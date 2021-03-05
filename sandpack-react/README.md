@@ -1,5 +1,7 @@
 # React Sandpack
 
+<img src="https://raw.githubusercontent.com/codesandbox/sandpack/main/demo.gif?token=ACL4CFQWS3YKIHBSI2HBPODAJOQAI" alt="Demo of a React component that edits the code while the bundler executes the changes" />
+
 React components that give you the power of editable sandboxes that run in the
 browser. Powered by `Sandpack`, the online bundler used by
 [CodeSandbox](https://codesandbox.io/).
