@@ -1,5 +1,7 @@
 # Sandpack Beta
 
+<img src="https://raw.githubusercontent.com/codesandbox/sandpack/main/demo.gif?token=ACL4CFQWS3YKIHBSI2HBPODAJOQAI" alt="Demo of a React component that edits the code while the bundler executes the changes" />
+
 ## What is this?
 
 This repo contains different packages that form the sandpack ecosystem.
