@@ -1,4 +1,4 @@
-import { generatePackageJSON, IFile, IFiles } from 'smooshpack';
+import { addPackageJSONIfNeeded, IFile, IFiles } from 'smooshpack';
 import { SandpackProviderProps } from '../contexts/sandpack-context';
 import { SANDBOX_TEMPLATES } from '../templates';
 import {
@@ -60,7 +60,7 @@ export const getSandpackStateFromProps = (props: SandpackProviderProps) => {
     );
   }
 
-  const files = generatePackageJSON(
+  const files = addPackageJSONIfNeeded(
     projectSetup.files,
     projectSetup.dependencies || {},
     projectSetup.entry

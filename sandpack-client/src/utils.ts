@@ -1,6 +1,6 @@
-import { IFiles, IDependencies } from '../manager';
+import { IFiles, IDependencies } from './types';
 
-export function getPackageJSON(
+export function createPackageJSON(
   dependencies: IDependencies = {},
   entry: string = '/index.js'
 ) {
@@ -15,7 +15,7 @@ export function getPackageJSON(
   );
 }
 
-export default function createMissingPackageJSON(
+export function addPackageJSONIfNeeded(
   files: IFiles,
   dependencies?: IDependencies,
   entry?: string
@@ -36,7 +36,7 @@ export default function createMissingPackageJSON(
     }
 
     newFiles['/package.json'] = {
-      code: getPackageJSON(dependencies, entry),
+      code: createPackageJSON(dependencies, entry),
     };
   }
 

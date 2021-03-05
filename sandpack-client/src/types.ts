@@ -11,6 +11,17 @@ export interface IModule {
   path: string;
 }
 
+export interface IModules {
+  [path: string]: {
+    code: string;
+    path: string;
+  };
+}
+
+export interface IDependencies {
+  [depName: string]: string;
+}
+
 export interface IModuleSource {
   fileName: string;
   compiledCode: string;

@@ -3,11 +3,18 @@ import { getTemplate } from 'codesandbox-import-utils/lib/create-sandbox/templat
 
 import isEqual from 'lodash.isequal';
 
-import generatePackageJSON, {
-  getPackageJSON,
-} from '../utils/generate-package-json';
-import version from '../version';
-import { IManagerState, IModuleError, ManagerStatus } from '../typings/types';
+import { createPackageJSON, addPackageJSONIfNeeded } from './utils';
+
+// @ts-ignore
+import { version } from '../package.json';
+import {
+  IDependencies,
+  IFiles,
+  IManagerState,
+  IModuleError,
+  IModules,
+  ManagerStatus,
+} from './types';
 
 export interface IManagerOptions {
   /**
@@ -44,25 +51,6 @@ export interface IManagerOptions {
   };
 }
 
-export interface IFile {
-  code: string;
-}
-
-export interface IFiles {
-  [path: string]: IFile;
-}
-
-export interface IModules {
-  [path: string]: {
-    code: string;
-    path: string;
-  };
-}
-
-export interface IDependencies {
-  [depName: string]: string;
-}
-
 export interface ISandboxInfo {
   files: IFiles;
   dependencies?: IDependencies;
@@ -86,7 +74,7 @@ const BUNDLER_URL =
     ? 'http://localhost:3000'
     : `https://${version.replace(/\./g, '-')}-sandpack.codesandbox.io`;
 
-export default class PreviewManager {
+export class SandpackClient {
   selector: string | undefined;
   element: Element;
   iframe: HTMLIFrameElement;
@@ -234,7 +222,7 @@ export default class PreviewManager {
     );
 
     let packageJSON = JSON.parse(
-      getPackageJSON(this.sandboxInfo.dependencies, this.sandboxInfo.entry)
+      createPackageJSON(this.sandboxInfo.dependencies, this.sandboxInfo.entry)
     );
     try {
       packageJSON = JSON.parse(files['/package.json'].code);
@@ -342,7 +330,7 @@ export default class PreviewManager {
     const { sandboxInfo } = this;
 
     if (sandboxInfo.files['/package.json'] === undefined) {
-      return generatePackageJSON(
+      return addPackageJSONIfNeeded(
         sandboxInfo.files,
         sandboxInfo.dependencies,
         sandboxInfo.entry

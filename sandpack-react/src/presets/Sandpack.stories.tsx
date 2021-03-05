@@ -15,8 +15,15 @@ export default function App() {
   return (
     <div>
       <h1>Hello World</h1>
+      <h1>Hello World</h1>
+      <img
+      src="https://placekitten.com/100"
+      alt="Kitten"
+        
+    /><h1>Hel</h1>
       <Button />
       <Link />
+      <h1>Hello World</h1>
     </div>
   )
 }

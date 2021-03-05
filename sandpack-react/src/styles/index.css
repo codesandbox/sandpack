@@ -195,6 +195,7 @@
   min-height: 160px; /* fits a minimal the error screen */
   max-height: 2000px; /* safety measure */
   flex: 1;
+  transition: height 0.15s ease-out;
 }
 
 .sp-preview-actions {

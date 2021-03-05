@@ -29,5 +29,5 @@ export const useCodeSandboxLink = () => {
     sandpack.openInCSBRegisteredRef.current = true;
   }, []);
 
-  return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${params}&query=file=${sandpack.activePath}`;
+  return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${params}&query=file=${sandpack.activePath}%26from-sandpack=true`;
 };

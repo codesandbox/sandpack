@@ -1,6 +1,6 @@
 {
   "name": "smooshpack",
-  "version": "1.0.0-alpha-36",
+  "version": "1.0.0-beta-2",
   "description": "",
   "keywords": [],
   "repository": {
@@ -9,21 +9,26 @@
   },
   "license": "GPL-2.0",
   "author": "CodeSandbox",
-  "files": [
-    "dist",
-    "sandpack"
-  ],
   "sideEffects": false,
-  "main": "dist/sandpack.umd.js",
-  "module": "dist/sandpack.js",
-  "typings": "dist/types/sandpack.d.ts",
+  "main": "dist/index.js",
+  "module": "esm/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
+    "prebuild": "rimraf dist && rimraf esm",
+    "build": "yarn build:cjs && yarn build:esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
-    "build:publish": "yarn build && lerna run build:sandpack-sandbox --scope app --stream && rimraf sandpack && gulp copy-sandbox",
+    "build:publish": "yarn build && rimraf sandpack && gulp copy-sandbox",
     "start": "tsc --watch"
   },
+  "files": [
+    "dist",
+    "esm",
+    "sandpack",
+    "package.json",
+    "README.md"
+  ],
   "dependencies": {
     "codesandbox-api": "^0.0.31",
     "codesandbox-import-utils": "^1.2.3",
@@ -32,20 +37,12 @@
   "devDependencies": {
     "@types/lodash.isequal": "^4.5.2",
     "@types/node": "^9.3.0",
-    "colors": "^1.1.2",
+    "babel-loader": "^7.1.5",
     "core-js": "^3.7.0",
     "cross-env": "^5.0.1",
     "gulp": "^3.9.1",
-    "lodash.camelcase": "^4.3.0",
-    "prompt": "^1.0.0",
-    "replace-in-file": "^3.0.0-beta.2",
+    "regenerator-runtime": "^0.13.7",
     "rimraf": "^2.6.2",
-    "rollup": "^0.55.4",
-    "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-json": "^2.3.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-typescript2": "^0.11.1",
     "ts-node": "^4.1.0",
     "tslint": "^5.8.0",
     "tslint-config-prettier": "^1.1.0",
