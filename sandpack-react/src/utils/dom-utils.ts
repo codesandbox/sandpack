@@ -18,3 +18,10 @@ export const injectThemeStyleSheet = (
     }
   }
 };
+
+const QUERY = '(prefers-color-scheme: dark)';
+const isRenderingOnServer = typeof window === 'undefined';
+
+export const getDarkModePreference = () => {
+  return isRenderingOnServer ? false : window.matchMedia(QUERY).matches;
+};

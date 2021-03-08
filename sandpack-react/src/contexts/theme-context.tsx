@@ -6,7 +6,10 @@ import {
   SandpackPredefinedTheme,
   SandpackTheme,
 } from '../types';
-import { injectThemeStyleSheet } from '../utils/dom-utils';
+import {
+  injectThemeStyleSheet,
+  getDarkModePreference,
+} from '../utils/dom-utils';
 
 const SandpackThemeContext = React.createContext<{
   theme: SandpackTheme;
@@ -19,13 +22,16 @@ const SandpackThemeContext = React.createContext<{
 const SandpackThemeProvider: React.FC<{
   theme?: SandpackPredefinedTheme | SandpackPartialTheme;
 }> = props => {
-  const { theme, id } = createThemeObject(props.theme);
+  let themeObj = createThemeObject(
+    getDarkModePreference() ? 'codesandbox-dark' : 'codesandbox-light'
+  );
   const c = useClasser('sp');
-
   // If theme is not explicitly set, don't inject any stylesheet
   if (props.theme) {
-    injectThemeStyleSheet(theme, id);
+    themeObj = createThemeObject(props.theme);
   }
+  const { theme, id } = themeObj;
+  injectThemeStyleSheet(theme, id);
 
   return (
     <SandpackThemeContext.Provider
