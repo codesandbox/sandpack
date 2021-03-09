@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { IFiles } from 'smooshpack';
+import { SandpackBundlerFiles } from 'smooshpack';
 import { getParameters } from 'codesandbox-import-utils/lib/api/define';
 import { useSandpack } from './useSandpack';
 
-const getFileParameters = (files: IFiles) => {
+const getFileParameters = (files: SandpackBundlerFiles) => {
   const normalized: {
     [path: string]: { content: string; isBinary: boolean };
   } = Object.keys(files).reduce(

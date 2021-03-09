@@ -1,4 +1,4 @@
-# React Sandpack
+# sandpack-react
 
 <img src="https://raw.githubusercontent.com/codesandbox/sandpack/main/demo.gif?token=ACL4CFQWS3YKIHBSI2HBPODAJOQAI" alt="Demo of a React component that edits the code while the bundler executes the changes" />
 
@@ -597,10 +597,13 @@ You can also implement your own preview component, but we recommend sticking
 with the standard one, as it is a bit more coupled to the bundler
 implementation.
 
-### Sandpack Manager
-
-Coming soon
-
 ## Development
 
-Coming soon
+If you want to contribute, fork the main repo:
+`https://github.com/codesandbox/sandpack`
+
+```bash
+cd sandpack-react
+yarn
+yarn storybook
+```

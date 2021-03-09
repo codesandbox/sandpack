@@ -9497,10 +9497,10 @@ slash@^3.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
 
-smooshpack@1.0.0-beta-2:
-  version "1.0.0-beta-2"
-  resolved "https://registry.yarnpkg.com/smooshpack/-/smooshpack-1.0.0-beta-2.tgz#14ae868c3fc25361a85c71fbf917bb49c1cd0831"
-  integrity sha512-q7flqqdbXq9reV/RtQCNx2BlDlLgWhnvWP7rTfUePQcPp+3sgTiiK0hUD21ReIVo9kiLFlNVHaPRaDzG0UK43g==
+smooshpack@1.0.0-beta-3:
+  version "1.0.0-beta-3"
+  resolved "https://registry.yarnpkg.com/smooshpack/-/smooshpack-1.0.0-beta-3.tgz#bed5a42f3bdc4f0b7c870f8b8850497a0415c503"
+  integrity sha512-keRuSPIHQGb1EguMkurfgIP5MWSdlscB8ELnSdNkoq7gAFUuiPcfz9LkGDV8+oTYKgdns6FgDl9V3men5hFtTA==
   dependencies:
     codesandbox-api "^0.0.31"
     codesandbox-import-utils "^1.2.3"

@@ -1,6 +1,6 @@
 {
   "name": "smooshpack",
-  "version": "1.0.0-beta-2",
+  "version": "1.0.0-beta-3",
   "description": "",
   "keywords": [],
   "repository": {
@@ -20,7 +20,7 @@
     "build:esm": "tsc -p tsconfig.esm.json",
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "build:publish": "yarn build && rimraf sandpack && gulp copy-sandbox",
-    "start": "tsc --watch"
+    "start": "tsc -p tsconfig.esm.json --watch"
   },
   "files": [
     "dist",

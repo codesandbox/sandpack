@@ -1,4 +1,4 @@
-import { IManagerState, IModuleError, IFiles } from 'smooshpack';
+import { BundlerState, ModuleError, SandpackBundlerFiles } from 'smooshpack';
 
 export type SandpackContext = SandpackState & {
   dispatch: (message: any) => void;
@@ -6,12 +6,12 @@ export type SandpackContext = SandpackState & {
 };
 
 export interface SandpackState {
-  bundlerState: IManagerState | undefined;
+  bundlerState: BundlerState | undefined;
   openPaths: string[];
   activePath: string;
   editorState: EditorState;
-  error: Partial<IModuleError> | null;
-  files: IFiles;
+  error: Partial<ModuleError> | null;
+  files: SandpackBundlerFiles;
   status: SandpackStatus;
   runSandpack: () => void;
   updateCurrentFile: (newCode: string) => void;
@@ -39,7 +39,7 @@ export type EditorState = 'pristine' | 'dirty';
 export type SandpackListener = (msg: any) => void;
 
 export type SandboxTemplate = {
-  files: IFiles;
+  files: SandpackBundlerFiles;
   dependencies: Record<string, string>;
   entry: string;
   main: string;

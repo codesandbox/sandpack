@@ -159,7 +159,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
     ) {
       cmView.current.contentDOM.focus();
     }
-  });
+  }, []);
 
   // Update editor when code passed as prop from outside sandpack changes
   React.useEffect(() => {

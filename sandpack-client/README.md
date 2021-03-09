@@ -1,22 +1,30 @@
-# Sandpack
+# sandpack-client
 
 A bundler that completely works in the browser and takes advantage of it.
 
 ## Why?
 
-Online code playgrounds are getting more popular: they provide an easy way to play with code without installation. Until a year ago it was very hard to play with bigger web applications in the browser; there was no bundler that was comparable with local bundlers and worked in the browser.
+Online code playgrounds are getting more popular: they provide an easy way to
+play with code without installation.
 
-CodeSandbox came along, and still had a pretty basic bundler. However, as CodeSandbox got more popular its bundler got more advanced. Nowadays the bundler is used for all kinds of bigger web projects, and it would be a shame if others couldn't use the functionality.
+As CodeSandbox came along, it had a pretty basic bundler. However, as
+CodeSandbox got more popular its bundler got more advanced. Nowadays the bundler
+is used for all kinds of bigger web projects, and it would be a shame if others
+couldn't use the functionality.
 
-This library acts as an interface with the bundler of CodeSandbox. It allows you to run any code on a web page, from Vue projects to React projects to Parcel projects. With everything that CodeSandbox supports client side as well.
+This library acts as an interface with the bundler of CodeSandbox. It allows you
+to run any code on a web page, from Vue projects to React projects to Parcel
+projects. With everything that CodeSandbox supports client side as well.
 
 ## So what can this bundler do?
 
-This is a list of features that the bundler supports out of the box, the list may be outdated.
+This is a list of features that the bundler supports out of the box, the list
+may be outdated.
 
 1.  Hot Module Reloading API (`module.hot`)
 2.  npm dependencies
-3.  Most common transpilers (vue, babel, typescript, css, scss, less, stylus, parcel, etc...)
+3.  Most common transpilers (vue, babel, typescript, css, scss, less, stylus,
+    parcel, etc...)
 4.  Parallel transpiling
 5.  On-demand transpiler loading
 6.  Webpack loader syntax (`!raw-loader!./test.js`)
@@ -26,19 +34,22 @@ This is a list of features that the bundler supports out of the box, the list ma
 
 ## Example usage
 
-This repo serves as an interface to communicate with the bundler. The bundler itself is hosted on `sandpack-{version}.codesandbox.io` and is heavily cached by a CDN. We also included the necessary files under `sandpack` if you want to host the bundler yourself.
+This repo serves as an interface to communicate with the bundler. The bundler
+itself is hosted on `{version}-sandpack.codesandbox.io` and is heavily cached by
+a CDN. We also included the necessary files under `sandpack` if you want to host
+the bundler yourself.
 
-### Using the Manager
+### Using the Client
 
-The Manager is a class implementation, you can use it by importing Manager.
+The Client is a class implementation, you can import it from the package.
 
 ```js
-import { Manager } from 'sandpack';
+import { Client } from 'smooshpack';
 
 // There are two ways of initializing a preview, you can give it either an
 // iframe element or a selector of an element to create an iframe on.
-const manager = new Manager(
-  '#preview',
+const client = new Client(
+  '#preview', // iframe selector or element itself
   {
     files: {
       '/index.js': {
@@ -49,12 +60,12 @@ const manager = new Manager(
     dependencies: {
       uuid: 'latest',
     },
-  } /* We support a third parameter for advanced options, you can find more info in the bottom */
+  } /* We support a third parameter for advanced options, you can find more info below */
 );
 
 // When you make a change you can just run `updatePreview`, we'll automatically discover
 // which files have changed and hot reload them.
-manager.updatePreview({
+client.updatePreview({
   files: {
     '/index.js': {
       code: `console.log('New Text!')`,
@@ -67,7 +78,8 @@ manager.updatePreview({
 });
 ```
 
-If you specify a `package.json` in the list of files we will use that as source of truth instead, we infer `dependencies` and `entry` from it:
+If you specify a `package.json` in the list of files we will use that as source
+of truth. Otherwise, we infer `dependencies` and `entry` from it:
 
 ```js
 // We infer dependencies and the entry point from package.json
@@ -84,7 +96,7 @@ const PACKAGE_JSON_CODE = JSON.stringify(
 );
 
 // Give it either a selector or an iframe element as first argument, the second arguments are the files
-const manager = new Manager('#preview', {
+const client = new Client('#preview', {
   files: {
     '/index.js': {
       code: `console.log(require('uuid'))`,
@@ -96,52 +108,10 @@ const manager = new Manager('#preview', {
 });
 ```
 
-### As a React Component
+### SandboxInfo
 
-We built another library called `react-sandpack` for usage with `sandpack`. This library provides basic React components for editors, including `FileExplorer`, `CodeEditor` and `BrowserPreview`. This serves as a library that makes it easier to build embeddable or full blown online code editors.
-
-An example implementation:
-
-```jsx harmony
-import React from 'react';
-import { render } from 'react-dom';
-import {
-  FileExplorer,
-  CodeMirror,
-  BrowserPreview,
-  SandpackProvider,
-} from 'react-sandpack';
-
-const files = {
-  '/index.js': {
-    code: "document.body.innerHTML = `<div>${require('uuid')}</div>`",
-  },
-};
-
-const dependencies = {
-  uuid: 'latest',
-};
-
-const App = () => (
-  <SandpackProvider files={files} dependencies={dependencies} entry="/index.js">
-    <div style={{ display: 'flex', width: '100%', height: '100%' }}>
-      <FileExplorer style={{ width: 300 }} />
-      <CodeMirror style={{ flex: 1 }} />
-      <BrowserPreview style={{ flex: 1 }} />
-    </div>
-  </SandpackProvider>
-);
-
-render(<App />, document.getElementById('root'));
-```
-
-The above code will render a File Explorer, a working code editor and a preview with browser navigation. We have many more components, like a Jest test view or a console. For more info about `react-sandpack` you can go here: https://github.com/codesandbox/codesandbox-client/tree/master/standalone-packages/react-sandpack
-
-> It would be really cool if we would have more libraries that uses this library as a basis. Like `vue-sandpack` and `angular-sandpack`. Or even a library that just exposes components that use `sandpack`.
-
-### SandboxInfo Argument
-
-The second argument in the constructor of `Manager` is all sandbox info. It has this structure:
+The second argument in the constructor of `Client` is all sandbox info. It has
+this structure:
 
 ```ts
 {
@@ -170,47 +140,76 @@ The second argument in the constructor of `Manager` is all sandbox info. It has 
 }
 ```
 
-### Options Argument
+### ClientOptions
 
-The third argument in the constructor of `Manager` is extra options. It has this structure:
+The third argument in the constructor of `Client` is extra options. Here you can
+pass custom bundling/evaluation options or instructions for what and how to
+render inside the iframe:
 
 ```ts
 {
   /**
-   * Location of the bundler. Defaults to `sandpack-${version}.codesandbox.io`
+   * Location of the bundler. Defaults to `${version}-sandpack.codesandbox.io`
    */
   bundlerURL?: string;
   /**
-   * Width of iframe.
+   * Width/Height of the iframe.
    */
   width?: string;
-  /**
-   * Height of iframe.
-   */
   height?: string;
   /**
    * If we should skip the third step: evaluation. Useful if you only want to see
    * transpiled results
    */
   skipEval?: boolean;
+  /**
+   * Boolean flags to trigger certain UI elements in the bundler
+   */
+  showOpenInCodeSandbox?: boolean;
+  showErrorScreen?: boolean;
+  showLoadingScreen?: boolean;
 }
 ```
 
-### Manager functions
+### Client API
 
-The manager instance has several helper functions you can call.
+The client instance has several helper functions you can call.
 
 #### `updatePreview`
 
-Send new sandbox info, like files and dependencies, to the preview. It will automatically hot update the preview with the new files and options. Accepts a single argument `sandboxInfo` of type `SandboxInfo`.
+Send new content like files and dependencies, to the preview. It will
+automatically hot update the preview with the new files and options. Accepts a
+single argument `sandboxInfo` of type `SandboxInfo`.
 
 #### `updateOptions`
 
-Updates the given options and updates the preview. Accepts a single argument `options` of type `Options`.
+Updates the given options and then updates the preview. Accepts a single
+argument `options` of type `ClientOptions`.
 
 #### `dispatch`
 
-Dispatch an event to the sandbox preview and all other listeners. Accepts a single argument, which is the data to send. This is used heavily by the manager and `react-sandpack` to communicate with the bundler.
+Dispatch an event to the bundler and all other listeners. Accepts a single
+argument, which is the data to send. The `dispatch` function will pass the
+internal `id` of the client, so only the bundler that performed the handshake
+with this client instance will respond.
+
+```js
+client.dispatch({ type: 'refresh' }); // sends a refresh action to the bundler
+```
+
+#### `listen`
+
+Listens to events coming from the bundler that performed the handshake with this
+client instance. Uses the internal `id` to filter events coming from other
+bundlers.
+
+```js
+client.listen(message => {
+  if (message.type === 'status') {
+    console.log(message.status);
+  }
+});
+```
 
 #### `getCodeSandboxURL`
 
@@ -230,22 +229,37 @@ We have three reasons to host the bundler of sandpack externally:
 
 ### Security
 
-The bundler evaluates and transpiles all files in an iframe under a different subdomain. This is important, because it prevents attackers from tampering with cookies of the host domain when evaluating code.
+The bundler evaluates and transpiles all files in an iframe under a different
+subdomain. This is important, because it prevents attackers from tampering with
+cookies of the host domain when evaluating code.
 
 ### Performance
 
-We heavily make use of Web Workers for transpilations. Almost all our transpilation happens in web workers, and there is no easy way yet to bundle this in a library.
+We heavily make use of Web Workers for transpilations. Almost all our
+transpilation happens in web workers, and there is no easy way yet to bundle
+this in a library.
 
 ### Bundle Size
 
-Another reason to host the bundler externally is because of code splitting: we split all our transpilers away and load them on-demand. If a user doesn't use `sass` we won't load the transpiler. This wouldn't be possible if we would give one big JS file as the library.
+Another reason to host the bundler externally is because of code splitting: we
+split all our transpilers away and load them on-demand. If a user doesn't use
+`sass` we won't load the transpiler. This wouldn't be possible if we would give
+one big JS file as the library.
 
 ### Offline Support
 
-We use Service Workers to download all transpilers in the background, so the next time a user visits your website they don't have to download the bundler anymore and it can be used offline. This is possible because we host the service worker externally.
+We use Service Workers to download all transpilers in the background, so the
+next time a user visits your website they don't have to download the bundler
+anymore and it can be used offline. This is possible because we host the service
+worker externally.
 
-> I want to highlight that you can also host the bundler by yourself, all necessary files are in the `sandpack` folder.
+> I want to highlight that you can also host the bundler by yourself, all
+> necessary files are in the `sandpack` folder.
 
-## Open In CodeSandbox
+## For React developers
 
-We show an "Open in CodeSandbox" button in the sandbox preview on the bottom right. This button allows everyone to create a sandbox from the code in the preview, open it in CodeSandbox and share their work more easily with others.
+If you want to integrate the sandpack bundler into your React project, we
+recomment you check out the
+[sandpack-react package](https://github.com/codesandbox/sandpack/tree/main/sandpack-react),
+which has all the components and hooks you need for building an instant code
+running experience for your users.

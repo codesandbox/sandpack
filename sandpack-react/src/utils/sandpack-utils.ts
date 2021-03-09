@@ -1,4 +1,8 @@
-import { addPackageJSONIfNeeded, IFile, IFiles } from 'smooshpack';
+import {
+  addPackageJSONIfNeeded,
+  SandpackBundlerFile,
+  SandpackBundlerFiles,
+} from 'smooshpack';
 import { SandpackProviderProps } from '../contexts/sandpack-context';
 import { SANDBOX_TEMPLATES } from '../templates';
 import {
@@ -134,15 +138,18 @@ const createSetupFromUserInput = (
 
   const { files } = setup;
 
-  const convertedFiles = Object.keys(files).reduce((acc: IFiles, key) => {
-    if (typeof files[key] === 'string') {
-      acc[key] = { code: files[key] as string };
-    } else {
-      acc[key] = files[key] as IFile;
-    }
+  const convertedFiles = Object.keys(files).reduce(
+    (acc: SandpackBundlerFiles, key) => {
+      if (typeof files[key] === 'string') {
+        acc[key] = { code: files[key] as string };
+      } else {
+        acc[key] = files[key] as SandpackBundlerFile;
+      }
 
-    return acc;
-  }, {});
+      return acc;
+    },
+    {}
+  );
 
   return {
     ...setup,

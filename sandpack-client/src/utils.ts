@@ -1,7 +1,7 @@
-import { IFiles, IDependencies } from './types';
+import { SandpackBundlerFiles, Dependencies } from './types';
 
 export function createPackageJSON(
-  dependencies: IDependencies = {},
+  dependencies: Dependencies = {},
   entry: string = '/index.js'
 ) {
   return JSON.stringify(
@@ -16,8 +16,8 @@ export function createPackageJSON(
 }
 
 export function addPackageJSONIfNeeded(
-  files: IFiles,
-  dependencies?: IDependencies,
+  files: SandpackBundlerFiles,
+  dependencies?: Dependencies,
   entry?: string
 ) {
   const newFiles = { ...files };

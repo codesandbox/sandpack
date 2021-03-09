@@ -1,34 +1,34 @@
-export interface IFile {
+export interface SandpackBundlerFile {
   code: string;
 }
 
-export interface IFiles {
-  [path: string]: IFile;
+export interface SandpackBundlerFiles {
+  [path: string]: SandpackBundlerFile;
 }
 
-export interface IModule {
+export interface Module {
   code: string;
   path: string;
 }
 
-export interface IModules {
+export interface Modules {
   [path: string]: {
     code: string;
     path: string;
   };
 }
 
-export interface IDependencies {
+export interface Dependencies {
   [depName: string]: string;
 }
 
-export interface IModuleSource {
+export interface ModuleSource {
   fileName: string;
   compiledCode: string;
   sourceMap: Object | undefined;
 }
 
-export interface IModuleError {
+export interface ModuleError {
   title: string;
   message: string;
   path: string;
@@ -36,12 +36,12 @@ export interface IModuleError {
   column: number;
 }
 
-export interface ITranspiledModule {
-  module: IModule;
+export interface TranspiledModule {
+  module: Module;
   query: string;
-  source: IModuleSource | undefined;
+  source: ModuleSource | undefined;
   assets: {
-    [name: string]: IModuleSource;
+    [name: string]: ModuleSource;
   };
   isEntry: boolean;
   isTestFile: boolean;
@@ -49,7 +49,7 @@ export interface ITranspiledModule {
   /**
    * All extra modules emitted by the loader
    */
-  emittedAssets: Array<IModuleSource>;
+  emittedAssets: Array<ModuleSource>;
   initiators: Array<string>;
   dependencies: Array<string>;
   asyncDependencies: Array<string>;
@@ -57,14 +57,14 @@ export interface ITranspiledModule {
   transpilationInitiators: Array<string>;
 }
 
-export interface IManagerState {
+export interface BundlerState {
   entry: string;
   transpiledModules: {
-    [id: string]: ITranspiledModule;
+    [id: string]: TranspiledModule;
   };
 }
 
-export type ManagerStatus =
+export type ClientStatus =
   | 'initializing'
   | 'installing-dependencies'
   | 'transpiling'

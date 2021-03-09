@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {
   SandpackClient,
-  IManagerState,
-  IModuleError,
-  IFiles,
+  BundlerState,
+  ModuleError,
+  SandpackBundlerFiles,
 } from 'smooshpack';
 
 import {
@@ -22,12 +22,12 @@ import { generateRandomId } from '../utils/string-utils';
 const Sandpack = React.createContext<SandpackContext | null>(null);
 
 export interface SandpackProviderState {
-  files: IFiles;
+  files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;
   activePath: string;
   openPaths: string[];
-  bundlerState: IManagerState | undefined;
-  error: Partial<IModuleError> | null;
+  bundlerState?: BundlerState;
+  error: Partial<ModuleError> | null;
   sandpackStatus: SandpackStatus;
   editorState: EditorState;
   renderHiddenIframe: boolean;

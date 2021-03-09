@@ -8,15 +8,15 @@ import { createPackageJSON, addPackageJSONIfNeeded } from './utils';
 // @ts-ignore
 import { version } from '../package.json';
 import {
-  IDependencies,
-  IFiles,
-  IManagerState,
-  IModuleError,
-  IModules,
-  ManagerStatus,
+  Dependencies,
+  SandpackBundlerFiles,
+  BundlerState,
+  ModuleError,
+  Modules,
+  ClientStatus,
 } from './types';
 
-export interface IManagerOptions {
+export interface ClientOptions {
   /**
    * Location of the bundler.
    */
@@ -51,9 +51,9 @@ export interface IManagerOptions {
   };
 }
 
-export interface ISandboxInfo {
-  files: IFiles;
-  dependencies?: IDependencies;
+export interface SandboxInfo {
+  files: SandpackBundlerFiles;
+  dependencies?: Dependencies;
   entry?: string;
   /**
    * What template we use, if not defined we infer the template from the dependencies or files.
@@ -78,27 +78,27 @@ export class SandpackClient {
   selector: string | undefined;
   element: Element;
   iframe: HTMLIFrameElement;
-  options: IManagerOptions;
+  options: ClientOptions;
   readonly id: number = Math.floor(Math.random() * 1000000);
 
   listener?: Function;
   fileResolverProtocol?: Protocol;
   bundlerURL: string;
-  managerState: IManagerState | undefined;
-  errors: Array<IModuleError>;
-  status: ManagerStatus;
+  bundlerState?: BundlerState;
+  errors: Array<ModuleError>;
+  status: ClientStatus;
 
-  sandboxInfo: ISandboxInfo;
+  sandboxInfo: SandboxInfo;
 
   constructor(
     selector: string | HTMLIFrameElement,
-    sandboxInfo: ISandboxInfo,
-    options: IManagerOptions = {}
+    sandboxInfo: SandboxInfo,
+    options: ClientOptions = {}
   ) {
     this.options = options;
     this.sandboxInfo = sandboxInfo;
     this.bundlerURL = options.bundlerURL || BUNDLER_URL;
-    this.managerState = undefined;
+    this.bundlerState = undefined;
     this.errors = [];
     this.status = 'initializing';
 
@@ -133,7 +133,7 @@ export class SandpackClient {
     this.iframe.src = this.bundlerURL;
     this.listener = listen((mes: any) => {
       if (mes.type !== 'initialized' && mes.$id && mes.$id !== this.id) {
-        // This message was not meant for this instance of the manager.
+        // This message was not meant for this instance of the client.
         return;
       }
 
@@ -185,7 +185,7 @@ export class SandpackClient {
           break;
         }
         case 'state': {
-          this.managerState = mes.state;
+          this.bundlerState = mes.state;
           break;
         }
         default: {
@@ -195,7 +195,7 @@ export class SandpackClient {
     });
   }
 
-  updateOptions(options: IManagerOptions) {
+  updateOptions(options: ClientOptions) {
     if (!isEqual(this.options, options)) {
       this.options = options;
       this.updatePreview();
@@ -210,7 +210,7 @@ export class SandpackClient {
 
     const files = this.getFiles();
 
-    const modules: IModules = Object.keys(files).reduce(
+    const modules: Modules = Object.keys(files).reduce(
       (prev, next) => ({
         ...prev,
         [next]: {
@@ -311,7 +311,7 @@ export class SandpackClient {
       }));
   }
 
-  public getManagerTranspilerContext = (): Promise<{
+  public getTranspilerContext = (): Promise<{
     [transpiler: string]: Object;
   }> =>
     new Promise(resolve => {

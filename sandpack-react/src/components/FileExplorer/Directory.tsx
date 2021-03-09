@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { IFiles } from 'smooshpack';
+import { SandpackBundlerFiles } from 'smooshpack';
 
 import { File } from './File';
 import { ModuleList } from './ModuleList';
 
 export interface Props {
   prefixedPath: string;
-  files: IFiles;
+  files: SandpackBundlerFiles;
   selectFile: (path: string) => void;
   activePath: string;
   depth: number;
