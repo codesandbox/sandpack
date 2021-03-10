@@ -1,9 +1,10 @@
 import {
   SandpackTheme,
   SandpackPredefinedTheme,
-  SandpackPartialTheme,
   SandpackSyntaxStyle,
+  SandpackThemeProp,
 } from '../types';
+import { getDarkModePreference } from '../utils/dom-utils';
 import { hexToCSSRGBa } from '../utils/string-utils';
 
 export const codesandboxLightTheme: SandpackTheme = {
@@ -175,9 +176,18 @@ export const SANDPACK_THEMES: Record<SandpackPredefinedTheme, SandpackTheme> = {
   'monokai-pro': monokaiProTheme,
 };
 
-export const createThemeObject = (
-  inputTheme?: SandpackPredefinedTheme | SandpackPartialTheme
-) => {
+export const createThemeObject = (inputTheme?: SandpackThemeProp) => {
+  if (inputTheme === 'auto') {
+    const theme = getDarkModePreference()
+      ? codesandboxDarkTheme
+      : codesandboxLightTheme;
+    const id = `sp-${simpleHashFunction(JSON.stringify(theme))}`;
+    return {
+      theme,
+      id,
+    };
+  }
+
   const defaultTheme = codesandboxLightTheme;
   const defaultThemeKey = 'codesandbox-light';
 

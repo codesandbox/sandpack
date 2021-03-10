@@ -4,10 +4,9 @@ import { SandpackPreview } from '../components/Preview';
 import { SandpackLayout } from '../common/Layout';
 import { SandpackProvider } from '../contexts/sandpack-context';
 import {
-  SandpackPartialTheme,
   SandpackPredefinedTemplate,
-  SandpackPredefinedTheme,
   SandpackSetup,
+  SandpackThemeProp,
 } from '../types';
 import { SANDBOX_TEMPLATES } from '../templates';
 
@@ -15,7 +14,7 @@ export interface SandpackRunnerProps {
   code?: string;
   template?: SandpackPredefinedTemplate;
   customSetup?: SandpackSetup;
-  theme?: SandpackPredefinedTheme | SandpackPartialTheme;
+  theme?: SandpackThemeProp;
   options?: {
     showNavigator?: boolean;
     bundlerUrl?: string;

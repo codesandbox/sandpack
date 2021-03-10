@@ -5,9 +5,8 @@ import {
   FileResolver,
   SandpackFiles,
   SandpackPredefinedTemplate,
-  SandpackPredefinedTheme,
   SandpackSetup,
-  SandpackPartialTheme,
+  SandpackThemeProp,
 } from '../types';
 import { SandpackProvider } from '../contexts/sandpack-context';
 import { SandpackCodeEditor, CodeEditorProps } from '../components/CodeEditor';
@@ -18,7 +17,7 @@ export interface SandpackProps {
   template?: SandpackPredefinedTemplate;
   customSetup?: SandpackSetup;
 
-  theme?: SandpackPredefinedTheme | SandpackPartialTheme;
+  theme?: SandpackThemeProp;
 
   options?: {
     openPaths?: string[];
