@@ -177,25 +177,29 @@ export const SANDPACK_THEMES: Record<SandpackPredefinedTheme, SandpackTheme> = {
 };
 
 export const createThemeObject = (inputTheme?: SandpackThemeProp) => {
-  if (inputTheme === 'auto') {
-    const theme = getDarkModePreference()
-      ? codesandboxDarkTheme
-      : codesandboxLightTheme;
-    const id = `sp-${simpleHashFunction(JSON.stringify(theme))}`;
-    return {
-      theme,
-      id,
-    };
-  }
+  const defaultLightTheme = codesandboxLightTheme;
+  const defaultLightThemeKey = 'codesandbox-light';
 
-  const defaultTheme = codesandboxLightTheme;
-  const defaultThemeKey = 'codesandbox-light';
+  const defaultDarkTheme = codesandboxDarkTheme;
+  const defaultDarkThemeKey = 'codesandbox-dark';
 
   if (inputTheme === undefined) {
     return {
-      theme: defaultTheme,
-      id: defaultThemeKey,
+      theme: defaultLightTheme,
+      id: defaultLightThemeKey,
     };
+  }
+
+  if (inputTheme === 'auto') {
+    return getDarkModePreference()
+      ? {
+          theme: defaultDarkTheme,
+          id: defaultDarkThemeKey,
+        }
+      : {
+          theme: defaultLightTheme,
+          id: defaultLightThemeKey,
+        };
   }
 
   if (typeof inputTheme === 'string') {
@@ -206,15 +210,15 @@ export const createThemeObject = (inputTheme?: SandpackThemeProp) => {
 
     return {
       theme: predefinedTheme,
-      id: inputTheme ?? defaultThemeKey,
+      id: inputTheme ?? defaultLightThemeKey,
     };
   }
 
   const theme = {
-    palette: { ...defaultTheme.palette, ...inputTheme?.palette },
-    syntax: { ...defaultTheme.syntax, ...inputTheme?.syntax },
+    palette: { ...defaultLightTheme.palette, ...inputTheme?.palette },
+    syntax: { ...defaultLightTheme.syntax, ...inputTheme?.syntax },
     typography: {
-      ...defaultTheme.typography,
+      ...defaultLightTheme.typography,
       ...inputTheme?.typography,
     },
   };

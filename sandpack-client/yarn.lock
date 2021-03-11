@@ -282,10 +282,10 @@ clone@^1.0.0, clone@^1.0.2:
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
 
-codesandbox-api@^0.0.31:
-  version "0.0.31"
-  resolved "https://registry.yarnpkg.com/codesandbox-api/-/codesandbox-api-0.0.31.tgz#bae44d326b4ac7acadf9c5e88840ccc79b4bfd69"
-  integrity sha512-9NnDD6f32G3gUTuzy8FIFAY9iXZ1fezExozRnTmF4ImmKQFipmVuxY8XfAN7lwvUWWjLzr0J37AFz6YUkivfHA==
+codesandbox-api@^0.0.32:
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/codesandbox-api/-/codesandbox-api-0.0.32.tgz#dd2a937687398a3288f6b6534b56a2d059edeaef"
+  integrity sha512-YMQDDW9AdkAAQij0yg+DjdACulkIgtnsOGam70zUP/tuGI5hM4pjaadXPU1BI/GrZHO2Df7Y/TSWcxwyz10PbQ==
 
 codesandbox-import-util-types@^1.3.7:
   version "1.3.7"
