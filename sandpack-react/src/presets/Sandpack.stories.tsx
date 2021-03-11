@@ -258,6 +258,13 @@ export const MultipleInstances: Story<SandpackProps> = args => (
         },
       }}
     />
+    <h2>Theme - Auto</h2>
+    <p>Selects theme using system preference</p>
+    <Sandpack
+      theme="auto"
+      template="react"
+      options={{ showTabs: true, showNavigator: true }}
+    />
   </div>
 );
 

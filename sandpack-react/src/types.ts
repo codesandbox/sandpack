@@ -155,6 +155,11 @@ export type SandpackTheme = {
 
 export type SandpackPartialTheme = DeepPartial<SandpackTheme>;
 
+export type SandpackThemeProp =
+  | SandpackPredefinedTheme
+  | SandpackPartialTheme
+  | 'auto';
+
 export type DeepPartial<Type> = {
   [Property in keyof Type]?: DeepPartial<Type[Property]>;
 };

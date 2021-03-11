@@ -57,6 +57,10 @@ const reactAltCode = `export default function App() {
 }
 `;
 
+export const AutoTheme: Story<SandpackRunnerProps> = args => (
+  <SandpackRunner theme="auto" />
+);
+
 export const SwitchExperiment = () => {
   const [codeToggle, setCodeToggle] = useState(false);
 
