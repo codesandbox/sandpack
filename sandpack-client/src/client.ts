@@ -1,9 +1,9 @@
-import { dispatch, listen, registerFrame, Protocol } from 'codesandbox-api';
 import { getTemplate } from 'codesandbox-import-utils/lib/create-sandbox/templates';
 
 import isEqual from 'lodash.isequal';
 
 import { createPackageJSON, addPackageJSONIfNeeded } from './utils';
+import { IFrameProtocol } from './iframe-protocol';
 
 // @ts-ignore
 import { version } from '../package.json';
@@ -15,6 +15,7 @@ import {
   Modules,
   ClientStatus,
 } from './types';
+import Protocol from './file-resolver-protocol';
 
 export interface ClientOptions {
   /**
@@ -71,17 +72,16 @@ export interface SandboxInfo {
 
 const BUNDLER_URL =
   process.env.CODESANDBOX_ENV === 'development'
-    ? 'http://localhost:3000'
-    : `https://${version.replace(/\./g, '-')}-sandpack.codesandbox.io`;
+    ? 'http://localhost:3000/'
+    : `https://${version.replace(/\./g, '-')}-sandpack.codesandbox.io/`;
 
 export class SandpackClient {
   selector: string | undefined;
   element: Element;
   iframe: HTMLIFrameElement;
+  iframeProtocol: IFrameProtocol;
   options: ClientOptions;
-  readonly id: number = Math.floor(Math.random() * 1000000);
 
-  listener?: Function;
   fileResolverProtocol?: Protocol;
   bundlerURL: string;
   bundlerState?: BundlerState;
@@ -89,6 +89,9 @@ export class SandpackClient {
   status: ClientStatus;
 
   sandboxInfo: SandboxInfo;
+
+  unsubscribeGlobalListener: Function;
+  unsubscribeChannelListener: Function;
 
   constructor(
     selector: string | HTMLIFrameElement,
@@ -131,68 +134,73 @@ export class SandpackClient {
     }
 
     this.iframe.src = this.bundlerURL;
-    this.listener = listen((mes: any) => {
-      if (mes.type !== 'initialized' && mes.$id && mes.$id !== this.id) {
-        // This message was not meant for this instance of the client.
-        return;
-      }
+    this.iframeProtocol = new IFrameProtocol(this.iframe, this.bundlerURL);
 
-      switch (mes.type) {
-        case 'initialized': {
-          if (this.iframe) {
-            if (this.iframe.contentWindow) {
-              registerFrame(
-                this.iframe.contentWindow,
-                this.bundlerURL,
-                this.id
-              );
+    this.unsubscribeGlobalListener = this.iframeProtocol.globalListen(
+      (mes: any) => {
+        if (
+          mes.type !== 'initialized' ||
+          // mes.url !== this.bundlerURL || TODO: see if it makes sense to match the URL here (eg: routing scenario)
+          !this.iframe.contentWindow
+        ) {
+          return;
+        }
 
-              if (this.options.fileResolver) {
-                this.fileResolverProtocol = new Protocol(
-                  'file-resolver',
-                  async (data: { m: 'isFile' | 'readFile'; p: string }) => {
-                    if (data.m === 'isFile') {
-                      return this.options.fileResolver!.isFile(data.p);
-                    }
+        this.iframeProtocol.register();
 
-                    return this.options.fileResolver!.readFile(data.p);
-                  },
-                  this.iframe.contentWindow
-                );
+        if (this.options.fileResolver) {
+          // TODO: Find a common place for the Protocol to be implemented for both sandpack-core and sandpack-client
+          this.fileResolverProtocol = new Protocol(
+            'file-resolver',
+            async (data: { m: 'isFile' | 'readFile'; p: string }) => {
+              if (data.m === 'isFile') {
+                return this.options.fileResolver!.isFile(data.p);
               }
-            }
 
-            this.updatePreview(this.sandboxInfo, true);
+              return this.options.fileResolver!.readFile(data.p);
+            },
+            this.iframe.contentWindow
+          );
+        }
+
+        this.updatePreview(this.sandboxInfo, true);
+      }
+    );
+
+    this.unsubscribeChannelListener = this.iframeProtocol.channelListen(
+      (mes: any) => {
+        switch (mes.type) {
+          case 'start': {
+            this.errors = [];
+            break;
           }
-          break;
-        }
-        case 'start': {
-          this.errors = [];
-          break;
-        }
-        case 'status': {
-          this.status = mes.status;
-          break;
-        }
-        case 'action': {
-          if (mes.action === 'show-error') {
-            const { title, path, message, line, column } = mes;
-            this.errors = [
-              ...this.errors,
-              { title, path, message, line, column },
-            ];
+          case 'status': {
+            this.status = mes.status;
+            break;
           }
-          break;
-        }
-        case 'state': {
-          this.bundlerState = mes.state;
-          break;
-        }
-        default: {
-          // Do nothing
+          case 'action': {
+            if (mes.action === 'show-error') {
+              const { title, path, message, line, column } = mes;
+              this.errors = [
+                ...this.errors,
+                { title, path, message, line, column },
+              ];
+            }
+            break;
+          }
+          case 'state': {
+            this.bundlerState = mes.state;
+            break;
+          }
         }
       }
-    });
+    );
+  }
+
+  cleanup() {
+    this.unsubscribeChannelListener();
+    this.unsubscribeGlobalListener();
+    this.iframeProtocol.cleanup();
   }
 
   updateOptions(options: ClientOptions) {
@@ -263,19 +271,11 @@ export class SandpackClient {
   }
 
   public dispatch(message: Object) {
-    // @ts-ignore We want to add the id, don't use Object.assign since that copies the message.
-    message.$id = this.id;
-    dispatch(message);
+    this.iframeProtocol.dispatch(message);
   }
 
   public listen(listener: (msg: any) => void): Function {
-    return listen((msg: any) => {
-      if (msg.$id !== this.id) {
-        return;
-      }
-
-      listener(msg);
-    });
+    return this.iframeProtocol.channelListen(listener);
   }
 
   /**
@@ -315,11 +315,11 @@ export class SandpackClient {
     [transpiler: string]: Object;
   }> =>
     new Promise(resolve => {
-      const listener = this.listen((message: any) => {
+      const unsubscribe = this.listen((message: any) => {
         if (message.type === 'transpiler-context') {
           resolve(message.data);
 
-          listener();
+          unsubscribe();
         }
       });
 

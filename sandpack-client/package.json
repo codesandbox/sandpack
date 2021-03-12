@@ -1,6 +1,6 @@
 {
   "name": "smooshpack",
-  "version": "1.0.0-beta-4",
+  "version": "1.0.0-beta-5",
   "description": "",
   "keywords": [],
   "repository": {
@@ -30,7 +30,6 @@
     "README.md"
   ],
   "dependencies": {
-    "codesandbox-api": "^0.0.32",
     "codesandbox-import-utils": "^1.2.3",
     "lodash.isequal": "^4.5.0"
   },

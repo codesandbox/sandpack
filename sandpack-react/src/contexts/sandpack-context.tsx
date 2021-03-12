@@ -246,6 +246,10 @@ class SandpackProvider extends React.PureComponent<
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
     }
+
+    if (this.client) {
+      this.client.cleanup();
+    }
   }
 
   runSandpack = () => {
