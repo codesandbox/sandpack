@@ -1222,6 +1222,14 @@
     style-mod "^4.0.0"
     w3c-keyname "^2.2.4"
 
+"@codesandbox/sandpack-client@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-client/-/sandpack-client-0.0.1.tgz#8119487b8ecb0df3ce7a9415a8f0d7c64c51c12c"
+  integrity sha512-BY7zOjismRa4h2oJbXaaqclveXz0yLMHE8MJ9oUNgHVOlLzDni35/5KUDmMEUX7b15I97B+Knf19IFfKf8L54w==
+  dependencies:
+    codesandbox-import-utils "^1.2.3"
+    lodash.isequal "^4.5.0"
+
 "@emotion/cache@^10.0.27", "@emotion/cache@^10.0.9":
   version "10.0.29"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.29.tgz#87e7e64f412c060102d589fe7c6dc042e6f9d1e0"
@@ -9491,14 +9499,6 @@ slash@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
-
-smooshpack@1.0.0-beta-5:
-  version "1.0.0-beta-5"
-  resolved "https://registry.yarnpkg.com/smooshpack/-/smooshpack-1.0.0-beta-5.tgz#f112b2ad68093884fda6170fdaf91ecb051a2bd2"
-  integrity sha512-DszOdnRY90R8A6y8DCL96f9BE6bEaMBRWJoaL5I3XfvbxxTi6PdPGfgFLp77uWlx3rHDLNIe2Uvnib1nRRFROA==
-  dependencies:
-    codesandbox-import-utils "^1.2.3"
-    lodash.isequal "^4.5.0"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"

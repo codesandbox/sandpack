@@ -4,7 +4,7 @@ import {
   BundlerState,
   ModuleError,
   SandpackBundlerFiles,
-} from 'smooshpack';
+} from '@codesandbox/sandpack-client';
 
 import {
   SandpackContext,

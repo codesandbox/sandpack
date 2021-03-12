@@ -15,8 +15,17 @@ deeper into our ecosystem.
 
 ## Getting Started
 
-You can install this package by running `npm i react-smooshpack` or
-`yarn add react-smooshpack`.
+You can install this package by running
+
+```bash
+npm i @codesandbox/sandpack-react
+```
+
+or
+
+```bash
+yarn add @codesandbox/sandpack-react
+```
 
 The package contains multiple components, utilities and typings for diving into
 the `sandpack` ecosystem.
@@ -27,8 +36,8 @@ We packed all the components and the bundler inside the `<Sandpack>` component.
 There's also a small stylesheet you should bring into your css pipeline.
 
 ```jsx
-import { Sandpack } from 'react-smooshpack';
-import 'react-smooshpack/dist/index.css';
+import { Sandpack } from '@codesandbox/sandpack-react';
+import '@codesandbox/sandpack-react/dist/index.css';
 
 <Sandpack />;
 ```
@@ -130,7 +139,7 @@ Or you can import an existing theme object and change it or compose your own
 theme from scratch
 
 ```jsx
-import { Sandpack, codesandboxDarkTheme } from 'react-smooshpack';
+import { Sandpack, codesandboxDarkTheme } from '@codesandbox/sandpack-react';
 
 <Sandpack
   theme={{
@@ -296,7 +305,7 @@ However, your input will be sent through the `code` prop. This is a single
 string that will replace the **main** file of the project.
 
 ```jsx
-import { SandpackRunner } from 'react-smooshpack';
+import { SandpackRunner } from '@codesandbox/sandpack-react';
 
 <SandpackRunner code={`...`} template="vue" />;
 ```
@@ -328,7 +337,7 @@ Let's start from the `SandpackProvider`. This becomes the root node of our new
 `Sandpack` component.
 
 ```jsx
-import { SandpackProvider, SandpackPreview } from 'react-smooshpack';
+import { SandpackProvider, SandpackPreview } from '@codesandbox/sandpack-react';
 
 const CustomSandpack = () => (
   <SandpackProvider>
@@ -353,7 +362,7 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
   SandpackPreview,
-} from 'react-smooshpack';
+} from '@codesandbox/sandpack-react';
 
 const CustomSandpack = () => (
   <SandpackProvider>
@@ -376,7 +385,7 @@ import {
   SandpackLayout,
   SandpackCodeEditor,
   SandpackPreview,
-} from 'react-smooshpack';
+} from '@codesandbox/sandpack-react';
 
 const CustomSandpack = () => (
   <SandpackProvider template="react">
@@ -410,7 +419,7 @@ import {
   SandpackLayout,
   SandpackCodeEditor,
   SandpackTranspiledCode,
-} from 'react-smooshpack';
+} from '@codesandbox/sandpack-react';
 
 const CustomSandpack = () => (
   <SandpackProvider template="react">
@@ -443,7 +452,7 @@ inside the `<SandpackProvider>`.
 Let's build a simple code viewer:
 
 ```jsx
-import { useSandpack } from 'react-smooshpack';
+import { useSandpack } from '@codesandbox/sandpack-react';
 
 const SimpleCodeViewer = () => {
   const { sandpack } = useSandpack();
@@ -486,7 +495,7 @@ understand all the different types of messages and payloads that are passed from
 the sandpack manager to the iframe and back.
 
 ```jsx
-import { useSandpack } from 'react-smooshpack';
+import { useSandpack } from '@codesandbox/sandpack-react';
 
 const CustomRefreshButton = () => {
   const { dispatch, listen } = useSandpack();
@@ -519,7 +528,7 @@ the shape of the **state** object and the **dispatch/listen** functions.
 The refresh button can be built with the `useSandpackNavigation` hook:
 
 ```jsx
-import { useSandpackNavigation } from 'react-smooshpack';
+import { useSandpackNavigation } from '@codesandbox/sandpack-react';
 
 const CustomRefreshButton = () => {
   const { refresh } = useSandpackNavigation();
@@ -535,7 +544,7 @@ Similarly, we can build a custom link that opens the sandpack files in a new tab
 on https://codesandbox.io. Let's the use `useCodeSandboxLink` for that:
 
 ```jsx
-import { useCodeSandboxLink } from 'react-smooshpack';
+import { useCodeSandboxLink } from '@codesandbox/sandpack-react';
 
 const CustomOpenInCSB = () => {
   const url = useCodeSandboxLink();
@@ -554,7 +563,7 @@ your favorite code editor. Let's connect the sandpack state to an instance of
 `useActiveCode` hook, which gives us the `code` and the `updateCode` callback.
 
 ```jsx
-import { useActiveCode } from 'react-smooshpack';
+import { useActiveCode } from '@codesandbox/sandpack-react';
 import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-textmate';

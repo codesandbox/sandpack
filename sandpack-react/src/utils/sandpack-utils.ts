@@ -2,7 +2,7 @@ import {
   addPackageJSONIfNeeded,
   SandpackBundlerFile,
   SandpackBundlerFiles,
-} from 'smooshpack';
+} from '@codesandbox/sandpack-client';
 import { SandpackProviderProps } from '../contexts/sandpack-context';
 import { SANDBOX_TEMPLATES } from '../templates';
 import {

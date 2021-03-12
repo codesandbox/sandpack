@@ -1,4 +1,8 @@
-import { BundlerState, ModuleError, SandpackBundlerFiles } from 'smooshpack';
+import {
+  BundlerState,
+  ModuleError,
+  SandpackBundlerFiles,
+} from '@codesandbox/sandpack-client';
 
 export type SandpackContext = SandpackState & {
   dispatch: (message: any) => void;

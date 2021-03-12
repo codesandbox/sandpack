@@ -29,8 +29,8 @@ your project. If you are working with React, you should start with this package
 as it is built on top of `sandpack-client` for all React use cases.
 
 ```jsx
-import { Sandpack } from 'react-smooshpack';
-import 'react-smooshpack/dist/index.css';
+import { Sandpack } from '@codesandbox/sandpack-react';
+import '@codesandbox/sandpack-react/dist/index.css';
 
 <Sandpack template="react" />;
 ```

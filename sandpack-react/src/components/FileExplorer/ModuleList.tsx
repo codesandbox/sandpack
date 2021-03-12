@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SandpackBundlerFiles } from 'smooshpack';
+import { SandpackBundlerFiles } from '@codesandbox/sandpack-client';
 
 import { File } from './File';
 import { Directory } from './Directory';
