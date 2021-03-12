@@ -15,6 +15,7 @@ import {
   Modules,
   ClientStatus,
 } from './types';
+import Protocol from './file-resolver-protocol';
 
 export interface ClientOptions {
   /**
@@ -81,7 +82,7 @@ export class SandpackClient {
   iframeProtocol: IFrameProtocol;
   options: ClientOptions;
 
-  // fileResolverProtocol?: Protocol;
+  fileResolverProtocol?: Protocol;
   bundlerURL: string;
   bundlerState?: BundlerState;
   errors: Array<ModuleError>;
@@ -147,20 +148,20 @@ export class SandpackClient {
 
         this.iframeProtocol.register();
 
-        // TODO: Figure out the best way to bring this back
-        // if (this.options.fileResolver) {
-        //   this.fileResolverProtocol = new Protocol(
-        //     'file-resolver',
-        //     async (data: { m: 'isFile' | 'readFile'; p: string }) => {
-        //       if (data.m === 'isFile') {
-        //         return this.options.fileResolver!.isFile(data.p);
-        //       }
+        if (this.options.fileResolver) {
+          // TODO: Find a common place for the Protocol to be implemented for both sandpack-core and sandpack-client
+          this.fileResolverProtocol = new Protocol(
+            'file-resolver',
+            async (data: { m: 'isFile' | 'readFile'; p: string }) => {
+              if (data.m === 'isFile') {
+                return this.options.fileResolver!.isFile(data.p);
+              }
 
-        //       return this.options.fileResolver!.readFile(data.p);
-        //     },
-        //     this.iframe.contentWindow
-        //   );
-        // }
+              return this.options.fileResolver!.readFile(data.p);
+            },
+            this.iframe.contentWindow
+          );
+        }
 
         this.updatePreview(this.sandboxInfo, true);
       }
