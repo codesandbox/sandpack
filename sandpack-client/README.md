@@ -41,14 +41,14 @@ the bundler yourself.
 
 ### Using the Client
 
-The Client is a class implementation, you can import it from the package.
+The SandpackClient is a class implementation, you can import it from the package.
 
 ```js
-import { Client } from 'smooshpack';
+import { SandpackClient } from 'smooshpack';
 
 // There are two ways of initializing a preview, you can give it either an
 // iframe element or a selector of an element to create an iframe on.
-const client = new Client(
+const client = new SandpackClient(
   '#preview', // iframe selector or element itself
   {
     files: {
@@ -96,7 +96,7 @@ const PACKAGE_JSON_CODE = JSON.stringify(
 );
 
 // Give it either a selector or an iframe element as first argument, the second arguments are the files
-const client = new Client('#preview', {
+const client = new SandpackClient('#preview', {
   files: {
     '/index.js': {
       code: `console.log(require('uuid'))`,
@@ -110,7 +110,7 @@ const client = new Client('#preview', {
 
 ### SandboxInfo
 
-The second argument in the constructor of `Client` is all sandbox info. It has
+The second argument in the constructor of `SandpackClient` is all sandbox info. It has
 this structure:
 
 ```ts
@@ -142,7 +142,7 @@ this structure:
 
 ### ClientOptions
 
-The third argument in the constructor of `Client` is extra options. Here you can
+The third argument in the constructor of `SandpackClient` is extra options. Here you can
 pass custom bundling/evaluation options or instructions for what and how to
 render inside the iframe:
 
