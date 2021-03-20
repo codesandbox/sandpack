@@ -257,6 +257,22 @@ worker externally.
 > I want to highlight that you can also host the bundler by yourself, all
 > necessary files are in the `sandpack` folder.
 
+## Self Hosting Bundler
+
+If you want to host the bundler yourself, you will need to do a few things.
+
+* The bundler is part of the codesandbox-client codebase: https://github.com/codesandbox/codesandbox-client
+* Clone the codesandbox-client and install the dependencies in the root folder (`yarn install`).
+* `yarn build:deps` to build some of the packages lerna needs for internal links.
+* create your instance of sandpack with `yarn build:sandpack`.
+```
+This creates a www folder in the root folder that www folder is the sandpack folder.
+The sandpack-client connects to on {version}-sandpack.codesandbox.io, 
+Once you have this hosted on your end you can pass bundlerURL when calling
+new SandpackClient(iframe, sandboxInfo, { bundlerURL: 'https://your-hosted-version' } )
+or, if you use sandpack-react, you can bundlerURL in the options of the Sandpack preset.
+```
+
 ## For React developers
 
 If you want to integrate the sandpack bundler into your React project, we
