@@ -13,6 +13,7 @@ export interface CodeEditorProps {
   customStyle?: React.CSSProperties;
   showTabs?: boolean;
   showLineNumbers?: boolean;
+  showRunButton?: boolean;
   wrapContent?: boolean;
 }
 
@@ -22,6 +23,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
   customStyle,
   showTabs,
   showLineNumbers = false,
+  showRunButton = true,
   wrapContent = false,
 }) => {
   const { sandpack } = useSandpack();
@@ -49,7 +51,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
           wrapContent={wrapContent}
         />
 
-        {status === "idle" && <RunButton />}
+        {showRunButton && status === "idle" && <RunButton />}
       </div>
     </SandpackStack>
   );

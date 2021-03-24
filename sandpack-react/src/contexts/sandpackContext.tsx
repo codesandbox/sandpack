@@ -108,6 +108,7 @@ class SandpackProvider extends React.PureComponent<
     this.queuedListeners = {};
     this.unsubscribeQueuedListeners = {};
     this.iframeRef = React.createRef<HTMLIFrameElement>();
+
     this.lazyAnchorRef = React.createRef<HTMLDivElement>();
     this.errorScreenRegistered = React.createRef<
       boolean
