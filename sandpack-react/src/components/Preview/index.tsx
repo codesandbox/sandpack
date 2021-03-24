@@ -80,7 +80,7 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
         display: status !== "idle" ? "flex" : "none",
       }}
     >
-      {showNavigator && <Navigator />}
+      {showNavigator ? <Navigator /> : null}
 
       <div className={c("preview-container")}>
         <iframe
@@ -96,14 +96,15 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
           }}
           title="Sandpack Preview"
         />
-        {showSandpackErrorOverlay && <ErrorOverlay />}
+
+        {showSandpackErrorOverlay ? <ErrorOverlay /> : null}
 
         <div className={c("preview-actions")}>
-          {!showNavigator && showRefreshButton && status === "running" && (
+          {!showNavigator && showRefreshButton && status === "running" ? (
             <RefreshButton />
-          )}
+          ) : null}
 
-          {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
+          {showOpenInCodeSandbox ? <OpenInCodeSandboxButton /> : null}
         </div>
 
         <LoadingOverlay />

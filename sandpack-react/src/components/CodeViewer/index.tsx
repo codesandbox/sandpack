@@ -27,13 +27,15 @@ export const SandpackCodeViewer: React.FC<CodeViewerProps> = ({
 
   return (
     <SandpackStack>
-      {shouldShowTabs && <FileTabs />}
+      {shouldShowTabs ? <FileTabs /> : null}
+
       <PrismHighlight
         code={code}
         lang={lang}
         showLineNumbers={showLineNumbers}
       />
-      {status === "idle" && <RunButton />}
+
+      {status === "idle" ? <RunButton /> : null}
     </SandpackStack>
   );
 };

@@ -48,7 +48,7 @@ export const PrismHighlight: React.FC<PrismHighlightProps> = ({
                 style={{ display: "table-row" }}
                 {...getLineProps({ line, key: i })}
               >
-                {showLineNumbers && (
+                {showLineNumbers ? (
                   <span
                     style={{
                       display: "table-cell",
@@ -61,7 +61,8 @@ export const PrismHighlight: React.FC<PrismHighlightProps> = ({
                   >
                     {i + 1}
                   </span>
-                )}
+                ) : null}
+
                 <span
                   style={{
                     display: "table-cell",
