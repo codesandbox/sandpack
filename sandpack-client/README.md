@@ -45,21 +45,21 @@ The SandpackClient is a class implementation, you can import it from the
 package.
 
 ```js
-import { SandpackClient } from '@codesandbox/sandpack-client';
+import { SandpackClient } from "@codesandbox/sandpack-client";
 
 // There are two ways of initializing a preview, you can give it either an
 // iframe element or a selector of an element to create an iframe on.
 const client = new SandpackClient(
-  '#preview', // iframe selector or element itself
+  "#preview", // iframe selector or element itself
   {
     files: {
-      '/index.js': {
+      "/index.js": {
         code: `console.log(require('uuid'))`,
       },
     },
-    entry: '/index.js',
+    entry: "/index.js",
     dependencies: {
-      uuid: 'latest',
+      uuid: "latest",
     },
   } /* We support a third parameter for advanced options, you can find more info below */
 );
@@ -68,13 +68,13 @@ const client = new SandpackClient(
 // which files have changed and hot reload them.
 client.updatePreview({
   files: {
-    '/index.js': {
+    "/index.js": {
       code: `console.log('New Text!')`,
     },
   },
-  entry: '/index.js',
+  entry: "/index.js",
   dependencies: {
-    uuid: 'latest',
+    uuid: "latest",
   },
 });
 ```
@@ -86,10 +86,10 @@ of truth. Otherwise, we infer `dependencies` and `entry` from it:
 // We infer dependencies and the entry point from package.json
 const PACKAGE_JSON_CODE = JSON.stringify(
   {
-    title: 'test',
-    main: 'index.js',
+    title: "test",
+    main: "index.js",
     dependencies: {
-      uuid: 'latest',
+      uuid: "latest",
     },
   },
   null,
@@ -97,12 +97,12 @@ const PACKAGE_JSON_CODE = JSON.stringify(
 );
 
 // Give it either a selector or an iframe element as first argument, the second arguments are the files
-const client = new SandpackClient('#preview', {
+const client = new SandpackClient("#preview", {
   files: {
-    '/index.js': {
+    "/index.js": {
       code: `console.log(require('uuid'))`,
     },
-    '/package.json': {
+    "/package.json": {
       code: PACKAGE_JSON_CODE,
     },
   },
@@ -195,7 +195,7 @@ internal `id` of the client, so only the bundler that performed the handshake
 with this client instance will respond.
 
 ```js
-client.dispatch({ type: 'refresh' }); // sends a refresh action to the bundler
+client.dispatch({ type: "refresh" }); // sends a refresh action to the bundler
 ```
 
 #### `listen`
@@ -205,8 +205,8 @@ client instance. Uses the internal `id` to filter events coming from other
 bundlers.
 
 ```js
-client.listen(message => {
-  if (message.type === 'status') {
+client.listen((message) => {
+  if (message.type === "status") {
     console.log(message.status);
   }
 });
@@ -261,21 +261,22 @@ worker externally.
 
 If you want to host the bundler yourself, you will need to do a few things.
 
-* The bundler is part of the codesandbox-client codebase: https://github.com/codesandbox/codesandbox-client
-* Clone the codesandbox-client and install the dependencies in the root folder (`yarn install`).
-* `yarn build:deps` to build some of the packages lerna needs for internal links.
-* create your instance of sandpack with `yarn build:sandpack`.
+- The bundler is part of the codesandbox-client codebase: https://github.com/codesandbox/codesandbox-client
+- Clone the codesandbox-client and install the dependencies in the root folder (`yarn install`).
+- `yarn build:deps` to build some of the packages lerna needs for internal links.
+- create your instance of sandpack with `yarn build:sandpack`.
 
-This creates a `www` folder in the root of `codesandbox-client`. That `www` folder is the 
-sandpack folder sandpack-client connects to on `{version}-sandpack.codesandbox.io`. 
+This creates a `www` folder in the root of `codesandbox-client`. That `www` folder is the
+sandpack folder sandpack-client connects to on `{version}-sandpack.codesandbox.io`.
 Once you have this hosted on your end you can pass `bundlerURL` when calling:
 
 ```js
-new SandpackClient(iframe, sandboxInfo, { bundlerURL: 'https://your-hosted-version' } )
+new SandpackClient(iframe, sandboxInfo, {
+  bundlerURL: "https://your-hosted-version",
+});
 ```
 
 or, if you use sandpack-react, you can bundlerURL in the `options` of the Sandpack preset.
-
 
 ## For React developers
 

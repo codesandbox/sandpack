@@ -1,8 +1,9 @@
-import * as React from 'react';
-import { useClasser } from '@code-hike/classer';
-import { SandpackThemeProvider } from '../contexts/theme-context';
-import { useSandpack } from '../hooks/useSandpack';
-import { SandpackThemeProp } from '../types';
+import { useClasser } from "@code-hike/classer";
+import * as React from "react";
+
+import { SandpackThemeProvider } from "../contexts/themeContext";
+import { useSandpack } from "../hooks/useSandpack";
+import type { SandpackThemeProp } from "../types";
 
 export interface SandpackLayoutProps {
   theme?: SandpackThemeProp;
@@ -13,11 +14,11 @@ export const SandpackLayout: React.FC<SandpackLayoutProps> = ({
   theme,
 }) => {
   const { sandpack } = useSandpack();
-  const c = useClasser('sp');
+  const c = useClasser("sp");
 
   return (
     <SandpackThemeProvider theme={theme}>
-      <div className={c('layout')} ref={sandpack.lazyAnchorRef}>
+      <div ref={sandpack.lazyAnchorRef} className={c("layout")}>
         {children}
       </div>
     </SandpackThemeProvider>

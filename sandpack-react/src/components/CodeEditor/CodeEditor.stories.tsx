@@ -1,22 +1,23 @@
-import React from 'react';
-import { Story } from '@storybook/react';
+import type { Story } from "@storybook/react";
+import React from "react";
 
-import { SandpackCodeEditor, CodeEditorProps } from './index';
+import { SandpackProvider } from "../../contexts/sandpackContext";
+import { SandpackThemeProvider } from "../../contexts/themeContext";
 
-import { SandpackProvider } from '../../contexts/sandpack-context';
-import { SandpackThemeProvider } from '../../contexts/theme-context';
+import type { CodeEditorProps } from "./index";
+import { SandpackCodeEditor } from "./index";
 
 export default {
-  title: 'components/Code Editor',
+  title: "components/Code Editor",
   component: SandpackCodeEditor,
 };
 
-export const Component: Story<CodeEditorProps> = args => (
+export const Component: Story<CodeEditorProps> = (args) => (
   <SandpackProvider
     customSetup={{
-      entry: '/index.js',
+      entry: "/index.js",
       files: {
-        '/index.js': {
+        "/index.js": {
           code: 'const title = "This is a simple code editor"',
         },
       },
@@ -28,7 +29,7 @@ export const Component: Story<CodeEditorProps> = args => (
   </SandpackProvider>
 );
 
-export const ReactCode = () => (
+export const ReactCode: React.FC = () => (
   <SandpackProvider template="react">
     <SandpackThemeProvider>
       <SandpackCodeEditor showLineNumbers />
@@ -36,7 +37,7 @@ export const ReactCode = () => (
   </SandpackProvider>
 );
 
-export const VueCode = () => (
+export const VueCode: React.FC = () => (
   <SandpackProvider template="vue">
     <SandpackThemeProvider>
       <SandpackCodeEditor />
@@ -44,7 +45,7 @@ export const VueCode = () => (
   </SandpackProvider>
 );
 
-export const DarkTheme = () => (
+export const DarkTheme: React.FC = () => (
   <SandpackProvider template="vue">
     <SandpackThemeProvider theme="codesandbox-dark">
       <SandpackCodeEditor />

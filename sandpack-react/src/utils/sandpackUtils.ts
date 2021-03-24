@@ -1,17 +1,28 @@
-import {
-  addPackageJSONIfNeeded,
+import type {
   SandpackBundlerFile,
   SandpackBundlerFiles,
-} from '@codesandbox/sandpack-client';
-import { SandpackProviderProps } from '../contexts/sandpack-context';
-import { SANDBOX_TEMPLATES } from '../templates';
-import {
+} from "@codesandbox/sandpack-client";
+import { addPackageJSONIfNeeded } from "@codesandbox/sandpack-client";
+
+import type { SandpackProviderProps } from "../contexts/sandpackContext";
+import { SANDBOX_TEMPLATES } from "../templates";
+import type {
+  SandboxEnvironment,
   SandboxTemplate,
   SandpackPredefinedTemplate,
   SandpackSetup,
-} from '../types';
+} from "../types";
 
-export const getSandpackStateFromProps = (props: SandpackProviderProps) => {
+export interface SandpackContextInfo {
+  activePath: string;
+  openPaths: string[];
+  files: Record<string, SandpackBundlerFile>;
+  environment: SandboxEnvironment;
+}
+
+export const getSandpackStateFromProps = (
+  props: SandpackProviderProps
+): SandpackContextInfo => {
   // Merge predefined template with custom setup
   const projectSetup = getSetup(props.template, props.customSetup);
 
@@ -23,9 +34,9 @@ export const getSandpackStateFromProps = (props: SandpackProviderProps) => {
     const inputFiles = props.customSetup.files;
 
     // extract open and active files from the custom input files
-    Object.keys(inputFiles).forEach(filePath => {
+    Object.keys(inputFiles).forEach((filePath) => {
       const file = inputFiles[filePath];
-      if (typeof file === 'string') {
+      if (typeof file === "string") {
         openPaths.push(filePath);
         return;
       }
@@ -140,7 +151,7 @@ const createSetupFromUserInput = (
 
   const convertedFiles = Object.keys(files).reduce(
     (acc: SandpackBundlerFiles, key) => {
-      if (typeof files[key] === 'string') {
+      if (typeof files[key] === "string") {
         acc[key] = { code: files[key] as string };
       } else {
         acc[key] = files[key] as SandpackBundlerFile;

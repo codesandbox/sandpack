@@ -1,8 +1,8 @@
-import { SandboxTemplate } from '../types';
+import type { SandboxTemplate } from "../types";
 
 export const VANILLA_TEMPLATE: SandboxTemplate = {
   files: {
-    '/src/index.js': {
+    "/src/index.js": {
       code: `import "./styles.css";
 
 document.getElementById("app").innerHTML = \`
@@ -15,13 +15,13 @@ document.getElementById("app").innerHTML = \`
 \`;
 `,
     },
-    '/src/styles.css': {
+    "/src/styles.css": {
       code: `body {
   font-family: sans-serif;
 }
       `,
     },
-    '/index.html': {
+    "/index.html": {
       code: `<!DOCTYPE html>
 <html>
 
@@ -41,7 +41,7 @@ document.getElementById("app").innerHTML = \`
     },
   },
   dependencies: {},
-  entry: '/src/index.js',
-  main: '/src/index.js',
-  environment: 'parcel',
+  entry: "/src/index.js",
+  main: "/src/index.js",
+  environment: "parcel",
 };

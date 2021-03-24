@@ -1,29 +1,28 @@
-import * as React from 'react';
-import { useClasser } from '@code-hike/classer';
-import { useSandpack } from '../../hooks/useSandpack';
-import { BackwardIcon, ForwardIcon, RefreshIcon } from '../../icons';
-import { splitUrl } from './utils';
+import { useClasser } from "@code-hike/classer";
+import * as React from "react";
 
-type UrlChangeMessage = {
-  url: string;
-  back: boolean;
-  forward: boolean;
-};
+import { useSandpack } from "../../hooks/useSandpack";
+import { BackwardIcon, ForwardIcon, RefreshIcon } from "../../icons";
+
+import { splitUrl } from "./utils";
 
 export const Navigator: React.FC = () => {
-  const [baseUrl, setBaseUrl] = React.useState<string>('');
-  const [relativeUrl, setRelativeUrl] = React.useState<string>('/');
+  const [baseUrl, setBaseUrl] = React.useState<string>("");
+  const { sandpack, dispatch, listen } = useSandpack();
+
+  const [relativeUrl, setRelativeUrl] = React.useState<string>(
+    sandpack.startRoute ?? "/"
+  );
 
   const [backEnabled, setBackEnabled] = React.useState(false);
   const [forwardEnabled, setForwardEnabled] = React.useState(false);
 
-  const { sandpack, dispatch, listen } = useSandpack();
-  const c = useClasser('sp');
+  const c = useClasser("sp");
 
   React.useEffect(() => {
-    const unsub = listen((message: any) => {
-      if (message.type === 'urlchange') {
-        const { url, back, forward } = message as UrlChangeMessage;
+    const unsub = listen((message) => {
+      if (message.type === "urlchange") {
+        const { url, back, forward } = message;
 
         const [newBaseUrl, newRelativeUrl] = splitUrl(url);
 
@@ -47,7 +46,7 @@ export const Navigator: React.FC = () => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const path = e.target.value.startsWith('/')
+    const path = e.target.value.startsWith("/")
       ? e.target.value
       : `/${e.target.value}`;
 
@@ -65,53 +64,53 @@ export const Navigator: React.FC = () => {
   };
 
   const handleRefresh = () => {
-    dispatch({ type: 'refresh' });
+    dispatch({ type: "refresh" });
   };
 
   const handleBack = () => {
-    dispatch({ type: 'urlback' });
+    dispatch({ type: "urlback" });
   };
 
   const handleForward = () => {
-    dispatch({ type: 'urlforward' });
+    dispatch({ type: "urlforward" });
   };
 
   return (
-    <div className={c('navigator')}>
+    <div className={c("navigator")}>
       <button
-        className={c('button', 'icon')}
-        type="button"
-        onClick={handleBack}
-        disabled={!backEnabled}
         aria-label="Go back one page"
+        className={c("button", "icon")}
+        disabled={!backEnabled}
+        onClick={handleBack}
+        type="button"
       >
         <BackwardIcon />
       </button>
       <button
-        className={c('button', 'icon')}
-        type="button"
-        onClick={handleForward}
-        disabled={!forwardEnabled}
         aria-label="Go forward one page"
+        className={c("button", "icon")}
+        disabled={!forwardEnabled}
+        onClick={handleForward}
+        type="button"
       >
         <ForwardIcon />
       </button>
       <button
-        className={c('button', 'icon')}
-        type="button"
-        onClick={handleRefresh}
         aria-label="Refresh page"
+        className={c("button", "icon")}
+        onClick={handleRefresh}
+        type="button"
       >
         <RefreshIcon />
       </button>
 
       <input
-        className={c('input')}
-        type="text"
-        name="Current Sandpack URL"
         aria-label="Current Sandpack URL"
+        className={c("input")}
+        name="Current Sandpack URL"
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
+        type="text"
         value={relativeUrl}
       />
     </div>

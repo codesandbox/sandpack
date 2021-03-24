@@ -1,15 +1,17 @@
-import React from 'react';
-import { SandpackLayout } from '../../common/Layout';
-import { SandpackProvider } from '../../contexts/sandpack-context';
-import { Navigator } from '.';
-import { SandpackPreview } from '../Preview';
-import { SandpackThemeProvider } from '../../contexts/theme-context';
+import React from "react";
+
+import { SandpackLayout } from "../../common/Layout";
+import { SandpackProvider } from "../../contexts/sandpackContext";
+import { SandpackThemeProvider } from "../../contexts/themeContext";
+import { SandpackPreview } from "../Preview";
+
+import { Navigator } from ".";
 
 export default {
-  title: 'components/Navigator',
+  title: "components/Navigator",
 };
 
-export const Component = () => (
+export const Component: React.FC = () => (
   <SandpackProvider template="react">
     <SandpackThemeProvider>
       <Navigator />
@@ -17,28 +19,27 @@ export const Component = () => (
   </SandpackProvider>
 );
 
-export const WithRoutingExample = () => (
+export const WithRoutingExample: React.FC = () => (
   <SandpackProvider
-    template="react"
     customSetup={{
       dependencies: {
-        'react-router-dom': 'latest',
-        'react-scripts': 'latest',
-        react: 'latest',
-        'react-dom': 'latest',
+        "react-router-dom": "latest",
+        "react-scripts": "latest",
+        react: "latest",
+        "react-dom": "latest",
       },
       files: {
-        '/index.html': {
+        "/index.html": {
           code: `<div id="root"></div>`,
         },
-        '/index.js': {
+        "/index.js": {
           code: `import ReactDOM from "react-dom";
 import App from "./example";
 
 ReactDOM.render(<App />, document.getElementById("root"));
         `,
         },
-        '/example.js': {
+        "/example.js": {
           code: `import {
   BrowserRouter as Router,
   Switch,
@@ -108,6 +109,8 @@ function Dashboard() {
         },
       },
     }}
+    startRoute="/about"
+    template="react"
   >
     <SandpackLayout>
       <SandpackPreview showNavigator />

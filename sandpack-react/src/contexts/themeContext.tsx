@@ -1,22 +1,23 @@
-import * as React from 'react';
-import { useClasser } from '@code-hike/classer';
-import { createThemeObject, codesandboxLightTheme } from '../themes';
-import { SandpackTheme, SandpackThemeProp } from '../types';
-import { injectThemeStyleSheet } from '../utils/dom-utils';
+import { useClasser } from "@code-hike/classer";
+import * as React from "react";
+
+import { createThemeObject, codesandboxLightTheme } from "../themes";
+import type { SandpackTheme, SandpackThemeProp } from "../types";
+import { injectThemeStyleSheet } from "../utils/domUtils";
 
 const SandpackThemeContext = React.createContext<{
   theme: SandpackTheme;
   id: string;
 }>({
   theme: codesandboxLightTheme,
-  id: 'codesandbox-light',
+  id: "codesandbox-light",
 });
 
 const SandpackThemeProvider: React.FC<{
   theme?: SandpackThemeProp;
-}> = props => {
+}> = (props) => {
   const { theme, id } = createThemeObject(props.theme);
-  const c = useClasser('sp');
+  const c = useClasser("sp");
   // If theme is not explicitly set, don't inject any stylesheet
   if (props.theme) {
     injectThemeStyleSheet(theme, id);
@@ -29,7 +30,7 @@ const SandpackThemeProvider: React.FC<{
         id,
       }}
     >
-      <div className={c('wrapper', id)}>{props.children}</div>
+      <div className={c("wrapper", id)}>{props.children}</div>
     </SandpackThemeContext.Provider>
   );
 };

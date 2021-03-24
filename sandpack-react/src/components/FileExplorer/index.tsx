@@ -1,6 +1,8 @@
-import * as React from 'react';
-import { useSandpack } from '../../hooks/useSandpack';
-import { ModuleList } from './ModuleList';
+import * as React from "react";
+
+import { useSandpack } from "../../hooks/useSandpack";
+
+import { ModuleList } from "./ModuleList";
 
 // WIP
 export const FileExplorer: React.FC = () => {
@@ -9,10 +11,10 @@ export const FileExplorer: React.FC = () => {
   return (
     <div>
       <ModuleList
-        selectFile={sandpack.openFile}
+        activePath={sandpack.activePath}
         files={sandpack.files}
         prefixedPath="/"
-        activePath={sandpack.activePath}
+        selectFile={sandpack.openFile}
       />
     </div>
   );

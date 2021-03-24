@@ -1,31 +1,32 @@
-import * as React from 'react';
-import { useClasser } from '@code-hike/classer';
-import { useSandpack } from '../../hooks/useSandpack';
-import { getFileName } from '../../utils/string-utils';
+import { useClasser } from "@code-hike/classer";
+import * as React from "react";
+
+import { useSandpack } from "../../hooks/useSandpack";
+import { getFileName } from "../../utils/stringUtils";
 
 export const FileTabs: React.FC = () => {
   const { sandpack } = useSandpack();
-  const c = useClasser('sp');
+  const c = useClasser("sp");
 
-  const { activePath, openPaths, changeActiveFile } = sandpack;
+  const { activePath, openPaths, setActiveFile } = sandpack;
 
   return (
-    <div className={c('tabs')}>
+    <div className={c("tabs")}>
       <div
-        className={c('tabs-scrollable-container')}
-        role="tablist"
         aria-label="Select active file"
+        className={c("tabs-scrollable-container")}
+        role="tablist"
       >
-        {openPaths.map(filePath => (
+        {openPaths.map((filePath) => (
           <button
-            className={c('tab-button')}
-            type="button"
-            role="tab"
             key={filePath}
             aria-selected={filePath === activePath}
+            className={c("tab-button")}
             data-active={filePath === activePath}
-            onClick={() => changeActiveFile(filePath)}
+            onClick={() => setActiveFile(filePath)}
+            role="tab"
             title={filePath}
+            type="button"
           >
             {getFileName(filePath)}
           </button>

@@ -1,75 +1,89 @@
-import * as React from 'react';
-import { useClasser } from '@code-hike/classer';
-import {
-  highlightSpecialChars,
-  highlightActiveLine,
-  keymap,
-  EditorView,
-  KeyBinding,
-} from '@codemirror/view';
-import { history, historyKeymap } from '@codemirror/history';
+import { useClasser } from "@code-hike/classer";
+import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
 import {
   defaultKeymap,
   indentLess,
   deleteGroupBackward,
   insertTab,
-} from '@codemirror/commands';
-import { lineNumbers } from '@codemirror/gutter';
-import { bracketMatching } from '@codemirror/matchbrackets';
-import { closeBrackets, closeBracketsKeymap } from '@codemirror/closebrackets';
-import { EditorState } from '@codemirror/state';
-import { commentKeymap } from '@codemirror/comment';
+} from "@codemirror/commands";
+import { commentKeymap } from "@codemirror/comment";
+import { lineNumbers } from "@codemirror/gutter";
+import { history, historyKeymap } from "@codemirror/history";
+import { bracketMatching } from "@codemirror/matchbrackets";
+import { EditorState } from "@codemirror/state";
+import {
+  highlightSpecialChars,
+  highlightActiveLine,
+  keymap,
+  EditorView,
+} from "@codemirror/view";
+import type { KeyBinding } from "@codemirror/view";
+import * as React from "react";
+
+import { useSandpackTheme } from "../../hooks/useSandpackTheme";
+import type { EditorState as SandpackEditorState } from "../../types";
+import { getFileName } from "../../utils/stringUtils";
+
 import {
   getCodeMirrorLanguage,
   getEditorTheme,
   getSyntaxHighlight,
-} from './utils';
-
-import { getFileName } from '../../utils/string-utils';
-import { EditorState as SandpackEditorState } from '../../types';
-import { useSandpackTheme } from '../../hooks/useSandpackTheme';
+} from "./utils";
 
 export interface CodeMirrorProps {
   code: string;
-  activePath: string;
+  filePath?: string;
+  fileType?:
+    | "js"
+    | "jsx"
+    | "ts"
+    | "tsx"
+    | "css"
+    | "scss"
+    | "less"
+    | "html"
+    | "vue";
   onCodeUpdate: (newCode: string) => void;
   showLineNumbers?: boolean;
   wrapContent?: boolean;
-  editorState: SandpackEditorState;
+  editorState?: SandpackEditorState;
 }
 
 export const CodeMirror: React.FC<CodeMirrorProps> = ({
   code,
-  activePath,
+  filePath,
+  fileType,
   onCodeUpdate,
   showLineNumbers = false,
   wrapContent = false,
-  editorState,
+  editorState = "pristine",
 }) => {
   const wrapper = React.useRef<HTMLDivElement>(null);
   const cmView = React.useRef<EditorView>();
   const { theme, themeId } = useSandpackTheme();
   const [internalCode, setInternalCode] = React.useState<string>(code);
-  const c = useClasser('sp');
+  const c = useClasser("sp");
 
   React.useEffect(() => {
     if (!wrapper.current) {
-      return () => {};
+      return () => {
+        return;
+      };
     }
 
-    const langSupport = getCodeMirrorLanguage(activePath);
+    const langSupport = getCodeMirrorLanguage(filePath, fileType);
 
     const customCommandsKeymap: KeyBinding[] = [
       {
-        key: 'Tab',
+        key: "Tab",
         run: insertTab,
       },
       {
-        key: 'Shift-Tab',
+        key: "Shift-Tab",
         run: indentLess,
       },
       {
-        key: 'Escape',
+        key: "Escape",
         run: () => {
           if (wrapper.current) {
             wrapper.current.focus();
@@ -79,7 +93,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
         },
       },
       {
-        key: 'mod-Backspace',
+        key: "mod-Backspace",
         run: deleteGroupBackward,
       },
     ];
@@ -118,7 +132,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
     });
 
     const parentDiv = wrapper.current;
-    const existingPlaceholder = parentDiv.querySelector('.sp-pre-placeholder');
+    const existingPlaceholder = parentDiv.querySelector(".sp-pre-placeholder");
     if (existingPlaceholder) {
       parentDiv.removeChild(existingPlaceholder);
     }
@@ -126,7 +140,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
     const view = new EditorView({
       state: startState,
       parent: parentDiv,
-      dispatch: tr => {
+      dispatch: (tr) => {
         view.update([tr]);
 
         if (tr.docChanged) {
@@ -137,8 +151,8 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       },
     });
 
-    view.contentDOM.setAttribute('tabIndex', '-1');
-    view.contentDOM.setAttribute('aria-describedby', 'exit-instructions');
+    view.contentDOM.setAttribute("tabIndex", "-1");
+    view.contentDOM.setAttribute("aria-describedby", "exit-instructions");
 
     cmView.current = view;
 
@@ -154,8 +168,8 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
     // Avoid autofocus on mobile as it leads to a bad experience and an unexpected layout shift
     if (
       cmView.current &&
-      editorState === 'dirty' &&
-      window.matchMedia('(min-width: 768px)').matches
+      editorState === "dirty" &&
+      window.matchMedia("(min-width: 768px)").matches
     ) {
       cmView.current.contentDOM.focus();
     }
@@ -172,7 +186,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
   }, [code]);
 
   const handleContainerKeyDown = (evt: React.KeyboardEvent) => {
-    if (evt.key === 'Enter' && cmView.current) {
+    if (evt.key === "Enter" && cmView.current) {
       evt.preventDefault();
       cmView.current.contentDOM.focus();
     }
@@ -182,27 +196,29 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
     /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
     /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
     <div
-      className={c('cm', editorState)}
-      onKeyDown={handleContainerKeyDown}
-      tabIndex={0}
-      role="group"
-      aria-label={`Code Editor for ${getFileName(activePath)}`}
-      aria-describedby="enter-instructions"
       ref={wrapper}
+      aria-describedby="enter-instructions"
+      aria-label={
+        filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
+      }
+      className={c("cm", editorState)}
+      onKeyDown={handleContainerKeyDown}
+      role="group"
+      tabIndex={0}
     >
       <pre
-        className={c('pre-placeholder')}
+        className={c("pre-placeholder")}
         style={{
           marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
         }}
       >
         {code}
       </pre>
-      <p id="enter-instructions" style={{ display: 'none' }}>
+      <p id="enter-instructions" style={{ display: "none" }}>
         To enter the code editing mode, press Enter. To exit the edit mode,
         press Escape
       </p>
-      <p id="exit-instructions" style={{ display: 'none' }}>
+      <p id="exit-instructions" style={{ display: "none" }}>
         You are editing the code. To exit the edit mode, press Escape
       </p>
     </div>

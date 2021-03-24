@@ -1,10 +1,13 @@
-import React from 'react';
-import { Story } from '@storybook/react';
-import { Sandpack, SandpackProps } from './Sandpack';
-import { codesandboxDarkTheme } from '../themes';
+import type { Story } from "@storybook/react";
+import React from "react";
+
+import { codesandboxDarkTheme } from "../themes";
+
+import type { SandpackProps } from "./Sandpack";
+import { Sandpack } from "./Sandpack";
 
 export default {
-  title: 'presets/Sandpack',
+  title: "presets/Sandpack",
   component: Sandpack,
 };
 
@@ -31,13 +34,13 @@ const linkCode = `export default function Link() {
   return <a href="https://www.example.com" target="_blank">Click Here</a>
 }`;
 
-export const ReactEditor: Story<SandpackProps> = args => (
+export const ReactEditor: Story<SandpackProps> = (args) => (
   <Sandpack
     {...args}
     files={{
-      '/App.js': reactCode,
-      '/button.js': buttonCode,
-      '/link.js': linkCode,
+      "/App.js": reactCode,
+      "/button.js": buttonCode,
+      "/link.js": linkCode,
     }}
     options={{
       showLineNumbers: true,
@@ -46,31 +49,31 @@ export const ReactEditor: Story<SandpackProps> = args => (
   />
 );
 
-export const VueEditor: Story<SandpackProps> = args => (
+export const VueEditor: Story<SandpackProps> = (args) => (
   <Sandpack {...args} template="vue" theme="aqua-blue" />
 );
 
-export const VanillaEditor: Story<SandpackProps> = args => (
+export const VanillaEditor: Story<SandpackProps> = (args) => (
   <Sandpack
     {...args}
-    theme="codesandbox-dark"
-    template="vanilla"
     options={{
-      openPaths: ['/src/index.js', '/src/styles.css', '/index.html'],
+      openPaths: ["/src/index.js", "/src/styles.css", "/index.html"],
       showNavigator: true,
     }}
+    template="vanilla"
+    theme="codesandbox-dark"
   />
 );
 
-export const DarkTheme: Story<SandpackProps> = args => (
+export const DarkTheme: Story<SandpackProps> = (args) => (
   <Sandpack
     {...args}
     files={{
-      '/App.js': reactCode,
-      '/button.js': {
+      "/App.js": reactCode,
+      "/button.js": {
         code: buttonCode,
       },
-      '/link.js': {
+      "/link.js": {
         code: linkCode,
         hidden: true,
       },
@@ -80,13 +83,20 @@ export const DarkTheme: Story<SandpackProps> = args => (
   />
 );
 
-export const CustomSetup: Story<SandpackProps> = args => (
+export const CustomSetup: Story<SandpackProps> = (args) => (
   <Sandpack
     {...args}
-    options={{ wrapContent: true }}
-    theme="night-owl"
+    customSetup={{
+      entry: "/src/index.tsx",
+      main: "/src/main.tsx",
+      dependencies: {
+        react: "latest",
+        "react-dom": "latest",
+        "react-scripts": "4.0.0",
+      },
+    }}
     files={{
-      './tsconfig.json': {
+      "./tsconfig.json": {
         code: `{
 "include": [
   "./src/**/*"
@@ -103,7 +113,7 @@ export const CustomSetup: Story<SandpackProps> = args => (
 }`,
         hidden: true,
       },
-      '/public/index.html': {
+      "/public/index.html": {
         code: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,7 +128,7 @@ export const CustomSetup: Story<SandpackProps> = args => (
         hidden: true,
       },
 
-      '/src/index.tsx': {
+      "/src/index.tsx": {
         code: `import * as React from "react";
 import { render } from "react-dom";
 
@@ -130,7 +140,7 @@ render(<Main test="World"/>, rootElement);
         hidden: true,
       },
 
-      '/src/main.tsx': {
+      "/src/main.tsx": {
         code: `import * as React from "react";
 
 export const Main: React.FC<{test: string}> = ({test}) => {
@@ -140,15 +150,8 @@ export const Main: React.FC<{test: string}> = ({test}) => {
 }`,
       },
     }}
-    customSetup={{
-      entry: '/src/index.tsx',
-      main: '/src/main.tsx',
-      dependencies: {
-        react: 'latest',
-        'react-dom': 'latest',
-        'react-scripts': '4.0.0',
-      },
-    }}
+    options={{ wrapContent: true }}
+    theme="night-owl"
   />
 );
 
@@ -158,22 +161,22 @@ export default function App() {
   return <ReactMarkdown># Hello, *world*!</ReactMarkdown>
 }`;
 
-export const WithCustomLibrary: Story<SandpackProps> = args => (
+export const WithCustomLibrary: Story<SandpackProps> = (args) => (
   <Sandpack
     {...args}
-    template="react"
-    files={{
-      '/App.js': reactWithLibCode,
-    }}
     customSetup={{
       dependencies: {
-        'react-markdown': 'latest',
+        "react-markdown": "latest",
       },
     }}
+    files={{
+      "/App.js": reactWithLibCode,
+    }}
+    template="react"
   />
 );
 
-export const MultipleInstances: Story<SandpackProps> = args => (
+export const MultipleInstances: Story<SandpackProps> = (args) => (
   <div>
     <h2>Light Theme</h2>
     <Sandpack
@@ -234,11 +237,11 @@ export const MultipleInstances: Story<SandpackProps> = args => (
       template="react"
       theme={{
         palette: {
-          accent: '#fc0e34',
-          inactiveText: '#aaa',
+          accent: "#fc0e34",
+          inactiveText: "#aaa",
         },
         syntax: {
-          keyword: '#6700ff',
+          keyword: "#6700ff",
         },
       }}
     />
@@ -253,17 +256,17 @@ export const MultipleInstances: Story<SandpackProps> = args => (
       theme={{
         ...codesandboxDarkTheme,
         typography: {
-          fontSize: '16px',
-          bodyFont: 'Arial',
+          fontSize: "16px",
+          bodyFont: "Arial",
         },
       }}
     />
     <h2>Theme - Auto</h2>
     <p>Selects theme using system preference</p>
     <Sandpack
-      theme="auto"
-      template="react"
       options={{ showTabs: true, showNavigator: true }}
+      template="react"
+      theme="auto"
     />
   </div>
 );
@@ -274,11 +277,10 @@ const code = `export default function Kitten() {
   );
 }`;
 
-export const RunnableComponent = () => (
+export const RunnableComponent = (): React.ReactElement => (
   <Sandpack
-    template="react"
     files={{
-      '/App.js': code,
+      "/App.js": code,
     }}
     options={{
       autorun: false,
@@ -286,5 +288,6 @@ export const RunnableComponent = () => (
       showLineNumbers: true,
       showNavigator: true,
     }}
+    template="react"
   />
 );

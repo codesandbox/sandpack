@@ -36,8 +36,8 @@ We packed all the components and the bundler inside the `<Sandpack>` component.
 There's also a small stylesheet you should bring into your css pipeline.
 
 ```jsx
-import { Sandpack } from '@codesandbox/sandpack-react';
-import '@codesandbox/sandpack-react/dist/index.css';
+import { Sandpack } from "@codesandbox/sandpack-react";
+import "@codesandbox/sandpack-react/dist/index.css";
 
 <Sandpack />;
 ```
@@ -71,7 +71,7 @@ const code = `export default function App() {
 <Sandpack
   template="react"
   files={{
-    '/App.js': code,
+    "/App.js": code,
   }}
 />;
 ```
@@ -96,13 +96,13 @@ export default function App() {
 <Sandpack
   template="react"
   files={{
-    '/App.js': code,
+    "/App.js": code,
   }}
   customSetup={{
     dependencies: {
-      'react-markdown': 'latest',
+      "react-markdown": "latest",
     },
-    entry: '/index.js',
+    entry: "/index.js",
   }}
 />;
 ```
@@ -125,11 +125,11 @@ default theme
 <Sandpack
   theme={{
     palette: {
-      accent: '#fc0e34',
-      inactiveText: '#aaa',
+      accent: "#fc0e34",
+      inactiveText: "#aaa",
     },
     syntax: {
-      keyword: '#6700ff',
+      keyword: "#6700ff",
     },
   }}
 />
@@ -139,14 +139,14 @@ Or you can import an existing theme object and change it or compose your own
 theme from scratch
 
 ```jsx
-import { Sandpack, codesandboxDarkTheme } from '@codesandbox/sandpack-react';
+import { Sandpack, codesandboxDarkTheme } from "@codesandbox/sandpack-react";
 
 <Sandpack
   theme={{
     ...codesandboxDarkTheme,
     typography: {
-      fontSize: '16px',
-      bodyFont: 'Arial',
+      fontSize: "16px",
+      bodyFont: "Arial",
     },
   }}
 />;
@@ -166,9 +166,9 @@ you can use to customize the sandpack experience. For example, you can pass a
 ```jsx
 <Sandpack
   files={{
-    '/App.js': reactCode,
-    '/button.js': buttonCode,
-    '/link.js': {
+    "/App.js": reactCode,
+    "/button.js": buttonCode,
+    "/link.js": {
       code: linkCode,
       hidden: true,
     },
@@ -206,12 +206,12 @@ places and can be error prone, so use this with caution:
 <Sandpack
   template="react"
   files={{
-    '/App.js': reactButtonCode,
-    '/button.js': buttonCode,
+    "/App.js": reactButtonCode,
+    "/button.js": buttonCode,
   }}
   options={{
-    openPaths: ['/App.js', '/button.js', '/index.js'],
-    activePath: '/index.js',
+    openPaths: ["/App.js", "/button.js", "/index.js"],
+    activePath: "/index.js",
   }}
 />
 ```
@@ -270,7 +270,7 @@ The `options` also allow you to customize the _recompile mode_, or what happens
 you type inside the code editor.
 
 ```jsx
-<Sandpack options={{ recompileMode: 'immediate' }} template="react" />
+<Sandpack options={{ recompileMode: "immediate" }} template="react" />
 ```
 
 By default, the mode is set to `delayed` and there's a `500ms` debounce timeout
@@ -281,7 +281,7 @@ experience by modifying the `recompileDelay` value or by setting the
 ```jsx
 <Sandpack
   options={{
-    recompileMode: 'delayed',
+    recompileMode: "delayed",
     recompileDelay: 300,
   }}
   template="react"
@@ -305,7 +305,7 @@ However, your input will be sent through the `code` prop. This is a single
 string that will replace the **main** file of the project.
 
 ```jsx
-import { SandpackRunner } from '@codesandbox/sandpack-react';
+import { SandpackRunner } from "@codesandbox/sandpack-react";
 
 <SandpackRunner code={`...`} template="vue" />;
 ```
@@ -337,7 +337,7 @@ Let's start from the `SandpackProvider`. This becomes the root node of our new
 `Sandpack` component.
 
 ```jsx
-import { SandpackProvider, SandpackPreview } from '@codesandbox/sandpack-react';
+import { SandpackProvider, SandpackPreview } from "@codesandbox/sandpack-react";
 
 const CustomSandpack = () => (
   <SandpackProvider>
@@ -377,6 +377,8 @@ The theme provider component will also render a wrapper div around your sandpack
 components. That div ensures the theme variables and styling is specific to this
 instance of sandpack.
 
+#### SandpackLayout component
+
 Let's add a code editor and introduce the `SandpackLayout` component.
 
 ```jsx
@@ -385,7 +387,7 @@ import {
   SandpackLayout,
   SandpackCodeEditor,
   SandpackPreview,
-} from '@codesandbox/sandpack-react';
+} from "@codesandbox/sandpack-react";
 
 const CustomSandpack = () => (
   <SandpackProvider template="react">
@@ -407,9 +409,6 @@ passing, which you can decide based on your specific needs.
 You can also bring other components in the mix: `SandpackCodeViewer`,
 `SandpackTranspiledCode`, `FileTabs`, `Navigator` and so on.
 
-Some of the components have configuration flags that toggle subparts on/off. All
-of them comunicate with sandpack through the shared context.
-
 For example, you can create an editor instance that gives you the transpiled
 code of your **active** component instead of the preview page:
 
@@ -419,7 +418,7 @@ import {
   SandpackLayout,
   SandpackCodeEditor,
   SandpackTranspiledCode,
-} from '@codesandbox/sandpack-react';
+} from "@codesandbox/sandpack-react";
 
 const CustomSandpack = () => (
   <SandpackProvider template="react">
@@ -433,6 +432,29 @@ const CustomSandpack = () => (
 
 You will notice that the theming applies to all components in the same way, as
 the theme object is also distributed by the context.
+
+Some of the components have configuration props that toggle subparts on/off or that configure behavior/look. All
+of them comunicate with sandpack through the shared context.
+
+#### SandpackCodeEditor props
+
+| name            | type    | default                           | description                                                             |
+| --------------- | ------- | --------------------------------- | ----------------------------------------------------------------------- |
+| showTabs        | boolean | computed based on number of files | The FileTabs component is shown on top of the editor based on this flag |
+| showLineNumbers | boolean | false                             | Adds a column with line numbers on the left side of the code editor     |
+| showRunButton   | boolean | true                              | Shows a `Run` button when the sandpack is not set to `autorun`          |
+| wrapContent     | boolean | false                             | Wraps the code lines that don't fit horizontally                        |
+
+#### SandpackPreview props
+
+| name                     | type                      | default    | description                                                                                                                                                                                                           |
+| ------------------------ | ------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| showNavigator            | boolean                   | false      | Shows the Navigator component on top of the Preview. When this is true, the refresh button is not shown independently on top of the Preview.                                                                          |
+| showRefreshButton        | boolean                   | true       | Shows a refresh button positioned absolutely on top of the Preview (lower right corner)                                                                                                                               |
+| showOpenInCodeSandbox    | boolean                   | true       | Shows a link that creates a new codesandbox based on the current state of the sandpack instance (lower right corner).                                                                                                 |
+| showSandpackErrorOverlay | boolean                   | true       | Shows a custom overlay screen covering the preview in case of an error, with relevant information about the error                                                                                                     |
+| viewportSize             | ViewportSize              | "auto"     | On auto, the preview will scale to the size of the iframe. You can also pass presets like: "iPhone X", "Pixel 2", "iPad", "Moto G4", "Surface Duo", Or you can pass a custom size `{ width: number, height: number }` |
+| viewportOrientation      | "portrait" \| "landscape" | "portrait" | When using a preset viewport size, you can flip the width/height with this setting                                                                                                                                    |
 
 ### Create a custom sandpack-aware component
 
@@ -452,7 +474,7 @@ inside the `<SandpackProvider>`.
 Let's build a simple code viewer:
 
 ```jsx
-import { useSandpack } from '@codesandbox/sandpack-react';
+import { useSandpack } from "@codesandbox/sandpack-react";
 
 const SimpleCodeViewer = () => {
   const { sandpack } = useSandpack();
@@ -470,7 +492,7 @@ state:
 - the `activePath` / `openPaths` fields
 - the `error` object, if any
 - multiple functions for changing the state of sandpack: `updateCurrentFile`,
-  `changeActiveFile`, etc.
+  `setActiveFile`, etc.
 
 In the component above, you get the active code string by calling
 `files[activePath].code`, so any change of state will trigger a re-render of the
@@ -495,17 +517,17 @@ understand all the different types of messages and payloads that are passed from
 the sandpack manager to the iframe and back.
 
 ```jsx
-import { useSandpack } from '@codesandbox/sandpack-react';
+import { useSandpack } from "@codesandbox/sandpack-react";
 
 const CustomRefreshButton = () => {
   const { dispatch, listen } = useSandpack();
 
   const handleRefresh = () => {
     // listens for any message dispatched between sandpack and the bundler
-    const stopListening = listen(message => console.log(message));
+    const stopListening = listen((message) => console.log(message));
 
     // sends the refresh message to the bundler, should be logged by the listener
-    dispatch({ type: 'refresh' });
+    dispatch({ type: "refresh" });
 
     // unsubscribe
     stopListening();
@@ -528,7 +550,7 @@ the shape of the **state** object and the **dispatch/listen** functions.
 The refresh button can be built with the `useSandpackNavigation` hook:
 
 ```jsx
-import { useSandpackNavigation } from '@codesandbox/sandpack-react';
+import { useSandpackNavigation } from "@codesandbox/sandpack-react";
 
 const CustomRefreshButton = () => {
   const { refresh } = useSandpackNavigation();
@@ -544,7 +566,7 @@ Similarly, we can build a custom link that opens the sandpack files in a new tab
 on https://codesandbox.io. Let's the use `useCodeSandboxLink` for that:
 
 ```jsx
-import { useCodeSandboxLink } from '@codesandbox/sandpack-react';
+import { useCodeSandboxLink } from "@codesandbox/sandpack-react";
 
 const CustomOpenInCSB = () => {
   const url = useCodeSandboxLink();
@@ -563,10 +585,10 @@ your favorite code editor. Let's connect the sandpack state to an instance of
 `useActiveCode` hook, which gives us the `code` and the `updateCode` callback.
 
 ```jsx
-import { useActiveCode } from '@codesandbox/sandpack-react';
-import AceEditor from 'react-ace';
-import 'ace-builds/src-noconflict/mode-javascript';
-import 'ace-builds/src-noconflict/theme-textmate';
+import { useActiveCode } from "@codesandbox/sandpack-react";
+import AceEditor from "react-ace";
+import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/theme-textmate";
 
 const CustomAceEditor = () => {
   const { code, updateCode } = useActiveCode();
@@ -601,18 +623,13 @@ It's not pretty, but with just a few lines of code, you can create a whole new
 component that uses the power of sandpack, but has all the UI and functionality
 you need for your specific use case.
 
-Notice how the `SandpackPreview` is the only component left from our package.
-You can also implement your own preview component, but we recommend sticking
-with the standard one, as it is a bit more coupled to the bundler
-implementation.
-
 ## Development
 
 If you want to contribute, fork the main repo:
 `https://github.com/codesandbox/sandpack`
 
 ```bash
-cd sandpack-react
 yarn
+cd sandpack-react
 yarn storybook
 ```

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Story } from '@storybook/react';
-import { SandpackRunner, SandpackRunnerProps } from './SandpackRunner';
+import type { Story } from "@storybook/react";
+import React, { useState } from "react";
+
+import type { SandpackRunnerProps } from "./SandpackRunner";
+import { SandpackRunner } from "./SandpackRunner";
 
 export default {
-  title: 'presets/Sandpack Runner',
+  title: "presets/Sandpack Runner",
   component: SandpackRunner,
 };
 
@@ -36,7 +38,7 @@ const vueCode = `<template>
 </style>
 `;
 
-export const ReactRunner: Story<SandpackRunnerProps> = args => (
+export const ReactRunner: Story<SandpackRunnerProps> = (args) => (
   <SandpackRunner {...args} template="react" />
 );
 
@@ -44,7 +46,7 @@ ReactRunner.args = {
   code: reactCode,
 };
 
-export const VueRunner: Story<SandpackRunnerProps> = args => (
+export const VueRunner: Story<SandpackRunnerProps> = (args) => (
   <SandpackRunner {...args} template="vue" theme="codesandbox-dark" />
 );
 
@@ -57,20 +59,20 @@ const reactAltCode = `export default function App() {
 }
 `;
 
-export const AutoTheme: Story<SandpackRunnerProps> = args => (
+export const AutoTheme: Story<SandpackRunnerProps> = (args) => (
   <SandpackRunner theme="auto" />
 );
 
-export const SwitchExperiment = () => {
+export const SwitchExperiment = (): React.ReactElement => {
   const [codeToggle, setCodeToggle] = useState(false);
 
   return (
     <div>
       <SandpackRunner
-        template="react"
         code={codeToggle ? reactAltCode : reactCode}
+        template="react"
       />
-      <button type="button" onClick={() => setCodeToggle(!codeToggle)}>
+      <button onClick={() => setCodeToggle(!codeToggle)} type="button">
         Switch
       </button>
     </div>

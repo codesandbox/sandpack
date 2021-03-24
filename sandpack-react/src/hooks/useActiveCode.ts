@@ -1,6 +1,9 @@
-import { useSandpack } from './useSandpack';
+import { useSandpack } from "./useSandpack";
 
-export const useActiveCode = () => {
+export const useActiveCode = (): {
+  code: string;
+  updateCode: (newCode: string) => void;
+} => {
   const { sandpack } = useSandpack();
 
   return {

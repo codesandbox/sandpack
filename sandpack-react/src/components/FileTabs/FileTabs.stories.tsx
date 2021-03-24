@@ -1,21 +1,23 @@
-import React from 'react';
-import { FileTabs } from './index';
-import { SandpackCodeViewer } from '../CodeViewer';
-import { SandpackProvider } from '../../contexts/sandpack-context';
-import { SandpackLayout } from '../../common/Layout';
+import React from "react";
+
+import { SandpackLayout } from "../../common/Layout";
+import { SandpackProvider } from "../../contexts/sandpackContext";
+import { SandpackCodeViewer } from "../CodeViewer";
+
+import { FileTabs } from "./index";
 
 export default {
-  title: 'components/File Tabs',
+  title: "components/File Tabs",
 };
 
-export const Component = () => (
+export const Component: React.FC = () => (
   <SandpackProvider
     customSetup={{
-      entry: '/index.tsx',
+      entry: "/index.tsx",
       files: {
-        '/index.tsx': '',
-        '/src/app.tsx': { code: '', active: true },
-        '/src/components/button.tsx': '',
+        "/index.tsx": "",
+        "/src/app.tsx": { code: "", active: true },
+        "/src/components/button.tsx": "",
       },
     }}
   >
@@ -25,14 +27,14 @@ export const Component = () => (
   </SandpackProvider>
 );
 
-export const WithHiddenFiles = () => (
+export const WithHiddenFiles: React.FC = () => (
   <SandpackProvider
     customSetup={{
-      entry: '/index.tsx',
+      entry: "/index.tsx",
       files: {
-        '/index.tsx': { code: '', hidden: true },
-        '/src/app.tsx': 'Hello',
-        '/src/components/button.tsx': 'World',
+        "/index.tsx": { code: "", hidden: true },
+        "/src/app.tsx": "Hello",
+        "/src/components/button.tsx": "World",
       },
     }}
   >

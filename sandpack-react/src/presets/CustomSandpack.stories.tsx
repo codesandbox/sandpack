@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSandpack } from '../hooks/useSandpack';
+import React from "react";
 
+import { useSandpack } from "../hooks/useSandpack";
 import {
   SandpackPreview,
   SandpackProvider,
@@ -16,13 +16,13 @@ import {
   useActiveCode,
   useSandpackNavigation,
   SandpackStack,
-} from '../index';
+} from "../index";
 
 export default {
-  title: 'presets/Custom Sandpack',
+  title: "presets/Custom Sandpack",
 };
 
-export const UsingSandpackLayout = () => (
+export const UsingSandpackLayout: React.FC = () => (
   <SandpackProvider template="react">
     <SandpackLayout theme="codesandbox-dark">
       <SandpackStack>
@@ -33,8 +33,8 @@ export const UsingSandpackLayout = () => (
   </SandpackProvider>
 );
 
-export const UsingVisualElements = () => (
-  <SandpackProvider template="react" activePath="/App.js">
+export const UsingVisualElements: React.FC = () => (
+  <SandpackProvider activePath="/App.js" template="react">
     <SandpackThemeProvider theme="codesandbox-dark">
       <SandpackCodeEditor
         customStyle={{
@@ -44,22 +44,22 @@ export const UsingVisualElements = () => (
       />
 
       <SandpackPreview
-        showRefreshButton={false}
-        showOpenInCodeSandbox={false}
         customStyle={{
-          border: '1px solid red',
+          border: "1px solid red",
           marginBottom: 4,
           marginTop: 4,
           width: 500,
           height: 300,
         }}
+        showOpenInCodeSandbox={false}
+        showRefreshButton={false}
       />
 
       <div
         style={{
-          display: 'flex',
+          display: "flex",
           width: 500,
-          justifyContent: 'space-between',
+          justifyContent: "space-between",
         }}
       >
         <OpenInCodeSandboxButton />
@@ -77,7 +77,7 @@ const CustomOpenInCSB = () => {
 const CustomRefreshButton = () => {
   const { refresh } = useSandpackNavigation();
   return (
-    <button type="button" onClick={() => refresh()}>
+    <button onClick={() => refresh()} type="button">
       Refresh Sandpack
     </button>
   );
@@ -89,7 +89,7 @@ const CustomCodeEditor = () => {
 
   return (
     <textarea
-      onChange={evt => updateCode(evt.target.value)}
+      onChange={(evt) => updateCode(evt.target.value)}
       style={{
         width: 400,
         height: 200,
@@ -107,23 +107,23 @@ const CustomCodeEditor = () => {
   );
 };
 
-export const UsingHooks = () => (
+export const UsingHooks: React.FC = () => (
   <SandpackProvider template="react">
     <SandpackThemeProvider>
       <CustomCodeEditor />
 
       <SandpackPreview
-        showRefreshButton={false}
+        customStyle={{ border: "1px solid red", width: 400, height: 300 }}
         showOpenInCodeSandbox={false}
-        customStyle={{ border: '1px solid red', width: 400, height: 300 }}
+        showRefreshButton={false}
       />
 
       <div
         style={{
-          display: 'flex',
+          display: "flex",
           width: 400,
-          margin: '8px 0',
-          justifyContent: 'space-between',
+          margin: "8px 0",
+          justifyContent: "space-between",
         }}
       >
         <CustomRefreshButton />
@@ -174,40 +174,41 @@ const CustomPreview = () => {
 
   return (
     <iframe
+      ref={sandpack.iframeRef}
       style={{
         width: 400,
         height: 400,
       }}
-      ref={sandpack.iframeRef}
       title="Sandpack Preview"
     />
   );
 };
 
-export const JustIframe = () => {
+export const JustIframe = (): React.ReactElement => {
   const [first, setFirst] = React.useState(true);
   const code = first ? code1 : code2;
 
   return (
     <SandpackProvider
-      template="react"
       customSetup={{
         files: {
-          '/App.js': code,
+          "/App.js": code,
         },
       }}
+      template="react"
     >
+      <CustomPreview />
       <CustomPreview />
       <div
         style={{
-          display: 'flex',
+          display: "flex",
           width: 400,
-          margin: '8px 0',
-          justifyContent: 'space-between',
+          margin: "8px 0",
+          justifyContent: "space-between",
         }}
       >
         <CustomRefreshButton />
-        <button type="button" onClick={() => setFirst(!first)}>
+        <button onClick={() => setFirst(!first)} type="button">
           Switch
         </button>
         <CustomOpenInCSB />

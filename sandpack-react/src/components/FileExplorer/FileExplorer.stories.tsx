@@ -1,21 +1,22 @@
-import React from 'react';
-import { FileExplorer } from './index';
+import React from "react";
 
-import { SandpackProvider } from '../../contexts/sandpack-context';
-import { SandpackLayout } from '../../common/Layout';
+import { SandpackLayout } from "../../common/Layout";
+import { SandpackProvider } from "../../contexts/sandpackContext";
+
+import { FileExplorer } from "./index";
 
 export default {
-  title: 'components/File Explorer',
+  title: "components/File Explorer",
 };
 
-export const Component = () => (
+export const Component: React.FC = () => (
   <SandpackProvider
     customSetup={{
-      entry: '/index.tsx',
+      entry: "/index.tsx",
       files: {
-        '/index.tsx': '',
-        '/src/app.tsx': '',
-        '/src/components/button.tsx': '',
+        "/index.tsx": "",
+        "/src/app.tsx": "",
+        "/src/components/button.tsx": "",
       },
     }}
   >

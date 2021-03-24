@@ -1,26 +1,30 @@
-import {
+import type {
   BundlerState,
   ModuleError,
+  Dispatch,
+  Listen,
   SandpackBundlerFiles,
-} from '@codesandbox/sandpack-client';
+} from "@codesandbox/sandpack-client";
 
 export type SandpackContext = SandpackState & {
-  dispatch: (message: any) => void;
-  listen: (listener: SandpackListener) => Function;
+  dispatch: Dispatch;
+  listen: Listen;
 };
 
 export interface SandpackState {
   bundlerState: BundlerState | undefined;
   openPaths: string[];
   activePath: string;
+  startRoute?: string;
   editorState: EditorState;
   error: Partial<ModuleError> | null;
   files: SandpackBundlerFiles;
   status: SandpackStatus;
   runSandpack: () => void;
+  updateFile: (path: string, newCode: string) => void;
   updateCurrentFile: (newCode: string) => void;
   openFile: (path: string) => void;
-  changeActiveFile: (path: string) => void;
+  setActiveFile: (path: string) => void;
 
   // Element refs
   // Different components inside the SandpackProvider might register certain elements of interest for sandpack
@@ -37,97 +41,99 @@ export interface SandpackState {
   loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
 }
 
-export type SandpackStatus = 'initial' | 'idle' | 'running';
-export type EditorState = 'pristine' | 'dirty';
+export type SandpackStatus = "initial" | "idle" | "running";
+export type EditorState = "pristine" | "dirty";
 
-export type SandpackListener = (msg: any) => void;
-
-export type SandboxTemplate = {
+export interface SandboxTemplate {
   files: SandpackBundlerFiles;
   dependencies: Record<string, string>;
   entry: string;
   main: string;
   environment: SandboxEnvironment;
-};
+}
 
-export type SandpackFile = {
+export interface SandpackFile {
   code: string;
   hidden?: boolean;
   active?: boolean;
-};
+}
 
 export type SandpackFiles = Record<string, string | SandpackFile>;
 
-export type SandpackSetup = {
+export interface SandpackSetup {
   dependencies?: Record<string, string>;
   entry?: string;
   main?: string;
   files?: SandpackFiles;
   environment?: SandboxEnvironment;
-};
+}
 
 export type SandboxEnvironment =
-  | 'adonis'
-  | 'create-react-app'
-  | 'vue-cli'
-  | 'preact-cli'
-  | 'svelte'
-  | 'create-react-app-typescript'
-  | 'angular-cli'
-  | 'parcel'
-  | 'cxjs'
-  | '@dojo/cli-create-app'
-  | 'gatsby'
-  | 'marko'
-  | 'nuxt'
-  | 'next'
-  | 'reason'
-  | 'apollo'
-  | 'sapper'
-  | 'nest'
-  | 'static'
-  | 'styleguidist'
-  | 'gridsome'
-  | 'vuepress'
-  | 'mdx-deck'
-  | 'quasar-framework'
-  | 'unibit'
-  | 'node'
-  | 'ember'
-  | 'custom'
-  | 'babel-repl';
+  | "adonis"
+  | "create-react-app"
+  | "vue-cli"
+  | "preact-cli"
+  | "svelte"
+  | "create-react-app-typescript"
+  | "angular-cli"
+  | "parcel"
+  | "cxjs"
+  | "@dojo/cli-create-app"
+  | "gatsby"
+  | "marko"
+  | "nuxt"
+  | "next"
+  | "reason"
+  | "apollo"
+  | "sapper"
+  | "nest"
+  | "static"
+  | "styleguidist"
+  | "gridsome"
+  | "vuepress"
+  | "mdx-deck"
+  | "quasar-framework"
+  | "unibit"
+  | "node"
+  | "ember"
+  | "custom"
+  | "babel-repl";
 
-export type SandpackPredefinedTemplate = 'react' | 'vue' | 'vanilla';
+export type SandpackPredefinedTemplate = "react" | "vue" | "vanilla";
 // TODO
 // | 'angular-cli'
 // | 'parcel';
 
 export type SandpackPredefinedTheme =
-  | 'codesandbox-light'
-  | 'codesandbox-dark'
-  | 'night-owl'
-  | 'aqua-blue'
-  | 'monokai-pro';
+  | "codesandbox-light"
+  | "codesandbox-dark"
+  | "night-owl"
+  | "aqua-blue"
+  | "monokai-pro";
 
-export type SandpackSyntaxStyle = {
+export interface SandpackSyntaxStyle {
   color?: string;
-  fontStyle?: 'normal' | 'italic';
+  fontStyle?: "normal" | "italic";
   fontWeight?:
-    | 'normal'
-    | 'bold'
-    | '100'
-    | '200'
-    | '300'
-    | '400'
-    | '500'
-    | '600'
-    | '700'
-    | '800'
-    | '900';
-  textDecoration?: 'underline' | 'line-through';
-};
+    | "normal"
+    | "bold"
+    | "100"
+    | "200"
+    | "300"
+    | "400"
+    | "500"
+    | "600"
+    | "700"
+    | "800"
+    | "900";
+  textDecoration?:
+    | "none"
+    | "underline"
+    | "line-through"
+    | "underline line-through";
+}
 
-export type SandpackTheme = {
+export interface SandpackTheme {
   palette: {
     activeText: string;
     defaultText: string;
@@ -155,14 +161,14 @@ export type SandpackTheme = {
     monoFont: string;
     fontSize: string;
   };
-};
+}
 
 export type SandpackPartialTheme = DeepPartial<SandpackTheme>;
 
 export type SandpackThemeProp =
   | SandpackPredefinedTheme
   | SandpackPartialTheme
-  | 'auto';
+  | "auto";
 
 export type DeepPartial<Type> = {
   [Property in keyof Type]?: DeepPartial<Type[Property]>;

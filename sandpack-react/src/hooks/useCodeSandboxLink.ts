@@ -1,15 +1,17 @@
-import * as React from 'react';
-import { SandpackBundlerFiles } from '@codesandbox/sandpack-client';
-import { getParameters } from 'codesandbox-import-utils/lib/api/define';
-import { useSandpack } from './useSandpack';
+import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
+import { getParameters } from "codesandbox-import-utils/lib/api/define";
+import * as React from "react";
+
+import { useSandpack } from "./useSandpack";
 
 const getFileParameters = (files: SandpackBundlerFiles) => {
-  const normalized: {
-    [path: string]: { content: string; isBinary: boolean };
-  } = Object.keys(files).reduce(
+  const normalized: Record<
+    string,
+    { content: string; isBinary: boolean }
+  > = Object.keys(files).reduce(
     (prev, next) => ({
       ...prev,
-      [next.replace('/', '')]: {
+      [next.replace("/", "")]: {
         content: files[next].code,
         isBinary: false,
       },
@@ -20,7 +22,7 @@ const getFileParameters = (files: SandpackBundlerFiles) => {
   return getParameters({ files: normalized });
 };
 
-export const useCodeSandboxLink = () => {
+export const useCodeSandboxLink = (): string => {
   const { sandpack } = useSandpack();
   const params = getFileParameters(sandpack.files);
 

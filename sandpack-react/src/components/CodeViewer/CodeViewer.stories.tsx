@@ -1,22 +1,23 @@
-import React from 'react';
-import { Story } from '@storybook/react';
+import type { Story } from "@storybook/react";
+import React from "react";
 
-import { SandpackCodeViewer, CodeViewerProps } from '.';
+import { SandpackProvider } from "../../contexts/sandpackContext";
+import { SandpackThemeProvider } from "../../contexts/themeContext";
 
-import { SandpackProvider } from '../../contexts/sandpack-context';
-import { SandpackThemeProvider } from '../../contexts/theme-context';
+import type { CodeViewerProps } from ".";
+import { SandpackCodeViewer } from ".";
 
 export default {
-  title: 'components/Code Viewer',
+  title: "components/Code Viewer",
   component: SandpackCodeViewer,
 };
 
-export const Component: Story<CodeViewerProps> = args => (
+export const Component: Story<CodeViewerProps> = (args) => (
   <SandpackProvider
     customSetup={{
-      entry: '/index.js',
+      entry: "/index.js",
       files: {
-        '/index.js': {
+        "/index.js": {
           code: 'const title = "This is not editable" // this is a comaent',
         },
       },
@@ -28,7 +29,7 @@ export const Component: Story<CodeViewerProps> = args => (
   </SandpackProvider>
 );
 
-export const ReactCode = () => (
+export const ReactCode: React.FC = () => (
   <SandpackProvider template="react">
     <SandpackThemeProvider>
       <SandpackCodeViewer />
@@ -36,7 +37,7 @@ export const ReactCode = () => (
   </SandpackProvider>
 );
 
-export const VueCode = () => (
+export const VueCode: React.FC = () => (
   <SandpackProvider template="vue">
     <SandpackThemeProvider theme="codesandbox-dark">
       <SandpackCodeViewer />

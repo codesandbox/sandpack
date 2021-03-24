@@ -1,12 +1,12 @@
-import { SandpackBundlerFiles, Dependencies } from './types';
+import type { SandpackBundlerFiles, Dependencies } from "./types";
 
 export function createPackageJSON(
   dependencies: Dependencies = {},
-  entry: string = '/index.js'
-) {
+  entry = "/index.js"
+): string {
   return JSON.stringify(
     {
-      name: 'sandpack-project',
+      name: "sandpack-project",
       main: entry,
       dependencies,
     },
@@ -19,13 +19,13 @@ export function addPackageJSONIfNeeded(
   files: SandpackBundlerFiles,
   dependencies?: Dependencies,
   entry?: string
-) {
+): SandpackBundlerFiles {
   const newFiles = { ...files };
 
-  if (!newFiles['/package.json']) {
+  if (!newFiles["/package.json"]) {
     if (!dependencies) {
       throw new Error(
-        'No dependencies specified, please specify either a package.json or dependencies.'
+        "No dependencies specified, please specify either a package.json or dependencies."
       );
     }
 
@@ -35,7 +35,7 @@ export function addPackageJSONIfNeeded(
       );
     }
 
-    newFiles['/package.json'] = {
+    newFiles["/package.json"] = {
       code: createPackageJSON(dependencies, entry),
     };
   }

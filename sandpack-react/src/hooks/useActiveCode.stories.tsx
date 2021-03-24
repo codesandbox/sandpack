@@ -1,21 +1,23 @@
-import React from 'react';
-import { SandpackPreview } from '../components/Preview';
-import { SandpackLayout } from '../common/Layout';
-import { SandpackProvider } from '../contexts/sandpack-context';
-import { useActiveCode } from './useActiveCode';
+import React from "react";
+
+import { SandpackLayout } from "../common/Layout";
+import { SandpackPreview } from "../components/Preview";
+import { SandpackProvider } from "../contexts/sandpackContext";
+
+import { useActiveCode } from "./useActiveCode";
 
 export default {
-  title: 'hooks/useActiveCode',
+  title: "hooks/useActiveCode",
 };
 
 const CustomEditor = () => {
   const { code, updateCode } = useActiveCode();
   return (
-    <textarea onChange={evt => updateCode(evt.target.value)}>{code}</textarea>
+    <textarea onChange={(evt) => updateCode(evt.target.value)}>{code}</textarea>
   );
 };
 
-export const CustomCodeEditor = () => (
+export const CustomCodeEditor = (): React.ReactElement => (
   <SandpackProvider template="react">
     <SandpackLayout>
       <CustomEditor />
