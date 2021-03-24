@@ -1,14 +1,15 @@
-import * as React from 'react';
-import { ClasserProvider } from '@code-hike/classer';
-import { SandpackPreview } from '../components/Preview';
-import { SandpackLayout } from '../common/Layout';
-import { SandpackProvider } from '../contexts/sandpackContext';
-import {
+import { ClasserProvider } from "@code-hike/classer";
+import * as React from "react";
+
+import { SandpackLayout } from "../common/Layout";
+import { SandpackPreview } from "../components/Preview";
+import { SandpackProvider } from "../contexts/sandpackContext";
+import { SANDBOX_TEMPLATES } from "../templates";
+import type {
   SandpackPredefinedTemplate,
   SandpackSetup,
   SandpackThemeProp,
-} from '../types';
-import { SANDBOX_TEMPLATES } from '../templates';
+} from "../types";
 
 export interface SandpackRunnerProps {
   code?: string;
@@ -30,7 +31,7 @@ export const SandpackRunner: React.FC<SandpackRunnerProps> = ({
   theme,
 }) => {
   const mainFile =
-    customSetup?.main ?? SANDBOX_TEMPLATES[template || 'vanilla'].main;
+    customSetup?.main ?? SANDBOX_TEMPLATES[template || "vanilla"].main;
 
   // Override the main file of the sandbox
   const userInput = code
@@ -45,9 +46,9 @@ export const SandpackRunner: React.FC<SandpackRunnerProps> = ({
 
   return (
     <SandpackProvider
-      template={template}
-      customSetup={userInput}
       bundlerURL={options?.bundlerUrl}
+      customSetup={userInput}
+      template={template}
     >
       <ClasserProvider classes={options?.classes}>
         <SandpackLayout theme={theme}>

@@ -6,7 +6,7 @@ const getConstructorName = (x: any) => {
   try {
     return x.constructor.name;
   } catch (e) {
-    return '';
+    return "";
   }
 };
 
@@ -22,7 +22,7 @@ export default class Protocol {
   ) {
     this.createConnection();
     this.internalId = generateId();
-    this.isWorker = getConstructorName(target) === 'Worker';
+    this.isWorker = getConstructorName(target) === "Worker";
   }
 
   getTypeId() {
@@ -30,15 +30,15 @@ export default class Protocol {
   }
 
   createConnection() {
-    self.addEventListener('message', this._messageListener);
+    self.addEventListener("message", this._messageListener);
   }
 
   public dispose() {
-    self.removeEventListener('message', this._messageListener);
+    self.removeEventListener("message", this._messageListener);
   }
 
   sendMessage<PromiseType>(data: any): Promise<PromiseType> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const messageId = generateId();
 
       const message = {
@@ -60,11 +60,11 @@ export default class Protocol {
         ) {
           resolve(data.$data);
 
-          self.removeEventListener('message', listenFunction);
+          self.removeEventListener("message", listenFunction);
         }
       };
 
-      self.addEventListener('message', listenFunction);
+      self.addEventListener("message", listenFunction);
 
       this._postMessage(message);
     });
@@ -93,7 +93,7 @@ export default class Protocol {
 
     if (e.source) {
       // @ts-ignore
-      e.source.postMessage(returnMessage, '*');
+      e.source.postMessage(returnMessage, "*");
     } else {
       this._postMessage(returnMessage);
     }
@@ -103,14 +103,14 @@ export default class Protocol {
     if (
       this.isWorker ||
       // @ts-ignore Unknown to TS
-      (typeof DedicatedWorkerGlobalScope !== 'undefined' &&
+      (typeof DedicatedWorkerGlobalScope !== "undefined" &&
         // @ts-ignore Unknown to TS
         this.target instanceof DedicatedWorkerGlobalScope)
     ) {
       // @ts-ignore
       this.target.postMessage(m);
     } else {
-      (this.target as Window).postMessage(m, '*');
+      (this.target as Window).postMessage(m, "*");
     }
   }
 }

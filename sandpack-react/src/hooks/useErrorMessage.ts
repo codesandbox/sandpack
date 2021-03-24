@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { useSandpack } from './useSandpack';
+import * as React from "react";
 
-export const useErrorMessage = () => {
+import { useSandpack } from "./useSandpack";
+
+export const useErrorMessage = (): string | null => {
   const { sandpack } = useSandpack();
 
   React.useEffect(() => {
@@ -13,5 +14,12 @@ export const useErrorMessage = () => {
     return null;
   }
 
-  return error.message;
+  if (error.title === "SyntaxError") {
+    return error.message ?? null;
+  }
+
+  const errorLocation = error.line ? ` (${error.line}:${error.column})` : ``;
+  const errorMessage = `${error.path}: ${error.message}${errorLocation}`;
+
+  return errorMessage ?? null;
 };

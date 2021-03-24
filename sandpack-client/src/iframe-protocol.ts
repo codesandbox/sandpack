@@ -1,13 +1,19 @@
+import type {
+  ListenerFunction,
+  SandpackMessage,
+  UnsubscribeFunction,
+} from "./types";
+
 export class IFrameProtocol {
   private frameWindow: Window | null;
   private origin: string;
 
   // React to messages from any iframe
-  private globalListeners: Record<number, Function> = {};
+  private globalListeners: Record<number, ListenerFunction> = {};
   private globalListenersCount = 0;
 
   // React to messages from the iframe owned by this instance
-  private channelListeners: Record<number, Function> = {};
+  private channelListeners: Record<number, ListenerFunction> = {};
   private channelListenersCount = 0;
 
   // Random number to identify this instance of the client when messages are coming from multiple iframes
@@ -21,13 +27,13 @@ export class IFrameProtocol {
 
     this.eventListener = this.eventListener.bind(this);
 
-    if (typeof window !== 'undefined') {
-      window.addEventListener('message', this.eventListener);
+    if (typeof window !== "undefined") {
+      window.addEventListener("message", this.eventListener);
     }
   }
 
-  cleanup() {
-    window.removeEventListener('message', this.eventListener);
+  cleanup(): void {
+    window.removeEventListener("message", this.eventListener);
     this.globalListeners = {};
     this.channelListeners = {};
     this.globalListenersCount = 0;
@@ -36,14 +42,14 @@ export class IFrameProtocol {
 
   // Sends the channelId and triggers an iframeHandshake promise to resolve,
   // so the iframe can start listening for messages (based on the id)
-  register() {
+  register(): void {
     if (!this.frameWindow) {
       return;
     }
 
     this.frameWindow.postMessage(
       {
-        type: 'register-frame',
+        type: "register-frame",
         origin: document.location.origin,
         id: this.channelId, // TODO: Rename in codesandbox-api to channelId
       },
@@ -52,7 +58,7 @@ export class IFrameProtocol {
   }
 
   // Messages are dispatched from the client directly to the instance iframe
-  dispatch(message: any) {
+  dispatch(message: SandpackMessage): void {
     if (!this.frameWindow) {
       return;
     }
@@ -69,9 +75,11 @@ export class IFrameProtocol {
 
   // Add a listener that is called on any message coming from an iframe in the page
   // This is needed for the `initialize` message which comes without a channelId
-  globalListen(listener: Function) {
-    if (typeof listener !== 'function') {
-      return () => {};
+  globalListen(listener: ListenerFunction): UnsubscribeFunction {
+    if (typeof listener !== "function") {
+      return () => {
+        return;
+      };
     }
 
     const listenerId = this.globalListenersCount;
@@ -84,9 +92,11 @@ export class IFrameProtocol {
 
   // Add a listener that is called on any message coming from an iframe with the instance channelId
   // All other messages (eg: from other iframes) are ignored
-  channelListen(listener: Function) {
-    if (typeof listener !== 'function') {
-      return () => {};
+  channelListen(listener: ListenerFunction): UnsubscribeFunction {
+    if (typeof listener !== "function") {
+      return () => {
+        return;
+      };
     }
 
     const listenerId = this.channelListenersCount;
@@ -103,7 +113,7 @@ export class IFrameProtocol {
       return;
     }
 
-    Object.values(this.globalListeners).forEach(listener =>
+    Object.values(this.globalListeners).forEach((listener) =>
       listener(message.data)
     );
 
@@ -111,7 +121,7 @@ export class IFrameProtocol {
       return;
     }
 
-    Object.values(this.channelListeners).forEach(listener =>
+    Object.values(this.channelListeners).forEach((listener) =>
       listener(message.data)
     );
   }

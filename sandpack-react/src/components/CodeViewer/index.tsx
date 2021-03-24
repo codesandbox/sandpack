@@ -1,11 +1,13 @@
-import * as React from 'react';
-import { useSandpack } from '../../hooks/useSandpack';
-import { FileTabs } from '../FileTabs';
-import { PrismHighlight } from '../../common/PrismHighlight';
-import { getPrismLanguage } from './utils';
-import { useActiveCode } from '../../hooks/useActiveCode';
-import { RunButton } from '../../common/RunButton';
-import { SandpackStack } from '../../common/Stack';
+import * as React from "react";
+
+import { PrismHighlight } from "../../common/PrismHighlight";
+import { RunButton } from "../../common/RunButton";
+import { SandpackStack } from "../../common/Stack";
+import { useActiveCode } from "../../hooks/useActiveCode";
+import { useSandpack } from "../../hooks/useSandpack";
+import { FileTabs } from "../FileTabs";
+
+import { getPrismLanguage } from "./utils";
 
 export interface CodeViewerProps {
   showTabs?: boolean;
@@ -27,11 +29,11 @@ export const SandpackCodeViewer: React.FC<CodeViewerProps> = ({
     <SandpackStack>
       {shouldShowTabs && <FileTabs />}
       <PrismHighlight
-        showLineNumbers={showLineNumbers}
         code={code}
         lang={lang}
+        showLineNumbers={showLineNumbers}
       />
-      {status === 'idle' && <RunButton />}
+      {status === "idle" && <RunButton />}
     </SandpackStack>
   );
 };

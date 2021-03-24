@@ -1,16 +1,19 @@
-import * as React from 'react';
-import { ClasserProvider } from '@code-hike/classer';
-import { SandpackLayout } from '../common/Layout';
-import {
+import { ClasserProvider } from "@code-hike/classer";
+import * as React from "react";
+
+import { SandpackLayout } from "../common/Layout";
+import type { CodeEditorProps } from "../components/CodeEditor";
+import { SandpackCodeEditor } from "../components/CodeEditor";
+import type { PreviewProps } from "../components/Preview";
+import { SandpackPreview } from "../components/Preview";
+import { SandpackProvider } from "../contexts/sandpackContext";
+import type {
   FileResolver,
   SandpackFiles,
   SandpackPredefinedTemplate,
   SandpackSetup,
   SandpackThemeProp,
-} from '../types';
-import { SandpackProvider } from '../contexts/sandpackContext';
-import { SandpackCodeEditor, CodeEditorProps } from '../components/CodeEditor';
-import { SandpackPreview, PreviewProps } from '../components/Preview';
+} from "../types";
 
 export interface SandpackProps {
   files?: SandpackFiles;
@@ -24,7 +27,7 @@ export interface SandpackProps {
     activePath?: string;
 
     editorWidthPercentage?: number;
-    editorHeight?: React.CSSProperties['height'];
+    editorHeight?: React.CSSProperties["height"];
     classes?: Record<string, string>;
 
     showNavigator?: boolean;
@@ -38,12 +41,12 @@ export interface SandpackProps {
     fileResolver?: FileResolver;
 
     autorun?: boolean;
-    recompileMode?: 'immediate' | 'delayed';
+    recompileMode?: "immediate" | "delayed";
     recompileDelay?: number;
   };
 }
 
-export const Sandpack: React.FC<SandpackProps> = props => {
+export const Sandpack: React.FC<SandpackProps> = (props) => {
   // Combine files with customSetup to create the user input structure
   const userInputSetup = props.files
     ? {
@@ -85,8 +88,8 @@ export const Sandpack: React.FC<SandpackProps> = props => {
 
   return (
     <SandpackProvider
-      template={props.template}
       customSetup={userInputSetup}
+      template={props.template}
       {...providerOptions}
     >
       <ClasserProvider classes={props.options?.classes}>

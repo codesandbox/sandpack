@@ -1,23 +1,25 @@
-import * as React from 'react';
-import {
-  SandpackClient,
+import type {
   BundlerState,
+  ListenerFunction,
   ModuleError,
   SandpackBundlerFiles,
-} from '@codesandbox/sandpack-client';
+  SandpackMessage,
+  UnsubscribeFunction,
+} from "@codesandbox/sandpack-client";
+import { SandpackClient } from "@codesandbox/sandpack-client";
+import * as React from "react";
 
-import {
+import type {
   SandpackContext,
   SandboxEnvironment,
-  SandpackListener,
   FileResolver,
   SandpackStatus,
   EditorState,
   SandpackPredefinedTemplate,
   SandpackSetup,
-} from '../types';
-import { getSandpackStateFromProps } from '../utils/sandpackUtils';
-import { generateRandomId } from '../utils/stringUtils';
+} from "../types";
+import { getSandpackStateFromProps } from "../utils/sandpackUtils";
+import { generateRandomId } from "../utils/stringUtils";
 
 const Sandpack = React.createContext<SandpackContext | null>(null);
 
@@ -42,7 +44,7 @@ export interface SandpackProviderProps {
   openPaths?: string[];
 
   // execution and recompile
-  recompileMode?: 'immediate' | 'delayed';
+  recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;
   autorun?: boolean;
 
@@ -58,7 +60,7 @@ class SandpackProvider extends React.PureComponent<
 > {
   static defaultProps = {
     skipEval: false,
-    recompileMode: 'delayed',
+    recompileMode: "delayed",
     recompileDelay: 500,
     autorun: true,
   };
@@ -72,9 +74,9 @@ class SandpackProvider extends React.PureComponent<
   loadingScreenRegistered: React.MutableRefObject<boolean>;
 
   intersectionObserver?: IntersectionObserver;
-  queuedListeners: Record<string, SandpackListener>;
-  unsubscribeQueuedListeners: Record<string, Function>;
-  unsubscribe?: Function;
+  queuedListeners: Record<string, ListenerFunction>;
+  unsubscribeQueuedListeners: Record<string, UnsubscribeFunction>;
+  unsubscribe?: UnsubscribeFunction;
   debounceHook?: number;
 
   constructor(props: SandpackProviderProps) {
@@ -94,8 +96,8 @@ class SandpackProvider extends React.PureComponent<
       activePath,
       bundlerState: undefined,
       error: null,
-      sandpackStatus: this.props.autorun ? 'initial' : 'idle',
-      editorState: 'pristine',
+      sandpackStatus: this.props.autorun ? "initial" : "idle",
+      editorState: "pristine",
       renderHiddenIframe: false,
     };
 
@@ -115,28 +117,29 @@ class SandpackProvider extends React.PureComponent<
     >() as React.MutableRefObject<boolean>;
   }
 
-  handleMessage = (m: any) => {
-    if (m.type === 'state') {
-      this.setState({ bundlerState: m.state });
-    } else if (m.type === 'done' && !m.compilatonError) {
+  handleMessage = (msg: SandpackMessage): void => {
+    console.log(msg);
+    if (msg.type === "state") {
+      this.setState({ bundlerState: msg.state });
+    } else if (msg.type === "done" && !msg.compilatonError) {
       this.setState({ error: null });
-    } else if (m.type === 'action' && m.action === 'show-error') {
-      const { title, path, message, line, column } = m;
+    } else if (msg.type === "action" && msg.action === "show-error") {
+      const { title, path, message, line, column } = msg;
       this.setState({
         error: { title, path, message, line, column },
       });
     } else if (
-      m.type === 'action' &&
-      m.action === 'notification' &&
-      m.notificationType === 'error'
+      msg.type === "action" &&
+      msg.action === "notification" &&
+      msg.notificationType === "error"
     ) {
       this.setState({
-        error: { message: m.title },
+        error: { message: msg.title },
       });
     }
   };
 
-  updateCurrentFile = (newCode: string) => {
+  updateCurrentFile = (newCode: string): void => {
     if (newCode === this.state.files[this.state.activePath]?.code) {
       return;
     }
@@ -151,11 +154,11 @@ class SandpackProvider extends React.PureComponent<
 
     this.setState({ files: newFiles });
 
-    if (sandpackStatus !== 'running') {
+    if (sandpackStatus !== "running") {
       return;
     }
 
-    if (recompileMode === 'immediate') {
+    if (recompileMode === "immediate") {
       if (!this.client) {
         return;
       }
@@ -165,7 +168,7 @@ class SandpackProvider extends React.PureComponent<
       });
     }
 
-    if (recompileMode === 'delayed') {
+    if (recompileMode === "delayed") {
       window.clearTimeout(this.debounceHook);
       this.debounceHook = window.setTimeout(() => {
         if (!this.client) {
@@ -179,7 +182,7 @@ class SandpackProvider extends React.PureComponent<
     }
   };
 
-  componentDidMount() {
+  componentDidMount(): void {
     if (!this.props.autorun) {
       return;
     }
@@ -187,14 +190,14 @@ class SandpackProvider extends React.PureComponent<
     if (this.lazyAnchorRef.current) {
       // If any component registerd a lazy anchor ref component, use that for the intersection observer
       const options = {
-        rootMargin: '600px 0px',
+        rootMargin: "600px 0px",
         threshold: 0,
       };
 
-      this.intersectionObserver = new IntersectionObserver(entries => {
+      this.intersectionObserver = new IntersectionObserver((entries) => {
         if (
           entries[0]?.intersectionRatio > 0 &&
-          this.state.sandpackStatus === 'initial'
+          this.state.sandpackStatus === "initial"
         ) {
           // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
           setTimeout(() => this.runSandpack());
@@ -208,7 +211,7 @@ class SandpackProvider extends React.PureComponent<
     }
   }
 
-  componentDidUpdate(prevProps: SandpackProviderProps) {
+  componentDidUpdate(prevProps: SandpackProviderProps): void {
     if (
       prevProps.template !== this.props.template ||
       prevProps.activePath !== this.props.activePath ||
@@ -227,7 +230,7 @@ class SandpackProvider extends React.PureComponent<
       /* eslint-disable react/no-did-update-set-state */
       this.setState({ activePath, openPaths, files, environment });
 
-      if (this.state.sandpackStatus !== 'running' || !this.client) {
+      if (this.state.sandpackStatus !== "running" || !this.client) {
         return;
       }
 
@@ -238,8 +241,8 @@ class SandpackProvider extends React.PureComponent<
     }
   }
 
-  componentWillUnmount() {
-    if (typeof this.unsubscribe === 'function') {
+  componentWillUnmount(): void {
+    if (typeof this.unsubscribe === "function") {
       this.unsubscribe();
     }
 
@@ -252,7 +255,7 @@ class SandpackProvider extends React.PureComponent<
     }
   }
 
-  runSandpack = () => {
+  runSandpack = (): void => {
     const iframe = this.iframeRef.current;
     if (!iframe) {
       // If no component mounts an iframe, the context will render a hidden one, mount it and run sandpack on it
@@ -280,22 +283,22 @@ class SandpackProvider extends React.PureComponent<
     this.unsubscribe = this.client.listen(this.handleMessage);
 
     // Register any potential listeners that subscribed before sandpack ran
-    Object.keys(this.queuedListeners).forEach(listenerId => {
+    Object.keys(this.queuedListeners).forEach((listenerId) => {
       const listener = this.queuedListeners[listenerId];
-      const unsubscribe = this.client!.listen(listener);
+      const unsubscribe = this.client!.listen(listener) as () => void;
       this.unsubscribeQueuedListeners[listenerId] = unsubscribe;
     });
 
     // Clear the queued listeners after they were registered
     this.queuedListeners = {};
-    this.setState({ sandpackStatus: 'running' });
+    this.setState({ sandpackStatus: "running" });
   };
 
-  changeActiveFile = (path: string) => {
-    this.setState({ activePath: path, editorState: 'dirty' });
+  changeActiveFile = (path: string): void => {
+    this.setState({ activePath: path, editorState: "dirty" });
   };
 
-  openFile = (path: string) => {
+  openFile = (path: string): void => {
     this.setState(({ openPaths }) => {
       const newPaths = openPaths.includes(path)
         ? openPaths
@@ -304,21 +307,21 @@ class SandpackProvider extends React.PureComponent<
       return {
         activePath: path,
         openPaths: newPaths,
-        editorState: 'dirty',
+        editorState: "dirty",
       };
     });
   };
 
-  dispatchMessage = (message: any) => {
+  dispatchMessage = (message: SandpackMessage): void => {
     if (this.client === null) {
-      console.warn('dispatch cannot be called while in idle mode');
+      console.warn("dispatch cannot be called while in idle mode");
       return;
     }
 
     this.client.dispatch(message);
   };
 
-  addListener = (listener: SandpackListener) => {
+  addListener = (listener: ListenerFunction): UnsubscribeFunction => {
     if (this.client === null) {
       // When listeners are added before the client is instantiated, they are stored with an unique id
       // When the client is eventually instantiated, the listeners are registered on the spot
@@ -339,7 +342,7 @@ class SandpackProvider extends React.PureComponent<
       };
     }
 
-    return this.client.listen(listener);
+    return this.client.listen(listener) as () => void;
   };
 
   _getSandpackState = (): SandpackContext => {
@@ -375,7 +378,7 @@ class SandpackProvider extends React.PureComponent<
     };
   };
 
-  render() {
+  render(): React.ReactElement {
     const { children } = this.props;
     const { renderHiddenIframe } = this.state;
 
@@ -383,9 +386,9 @@ class SandpackProvider extends React.PureComponent<
       <Sandpack.Provider value={this._getSandpackState()}>
         {renderHiddenIframe && (
           <iframe
-            title="Sandpack"
             ref={this.iframeRef}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
+            title="Sandpack"
           />
         )}
         {children}
@@ -396,44 +399,4 @@ class SandpackProvider extends React.PureComponent<
 
 const SandpackConsumer = Sandpack.Consumer;
 
-function getDisplayName(
-  WrappedComponent: React.ComponentClass<any> | React.FC<any>
-) {
-  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
-}
-
-function withSandpack(Component: React.ComponentClass<any> | React.FC<any>) {
-  const WrappedComponent = (props: any) => (
-    <SandpackConsumer>
-      {sandpack => {
-        if (sandpack === null) {
-          throw new Error(
-            `withSandpack can only be used inside components wrapped by 'SandpackProvider'`
-          );
-        }
-
-        const { dispatch, listen, ...rest } = sandpack;
-
-        return (
-          <Component
-            {...props}
-            dispatch={dispatch}
-            listen={listen}
-            sandpack={rest}
-          />
-        );
-      }}
-    </SandpackConsumer>
-  );
-
-  WrappedComponent.displayName = `WithSandpack(${getDisplayName(Component)})`;
-
-  return WrappedComponent;
-}
-
-export {
-  SandpackProvider,
-  SandpackConsumer,
-  withSandpack,
-  Sandpack as SandpackReactContext,
-};
+export { SandpackProvider, SandpackConsumer, Sandpack as SandpackReactContext };

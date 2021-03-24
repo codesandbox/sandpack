@@ -1,11 +1,12 @@
-import React from 'react';
-import { SandpackPreview } from './index';
-import { SandpackLayout } from '../../common/Layout';
+import React from "react";
 
-import { SandpackProvider } from '../../contexts/sandpackContext';
+import { SandpackLayout } from "../../common/Layout";
+import { SandpackProvider } from "../../contexts/sandpackContext";
+
+import { SandpackPreview } from "./index";
 
 export default {
-  title: 'components/Preview',
+  title: "components/Preview",
 };
 
 const code = `export default function Kitten() {
@@ -14,14 +15,14 @@ const code = `export default function Kitten() {
   );
 }`;
 
-export const Component = () => (
+export const Component: React.FC = () => (
   <SandpackProvider
-    template="react"
     customSetup={{
       files: {
-        '/App.js': code,
+        "/App.js": code,
       },
     }}
+    template="react"
   >
     <SandpackLayout>
       <SandpackPreview />
@@ -29,14 +30,14 @@ export const Component = () => (
   </SandpackProvider>
 );
 
-export const WithNavigator = () => (
+export const WithNavigator: React.FC = () => (
   <SandpackProvider
-    template="react"
     customSetup={{
       files: {
-        '/App.js': code,
+        "/App.js": code,
       },
     }}
+    template="react"
   >
     <SandpackLayout>
       <SandpackPreview showNavigator />

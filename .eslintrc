@@ -1,0 +1,85 @@
+{
+  "extends": [
+    // Create React App config
+    "react-app",
+    "eslint:recommended",
+    // eslint-recommended, but for TypeScript
+    "plugin:@typescript-eslint/eslint-recommended",
+    // TypeScript specific rules
+    "plugin:@typescript-eslint/recommended",
+    // Disable eslint rules that conflict with Prettier's formatting
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-empty-function": "error",
+    // Enforce return types on exported functions or public methods
+    "@typescript-eslint/explicit-module-boundary-types": "error",
+    // Enforce use of interfaces for object type definitions
+    "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+    // Enforce use of Record<string, string> instead of {[key: string]: string};
+    "@typescript-eslint/consistent-indexed-object-style": "error",
+    // Use "import type" for type imports
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        "prefer": "type-imports"
+      }
+    ],
+    // Declare simple arrays as string[], declare complex ones as Array<string | number>
+    "@typescript-eslint/array-type": [
+      "error",
+      {
+        "default": "array-simple"
+      }
+    ],
+
+    // Enforce PascalCase types and interfaces
+    "@typescript-eslint/naming-convention": [
+      "error",
+      { "selector": "typeLike", "format": ["PascalCase"] }
+    ],
+
+    // Consistently sort props
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "ignoreCase": true,
+        // key, ref must always come first
+        "reservedFirst": true,
+        // `true` shorthand props must always be last
+        "shorthandLast": true
+      }
+    ],
+    // Always use shorthand for `true`
+    "react/jsx-boolean-value": "error",
+
+    // Group module and relative imports
+    "import/order": [
+      "error",
+      {
+        // Imports are grouped as follows:
+        "groups": [
+          // 1: built-in node modules (fs, path)
+          "builtin",
+          // 2: dependencies in node_modules
+          "external",
+          // 3. relative imports
+          "parent",
+          // 4. relative imports in the same directory
+          "sibling"
+        ],
+        // Add an empty line between import groups.
+        "newlines-between": "always",
+        // Sort imports alphabetically
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "version": "detect"
+  }
+}

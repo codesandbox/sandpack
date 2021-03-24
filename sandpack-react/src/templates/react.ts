@@ -1,14 +1,14 @@
-import { SandboxTemplate } from '../types';
+import type { SandboxTemplate } from "../types";
 
 export const REACT_TEMPLATE: SandboxTemplate = {
   files: {
-    '/App.js': {
+    "/App.js": {
       code: `export default function App() {
   return <h1>Hello World</h1>
 }
 `,
     },
-    '/index.js': {
+    "/index.js": {
       code: `import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
@@ -23,7 +23,7 @@ ReactDOM.render(
   rootElement
 );`,
     },
-    '/styles.css': {
+    "/styles.css": {
       code: `body {
   font-family: sans-serif;
   -webkit-font-smoothing: auto;
@@ -40,7 +40,7 @@ h1 {
   font-size: 1.5rem;
 }`,
     },
-    '/public/index.html': {
+    "/public/index.html": {
       code: `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,11 +55,11 @@ h1 {
     },
   },
   dependencies: {
-    react: '^17.0.0',
-    'react-dom': '^17.0.0',
-    'react-scripts': '^4.0.0',
+    react: "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-scripts": "^4.0.0",
   },
-  entry: '/index.js',
-  main: '/App.js',
-  environment: 'create-react-app',
+  entry: "/index.js",
+  main: "/App.js",
+  environment: "create-react-app",
 };

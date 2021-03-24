@@ -1,7 +1,8 @@
-import { SandpackPredefinedTemplate, SandboxTemplate } from '../types';
-import { REACT_TEMPLATE } from './react';
-import { VANILLA_TEMPLATE } from './vanilla';
-import { VUE_TEMPLATE } from './vue';
+import type { SandpackPredefinedTemplate, SandboxTemplate } from "../types";
+
+import { REACT_TEMPLATE } from "./react";
+import { VANILLA_TEMPLATE } from "./vanilla";
+import { VUE_TEMPLATE } from "./vue";
 
 export const SANDBOX_TEMPLATES: Record<
   SandpackPredefinedTemplate,

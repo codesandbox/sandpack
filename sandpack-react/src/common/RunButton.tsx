@@ -1,22 +1,23 @@
-import * as React from 'react';
-import { useClasser } from '@code-hike/classer';
-import { RunIcon } from '../icons';
-import { useSandpack } from '../hooks/useSandpack';
+import { useClasser } from "@code-hike/classer";
+import * as React from "react";
 
-export const RunButton = () => {
-  const c = useClasser('sp');
+import { useSandpack } from "../hooks/useSandpack";
+import { RunIcon } from "../icons";
+
+export const RunButton: React.FC = () => {
+  const c = useClasser("sp");
   const { sandpack } = useSandpack();
 
   return (
     <button
-      type="button"
-      className={c('button')}
-      style={{
-        position: 'absolute',
-        bottom: 'var(--sp-space-2)',
-        right: 'var(--sp-space-2)',
-      }}
+      className={c("button")}
       onClick={() => sandpack.runSandpack()}
+      style={{
+        position: "absolute",
+        bottom: "var(--sp-space-2)",
+        right: "var(--sp-space-2)",
+      }}
+      type="button"
     >
       <RunIcon />
       Run

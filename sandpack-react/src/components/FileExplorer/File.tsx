@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 export interface Props {
   path: string;
@@ -9,22 +9,22 @@ export interface Props {
 }
 
 export class File extends React.PureComponent<Props> {
-  selectFile = () => {
+  selectFile = (): void => {
     if (this.props.selectFile) {
       this.props.selectFile(this.props.path);
     }
   };
 
-  render() {
-    const fileName = this.props.path.split('/').filter(Boolean).pop();
+  render(): React.ReactElement {
+    const fileName = this.props.path.split("/").filter(Boolean).pop();
 
     return (
       <button
         className="sp-button"
-        type="button"
-        onClick={this.props.selectFile ? this.selectFile : this.props.onClick}
         data-active={this.props.active}
-        style={{ paddingLeft: 8 * this.props.depth + 'px' }}
+        onClick={this.props.selectFile ? this.selectFile : this.props.onClick}
+        style={{ paddingLeft: 8 * this.props.depth + "px" }}
+        type="button"
       >
         {fileName}
       </button>

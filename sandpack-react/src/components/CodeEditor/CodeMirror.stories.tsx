@@ -1,22 +1,22 @@
-import React from 'react';
+import React from "react";
 
-import { CodeEditor } from './index';
+import { SandpackProvider } from "../../contexts/sandpackContext";
+import { SandpackThemeProvider } from "../../contexts/themeContext";
 
-import { SandpackProvider } from '../../contexts/sandpackContext';
-import { SandpackThemeProvider } from '../../contexts/themeContext';
+import { CodeEditor } from "./index";
 
 export default {
-  title: 'components/CodeMirror',
+  title: "components/CodeMirror",
   component: CodeEditor,
 };
 
-export const JustEditor = () => (
+export const JustEditor: React.FC = () => (
   <SandpackProvider template="vue">
     <SandpackThemeProvider>
       <CodeEditor
         code="const c = a+b;"
         fileType="jsx"
-        onCodeUpdate={() => console.log('code update')}
+        onCodeUpdate={() => console.log("code update")}
       />
     </SandpackThemeProvider>
   </SandpackProvider>
