@@ -93,9 +93,16 @@ export const getSyntaxHighlight = (theme: SandpackTheme) =>
     { tag: tags.comment, ...getSyntaxStyle(theme.syntax.comment) },
   ]);
 
-export const getCodeMirrorLanguage = (filePath: string) => {
-  const extensionDotIndex = filePath.lastIndexOf('.');
-  const extension = filePath.slice(extensionDotIndex + 1);
+export const getCodeMirrorLanguage = (filePath?: string, fileType?: string) => {
+  if (!filePath && !fileType) {
+    return javascript();
+  }
+
+  let extension = fileType;
+  if (!extension && filePath) {
+    const extensionDotIndex = filePath.lastIndexOf('.');
+    extension = filePath.slice(extensionDotIndex + 1);
+  }
 
   switch (extension) {
     case 'js':

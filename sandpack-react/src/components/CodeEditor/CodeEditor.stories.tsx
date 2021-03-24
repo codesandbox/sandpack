@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 
-import { SandpackCodeEditor, CodeEditorProps } from './index';
+import { SandpackCodeEditor, CodeEditorProps, CodeEditor } from './index';
 
 import { SandpackProvider } from '../../contexts/sandpack-context';
 import { SandpackThemeProvider } from '../../contexts/theme-context';

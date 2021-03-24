@@ -14,6 +14,8 @@ export type CodeEditorProps = {
   wrapContent?: boolean;
 };
 
+export { CodeMirror as CodeEditor };
+
 export const SandpackCodeEditor = ({
   customStyle,
   showTabs,
@@ -36,7 +38,7 @@ export const SandpackCodeEditor = ({
       {shouldShowTabs && <FileTabs />}
       <div className={c('code-editor')}>
         <CodeMirror
-          activePath={activePath}
+          filePath={activePath}
           code={code}
           key={activePath}
           editorState={editorState}

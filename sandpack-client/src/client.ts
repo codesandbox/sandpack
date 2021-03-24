@@ -138,11 +138,7 @@ export class SandpackClient {
 
     this.unsubscribeGlobalListener = this.iframeProtocol.globalListen(
       (mes: any) => {
-        if (
-          mes.type !== 'initialized' ||
-          // mes.url !== this.bundlerURL || TODO: see if it makes sense to match the URL here (eg: routing scenario)
-          !this.iframe.contentWindow
-        ) {
+        if (mes.type !== 'initialized' || !this.iframe.contentWindow) {
           return;
         }
 

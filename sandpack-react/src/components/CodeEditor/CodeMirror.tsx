@@ -31,20 +31,31 @@ import { useSandpackTheme } from '../../hooks/useSandpackTheme';
 
 export interface CodeMirrorProps {
   code: string;
-  activePath: string;
+  filePath?: string;
+  fileType?:
+    | 'js'
+    | 'jsx'
+    | 'ts'
+    | 'tsx'
+    | 'css'
+    | 'scss'
+    | 'less'
+    | 'html'
+    | 'vue';
   onCodeUpdate: (newCode: string) => void;
   showLineNumbers?: boolean;
   wrapContent?: boolean;
-  editorState: SandpackEditorState;
+  editorState?: SandpackEditorState;
 }
 
 export const CodeMirror: React.FC<CodeMirrorProps> = ({
   code,
-  activePath,
+  filePath,
+  fileType,
   onCodeUpdate,
   showLineNumbers = false,
   wrapContent = false,
-  editorState,
+  editorState = 'pristine',
 }) => {
   const wrapper = React.useRef<HTMLDivElement>(null);
   const cmView = React.useRef<EditorView>();
@@ -57,7 +68,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       return () => {};
     }
 
-    const langSupport = getCodeMirrorLanguage(activePath);
+    const langSupport = getCodeMirrorLanguage(filePath, fileType);
 
     const customCommandsKeymap: KeyBinding[] = [
       {
@@ -186,7 +197,9 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       onKeyDown={handleContainerKeyDown}
       tabIndex={0}
       role="group"
-      aria-label={`Code Editor for ${getFileName(activePath)}`}
+      aria-label={
+        filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
+      }
       aria-describedby="enter-instructions"
       ref={wrapper}
     >
