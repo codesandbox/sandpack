@@ -8,7 +8,7 @@ export const FileTabs: React.FC = () => {
   const { sandpack } = useSandpack();
   const c = useClasser("sp");
 
-  const { activePath, openPaths, changeActiveFile } = sandpack;
+  const { activePath, openPaths, setActiveFile } = sandpack;
 
   return (
     <div className={c("tabs")}>
@@ -23,7 +23,7 @@ export const FileTabs: React.FC = () => {
             aria-selected={filePath === activePath}
             className={c("tab-button")}
             data-active={filePath === activePath}
-            onClick={() => changeActiveFile(filePath)}
+            onClick={() => setActiveFile(filePath)}
             role="tab"
             title={filePath}
             type="button"

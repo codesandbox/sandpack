@@ -118,7 +118,6 @@ class SandpackProvider extends React.PureComponent<
   }
 
   handleMessage = (msg: SandpackMessage): void => {
-    console.log(msg);
     if (msg.type === "state") {
       this.setState({ bundlerState: msg.state });
     } else if (msg.type === "done" && !msg.compilatonError) {
@@ -140,16 +139,20 @@ class SandpackProvider extends React.PureComponent<
   };
 
   updateCurrentFile = (newCode: string): void => {
+    this.updateFile(this.state.activePath, newCode);
+  };
+
+  updateFile = (path: string, newCode: string): void => {
     if (newCode === this.state.files[this.state.activePath]?.code) {
       return;
     }
 
-    const { files, activePath, sandpackStatus } = this.state;
+    const { files, sandpackStatus } = this.state;
     const { recompileMode, recompileDelay } = this.props;
 
     const newFiles = {
       ...files,
-      [activePath]: { code: newCode },
+      [path]: { code: newCode },
     };
 
     this.setState({ files: newFiles });
@@ -294,7 +297,7 @@ class SandpackProvider extends React.PureComponent<
     this.setState({ sandpackStatus: "running" });
   };
 
-  changeActiveFile = (path: string): void => {
+  setActiveFile = (path: string): void => {
     this.setState({ activePath: path, editorState: "dirty" });
   };
 
@@ -364,9 +367,10 @@ class SandpackProvider extends React.PureComponent<
       bundlerState,
       status: sandpackStatus,
       editorState,
-      changeActiveFile: this.changeActiveFile,
+      setActiveFile: this.setActiveFile,
       openFile: this.openFile,
       updateCurrentFile: this.updateCurrentFile,
+      updateFile: this.updateFile,
       runSandpack: this.runSandpack,
       dispatch: this.dispatchMessage,
       listen: this.addListener,

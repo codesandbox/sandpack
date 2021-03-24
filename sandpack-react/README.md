@@ -470,7 +470,7 @@ state:
 - the `activePath` / `openPaths` fields
 - the `error` object, if any
 - multiple functions for changing the state of sandpack: `updateCurrentFile`,
-  `changeActiveFile`, etc.
+  `setActiveFile`, etc.
 
 In the component above, you get the active code string by calling
 `files[activePath].code`, so any change of state will trigger a re-render of the

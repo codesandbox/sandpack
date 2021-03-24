@@ -20,9 +20,10 @@ export interface SandpackState {
   files: SandpackBundlerFiles;
   status: SandpackStatus;
   runSandpack: () => void;
+  updateFile: (path: string, newCode: string) => void;
   updateCurrentFile: (newCode: string) => void;
   openFile: (path: string) => void;
-  changeActiveFile: (path: string) => void;
+  setActiveFile: (path: string) => void;
 
   // Element refs
   // Different components inside the SandpackProvider might register certain elements of interest for sandpack
