@@ -1,5 +1,4 @@
 import React from 'react';
-import { CodeEditor } from '../components/CodeEditor';
 import { useSandpack } from '../hooks/useSandpack';
 
 import {

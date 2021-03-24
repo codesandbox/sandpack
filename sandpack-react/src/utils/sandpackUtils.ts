@@ -3,7 +3,7 @@ import {
   SandpackBundlerFile,
   SandpackBundlerFiles,
 } from '@codesandbox/sandpack-client';
-import { SandpackProviderProps } from '../contexts/sandpack-context';
+import { SandpackProviderProps } from '../contexts/sandpackContext';
 import { SANDBOX_TEMPLATES } from '../templates';
 import {
   SandboxTemplate,

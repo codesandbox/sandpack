@@ -4,8 +4,8 @@ import {
   SandpackSyntaxStyle,
   SandpackThemeProp,
 } from '../types';
-import { getDarkModePreference } from '../utils/dom-utils';
-import { hexToCSSRGBa } from '../utils/string-utils';
+import { getDarkModePreference } from '../utils/domUtils';
+import { hexToCSSRGBa } from '../utils/stringUtils';
 
 export const codesandboxLightTheme: SandpackTheme = {
   palette: {

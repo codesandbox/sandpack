@@ -1,9 +1,9 @@
 import React from 'react';
 import { SandpackLayout } from '../../common/Layout';
-import { SandpackProvider } from '../../contexts/sandpack-context';
+import { SandpackProvider } from '../../contexts/sandpackContext';
 import { Navigator } from '.';
 import { SandpackPreview } from '../Preview';
-import { SandpackThemeProvider } from '../../contexts/theme-context';
+import { SandpackThemeProvider } from '../../contexts/themeContext';
 
 export default {
   title: 'components/Navigator',

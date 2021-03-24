@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useClasser } from '@code-hike/classer';
-import { SandpackThemeProvider } from '../contexts/theme-context';
+import { SandpackThemeProvider } from '../contexts/themeContext';
 import { useSandpack } from '../hooks/useSandpack';
 import { SandpackThemeProp } from '../types';
 

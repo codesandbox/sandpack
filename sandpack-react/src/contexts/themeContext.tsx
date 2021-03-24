@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useClasser } from '@code-hike/classer';
 import { createThemeObject, codesandboxLightTheme } from '../themes';
 import { SandpackTheme, SandpackThemeProp } from '../types';
-import { injectThemeStyleSheet } from '../utils/dom-utils';
+import { injectThemeStyleSheet } from '../utils/domUtils';
 
 const SandpackThemeContext = React.createContext<{
   theme: SandpackTheme;

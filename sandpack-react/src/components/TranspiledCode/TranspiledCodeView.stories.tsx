@@ -3,7 +3,7 @@ import React from 'react';
 import { SandpackTranspiledCode } from './index';
 import { SandpackLayout } from '../../common/Layout';
 import { SandpackStack } from '../../common/Stack';
-import { SandpackProvider } from '../../contexts/sandpack-context';
+import { SandpackProvider } from '../../contexts/sandpackContext';
 import { SandpackCodeEditor } from '../CodeEditor';
 
 export default {

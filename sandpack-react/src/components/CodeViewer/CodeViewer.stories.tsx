@@ -3,8 +3,8 @@ import { Story } from '@storybook/react';
 
 import { SandpackCodeViewer, CodeViewerProps } from '.';
 
-import { SandpackProvider } from '../../contexts/sandpack-context';
-import { SandpackThemeProvider } from '../../contexts/theme-context';
+import { SandpackProvider } from '../../contexts/sandpackContext';
+import { SandpackThemeProvider } from '../../contexts/themeContext';
 
 export default {
   title: 'components/Code Viewer',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FileTabs } from './index';
 import { SandpackCodeViewer } from '../CodeViewer';
-import { SandpackProvider } from '../../contexts/sandpack-context';
+import { SandpackProvider } from '../../contexts/sandpackContext';
 import { SandpackLayout } from '../../common/Layout';
 
 export default {

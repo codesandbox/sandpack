@@ -4,7 +4,7 @@ import { javascript } from '@codemirror/lang-javascript';
 import { html } from '@codemirror/lang-html';
 import { css } from '@codemirror/lang-css';
 import { SandpackTheme } from '../../types';
-import { hexToCSSRGBa } from '../../utils/string-utils';
+import { hexToCSSRGBa } from '../../utils/stringUtils';
 import { getSyntaxStyle } from '../../themes';
 
 export const getEditorTheme = (theme: SandpackTheme) =>

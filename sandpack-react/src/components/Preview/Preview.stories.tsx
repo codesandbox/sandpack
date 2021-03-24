@@ -2,7 +2,7 @@ import React from 'react';
 import { SandpackPreview } from './index';
 import { SandpackLayout } from '../../common/Layout';
 
-import { SandpackProvider } from '../../contexts/sandpack-context';
+import { SandpackProvider } from '../../contexts/sandpackContext';
 
 export default {
   title: 'components/Preview',

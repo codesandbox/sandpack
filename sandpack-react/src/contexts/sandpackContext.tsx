@@ -16,8 +16,8 @@ import {
   SandpackPredefinedTemplate,
   SandpackSetup,
 } from '../types';
-import { getSandpackStateFromProps } from '../utils/sandpack-utils';
-import { generateRandomId } from '../utils/string-utils';
+import { getSandpackStateFromProps } from '../utils/sandpackUtils';
+import { generateRandomId } from '../utils/stringUtils';
 
 const Sandpack = React.createContext<SandpackContext | null>(null);
 

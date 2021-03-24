@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SandpackReactContext } from '../contexts/sandpack-context';
+import { SandpackReactContext } from '../contexts/sandpackContext';
 import { SandpackState } from '../types';
 
 export function useSandpack() {

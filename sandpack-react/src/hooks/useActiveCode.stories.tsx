@@ -1,7 +1,7 @@
 import React from 'react';
 import { SandpackPreview } from '../components/Preview';
 import { SandpackLayout } from '../common/Layout';
-import { SandpackProvider } from '../contexts/sandpack-context';
+import { SandpackProvider } from '../contexts/sandpackContext';
 import { useActiveCode } from './useActiveCode';
 
 export default {

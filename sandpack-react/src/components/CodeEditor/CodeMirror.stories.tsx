@@ -2,8 +2,8 @@ import React from 'react';
 
 import { CodeEditor } from './index';
 
-import { SandpackProvider } from '../../contexts/sandpack-context';
-import { SandpackThemeProvider } from '../../contexts/theme-context';
+import { SandpackProvider } from '../../contexts/sandpackContext';
+import { SandpackThemeProvider } from '../../contexts/themeContext';
 
 export default {
   title: 'components/CodeMirror',

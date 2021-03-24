@@ -3,7 +3,7 @@ import { useClasser } from '@code-hike/classer';
 import { CSBIcon } from '../icons';
 import { useCodeSandboxLink } from '../hooks/useCodeSandboxLink';
 import { useSandpackTheme } from '../hooks/useSandpackTheme';
-import { isDarkColor } from '../utils/string-utils';
+import { isDarkColor } from '../utils/stringUtils';
 
 export const OpenInCodeSandboxButton: React.FC = () => {
   const url = useCodeSandboxLink();

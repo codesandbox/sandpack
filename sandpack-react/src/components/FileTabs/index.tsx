@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useClasser } from '@code-hike/classer';
 import { useSandpack } from '../../hooks/useSandpack';
-import { getFileName } from '../../utils/string-utils';
+import { getFileName } from '../../utils/stringUtils';
 
 export const FileTabs: React.FC = () => {
   const { sandpack } = useSandpack();

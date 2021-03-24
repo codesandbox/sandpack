@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ClasserProvider } from '@code-hike/classer';
 import { SandpackPreview } from '../components/Preview';
 import { SandpackLayout } from '../common/Layout';
-import { SandpackProvider } from '../contexts/sandpack-context';
+import { SandpackProvider } from '../contexts/sandpackContext';
 import {
   SandpackPredefinedTemplate,
   SandpackSetup,

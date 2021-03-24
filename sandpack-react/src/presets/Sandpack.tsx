@@ -8,7 +8,7 @@ import {
   SandpackSetup,
   SandpackThemeProp,
 } from '../types';
-import { SandpackProvider } from '../contexts/sandpack-context';
+import { SandpackProvider } from '../contexts/sandpackContext';
 import { SandpackCodeEditor, CodeEditorProps } from '../components/CodeEditor';
 import { SandpackPreview, PreviewProps } from '../components/Preview';
 

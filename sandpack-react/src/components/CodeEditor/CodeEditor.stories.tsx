@@ -1,10 +1,10 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 
-import { SandpackCodeEditor, CodeEditorProps, CodeEditor } from './index';
+import { SandpackCodeEditor, CodeEditorProps } from './index';
 
-import { SandpackProvider } from '../../contexts/sandpack-context';
-import { SandpackThemeProvider } from '../../contexts/theme-context';
+import { SandpackProvider } from '../../contexts/sandpackContext';
+import { SandpackThemeProvider } from '../../contexts/themeContext';
 
 export default {
   title: 'components/Code Editor',

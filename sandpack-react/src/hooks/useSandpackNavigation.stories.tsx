@@ -1,7 +1,7 @@
 import React from 'react';
 import { SandpackLayout } from '../common/Layout';
 import { SandpackPreview } from '../components/Preview';
-import { SandpackProvider } from '../contexts/sandpack-context';
+import { SandpackProvider } from '../contexts/sandpackContext';
 import { useSandpackNavigation } from './useSandpackNavigation';
 
 export default {
