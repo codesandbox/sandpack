@@ -37,6 +37,7 @@ export interface SandpackProps {
     wrapContent?: boolean;
 
     bundlerURL?: string;
+    startRoute?: string;
     skipEval?: boolean;
     fileResolver?: FileResolver;
 
@@ -75,6 +76,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     recompileDelay: props.options?.recompileDelay,
     autorun: props.options?.autorun ?? true,
     bundlerURL: props.options?.bundlerURL,
+    startRoute: props.options?.startRoute,
     skipEval: props.options?.skipEval,
     fileResolver: props.options?.fileResolver,
   };

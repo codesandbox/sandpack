@@ -109,6 +109,7 @@ function Dashboard() {
         },
       },
     }}
+    startRoute="/about"
     template="react"
   >
     <SandpackLayout>

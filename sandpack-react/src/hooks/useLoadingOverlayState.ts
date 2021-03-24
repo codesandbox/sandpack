@@ -13,6 +13,7 @@ export const useLoadingOverlayState = (): LoadingOverlayState => {
 
   React.useEffect(() => {
     sandpack.loadingScreenRegisteredRef.current = true;
+    let timeoutHook: NodeJS.Timer;
 
     const unsub = listen((message) => {
       if (message.type === "start" && message.firstLoad === true) {
@@ -21,11 +22,14 @@ export const useLoadingOverlayState = (): LoadingOverlayState => {
 
       if (message.type === "done") {
         setLoadingOverlayState("fading");
-        setTimeout(() => setLoadingOverlayState("hidden"), 500); // fade animation
+        timeoutHook = setTimeout(() => setLoadingOverlayState("hidden"), 500); // fade animation
       }
     });
 
-    return () => unsub();
+    return () => {
+      clearTimeout(timeoutHook);
+      unsub();
+    };
   }, []);
 
   if (sandpack.status !== "running") {

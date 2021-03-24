@@ -15,6 +15,7 @@ export interface SandpackState {
   bundlerState: BundlerState | undefined;
   openPaths: string[];
   activePath: string;
+  startRoute?: string;
   editorState: EditorState;
   error: Partial<ModuleError> | null;
   files: SandpackBundlerFiles;

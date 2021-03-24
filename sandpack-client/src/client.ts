@@ -27,6 +27,10 @@ export interface ClientOptions {
    */
   bundlerURL?: string;
   /**
+   * Relative path that the iframe loads (eg: /about)
+   */
+  startRoute?: string;
+  /**
    * Width of iframe.
    */
   width?: string;
@@ -137,7 +141,9 @@ export class SandpackClient {
       );
     }
 
-    this.iframe.src = this.bundlerURL;
+    this.iframe.src = options.startRoute
+      ? new URL(options.startRoute, this.bundlerURL).toString()
+      : this.bundlerURL;
     this.iframeProtocol = new IFrameProtocol(this.iframe, this.bundlerURL);
 
     this.unsubscribeGlobalListener = this.iframeProtocol.globalListen(

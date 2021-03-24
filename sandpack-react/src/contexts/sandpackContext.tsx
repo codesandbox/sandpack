@@ -28,6 +28,7 @@ export interface SandpackProviderState {
   environment?: SandboxEnvironment;
   activePath: string;
   openPaths: string[];
+  startRoute?: string;
   bundlerState?: BundlerState;
   error: Partial<ModuleError> | null;
   sandpackStatus: SandpackStatus;
@@ -50,6 +51,7 @@ export interface SandpackProviderProps {
 
   // bundler options
   bundlerURL?: string;
+  startRoute?: string;
   skipEval?: boolean;
   fileResolver?: FileResolver;
 }
@@ -94,6 +96,7 @@ class SandpackProvider extends React.PureComponent<
       environment,
       openPaths,
       activePath,
+      startRoute: this.props.startRoute,
       bundlerState: undefined,
       error: null,
       sandpackStatus: this.props.autorun ? "initial" : "idle",
@@ -275,6 +278,7 @@ class SandpackProvider extends React.PureComponent<
       },
       {
         bundlerURL: this.props.bundlerURL,
+        startRoute: this.props.startRoute,
         fileResolver: this.props.fileResolver,
         skipEval: this.props.skipEval,
         showOpenInCodeSandbox: !this.openInCSBRegistered.current,
@@ -353,6 +357,7 @@ class SandpackProvider extends React.PureComponent<
       files,
       activePath,
       openPaths,
+      startRoute,
       bundlerState,
       editorState,
       error,
@@ -363,6 +368,7 @@ class SandpackProvider extends React.PureComponent<
       files,
       openPaths,
       activePath,
+      startRoute,
       error,
       bundlerState,
       status: sandpackStatus,

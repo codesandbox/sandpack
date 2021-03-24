@@ -19,6 +19,7 @@ export interface SandpackRunnerProps {
   options?: {
     showNavigator?: boolean;
     bundlerUrl?: string;
+    startRoute?: string;
     classes?: Record<string, string>;
   };
 }
@@ -48,6 +49,7 @@ export const SandpackRunner: React.FC<SandpackRunnerProps> = ({
     <SandpackProvider
       bundlerURL={options?.bundlerUrl}
       customSetup={userInput}
+      startRoute={options?.startRoute}
       template={template}
     >
       <ClasserProvider classes={options?.classes}>

@@ -15,7 +15,11 @@ export default {
 
 const code = `export default function Kitten() {
   return (
-    <img src="https://placekitten.com/200/250" alt="Kitten" />
+    <>
+      <img src="https://placekitten.com/200/250" alt="Kitten" />
+      <img src="https://placekitten.com/200/250" alt="Kitten" />
+      <img src="https://placekitten.com/200/250" alt="Kitten" />
+    </>
   );
 }`;
 

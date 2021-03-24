@@ -8,12 +8,15 @@ import { splitUrl } from "./utils";
 
 export const Navigator: React.FC = () => {
   const [baseUrl, setBaseUrl] = React.useState<string>("");
-  const [relativeUrl, setRelativeUrl] = React.useState<string>("/");
+  const { sandpack, dispatch, listen } = useSandpack();
+
+  const [relativeUrl, setRelativeUrl] = React.useState<string>(
+    sandpack.startRoute ?? "/"
+  );
 
   const [backEnabled, setBackEnabled] = React.useState(false);
   const [forwardEnabled, setForwardEnabled] = React.useState(false);
 
-  const { sandpack, dispatch, listen } = useSandpack();
   const c = useClasser("sp");
 
   React.useEffect(() => {

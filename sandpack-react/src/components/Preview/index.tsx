@@ -48,12 +48,18 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
   const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
     number | null
   >(null);
-  const { status, iframeRef, errorScreenRegisteredRef } = sandpack;
+  const {
+    status,
+    iframeRef,
+    errorScreenRegisteredRef,
+    openInCSBRegisteredRef,
+  } = sandpack;
 
   const c = useClasser("sp");
 
   React.useEffect(() => {
     errorScreenRegisteredRef.current = true;
+    openInCSBRegisteredRef.current = true;
 
     const unsub = listen((message) => {
       if (message.type === "resize" && iframeRef.current) {
