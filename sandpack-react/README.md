@@ -377,6 +377,8 @@ The theme provider component will also render a wrapper div around your sandpack
 components. That div ensures the theme variables and styling is specific to this
 instance of sandpack.
 
+#### SandpackLayout component
+
 Let's add a code editor and introduce the `SandpackLayout` component.
 
 ```jsx
@@ -407,9 +409,6 @@ passing, which you can decide based on your specific needs.
 You can also bring other components in the mix: `SandpackCodeViewer`,
 `SandpackTranspiledCode`, `FileTabs`, `Navigator` and so on.
 
-Some of the components have configuration flags that toggle subparts on/off. All
-of them comunicate with sandpack through the shared context.
-
 For example, you can create an editor instance that gives you the transpiled
 code of your **active** component instead of the preview page:
 
@@ -433,6 +432,28 @@ const CustomSandpack = () => (
 
 You will notice that the theming applies to all components in the same way, as
 the theme object is also distributed by the context.
+
+Some of the components have configuration props that toggle subparts on/off or that configure behavior/look. All
+of them comunicate with sandpack through the shared context.
+
+#### SandpackCodeEditor props
+
+| name            | type    | default                           | description                                                             |
+| --------------- | ------- | --------------------------------- | ----------------------------------------------------------------------- |
+| showTabs        | boolean | computed based on number of files | The FileTabs component is shown on top of the editor based on this flag |
+| showLineNumbers | boolean | false                             | Adds a column with line numbers on the left side of the code editor     |
+| wrapContent     | boolean | false                             | Wraps the code lines that don't fit horizontally                        |
+
+#### SandpackPreview props
+
+| name                     | type                      | default    | description                                                                                                                                                                                                           |
+| ------------------------ | ------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| showNavigator            | boolean                   | false      | Shows the Navigator component on top of the Preview. When this is true, the refresh button is not shown independently on top of the Preview.                                                                          |
+| showRefreshButton        | boolean                   | true       | Shows a refresh button positioned absolutely on top of the Preview (lower right corner)                                                                                                                               |
+| showOpenInCodeSandbox    | boolean                   | true       | Shows a link that creates a new codesandbox based on the current state of the sandpack instance (lower right corner).                                                                                                 |
+| showSandpackErrorOverlay | boolean                   | true       | Shows a custom overlay screen covering the preview in case of an error, with relevant information about the error                                                                                                     |
+| viewportSize             | ViewportSize              | "auto"     | On auto, the preview will scale to the size of the iframe. You can also pass presets like: "iPhone X", "Pixel 2", "iPad", "Moto G4", "Surface Duo", Or you can pass a custom size `{ width: number, height: number }` |
+| viewportOrientation      | "portrait" \| "landscape" | "portrait" | When using a preset viewport size, you can flip the width/height with this setting                                                                                                                                    |
 
 ### Create a custom sandpack-aware component
 
@@ -600,11 +621,6 @@ export const CustomSandpack = () => (
 It's not pretty, but with just a few lines of code, you can create a whole new
 component that uses the power of sandpack, but has all the UI and functionality
 you need for your specific use case.
-
-Notice how the `SandpackPreview` is the only component left from our package.
-You can also implement your own preview component, but we recommend sticking
-with the standard one, as it is a bit more coupled to the bundler
-implementation.
 
 ## Development
 

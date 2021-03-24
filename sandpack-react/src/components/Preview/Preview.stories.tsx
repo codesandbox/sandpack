@@ -1,12 +1,16 @@
+import type { Story } from "@storybook/react";
 import React from "react";
 
 import { SandpackLayout } from "../../common/Layout";
 import { SandpackProvider } from "../../contexts/sandpackContext";
+import { SandpackThemeProvider } from "../../contexts/themeContext";
 
+import type { PreviewProps } from "./index";
 import { SandpackPreview } from "./index";
 
 export default {
   title: "components/Preview",
+  component: SandpackPreview,
 };
 
 const code = `export default function Kitten() {
@@ -29,6 +33,39 @@ export const Component: React.FC = () => (
     </SandpackLayout>
   </SandpackProvider>
 );
+
+export const CustomViewport: Story<PreviewProps> = (args) => (
+  <SandpackProvider
+    customSetup={{
+      files: {
+        "/App.js": code,
+      },
+    }}
+    template="react"
+  >
+    <SandpackThemeProvider>
+      <div style={{ border: "1px solid grey", display: "inline-block" }}>
+        <SandpackPreview {...args} />
+      </div>
+    </SandpackThemeProvider>
+  </SandpackProvider>
+);
+
+CustomViewport.argTypes = {
+  viewportSize: {
+    control: {
+      type: "select",
+      options: [
+        "iPhone X",
+        "iPad",
+        "Pixel 2",
+        "Moto G4",
+        "Surface Duo",
+        "auto",
+      ],
+    },
+  },
+};
 
 export const WithNavigator: React.FC = () => (
   <SandpackProvider
