@@ -35,7 +35,8 @@ export class Directory extends React.Component<Props, State> {
           onClick={this.toggleOpen}
           path={prefixedPath + "/"}
         />
-        {this.state.open && (
+
+        {this.state.open ? (
           <ModuleList
             activePath={activePath}
             depth={depth}
@@ -43,7 +44,7 @@ export class Directory extends React.Component<Props, State> {
             prefixedPath={prefixedPath}
             selectFile={selectFile}
           />
-        )}
+        ) : null}
       </div>
     );
   }

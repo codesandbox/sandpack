@@ -39,7 +39,8 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
 
   return (
     <SandpackStack customStyle={customStyle}>
-      {shouldShowTabs && <FileTabs />}
+      {shouldShowTabs ? <FileTabs /> : null}
+
       <div className={c("code-editor")}>
         <CodeMirror
           key={activePath}
@@ -51,7 +52,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
           wrapContent={wrapContent}
         />
 
-        {showRunButton && status === "idle" && <RunButton />}
+        {showRunButton && status === "idle" ? <RunButton /> : null}
       </div>
     </SandpackStack>
   );

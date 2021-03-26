@@ -12,8 +12,10 @@ export const SandpackTranspiledCode: React.FC = () => {
 
   return (
     <div className={c("transpiled-code")}>
-      {transpiledCode && <PrismHighlight code={transpiledCode} />}
+      {transpiledCode ? <PrismHighlight code={transpiledCode} /> : null}
+
       <ErrorOverlay />
+
       <LoadingOverlay />
     </div>
   );
