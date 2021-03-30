@@ -27,12 +27,20 @@ export interface ModuleSource {
   sourceMap: unknown | undefined;
 }
 
-export interface ModuleError {
-  title: string;
-  message: string;
-  path: string;
-  line: number;
-  column: number;
+export interface ErrorStackFrame {
+  columnNumber: number;
+  fileName: string;
+  functionName: string;
+  lineNumber: number;
+  _originalColumnNumber: number;
+  _originalFileName: string;
+  _originalFunctionName: string;
+  _originalLineNumber: number;
+  _originalScriptCode: Array<{
+    lineNumber: number;
+    content: string;
+    highlight: boolean;
+  }>;
 }
 
 export interface TranspiledModule {
@@ -73,6 +81,25 @@ export type UnsubscribeFunction = () => void;
 export type Listen = (listener: ListenerFunction) => UnsubscribeFunction;
 export type Dispatch = (msg: SandpackMessage) => void;
 
+export interface SandpackError {
+  message: string;
+  line?: number;
+  column?: number;
+  path?: string;
+  title?: string;
+}
+
+export interface SandpackErrorMessage {
+  title: string;
+  path: string;
+  message: string;
+  line: number;
+  column: number;
+  payload: {
+    frames?: ErrorStackFrame[];
+  };
+}
+
 export interface BaseSandpackMessage {
   type: string;
   $id?: number;
@@ -99,15 +126,10 @@ export type SandpackMessage = BaseSandpackMessage &
     | {
         type: "success";
       }
-    | {
+    | ({
         type: "action";
         action: "show-error";
-        title: string;
-        path: string;
-        message: string;
-        line: number;
-        column: number;
-      }
+      } & SandpackErrorMessage)
     | {
         type: "action";
         action: "notification";
@@ -145,6 +167,7 @@ export type SandpackMessage = BaseSandpackMessage &
         showErrorScreen: boolean;
         showLoadingScreen: boolean;
         skipEval: boolean;
+        clearConsoleDisabled?: boolean;
       }
     | {
         type: "refresh";

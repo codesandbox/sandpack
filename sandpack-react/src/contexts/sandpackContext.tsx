@@ -1,12 +1,15 @@
 import type {
   BundlerState,
   ListenerFunction,
-  ModuleError,
   SandpackBundlerFiles,
+  SandpackError,
   SandpackMessage,
   UnsubscribeFunction,
 } from "@codesandbox/sandpack-client";
-import { SandpackClient } from "@codesandbox/sandpack-client";
+import {
+  SandpackClient,
+  extractErrorDetails,
+} from "@codesandbox/sandpack-client";
 import * as React from "react";
 
 import type {
@@ -30,7 +33,7 @@ export interface SandpackProviderState {
   openPaths: string[];
   startRoute?: string;
   bundlerState?: BundlerState;
-  error: Partial<ModuleError> | null;
+  error: SandpackError | null;
   sandpackStatus: SandpackStatus;
   editorState: EditorState;
   renderHiddenIframe: boolean;
@@ -110,15 +113,9 @@ class SandpackProvider extends React.PureComponent<
     this.iframeRef = React.createRef<HTMLIFrameElement>();
 
     this.lazyAnchorRef = React.createRef<HTMLDivElement>();
-    this.errorScreenRegistered = React.createRef<
-      boolean
-    >() as React.MutableRefObject<boolean>;
-    this.openInCSBRegistered = React.createRef<
-      boolean
-    >() as React.MutableRefObject<boolean>;
-    this.loadingScreenRegistered = React.createRef<
-      boolean
-    >() as React.MutableRefObject<boolean>;
+    this.errorScreenRegistered = React.createRef<boolean>() as React.MutableRefObject<boolean>;
+    this.openInCSBRegistered = React.createRef<boolean>() as React.MutableRefObject<boolean>;
+    this.loadingScreenRegistered = React.createRef<boolean>() as React.MutableRefObject<boolean>;
   }
 
   handleMessage = (msg: SandpackMessage): void => {
@@ -127,10 +124,7 @@ class SandpackProvider extends React.PureComponent<
     } else if (msg.type === "done" && !msg.compilatonError) {
       this.setState({ error: null });
     } else if (msg.type === "action" && msg.action === "show-error") {
-      const { title, path, message, line, column } = msg;
-      this.setState({
-        error: { title, path, message, line, column },
-      });
+      this.setState({ error: extractErrorDetails(msg) });
     } else if (
       msg.type === "action" &&
       msg.action === "notification" &&
@@ -202,12 +196,12 @@ class SandpackProvider extends React.PureComponent<
       };
 
       this.intersectionObserver = new IntersectionObserver((entries) => {
-        if (
-          entries[0]?.intersectionRatio > 0 &&
-          this.state.sandpackStatus === "initial"
-        ) {
+        if (entries[0]?.intersectionRatio > 0) {
           // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
-          setTimeout(() => this.runSandpack());
+          setTimeout(() => {
+            this.intersectionObserver?.unobserve(this.lazyAnchorRef.current!);
+            this.runSandpack();
+          });
         }
       }, options);
 

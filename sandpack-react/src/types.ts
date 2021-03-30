@@ -1,9 +1,9 @@
 import type {
   BundlerState,
-  ModuleError,
   Dispatch,
   Listen,
   SandpackBundlerFiles,
+  SandpackError,
 } from "@codesandbox/sandpack-client";
 
 export type SandpackContext = SandpackState & {
@@ -17,7 +17,7 @@ export interface SandpackState {
   activePath: string;
   startRoute?: string;
   editorState: EditorState;
-  error: Partial<ModuleError> | null;
+  error: SandpackError | null;
   files: SandpackBundlerFiles;
   status: SandpackStatus;
   runSandpack: () => void;
