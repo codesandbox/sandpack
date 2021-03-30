@@ -12,14 +12,18 @@ import type {
   Dependencies,
   SandpackBundlerFiles,
   BundlerState,
-  ModuleError,
   Modules,
   ClientStatus,
   UnsubscribeFunction,
   SandpackMessage,
   ListenerFunction,
+  SandpackError,
 } from "./types";
-import { createPackageJSON, addPackageJSONIfNeeded } from "./utils";
+import {
+  createPackageJSON,
+  addPackageJSONIfNeeded,
+  extractErrorDetails,
+} from "./utils";
 
 export interface ClientOptions {
   /**
@@ -49,6 +53,11 @@ export interface ClientOptions {
   showOpenInCodeSandbox?: boolean;
   showErrorScreen?: boolean;
   showLoadingScreen?: boolean;
+
+  /**
+   * The bundler will clear the console if you set this to true, everytime the iframe refreshes / starts the first compile
+   */
+  clearConsoleOnFirstCompile?: boolean;
 
   /**
    * You can pass a custom file resolver that is responsible for resolving files.
@@ -93,7 +102,7 @@ export class SandpackClient {
   fileResolverProtocol?: Protocol;
   bundlerURL: string;
   bundlerState?: BundlerState;
-  errors: ModuleError[];
+  errors: SandpackError[];
   status: ClientStatus;
 
   sandboxInfo: SandboxInfo;
@@ -109,6 +118,7 @@ export class SandpackClient {
     this.options = options;
     this.sandboxInfo = sandboxInfo;
     this.bundlerURL = options.bundlerURL || BUNDLER_URL;
+
     this.bundlerState = undefined;
     this.errors = [];
     this.status = "initializing";
@@ -186,11 +196,7 @@ export class SandpackClient {
           }
           case "action": {
             if (mes.action === "show-error") {
-              const { title, path, message, line, column } = mes;
-              this.errors = [
-                ...this.errors,
-                { title, path, message, line, column },
-              ];
+              this.errors = [...this.errors, extractErrorDetails(mes)];
             }
             break;
           }
@@ -273,6 +279,7 @@ export class SandpackClient {
       showErrorScreen: this.options.showErrorScreen ?? true,
       showLoadingScreen: this.options.showLoadingScreen ?? true,
       skipEval: this.options.skipEval || false,
+      clearConsoleDisabled: !this.options.clearConsoleOnFirstCompile,
     });
   }
 
