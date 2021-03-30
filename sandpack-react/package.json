@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-react",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "keywords": [],
   "repository": {
@@ -43,7 +43,7 @@
     "@codemirror/matchbrackets": "^0.18.0",
     "@codemirror/state": "^0.18.0",
     "@codemirror/view": "^0.18.0",
-    "@codesandbox/sandpack-client": "^0.0.2",
+    "@codesandbox/sandpack-client": "^0.0.3",
     "codesandbox-import-utils": "^1.2.3",
     "prism-react-renderer": "^1.1.1"
   },
