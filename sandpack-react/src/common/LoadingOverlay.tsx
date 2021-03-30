@@ -9,7 +9,6 @@ export const LoadingOverlay: React.FC = () => {
   const loadingOverlayState = useLoadingOverlayState();
   const c = useClasser("sp");
 
-  console.log(loadingOverlayState);
   if (loadingOverlayState === "hidden") {
     return null;
   }
