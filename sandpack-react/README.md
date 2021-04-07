@@ -368,7 +368,7 @@ const CustomSandpack = () => (
   <SandpackProvider>
     <SandpackThemeProvider>
       <SandpackPreview />
-    <SandpackThemeProvider/>
+    </SandpackThemeProvider>
   </SandpackProvider>
 );
 ```
