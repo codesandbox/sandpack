@@ -180,7 +180,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
     if (cmView.current && code !== internalCode) {
       const view = cmView.current;
       view.dispatch({
-        changes: { from: 0, to: view.state.doc.length - 1, insert: code },
+        changes: { from: 0, to: view.state.doc.length, insert: code },
       });
     }
   }, [code]);
