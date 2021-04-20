@@ -4,7 +4,7 @@ import { useSandpack } from "./useSandpack";
 
 export type LoadingOverlayState = "visible" | "fading" | "hidden" | "timeout";
 
-const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
+const BUNDLER_TIMEOUT = 300; // 30 seconds timeout for the bundler to respond.
 const FADE_DELAY = 1000; // 1 second delay one initial load, only relevant if the loading overlay is visible.
 const FADE_ANIMATION_DURATION = 500; // 500 ms fade animation
 
