@@ -1,0 +1,34 @@
+{
+  "name": "@codesandbox/sandpack-playground",
+  "version": "0.0.3",
+  "description": "",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codesandbox/sandpack"
+  },
+  "license": "GPL-2.0",
+  "author": "CodeSandbox",
+  "sideEffects": false,
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html --no-scope-hoist",
+    "start": "node ./start.js"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "@codesandbox/sandpack-react": "^0.0.3",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "express": "^4.17.1",
+    "parcel": "^2.0.0-nightly.643"
+  }
+}
