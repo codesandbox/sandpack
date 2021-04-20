@@ -4,12 +4,14 @@
   "private": true,
   "workspaces": [
     "sandpack-client",
-    "sandpack-react"
+    "sandpack-react",
+    "sandpack-playground"
   ],
   "description": "",
   "scripts": {
     "lint": "eslint '**/*.ts?(x)'",
-    "format": "prettier --write '**/*.ts?(x)'"
+    "format": "prettier --write '**/*.ts?(x)'",
+    "build": "yarn workspaces run build"
   },
   "repository": {
     "type": "git",
