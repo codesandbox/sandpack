@@ -2,11 +2,7 @@ import { Sandpack } from "@codesandbox/sandpack-react";
 import React from "react";
 
 const reactCode = `export default function App() {
-  return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
-  )
+  return <img src="https://placekitten.com/190" alt="Kitten" />;
 }
 `;
 
