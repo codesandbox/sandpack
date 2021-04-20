@@ -21,7 +21,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@codesandbox/sandpack-react": "^0.0.3",
+    "@codesandbox/sandpack-react": "^0.0.4",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },
