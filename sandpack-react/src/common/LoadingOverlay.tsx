@@ -13,6 +13,33 @@ export const LoadingOverlay: React.FC = () => {
     return null;
   }
 
+  if (loadingOverlayState === "timeout") {
+    return (
+      <div className={c("overlay", "error")}>
+        <div className={c("error-message")}>
+          Unable to establish connection with the sandpack bundler. Make sure
+          you are online or try again later. If the problem persists, please
+          report it via{" "}
+          <a
+            className={c("error-message")}
+            href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error"
+          >
+            email
+          </a>{" "}
+          or submit an issue on{" "}
+          <a
+            className={c("error-message")}
+            href="https://github.com/codesandbox/sandpack/issues"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            GitHub.
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={c("overlay", "loading")}
