@@ -8,7 +8,7 @@ const reactCode = `export default function App() {
 
 export const App: React.FC = () => {
   return (
-    <div style={{ height: "100vh", width: "100%" }}>
+    <div>
       <Sandpack
         files={{
           "/App.js": reactCode,
@@ -18,6 +18,7 @@ export const App: React.FC = () => {
           showTabs: true,
           showLineNumbers: true,
           showNavigator: true,
+          editorHeight: "calc(100vh - 5px)",
         }}
         template="react"
       />
