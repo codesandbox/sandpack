@@ -41,7 +41,7 @@ export interface SandpackState {
   loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
 }
 
-export type SandpackStatus = "initial" | "idle" | "running";
+export type SandpackStatus = "initial" | "idle" | "running" | "timeout";
 export type EditorState = "pristine" | "dirty";
 
 export interface SandboxTemplate {
