@@ -18,7 +18,10 @@ export const App: React.FC = () => {
           showTabs: true,
           showLineNumbers: true,
           showNavigator: true,
-          editorHeight: "calc(100vh - 5px)",
+          editorHeight: "100vh",
+          classes: {
+            "sp-layout": "no-border",
+          },
         }}
         template="react"
       />
