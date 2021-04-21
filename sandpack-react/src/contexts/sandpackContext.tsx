@@ -25,6 +25,7 @@ import { getSandpackStateFromProps } from "../utils/sandpackUtils";
 import { generateRandomId } from "../utils/stringUtils";
 
 const Sandpack = React.createContext<SandpackContext | null>(null);
+const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
 
 export interface SandpackProviderState {
   files: SandpackBundlerFiles;
@@ -83,6 +84,7 @@ class SandpackProvider extends React.PureComponent<
   unsubscribeQueuedListeners: Record<string, UnsubscribeFunction>;
   unsubscribe?: UnsubscribeFunction;
   debounceHook?: number;
+  timeoutHook: NodeJS.Timer | null = null;
 
   constructor(props: SandpackProviderProps) {
     super(props);
@@ -119,6 +121,10 @@ class SandpackProvider extends React.PureComponent<
   }
 
   handleMessage = (msg: SandpackMessage): void => {
+    if (this.timeoutHook) {
+      clearTimeout(this.timeoutHook);
+    }
+
     if (msg.type === "state") {
       this.setState({ bundlerState: msg.state });
     } else if (msg.type === "done" && !msg.compilatonError) {
@@ -294,6 +300,14 @@ class SandpackProvider extends React.PureComponent<
     // Clear the queued listeners after they were registered
     this.queuedListeners = {};
     this.setState({ sandpackStatus: "running" });
+
+    if (this.timeoutHook) {
+      clearTimeout(this.timeoutHook);
+    }
+
+    this.timeoutHook = setTimeout(() => {
+      this.setState({ sandpackStatus: "timeout" });
+    }, BUNDLER_TIMEOUT);
   };
 
   setActiveFile = (path: string): void => {

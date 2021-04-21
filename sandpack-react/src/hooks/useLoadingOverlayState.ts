@@ -4,7 +4,6 @@ import { useSandpack } from "./useSandpack";
 
 export type LoadingOverlayState = "visible" | "fading" | "hidden" | "timeout";
 
-const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
 const FADE_DELAY = 1000; // 1 second delay one initial load, only relevant if the loading overlay is visible.
 const FADE_ANIMATION_DURATION = 500; // 500 ms fade animation
 
@@ -20,15 +19,7 @@ export const useLoadingOverlayState = (): LoadingOverlayState => {
     let innerHook: NodeJS.Timer;
     let outerHook: NodeJS.Timer;
 
-    // Timeout hook in case the bundler does not respond
-    const timeoutHook = setTimeout(() => {
-      setLoadingOverlayState("timeout");
-    }, BUNDLER_TIMEOUT);
-
     const unsub = listen((message) => {
-      // If the bundler dispatches any message, clear the timeout hook
-      clearTimeout(timeoutHook);
-
       if (message.type === "start" && message.firstLoad === true) {
         setLoadingOverlayState("visible");
       }
@@ -49,10 +40,13 @@ export const useLoadingOverlayState = (): LoadingOverlayState => {
     return () => {
       clearTimeout(outerHook);
       clearTimeout(innerHook);
-      clearTimeout(timeoutHook);
       unsub();
     };
   }, []);
+
+  if (sandpack.status === "timeout") {
+    return "timeout";
+  }
 
   if (sandpack.status !== "running") {
     return "hidden";
