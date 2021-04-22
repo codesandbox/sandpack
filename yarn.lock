@@ -1441,6 +1441,37 @@
     style-mod "^4.0.0"
     w3c-keyname "^2.2.4"
 
+"@codesandbox/sandpack-client@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-client/-/sandpack-client-0.0.4.tgz#f480e656456d4f3f35b54c0e12ff0039318db753"
+  integrity sha512-Zl30hHKRKTweKjoKwSqE3ejihpWomVlBo6a6ttDgIJY9Pzjf9xuPChjT43ho/EMNSBZasNlpHCwHF4iQJh2+kA==
+  dependencies:
+    codesandbox-import-utils "^1.2.3"
+    lodash.isequal "^4.5.0"
+
+"@codesandbox/sandpack-react@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-react/-/sandpack-react-0.0.4.tgz#2c4132aa6deec831a486feab72daeefae8ca52d1"
+  integrity sha512-sNlBbIOn8E2iM9zSYyXyGAYZZhE3BFb9Srekqxlsn2O9cXgvl4k0RQrROOy1YO5SaBAP8nXOZImJ+2SVM+Om2g==
+  dependencies:
+    "@code-hike/classer" "^0.0.0-aa6efee"
+    "@codemirror/closebrackets" "^0.18.0"
+    "@codemirror/commands" "^0.18.0"
+    "@codemirror/comment" "^0.18.0"
+    "@codemirror/gutter" "^0.18.0"
+    "@codemirror/highlight" "^0.18.0"
+    "@codemirror/history" "^0.18.0"
+    "@codemirror/lang-css" "^0.18.0"
+    "@codemirror/lang-html" "^0.18.0"
+    "@codemirror/lang-javascript" "^0.18.0"
+    "@codemirror/language" "^0.18.0"
+    "@codemirror/matchbrackets" "^0.18.0"
+    "@codemirror/state" "^0.18.0"
+    "@codemirror/view" "^0.18.0"
+    "@codesandbox/sandpack-client" "^0.0.4"
+    codesandbox-import-utils "^1.2.3"
+    prism-react-renderer "^1.1.1"
+
 "@emotion/cache@^10.0.27", "@emotion/cache@^10.0.9":
   version "10.0.29"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.29.tgz#87e7e64f412c060102d589fe7c6dc042e6f9d1e0"
