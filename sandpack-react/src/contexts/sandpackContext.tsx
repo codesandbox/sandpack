@@ -198,7 +198,7 @@ class SandpackProvider extends React.PureComponent<
       // If any component registerd a lazy anchor ref component, use that for the intersection observer
       const options = {
         rootMargin: "600px 0px",
-        threshold: 0,
+        threshold: 0.1,
       };
 
       this.intersectionObserver = new IntersectionObserver((entries) => {
