@@ -372,10 +372,12 @@ class SandpackProvider extends React.PureComponent<
       editorState,
       error,
       sandpackStatus,
+      environment,
     } = this.state;
 
     return {
       files,
+      environment,
       openPaths,
       activePath,
       startRoute,

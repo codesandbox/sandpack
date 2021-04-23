@@ -19,6 +19,7 @@ export interface SandpackState {
   editorState: EditorState;
   error: SandpackError | null;
   files: SandpackBundlerFiles;
+  environment?: SandboxEnvironment;
   status: SandpackStatus;
   runSandpack: () => void;
   updateFile: (path: string, newCode: string) => void;
