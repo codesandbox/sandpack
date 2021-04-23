@@ -53,14 +53,17 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
     iframeRef,
     errorScreenRegisteredRef,
     openInCSBRegisteredRef,
+    loadingScreenRegisteredRef,
   } = sandpack;
 
   const c = useClasser("sp");
 
-  React.useEffect(() => {
-    errorScreenRegisteredRef.current = true;
-    openInCSBRegisteredRef.current = true;
+  // SandpackPreview immediately registers the custom screens/components so the bundler does not render any of them
+  openInCSBRegisteredRef.current = true;
+  errorScreenRegisteredRef.current = true;
+  loadingScreenRegisteredRef.current = true;
 
+  React.useEffect(() => {
     const unsub = listen((message) => {
       if (message.type === "resize" && iframeRef.current) {
         setComputedAutoHeight(message.height);

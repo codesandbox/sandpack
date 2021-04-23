@@ -205,16 +205,17 @@ class SandpackProvider extends React.PureComponent<
         if (entries[0]?.intersectionRatio > 0) {
           // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
           setTimeout(() => {
-            this.intersectionObserver?.unobserve(this.lazyAnchorRef.current!);
             this.runSandpack();
-          });
+          }, 50);
+
+          this.intersectionObserver?.unobserve(this.lazyAnchorRef.current!);
         }
       }, options);
 
       this.intersectionObserver.observe(this.lazyAnchorRef.current);
     } else {
-      // else run the sandpack on the spot
-      setTimeout(() => this.runSandpack());
+      // else run the sandpack on mount, with a slight delay to allow all subcomponents to mount/register components
+      setTimeout(() => this.runSandpack(), 50);
     }
   }
 
