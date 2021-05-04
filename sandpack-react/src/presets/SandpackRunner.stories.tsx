@@ -78,30 +78,3 @@ export const SwitchExperiment = (): React.ReactElement => {
     </div>
   );
 };
-
-const html = `
-<html>
-<head>
-  <script
-    src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
-    defer
-  ></script>
-</head>
-<body>
-  <div>
-    <div x-data="{name: 'Messi'}">
-      <button x-text="name"></button>
-    </div>
-  </div>
-</body>
-</html>`;
-
-const setup = {
-  entry: "/index.html",
-  environment: "parcel",
-  files: {
-    "/index.html": html,
-  },
-};
-
-export const HtmlClone: React.FC = () => <SandpackRunner customSetup={setup} />;
