@@ -5087,10 +5087,10 @@ codesandbox-import-util-types@^1.3.7:
   resolved "https://registry.yarnpkg.com/codesandbox-import-util-types/-/codesandbox-import-util-types-1.3.7.tgz#7a6097e248a75424d13b06b74368cd76bd2b3e10"
   integrity sha512-8oP3emA0jyEuVOM2FBTpo/AF4C9vxHn14saVWZf2CQ/QhMtonBlNPE98ElrHkW+PFNXiO7Ad52Qr73b03n8qlA==
 
-codesandbox-import-util-types@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/codesandbox-import-util-types/-/codesandbox-import-util-types-2.2.1.tgz#fbd0babed213eed068ad8251f5cdb1a01e573171"
-  integrity sha512-hM5rkWi1u4dyQo6KMM0QqxOqUYWPPVy1tEoZ058UjaB2YE2YYXOyqmTpOOQZ2misJMzTsZH2r+3vC051bKd5bQ==
+codesandbox-import-util-types@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/codesandbox-import-util-types/-/codesandbox-import-util-types-2.2.3.tgz#b354b2f732ad130e119ebd9ead3bda3be5981a54"
+  integrity sha512-Qj00p60oNExthP2oR3vvXmUGjukij+rxJGuiaKM6tyUmSyimdZsqHI/TUvFFClAffk9s7hxGnQgWQ8KCce27qQ==
 
 codesandbox-import-utils@^1.2.3:
   version "1.3.8"
@@ -5101,12 +5101,12 @@ codesandbox-import-utils@^1.2.3:
     istextorbinary "2.2.1"
     lz-string "^1.4.4"
 
-codesandbox-import-utils@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/codesandbox-import-utils/-/codesandbox-import-utils-2.2.2.tgz#2bf0aed166edb113951d2323725014daa8189d71"
-  integrity sha512-1fgtBq+WiUEN49qmVS1086pLFG5KZIhbrtf7IuJWTUGU1FIgu9DXxwmp2snEA9asFUhCx/dtzeWbMPxJRewQ7Q==
+codesandbox-import-utils@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/codesandbox-import-utils/-/codesandbox-import-utils-2.2.3.tgz#f7b4801245b381cb8c90fe245e336624e19b6c84"
+  integrity sha512-ymtmcgZKU27U+nM2qUb21aO8Ut/u2S9s6KorOgG81weP+NA0UZkaHKlaRqbLJ9h4i/4FLvwmEXYAnTjNmp6ogg==
   dependencies:
-    codesandbox-import-util-types "^2.2.1"
+    codesandbox-import-util-types "^2.2.3"
     istextorbinary "^2.2.1"
     lz-string "^1.4.4"
 
