@@ -5,6 +5,7 @@ import type {
   SandpackBundlerFiles,
   SandpackError,
 } from "@codesandbox/sandpack-client";
+import type { ITemplate } from "codesandbox-import-util-types";
 
 export type SandpackContext = SandpackState & {
   dispatch: Dispatch;
@@ -19,6 +20,7 @@ export interface SandpackState {
   editorState: EditorState;
   error: SandpackError | null;
   files: SandpackBundlerFiles;
+  environment?: SandboxEnvironment;
   status: SandpackStatus;
   runSandpack: () => void;
   updateFile: (path: string, newCode: string) => void;
@@ -68,36 +70,7 @@ export interface SandpackSetup {
   environment?: SandboxEnvironment;
 }
 
-export type SandboxEnvironment =
-  | "adonis"
-  | "create-react-app"
-  | "vue-cli"
-  | "preact-cli"
-  | "svelte"
-  | "create-react-app-typescript"
-  | "angular-cli"
-  | "parcel"
-  | "cxjs"
-  | "@dojo/cli-create-app"
-  | "gatsby"
-  | "marko"
-  | "nuxt"
-  | "next"
-  | "reason"
-  | "apollo"
-  | "sapper"
-  | "nest"
-  | "static"
-  | "styleguidist"
-  | "gridsome"
-  | "vuepress"
-  | "mdx-deck"
-  | "quasar-framework"
-  | "unibit"
-  | "node"
-  | "ember"
-  | "custom"
-  | "babel-repl";
+export type SandboxEnvironment = ITemplate;
 
 export type SandpackPredefinedTemplate = "react" | "vue" | "vanilla";
 // TODO
