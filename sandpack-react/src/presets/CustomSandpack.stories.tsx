@@ -198,7 +198,6 @@ export const JustIframe = (): React.ReactElement => {
       template="react"
     >
       <CustomPreview />
-      <CustomPreview />
       <div
         style={{
           display: "flex",
