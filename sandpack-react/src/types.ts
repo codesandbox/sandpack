@@ -72,7 +72,7 @@ export interface SandpackSetup {
 
 export type SandboxEnvironment = ITemplate;
 
-export type SandpackPredefinedTemplate = "react" | "vue" | "vanilla" | "vue3";
+export type SandpackPredefinedTemplate = "react" | "vue" | "vanilla" | "vue3" | "angular";
 // TODO
 // | 'angular-cli'
 // | 'parcel';
