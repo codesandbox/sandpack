@@ -72,7 +72,7 @@ export interface SandpackSetup {
 
 export type SandboxEnvironment = ITemplate;
 
-export type SandpackPredefinedTemplate = "react" | "vue" | "vanilla";
+export type SandpackPredefinedTemplate = "react" | "vue" | "vanilla" | "vue3" | "angular";
 // TODO
 // | 'angular-cli'
 // | 'parcel';
@@ -88,22 +88,22 @@ export interface SandpackSyntaxStyle {
   color?: string;
   fontStyle?: "normal" | "italic";
   fontWeight?:
-    | "normal"
-    | "bold"
-    | "100"
-    | "200"
-    | "300"
-    | "400"
-    | "500"
-    | "600"
-    | "700"
-    | "800"
-    | "900";
+  | "normal"
+  | "bold"
+  | "100"
+  | "200"
+  | "300"
+  | "400"
+  | "500"
+  | "600"
+  | "700"
+  | "800"
+  | "900";
   textDecoration?:
-    | "none"
-    | "underline"
-    | "line-through"
-    | "underline line-through";
+  | "none"
+  | "underline"
+  | "line-through"
+  | "underline line-through";
 }
 
 export interface SandpackTheme {
