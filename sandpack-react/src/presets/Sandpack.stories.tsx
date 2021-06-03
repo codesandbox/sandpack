@@ -65,6 +65,17 @@ export const VanillaEditor: Story<SandpackProps> = (args) => (
   />
 );
 
+export const AngularEditor: Story<SandpackProps> = (args) => (
+  <Sandpack {...args} template="angular" theme="monokai-pro" options={{
+    openPaths: ["/src/app/app.component.css", "/src/app/app.component.html", "/src/app/app.component.ts"]
+  }} />
+);
+
+export const Vue3Editor: Story<SandpackProps> = (args) => (
+  <Sandpack {...args} template="vue3"  />
+);
+
+
 export const DarkTheme: Story<SandpackProps> = (args) => (
   <Sandpack
     {...args}

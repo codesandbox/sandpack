@@ -13,7 +13,7 @@ export const ANGULAR_TEMPLATE: SandboxTemplate = {
 <h1>
     {{ helloWorld }}
 </h1>
-</div>          
+</div>         
 `,
         },
         "/src/app/app.component.ts": {
@@ -93,6 +93,6 @@ platformBrowserDynamic()
         "rxjs": "6.6.3",
     },
     entry: "/src/main.ts",
-    main: "/src/main.ts",
+    main: "/src/app/app.component.ts",
     environment: "angular-cli",
 };
