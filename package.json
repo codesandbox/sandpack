@@ -11,7 +11,8 @@
   "scripts": {
     "lint": "eslint '**/*.ts?(x)'",
     "format": "prettier --write '**/*.ts?(x)'",
-    "build": "yarn workspaces run build"
+    "build": "yarn workspaces run build",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
