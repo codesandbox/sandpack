@@ -71,7 +71,7 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
     registerBundler(iframeElement, clientId.current)
 
     const unsub = listen((message) => {
-      if (message.type === "resize" && iframeRef.current) {
+      if (message.type === "resize") {
         setComputedAutoHeight(message.height);
       }
     }, clientId.current);
@@ -89,7 +89,7 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
         display: status !== "idle" ? "flex" : "none",
       }}
     >
-      {showNavigator ? <Navigator /> : null}
+      {showNavigator ? <Navigator clientId={clientId.current} /> : null}
 
       <div className={c("preview-container")}>
         <iframe
@@ -110,7 +110,7 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
 
         <div className={c("preview-actions")}>
           {!showNavigator && showRefreshButton && status === "running" ? (
-            <RefreshButton />
+            <RefreshButton clientId={clientId.current} />
           ) : null}
 
           {showOpenInCodeSandbox ? <OpenInCodeSandboxButton /> : null}

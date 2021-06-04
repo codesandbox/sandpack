@@ -20,7 +20,6 @@ export const useLoadingOverlayState = (clientId?: string): LoadingOverlayState =
     let outerHook: NodeJS.Timer;
 
     const unsub = listen((message) => {
-      console.log(clientId, message)
       if (message.type === "start" && message.firstLoad === true) {
         setLoadingOverlayState("visible");
       }

@@ -6,7 +6,11 @@ import { BackwardIcon, ForwardIcon, RefreshIcon } from "../../icons";
 
 import { splitUrl } from "./utils";
 
-export const Navigator: React.FC = () => {
+export interface NavigatorProps {
+  clientId?: string;
+}
+
+export const Navigator: React.FC<NavigatorProps> = ({ clientId }) => {
   const [baseUrl, setBaseUrl] = React.useState<string>("");
   const { sandpack, dispatch, listen } = useSandpack();
 

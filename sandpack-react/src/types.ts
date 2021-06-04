@@ -1,15 +1,20 @@
 import type {
   BundlerState,
-  Dispatch,
-  Listen,
+  ListenerFunction,
   SandpackBundlerFiles,
   SandpackError,
+  SandpackMessage,
+  UnsubscribeFunction,
 } from "@codesandbox/sandpack-client";
 import type { ITemplate } from "codesandbox-import-util-types";
 
+export type SandpackClientDispatch = (msg: SandpackMessage, clientId?: string) => void;
+
+export type SandpackClientListen = (listener: ListenerFunction, clientId?: string) => UnsubscribeFunction;
+
 export type SandpackContext = SandpackState & {
-  dispatch: Dispatch;
-  listen: Listen;
+  dispatch: SandpackClientDispatch;
+  listen: SandpackClientListen;
 };
 
 export interface SandpackState {

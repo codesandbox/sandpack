@@ -229,13 +229,51 @@ export const MultiplePreviews: React.FC = () => {
   return (
     <>
       <SandpackProvider template="react">
-        <SandpackLayout theme="codesandbox-dark">
+        <SandpackLayout>
           <SandpackCodeEditor />
           {previews.map((pr) => (<SandpackPreview key={pr} />))}
         </SandpackLayout>
       </SandpackProvider>
       <button onClick={() => setCount(count + 1)}>Add</button>
       <button onClick={() => setCount(count - 1)}>Remove</button>
+    </>
+  )
+}
+
+const Box: React.FC<{ label?: string, width?: number | string, height?: number | string }> = ({ children, label, width = "auto", height = "auto" }) => (
+  <div style={{ display: 'flex', alignItems: "center", flexDirection: "column", margin: 10, overflow: "auto", border: "1px solid gray", width, height }}>
+    <span style={{ padding: 4 }}>{label}</span>
+    {children}
+  </div>
+)
+
+const VIEWPORTS = ['Pixel 2', 'Moto G4', 'iPhone X']
+
+export const MultiplePreviewsRandomViewports: React.FC = () => {
+  const [count, setCount] = useState(0);
+
+  const previews = Array.from(Array(count).keys())
+
+  return (
+    <>
+      <button onClick={() => setCount(count + 1)}>Add</button>
+      <button onClick={() => setCount(count > 0 ? count - 1 : 0)}>Remove</button>
+      <SandpackProvider template="react">
+        <SandpackThemeProvider>
+          <div style={{ display: 'flex', alignItems: "flex-start" }}>
+            <Box label="code editor" width={400} height={400}>
+              <SandpackCodeEditor />
+            </Box>
+            {previews.map((pr, index) => {
+              const viewport = VIEWPORTS[index % 3];
+              return (
+                <Box key={pr} label={viewport}><SandpackPreview viewportSize={viewport} /></Box>
+              )
+            })}
+          </div>
+        </SandpackThemeProvider>
+      </SandpackProvider>
+
     </>
   )
 }
