@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { useSandpack } from "../hooks/useSandpack";
 import {
@@ -171,10 +171,15 @@ export default function KittenGallery() {
 
 const CustomPreview = () => {
   const { sandpack } = useSandpack();
+  const iframeRef = useRef<HTMLIFrameElement>()
+
+  useEffect(() => {
+    sandpack.registerBundler(iframeRef.current, "custom")
+  }, [])
 
   return (
     <iframe
-      ref={sandpack.iframeRef}
+      ref={iframeRef}
       style={{
         width: 400,
         height: 400,
@@ -215,3 +220,22 @@ export const JustIframe = (): React.ReactElement => {
     </SandpackProvider>
   );
 };
+
+export const MultiplePreviews: React.FC = () => {
+  const [count, setCount] = useState(2);
+
+  const previews = Array.from(Array(count).keys())
+
+  return (
+    <>
+      <SandpackProvider template="react">
+        <SandpackLayout theme="codesandbox-dark">
+          <SandpackCodeEditor />
+          {previews.map((pr) => (<SandpackPreview key={pr} />))}
+        </SandpackLayout>
+      </SandpackProvider>
+      <button onClick={() => setCount(count + 1)}>Add</button>
+      <button onClick={() => setCount(count - 1)}>Remove</button>
+    </>
+  )
+}

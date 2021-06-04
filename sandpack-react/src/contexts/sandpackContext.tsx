@@ -72,16 +72,19 @@ class SandpackProvider extends React.PureComponent<
   };
 
   client: SandpackClient | null;
-  iframeRef: React.RefObject<HTMLIFrameElement>;
+  hiddenIframeRef: React.RefObject<HTMLIFrameElement>;
   lazyAnchorRef: React.RefObject<HTMLDivElement>;
+
+  preregisteredIframes: Record<string, HTMLIFrameElement>;
+  clients: Record<string, SandpackClient>;
 
   errorScreenRegistered: React.MutableRefObject<boolean>;
   openInCSBRegistered: React.MutableRefObject<boolean>;
   loadingScreenRegistered: React.MutableRefObject<boolean>;
 
   intersectionObserver?: IntersectionObserver;
-  queuedListeners: Record<string, ListenerFunction>;
-  unsubscribeQueuedListeners: Record<string, UnsubscribeFunction>;
+  queuedListeners: Record<string, Record<string, ListenerFunction>>;
+  unsubscribeQueuedListeners: Record<string, Record<string, UnsubscribeFunction>>;
   unsubscribe?: UnsubscribeFunction;
   debounceHook?: number;
   timeoutHook: NodeJS.Timer | null = null;
@@ -112,7 +115,9 @@ class SandpackProvider extends React.PureComponent<
     this.client = null;
     this.queuedListeners = {};
     this.unsubscribeQueuedListeners = {};
-    this.iframeRef = React.createRef<HTMLIFrameElement>();
+    this.hiddenIframeRef = React.createRef<HTMLIFrameElement>();
+    this.preregisteredIframes = {};
+    this.clients = {};
 
     this.lazyAnchorRef = React.createRef<HTMLDivElement>();
     this.errorScreenRegistered = React.createRef<boolean>() as React.MutableRefObject<boolean>;
@@ -121,6 +126,7 @@ class SandpackProvider extends React.PureComponent<
   }
 
   handleMessage = (msg: SandpackMessage): void => {
+    console.log(msg)
     if (this.timeoutHook) {
       clearTimeout(this.timeoutHook);
     }
@@ -166,25 +172,22 @@ class SandpackProvider extends React.PureComponent<
     }
 
     if (recompileMode === "immediate") {
-      if (!this.client) {
-        return;
-      }
-
-      this.client.updatePreview({
-        files: newFiles,
-      });
+      Object.values(this.clients).forEach((client) => {
+        client.updatePreview({
+          files: newFiles,
+        });
+      })
     }
 
     if (recompileMode === "delayed") {
+      console.log(Object.values(this.clients))
       window.clearTimeout(this.debounceHook);
       this.debounceHook = window.setTimeout(() => {
-        if (!this.client) {
-          return;
-        }
-
-        this.client.updatePreview({
-          files: this.state.files,
-        });
+        Object.values(this.clients).forEach((client) => {
+          client.updatePreview({
+            files: this.state.files,
+          });
+        })
       }, recompileDelay);
     }
   };
@@ -224,9 +227,9 @@ class SandpackProvider extends React.PureComponent<
       prevProps.template !== this.props.template ||
       prevProps.activePath !== this.props.activePath ||
       JSON.stringify(prevProps.openPaths) !==
-        JSON.stringify(this.props.openPaths) ||
+      JSON.stringify(this.props.openPaths) ||
       JSON.stringify(prevProps.customSetup) !==
-        JSON.stringify(this.props.customSetup)
+      JSON.stringify(this.props.customSetup)
     ) {
       const {
         activePath,
@@ -263,16 +266,8 @@ class SandpackProvider extends React.PureComponent<
     }
   }
 
-  runSandpack = (): void => {
-    const iframe = this.iframeRef.current;
-    if (!iframe) {
-      // If no component mounts an iframe, the context will render a hidden one, mount it and run sandpack on it
-      this.setState({ renderHiddenIframe: true }, this.runSandpack);
-
-      return;
-    }
-
-    this.client = new SandpackClient(
+  createClient = (iframe: HTMLIFrameElement, clientId: string): SandpackClient => {
+    const client = new SandpackClient(
       iframe,
       {
         files: this.state.files,
@@ -289,17 +284,46 @@ class SandpackProvider extends React.PureComponent<
       }
     );
 
-    this.unsubscribe = this.client.listen(this.handleMessage);
+    // Subscribe inside the context with the first client that gets instantiated.
+    // This subscription is for global states like error and timeout, so no need for a per client listen
+    if (typeof this.unsubscribe !== 'function') {
+      this.unsubscribe = client.listen(this.handleMessage);
+    }
 
-    // Register any potential listeners that subscribed before sandpack ran
-    Object.keys(this.queuedListeners).forEach((listenerId) => {
-      const listener = this.queuedListeners[listenerId];
-      const unsubscribe = this.client!.listen(listener) as () => void;
-      this.unsubscribeQueuedListeners[listenerId] = unsubscribe;
-    });
+    if (this.queuedListeners[clientId]) {
+      // Register any potential listeners that subscribed before sandpack ran
+      Object.keys(this.queuedListeners[clientId]).forEach((listenerId) => {
+        const listener = this.queuedListeners[clientId][listenerId];
+        const unsubscribe = client.listen(listener) as () => void;
+        this.unsubscribeQueuedListeners[clientId][listenerId] = unsubscribe;
+      });
 
-    // Clear the queued listeners after they were registered
-    this.queuedListeners = {};
+      // Clear the queued listeners after they were registered
+      this.queuedListeners[clientId] = {};
+    }
+
+    return client
+  }
+
+  runSandpack = (): void => {
+    if (this.hiddenIframeRef.current) {
+      this.preregisteredIframes['hidden'] = this.hiddenIframeRef.current
+    }
+
+    const existingRegisteredIframes = Object.keys(this.preregisteredIframes).length > 0;
+    if (!existingRegisteredIframes) {
+      // If no component mounts an iframe, the context will render a hidden one, mount it and run sandpack on it
+      this.setState({ renderHiddenIframe: true }, this.runSandpack);
+
+      return;
+    }
+
+    Object.keys(this.preregisteredIframes).forEach((clientId) => {
+      const iframe = this.preregisteredIframes[clientId]
+      this.clients[clientId] = this.createClient(iframe, clientId);
+    })
+
+
     this.setState({ sandpackStatus: "running" });
 
     if (this.timeoutHook) {
@@ -310,6 +334,14 @@ class SandpackProvider extends React.PureComponent<
       this.setState({ sandpackStatus: "timeout" });
     }, BUNDLER_TIMEOUT);
   };
+
+  registerBundler = (iframe: HTMLIFrameElement, clientId: string): void => {
+    if (this.state.sandpackStatus === "running") {
+      this.clients[clientId] = this.createClient(iframe, clientId)
+    } else {
+      this.preregisteredIframes[clientId] = iframe;
+    }
+  }
 
   setActiveFile = (path: string): void => {
     this.setState({ activePath: path, editorState: "dirty" });
@@ -329,37 +361,55 @@ class SandpackProvider extends React.PureComponent<
     });
   };
 
-  dispatchMessage = (message: SandpackMessage): void => {
-    if (this.client === null) {
+  dispatchMessage = (message: SandpackMessage, clientId?: string): void => {
+    if (this.state.sandpackStatus !== 'running') {
       console.warn("dispatch cannot be called while in idle mode");
       return;
     }
 
-    this.client.dispatch(message);
-  };
-
-  addListener = (listener: ListenerFunction): UnsubscribeFunction => {
-    if (this.client === null) {
-      // When listeners are added before the client is instantiated, they are stored with an unique id
-      // When the client is eventually instantiated, the listeners are registered on the spot
-      // Their unsubscribe functions are stored in unsubscribeQueuedListeners for future cleanup
-      const listenerId = generateRandomId();
-      this.queuedListeners[listenerId] = listener;
-      return () => {
-        if (this.queuedListeners[listenerId]) {
-          // unsubscribe was called before the client was instantiated
-          // common example - a component with autorun=false that unmounted
-          delete this.queuedListeners[listenerId];
-        } else if (this.unsubscribeQueuedListeners[listenerId]) {
-          // unsubscribe was called for a listener that got added before the client was instantiated
-          // call the unsubscribe function and remove it from memory
-          this.unsubscribeQueuedListeners[listenerId]();
-          delete this.unsubscribeQueuedListeners[listenerId];
-        }
-      };
+    if (clientId) {
+      this.clients[clientId].dispatch(message)
+    } else {
+      Object.values(this.clients).forEach((client) => {
+        client.dispatch(message);
+      })
     }
 
-    return this.client.listen(listener) as () => void;
+  };
+
+  addListener = (listener: ListenerFunction, clientId?: string): UnsubscribeFunction => {
+    if (clientId) {
+      if (this.clients[clientId]) {
+        return this.clients[clientId].listen(listener)
+      } else {
+        // When listeners are added before the client is instantiated, they are stored with an unique id
+        // When the client is eventually instantiated, the listeners are registered on the spot
+        // Their unsubscribe functions are stored in unsubscribeQueuedListeners for future cleanup
+
+        const listenerId = generateRandomId();
+        this.queuedListeners[clientId] = this.queuedListeners[clientId] || {};
+        this.unsubscribeQueuedListeners[clientId] = this.unsubscribeQueuedListeners[clientId] || {};
+
+        this.queuedListeners[clientId][listenerId] = listener;
+        return () => {
+          if (this.queuedListeners[clientId][listenerId]) {
+            // unsubscribe was called before the client was instantiated
+            // common example - a component with autorun=false that unmounted
+            delete this.queuedListeners[clientId][listenerId];
+          } else if (this.unsubscribeQueuedListeners[clientId][listenerId]) {
+            // unsubscribe was called for a listener that got added before the client was instantiated
+            // call the unsubscribe function and remove it from memory
+            this.unsubscribeQueuedListeners[clientId][listenerId]();
+            delete this.unsubscribeQueuedListeners[clientId][listenerId];
+          }
+        };
+      }
+
+
+    } else {
+      const unsubs = Object.values(this.clients).map(client => client.listen(listener))
+      return () => unsubs.forEach(unsub => unsub())
+    }
   };
 
   _getSandpackState = (): SandpackContext => {
@@ -390,9 +440,9 @@ class SandpackProvider extends React.PureComponent<
       updateCurrentFile: this.updateCurrentFile,
       updateFile: this.updateFile,
       runSandpack: this.runSandpack,
+      registerBundler: this.registerBundler,
       dispatch: this.dispatchMessage,
       listen: this.addListener,
-      iframeRef: this.iframeRef,
       lazyAnchorRef: this.lazyAnchorRef,
       errorScreenRegisteredRef: this.errorScreenRegistered,
       openInCSBRegisteredRef: this.openInCSBRegistered,
@@ -408,7 +458,7 @@ class SandpackProvider extends React.PureComponent<
       <Sandpack.Provider value={this._getSandpackState()}>
         {renderHiddenIframe && (
           <iframe
-            ref={this.iframeRef}
+            ref={this.hiddenIframeRef}
             style={{ display: "none" }}
             title="Sandpack"
           />

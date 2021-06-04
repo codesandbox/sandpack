@@ -7,7 +7,7 @@ export type LoadingOverlayState = "visible" | "fading" | "hidden" | "timeout";
 const FADE_DELAY = 1000; // 1 second delay one initial load, only relevant if the loading overlay is visible.
 const FADE_ANIMATION_DURATION = 500; // 500 ms fade animation
 
-export const useLoadingOverlayState = (): LoadingOverlayState => {
+export const useLoadingOverlayState = (clientId?: string): LoadingOverlayState => {
   const { sandpack, listen } = useSandpack();
   const [
     loadingOverlayState,
@@ -20,6 +20,7 @@ export const useLoadingOverlayState = (): LoadingOverlayState => {
     let outerHook: NodeJS.Timer;
 
     const unsub = listen((message) => {
+      console.log(clientId, message)
       if (message.type === "start" && message.firstLoad === true) {
         setLoadingOverlayState("visible");
       }
@@ -35,7 +36,7 @@ export const useLoadingOverlayState = (): LoadingOverlayState => {
           );
         }, FADE_DELAY);
       }
-    });
+    }, clientId);
 
     return () => {
       clearTimeout(outerHook);

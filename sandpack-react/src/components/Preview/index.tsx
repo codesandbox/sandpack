@@ -6,6 +6,7 @@ import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { OpenInCodeSandboxButton } from "../../common/OpenInCodeSandboxButton";
 import { SandpackStack } from "../../common/Stack";
 import { useSandpack } from "../../hooks/useSandpack";
+import { generateRandomId } from "../../utils/stringUtils";
 import { Navigator } from "../Navigator";
 
 import { RefreshButton } from "./RefreshButton";
@@ -50,13 +51,15 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
   >(null);
   const {
     status,
-    iframeRef,
+    registerBundler,
     errorScreenRegisteredRef,
     openInCSBRegisteredRef,
     loadingScreenRegisteredRef,
   } = sandpack;
 
   const c = useClasser("sp");
+  const clientId = React.useRef<string>(generateRandomId())
+  const iframeRef = React.useRef<HTMLIFrameElement | null>(null)
 
   // SandpackPreview immediately registers the custom screens/components so the bundler does not render any of them
   openInCSBRegisteredRef.current = true;
@@ -64,11 +67,14 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
   loadingScreenRegisteredRef.current = true;
 
   React.useEffect(() => {
+    const iframeElement = iframeRef.current!
+    registerBundler(iframeElement, clientId.current)
+
     const unsub = listen((message) => {
       if (message.type === "resize" && iframeRef.current) {
         setComputedAutoHeight(message.height);
       }
-    });
+    }, clientId.current);
 
     return () => unsub();
   }, []);
@@ -110,7 +116,7 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
           {showOpenInCodeSandbox ? <OpenInCodeSandboxButton /> : null}
         </div>
 
-        <LoadingOverlay />
+        <LoadingOverlay clientId={clientId.current} />
       </div>
     </SandpackStack>
   );

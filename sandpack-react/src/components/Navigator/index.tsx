@@ -37,12 +37,13 @@ export const Navigator: React.FC = () => {
   }, []);
 
   const commitUrl = () => {
-    if (!sandpack.iframeRef.current) {
-      return;
-    }
+    // TODO handle per preview instance
+    // if (!sandpack.iframeRef.current) {
+    //   return;
+    // }
 
-    const newUrl = baseUrl + relativeUrl;
-    sandpack.iframeRef.current.src = newUrl;
+    // const newUrl = baseUrl + relativeUrl;
+    // sandpack.iframeRef.current.src = newUrl;
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

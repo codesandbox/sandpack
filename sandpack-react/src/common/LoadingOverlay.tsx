@@ -5,8 +5,12 @@ import { useLoadingOverlayState } from "../hooks/useLoadingOverlayState";
 
 import { OpenInCodeSandboxButton } from "./OpenInCodeSandboxButton";
 
-export const LoadingOverlay: React.FC = () => {
-  const loadingOverlayState = useLoadingOverlayState();
+export interface LoadingOverlayProps {
+  clientId?: string;
+}
+
+export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
+  const loadingOverlayState = useLoadingOverlayState(clientId);
   const c = useClasser("sp");
 
   if (loadingOverlayState === "hidden") {
