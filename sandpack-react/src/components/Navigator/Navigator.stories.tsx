@@ -19,28 +19,26 @@ export const Component: React.FC = () => (
   </SandpackProvider>
 );
 
-export const WithRoutingExample: React.FC = () => (
-  <SandpackProvider
-    customSetup={{
-      dependencies: {
-        "react-router-dom": "latest",
-        "react-scripts": "latest",
-        react: "latest",
-        "react-dom": "latest",
-      },
-      files: {
-        "/index.html": {
-          code: `<div id="root"></div>`,
-        },
-        "/index.js": {
-          code: `import ReactDOM from "react-dom";
+const routingSetup = {
+  dependencies: {
+    "react-router-dom": "latest",
+    "react-scripts": "latest",
+    react: "latest",
+    "react-dom": "latest",
+  },
+  files: {
+    "/index.html": {
+      code: `<div id="root"></div>`,
+    },
+    "/index.js": {
+      code: `import ReactDOM from "react-dom";
 import App from "./example";
 
 ReactDOM.render(<App />, document.getElementById("root"));
         `,
-        },
-        "/example.js": {
-          code: `import {
+    },
+    "/example.js": {
+      code: `import {
   BrowserRouter as Router,
   Switch,
   Route,
@@ -106,10 +104,22 @@ function Dashboard() {
 }
         
 `,
-        },
-      },
-    }}
-    startRoute="/about"
+    },
+  },
+};
+
+export const WithRouting: React.FC = () => (
+  <SandpackProvider customSetup={routingSetup} template="react">
+    <SandpackLayout>
+      <SandpackPreview showNavigator />
+    </SandpackLayout>
+  </SandpackProvider>
+);
+
+export const WithStartingRoute: React.FC = () => (
+  <SandpackProvider
+    customSetup={routingSetup}
+    startRoute={"/about"}
     template="react"
   >
     <SandpackLayout>

@@ -1,15 +1,26 @@
 import type {
   BundlerState,
-  Dispatch,
-  Listen,
+  ListenerFunction,
   SandpackBundlerFiles,
   SandpackError,
+  SandpackMessage,
+  UnsubscribeFunction,
 } from "@codesandbox/sandpack-client";
 import type { ITemplate } from "codesandbox-import-util-types";
 
+export type SandpackClientDispatch = (
+  msg: SandpackMessage,
+  clientId?: string
+) => void;
+
+export type SandpackClientListen = (
+  listener: ListenerFunction,
+  clientId?: string
+) => UnsubscribeFunction;
+
 export type SandpackContext = SandpackState & {
-  dispatch: Dispatch;
-  listen: Listen;
+  dispatch: SandpackClientDispatch;
+  listen: SandpackClientListen;
 };
 
 export interface SandpackState {
@@ -23,6 +34,8 @@ export interface SandpackState {
   environment?: SandboxEnvironment;
   status: SandpackStatus;
   runSandpack: () => void;
+  registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
+  unregisterBundler: (clientId: string) => void;
   updateFile: (path: string, newCode: string) => void;
   updateCurrentFile: (newCode: string) => void;
   openFile: (path: string) => void;
@@ -30,9 +43,7 @@ export interface SandpackState {
 
   // Element refs
   // Different components inside the SandpackProvider might register certain elements of interest for sandpack
-  // eg: the preview iframe - if no iframe is registered, the context needs to register a hidden one to run the bundler
   // eg: lazy anchor - if no component registers this, then the sandpack runs on mount, without lazy mode
-  iframeRef: React.RefObject<HTMLIFrameElement>;
   lazyAnchorRef: React.RefObject<HTMLDivElement>;
 
   // eg: error screen - if no component registers this, the bundler needs to show the custom error screen
@@ -85,22 +96,22 @@ export interface SandpackSyntaxStyle {
   color?: string;
   fontStyle?: "normal" | "italic";
   fontWeight?:
-  | "normal"
-  | "bold"
-  | "100"
-  | "200"
-  | "300"
-  | "400"
-  | "500"
-  | "600"
-  | "700"
-  | "800"
-  | "900";
+    | "normal"
+    | "bold"
+    | "100"
+    | "200"
+    | "300"
+    | "400"
+    | "500"
+    | "600"
+    | "700"
+    | "800"
+    | "900";
   textDecoration?:
-  | "none"
-  | "underline"
-  | "line-through"
-  | "underline line-through";
+    | "none"
+    | "underline"
+    | "line-through"
+    | "underline line-through";
 }
 
 export interface SandpackTheme {
