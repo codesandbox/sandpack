@@ -8,9 +8,15 @@ import type {
 } from "@codesandbox/sandpack-client";
 import type { ITemplate } from "codesandbox-import-util-types";
 
-export type SandpackClientDispatch = (msg: SandpackMessage, clientId?: string) => void;
+export type SandpackClientDispatch = (
+  msg: SandpackMessage,
+  clientId?: string
+) => void;
 
-export type SandpackClientListen = (listener: ListenerFunction, clientId?: string) => UnsubscribeFunction;
+export type SandpackClientListen = (
+  listener: ListenerFunction,
+  clientId?: string
+) => UnsubscribeFunction;
 
 export type SandpackContext = SandpackState & {
   dispatch: SandpackClientDispatch;
@@ -29,6 +35,7 @@ export interface SandpackState {
   status: SandpackStatus;
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
+  unregisterBundler: (clientId: string) => void;
   updateFile: (path: string, newCode: string) => void;
   updateCurrentFile: (newCode: string) => void;
   openFile: (path: string) => void;
@@ -76,7 +83,12 @@ export interface SandpackSetup {
 
 export type SandboxEnvironment = ITemplate;
 
-export type SandpackPredefinedTemplate = "angular" | "react" | "vanilla" | "vue" | "vue3";
+export type SandpackPredefinedTemplate =
+  | "angular"
+  | "react"
+  | "vanilla"
+  | "vue"
+  | "vue3";
 
 export type SandpackPredefinedTheme =
   | "codesandbox-light"
@@ -89,22 +101,22 @@ export interface SandpackSyntaxStyle {
   color?: string;
   fontStyle?: "normal" | "italic";
   fontWeight?:
-  | "normal"
-  | "bold"
-  | "100"
-  | "200"
-  | "300"
-  | "400"
-  | "500"
-  | "600"
-  | "700"
-  | "800"
-  | "900";
+    | "normal"
+    | "bold"
+    | "100"
+    | "200"
+    | "300"
+    | "400"
+    | "500"
+    | "600"
+    | "700"
+    | "800"
+    | "900";
   textDecoration?:
-  | "none"
-  | "underline"
-  | "line-through"
-  | "underline line-through";
+    | "none"
+    | "underline"
+    | "line-through"
+    | "underline line-through";
 }
 
 export interface SandpackTheme {

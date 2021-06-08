@@ -82,7 +82,10 @@ class SandpackProvider extends React.PureComponent<
 
   intersectionObserver?: IntersectionObserver;
   queuedListeners: Record<string, Record<string, ListenerFunction>>;
-  unsubscribeQueuedListeners: Record<string, Record<string, UnsubscribeFunction>>;
+  unsubscribeQueuedListeners: Record<
+    string,
+    Record<string, UnsubscribeFunction>
+  >;
   unsubscribe?: UnsubscribeFunction;
   debounceHook?: number;
   timeoutHook: NodeJS.Timer | null = null;
@@ -90,12 +93,8 @@ class SandpackProvider extends React.PureComponent<
   constructor(props: SandpackProviderProps) {
     super(props);
 
-    const {
-      activePath,
-      openPaths,
-      files,
-      environment,
-    } = getSandpackStateFromProps(props);
+    const { activePath, openPaths, files, environment } =
+      getSandpackStateFromProps(props);
 
     this.state = {
       files,
@@ -116,9 +115,12 @@ class SandpackProvider extends React.PureComponent<
     this.clients = {};
 
     this.lazyAnchorRef = React.createRef<HTMLDivElement>();
-    this.errorScreenRegistered = React.createRef<boolean>() as React.MutableRefObject<boolean>;
-    this.openInCSBRegistered = React.createRef<boolean>() as React.MutableRefObject<boolean>;
-    this.loadingScreenRegistered = React.createRef<boolean>() as React.MutableRefObject<boolean>;
+    this.errorScreenRegistered =
+      React.createRef<boolean>() as React.MutableRefObject<boolean>;
+    this.openInCSBRegistered =
+      React.createRef<boolean>() as React.MutableRefObject<boolean>;
+    this.loadingScreenRegistered =
+      React.createRef<boolean>() as React.MutableRefObject<boolean>;
   }
 
   handleMessage = (msg: SandpackMessage): void => {
@@ -171,7 +173,7 @@ class SandpackProvider extends React.PureComponent<
         client.updatePreview({
           files: newFiles,
         });
-      })
+      });
     }
 
     if (recompileMode === "delayed") {
@@ -181,7 +183,7 @@ class SandpackProvider extends React.PureComponent<
           client.updatePreview({
             files: this.state.files,
           });
-        })
+        });
       }, recompileDelay);
     }
   };
@@ -221,16 +223,12 @@ class SandpackProvider extends React.PureComponent<
       prevProps.template !== this.props.template ||
       prevProps.activePath !== this.props.activePath ||
       JSON.stringify(prevProps.openPaths) !==
-      JSON.stringify(this.props.openPaths) ||
+        JSON.stringify(this.props.openPaths) ||
       JSON.stringify(prevProps.customSetup) !==
-      JSON.stringify(this.props.customSetup)
+        JSON.stringify(this.props.customSetup)
     ) {
-      const {
-        activePath,
-        openPaths,
-        files,
-        environment,
-      } = getSandpackStateFromProps(this.props);
+      const { activePath, openPaths, files, environment } =
+        getSandpackStateFromProps(this.props);
 
       /* eslint-disable react/no-did-update-set-state */
       this.setState({ activePath, openPaths, files, environment });
@@ -239,10 +237,12 @@ class SandpackProvider extends React.PureComponent<
         return;
       }
 
-      Object.values(this.clients).forEach(client => client.updatePreview({
-        files,
-        template: environment,
-      }))
+      Object.values(this.clients).forEach((client) =>
+        client.updatePreview({
+          files,
+          template: environment,
+        })
+      );
     }
   }
 
@@ -251,14 +251,23 @@ class SandpackProvider extends React.PureComponent<
       this.unsubscribe();
     }
 
+    if (this.timeoutHook) {
+      clearTimeout(this.timeoutHook);
+    }
+
+    if (this.debounceHook) {
+      clearTimeout(this.debounceHook);
+    }
+
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
     }
-
-    Object.values(this.clients).forEach(client => client.cleanup())
   }
 
-  createClient = (iframe: HTMLIFrameElement, clientId: string): SandpackClient => {
+  createClient = (
+    iframe: HTMLIFrameElement,
+    clientId: string
+  ): SandpackClient => {
     const client = new SandpackClient(
       iframe,
       {
@@ -278,8 +287,13 @@ class SandpackProvider extends React.PureComponent<
 
     // Subscribe inside the context with the first client that gets instantiated.
     // This subscription is for global states like error and timeout, so no need for a per client listen
-    if (typeof this.unsubscribe !== 'function') {
+    // Also, set the timeout timer only when the first client is instantiated
+    if (typeof this.unsubscribe !== "function") {
       this.unsubscribe = client.listen(this.handleMessage);
+
+      this.timeoutHook = setTimeout(() => {
+        this.setState({ sandpackStatus: "timeout" });
+      }, BUNDLER_TIMEOUT);
     }
 
     if (this.queuedListeners[clientId]) {
@@ -294,34 +308,39 @@ class SandpackProvider extends React.PureComponent<
       this.queuedListeners[clientId] = {};
     }
 
-    return client
-  }
+    return client;
+  };
 
   runSandpack = (): void => {
     Object.keys(this.preregisteredIframes).forEach((clientId) => {
-      const iframe = this.preregisteredIframes[clientId]
+      const iframe = this.preregisteredIframes[clientId];
       this.clients[clientId] = this.createClient(iframe, clientId);
-    })
-
+    });
 
     this.setState({ sandpackStatus: "running" });
-
-    if (this.timeoutHook) {
-      clearTimeout(this.timeoutHook);
-    }
-
-    this.timeoutHook = setTimeout(() => {
-      this.setState({ sandpackStatus: "timeout" });
-    }, BUNDLER_TIMEOUT);
   };
 
   registerBundler = (iframe: HTMLIFrameElement, clientId: string): void => {
     if (this.state.sandpackStatus === "running") {
-      this.clients[clientId] = this.createClient(iframe, clientId)
+      this.clients[clientId] = this.createClient(iframe, clientId);
     } else {
       this.preregisteredIframes[clientId] = iframe;
     }
-  }
+  };
+
+  unregisterBundler = (clientId: string): void => {
+    const client = this.clients[clientId];
+    if (client) {
+      client.cleanup();
+      delete this.clients[clientId];
+      delete this.unsubscribeQueuedListeners[clientId];
+    } else {
+      delete this.preregisteredIframes[clientId];
+    }
+
+    console.log("unregister", clientId);
+    console.log("unsubs", this.unsubscribeQueuedListeners);
+  };
 
   setActiveFile = (path: string): void => {
     this.setState({ activePath: path, editorState: "dirty" });
@@ -342,32 +361,35 @@ class SandpackProvider extends React.PureComponent<
   };
 
   dispatchMessage = (message: SandpackMessage, clientId?: string): void => {
-    if (this.state.sandpackStatus !== 'running') {
+    if (this.state.sandpackStatus !== "running") {
       console.warn("dispatch cannot be called while in idle mode");
       return;
     }
 
     if (clientId) {
-      this.clients[clientId].dispatch(message)
+      this.clients[clientId].dispatch(message);
     } else {
       Object.values(this.clients).forEach((client) => {
         client.dispatch(message);
-      })
+      });
     }
-
   };
 
-  addListener = (listener: ListenerFunction, clientId?: string): UnsubscribeFunction => {
+  addListener = (
+    listener: ListenerFunction,
+    clientId?: string
+  ): UnsubscribeFunction => {
     if (clientId) {
       if (this.clients[clientId]) {
-        return this.clients[clientId].listen(listener)
+        return this.clients[clientId].listen(listener);
       } else {
         // When listeners are added before the client is instantiated, they are stored with an unique id
         // When the client is eventually instantiated, the listeners are registered on the spot
         // Their unsubscribe functions are stored in unsubscribeQueuedListeners for future cleanup
         const listenerId = generateRandomId();
         this.queuedListeners[clientId] = this.queuedListeners[clientId] || {};
-        this.unsubscribeQueuedListeners[clientId] = this.unsubscribeQueuedListeners[clientId] || {};
+        this.unsubscribeQueuedListeners[clientId] =
+          this.unsubscribeQueuedListeners[clientId] || {};
 
         this.queuedListeners[clientId][listenerId] = listener;
         return () => {
@@ -383,11 +405,11 @@ class SandpackProvider extends React.PureComponent<
           }
         };
       }
-
-
     } else {
-      const unsubs = Object.values(this.clients).map(client => client.listen(listener))
-      return () => unsubs.forEach(unsub => unsub())
+      const unsubs = Object.values(this.clients).map((client) =>
+        client.listen(listener)
+      );
+      return () => unsubs.forEach((unsub) => unsub());
     }
   };
 
@@ -420,6 +442,7 @@ class SandpackProvider extends React.PureComponent<
       updateFile: this.updateFile,
       runSandpack: this.runSandpack,
       registerBundler: this.registerBundler,
+      unregisterBundler: this.unregisterBundler,
       dispatch: this.dispatchMessage,
       listen: this.addListener,
       lazyAnchorRef: this.lazyAnchorRef,

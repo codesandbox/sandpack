@@ -38,7 +38,7 @@ export const Component: React.FC = () => (
   </SandpackProvider>
 );
 
-export const CustomViewport: Story<PreviewProps> = (args) => (
+export const Viewport: Story<PreviewProps> = (args) => (
   <SandpackProvider
     customSetup={{
       files: {
@@ -55,7 +55,7 @@ export const CustomViewport: Story<PreviewProps> = (args) => (
   </SandpackProvider>
 );
 
-CustomViewport.argTypes = {
+Viewport.argTypes = {
   viewportSize: {
     control: {
       type: "select",
@@ -83,5 +83,20 @@ export const WithNavigator: React.FC = () => (
     <SandpackLayout>
       <SandpackPreview showNavigator />
     </SandpackLayout>
+  </SandpackProvider>
+);
+
+export const AutoResize: React.FC = () => (
+  <SandpackProvider
+    customSetup={{
+      files: {
+        "/App.js": code,
+      },
+    }}
+    template="react"
+  >
+    <SandpackThemeProvider>
+      <SandpackPreview />
+    </SandpackThemeProvider>
   </SandpackProvider>
 );
