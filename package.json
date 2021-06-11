@@ -9,7 +9,7 @@
   ],
   "description": "",
   "scripts": {
-    "lint": "eslint '**/*.ts?(x)'",
+    "lint": "eslint '**/*.ts?(x)' --fix",
     "format": "prettier --write '**/*.ts?(x)'",
     "build": "yarn workspaces run build",
     "prepare": "husky install"

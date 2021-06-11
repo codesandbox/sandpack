@@ -337,9 +337,6 @@ class SandpackProvider extends React.PureComponent<
     } else {
       delete this.preregisteredIframes[clientId];
     }
-
-    console.log("unregister", clientId);
-    console.log("unsubs", this.unsubscribeQueuedListeners);
   };
 
   setActiveFile = (path: string): void => {
