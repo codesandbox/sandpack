@@ -1,7 +1,11 @@
 import * as React from "react";
 
 import { SandpackReactContext } from "../contexts/sandpackContext";
-import type { SandpackClientDispatch, SandpackClientListen, SandpackState } from "../types";
+import type {
+  SandpackClientDispatch,
+  SandpackClientListen,
+  SandpackState,
+} from "../types";
 
 interface UseSandpackReturnType {
   sandpack: SandpackState;

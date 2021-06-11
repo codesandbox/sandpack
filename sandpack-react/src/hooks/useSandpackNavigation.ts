@@ -1,6 +1,8 @@
 import { useSandpack } from "./useSandpack";
 
-export const useSandpackNavigation = (clientId?: string): {
+export const useSandpackNavigation = (
+  clientId?: string
+): {
   refresh: () => void;
   back: () => void;
   forward: () => void;

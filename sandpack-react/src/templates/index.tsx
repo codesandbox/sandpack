@@ -14,5 +14,5 @@ export const SANDBOX_TEMPLATES: Record<
   vue: VUE_TEMPLATE,
   vanilla: VANILLA_TEMPLATE,
   vue3: VUE_TEMPLATE_3,
-  angular:ANGULAR_TEMPLATE
+  angular: ANGULAR_TEMPLATE,
 };

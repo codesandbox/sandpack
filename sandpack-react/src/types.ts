@@ -83,7 +83,12 @@ export interface SandpackSetup {
 
 export type SandboxEnvironment = ITemplate;
 
-export type SandpackPredefinedTemplate = "angular" | "react" | "vanilla" | "vue" | "vue3";
+export type SandpackPredefinedTemplate =
+  | "angular"
+  | "react"
+  | "vanilla"
+  | "vue"
+  | "vue3";
 
 export type SandpackPredefinedTheme =
   | "codesandbox-light"

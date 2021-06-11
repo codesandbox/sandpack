@@ -1,23 +1,23 @@
 import type { SandboxTemplate } from "../types";
 
 export const ANGULAR_TEMPLATE: SandboxTemplate = {
-    files: {
-        "/src/app/app.component.css": {
-            code: `div {
+  files: {
+    "/src/app/app.component.css": {
+      code: `div {
     text-align: center;
 }              
 `,
-        },
-        "/src/app/app.component.html": {
-            code: `<div>
+    },
+    "/src/app/app.component.html": {
+      code: `<div>
 <h1>
     {{ helloWorld }}
 </h1>
 </div>         
 `,
-        },
-        "/src/app/app.component.ts": {
-            code: `import { Component } from "@angular/core";
+    },
+    "/src/app/app.component.ts": {
+      code: `import { Component } from "@angular/core";
 
 @Component({
     selector: "app-root",
@@ -28,9 +28,9 @@ export class AppComponent {
     helloWorld = "hello world";
 }                   
 `,
-        },
-        "/src/app/app.module.ts": {
-            code: `import { BrowserModule } from "@angular/platform-browser";
+    },
+    "/src/app/app.module.ts": {
+      code: `import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
             
 import { AppComponent } from "./app.component";
@@ -43,9 +43,9 @@ import { AppComponent } from "./app.component";
 })
 export class AppModule {}           
 `,
-        },
-        "/src/index.html": {
-            code: `<!doctype html>
+    },
+    "/src/index.html": {
+      code: `<!doctype html>
 <html lang="en">
             
 <head>
@@ -63,9 +63,9 @@ export class AppModule {}
             
 </html>
 `,
-        },
-        "/src/main.ts": {
-            code: `import { enableProdMode } from "@angular/core";
+    },
+    "/src/main.ts": {
+      code: `import { enableProdMode } from "@angular/core";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
             
 import { AppModule } from "./app/app.module";            
@@ -75,24 +75,24 @@ platformBrowserDynamic()
     .catch(err => console.log(err));
             
 `,
-        },
-        "/src/polyfills.ts": {
-            code: `import "core-js/proposals/reflect-metadata";   
+    },
+    "/src/polyfills.ts": {
+      code: `import "core-js/proposals/reflect-metadata";   
             import "zone.js/dist/zone";
 `,
-        },
     },
-    dependencies: {
-        "@angular/core": "^11.2.0",
-        "@angular/platform-browser": "^11.2.0",
-        "@angular/platform-browser-dynamic": "^11.2.0",
-        "@angular/common": "^11.2.0",
-        "@angular/compiler": "^11.2.0",
-        "zone.js": "0.11.3",
-        "core-js": "3.8.3",
-        "rxjs": "6.6.3",
-    },
-    entry: "/src/main.ts",
-    main: "/src/app/app.component.ts",
-    environment: "angular-cli",
+  },
+  dependencies: {
+    "@angular/core": "^11.2.0",
+    "@angular/platform-browser": "^11.2.0",
+    "@angular/platform-browser-dynamic": "^11.2.0",
+    "@angular/common": "^11.2.0",
+    "@angular/compiler": "^11.2.0",
+    "zone.js": "0.11.3",
+    "core-js": "3.8.3",
+    rxjs: "6.6.3",
+  },
+  entry: "/src/main.ts",
+  main: "/src/app/app.component.ts",
+  environment: "angular-cli",
 };

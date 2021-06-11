@@ -1,9 +1,9 @@
 import type { SandboxTemplate } from "../types";
 
 export const VUE_TEMPLATE_3: SandboxTemplate = {
-    files: {
-        "/src/App.vue": {
-            code: `<template>
+  files: {
+    "/src/App.vue": {
+      code: `<template>
   <main id="app">
     <h1>{{ helloWorld }}</h1>
   </main>
@@ -31,16 +31,16 @@ margin-top: 60px;
 }
 </style>   
 `,
-        },
-        "/src/main.js": {
-            code: `import { createApp } from 'vue'
+    },
+    "/src/main.js": {
+      code: `import { createApp } from 'vue'
 import App from './App.vue'
             
 createApp(App).mount('#app')            
 `,
-        },
-        "/public/index.html": {
-            code: `<!DOCTYPE html>
+    },
+    "/public/index.html": {
+      code: `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -60,14 +60,14 @@ createApp(App).mount('#app')
   </body>
 </html>
 `,
-        },
     },
-    dependencies: {
-        "core-js": "^3.6.5",
-        "vue": "^3.0.0-0",
-        "@vue/cli-plugin-babel": "4.5.0",
-    },
-    entry: "/src/main.js",
-    main: "/src/App.vue",
-    environment: "vue-cli",
+  },
+  dependencies: {
+    "core-js": "^3.6.5",
+    vue: "^3.0.0-0",
+    "@vue/cli-plugin-babel": "4.5.0",
+  },
+  entry: "/src/main.js",
+  main: "/src/App.vue",
+  environment: "vue-cli",
 };

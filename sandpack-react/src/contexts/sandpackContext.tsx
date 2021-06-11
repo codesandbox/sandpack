@@ -93,8 +93,12 @@ class SandpackProvider extends React.PureComponent<
   constructor(props: SandpackProviderProps) {
     super(props);
 
-    const { activePath, openPaths, files, environment } =
-      getSandpackStateFromProps(props);
+    const {
+      activePath,
+      openPaths,
+      files,
+      environment,
+    } = getSandpackStateFromProps(props);
 
     this.state = {
       files,
@@ -115,12 +119,9 @@ class SandpackProvider extends React.PureComponent<
     this.clients = {};
 
     this.lazyAnchorRef = React.createRef<HTMLDivElement>();
-    this.errorScreenRegistered =
-      React.createRef<boolean>() as React.MutableRefObject<boolean>;
-    this.openInCSBRegistered =
-      React.createRef<boolean>() as React.MutableRefObject<boolean>;
-    this.loadingScreenRegistered =
-      React.createRef<boolean>() as React.MutableRefObject<boolean>;
+    this.errorScreenRegistered = React.createRef<boolean>() as React.MutableRefObject<boolean>;
+    this.openInCSBRegistered = React.createRef<boolean>() as React.MutableRefObject<boolean>;
+    this.loadingScreenRegistered = React.createRef<boolean>() as React.MutableRefObject<boolean>;
   }
 
   handleMessage = (msg: SandpackMessage): void => {
@@ -227,8 +228,12 @@ class SandpackProvider extends React.PureComponent<
       JSON.stringify(prevProps.customSetup) !==
         JSON.stringify(this.props.customSetup)
     ) {
-      const { activePath, openPaths, files, environment } =
-        getSandpackStateFromProps(this.props);
+      const {
+        activePath,
+        openPaths,
+        files,
+        environment,
+      } = getSandpackStateFromProps(this.props);
 
       /* eslint-disable react/no-did-update-set-state */
       this.setState({ activePath, openPaths, files, environment });

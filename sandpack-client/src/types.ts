@@ -78,7 +78,10 @@ export type ClientStatus =
 export type ListenerFunction = (msg: SandpackMessage) => void;
 export type UnsubscribeFunction = () => void;
 
-export type Listen = (listener: ListenerFunction, clientId?: string) => UnsubscribeFunction;
+export type Listen = (
+  listener: ListenerFunction,
+  clientId?: string
+) => UnsubscribeFunction;
 export type Dispatch = (msg: SandpackMessage, clientId?: string) => void;
 
 export interface SandpackError {
@@ -109,76 +112,76 @@ export interface BaseSandpackMessage {
 export type SandpackMessage = BaseSandpackMessage &
   (
     | {
-      type: "initialized";
-    }
+        type: "initialized";
+      }
     | {
-      type: "start";
-      firstLoad?: boolean;
-    }
+        type: "start";
+        firstLoad?: boolean;
+      }
     | {
-      type: "status";
-      status: ClientStatus;
-    }
+        type: "status";
+        status: ClientStatus;
+      }
     | {
-      type: "state";
-      state: BundlerState;
-    }
+        type: "state";
+        state: BundlerState;
+      }
     | {
-      type: "success";
-    }
+        type: "success";
+      }
     | ({
-      type: "action";
-      action: "show-error";
-    } & SandpackErrorMessage)
+        type: "action";
+        action: "show-error";
+      } & SandpackErrorMessage)
     | {
-      type: "action";
-      action: "notification";
-      notificationType: "error";
-      title: string;
-    }
+        type: "action";
+        action: "notification";
+        notificationType: "error";
+        title: string;
+      }
     | {
-      type: "done";
-      compilatonError: boolean; // TODO: fix typo?
-    }
+        type: "done";
+        compilatonError: boolean; // TODO: fix typo?
+      }
     | {
-      type: "urlchange";
-      url: string;
-      back: boolean;
-      forward: boolean;
-    }
+        type: "urlchange";
+        url: string;
+        back: boolean;
+        forward: boolean;
+      }
     | {
-      type: "resize";
-      height: number;
-    }
+        type: "resize";
+        height: number;
+      }
     | {
-      type: "transpiler-context";
-      data: Record<string, Record<string, unknown>>;
-    }
+        type: "transpiler-context";
+        data: Record<string, Record<string, unknown>>;
+      }
     | {
-      type: "compile";
-      version: number;
-      isInitializationCompile?: boolean;
-      modules: Modules;
-      externalResources: string[];
-      hasFileResolver: boolean;
-      disableDependencyPreprocessing?: boolean;
-      template?: string | ITemplate;
-      showOpenInCodeSandbox: boolean;
-      showErrorScreen: boolean;
-      showLoadingScreen: boolean;
-      skipEval: boolean;
-      clearConsoleDisabled?: boolean;
-    }
+        type: "compile";
+        version: number;
+        isInitializationCompile?: boolean;
+        modules: Modules;
+        externalResources: string[];
+        hasFileResolver: boolean;
+        disableDependencyPreprocessing?: boolean;
+        template?: string | ITemplate;
+        showOpenInCodeSandbox: boolean;
+        showErrorScreen: boolean;
+        showLoadingScreen: boolean;
+        skipEval: boolean;
+        clearConsoleDisabled?: boolean;
+      }
     | {
-      type: "refresh";
-    }
+        type: "refresh";
+      }
     | {
-      type: "urlback";
-    }
+        type: "urlback";
+      }
     | {
-      type: "urlforward";
-    }
+        type: "urlforward";
+      }
     | {
-      type: "get-transpiler-context";
-    }
+        type: "get-transpiler-context";
+      }
   );
