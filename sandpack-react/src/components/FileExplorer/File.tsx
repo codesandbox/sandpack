@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { DirectoryIcon, FileIcon } from "../../icons";
+
 export interface Props {
   path: string;
   selectFile?: (path: string) => void;
@@ -26,6 +28,7 @@ export class File extends React.PureComponent<Props> {
         style={{ paddingLeft: 8 * this.props.depth + "px" }}
         type="button"
       >
+        {this.props.selectFile ? <FileIcon /> : <DirectoryIcon />}
         {fileName}
       </button>
     );

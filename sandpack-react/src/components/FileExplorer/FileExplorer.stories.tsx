@@ -10,18 +10,34 @@ export default {
 };
 
 export const Component: React.FC = () => (
-  <SandpackProvider
-    customSetup={{
-      entry: "/index.tsx",
-      files: {
-        "/index.tsx": "",
-        "/src/app.tsx": "",
-        "/src/components/button.tsx": "",
-      },
-    }}
-  >
-    <SandpackLayout>
-      <FileExplorer />
-    </SandpackLayout>
-  </SandpackProvider>
+  <>
+    <SandpackProvider
+      customSetup={{
+        entry: "/index.tsx",
+        files: {
+          "/index.tsx": "",
+          "/src/app.tsx": "",
+          "/src/components/button.tsx": "",
+        },
+      }}
+    >
+      <SandpackLayout>
+        <FileExplorer />
+      </SandpackLayout>
+    </SandpackProvider>
+    <SandpackProvider
+      customSetup={{
+        entry: "/index.tsx",
+        files: {
+          "/index.tsx": "",
+          "/src/app.tsx": "",
+          "/src/components/button.tsx": "",
+        },
+      }}
+    >
+      <SandpackLayout theme="night-owl">
+        <FileExplorer />
+      </SandpackLayout>
+    </SandpackProvider>
+  </>
 );
