@@ -23,7 +23,7 @@ export class File extends React.PureComponent<Props> {
 
     return (
       <button
-        className="sp-button"
+        className="sp-button sp-explorer"
         data-active={this.props.active}
         onClick={this.props.selectFile ? this.selectFile : this.props.onClick}
         style={{ paddingLeft: 8 * this.props.depth + "px" }}

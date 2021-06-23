@@ -1,6 +1,7 @@
 import React from "react";
 
 import { SandpackLayout } from "../../common/Layout";
+import { SandpackCodeEditor } from "../../components/CodeEditor";
 import { SandpackProvider } from "../../contexts/sandpackContext";
 
 import { FileExplorer } from "./index";
@@ -23,6 +24,7 @@ export const Component: React.FC = () => (
     >
       <SandpackLayout>
         <FileExplorer />
+        <SandpackCodeEditor />
       </SandpackLayout>
     </SandpackProvider>
     <SandpackProvider
@@ -37,6 +39,7 @@ export const Component: React.FC = () => (
     >
       <SandpackLayout theme="night-owl">
         <FileExplorer />
+        <SandpackCodeEditor />
       </SandpackLayout>
     </SandpackProvider>
   </>
