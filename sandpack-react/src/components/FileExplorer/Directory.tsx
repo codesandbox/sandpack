@@ -32,6 +32,7 @@ export class Directory extends React.Component<Props, State> {
       <div key={prefixedPath}>
         <File
           depth={depth}
+          isDirOpen={this.state.open}
           onClick={this.toggleOpen}
           path={prefixedPath + "/"}
         />

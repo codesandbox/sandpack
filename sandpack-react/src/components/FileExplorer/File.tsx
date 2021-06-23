@@ -1,11 +1,14 @@
 import * as React from "react";
 
+import { DirectoryIcon, FileIcon } from "../../icons";
+
 export interface Props {
   path: string;
   selectFile?: (path: string) => void;
   active?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   depth: number;
+  isDirOpen?: boolean;
 }
 
 export class File extends React.PureComponent<Props> {
@@ -26,6 +29,11 @@ export class File extends React.PureComponent<Props> {
         style={{ paddingLeft: 8 * this.props.depth + "px" }}
         type="button"
       >
+        {this.props.selectFile ? (
+          <FileIcon />
+        ) : (
+          <DirectoryIcon isOpen={this.props.isDirOpen} />
+        )}
         {fileName}
       </button>
     );
