@@ -78,8 +78,11 @@ export type ClientStatus =
 export type ListenerFunction = (msg: SandpackMessage) => void;
 export type UnsubscribeFunction = () => void;
 
-export type Listen = (listener: ListenerFunction) => UnsubscribeFunction;
-export type Dispatch = (msg: SandpackMessage) => void;
+export type Listen = (
+  listener: ListenerFunction,
+  clientId?: string
+) => UnsubscribeFunction;
+export type Dispatch = (msg: SandpackMessage, clientId?: string) => void;
 
 export interface SandpackError {
   message: string;

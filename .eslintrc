@@ -43,7 +43,7 @@
 
     // Consistently sort props
     "react/jsx-sort-props": [
-      "error",
+      "warn",
       {
         "ignoreCase": true,
         // key, ref must always come first
@@ -57,7 +57,7 @@
 
     // Group module and relative imports
     "import/order": [
-      "error",
+      "warn",
       {
         // Imports are grouped as follows:
         "groups": [

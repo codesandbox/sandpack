@@ -31,7 +31,6 @@ export interface SandpackProps {
     classes?: Record<string, string>;
 
     showNavigator?: boolean;
-
     showLineNumbers?: boolean;
     showTabs?: boolean;
     wrapContent?: boolean;

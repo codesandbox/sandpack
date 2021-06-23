@@ -6,7 +6,15 @@ import { BackwardIcon, ForwardIcon, RefreshIcon } from "../../icons";
 
 import { splitUrl } from "./utils";
 
-export const Navigator: React.FC = () => {
+export interface NavigatorProps {
+  clientId?: string;
+  onURLChange?: (newURL: string) => void;
+}
+
+export const Navigator: React.FC<NavigatorProps> = ({
+  clientId,
+  onURLChange,
+}) => {
   const [baseUrl, setBaseUrl] = React.useState<string>("");
   const { sandpack, dispatch, listen } = useSandpack();
 
@@ -31,19 +39,10 @@ export const Navigator: React.FC = () => {
         setBackEnabled(back);
         setForwardEnabled(forward);
       }
-    });
+    }, clientId);
 
     return () => unsub();
   }, []);
-
-  const commitUrl = () => {
-    if (!sandpack.iframeRef.current) {
-      return;
-    }
-
-    const newUrl = baseUrl + relativeUrl;
-    sandpack.iframeRef.current.src = newUrl;
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const path = e.target.value.startsWith("/")
@@ -54,12 +53,14 @@ export const Navigator: React.FC = () => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.keyCode === 13) {
+    if (e.code === "Enter") {
       //  Enter
       e.preventDefault();
       e.stopPropagation();
 
-      commitUrl();
+      if (typeof onURLChange === "function") {
+        onURLChange(baseUrl + e.currentTarget.value);
+      }
     }
   };
 
