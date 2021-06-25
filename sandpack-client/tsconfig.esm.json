@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "esm",
+    "outDir": "dist/esm",
     "module": "esnext",
     "target": "es2019",
     "moduleResolution": "node"
