@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-client",
-  "version": "0.1.0",
+  "version": "0.0.6",
   "description": "",
   "keywords": [],
   "repository": {
@@ -9,12 +9,12 @@
   },
   "license": "GPL-2.0",
   "author": "CodeSandbox",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "typings": "dist/cjs/index.d.ts",
   "sideEffects": false,
+  "main": "dist/index.js",
+  "module": "esm/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
-    "prebuild": "rimraf dist",
+    "prebuild": "rimraf dist && rimraf esm",
     "build": "yarn build:cjs && yarn build:esm",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
@@ -24,6 +24,7 @@
   },
   "files": [
     "dist",
+    "esm",
     "sandpack",
     "package.json",
     "README.md"
