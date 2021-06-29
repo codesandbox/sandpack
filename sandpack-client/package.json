@@ -14,8 +14,8 @@
   "module": "esm/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "prebuild": "rimraf dist && rimraf esm",
-    "build": "yarn build:cjs && yarn build:esm",
+    "prebuild": "rimraf dist",
+    "build": "node build.js && yarn build:cjs && yarn build:esm",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
@@ -31,6 +31,7 @@
   ],
   "dependencies": {
     "codesandbox-import-utils": "^1.2.3",
+    "esbuild": "^0.12.12",
     "lodash.isequal": "^4.5.0"
   },
   "devDependencies": {
