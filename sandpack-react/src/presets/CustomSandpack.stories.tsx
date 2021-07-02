@@ -34,8 +34,21 @@ export const UsingSandpackLayout: React.FC = () => (
   </SandpackProvider>
 );
 
+function SandpackListener() {
+  const { listen } = useSandpack();
+
+  useEffect(() => {
+    const unsubscribe = listen((msg) => console.log(msg));
+
+    return unsubscribe;
+  }, [listen]);
+
+  return null;
+}
+
 export const UsingVisualElements: React.FC = () => (
   <SandpackProvider activePath="/App.js" template="react">
+    <SandpackListener />
     <SandpackThemeProvider theme="codesandbox-dark">
       <SandpackCodeEditor
         customStyle={{
@@ -230,6 +243,7 @@ export const MultiplePreviews: React.FC = () => {
   return (
     <>
       <SandpackProvider template="react">
+        <SandpackListener />
         <SandpackLayout>
           <SandpackCodeEditor />
           {previews.map((pr) => (
