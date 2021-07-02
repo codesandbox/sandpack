@@ -366,7 +366,6 @@ class SandpackProvider extends React.PureComponent<
     if (client) {
       client.cleanup();
       delete this.clients[clientId];
-      delete this.unsubscribeQueuedListeners[clientId];
     } else {
       delete this.preregisteredIframes[clientId];
     }
@@ -426,13 +425,11 @@ class SandpackProvider extends React.PureComponent<
         this.queuedListeners[clientId][listenerId] = listener;
 
         const unsubscribeListener = () => {
-          if (this.queuedListeners?.[clientId]?.[listenerId]) {
+          if (this.queuedListeners[clientId][listenerId]) {
             // unsubscribe was called before the client was instantiated
             // common example - a component with autorun=false that unmounted
             delete this.queuedListeners[clientId][listenerId];
-          } else if (
-            this.unsubscribeQueuedListeners?.[clientId]?.[listenerId]
-          ) {
+          } else if (this.unsubscribeQueuedListeners[clientId][listenerId]) {
             // unsubscribe was called for a listener that got added before the client was instantiated
             // call the unsubscribe function and remove it from memory
             this.unsubscribeQueuedListeners[clientId][listenerId]();
