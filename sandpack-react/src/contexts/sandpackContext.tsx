@@ -426,11 +426,13 @@ class SandpackProvider extends React.PureComponent<
         this.queuedListeners[clientId][listenerId] = listener;
 
         const unsubscribeListener = () => {
-          if (this.queuedListeners[clientId][listenerId]) {
+          if (this.queuedListeners?.[clientId]?.[listenerId]) {
             // unsubscribe was called before the client was instantiated
             // common example - a component with autorun=false that unmounted
             delete this.queuedListeners[clientId][listenerId];
-          } else if (this.unsubscribeQueuedListeners[clientId][listenerId]) {
+          } else if (
+            this.unsubscribeQueuedListeners?.[clientId]?.[listenerId]
+          ) {
             // unsubscribe was called for a listener that got added before the client was instantiated
             // call the unsubscribe function and remove it from memory
             this.unsubscribeQueuedListeners[clientId][listenerId]();
@@ -445,26 +447,29 @@ class SandpackProvider extends React.PureComponent<
       const listenerId = generateRandomId();
       this.queuedListeners.global[listenerId] = listener;
 
-      const unsubscribeListener = () => {
-        const clients = Object.values(this.unsubscribeQueuedListeners);
+      // Add to the current clients
+      const clients = Object.values(this.clients);
+      const currentClientListeners = clients.map((client) =>
+        client.listen(listener)
+      );
+      const currentClientListenersUnsubscribe = () => {
+        currentClientListeners.forEach((unsubscribe) => unsubscribe());
+      };
 
-        clients.forEach((listenerOfClient) => {
-          const listenersFunc = Object.values(listenerOfClient);
-          listenersFunc.forEach((unsubscribe) => unsubscribe());
+      const unsubscribeListener = () => {
+        const unsubscribeQueuedClients = Object.values(
+          this.unsubscribeQueuedListeners
+        );
+
+        unsubscribeQueuedClients.forEach((listenerOfClient) => {
+          const listenerFunctions = Object.values(listenerOfClient);
+          listenerFunctions.forEach((unsubscribe) => unsubscribe());
         });
+
+        currentClientListenersUnsubscribe();
       };
 
       return unsubscribeListener;
-
-      // const listeners = Object.values(this.clients).map((client) =>
-      //   client.listen(listener)
-      // );
-
-      // const unsubscribeListener = () => {
-      //   listeners.forEach((unsubscribe) => unsubscribe());
-      // };
-
-      // return unsubscribeListener;
     }
   };
 
