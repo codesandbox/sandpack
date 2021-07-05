@@ -446,24 +446,25 @@ class SandpackProvider extends React.PureComponent<
 
       // Add to the current clients
       const clients = Object.values(this.clients);
-      const currentClientListeners = clients.map((client) =>
+      const currentClientUnsubscribeListeners = clients.map((client) =>
         client.listen(listener)
       );
-      const currentClientListenersUnsubscribe = () => {
-        currentClientListeners.forEach((unsubscribe) => unsubscribe());
-      };
 
       const unsubscribeListener = () => {
         const unsubscribeQueuedClients = Object.values(
           this.unsubscribeQueuedListeners
         );
 
+        // Unsubscribing all listener registered
         unsubscribeQueuedClients.forEach((listenerOfClient) => {
           const listenerFunctions = Object.values(listenerOfClient);
           listenerFunctions.forEach((unsubscribe) => unsubscribe());
         });
 
-        currentClientListenersUnsubscribe();
+        // Unsubscribing from the clients already created
+        currentClientUnsubscribeListeners.forEach((unsubscribe) =>
+          unsubscribe()
+        );
       };
 
       return unsubscribeListener;
