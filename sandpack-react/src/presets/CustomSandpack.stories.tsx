@@ -243,6 +243,51 @@ export const MultiplePreviews: React.FC = () => {
   );
 };
 
+function SandpackListener() {
+  const { listen } = useSandpack();
+
+  useEffect(() => {
+    const unsubscribe = listen((msg) => console.log(msg));
+
+    return unsubscribe;
+  }, [listen]);
+
+  return null;
+}
+
+export const MultiplePreviewsAndListeners: React.FC = () => {
+  const [count, setCount] = useState(2);
+  const [listenersCount, setListenersCount] = useState(0);
+
+  const previews = Array.from(Array(count).keys());
+
+  return (
+    <>
+      <SandpackProvider template="react">
+        {new Array(listenersCount).fill(" ").map((pr) => (
+          <SandpackListener key={pr} />
+        ))}
+        <SandpackLayout>
+          <SandpackCodeEditor />
+          {previews.map((pr) => (
+            <SandpackPreview key={pr} />
+          ))}
+        </SandpackLayout>
+      </SandpackProvider>
+      <button onClick={() => setCount(count + 1)}>Add</button>
+      <button onClick={() => setCount(count - 1)}>Remove</button>
+
+      <p>Amount of listeners: {listenersCount}</p>
+      <button onClick={() => setListenersCount(listenersCount + 1)}>
+        Add listener
+      </button>
+      <button onClick={() => setListenersCount(listenersCount - 1)}>
+        Remove listener
+      </button>
+    </>
+  );
+};
+
 const Box: React.FC<{
   label?: string;
   width?: number | string;
