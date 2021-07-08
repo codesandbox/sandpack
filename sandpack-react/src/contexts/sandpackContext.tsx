@@ -389,6 +389,22 @@ class SandpackProvider extends React.PureComponent<
     });
   };
 
+  closeFile = (path: string): void => {
+    if (this.state.openPaths.length === 1) {
+      return;
+    }
+
+    this.setState(({ openPaths, activePath }) => {
+      const newPaths = openPaths.filter((openPath) => openPath !== path);
+
+      return {
+        activePath: path === activePath ? newPaths[0] : activePath,
+        openPaths: newPaths,
+        editorState: "dirty",
+      };
+    });
+  };
+
   dispatchMessage = (message: SandpackMessage, clientId?: string): void => {
     if (this.state.sandpackStatus !== "running") {
       console.warn("dispatch cannot be called while in idle mode");
@@ -496,6 +512,7 @@ class SandpackProvider extends React.PureComponent<
       editorState,
       setActiveFile: this.setActiveFile,
       openFile: this.openFile,
+      closeFile: this.closeFile,
       updateCurrentFile: this.updateCurrentFile,
       updateFile: this.updateFile,
       runSandpack: this.runSandpack,

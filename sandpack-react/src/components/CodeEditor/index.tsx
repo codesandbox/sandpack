@@ -29,7 +29,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
   const { sandpack } = useSandpack();
   const { code, updateCode } = useActiveCode();
   const { activePath, status, editorState } = sandpack;
-  const shouldShowTabs = showTabs ?? sandpack.openPaths.length > 1;
+  const shouldShowTabs = showTabs ?? sandpack.openPaths.length > 0;
 
   const c = useClasser("sp");
 

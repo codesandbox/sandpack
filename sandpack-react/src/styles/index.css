@@ -243,7 +243,6 @@
 
 .sp-tab-button:hover {
   color: var(--sp-colors-fg-active);
-  background: var(--sp-colors-bg-active);
 }
 
 .sp-tab-button:focus {
@@ -252,6 +251,22 @@
 
 .sp-tab-button:focus-visible {
   box-shadow: inset 0 0 0 2px var(--sp-colors-accent);
+}
+
+.sp-close-button {
+  padding: 0px var(--sp-space-1) 2px var(--sp-space-1);
+  border-radius: var(--sp-border-radius);
+  margin-left: var(--sp-space-1);
+  width: 20px;
+  visibility: hidden;
+}
+
+.sp-close-button:hover {
+  background: var(--sp-colors-bg-active);
+}
+
+.sp-tab-button:hover > .sp-close-button {
+  visibility: unset;
 }
 
 .sp-button {

@@ -39,6 +39,7 @@ export interface SandpackState {
   updateFile: (path: string, newCode: string) => void;
   updateCurrentFile: (newCode: string) => void;
   openFile: (path: string) => void;
+  closeFile: (path: string) => void;
   setActiveFile: (path: string) => void;
 
   // Element refs
@@ -54,7 +55,12 @@ export interface SandpackState {
   loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
 }
 
-export type SandpackStatus = "initial" | "idle" | "running" | "timeout";
+export type SandpackStatus =
+  | "initial"
+  | "idle"
+  | "running"
+  | "timeout"
+  | "done";
 export type EditorState = "pristine" | "dirty";
 
 export interface SandboxTemplate {
