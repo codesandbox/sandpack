@@ -15,6 +15,7 @@ export interface CodeEditorProps {
   showLineNumbers?: boolean;
   showRunButton?: boolean;
   wrapContent?: boolean;
+  closableTabs?: boolean;
 }
 
 export { CodeMirror as CodeEditor };
@@ -25,6 +26,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
   showLineNumbers = false,
   showRunButton = true,
   wrapContent = false,
+  closableTabs = false,
 }) => {
   const { sandpack } = useSandpack();
   const { code, updateCode } = useActiveCode();
@@ -39,7 +41,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
 
   return (
     <SandpackStack customStyle={customStyle}>
-      {shouldShowTabs ? <FileTabs /> : null}
+      {shouldShowTabs ? <FileTabs closableTabs={closableTabs} /> : null}
 
       <div className={c("code-editor")}>
         <CodeMirror

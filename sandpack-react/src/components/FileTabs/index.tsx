@@ -5,7 +5,11 @@ import { useSandpack } from "../../hooks/useSandpack";
 import { CloseIcon } from "../../icons";
 import { getFileName } from "../../utils/stringUtils";
 
-export const FileTabs: React.FC = () => {
+interface FileTabsProps {
+  closableTabs?: boolean;
+}
+
+export const FileTabs: React.FC<FileTabsProps> = ({ closableTabs }) => {
   const { sandpack } = useSandpack();
   const c = useClasser("sp");
 
@@ -42,7 +46,7 @@ export const FileTabs: React.FC = () => {
             type="button"
           >
             {getFileName(filePath)}
-            {openPaths.length > 0 ? (
+            {closableTabs && openPaths.length > 0 ? (
               <span className={c("close-button")} onClick={handleCloseFile}>
                 <CloseIcon />
               </span>

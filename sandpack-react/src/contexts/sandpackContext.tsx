@@ -166,16 +166,18 @@ class SandpackProvider extends React.PureComponent<
       return;
     }
 
-    const { files, sandpackStatus } = this.state;
-    const { recompileMode, recompileDelay } = this.props;
-
+    const { files } = this.state;
     const newFiles = {
       ...files,
       [path]: { code: newCode },
     };
 
-    this.setState({ files: newFiles });
+    this.setState({ files: newFiles }, this.updateClients);
+  };
 
+  updateClients = (): void => {
+    const { files, sandpackStatus } = this.state;
+    const { recompileMode, recompileDelay } = this.props;
     if (sandpackStatus !== "running") {
       return;
     }
@@ -183,7 +185,7 @@ class SandpackProvider extends React.PureComponent<
     if (recompileMode === "immediate") {
       Object.values(this.clients).forEach((client) => {
         client.updatePreview({
-          files: newFiles,
+          files,
         });
       });
     }
@@ -405,6 +407,29 @@ class SandpackProvider extends React.PureComponent<
     });
   };
 
+  deleteFile = (path: string): void => {
+    this.setState(({ openPaths, files }) => {
+      const newPaths = openPaths.filter((openPath) => openPath !== path);
+      const newFiles = Object.keys(files).reduce(
+        (acc: SandpackBundlerFiles, filePath) => {
+          if (filePath === path) {
+            return acc;
+          }
+          acc[filePath] = files[filePath];
+          return acc;
+        },
+        {}
+      );
+
+      return {
+        openPaths: newPaths,
+        files: newFiles,
+        editorState: "dirty",
+      };
+    });
+    this.updateClients();
+  };
+
   dispatchMessage = (message: SandpackMessage, clientId?: string): void => {
     if (this.state.sandpackStatus !== "running") {
       console.warn("dispatch cannot be called while in idle mode");
@@ -520,6 +545,7 @@ class SandpackProvider extends React.PureComponent<
       unregisterBundler: this.unregisterBundler,
       dispatch: this.dispatchMessage,
       listen: this.addListener,
+      deleteFile: this.deleteFile,
       lazyAnchorRef: this.lazyAnchorRef,
       errorScreenRegisteredRef: this.errorScreenRegistered,
       openInCSBRegisteredRef: this.openInCSBRegistered,

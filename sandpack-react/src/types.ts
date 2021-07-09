@@ -33,6 +33,7 @@ export interface SandpackState {
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;
   status: SandpackStatus;
+
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
   unregisterBundler: (clientId: string) => void;
@@ -40,6 +41,7 @@ export interface SandpackState {
   updateCurrentFile: (newCode: string) => void;
   openFile: (path: string) => void;
   closeFile: (path: string) => void;
+  deleteFile: (path: string) => void;
   setActiveFile: (path: string) => void;
 
   // Element refs
