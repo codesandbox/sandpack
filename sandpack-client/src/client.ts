@@ -144,12 +144,6 @@ export class SandpackClient {
         "allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
       );
     }
-    if (!this.iframe.getAttribute("allow")) {
-      this.iframe.setAttribute(
-        "allow",
-        "accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-      );
-    }
 
     this.iframe.src = options.startRoute
       ? new URL(options.startRoute, this.bundlerURL).toString()
