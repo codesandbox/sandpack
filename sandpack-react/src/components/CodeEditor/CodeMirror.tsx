@@ -20,6 +20,7 @@ import {
 } from "@codemirror/view";
 import type { KeyBinding } from "@codemirror/view";
 import * as React from "react";
+import { linter, setDiagnostics } from "@codemirror/lint";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
@@ -110,6 +111,10 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       bracketMatching(),
       closeBrackets(),
       highlightActiveLine(),
+      /**
+       * 1. Register the linter plugin so that it is called when the editor is updated.
+       */
+      linter(() => [{ from: 0, to: 10, severity: "warning", message: "fooo" }]),
 
       keymap.of([
         ...closeBracketsKeymap,
@@ -172,6 +177,21 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
 
     // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
   }, [showLineNumbers, wrapContent, themeId]);
+
+  React.useEffect(() => {
+    /**
+     * 2. Every time the code changes
+     * - Generate diagnostics (linting)
+     * - Create a new transaction state
+     * - Update the editor with the new state
+     */
+    const view = cmView.current;
+    const transaction = setDiagnostics(view?.state, [
+      { from: 30, to: 70, severity: "error", message: "fooo" },
+    ]);
+
+    view?.dispatch(transaction);
+  }, [internalCode]);
 
   React.useEffect(() => {
     // When the user clicks on a tab button on a larger screen
