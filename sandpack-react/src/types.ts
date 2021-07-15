@@ -33,12 +33,15 @@ export interface SandpackState {
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;
   status: SandpackStatus;
+
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
   unregisterBundler: (clientId: string) => void;
   updateFile: (path: string, newCode: string) => void;
   updateCurrentFile: (newCode: string) => void;
   openFile: (path: string) => void;
+  closeFile: (path: string) => void;
+  deleteFile: (path: string) => void;
   setActiveFile: (path: string) => void;
 
   // Element refs
@@ -54,7 +57,12 @@ export interface SandpackState {
   loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
 }
 
-export type SandpackStatus = "initial" | "idle" | "running" | "timeout";
+export type SandpackStatus =
+  | "initial"
+  | "idle"
+  | "running"
+  | "timeout"
+  | "done";
 export type EditorState = "pristine" | "dirty";
 
 export interface SandboxTemplate {

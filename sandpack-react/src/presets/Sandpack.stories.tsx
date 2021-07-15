@@ -195,6 +195,24 @@ export const WithCustomLibrary: Story<SandpackProps> = (args) => (
   />
 );
 
+export const WithClosableTabs: Story<SandpackProps> = (args) => (
+  <Sandpack
+    {...args}
+    customSetup={{
+      dependencies: {
+        "react-markdown": "latest",
+      },
+    }}
+    files={{
+      "/App.js": reactWithLibCode,
+    }}
+    options={{
+      closableTabs: true,
+    }}
+    template="react"
+  />
+);
+
 export const MultipleInstances: Story<SandpackProps> = (args) => (
   <div>
     <h2>Light Theme</h2>

@@ -52,3 +52,11 @@ export const DarkTheme: React.FC = () => (
     </SandpackThemeProvider>
   </SandpackProvider>
 );
+
+export const ClosableTabs: React.FC = () => (
+  <SandpackProvider template="react">
+    <SandpackThemeProvider theme="codesandbox-dark">
+      <SandpackCodeEditor closableTabs />
+    </SandpackThemeProvider>
+  </SandpackProvider>
+);
