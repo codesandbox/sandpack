@@ -48,6 +48,7 @@ export interface CodeMirrorProps {
     | "vue";
   onCodeUpdate: (newCode: string) => void;
   showLineNumbers?: boolean;
+  showInlineErrors?: boolean;
   wrapContent?: boolean;
   editorState?: SandpackEditorState;
 }
@@ -58,6 +59,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
   fileType,
   onCodeUpdate,
   showLineNumbers = false,
+  showInlineErrors = false,
   wrapContent = false,
   editorState = "pristine",
 }) => {
@@ -108,7 +110,6 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       bracketMatching(),
       closeBrackets(),
       highlightActiveLine(),
-      highlightInlineError(),
 
       keymap.of([
         ...closeBracketsKeymap,
@@ -129,6 +130,10 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
 
     if (showLineNumbers) {
       extensions.push(lineNumbers());
+    }
+
+    if (showInlineErrors) {
+      extensions.push(highlightInlineError());
     }
 
     const startState = EditorState.create({
@@ -192,39 +197,50 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
 
   React.useEffect(
     function messageToInlineError() {
-      const unsubscribe = listen((message) => {
-        const view = cmView.current;
+      if (showInlineErrors) {
+        const unsubscribe = listen((message) => {
+          const view = cmView.current;
 
-        if (message.type === "success") {
-          view?.dispatch({
-            annotations: [
-              ({
-                type: "clean-error",
-                value: null,
-              } as unknown) as Annotation<unknown>,
-            ],
-          });
-        }
+          if (message.type === "success") {
+            view?.dispatch({
+              // Pass message to clean up inline error
+              annotations: [
+                ({
+                  type: "clean-error",
+                  value: null,
+                } as unknown) as Annotation<unknown>,
+              ],
 
-        if (
-          message.type === "action" &&
-          message.title === "SyntaxError" &&
-          "line" in message
-        ) {
-          view?.dispatch({
-            annotations: [
-              ({
-                type: "error",
-                value: message.line,
-              } as unknown) as Annotation<unknown>,
-            ],
-          });
-        }
-      });
+              // Trigger a doc change to remove inline error
+              changes: {
+                from: 0,
+                to: view.state.doc.length,
+                insert: view.state.doc,
+              },
+              selection: view.state.selection,
+            });
+          }
 
-      return () => unsubscribe();
+          if (
+            message.type === "action" &&
+            message.action === "show-error" &&
+            "line" in message
+          ) {
+            view?.dispatch({
+              annotations: [
+                ({
+                  type: "error",
+                  value: message.line,
+                } as unknown) as Annotation<unknown>,
+              ],
+            });
+          }
+        });
+
+        return () => unsubscribe();
+      }
     },
-    [listen]
+    [listen, showInlineErrors]
   );
 
   const handleContainerKeyDown = (evt: React.KeyboardEvent) => {

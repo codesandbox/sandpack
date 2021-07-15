@@ -26,31 +26,26 @@ const activeLineHighlighter = ViewPlugin.fromClass(
           annotations: Array<{ type: string }>;
         }
 
-        console.log(trans);
-
-        return ((trans as unknown) as Annotations).annotations?.forEach(
-          (element) => {
-            if (element.type === "error") {
-              message = element;
-            }
-
-            if (element.type === "clean-error") {
-              message = element;
-            }
+        ((trans as unknown) as Annotations).annotations?.forEach((element) => {
+          if (element.type === "error") {
+            message = element;
           }
-        );
+
+          if (element.type === "clean-error") {
+            message = element;
+          }
+        });
       });
 
       if (message !== null) {
-        this.decorations = this.getDeco(update.view, message);
+        this.decorations = this.getDecoration(update.view, message);
       }
     }
 
-    getDeco(
+    getDecoration(
       view: EditorView,
       message: { type: "clean-error" } | { type: "error"; value: number } | null
     ) {
-      console.log(message);
       if (message === null || message.type === "clean-error") {
         return Decoration.none;
       }
