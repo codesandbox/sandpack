@@ -10,6 +10,7 @@ import { commentKeymap } from "@codemirror/comment";
 import { lineNumbers } from "@codemirror/gutter";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
+import type { Annotation } from "@codemirror/state";
 import { EditorState } from "@codemirror/state";
 import {
   highlightSpecialChars,
@@ -20,10 +21,12 @@ import {
 import type { KeyBinding } from "@codemirror/view";
 import * as React from "react";
 
+import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
 import type { EditorState as SandpackEditorState } from "../../types";
 import { getFileName } from "../../utils/stringUtils";
 
+import { highlightInlineError } from "./highlightInlineError";
 import {
   getCodeMirrorLanguage,
   getEditorTheme,
@@ -63,6 +66,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
   const { theme, themeId } = useSandpackTheme();
   const [internalCode, setInternalCode] = React.useState<string>(code);
   const c = useClasser("sp");
+  const { listen } = useSandpack();
 
   React.useEffect(() => {
     if (!wrapper.current) {
@@ -104,6 +108,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       bracketMatching(),
       closeBrackets(),
       highlightActiveLine(),
+      highlightInlineError(),
 
       keymap.of([
         ...closeBracketsKeymap,
@@ -184,6 +189,43 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       });
     }
   }, [code]);
+
+  React.useEffect(
+    function messageToInlineError() {
+      const unsubscribe = listen((message) => {
+        const view = cmView.current;
+
+        if (message.type === "success") {
+          view?.dispatch({
+            annotations: [
+              ({
+                type: "clean-error",
+                value: null,
+              } as unknown) as Annotation<unknown>,
+            ],
+          });
+        }
+
+        if (
+          message.type === "action" &&
+          message.title === "SyntaxError" &&
+          "line" in message
+        ) {
+          view?.dispatch({
+            annotations: [
+              ({
+                type: "error",
+                value: message.line,
+              } as unknown) as Annotation<unknown>,
+            ],
+          });
+        }
+      });
+
+      return () => unsubscribe();
+    },
+    [listen]
+  );
 
   const handleContainerKeyDown = (evt: React.KeyboardEvent) => {
     if (evt.key === "Enter" && cmView.current) {
