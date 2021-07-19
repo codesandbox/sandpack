@@ -44,6 +44,7 @@ export const ReactEditor: Story<SandpackProps> = (args) => (
     }}
     options={{
       showLineNumbers: true,
+      showInlineErrors: true,
     }}
     template="react"
   />

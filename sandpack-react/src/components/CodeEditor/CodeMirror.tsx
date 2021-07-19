@@ -10,6 +10,7 @@ import { commentKeymap } from "@codemirror/comment";
 import { lineNumbers } from "@codemirror/gutter";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
+import type { Annotation } from "@codemirror/state";
 import { EditorState } from "@codemirror/state";
 import {
   highlightSpecialChars,
@@ -20,10 +21,12 @@ import {
 import type { KeyBinding } from "@codemirror/view";
 import * as React from "react";
 
+import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
 import type { EditorState as SandpackEditorState } from "../../types";
 import { getFileName } from "../../utils/stringUtils";
 
+import { highlightInlineError } from "./highlightInlineError";
 import {
   getCodeMirrorLanguage,
   getEditorTheme,
@@ -45,6 +48,7 @@ export interface CodeMirrorProps {
     | "vue";
   onCodeUpdate: (newCode: string) => void;
   showLineNumbers?: boolean;
+  showInlineErrors?: boolean;
   wrapContent?: boolean;
   editorState?: SandpackEditorState;
 }
@@ -55,6 +59,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
   fileType,
   onCodeUpdate,
   showLineNumbers = false,
+  showInlineErrors = false,
   wrapContent = false,
   editorState = "pristine",
 }) => {
@@ -63,6 +68,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
   const { theme, themeId } = useSandpackTheme();
   const [internalCode, setInternalCode] = React.useState<string>(code);
   const c = useClasser("sp");
+  const { listen } = useSandpack();
 
   React.useEffect(() => {
     if (!wrapper.current) {
@@ -126,6 +132,10 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       extensions.push(lineNumbers());
     }
 
+    if (showInlineErrors) {
+      extensions.push(highlightInlineError());
+    }
+
     const startState = EditorState.create({
       doc: code,
       extensions,
@@ -184,6 +194,54 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       });
     }
   }, [code]);
+
+  React.useEffect(
+    function messageToInlineError() {
+      if (!showInlineErrors) return () => null;
+
+      const unsubscribe = listen((message) => {
+        const view = cmView.current;
+
+        if (message.type === "success") {
+          view?.dispatch({
+            // Pass message to clean up inline error
+            annotations: [
+              ({
+                type: "clean-error",
+                value: null,
+              } as unknown) as Annotation<unknown>,
+            ],
+
+            // Trigger a doc change to remove inline error
+            changes: {
+              from: 0,
+              to: view.state.doc.length,
+              insert: view.state.doc,
+            },
+            selection: view.state.selection,
+          });
+        }
+
+        if (
+          message.type === "action" &&
+          message.action === "show-error" &&
+          "line" in message
+        ) {
+          view?.dispatch({
+            annotations: [
+              ({
+                type: "error",
+                value: message.line,
+              } as unknown) as Annotation<unknown>,
+            ],
+          });
+        }
+      });
+
+      return () => unsubscribe();
+    },
+    [listen, showInlineErrors]
+  );
 
   const handleContainerKeyDown = (evt: React.KeyboardEvent) => {
     if (evt.key === "Enter" && cmView.current) {

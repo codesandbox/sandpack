@@ -3,6 +3,7 @@ import React from "react";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../contexts/themeContext";
+import { SandpackPreview } from "../Preview";
 
 import type { CodeEditorProps } from "./index";
 import { SandpackCodeEditor } from "./index";
@@ -25,6 +26,15 @@ export const Component: Story<CodeEditorProps> = (args) => (
   >
     <SandpackThemeProvider>
       <SandpackCodeEditor {...args} />
+    </SandpackThemeProvider>
+  </SandpackProvider>
+);
+
+export const InlineError: React.FC = () => (
+  <SandpackProvider template="react">
+    <SandpackThemeProvider>
+      <SandpackCodeEditor showInlineErrors showLineNumbers />
+      <SandpackPreview />
     </SandpackThemeProvider>
   </SandpackProvider>
 );
