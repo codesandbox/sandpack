@@ -197,48 +197,48 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
 
   React.useEffect(
     function messageToInlineError() {
-      if (showInlineErrors) {
-        const unsubscribe = listen((message) => {
-          const view = cmView.current;
+      if (!showInlineErrors) return () => null;
 
-          if (message.type === "success") {
-            view?.dispatch({
-              // Pass message to clean up inline error
-              annotations: [
-                ({
-                  type: "clean-error",
-                  value: null,
-                } as unknown) as Annotation<unknown>,
-              ],
+      const unsubscribe = listen((message) => {
+        const view = cmView.current;
 
-              // Trigger a doc change to remove inline error
-              changes: {
-                from: 0,
-                to: view.state.doc.length,
-                insert: view.state.doc,
-              },
-              selection: view.state.selection,
-            });
-          }
+        if (message.type === "success") {
+          view?.dispatch({
+            // Pass message to clean up inline error
+            annotations: [
+              ({
+                type: "clean-error",
+                value: null,
+              } as unknown) as Annotation<unknown>,
+            ],
 
-          if (
-            message.type === "action" &&
-            message.action === "show-error" &&
-            "line" in message
-          ) {
-            view?.dispatch({
-              annotations: [
-                ({
-                  type: "error",
-                  value: message.line,
-                } as unknown) as Annotation<unknown>,
-              ],
-            });
-          }
-        });
+            // Trigger a doc change to remove inline error
+            changes: {
+              from: 0,
+              to: view.state.doc.length,
+              insert: view.state.doc,
+            },
+            selection: view.state.selection,
+          });
+        }
 
-        return () => unsubscribe();
-      }
+        if (
+          message.type === "action" &&
+          message.action === "show-error" &&
+          "line" in message
+        ) {
+          view?.dispatch({
+            annotations: [
+              ({
+                type: "error",
+                value: message.line,
+              } as unknown) as Annotation<unknown>,
+            ],
+          });
+        }
+      });
+
+      return () => unsubscribe();
     },
     [listen, showInlineErrors]
   );
