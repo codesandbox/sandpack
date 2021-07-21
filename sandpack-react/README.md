@@ -362,7 +362,7 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
   SandpackPreview,
-} from '@codesandbox/sandpack-react';
+} from "@codesandbox/sandpack-react";
 
 const CustomSandpack = () => (
   <SandpackProvider>
@@ -438,12 +438,13 @@ of them comunicate with sandpack through the shared context.
 
 #### SandpackCodeEditor props
 
-| name            | type    | default                           | description                                                             |
-| --------------- | ------- | --------------------------------- | ----------------------------------------------------------------------- |
-| showTabs        | boolean | computed based on number of files | The FileTabs component is shown on top of the editor based on this flag |
-| showLineNumbers | boolean | false                             | Adds a column with line numbers on the left side of the code editor     |
-| showRunButton   | boolean | true                              | Shows a `Run` button when the sandpack is not set to `autorun`          |
-| wrapContent     | boolean | false                             | Wraps the code lines that don't fit horizontally                        |
+| name             | type    | default                           | description                                                                       |
+| ---------------- | ------- | --------------------------------- | --------------------------------------------------------------------------------- |
+| showTabs         | boolean | computed based on number of files | The FileTabs component is shown on top of the editor based on this flag           |
+| showLineNumbers  | boolean | false                             | Adds a column with line numbers on the left side of the code editor               |
+| showInlineErrors | boolean | false                             | Highlights the syntax errors and parse errors from the bundler in the code editor |
+| showRunButton    | boolean | true                              | Shows a `Run` button when the sandpack is not set to `autorun`                    |
+| wrapContent      | boolean | false                             | Wraps the code lines that don't fit horizontally                                  |
 
 #### SandpackPreview props
 

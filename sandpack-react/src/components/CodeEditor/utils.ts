@@ -27,6 +27,10 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
       backgroundColor: hexToCSSRGBa(theme.palette.activeBackground, 0.5),
     },
 
+    ".cm-errorLine": {
+      backgroundColor: hexToCSSRGBa(theme.palette.errorBackground, 0.2),
+    },
+
     ".cm-matchingBracket, .cm-nonmatchingBracket": {
       color: "inherit",
       background: theme.palette.activeBackground,
