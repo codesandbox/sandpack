@@ -10,7 +10,7 @@ import { commentKeymap } from "@codemirror/comment";
 import { lineNumbers } from "@codemirror/gutter";
 import { history, historyKeymap } from "@codemirror/history";
 import type { Diagnostic } from "@codemirror/lint";
-import { linter, setDiagnostics } from "@codemirror/lint";
+import { linter } from "@codemirror/lint";
 import { bracketMatching } from "@codemirror/matchbrackets";
 import type { Annotation } from "@codemirror/state";
 import { EditorState } from "@codemirror/state";
@@ -49,6 +49,7 @@ export interface CodeMirrorProps {
     | "html"
     | "vue";
   onCodeUpdate: (newCode: string) => void;
+  onLint?: (lintCode: string) => Diagnostic[];
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
   wrapContent?: boolean;
@@ -58,14 +59,14 @@ export interface CodeMirrorProps {
 
 export const CodeMirror: React.FC<CodeMirrorProps> = ({
   code,
+  editorState = "pristine",
   filePath,
   fileType,
   onCodeUpdate,
+  onLint,
   showLineNumbers = false,
   showInlineErrors = false,
   wrapContent = false,
-  editorState = "pristine",
-  lintDiagnostics,
 }) => {
   const wrapper = React.useRef<HTMLDivElement>(null);
   const cmView = React.useRef<EditorView>();
@@ -114,7 +115,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       bracketMatching(),
       closeBrackets(),
       highlightActiveLine(),
-      linter(() => lintDiagnostics ?? []),
+      linter((props) => onLint?.(props.state.toJSON().doc) ?? []),
 
       keymap.of([
         ...closeBracketsKeymap,
@@ -178,14 +179,14 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
     // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
   }, [showLineNumbers, wrapContent, themeId]);
 
-  React.useEffect(() => {
-    const view = cmView.current;
+  // React.useEffect(() => {
+  //   const view = cmView.current;
 
-    if (view?.state) {
-      const transaction = setDiagnostics(view?.state, lintDiagnostics ?? []);
-      view?.dispatch(transaction);
-    }
-  }, [lintDiagnostics]);
+  //   if (view?.state) {
+  //     const transaction = setDiagnostics(view?.state, lintDiagnostics ?? []);
+  //     view?.dispatch(transaction);
+  //   }
+  // }, [lintDiagnostics]);
 
   React.useEffect(() => {
     // When the user clicks on a tab button on a larger screen

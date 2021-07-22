@@ -17,7 +17,7 @@ export interface CodeEditorProps {
   showInlineErrors?: boolean;
   showRunButton?: boolean;
   wrapContent?: boolean;
-  onCodeUpdate?: (code: string) => void;
+  onLint?: (lintCode: string) => Diagnostic[];
   lintDiagnostics?: Diagnostic[];
 }
 
@@ -30,7 +30,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
   showInlineErrors = false,
   showRunButton = true,
   wrapContent = false,
-  onCodeUpdate,
+  onLint,
   lintDiagnostics,
 }) => {
   const { sandpack } = useSandpack();
@@ -42,8 +42,6 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
 
   const handleCodeUpdate = (newCode: string) => {
     updateCode(newCode);
-
-    onCodeUpdate?.(newCode);
   };
 
   return (
@@ -52,12 +50,13 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
 
       <div className={c("code-editor")}>
         <CodeMirror
-          key={activePath}
           code={code}
           editorState={editorState}
           filePath={activePath}
+          key={activePath}
           lintDiagnostics={lintDiagnostics}
           onCodeUpdate={handleCodeUpdate}
+          onLint={onLint}
           showInlineErrors={showInlineErrors}
           showLineNumbers={showLineNumbers}
           wrapContent={wrapContent}
