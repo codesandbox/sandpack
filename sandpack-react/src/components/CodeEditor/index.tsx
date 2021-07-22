@@ -1,5 +1,6 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
+import type { Diagnostic } from "@codemirror/lint";
 
 import { RunButton } from "../../common/RunButton";
 import { SandpackStack } from "../../common/Stack";
@@ -16,6 +17,8 @@ export interface CodeEditorProps {
   showInlineErrors?: boolean;
   showRunButton?: boolean;
   wrapContent?: boolean;
+  onCodeUpdate?: (code: string) => void;
+  lintDiagnostics?: Diagnostic[];
 }
 
 export { CodeMirror as CodeEditor };
@@ -27,6 +30,8 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
   showInlineErrors = false,
   showRunButton = true,
   wrapContent = false,
+  onCodeUpdate,
+  lintDiagnostics,
 }) => {
   const { sandpack } = useSandpack();
   const { code, updateCode } = useActiveCode();
@@ -37,6 +42,8 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
 
   const handleCodeUpdate = (newCode: string) => {
     updateCode(newCode);
+
+    onCodeUpdate?.(newCode);
   };
 
   return (
@@ -49,6 +56,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
           code={code}
           editorState={editorState}
           filePath={activePath}
+          lintDiagnostics={lintDiagnostics}
           onCodeUpdate={handleCodeUpdate}
           showInlineErrors={showInlineErrors}
           showLineNumbers={showLineNumbers}

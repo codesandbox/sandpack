@@ -18,7 +18,7 @@ export const Component: Story<CodeViewerProps> = (args) => (
       entry: "/index.js",
       files: {
         "/index.js": {
-          code: 'const title = "This is not editable" // this is a comaent',
+          code: 'const title = "This is not editable" // this is a comment',
         },
       },
     }}

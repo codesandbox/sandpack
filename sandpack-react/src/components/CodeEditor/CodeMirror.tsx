@@ -9,6 +9,8 @@ import {
 import { commentKeymap } from "@codemirror/comment";
 import { lineNumbers } from "@codemirror/gutter";
 import { history, historyKeymap } from "@codemirror/history";
+import type { Diagnostic } from "@codemirror/lint";
+import { linter, setDiagnostics } from "@codemirror/lint";
 import { bracketMatching } from "@codemirror/matchbrackets";
 import type { Annotation } from "@codemirror/state";
 import { EditorState } from "@codemirror/state";
@@ -20,7 +22,6 @@ import {
 } from "@codemirror/view";
 import type { KeyBinding } from "@codemirror/view";
 import * as React from "react";
-import { linter, setDiagnostics } from "@codemirror/lint";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
@@ -52,6 +53,7 @@ export interface CodeMirrorProps {
   showInlineErrors?: boolean;
   wrapContent?: boolean;
   editorState?: SandpackEditorState;
+  lintDiagnostics?: Diagnostic[];
 }
 
 export const CodeMirror: React.FC<CodeMirrorProps> = ({
@@ -63,6 +65,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
   showInlineErrors = false,
   wrapContent = false,
   editorState = "pristine",
+  lintDiagnostics,
 }) => {
   const wrapper = React.useRef<HTMLDivElement>(null);
   const cmView = React.useRef<EditorView>();
@@ -111,10 +114,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       bracketMatching(),
       closeBrackets(),
       highlightActiveLine(),
-      /**
-       * 1. Register the linter plugin so that it is called when the editor is updated.
-       */
-      linter(() => [{ from: 0, to: 10, severity: "warning", message: "fooo" }]),
+      linter(() => lintDiagnostics ?? []),
 
       keymap.of([
         ...closeBracketsKeymap,
@@ -179,19 +179,13 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
   }, [showLineNumbers, wrapContent, themeId]);
 
   React.useEffect(() => {
-    /**
-     * 2. Every time the code changes
-     * - Generate diagnostics (linting)
-     * - Create a new transaction state
-     * - Update the editor with the new state
-     */
     const view = cmView.current;
-    const transaction = setDiagnostics(view?.state, [
-      { from: 30, to: 70, severity: "error", message: "fooo" },
-    ]);
 
-    view?.dispatch(transaction);
-  }, [internalCode]);
+    if (view?.state) {
+      const transaction = setDiagnostics(view?.state, lintDiagnostics ?? []);
+      view?.dispatch(transaction);
+    }
+  }, [lintDiagnostics]);
 
   React.useEffect(() => {
     // When the user clicks on a tab button on a larger screen
