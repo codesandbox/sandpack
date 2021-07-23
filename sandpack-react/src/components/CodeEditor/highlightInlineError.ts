@@ -1,6 +1,7 @@
 import type { Extension } from "@codemirror/state";
 import type { DecorationSet, EditorView, ViewUpdate } from "@codemirror/view";
 import { Decoration, ViewPlugin } from "@codemirror/view";
+import { getCodeMirrorPosition } from "../CodeViewer/utils";
 
 export function highlightInlineError(): Extension {
   return activeLineHighlighter;
@@ -51,16 +52,9 @@ const activeLineHighlighter = ViewPlugin.fromClass(
       }
 
       if (message.type === "error") {
-        const doc = (view.state.doc as unknown) as { text: string[] };
-
-        // It calculates the position for a given line
-        const position = doc.text.reduce((acc, curr, i) => {
-          // -1 is to fix the array index
-          if (i < message.value - 1) {
-            return acc + curr.length + 1;
-          }
-          return acc;
-        }, 0);
+        const position = getCodeMirrorPosition(view.state.doc, {
+          line: message.value,
+        });
 
         return Decoration.set([lineDeco.range(position)]);
       }
