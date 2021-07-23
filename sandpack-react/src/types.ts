@@ -7,6 +7,7 @@ import type {
   UnsubscribeFunction,
 } from "@codesandbox/sandpack-client";
 import type { ITemplate } from "codesandbox-import-util-types";
+import type { Diagnostic } from "@codemirror/lint";
 
 export type SandpackClientDispatch = (
   msg: SandpackMessage,
@@ -164,3 +165,5 @@ export interface FileResolver {
   isFile: (path: string) => Promise<boolean>;
   readFile: (path: string) => Promise<string>;
 }
+
+export type LintDiagnostic = Diagnostic;

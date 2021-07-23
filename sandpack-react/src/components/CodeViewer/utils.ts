@@ -1,3 +1,4 @@
+import type { Text } from "@codemirror/text";
 import type { PrismTheme, Language } from "prism-react-renderer";
 
 import { getSyntaxStyle } from "../../themes";
@@ -72,4 +73,11 @@ export const getPrismLanguage = (filePath: string): Language => {
     default:
       return extension as Language;
   }
+};
+
+export const getCodeMirrorPosition = (
+  doc: Text,
+  { line, column }: { line: number; column?: number }
+): number => {
+  return doc.line(line).from + (column ?? 0) + (line === 1 ? -1 : -1);
 };

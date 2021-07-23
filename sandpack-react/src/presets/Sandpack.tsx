@@ -1,4 +1,5 @@
 import { ClasserProvider } from "@code-hike/classer";
+import type { Text } from "@codemirror/text";
 import * as React from "react";
 
 import { SandpackLayout } from "../common/Layout";
@@ -9,6 +10,7 @@ import { SandpackPreview } from "../components/Preview";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import type {
   FileResolver,
+  LintDiagnostic,
   SandpackFiles,
   SandpackPredefinedTemplate,
   SandpackSetup,
@@ -35,6 +37,7 @@ export interface SandpackProps {
     showInlineErrors?: boolean;
     showTabs?: boolean;
     wrapContent?: boolean;
+    onLint?: (doc: Text) => LintDiagnostic[];
 
     bundlerURL?: string;
     startRoute?: string;
@@ -68,6 +71,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     showLineNumbers: props.options?.showLineNumbers,
     showInlineErrors: props.options?.showInlineErrors,
     wrapContent: props.options?.wrapContent,
+    onLint: props.options?.onLint,
   };
 
   const providerOptions = {

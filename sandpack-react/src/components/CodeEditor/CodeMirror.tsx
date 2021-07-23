@@ -9,11 +9,11 @@ import {
 import { commentKeymap } from "@codemirror/comment";
 import { lineNumbers } from "@codemirror/gutter";
 import { history, historyKeymap } from "@codemirror/history";
-import type { Diagnostic } from "@codemirror/lint";
 import { linter } from "@codemirror/lint";
 import { bracketMatching } from "@codemirror/matchbrackets";
 import type { Annotation } from "@codemirror/state";
 import { EditorState } from "@codemirror/state";
+import type { Text } from "@codemirror/text";
 import {
   highlightSpecialChars,
   highlightActiveLine,
@@ -25,7 +25,10 @@ import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
-import type { EditorState as SandpackEditorState } from "../../types";
+import type {
+  EditorState as SandpackEditorState,
+  LintDiagnostic,
+} from "../../types";
 import { getFileName } from "../../utils/stringUtils";
 
 import { highlightInlineError } from "./highlightInlineError";
@@ -49,12 +52,11 @@ export interface CodeMirrorProps {
     | "html"
     | "vue";
   onCodeUpdate: (newCode: string) => void;
-  onLint?: (lintCode: string) => Diagnostic[];
+  onLint?: (doc: Text) => LintDiagnostic[];
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
   wrapContent?: boolean;
   editorState?: SandpackEditorState;
-  lintDiagnostics?: Diagnostic[];
 }
 
 export const CodeMirror: React.FC<CodeMirrorProps> = ({
@@ -115,7 +117,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       bracketMatching(),
       closeBrackets(),
       highlightActiveLine(),
-      linter((props) => onLint?.(props.state.toJSON().doc) ?? []),
+      linter((props) => onLint?.(props.state.doc) ?? []),
 
       keymap.of([
         ...closeBracketsKeymap,
@@ -178,15 +180,6 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
 
     // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
   }, [showLineNumbers, wrapContent, themeId]);
-
-  // React.useEffect(() => {
-  //   const view = cmView.current;
-
-  //   if (view?.state) {
-  //     const transaction = setDiagnostics(view?.state, lintDiagnostics ?? []);
-  //     view?.dispatch(transaction);
-  //   }
-  // }, [lintDiagnostics]);
 
   React.useEffect(() => {
     // When the user clicks on a tab button on a larger screen
