@@ -79,5 +79,5 @@ export const getCodeMirrorPosition = (
   doc: Text,
   { line, column }: { line: number; column?: number }
 ): number => {
-  return doc.line(line).from + (column ?? 0);
+  return doc.line(line).from + (column ?? 0) - 1;
 };

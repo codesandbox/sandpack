@@ -52,9 +52,10 @@ const activeLineHighlighter = ViewPlugin.fromClass(
       }
 
       if (message.type === "error") {
-        const position = getCodeMirrorPosition(view.state.doc, {
-          line: message.value,
-        });
+        const position =
+          getCodeMirrorPosition(view.state.doc, {
+            line: message.value,
+          }) + 1;
 
         return Decoration.set([lineDeco.range(position)]);
       }
