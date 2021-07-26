@@ -30,7 +30,7 @@ export interface SandpackState {
   activePath: string;
   startRoute?: string;
   editorState: EditorState;
-  error: SandpackError | null;
+  error: SandpackError[];
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;
   status: SandpackStatus;
@@ -41,6 +41,11 @@ export interface SandpackState {
   updateCurrentFile: (newCode: string) => void;
   openFile: (path: string) => void;
   setActiveFile: (path: string) => void;
+  setError: (
+    callbackUpdate:
+      | ((prev: SandpackError[]) => SandpackError[])
+      | SandpackError[]
+  ) => void;
 
   // Element refs
   // Different components inside the SandpackProvider might register certain elements of interest for sandpack

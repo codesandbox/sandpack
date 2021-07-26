@@ -542,7 +542,7 @@ const CustomRefreshButton = () => {
 };
 ```
 
-#### useActiveCode, useCodeSandboxLink, useSandpackNavigation
+#### useActiveCode, useCodeSandboxLink, useSandpackNavigation, useErrorMessage
 
 Some of the common functionalities of sandpack are also extracted into
 specialized hooks. These all use `useSandpack` under the hood, but abstract away
@@ -623,6 +623,10 @@ export const CustomSandpack = () => (
 It's not pretty, but with just a few lines of code, you can create a whole new
 component that uses the power of sandpack, but has all the UI and functionality
 you need for your specific use case.
+
+useErrorMessage
+
+TODO
 
 ## Development
 

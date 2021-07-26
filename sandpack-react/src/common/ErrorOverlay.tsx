@@ -4,16 +4,30 @@ import * as React from "react";
 import { useErrorMessage } from "../hooks/useErrorMessage";
 
 export const ErrorOverlay: React.FC = () => {
-  const errorMessage = useErrorMessage();
+  const { error } = useErrorMessage();
   const c = useClasser("sp");
 
-  if (!errorMessage) {
+  if (error?.length === 0) {
     return null;
   }
 
   return (
     <div className={c("overlay", "error")}>
-      <div className={c("error-message")}>{errorMessage}</div>
+      {error.map(({ message, line, column }) => {
+        const renderLineColumn = () => {
+          if (line && column) {
+            return `[${line}:${column}] - `;
+          }
+
+          return null;
+        };
+        return (
+          <div key={message} className={c("error-message")}>
+            {renderLineColumn()}
+            {message}
+          </div>
+        );
+      })}
     </div>
   );
 };

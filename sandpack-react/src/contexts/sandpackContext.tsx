@@ -34,7 +34,7 @@ export interface SandpackProviderState {
   openPaths: string[];
   startRoute?: string;
   bundlerState?: BundlerState;
-  error: SandpackError | null;
+  error: SandpackError[];
   sandpackStatus: SandpackStatus;
   editorState: EditorState;
   renderHiddenIframe: boolean;
@@ -107,7 +107,7 @@ class SandpackProvider extends React.PureComponent<
       activePath,
       startRoute: this.props.startRoute,
       bundlerState: undefined,
-      error: null,
+      error: [],
       sandpackStatus: this.props.autorun ? "initial" : "idle",
       editorState: "pristine",
       renderHiddenIframe: false,
@@ -143,18 +143,30 @@ class SandpackProvider extends React.PureComponent<
     if (msg.type === "state") {
       this.setState({ bundlerState: msg.state });
     } else if (msg.type === "done" && !msg.compilatonError) {
-      this.setState({ error: null });
+      this.setState({ error: [] });
     } else if (msg.type === "action" && msg.action === "show-error") {
-      this.setState({ error: extractErrorDetails(msg) });
+      this.setState({ error: [extractErrorDetails(msg)] });
     } else if (
       msg.type === "action" &&
       msg.action === "notification" &&
       msg.notificationType === "error"
     ) {
       this.setState({
-        error: { message: msg.title },
+        error: [{ message: msg.title }],
       });
     }
+  };
+
+  handleErrorMessage = (
+    callbackUpdate:
+      | ((prev: SandpackError[]) => SandpackError[])
+      | SandpackError[]
+  ): void => {
+    if (typeof callbackUpdate === "function") {
+      return this.setState((prev) => ({ error: callbackUpdate(prev.error) }));
+    }
+
+    this.setState({ error: callbackUpdate });
   };
 
   updateCurrentFile = (newCode: string): void => {
@@ -507,6 +519,7 @@ class SandpackProvider extends React.PureComponent<
       errorScreenRegisteredRef: this.errorScreenRegistered,
       openInCSBRegisteredRef: this.openInCSBRegistered,
       loadingScreenRegisteredRef: this.loadingScreenRegistered,
+      setError: this.handleErrorMessage,
     };
   };
 

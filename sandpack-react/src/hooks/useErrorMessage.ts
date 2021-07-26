@@ -1,14 +1,23 @@
 import * as React from "react";
 
+import type { SandpackError } from "../../../sandpack-client/dist";
+
 import { useSandpack } from "./useSandpack";
 
-export const useErrorMessage = (): string | null => {
+export const useErrorMessage = (): {
+  error: SandpackError[];
+  setError: (
+    callbackUpdate:
+      | ((prev: SandpackError[]) => SandpackError[])
+      | SandpackError[]
+  ) => void;
+} => {
   const { sandpack } = useSandpack();
-  const { error } = sandpack;
+  const { error, setError } = sandpack;
 
   React.useEffect(() => {
     sandpack.errorScreenRegisteredRef.current = true;
   }, []);
 
-  return error?.message ?? null;
+  return { error, setError };
 };
