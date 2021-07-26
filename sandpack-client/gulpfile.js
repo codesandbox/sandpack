@@ -1,4 +1,5 @@
 const gulp = require("gulp");
+const removeSourcemaps = require("gulp-remove-sourcemaps");
 
 gulp.task("copy-sandbox", () =>
   gulp
@@ -8,5 +9,6 @@ gulp.task("copy-sandbox", () =>
       "!../../codesandbox-client/www/stats.json",
       "!../../codesandbox-client/www/public/**/*.*",
     ])
+    .pipe(removeSourcemaps())
     .pipe(gulp.dest("./sandpack/"))
 );

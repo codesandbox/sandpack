@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-client",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "",
   "keywords": [],
   "repository": {
@@ -40,6 +40,7 @@
     "core-js": "^3.7.0",
     "cross-env": "^5.0.1",
     "gulp": "^3.9.1",
+    "gulp-remove-sourcemaps": "1.0.1",
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^2.6.2",
     "ts-node": "^4.1.0",
