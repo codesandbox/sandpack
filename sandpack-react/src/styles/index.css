@@ -464,5 +464,4 @@
 .sp-error-message {
   animation: sp-fade-in 0.15s ease-in;
   color: var(--sp-colors-fg-error);
-  margin-bottom: 0.4em;
 }
