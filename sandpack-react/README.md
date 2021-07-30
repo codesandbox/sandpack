@@ -445,7 +445,7 @@ of them comunicate with sandpack through the shared context.
 | showInlineErrors | boolean | false                             | Highlights the syntax errors and parse errors from the bundler in the code editor |
 | showRunButton    | boolean | true                              | Shows a `Run` button when the sandpack is not set to `autorun`                    |
 | wrapContent      | boolean | false                             | Wraps the code lines that don't fit horizontally                                  |
-| closableTabs     | boolean | false                             | Adds a close action to open file tas.                                             |
+| closableTabs     | boolean | false                             | Adds a close file action to open files                                            |
 
 #### SandpackPreview props
 
