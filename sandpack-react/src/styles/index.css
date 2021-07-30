@@ -266,6 +266,7 @@
 }
 
 .sp-tab-button:hover > .sp-close-button {
+  animation: sp-fade-in 0.15s ease-in;
   visibility: unset;
 }
 

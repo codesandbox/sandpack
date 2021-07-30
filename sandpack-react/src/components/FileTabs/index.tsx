@@ -46,7 +46,7 @@ export const FileTabs: React.FC<FileTabsProps> = ({ closableTabs }) => {
             type="button"
           >
             {getFileName(filePath)}
-            {closableTabs && openPaths.length > 0 ? (
+            {closableTabs && openPaths.length > 1 ? (
               <span className={c("close-button")} onClick={handleCloseFile}>
                 <CloseIcon />
               </span>

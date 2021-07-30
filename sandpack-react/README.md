@@ -444,6 +444,7 @@ of them comunicate with sandpack through the shared context.
 | showLineNumbers | boolean | false                             | Adds a column with line numbers on the left side of the code editor     |
 | showRunButton   | boolean | true                              | Shows a `Run` button when the sandpack is not set to `autorun`          |
 | wrapContent     | boolean | false                             | Wraps the code lines that don't fit horizontally                        |
+| closableTabs    | boolean | false                             | Adds a close action to open file tas.
 
 #### SandpackPreview props
 

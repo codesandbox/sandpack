@@ -397,10 +397,16 @@ class SandpackProvider extends React.PureComponent<
     }
 
     this.setState(({ openPaths, activePath }) => {
+      const indexOfRemovedPath = openPaths.indexOf(path);
       const newPaths = openPaths.filter((openPath) => openPath !== path);
 
       return {
-        activePath: path === activePath ? newPaths[0] : activePath,
+        activePath:
+          path === activePath
+            ? indexOfRemovedPath === 0
+              ? openPaths[1]
+              : openPaths[indexOfRemovedPath - 1]
+            : activePath,
         openPaths: newPaths,
         editorState: "dirty",
       };
