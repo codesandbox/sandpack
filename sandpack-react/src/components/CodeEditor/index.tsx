@@ -13,6 +13,7 @@ export interface CodeEditorProps {
   customStyle?: React.CSSProperties;
   showTabs?: boolean;
   showLineNumbers?: boolean;
+  showInlineErrors?: boolean;
   showRunButton?: boolean;
   wrapContent?: boolean;
   closableTabs?: boolean;
@@ -24,6 +25,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
   customStyle,
   showTabs,
   showLineNumbers = false,
+  showInlineErrors = false,
   showRunButton = true,
   wrapContent = false,
   closableTabs = false,
@@ -50,6 +52,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
           editorState={editorState}
           filePath={activePath}
           onCodeUpdate={handleCodeUpdate}
+          showInlineErrors={showInlineErrors}
           showLineNumbers={showLineNumbers}
           wrapContent={wrapContent}
         />

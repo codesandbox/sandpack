@@ -7725,6 +7725,11 @@ gud@^1.0.0:
   resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
+gulp-remove-sourcemaps@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/gulp-remove-sourcemaps/-/gulp-remove-sourcemaps-1.0.1.tgz#4298b15e02ebed3bf1a8dd10c2576916879c2f80"
+  integrity sha512-Gp5/CEVeIuXd7mo7GJCLtZo3Ncigt3LgK6JmllN80Ecl8bLh/nN0Knqr8XgZOb9aMPetFGy42gNbXRSqTAjEEg==
+
 gulp-util@^3.0.0:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.8.tgz#0054e1e744502e27c04c187c3ecc505dd54bbb4f"

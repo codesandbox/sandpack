@@ -32,6 +32,7 @@ export interface SandpackProps {
 
     showNavigator?: boolean;
     showLineNumbers?: boolean;
+    showInlineErrors?: boolean;
     showTabs?: boolean;
     closableTabs?: boolean;
     wrapContent?: boolean;
@@ -66,6 +67,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
   const codeEditorOptions: CodeEditorProps = {
     showTabs: props.options?.showTabs,
     showLineNumbers: props.options?.showLineNumbers,
+    showInlineErrors: props.options?.showInlineErrors,
     wrapContent: props.options?.wrapContent,
     closableTabs: props.options?.closableTabs,
   };
