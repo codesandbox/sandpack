@@ -27,6 +27,23 @@ export const Component: React.FC = () => (
   </SandpackProvider>
 );
 
+export const WithClosableTabs: React.FC = () => (
+  <SandpackProvider
+    customSetup={{
+      entry: "/index.tsx",
+      files: {
+        "/index.tsx": { code: "", hidden: true },
+        "/src/app.tsx": "Hello",
+        "/src/components/button.tsx": "World",
+      },
+    }}
+  >
+    <SandpackLayout>
+      <FileTabs closableTabs />
+    </SandpackLayout>
+  </SandpackProvider>
+);
+
 export const WithHiddenFiles: React.FC = () => (
   <SandpackProvider
     customSetup={{

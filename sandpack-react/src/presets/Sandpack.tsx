@@ -34,6 +34,7 @@ export interface SandpackProps {
     showLineNumbers?: boolean;
     showInlineErrors?: boolean;
     showTabs?: boolean;
+    closableTabs?: boolean;
     wrapContent?: boolean;
 
     bundlerURL?: string;
@@ -68,6 +69,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     showLineNumbers: props.options?.showLineNumbers,
     showInlineErrors: props.options?.showInlineErrors,
     wrapContent: props.options?.wrapContent,
+    closableTabs: props.options?.closableTabs,
   };
 
   const providerOptions = {
