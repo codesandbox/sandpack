@@ -243,6 +243,7 @@
 
 .sp-tab-button:hover {
   color: var(--sp-colors-fg-active);
+  background: var(--sp-colors-bg-active);
 }
 
 .sp-tab-button:focus {
@@ -261,12 +262,7 @@
   visibility: hidden;
 }
 
-.sp-close-button:hover {
-  background: var(--sp-colors-bg-active);
-}
-
 .sp-tab-button:hover > .sp-close-button {
-  animation: sp-fade-in 0.15s ease-in;
   visibility: unset;
 }
 
