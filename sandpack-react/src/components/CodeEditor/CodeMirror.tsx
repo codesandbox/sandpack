@@ -109,7 +109,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       history(),
       bracketMatching(),
       closeBrackets(),
-      highlightActiveLine(),
+      // highlightActiveLine(),
 
       keymap.of([
         ...closeBracketsKeymap,

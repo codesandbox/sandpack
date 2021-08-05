@@ -1,7 +1,9 @@
 import { useClasser } from "@code-hike/classer";
 import type { Language } from "prism-react-renderer";
-import Highlight, { defaultProps } from "prism-react-renderer";
+import Highlight, { defaultProps, Prism } from "prism-react-renderer";
 import * as React from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { twilight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { getPrismTheme } from "../components/CodeViewer/utils";
 import { useSandpackTheme } from "../hooks/useSandpackTheme";
@@ -22,8 +24,26 @@ export const PrismHighlight: React.FC<PrismHighlightProps> = ({
 
   return (
     <div className={c("code-view")}>
+      <SyntaxHighlighter
+        language="jsx"
+        style={twilight}
+        style={{
+          ...Object.entries(theme.syntax).reduce((acc, [key, value]) => {
+            return { ...acc, [key]: { color: value } };
+          }),
+          'pre[class*="language-"]': {
+            backgroundColor: "none",
+          },
+          'code[class*="language-"]': {
+            fontFamily: "var(--sp-font-mono)",
+          },
+        }}
+      >
+        {code}
+      </SyntaxHighlighter>
       <Highlight
-        {...defaultProps}
+        // {...defaultProps}
+        Prism={Prism}
         code={code}
         language={lang}
         theme={getPrismTheme(theme)}
