@@ -34,6 +34,7 @@ export const codesandboxLightTheme: SandpackTheme = {
     tag: "#22863a",
     plain: "#393A34",
     string: "#393A34",
+    key: "red",
   },
   typography: {
     bodyFont:

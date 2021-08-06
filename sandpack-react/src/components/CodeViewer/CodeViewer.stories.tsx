@@ -53,13 +53,15 @@ export const Component: Story<CodeViewerProps> = (args) => (
       files: {
         "/index.js": {
           code: `
-const people = [
-  'Creola Katherine Johnson: mathematician',
-  'Mario José Molina-Pasquel Henríquez: chemist',
-  'Mohammad Abdus Salam: physicist',
-  'Percy Lavon Julian: chemist',
-  'Subrahmanyan Chandrasekhar: astrophysicist'
-];
+const people = [{
+  id: 0,
+  name: 'Creola Katherine Johnson',
+  profession: 'mathematician',
+}, {
+  id: 1,
+  name: 'Mario José Molina-Pasquel Henríquez',
+  profession: 'chemist',
+}];
 
 export default function List() {
   const listItems = people.map(person =>
@@ -73,6 +75,7 @@ export default function List() {
     }}
   >
     <SandpackThemeProvider theme={githubLightTheme}>
+      <p>Editor</p>
       <SandpackCodeEditor {...args} />
       <SandpackCodeViewer {...args} />
     </SandpackThemeProvider>

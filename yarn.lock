@@ -5082,6 +5082,11 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
+codemirror@^5.62.2:
+  version "5.62.2"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.62.2.tgz#bce6d19c9829e6e788f83886d48ecf5c1e106e65"
+  integrity sha512-tVFMUa4J3Q8JUd1KL9yQzQB0/BJt7ZYZujZmTPgo/54Lpuq3ez4C8x/ATUY/wv7b7X3AUq8o3Xd+2C5ZrCGWHw==
+
 codesandbox-import-util-types@^1.3.7:
   version "1.3.7"
   resolved "https://registry.yarnpkg.com/codesandbox-import-util-types/-/codesandbox-import-util-types-1.3.7.tgz#7a6097e248a75424d13b06b74368cd76bd2b3e10"
@@ -11870,6 +11875,11 @@ raw-loader@^4.0.1:
   dependencies:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
+
+react-codemirror-runmode@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-codemirror-runmode/-/react-codemirror-runmode-1.0.5.tgz#a80cd25cb1af4c9c6e9c84861c23165ce29d7111"
+  integrity sha512-6TzbODi0WSllc0VOwOjTpZxE9wUheMMpmBNydzR5o0NbbBLX0j73xutH/o85BTG9NKs06sFEBMvCsRKT6jRz8A==
 
 react-color@^2.17.0:
   version "2.19.3"

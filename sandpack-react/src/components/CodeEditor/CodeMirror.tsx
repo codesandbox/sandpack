@@ -107,9 +107,12 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
     const extensions = [
       highlightSpecialChars(),
       history(),
-      bracketMatching(),
       closeBrackets(),
+
+      // read only
+      // bracketMatching(),
       // highlightActiveLine(),
+      EditorView.editable.of(false),
 
       keymap.of([
         ...closeBracketsKeymap,

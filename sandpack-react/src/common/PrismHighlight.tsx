@@ -3,7 +3,11 @@ import type { Language } from "prism-react-renderer";
 import Highlight, { defaultProps, Prism } from "prism-react-renderer";
 import * as React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { twilight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import CodeMirror from "codemirror";
+import "codemirror/addon/runmode/runmode";
+import "codemirror/mode/meta";
+import "codemirror/mode/javascript/javascript";
+import Highlighter from "react-codemirror-runmode";
 
 import { getPrismTheme } from "../components/CodeViewer/utils";
 import { useSandpackTheme } from "../hooks/useSandpackTheme";
@@ -24,9 +28,12 @@ export const PrismHighlight: React.FC<PrismHighlightProps> = ({
 
   return (
     <div className={c("code-view")}>
+      <p>Codemirror 5</p>
+      <Highlighter codeMirror={CodeMirror} value={code} language="javascript" />
+
+      <p>prism-react-renderer</p>
       <SyntaxHighlighter
         language="jsx"
-        style={twilight}
         style={{
           ...Object.entries(theme.syntax).reduce((acc, [key, value]) => {
             return { ...acc, [key]: { color: value } };
@@ -41,6 +48,8 @@ export const PrismHighlight: React.FC<PrismHighlightProps> = ({
       >
         {code}
       </SyntaxHighlighter>
+
+      <p>Original</p>
       <Highlight
         // {...defaultProps}
         Prism={Prism}

@@ -44,9 +44,11 @@
     "@codemirror/state": "^0.18.0",
     "@codemirror/view": "^0.18.0",
     "@codesandbox/sandpack-client": "^0.1.7",
+    "codemirror": "^5.62.2",
     "codesandbox-import-util-types": "^2.2.3",
     "codesandbox-import-utils": "^2.2.3",
     "prism-react-renderer": "^1.1.1",
+    "react-codemirror-runmode": "^1.0.5",
     "react-syntax-highlighter": "^15.4.4"
   },
   "devDependencies": {
