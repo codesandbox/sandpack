@@ -1,11 +1,12 @@
 import type { Story } from "@storybook/react";
-import React from "react";
+import React, { useState } from "react";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../contexts/themeContext";
 
 import type { CodeViewerProps } from ".";
 import { SandpackCodeViewer } from ".";
+import { CodeMirrorProps } from "../CodeEditor/CodeMirror";
 
 export default {
   title: "components/Code Viewer",
@@ -60,13 +61,30 @@ export const VueCode: React.FC = () => (
   </SandpackProvider>
 );
 
-export const Decorators: React.FC = () => (
-  <SandpackProvider
-    customSetup={{
-      entry: "/index.js",
-      files: {
-        "/index.js": {
-          code: `const people = [{
+export const Decorators: React.FC = () => {
+  const [exampleDecorator, setExampleDecorators] = useState<
+    CodeMirrorProps["decorators"]
+  >([
+    { className: "highlight", line: 1 },
+    { className: "highlight", line: 9 },
+  ]);
+
+  const updateDecorators = () => {
+    setExampleDecorators([
+      ...exampleDecorator,
+      { className: "widget", line: 12, startColumn: 26, endColumn: 38 },
+    ]);
+  };
+
+  return (
+    <>
+      <button onClick={updateDecorators}>update it</button>
+      <SandpackProvider
+        customSetup={{
+          entry: "/index.js",
+          files: {
+            "/index.js": {
+              code: `const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
   profession: 'mathematician',
@@ -77,28 +95,49 @@ export const Decorators: React.FC = () => (
 }];
 
 export default function List() {
+  const [text, setText] = useState("")
   const listItems = people.map(person =>
     <li>{person}</li>
   );
   return <ul>{listItems}</ul>;
 }`,
-        },
-      },
-    }}
-  >
-    <style>
-      {`.highlight {
+            },
+          },
+        }}
+      >
+        <style>
+          {`.highlight {
         background: #1ea7fd2b;
-      }`}
-    </style>
-    <SandpackThemeProvider>
-      <SandpackCodeViewer
-        decorators={[
-          { className: "highlight", line: 1 },
-          { className: "highlight", line: 9 },
-        ]}
-        showLineNumbers
-      />
-    </SandpackThemeProvider>
-  </SandpackProvider>
-);
+      }
+      .widget {
+        border: 1px solid #1ea7fd;
+        border-radius: 2px;
+        padding: 2px 4px 2px 12px;
+        margin-left: 6px;
+        position: relative;
+      }
+
+      .widget:before {
+        content: "1";
+        background: #1ea7fd;
+        border-radius: 100%;
+        position: absolute;
+        width: 16px;
+        display: block;
+        height: 16px;
+        left: -8px;
+        top: 2px;
+        font-size: 11px;
+        text-align: center;
+        color: white;
+        line-height: 17px;
+      }
+      `}
+        </style>
+        <SandpackThemeProvider>
+          <SandpackCodeViewer decorators={exampleDecorator} showLineNumbers />
+        </SandpackThemeProvider>
+      </SandpackProvider>
+    </>
+  );
+};

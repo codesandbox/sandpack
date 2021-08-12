@@ -29,8 +29,23 @@ export function highlightDecorators(
             attributes: { class: item.className ?? "" },
           });
 
+          const markDeco = Decoration.mark({ class: item.className ?? "" });
+
           const positionLineStart =
-            getCodeMirrorPosition(view.state.doc, { line: item.line }) + 1;
+            getCodeMirrorPosition(view.state.doc, {
+              line: item.line,
+              column: item.startColumn,
+            }) + 1;
+
+          if (item.startColumn && item.endColumn) {
+            const positionLineEnd =
+              getCodeMirrorPosition(view.state.doc, {
+                line: item.line,
+                column: item.endColumn,
+              }) + 1;
+
+            return markDeco.range(positionLineStart, positionLineEnd);
+          }
 
           return lineDeco.range(positionLineStart);
         });

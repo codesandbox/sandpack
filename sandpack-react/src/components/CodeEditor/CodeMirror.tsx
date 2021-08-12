@@ -190,7 +190,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
     };
 
     // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
-  }, [showLineNumbers, wrapContent, themeId]);
+  }, [showLineNumbers, wrapContent, themeId, decorators]);
 
   React.useEffect(() => {
     // When the user clicks on a tab button on a larger screen
