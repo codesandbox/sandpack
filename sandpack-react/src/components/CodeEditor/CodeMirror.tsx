@@ -46,11 +46,12 @@ export interface CodeMirrorProps {
     | "less"
     | "html"
     | "vue";
-  onCodeUpdate: (newCode: string) => void;
+  onCodeUpdate?: (newCode: string) => void;
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
   wrapContent?: boolean;
   editorState?: SandpackEditorState;
+  readOnly?: boolean;
 }
 
 export const CodeMirror: React.FC<CodeMirrorProps> = ({
@@ -62,6 +63,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
   showInlineErrors = false,
   wrapContent = false,
   editorState = "pristine",
+  readOnly = false,
 }) => {
   const wrapper = React.useRef<HTMLDivElement>(null);
   const cmView = React.useRef<EditorView>();
@@ -109,11 +111,6 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       history(),
       closeBrackets(),
 
-      // read only
-      // bracketMatching(),
-      // highlightActiveLine(),
-      EditorView.editable.of(false),
-
       keymap.of([
         ...closeBracketsKeymap,
         ...defaultKeymap,
@@ -126,6 +123,13 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
       getEditorTheme(theme),
       getSyntaxHighlight(theme),
     ];
+
+    if (readOnly) {
+      extensions.push(EditorView.editable.of(false));
+    } else {
+      extensions.push(bracketMatching());
+      extensions.push(highlightActiveLine());
+    }
 
     if (wrapContent) {
       extensions.push(EditorView.lineWrapping);
@@ -159,7 +163,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
         if (tr.docChanged) {
           const newCode = tr.newDoc.sliceString(0, tr.newDoc.length);
           setInternalCode(newCode);
-          onCodeUpdate(newCode);
+          onCodeUpdate?.(newCode);
         }
       },
     });

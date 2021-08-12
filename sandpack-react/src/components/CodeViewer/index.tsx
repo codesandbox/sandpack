@@ -4,9 +4,8 @@ import { RunButton } from "../../common/RunButton";
 import { SandpackStack } from "../../common/Stack";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
+import { CodeEditor } from "../CodeEditor";
 import { FileTabs } from "../FileTabs";
-
-import { getPrismLanguage } from "./utils";
 
 export interface CodeViewerProps {
   showTabs?: boolean;
@@ -19,22 +18,21 @@ export const SandpackCodeViewer: React.FC<CodeViewerProps> = ({
 }) => {
   const { sandpack } = useSandpack();
   const { code } = useActiveCode();
-  const { activePath, status } = sandpack;
 
-  const lang = getPrismLanguage(activePath);
   const shouldShowTabs = showTabs ?? sandpack.openPaths.length > 1;
 
   return (
     <SandpackStack>
       {shouldShowTabs ? <FileTabs /> : null}
 
-      {/* <PrismHighlight
+      <CodeEditor
         code={code}
-        lang={lang}
+        filePath={sandpack.activePath}
         showLineNumbers={showLineNumbers}
-      /> */}
+        readOnly
+      />
 
-      {status === "idle" ? <RunButton /> : null}
+      {sandpack.status === "idle" ? <RunButton /> : null}
     </SandpackStack>
   );
 };

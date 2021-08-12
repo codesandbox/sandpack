@@ -3,7 +3,6 @@ import React from "react";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../contexts/themeContext";
-import { SandpackCodeEditor } from "../CodeEditor";
 
 import type { CodeViewerProps } from ".";
 import { SandpackCodeViewer } from ".";
@@ -19,8 +18,7 @@ export const Component: Story<CodeViewerProps> = (args) => (
       entry: "/index.js",
       files: {
         "/index.js": {
-          code: `
-const people = [{
+          code: `const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
   profession: 'mathematician',
@@ -42,9 +40,7 @@ export default function List() {
     }}
   >
     <SandpackThemeProvider>
-      <p>Editor</p>
-      <SandpackCodeEditor {...args} />
-      <SandpackCodeViewer {...args} />
+      <SandpackCodeViewer showLineNumbers {...args} />
     </SandpackThemeProvider>
   </SandpackProvider>
 );
