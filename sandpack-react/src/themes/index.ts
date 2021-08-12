@@ -29,12 +29,6 @@ export const codesandboxLightTheme: SandpackTheme = {
     property: "#151515",
     static: "#FF453A",
     string: "#BF5AF2",
-    "property-access": "#36acaa",
-    function: "#6f42c1",
-    tag: "#22863a",
-    plain: "#393A34",
-    string: "#393A34",
-    key: "red",
   },
   typography: {
     bodyFont:

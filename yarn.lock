@@ -5082,11 +5082,6 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-codemirror@^5.62.2:
-  version "5.62.2"
-  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.62.2.tgz#bce6d19c9829e6e788f83886d48ecf5c1e106e65"
-  integrity sha512-tVFMUa4J3Q8JUd1KL9yQzQB0/BJt7ZYZujZmTPgo/54Lpuq3ez4C8x/ATUY/wv7b7X3AUq8o3Xd+2C5ZrCGWHw==
-
 codesandbox-import-util-types@^1.3.7:
   version "1.3.7"
   resolved "https://registry.yarnpkg.com/codesandbox-import-util-types/-/codesandbox-import-util-types-1.3.7.tgz#7a6097e248a75424d13b06b74368cd76bd2b3e10"
@@ -7995,11 +7990,6 @@ highlight.js@^10.1.1, highlight.js@~10.7.0:
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.1.tgz#a8ec4152db24ea630c90927d6cae2a45f8ecb955"
   integrity sha512-S6G97tHGqJ/U8DsXcEdnACbirtbx58Bx9CzIVeYli8OuswCfYI/LsXH2EiGcoGio1KAC3x4mmUwulOllJ2ZyRA==
 
-highlight.js@^10.4.1:
-  version "10.7.3"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.3.tgz#697272e3991356e40c3cac566a74eef681756531"
-  integrity sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==
-
 highlight.js@~10.4.0:
   version "10.4.1"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.4.1.tgz#d48fbcf4a9971c4361b3f95f302747afe19dbad0"
@@ -9646,7 +9636,7 @@ lower-case@^2.0.2:
   dependencies:
     tslib "^2.0.3"
 
-lowlight@^1.14.0, lowlight@^1.17.0:
+lowlight@^1.14.0:
   version "1.20.0"
   resolved "https://registry.yarnpkg.com/lowlight/-/lowlight-1.20.0.tgz#ddb197d33462ad0d93bf19d17b6c301aa3941888"
   integrity sha512-8Ktj+prEb1RoCPkEOrPMYUN/nCggB7qAWe3a7OpMjWQkh3l2RD5wKRQ+o8Q8YuI9RG/xs95waaI/E6ym/7NsTw==
@@ -11626,11 +11616,6 @@ prismjs@^1.21.0, prismjs@~1.23.0:
   optionalDependencies:
     clipboard "^2.0.0"
 
-prismjs@^1.22.0, prismjs@~1.24.0:
-  version "1.24.1"
-  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.24.1.tgz#c4d7895c4d6500289482fa8936d9cdd192684036"
-  integrity sha512-mNPsedLuk90RVJioIky8ANZEwYm5w9LcvCXrxHlwf4fNVSn8jEipMybMkWUyyF0JhnC+C4VcOVSBuHRKs1L5Ow==
-
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -11876,11 +11861,6 @@ raw-loader@^4.0.1:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
-react-codemirror-runmode@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-codemirror-runmode/-/react-codemirror-runmode-1.0.5.tgz#a80cd25cb1af4c9c6e9c84861c23165ce29d7111"
-  integrity sha512-6TzbODi0WSllc0VOwOjTpZxE9wUheMMpmBNydzR5o0NbbBLX0j73xutH/o85BTG9NKs06sFEBMvCsRKT6jRz8A==
-
 react-color@^2.17.0:
   version "2.19.3"
   resolved "https://registry.yarnpkg.com/react-color/-/react-color-2.19.3.tgz#ec6c6b4568312a3c6a18420ab0472e146aa5683d"
@@ -12101,17 +12081,6 @@ react-syntax-highlighter@^13.5.0:
     prismjs "^1.21.0"
     refractor "^3.1.0"
 
-react-syntax-highlighter@^15.4.4:
-  version "15.4.4"
-  resolved "https://registry.yarnpkg.com/react-syntax-highlighter/-/react-syntax-highlighter-15.4.4.tgz#dc9043f19e7bd063ff3ea78986d22a6eaa943b2a"
-  integrity sha512-PsOFHNTzkb3OroXdoR897eKN5EZ6grht1iM+f1lJSq7/L0YVnkJaNVwC3wEUYPOAmeyl5xyer1DjL6MrumO6Zw==
-  dependencies:
-    "@babel/runtime" "^7.3.1"
-    highlight.js "^10.4.1"
-    lowlight "^1.17.0"
-    prismjs "^1.22.0"
-    refractor "^3.2.0"
-
 react-textarea-autosize@^8.1.1:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/react-textarea-autosize/-/react-textarea-autosize-8.3.2.tgz#4f9374d357b0a6f6469956726722549124a1b2db"
@@ -12251,15 +12220,6 @@ refractor@^3.1.0:
     hastscript "^6.0.0"
     parse-entities "^2.0.0"
     prismjs "~1.23.0"
-
-refractor@^3.2.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/refractor/-/refractor-3.4.0.tgz#62bd274b06c942041f390c371b676eb67cb0a678"
-  integrity sha512-dBeD02lC5eytm9Gld2Mx0cMcnR+zhSnsTfPpWqFaMgUMJfC9A6bcN3Br/NaXrnBJcuxnLFR90k1jrkaSyV8umg==
-  dependencies:
-    hastscript "^6.0.0"
-    parse-entities "^2.0.0"
-    prismjs "~1.24.0"
 
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"

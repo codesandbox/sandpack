@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { PrismHighlight } from "../../common/PrismHighlight";
 import { RunButton } from "../../common/RunButton";
 import { SandpackStack } from "../../common/Stack";
 import { useActiveCode } from "../../hooks/useActiveCode";
@@ -29,11 +28,11 @@ export const SandpackCodeViewer: React.FC<CodeViewerProps> = ({
     <SandpackStack>
       {shouldShowTabs ? <FileTabs /> : null}
 
-      <PrismHighlight
+      {/* <PrismHighlight
         code={code}
         lang={lang}
         showLineNumbers={showLineNumbers}
-      />
+      /> */}
 
       {status === "idle" ? <RunButton /> : null}
     </SandpackStack>
