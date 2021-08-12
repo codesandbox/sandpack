@@ -33,8 +33,7 @@ export default function List() {
     <li>{person}</li>
   );
   return <ul>{listItems}</ul>;
-}
-          `,
+}`,
         },
       },
     }}
@@ -57,6 +56,49 @@ export const VueCode: React.FC = () => (
   <SandpackProvider template="vue">
     <SandpackThemeProvider theme="codesandbox-dark">
       <SandpackCodeViewer />
+    </SandpackThemeProvider>
+  </SandpackProvider>
+);
+
+export const Decorators: React.FC = () => (
+  <SandpackProvider
+    customSetup={{
+      entry: "/index.js",
+      files: {
+        "/index.js": {
+          code: `const people = [{
+  id: 0,
+  name: 'Creola Katherine Johnson',
+  profession: 'mathematician',
+}, {
+  id: 1,
+  name: 'Mario José Molina-Pasquel Henríquez',
+  profession: 'chemist',
+}];
+
+export default function List() {
+  const listItems = people.map(person =>
+    <li>{person}</li>
+  );
+  return <ul>{listItems}</ul>;
+}`,
+        },
+      },
+    }}
+  >
+    <style>
+      {`.highlight {
+        background: #1ea7fd2b;
+      }`}
+    </style>
+    <SandpackThemeProvider>
+      <SandpackCodeViewer
+        decorators={[
+          { className: "highlight", line: 1 },
+          { className: "highlight", line: 9 },
+        ]}
+        showLineNumbers
+      />
     </SandpackThemeProvider>
   </SandpackProvider>
 );

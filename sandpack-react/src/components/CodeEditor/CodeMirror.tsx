@@ -26,6 +26,7 @@ import { useSandpackTheme } from "../../hooks/useSandpackTheme";
 import type { EditorState as SandpackEditorState } from "../../types";
 import { getFileName } from "../../utils/stringUtils";
 
+import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
 import {
   getCodeMirrorLanguage,
@@ -52,6 +53,12 @@ export interface CodeMirrorProps {
   wrapContent?: boolean;
   editorState?: SandpackEditorState;
   readOnly?: boolean;
+  decorators?: Array<{
+    className?: string;
+    line: number;
+    startColumn?: number;
+    endColumn?: number;
+  }>;
 }
 
 export const CodeMirror: React.FC<CodeMirrorProps> = ({
@@ -64,6 +71,7 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
   wrapContent = false,
   editorState = "pristine",
   readOnly = false,
+  decorators,
 }) => {
   const wrapper = React.useRef<HTMLDivElement>(null);
   const cmView = React.useRef<EditorView>();
@@ -129,6 +137,10 @@ export const CodeMirror: React.FC<CodeMirrorProps> = ({
     } else {
       extensions.push(bracketMatching());
       extensions.push(highlightActiveLine());
+    }
+
+    if (decorators) {
+      extensions.push(highlightDecorators(decorators));
     }
 
     if (wrapContent) {

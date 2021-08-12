@@ -4,11 +4,19 @@ import { html } from "@codemirror/lang-html";
 import { javascript } from "@codemirror/lang-javascript";
 import type { LanguageSupport } from "@codemirror/language";
 import type { Extension } from "@codemirror/state";
+import type { Text } from "@codemirror/text";
 import { EditorView } from "@codemirror/view";
 
 import { getSyntaxStyle } from "../../themes";
 import type { SandpackTheme } from "../../types";
 import { hexToCSSRGBa } from "../../utils/stringUtils";
+
+export const getCodeMirrorPosition = (
+  doc: Text,
+  { line, column }: { line: number; column?: number }
+): number => {
+  return doc.line(line).from + (column ?? 0) - 1;
+};
 
 export const getEditorTheme = (theme: SandpackTheme): Extension =>
   EditorView.theme({
