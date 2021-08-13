@@ -3,10 +3,10 @@ import React, { useState } from "react";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../contexts/themeContext";
+import type { CodeMirrorProps } from "../CodeEditor/CodeMirror";
 
 import type { CodeViewerProps } from ".";
 import { SandpackCodeViewer } from ".";
-import { CodeMirrorProps } from "../CodeEditor/CodeMirror";
 
 export default {
   title: "components/Code Viewer",
@@ -62,29 +62,13 @@ export const VueCode: React.FC = () => (
 );
 
 export const Decorators: React.FC = () => {
-  const [exampleDecorator, setExampleDecorators] = useState<
-    CodeMirrorProps["decorators"]
-  >([
-    { className: "highlight", line: 1 },
-    { className: "highlight", line: 9 },
-  ]);
-
-  const updateDecorators = () => {
-    setExampleDecorators([
-      ...exampleDecorator,
-      { className: "widget", line: 12, startColumn: 26, endColumn: 38 },
-    ]);
-  };
-
   return (
-    <>
-      <button onClick={updateDecorators}>update it</button>
-      <SandpackProvider
-        customSetup={{
-          entry: "/index.js",
-          files: {
-            "/index.js": {
-              code: `const people = [{
+    <SandpackProvider
+      customSetup={{
+        entry: "/index.js",
+        files: {
+          "/index.js": {
+            code: `const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
   profession: 'mathematician',
@@ -101,13 +85,14 @@ export default function List() {
   );
   return <ul>{listItems}</ul>;
 }`,
-            },
           },
-        }}
-      >
-        <style>
-          {`.highlight {
+        },
+      }}
+    >
+      <style>
+        {`.highlight {
         background: #1ea7fd2b;
+        border-radius: 4px;
       }
       .widget {
         border: 1px solid #1ea7fd;
@@ -133,11 +118,17 @@ export default function List() {
         line-height: 17px;
       }
       `}
-        </style>
-        <SandpackThemeProvider>
-          <SandpackCodeViewer decorators={exampleDecorator} showLineNumbers />
-        </SandpackThemeProvider>
-      </SandpackProvider>
-    </>
+      </style>
+      <SandpackThemeProvider>
+        <SandpackCodeViewer
+          decorators={[
+            { className: "highlight", line: 1 },
+            { className: "highlight", line: 9 },
+            { className: "widget", line: 12, startColumn: 26, endColumn: 38 },
+          ]}
+          showLineNumbers
+        />
+      </SandpackThemeProvider>
+    </SandpackProvider>
   );
 };
