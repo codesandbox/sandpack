@@ -29,7 +29,10 @@ export function highlightDecorators(
             attributes: { class: item.className ?? "" },
           });
 
-          const markDeco = Decoration.mark({ class: item.className ?? "" });
+          const markDeco = Decoration.mark({
+            class: item.className ?? "",
+            attributes: item.elementAttributes ?? undefined,
+          });
 
           const positionLineStart =
             getCodeMirrorPosition(view.state.doc, {
