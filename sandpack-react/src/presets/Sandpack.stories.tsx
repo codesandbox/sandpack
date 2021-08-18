@@ -1,6 +1,10 @@
 import type { Story } from "@storybook/react";
 import React from "react";
 
+import { SandpackProvider, SandpackLayout, SandpackStack } from "..";
+import { SandpackCodeEditor } from "../components/CodeEditor";
+import { SandpackPreview } from "../components/Preview";
+import { useSandpack } from "../hooks/useSandpack";
 import { codesandboxDarkTheme } from "../themes";
 
 import type { SandpackProps } from "./Sandpack";
@@ -328,4 +332,94 @@ export const RunnableComponent = (): React.ReactElement => (
     }}
     template="react"
   />
+);
+
+const ResetButton = () => {
+  const { sandpack } = useSandpack();
+
+  return (
+    <button
+      className="sp-tab-button"
+      onClick={sandpack.resetAllFiles}
+      style={{
+        background: "none",
+        border: 0,
+        position: "absolute",
+        right: "1em",
+      }}
+    >
+      Reset all file
+    </button>
+  );
+};
+
+const ResetCurrentFileButton = () => {
+  const { sandpack } = useSandpack();
+
+  return (
+    <button
+      className="sp-tab-button"
+      onClick={() => sandpack.resetFile(sandpack.activePath)}
+      style={{
+        background: "none",
+        border: 0,
+        position: "absolute",
+        right: "1em",
+      }}
+    >
+      Reset current files
+    </button>
+  );
+};
+
+export const WithResetButton: React.FC = () => (
+  <>
+    <SandpackProvider
+      customSetup={{
+        files: {
+          "/App.js": reactCode,
+          "/button.js": buttonCode,
+          "/link.js": linkCode,
+        },
+      }}
+      template="react"
+    >
+      <SandpackLayout>
+        <div
+          className="sp-stack"
+          style={{ position: "relative", width: "100%" }}
+        >
+          <SandpackCodeEditor />
+          <ResetButton />
+        </div>
+        <SandpackStack>
+          <SandpackPreview />
+        </SandpackStack>
+      </SandpackLayout>
+    </SandpackProvider>
+
+    <SandpackProvider
+      customSetup={{
+        files: {
+          "/App.js": reactCode,
+          "/button.js": buttonCode,
+          "/link.js": linkCode,
+        },
+      }}
+      template="react"
+    >
+      <SandpackLayout>
+        <div
+          className="sp-stack"
+          style={{ position: "relative", width: "100%" }}
+        >
+          <SandpackCodeEditor />
+          <ResetCurrentFileButton />
+        </div>
+        <SandpackStack>
+          <SandpackPreview />
+        </SandpackStack>
+      </SandpackLayout>
+    </SandpackProvider>
+  </>
 );

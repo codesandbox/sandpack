@@ -518,6 +518,20 @@ class SandpackProvider extends React.PureComponent<
     }
   };
 
+  resetFile = (path: string): void => {
+    const { files } = getSandpackStateFromProps(this.props);
+
+    this.setState((prevState) => ({
+      files: { ...prevState.files, [path]: files[path] },
+    }));
+  };
+
+  resetAllFiles = (): void => {
+    const { files } = getSandpackStateFromProps(this.props);
+
+    this.setState({ files });
+  };
+
   _getSandpackState = (): SandpackContext => {
     const {
       files,
@@ -541,21 +555,23 @@ class SandpackProvider extends React.PureComponent<
       bundlerState,
       status: sandpackStatus,
       editorState,
-      setActiveFile: this.setActiveFile,
-      openFile: this.openFile,
       closeFile: this.closeFile,
+      deleteFile: this.deleteFile,
+      dispatch: this.dispatchMessage,
+      errorScreenRegisteredRef: this.errorScreenRegistered,
+      lazyAnchorRef: this.lazyAnchorRef,
+      listen: this.addListener,
+      loadingScreenRegisteredRef: this.loadingScreenRegistered,
+      openFile: this.openFile,
+      openInCSBRegisteredRef: this.openInCSBRegistered,
+      registerBundler: this.registerBundler,
+      resetAllFiles: this.resetAllFiles,
+      resetFile: this.resetFile,
+      runSandpack: this.runSandpack,
+      setActiveFile: this.setActiveFile,
+      unregisterBundler: this.unregisterBundler,
       updateCurrentFile: this.updateCurrentFile,
       updateFile: this.updateFile,
-      runSandpack: this.runSandpack,
-      registerBundler: this.registerBundler,
-      unregisterBundler: this.unregisterBundler,
-      dispatch: this.dispatchMessage,
-      listen: this.addListener,
-      deleteFile: this.deleteFile,
-      lazyAnchorRef: this.lazyAnchorRef,
-      errorScreenRegisteredRef: this.errorScreenRegistered,
-      openInCSBRegisteredRef: this.openInCSBRegistered,
-      loadingScreenRegisteredRef: this.loadingScreenRegistered,
     };
   };
 

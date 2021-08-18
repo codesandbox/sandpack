@@ -43,6 +43,8 @@ export interface SandpackState {
   closeFile: (path: string) => void;
   deleteFile: (path: string) => void;
   setActiveFile: (path: string) => void;
+  resetFile: (path: string) => void;
+  resetAllFiles: () => void;
 
   // Element refs
   // Different components inside the SandpackProvider might register certain elements of interest for sandpack
