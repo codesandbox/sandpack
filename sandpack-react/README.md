@@ -6,7 +6,7 @@ React components that give you the power of editable sandboxes that run in the
 browser. Powered by `Sandpack`, the online bundler used by
 [CodeSandbox](https://codesandbox.io/).
 
-Sandpack is an open ecoystem of components and utilities that allow you to
+Sandpack is an open ecosystem of components and utilities that allow you to
 compile and run modern frameworks in the browser. You can either use one of our
 predefined `components` for embedding the _CodeSandbox_ experience into your
 projects, or you can build your own version of `sandpack`, on top of our
@@ -446,6 +446,27 @@ of them comunicate with sandpack through the shared context.
 | showRunButton    | boolean | true                              | Shows a `Run` button when the sandpack is not set to `autorun`                    |
 | wrapContent      | boolean | false                             | Wraps the code lines that don't fit horizontally                                  |
 | closableTabs     | boolean | false                             | Adds a close file action to open files                                            |
+
+##### SandpackCodeViewer props
+
+It is a Codemirror instance in a read-only and is used to syntax-highlight code.
+
+| name            | type            | default                           | description                                                             |
+| --------------- | --------------- | --------------------------------- | ----------------------------------------------------------------------- |
+| showTabs        | boolean         | computed based on number of files | The FileTabs component is shown on top of the editor based on this flag |
+| showLineNumbers | boolean         | false                             | Adds a column with line numbers on the left side of the code editor     |
+| code            | string          | undefined                         | The code to display in the editor                                       |
+| decorators      | type Decorators | undefined                         | An array of Codemirror decorations to apply to the code                 |
+
+```ts
+type Decorators = Array<{
+  className?: string;
+  line: number;
+  startColumn?: number;
+  endColumn?: number;
+  elementAttributes?: Record<string, string>;
+}>;
+```
 
 #### SandpackPreview props
 

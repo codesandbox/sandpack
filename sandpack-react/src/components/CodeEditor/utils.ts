@@ -4,11 +4,21 @@ import { html } from "@codemirror/lang-html";
 import { javascript } from "@codemirror/lang-javascript";
 import type { LanguageSupport } from "@codemirror/language";
 import type { Extension } from "@codemirror/state";
+import type { Text } from "@codemirror/text";
 import { EditorView } from "@codemirror/view";
+import type { Ref } from "react";
+import { useCallback } from "react";
 
 import { getSyntaxStyle } from "../../themes";
 import type { SandpackTheme } from "../../types";
 import { hexToCSSRGBa } from "../../utils/stringUtils";
+
+export const getCodeMirrorPosition = (
+  doc: Text,
+  { line, column }: { line: number; column?: number }
+): number => {
+  return doc.line(line).from + (column ?? 0) - 1;
+};
 
 export const getEditorTheme = (theme: SandpackTheme): Extension =>
   EditorView.theme({
@@ -132,3 +142,27 @@ export const getCodeMirrorLanguage = (
       return javascript();
   }
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useCombinedRefs = <T extends any>(
+  ...refs: Array<Ref<T>>
+): Ref<T> =>
+  useCallback(
+    (element: T) =>
+      refs.forEach((ref) => {
+        if (!ref) {
+          return;
+        }
+
+        // Ref can have two types - a function or an object. We treat each case.
+        if (typeof ref === "function") {
+          return ref(element);
+        }
+
+        // As per https://github.com/facebook/react/issues/13029
+        // it should be fine to set current this way.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (ref as any).current = element;
+      }),
+    refs
+  );
