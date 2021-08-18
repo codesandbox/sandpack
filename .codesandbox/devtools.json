@@ -1,0 +1,12 @@
+{
+    "previews": {
+        "3000": {
+            "name": "Playground",
+            "script": "yarn workspace @codesandbox/sandpack-playground dev" 
+        },
+        "6006": {
+            "name": "Storybook",
+            "script": "yarn workspace @codesandbox/sandpack-react storybook"
+        }
+    }
+}
