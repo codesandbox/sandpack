@@ -2,13 +2,11 @@ import type { Extension } from "@codemirror/state";
 import type { DecorationSet, EditorView, ViewUpdate } from "@codemirror/view";
 import { Decoration, ViewPlugin } from "@codemirror/view";
 
-import type { CodeMirrorProps } from "../CodeEditor/CodeMirror";
+import type { Decorators } from "../CodeEditor/CodeMirror";
 
 import { getCodeMirrorPosition } from "./utils";
 
-export function highlightDecorators(
-  positions: CodeMirrorProps["decorators"]
-): Extension {
+export function highlightDecorators(positions: Decorators): Extension {
   return ViewPlugin.fromClass(
     class {
       decorations: DecorationSet;

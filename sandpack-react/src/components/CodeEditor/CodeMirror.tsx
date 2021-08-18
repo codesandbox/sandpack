@@ -35,7 +35,15 @@ import {
   useCombinedRefs,
 } from "./utils";
 
-export interface CodeMirrorProps {
+export type Decorators = Array<{
+  className?: string;
+  line: number;
+  startColumn?: number;
+  endColumn?: number;
+  elementAttributes?: Record<string, string>;
+}>;
+
+interface CodeMirrorProps {
   code: string;
   filePath?: string;
   fileType?:
@@ -54,13 +62,7 @@ export interface CodeMirrorProps {
   wrapContent?: boolean;
   editorState?: SandpackEditorState;
   readOnly?: boolean;
-  decorators?: Array<{
-    className?: string;
-    line: number;
-    startColumn?: number;
-    endColumn?: number;
-    elementAttributes?: Record<string, string>;
-  }>;
+  decorators?: Decorators;
 }
 
 export const CodeMirror = React.forwardRef<HTMLDivElement, CodeMirrorProps>(
