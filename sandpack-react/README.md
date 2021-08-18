@@ -543,6 +543,22 @@ const CustomRefreshButton = () => {
 };
 ```
 
+#### All methods
+
+Plus, `useSandpack` exposes a bunch of methods that you can use to manage the current state of the Sandpack instance:
+
+| Method          | Description                                 |
+| --------------- | ------------------------------------------- |
+| `closeFile`     | Close the given path in the editor          |
+| `deleteFile`    | Delete the given path in the editor         |
+| `dispatch`      | Sends a message to the bundler              |
+| `listen`        | Listens for messages from the bundler       |
+| `openFile`      | Open the given path in the editor           |
+| `resetAllFiles` | Reset all files for all paths               |
+| `resetFile`     | Reset the code for a given path             |
+| `setActiveFile` | Set as active the file for a given path     |
+| `updateFile`    | Give a path and a code, it updates the file |
+
 #### useActiveCode, useCodeSandboxLink, useSandpackNavigation
 
 Some of the common functionalities of sandpack are also extracted into
