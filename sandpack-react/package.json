@@ -14,7 +14,8 @@
   "types": "dist/cjs/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "prebuild": "rimraf dist",
+    "clean": "rimraf dist",
+    "prebuild": "yarn run clean",
     "build": "yarn build:cjs && yarn build:esm && yarn build:css",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",

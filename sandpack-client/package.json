@@ -14,7 +14,8 @@
   "module": "esm/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "prebuild": "rimraf dist",
+    "clean": "rimraf dist sandpack",
+    "prebuild": "yarn run clean",
     "build": "node build.js && yarn build:cjs && yarn build:esm",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",

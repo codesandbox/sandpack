@@ -13,7 +13,8 @@
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html --no-scope-hoist",
-    "start": "node ./start.js"
+    "start": "node ./start.js",
+    "clean": "rimraf dist"
   },
   "files": [
     "dist",
@@ -29,6 +30,7 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "express": "^4.17.1",
-    "parcel": "^2.0.0-nightly.643"
+    "parcel": "^2.0.0-nightly.643",
+    "rimraf": "^2.6.2"
   }
 }
