@@ -9,13 +9,17 @@ const options = {
     .filter((src) => src.endsWith(".ts"))
     .map((e) => `src/${e}`),
 
-  minify: true,
   bundle: true,
   sourcemap: true,
   define: {
     "process.env.CODESANDBOX_ENV": `"${process.env.CODESANDBOX_ENV}"`,
     "process.env.PACKAGE_VERSION": `"${package.version}"`,
   },
+  external: Object.keys({
+    ...(package.dependencies || {}),
+    ...(package.devDependencies || {}),
+    ...(package.peerDependencies || {}),
+  }),
 };
 
 build({
