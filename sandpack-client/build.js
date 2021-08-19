@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require("fs");
-const package = require("./package.json");
 const { build } = require("esbuild");
+const package = require("./package.json");
 
 const options = {
   entryPoints: fs
@@ -8,6 +9,7 @@ const options = {
     .filter((src) => src.endsWith(".ts"))
     .map((e) => `src/${e}`),
 
+  minify: true,
   bundle: true,
   sourcemap: true,
   define: {
@@ -19,7 +21,6 @@ const options = {
 build({
   ...options,
   format: "esm",
-  splitting: true,
   outdir: "dist/esm",
   target: "es2019",
 }).catch(() => process.exit(1));
@@ -27,4 +28,5 @@ build({
   ...options,
   format: "cjs",
   outdir: "dist/cjs",
+  target: "es6",
 }).catch(() => process.exit(1));
