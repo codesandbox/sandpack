@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require("fs");
 const { build } = require("esbuild");
-const package = require("./package.json");
 
 const options = {
   entryPoints: fs
@@ -12,10 +11,6 @@ const options = {
   minify: true,
   bundle: true,
   sourcemap: true,
-  define: {
-    "process.env.CODESANDBOX_ENV": `"${process.env.CODESANDBOX_ENV}"`,
-    "process.env.PACKAGE_VERSION": `"${package.version}"`,
-  },
 };
 
 build({
