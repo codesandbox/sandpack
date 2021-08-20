@@ -4,8 +4,7 @@
   "private": true,
   "workspaces": [
     "sandpack-client",
-    "sandpack-react",
-    "sandpack-playground"
+    "sandpack-react"
   ],
   "description": "",
   "scripts": {
@@ -21,9 +20,13 @@
   "author": "CodeSandbox",
   "license": "GPL-2.0",
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "@commitlint/config-lerna-scopes": "^13.1.0",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
     "babel-eslint": "^10.0.0",
+    "commitlint": "^13.1.0",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-react-app": "^6.0.0",
