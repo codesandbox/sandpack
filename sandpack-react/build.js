@@ -23,11 +23,17 @@ build({
   format: "esm",
   outdir: "dist/esm",
   target: "es2019",
-}).catch(() => process.exit(1));
+}).catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
 
 build({
   ...options,
   format: "cjs",
   outdir: "dist/cjs",
   target: "es6",
-}).catch(() => process.exit(1));
+}).catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
