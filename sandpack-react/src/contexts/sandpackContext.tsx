@@ -521,15 +521,18 @@ class SandpackProvider extends React.PureComponent<
   resetFile = (path: string): void => {
     const { files } = getSandpackStateFromProps(this.props);
 
-    this.setState((prevState) => ({
-      files: { ...prevState.files, [path]: files[path] },
-    }));
+    this.setState(
+      (prevState) => ({
+        files: { ...prevState.files, [path]: files[path] },
+      }),
+      this.updateClients
+    );
   };
 
   resetAllFiles = (): void => {
     const { files } = getSandpackStateFromProps(this.props);
 
-    this.setState({ files });
+    this.setState({ files }, this.updateClients);
   };
 
   _getSandpackState = (): SandpackContext => {
