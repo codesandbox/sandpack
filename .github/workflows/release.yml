@@ -55,8 +55,8 @@ jobs:
           # pulls all commits (needed for lerna / semantic release to correctly version)
           fetch-depth: "0"
 
-      # - name: Setup | Ensure registry access
-      #   run: npm whoami --registry https://npm.pkg.github.com/
+      - name: Setup | Ensure registry access
+        run: npm whoami --registry https://npm.pkg.github.com/
 
       - name: Setup | Configure git user
         run: |
