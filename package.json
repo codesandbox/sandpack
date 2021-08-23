@@ -11,6 +11,7 @@
     "lint": "eslint '**/*.ts?(x)' --fix",
     "format": "prettier --write '**/*.ts?(x)'",
     "build": "yarn workspaces run build",
+    "build:publish": "yarn workspaces run build:publish",
     "prepare": "husky install"
   },
   "repository": {

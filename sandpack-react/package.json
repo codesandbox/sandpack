@@ -16,6 +16,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "yarn build:cjs && yarn build:esm && yarn build:css",
+    "build:publish": "yarn build",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:css": "postcss src/styles/index.css -o dist/index.css -u autoprefixer -u cssnano",
