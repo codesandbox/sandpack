@@ -269,6 +269,16 @@ export const MultipleInstances: Story<SandpackProps> = (args) => (
       template="react"
       theme="monokai-pro"
     />
+    <h2>GitHub Light Theme</h2>
+    <Sandpack
+      {...args}
+      options={{
+        showTabs: true,
+        showNavigator: true,
+      }}
+      template="react"
+      theme="github-light"
+    />
     <h2>Custom Theme Colors</h2>
     <Sandpack
       {...args}
