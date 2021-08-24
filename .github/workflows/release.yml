@@ -55,8 +55,11 @@ jobs:
           # pulls all commits (needed for lerna / semantic release to correctly version)
           fetch-depth: "0"
 
-      - name: Setup | Ensure registry access
-        run: npm whoami --registry https://npm.pkg.github.com/
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "10.23.2"
+          registry-url: "https://npm.pkg.github.com/"
 
       - name: Setup | Configure git user
         run: |
@@ -80,8 +83,5 @@ jobs:
       - name: Prepare | Build
         run: yarn run build:publish
 
-      # - name: Prepare | Lerna Version
-      #   run: yarn lerna version --create-release github --yes
-
-      # - name: Release | Lerna Publish
-      #   run: lerna publish from-package --yes
+      - name: Release | Lerna Publish
+        run: lerna publish --canary prerelease #TODO - remove canary
