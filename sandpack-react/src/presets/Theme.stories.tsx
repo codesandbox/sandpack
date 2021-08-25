@@ -9,6 +9,22 @@ const stories = storiesOf("presets/Themes", module);
 
 Object.keys(SANDPACK_THEMES).forEach((themeName) =>
   stories.add(themeName, () => (
-    <Sandpack theme={themeName as keyof typeof SANDPACK_THEMES} />
+    <Sandpack
+      files={{
+        "/App.js": `const Test = () => "Test";
+
+export default function App() {
+  return (
+    <div>
+      <Test />
+      <h1>Hello World</h1>
+    </div>
+  );
+}
+`,
+      }}
+      template="react"
+      theme={themeName as keyof typeof SANDPACK_THEMES}
+    />
   ))
 );

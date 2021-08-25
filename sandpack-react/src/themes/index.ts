@@ -36,6 +36,7 @@ export const codesandboxLightTheme: SandpackTheme = {
     monoFont:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     fontSize: "14px",
+    lineHeight: "1.4",
   },
 };
 
@@ -69,6 +70,7 @@ export const aquaBlueTheme: SandpackTheme = {
     monoFont:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     fontSize: "14px",
+    lineHeight: "1.4",
   },
 };
 
@@ -91,7 +93,7 @@ export const githubLightTheme: SandpackTheme = {
     static: "#032f62",
     string: "#032f62",
     definition: "#6f42c1",
-    punctuation: "#005cc5",
+    punctuation: "#24292e",
     tag: "#22863a",
     comment: {
       color: "#6a737d",
@@ -104,6 +106,7 @@ export const githubLightTheme: SandpackTheme = {
     monoFont:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     fontSize: "14px",
+    lineHeight: "1.4",
   },
 };
 
@@ -136,6 +139,7 @@ export const codesandboxDarkTheme: SandpackTheme = {
     monoFont:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     fontSize: "14px",
+    lineHeight: "1.4",
   },
 };
 
@@ -168,6 +172,7 @@ export const nightOwlTheme: SandpackTheme = {
     monoFont:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     fontSize: "14px",
+    lineHeight: "1.4",
   },
 };
 
@@ -200,6 +205,7 @@ export const monokaiProTheme: SandpackTheme = {
     monoFont:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     fontSize: "14px",
+    lineHeight: "1.4",
   },
 };
 
@@ -304,6 +310,7 @@ export const getThemeStyleSheet = (
   --sp-font-size: ${theme.typography.fontSize};
   --sp-font-body: ${theme.typography.bodyFont};
   --sp-font-mono: ${theme.typography.monoFont};
+  --sp-line-height: ${theme.typography.lineHeight};
 `;
 
 export const getSyntaxStyle = (

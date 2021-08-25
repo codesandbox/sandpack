@@ -53,6 +53,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
 
     ".cm-scroller": {
       fontFamily: theme.typography.monoFont,
+      lineHeight: theme.typography.lineHeight,
     },
 
     ".cm-gutters": {
@@ -90,21 +91,27 @@ export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
       ...getSyntaxStyle(theme.syntax.static),
     },
     {
-      tag: tags.typeName,
+      tag: tags.tagName,
       ...getSyntaxStyle(theme.syntax.tag),
     },
     { tag: tags.variableName, ...getSyntaxStyle(theme.syntax.plain) },
     {
+      // Highlight function call
+      tag: tags.function(tags.variableName),
+      ...getSyntaxStyle(theme.syntax.definition),
+    },
+    {
+      // Highlight function definition differently (eg: functional component def in React)
       tag: tags.definition(tags.function(tags.variableName)),
       ...getSyntaxStyle(theme.syntax.definition),
     },
     {
-      tag: [tags.literal, tags.inserted],
-      ...getSyntaxStyle(theme.syntax.string ?? theme.syntax.static),
-    },
-    {
       tag: tags.propertyName,
       ...getSyntaxStyle(theme.syntax.property),
+    },
+    {
+      tag: [tags.literal, tags.inserted],
+      ...getSyntaxStyle(theme.syntax.string ?? theme.syntax.static),
     },
     { tag: tags.punctuation, ...getSyntaxStyle(theme.syntax.punctuation) },
     { tag: tags.comment, ...getSyntaxStyle(theme.syntax.comment) },
