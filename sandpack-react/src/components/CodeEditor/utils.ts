@@ -53,6 +53,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
 
     ".cm-scroller": {
       fontFamily: theme.typography.monoFont,
+      lineHeight: theme.typography.lineHeight,
     },
 
     ".cm-gutters": {
