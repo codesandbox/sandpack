@@ -1,4 +1,4 @@
-import { HighlightStyle, tags } from "@codemirror/highlight";
+import { HighlightStyle, tags, Tag } from "@codemirror/highlight";
 import { css } from "@codemirror/lang-css";
 import { html } from "@codemirror/lang-html";
 import { javascript } from "@codemirror/lang-javascript";
@@ -91,11 +91,17 @@ export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
       ...getSyntaxStyle(theme.syntax.static),
     },
     {
-      tag: tags.typeName,
+      tag: tags.tagName,
       ...getSyntaxStyle(theme.syntax.tag),
     },
     { tag: tags.variableName, ...getSyntaxStyle(theme.syntax.plain) },
     {
+      // Highlight function call
+      tag: tags.function(tags.variableName),
+      ...getSyntaxStyle(theme.syntax.property),
+    },
+    {
+      // Highlight function definition differently (eg: functional component def in React)
       tag: tags.definition(tags.function(tags.variableName)),
       ...getSyntaxStyle(theme.syntax.definition),
     },
@@ -103,10 +109,11 @@ export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
       tag: [tags.literal, tags.inserted],
       ...getSyntaxStyle(theme.syntax.string ?? theme.syntax.static),
     },
-    {
-      tag: tags.propertyName,
-      ...getSyntaxStyle(theme.syntax.property),
-    },
+    // {
+    //   // Highlight variable definition same as function call
+    //   tag: tags.definition(tags.variableName),
+    //   ...getSyntaxStyle(theme.syntax.property),
+    // },
     { tag: tags.punctuation, ...getSyntaxStyle(theme.syntax.punctuation) },
     { tag: tags.comment, ...getSyntaxStyle(theme.syntax.comment) },
   ]);
