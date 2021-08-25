@@ -58,7 +58,7 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "10.23.2"
+          node-version: "12.22.4"
           registry-url: "https://npm.pkg.github.com/"
 
       - name: Setup | Configure git user
