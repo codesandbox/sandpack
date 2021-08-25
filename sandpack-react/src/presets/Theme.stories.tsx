@@ -11,15 +11,9 @@ Object.keys(SANDPACK_THEMES).forEach((themeName) =>
   stories.add(themeName, () => (
     <Sandpack
       files={{
-        "/App.js": `import {useState} from "react"
-    
-const Test = () => "Test";
-
-const x = window.setTimeout;
+        "/App.js": `const Test = () => "Test";
 
 export default function App() {
-  const [x, setX] = useState(false);
-
   return (
     <div>
       <Test />

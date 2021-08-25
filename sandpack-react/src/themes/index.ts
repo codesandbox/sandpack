@@ -93,7 +93,7 @@ export const githubLightTheme: SandpackTheme = {
     static: "#032f62",
     string: "#032f62",
     definition: "#6f42c1",
-    punctuation: "#005cc5",
+    punctuation: "#24292e",
     tag: "#22863a",
     comment: {
       color: "#6a737d",

@@ -98,7 +98,7 @@ export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
     {
       // Highlight function call
       tag: tags.function(tags.variableName),
-      ...getSyntaxStyle(theme.syntax.property),
+      ...getSyntaxStyle(theme.syntax.definition),
     },
     {
       // Highlight function definition differently (eg: functional component def in React)
@@ -106,14 +106,13 @@ export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
       ...getSyntaxStyle(theme.syntax.definition),
     },
     {
+      tag: tags.propertyName,
+      ...getSyntaxStyle(theme.syntax.property),
+    },
+    {
       tag: [tags.literal, tags.inserted],
       ...getSyntaxStyle(theme.syntax.string ?? theme.syntax.static),
     },
-    // {
-    //   // Highlight variable definition same as function call
-    //   tag: tags.definition(tags.variableName),
-    //   ...getSyntaxStyle(theme.syntax.property),
-    // },
     { tag: tags.punctuation, ...getSyntaxStyle(theme.syntax.punctuation) },
     { tag: tags.comment, ...getSyntaxStyle(theme.syntax.comment) },
   ]);
