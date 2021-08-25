@@ -157,6 +157,7 @@ export interface SandpackTheme {
     bodyFont: string;
     monoFont: string;
     fontSize: string;
+    lineHeight: string;
   };
 }
 
