@@ -84,4 +84,4 @@ jobs:
         run: yarn run build:publish
 
       - name: Release | Lerna Publish
-        run: lerna publish --canary prerelease #TODO - remove canary
+        run: lerna publish --canary prerelease --yes #TODO - remove canary
