@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
-    "lib": ["es2015", "es2016", "es2017", "dom"],
+    "lib": [
+      "es2015",
+      "es2016",
+      "es2017",
+      "dom"
+    ],
     "strict": true,
     "sourceMap": true,
     "declaration": true,
@@ -8,8 +13,15 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noImplicitAny": true,
-    "typeRoots": ["node_modules/@types"]
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
-  "include": ["./src"],
-  "exclude": ["node_modules"]
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

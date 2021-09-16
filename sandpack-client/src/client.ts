@@ -1,9 +1,7 @@
 import { getTemplate } from "codesandbox-import-utils/lib/create-sandbox/templates";
 import isEqual from "lodash.isequal";
 
-// Muhahaha
-// eslint-disable-next-line
-// @ts-ignore
+
 import { version } from "../package.json";
 
 import Protocol from "./file-resolver-protocol";
