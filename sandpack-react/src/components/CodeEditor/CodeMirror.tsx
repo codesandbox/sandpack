@@ -109,6 +109,8 @@ export const CodeMirror = React.forwardRef<HTMLDivElement, CodeMirrorProps>(
         {
           key: "Escape",
           run: () => {
+            if (readOnly) return true;
+
             if (wrapper.current) {
               wrapper.current.focus();
             }
@@ -190,8 +192,10 @@ export const CodeMirror = React.forwardRef<HTMLDivElement, CodeMirrorProps>(
         },
       });
 
-      view.contentDOM.setAttribute("tabIndex", "-1");
-      view.contentDOM.setAttribute("aria-describedby", "exit-instructions");
+      if (!readOnly) {
+        view.contentDOM.setAttribute("tabIndex", "-1");
+        view.contentDOM.setAttribute("aria-describedby", "exit-instructions");
+      }
 
       cmView.current = view;
 
@@ -286,14 +290,18 @@ export const CodeMirror = React.forwardRef<HTMLDivElement, CodeMirrorProps>(
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       <div
         ref={combinedRef}
-        aria-describedby="enter-instructions"
-        aria-label={
-          filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
-        }
         className={c("cm", editorState)}
-        onKeyDown={handleContainerKeyDown}
-        role="group"
-        tabIndex={0}
+        {...(readOnly
+          ? {}
+          : {
+              "aria-describedby": "enter-instructions",
+              "aria-label": filePath
+                ? `Code Editor for ${getFileName(filePath)}`
+                : `Code Editor`,
+              onKeyDown: handleContainerKeyDown,
+              role: "group",
+              tabIndex: 0,
+            })}
       >
         <pre
           className={c("pre-placeholder")}
@@ -303,13 +311,18 @@ export const CodeMirror = React.forwardRef<HTMLDivElement, CodeMirrorProps>(
         >
           {code}
         </pre>
-        <p id="enter-instructions" style={{ display: "none" }}>
-          To enter the code editing mode, press Enter. To exit the edit mode,
-          press Escape
-        </p>
-        <p id="exit-instructions" style={{ display: "none" }}>
-          You are editing the code. To exit the edit mode, press Escape
-        </p>
+
+        {!readOnly && (
+          <>
+            <p id="enter-instructions" style={{ display: "none" }}>
+              To enter the code editing mode, press Enter. To exit the edit
+              mode, press Escape
+            </p>
+            <p id="exit-instructions" style={{ display: "none" }}>
+              You are editing the code. To exit the edit mode, press Escape
+            </p>
+          </>
+        )}
       </div>
     );
   }
