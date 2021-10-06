@@ -12,7 +12,8 @@
     "lint": "eslint '**/*.ts?(x)' --fix",
     "format": "prettier --write '**/*.ts?(x)'",
     "build": "yarn workspaces run build",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "clean": "yarn workspaces run clean"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
     "babel-eslint": "^10.0.0",
+    "esbuild": "^0.12.21",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-react-app": "^6.0.0",
