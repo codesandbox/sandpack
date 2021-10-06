@@ -65,7 +65,7 @@ interface CodeMirrorProps {
   decorators?: Decorators;
 }
 
-export const CodeMirror = React.forwardRef<HTMLDivElement, CodeMirrorProps>(
+export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
   (
     {
       code,
@@ -81,7 +81,8 @@ export const CodeMirror = React.forwardRef<HTMLDivElement, CodeMirrorProps>(
     },
     ref
   ) => {
-    const wrapper = React.useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const wrapper = React.useRef<any | HTMLElement>(null);
     const cmView = React.useRef<EditorView>();
     const { theme, themeId } = useSandpackTheme();
     const [internalCode, setInternalCode] = React.useState<string>(code);
@@ -285,23 +286,27 @@ export const CodeMirror = React.forwardRef<HTMLDivElement, CodeMirrorProps>(
 
     const combinedRef = useCombinedRefs(wrapper, ref);
 
+    if (readOnly) {
+      return (
+        <pre ref={combinedRef} className={c("cm", editorState)}>
+          <code className={c("pre-placeholder")}>{code}</code>
+        </pre>
+      );
+    }
+
     return (
       /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       <div
         ref={combinedRef}
+        aria-describedby="enter-instructions"
+        aria-label={
+          filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
+        }
         className={c("cm", editorState)}
-        {...(readOnly
-          ? {}
-          : {
-              "aria-describedby": "enter-instructions",
-              "aria-label": filePath
-                ? `Code Editor for ${getFileName(filePath)}`
-                : `Code Editor`,
-              onKeyDown: handleContainerKeyDown,
-              role: "group",
-              tabIndex: 0,
-            })}
+        onKeyDown={handleContainerKeyDown}
+        role="group"
+        tabIndex={0}
       >
         <pre
           className={c("pre-placeholder")}
@@ -312,17 +317,15 @@ export const CodeMirror = React.forwardRef<HTMLDivElement, CodeMirrorProps>(
           {code}
         </pre>
 
-        {!readOnly && (
-          <>
-            <p id="enter-instructions" style={{ display: "none" }}>
-              To enter the code editing mode, press Enter. To exit the edit
-              mode, press Escape
-            </p>
-            <p id="exit-instructions" style={{ display: "none" }}>
-              You are editing the code. To exit the edit mode, press Escape
-            </p>
-          </>
-        )}
+        <>
+          <p id="enter-instructions" style={{ display: "none" }}>
+            To enter the code editing mode, press Enter. To exit the edit mode,
+            press Escape
+          </p>
+          <p id="exit-instructions" style={{ display: "none" }}>
+            You are editing the code. To exit the edit mode, press Escape
+          </p>
+        </>
       </div>
     );
   }
