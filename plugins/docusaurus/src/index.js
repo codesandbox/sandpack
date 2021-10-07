@@ -1,3 +1,5 @@
+const {validateThemeConfig} = require('./validateThemeConfig');
+
 function theme() {
   return {
     name: 'docusaurus-sandpack',
@@ -8,4 +10,8 @@ function theme() {
   };
 }
 
+console.log("plugin")
+
 module.exports = theme;
+
+theme.validateThemeConfig = validateThemeConfig;
