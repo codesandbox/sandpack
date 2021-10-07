@@ -6,12 +6,10 @@ sidebar_position: 1
 
 Let's discover **Docusaurus in less than 5 minutes**.
 
-```jsx sandpack title="/src/components/HelloCodeTitle.js"
-const foo = "foo";
-```
-
-```jsx live
-const foo = "foo";
+```js sandpack file=/App.js template=react theme=codesandbox-dark
+export default function App() {
+  return <p>Hello Docusaurus</p>;
+}
 ```
 
 ## Getting Started

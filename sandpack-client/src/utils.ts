@@ -95,8 +95,8 @@ function getErrorLocation(errorFrame: ErrorStackFrame) {
 function getErrorInOriginalCode(errorFrame: ErrorStackFrame) {
   const lastScriptLine =
     errorFrame._originalScriptCode[errorFrame._originalScriptCode.length - 1];
-  const numberOfLineNumberCharacters = lastScriptLine.lineNumber.toString()
-    .length;
+  const numberOfLineNumberCharacters =
+    lastScriptLine.lineNumber.toString().length;
 
   const leadingCharacterOffset = 2;
   const barSeparatorCharacterOffset = 3;

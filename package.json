@@ -11,7 +11,7 @@
   "description": "",
   "scripts": {
     "lint": "eslint '**/*.ts?(x)' --fix",
-    "format": "prettier --write '**/*.ts?(x)'",
+    "format": "prettier --write .",
     "build": "yarn workspaces run build",
     "prepare": "husky install",
     "clean": "yarn workspaces run clean",

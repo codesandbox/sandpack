@@ -1,16 +1,23 @@
 import { Sandpack } from "@codesandbox/sandpack-react";
 import CodeBlock from "@theme-init/CodeBlock";
+import React from "react";
 
 import "./style.css";
 
 const RenderSandpack = (props) => {
-  const { sandpack, children } = props;
+  if (props.sandpack) {
+    const {
+      children,
+      template = "react",
+      file = "/App.js",
+      theme = "codesandbox-light",
+    } = props;
 
-  if (sandpack) {
     return (
       <Sandpack
-        files={{ "/src/index.js": { code: children } }}
-        template="vanilla"
+        files={{ [file]: { code: children } }}
+        template={template}
+        theme={theme}
       />
     );
   }
