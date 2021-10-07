@@ -13,9 +13,25 @@ const RenderSandpack = (props) => {
       theme = "codesandbox-light",
     } = props;
 
+    const occurrences = children
+      .split(/(```(.*?[^\\])```)/gms)
+      .filter((line) => line.startsWith("```"));
+
+    const files = occurrences.reduce((acc, curr) => {
+      const [firstLine, ...content] = curr.replace(/```/g, "").split("\n");
+      const fileName = firstLine.match(/file=(.+)/)[1];
+
+      return {
+        ...acc,
+        [fileName]: {
+          code: content.join("\n"),
+        },
+      };
+    }, {});
+
     return (
       <Sandpack
-        files={{ [file]: { code: children } }}
+        files={occurrences.length ? files : { [file]: children }}
         template={template}
         theme={theme}
       />

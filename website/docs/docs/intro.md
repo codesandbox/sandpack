@@ -2,15 +2,33 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Sandpack examples
 
-Let's discover **Docusaurus in less than 5 minutes**.
 
-```js sandpack file=/App.js template=react theme=codesandbox-dark
+## Single file
+
+````js sandpack
+export default function App() {
+  return <p>Hello Docusaurus</p>;
+}
+````
+
+## Multiples files
+
+````js sandpack template=react theme=codesandbox-dark
+```js file=/App.js
+import "./style.css"
+
 export default function App() {
   return <p>Hello Docusaurus</p>;
 }
 ```
+```css file=/style.css
+body {
+  background: red;
+}
+```;
+````
 
 ## Getting Started
 
