@@ -1,5 +1,6 @@
-const lightCodeTheme = require("prism-react-renderer/themes/github");
+/* eslint-disable @typescript-eslint/no-var-requires */
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const lightCodeTheme = require("prism-react-renderer/themes/github");
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
@@ -14,8 +15,9 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
   organizationName: "codesandbox",
   projectName: "sandpack",
 
+  themes: ["@codesandbox/sandpack-docusaurus"],
+
   presets: [
-    "@codesandbox/sandpack-docusaurus",
     [
       "@docusaurus/preset-classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
