@@ -30,6 +30,14 @@ body {
 ```;
 ````
 
+## Theme: GitHub Light
+
+````js sandpack theme=github-light
+export default function App() {
+  return <p>Hello Docusaurus</p>;
+}
+````
+
 ## Getting Started
 
 Get started by **creating a new site**.

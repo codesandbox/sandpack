@@ -44,6 +44,7 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
+        sandpack: { theme : "codesandbox-dark"},
         colorMode: {
           defaultMode: "dark",
           disableSwitch: true,

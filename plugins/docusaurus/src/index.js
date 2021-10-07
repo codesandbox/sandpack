@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
+const { validateThemeConfig } = require("./validateThemeConfig");
 
 function theme() {
   return {
@@ -12,3 +13,5 @@ function theme() {
 }
 
 module.exports = theme;
+
+theme.validateThemeConfig = validateThemeConfig;

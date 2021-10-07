@@ -1,16 +1,22 @@
 import { Sandpack } from "@codesandbox/sandpack-react";
 import CodeBlock from "@theme-init/CodeBlock";
 import React from "react";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 import "./style.css";
 
 const RenderSandpack = (props) => {
+  const { siteConfig } = useDocusaurusContext();
+  const sandpackPluginOptions = siteConfig.themeConfig.sandpack;
+
+  console.log(sandpackPluginOptions);
+
   if (props.sandpack) {
     const {
       children,
       template = "react",
       file = "/App.js",
-      theme = "codesandbox-light",
+      theme = sandpackPluginOptions.theme,
     } = props;
 
     const occurrences = children
@@ -19,7 +25,7 @@ const RenderSandpack = (props) => {
 
     const files = occurrences.reduce((acc, curr) => {
       const [firstLine, ...content] = curr.replace(/```/g, "").split("\n");
-      const fileName = firstLine.match(/file=(.+)/)[1];
+      const fileName = firstLine.match(/file=(.+)/)?.[1] ?? "";
 
       return {
         ...acc,
