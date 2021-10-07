@@ -1,0 +1,6 @@
+{
+    "setupTasks": [
+        "yarn",
+        "yarn build"
+    ]
+}
