@@ -7,6 +7,10 @@
         "6006": {
             "name": "Storybook",
             "command": "yarn workspace @codesandbox/sandpack-react storybook"
+        },
+        "3000": {
+            "name": "Docs",
+            "command": "yarn dev:docs"
         }
     },
     "tasks": {
