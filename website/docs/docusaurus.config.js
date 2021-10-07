@@ -40,6 +40,10 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      colorMode: {
+        defaultMode: "dark",
+        disableSwitch: true,
+      },
       navbar: {
         title: "Sandpack",
         logo: {
@@ -54,6 +58,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             label: "Docs",
           },
           { to: "/blog", label: "Blog", position: "left" }, // TODO: release page?
+          { to: "/page", label: "Example page", position: "left" }, // TODO: release page?
           {
             href: "https://github.com/codesandbox/sandpack",
             label: "GitHub",
