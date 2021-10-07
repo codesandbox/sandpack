@@ -15,6 +15,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
   projectName: "sandpack",
 
   presets: [
+    "@codesandbox/sandpack-docusaurus",
     [
       "@docusaurus/preset-classic",
       /** @type {import('@docusaurus/preset-classic').Options} */

@@ -5,7 +5,8 @@
   "workspaces": [
     "sandpack-client",
     "sandpack-react",
-    "website/docs"
+    "website/docs",
+    "plugins/*"
   ],
   "description": "",
   "scripts": {
