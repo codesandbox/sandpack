@@ -5,12 +5,12 @@ title: 'Bug: '
 labels: 'bug'
 ---
 
-# 🐛 bug report
+# Bug report
 
 ## Packages affected
 
-- [ ] Sandpack-client
-- [ ] Sandpack-react
+- [ ] sandpack-client
+- [ ] sandpack-react
 
 ## Description of the problem
 

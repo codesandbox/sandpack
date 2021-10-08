@@ -5,12 +5,12 @@ title: 'Feature request: '
 labels: 'feature request'
 ---
 
-# 🌈 Feature
+# Feature
 
 ## Packages affected
 
-- [ ] Sandpack-client
-- [ ] Sandpack-react
+- [ ] sandpack-client
+- [ ] sandpack-react
 
 ## What is this feature?
 
