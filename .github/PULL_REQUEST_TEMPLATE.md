@@ -1,6 +1,6 @@
-## What kind of change does this PR introduce?
+## What kind of change does this pull request introduce?
 
-<!-- Is it a Bug fix, feature, docs update, ... -->
+<!-- Is it a Bug fix, feature, documentation update... -->
 
 ## What is the current behavior?
 

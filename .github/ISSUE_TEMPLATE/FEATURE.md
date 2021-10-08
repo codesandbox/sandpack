@@ -5,7 +5,7 @@ title: 'Feature request: '
 labels: 'feature request'
 ---
 
-# Feature
+# Tell us how you think we can improve Sandpack
 
 ## Packages affected
 
@@ -14,6 +14,6 @@ labels: 'feature request'
 
 ## What is this feature?
 
-## How the feature should work?
+## How would your idea work?
 
-## You have examples or an idea how it can be implemented?
+## Do you have any examples of how you would like to see us implement it?

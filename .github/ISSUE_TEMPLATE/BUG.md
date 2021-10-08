@@ -1,6 +1,6 @@
 ---
 name: 🐛 Bug Report
-about: Did something not work?
+about: What went wrong?
 title: 'Bug: '
 labels: 'bug'
 ---
@@ -14,9 +14,9 @@ labels: 'bug'
 
 ## Description of the problem
 
-## How has this issue affected you? What are you trying to accomplish?
+## What were you doing when the problem occurred?
 
-### To Reproduce
+### What steps can we take to reproduce the problem?
 
 <!--
 Your best chance of getting this bug looked at quickly is to provide an example.
