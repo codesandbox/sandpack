@@ -1,6 +1,6 @@
 ---
-slug: welcome
-title: Welcome
+slug: release-v004
+title: Release v0.0.4
 authors: [slorber, yangshun]
 tags: [facebook, hello, docusaurus]
 ---

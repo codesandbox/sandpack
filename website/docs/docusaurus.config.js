@@ -29,10 +29,12 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
               "https://github.com/codesandbox/sandpack/edit/main/website/docs",
           },
           blog: {
+            blogSidebarTitle: "Latest",
+            path: "./releases",
+            routeBasePath: "releases",
             showReadingTime: true,
-            // Please change this to your repo.
             editUrl:
-              "https://github.com/codesandbox/sandpack/edit/main/website/blog",
+              "https://github.com/codesandbox/sandpack/edit/main/website/docs",
           },
           theme: {
             customCss: require.resolve("./src/css/custom.css"),
@@ -44,10 +46,9 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
-        sandpack: { theme : "codesandbox-dark"},
+        sandpack: { theme: "codesandbox-dark" },
         colorMode: {
           defaultMode: "dark",
-          disableSwitch: true,
         },
         navbar: {
           title: "Sandpack",
@@ -62,8 +63,7 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
               position: "left",
               label: "Docs",
             },
-            { to: "/blog", label: "Blog", position: "left" }, // TODO: release page?
-            { to: "/page", label: "Example page", position: "left" }, // TODO: release page?
+            { to: "/releases", label: "Releases", position: "left" },
             {
               href: "https://github.com/codesandbox/sandpack",
               label: "GitHub",
@@ -104,12 +104,12 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
               title: "More",
               items: [
                 {
-                  label: "Blog",
-                  to: "/blog",
+                  label: "Releases",
+                  to: "/releases",
                 },
                 {
                   label: "GitHub",
-                  href: "https://github.com/facebook/docusaurus",
+                  href: "https://github.com/codesandbox/sandpack",
                 },
               ],
             },

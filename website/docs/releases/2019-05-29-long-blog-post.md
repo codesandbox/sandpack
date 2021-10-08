@@ -1,6 +1,6 @@
 ---
-slug: long-blog-post
-title: Long Blog Post
+slug: release-v002
+title: Release v0.0.2
 authors: endi
 tags: [hello, docusaurus]
 ---

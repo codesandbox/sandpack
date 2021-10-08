@@ -1,6 +1,6 @@
 ---
-slug: first-blog-post
-title: First Blog Post
+slug: release-v001
+title: Release v0.0.1
 authors:
   name: Gao Wei
   title: Docusaurus Core Team
