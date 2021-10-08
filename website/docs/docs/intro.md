@@ -7,10 +7,18 @@ sidebar_position: 1
 
 ## Single file
 
-````js sandpack
+```js sandpack
 export default function App() {
   return <p>Hello Docusaurus</p>;
 }
+```
+
+````md
+```js sandpack
+export default function App() {
+  return <p>Hello Docusaurus</p>;
+}
+```
 ````
 
 ## Multiples files
@@ -30,12 +38,37 @@ body {
 ```;
 ````
 
-## Theme: GitHub Light
+`````md
+````js sandpack template=react theme=codesandbox-dark
+```js file=/App.js
+import "./style.css"
 
-````js sandpack theme=github-light
 export default function App() {
   return <p>Hello Docusaurus</p>;
 }
+```
+```css file=/style.css
+body {
+  background: red;
+}
+```;
+````
+`````
+
+## Theme: GitHub Light
+
+```js sandpack theme=github-light
+export default function App() {
+  return <p>Hello Docusaurus</p>;
+}
+```
+
+````md
+```js sandpack theme=github-light
+export default function App() {
+  return <p>Hello Docusaurus</p>;
+}
+```
 ````
 
 ## Getting Started

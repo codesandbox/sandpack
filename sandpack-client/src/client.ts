@@ -262,8 +262,8 @@ export class SandpackClient {
       modules,
       externalResources: [],
       hasFileResolver: Boolean(this.options.fileResolver),
-      disableDependencyPreprocessing:
-        this.sandboxInfo.disableDependencyPreprocessing,
+      disableDependencyPreprocessing: this.sandboxInfo
+        .disableDependencyPreprocessing,
       template:
         this.sandboxInfo.template ||
         getTemplate(packageJSON, normalizedModules),

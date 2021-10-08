@@ -11,8 +11,10 @@ export const useLoadingOverlayState = (
   clientId?: string
 ): LoadingOverlayState => {
   const { sandpack, listen } = useSandpack();
-  const [loadingOverlayState, setLoadingOverlayState] =
-    React.useState<LoadingOverlayState>("visible");
+  const [
+    loadingOverlayState,
+    setLoadingOverlayState,
+  ] = React.useState<LoadingOverlayState>("visible");
 
   React.useEffect(() => {
     sandpack.loadingScreenRegisteredRef.current = true;
