@@ -65,9 +65,9 @@ Make sure you don't omit the leading slash (`/`) when setting the file paths
 If you try it out, you should get something like this:
 
 <Sandpack
-  template="react"
-  theme="codesandbox-dark"
-  files={{
+template="react"
+theme="codesandbox-dark"
+files={{
     "/App.js": `export default function App() {
   return <h1>Hello CodeSandbox!</h1>
 }
@@ -79,7 +79,7 @@ If you try it out, you should get something like this:
 Notice that when passing the `files` prop, only the content you pass there is available in the file tabs. The other files are still bundled together, but you don't see them.
 :::
 
-### Hidden files
+### Hidden Files
 
 Sometimes you might want to pass some custom code to `Sandpack`, but you don't want the users to see that code. For example, you might have some stylesheet that should not be editable but helps you in your examples.
 
@@ -106,7 +106,7 @@ The `hidden` flag is `false` by default.
 You can use the object notation only for the files which need additional flags, while the other files can be passed as a `string`.
 :::
 
-### Active file
+### Active File
 
 You can also specify the `active` file, which is open in the code editor
 when the component mounts. If no `active` flag is set, the first file will be active by
@@ -182,7 +182,7 @@ export default function App() {
       "react-markdown": "latest",
     },
   }}
-/>
+/>;
 ```
 
 TODO: Inject example
@@ -194,7 +194,7 @@ specify your entire sandbox structure with the `customSetup`.
 
 ### Dependencies
 
-Inside `customSetup` you can pass a `dependencies` object. The `key` should be the name of the package, while the value is the `version`, exactly in the same format as you would pass it inside `package.json`. 
+Inside `customSetup` you can pass a `dependencies` object. The `key` should be the name of the package, while the value is the `version`, exactly in the same format as you would pass it inside `package.json`.
 
 ```jsx
 <Sandpack
@@ -204,7 +204,7 @@ Inside `customSetup` you can pass a `dependencies` object. The `key` should be t
   }}
   customSetup={{
     dependencies: {
-      "react": "17.0.2",
+      react: "17.0.2",
       "react-dom": "17.0.2",
       "react-scripts": "4.0.0",
     },
@@ -212,9 +212,9 @@ Inside `customSetup` you can pass a `dependencies` object. The `key` should be t
 />
 ```
 
-### Entry file
+### Entry File
 
-Additionally, you can also specify a different `entry` file for the sandbox. The entry file is the starting point of the bundle process. 
+Additionally, you can also specify a different `entry` file for the sandbox. The entry file is the starting point of the bundle process.
 
 ```jsx
 <Sandpack
@@ -225,9 +225,15 @@ Additionally, you can also specify a different `entry` file for the sandbox. The
   customSetup={{
     entry: "/index.js",
   }}
-/>;
+/>
 ```
 
 :::warning
 If you change the path of the entry file, make sure you control all the files that go into the bundle process, as prexisting settings in the `template` might not work anymore.
+:::
 
+---
+
+:::success Congrats!
+You learned the basics of configuring content that goes inside a `Sandpack` instance. The next section will guide you though UI customization.
+:::
