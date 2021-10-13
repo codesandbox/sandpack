@@ -4,7 +4,7 @@ sidebar_position: 1
 
 import { Sandpack } from "@codesandbox/sandpack-react"
 
-# Installation
+# Install
 
 Sandpack is ready to be used in your React project. The package is published on `npm` and you can install it with:
 
