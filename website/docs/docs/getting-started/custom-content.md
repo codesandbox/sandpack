@@ -42,7 +42,7 @@ The code is passed as a `string` and should be pre-formatted:
 
 ```jsx
 const code = `export default function App() {
-  return <h1>Hello World</h1>
+  return <h1>Hello CodeSandbox</h1>
 }
 `;
 
@@ -169,7 +169,7 @@ If you want to configure **dependencies** or you need a different sandbox struct
 const code = `import ReactMarkdown from 'react-markdown' 
 
 export default function App() {
-  return <ReactMarkdown># Hello, *world*!</ReactMarkdown>
+  return <ReactMarkdown># Hello, *CodeSandbox*!</ReactMarkdown>
 }`;
 
 <Sandpack
