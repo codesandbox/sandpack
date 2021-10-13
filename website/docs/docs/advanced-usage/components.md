@@ -4,6 +4,10 @@ sidebar_position: 2
 
 # Components
 
+Several `Sandpack` prefixed components are available in the `sandpack-react` package. They can be used to build custom presets, as long as they render within the providers we talked about during the previous section.
+
+Let's try to rebuild the `Sandpack` preset.
+
 ## SandpackLayout
 
 Let's add a code editor and introduce the `SandpackLayout` component.
@@ -29,9 +33,11 @@ const CustomSandpack = () => (
 And now we have pretty much the same component as the preset, minus the prop
 passing, which you can decide based on your specific needs.
 
-> `SandpackLayout` gives you the left-right split between two components and
-> also breaks the columns when the component is under 700px wide, so you have
-> some responsiveness built-in. It also renders the SandpackThemeProvider.
+:::info 
+`SandpackLayout` gives you the left-right split between two components and
+also breaks the columns when the component is under 700px wide, so you have
+some responsiveness built-in. It also renders the theme provider for convenience.
+:::
 
 You can also bring other components in the mix: `SandpackCodeViewer`,
 `SandpackTranspiledCode`, `FileTabs`, `Navigator` and so on.
