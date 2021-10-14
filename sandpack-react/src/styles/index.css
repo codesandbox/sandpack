@@ -141,10 +141,6 @@
   outline: 0;
 }
 
-.sp-cm.sp-pristine:focus-within .cm-scroller {
-  overflow: auto;
-}
-
 .sp-transpiled-code {
   display: flex;
   flex-direction: column;
