@@ -137,6 +137,10 @@
   padding-right: var(--sp-space-2);
 }
 
+.sp-cm .cm-scroller:focus {
+  outline: 0;
+}
+
 .sp-cm.sp-pristine .cm-scroller {
   overflow: hidden;
 }
