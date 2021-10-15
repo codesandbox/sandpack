@@ -5,15 +5,17 @@
   "workspaces": [
     "sandpack-client",
     "sandpack-react",
-    "sandpack-playground"
+    "website/docs",
+    "plugins/*"
   ],
   "description": "",
   "scripts": {
     "lint": "eslint '**/*.ts?(x)' --fix",
-    "format": "prettier --write '**/*.ts?(x)'",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,md,mdx}'",
     "build": "yarn workspaces run build",
     "prepare": "husky install",
-    "clean": "yarn workspaces run clean"
+    "clean": "yarn workspaces run clean",
+    "dev:docs": "yarn workspace sandpack-docs start"
   },
   "repository": {
     "type": "git",

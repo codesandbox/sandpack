@@ -1,0 +1,24 @@
+{
+  "name": "@codesandbox/sandpack-docusaurus",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "echo 1"
+  },
+  "dependencies": {
+    "@codesandbox/sandpack-react": "0.1.13",
+    "@docusaurus/core": "2.0.0-beta.6",
+    "@docusaurus/utils-validation": "2.0.0-beta.6"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4 || ^17.0.0",
+    "react-dom": "^16.8.4 || ^17.0.0"
+  },
+  "engines": {
+    "node": ">=12.13.0"
+  }
+}

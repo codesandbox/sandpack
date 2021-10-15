@@ -1,0 +1,5 @@
+@import "@codesandbox/sandpack-react/dist/index.css";
+
+.sp-wrapper {
+    margin-bottom: 2em;
+}

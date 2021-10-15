@@ -1,18 +1,30 @@
 {
-    "previews": {
-        "6006": {
-            "name": "Storybook",
-            "command": "yarn workspace @codesandbox/sandpack-react storybook"
-        }
+  "previews": {
+    "1234": {
+      "name": "Playground",
+      "command": "yarn workspace @codesandbox/sandpack-playground dev"
     },
-    "tasks": {
-        "setup": {
-            "name": "Install Dependencies",
-            "command": "yarn"
-        },
-        "build": {
-            "name": "Build Workspace",
-            "command": "yarn build"
-        }
+    "6006": {
+      "name": "Storybook",
+      "command": "yarn workspace @codesandbox/sandpack-react storybook"
+    },
+    "3000": {
+      "name": "Docs",
+      "command": "yarn dev:docs"
     }
+  },
+  "tasks": {
+    "setup": {
+      "name": "Install Dependencies",
+      "command": "yarn"
+    },
+    "build": {
+      "name": "Build Workspace",
+      "command": "yarn build"
+    },
+    "format": {
+      "name": "Format Workspace",
+      "command": "yarn format"
+    }
+  }
 }

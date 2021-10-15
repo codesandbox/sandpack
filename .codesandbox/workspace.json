@@ -1,9 +1,10 @@
 {
-    "default": {
-        "name": "Default",
-        "type": "SIDEKICK",
-        "items": [
-            { "type": "PREVIEW", "port": "6006" }
-        ]
-    }
+  "default": {
+    "name": "Default",
+    "type": "SIDEKICK",
+    "items": [
+      { "type": "PREVIEW", "port": "3000" },
+      { "type": "PREVIEW", "port": "6006" }
+    ]
+  }
 }
