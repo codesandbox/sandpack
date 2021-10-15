@@ -9,8 +9,6 @@ const RenderSandpack = (props) => {
   const { siteConfig } = useDocusaurusContext();
   const sandpackPluginOptions = siteConfig.themeConfig.sandpack;
 
-  console.log(sandpackPluginOptions);
-
   if (props.sandpack) {
     const {
       children,

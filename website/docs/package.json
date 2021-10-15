@@ -5,6 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start -h 0.0.0.0",
+    "build:deps": "yarn workspace @codesandbox/sandpack-client build && yarn workspace @codesandbox/sandpack-react build",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
