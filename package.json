@@ -8,6 +8,9 @@
     "website/docs",
     "plugins/*"
   ],
+  "nohoist": [
+    "**/html-minifier-terser"
+  ],
   "description": "",
   "scripts": {
     "lint": "eslint '**/*.ts?(x)' --fix",
