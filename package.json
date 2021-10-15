@@ -9,7 +9,7 @@
     "plugins/*"
   ],
   "nohoist": [
-    "**/html-minifier-terser"
+    "website/docs"
   ],
   "description": "",
   "scripts": {
