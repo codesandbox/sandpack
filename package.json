@@ -9,7 +9,7 @@
     "plugins/*"
   ],
   "nohoist": [
-    "website/docs"
+    "website/docs/**"
   ],
   "description": "",
   "scripts": {
