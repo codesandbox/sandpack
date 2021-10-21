@@ -138,12 +138,8 @@
   padding-right: var(--sp-space-2);
 }
 
-.sp-cm.sp-pristine .cm-scroller {
-  overflow: hidden;
-}
-
-.sp-cm.sp-pristine:focus-within .cm-scroller {
-  overflow: auto;
+.sp-cm .cm-scroller:focus {
+  outline: 0;
 }
 
 .sp-transpiled-code {
