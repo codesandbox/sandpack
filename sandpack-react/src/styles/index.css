@@ -101,6 +101,7 @@
 
 .sp-pre-placeholder {
   margin: 0;
+  display: block;
   padding: 0 var(--sp-space-3);
   font-family: var(--sp-font-mono);
   font-size: var(--sp-font-size);
