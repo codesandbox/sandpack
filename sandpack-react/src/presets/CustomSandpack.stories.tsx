@@ -18,6 +18,7 @@ import {
   useSandpackNavigation,
   SandpackStack,
 } from "../index";
+import { getThemeStyleSheet } from "../themes";
 
 export default {
   title: "presets/Custom Sandpack",
@@ -100,7 +101,7 @@ const CustomCodeEditor = () => {
         background: theme.palette.defaultBackground,
         border: `1px solid ${theme.palette.inactiveText}`,
         color: theme.palette.activeText,
-        lineHeight: 1.4,
+        lineHeight: theme.typography.lineheight,
       }}
     >
       {code}

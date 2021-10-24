@@ -36,6 +36,7 @@ export const codesandboxLightTheme: SandpackTheme = {
     monoFont:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     fontSize: "14px",
+    lineHeight: "1.4",
   },
 };
 
@@ -69,6 +70,43 @@ export const aquaBlueTheme: SandpackTheme = {
     monoFont:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     fontSize: "14px",
+    lineHeight: "1.4",
+  },
+};
+
+export const githubLightTheme: SandpackTheme = {
+  palette: {
+    activeText: "#24292e",
+    defaultText: "#959da5",
+    inactiveText: "#e4e7eb",
+    activeBackground: "#e4e7eb",
+    defaultBackground: "#ffffff",
+    inputBackground: "#ffffff",
+    accent: "#c8c8fa",
+    errorBackground: "#ffcdca",
+    errorForeground: "#811e18",
+  },
+  syntax: {
+    keyword: "#d73a49",
+    property: "#005cc5",
+    plain: "#24292e",
+    static: "#032f62",
+    string: "#032f62",
+    definition: "#6f42c1",
+    punctuation: "#24292e",
+    tag: "#22863a",
+    comment: {
+      color: "#6a737d",
+      fontStyle: "normal",
+    },
+  },
+  typography: {
+    bodyFont:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    monoFont:
+      '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    fontSize: "14px",
+    lineHeight: "1.4",
   },
 };
 
@@ -101,6 +139,7 @@ export const codesandboxDarkTheme: SandpackTheme = {
     monoFont:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     fontSize: "14px",
+    lineHeight: "1.4",
   },
 };
 
@@ -133,6 +172,7 @@ export const nightOwlTheme: SandpackTheme = {
     monoFont:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     fontSize: "14px",
+    lineHeight: "1.4",
   },
 };
 
@@ -165,6 +205,7 @@ export const monokaiProTheme: SandpackTheme = {
     monoFont:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     fontSize: "14px",
+    lineHeight: "1.4",
   },
 };
 
@@ -174,6 +215,7 @@ export const SANDPACK_THEMES: Record<SandpackPredefinedTheme, SandpackTheme> = {
   "night-owl": nightOwlTheme,
   "aqua-blue": aquaBlueTheme,
   "monokai-pro": monokaiProTheme,
+  "github-light": githubLightTheme,
 };
 
 export const createThemeObject = (
@@ -268,6 +310,7 @@ export const getThemeStyleSheet = (
   --sp-font-size: ${theme.typography.fontSize};
   --sp-font-body: ${theme.typography.bodyFont};
   --sp-font-mono: ${theme.typography.monoFont};
+  --sp-line-height: ${theme.typography.lineHeight};
 `;
 
 export const getSyntaxStyle = (

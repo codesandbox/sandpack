@@ -2,13 +2,15 @@
   "compilerOptions": {
     "lib": ["es2015", "es2016", "es2017", "dom"],
     "strict": true,
-    "sourceMap": true,
+    "sourceMap": false,
+    "emitDeclarationOnly": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noImplicitAny": true,
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["node_modules/@types"],
+    "outDir": "dist/types"
   },
   "include": ["./src"],
   "exclude": ["node_modules"]

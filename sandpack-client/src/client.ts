@@ -1,11 +1,6 @@
 import { getTemplate } from "codesandbox-import-utils/lib/create-sandbox/templates";
 import isEqual from "lodash.isequal";
 
-// Muhahaha
-// eslint-disable-next-line
-// @ts-ignore
-import { version } from "../package.json";
-
 import Protocol from "./file-resolver-protocol";
 import { IFrameProtocol } from "./iframe-protocol";
 import type {
@@ -90,7 +85,10 @@ export interface SandboxInfo {
 const BUNDLER_URL =
   process.env.CODESANDBOX_ENV === "development"
     ? "http://localhost:3000/"
-    : `https://${version.replace(/\./g, "-")}-sandpack.codesandbox.io/`;
+    : `https://${process.env.PACKAGE_VERSION?.replace(
+        /\./g,
+        "-"
+      )}-sandpack.codesandbox.io/`;
 
 export class SandpackClient {
   selector: string | undefined;

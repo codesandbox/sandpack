@@ -32,7 +32,7 @@ jobs:
       - name: Prepare | Build dependencies
         run: yarn build:deps
 
-      - name: Prepare | Build sandpack bundler
+      - name: Prepare | Build CodeSandbox bundler
         run: yarn build:sandpack
 
       - name: Archive bundler artifacts
@@ -59,7 +59,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "12.22.4"
-          registry-url: "https://npm.pkg.github.com/"
+
+      - name: Setup | Authenticate with Registry
+        run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Setup | Configure git user
         run: |
@@ -81,7 +85,9 @@ jobs:
           path: bundler
 
       - name: Prepare | Build
-        run: yarn run build:publish
+        run: |
+          yarn workspace @codesandbox/sandpack-client build:publish 
+          yarn workspace @codesandbox/sandpack-react build:publish
 
       - name: Release | Lerna Publish
         run: lerna publish from-package --yes --canary #TODO - remove canary

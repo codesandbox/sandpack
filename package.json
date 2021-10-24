@@ -4,15 +4,22 @@
   "private": true,
   "workspaces": [
     "sandpack-client",
-    "sandpack-react"
+    "sandpack-react",
+    "website/docs",
+    "plugins/*"
+  ],
+  "nohoist": [
+    "website/docs/**",
+    "**/html-minifier-terser"
   ],
   "description": "",
   "scripts": {
     "lint": "eslint '**/*.ts?(x)' --fix",
-    "format": "prettier --write '**/*.ts?(x)'",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,md,mdx}'",
     "build": "yarn workspaces run build",
-    "build:publish": "yarn workspaces run build:publish",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "clean": "yarn workspaces run clean",
+    "dev:docs": "yarn workspace sandpack-docs start"
   },
   "repository": {
     "type": "git",
@@ -28,6 +35,7 @@
     "@typescript-eslint/parser": "^4.0.0",
     "babel-eslint": "^10.0.0",
     "commitlint": "^13.1.0",
+    "esbuild": "^0.12.21",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-react-app": "^6.0.0",

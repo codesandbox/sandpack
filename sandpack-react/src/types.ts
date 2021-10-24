@@ -105,6 +105,7 @@ export type SandpackPredefinedTheme =
   | "codesandbox-dark"
   | "night-owl"
   | "aqua-blue"
+  | "github-light"
   | "monokai-pro";
 
 export interface SandpackSyntaxStyle {
@@ -156,6 +157,7 @@ export interface SandpackTheme {
     bodyFont: string;
     monoFont: string;
     fontSize: string;
+    lineHeight: string;
   };
 }
 

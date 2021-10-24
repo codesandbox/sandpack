@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-react",
-  "version": "0.1.9",
+  "version": "0.1.15",
   "description": "",
   "keywords": [],
   "repository": {
@@ -11,14 +11,14 @@
   "author": "CodeSandbox",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "types": "dist/cjs/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "yarn build:cjs && yarn build:esm && yarn build:css",
+    "clean": "rimraf dist",
+    "prebuild": "yarn run clean",
+    "build": "node build.js && yarn run build:types && yarn build:css",
     "build:publish": "yarn build",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:types": "tsc -p tsconfig.json",
     "build:css": "postcss src/styles/index.css -o dist/index.css -u autoprefixer -u cssnano",
     "start": "tsc -p tsconfig.esm.json --watch",
     "storybook": "start-storybook -p 6006 --no-dll",
@@ -44,7 +44,7 @@
     "@codemirror/matchbrackets": "^0.18.0",
     "@codemirror/state": "^0.18.0",
     "@codemirror/view": "^0.18.0",
-    "@codesandbox/sandpack-client": "^0.1.9",
+    "@codesandbox/sandpack-client": "0.1.15",
     "codesandbox-import-util-types": "^2.2.3",
     "codesandbox-import-utils": "^2.2.3"
   },
@@ -67,8 +67,6 @@
     "dotenv": "^8.2.0",
     "postcss": "^8.2.6",
     "postcss-cli": "^8.3.1",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
     "rimraf": "^2.6.1",
     "storybook-addon-jsx": "^7.3.4",
     "typescript": "4.0.3"

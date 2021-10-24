@@ -101,6 +101,7 @@
 
 .sp-pre-placeholder {
   margin: 0;
+  display: block;
   padding: 0 var(--sp-space-3);
   font-family: var(--sp-font-mono);
   font-size: var(--sp-font-size);
@@ -117,6 +118,7 @@
 
 .sp-cm {
   padding: var(--sp-space-4) 0;
+  margin: 0;
   outline: none;
   height: 100%;
 }
@@ -136,12 +138,8 @@
   padding-right: var(--sp-space-2);
 }
 
-.sp-cm.sp-pristine .cm-scroller {
-  overflow: hidden;
-}
-
-.sp-cm.sp-pristine:focus-within .cm-scroller {
-  overflow: auto;
+.sp-cm .cm-scroller:focus {
+  outline: 0;
 }
 
 .sp-transpiled-code {

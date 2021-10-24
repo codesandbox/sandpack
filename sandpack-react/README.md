@@ -669,6 +669,7 @@ If you want to contribute, fork the main repo:
 
 ```bash
 yarn
+yarn build
 cd sandpack-react
 yarn storybook
 ```
