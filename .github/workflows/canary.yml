@@ -3,7 +3,7 @@ name: Release (Canary)
 on:
   push:
     branches:
-      - feat/semantic-release # TODO - change to main branch
+      - next
 
 jobs:
   bundler:
@@ -93,4 +93,4 @@ jobs:
           yarn workspace @codesandbox/sandpack-react build:publish
 
       - name: Release | Lerna Publish
-        run: lerna publish from-package --yes --canary #TODO - remove canary
+        run: lerna publish from-package --yes --canary
