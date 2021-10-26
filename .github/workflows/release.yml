@@ -1,0 +1,93 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bundler:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup | Clone codesandbox-client
+        uses: actions/checkout@v2
+        with:
+          repository: codesandbox/codesandbox-client
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "10.23.2"
+          registry-url: "https://npm.pkg.github.com/"
+
+      - name: Setup | Install dependencies
+        run: yarn
+
+      - name: Prepare | Build dependencies
+        run: yarn build:deps
+
+      - name: Prepare | Build CodeSandbox bundler
+        run: yarn build:sandpack
+
+      - name: Archive bundler artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: bundler
+          path: www/**/*.*
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: [bundler]
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v2
+        with:
+          # pulls all commits (needed for lerna / semantic release to correctly version)
+          fetch-depth: "0"
+
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "12.22.4"
+
+      - name: Setup | Authenticate with Registry
+        run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Setup | Configure git user
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Prepare | Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: bundler
+          path: bundler
+
+      - name: Prepare | Build
+        run: |
+          yarn workspace @codesandbox/sandpack-client build:publish 
+          yarn workspace @codesandbox/sandpack-react build:publish
+
+      - name: Release | Lerna Publish
+        run: lerna publish from-package --yes

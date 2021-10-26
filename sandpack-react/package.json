@@ -17,6 +17,7 @@
     "clean": "rimraf dist",
     "prebuild": "yarn run clean",
     "build": "node build.js && yarn run build:types && yarn build:css",
+    "build:publish": "yarn build",
     "build:types": "tsc -p tsconfig.json",
     "build:css": "postcss src/styles/index.css -o dist/index.css -u autoprefixer -u cssnano",
     "start": "tsc -p tsconfig.esm.json --watch",

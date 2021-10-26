@@ -1,14 +1,21 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const del = require("del");
 const gulp = require("gulp");
 const removeSourcemaps = require("gulp-remove-sourcemaps");
 
-gulp.task("copy-sandbox", () =>
+const dist = "./sandpack/";
+const paths = process.env.CI
+  ? ["../../bundler/www/**/!(*.map)", "!../../bundler/www/public/**"]
+  : [
+      "../../codesandbox-client/www/**/!(*.map)",
+      "!../../codesandbox-client/www/public/**",
+    ];
+
+const remove = () => del(dist);
+const copyFolder = () =>
   gulp
-    .src([
-      "../../codesandbox-client/www/**/*.*",
-      "!../../codesandbox-client/www/**/*.map",
-      "!../../codesandbox-client/www/stats.json",
-      "!../../codesandbox-client/www/public/**/*.*",
-    ])
+    .src(paths, { matchBase: true })
     .pipe(removeSourcemaps())
-    .pipe(gulp.dest("./sandpack/"))
-);
+    .pipe(gulp.dest(dist));
+
+exports["default"] = gulp.series(remove, copyFolder);

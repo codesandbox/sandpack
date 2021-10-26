@@ -1,0 +1,15 @@
+{
+  "packages": ["sandpack-client", "sandpack-react"],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "version": {
+      "conventionalCommits": true,
+      "message": "chore: [skip ci] bump packages"
+    },
+    "publish": {
+      "conventionalCommits": true,
+      "message": "chore: [skip ci] bump packages"
+    }
+  }
+}

@@ -19,7 +19,8 @@
     "build": "node build.js && yarn run build:types",
     "build:types": "tsc -p tsconfig.json",
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
-    "build:publish": "yarn build && rimraf sandpack && gulp copy-sandbox",
+    "build:publish": "yarn build && gulp",
+    "build:bundler": "gulp",
     "start": "tsc -p tsconfig.esm.json --watch"
   },
   "files": [
@@ -39,8 +40,9 @@
     "babel-loader": "^7.1.5",
     "core-js": "^3.7.0",
     "cross-env": "^5.0.1",
-    "gulp": "^3.9.1",
-    "gulp-remove-sourcemaps": "1.0.1",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-remove-sourcemaps": "^1.0.1",
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^2.6.2",
     "ts-node": "^4.1.0",
