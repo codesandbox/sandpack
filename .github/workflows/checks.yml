@@ -39,22 +39,3 @@ jobs:
 
       - name: Build
         run: yarn run build
-
-  commitlint:
-    name: Commit lint
-    runs-on: ubuntu-18.04
-    timeout-minutes: 10
-    steps:
-      - name: Setup | Checkout
-        uses: actions/checkout@v1
-
-      - uses: actions/cache@v2
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Commitlint
-        run: git log -1 --pretty=format:"%s" | yarn commitlint
