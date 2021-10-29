@@ -1,0 +1,29 @@
+.menu {
+  padding: 1.5rem 0 !important;
+}
+
+.menu__list .menu__list {
+  margin-left: 0;
+  font-size: 14px;
+}
+
+.menu__list-item {
+  // &:not(:first-child) {
+  //   margin-top: 1rem;
+  // }
+  .menu__list-item {
+    margin-top: 0;
+  }
+  .menu__link--sublist:after {
+    background: var(--ifm-menu-link-sublist-icon) 50% / 1.2rem 1.2rem;
+  }
+}
+
+.menu__link {
+  border-radius: 0;
+  height: auto !important;
+}
+
+.iconExternalLink__-_-node_modules-\@docusaurus-theme-classic-lib-next-theme-IconExternalLink-styles-module {
+  display: none;
+}
