@@ -8,22 +8,24 @@ import type {
 
 export function createPackageJSON(
   dependencies: Dependencies = {},
-  entry = "/index.js"
+  entry = "/index.js",
+  devDependencies?: Dependencies
 ): string {
-  return JSON.stringify(
-    {
-      name: "sandpack-project",
-      main: entry,
-      dependencies,
-    },
-    null,
-    2
-  );
+  const packageJsonContent: Record<string, string | Dependencies> = {
+    name: "sandpack-project",
+    main: entry,
+    dependencies,
+  };
+  if (devDependencies && Object.keys(devDependencies).length) {
+    packageJsonContent["devDependencies"] = devDependencies;
+  }
+  return JSON.stringify(packageJsonContent, null, 2);
 }
 
 export function addPackageJSONIfNeeded(
   files: SandpackBundlerFiles,
   dependencies?: Dependencies,
+  devDependencies?: Dependencies,
   entry?: string
 ): SandpackBundlerFiles {
   const newFiles = { ...files };
@@ -42,7 +44,7 @@ export function addPackageJSONIfNeeded(
     }
 
     newFiles["/package.json"] = {
-      code: createPackageJSON(dependencies, entry),
+      code: createPackageJSON(dependencies, entry, devDependencies),
     };
   }
 
@@ -95,8 +97,8 @@ function getErrorLocation(errorFrame: ErrorStackFrame) {
 function getErrorInOriginalCode(errorFrame: ErrorStackFrame) {
   const lastScriptLine =
     errorFrame._originalScriptCode[errorFrame._originalScriptCode.length - 1];
-  const numberOfLineNumberCharacters = lastScriptLine.lineNumber.toString()
-    .length;
+  const numberOfLineNumberCharacters =
+    lastScriptLine.lineNumber.toString().length;
 
   const leadingCharacterOffset = 2;
   const barSeparatorCharacterOffset = 3;
