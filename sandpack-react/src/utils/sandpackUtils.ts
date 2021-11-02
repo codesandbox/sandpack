@@ -78,9 +78,9 @@ export const getSandpackStateFromProps = (
   const files = addPackageJSONIfNeeded(
     projectSetup.files,
     projectSetup.dependencies || {},
-    projectSetup.entry,
+    projectSetup.devDependencies || {},
     // @ts-ignore FIXME: remove this as soon as the sandpack-client typings are up-to-date
-    projectSetup.devDependencies
+    projectSetup.entry
   );
 
   const environment = projectSetup.environment;
