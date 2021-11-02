@@ -240,10 +240,10 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
             view?.dispatch({
               // Pass message to clean up inline error
               annotations: [
-                ({
+                {
                   type: "clean-error",
                   value: null,
-                } as unknown) as Annotation<unknown>,
+                } as unknown as Annotation<unknown>,
               ],
 
               // Trigger a doc change to remove inline error
@@ -263,10 +263,10 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
           ) {
             view?.dispatch({
               annotations: [
-                ({
+                {
                   type: "error",
                   value: message.line,
-                } as unknown) as Annotation<unknown>,
+                } as unknown as Annotation<unknown>,
               ],
             });
           }
@@ -288,7 +288,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
 
     if (readOnly) {
       return (
-        <pre ref={combinedRef} className={c("cm", editorState)}>
+        <pre ref={combinedRef} className={c("cm", editorState)} translate="no">
           <code className={c("pre-placeholder")}>{code}</code>
         </pre>
       );
@@ -307,6 +307,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
         onKeyDown={handleContainerKeyDown}
         role="group"
         tabIndex={0}
+        translate="no"
       >
         <pre
           className={c("pre-placeholder")}
