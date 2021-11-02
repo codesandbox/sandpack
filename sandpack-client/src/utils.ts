@@ -8,18 +8,19 @@ import type {
 
 export function createPackageJSON(
   dependencies: Dependencies = {},
-  entry = "/index.js",
-  devDependencies?: Dependencies
+  devDependencies: Dependencies = {},
+  entry = "/index.js"
 ): string {
-  const packageJsonContent: Record<string, string | Dependencies> = {
-    name: "sandpack-project",
-    main: entry,
-    dependencies,
-  };
-  if (devDependencies && Object.keys(devDependencies).length) {
-    packageJsonContent["devDependencies"] = devDependencies;
-  }
-  return JSON.stringify(packageJsonContent, null, 2);
+  return JSON.stringify(
+    {
+      name: "sandpack-project",
+      main: entry,
+      dependencies,
+      devDependencies,
+    },
+    null,
+    2
+  );
 }
 
 export function addPackageJSONIfNeeded(
@@ -44,7 +45,7 @@ export function addPackageJSONIfNeeded(
     }
 
     newFiles["/package.json"] = {
-      code: createPackageJSON(dependencies, entry, devDependencies),
+      code: createPackageJSON(dependencies, devDependencies, entry),
     };
   }
 

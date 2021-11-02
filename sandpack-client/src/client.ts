@@ -237,8 +237,8 @@ export class SandpackClient {
     let packageJSON = JSON.parse(
       createPackageJSON(
         this.sandboxInfo.dependencies,
-        this.sandboxInfo.entry,
-        this.sandboxInfo.devDependencies
+        this.sandboxInfo.devDependencies,
+        this.sandboxInfo.entry
       )
     );
     try {
