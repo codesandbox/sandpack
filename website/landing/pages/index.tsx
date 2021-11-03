@@ -3,9 +3,7 @@ import Head from "next/head";
 
 import { styled } from "../stitches.config";
 
-const Text = styled("p", {
-  color: "#6FEC5B",
-});
+const Text = styled("p", {});
 
 const Home: NextPage = () => {
   return (
