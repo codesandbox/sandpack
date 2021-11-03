@@ -28,7 +28,7 @@ export const FileTabs: React.FC<FileTabsProps> = ({ closableTabs }) => {
   };
 
   return (
-    <div className={c("tabs")}>
+    <div className={c("tabs")} translate="no">
       <div
         aria-label="Select active file"
         className={c("tabs-scrollable-container")}
