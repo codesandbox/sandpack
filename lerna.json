@@ -1,5 +1,8 @@
 {
-  "packages": ["sandpack-client", "sandpack-react"],
+  "packages": [
+    "sandpack-client",
+    "sandpack-react"
+  ],
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
@@ -12,5 +15,5 @@
       "message": "chore: [skip ci] bump packages"
     }
   },
-  "version": "0.0.0"
+  "version": "0.1.16"
 }
