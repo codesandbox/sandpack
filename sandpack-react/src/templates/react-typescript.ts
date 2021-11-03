@@ -19,7 +19,7 @@ export const REACT_TYPESCRIPT_TEMPLATE: SandboxTemplate = {
 }`,
     },
     "/App.tsx": {
-      code: `export default function App() {
+      code: `export default function App(): JSX.Element {
   return <h1>Hello World</h1>
 }
 `,

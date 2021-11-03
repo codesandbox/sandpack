@@ -89,7 +89,7 @@ export const ReactTypescriptEditor: Story<SandpackProps> = (args) => (
       showLineNumbers: true,
       showInlineErrors: true,
     }}
-    template="react-typescript"
+    template="react-ts"
   />
 );
 

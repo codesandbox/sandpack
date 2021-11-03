@@ -97,7 +97,7 @@ export type SandboxEnvironment = ITemplate;
 export type SandpackPredefinedTemplate =
   | "angular"
   | "react"
-  | "react-typescript"
+  | "react-ts"
   | "vanilla"
   | "vue"
   | "vue3";

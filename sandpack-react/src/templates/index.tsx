@@ -12,7 +12,7 @@ export const SANDBOX_TEMPLATES: Record<
   SandboxTemplate
 > = {
   react: REACT_TEMPLATE,
-  "react-typescript": REACT_TYPESCRIPT_TEMPLATE,
+  "react-ts": REACT_TYPESCRIPT_TEMPLATE,
   vue: VUE_TEMPLATE,
   vanilla: VANILLA_TEMPLATE,
   vue3: VUE_TEMPLATE_3,

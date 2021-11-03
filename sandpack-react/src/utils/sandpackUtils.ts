@@ -79,7 +79,6 @@ export const getSandpackStateFromProps = (
     projectSetup.files,
     projectSetup.dependencies || {},
     projectSetup.devDependencies || {},
-    // @ts-ignore FIXME: remove this as soon as the sandpack-client typings are up-to-date
     projectSetup.entry
   );
 
