@@ -1,3 +1,7 @@
 import { createStitches } from "@stitches/react";
 
-export const { styled, getCssText } = createStitches({});
+import { breakpoints } from "./styles/breakpoints";
+
+export const { styled, getCssText } = createStitches({
+  media: breakpoints,
+});
