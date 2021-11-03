@@ -5,7 +5,7 @@ const removeSourcemaps = require("gulp-remove-sourcemaps");
 
 const dist = "./sandpack/";
 const paths = process.env.CI
-  ? ["../../bundler/www/**/!(*.map)", "!../../bundler/www/public/**"]
+  ? ["../bundler/www/**/!(*.map)", "!../bundler/www/public/**"]
   : [
       "../../codesandbox-client/www/**/!(*.map)",
       "!../../codesandbox-client/www/public/**",

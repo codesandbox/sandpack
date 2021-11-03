@@ -84,13 +84,13 @@ jobs:
           name: bundler
           path: bundler
 
+      - name: Prepare | Lerna Version
+        run: yarn lerna version --create-release github --yes
+
       - name: Prepare | Build
         run: |
           yarn workspace @codesandbox/sandpack-client build:publish 
           yarn workspace @codesandbox/sandpack-react build:publish
-
-      - name: Prepare | Lerna Version
-        run: yarn lerna version --create-release github --yes
 
       - name: Release | Lerna Publish
         run: lerna publish from-package --yes
