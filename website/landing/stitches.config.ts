@@ -1,7 +1,7 @@
 import { createStitches } from "@stitches/react";
 
 import { breakpoints } from "./styles/breakpoints";
-import { palette } from './styles/palette'
+import { palette } from "./styles/palette";
 import { space } from "./styles/space";
 import {
   fontSizes,
@@ -13,7 +13,7 @@ import {
 
 const sizes = space;
 
-export const { styled, getCssText } = createStitches({
+export const { globalCss, styled, getCssText } = createStitches({
   media: breakpoints,
   theme: {
     borderStyles: {},
