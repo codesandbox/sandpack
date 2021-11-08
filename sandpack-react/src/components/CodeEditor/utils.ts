@@ -29,7 +29,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
       height: "100%",
     },
 
-    "&.cm-focused": {
+    "&.cm-editor.cm-focused": {
       outline: "none",
     },
 

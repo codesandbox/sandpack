@@ -1,9 +1,5 @@
 {
   "previews": {
-    "1234": {
-      "name": "Playground",
-      "command": "yarn workspace @codesandbox/sandpack-playground dev"
-    },
     "6006": {
       "name": "Storybook",
       "command": "yarn workspace @codesandbox/sandpack-react storybook"
