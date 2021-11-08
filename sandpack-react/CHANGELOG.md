@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.20-alpha.0](https://github.com/codesandbox/sandpack/compare/v0.1.19...v0.1.20-alpha.0) (2021-11-08)
+
+
+### Bug Fixes
+
+* **codemirror:** update dependencies ([e13ee98](https://github.com/codesandbox/sandpack/commit/e13ee9870de82fa6b82a9ef7a4c464b2aa1c4fa6))
+
+
+
+
+
 ## [0.1.19](https://github.com/codesandbox/sandpack/compare/v0.1.18...v0.1.19) (2021-11-04)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
