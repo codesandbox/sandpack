@@ -36,6 +36,7 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
         /** @type {import('@docusaurus/preset-classic').Options} */
         ({
           docs: {
+            routeBasePath: "/",
             sidebarPath: require.resolve("./sidebars.js"),
             editUrl:
               "https://github.com/codesandbox/sandpack/edit/main/website/docs",
@@ -69,12 +70,6 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
             src: "img/logo.svg", // TODO
           },
           items: [
-            {
-              type: "doc",
-              docId: "intro",
-              position: "left",
-              label: "Docs",
-            },
             { to: "/releases", label: "Releases", position: "left" },
             {
               href: "https://github.com/codesandbox/sandpack",
@@ -86,15 +81,6 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
         footer: {
           style: "dark",
           links: [
-            {
-              title: "Docs",
-              items: [
-                {
-                  label: "Tutorial",
-                  to: "/docs/intro",
-                },
-              ],
-            },
             {
               title: "Community",
               items: [
