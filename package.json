@@ -46,5 +46,8 @@
     "lerna-changelog": "^2.1.0",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1"
+  },
+  "resolutions": {
+    "@codemirror/state": "0.19.4"
   }
 }
