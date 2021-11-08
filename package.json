@@ -22,7 +22,7 @@
     "clean": "yarn workspaces run clean",
     "dev:docs": "yarn workspace sandpack-docs start",
     "dev:react": "yarn workspace @codesandbox/sandpack-react storybook",
-    "dev:landing": "yarn workspace sandpack-landing dev"
+    "dev:landing": "yarn workspace sandpack-landing dev -p 4000"
   },
   "repository": {
     "type": "git",
