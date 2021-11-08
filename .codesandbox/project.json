@@ -9,7 +9,7 @@
       "command": "yarn dev:docs"
     },
     "4000": {
-      "name": "Docs",
+      "name": "Landing page",
       "command": "yarn dev:landing"
     }
   },
