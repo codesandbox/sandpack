@@ -83,7 +83,7 @@ export const Community: React.FC = () => {
             },
           }}
         >
-          {community.communities.map((c) => (
+          {community.list.map((c) => (
             <li key={c.name}>
               <CommunityLink href={c.socialUrl} target="_blank">
                 <Image alt="" height={32} src={c.logoUrl} width={32} />

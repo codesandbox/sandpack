@@ -46,7 +46,7 @@
   },
   "community": {
     "title": "Get involved in our community.",
-    "communities": [
+    "list": [
       {
         "name": "Twitter",
         "socialUrl": "#",
