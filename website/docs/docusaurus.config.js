@@ -33,6 +33,7 @@
         /** @type {import('@docusaurus/preset-classic').Options} */
         ({
           docs: {
+            routeBasePath: "/",
             sidebarPath: require.resolve("./sidebars.js"),
             editUrl:
               "https://github.com/codesandbox/sandpack/edit/main/website/docs",
@@ -67,12 +68,6 @@
             srcDark: "img/logo.svg",
           },
           items: [
-            {
-              type: "doc",
-              docId: "intro",
-              position: "left",
-              label: "Docs",
-            },
             { to: "/releases", label: "Releases", position: "left" },
             {
               href: "https://github.com/codesandbox/sandpack",
@@ -84,15 +79,6 @@
         footer: {
           style: "dark",
           links: [
-            {
-              title: "Docs",
-              items: [
-                {
-                  label: "Tutorial",
-                  to: "/docs/intro",
-                },
-              ],
-            },
             {
               title: "Community",
               items: [
