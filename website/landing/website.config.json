@@ -9,6 +9,29 @@
   "commands": {
     "install": "npm install @codesandbox/sandpack-react"
   },
+  "community": {
+    "title": "Get involved in our community",
+    "communities": [
+      {
+        "name": "Twitter",
+        "socialUrl": "#",
+        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "logoUrl": "/assets/logos/Twitter.svg"
+      },
+      {
+        "name": "Discord",
+        "socialUrl": "#",
+        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "logoUrl": "/assets/logos/Discord.svg"
+      },
+      {
+        "name": "GitHub",
+        "socialUrl": "#",
+        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "logoUrl": "/assets/logos/GitHub.svg"
+      }
+    ]
+  },
   "resources": [
     {
       "name": "Docs",
