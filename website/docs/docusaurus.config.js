@@ -63,7 +63,8 @@
           title: "Sandpack",
           logo: {
             alt: "Sandpack",
-            src: "img/logo.svg", // TODO
+            src: "img/logo-dark.svg",
+            srcDark: "img/logo.svg",
           },
           items: [
             {
