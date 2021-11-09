@@ -1,5 +1,5 @@
-import { content } from "../../content/intro-section";
-import { Box, CodeBlock, List, Text, TextHighlight } from "../common";
+import content from "../../website.config.json";
+import { Box, CodeBlock, List, Text } from "../common";
 
 const ContentLandmark = () => {
   return (
@@ -34,6 +34,8 @@ const ContentLandmark = () => {
 };
 
 export const Intro: React.FC = () => {
+  const { intro, commands } = content;
+
   return (
     <Box
       as="section"
@@ -81,13 +83,11 @@ export const Intro: React.FC = () => {
               width: "56%",
             },
           }}
-          dangerouslySetInnerHTML={{ __html: content.title }}
+          dangerouslySetInnerHTML={{ __html: intro.title }}
         />
-        {content.importCommand && (
-          <CodeBlock>
-            <code>{content.importCommand}</code>
-          </CodeBlock>
-        )}
+        <CodeBlock>
+          <code>{commands.import}</code>
+        </CodeBlock>
       </Box>
       <Box css={{ display: "none", "@bp2": { display: "block" } }}>
         <ContentLandmark />
@@ -101,7 +101,7 @@ export const Intro: React.FC = () => {
           "@bp2": { gap: "0" },
         }}
       >
-        {content.features.map((f, index) => (
+        {intro.highlights.map((h, index) => (
           <Box
             key={`section-intro-${index}`}
             as="li"
@@ -160,7 +160,7 @@ export const Intro: React.FC = () => {
                   },
                 }}
               >
-                {f.title}
+                {h.title}
               </Text>
               <Text
                 css={{
@@ -175,13 +175,11 @@ export const Intro: React.FC = () => {
                     textAlign: "start",
                   },
                 }}
-                dangerouslySetInnerHTML={{ __html: f.description }}
+                dangerouslySetInnerHTML={{ __html: h.description }}
               />
-              {f.snippet && (
-                <CodeBlock
-                  css={{ display: "none", "@bp2": { display: "flex" } }}
-                >
-                  <code>{f.snippet}</code>
+              {h.snippet && (
+                <CodeBlock>
+                  <code>{h.snippet}</code>
                 </CodeBlock>
               )}
             </Box>
