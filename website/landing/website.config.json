@@ -21,7 +21,7 @@
   ],
   "api": {
     "title": "Building blocks of the Sandpack ecosystem.",
-    "features": [
+    "highlights": [
       {
         "title": "Providers",
         "description": "We export a <code>SandpackProvider</code> that manages the state and actions for sandpack and a <code>ThemeProvider</code> that handles the theme and style."
@@ -44,7 +44,7 @@
     "title": "Get started with Sandpack."
   },
   "community": {
-    "title": "Get involved in our community",
+    "title": "Get involved in our community.",
     "communities": [
       {
         "name": "Twitter",
@@ -63,6 +63,26 @@
         "socialUrl": "#",
         "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
         "logoUrl": "/assets/logos/GitHub.svg"
+      }
+    ]
+  },
+  "features": {
+    "title": "Live coding environment <span class=\"highlight\">in minutes.</span>",
+    "highlights": [
+      {
+        "title": "Full editor experience",
+        "description": "Sandpack is using CodeMirror under the hood, giving you all the basic capabilities of a code editor and syntax highlight.",
+        "iconKey": "editor"
+      },
+      {
+        "title": "Advanced preview",
+        "description": "Sandpack embeds the browser bundler that powers codesandbox.io and takes advantage of the following features: hot module reloading API, friendly error overlay, powerful transpilation result caching, dependency resolver.",
+        "iconKey": "preview"
+      },
+      {
+        "title": "Export to CodeSandbox",
+        "description": "With Sandpack, you're always one click away from opening your code snippet in codesandbox",
+        "iconKey": "export"
       }
     ]
   },

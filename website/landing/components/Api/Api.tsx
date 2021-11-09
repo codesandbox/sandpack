@@ -118,7 +118,7 @@ export const Api: React.FC = () => {
           },
         }}
       >
-        {api.features.map((f, index) => (
+        {api.highlights.map((h, index) => (
           <Box
             key={`section-api-${index}`}
             as="li"
@@ -193,7 +193,7 @@ export const Api: React.FC = () => {
                     },
                   }}
                 >
-                  {f.title}
+                  {h.title}
                 </Text>
                 <Text
                   css={{
@@ -208,7 +208,7 @@ export const Api: React.FC = () => {
                       textAlign: "start",
                     },
                   }}
-                  dangerouslySetInnerHTML={{ __html: f.description }}
+                  dangerouslySetInnerHTML={{ __html: h.description }}
                 />
               </Box>
             </Box>
