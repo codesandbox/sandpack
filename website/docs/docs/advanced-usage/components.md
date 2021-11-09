@@ -66,7 +66,7 @@ You can easily swap the two components inside the `SandpackLayout` to get a diff
   </SandpackLayout>
 </SandpackProvider>
 
-`SandpackLayout` accepts a `theme` prop, so you can pass in your [custom theme object or a predefined theme](/docs/getting-started/custom-ui#theming).
+`SandpackLayout` accepts a `theme` prop, so you can pass in your [custom theme object or a predefined theme](/getting-started/custom-ui#theming).
 
 :::note Reminder
 If you do not want to use the `SandpackLayout` but still want to have style applied to the `sandpack` components according to the theme,
