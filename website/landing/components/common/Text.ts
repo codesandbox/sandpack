@@ -21,7 +21,3 @@ export const Text = styled("p", {
     color: "$primary",
   },
 });
-
-export const TextHighlight = styled("span", {
-  color: "$primary",
-});
