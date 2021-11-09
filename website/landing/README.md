@@ -5,6 +5,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
-// On root
-yarn dev:landing
+yarn dev:landing // root folder
+# or
+yarn dev // website/landing folder
 ```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Content
+
+The content folder contains all of the section's text. If a copy change is needed, you can go to `/content/{name-of-the-section}.ts` and update the corresponding value.
