@@ -11,7 +11,7 @@ export const ErrorOverlay: React.FC = () => {
     return null;
   }
   return (
-    <div className={c("overlay", "error")}>
+    <div className={c("overlay", "error")} translate="no">
       <div className={c("error-message")}>{errorMessage}</div>
     </div>
   );
