@@ -25,11 +25,13 @@ const Main = styled("main", {
 });
 
 const Home: NextPage = () => {
+  const { global } = content;
+
   return (
     <Container>
       <Head>
-        <title>{content.global.title}</title>
-        <meta content={content.global.description} name="description" />
+        <title>{global.title}</title>
+        <meta content={global.description} name="description" />
         <link href="/favicon.ico" rel="icon" />
       </Head>
 
