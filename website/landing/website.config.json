@@ -1,0 +1,19 @@
+{
+  "global": {
+    "title": "Sandpack",
+    "description": ""
+  },
+  "commands": {
+    "install": "npm install @codesandbox/sandpack-react"
+  },
+  "resources": [
+    {
+      "name": "Docs",
+      "url": "#"
+    },
+    {
+      "name": "GitHub",
+      "url": "#"
+    }
+  ]
+}
