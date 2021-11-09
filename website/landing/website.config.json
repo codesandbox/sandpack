@@ -45,6 +45,27 @@
       }
     ]
   },
+  "showCase": {
+    "title": "Showcase",
+    "highlights": [
+      {
+        "title": "MDX",
+        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+      },
+      {
+        "title": "Sound Demo",
+        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+      },
+      {
+        "title": "Multiple Previews",
+        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+      },
+      {
+        "title": "Step by step code",
+        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+      }
+    ]
+  },
   "users": {
     "title": "Who's using Sandpack.",
     "list": [
