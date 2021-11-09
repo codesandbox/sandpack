@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+slug: /
 ---
 
 # Introduction
@@ -47,7 +48,7 @@ body {
 ```;
 ```````
 
-```````md
+````````md
 ```````js sandpack template=react theme=codesandbox-dark
 ```js file=/App.js
 import "./style.css"
@@ -61,7 +62,9 @@ body {
 }
 ```;
 ```````
-```````
+````````
+
+`````
 
 ## Theme: GitHub Light
 
@@ -78,3 +81,4 @@ export default function App() {
 }
 ```
 ````
+`````
