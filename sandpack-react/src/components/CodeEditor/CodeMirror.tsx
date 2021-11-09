@@ -24,7 +24,7 @@ import * as React from "react";
 import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
 import type { EditorState as SandpackEditorState } from "../../types";
-import { getFileName } from "../../utils/stringUtils";
+import { getFileName, generateRandomId } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
@@ -88,6 +88,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
     const [internalCode, setInternalCode] = React.useState<string>(code);
     const c = useClasser("sp");
     const { listen } = useSandpack();
+    const ariaId = React.useRef<string>(generateRandomId());
 
     React.useEffect(() => {
       if (!wrapper.current) {
@@ -195,7 +196,10 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
 
       if (!readOnly) {
         view.contentDOM.setAttribute("tabIndex", "-1");
-        view.contentDOM.setAttribute("aria-describedby", "exit-instructions");
+        view.contentDOM.setAttribute(
+          "aria-describedby",
+          `exit-instructions-${ariaId.current}`
+        );
       }
 
       cmView.current = view;
@@ -240,10 +244,10 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
             view?.dispatch({
               // Pass message to clean up inline error
               annotations: [
-                ({
+                {
                   type: "clean-error",
                   value: null,
-                } as unknown) as Annotation<unknown>,
+                } as unknown as Annotation<unknown>,
               ],
 
               // Trigger a doc change to remove inline error
@@ -263,10 +267,10 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
           ) {
             view?.dispatch({
               annotations: [
-                ({
+                {
                   type: "error",
                   value: message.line,
-                } as unknown) as Annotation<unknown>,
+                } as unknown as Annotation<unknown>,
               ],
             });
           }
@@ -288,7 +292,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
 
     if (readOnly) {
       return (
-        <pre ref={combinedRef} className={c("cm", editorState)}>
+        <pre ref={combinedRef} className={c("cm", editorState)} translate="no">
           <code className={c("pre-placeholder")}>{code}</code>
         </pre>
       );
@@ -299,7 +303,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       <div
         ref={combinedRef}
-        aria-describedby="enter-instructions"
+        aria-describedby={`enter-instructions-${ariaId.current}`}
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
@@ -307,6 +311,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
         onKeyDown={handleContainerKeyDown}
         role="group"
         tabIndex={0}
+        translate="no"
       >
         <pre
           className={c("pre-placeholder")}
@@ -318,11 +323,17 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
         </pre>
 
         <>
-          <p id="enter-instructions" style={{ display: "none" }}>
+          <p
+            id={`enter-instructions-${ariaId.current}`}
+            style={{ display: "none" }}
+          >
             To enter the code editing mode, press Enter. To exit the edit mode,
             press Escape
           </p>
-          <p id="exit-instructions" style={{ display: "none" }}>
+          <p
+            id={`exit-instructions-${ariaId.current}`}
+            style={{ display: "none" }}
+          >
             You are editing the code. To exit the edit mode, press Escape
           </p>
         </>
