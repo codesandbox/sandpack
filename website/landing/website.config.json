@@ -3,6 +3,9 @@
     "title": "Sandpack",
     "description": ""
   },
+  "footer": {
+    "text": "powered by"
+  },
   "commands": {
     "install": "npm install @codesandbox/sandpack-react"
   },

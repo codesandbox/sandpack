@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import content from "../../website.config.json";
 import { Box, Text } from "../common";
 
 export const Footer: React.FC = () => {
@@ -27,7 +28,7 @@ export const Footer: React.FC = () => {
         }}
         id="footer-label"
       >
-        powered by
+        {content.footer.text}
       </Text>
       <Image
         alt="CodeSandbox"
