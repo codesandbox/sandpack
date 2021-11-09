@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (
@@ -58,7 +54,7 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
-        sandpack: { theme: "codesandbox-dark" },
+        sandpack: { theme: require("./src/css/sandpack") },
         colorMode: {
           defaultMode: "dark",
         },
@@ -127,10 +123,6 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
             },
           ],
           copyright: `Copyright © ${new Date().getFullYear()} CodeSandbox, Inc. Built with Docusaurus.`,
-        },
-        prism: {
-          theme: lightCodeTheme,
-          darkTheme: darkCodeTheme,
         },
       }),
   }
