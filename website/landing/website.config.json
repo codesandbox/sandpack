@@ -44,5 +44,46 @@
         "logoUrl": "/assets/logos/GitHub.svg"
       }
     ]
+  },
+  "users": {
+    "title": "Who's using Sandpack.",
+    "list": [
+      {
+        "name": "React",
+        "socialUrl": "#",
+        "logo": {
+          "url": "/assets/logos/React.svg",
+          "height": 39,
+          "width": 147
+        }
+      },
+      {
+        "name": "CodeSandbox",
+        "socialUrl": "#",
+        "logo": {
+          "url": "/assets/logos/CodeSandbox-minimal.svg",
+          "height": 37,
+          "width": 261
+        }
+      },
+      {
+        "name": "CodeHike",
+        "socialUrl": "#",
+        "logo": {
+          "url": "/assets/logos/CodeHike.svg",
+          "height": 47,
+          "width": 219
+        }
+      },
+      {
+        "name": "CodeAmigo",
+        "socialUrl": "#",
+        "logo": {
+          "url": "/assets/logos/CodeAmigo.svg",
+          "height": 47,
+          "width": 219
+        }
+      }
+    ]
   }
 }
