@@ -1,5 +1,3 @@
-import type { HighlightedText } from "./shared-types";
-
 interface Feature {
   title: string;
   description: string;
@@ -9,7 +7,7 @@ interface Feature {
 interface IntroSection {
   features: Feature[];
   importCommand?: string;
-  title: HighlightedText[];
+  title: string;
 }
 
 export const content: IntroSection = {
@@ -57,8 +55,5 @@ export const content: IntroSection = {
     },
   ],
   importCommand: `import { Sandpack } from "@codesandbox/sandpack-react";`,
-  title: [
-    { text: "Live coding", highlight: true },
-    { text: "in the browser.", highlight: false },
-  ],
+  title: 'Live coding <span class="highlight">in the browser.</span>',
 };

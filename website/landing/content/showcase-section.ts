@@ -1,17 +1,15 @@
-import type { HighlightedText } from "./shared-types";
-
 interface Feature {
   title: string;
   description: string;
 }
 
 interface ShowcaseSection {
-  title: HighlightedText[];
+  title: string;
   features: Feature[];
 }
 
 export const content: ShowcaseSection = {
-  title: [{ text: "Showcase", highlight: false }],
+  title: "Showcase",
   features: [
     {
       title: "MDX",

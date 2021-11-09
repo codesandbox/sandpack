@@ -1,5 +1,5 @@
 import { content } from "../../content/api-section";
-import { Box, List, SandpackLogo, Text, TextHighlight } from "../common";
+import { Box, List, SandpackLogo, Text } from "../common";
 
 const ContentLandmark = () => {
   return (
@@ -97,21 +97,8 @@ export const Api: React.FC = () => {
               width: "56%",
             },
           }}
-        >
-          {content.title.map(({ text, highlight }, index) => {
-            const renderedText = `${text}${
-              index < content.title.length - 1 ? " " : ""
-            }`;
-
-            return highlight ? (
-              <TextHighlight className="highlight">
-                {renderedText}
-              </TextHighlight>
-            ) : (
-              renderedText
-            );
-          })}
-        </Text>
+          dangerouslySetInnerHTML={{ __html: content.title }}
+        />
       </Box>
       <List
         css={{

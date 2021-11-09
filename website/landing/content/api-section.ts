@@ -1,5 +1,3 @@
-import type { HighlightedText } from "./shared-types";
-
 interface Feature {
   title: string;
   description: string;
@@ -7,17 +5,12 @@ interface Feature {
 }
 
 interface ApiSection {
-  title: HighlightedText[];
+  title: string;
   features: Feature[];
 }
 
 export const content: ApiSection = {
-  title: [
-    {
-      text: "Building blocks of the Sandpack ecosystem.",
-      highlight: false,
-    },
-  ],
+  title: "Building blocks of the Sandpack ecosystem.",
   features: [
     {
       title: "Providers",

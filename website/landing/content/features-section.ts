@@ -1,5 +1,3 @@
-import type { HighlightedText } from "./shared-types";
-
 interface Feature {
   title: string;
   description: string;
@@ -8,7 +6,7 @@ interface Feature {
 
 interface FeaturesSection {
   features: Feature[];
-  title: HighlightedText[];
+  title: string;
 }
 
 export const content: FeaturesSection = {
@@ -32,8 +30,5 @@ export const content: FeaturesSection = {
       iconKey: "export",
     },
   ],
-  title: [
-    { text: "Live coding environment", highlight: false },
-    { text: "in minutes.", highlight: true },
-  ],
+  title: 'Live coding environment <span class="highlight">in minutes.</span>',
 };

@@ -16,6 +16,10 @@ export const Text = styled("p", {
     letterSpacing: "inherit",
     padding: "4px 12px",
   },
+
+  ".highlight": {
+    color: "$primary",
+  },
 });
 
 export const TextHighlight = styled("span", {

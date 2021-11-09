@@ -1,5 +1,5 @@
 import { content } from "../../content/features-section";
-import { Box, List, Text, TextHighlight } from "../common";
+import { Box, List, Text } from "../common";
 
 const ICONS_MAP = {
   editor: () => (
@@ -93,21 +93,8 @@ export const Features: React.FC = () => {
               width: "44%",
             },
           }}
-        >
-          {content.title.map(({ text, highlight }, index) => {
-            const renderedText = `${text}${
-              index < content.title.length - 1 ? " " : ""
-            }`;
-
-            return highlight ? (
-              <TextHighlight className="highlight">
-                {renderedText}
-              </TextHighlight>
-            ) : (
-              renderedText
-            );
-          })}
-        </Text>
+          dangerouslySetInnerHTML={{ __html: content.title }}
+        />
         <List
           css={{
             alignItems: "center",
