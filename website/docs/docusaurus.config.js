@@ -15,6 +15,7 @@
     themes: ["@codesandbox/sandpack-docusaurus"],
 
     plugins: [
+      'docusaurus-plugin-sass',
       [
         "@docusaurus/plugin-sitemap",
         {
@@ -45,7 +46,7 @@
               "https://github.com/codesandbox/sandpack/edit/main/website/docs",
           },
           theme: {
-            customCss: require.resolve("./src/css/custom.css"),
+            customCss: [require.resolve('./src/scss/custom.scss')],
           },
         }),
       ],
@@ -54,7 +55,7 @@
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
-        sandpack: { theme: require("./src/css/sandpack") },
+        // sandpack: { theme: require("./src/css/sandpack") },
         colorMode: {
           defaultMode: "dark",
         },
