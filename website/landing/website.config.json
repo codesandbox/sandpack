@@ -9,6 +9,19 @@
   "commands": {
     "install": "npm install @codesandbox/sandpack-react"
   },
+  "resources": [
+    {
+      "name": "Docs",
+      "url": "#"
+    },
+    {
+      "name": "GitHub",
+      "url": "#"
+    }
+  ],
+  "banner": {
+    "title": "Get started with Sandpack."
+  },
   "community": {
     "title": "Get involved in our community",
     "communities": [
@@ -31,15 +44,5 @@
         "logoUrl": "/assets/logos/GitHub.svg"
       }
     ]
-  },
-  "resources": [
-    {
-      "name": "Docs",
-      "url": "#"
-    },
-    {
-      "name": "GitHub",
-      "url": "#"
-    }
-  ]
+  }
 }
