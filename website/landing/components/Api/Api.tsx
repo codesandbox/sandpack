@@ -1,4 +1,4 @@
-import { content } from "../../content/api-section";
+import content from "../../website.config.json";
 import { Box, List, SandpackLogo, Text } from "../common";
 
 const ContentLandmark = () => {
@@ -35,6 +35,8 @@ const ContentLandmark = () => {
 };
 
 export const Api: React.FC = () => {
+  const { api } = content;
+
   return (
     <Box
       as="section"
@@ -97,7 +99,7 @@ export const Api: React.FC = () => {
               width: "56%",
             },
           }}
-          dangerouslySetInnerHTML={{ __html: content.title }}
+          dangerouslySetInnerHTML={{ __html: api.title }}
         />
       </Box>
       <List
@@ -116,7 +118,7 @@ export const Api: React.FC = () => {
           },
         }}
       >
-        {content.features.map((f, index) => (
+        {api.features.map((f, index) => (
           <Box
             key={`section-api-${index}`}
             as="li"

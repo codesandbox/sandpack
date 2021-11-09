@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 
-
 import { Api } from "../components/Api";
 import { Banner } from "../components/Banner";
 import { Community } from "../components/Community";
