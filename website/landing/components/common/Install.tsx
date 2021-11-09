@@ -1,13 +1,10 @@
+import content from "../../website.config.json";
+
 import { Box, Button, Text } from ".";
 
-const DEFAULT_COMMAND = "npm install @codesandbox/sandpack-react";
+const command = content.commands.install;
 
-interface InstallProps {
-  command?: string;
-}
-export const Install: React.FC<InstallProps> = ({
-  command = DEFAULT_COMMAND,
-}) => {
+export const Install: React.FC = () => {
   // TODO: feedback on copy (?)
   const copyToClipboard = () => {
     navigator.clipboard.writeText(command);
@@ -37,7 +34,7 @@ export const Install: React.FC<InstallProps> = ({
           "@bp2": {
             fontSize: "24px",
             lineHeight: "29px",
-          }
+          },
         }}
       >
         {command}
