@@ -4,6 +4,8 @@ import content from "../../website.config.json";
 import { Box, Text } from "../common";
 
 export const Footer: React.FC = () => {
+  const { footer } = content;
+
   return (
     <Box
       aria-labelledby="footer-label"
@@ -28,7 +30,7 @@ export const Footer: React.FC = () => {
         }}
         id="footer-label"
       >
-        {content.footer.text}
+        {footer.text}
       </Text>
       <Image
         alt="CodeSandbox"
