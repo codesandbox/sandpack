@@ -30,6 +30,7 @@ export const globalStyles = globalCss({
   body: {
     backgroundColor: "$darkBackground",
     color: "$darkTextPrimary",
+    fontSize: "10px",
     fontFamily: "$base",
     margin: 0,
   },
