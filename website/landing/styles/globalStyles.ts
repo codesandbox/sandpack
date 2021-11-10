@@ -24,7 +24,7 @@ export const globalStyles = globalCss({
   ],
 
   "*, *::before, *::after": {
-    boxSizing: "inherit",
+    boxSizing: "border-box",
   },
 
   body: {

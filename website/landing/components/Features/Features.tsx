@@ -1,48 +1,11 @@
-import { content } from "../../content/features-section";
-import { Box, List, Text, TextHighlight } from "../common";
+import content from "../../website.config.json";
+import { Box, List, Text } from "../common";
 
-const ICONS_MAP = {
-  editor: () => (
-    <svg fill="none" height="42" viewBox="0 0 43 42" width="43">
-      <path
-        d="M7.5 18v-8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2ZM35.5 20h-8.172c-1.781 0-2.674-2.154-1.414-3.414l8.172-8.172c1.26-1.26 3.414-.367 3.414 1.414V18a2 2 0 0 1-2 2Z"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="2"
-      />
-      <circle
-        cx="23"
-        cy="30.5"
-        r="6.5"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="2"
-      />
-    </svg>
-  ),
-  preview: () => (
-    <svg fill="none" height="42" viewBox="0 0 43 42" width="43">
-      <path
-        d="M16.5 26h4a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-11a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2h-17a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="2"
-      />
-    </svg>
-  ),
-  export: () => (
-    <svg fill="none" height="42" viewBox="0 0 43 42" width="43">
-      <path
-        d="M10.5 16v14a2 2 0 0 0 2 2h19a2 2 0 0 0 2-2V16M9.5 12a2 2 0 0 1 2-2h21a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-21a2 2 0 0 1-2-2v-2Z"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="2"
-      />
-    </svg>
-  ),
-};
+import { ICONS } from "./icons";
 
 export const Features: React.FC = () => {
+  const { features } = content;
+
   return (
     <Box
       as="section"
@@ -93,21 +56,8 @@ export const Features: React.FC = () => {
               width: "44%",
             },
           }}
-        >
-          {content.title.map(({ text, highlight }, index) => {
-            const renderedText = `${text}${
-              index < content.title.length - 1 ? " " : ""
-            }`;
-
-            return highlight ? (
-              <TextHighlight className="highlight">
-                {renderedText}
-              </TextHighlight>
-            ) : (
-              renderedText
-            );
-          })}
-        </Text>
+          dangerouslySetInnerHTML={{ __html: features.title }}
+        />
         <List
           css={{
             alignItems: "center",
@@ -123,8 +73,8 @@ export const Features: React.FC = () => {
             },
           }}
         >
-          {content.features.map((f, index) => {
-            const icon = ICONS_MAP[f.iconKey as keyof typeof ICONS_MAP];
+          {features.highlights.map((h, index) => {
+            const icon = ICONS[h.iconKey as keyof typeof ICONS];
 
             return (
               <Box
@@ -158,10 +108,11 @@ export const Features: React.FC = () => {
                     flexGrow: "0",
                     height: "78px",
                     justifyContent: "center",
+                    padding: "18px",
                     width: "78px",
                   }}
                 >
-                  {icon()}
+                  {icon}
                 </Box>
                 <Box
                   css={{
@@ -191,7 +142,7 @@ export const Features: React.FC = () => {
                       },
                     }}
                   >
-                    {f.title}
+                    {h.title}
                   </Text>
                   <Text
                     css={{
@@ -207,7 +158,7 @@ export const Features: React.FC = () => {
                       },
                     }}
                   >
-                    {f.description}
+                    {h.description}
                   </Text>
                 </Box>
               </Box>

@@ -1,7 +1,9 @@
+import content from "../../website.config.json";
 import { Box, Resources, SandpackLogo, Text } from "../common";
 import { Install } from "../common/Install";
 
 export const Banner: React.FC = () => {
+  const { banner } = content;
   return (
     <Box
       css={{
@@ -39,10 +41,10 @@ export const Banner: React.FC = () => {
             "@bp2": {
               fontSize: "96px",
               maxWidth: "58%",
-            }
+            },
           }}
         >
-          Get started with Sandpack.
+          {banner.title}
         </Text>
       </Box>
       <Install />

@@ -1,5 +1,5 @@
-import { content } from "../../content/api-section";
-import { Box, List, SandpackLogo, Text, TextHighlight } from "../common";
+import content from "../../website.config.json";
+import { Box, List, SandpackLogo, Text } from "../common";
 
 const ContentLandmark = () => {
   return (
@@ -35,6 +35,8 @@ const ContentLandmark = () => {
 };
 
 export const Api: React.FC = () => {
+  const { api } = content;
+
   return (
     <Box
       as="section"
@@ -97,21 +99,8 @@ export const Api: React.FC = () => {
               width: "56%",
             },
           }}
-        >
-          {content.title.map(({ text, highlight }, index) => {
-            const renderedText = `${text}${
-              index < content.title.length - 1 ? " " : ""
-            }`;
-
-            return highlight ? (
-              <TextHighlight className="highlight">
-                {renderedText}
-              </TextHighlight>
-            ) : (
-              renderedText
-            );
-          })}
-        </Text>
+          dangerouslySetInnerHTML={{ __html: api.title }}
+        />
       </Box>
       <List
         css={{
@@ -129,7 +118,7 @@ export const Api: React.FC = () => {
           },
         }}
       >
-        {content.features.map((f, index) => (
+        {api.highlights.map((h, index) => (
           <Box
             key={`section-api-${index}`}
             as="li"
@@ -204,7 +193,7 @@ export const Api: React.FC = () => {
                     },
                   }}
                 >
-                  {f.title}
+                  {h.title}
                 </Text>
                 <Text
                   css={{
@@ -219,7 +208,7 @@ export const Api: React.FC = () => {
                       textAlign: "start",
                     },
                   }}
-                  dangerouslySetInnerHTML={{ __html: f.description }}
+                  dangerouslySetInnerHTML={{ __html: h.description }}
                 />
               </Box>
             </Box>

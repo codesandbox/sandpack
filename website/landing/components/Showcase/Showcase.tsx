@@ -1,5 +1,5 @@
-import { content } from "../../content/showcase-section";
-import { Box, List, Text, TextHighlight } from "../common";
+import content from "../../website.config.json";
+import { Box, List, Text } from "../common";
 
 const ContentLandmark = () => {
   return (
@@ -35,6 +35,8 @@ const ContentLandmark = () => {
 };
 
 export const Showcase: React.FC = () => {
+  const { showCase } = content;
+
   return (
     <Box
       as="section"
@@ -76,19 +78,8 @@ export const Showcase: React.FC = () => {
             width: "56%",
           },
         }}
-      >
-        {content.title.map(({ text, highlight }, index) => {
-          const renderedText = `${text}${
-            index < content.title.length - 1 ? " " : ""
-          }`;
-
-          return highlight ? (
-            <TextHighlight className="highlight">{renderedText}</TextHighlight>
-          ) : (
-            renderedText
-          );
-        })}
-      </Text>
+        dangerouslySetInnerHTML={{ __html: showCase.title }}
+      />
       <List
         css={{
           alignItems: "center",
@@ -104,7 +95,7 @@ export const Showcase: React.FC = () => {
           },
         }}
       >
-        {content.features.map((f, index) => (
+        {showCase.highlights.map((h, index) => (
           <Box
             key={`section-showcase-${index}`}
             as="li"
@@ -150,7 +141,7 @@ export const Showcase: React.FC = () => {
                   },
                 }}
               >
-                {f.title}
+                {h.title}
               </Text>
               <Text
                 css={{
@@ -165,7 +156,7 @@ export const Showcase: React.FC = () => {
                   },
                 }}
               >
-                {f.description}
+                {h.description}
               </Text>
             </Box>
           </Box>

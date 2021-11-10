@@ -10,8 +10,8 @@ import { Hero } from "../components/Hero";
 import { Intro } from "../components/Intro";
 import { Showcase } from "../components/Showcase";
 import { Users } from "../components/Users";
-import { content } from "../content/global";
 import { styled } from "../stitches.config";
+import content from "../website.config.json";
 
 const Container = styled("section", {
   display: "flex",
@@ -25,11 +25,13 @@ const Main = styled("main", {
 });
 
 const Home: NextPage = () => {
+  const { global } = content;
+
   return (
     <Container>
       <Head>
-        <title>{content.pageTitle}</title>
-        <meta content={content.pageDescription} name="description" />
+        <title>{global.title}</title>
+        <meta content={global.description} name="description" />
         <link href="/favicon.ico" rel="icon" />
       </Head>
 

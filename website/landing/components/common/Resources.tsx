@@ -1,9 +1,6 @@
-import { List, Text } from ".";
+import content from "../../website.config.json";
 
-const RESOURCES = [
-  { name: "Docs", link: "" },
-  { name: "GitHub", link: "" },
-];
+import { List, Text } from ".";
 
 export const Resources: React.FC = () => {
   return (
@@ -13,9 +10,9 @@ export const Resources: React.FC = () => {
         gap: "48px",
       }}
     >
-      {RESOURCES.map((r) => (
+      {content.resources.map((r) => (
         <li key={r.name}>
-          <a href={r.link}>
+          <a href={r.url}>
             <Text
               css={{
                 fontWeight: "$semiBold",
@@ -32,7 +29,7 @@ export const Resources: React.FC = () => {
                 "@bp2": {
                   fontSize: "24px",
                   lineHeight: "29px",
-                }
+                },
               }}
             >
               {r.name}

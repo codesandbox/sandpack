@@ -14,4 +14,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Content
 
-The content folder contains all of the section's text. If a copy change is needed, you can go to `/content/{name-of-the-section}.ts` and update the corresponding value.
+The `website.config.json` file contains all of this page's contents. To modify the copy, open the file and look for the corresponding key and update the text.
