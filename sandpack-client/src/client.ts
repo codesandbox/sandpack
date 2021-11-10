@@ -67,6 +67,7 @@ export interface ClientOptions {
 export interface SandboxInfo {
   files: SandpackBundlerFiles;
   dependencies?: Dependencies;
+  devDependencies?: Dependencies;
   entry?: string;
   /**
    * What template we use, if not defined we infer the template from the dependencies or files.
@@ -234,7 +235,11 @@ export class SandpackClient {
     );
 
     let packageJSON = JSON.parse(
-      createPackageJSON(this.sandboxInfo.dependencies, this.sandboxInfo.entry)
+      createPackageJSON(
+        this.sandboxInfo.dependencies,
+        this.sandboxInfo.devDependencies,
+        this.sandboxInfo.entry
+      )
     );
     try {
       packageJSON = JSON.parse(files["/package.json"].code);
@@ -262,8 +267,8 @@ export class SandpackClient {
       modules,
       externalResources: [],
       hasFileResolver: Boolean(this.options.fileResolver),
-      disableDependencyPreprocessing: this.sandboxInfo
-        .disableDependencyPreprocessing,
+      disableDependencyPreprocessing:
+        this.sandboxInfo.disableDependencyPreprocessing,
       template:
         this.sandboxInfo.template ||
         getTemplate(packageJSON, normalizedModules),
@@ -342,6 +347,7 @@ export class SandpackClient {
       return addPackageJSONIfNeeded(
         sandboxInfo.files,
         sandboxInfo.dependencies,
+        sandboxInfo.devDependencies,
         sandboxInfo.entry
       );
     }

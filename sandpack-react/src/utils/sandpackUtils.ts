@@ -78,6 +78,7 @@ export const getSandpackStateFromProps = (
   const files = addPackageJSONIfNeeded(
     projectSetup.files,
     projectSetup.dependencies || {},
+    projectSetup.devDependencies || {},
     projectSetup.entry
   );
 
@@ -129,6 +130,10 @@ export const getSetup = (
     dependencies: {
       ...baseTemplate.dependencies,
       ...setup.dependencies,
+    },
+    devDependencies: {
+      ...baseTemplate.devDependencies,
+      ...setup.devDependencies,
     },
     entry: setup.entry || baseTemplate.entry,
     main: setup.main || baseTemplate.main,

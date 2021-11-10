@@ -70,6 +70,7 @@ export type EditorState = "pristine" | "dirty";
 export interface SandboxTemplate {
   files: SandpackBundlerFiles;
   dependencies: Record<string, string>;
+  devDependencies?: Record<string, string>;
   entry: string;
   main: string;
   environment: SandboxEnvironment;
@@ -96,6 +97,7 @@ export type SandboxEnvironment = ITemplate;
 export type SandpackPredefinedTemplate =
   | "angular"
   | "react"
+  | "react-ts"
   | "vanilla"
   | "vue"
   | "vue3";
