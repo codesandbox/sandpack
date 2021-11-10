@@ -18,6 +18,8 @@ import {
   keymap,
   EditorView,
 } from "@codemirror/view";
+import { classHighlightStyle, highlightTree } from "@codemirror/highlight";
+import { NodeType, Tree } from "@lezer/common";
 import type { KeyBinding } from "@codemirror/view";
 import * as React from "react";
 
@@ -297,6 +299,21 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
         </pre>
       );
     }
+
+    const SSRSyntaxHighlight = () => {
+      const startState = EditorState.create({
+        doc: code,
+        extensions: [],
+      });
+
+      const syntax = highlightTree(
+        startState.tree,
+        classHighlightStyle.match,
+        console.log
+      );
+    };
+
+    SSRSyntaxHighlight();
 
     return (
       /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
