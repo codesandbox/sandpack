@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/codesandbox/sandpack/compare/v0.1.20...v0.2.0) (2021-11-10)
+
+
+### Features
+
+* **template:** add react typescript ([#114](https://github.com/codesandbox/sandpack/issues/114)) ([96aaac8](https://github.com/codesandbox/sandpack/commit/96aaac86afc2287a1e96fa95a9836d156a4bc9de))
+
+
+
+
+
 ## [0.1.20](https://github.com/codesandbox/sandpack/compare/v0.1.19...v0.1.20) (2021-11-08)
 
 

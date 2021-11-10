@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-react",
-  "version": "0.1.20",
+  "version": "0.2.0",
   "description": "",
   "keywords": [],
   "repository": {
@@ -44,7 +44,7 @@
     "@codemirror/matchbrackets": "0.19.3",
     "@codemirror/state": "0.19.4",
     "@codemirror/view": "0.19.14",
-    "@codesandbox/sandpack-client": "^0.1.20",
+    "@codesandbox/sandpack-client": "^0.2.0",
     "codesandbox-import-util-types": "^2.2.3",
     "codesandbox-import-utils": "^2.2.3"
   },
