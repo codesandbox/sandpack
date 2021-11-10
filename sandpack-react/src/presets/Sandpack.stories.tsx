@@ -81,9 +81,9 @@ export const ReactTypescriptEditor: Story<SandpackProps> = (args) => (
   <Sandpack
     {...args}
     files={{
-      "/App.tsx": reactCodeTsx,
-      "/button.tsx": buttonCodeTsx,
-      "/link.tsx": linkCodeTsx,
+      "/src/App.tsx": reactCodeTsx,
+      "/src/button.tsx": buttonCodeTsx,
+      "/src/link.tsx": linkCodeTsx,
     }}
     options={{
       showLineNumbers: true,
