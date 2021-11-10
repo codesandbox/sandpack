@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (
@@ -19,6 +15,7 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
     themes: ["@codesandbox/sandpack-docusaurus"],
 
     plugins: [
+      'docusaurus-plugin-sass',
       [
         "@docusaurus/plugin-sitemap",
         {
@@ -49,7 +46,7 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
               "https://github.com/codesandbox/sandpack/edit/main/website/docs",
           },
           theme: {
-            customCss: require.resolve("./src/css/custom.css"),
+            customCss: [require.resolve('./src/scss/custom.scss')],
           },
         }),
       ],
@@ -58,7 +55,7 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
-        sandpack: { theme: "codesandbox-dark" },
+        // sandpack: { theme: require("./src/css/sandpack") },
         colorMode: {
           defaultMode: "dark",
         },
@@ -66,7 +63,8 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
           title: "Sandpack",
           logo: {
             alt: "Sandpack",
-            src: "img/logo.svg", // TODO
+            src: "img/logo-dark.svg",
+            srcDark: "img/logo.svg",
           },
           items: [
             {
@@ -127,10 +125,6 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
             },
           ],
           copyright: `Copyright © ${new Date().getFullYear()} CodeSandbox, Inc. Built with Docusaurus.`,
-        },
-        prism: {
-          theme: lightCodeTheme,
-          darkTheme: darkCodeTheme,
         },
       }),
   }

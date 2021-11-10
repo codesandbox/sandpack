@@ -2,8 +2,6 @@
 sidebar_position: 1
 ---
 
-import { Sandpack } from "@codesandbox/sandpack-react"
-
 # Install
 
 Sandpack is ready to be used in your React project. The package is published on `npm` and you can install it with:
@@ -34,7 +32,8 @@ import "@codesandbox/sandpack-react/dist/index.css";
 
 This should give you a nice code editor with some file tabs and a preview that runs in the browser.
 
-<Sandpack template="react"/>
+```js sandpack template=react
+```
 
 :::success Congrats!
 You have integrated the first Sandpack component into your project

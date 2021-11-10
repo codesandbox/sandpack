@@ -28,7 +28,9 @@
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "docusaurus-plugin-sass": "0.2.1",
+    "sass": "1.30.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.0.0-beta.6",
