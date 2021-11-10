@@ -39,7 +39,7 @@ const CustomSandpack = () => (
 ```
 
 <SandpackProvider template="react">
-  <SandpackLayout>
+  <SandpackLayout theme="codesandbox-dark">
     <SandpackCodeEditor />
     <SandpackPreview />
   </SandpackLayout>
@@ -60,7 +60,7 @@ You can easily swap the two components inside the `SandpackLayout` to get a diff
 ```
 
 <SandpackProvider template="react">
-  <SandpackLayout>
+  <SandpackLayout theme="codesandbox-dark">
     <SandpackPreview />
     <SandpackCodeEditor />
   </SandpackLayout>
@@ -101,7 +101,7 @@ There's nothing stopping you from rendering multiple previews in the same `Provi
 ```
 
 <SandpackProvider template="react">
-  <SandpackLayout>
+  <SandpackLayout theme="codesandbox-dark">
     <SandpackPreview />
     <SandpackPreview />
     <SandpackPreview />
@@ -140,7 +140,7 @@ If you played with the `Sandpack` preset, you should be familiar already with th
 ```
 
 <SandpackProvider template="react">
-  <SandpackLayout>
+  <SandpackLayout theme="codesandbox-dark">
     <SandpackCodeEditor
       showTabs
       showLineNumbers={false}
@@ -166,7 +166,7 @@ For situations when you strictly want to show some code and run it in the browse
 ```
 
 <SandpackProvider template="react">
-  <SandpackLayout>
+  <SandpackLayout theme="codesandbox-dark">
     <SandpackCodeViewer />
     <SandpackPreview />
   </SandpackLayout>
@@ -198,7 +198,7 @@ const CustomSandpack = () => (
 ```
 
 <SandpackProvider template="react">
-  <SandpackLayout>
+  <SandpackLayout theme="codesandbox-dark">
     <SandpackCodeEditor />
     <SandpackTranspiledCode />
   </SandpackLayout>

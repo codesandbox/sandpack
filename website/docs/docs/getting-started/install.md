@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+slug: /
 ---
 
 # Install
@@ -27,12 +28,13 @@ import { Sandpack } from "@codesandbox/sandpack-react";
 import "@codesandbox/sandpack-react/dist/index.css";
 
 /* JSX Usage */
-<Sandpack template="react"/>
+<Sandpack template="react" />;
 ```
 
 This should give you a nice code editor with some file tabs and a preview that runs in the browser.
 
 ```js sandpack template=react
+
 ```
 
 :::success Congrats!

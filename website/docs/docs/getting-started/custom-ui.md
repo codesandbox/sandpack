@@ -17,12 +17,14 @@ The overall style can be set through the `theme` prop. Once again, sandpack offe
 Sandpack comes with some predefined themes:
 
 ```jsx
-<Sandpack theme="codesandbox-dark" />
-<Sandpack theme="codesandbox-light" />
-<Sandpack theme="github-light" />
-<Sandpack theme="night-owl" />
-<Sandpack theme="aqua-blue" />
-<Sandpack theme="monokai-pro" />
+<>
+  <Sandpack theme="codesandbox-dark" />
+  <Sandpack theme="codesandbox-light" />
+  <Sandpack theme="github-light" />
+  <Sandpack theme="night-owl" />
+  <Sandpack theme="aqua-blue" />
+  <Sandpack theme="monokai-pro" />
+</>
 ```
 
 You can compare all the themes [in this sandbox](https://codesandbox.io/s/sandpack-theme-yqsmj)
