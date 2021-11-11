@@ -15,7 +15,7 @@
     themes: ["@codesandbox/sandpack-docusaurus"],
 
     plugins: [
-      'docusaurus-plugin-sass',
+      "docusaurus-plugin-sass",
       [
         "@docusaurus/plugin-sitemap",
         {
@@ -33,6 +33,7 @@
         /** @type {import('@docusaurus/preset-classic').Options} */
         ({
           docs: {
+            routeBasePath: "/",
             sidebarPath: require.resolve("./sidebars.js"),
             editUrl:
               "https://github.com/codesandbox/sandpack/edit/main/website/docs",
@@ -46,7 +47,7 @@
               "https://github.com/codesandbox/sandpack/edit/main/website/docs",
           },
           theme: {
-            customCss: [require.resolve('./src/scss/custom.scss')],
+            customCss: [require.resolve("./src/scss/custom.scss")],
           },
         }),
       ],
@@ -55,9 +56,10 @@
     themeConfig:
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
-        // sandpack: { theme: require("./src/css/sandpack") },
+        sandpack: { theme: require("./src/scss/sandpack-theme") },
         colorMode: {
           defaultMode: "dark",
+          disableSwitch: true,
         },
         navbar: {
           title: "Sandpack",
@@ -67,13 +69,7 @@
             srcDark: "img/logo.svg",
           },
           items: [
-            {
-              type: "doc",
-              docId: "intro",
-              position: "left",
-              label: "Docs",
-            },
-            { to: "/releases", label: "Releases", position: "left" },
+            { to: "/releases", label: "Releases", position: "right" },
             {
               href: "https://github.com/codesandbox/sandpack",
               label: "GitHub",
@@ -84,15 +80,6 @@
         footer: {
           style: "dark",
           links: [
-            {
-              title: "Docs",
-              items: [
-                {
-                  label: "Tutorial",
-                  to: "/docs/intro",
-                },
-              ],
-            },
             {
               title: "Community",
               items: [

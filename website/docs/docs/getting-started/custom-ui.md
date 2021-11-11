@@ -2,7 +2,8 @@
 sidebar_position: 4
 ---
 
-import { Sandpack, SandpackRunner } from "@codesandbox/sandpack-react"
+import { Sandpack } from "../../src/CustomSandpack";
+import { SandpackRunner } from "@codesandbox/sandpack-react"
 
 # Custom UI
 
@@ -17,12 +18,14 @@ The overall style can be set through the `theme` prop. Once again, sandpack offe
 Sandpack comes with some predefined themes:
 
 ```jsx
-<Sandpack theme="codesandbox-dark" />
-<Sandpack theme="codesandbox-light" />
-<Sandpack theme="github-light" />
-<Sandpack theme="night-owl" />
-<Sandpack theme="aqua-blue" />
-<Sandpack theme="monokai-pro" />
+<>
+  <Sandpack theme="codesandbox-dark" />
+  <Sandpack theme="codesandbox-light" />
+  <Sandpack theme="github-light" />
+  <Sandpack theme="night-owl" />
+  <Sandpack theme="aqua-blue" />
+  <Sandpack theme="monokai-pro" />
+</>
 ```
 
 You can compare all the themes [in this sandbox](https://codesandbox.io/s/sandpack-theme-yqsmj)
@@ -41,6 +44,7 @@ You can also pass a **partial** theme object that overrides properties in the
     syntax: {
       tag: "darkgreen",
       string: "orange",
+      plain: "tomato",
     },
   }}
 />
@@ -49,13 +53,15 @@ You can also pass a **partial** theme object that overrides properties in the
 Your `Sandpack` instance should look like this:
 
 <Sandpack
-  theme={{
+template="react"
+theme={{
     palette: {
       accent: "rebeccapurple",
     },
     syntax: {
       tag: "darkgreen",
-      string: "orange"
+      string: "orange",
+      plain: "tomato"
     },
   }}
 />
@@ -73,7 +79,7 @@ import { Sandpack, codesandboxDarkTheme } from "@codesandbox/sandpack-react";
       bodyFont: "Arial",
     },
   }}
-/>
+/>;
 ```
 
 ## Custom Styling
@@ -82,7 +88,7 @@ Theming controls the color palette and typography, but you can also append your 
 
 For this, sandpack uses a small package called [`classer`](https://github.com/code-hike/codehike/tree/next/packages/classer). To customize existing components, you need to map your own classes to the internal sandpack classes.
 
-:::note 
+:::note
 While inspecting your Sandpack instance, notice that our components have classes prefixed with `sp-`.
 :::
 
@@ -95,7 +101,7 @@ While inspecting your Sandpack instance, notice that our components have classes
       "sp-wrapper": "custom-wrapper",
       "sp-layout": "custom-layout",
       "sp-tab-button": "custom-tab",
-    }
+    },
   }}
 />
 ```
@@ -106,7 +112,7 @@ This pattern is compatible with most modern styling systems, including Tailwind,
 
 ## Visual Options
 
-Some of the internal components of sandpack can be configured via the `options` prop. 
+Some of the internal components of sandpack can be configured via the `options` prop.
 
 ### Navigator
 
@@ -121,8 +127,8 @@ By default `Sandpack` will show a refresh button in the lower part of the previe
 ```
 
 <Sandpack
-  template="react"
-  options={{
+template="react"
+options={{
     showNavigator: true,
   }}
 />
@@ -215,7 +221,6 @@ preset.
 However, your input will be sent through the `code` prop. This is a single
 string that will replace the main file of the project.
 
-
 ```jsx
 import { SandpackRunner } from "@codesandbox/sandpack-react";
 
@@ -226,16 +231,14 @@ const code = `export default function App() {
 <SandpackRunner code={code} template="react" />;
 ```
 
-<SandpackRunner code={`export default function App() {
-  return <h1>Hello CodeSandbox</h1>
-}`} template="react" />
+<SandpackRunner code={`export default function App() { return <h1>Hello CodeSandbox</h1> }`} template="react" />
 
 :::note
 The `main` file is also be set in the `template` or the `customSetup` and is not the same as the `entry` file. In this example, `code` will replace the `App.js` file, because that is the
 **main** file in the react template. For `vue`, this would be the `App.vue` file.
 :::
 
-If you need to pass multiple files you can use the [`customSetup` prop](/docs/getting-started/custom-content#custom-setup).
+If you need to pass multiple files you can use the [`customSetup` prop](/getting-started/custom-content#custom-setup).
 
 `SandpackRunner` is already powering the popular [`code-hike` library](https://github.com/code-hike/codehike), maintained by Rodrigo Pombo.
 

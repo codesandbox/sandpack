@@ -1,12 +1,11 @@
 ---
 slug: release-v001
-title: Release v0.0.1
-authors:
-  name: Gao Wei
-  title: Docusaurus Core Team
-  url: https://github.com/wgao19
-  image_url: https://github.com/wgao19.png
-tags: [hola, docusaurus]
+title: Release v1.0.0
+authors: [csb]
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet
+Soon 🎉
+
+```js sandpack
+
+```
