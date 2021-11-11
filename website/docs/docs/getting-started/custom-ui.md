@@ -2,7 +2,8 @@
 sidebar_position: 4
 ---
 
-import { Sandpack, SandpackRunner } from "@codesandbox/sandpack-react"
+import { Sandpack } from "../../src/CustomSandpack";
+import { SandpackRunner } from "@codesandbox/sandpack-react"
 
 # Custom UI
 
@@ -43,6 +44,7 @@ You can also pass a **partial** theme object that overrides properties in the
     syntax: {
       tag: "darkgreen",
       string: "orange",
+      plain: "tomato",
     },
   }}
 />
@@ -58,7 +60,8 @@ theme={{
     },
     syntax: {
       tag: "darkgreen",
-      string: "orange"
+      string: "orange",
+      plain: "tomato"
     },
   }}
 />
@@ -235,7 +238,7 @@ The `main` file is also be set in the `template` or the `customSetup` and is not
 **main** file in the react template. For `vue`, this would be the `App.vue` file.
 :::
 
-If you need to pass multiple files you can use the [`customSetup` prop](/docs/getting-started/custom-content#custom-setup).
+If you need to pass multiple files you can use the [`customSetup` prop](/getting-started/custom-content#custom-setup).
 
 `SandpackRunner` is already powering the popular [`code-hike` library](https://github.com/code-hike/codehike), maintained by Rodrigo Pombo.
 

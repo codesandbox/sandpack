@@ -5,3 +5,7 @@ authors: [csb]
 ---
 
 Soon 🎉
+
+```js sandpack
+
+```

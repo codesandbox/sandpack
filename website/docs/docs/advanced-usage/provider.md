@@ -22,17 +22,14 @@ components that are exported by the main package (eg: `SandpackCodeEditor`,
 `SandpackPreview`) use that `context` object to communicate with `sandpack`.
 
 :::info
-The `SandpackProvider` accepts [the same two props](/docs/getting-started/custom-content#template) for getting input as the `Sandpack` preset:
+The `SandpackProvider` accepts [the same two props](/getting-started/custom-content#template) for getting input as the `Sandpack` preset:
 `template` and `customSetup`.
 :::
 
 `SandpackProvider` as well as the other sandpack components are named exports in the `sandpack-react` package.
 
 ```jsx
-import {
-  SandpackProvider,
-  SandpackPreview,
-} from "@codesandbox/sandpack-react";
+import { SandpackProvider, SandpackPreview } from "@codesandbox/sandpack-react";
 
 const CustomSandpack = () => (
   <SandpackProvider>

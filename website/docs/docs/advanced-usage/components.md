@@ -2,7 +2,8 @@
 sidebar_position: 2
 ---
 
-import { SandpackProvider, SandpackLayout, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@codesandbox/sandpack-react"
+import { SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@codesandbox/sandpack-react"
+import { SandpackLayout } from "../../src/CustomSandpack"
 
 # Components
 
@@ -39,7 +40,7 @@ const CustomSandpack = () => (
 ```
 
 <SandpackProvider template="react">
-  <SandpackLayout theme="codesandbox-dark">
+  <SandpackLayout>
     <SandpackCodeEditor />
     <SandpackPreview />
   </SandpackLayout>
@@ -60,13 +61,13 @@ You can easily swap the two components inside the `SandpackLayout` to get a diff
 ```
 
 <SandpackProvider template="react">
-  <SandpackLayout theme="codesandbox-dark">
+  <SandpackLayout>
     <SandpackPreview />
     <SandpackCodeEditor />
   </SandpackLayout>
 </SandpackProvider>
 
-`SandpackLayout` accepts a `theme` prop, so you can pass in your [custom theme object or a predefined theme](/docs/getting-started/custom-ui#theming).
+`SandpackLayout` accepts a `theme` prop, so you can pass in your [custom theme object or a predefined theme](/getting-started/custom-ui#theming).
 
 :::note Reminder
 If you do not want to use the `SandpackLayout` but still want to have style applied to the `sandpack` components according to the theme,
@@ -101,7 +102,7 @@ There's nothing stopping you from rendering multiple previews in the same `Provi
 ```
 
 <SandpackProvider template="react">
-  <SandpackLayout theme="codesandbox-dark">
+  <SandpackLayout>
     <SandpackPreview />
     <SandpackPreview />
     <SandpackPreview />
@@ -140,7 +141,7 @@ If you played with the `Sandpack` preset, you should be familiar already with th
 ```
 
 <SandpackProvider template="react">
-  <SandpackLayout theme="codesandbox-dark">
+  <SandpackLayout>
     <SandpackCodeEditor
       showTabs
       showLineNumbers={false}
@@ -166,7 +167,7 @@ For situations when you strictly want to show some code and run it in the browse
 ```
 
 <SandpackProvider template="react">
-  <SandpackLayout theme="codesandbox-dark">
+  <SandpackLayout>
     <SandpackCodeViewer />
     <SandpackPreview />
   </SandpackLayout>
@@ -198,7 +199,7 @@ const CustomSandpack = () => (
 ```
 
 <SandpackProvider template="react">
-  <SandpackLayout theme="codesandbox-dark">
+  <SandpackLayout>
     <SandpackCodeEditor />
     <SandpackTranspiledCode />
   </SandpackLayout>

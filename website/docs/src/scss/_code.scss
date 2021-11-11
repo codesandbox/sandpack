@@ -1,3 +1,13 @@
 pre {
   font: inherit;
+  background: #131313;
+  line-height: 1.6;
+}
+
+.sp-pre-placeholder {
+  --sp-colors-fg-active: #f0fdaf;
+}
+
+.sp-pre-placeholder {
+  display: block;
 }
