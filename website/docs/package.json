@@ -1,6 +1,6 @@
 {
   "name": "sandpack-docs",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -16,8 +16,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@codesandbox/sandpack-docusaurus": "^0.2.1",
-    "@codesandbox/sandpack-react": "^0.2.2",
+    "@codesandbox/sandpack-docusaurus": "^0.2.3",
+    "@codesandbox/sandpack-react": "^0.2.3",
     "@docusaurus/core": "2.0.0-beta.9",
     "@docusaurus/plugin-sitemap": "^2.0.0-beta.9",
     "@docusaurus/preset-classic": "2.0.0-beta.9",
