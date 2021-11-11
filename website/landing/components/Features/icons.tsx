@@ -1,40 +1,32 @@
 export const ICONS = {
   editor: (
-    <svg fill="none" height="100%" viewBox="0 0 43 42" width="100%">
+    <svg width="100%" height="100%" viewBox="0 0 42 42" fill="none">
       <path
-        d="M7.5 18v-8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2ZM35.5 20h-8.172c-1.781 0-2.674-2.154-1.414-3.414l8.172-8.172c1.26-1.26 3.414-.367 3.414 1.414V18a2 2 0 0 1-2 2Z"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="2"
-      />
-      <circle
-        cx="23"
-        cy="30.5"
-        r="6.5"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="2"
+        d="m22 10 11 11-11 11M19 5l-9 27"
+        stroke="#090909"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
   ),
   preview: (
-    <svg fill="none" height="100%" viewBox="0 0 43 42" width="100%">
-      <path
-        d="M16.5 26h4a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-11a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2h-17a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="2"
+    <svg width="100%" height="100%" viewBox="0 0 42 42" fill="none">
+      <rect
+        x="4"
+        y="7"
+        width="34"
+        height="28"
+        rx="3"
+        stroke="#090909"
+        stroke-width="2"
+        stroke-linecap="round"
       />
+      <path d="M5 13h33" stroke="#090909" stroke-width="2" />
     </svg>
   ),
   export: (
-    <svg
-      fill="none"
-      height="100%"
-      viewBox="0 0 42 42"
-      width="100%"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg fill="none" height="100%" viewBox="0 0 42 42" width="100%">
       <path
         clipRule="evenodd"
         d="M21.5 21.314V40c.325 0 .54-.07.831-.237l14.963-8.55c.59-.339.831-.863.831-1.544V12.33c0-.341-.072-.546-.238-.831L21.98 20.489a.95.95 0 0 0-.479.825Zm8.312 10.73c0 .475-.178.712-.593.95l-4.988 2.85c-.356.237-.831.119-.831-.357V22.781c0-.34.299-.78.594-.95l11.4-6.531c.316-.182.593.11.593.475v6.769c0 .35-.165.666-.475.831l-5.106 2.731c-.31.165-.594.48-.594.831v5.107Z"
