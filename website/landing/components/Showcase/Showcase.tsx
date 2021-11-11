@@ -61,21 +61,17 @@ export const Showcase: React.FC = () => {
           letterSpacing: "-0.05em",
           lineHeight: "1",
           textAlign: "center",
-          width: "80%",
 
           "@bp1": {
             fontSize: "72px",
-            width: "64%",
           },
 
           "@bp2": {
             fontSize: "96px",
-            width: "52%",
           },
 
           "@bp3": {
             fontSize: "144px",
-            width: "56%",
           },
         }}
         dangerouslySetInnerHTML={{ __html: showCase.title }}
@@ -117,8 +113,8 @@ export const Showcase: React.FC = () => {
                 },
 
                 "&:ntt-of-type(even)": {
-                  justifySelf: "flex-start"
-                }
+                  justifySelf: "flex-start",
+                },
               },
 
               "@bp3": {

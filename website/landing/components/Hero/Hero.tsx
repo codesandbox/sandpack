@@ -11,7 +11,7 @@ export const Hero: React.FC = () => {
         gap: "48px",
         height: "100%",
         minHeight: "100vh",
-        paddingTop: "100px",
+        padding: "100px 16px 0",
         overflow: "hidden",
 
         "@bp2": {

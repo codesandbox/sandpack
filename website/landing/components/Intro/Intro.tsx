@@ -44,7 +44,7 @@ export const Intro: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
-        padding: "200px 0 0",
+        padding: "200px 16px 0",
         width: "100%",
       }}
     >
@@ -66,21 +66,17 @@ export const Intro: React.FC = () => {
             letterSpacing: "-0.05em",
             lineHeight: "1",
             textAlign: "center",
-            width: "48%",
 
             "@bp1": {
               fontSize: "72px",
-              width: "64%",
             },
 
             "@bp2": {
               fontSize: "96px",
-              width: "52%",
             },
 
             "@bp3": {
               fontSize: "144px",
-              width: "56%",
             },
           }}
           dangerouslySetInnerHTML={{ __html: intro.title }}
