@@ -1,28 +1,28 @@
 export const ICONS = {
   editor: (
-    <svg width="100%" height="100%" viewBox="0 0 42 42" fill="none">
+    <svg fill="none" height="100%" viewBox="0 0 42 42" width="100%">
       <path
         d="m22 10 11 11-11 11M19 5l-9 27"
         stroke="#090909"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
       />
     </svg>
   ),
   preview: (
-    <svg width="100%" height="100%" viewBox="0 0 42 42" fill="none">
+    <svg fill="none" height="100%" viewBox="0 0 42 42" width="100%">
       <rect
-        x="4"
-        y="7"
-        width="34"
         height="28"
         rx="3"
         stroke="#090909"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeLinecap="round"
+        strokeWidth="2"
+        width="34"
+        x="4"
+        y="7"
       />
-      <path d="M5 13h33" stroke="#090909" stroke-width="2" />
+      <path d="M5 13h33" stroke="#090909" strokeWidth="2" />
     </svg>
   ),
   export: (
