@@ -1,4 +1,5 @@
 import { useClasser } from "@code-hike/classer";
+import { StyleModule, StyleSpec } from "style-mod";
 import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
 import {
   defaultKeymap,
@@ -10,6 +11,7 @@ import { commentKeymap } from "@codemirror/comment";
 import { lineNumbers } from "@codemirror/gutter";
 import {
   classHighlightStyle,
+  defaultHighlightStyle,
   HighlightStyle,
   highlightTree,
   Tag,
@@ -312,6 +314,8 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
         extensions: [langSupport],
       });
 
+      console.log(state.facet({}));
+
       const getEditorStyle = () => {
         const style = getEditorTheme(theme);
 
@@ -326,28 +330,27 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
       const highlightTheme = getSyntaxHighlight(theme);
       const tree = syntaxTree(state);
 
-      const render = state.doc.text.map((text) => {
-        return React.createElement("div", {
-          className: "cm-line",
-          children: text,
-        });
-      });
-
-      // const render = [];
-      // highlightTree(tree, highlightTheme.match, (from, to, className) => {
-      //   const copy = `${code}`;
-      //   render.push(
-      //     React.createElement("span", {
-      //       className,
-      //       children: copy.substr(from, to),
-      //     })
-      //   );
+      // const render = state.doc.text.map((text) => {
+      //   return React.createElement("div", {
+      //     className: "cm-line",
+      //     children: text,
+      //   });
       // });
 
+      const render = [];
+      highlightTree(tree, highlightTheme.match, (from, to, className) => {
+        render.push(
+          React.createElement("span", {
+            className,
+            children: code.substring(from, to),
+          })
+        );
+      });
+
       return {
+        editorClassName,
         css: `${editorRules},${highlightTheme.module?.getRules()}`,
         render,
-        editorClassName,
       };
     };
 
@@ -368,13 +371,13 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
         tabIndex={0}
         translate="no"
       >
-        <style>{css}</style>
         <pre
-          className={c("pre-placeholder")}
+          className={`${c("pre-placeholder")} cm-content`}
           style={{
             marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
           }}
         >
+          <style>{css}</style>
           {render}
         </pre>
 
