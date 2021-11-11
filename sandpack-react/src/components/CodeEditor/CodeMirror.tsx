@@ -314,8 +314,6 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
         extensions: [langSupport],
       });
 
-      console.log(state.facet({}));
-
       const getEditorStyle = () => {
         const style = getEditorTheme(theme);
 
@@ -330,26 +328,39 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
       const highlightTheme = getSyntaxHighlight(theme);
       const tree = syntaxTree(state);
 
-      // const render = state.doc.text.map((text) => {
-      //   return React.createElement("div", {
-      //     className: "cm-line",
-      //     children: text,
-      //   });
-      // });
+      const styles: Array<{ from: number; to: number; className: string }> = [];
 
-      const render = [];
       highlightTree(tree, highlightTheme.match, (from, to, className) => {
-        render.push(
-          React.createElement("span", {
-            className,
-            children: code.substring(from, to),
-          })
+        styles.push({ from, to, className });
+      });
+
+      let offSet = 0;
+
+      const render = state.doc.text.map((text) => {
+        const from = offSet;
+        const to = from + text.length;
+
+        const fits = styles.filter(
+          (e) =>
+            (from <= e.from && to >= e.to) || (from >= e.from && to <= e.to)
         );
+
+        offSet = offSet + text.length + 1;
+
+        return React.createElement("div", {
+          className: "cm-line",
+          children: fits.map((style) => {
+            return React.createElement("span", {
+              className: style.className,
+              children: text.substring(style.from - from, style.to - from),
+            });
+          }),
+        });
       });
 
       return {
         editorClassName,
-        css: `${editorRules},${highlightTheme.module?.getRules()}`,
+        css: `${editorRules} ${highlightTheme.module?.getRules()}`,
         render,
       };
     };
