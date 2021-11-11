@@ -6,12 +6,14 @@ export const Banner: React.FC = () => {
   const { banner } = content;
   return (
     <Box
+      as="section"
       css={{
         alignItems: "center",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         gap: "48px",
+        paddingTop: "100px",
       }}
     >
       <Box

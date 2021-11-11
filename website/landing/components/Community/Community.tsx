@@ -53,11 +53,12 @@ export const Community: React.FC = () => {
 
   return (
     <Box
+      as="section"
       css={{
         alignItems: "center",
         display: "flex",
         flexDirection: "column",
-        paddingBottom: "200px",
+        paddingBottom: "100px",
       }}
     >
       <Divider />
@@ -66,7 +67,7 @@ export const Community: React.FC = () => {
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
-          gap: "200px",
+          gap: "100px",
           width: "100%",
         }}
       >
