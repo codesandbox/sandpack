@@ -6,11 +6,17 @@ import { Box, List, Text } from "../common";
 
 const UserLink = styled("a", {
   display: "block",
+  maxWidth: "75%",
+  margin: "0 auto",
   position: "relative",
 
   img: {
     objectFit: "contain",
     objectPosition: "center",
+  },
+
+  "@bp1": {
+    maxWidth: "100%",
   },
 });
 
@@ -19,6 +25,7 @@ export const Users: React.FC = () => {
 
   return (
     <Box
+      as="section"
       css={{
         alignItems: "center",
         display: "flex",
@@ -35,7 +42,7 @@ export const Users: React.FC = () => {
         css={{
           fontWeight: "$semiBold",
           fontSize: "18px",
-          lineHeight: "120%",
+          lineHeight: "1.2",
           textAlign: "center",
           letterSpacing: "-0.0125em",
         }}
@@ -48,7 +55,6 @@ export const Users: React.FC = () => {
           display: "flex",
           flexDirection: "column",
           gap: "48px",
-          maxWidth: "50%",
           justifyContent: "center",
 
           "@bp1": {
