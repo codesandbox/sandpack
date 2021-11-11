@@ -21,9 +21,13 @@ export const Features: React.FC = () => {
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
-          gap: "200px",
+          gap: "100px",
           justifyContent: "center",
           padding: "200px 0",
+
+          "@bp1": {
+            gap: "200px",
+          },
 
           "@bp2": {
             width: "64%",

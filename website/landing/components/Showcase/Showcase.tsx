@@ -110,8 +110,15 @@ export const Showcase: React.FC = () => {
               },
 
               "@bp2": {
-                margin: "0 auto",
                 width: "360px",
+
+                "&:nth-of-type(odd)": {
+                  justifySelf: "flex-end",
+                },
+
+                "&:ntt-of-type(even)": {
+                  justifySelf: "flex-start"
+                }
               },
 
               "@bp3": {
