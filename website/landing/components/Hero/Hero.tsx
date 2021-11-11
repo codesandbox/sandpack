@@ -6,7 +6,6 @@ export const Hero: React.FC = () => {
       as="section"
       css={{
         alignItems: "center",
-        background: "$surface",
         display: "flex",
         flexDirection: "column",
         gap: "48px",
@@ -14,6 +13,10 @@ export const Hero: React.FC = () => {
         minHeight: "100vh",
         paddingTop: "100px",
         overflow: "hidden",
+
+        "@bp2": {
+          background: "$surface",
+        }
       }}
     >
       <Box
