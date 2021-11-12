@@ -5,4 +5,5 @@ export { Install } from "./Install";
 export { List } from "./List";
 export { Resources } from "./Resources";
 export { SandpackLogo } from "./SandpackLogo";
+export { SandpackPreview } from "./SandpackPreview";
 export { Text } from "./Text";

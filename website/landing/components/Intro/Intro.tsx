@@ -1,37 +1,5 @@
 import content from "../../website.config.json";
-import { Box, CodeBlock, List, Text } from "../common";
-
-const ContentLandmark = () => {
-  return (
-    <Box
-      css={{
-        alignItems: "center",
-        background: "white",
-        color: "black",
-        display: "flex",
-        height: "595px",
-        justifyContent: "center",
-        width: "343px",
-
-        "@bp1": {
-          width: "376px",
-        },
-
-        "@bp2": {
-          height: "497.5px",
-          width: "988.18px",
-        },
-
-        "@bp3": {
-          height: "663.33px",
-          width: "1317.57px",
-        },
-      }}
-    >
-      <Text>content landmark.</Text>
-    </Box>
-  );
-};
+import { Box, CodeBlock, List, SandpackPreview, Text } from "../common";
 
 export const Intro: React.FC = () => {
   const { intro, commands } = content;
@@ -86,7 +54,7 @@ export const Intro: React.FC = () => {
         </CodeBlock>
       </Box>
       <Box css={{ display: "none", "@bp2": { display: "block" } }}>
-        <ContentLandmark />
+        <SandpackPreview />
       </Box>
       <List
         css={{
@@ -179,7 +147,7 @@ export const Intro: React.FC = () => {
                 </CodeBlock>
               )}
             </Box>
-            <ContentLandmark />
+            <SandpackPreview />
           </Box>
         ))}
       </List>
