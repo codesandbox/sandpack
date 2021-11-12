@@ -103,3 +103,6 @@ dist
 
 # IDEs
 .idea
+
+# Mac
+.DS_Store
