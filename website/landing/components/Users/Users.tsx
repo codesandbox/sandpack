@@ -31,10 +31,10 @@ export const Users: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         gap: "100px",
-        padding: "100px 0",
+        padding: "100px 16px",
 
         "@bp1": {
-          padding: "200px 0",
+          padding: "200px 16px",
         },
       }}
     >
@@ -46,9 +46,8 @@ export const Users: React.FC = () => {
           textAlign: "center",
           letterSpacing: "-0.0125em",
         }}
-      >
-        {users.title}
-      </Text>
+        dangerouslySetInnerHTML={{ __html: content.users.title }}
+      />
       <List
         css={{
           alignItems: "center",

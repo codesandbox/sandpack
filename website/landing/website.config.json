@@ -21,7 +21,7 @@
     }
   ],
   "api": {
-    "title": "Building blocks of the Sandpack ecosystem.",
+    "title": "Building blocks<br />of the Sandpack<br />ecosystem.",
     "highlights": [
       {
         "title": "Providers",
@@ -42,10 +42,10 @@
     ]
   },
   "banner": {
-    "title": "Get started with Sandpack."
+    "title": "Get started<br /> with Sandpack."
   },
   "community": {
-    "title": "Get involved in our community.",
+    "title": "Get involved in<br />our community.",
     "list": [
       {
         "name": "Twitter",
@@ -88,7 +88,7 @@
     ]
   },
   "intro": {
-    "title": "Live coding <span class=\"highlight\">in the browser.</span>",
+    "title": "Live coding <span class=\"highlight\">in<br />the browser.</span>",
     "highlights": [
       {
         "title": "Start with preset templates",

@@ -17,17 +17,14 @@ const Title = styled("h3", {
   letterSpacing: "-0.05em",
   lineHeight: "100%",
   margin: "0",
-  maxWidth: "45%",
   textAlign: "center",
 
   "@bp1": {
     fontSize: "36px",
-    maxWidth: "35%",
   },
 
   "@bp2": {
     fontSize: "48px",
-    maxWidth: "25%",
   },
 });
 
@@ -58,7 +55,7 @@ export const Community: React.FC = () => {
         alignItems: "center",
         display: "flex",
         flexDirection: "column",
-        paddingBottom: "100px",
+        padding: "0 16px 100px",
       }}
     >
       <Divider />
@@ -71,7 +68,7 @@ export const Community: React.FC = () => {
           width: "100%",
         }}
       >
-        <Title>{community.title}</Title>
+        <Title dangerouslySetInnerHTML={{ __html: community.title }} />
         <List
           css={{
             display: "flex",

@@ -21,6 +21,9 @@ const Container = styled("section", {
 });
 
 const Main = styled("main", {
+  alignItems: "center",
+  display: "flex",
+  flexDirection: "column",
   flex: 1,
 });
 

@@ -13,7 +13,7 @@ export const Banner: React.FC = () => {
         flexDirection: "column",
         justifyContent: "center",
         gap: "48px",
-        paddingTop: "100px",
+        padding: "100px 16px 0",
       }}
     >
       <Box
@@ -28,7 +28,7 @@ export const Banner: React.FC = () => {
           <SandpackLogo theme="light" />
         </Box>
         <Text
-          as="h1"
+          as="h2"
           css={{
             fontWeight: "$semiBold",
             fontSize: "36px",
@@ -42,12 +42,10 @@ export const Banner: React.FC = () => {
 
             "@bp2": {
               fontSize: "96px",
-              maxWidth: "58%",
             },
           }}
-        >
-          {banner.title}
-        </Text>
+          dangerouslySetInnerHTML={{ __html: banner.title }}
+        />
       </Box>
       <Install />
       <Resources />
