@@ -101,7 +101,7 @@
       {
         "title": "Configure your editor",
         "description": "The <code>options</code> prop allows you to toggle on/off different features of the code editor.",
-        "snippet": "<Sandpack options={{ showNavigator: true, showLineNumbers: true }} />"
+        "snippet": "<Sandpack\n  options={{\n    showNavigator: true,\n    showLineNumbers: true\n  }}\n/>"
       },
       {
         "title": "Customize your setup",
@@ -110,7 +110,7 @@
       {
         "title": "Build your own Sandpack",
         "description": "The library exports a set of composable components and hooks that allow you to tailor the editing experience to your own needs.",
-        "snippet": "<SandpackProvider><Sandpacklayout><SandpackEditor /><SandpackPreview /><Sandpacklayout></SandpackProvider>"
+        "snippet": "<SandpackProvider>\n  <Sandpacklayout>\n    <SandpackEditor />\n    <SandpackPreview />\n  <Sandpacklayout>\n</SandpackProvider>"
       }
     ]
   },
