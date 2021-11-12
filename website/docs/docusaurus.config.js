@@ -15,6 +15,92 @@
     themes: ["@codesandbox/sandpack-docusaurus"],
 
     plugins: [
+      /**
+       * API Reference
+       */
+      [
+        "docusaurus-plugin-typedoc",
+        {
+          id: "components",
+          entryPoints: ["../../sandpack-react/src/components/index.ts"],
+          tsconfig: "../../sandpack-react/tsconfig.json",
+          out: "api/components",
+          indexTitle: "Components",
+          readme: "none",
+          plugins: ["typedoc-plugin-missing-exports"],
+          sidebar: {
+            categoryLabel: "Components",
+            fullNames: false,
+            readmeLabel: "Components",
+          },
+        },
+      ],
+      [
+        "docusaurus-plugin-typedoc",
+        {
+          id: "presets",
+          entryPoints: ["../../sandpack-react/src/presets/index.ts"],
+          tsconfig: "../../sandpack-react/tsconfig.json",
+          out: "api/presets",
+          indexTitle: "Presets",
+          readme: "none",
+          sidebar: {
+            categoryLabel: "Presets",
+            fullNames: false,
+            readmeLabel: "Presets",
+          },
+        },
+      ],
+      [
+        "docusaurus-plugin-typedoc",
+        {
+          id: "hooks",
+          entryPoints: ["../../sandpack-react/src/hooks/index.ts"],
+          tsconfig: "../../sandpack-react/tsconfig.json",
+          out: "api/hooks",
+          indexTitle: "Hooks",
+          readme: "none",
+          sidebar: {
+            categoryLabel: "Hooks",
+            fullNames: false,
+            readmeLabel: "Hooks",
+          },
+        },
+      ],
+      [
+        "docusaurus-plugin-typedoc",
+        {
+          id: "common",
+          entryPoints: ["../../sandpack-react/src/common/index.ts"],
+          tsconfig: "../../sandpack-react/tsconfig.json",
+          out: "api/common",
+          indexTitle: "Common",
+          readme: "none",
+          sidebar: {
+            categoryLabel: "Common",
+            fullNames: false,
+            readmeLabel: "Common",
+          },
+        },
+      ],
+      [
+        "docusaurus-plugin-typedoc",
+        {
+          id: "types",
+          entryPoints: ["../../sandpack-react/src/types.ts"],
+          tsconfig: "../../sandpack-react/tsconfig.json",
+          out: "api/types",
+          indexTitle: "Types",
+          readme: "none",
+          sidebar: {
+            categoryLabel: "Types",
+            fullNames: false,
+            readmeLabel: "Types",
+          },
+        },
+      ],
+      /** END */
+
       "docusaurus-plugin-sass",
       [
         "@docusaurus/plugin-sitemap",
