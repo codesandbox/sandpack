@@ -49,9 +49,13 @@ export const Intro: React.FC = () => {
           }}
           dangerouslySetInnerHTML={{ __html: intro.title }}
         />
-        <CodeBlock>
-          <code>{commands.import}</code>
-        </CodeBlock>
+        <Box
+          css={{
+            maxWidth: "calc(100vw - 16px)",
+          }}
+        >
+          <CodeBlock oneLiner>{commands.import}</CodeBlock>
+        </Box>
       </Box>
       <Box css={{ display: "none", "@bp2": { display: "block" } }}>
         <SandpackPreview />
@@ -141,11 +145,7 @@ export const Intro: React.FC = () => {
                 }}
                 dangerouslySetInnerHTML={{ __html: h.description }}
               />
-              {h.snippet && (
-                <CodeBlock>
-                  <code>{h.snippet}</code>
-                </CodeBlock>
-              )}
+              {h.snippet && <CodeBlock>{h.snippet}</CodeBlock>}
             </Box>
             <SandpackPreview />
           </Box>
