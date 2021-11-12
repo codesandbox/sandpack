@@ -4,10 +4,19 @@ pre {
   line-height: 1.6;
 }
 
-.sp-pre-placeholder {
-  --sp-colors-fg-active: #f0fdaf;
+code {
+  border-radius: 6px;
+}
+
+.sp-wrapper {
+  --sp-border-radius: 10px !important;
+
+  .sp-layout {
+    border: 0;
+  }
 }
 
 .sp-pre-placeholder {
+  --sp-colors-fg-active: #f0fdaf;
   display: block;
 }

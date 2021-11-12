@@ -22,7 +22,8 @@
     "build:css": "postcss src/styles/index.css -o dist/index.css -u autoprefixer -u cssnano",
     "start": "tsc -p tsconfig.esm.json --watch",
     "storybook": "start-storybook -p 6006 --no-dll",
-    "build-storybook": "build-storybook --no-dll"
+    "build-storybook": "build-storybook --no-dll",
+    "typecheck": "tsc"
   },
   "files": [
     "dist",

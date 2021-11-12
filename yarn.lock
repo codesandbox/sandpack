@@ -1579,19 +1579,12 @@
   dependencies:
     "@codemirror/state" "^0.19.0"
 
-"@codemirror/state@0.19.4", "@codemirror/state@^0.19.0", "@codemirror/state@^0.19.2", "@codemirror/state@^0.19.3":
+"@codemirror/state@0.19.4", "@codemirror/state@^0.18.0", "@codemirror/state@^0.18.3", "@codemirror/state@^0.19.0", "@codemirror/state@^0.19.2", "@codemirror/state@^0.19.3":
   version "0.19.4"
   resolved "https://registry.yarnpkg.com/@codemirror/state/-/state-0.19.4.tgz#db6ee73ec3eb5a237d0d04652a8d8e7b4cb7758b"
   integrity sha512-PLsY1PvuGynylzv4FVEi1vDz4gituIxJR4XdEVT4+UK6C2l14Y2TGLkUTw3D8xlq+xmY1J1TR7UbicZtJIxO6A==
   dependencies:
     "@codemirror/text" "^0.19.0"
-
-"@codemirror/state@^0.18.0", "@codemirror/state@^0.18.3":
-  version "0.18.7"
-  resolved "https://registry.yarnpkg.com/@codemirror/state/-/state-0.18.7.tgz#3339a732387bb2c034987c57ccf0649ef2f7c4c1"
-  integrity sha512-cVyTiAC9vv90NKmGOfNtBjyIem3BqKui1L5Hfcxurp8K9votQj2oH9COcgWPnQ2Xs64yC70tEuTt9DF1pj5PFQ==
-  dependencies:
-    "@codemirror/text" "^0.18.0"
 
 "@codemirror/text@^0.18.0", "@codemirror/text@^0.18.1":
   version "0.18.1"
@@ -17860,11 +17853,6 @@ typedoc-plugin-markdown@^3.11.3:
   integrity sha512-rWiHbEIe0oZetDIsBR24XJVxGOJ91kDcHoj2KhFKxCLoJGX659EKBQkHne9QJ4W2stGhu1fRgFyQaouSBnxukA==
   dependencies:
     handlebars "^4.7.7"
-
-typedoc-plugin-missing-exports@^0.22.4:
-  version "0.22.4"
-  resolved "https://registry.yarnpkg.com/typedoc-plugin-missing-exports/-/typedoc-plugin-missing-exports-0.22.4.tgz#22a2cf10c0dc1724460c5ba9c81ae66c60a3658e"
-  integrity sha512-NRagPFyh8Oma5E7rR8534x4d8GQ/87Tp3WYfBJcxradPjXTZ4D2MXD5eHfG98DQCMqYrb+CRZnvO4iaGaqQC7w==
 
 typedoc@^0.22.8:
   version "0.22.8"
