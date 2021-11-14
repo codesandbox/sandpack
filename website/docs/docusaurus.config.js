@@ -1,3 +1,8 @@
+const typeDocsDefault = {
+  readme: "none",
+  plugin: ["typedoc-plugin-no-inherit"],
+};
+
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (
@@ -21,95 +26,83 @@
       [
         "docusaurus-plugin-typedoc",
         {
+          ...typeDocsDefault,
           id: "components",
-          watch: true,
-          entryPoints: [
-            "../../sandpack-react/src/components/index.ts",
-            "../../sandpack-react/src/common/index.ts",
-            "../../sandpack-react/src/presets/index.ts",
-            "../../sandpack-react/src/types.ts",
-          ],
+          entryPoints: ["../../sandpack-react/src/_docs-index/components.ts"],
           tsconfig: "../../sandpack-react/tsconfig.json",
-          out: "api/components",
+          out: "api/react/components",
           indexTitle: "Components",
-          readme: "none",
           sidebar: {
             categoryLabel: "Components",
             fullNames: false,
             readmeLabel: "Components",
+            position: 0,
           },
         },
       ],
       [
         "docusaurus-plugin-typedoc",
         {
+          ...typeDocsDefault,
           id: "provider",
-          watch: true,
-          entryPoints: [
-            "../../sandpack-react/src/contexts/sandpackContext.tsx",
-          ],
+          entryPoints: ["../../sandpack-react/src/_docs-index/provider.ts"],
           tsconfig: "../../sandpack-react/tsconfig.json",
-          out: "api/provider",
+          out: "api/react/provider",
           indexTitle: "Provider",
-          readme: "none",
           sidebar: {
             categoryLabel: "Provider",
             fullNames: false,
             readmeLabel: "Provider",
+            position: 1,
           },
         },
       ],
       [
         "docusaurus-plugin-typedoc",
         {
+          ...typeDocsDefault,
           id: "hooks",
-          watch: true,
-          entryPoints: ["../../sandpack-react/src/hooks/index.ts"],
+          entryPoints: ["../../sandpack-react/src/_docs-index/hooks.ts"],
           tsconfig: "../../sandpack-react/tsconfig.json",
-          out: "api/hooks",
+          out: "api/react/hooks",
           indexTitle: "Hooks",
-          readme: "none",
           sidebar: {
             categoryLabel: "Hooks",
             fullNames: false,
             readmeLabel: "Hooks",
+            position: 2,
           },
         },
       ],
       [
         "docusaurus-plugin-typedoc",
         {
+          ...typeDocsDefault,
           id: "Theme",
-          watch: true,
-          entryPoints: [
-            "../../sandpack-react/src/themes/index.ts",
-            "../../sandpack-react/src/contexts/themeContext.tsx",
-          ],
+          entryPoints: ["../../sandpack-react/src/_docs-index/theme.ts"],
           tsconfig: "../../sandpack-react/tsconfig.json",
-          out: "api/theme",
+          out: "api/react/theme",
           indexTitle: "Theme",
-          readme: "none",
           sidebar: {
             categoryLabel: "Theme",
-            fullNames: false,
             readmeLabel: "Theme",
+            position: 3,
           },
         },
       ],
       [
         "docusaurus-plugin-typedoc",
         {
+          ...typeDocsDefault,
           id: "client",
-          watch: true,
           entryPoints: ["../../sandpack-client/src/index.ts"],
           tsconfig: "../../sandpack-client/tsconfig.json",
           out: "api/client",
           indexTitle: "Sandpack-client",
-          readme: "none",
           sidebar: {
             categoryLabel: "Sandpack-client",
-            fullNames: false,
             readmeLabel: "Sandpack-client",
+            position: 4,
           },
         },
       ],
