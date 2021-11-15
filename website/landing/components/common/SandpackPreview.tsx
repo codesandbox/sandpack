@@ -1,6 +1,8 @@
 import { Sandpack } from "@codesandbox/sandpack-react";
 
-import { Box } from ".";
+import { sandpackTheme } from "../../styles/sandpackTheme";
+
+import { Box } from "./Box";
 
 export const SandpackPreview: React.FC = () => {
   return (
@@ -47,6 +49,7 @@ export const SandpackPreview: React.FC = () => {
           },
         }}
         template="react"
+        theme={sandpackTheme}
       />
     </Box>
   );
