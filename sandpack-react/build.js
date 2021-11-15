@@ -1,34 +1,48 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { build } = require("esbuild");
-const glob = require("glob");
+import { promises as fs } from "fs";
 
-const package = require("./package.json");
+import { build } from "esbuild";
+import glob from "glob";
 
 const buildProject = async () => {
+  const packageJson = JSON.parse(await fs.readFile("./package.json"));
+
   const getFiles = () =>
     new Promise((resolve) => {
-      glob("./src/**/index.ts[x]", {}, (err, files) => {
+      glob("./src/**/*.ts[x]", {}, (err, files) => {
         resolve(["./src/index.ts", ...files]);
       });
     });
 
-  build({
+  const config = {
     entryPoints: await getFiles(),
     entryNames: "[dir]/[name]",
     outbase: "src",
     bundle: true,
     sourcemap: true,
     external: Object.keys({
-      ...(package.dependencies || {}),
-      ...(package.devDependencies || {}),
-      ...(package.peerDependencies || {}),
+      ...(packageJson.dependencies || {}),
+      ...(packageJson.devDependencies || {}),
+      ...(packageJson.peerDependencies || {}),
     }),
-    format: "esm",
     outdir: "dist",
     target: "es2019",
+  };
+
+  build({
+    ...config,
+    format: "esm",
   }).catch((error) => {
     console.error(error);
     process.exit(1);
+  });
+
+    build({
+      ...config,
+      entryNames: "[dir]/[name].cjs",
+      format: "cjs",
+    }).catch((error) => {
+      console.error(error);
+      process.exit(1);
   });
 };
 
