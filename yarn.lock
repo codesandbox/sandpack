@@ -9679,11 +9679,6 @@ gulp-cli@^2.2.0:
     v8flags "^3.2.0"
     yargs "^7.1.0"
 
-gulp-remove-sourcemaps@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/gulp-remove-sourcemaps/-/gulp-remove-sourcemaps-1.0.2.tgz#46d5ca320998aac2ae79eaf1b9bd642f76659085"
-  integrity sha512-28PndAsOCdBl4bLZ1vdrLwi7cMBtYnHvGnf7qP06ICUITo7EM1Dtw1sBrcNwmo+P4IigOzTR6rP4OEA74dQkgw==
-
 gulp@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/gulp/-/gulp-4.0.2.tgz#543651070fd0f6ab0a0650c6a3e6ff5a7cb09caa"

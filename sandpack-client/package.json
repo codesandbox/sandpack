@@ -42,7 +42,6 @@
     "cross-env": "^5.0.1",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
-    "gulp-remove-sourcemaps": "^1.0.1",
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^2.6.2",
     "ts-node": "^4.1.0",

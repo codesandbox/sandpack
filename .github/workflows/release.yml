@@ -6,6 +6,7 @@ on:
       - main
 
 jobs:
+  timeout-minutes: 20
   bundler:
     runs-on: ubuntu-latest
 
