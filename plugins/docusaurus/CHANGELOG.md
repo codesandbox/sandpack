@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/codesandbox/sandpack/compare/v0.3.0...v0.3.1) (2021-11-15)
+
+
+### Bug Fixes
+
+* **react:** dedupe deps ([#145](https://github.com/codesandbox/sandpack/issues/145)) ([bc86c31](https://github.com/codesandbox/sandpack/commit/bc86c3160fbf07c8c226f8c2462ffcadd3faac0e))
+
+
+
+
+
 # [0.3.0](https://github.com/codesandbox/sandpack/compare/v0.2.3...v0.3.0) (2021-11-15)
 
 **Note:** Version bump only for package @codesandbox/sandpack-docusaurus
