@@ -11,7 +11,7 @@
     "noImplicitAny": true,
     "typeRoots": ["node_modules/@types"],
     "jsx": "react",
-    "outDir": "dist/types"
+    "outDir": "dist"
   },
   "include": ["src"],
   "exclude": ["src/**/*.stories.tsx"]
