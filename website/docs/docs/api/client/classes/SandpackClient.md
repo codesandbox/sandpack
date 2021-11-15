@@ -22,7 +22,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[client.ts:112](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L112)
+[client.ts:112](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L112)
 
 ## Properties
 
@@ -32,7 +32,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[client.ts:103](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L103)
+[client.ts:103](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L103)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 #### Defined in
 
-[client.ts:102](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L102)
+[client.ts:102](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L102)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 #### Defined in
 
-[client.ts:96](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L96)
+[client.ts:96](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L96)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[client.ts:104](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L104)
+[client.ts:104](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L104)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[client.ts:101](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L101)
+[client.ts:101](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L101)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Defined in
 
-[client.ts:97](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L97)
+[client.ts:97](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L97)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[client.ts:98](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L98)
+[client.ts:98](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L98)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-[client.ts:99](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L99)
+[client.ts:99](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L99)
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Defined in
 
-[client.ts:107](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L107)
+[client.ts:107](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L107)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[client.ts:95](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L95)
+[client.ts:95](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L95)
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 #### Defined in
 
-[client.ts:105](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L105)
+[client.ts:105](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L105)
 
 ___
 
@@ -142,7 +142,7 @@ ___
 
 #### Defined in
 
-[client.ts:110](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L110)
+[client.ts:110](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L110)
 
 ___
 
@@ -152,7 +152,7 @@ ___
 
 #### Defined in
 
-[client.ts:109](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L109)
+[client.ts:109](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L109)
 
 ## Methods
 
@@ -166,7 +166,7 @@ ___
 
 #### Defined in
 
-[client.ts:205](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L205)
+[client.ts:205](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L205)
 
 ___
 
@@ -186,7 +186,7 @@ ___
 
 #### Defined in
 
-[client.ts:285](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L285)
+[client.ts:285](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L285)
 
 ___
 
@@ -202,7 +202,7 @@ Get the URL of the contents of the current sandbox
 
 #### Defined in
 
-[client.ts:296](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L296)
+[client.ts:296](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L296)
 
 ___
 
@@ -216,7 +216,7 @@ ___
 
 #### Defined in
 
-[client.ts:345](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L345)
+[client.ts:345](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L345)
 
 ___
 
@@ -230,7 +230,7 @@ ___
 
 #### Defined in
 
-[client.ts:330](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L330)
+[client.ts:330](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L330)
 
 ___
 
@@ -244,7 +244,7 @@ ___
 
 #### Defined in
 
-[client.ts:360](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L360)
+[client.ts:360](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L360)
 
 ___
 
@@ -264,7 +264,7 @@ ___
 
 #### Defined in
 
-[client.ts:289](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L289)
+[client.ts:289](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L289)
 
 ___
 
@@ -284,7 +284,7 @@ ___
 
 #### Defined in
 
-[client.ts:211](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L211)
+[client.ts:211](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L211)
 
 ___
 
@@ -305,4 +305,4 @@ ___
 
 #### Defined in
 
-[client.ts:218](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-client/src/client.ts#L218)
+[client.ts:218](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/client.ts#L218)

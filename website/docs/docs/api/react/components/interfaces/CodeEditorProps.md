@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[components/CodeEditor/index.tsx:19](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/components/CodeEditor/index.tsx#L19)
+[components/CodeEditor/index.tsx:19](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/CodeEditor/index.tsx#L19)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[components/CodeEditor/index.tsx:13](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/components/CodeEditor/index.tsx#L13)
+[components/CodeEditor/index.tsx:13](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/CodeEditor/index.tsx#L13)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[components/CodeEditor/index.tsx:16](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/components/CodeEditor/index.tsx#L16)
+[components/CodeEditor/index.tsx:16](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/CodeEditor/index.tsx#L16)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[components/CodeEditor/index.tsx:15](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/components/CodeEditor/index.tsx#L15)
+[components/CodeEditor/index.tsx:15](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/CodeEditor/index.tsx#L15)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[components/CodeEditor/index.tsx:17](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/components/CodeEditor/index.tsx#L17)
+[components/CodeEditor/index.tsx:17](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/CodeEditor/index.tsx#L17)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[components/CodeEditor/index.tsx:14](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/components/CodeEditor/index.tsx#L14)
+[components/CodeEditor/index.tsx:14](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/CodeEditor/index.tsx#L14)
 
 ___
 
@@ -74,4 +74,4 @@ ___
 
 #### Defined in
 
-[components/CodeEditor/index.tsx:18](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/components/CodeEditor/index.tsx#L18)
+[components/CodeEditor/index.tsx:18](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/CodeEditor/index.tsx#L18)

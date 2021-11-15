@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:33](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/contexts/sandpackContext.tsx#L33)
+[sandpack-react/src/contexts/sandpackContext.tsx:33](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L33)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:36](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/contexts/sandpackContext.tsx#L36)
+[sandpack-react/src/contexts/sandpackContext.tsx:36](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L36)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:39](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/contexts/sandpackContext.tsx#L39)
+[sandpack-react/src/contexts/sandpackContext.tsx:39](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L39)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:32](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/contexts/sandpackContext.tsx#L32)
+[sandpack-react/src/contexts/sandpackContext.tsx:32](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L32)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:37](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/contexts/sandpackContext.tsx#L37)
+[sandpack-react/src/contexts/sandpackContext.tsx:37](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L37)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:31](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/contexts/sandpackContext.tsx#L31)
+[sandpack-react/src/contexts/sandpackContext.tsx:31](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L31)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:34](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/contexts/sandpackContext.tsx#L34)
+[sandpack-react/src/contexts/sandpackContext.tsx:34](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L34)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:40](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/contexts/sandpackContext.tsx#L40)
+[sandpack-react/src/contexts/sandpackContext.tsx:40](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L40)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:38](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/contexts/sandpackContext.tsx#L38)
+[sandpack-react/src/contexts/sandpackContext.tsx:38](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L38)
 
 ___
 
@@ -104,4 +104,4 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:35](https://github.com/codesandbox/sandpack/blob/e7cb439/sandpack-react/src/contexts/sandpackContext.tsx#L35)
+[sandpack-react/src/contexts/sandpackContext.tsx:35](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L35)
