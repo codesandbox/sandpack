@@ -1,12 +1,3 @@
 {
-  "setupTasks": [
-    {
-      "name": "Installing Dependencies",
-      "command": "yarn install"
-    },
-    {
-      "name": "Building Workspace",
-      "command": "yarn build"
-    }
-  ]
+
 }
