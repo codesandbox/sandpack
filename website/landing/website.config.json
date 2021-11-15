@@ -1,0 +1,179 @@
+{
+  "global": {
+    "title": "Sandpack",
+    "description": ""
+  },
+  "footer": {
+    "text": "powered by"
+  },
+  "commands": {
+    "import": "import { Sandpack } from \"@codesandbox/sandpack-react\";",
+    "install": "npm install @codesandbox/sandpack-react"
+  },
+  "resources": [
+    {
+      "name": "Docs",
+      "url": "#"
+    },
+    {
+      "name": "GitHub",
+      "url": "#"
+    }
+  ],
+  "api": {
+    "title": "Building blocks<br />of the Sandpack<br />ecosystem.",
+    "highlights": [
+      {
+        "title": "Providers",
+        "description": "We export a <code>SandpackProvider</code> that manages the state and actions for sandpack and a <code>ThemeProvider</code> that handles the theme and style."
+      },
+      {
+        "title": "Custom Hooks",
+        "description": "A set of hooks gives you access to the state and offer an API for integrating custom components into sandpack."
+      },
+      {
+        "title": "Sandpack Components",
+        "description": "We also export the smaller parts that make up the <code>&lt;Sandpack /&gt;</code> component, so you can combine them with your custom components."
+      },
+      {
+        "title": "Sandpack Client",
+        "description": "The bundler is wrapped by a small package called <code>sandpack-client</code>, which is framework agnostic and allows you to tap into the bundler protocol."
+      }
+    ]
+  },
+  "banner": {
+    "title": "Get started<br /> with Sandpack."
+  },
+  "community": {
+    "title": "Get involved in<br />our community.",
+    "list": [
+      {
+        "name": "Twitter",
+        "socialUrl": "#",
+        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "logoUrl": "/assets/logos/Twitter.svg"
+      },
+      {
+        "name": "Discord",
+        "socialUrl": "#",
+        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "logoUrl": "/assets/logos/Discord.svg"
+      },
+      {
+        "name": "GitHub",
+        "socialUrl": "#",
+        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "logoUrl": "/assets/logos/GitHub.svg"
+      }
+    ]
+  },
+  "features": {
+    "title": "Live coding</br>environment</br><span class=\"highlight\">in minutes.</span>",
+    "highlights": [
+      {
+        "title": "Full editor experience",
+        "description": "Sandpack is using CodeMirror under the hood, giving you all the basic capabilities of a code editor and syntax highlight.",
+        "iconKey": "editor"
+      },
+      {
+        "title": "Advanced preview",
+        "description": "Sandpack embeds the browser bundler that powers codesandbox.io and takes advantage of the following features: hot module reloading API, friendly error overlay, powerful transpilation result caching, dependency resolver.",
+        "iconKey": "preview"
+      },
+      {
+        "title": "Export to CodeSandbox",
+        "description": "With Sandpack, you're always one click away from opening your code snippet in codesandbox",
+        "iconKey": "export"
+      }
+    ]
+  },
+  "intro": {
+    "title": "Live coding <span class=\"highlight\">in<br />the browser.</span>",
+    "highlights": [
+      {
+        "title": "Start with preset templates",
+        "description": "Use the <code>template</code> prop to choose an option made by CodeSandbox: react, angular, vanilla."
+      },
+      {
+        "title": "Customize your setup",
+        "description": "If you want to add dependencies or you need a different file structure, you can use the <code>customSetup</code> prop."
+      },
+      {
+        "title": "Configure your editor",
+        "description": "The <code>options</code> prop allows you to toggle on/off different features of the code editor.",
+        "snippet": "<Sandpack\n  options={{\n    showNavigator: true,\n    showLineNumbers: true\n  }}\n/>"
+      },
+      {
+        "title": "Customize your setup",
+        "description": "Use the <code>theme</code> prop to set a predefined option made by CodeSandbox. Try below, just click to change code and see all the predefined options. (mention the user can create its own theme)."
+      },
+      {
+        "title": "Build your own Sandpack",
+        "description": "The library exports a set of composable components and hooks that allow you to tailor the editing experience to your own needs.",
+        "snippet": "<SandpackProvider>\n  <Sandpacklayout>\n    <SandpackEditor />\n    <SandpackPreview />\n  <Sandpacklayout>\n</SandpackProvider>"
+      }
+    ]
+  },
+  "showCase": {
+    "title": "Showcase",
+    "highlights": [
+      {
+        "title": "MDX",
+        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+      },
+      {
+        "title": "Sound Demo",
+        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+      },
+      {
+        "title": "Multiple Previews",
+        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+      },
+      {
+        "title": "Step by step code",
+        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+      }
+    ]
+  },
+  "users": {
+    "title": "Who's using Sandpack.",
+    "list": [
+      {
+        "name": "React",
+        "socialUrl": "#",
+        "logo": {
+          "url": "/assets/logos/React.svg",
+          "height": 39,
+          "width": 147
+        }
+      },
+      {
+        "name": "CodeSandbox",
+        "socialUrl": "#",
+        "logo": {
+          "url": "/assets/logos/CodeSandbox-minimal.svg",
+          "height": 37,
+          "width": 261
+        }
+      },
+      {
+        "name": "CodeHike",
+        "socialUrl": "#",
+        "logo": {
+          "url": "/assets/logos/CodeHike.svg",
+          "height": 47,
+          "width": 219
+        }
+      },
+      {
+        "name": "CodeAmigo",
+        "socialUrl": "#",
+        "logo": {
+          "url": "/assets/logos/CodeAmigo.svg",
+          "height": 47,
+          "width": 219
+        }
+      }
+    ]
+  }
+}
