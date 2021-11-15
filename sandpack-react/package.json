@@ -10,17 +10,9 @@
   "license": "GPL-2.0",
   "author": "CodeSandbox",
   "main": "dist/index.js",
-  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "sideEffects": false,
-  "exports": {
-    "./common": "./dist/common",
-    "./components": "./dist/components",
-    "./contexts": "./dist/contexts",
-    "./hooks": "./dist/hooks",
-    "./presents": "./dist/presents",
-    "./templates": "./dist/templates"
-  },
+  "type": "module",
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "yarn run clean",
