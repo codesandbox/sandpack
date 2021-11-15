@@ -99,6 +99,7 @@ export type SandpackPredefinedTemplate =
   | "react"
   | "react-ts"
   | "vanilla"
+  | "vanilla-ts"
   | "vue"
   | "vue3";
 
