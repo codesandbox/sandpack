@@ -47,6 +47,7 @@ export interface SandpackProviderProps {
   // editor state (override values)
   activePath?: string;
   openPaths?: string[];
+  externalResources?: string[];
 
   // execution and recompile
   recompileMode?: "immediate" | "delayed";
@@ -293,6 +294,7 @@ class SandpackProvider extends React.PureComponent<
         template: this.state.environment,
       },
       {
+        externalResources: this.props.externalResources,
         bundlerURL: this.props.bundlerURL,
         startRoute: this.props.startRoute,
         fileResolver: this.props.fileResolver,
