@@ -171,6 +171,9 @@ export type SandpackThemeProp =
   | SandpackPartialTheme
   | "auto";
 
+/**
+ * @hidden
+ */
 export type DeepPartial<Type> = {
   [Property in keyof Type]?: DeepPartial<Type[Property]>;
 };
