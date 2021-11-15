@@ -137,7 +137,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
           ...historyKeymap,
           ...commentKeymap,
           ...customCommandsKeymap,
-        ]),
+        ] as  KeyBinding[]),
         langSupport,
 
         getEditorTheme(theme),
