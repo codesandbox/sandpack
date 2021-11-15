@@ -11,7 +11,7 @@ import { lineNumbers } from "@codemirror/gutter";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
 import { EditorState } from "@codemirror/state";
-import type { Annotation, ChangeSet } from "@codemirror/state";
+import type { Annotation } from "@codemirror/state";
 import {
   highlightSpecialChars,
   highlightActiveLine,
@@ -47,15 +47,15 @@ interface CodeMirrorProps {
   code: string;
   filePath?: string;
   fileType?:
-    | "js"
-    | "jsx"
-    | "ts"
-    | "tsx"
-    | "css"
-    | "scss"
-    | "less"
-    | "html"
-    | "vue";
+  | "js"
+  | "jsx"
+  | "ts"
+  | "tsx"
+  | "css"
+  | "scss"
+  | "less"
+  | "html"
+  | "vue";
   onCodeUpdate?: (newCode: string) => void;
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
@@ -211,75 +211,75 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
       // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
     }, [showLineNumbers, wrapContent, themeId, decorators]);
 
-    // React.useEffect(() => {
-    //   // When the user clicks on a tab button on a larger screen
-    //   // Avoid autofocus on mobile as it leads to a bad experience and an unexpected layout shift
-    //   if (
-    //     cmView.current &&
-    //     editorState === "dirty" &&
-    //     window.matchMedia("(min-width: 768px)").matches
-    //   ) {
-    //     cmView.current.contentDOM.focus();
-    //   }
-    // }, []);
+    React.useEffect(() => {
+      // When the user clicks on a tab button on a larger screen
+      // Avoid autofocus on mobile as it leads to a bad experience and an unexpected layout shift
+      if (
+        cmView.current &&
+        editorState === "dirty" &&
+        window.matchMedia("(min-width: 768px)").matches
+      ) {
+        cmView.current.contentDOM.focus();
+      }
+    }, []);
 
     // Update editor when code passed as prop from outside sandpack changes
-    // React.useEffect(() => {
-    //   if (cmView.current && code !== internalCode) {
-    //     const view = cmView.current;
-    //     view.dispatch({
-    //       changes: { from: 0, to: view.state.doc.length, insert: code },
-    //     });
-    //   }
-    // }, [code]);
+    React.useEffect(() => {
+      if (cmView.current && code !== internalCode) {
+        const view = cmView.current;
+        view.dispatch({
+          changes: { from: 0, to: view.state.doc.length, insert: code },
+        });
+      }
+    }, [code]);
 
-    // React.useEffect(
-    //   function messageToInlineError() {
-    //     if (!showInlineErrors) return () => null;
+    React.useEffect(
+      function messageToInlineError() {
+        if (!showInlineErrors) return () => null;
 
-    //     const unsubscribe = listen((message) => {
-    //       const view = cmView.current;
+        const unsubscribe = listen((message) => {
+          const view = cmView.current;
 
-    //       if (message.type === "success") {
-    //         view?.dispatch({
-    //           // Pass message to clean up inline error
-    //           annotations: [
-    //             {
-    //               type: "clean-error",
-    //               value: null,
-    //             } as unknown as Annotation<any>,
-    //           ],
+          if (message.type === "success") {
+            view?.dispatch({
+              // Pass message to clean up inline error
+              annotations: [
+                {
+                  type: "clean-error",
+                  value: null,
+                } as unknown as Annotation<unknown>,
+              ],
 
-    //           // Trigger a doc change to remove inline error
-    //           changes: {
-    //             from: 0,
-    //             to: view.state.doc.length,
-    //             insert: view.state.doc,
-    //           } as unknown as ChangeSet,
-    //           selection: view.state.selection,
-    //         });
-    //       }
+              // Trigger a doc change to remove inline error
+              changes: {
+                from: 0,
+                to: view.state.doc.length,
+                insert: view.state.doc,
+              },
+              selection: view.state.selection,
+            });
+          }
 
-    //       if (
-    //         message.type === "action" &&
-    //         message.action === "show-error" &&
-    //         "line" in message
-    //       ) {
-    //         view?.dispatch({
-    //           annotations: [
-    //             {
-    //               type: "error",
-    //               value: message.line,
-    //             } as unknown as Annotation<unknown>,
-    //           ],
-    //         });
-    //       }
-    //     });
+          if (
+            message.type === "action" &&
+            message.action === "show-error" &&
+            "line" in message
+          ) {
+            view?.dispatch({
+              annotations: [
+                {
+                  type: "error",
+                  value: message.line,
+                } as unknown as Annotation<unknown>,
+              ],
+            });
+          }
+        });
 
-    //     return () => unsubscribe();
-    //   },
-    //   [listen, showInlineErrors]
-    // );
+        return () => unsubscribe();
+      },
+      [listen, showInlineErrors]
+    );
 
     const handleContainerKeyDown = (evt: React.KeyboardEvent) => {
       if (evt.key === "Enter" && cmView.current) {
