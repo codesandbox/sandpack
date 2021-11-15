@@ -109,6 +109,18 @@ export const VanillaEditor: Story<SandpackProps> = (args) => (
   />
 );
 
+export const VanillaTypescriptEditor: Story<SandpackProps> = (args) => (
+  <Sandpack
+    {...args}
+    options={{
+      openPaths: ["/src/index.ts", "/src/styles.css", "/index.html"],
+      showNavigator: true,
+    }}
+    template="vanilla-ts"
+    theme="codesandbox-dark"
+  />
+);
+
 export const AngularEditor: Story<SandpackProps> = (args) => (
   <Sandpack
     {...args}

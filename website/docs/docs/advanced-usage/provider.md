@@ -29,10 +29,7 @@ The `SandpackProvider` accepts [the same two props](/getting-started/custom-cont
 `SandpackProvider` as well as the other sandpack components are named exports in the `sandpack-react` package.
 
 ```jsx
-import {
-  SandpackProvider,
-  SandpackPreview,
-} from "@codesandbox/sandpack-react";
+import { SandpackProvider, SandpackPreview } from "@codesandbox/sandpack-react";
 
 const CustomSandpack = () => (
   <SandpackProvider>

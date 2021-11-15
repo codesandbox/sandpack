@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-react",
-  "version": "0.2.1",
+  "version": "0.3.2",
   "description": "",
   "keywords": [],
   "repository": {
@@ -22,7 +22,8 @@
     "build:css": "postcss src/styles/index.css -o dist/index.css -u autoprefixer -u cssnano",
     "start": "tsc -p tsconfig.esm.json --watch",
     "storybook": "start-storybook -p 6006 --no-dll",
-    "build-storybook": "build-storybook --no-dll"
+    "build-storybook": "build-storybook --no-dll",
+    "typecheck": "tsc"
   },
   "files": [
     "dist",
@@ -31,20 +32,20 @@
   ],
   "dependencies": {
     "@code-hike/classer": "^0.0.0-aa6efee",
-    "@codemirror/closebrackets": "0.19.0",
-    "@codemirror/commands": "0.19.5",
-    "@codemirror/comment": "0.19.0",
-    "@codemirror/gutter": "0.19.4",
-    "@codemirror/highlight": "0.19.6",
-    "@codemirror/history": "0.19.0",
-    "@codemirror/lang-css": "0.19.3",
-    "@codemirror/lang-html": "0.19.3",
-    "@codemirror/lang-javascript": "0.19.2",
-    "@codemirror/language": "0.19.3",
-    "@codemirror/matchbrackets": "0.19.3",
-    "@codemirror/state": "0.19.4",
-    "@codemirror/view": "0.19.14",
-    "@codesandbox/sandpack-client": "^0.2.0",
+    "@codemirror/closebrackets": "^0.19.0",
+    "@codemirror/commands": "^0.19.5",
+    "@codemirror/comment": "^0.19.0",
+    "@codemirror/gutter": "^0.19.5",
+    "@codemirror/highlight": "^0.19.6",
+    "@codemirror/history": "^0.19.0",
+    "@codemirror/lang-css": "^0.19.3",
+    "@codemirror/lang-html": "^0.19.3",
+    "@codemirror/lang-javascript": "^0.19.3",
+    "@codemirror/language": "^0.19.4",
+    "@codemirror/matchbrackets": "^0.19.3",
+    "@codemirror/state": "^0.19.5",
+    "@codemirror/view": "^0.19.16",
+    "@codesandbox/sandpack-client": "^0.3.2",
     "codesandbox-import-util-types": "^2.2.3",
     "codesandbox-import-utils": "^2.2.3"
   },

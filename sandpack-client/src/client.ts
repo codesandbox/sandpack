@@ -244,7 +244,9 @@ export class SandpackClient {
     try {
       packageJSON = JSON.parse(files["/package.json"].code);
     } catch (e) {
-      console.error("Could not parse package.json file: " + e.message);
+      console.error(
+        "Could not parse package.json file: " + (e as Error).message
+      );
     }
 
     // TODO move this to a common format

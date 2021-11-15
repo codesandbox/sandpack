@@ -2,7 +2,8 @@
 sidebar_position: 2
 ---
 
-import { SandpackProvider, SandpackLayout, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@codesandbox/sandpack-react"
+import { SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@codesandbox/sandpack-react"
+import { SandpackLayout } from "../../src/CustomSandpack"
 
 # Components
 

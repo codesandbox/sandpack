@@ -8,7 +8,7 @@
       "name": "Docs",
       "command": "yarn dev:docs"
     },
-    "4000": {
+    "3001": {
       "name": "Landing page",
       "command": "yarn dev:landing"
     }
@@ -26,5 +26,15 @@
       "name": "Format Workspace",
       "command": "yarn format"
     }
-  }
+  },
+  "setupTasks": [
+    {
+      "name": "Installing Dependencies",
+      "command": "yarn install"
+    },
+    {
+      "name": "Building Workspace",
+      "command": "yarn build"
+    }
+  ]
 }

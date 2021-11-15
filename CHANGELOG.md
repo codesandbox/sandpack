@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://github.com/codesandbox/sandpack/compare/v0.3.1...v0.3.2) (2021-11-15)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.3.1](https://github.com/codesandbox/sandpack/compare/v0.3.0...v0.3.1) (2021-11-15)
+
+
+### Bug Fixes
+
+* **react:** dedupe deps ([#145](https://github.com/codesandbox/sandpack/issues/145)) ([bc86c31](https://github.com/codesandbox/sandpack/commit/bc86c3160fbf07c8c226f8c2462ffcadd3faac0e))
+
+
+
+
+
+# [0.3.0](https://github.com/codesandbox/sandpack/compare/v0.2.3...v0.3.0) (2021-11-15)
+
+
+### Features
+
+* **template:** add vanilla typescript ([#130](https://github.com/codesandbox/sandpack/issues/130)) ([d33eeb9](https://github.com/codesandbox/sandpack/commit/d33eeb9be6809fb40165d97e34a13471ec5faf1b))
+
+
+
+
+
+## [0.2.3](https://github.com/codesandbox/sandpack/compare/v0.2.2...v0.2.3) (2021-11-11)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.2.2](https://github.com/codesandbox/sandpack/compare/v0.2.1...v0.2.2) (2021-11-11)
+
+
+### Bug Fixes
+
+* **react-layout:** remove max-height limit for print media ([#121](https://github.com/codesandbox/sandpack/issues/121)) ([e0001a5](https://github.com/codesandbox/sandpack/commit/e0001a575b13b17188a0233bab36c38800e6c21b))
+
+
+
+
+
 ## [0.2.1](https://github.com/codesandbox/sandpack/compare/v0.2.0...v0.2.1) (2021-11-10)
 
 **Note:** Version bump only for package sandpack

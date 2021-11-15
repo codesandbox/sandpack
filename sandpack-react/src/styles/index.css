@@ -78,6 +78,13 @@
   height: 300px;
 }
 
+@media print {
+  .sp-layout > .sp-stack {
+    height: auto;
+    display: block;
+  }
+}
+
 .sp-layout > *:not(:first-child) {
   border-left: 1px solid var(--sp-colors-fg-inactive);
   border-top: 1px solid var(--sp-colors-fg-inactive);

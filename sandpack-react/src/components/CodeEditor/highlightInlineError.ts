@@ -28,7 +28,7 @@ const activeLineHighlighter = ViewPlugin.fromClass(
           annotations: Array<{ type: string }>;
         }
 
-        ((trans as unknown) as Annotations).annotations?.forEach((element) => {
+        (trans as unknown as Annotations).annotations?.forEach((element) => {
           if (element.type === "error") {
             message = element;
           }
