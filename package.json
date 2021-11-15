@@ -15,7 +15,7 @@
   "description": "",
   "scripts": {
     "lint": "eslint '**/*.ts?(x)' --fix",
-    "format": "prettier --write '**/*.{js,jsx,ts,tsx,md,mdx}'",
+    "format": "prettier --write '**/*.{ts,tsx}'",
     "build": "yarn workspace @codesandbox/sandpack-client run build && yarn workspace @codesandbox/sandpack-react run build",
     "prepare": "husky install",
     "clean": "yarn workspaces run clean",
@@ -46,8 +46,5 @@
     "lerna-changelog": "^2.1.0",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1"
-  },
-  "resolutions": {
-    "@codemirror/state": "0.19.4"
   }
 }

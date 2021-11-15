@@ -10,8 +10,8 @@ import { commentKeymap } from "@codemirror/comment";
 import { lineNumbers } from "@codemirror/gutter";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
-import type { Annotation } from "@codemirror/state";
 import { EditorState } from "@codemirror/state";
+import type { Annotation } from "@codemirror/state";
 import {
   highlightSpecialChars,
   highlightActiveLine,
@@ -137,7 +137,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
           ...historyKeymap,
           ...commentKeymap,
           ...customCommandsKeymap,
-        ]),
+        ] as KeyBinding[]),
         langSupport,
 
         getEditorTheme(theme),

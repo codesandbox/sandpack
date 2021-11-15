@@ -10,19 +10,17 @@ const getFileParameters = (
   files: SandpackBundlerFiles,
   environment?: SandboxEnvironment
 ) => {
-  const normalized: Record<
-    string,
-    { content: string; isBinary: boolean }
-  > = Object.keys(files).reduce(
-    (prev, next) => ({
-      ...prev,
-      [next.replace("/", "")]: {
-        content: files[next].code,
-        isBinary: false,
-      },
-    }),
-    {}
-  );
+  const normalized: Record<string, { content: string; isBinary: boolean }> =
+    Object.keys(files).reduce(
+      (prev, next) => ({
+        ...prev,
+        [next.replace("/", "")]: {
+          content: files[next].code,
+          isBinary: false,
+        },
+      }),
+      {}
+    );
 
   return getParameters({
     files: normalized,
