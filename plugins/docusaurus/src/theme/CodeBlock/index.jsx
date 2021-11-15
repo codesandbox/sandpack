@@ -13,7 +13,12 @@ const RenderSandpack = (props) => {
   const { siteConfig } = useDocusaurusContext();
   const sandpackPluginOptions = siteConfig.themeConfig.sandpack;
 
-  const { children, template = "react", file = "/App.js", theme = sandpackPluginOptions.theme } = props;
+  const {
+    children,
+    template = "react",
+    file = "/App.js",
+    theme = sandpackPluginOptions.theme,
+  } = props;
 
   if (props.sandpack) {
     const occurrences = children
@@ -34,7 +39,13 @@ const RenderSandpack = (props) => {
 
     return (
       <Sandpack
-        files={children ? occurrences.length ? files : { [file]: children } : undefined}
+        files={
+          children
+            ? occurrences.length
+              ? files
+              : { [file]: children }
+            : undefined
+        }
         template={template}
         theme={theme}
       />
@@ -43,7 +54,10 @@ const RenderSandpack = (props) => {
 
   return (
     <SandpackProvider
-      customSetup={{ entry: "index.ts", files: { "index.ts": children.trim() } }}
+      customSetup={{
+        entry: "index.ts",
+        files: { "index.ts": children.trim() },
+      }}
     >
       <SandpackThemeProvider theme={theme}>
         <SandpackCodeViewer />

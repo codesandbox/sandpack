@@ -47,15 +47,15 @@ interface CodeMirrorProps {
   code: string;
   filePath?: string;
   fileType?:
-  | "js"
-  | "jsx"
-  | "ts"
-  | "tsx"
-  | "css"
-  | "scss"
-  | "less"
-  | "html"
-  | "vue";
+    | "js"
+    | "jsx"
+    | "ts"
+    | "tsx"
+    | "css"
+    | "scss"
+    | "less"
+    | "html"
+    | "vue";
   onCodeUpdate?: (newCode: string) => void;
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
