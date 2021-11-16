@@ -32,7 +32,6 @@ export default [
       dir: "dist",
       format: "es",
       sourcemap: true,
-      preserveModules: true,
     },
   },
   {
@@ -41,7 +40,6 @@ export default [
       dir: "dist",
       format: "cjs",
       entryFileNames: "[name].[format].js",
-      preserveModules: true,
     },
   },
 ];
