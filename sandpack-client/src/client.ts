@@ -22,6 +22,10 @@ import {
 
 export interface ClientOptions {
   /**
+   * Paths to external resources
+   */
+  externalResources?: string[];
+  /**
    * Location of the bundler.
    */
   bundlerURL?: string;
@@ -267,7 +271,7 @@ export class SandpackClient {
       version: 3,
       isInitializationCompile,
       modules,
-      externalResources: [],
+      externalResources: this.options.externalResources || [],
       hasFileResolver: Boolean(this.options.fileResolver),
       disableDependencyPreprocessing:
         this.sandboxInfo.disableDependencyPreprocessing,

@@ -138,6 +138,10 @@ to render inside the iframe:
 ```ts
 {
   /**
+   * Paths to external resources
+   */
+  externalResources?: string[];
+  /**
    * Location of the bundler. Defaults to `${version}-sandpack.codesandbox.io`
    */
   bundlerURL?: string;

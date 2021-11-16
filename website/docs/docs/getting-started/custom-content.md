@@ -130,6 +130,32 @@ default:
 The `active` flag has precendence over the `hidden` flag. So a file with both of these set as `true` will be visible.
 :::
 
+### Links on external resources
+
+You can also use `externalResources` property to specify the static links on external resources such as CSS files or images presence somewhere in the web:
+
+```jsx
+<Sandpack
+  files={{
+    '/App.js': reactCode,
+    '/button.js': {
+      code: buttonCode,
+      active: true,
+    }
+    '/link.js': {
+      code: linkCode,
+      hidden: true,
+    },
+  }}
+  options={{
+    'externalResources': [
+      "https://unpkg.com/@tailwindcss/ui/dist/tailwind-ui.min.css"
+    ]
+  }}
+  template="react"
+/>
+```
+
 ### openPaths and activePath
 
 You can override the entire hidden/active system with two settings (`openPaths` and `activePath`) inside the
