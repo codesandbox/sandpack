@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-function getMainFile(template: string) {
+export function getMainFile(template: string) {
   if (template === "vue-cli") {
     return "src/main.js";
   }
@@ -44,10 +44,10 @@ function getMainFile(template: string) {
   }
   return "src/index.js";
 }
-exports.getMainFile = getMainFile;
+
 const SANDBOX_CONFIG = "sandbox.config.json";
 
-function getTemplate(packageJSONPackage: any, modules: any): any {
+export function getTemplate(packageJSONPackage: any, modules: any): any {
   const sandboxConfig =
     modules[SANDBOX_CONFIG] || modules["/" + SANDBOX_CONFIG];
   if (sandboxConfig) {
@@ -157,4 +157,4 @@ function getTemplate(packageJSONPackage: any, modules: any): any {
   }
   return undefined;
 }
-export { getTemplate };
+
