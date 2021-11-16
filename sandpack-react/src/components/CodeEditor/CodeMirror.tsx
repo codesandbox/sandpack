@@ -181,8 +181,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
       }
 
       const view = new EditorView({
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        state: startState as any,
+        state: startState,
         parent: parentDiv,
         dispatch: (tr) => {
           view.update([tr]);
@@ -258,8 +257,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
                 insert: view.state.doc,
               },
               selection: view.state.selection,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any);
+            });
           }
 
           if (
@@ -274,8 +272,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
                   value: message.line,
                 } as unknown as Annotation<unknown>,
               ],
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } as any);
+            });
           }
         });
 
