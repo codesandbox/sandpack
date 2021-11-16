@@ -15,7 +15,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[themes/index.ts:212](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/themes/index.ts#L212)
+[themes/index.ts:212](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/themes/index.ts#L212)
 
 ___
 
@@ -25,7 +25,7 @@ ___
 
 #### Defined in
 
-[contexts/themeContext.tsx:19](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/contexts/themeContext.tsx#L19)
+[contexts/themeContext.tsx:19](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/contexts/themeContext.tsx#L19)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 #### Defined in
 
-[themes/index.ts:43](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/themes/index.ts#L43)
+[themes/index.ts:43](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/themes/index.ts#L43)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[themes/index.ts:113](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/themes/index.ts#L113)
+[themes/index.ts:113](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/themes/index.ts#L113)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[themes/index.ts:10](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/themes/index.ts#L10)
+[themes/index.ts:10](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/themes/index.ts#L10)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[themes/index.ts:77](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/themes/index.ts#L77)
+[themes/index.ts:77](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/themes/index.ts#L77)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[themes/index.ts:179](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/themes/index.ts#L179)
+[themes/index.ts:179](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/themes/index.ts#L179)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[themes/index.ts:146](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/themes/index.ts#L146)
+[themes/index.ts:146](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/themes/index.ts#L146)
 
 ## Functions
 
@@ -110,7 +110,7 @@ ___
 
 #### Defined in
 
-[themes/index.ts:221](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/themes/index.ts#L221)
+[themes/index.ts:221](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/themes/index.ts#L221)
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 #### Defined in
 
-[themes/index.ts:316](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/themes/index.ts#L316)
+[themes/index.ts:316](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/themes/index.ts#L316)
 
 ___
 
@@ -151,4 +151,4 @@ ___
 
 #### Defined in
 
-[themes/index.ts:288](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/themes/index.ts#L288)
+[themes/index.ts:288](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/themes/index.ts#L288)

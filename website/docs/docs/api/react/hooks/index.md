@@ -15,7 +15,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[hooks/useLoadingOverlayState.ts:5](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/hooks/useLoadingOverlayState.ts#L5)
+[hooks/useLoadingOverlayState.ts:5](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/hooks/useLoadingOverlayState.ts#L5)
 
 ## Functions
 
@@ -34,7 +34,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[hooks/useActiveCode.ts:3](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/hooks/useActiveCode.ts#L3)
+[hooks/useActiveCode.ts:3](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/hooks/useActiveCode.ts#L3)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[hooks/useCodeSandboxLink.ts:31](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/hooks/useCodeSandboxLink.ts#L31)
+[hooks/useCodeSandboxLink.ts:31](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/hooks/useCodeSandboxLink.ts#L31)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[hooks/useErrorMessage.ts:5](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/hooks/useErrorMessage.ts#L5)
+[hooks/useErrorMessage.ts:5](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/hooks/useErrorMessage.ts#L5)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Defined in
 
-[hooks/useLoadingOverlayState.ts:10](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/hooks/useLoadingOverlayState.ts#L10)
+[hooks/useLoadingOverlayState.ts:10](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/hooks/useLoadingOverlayState.ts#L10)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 #### Defined in
 
-[hooks/useSandpack.ts:16](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/hooks/useSandpack.ts#L16)
+[hooks/useSandpack.ts:16](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/hooks/useSandpack.ts#L16)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[hooks/useSandpackNavigation.ts:3](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/hooks/useSandpackNavigation.ts#L3)
+[hooks/useSandpackNavigation.ts:3](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/hooks/useSandpackNavigation.ts#L3)
 
 ___
 
@@ -141,7 +141,7 @@ ___
 
 #### Defined in
 
-[hooks/useSandpackTheme.ts:6](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/hooks/useSandpackTheme.ts#L6)
+[hooks/useSandpackTheme.ts:6](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/hooks/useSandpackTheme.ts#L6)
 
 ___
 
@@ -155,4 +155,4 @@ ___
 
 #### Defined in
 
-[hooks/useTranspiledCode.ts:15](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/hooks/useTranspiledCode.ts#L15)
+[hooks/useTranspiledCode.ts:15](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/hooks/useTranspiledCode.ts#L15)

@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[types.ts:72](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L72)
+[types.ts:72](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L72)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[types.ts:73](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L73)
+[types.ts:73](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L73)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[types.ts:74](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L74)
+[types.ts:74](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L74)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[types.ts:76](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L76)
+[types.ts:76](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L76)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[types.ts:71](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L71)
+[types.ts:71](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L71)
 
 ___
 
@@ -64,4 +64,4 @@ ___
 
 #### Defined in
 
-[types.ts:75](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L75)
+[types.ts:75](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L75)

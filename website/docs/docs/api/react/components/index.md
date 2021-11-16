@@ -33,7 +33,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[types.ts:68](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L68)
+[types.ts:68](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L68)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[types.ts:95](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L95)
+[types.ts:95](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L95)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-[types.ts:11](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L11)
+[types.ts:11](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L11)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[types.ts:16](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L16)
+[types.ts:16](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L16)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[types.ts:21](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L21)
+[types.ts:21](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L21)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-[types.ts:85](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L85)
+[types.ts:85](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L85)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-[types.ts:167](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L167)
+[types.ts:167](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L167)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 #### Defined in
 
-[types.ts:97](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L97)
+[types.ts:97](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L97)
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 #### Defined in
 
-[types.ts:106](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L106)
+[types.ts:106](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L106)
 
 ___
 
@@ -153,7 +153,7 @@ ___
 
 #### Defined in
 
-[types.ts:62](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L62)
+[types.ts:62](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L62)
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 #### Defined in
 
-[types.ts:169](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L169)
+[types.ts:169](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L169)
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 #### Defined in
 
-[components/Preview/index.tsx:26](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Preview/index.tsx#L26)
+[components/Preview/index.tsx:26](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/components/Preview/index.tsx#L26)
 
 ___
 
@@ -183,7 +183,7 @@ ___
 
 #### Defined in
 
-[components/Preview/index.tsx:21](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Preview/index.tsx#L21)
+[components/Preview/index.tsx:21](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/components/Preview/index.tsx#L21)
 
 ___
 
@@ -193,7 +193,7 @@ ___
 
 #### Defined in
 
-[components/Preview/index.tsx:14](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Preview/index.tsx#L14)
+[components/Preview/index.tsx:14](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/components/Preview/index.tsx#L14)
 
 ## Variables
 
@@ -203,7 +203,7 @@ ___
 
 #### Defined in
 
-[components/CodeEditor/CodeMirror.tsx:68](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/CodeEditor/CodeMirror.tsx#L68)
+[components/CodeEditor/CodeMirror.tsx:68](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/components/CodeEditor/CodeMirror.tsx#L68)
 
 ___
 
@@ -213,7 +213,7 @@ ___
 
 #### Defined in
 
-[common/ErrorOverlay.tsx:6](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/common/ErrorOverlay.tsx#L6)
+[common/ErrorOverlay.tsx:6](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/common/ErrorOverlay.tsx#L6)
 
 ___
 
@@ -223,7 +223,7 @@ ___
 
 #### Defined in
 
-[components/FileTabs/index.tsx:12](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/FileTabs/index.tsx#L12)
+[components/FileTabs/index.tsx:12](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/components/FileTabs/index.tsx#L12)
 
 ___
 
@@ -233,7 +233,7 @@ ___
 
 #### Defined in
 
-[common/LoadingOverlay.tsx:12](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/common/LoadingOverlay.tsx#L12)
+[common/LoadingOverlay.tsx:12](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/common/LoadingOverlay.tsx#L12)
 
 ___
 
@@ -243,7 +243,7 @@ ___
 
 #### Defined in
 
-[components/Navigator/index.tsx:14](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Navigator/index.tsx#L14)
+[components/Navigator/index.tsx:14](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/components/Navigator/index.tsx#L14)
 
 ___
 
@@ -253,7 +253,7 @@ ___
 
 #### Defined in
 
-[common/OpenInCodeSandboxButton.tsx:9](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/common/OpenInCodeSandboxButton.tsx#L9)
+[common/OpenInCodeSandboxButton.tsx:9](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/common/OpenInCodeSandboxButton.tsx#L9)
 
 ___
 
@@ -263,7 +263,7 @@ ___
 
 #### Defined in
 
-[components/Preview/RefreshButton.tsx:11](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Preview/RefreshButton.tsx#L11)
+[components/Preview/RefreshButton.tsx:11](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/components/Preview/RefreshButton.tsx#L11)
 
 ___
 
@@ -273,7 +273,7 @@ ___
 
 #### Defined in
 
-[presets/Sandpack.tsx:51](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/presets/Sandpack.tsx#L51)
+[presets/Sandpack.tsx:51](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/presets/Sandpack.tsx#L51)
 
 ___
 
@@ -283,7 +283,7 @@ ___
 
 #### Defined in
 
-[components/CodeEditor/index.tsx:24](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/CodeEditor/index.tsx#L24)
+[components/CodeEditor/index.tsx:24](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/components/CodeEditor/index.tsx#L24)
 
 ___
 
@@ -293,7 +293,7 @@ ___
 
 #### Defined in
 
-[components/CodeViewer/index.tsx:19](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/CodeViewer/index.tsx#L19)
+[components/CodeViewer/index.tsx:19](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/components/CodeViewer/index.tsx#L19)
 
 ___
 
@@ -303,7 +303,7 @@ ___
 
 #### Defined in
 
-[common/Layout.tsx:12](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/common/Layout.tsx#L12)
+[common/Layout.tsx:12](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/common/Layout.tsx#L12)
 
 ___
 
@@ -313,7 +313,7 @@ ___
 
 #### Defined in
 
-[components/Preview/index.tsx:39](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Preview/index.tsx#L39)
+[components/Preview/index.tsx:39](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/components/Preview/index.tsx#L39)
 
 ___
 
@@ -323,7 +323,7 @@ ___
 
 #### Defined in
 
-[presets/SandpackRunner.tsx:27](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/presets/SandpackRunner.tsx#L27)
+[presets/SandpackRunner.tsx:27](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/presets/SandpackRunner.tsx#L27)
 
 ___
 
@@ -333,7 +333,7 @@ ___
 
 #### Defined in
 
-[common/Stack.tsx:4](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/common/Stack.tsx#L4)
+[common/Stack.tsx:4](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/common/Stack.tsx#L4)
 
 ___
 
@@ -343,4 +343,4 @@ ___
 
 #### Defined in
 
-[components/TranspiledCode/index.tsx:10](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/TranspiledCode/index.tsx#L10)
+[components/TranspiledCode/index.tsx:10](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/components/TranspiledCode/index.tsx#L10)

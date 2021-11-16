@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[types.ts:100](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L100)
+[types.ts:100](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/types.ts#L100)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[types.ts:99](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L99)
+[types.ts:99](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/types.ts#L99)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[types.ts:98](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L98)
+[types.ts:98](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/types.ts#L98)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[types.ts:97](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L97)
+[types.ts:97](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/types.ts#L97)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 #### Defined in
 
-[types.ts:101](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L101)
+[types.ts:101](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/types.ts#L101)
 
 ___
 
@@ -70,4 +70,4 @@ ___
 
 #### Defined in
 
-[types.ts:96](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L96)
+[types.ts:96](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/types.ts#L96)

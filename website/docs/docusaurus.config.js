@@ -3,13 +3,15 @@ const typeDocsDefault = {
   plugin: ["typedoc-plugin-no-inherit"],
 };
 
+const BASE_URL = process.env.BASE_URL || "/";
+
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: "Sandpack",
   tagline: "Bring the power of CodeSandbox into your project",
-  url: "https://sandpack.vercel.app/docs/",
-  baseUrl: "/docs/",
+  url: `https://sandpack.vercel.app${BASE_URL}`,
+  baseUrl: BASE_URL,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",

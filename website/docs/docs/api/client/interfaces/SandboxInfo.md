@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[client.ts:69](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L69)
+[client.ts:69](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L69)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[client.ts:70](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L70)
+[client.ts:70](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L70)
 
 ___
 
@@ -37,7 +37,7 @@ to AWS.
 
 #### Defined in
 
-[client.ts:83](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L83)
+[client.ts:83](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L83)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[client.ts:71](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L71)
+[client.ts:71](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L71)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[client.ts:68](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L68)
+[client.ts:68](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L68)
 
 ___
 
@@ -69,4 +69,4 @@ What template we use, if not defined we infer the template from the dependencies
 
 #### Defined in
 
-[client.ts:77](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L77)
+[client.ts:77](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L77)

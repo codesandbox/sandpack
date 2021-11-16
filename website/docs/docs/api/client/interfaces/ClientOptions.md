@@ -16,7 +16,7 @@ Location of the bundler.
 
 #### Defined in
 
-[client.ts:27](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L27)
+[client.ts:27](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L27)
 
 ___
 
@@ -28,7 +28,7 @@ The bundler will clear the console if you set this to true, everytime the iframe
 
 #### Defined in
 
-[client.ts:55](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L55)
+[client.ts:55](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L55)
 
 ___
 
@@ -48,7 +48,7 @@ We will use this to get all files from the file system.
 
 #### Defined in
 
-[client.ts:61](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L61)
+[client.ts:61](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L61)
 
 ___
 
@@ -60,7 +60,7 @@ Height of iframe.
 
 #### Defined in
 
-[client.ts:39](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L39)
+[client.ts:39](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L39)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 #### Defined in
 
-[client.ts:49](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L49)
+[client.ts:49](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L49)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 #### Defined in
 
-[client.ts:50](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L50)
+[client.ts:50](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L50)
 
 ___
 
@@ -92,7 +92,7 @@ Boolean flags to trigger certain UI elements in the bundler
 
 #### Defined in
 
-[client.ts:48](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L48)
+[client.ts:48](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L48)
 
 ___
 
@@ -104,7 +104,7 @@ If we should skip the third step: evaluation.
 
 #### Defined in
 
-[client.ts:43](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L43)
+[client.ts:43](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L43)
 
 ___
 
@@ -116,7 +116,7 @@ Relative path that the iframe loads (eg: /about)
 
 #### Defined in
 
-[client.ts:31](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L31)
+[client.ts:31](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L31)
 
 ___
 
@@ -128,4 +128,4 @@ Width of iframe.
 
 #### Defined in
 
-[client.ts:35](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/client.ts#L35)
+[client.ts:35](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-client/src/client.ts#L35)

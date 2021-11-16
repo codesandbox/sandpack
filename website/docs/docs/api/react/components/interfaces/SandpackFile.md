@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[types.ts:82](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L82)
+[types.ts:82](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L82)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[types.ts:80](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L80)
+[types.ts:80](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L80)
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 #### Defined in
 
-[types.ts:81](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/types.ts#L81)
+[types.ts:81](https://github.com/codesandbox/sandpack/blob/443abe8/sandpack-react/src/types.ts#L81)
