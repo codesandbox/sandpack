@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.8-alpha.0](https://github.com/codesandbox/sandpack/compare/v0.3.7...v0.3.8-alpha.0) (2021-11-16)
+
+
+### Bug Fixes
+
+* **react:** split bundle modules ([4b38c02](https://github.com/codesandbox/sandpack/commit/4b38c02eaa4012c79e048f37c0f8bfb6ceb28801))
+
+
+
+
+
 ## [0.3.7](https://github.com/codesandbox/sandpack/compare/v0.3.6...v0.3.7) (2021-11-16)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
