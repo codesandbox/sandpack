@@ -1,7 +1,7 @@
-import { getTemplate } from "codesandbox-import-utils/lib/create-sandbox/templates";
 import isEqual from "lodash.isequal";
 
 import Protocol from "./file-resolver-protocol";
+import { getTemplate } from "./getTemplate";
 import { IFrameProtocol } from "./iframe-protocol";
 import type {
   Dependencies,

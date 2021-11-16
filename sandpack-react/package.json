@@ -11,8 +11,8 @@
   "author": "CodeSandbox",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "sideEffects": false,
   "type": "module",
+  "sideEffects": false,
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "yarn run clean",
@@ -52,7 +52,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
-    "@rollup/plugin-node-resolve": "^13.0.6",
     "@storybook/addon-actions": "^6.1.9",
     "@storybook/addon-essentials": "^6.1.9",
     "@storybook/addon-knobs": "^6.1.9",
@@ -71,8 +70,6 @@
     "postcss": "^8.2.6",
     "postcss-cli": "^8.3.1",
     "rimraf": "^2.6.1",
-    "rollup": "^2.60.0",
-    "rollup-plugin-typescript2": "^0.30.0",
     "storybook-addon-jsx": "^7.3.4",
     "typescript": "4.0.3"
   },
