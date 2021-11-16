@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[components/Navigator/index.tsx:10](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/Navigator/index.tsx#L10)
+[components/Navigator/index.tsx:10](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Navigator/index.tsx#L10)
 
 ## Methods
 
@@ -34,4 +34,4 @@ custom_edit_url: null
 
 #### Defined in
 
-[components/Navigator/index.tsx:11](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/Navigator/index.tsx#L11)
+[components/Navigator/index.tsx:11](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Navigator/index.tsx#L11)

@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:48](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L48)
+[sandpack-react/src/contexts/sandpackContext.tsx:48](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/contexts/sandpackContext.tsx#L48)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:54](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L54)
+[sandpack-react/src/contexts/sandpackContext.tsx:54](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/contexts/sandpackContext.tsx#L54)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:57](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L57)
+[sandpack-react/src/contexts/sandpackContext.tsx:57](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/contexts/sandpackContext.tsx#L57)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:45](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L45)
+[sandpack-react/src/contexts/sandpackContext.tsx:45](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/contexts/sandpackContext.tsx#L45)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:60](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L60)
+[sandpack-react/src/contexts/sandpackContext.tsx:60](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/contexts/sandpackContext.tsx#L60)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:49](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L49)
+[sandpack-react/src/contexts/sandpackContext.tsx:49](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/contexts/sandpackContext.tsx#L49)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:53](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L53)
+[sandpack-react/src/contexts/sandpackContext.tsx:53](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/contexts/sandpackContext.tsx#L53)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:52](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L52)
+[sandpack-react/src/contexts/sandpackContext.tsx:52](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/contexts/sandpackContext.tsx#L52)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:59](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L59)
+[sandpack-react/src/contexts/sandpackContext.tsx:59](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/contexts/sandpackContext.tsx#L59)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:58](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L58)
+[sandpack-react/src/contexts/sandpackContext.tsx:58](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/contexts/sandpackContext.tsx#L58)
 
 ___
 
@@ -114,4 +114,4 @@ ___
 
 #### Defined in
 
-[sandpack-react/src/contexts/sandpackContext.tsx:44](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/contexts/sandpackContext.tsx#L44)
+[sandpack-react/src/contexts/sandpackContext.tsx:44](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/contexts/sandpackContext.tsx#L44)

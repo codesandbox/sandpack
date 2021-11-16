@@ -33,7 +33,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[types.ts:70](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L70)
+[types.ts:70](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L70)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[types.ts:22](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L22)
+[types.ts:22](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L22)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-[types.ts:85](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L85)
+[types.ts:85](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L85)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[types.ts:81](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L81)
+[types.ts:81](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L81)
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 #### Defined in
 
-[types.ts:78](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L78)
+[types.ts:78](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L78)
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 #### Defined in
 
-[types.ts:14](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L14)
+[types.ts:14](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L14)
 
 ___
 
@@ -137,7 +137,7 @@ ___
 
 #### Defined in
 
-[types.ts:7](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L7)
+[types.ts:7](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L7)
 
 ___
 
@@ -147,7 +147,7 @@ ___
 
 #### Defined in
 
-[types.ts:112](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L112)
+[types.ts:112](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L112)
 
 ___
 
@@ -165,7 +165,7 @@ ___
 
 #### Defined in
 
-[types.ts:79](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L79)
+[types.ts:79](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L79)
 
 ## Functions
 
@@ -188,7 +188,7 @@ ___
 
 #### Defined in
 
-[utils.ts:26](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/utils.ts#L26)
+[utils.ts:26](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/utils.ts#L26)
 
 ___
 
@@ -210,7 +210,7 @@ ___
 
 #### Defined in
 
-[utils.ts:9](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/utils.ts#L9)
+[utils.ts:9](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/utils.ts#L9)
 
 ___
 
@@ -230,4 +230,4 @@ ___
 
 #### Defined in
 
-[utils.ts:55](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/utils.ts#L55)
+[utils.ts:55](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/utils.ts#L55)

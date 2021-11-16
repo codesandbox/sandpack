@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[presets/Sandpack.tsx:21](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/presets/Sandpack.tsx#L21)
+[presets/Sandpack.tsx:21](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/presets/Sandpack.tsx#L21)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[presets/Sandpack.tsx:19](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/presets/Sandpack.tsx#L19)
+[presets/Sandpack.tsx:19](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/presets/Sandpack.tsx#L19)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[presets/Sandpack.tsx:25](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/presets/Sandpack.tsx#L25)
+[presets/Sandpack.tsx:25](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/presets/Sandpack.tsx#L25)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[presets/Sandpack.tsx:20](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/presets/Sandpack.tsx#L20)
+[presets/Sandpack.tsx:20](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/presets/Sandpack.tsx#L20)
 
 ___
 
@@ -77,4 +77,4 @@ ___
 
 #### Defined in
 
-[presets/Sandpack.tsx:23](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/presets/Sandpack.tsx#L23)
+[presets/Sandpack.tsx:23](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/presets/Sandpack.tsx#L23)

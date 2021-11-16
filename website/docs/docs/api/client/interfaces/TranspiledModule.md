@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[types.ts:50](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L50)
+[types.ts:50](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L50)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[types.ts:60](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L60)
+[types.ts:60](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L60)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[types.ts:53](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L53)
+[types.ts:53](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L53)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[types.ts:59](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L59)
+[types.ts:59](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L59)
 
 ___
 
@@ -56,7 +56,7 @@ All extra modules emitted by the loader
 
 #### Defined in
 
-[types.ts:57](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L57)
+[types.ts:57](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L57)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 #### Defined in
 
-[types.ts:58](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L58)
+[types.ts:58](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L58)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[types.ts:51](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L51)
+[types.ts:51](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L51)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[types.ts:52](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L52)
+[types.ts:52](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L52)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 #### Defined in
 
-[types.ts:47](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L47)
+[types.ts:47](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L47)
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 #### Defined in
 
-[types.ts:48](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L48)
+[types.ts:48](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L48)
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 #### Defined in
 
-[types.ts:49](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L49)
+[types.ts:49](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L49)
 
 ___
 
@@ -126,7 +126,7 @@ ___
 
 #### Defined in
 
-[types.ts:61](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L61)
+[types.ts:61](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L61)
 
 ___
 
@@ -136,4 +136,4 @@ ___
 
 #### Defined in
 
-[types.ts:62](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L62)
+[types.ts:62](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L62)

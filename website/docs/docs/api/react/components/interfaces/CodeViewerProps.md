@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[components/CodeViewer/index.tsx:16](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/CodeViewer/index.tsx#L16)
+[components/CodeViewer/index.tsx:16](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/CodeViewer/index.tsx#L16)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[components/CodeViewer/index.tsx:15](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/CodeViewer/index.tsx#L15)
+[components/CodeViewer/index.tsx:15](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/CodeViewer/index.tsx#L15)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[components/CodeViewer/index.tsx:14](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/CodeViewer/index.tsx#L14)
+[components/CodeViewer/index.tsx:14](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/CodeViewer/index.tsx#L14)
 
 ___
 
@@ -44,4 +44,4 @@ ___
 
 #### Defined in
 
-[components/CodeViewer/index.tsx:13](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/CodeViewer/index.tsx#L13)
+[components/CodeViewer/index.tsx:13](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/CodeViewer/index.tsx#L13)

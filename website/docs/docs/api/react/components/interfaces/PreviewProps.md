@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[components/Preview/index.tsx:28](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/Preview/index.tsx#L28)
+[components/Preview/index.tsx:28](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Preview/index.tsx#L28)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[components/Preview/index.tsx:31](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/Preview/index.tsx#L31)
+[components/Preview/index.tsx:31](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Preview/index.tsx#L31)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[components/Preview/index.tsx:32](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/Preview/index.tsx#L32)
+[components/Preview/index.tsx:32](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Preview/index.tsx#L32)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[components/Preview/index.tsx:33](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/Preview/index.tsx#L33)
+[components/Preview/index.tsx:33](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Preview/index.tsx#L33)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[components/Preview/index.tsx:34](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/Preview/index.tsx#L34)
+[components/Preview/index.tsx:34](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Preview/index.tsx#L34)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[components/Preview/index.tsx:30](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/Preview/index.tsx#L30)
+[components/Preview/index.tsx:30](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Preview/index.tsx#L30)
 
 ___
 
@@ -74,4 +74,4 @@ ___
 
 #### Defined in
 
-[components/Preview/index.tsx:29](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-react/src/components/Preview/index.tsx#L29)
+[components/Preview/index.tsx:29](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-react/src/components/Preview/index.tsx#L29)

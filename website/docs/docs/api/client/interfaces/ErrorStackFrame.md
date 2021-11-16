@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[types.ts:35](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L35)
+[types.ts:35](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L35)
 
 ___
 
@@ -24,7 +24,7 @@ ___
 
 #### Defined in
 
-[types.ts:36](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L36)
+[types.ts:36](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L36)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[types.ts:37](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L37)
+[types.ts:37](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L37)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[types.ts:38](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L38)
+[types.ts:38](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L38)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[types.ts:39](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L39)
+[types.ts:39](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L39)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[types.ts:31](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L31)
+[types.ts:31](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L31)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[types.ts:32](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L32)
+[types.ts:32](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L32)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[types.ts:33](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L33)
+[types.ts:33](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L33)
 
 ___
 
@@ -94,4 +94,4 @@ ___
 
 #### Defined in
 
-[types.ts:34](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L34)
+[types.ts:34](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L34)

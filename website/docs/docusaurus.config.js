@@ -8,7 +8,7 @@ const typeDocsDefault = {
 module.exports = {
   title: "Sandpack",
   tagline: "Bring the power of CodeSandbox into your project",
-  url: "https://sandpack.vercel.app",
+  url: "https://sandpack.vercel.app/docs/",
   baseUrl: "/docs/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",

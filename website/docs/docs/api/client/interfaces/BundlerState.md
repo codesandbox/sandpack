@@ -14,7 +14,7 @@ custom_edit_url: null
 
 #### Defined in
 
-[types.ts:66](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L66)
+[types.ts:66](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L66)
 
 ___
 
@@ -24,4 +24,4 @@ ___
 
 #### Defined in
 
-[types.ts:67](https://github.com/codesandbox/sandpack/blob/b675032/sandpack-client/src/types.ts#L67)
+[types.ts:67](https://github.com/codesandbox/sandpack/blob/9fab5d6/sandpack-client/src/types.ts#L67)
