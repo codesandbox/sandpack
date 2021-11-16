@@ -3,6 +3,7 @@ sidebar_position: 4
 ---
 
 import { Sandpack } from "../../src/CustomSandpack";
+import { NestedSandpack } from "../../src/NestedSandpack";
 import { SandpackRunner } from "@codesandbox/sandpack-react"
 
 # Custom UI
@@ -17,54 +18,33 @@ The overall style can be set through the `theme` prop. Once again, sandpack offe
 
 Sandpack comes with some predefined themes:
 
-```jsx
-<>
-  <Sandpack theme="codesandbox-dark" />
-  <Sandpack theme="codesandbox-light" />
-  <Sandpack theme="github-light" />
-  <Sandpack theme="night-owl" />
-  <Sandpack theme="aqua-blue" />
-  <Sandpack theme="monokai-pro" />
-</>
-```
+To see all the themes at a glance, use [this sandbox](https://codesandbox.io/s/sandpack-theme-yqsmj)
 
-You can compare all the themes [in this sandbox](https://codesandbox.io/s/sandpack-theme-yqsmj)
+<!-- prettier-ignore -->
+<NestedSandpack nestedProps={`// Try out the included themes below!
+  theme="codesandbox-dark"
+  // theme="codesandbox-light"
+  // theme="github-light"
+  // theme="night-owl"
+  // theme="aqua-blue"
+  // theme="monokai-pro"`}/>
 
 ### Custom Theme
 
 You can also pass a **partial** theme object that overrides properties in the
-**default** theme, which is `codesandbox-light`
+**default** theme, which is `codesandbox-light`.
 
-```jsx
-<Sandpack
-  theme={{
+<!-- prettier-ignore -->
+<NestedSandpack nestedProps={`theme={{
     palette: {
       accent: "rebeccapurple",
     },
     syntax: {
-      tag: "darkgreen",
-      string: "orange",
+      tag: "#006400",
+      string: "rgb(255, 165, 0)",
       plain: "tomato",
     },
-  }}
-/>
-```
-
-Your `Sandpack` instance should look like this:
-
-<Sandpack
-template="react"
-theme={{
-    palette: {
-      accent: "rebeccapurple",
-    },
-    syntax: {
-      tag: "darkgreen",
-      string: "orange",
-      plain: "tomato"
-    },
-  }}
-/>
+  }}`}/>
 
 Or you can import an existing theme object and use object composition to override specific fields.
 

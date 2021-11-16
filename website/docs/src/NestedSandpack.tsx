@@ -17,11 +17,18 @@ ReactDOM.render(
 
 const NestedSandpack: React.FC<{ nestedProps?: string }> = (props) => {
     const { nestedProps } = props;
-    const appCode = `import {Sandpack} from "@codesandbox/sandpack-react";
+    const appCode = `import { Sandpack } from "@codesandbox/sandpack-react";
 
 export default function App() {
   return <Sandpack 
-    ${nestedProps ? nestedProps : '// theme="codesandbox-dark"'}
+  ${
+      nestedProps
+          ? nestedProps
+          : `// You can change these examples!
+    // Try uncommenting any of these lines
+    // theme="codesandbox-dark"
+    // template="react"`
+  }
   />
 }
 `;
