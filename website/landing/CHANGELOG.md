@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.8-alpha.3](https://github.com/codesandbox/sandpack/compare/v0.3.8-alpha.2...v0.3.8-alpha.3) (2021-11-16)
+
+**Note:** Version bump only for package sandpack-landing
+
+
+
+
+
 ## [0.3.8-alpha.2](https://github.com/codesandbox/sandpack/compare/v0.3.8-alpha.1...v0.3.8-alpha.2) (2021-11-16)
 
 **Note:** Version bump only for package sandpack-landing
