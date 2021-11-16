@@ -1,6 +1,6 @@
 import content from "../../website.config.json";
 import { Box, Resources, SandpackLogo, Text } from "../common";
-import { Install } from "../common/Install";
+import { Clipboard } from "../common";
 
 export const Banner: React.FC = () => {
   const { banner } = content;
@@ -47,7 +47,7 @@ export const Banner: React.FC = () => {
           dangerouslySetInnerHTML={{ __html: banner.title }}
         />
       </Box>
-      <Install />
+      <Clipboard />
       <Resources />
     </Box>
   );

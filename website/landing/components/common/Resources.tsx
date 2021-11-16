@@ -1,6 +1,17 @@
 import content from "../../website.config.json";
 
 import { List, Text } from ".";
+import { styled } from "../../stitches.config";
+
+const ResourceLink = styled("a", {
+  color: "inherit",
+  transition: "color .2s ease", // TODO: verify transition
+  willChange: "color",
+
+  "&:hover": {
+    color: "$primary",
+  },
+});
 
 export const Resources: React.FC = () => {
   return (
@@ -12,7 +23,7 @@ export const Resources: React.FC = () => {
     >
       {content.resources.map((r) => (
         <li key={r.name}>
-          <a href={r.url}>
+          <ResourceLink href={r.url}>
             <Text
               css={{
                 fontWeight: "$semiBold",
@@ -34,7 +45,7 @@ export const Resources: React.FC = () => {
             >
               {r.name}
             </Text>
-          </a>
+          </ResourceLink>
         </li>
       ))}
     </List>

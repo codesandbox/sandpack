@@ -1,6 +1,6 @@
 import {
   Box,
-  Install,
+  Clipboard,
   Resources,
   SandpackLogo,
   SandpackPreview,
@@ -20,6 +20,7 @@ export const Hero: React.FC = () => {
         minHeight: "100vh",
         padding: "100px 16px 0",
         overflow: "hidden",
+        width: "100%",
 
         "@bp2": {
           background: "$surface",
@@ -78,7 +79,7 @@ export const Hero: React.FC = () => {
           </Text>
         </Box>
       </Box>
-      <Install />
+      <Clipboard />
       <Resources />
       <Box css={{ display: "flex", justifyContent: "center" }}>
         <SandpackPreview />

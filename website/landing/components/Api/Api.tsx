@@ -48,6 +48,7 @@ export const Api: React.FC = () => {
         flexDirection: "column",
         gap: "100px",
         padding: "200px 16px 100px",
+        width: "100%",
       }}
     >
       <Box
