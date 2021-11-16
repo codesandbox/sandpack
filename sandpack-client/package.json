@@ -18,7 +18,7 @@
     "prebuild": "yarn run clean",
     "build": "rollup -c",
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
-    "build:publish": "yarn build && gulp",
+    "build:publish": "yarn build && gulp --gulpfile scripts/gulpfile.js",
     "build:bundler": "gulp",
     "start": "tsc -p tsconfig.esm.json --watch"
   },
@@ -30,7 +30,6 @@
     "README.md"
   ],
   "dependencies": {
-    "codesandbox-import-utils": "^1.2.3",
     "lodash.isequal": "^4.5.0"
   },
   "devDependencies": {
