@@ -4,7 +4,7 @@ import { Box, Button, Text } from ".";
 
 const command = content.commands.install;
 
-export const Install: React.FC = () => {
+export const Clipboard: React.FC = () => {
   // TODO: feedback on copy (?)
   const copyToClipboard = () => {
     navigator.clipboard.writeText(command);

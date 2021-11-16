@@ -1,6 +1,6 @@
 import {
   Box,
-  Install,
+  Clipboard,
   Resources,
   SandpackLogo,
   SandpackPreview,
@@ -78,7 +78,7 @@ export const Hero: React.FC = () => {
           </Text>
         </Box>
       </Box>
-      <Install />
+      <Clipboard />
       <Resources />
       <Box css={{ display: "flex", justifyContent: "center" }}>
         <SandpackPreview />
