@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.8-alpha.4](https://github.com/codesandbox/sandpack/compare/v0.3.8-alpha.3...v0.3.8-alpha.4) (2021-11-16)
+
+**Note:** Version bump only for package @codesandbox/sandpack-docusaurus
+
+
+
+
+
 ## [0.3.8-alpha.3](https://github.com/codesandbox/sandpack/compare/v0.3.8-alpha.2...v0.3.8-alpha.3) (2021-11-16)
 
 **Note:** Version bump only for package @codesandbox/sandpack-docusaurus
