@@ -106,3 +106,7 @@ dist
 
 # Mac
 .DS_Store
+
+# Autogenerate docs
+website/docs/docs/api/client
+website/docs/docs/api/react

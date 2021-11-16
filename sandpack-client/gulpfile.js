@@ -1,7 +1,30 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const del = require("del");
 const gulp = require("gulp");
-const removeSourcemaps = require("gulp-remove-sourcemaps");
+var Transform = require("stream").Transform;
+
+function removeSourcemaps() {
+  var transformStream = new Transform({ objectMode: true });
+
+  transformStream._transform = function (file, encoding, callback) {
+    if (file.isNull()) {
+      return callback(null, file);
+    }
+
+    if (file.isStream()) {
+      return callback(": Streams not supported!", undefined);
+    }
+
+    let contents = file.contents.toString(encoding);
+    contents = contents.replace(/\/\/# sourceMappingURL=.*/g, "");
+
+    file.contents = Buffer.from(contents, encoding);
+
+    callback(null, file);
+  };
+
+  return transformStream;
+}
 
 const dist = "./sandpack/";
 const paths = process.env.CI

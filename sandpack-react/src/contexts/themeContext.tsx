@@ -5,6 +5,9 @@ import { createThemeObject, codesandboxLightTheme } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
 import { injectThemeStyleSheet } from "../utils/domUtils";
 
+/**
+ * @hidden
+ */
 const SandpackThemeContext = React.createContext<{
   theme: SandpackTheme;
   id: string;
@@ -35,6 +38,9 @@ const SandpackThemeProvider: React.FC<{
   );
 };
 
+/**
+ * @hidden
+ */
 const SandpackThemeConsumer = SandpackThemeContext.Consumer;
 
 export { SandpackThemeProvider, SandpackThemeConsumer, SandpackThemeContext };

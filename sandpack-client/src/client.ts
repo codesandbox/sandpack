@@ -22,6 +22,10 @@ import {
 
 export interface ClientOptions {
   /**
+   * Paths to external resources
+   */
+  externalResources?: string[];
+  /**
    * Location of the bundler.
    */
   bundlerURL?: string;
@@ -244,7 +248,9 @@ export class SandpackClient {
     try {
       packageJSON = JSON.parse(files["/package.json"].code);
     } catch (e) {
-      console.error("Could not parse package.json file: " + e.message);
+      console.error(
+        "Could not parse package.json file: " + (e as Error).message
+      );
     }
 
     // TODO move this to a common format
@@ -265,7 +271,7 @@ export class SandpackClient {
       version: 3,
       isInitializationCompile,
       modules,
-      externalResources: [],
+      externalResources: this.options.externalResources || [],
       hasFileResolver: Boolean(this.options.fileResolver),
       disableDependencyPreprocessing:
         this.sandboxInfo.disableDependencyPreprocessing,
