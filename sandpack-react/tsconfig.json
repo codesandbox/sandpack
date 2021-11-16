@@ -3,7 +3,7 @@
     "lib": ["es2015", "es2016", "es2017", "dom"],
     "strict": true,
     "sourceMap": false,
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": false,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
