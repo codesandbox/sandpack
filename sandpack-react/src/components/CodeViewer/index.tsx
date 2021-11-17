@@ -20,13 +20,7 @@ export interface CodeViewerProps {
 
 export const SandpackCodeViewer = forwardRef<HTMLDivElement, CodeViewerProps>(
   (
-    {
-      showTabs,
-      showLineNumbers,
-      decorators,
-      code: propCode,
-      initMode = "user-visible",
-    },
+    { showTabs, showLineNumbers, decorators, code: propCode, initMode },
     ref
   ) => {
     const { sandpack } = useSandpack();
@@ -43,7 +37,7 @@ export const SandpackCodeViewer = forwardRef<HTMLDivElement, CodeViewerProps>(
           code={propCode ?? code}
           decorators={decorators}
           filePath={sandpack.activePath}
-          initMode={initMode}
+          initMode={initMode || sandpack.initMode}
           showLineNumbers={showLineNumbers}
           readOnly
         />

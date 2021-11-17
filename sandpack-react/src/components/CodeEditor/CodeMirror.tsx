@@ -95,14 +95,29 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
     const c = useClasser("sp");
     const { listen } = useSandpack();
     const ariaId = React.useRef<string>(generateRandomId());
+
     const { isIntersecting } = useIntersectionObserver(wrapper);
 
+    const shouldInitEditor = () => {
+      if (initMode === "immediate") {
+        return true;
+      }
+
+      if (initMode === "lazy" && isIntersecting) {
+        return true;
+      }
+
+      if (initMode === "user-visible") {
+        return isIntersecting;
+      }
+
+      return false;
+    };
+
+    const initEditor = shouldInitEditor();
+
     React.useEffect(() => {
-      if (!wrapper.current) return;
-
-      if (!isIntersecting && initMode === "user-visible") return;
-
-      console.log("load");
+      if (!wrapper.current || !initEditor) return;
 
       const langSupport = getCodeMirrorLanguage(filePath, fileType);
 
@@ -212,19 +227,11 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
       cmView.current = view;
 
       return () => {
-        console.log("destroy");
         view.destroy();
       };
 
       // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
-    }, [
-      isIntersecting,
-      initMode,
-      showLineNumbers,
-      wrapContent,
-      themeId,
-      decorators,
-    ]);
+    }, [initEditor, showLineNumbers, wrapContent, themeId, decorators]);
 
     React.useEffect(() => {
       // When the user clicks on a tab button on a larger screen

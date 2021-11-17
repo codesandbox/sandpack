@@ -93,7 +93,7 @@ export interface SandpackSetup {
   environment?: SandboxEnvironment;
 }
 
-export type SandpackInitMode = "immediate" | "user-visible";
+export type SandpackInitMode = "immediate" | "lazy" | "user-visible";
 
 export type SandboxEnvironment = ITemplate;
 

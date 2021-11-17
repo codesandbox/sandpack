@@ -23,12 +23,12 @@ export const SandpackTranspiledCode: React.FC = () => {
 
   return (
     <div className={c("transpiled-code")}>
-      {transpiledCode ? (
+      {transpiledCode && (
         <SandpackCodeViewer
           code={transpiledCode}
           initMode={sandpack.initMode}
         />
-      ) : null}
+      )}
       <iframe ref={hiddenIframeRef} style={{ display: "none" }} />
       <ErrorOverlay />
       <LoadingOverlay clientId="hidden" />

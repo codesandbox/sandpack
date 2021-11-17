@@ -6,6 +6,7 @@ import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
 import type { PreviewProps } from "../components/Preview";
 import { SandpackPreview } from "../components/Preview";
+import type { SandpackProviderProps } from "../contexts/sandpackContext";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import type {
   FileResolver,
@@ -75,7 +76,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     initMode: props.options?.initMode,
   };
 
-  const providerOptions = {
+  const providerOptions: SandpackProviderProps = {
     openPaths: props.options?.openPaths,
     activePath: props.options?.activePath,
     recompileMode: props.options?.recompileMode,
@@ -85,6 +86,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     startRoute: props.options?.startRoute,
     skipEval: props.options?.skipEval,
     fileResolver: props.options?.fileResolver,
+    initMode: props.options?.initMode,
   };
 
   // Parts are set as `flex` values, so they set the flex shrink/grow

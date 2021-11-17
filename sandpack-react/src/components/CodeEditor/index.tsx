@@ -31,7 +31,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
   showRunButton = true,
   wrapContent = false,
   closableTabs = false,
-  initMode = "user-visible",
+  initMode,
 }) => {
   const { sandpack } = useSandpack();
   const { code, updateCode } = useActiveCode();
@@ -54,7 +54,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
           code={code}
           editorState={editorState}
           filePath={activePath}
-          initMode={initMode}
+          initMode={initMode || sandpack.initMode}
           onCodeUpdate={handleCodeUpdate}
           showInlineErrors={showInlineErrors}
           showLineNumbers={showLineNumbers}

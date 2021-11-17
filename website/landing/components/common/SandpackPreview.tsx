@@ -1,10 +1,24 @@
+import type { SandpackInitMode } from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
+import { useEffect, useState } from "react";
 
 import { sandpackTheme } from "../../styles/sandpackTheme";
 
 import { Box } from "./Box";
 
 export const SandpackPreview: React.FC = () => {
+  const [initMode, setInitMode] = useState<SandpackInitMode>("lazy");
+
+  useEffect(() => {
+    const t0 = performance.now();
+    new Array(100000).forEach(console.log);
+    const t1 = performance.now();
+
+    setInitMode(t1 - t0 > 1 ? "user-visible" : "lazy");
+  }, []);
+
+  console.log(initMode);
+
   return (
     <Box
       css={{
@@ -43,7 +57,7 @@ export const SandpackPreview: React.FC = () => {
     >
       <Sandpack
         options={{
-          initMode: "user-visible",
+          initMode,
           classes: {
             "sp-layout": "custom-layout",
             "sp-stack": "custom-stack",
