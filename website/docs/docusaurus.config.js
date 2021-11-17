@@ -10,7 +10,7 @@ const BASE_URL = process.env.BASE_URL || "/";
 module.exports = {
   title: "Sandpack",
   tagline: "Bring the power of CodeSandbox into your project",
-  url: `https://sandpack.vercel.app${BASE_URL}`,
+  url: `https://sandpack.vercel.app/`,
   baseUrl: BASE_URL,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
