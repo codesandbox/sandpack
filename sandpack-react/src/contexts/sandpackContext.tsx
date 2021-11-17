@@ -260,7 +260,7 @@ class SandpackProvider extends React.PureComponent<
       this.state.initMode === "user-visible"
     ) {
       this.intersectionObserver = new IntersectionObserver((entries) => {
-        if (entries[0]?.intersectionRatio > 0) {
+        if (entries[0]?.isIntersecting) {
           // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
           setTimeout(() => {
             this.runSandpack();
@@ -268,7 +268,7 @@ class SandpackProvider extends React.PureComponent<
         } else {
           Object.keys(this.clients).map(this.unregisterBundler);
         }
-      });
+      }, observerOptions);
 
       this.intersectionObserver.observe(this.lazyAnchorRef.current);
     } else {

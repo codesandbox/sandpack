@@ -14,7 +14,7 @@ export const SandpackPreview: React.FC = () => {
     new Array(100000).forEach(console.log);
     const t1 = performance.now();
 
-    setInitMode(t1 - t0 > 1 ? "user-visible" : "lazy");
+    setInitMode(t1 - t0 > 0.5 ? "user-visible" : "lazy");
   }, []);
 
   console.log(initMode);
@@ -57,7 +57,7 @@ export const SandpackPreview: React.FC = () => {
     >
       <Sandpack
         options={{
-          initMode,
+          initMode: "user-visible",
           classes: {
             "sp-layout": "custom-layout",
             "sp-stack": "custom-stack",
