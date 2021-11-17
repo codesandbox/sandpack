@@ -234,7 +234,7 @@ class SandpackProvider extends React.PureComponent<
 
     const observerOptions = {
       rootMargin: "600px 0px",
-      threshold: 0.1,
+      threshold: 0.2,
     };
 
     if (this.intersectionObserver) {
@@ -244,7 +244,7 @@ class SandpackProvider extends React.PureComponent<
     if (this.lazyAnchorRef.current && this.state.initMode === "lazy") {
       // If any component registerd a lazy anchor ref component, use that for the intersection observer
       this.intersectionObserver = new IntersectionObserver((entries) => {
-        if (entries[0]?.intersectionRatio > 0) {
+        if (entries[0]?.isIntersecting) {
           // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
           setTimeout(() => {
             this.runSandpack();
