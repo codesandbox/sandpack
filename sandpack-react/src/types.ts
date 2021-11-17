@@ -33,6 +33,7 @@ export interface SandpackState {
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;
   status: SandpackStatus;
+  initMode: SandpackInitMode;
 
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
@@ -91,6 +92,8 @@ export interface SandpackSetup {
   files?: SandpackFiles;
   environment?: SandboxEnvironment;
 }
+
+export type SandpackInitMode = "immediate" | "user-visible";
 
 export type SandboxEnvironment = ITemplate;
 

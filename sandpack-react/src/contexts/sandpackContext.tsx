@@ -20,6 +20,7 @@ import type {
   EditorState,
   SandpackPredefinedTemplate,
   SandpackSetup,
+  SandpackInitMode,
 } from "../types";
 import { getSandpackStateFromProps } from "../utils/sandpackUtils";
 import { generateRandomId } from "../utils/stringUtils";
@@ -38,6 +39,7 @@ export interface SandpackProviderState {
   sandpackStatus: SandpackStatus;
   editorState: EditorState;
   renderHiddenIframe: boolean;
+  initMode: SandpackInitMode;
 }
 
 export interface SandpackProviderProps {
@@ -53,6 +55,7 @@ export interface SandpackProviderProps {
   recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;
   autorun?: boolean;
+  initMode?: SandpackInitMode;
 
   // bundler options
   bundlerURL?: string;
@@ -114,6 +117,7 @@ class SandpackProvider extends React.PureComponent<
       sandpackStatus: this.props.autorun ? "initial" : "idle",
       editorState: "pristine",
       renderHiddenIframe: false,
+      initMode: this.props.initMode || "user-visible",
     };
 
     /**
@@ -228,7 +232,7 @@ class SandpackProvider extends React.PureComponent<
       return;
     }
 
-    if (this.lazyAnchorRef.current) {
+    if (this.lazyAnchorRef.current && this.state.initMode === "user-visible") {
       // If any component registerd a lazy anchor ref component, use that for the intersection observer
       const options = {
         rootMargin: "600px 0px",
@@ -609,6 +613,7 @@ class SandpackProvider extends React.PureComponent<
       error,
       sandpackStatus,
       environment,
+      initMode,
     } = this.state;
 
     return {
@@ -621,6 +626,7 @@ class SandpackProvider extends React.PureComponent<
       bundlerState,
       status: sandpackStatus,
       editorState,
+      initMode,
       closeFile: this.closeFile,
       deleteFile: this.deleteFile,
       dispatch: this.dispatchMessage,

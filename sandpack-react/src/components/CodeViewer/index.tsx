@@ -1,6 +1,7 @@
 import * as React from "react";
 import { forwardRef } from "react";
 
+import type { SandpackInitMode } from "../..";
 import { RunButton } from "../../common/RunButton";
 import { SandpackStack } from "../../common/Stack";
 import { useActiveCode } from "../../hooks/useActiveCode";
@@ -14,10 +15,20 @@ export interface CodeViewerProps {
   showLineNumbers?: boolean;
   decorators?: Decorators;
   code?: string;
+  initMode?: SandpackInitMode;
 }
 
 export const SandpackCodeViewer = forwardRef<HTMLDivElement, CodeViewerProps>(
-  ({ showTabs, showLineNumbers, decorators, code: propCode }, ref) => {
+  (
+    {
+      showTabs,
+      showLineNumbers,
+      decorators,
+      code: propCode,
+      initMode = "user-visible",
+    },
+    ref
+  ) => {
     const { sandpack } = useSandpack();
     const { code } = useActiveCode();
 
@@ -32,6 +43,7 @@ export const SandpackCodeViewer = forwardRef<HTMLDivElement, CodeViewerProps>(
           code={propCode ?? code}
           decorators={decorators}
           filePath={sandpack.activePath}
+          initMode={initMode}
           showLineNumbers={showLineNumbers}
           readOnly
         />

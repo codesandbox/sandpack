@@ -43,6 +43,7 @@ export const SandpackPreview: React.FC = () => {
     >
       <Sandpack
         options={{
+          initMode: "user-visible",
           classes: {
             "sp-layout": "custom-layout",
             "sp-stack": "custom-stack",

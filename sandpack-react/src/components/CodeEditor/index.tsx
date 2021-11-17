@@ -5,6 +5,7 @@ import { RunButton } from "../../common/RunButton";
 import { SandpackStack } from "../../common/Stack";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
+import type { SandpackInitMode } from "../../types";
 import { FileTabs } from "../FileTabs";
 
 import { CodeMirror } from "./CodeMirror";
@@ -17,6 +18,7 @@ export interface CodeEditorProps {
   showRunButton?: boolean;
   wrapContent?: boolean;
   closableTabs?: boolean;
+  initMode?: SandpackInitMode;
 }
 
 export { CodeMirror as CodeEditor };
@@ -29,6 +31,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
   showRunButton = true,
   wrapContent = false,
   closableTabs = false,
+  initMode = "user-visible",
 }) => {
   const { sandpack } = useSandpack();
   const { code, updateCode } = useActiveCode();
@@ -51,6 +54,7 @@ export const SandpackCodeEditor: React.FC<CodeEditorProps> = ({
           code={code}
           editorState={editorState}
           filePath={activePath}
+          initMode={initMode}
           onCodeUpdate={handleCodeUpdate}
           showInlineErrors={showInlineErrors}
           showLineNumbers={showLineNumbers}

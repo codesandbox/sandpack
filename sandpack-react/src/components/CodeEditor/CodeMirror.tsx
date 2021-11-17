@@ -19,11 +19,15 @@ import {
   EditorView,
 } from "@codemirror/view";
 import type { KeyBinding } from "@codemirror/view";
+import useIntersectionObserver from "@react-hook/intersection-observer";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
-import type { EditorState as SandpackEditorState } from "../../types";
+import type {
+  EditorState as SandpackEditorState,
+  SandpackInitMode,
+} from "../../types";
 import { getFileName, generateRandomId } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
@@ -63,6 +67,7 @@ interface CodeMirrorProps {
   editorState?: SandpackEditorState;
   readOnly?: boolean;
   decorators?: Decorators;
+  initMode: SandpackInitMode;
 }
 
 export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
@@ -78,6 +83,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
       editorState = "pristine",
       readOnly = false,
       decorators,
+      initMode,
     },
     ref
   ) => {
@@ -89,13 +95,14 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
     const c = useClasser("sp");
     const { listen } = useSandpack();
     const ariaId = React.useRef<string>(generateRandomId());
+    const { isIntersecting } = useIntersectionObserver(wrapper);
 
     React.useEffect(() => {
-      if (!wrapper.current) {
-        return () => {
-          return;
-        };
-      }
+      if (!wrapper.current) return;
+
+      if (!isIntersecting && initMode === "user-visible") return;
+
+      console.log("load");
 
       const langSupport = getCodeMirrorLanguage(filePath, fileType);
 
@@ -205,11 +212,19 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
       cmView.current = view;
 
       return () => {
+        console.log("destroy");
         view.destroy();
       };
 
       // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
-    }, [showLineNumbers, wrapContent, themeId, decorators]);
+    }, [
+      isIntersecting,
+      initMode,
+      showLineNumbers,
+      wrapContent,
+      themeId,
+      decorators,
+    ]);
 
     React.useEffect(() => {
       // When the user clicks on a tab button on a larger screen

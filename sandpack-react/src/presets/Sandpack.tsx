@@ -10,6 +10,7 @@ import { SandpackProvider } from "../contexts/sandpackContext";
 import type {
   FileResolver,
   SandpackFiles,
+  SandpackInitMode,
   SandpackPredefinedTemplate,
   SandpackSetup,
   SandpackThemeProp,
@@ -36,6 +37,7 @@ export interface SandpackProps {
     showTabs?: boolean;
     closableTabs?: boolean;
     wrapContent?: boolean;
+    initMode?: SandpackInitMode;
 
     bundlerURL?: string;
     startRoute?: string;
@@ -70,6 +72,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     showInlineErrors: props.options?.showInlineErrors,
     wrapContent: props.options?.wrapContent,
     closableTabs: props.options?.closableTabs,
+    initMode: props.options?.initMode,
   };
 
   const providerOptions = {
