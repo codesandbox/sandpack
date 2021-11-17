@@ -22,7 +22,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
 
         ".cm-editor": {
           borderRadius: oneLiner ? "78px" : "16px",
-          padding: "10px 20px",
+          padding: "15px",
         },
       }}
     >

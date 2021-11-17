@@ -6,9 +6,9 @@ import { fontFamilies, fontWeights } from "./styles/typography";
 const SCREEN_SIZES = {
   sm: 375,
   md: 768,
-  lg: 1440,
-  xl: 1920
-}
+  lg: 1040,
+  xl: 1920,
+};
 
 export const { globalCss, getCssText, styled } = createStitches({
   media: {

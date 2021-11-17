@@ -22,7 +22,7 @@ export const Features: React.FC = () => {
         },
 
         "@bp2": {
-          width: "64%",
+          maxWidth: "1200px",
         },
       }}
     >

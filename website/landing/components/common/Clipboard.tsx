@@ -100,7 +100,7 @@ export const Clipboard: React.FC = () => {
           transition: "color .2s ease", // TODO: verify transition
           willChange: "color",
 
-          "&:hover, &:hover path": {
+          "&:hover": {
             color: "$primary",
           },
         }}
@@ -130,10 +130,11 @@ export const Clipboard: React.FC = () => {
         <Box
           aria-label="Copy to cliboard"
           css={{
-            color: "$darkTextPrimary",
             flexShrink: "0",
             height: "12px",
             width: "12px",
+            top: 1,
+            position: "relative",
 
             "@bp2": {
               height: "16px",
