@@ -157,6 +157,15 @@
         }
       },
       {
+        "name": "Amplify",
+        "socialUrl": "https://ui.docs.amplify.aws/",
+        "logo": {
+          "url": "/assets/logos/Amplify.svg",
+          "height": 40,
+          "width": 210
+        }
+      },
+      {
         "name": "CodeHike",
         "socialUrl": "#",
         "logo": {
