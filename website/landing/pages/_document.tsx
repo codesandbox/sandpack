@@ -24,3 +24,12 @@ export default class Document extends NextDocument {
     );
   }
 }
+
+Document.getInitialProps = async (ctx) => {
+  const initialProps = await NextDocument.getInitialProps(ctx);
+
+  return {
+    ...initialProps,
+    styles: [...React.Children.toArray(initialProps.styles)],
+  };
+};
