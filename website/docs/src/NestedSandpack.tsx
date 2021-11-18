@@ -15,9 +15,15 @@ ReactDOM.render(
   rootElement
 );`;
 
-const NestedSandpack: React.FC<{ nestedProps?: string }> = (props) => {
-    const { nestedProps } = props;
-    const appCode = `import { Sandpack } from "@codesandbox/sandpack-react";
+const NestedSandpack: React.FC<{ nestedProps?: string; setupCode?: string }> = (
+    props
+) => {
+    const { nestedProps, setupCode } = props;
+    const appCode = `${
+        setupCode
+            ? setupCode
+            : `import { Sandpack } from "@codesandbox/sandpack-react";`
+    }
 
 export default function App() {
   return <Sandpack 
