@@ -15,6 +15,12 @@ export interface CodeViewerProps {
   showLineNumbers?: boolean;
   decorators?: Decorators;
   code?: string;
+  /**
+   * This provides a way to control how some components are going to
+   * be initialized on the page. The CodeEditor and the Preview components
+   * are quite expensive and might overload the memory usage, so this gives
+   * a certain control of when to initialize them.
+   */
   initMode?: SandpackInitMode;
 }
 

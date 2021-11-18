@@ -18,6 +18,12 @@ export interface CodeEditorProps {
   showRunButton?: boolean;
   wrapContent?: boolean;
   closableTabs?: boolean;
+  /**
+   * This provides a way to control how some components are going to
+   * be initialized on the page. The CodeEditor and the Preview components
+   * are quite expensive and might overload the memory usage, so this gives
+   * a certain control of when to initialize them.
+   */
   initMode?: SandpackInitMode;
 }
 
