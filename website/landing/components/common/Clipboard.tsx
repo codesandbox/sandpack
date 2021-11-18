@@ -46,7 +46,9 @@ export const Clipboard: React.FC = () => {
     try {
       navigator.clipboard.writeText(command);
       setToastVisible(true);
-    } catch {}
+    } catch (err) {
+      console.error("Failed to copy command to clipboard", err);
+    }
   }, []);
 
   useEffect(() => {
