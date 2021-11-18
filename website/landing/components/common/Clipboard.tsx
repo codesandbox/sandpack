@@ -7,43 +7,33 @@ import { useCallback, useEffect, useState } from "react";
 const command = content.commands.install;
 
 const ClipboardToast = styled("div", {
-  $$toastHeight: "48px",
   alignItems: "center",
   borderRadius: "72px",
+  bottom: "30px",
   background: "$primary",
   display: "flex",
   color: "$lightTextPrimary",
   gap: "10px",
-  height: "$$toastHeight",
   left: "50%",
-  opacity: "0",
-  padding: "0 16px",
+  padding: "15px 20px",
   pointerEvents: "none",
-  position: "absolute",
-  top: 0,
-  transform: "translateY(100vh) translateX(-50%)",
-  transition: "opacity .5s ease, transform .5s ease",
-  zIndex: "-1",
+  position: "fixed",
+  transform: "translateX(-50%) translateY(calc(100% + 40px)) ",
+  transition: "transform .5s cubic-bezier(0.190, 1.000, 0.220, 1.000)",
+  zIndex: "1",
 
-  p: {
+  span: {
     fontWeight: "$normal",
-    fontSize: "18px",
+    fontSize: "16px",
     lineHeight: "22px",
     letterSpacing: "-0.025em",
     margin: 0,
   },
 
-  "@bp3": {
-    $$toastHeight: "64px",
-  },
-
   variants: {
     visible: {
       true: {
-        opacity: "1",
-        transform:
-          "translateY(calc(100vh - 2 * $$toastHeight)) translateX(-50%)",
-        zIndex: "10",
+        transform: "translateX(-50%) translateY(0) ",
       },
     },
   },
@@ -53,14 +43,18 @@ export const Clipboard: React.FC = () => {
   const [toastVisible, setToastVisible] = useState(false);
 
   const copyToClipboard = useCallback(() => {
-    navigator.clipboard.writeText(command);
-    setToastVisible(true);
+    try {
+      navigator.clipboard.writeText(command);
+      setToastVisible(true);
+    } catch (err) {
+      console.error("Failed to copy command to clipboard", err);
+    }
   }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setToastVisible(false);
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timeout);
   }, [toastVisible]);
@@ -88,7 +82,7 @@ export const Clipboard: React.FC = () => {
             />
           </svg>
         </Box>
-        <p>Copied to clipboard</p>
+        <span>Copied to clipboard</span>
       </ClipboardToast>
       <Button
         css={{
