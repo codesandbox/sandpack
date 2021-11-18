@@ -25,15 +25,18 @@
     "highlights": [
       {
         "title": "Providers",
-        "description": "We export a <code>SandpackProvider</code> that manages the state and actions for sandpack and a <code>ThemeProvider</code> that handles the theme and style."
+        "description": "We export a <code>SandpackProvider</code> that manages the state and actions for sandpack and a <code>ThemeProvider</code> that handles the theme and style.",
+        "illustrationKey": "providers"
       },
       {
         "title": "Components",
-        "description": "We also export the smaller parts that make up the <code>&lt;Sandpack /&gt;</code> component, so you can combine them with your custom components."
+        "description": "We also export the smaller parts that make up the <code>&lt;Sandpack /&gt;</code> component, so you can combine them with your custom components.",
+        "illustrationKey": "components"
       },
       {
         "title": "Client",
-        "description": "The bundler is wrapped by a small package called <code>sandpack-client</code>, which is framework agnostic and allows you to tap into the bundler protocol."
+        "description": "The bundler is wrapped by a small package called <code>sandpack-client</code>, which is framework agnostic and allows you to tap into the bundler protocol.",
+        "illustrationKey": "client"
       }
     ]
   },

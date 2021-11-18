@@ -1,0 +1,216 @@
+.svg {
+  width: 160%;
+
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  --speed: 7s;
+  --delay: 0.2s;
+  --delay2: 0.3s;
+  --delay3: 0.4s;
+  --ease-elastic: cubic-bezier(0.8, -2, 0.2, 2);
+}
+
+@keyframes editor {
+  0% {
+    transform: translateY(-100px) scale(0.9);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  35% {
+    transform: translateY(-100px) scale(0.9);
+  }
+
+  45% {
+    transform: translateY(-50px) scale(0.95);
+  }
+
+  90% {
+    transform: translateY(-50px) scale(0.95);
+  }
+
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes compiler {
+  0% {
+    opacity: 0;
+  }
+
+  35% {
+    transform: translateY(0px) scale(0.9);
+    opacity: 0;
+  }
+
+  45% {
+    opacity: 1;
+    transform: translateY(-50px) scale(0.95);
+  }
+
+  90% {
+    transform: translateY(-50px) scale(0.95);
+  }
+
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes logoRight {
+  to {
+    transform: translate(-17px, -10px);
+  }
+}
+
+@keyframes logoLeft {
+  to {
+    transform: translate(17px, 10px);
+  }
+}
+
+@keyframes circle {
+  0% {
+    stroke-dashoffset: -734;
+  }
+
+  50% {
+    stroke-dashoffset: 0;
+  }
+
+  0% {
+    stroke-dashoffset: 734;
+  }
+}
+
+@keyframes lines {
+  to {
+    stroke-dashoffset: 1000;
+  }
+}
+
+@keyframes preview {
+  0% {
+    opacity: 0;
+  }
+
+  90% {
+    transform: translateY(50px) scale(0.95);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@keyframes movement {
+  to {
+    transform: translateY(-7%);
+  }
+}
+
+/* elements */
+.editor {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+
+.editor path {
+  opacity: 0;
+}
+
+.fadeIn {
+  opacity: 0;
+}
+
+.compiler {
+  opacity: 0;
+  transform: translateY(0px);
+}
+
+.logoLeft {
+  transform: translate(0px, 0px);
+}
+
+.logoRight {
+  transform: translate(0px, 0px);
+}
+
+.circle {
+  stroke-dasharray: 734;
+  stroke-dashoffset: -734;
+}
+
+.lines path {
+  stroke-dasharray: 100;
+}
+
+.preview {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* isActive */
+.active .editor {
+  animation: editor var(--speed) var(--delay) var(--ease-elastic) forwards;
+}
+
+.active .editor path {
+  animation: fadeIn 1s var(--delay2) forwards;
+}
+
+.active .fadeIn {
+  animation: fadeIn 1s var(--delay3) forwards;
+}
+
+.active .compiler {
+  animation: compiler var(--speed) var(--delay) var(--ease-elastic) forwards;
+}
+
+.active .logoLeft {
+  animation: logoLeft 600ms ease-in-out alternate infinite;
+}
+
+.active .logoRight {
+  animation: logoRight 600ms ease-in-out alternate infinite;
+}
+
+.active .circle {
+  animation: circle 2s var(--delay) linear forwards infinite;
+}
+
+.active .lines path {
+  animation: lines 6s linear infinite;
+}
+
+.active .lines path:nth-of-type(odd) {
+  animation: lines 8s linear reverse infinite;
+}
+
+.active .preview {
+  animation: preview var(--speed) var(--delay) var(--ease-elastic) forwards;
+}
+
+.active .movement {
+  animation: movement 4s ease-in-out alternate infinite;
+}
+
+.active .movement:nth-of-type(odd) {
+  animation: movement 4s ease-in-out alternate reverse infinite;
+}

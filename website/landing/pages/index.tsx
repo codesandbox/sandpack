@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 
-import { Api } from "../components/Api";
+import { AdvancedUsage } from "../components/AdvancedUsage";
 import { Banner } from "../components/Banner";
 import { Community } from "../components/Community";
 import { Features } from "../components/Features";
@@ -42,7 +42,7 @@ const Home: NextPage = () => {
         <Hero />
         <Intro />
         <Features />
-        <Api />
+        <AdvancedUsage />
         {/* <Showcase />*/}
         <Users />
         <Banner />
