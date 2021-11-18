@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/codesandbox/sandpack/compare/v0.3.10...v0.4.0) (2021-11-18)
+
+
+### Features
+
+* **landing:** misc tweaks ([#156](https://github.com/codesandbox/sandpack/issues/156)) ([37109ad](https://github.com/codesandbox/sandpack/commit/37109ad77881e39fd8f2fc777e9407861e888bdf))
+
+
+
+
+
 ## [0.3.10](https://github.com/codesandbox/sandpack/compare/v0.3.9...v0.3.10) (2021-11-18)
 
 **Note:** Version bump only for package sandpack-landing
