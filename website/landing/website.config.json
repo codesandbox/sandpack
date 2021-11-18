@@ -13,11 +13,11 @@
   "resources": [
     {
       "name": "Docs",
-      "url": "#"
+      "url": "https://sandpack.codesandbox.io/docs/"
     },
     {
       "name": "GitHub",
-      "url": "#"
+      "url": "https://github.com/codesandbox/sandpack"
     }
   ],
   "api": {
@@ -49,19 +49,19 @@
     "list": [
       {
         "name": "Twitter",
-        "socialUrl": "#",
+        "socialUrl": "https://twitter.com/codesandbox",
         "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
         "logoUrl": "/assets/logos/Twitter.svg"
       },
       {
         "name": "Discord",
-        "socialUrl": "#",
+        "socialUrl": "https://discord.com/invite/5BpufEP7MH",
         "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
         "logoUrl": "/assets/logos/Discord.svg"
       },
       {
         "name": "GitHub",
-        "socialUrl": "#",
+        "socialUrl": "https://github.com/codesandbox/sandpack",
         "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
         "logoUrl": "/assets/logos/GitHub.svg"
       }
@@ -140,7 +140,7 @@
     "list": [
       {
         "name": "React",
-        "socialUrl": "#",
+        "socialUrl": "https://beta.reactjs.org/",
         "logo": {
           "url": "/assets/logos/React.svg",
           "height": 39,
@@ -149,11 +149,20 @@
       },
       {
         "name": "CodeSandbox",
-        "socialUrl": "#",
+        "socialUrl": "https://codesandbox.io",
         "logo": {
           "url": "/assets/logos/CodeSandbox-minimal.svg",
           "height": 37,
           "width": 261
+        }
+      },
+      {
+        "name": "Amplify",
+        "socialUrl": "https://ui.docs.amplify.aws/",
+        "logo": {
+          "url": "/assets/logos/Amplify.svg",
+          "height": 40,
+          "width": 210
         }
       },
       {
@@ -167,7 +176,7 @@
       },
       {
         "name": "CodeAmigo",
-        "socialUrl": "#",
+        "socialUrl": "https://codeamigo.dev/",
         "logo": {
           "url": "/assets/logos/CodeAmigo.svg",
           "height": 47,
