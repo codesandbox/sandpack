@@ -199,12 +199,12 @@ export const AdvancedUsage: React.FC = () => {
   const { scrollY } = useViewportScroll();
   const leftRange = useTransform(
     scrollY,
-    [sectionTop - windowHeight, sectionTop + windowHeight],
+    [sectionTop - windowHeight / 2, sectionTop + windowHeight / 2],
     [-50, 50]
   );
   const rightRange = useTransform(
     scrollY,
-    [sectionTop - windowHeight, sectionTop + windowHeight],
+    [sectionTop - windowHeight / 2, sectionTop + windowHeight / 2],
     [50, -50]
   );
   const leftY = useSpring(leftRange, SPRING_OPTIONS);
@@ -219,6 +219,7 @@ export const AdvancedUsage: React.FC = () => {
       setWindowHeight(window.innerHeight);
     };
 
+    onResize();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [section]);
