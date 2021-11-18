@@ -117,7 +117,7 @@ class SandpackProvider extends React.PureComponent<
       sandpackStatus: this.props.autorun ? "initial" : "idle",
       editorState: "pristine",
       renderHiddenIframe: false,
-      initMode: this.props.initMode || "user-visible",
+      initMode: this.props.initMode || "lazy",
     };
 
     /**
