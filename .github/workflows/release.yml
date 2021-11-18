@@ -87,7 +87,7 @@ jobs:
           path: bundler
 
       - name: Prepare | Lerna Version
-        run: yarn lerna version --create-release github --yes
+        run: yarn lerna version --yes
 
       - name: Prepare | Build
         run: |
