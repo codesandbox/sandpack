@@ -32,12 +32,12 @@ export const TemplateExample: React.FC = () => {
   const [mousePosition, setMousePosition] = useState<Record<string, number>>(
     {}
   );
-  const boxRef = useRef<unknown>(null);
+  const boxRef = useRef<HTMLButtonElement>(null);
   const [template, setTemplate] = useState(frameworkOptions[0]);
 
   useEffect(() => {
     setOptions({ template });
-  }, [setOptions, template]);
+  }, [template]);
 
   useEffect(() => {
     if (!inView) {

@@ -3,6 +3,7 @@ import { Box, List } from "../common";
 import { SandpackExample } from "./SandpackExample";
 import { TemplateExample } from "./Sections/Template";
 import { ThemeExample } from "./Sections/Theme";
+import { EditorExample } from "./Sections/Editor";
 
 export const Examples: React.FC = () => {
   return (
@@ -26,6 +27,7 @@ export const Examples: React.FC = () => {
         }}
       >
         <TemplateExample />
+        <EditorExample />
         <ThemeExample />
       </List>
     </>

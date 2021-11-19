@@ -45,15 +45,16 @@ export const SandpackPreview: React.FC<{ options: SandpackProps }> = ({
       }}
     >
       <Sandpack
+        template="react"
+        theme={sandpackTheme}
+        {...options}
         options={{
+          ...(options?.options ?? {}),
           classes: {
             "sp-layout": "custom-layout",
             "sp-stack": "custom-stack",
           },
         }}
-        template="react"
-        theme={sandpackTheme}
-        {...options}
       />
     </Box>
   );

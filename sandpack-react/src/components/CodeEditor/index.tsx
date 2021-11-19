@@ -8,7 +8,9 @@ import { useSandpack } from "../../hooks/useSandpack";
 import { FileTabs } from "../FileTabs";
 
 import { CodeMirror } from "./CodeMirror";
+import type { CodeMirrorRef } from "./CodeMirror";
 
+export type CodeEditorRef = CodeMirrorRef;
 export interface CodeEditorProps {
   customStyle?: React.CSSProperties;
   showTabs?: boolean;

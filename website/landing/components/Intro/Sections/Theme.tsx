@@ -36,7 +36,7 @@ export const ThemeExample: React.FC = () => {
 
   useEffect(() => {
     setOptions({ theme });
-  }, [setOptions, theme]);
+  }, [theme]);
 
   useEffect(() => {
     if (!inView) {
