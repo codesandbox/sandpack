@@ -112,8 +112,8 @@ export default function App() {
 Sandpack comes with some predefined themes:
 
 ```jsx
-<Sandpack theme="codesandbox-dark" />
-<Sandpack theme="codesandbox-light" />
+<Sandpack theme="light" />
+<Sandpack theme="dark" />
 <Sandpack theme="night-owl" />
 <Sandpack theme="monokai-pro" />
 ```

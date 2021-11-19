@@ -57,7 +57,7 @@ export const VueCode: React.FC = () => (
 
 export const DarkTheme: React.FC = () => (
   <SandpackProvider template="vue">
-    <SandpackThemeProvider theme="codesandbox-dark">
+    <SandpackThemeProvider theme="dark">
       <SandpackCodeEditor />
     </SandpackThemeProvider>
   </SandpackProvider>
@@ -65,7 +65,7 @@ export const DarkTheme: React.FC = () => (
 
 export const ClosableTabs: React.FC = () => (
   <SandpackProvider template="react">
-    <SandpackThemeProvider theme="codesandbox-dark">
+    <SandpackThemeProvider theme="dark">
       <SandpackCodeEditor closableTabs />
     </SandpackThemeProvider>
   </SandpackProvider>
