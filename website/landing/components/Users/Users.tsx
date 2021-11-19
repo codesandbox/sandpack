@@ -45,7 +45,7 @@ export const Users: React.FC = () => {
   // callback, a workaround is to wait until the list is in view
   // and then do an opacity transition.
   const { ref: listRef, inView } = useInView({
-    threshold: 1,
+    threshold: [0, 1],
   });
 
   return (
