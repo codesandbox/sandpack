@@ -1,8 +1,17 @@
 import Image from "next/image";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
 import { styled } from "../../stitches.config";
-import content from "../../website.config.json";
-import { Box, List, Text } from "../common";
+import config from "../../website.config.json";
+import {
+  List,
+  ListItem,
+  SectionContainer,
+  SectionHeader,
+  SectionTitle,
+  SectionWrapper,
+} from "../common";
 
 const UserLink = styled("a", {
   display: "block",
@@ -10,77 +19,77 @@ const UserLink = styled("a", {
   margin: "0 auto",
   position: "relative",
 
-  img: {
-    objectFit: "contain",
-    objectPosition: "center",
-  },
-
   "@bp1": {
     maxWidth: "100%",
   },
 });
 
 export const Users: React.FC = () => {
-  const { users } = content;
+  const content = config.users;
+
+  // The icons are loaded with next/image which tends to blink
+  // when first rendered. Because it doesn't support an `onLoad`
+  // callback, a workaround is to wait until the list is in view
+  // and then do an opacity transition.
+  const { ref: listRef, inView } = useInView({
+    threshold: 1,
+    triggerOnce: true,
+  });
 
   return (
-    <Box
-      as="section"
-      css={{
-        alignItems: "center",
-        display: "flex",
-        flexDirection: "column",
-        gap: "100px",
-        padding: "100px 16px",
-
-        "@bp1": {
-          padding: "200px 16px",
-        },
-      }}
-    >
-      <Text
+    <SectionWrapper>
+      <SectionContainer
         css={{
-          fontWeight: "$semiBold",
-          fontSize: "18px",
-          lineHeight: "1.2",
-          textAlign: "center",
-          letterSpacing: "-0.0125em",
-        }}
-        dangerouslySetInnerHTML={{ __html: content.users.title }}
-      />
-      <List
-        css={{
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          gap: "48px",
-          justifyContent: "center",
-
           "@bp1": {
-            gap: "100px",
-          },
-
-          "@bp2": {
-            flexDirection: "row",
+            paddingBottom: "200px",
           },
         }}
       >
-        {users.list.map((u) => {
-          const { url, height, width } = u.logo;
+        <SectionHeader>
+          <SectionTitle
+            as="h4"
+            dangerouslySetInnerHTML={{ __html: content.title }}
+            size="small"
+          />
+        </SectionHeader>
+        <List
+          ref={listRef}
+          css={{
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+            gap: "48px",
+            justifyContent: "center",
+            opacity: inView ? 1 : 0,
+            transition: "opacity .5s cubic-bezier(0.770, 0.000, 0.175, 1.000)",
 
-          return (
-            <li key={u.name}>
-              <UserLink
-                href={u.socialUrl}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <Image alt={u.name} height={height} src={url} width={width} />
-              </UserLink>
-            </li>
-          );
-        })}
-      </List>
-    </Box>
+            "@bp1": {
+              gap: "100px",
+            },
+
+            "@bp2": {
+              flexDirection: "row",
+              flexFlow: "row wrap",
+            },
+          }}
+        >
+          {content.list.map((u) => {
+            const { url, height, width } = u.logo;
+
+            return (
+              <ListItem key={u.name}>
+                <UserLink
+                  href={u.socialUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <Image alt={u.name} height={height} src={url} width={width} />
+                </UserLink>
+              </ListItem>
+            );
+          })}
+        </List>
+      </SectionContainer>
+    </SectionWrapper>
   );
 };
