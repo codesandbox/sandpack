@@ -29,8 +29,9 @@ export const SectionWrapper = styled("div", {
 
 export const SectionContainer = styled("section", {
   overflow: "hidden",
-  padding: "0 24px 100px",
+  margin: "0 24px",
   maxWidth: "2560px",
+  paddingBottom: "100px",
   width: "100%",
 
   "@bp2": {
@@ -66,7 +67,7 @@ export const SectionTitle = styled("h2", {
   textAlign: "center",
 
   ".highlight": {
-    color: "$primary"
+    color: "$primary",
   },
 
   "@bp1": {
