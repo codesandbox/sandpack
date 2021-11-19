@@ -10,6 +10,9 @@ import {
 
 const IllustrationWrapper = styled("div", {
   $$wrapperBackground: "#f1f1f1",
+  $$backgroundElevation: "1",
+  $$contentElevation: "calc(2 * $$backgroundElevation)",
+
   alignItems: "center",
   display: "flex",
   justifyContent: "center",
@@ -27,11 +30,11 @@ const IllustrationWrapper = styled("div", {
     transition: "transform 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000)",
     transformOrigin: "center top",
     width: "100%",
-    zIndex: 1,
+    zIndex: "$$backgroundElevation",
   },
 
   "> div": {
-    zIndex: 2,
+    zIndex: "$$contentElevation",
   },
 
   "@bp1": {
@@ -64,11 +67,11 @@ const IllustrationWrapper = styled("div", {
   },
 });
 
-interface IllustrationProps {
+interface ExampleIllustrationProps {
   illustrationKey: string;
   visible: boolean;
 }
-export const Illustration: React.FC<IllustrationProps> = ({
+export const ExampleIllustration: React.FC<ExampleIllustrationProps> = ({
   illustrationKey,
   visible,
 }) => {
