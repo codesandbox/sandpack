@@ -20,9 +20,9 @@
       "url": "https://github.com/codesandbox/sandpack"
     }
   ],
-  "api": {
+  "advancedUsage": {
     "title": "Building blocks<br />of the Sandpack<br />ecosystem.",
-    "highlights": [
+    "examples": [
       {
         "title": "Providers",
         "description": "We export a <code>SandpackProvider</code> that manages the state and actions for sandpack and a <code>ThemeProvider</code> that handles the theme and style.",
