@@ -4,8 +4,6 @@ import {
   SandpackThemeProvider,
 } from "@codesandbox/sandpack-react";
 
-import { sandpackTheme } from "../../styles/sandpackTheme";
-
 import { Box } from "./Box";
 
 interface CodeBlockProps {
@@ -32,7 +30,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
           files: { "index.ts": (children as string)?.trim() },
         }}
       >
-        <SandpackThemeProvider theme={sandpackTheme}>
+        <SandpackThemeProvider theme="dark">
           <SandpackCodeViewer />
         </SandpackThemeProvider>
       </SandpackProvider>

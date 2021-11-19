@@ -1,7 +1,7 @@
 {
   "name": "sandpack-landing",
   "private": true,
-  "version": "0.5.1",
+  "version": "0.5.2",
   "scripts": {
     "build:deps": "yarn workspace @codesandbox/sandpack-client build && yarn workspace @codesandbox/sandpack-react build",
     "dev": "next dev",

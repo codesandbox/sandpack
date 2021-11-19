@@ -20,9 +20,27 @@ export const Card = styled("div", {
   "@bp3": {
     width: "480px",
   },
+
+  variants: {
+    size: {
+      small: {
+        gap: "10px",
+        width: "256px",
+
+        "@bp2": {
+          width: "240px",
+        },
+
+        "@bp3": {
+          width: "320px",
+        },
+      },
+    },
+  },
 });
 
 export const CardTitle = styled("h4", {
+  color: "$$primaryTextColor",
   fontSize: "24px",
   fontWeight: "$semiBold",
   lineHeight: "1.2",
@@ -32,9 +50,19 @@ export const CardTitle = styled("h4", {
   "@bp1": {
     fontSize: "36px",
   },
+
+  variants: {
+    size: {
+      small: {
+        fontWeight: "$normal",
+        fontSize: "24px",
+      },
+    },
+  },
 });
 
 export const CardDescription = styled("p", {
+  color: "$$secondaryTextColor",
   lineHeight: "1.4",
   letterSpacing: "-0.025em",
   fontSize: "16px",
@@ -48,10 +76,6 @@ export const CardDescription = styled("p", {
     letterSpacing: "inherit",
   },
 
-  "@bp1": {
-    fontSize: "16px",
-  },
-
   "@bp2": {
     fontSize: "18px",
     textAlign: "start",
@@ -62,6 +86,14 @@ export const CardDescription = styled("p", {
       borderRadius: "145px",
       display: "inline-flex",
       padding: "2px 14px",
+    },
+  },
+
+  variants: {
+    size: {
+      small: {
+        letterSpacing: "-0.05em",
+      },
     },
   },
 });

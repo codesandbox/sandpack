@@ -1,8 +1,6 @@
 import type { SandpackProps } from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
 
-import { sandpackTheme } from "../../styles/sandpackTheme";
-
 import { Box } from "./Box";
 
 export const SandpackPreview: React.FC<{ options: SandpackProps }> = ({
@@ -46,7 +44,7 @@ export const SandpackPreview: React.FC<{ options: SandpackProps }> = ({
     >
       <Sandpack
         template="react"
-        theme={sandpackTheme}
+        theme="sandpack-dark"
         {...options}
         options={{
           ...(options?.options ?? {}),
