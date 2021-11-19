@@ -129,6 +129,8 @@ module.exports = {
         docs: {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
+          sidebarCollapsed: false,
+
           editUrl:
             "https://github.com/codesandbox/sandpack/edit/main/website/docs",
         },
@@ -162,14 +164,6 @@ module.exports = {
           src: "img/logo-dark.svg",
           srcDark: "img/logo.svg",
         },
-        items: [
-          { to: "/releases", label: "Releases", position: "right" },
-          {
-            href: "https://github.com/codesandbox/sandpack",
-            label: "GitHub",
-            position: "right",
-          },
-        ],
       },
       footer: {
         style: "dark",
