@@ -18,7 +18,8 @@ const UserLink = styled("a", {
   margin: "0 auto",
   position: "relative",
   opacity: 0,
-  transition: "opacity .5s cubic-bezier(0.770, 0.000, 0.175, 1.000)",
+  transitionProperty: "opacity",
+  transitionTimingFunction: "cubic-bezier(0.770, 0.000, 0.175, 1.000)",
 
   "@bp1": {
     maxWidth: "100%",
@@ -45,7 +46,6 @@ export const Users: React.FC = () => {
   // and then do an opacity transition.
   const { ref: listRef, inView } = useInView({
     threshold: 1,
-    // triggerOnce: true,
   });
 
   return (
@@ -92,8 +92,12 @@ export const Users: React.FC = () => {
               <ListItem key={user.name}>
                 <UserLink
                   css={{
-                    transitionDelay: `calc(0.1s * ${userIndex})`,
-                    transitionDuration: `calc(0.5s * ${userIndex})`,
+                    transitionDelay: inView
+                      ? "0s"
+                      : `calc(0.1s * ${userIndex})`,
+                    transitionDuration: `calc(0.2s * ${
+                      inView ? userIndex : 1
+                    })`,
                   }}
                   href={user.socialUrl}
                   rel="noopener noreferrer"
