@@ -69,6 +69,8 @@ export const Users: React.FC = () => {
             "@bp2": {
               flexDirection: "row",
               flexFlow: "row wrap",
+              margin: "0 auto",
+              width: "75%",
             },
           }}
         >
