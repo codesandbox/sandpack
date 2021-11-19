@@ -65,6 +65,10 @@ export const SectionTitle = styled("h2", {
   margin: 0,
   textAlign: "center",
 
+  ".highlight": {
+    color: "$primary"
+  },
+
   "@bp1": {
     fontSize: "72px",
   },
