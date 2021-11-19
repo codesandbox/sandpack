@@ -1,12 +1,30 @@
 import { styled } from "../../stitches.config";
+import { palette } from "../../styles/palette";
 
 export const SectionWrapper = styled("div", {
-  background: "$lightBackground",
-  color: "$lightTextPrimary",
+  // TODO: investigate if it's possible to set 
+  // values defined from the theme and provided
+  // by stitches rather than "hardcoding" them
+  $$backgroundColor: palette.darkBackground,
+  $$primaryTextColor: palette.darkTextPrimary,
+  $$secondaryTextColor: palette.darkTextSecondary,
+
+  background: "$$backgroundColor",
+  color: "$$primaryTextColor",
   display: "flex",
   height: "100%",
   justifyContent: "center",
   width: "100%",
+
+  variants: {
+    theme: {
+      light: {
+        $$backgroundColor: palette.lightBackground,
+        $$primaryTextColor: palette.lightTextPrimary,
+        $$secondaryTextColor: palette.lightTextSecondary,
+      },
+    },
+  },
 });
 
 export const SectionContainer = styled("section", {
