@@ -2,7 +2,7 @@ import { styled } from "../../stitches.config";
 import { palette } from "../../styles/palette";
 
 export const SectionWrapper = styled("div", {
-  // TODO: investigate if it's possible to set 
+  // TODO: investigate if it's possible to set
   // values defined from the theme and provided
   // by stitches rather than "hardcoding" them
   $$backgroundColor: palette.darkBackground,
@@ -43,6 +43,18 @@ export const SectionHeader = styled("header", {
   display: "flex",
   flexDirection: "column",
   padding: "200px 0 100px",
+
+  variants: {
+    size: {
+      small: {
+        padding: "100px 0",
+
+        "@bp1": {
+          padding: "200px 0 100px",
+        },
+      },
+    },
+  },
 });
 
 export const SectionTitle = styled("h2", {
@@ -63,5 +75,15 @@ export const SectionTitle = styled("h2", {
 
   "@bp3": {
     fontSize: "144px",
+  },
+
+  variants: {
+    size: {
+      small: {
+        fontSize: "18px",
+        lineHeight: "1.2",
+        letterSpacing: "-0.0125em",
+      },
+    },
   },
 });
