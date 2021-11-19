@@ -1,10 +1,13 @@
+import type { SandpackProps } from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
 
 import { sandpackTheme } from "../../styles/sandpackTheme";
 
 import { Box } from "./Box";
 
-export const SandpackPreview: React.FC = () => {
+export const SandpackPreview: React.FC<{ options: SandpackProps }> = ({
+  options,
+}) => {
   return (
     <Box
       css={{
@@ -50,6 +53,7 @@ export const SandpackPreview: React.FC = () => {
         }}
         template="react"
         theme={sandpackTheme}
+        {...options}
       />
     </Box>
   );
