@@ -4,6 +4,7 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 import config from "../../website.config.json";
 import {
   List,
+  ListItem,
   SectionContainer,
   SectionHeader,
   SectionTitle,
@@ -67,6 +68,7 @@ export const AdvancedUsage: React.FC = () => {
             display: "flex",
             flexWrap: "wrap",
             gap: "100px",
+            width: "100%",
 
             "@bp1": {
               gap: "200px",
@@ -77,13 +79,17 @@ export const AdvancedUsage: React.FC = () => {
               flexDirection: "column",
               gap: "0",
               scrollSnapType: "y mandatory",
+              width: "initial",
             },
           }}
         >
           {content.examples.map((example, exampleIndex) => (
-            <li key={`usage-example-${exampleIndex}`}>
+            <ListItem
+              key={`usage-example-${exampleIndex}`}
+              css={{ width: "100%", "@bp2": { width: "initial" } }}
+            >
               <UsageExample example={example} exampleIndex={exampleIndex} />
-            </li>
+            </ListItem>
           ))}
         </List>
       </SectionContainer>
