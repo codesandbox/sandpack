@@ -76,7 +76,7 @@ export const AdvancedUsage: React.FC = () => {
   }, [section]);
 
   return (
-    <SectionWrapper ref={section}>
+    <SectionWrapper ref={section} theme="light">
       <SectionContainer>
         <SectionHeader
           css={{
