@@ -47,7 +47,7 @@ export const SandpackPreview: React.FC = () => {
           },
         }}
         template="react"
-        theme="dark"
+        theme="sandpack-dark"
       />
     </Box>
   );

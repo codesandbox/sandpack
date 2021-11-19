@@ -42,6 +42,39 @@ export const defaultLight: SandpackTheme = {
 
 export const defaultDark: SandpackTheme = {
   palette: {
+    activeText: "#FFFFFF",
+    defaultText: "#999999",
+    inactiveText: "#343434",
+    activeBackground: "#343434",
+    defaultBackground: "#040404",
+    inputBackground: "#242424",
+    accent: "#6caedd",
+    errorBackground: "#ffcdca",
+    errorForeground: "#811e18",
+  },
+  syntax: {
+    plain: "#FFFFFF",
+    comment: { color: "#757575", fontStyle: "italic" },
+    keyword: "#77B7D7",
+    tag: "#DFAB5C",
+    punctuation: "#ffffff",
+    definition: "#86D9CA",
+    property: "#77B7D7",
+    static: "#C64640",
+    string: "#977CDC",
+  },
+  typography: {
+    bodyFont:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    monoFont:
+      '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    fontSize: "14px",
+    lineHeight: "1.4",
+  },
+};
+
+export const sandpackDark: SandpackTheme = {
+  palette: {
     activeText: "#90e86f",
     defaultText: "#5a5a5a",
     inactiveText: "#1a1a1a",
@@ -212,6 +245,7 @@ export const monokaiProTheme: SandpackTheme = {
 export const SANDPACK_THEMES: Record<SandpackPredefinedTheme, SandpackTheme> = {
   light: defaultLight,
   dark: defaultDark,
+  "sandpack-dark": sandpackDark,
   "night-owl": nightOwlTheme,
   "aqua-blue": aquaBlueTheme,
   "monokai-pro": monokaiProTheme,

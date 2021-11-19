@@ -150,7 +150,7 @@ module.exports = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      sandpack: { theme: "dark" },
+      sandpack: { theme: "sandpack-dark" },
       colorMode: {
         defaultMode: "dark",
         disableSwitch: true,

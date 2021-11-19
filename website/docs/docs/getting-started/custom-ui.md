@@ -33,7 +33,7 @@ You can compare all the themes [in this sandbox](https://codesandbox.io/s/sandpa
 ### Custom Theme
 
 You can also pass a **partial** theme object that overrides properties in the
-**default** theme, which is `default`
+**default** theme, which is `light`
 
 ```jsx
 <Sandpack

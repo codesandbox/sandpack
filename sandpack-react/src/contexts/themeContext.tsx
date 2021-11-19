@@ -13,7 +13,7 @@ const SandpackThemeContext = React.createContext<{
   id: string;
 }>({
   theme: defaultLight,
-  id: "default",
+  id: "light",
 });
 
 const SandpackThemeProvider: React.FC<{

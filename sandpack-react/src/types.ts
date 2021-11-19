@@ -106,6 +106,7 @@ export type SandpackPredefinedTemplate =
 export type SandpackPredefinedTheme =
   | "light"
   | "dark"
+  | "sandpack-dark"
   | "night-owl"
   | "aqua-blue"
   | "github-light"
