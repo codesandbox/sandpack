@@ -105,7 +105,7 @@ export const VanillaEditor: Story<SandpackProps> = (args) => (
       showNavigator: true,
     }}
     template="vanilla"
-    theme="codesandbox-dark"
+    theme="dark"
   />
 );
 
@@ -117,7 +117,7 @@ export const VanillaTypescriptEditor: Story<SandpackProps> = (args) => (
       showNavigator: true,
     }}
     template="vanilla-ts"
-    theme="codesandbox-dark"
+    theme="dark"
   />
 );
 
@@ -154,7 +154,7 @@ export const DarkTheme: Story<SandpackProps> = (args) => (
       },
     }}
     template="react"
-    theme="codesandbox-dark"
+    theme="dark"
   />
 );
 
@@ -288,7 +288,7 @@ export const MultipleInstances: Story<SandpackProps> = (args) => (
         showNavigator: true,
       }}
       template="react"
-      theme="codesandbox-dark"
+      theme="dark"
     />
     <h2>Night Owl</h2>
     <Sandpack
