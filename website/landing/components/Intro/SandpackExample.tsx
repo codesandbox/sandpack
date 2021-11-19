@@ -14,7 +14,13 @@ export const SandpackExampleProvider: React.FC = ({ children }) => {
   const [options, setOptions] = useState({});
 
   return (
-    <SandpackExampleContext.Provider value={{ setOptions, options }}>
+    <SandpackExampleContext.Provider
+      value={{
+        setOptions: (payload) =>
+          setOptions((prev) => ({ ...prev, ...payload })),
+        options,
+      }}
+    >
       {children}
     </SandpackExampleContext.Provider>
   );

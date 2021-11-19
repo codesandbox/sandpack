@@ -1,12 +1,13 @@
 import { forwardRef } from "react";
 import { styled } from "../../../stitches.config";
 import { Box, Text } from "../../common";
+import { motion } from "framer-motion";
 
 export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
   ({ children }, ref) => {
     return (
       <Box
-        ref={ref}
+        ref={ref as any}
         as="li"
         css={{
           alignItems: "center",
@@ -21,7 +22,7 @@ export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
             display: "grid",
             gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
             height: "100%",
-            minHeight: "50vh",
+            minHeight: "70vh",
           },
         }}
       >
@@ -112,5 +113,53 @@ export const SeeMoreLink = styled("a", {
     "&:hover": {
       textDecoration: "none",
     },
+  },
+});
+
+export const getRelativeCoordinates = (event: any, referenceElement: any) => {
+  const position = {
+    x: event.pageX,
+    y: event.pageY,
+  };
+
+  const offset = {
+    left: referenceElement.offsetLeft,
+    top: referenceElement.offsetTop,
+  };
+
+  let reference = referenceElement.offsetParent;
+
+  while (reference) {
+    offset.left += reference.offsetLeft;
+    offset.top += reference.offsetTop;
+    reference = reference.offsetParent;
+  }
+
+  return {
+    x: position.x - offset.left + 15,
+    y: position.y - offset.top - 35,
+  };
+};
+
+export const ToolTip = styled(motion.div, {
+  alignItems: "center",
+  background: "$primary",
+  borderRadius: "24px",
+  color: "$lightTextPrimary",
+  display: "inline-block",
+  fontWeight: "$normal",
+  fontSize: "inherit",
+  lineHeight: "inherit",
+  letterSpacing: "inherit",
+  padding: "4px 12px",
+});
+
+export const SnippetButton = styled("button", {
+  background: "none",
+  border: "none",
+
+  ".sp-wrapper": {
+    cursor: "pointer",
+    userSelect: "none",
   },
 });

@@ -1,13 +1,21 @@
 import type { SandpackPredefinedTemplate } from "@codesandbox/sandpack-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { styled } from "../../../stitches.config";
 import { Box, CodeBlock } from "../../common";
 import { useSandpackExample } from "../SandpackExample";
 
-import { Wrapper, Title, Description, Container, SeeMoreLink } from "./common";
+import {
+  Wrapper,
+  Title,
+  Description,
+  Container,
+  SeeMoreLink,
+  getRelativeCoordinates,
+  ToolTip,
+  SnippetButton,
+} from "./common";
 
 const frameworkOptions: SandpackPredefinedTemplate[] = [
   "react",
@@ -16,28 +24,6 @@ const frameworkOptions: SandpackPredefinedTemplate[] = [
   "vanilla",
   "angular",
 ];
-
-const SnippetButton = styled("button", {
-  background: "none",
-  border: "none",
-
-  ".sp-wrapper": {
-    cursor: "pointer",
-  },
-});
-
-const ToolTip = styled(motion.div, {
-  alignItems: "center",
-  background: "$primary",
-  borderRadius: "24px",
-  color: "$lightTextPrimary",
-  display: "inline-block",
-  fontWeight: "$normal",
-  fontSize: "inherit",
-  lineHeight: "inherit",
-  letterSpacing: "inherit",
-  padding: "4px 12px",
-});
 
 export const TemplateExample: React.FC = () => {
   const { ref, inView } = useInView({ threshold: 0.5 });
@@ -116,28 +102,3 @@ export const TemplateExample: React.FC = () => {
     </Wrapper>
   );
 };
-
-function getRelativeCoordinates(event: any, referenceElement: any) {
-  const position = {
-    x: event.pageX,
-    y: event.pageY,
-  };
-
-  const offset = {
-    left: referenceElement.offsetLeft,
-    top: referenceElement.offsetTop,
-  };
-
-  let reference = referenceElement.offsetParent;
-
-  while (reference) {
-    offset.left += reference.offsetLeft;
-    offset.top += reference.offsetTop;
-    reference = reference.offsetParent;
-  }
-
-  return {
-    x: position.x - offset.left + 15,
-    y: position.y - offset.top - 35,
-  };
-}
