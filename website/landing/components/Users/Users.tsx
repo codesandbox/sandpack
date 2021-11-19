@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { styled } from "../../stitches.config";
