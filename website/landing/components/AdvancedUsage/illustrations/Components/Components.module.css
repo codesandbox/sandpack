@@ -1,0 +1,141 @@
+.svg {
+  width: 180%;
+  height: auto;
+
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  --fadeInDelay1: 1.5s;
+  --fadeInDelay2: 2s;
+  --fadeInDelay3: 2.5s;
+  --fadeInDelay4: 1s;
+
+  --fadeInSpeed1: 0.5s;
+  --fadeInSpeed2: 0.5s;
+  --fadeInSpeed3: 0.5s;
+  --fadeInSpeed4: 0.5s;
+
+  --delay1: 0.1s;
+  --delay2: 0.6s;
+  --delay3: 0.1s;
+  --delay4: 0.6s;
+
+  --speed1: 2s;
+  --speed2: 1.5s;
+  --speed3: 1s;
+  --speed4: 2.5s;
+
+  --ease-elastic: cubic-bezier(0.8, -1, 0.2, 2);
+}
+
+/* motion */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes movement {
+  to {
+    transform: translateY(2%) scale(0.95);
+  }
+}
+
+@keyframes editor {
+  0% {
+    transform: translate(-142px, -128px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes navbar {
+  0% {
+    transform: translate(-4px, -130px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes browser {
+  0% {
+    transform: translate(112px, 47px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes preview {
+  0% {
+    transform: translate(5px, 33px);
+  }
+
+  100% {
+    transform: translate(-30px, 20px);
+  }
+}
+
+/* elements */
+.editor {
+  opacity: 0;
+  transform: translate(-142px, -128px);
+}
+
+.navbar {
+  opacity: 0;
+  transform: translate(-4px, -130px);
+}
+
+.browser {
+  opacity: 0;
+  transform: translate(112px, 47px);
+}
+
+.preview {
+  opacity: 0;
+  transform: translate(5px, 33px);
+}
+
+/* isActive */
+.active .movement:nth-child(1) {
+  animation: movement 4s ease-in-out alternate infinite;
+}
+
+.active .movement:nth-child(2) {
+  animation: movement 7s ease-in-out alternate infinite;
+}
+
+.active .movement:nth-child(3) {
+  animation: movement 6s ease-in-out alternate-reverse infinite;
+}
+
+.active .movement:nth-child(4) {
+  animation: movement 5s ease-in-out alternate infinite;
+}
+
+.active .editor {
+  animation: editor var(--speed1) var(--delay1) ease-in-out forwards,
+    fadeIn var(--fadeInSpeed1) var(--fadeInDelay1) forwards;
+}
+
+.active .navbar {
+  animation: navbar var(--speed2) var(--delay2) ease-in-out forwards,
+    fadeIn var(--fadeInSpeed2) var(--fadeInDelay2) forwards;
+}
+
+.active .browser {
+  animation: browser var(--speed3) var(--delay3) ease-in-out forwards,
+    fadeIn var(--fadeInSpeed3) var(--fadeInDelay3) forwards;
+}
+
+.active .preview {
+  animation: preview var(--speed4) var(--delay4) ease-in-out forwards,
+    fadeIn var(--fadeInSpeed4) var(--fadeInDelay4) forwards;
+}

@@ -16,3 +16,10 @@ export const fontWeights: Record<FontWeight, number> = {
   normal,
   semiBold,
 };
+
+// TODO: replace hard coded font sizes with theme
+export const fontSizes = [16, 18, 24, 36, 72, 96, 144];
+
+export const lineHeights = [1, 1.2, 1.4];
+
+export const letterSpacings = [-0.05, -0.025];

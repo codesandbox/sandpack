@@ -1,0 +1,178 @@
+.svg {
+  width: 180%;
+  height: auto;
+
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  --delay: 0.3;
+  --speed: 2s;
+  --ease-elastic: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* motion */
+@keyframes movement {
+  to {
+    transform: translateY(-2%);
+  }
+}
+
+@keyframes line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: matrix(0.866025, -0.5, 0.866025, 0.5, 256, 550.562);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: matrix(0.866025, -0.5, 0.866025, 0.5, 124, 523.562);
+  }
+}
+
+@keyframes code1 {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) translateX(100px);
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes navbar {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) translateX(50px);
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes code2 {
+  0% {
+    opacity: 0;
+    transform: translateY(100px) translateX(120px);
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes button {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) translateX(50px);
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes button {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) translateX(50px);
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 1;
+  }
+}
+
+/* elements */
+.line1 {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+}
+
+.line2 {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+}
+
+.line3 {
+  stroke-dasharray: 445;
+  stroke-dashoffset: -445;
+}
+
+.code1,
+.navbar,
+.code2,
+.button {
+  opacity: 0;
+}
+
+/* isActive */
+
+.active .line1 {
+  animation: line 1s 1s linear forwards,
+    movement 4s ease-in-out alternate infinite;
+}
+
+.active .line2 {
+  animation: line 2s 1s ease-in-out forwards,
+    movement 4s ease-in-out alternate-reverse infinite;
+}
+
+.active .line3 {
+  animation: line 1.5s 1s ease-in-out forwards,
+    movement 4s ease-in-out alternate infinite;
+}
+
+.active .code1 {
+  animation: code1 1s 0.8s var(--ease-elastic) forwards,
+    movement 4s ease-in-out alternate-reverse infinite;
+}
+
+.active .navbar {
+  animation: navbar 1.1s 0.8s var(--ease-elastic) forwards,
+    movement 4s ease-in-out alternate infinite;
+}
+
+.active .code2 {
+  animation: code2 1.2s 0.8s var(--ease-elastic) forwards;
+}
+
+.active .button {
+  animation: button 1s 0.9s var(--ease-elastic) forwards,
+    movement 6s ease-in-out alternate infinite;
+}
