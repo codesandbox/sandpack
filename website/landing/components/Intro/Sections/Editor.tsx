@@ -21,20 +21,16 @@ const ORIGINAL_CODE = `<Sandpack
   options={{
     showNavigator: true,
     showLineNumbers: true,
-    showInlineErrors: true,
     showTabs: true,
     closableTabs: true,
-    wrapContent: true,
   }} 
 />`;
 
 const ORIGINAL_CUSTOM = {
   showNavigator: true,
   showLineNumbers: true,
-  showInlineErrors: true,
   showTabs: true,
   closableTabs: true,
-  wrapContent: true,
 };
 
 const RefreshButton = styled("button", {

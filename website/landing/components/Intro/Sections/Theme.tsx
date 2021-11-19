@@ -22,6 +22,8 @@ const themeOptions: SandpackPredefinedTheme[] = [
   "codesandbox-light",
   "github-light",
   "monokai-pro",
+  "night-owl",
+  "aqua-blue",
 ];
 
 export const ThemeExample: React.FC = () => {

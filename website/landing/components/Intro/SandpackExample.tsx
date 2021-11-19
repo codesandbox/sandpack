@@ -16,7 +16,6 @@ export const SandpackExampleProvider: React.FC = ({ children }) => {
     showLineNumbers: true,
     showTabs: true,
     closableTabs: true,
-    wrapContent: false,
   });
 
   return (
