@@ -14,7 +14,7 @@ import { ParallaxLogo } from "../common/ParallaxLogo";
 
 import { UsageExample } from "./UsageExample";
 
-const SPRING_OPTIONS = { stiffness: 50, damping: 10 };
+const SPRING_OPTIONS = { stiffness: 200, damping: 20 };
 
 export const AdvancedUsage: React.FC = () => {
   // TODO: investigate why the app isn't able to find the existing
@@ -51,12 +51,12 @@ export const AdvancedUsage: React.FC = () => {
   const leftRange = useTransform(
     scrollY,
     [sectionTop - windowHeight / 2, sectionTop + windowHeight / 2],
-    [-50, 50]
+    [-20, 40]
   );
   const rightRange = useTransform(
     scrollY,
     [sectionTop - windowHeight / 2, sectionTop + windowHeight / 2],
-    [50, -50]
+    [20, -40]
   );
   const leftY = useSpring(leftRange, SPRING_OPTIONS);
   const rightY = useSpring(rightRange, SPRING_OPTIONS);
