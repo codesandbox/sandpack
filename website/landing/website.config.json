@@ -168,9 +168,9 @@
         "name": "CodeSandbox",
         "socialUrl": "https://codesandbox.io",
         "logo": {
-          "url": "/assets/logos/CodeSandbox-minimal.svg",
-          "height": 37,
-          "width": 261
+          "url": "/assets/logos/CodeSandbox.svg",
+          "height": 40,
+          "width": 245
         }
       },
       {
