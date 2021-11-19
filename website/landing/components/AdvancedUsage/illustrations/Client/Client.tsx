@@ -922,20 +922,20 @@ export const ClientIllustration: React.FC<{ isActive: boolean }> = ({
             <g className={styles.logo}>
               <g className={styles.logoLeft}>
                 <rect
-                  transform="matrix(0.866025, -0.5, 0.866025, 0.5, 297.993, 314.031)"
                   height="68"
                   stroke="white"
                   strokeWidth="7"
+                  transform="matrix(0.866025, -0.5, 0.866025, 0.5, 297.993, 314.031)"
                   width="34"
                   x="6.06218"
                 />
               </g>
               <g className={styles.logoRight}>
                 <rect
-                  transform="matrix(0.866025, -0.5, 0.866025, 0.5, 344.758, 307.031)"
                   height="68"
                   stroke="white"
                   strokeWidth="7"
+                  transform="matrix(0.866025, -0.5, 0.866025, 0.5, 344.758, 307.031)"
                   width="34"
                   x="6.06218"
                 />

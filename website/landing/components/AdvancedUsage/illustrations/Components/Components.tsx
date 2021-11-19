@@ -1,8 +1,8 @@
 import React from "react";
 
-import styles from "./Component.module.css";
+import styles from "./Components.module.css";
 
-export const ComponentIllustration: React.FC<{ isActive: boolean }> = ({
+export const ComponentsIllustration: React.FC<{ isActive: boolean }> = ({
   isActive,
 }) => {
   return (

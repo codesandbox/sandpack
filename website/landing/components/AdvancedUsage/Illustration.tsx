@@ -2,9 +2,11 @@ import React from "react";
 
 import { styled } from "../../stitches.config";
 
-import { ClientIllustration } from "./illustrations/Client";
-import { ComponentIllustration } from "./illustrations/Component";
-import { ProviderIllustration } from "./illustrations/Provider";
+import {
+  ClientIllustration,
+  ComponentsIllustration,
+  ProviderIllustration,
+} from "./illustrations";
 
 const IllustrationWrapper = styled("div", {
   $$wrapperBackground: "#f1f1f1",
@@ -75,7 +77,7 @@ export const Illustration: React.FC<IllustrationProps> = ({
       {
         {
           providers: <ProviderIllustration isActive={visible} />,
-          components: <ComponentIllustration isActive={visible} />,
+          components: <ComponentsIllustration isActive={visible} />,
           client: <ClientIllustration isActive={visible} />,
         }[illustrationKey]
       }
