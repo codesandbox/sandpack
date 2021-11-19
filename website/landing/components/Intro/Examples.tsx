@@ -1,4 +1,5 @@
 import { Box, List } from "../common";
+import { SandpackProvider } from "@codesandbox/sandpack-react";
 
 import { SandpackExample } from "./SandpackExample";
 import { TemplateExample } from "./Sections/Template";
@@ -27,7 +28,9 @@ export const Examples: React.FC = () => {
         }}
       >
         <TemplateExample />
-        <EditorExample />
+        <SandpackProvider>
+          <EditorExample />
+        </SandpackProvider>
         <ThemeExample />
       </List>
     </>
