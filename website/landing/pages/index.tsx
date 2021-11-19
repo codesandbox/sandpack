@@ -13,6 +13,8 @@ import { Users } from "../components/Users";
 import { styled } from "../stitches.config";
 import content from "../website.config.json";
 
+const DEFAULT_HOST = "";
+
 const Container = styled("section", {
   display: "flex",
   flexDirection: "column",
@@ -27,8 +29,14 @@ const Main = styled("main", {
   flex: 1,
 });
 
-const Home: NextPage = () => {
-  const { global } = content;
+interface HomeProps {
+  host: string | undefined;
+}
+const Home: NextPage<HomeProps> = ({ host }) => {
+  const { global, meta } = content;
+  const HOST_URL = host
+    ? `${host.includes("localhost") ? "http" : "https"}://${host}`
+    : DEFAULT_HOST;
 
   return (
     <Container>
@@ -36,6 +44,17 @@ const Home: NextPage = () => {
         <title>{global.title}</title>
         <meta content={global.description} name="description" />
         <link href="/favicon.ico" rel="icon" />
+
+        {/* Open Graph */}
+        {meta.map(({ name, value }) => {
+          const content =
+            {
+              "og:url": HOST_URL,
+              "og:image": `${HOST_URL}/${value}`,
+            }[name] || value;
+
+          return <meta key={name} content={content} name={name} />;
+        })}
       </Head>
 
       <Main>
@@ -51,6 +70,13 @@ const Home: NextPage = () => {
       <Footer />
     </Container>
   );
+};
+
+Home.getInitialProps = async (context) => {
+  const { req } = context;
+  const host = req?.headers.host;
+
+  return { host };
 };
 
 export default Home;
