@@ -40,7 +40,9 @@ export const TemplateExample: React.FC = () => {
   }, [template]);
 
   useEffect(() => {
-    if (!inView) {
+    if (inView) {
+      setTemplate(frameworkOptions[2]);
+    } else {
       setTemplate(frameworkOptions[0]);
     }
   }, [inView]);

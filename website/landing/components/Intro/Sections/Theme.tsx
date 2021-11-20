@@ -18,8 +18,9 @@ import {
 } from "./common";
 
 const themeOptions: SandpackPredefinedTheme[] = [
-  "codesandbox-dark",
-  "codesandbox-light",
+  "dark",
+  "light",
+  "sandpack-dark",
   "github-light",
   "monokai-pro",
   "night-owl",
@@ -41,8 +42,10 @@ export const ThemeExample: React.FC = () => {
   }, [theme]);
 
   useEffect(() => {
-    if (!inView) {
-      setTheme("codesandbox-dark");
+    if (inView) {
+      setTheme("light");
+    } else {
+      setTheme("sandpack-dark");
     }
   }, [inView]);
 

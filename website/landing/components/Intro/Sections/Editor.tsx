@@ -10,7 +10,6 @@ import {
 import { styled } from "@stitches/react";
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
-import { sandpackTheme } from "../../../styles/sandpackTheme";
 
 import { Box } from "../../common";
 import { useSandpackExample } from "../SandpackExample";
@@ -121,7 +120,7 @@ export const EditorExample: React.FC = () => {
             },
           }}
         >
-          <SandpackThemeProvider theme={sandpackTheme}>
+          <SandpackThemeProvider theme="sandpack-dark">
             <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
             <RefreshButton

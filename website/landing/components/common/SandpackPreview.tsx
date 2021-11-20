@@ -14,9 +14,14 @@ export const SandpackPreview: React.FC<{ options: SandpackProps }> = ({
         overflow: "hidden",
         width: "100%",
 
+        ".custom-wrapper": {
+          "--sp-border-radius": "10px",
+        },
+
         ".custom-layout": {
           width: "342px",
           height: "512px",
+          border: 0,
 
           "@bp1": {
             width: "384px",
@@ -51,6 +56,7 @@ export const SandpackPreview: React.FC<{ options: SandpackProps }> = ({
           classes: {
             "sp-layout": "custom-layout",
             "sp-stack": "custom-stack",
+            "sp-wrapper": "custom-wrapper",
           },
         }}
       />

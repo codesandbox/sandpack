@@ -14,6 +14,10 @@ export const Examples: React.FC = () => {
           position: "sticky",
           top: "calc(50vh - (440px / 2))",
           marginRight: "-80%",
+
+          "*": {
+            transition: ".2s ease background, .2s ease color",
+          },
         }}
       >
         <SandpackExample />
