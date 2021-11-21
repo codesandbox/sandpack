@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { CodeEditorRef } from "@codesandbox/sandpack-react";
 import {
   useSandpack,
@@ -5,14 +6,20 @@ import {
   SandpackThemeProvider,
   SandpackCodeEditor,
 } from "@codesandbox/sandpack-react";
-import { styled } from "@stitches/react";
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { Box } from "../../common";
 import { useSandpackExample } from "../SandpackExample";
 
-import { Wrapper, Title, Description, Container, SeeMoreLink } from "./common";
+import {
+  Wrapper,
+  Title,
+  Description,
+  Container,
+  SeeMoreLink,
+  RefreshButton,
+} from "./common";
 
 const ORIGINAL_CODE = `<Sandpack 
   options={{
@@ -29,33 +36,6 @@ const ORIGINAL_CUSTOM = {
   showTabs: true,
   closableTabs: true,
 };
-
-const RefreshButton = styled("button", {
-  background: "rgba(136, 136, 136, 0.2)",
-  border: "none",
-  color: "rgba(255,255,255, .5)",
-  borderRadius: "100%",
-  width: "24px",
-  height: "24px",
-  display: "flex",
-  padding: 0,
-  cursor: "pointer",
-
-  position: "absolute",
-  bottom: "12px",
-  right: "10px",
-
-  transition: ".2s ease all",
-
-  "&:hover": {
-    color: "rgba(255,255,255, 1)",
-  },
-
-  svg: {
-    padding: "1px",
-    margin: "auto",
-  },
-});
 
 export const EditorExample: React.FC = () => {
   const { ref, inView } = useInView({ threshold: 0.5 });
@@ -85,7 +65,9 @@ export const EditorExample: React.FC = () => {
         }
       }
     },
-    [code.length, inView]
+    // Ignore code.length
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [inView]
   );
 
   useEffect(function componentMount() {
@@ -123,7 +105,7 @@ export const EditorExample: React.FC = () => {
 
             ".sp-code-editor": {
               borderRadius: "16px",
-              padding: "15px",
+              padding: "0 15px",
             },
           }}
         >

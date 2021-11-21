@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { CodeEditorRef } from "@codesandbox/sandpack-react";
 import {
   useSandpack,
@@ -5,64 +6,43 @@ import {
   SandpackThemeProvider,
   SandpackCodeEditor,
 } from "@codesandbox/sandpack-react";
-import { styled } from "@stitches/react";
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { Box } from "../../common";
 import { useSandpackExample } from "../SandpackExample";
 
-import { Wrapper, Title, Description, Container, SeeMoreLink } from "./common";
+import {
+  Wrapper,
+  Title,
+  Description,
+  Container,
+  SeeMoreLink,
+  RefreshButton,
+} from "./common";
 
-const ORIGINAL_CODE = `<Sandpack 
-  customSetup={{
-    entry: "/index.js",
-    files: {
-      "/index.js": {
-        code: 'const title = "This is a simple code editor"',
-      },
-    },
+const ORIGINAL_CODE = `const code = \`
+import ReactMarkdown from 'react-markdown' 
+
+export default function App() {
+  return <ReactMarkdown># Hello, *world*!</ReactMarkdown>
+}
+\`
+
+<Sandpack
+  customSetup={{ 
+    dependencies: { "react-markdown": "latest" } 
   }}
-/>`;
-
-const ORIGINAL_CUSTOM = {
-  showNavigator: true,
-  showLineNumbers: true,
-  showTabs: true,
-  closableTabs: true,
-};
-
-const RefreshButton = styled("button", {
-  background: "rgba(136, 136, 136, 0.2)",
-  border: "none",
-  color: "rgba(255,255,255, .5)",
-  borderRadius: "100%",
-  width: "24px",
-  height: "24px",
-  display: "flex",
-  padding: 0,
-  cursor: "pointer",
-
-  position: "absolute",
-  bottom: "12px",
-  right: "10px",
-
-  transition: ".2s ease all",
-
-  "&:hover": {
-    color: "rgba(255,255,255, 1)",
-  },
-
-  svg: {
-    padding: "1px",
-    margin: "auto",
-  },
-});
+  files={{
+    "/App.js": code,
+  }}
+/>;
+`;
 
 export const CustomExample: React.FC = () => {
   const { ref, inView } = useInView({ threshold: 0.5 });
   const { setOptions } = useSandpackExample();
-  const [custom, setCustom] = useState(ORIGINAL_CUSTOM);
+  const [custom, setCustom] = useState<string>(ORIGINAL_CODE);
   const codeEditorRef = useRef<CodeEditorRef>(null);
 
   const { sandpack } = useSandpack();
@@ -87,27 +67,20 @@ export const CustomExample: React.FC = () => {
         }
       }
     },
-    [code.length, inView]
+    // Ignore code.length
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [inView]
   );
 
-  useEffect(
-    function componentMount() {
-      sandpack.updateCurrentFile(ORIGINAL_CODE);
-    },
-    [sandpack]
-  );
+  useEffect(function componentMount() {
+    sandpack.updateCurrentFile(ORIGINAL_CODE);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  // TODO: pass code to the provider
   useEffect(
     function listener() {
-      const newCustomOptions: Record<string, any> = {};
-
-      Object.keys(custom).map((key) => {
-        const value = code.match(new RegExp(`${key}:(.+)`));
-
-        newCustomOptions[key] = value?.[1]?.includes("true") ?? false;
-      });
-
-      setCustom((prev) => ({ ...prev, ...(newCustomOptions as any) }));
+      // setCustom(code);
     },
     [code]
   );
@@ -115,6 +88,7 @@ export const CustomExample: React.FC = () => {
   return (
     <Wrapper ref={ref}>
       <Container>
+        {/* TODO: update */}
         <Title>Configure your editor</Title>
         <Description>
           The <code>options</code> prop allows you to toggle on/off different
@@ -128,7 +102,7 @@ export const CustomExample: React.FC = () => {
 
             ".sp-code-editor": {
               borderRadius: "16px",
-              padding: "15px",
+              padding: "0 15px",
             },
           }}
         >
@@ -138,7 +112,6 @@ export const CustomExample: React.FC = () => {
             <RefreshButton
               onClick={() => {
                 sandpack.updateCurrentFile(ORIGINAL_CODE);
-                setOptions(ORIGINAL_CUSTOM);
               }}
             >
               <svg
@@ -158,6 +131,7 @@ export const CustomExample: React.FC = () => {
           </SandpackThemeProvider>
         </Box>
 
+        {/* TODO: update */}
         <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#visual-options">
           <span>See more</span>
         </SeeMoreLink>

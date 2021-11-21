@@ -34,12 +34,15 @@ export const Examples: React.FC = () => {
         }}
       >
         <TemplateExample />
+
         <SandpackProvider>
           <CustomExample />
         </SandpackProvider>
+
         <SandpackProvider>
           <EditorExample />
         </SandpackProvider>
+
         <ThemeExample />
       </List>
     </>

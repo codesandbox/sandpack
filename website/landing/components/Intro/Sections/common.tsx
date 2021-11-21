@@ -1,8 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { motion } from "framer-motion";
 import { forwardRef } from "react";
+
 import { styled } from "../../../stitches.config";
 import { Box, Text } from "../../common";
-import { motion } from "framer-motion";
 
+// eslint-disable-next-line react/display-name
 export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
   ({ children }, ref) => {
     return (
@@ -22,7 +26,7 @@ export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
             display: "grid",
             gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
             height: "100%",
-            minHeight: "70vh",
+            minHeight: "100vh",
           },
         }}
       >
@@ -161,5 +165,32 @@ export const SnippetButton = styled("button", {
   ".sp-wrapper": {
     cursor: "pointer",
     userSelect: "none",
+  },
+});
+
+export const RefreshButton = styled("button", {
+  background: "rgba(136, 136, 136, 0.2)",
+  border: "none",
+  color: "rgba(255,255,255, .5)",
+  borderRadius: "100%",
+  width: "24px",
+  height: "24px",
+  display: "flex",
+  padding: 0,
+  cursor: "pointer",
+
+  position: "absolute",
+  bottom: "12px",
+  right: "10px",
+
+  transition: ".2s ease all",
+
+  "&:hover": {
+    color: "rgba(255,255,255, 1)",
+  },
+
+  svg: {
+    padding: "1px",
+    margin: "auto",
   },
 });
