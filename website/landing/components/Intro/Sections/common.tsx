@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { motion } from "framer-motion";
+import { motion, useTransform, useViewportScroll } from "framer-motion";
+import { useState } from "react";
+import { useRef } from "react";
+import { useLayoutEffect } from "react";
 import { forwardRef } from "react";
 
 import { styled } from "../../../stitches.config";
@@ -208,3 +211,41 @@ export const RefreshButton = styled("button", {
     margin: "auto",
   },
 });
+
+export const FadeAnimation: React.FC = ({ children }) => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [sectionTop, setSectionTop] = useState(0);
+  const [sectionHeight, setSectionHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    const sectionEl = sectionRef.current;
+    if (!sectionEl) return;
+
+    const onResize = () => {
+      setSectionTop(sectionEl.offsetTop);
+      setSectionHeight(sectionEl.offsetHeight);
+    };
+
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [sectionRef]);
+
+  const { scrollY } = useViewportScroll();
+  const opacity = useTransform(
+    scrollY,
+    [
+      sectionTop - sectionHeight / 4,
+      sectionTop - sectionHeight / 6,
+      sectionTop + sectionHeight / 6,
+      sectionTop + sectionHeight / 4,
+    ],
+    [0, 1, 1, 0]
+  );
+
+  return (
+    <motion.div ref={sectionRef} style={{ opacity }}>
+      {children}
+    </motion.div>
+  );
+};

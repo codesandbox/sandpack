@@ -18,6 +18,7 @@ import {
   SnippetButton,
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
+  FadeAnimation,
 } from "./common";
 
 const themeOptions: SandpackPredefinedTheme[] = [
@@ -66,58 +67,60 @@ export const ThemeExample: React.FC = () => {
   };
 
   return (
-    <Wrapper ref={ref}>
-      <Container>
-        <Title>Apply a theme</Title>
-        <Description>
-          Use the <code>theme</code> prop to set a predefined option made by
-          CodeSandbox. Try below, just click to change code and see all the
-          predefined options
-        </Description>
-        <SnippetButton
-          ref={boxRef}
-          onClick={shuffleTheme}
-          onMouseEnter={() => setToolTipVisibility(true)}
-          onMouseLeave={() => setToolTipVisibility(false)}
-          onMouseMove={(event) =>
-            setMousePosition(getRelativeCoordinates(event, boxRef.current))
-          }
-        >
-          <CodeBlock>{`<Sandpack theme="${theme}">`}</CodeBlock>
-        </SnippetButton>
+    <FadeAnimation>
+      <Wrapper ref={ref}>
+        <Container>
+          <Title>Apply a theme</Title>
+          <Description>
+            Use the <code>theme</code> prop to set a predefined option made by
+            CodeSandbox. Try below, just click to change code and see all the
+            predefined options
+          </Description>
+          <SnippetButton
+            ref={boxRef}
+            onClick={shuffleTheme}
+            onMouseEnter={() => setToolTipVisibility(true)}
+            onMouseLeave={() => setToolTipVisibility(false)}
+            onMouseMove={(event) =>
+              setMousePosition(getRelativeCoordinates(event, boxRef.current))
+            }
+          >
+            <CodeBlock>{`<Sandpack theme="${theme}">`}</CodeBlock>
+          </SnippetButton>
 
-        <div style={{ height: 0, marginTop: "-24px" }}>
-          {toolTipVisibility && (
-            <AnimatePresence>
-              <ToolTip
-                animate={{
-                  opacity: 1,
-                  x: mousePosition.x,
-                  y: mousePosition.y,
-                }}
-                exit={{ opacity: 0 }}
-                initial={{
-                  opacity: 0,
-                  x: mousePosition.x,
-                  y: mousePosition.y,
-                }}
-                onlyDesktop
-              >
-                click to change
-              </ToolTip>
-            </AnimatePresence>
-          )}
-        </div>
+          <div style={{ height: 0, marginTop: "-24px" }}>
+            {toolTipVisibility && (
+              <AnimatePresence>
+                <ToolTip
+                  animate={{
+                    opacity: 1,
+                    x: mousePosition.x,
+                    y: mousePosition.y,
+                  }}
+                  exit={{ opacity: 0 }}
+                  initial={{
+                    opacity: 0,
+                    x: mousePosition.x,
+                    y: mousePosition.y,
+                  }}
+                  onlyDesktop
+                >
+                  click to change
+                </ToolTip>
+              </AnimatePresence>
+            )}
+          </div>
 
-        <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#theming">
-          <span>See more</span>
-        </SeeMoreLink>
-      </Container>
+          <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#theming">
+            <span>See more</span>
+          </SeeMoreLink>
+        </Container>
 
-      <SandpackContainerPlaceholder />
-      <SandpackContainerMobile>
-        <SandpackPreview options={{ theme }} />
-      </SandpackContainerMobile>
-    </Wrapper>
+        <SandpackContainerPlaceholder />
+        <SandpackContainerMobile>
+          <SandpackPreview options={{ theme }} />
+        </SandpackContainerMobile>
+      </Wrapper>
+    </FadeAnimation>
   );
 };

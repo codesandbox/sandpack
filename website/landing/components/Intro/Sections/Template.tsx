@@ -18,6 +18,7 @@ import {
   SnippetButton,
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
+  FadeAnimation,
 } from "./common";
 
 const frameworkOptions: SandpackPredefinedTemplate[] = [
@@ -64,58 +65,60 @@ export const TemplateExample: React.FC = () => {
   };
 
   return (
-    <Wrapper ref={ref}>
-      <Container>
-        <Title>Get started in a few lines</Title>
-        <Description>
-          Set the <code>template</code> prop to get started with Sandpack in a
-          few lines of code.
-        </Description>
-        <SnippetButton
-          ref={boxRef}
-          onClick={shuffleTemplate}
-          onMouseEnter={() => setToolTipVisibility(true)}
-          onMouseLeave={() => setToolTipVisibility(false)}
-          onMouseMove={(event) =>
-            setMousePosition(getRelativeCoordinates(event, boxRef.current))
-          }
-        >
-          <CodeBlock>{`<Sandpack template="${template}">`}</CodeBlock>
-        </SnippetButton>
+    <FadeAnimation>
+      <Wrapper ref={ref}>
+        <Container>
+          <Title>Get started in a few lines</Title>
+          <Description>
+            Set the <code>template</code> prop to get started with Sandpack in a
+            few lines of code.
+          </Description>
+          <SnippetButton
+            ref={boxRef}
+            onClick={shuffleTemplate}
+            onMouseEnter={() => setToolTipVisibility(true)}
+            onMouseLeave={() => setToolTipVisibility(false)}
+            onMouseMove={(event) =>
+              setMousePosition(getRelativeCoordinates(event, boxRef.current))
+            }
+          >
+            <CodeBlock>{`<Sandpack template="${template}">`}</CodeBlock>
+          </SnippetButton>
 
-        <div style={{ height: 0, marginTop: "-24px" }}>
-          {toolTipVisibility && (
-            <AnimatePresence>
-              <ToolTip
-                animate={{
-                  opacity: 1,
-                  x: mousePosition.x,
-                  y: mousePosition.y,
-                }}
-                exit={{ opacity: 0 }}
-                initial={{
-                  opacity: 0,
-                  x: mousePosition.x,
-                  y: mousePosition.y,
-                }}
-                onlyDesktop
-              >
-                click to change
-              </ToolTip>
-            </AnimatePresence>
-          )}
-        </div>
+          <div style={{ height: 0, marginTop: "-24px" }}>
+            {toolTipVisibility && (
+              <AnimatePresence>
+                <ToolTip
+                  animate={{
+                    opacity: 1,
+                    x: mousePosition.x,
+                    y: mousePosition.y,
+                  }}
+                  exit={{ opacity: 0 }}
+                  initial={{
+                    opacity: 0,
+                    x: mousePosition.x,
+                    y: mousePosition.y,
+                  }}
+                  onlyDesktop
+                >
+                  click to change
+                </ToolTip>
+              </AnimatePresence>
+            )}
+          </div>
 
-        <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-content#template">
-          <span>See more</span>
-        </SeeMoreLink>
-      </Container>
+          <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-content#template">
+            <span>See more</span>
+          </SeeMoreLink>
+        </Container>
 
-      <SandpackContainerPlaceholder />
+        <SandpackContainerPlaceholder />
 
-      <SandpackContainerMobile>
-        <SandpackPreview options={{ template }} />
-      </SandpackContainerMobile>
-    </Wrapper>
+        <SandpackContainerMobile>
+          <SandpackPreview options={{ template }} />
+        </SandpackContainerMobile>
+      </Wrapper>
+    </FadeAnimation>
   );
 };

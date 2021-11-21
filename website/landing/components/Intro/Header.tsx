@@ -47,13 +47,4 @@ export const Header: React.FC = () => {
       </Box>
     </Box>
   );
-
-  {
-    /* 
-	  TOP Sandpack
-	  <Box css={{ display: "none", "@bp2": { display: "block" } }}>
-		<SandpackPreview />
-	  </Box>
-	  */
-  }
 };
