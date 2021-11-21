@@ -10,7 +10,7 @@ import { commentKeymap } from "@codemirror/comment";
 import { lineNumbers } from "@codemirror/gutter";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
-import { EditorState, SelectionRange, Transaction } from "@codemirror/state";
+import { EditorState } from "@codemirror/state";
 import type { Annotation } from "@codemirror/state";
 import {
   highlightSpecialChars,
@@ -65,9 +65,9 @@ interface CodeMirrorProps {
   decorators?: Decorators;
 }
 
-export type CodeMirrorRef = HTMLElement & {
-  focusEditor: (params?: { position?: number }) => EditorView | undefined;
-};
+export interface CodeMirrorRef {
+  getCodemirror: () => EditorView | undefined;
+}
 
 export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
   (
@@ -94,25 +94,9 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     const { listen } = useSandpack();
     const ariaId = React.useRef<string>(generateRandomId());
 
-    React.useImperativeHandle(
-      ref,
-      () =>
-        ({
-          focusEditor: (params) => {
-            cmView.current?.focus();
-
-            if (params?.position) {
-              const newState = cmView.current?.state.update({
-                selection: { anchor: params.position },
-              });
-
-              if (newState) {
-                cmView.current?.update([newState]);
-              }
-            }
-          },
-        } as CodeMirrorRef)
-    );
+    React.useImperativeHandle(ref, () => ({
+      getCodemirror: () => cmView.current,
+    }));
 
     React.useEffect(() => {
       if (!wrapper.current) {

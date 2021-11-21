@@ -1,10 +1,12 @@
-import { Box, List } from "../common";
 import { SandpackProvider } from "@codesandbox/sandpack-react";
 
+import { Box, List } from "../common";
+
 import { SandpackExample } from "./SandpackExample";
+import { CustomExample } from "./Sections/Custom";
+import { EditorExample } from "./Sections/Editor";
 import { TemplateExample } from "./Sections/Template";
 import { ThemeExample } from "./Sections/Theme";
-import { EditorExample } from "./Sections/Editor";
 
 export const Examples: React.FC = () => {
   return (
@@ -32,6 +34,9 @@ export const Examples: React.FC = () => {
         }}
       >
         <TemplateExample />
+        <SandpackProvider>
+          <CustomExample />
+        </SandpackProvider>
         <SandpackProvider>
           <EditorExample />
         </SandpackProvider>

@@ -15,12 +15,14 @@ import { useSandpackExample } from "../SandpackExample";
 import { Wrapper, Title, Description, Container, SeeMoreLink } from "./common";
 
 const ORIGINAL_CODE = `<Sandpack 
-  options={{
-    showNavigator: true,
-    showLineNumbers: true,
-    showTabs: true,
-    closableTabs: true,
-  }} 
+  customSetup={{
+    entry: "/index.js",
+    files: {
+      "/index.js": {
+        code: 'const title = "This is a simple code editor"',
+      },
+    },
+  }}
 />`;
 
 const ORIGINAL_CUSTOM = {
@@ -57,7 +59,7 @@ const RefreshButton = styled("button", {
   },
 });
 
-export const EditorExample: React.FC = () => {
+export const CustomExample: React.FC = () => {
   const { ref, inView } = useInView({ threshold: 0.5 });
   const { setOptions } = useSandpackExample();
   const [custom, setCustom] = useState(ORIGINAL_CUSTOM);
@@ -88,9 +90,12 @@ export const EditorExample: React.FC = () => {
     [code.length, inView]
   );
 
-  useEffect(function componentMount() {
-    sandpack.updateCurrentFile(ORIGINAL_CODE);
-  }, []);
+  useEffect(
+    function componentMount() {
+      sandpack.updateCurrentFile(ORIGINAL_CODE);
+    },
+    [sandpack]
+  );
 
   useEffect(
     function listener() {
