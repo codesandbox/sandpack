@@ -3,7 +3,7 @@ import { Sandpack } from "@codesandbox/sandpack-react";
 
 import { Box } from "./Box";
 
-export const SandpackPreview: React.FC<{ options: SandpackProps }> = ({
+export const SandpackPreview: React.FC<{ options?: SandpackProps }> = ({
   options,
 }) => {
   return (

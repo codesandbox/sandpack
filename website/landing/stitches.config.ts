@@ -10,12 +10,14 @@ const SCREEN_SIZES = {
   xl: 1920,
 };
 
+export const media = {
+  bp1: `(min-width: ${SCREEN_SIZES.md}px)`,
+  bp2: `(min-width: ${SCREEN_SIZES.lg}px)`,
+  bp3: `(min-width: ${SCREEN_SIZES.xl}px)`,
+};
+
 export const { globalCss, getCssText, styled } = createStitches({
-  media: {
-    bp1: `(min-width: ${SCREEN_SIZES.md}px)`,
-    bp2: `(min-width: ${SCREEN_SIZES.lg}px)`,
-    bp3: `(min-width: ${SCREEN_SIZES.xl}px)`,
-  },
+  media,
   theme: {
     colors: palette,
     fontWeights,

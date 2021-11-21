@@ -14,8 +14,23 @@ export const Examples: React.FC = () => {
       <Box
         css={{
           position: "sticky",
-          top: "calc(50vh - (440px / 2))",
-          marginRight: "-80%",
+          top: "calc(50vh - 25%)",
+          right: 0,
+          display: "none",
+
+          "@bp2": {
+            display: "block",
+            transform: "translateX(50vw)",
+          },
+
+          "@media (min-width: 1300px)": {
+            transform: "translateX(30vw)",
+          },
+
+          // TODO: test it out on big screens
+          "@media (min-width: 2400px)": {
+            transform: "translateX(20vw)",
+          },
 
           "*": {
             transition: ".2s ease background, .2s ease color",

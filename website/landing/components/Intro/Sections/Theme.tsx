@@ -3,7 +3,8 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { Box, CodeBlock } from "../../common";
+import { CodeBlock, SandpackPreview } from "../../common";
+import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
@@ -15,6 +16,8 @@ import {
   getRelativeCoordinates,
   ToolTip,
   SnippetButton,
+  SandpackContainerPlaceholder,
+  SandpackContainerMobile,
 } from "./common";
 
 const themeOptions: SandpackPredefinedTheme[] = [
@@ -36,12 +39,19 @@ export const ThemeExample: React.FC = () => {
   );
   const boxRef = useRef<HTMLButtonElement>(null);
   const [theme, setTheme] = useState(themeOptions[0]);
+  const higherMobile = useBreakpoint("bp1");
 
   useEffect(() => {
     setOptions({ theme });
   }, [theme]);
 
   useEffect(() => {
+    if (!higherMobile) {
+      setTheme("light");
+
+      return;
+    }
+
     if (inView) {
       setTheme("light");
     } else {
@@ -69,7 +79,7 @@ export const ThemeExample: React.FC = () => {
           onClick={shuffleTheme}
           onMouseEnter={() => setToolTipVisibility(true)}
           onMouseLeave={() => setToolTipVisibility(false)}
-          onMouseMove={(event: any) =>
+          onMouseMove={(event) =>
             setMousePosition(getRelativeCoordinates(event, boxRef.current))
           }
         >
@@ -91,6 +101,7 @@ export const ThemeExample: React.FC = () => {
                   x: mousePosition.x,
                   y: mousePosition.y,
                 }}
+                onlyDesktop
               >
                 click to change
               </ToolTip>
@@ -103,7 +114,10 @@ export const ThemeExample: React.FC = () => {
         </SeeMoreLink>
       </Container>
 
-      <Box css={{ width: 800 }} />
+      <SandpackContainerPlaceholder />
+      <SandpackContainerMobile>
+        <SandpackPreview options={{ theme }} />
+      </SandpackContainerMobile>
     </Wrapper>
   );
 };

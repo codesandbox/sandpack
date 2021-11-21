@@ -18,9 +18,10 @@ export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          gap: "48px",
+          gap: "24px",
 
           "@bp2": {
+            gap: "48px",
             alignItems: "center",
             justifyContent: "center",
             display: "grid",
@@ -36,6 +37,14 @@ export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
   }
 );
 
+export const SandpackContainerPlaceholder = styled("div", { width: "50vw" });
+
+export const SandpackContainerMobile = styled("div", {
+  "@bp2": {
+    display: "none",
+  },
+});
+
 export const Container: React.FC = ({ children }) => {
   return (
     <Box
@@ -44,18 +53,15 @@ export const Container: React.FC = ({ children }) => {
         flexDirection: "column",
         gap: "24px",
         margin: "0 auto",
-        width: "344px",
+        width: "calc(100vw - 32px)",
+        maxWidth: "600px",
 
         "@bp1": {
-          width: "376px",
+          width: "40vw",
         },
 
         "@bp2": {
-          width: "360px",
-        },
-
-        "@bp3": {
-          width: "480px",
+          width: "30vw",
         },
       }}
     >
@@ -150,12 +156,20 @@ export const ToolTip = styled(motion.div, {
   background: "$primary",
   borderRadius: "24px",
   color: "$lightTextPrimary",
-  display: "inline-block",
   fontWeight: "$normal",
   fontSize: "inherit",
   lineHeight: "inherit",
   letterSpacing: "inherit",
   padding: "4px 12px",
+
+  variants: {
+    onlyDesktop: {
+      true: {
+        display: "none",
+        "@bp2": { display: "inline-block" },
+      },
+    },
+  },
 });
 
 export const SnippetButton = styled("button", {

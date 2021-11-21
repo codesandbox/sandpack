@@ -3,7 +3,8 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { Box, CodeBlock } from "../../common";
+import { CodeBlock, SandpackPreview } from "../../common";
+import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
@@ -15,6 +16,8 @@ import {
   getRelativeCoordinates,
   ToolTip,
   SnippetButton,
+  SandpackContainerPlaceholder,
+  SandpackContainerMobile,
 } from "./common";
 
 const frameworkOptions: SandpackPredefinedTemplate[] = [
@@ -34,18 +37,25 @@ export const TemplateExample: React.FC = () => {
   );
   const boxRef = useRef<HTMLButtonElement>(null);
   const [template, setTemplate] = useState(frameworkOptions[0]);
+  const higherMobile = useBreakpoint("bp1");
 
   useEffect(() => {
     setOptions({ template });
   }, [template]);
 
   useEffect(() => {
+    if (!higherMobile) {
+      setTemplate(frameworkOptions[2]);
+
+      return;
+    }
+
     if (inView) {
       setTemplate(frameworkOptions[2]);
     } else {
       setTemplate(frameworkOptions[0]);
     }
-  }, [inView]);
+  }, [higherMobile, inView]);
 
   const shuffleTemplate = () => {
     const currentIndex = frameworkOptions.indexOf(template);
@@ -66,7 +76,7 @@ export const TemplateExample: React.FC = () => {
           onClick={shuffleTemplate}
           onMouseEnter={() => setToolTipVisibility(true)}
           onMouseLeave={() => setToolTipVisibility(false)}
-          onMouseMove={(event: any) =>
+          onMouseMove={(event) =>
             setMousePosition(getRelativeCoordinates(event, boxRef.current))
           }
         >
@@ -88,6 +98,7 @@ export const TemplateExample: React.FC = () => {
                   x: mousePosition.x,
                   y: mousePosition.y,
                 }}
+                onlyDesktop
               >
                 click to change
               </ToolTip>
@@ -100,7 +111,11 @@ export const TemplateExample: React.FC = () => {
         </SeeMoreLink>
       </Container>
 
-      <Box css={{ width: 800 }} />
+      <SandpackContainerPlaceholder />
+
+      <SandpackContainerMobile>
+        <SandpackPreview options={{ template }} />
+      </SandpackContainerMobile>
     </Wrapper>
   );
 };

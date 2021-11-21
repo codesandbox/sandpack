@@ -9,7 +9,8 @@ import {
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { Box } from "../../common";
+import { Box, SandpackPreview } from "../../common";
+import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
@@ -19,6 +20,8 @@ import {
   Container,
   SeeMoreLink,
   RefreshButton,
+  SandpackContainerPlaceholder,
+  SandpackContainerMobile,
 } from "./common";
 
 const ORIGINAL_CODE = `const code = \`
@@ -44,6 +47,7 @@ export const CustomExample: React.FC = () => {
   const { setOptions } = useSandpackExample();
   const [custom, setCustom] = useState<string>(ORIGINAL_CODE);
   const codeEditorRef = useRef<CodeEditorRef>(null);
+  const higherMobile = useBreakpoint("bp1");
 
   const { sandpack } = useSandpack();
   const { code } = useActiveCode();
@@ -56,7 +60,7 @@ export const CustomExample: React.FC = () => {
     function componentOnView() {
       const position = 43;
       const cmInstance = codeEditorRef.current?.getCodemirror();
-      if (inView && cmInstance && code.length > position) {
+      if (higherMobile && inView && cmInstance && code.length > position) {
         cmInstance.focus();
         const newState = cmInstance.state.update({
           selection: { anchor: position },
@@ -69,7 +73,7 @@ export const CustomExample: React.FC = () => {
     },
     // Ignore code.length
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [inView]
+    [higherMobile, inView]
   );
 
   useEffect(function componentMount() {
@@ -137,7 +141,12 @@ export const CustomExample: React.FC = () => {
         </SeeMoreLink>
       </Container>
 
-      <Box css={{ width: 800 }} />
+      <SandpackContainerPlaceholder />
+
+      {/* TODO: pass props */}
+      <SandpackContainerMobile>
+        <SandpackPreview />
+      </SandpackContainerMobile>
     </Wrapper>
   );
 };
