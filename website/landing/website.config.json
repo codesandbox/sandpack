@@ -1,7 +1,7 @@
 {
   "global": {
-    "title": "Sandpack",
-    "description": "Sandpack is a component toolkit for creating your own live running code editing experience with the power of CodeSandbox"
+    "title": "Component toolkit for live running code editing experiences | Sandpack",
+    "description": "Sandpack is a component toolkit for creating your own live running code editing experience powered by CodeSandbox."
   },
   "meta": [
     {
@@ -14,11 +14,11 @@
     },
     {
       "name": "og:title",
-      "value": "Sandpack is a component toolkit for creating your own live running code editing experience with the power of CodeSandbox"
+      "value": "Component toolkit for live running code editing experiences | Sandpack"
     },
     {
       "name": "og:description",
-      "value": "React components that give you the power of editable sandboxes that run in the browser.  Gives you an ecosystem of components and utilities that allow you to compile and run modern frameworks with Sandpack."
+      "value": "Sandpack is a component toolkit for creating your own live running code editing experience powered by CodeSandbox."
     },
     {
       "name": "og:image",
