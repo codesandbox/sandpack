@@ -7,7 +7,7 @@ const LogoWraper = styled("div", {
   $$halfHeight: "150px",
   alignItems: "center",
   display: "flex",
-  height: "calc((2 * $$halfHeight) - $$halfHeight / 2)",
+  height: "$$halfHeight",
   justifyContent: "center",
   position: "relative",
 });

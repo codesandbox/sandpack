@@ -53,7 +53,11 @@ export const Banner: React.FC = () => {
           display: "flex",
           flexDirection: "column",
           gap: "50px",
-          overflow: "visible"
+          overflow: "visible",
+
+          "@bp3": {
+            gap: "100px",
+          },
         }}
       >
         <ParallaxLogo leftRange={leftRange} rightRange={rightRange} />
