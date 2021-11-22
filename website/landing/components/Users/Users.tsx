@@ -17,9 +17,23 @@ const UserLink = styled("a", {
   maxWidth: "75%",
   margin: "0 auto",
   position: "relative",
+  opacity: 0,
+  transitionProperty: "opacity",
+  transitionTimingFunction: "cubic-bezier(0.770, 0.000, 0.175, 1.000)",
 
   "@bp1": {
     maxWidth: "100%",
+  },
+
+  variants: {
+    visible: {
+      true: {
+        opacity: 1,
+      },
+      false: {
+        opacity: 0,
+      },
+    },
   },
 });
 
@@ -31,8 +45,7 @@ export const Users: React.FC = () => {
   // callback, a workaround is to wait until the list is in view
   // and then do an opacity transition.
   const { ref: listRef, inView } = useInView({
-    threshold: 1,
-    triggerOnce: true,
+    threshold: [0, 1],
   });
 
   return (
@@ -59,8 +72,6 @@ export const Users: React.FC = () => {
             flexDirection: "column",
             gap: "48px",
             justifyContent: "center",
-            opacity: inView ? 1 : 0,
-            transition: "opacity .5s cubic-bezier(0.770, 0.000, 0.175, 1.000)",
 
             "@bp1": {
               gap: "100px",
@@ -69,20 +80,36 @@ export const Users: React.FC = () => {
             "@bp2": {
               flexDirection: "row",
               flexFlow: "row wrap",
+              margin: "0 auto",
+              width: "75%",
             },
           }}
         >
-          {content.list.map((u) => {
-            const { url, height, width } = u.logo;
+          {content.list.map((user, userIndex) => {
+            const { url, height, width } = user.logo;
 
             return (
-              <ListItem key={u.name}>
+              <ListItem key={user.name}>
                 <UserLink
-                  href={u.socialUrl}
+                  css={{
+                    transitionDelay: inView
+                      ? "0s"
+                      : `calc(0.1s * ${userIndex})`,
+                    transitionDuration: `calc(0.2s * ${
+                      inView ? userIndex : 1
+                    })`,
+                  }}
+                  href={user.socialUrl}
                   rel="noopener noreferrer"
                   target="_blank"
+                  visible={inView}
                 >
-                  <Image alt={u.name} height={height} src={url} width={width} />
+                  <Image
+                    alt={user.name}
+                    height={height}
+                    src={url}
+                    width={width}
+                  />
                 </UserLink>
               </ListItem>
             );

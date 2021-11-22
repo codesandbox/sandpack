@@ -147,21 +147,12 @@
         }
       },
       {
-        "name": "CodeSandbox",
-        "socialUrl": "https://codesandbox.io",
+        "name": "CodeAmigo",
+        "socialUrl": "https://codeamigo.dev/",
         "logo": {
-          "url": "/assets/logos/CodeSandbox-minimal.svg",
-          "height": 37,
-          "width": 261
-        }
-      },
-      {
-        "name": "Amplify",
-        "socialUrl": "https://ui.docs.amplify.aws/",
-        "logo": {
-          "url": "/assets/logos/Amplify.svg",
-          "height": 40,
-          "width": 210
+          "url": "/assets/logos/CodeAmigo.svg",
+          "height": 47,
+          "width": 219
         }
       },
       {
@@ -174,12 +165,30 @@
         }
       },
       {
-        "name": "CodeAmigo",
-        "socialUrl": "https://codeamigo.dev/",
+        "name": "CodeSandbox",
+        "socialUrl": "https://codesandbox.io",
         "logo": {
-          "url": "/assets/logos/CodeAmigo.svg",
+          "url": "/assets/logos/CodeSandbox.svg",
+          "height": 40,
+          "width": 245
+        }
+      },
+      {
+        "name": "GitLab",
+        "socialUrl": "https://gitlab.com",
+        "logo": {
+          "url": "/assets/logos/GitLab.svg",
           "height": 47,
-          "width": 219
+          "width": 150
+        }
+      },
+      {
+        "name": "Amplify",
+        "socialUrl": "https://ui.docs.amplify.aws/",
+        "logo": {
+          "url": "/assets/logos/Amplify.svg",
+          "height": 40,
+          "width": 210
         }
       }
     ]
