@@ -1,4 +1,4 @@
-import { useSpring, useTransform, useViewportScroll } from "framer-motion";
+import { useTransform, useViewportScroll } from "framer-motion";
 import React, { useLayoutEffect, useRef, useState } from "react";
 
 // import config from "../../website.config.json";
@@ -13,8 +13,6 @@ import {
 import { ParallaxLogo } from "../common/ParallaxLogo";
 
 import { UsageExample } from "./UsageExample";
-
-const SPRING_OPTIONS = { stiffness: 200, damping: 20 };
 
 export const AdvancedUsage: React.FC = () => {
   // TODO: investigate why the app isn't able to find the existing
@@ -58,8 +56,6 @@ export const AdvancedUsage: React.FC = () => {
     [sectionTop - windowHeight / 2, sectionTop + windowHeight / 2],
     [20, -40]
   );
-  const leftY = useSpring(leftRange, SPRING_OPTIONS);
-  const rightY = useSpring(rightRange, SPRING_OPTIONS);
 
   useLayoutEffect(() => {
     const container = section.current;
@@ -83,7 +79,7 @@ export const AdvancedUsage: React.FC = () => {
             gap: "40px",
           }}
         >
-          <ParallaxLogo leftY={leftY} rightY={rightY} />
+          <ParallaxLogo leftRange={leftRange} rightRange={rightRange} />
           <SectionTitle dangerouslySetInnerHTML={{ __html: content.title }} />
         </SectionHeader>
         <List
