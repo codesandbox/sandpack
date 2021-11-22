@@ -12,11 +12,15 @@ const SandpackExampleContext = createContext<{
 
 export const SandpackExampleProvider: React.FC = ({ children }) => {
   const [options, setOptions] = useState({
-    showNavigator: true,
-    showLineNumbers: true,
-    showTabs: true,
-    closableTabs: true,
+    options: {
+      showNavigator: true,
+      showLineNumbers: true,
+      showTabs: true,
+      closableTabs: true,
+    },
   });
+
+  console.log(options);
 
   return (
     <SandpackExampleContext.Provider

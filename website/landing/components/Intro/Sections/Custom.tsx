@@ -25,20 +25,18 @@ import {
   FadeAnimation,
 } from "./common";
 
-const ORIGINAL_CODE = `const code = \`
-import ReactMarkdown from 'react-markdown' 
+const ORIGINAL_CODE = `<Sandpack
+  customSetup={{ 
+    dependencies: { 
+      "react-markdown": "latest" 
+    }, 
+    files: {
+      "/App.js": \`import ReactMarkdown from 'react-markdown' 
 
 export default function App() {
   return <ReactMarkdown># Hello, *world*!</ReactMarkdown>
-}
-\`
-
-<Sandpack
-  customSetup={{ 
-    dependencies: { "react-markdown": "latest" } 
-  }}
-  files={{
-    "/App.js": code,
+}\`
+    }
   }}
 />;
 `;
@@ -46,21 +44,17 @@ export default function App() {
 export const CustomExample: React.FC = () => {
   const { ref, inView } = useInView({ threshold: 0.5 });
   const { setOptions } = useSandpackExample();
-  const [custom, setCustom] = useState<string>(ORIGINAL_CODE);
   const codeEditorRef = useRef<CodeEditorRef>(null);
   const higherMobile = useBreakpoint("bp1");
 
   const { sandpack } = useSandpack();
   const { code } = useActiveCode();
 
-  useEffect(() => {
-    setOptions({ options: custom });
-  }, [custom]);
-
   useEffect(
     function componentOnView() {
-      const position = 43;
+      const position = 225;
       const cmInstance = codeEditorRef.current?.getCodemirror();
+
       if (higherMobile && inView && cmInstance && code.length > position) {
         cmInstance.focus();
         const newState = cmInstance.state.update({
@@ -82,23 +76,38 @@ export const CustomExample: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // TODO: pass code to the provider
-  useEffect(
-    function listener() {
-      // setCustom(code);
-    },
-    [code]
-  );
+  useEffect(() => {
+    if (inView) {
+      try {
+        const customSetup = code.match(/customSetup={{([\s\S]*?)}}/)?.[1];
+        if (!customSetup) return;
+
+        const fixString = `{${customSetup}}`
+          .replace(/(\w+:)|(\w+ :)/g, (matchedStr) => {
+            return '"' + matchedStr.substring(0, matchedStr.length - 1) + '":';
+          })
+          .replace(/`([\s\S]*?)`/gm, (matchedStr) => {
+            return `"${matchedStr.replace(/`/gm, "").replace(/\n/gm, "\\n")}"`;
+          });
+
+        const parse = JSON.parse(fixString);
+        setOptions({ customSetup: parse });
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      setOptions({ customSetup: {} });
+    }
+  }, [code, inView]);
 
   return (
     <FadeAnimation>
       <Wrapper ref={ref}>
         <Container>
-          {/* TODO: update */}
-          <Title>Configure your editor</Title>
+          <Title>Easily customise the project to run</Title>
           <Description>
-            The <code>options</code> prop allows you to toggle on/off different
-            features of the code editor.
+            Use the <code>customSetup</code> prop to add dependencies or change
+            the file structure.
           </Description>
 
           <Box
@@ -137,8 +146,7 @@ export const CustomExample: React.FC = () => {
             </SandpackThemeProvider>
           </Box>
 
-          {/* TODO: update */}
-          <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#visual-options">
+          <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-content#custom-setup">
             <span>See more</span>
           </SeeMoreLink>
         </Container>

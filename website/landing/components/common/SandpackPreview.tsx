@@ -32,11 +32,6 @@ export const SandpackPreview: React.FC<{ options?: SandpackProps }> = ({
             height: "448px",
             width: "996px",
           },
-
-          "@bp3": {
-            height: "664px",
-            width: "1328px",
-          },
         },
 
         ".custom-stack": {

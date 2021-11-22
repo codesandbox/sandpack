@@ -83,6 +83,8 @@ export const Title: React.FC = ({ children }) => {
         lineHeight: "1.2",
         textAlign: "center",
 
+        maxWidth: "400px",
+
         "@bp1": {
           fontSize: "36px",
         },
@@ -106,6 +108,7 @@ export const Description: React.FC = ({ children }) => {
         lineHeight: "1.4",
         letterSpacing: "-0.025em",
         textAlign: "center",
+        maxWidth: "400px",
 
         "@bp2": {
           fontSize: "18px",
