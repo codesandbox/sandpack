@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/codesandbox/sandpack/compare/v0.5.4...v0.6.0) (2021-11-22)
+
+
+### Features
+
+* landing - adds gitlab to users section ([#164](https://github.com/codesandbox/sandpack/issues/164)) ([fa885a1](https://github.com/codesandbox/sandpack/commit/fa885a110207cca5db26498bd69f89adc93fbcb4))
+
+
+
+
+
 ## [0.5.3](https://github.com/codesandbox/sandpack/compare/v0.5.2...v0.5.3) (2021-11-19)
 
 **Note:** Version bump only for package sandpack-landing
