@@ -20,8 +20,6 @@ export const SandpackExampleProvider: React.FC = ({ children }) => {
     },
   });
 
-  console.log(options);
-
   return (
     <SandpackExampleContext.Provider
       value={{

@@ -3,6 +3,7 @@ import { motion, useTransform, useViewportScroll } from "framer-motion";
 import { useLayoutEffect, useRef, useState } from "react";
 
 import { Box, List } from "../common";
+import { useBreakpoint } from "../common/useBreakpoint";
 
 import { SandpackExample } from "./SandpackExample";
 import { CustomExample } from "./Sections/Custom";
@@ -13,6 +14,7 @@ import { ThemeExample } from "./Sections/Theme";
 export const Examples: React.FC = () => {
   const sandpackSection = useRef(null);
   const { scrollY } = useViewportScroll();
+  const isLarge = useBreakpoint("2260");
 
   const [sandpackSectionTop, setSandpackSectionTop] = useState(0);
   const [sandpackSectionHeight, setSandpackSectionHeight] = useState(0);
@@ -35,7 +37,8 @@ export const Examples: React.FC = () => {
     sandpackSectionTop * 0.7,
     (sandpackSectionTop + sandpackSectionHeight) * 0.8,
   ];
-  const progressRangeX = ["0vw", "30vw"];
+  console.log(isLarge);
+  const progressRangeX = ["0vw", isLarge ? "0vw" : "30vw"];
   const x = useTransform(scrollY, scrollRangeX, progressRangeX);
 
   return (
