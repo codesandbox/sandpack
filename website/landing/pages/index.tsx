@@ -13,7 +13,7 @@ import { Users } from "../components/Users";
 import { styled } from "../stitches.config";
 import content from "../website.config.json";
 
-const DEFAULT_HOST = "";
+const DEFAULT_HOST = "https://sandpack.codesandbox.io";
 
 const Container = styled("section", {
   display: "flex",
@@ -32,11 +32,8 @@ const Main = styled("main", {
 interface HomeProps {
   host: string | undefined;
 }
-const Home: NextPage<HomeProps> = ({ host }) => {
+const Home: NextPage<HomeProps> = () => {
   const { global, meta } = content;
-  const HOST_URL = host
-    ? `${host.includes("localhost") ? "http" : "https"}://${host}`
-    : DEFAULT_HOST;
 
   return (
     <Container>
@@ -47,11 +44,13 @@ const Home: NextPage<HomeProps> = ({ host }) => {
 
         {/* Open Graph */}
         {meta.map(({ name, value }) => {
-          const content =
-            {
-              "og:url": HOST_URL,
-              "og:image": `${HOST_URL}/${value}`,
-            }[name] || value;
+          let content = value;
+
+          if (name === "og:url") {
+            content = `${DEFAULT_HOST}/${content}`;
+          } else if (name === "og:image") {
+            content = DEFAULT_HOST;
+          }
 
           return <meta key={name} content={content} name={name} />;
         })}
@@ -70,13 +69,6 @@ const Home: NextPage<HomeProps> = ({ host }) => {
       <Footer />
     </Container>
   );
-};
-
-Home.getInitialProps = async (context) => {
-  const { req } = context;
-  const host = req?.headers.host;
-
-  return { host };
 };
 
 export default Home;
