@@ -47,11 +47,12 @@ export const Examples: React.FC = () => {
 
   const scrollRangeX = [
     sandpackSectionTop * 0.7,
-    (sandpackSectionTop + sandpackSectionHeight) * 0.8,
+    sandpackSectionTop * 0.9,
+    (sandpackSectionTop + sandpackSectionHeight) * 0.9,
   ];
 
   // Max width that the left container can grow
-  const progressRangeX = ["0", isLarge ? "600px" : "35vw"];
+  const progressRangeX = ["0", "0", isLarge ? "600px" : "35vw"];
   const x = useTransform(scrollY, scrollRangeX, progressRangeX);
 
   return (
