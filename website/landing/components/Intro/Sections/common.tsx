@@ -11,7 +11,7 @@ import { Box } from "../../common";
 import { useBreakpoint } from "../../common/useBreakpoint";
 
 // eslint-disable-next-line react/display-name
-export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
+export const Row = forwardRef<unknown, { children: React.ReactNode }>(
   ({ children }, ref) => {
     return (
       <Box
@@ -45,9 +45,31 @@ export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
   }
 );
 
-export const SandpackContainerPlaceholder = styled("div", { width: "560px" });
+export const Content = styled("div", {
+  alignItems: "center",
+  display: "flex",
+  flexDirection: "column",
+  gap: "20px",
+  width: "100%",
+
+  "@bp1": {
+    gap: "20px",
+    width: "384px",
+  },
+
+  "@bp2": {
+    alignItems: "flex-start",
+    width: "30%",
+  },
+});
+
+export const SandpackContainerPlaceholder = styled("div", {
+  "@bp2": { width: "560px" },
+});
 
 export const SandpackContainerMobile = styled("div", {
+  width: "100%",
+
   "@bp2": {
     display: "none",
   },
@@ -94,7 +116,7 @@ export const ToolTip = styled(motion.div, {
 export const SnippetButton = styled("button", {
   background: "none",
   border: "none",
-  width: "100%",
+  maxWidth: "100%",
   padding: 0,
 
   ".sp-wrapper": {
@@ -164,8 +186,23 @@ export const FadeAnimation: React.FC = ({ children }) => {
   );
 
   return (
-    <motion.li ref={sectionRef} style={{ opacity: isDesktop ? opacity : 1 }}>
+    <motion.li
+      ref={sectionRef}
+      style={{ opacity: isDesktop ? opacity : 1, width: "100%" }}
+    >
       {children}
     </motion.li>
   );
 };
+
+export const CodeWrapper = styled("div", {
+  position: "relative",
+  width: "100%",
+
+  pre: { padding: 0 },
+
+  ".sp-code-editor": {
+    borderRadius: "16px",
+    padding: "0 15px",
+  },
+});

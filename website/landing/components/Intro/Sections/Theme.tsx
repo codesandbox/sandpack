@@ -6,7 +6,6 @@ import { useInView } from "react-intersection-observer";
 import {
   CodeBlock,
   SandpackPreview,
-  Card,
   CardTitle,
   CardDescription,
 } from "../../common";
@@ -14,7 +13,8 @@ import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
-  Wrapper,
+  Row,
+  Content,
   getRelativeCoordinates,
   ToolTip,
   SnippetButton,
@@ -70,8 +70,8 @@ export const ThemeExample: React.FC = () => {
 
   return (
     <FadeAnimation>
-      <Wrapper ref={ref}>
-        <Card>
+      <Row ref={ref}>
+        <Content>
           <CardTitle>Apply a theme</CardTitle>
           <CardDescription>
             Use the <code>theme</code> prop to set a predefined option made by
@@ -111,13 +111,14 @@ export const ThemeExample: React.FC = () => {
               </AnimatePresence>
             )}
           </div>
-        </Card>
+        </Content>
 
-        <SandpackContainerPlaceholder />
         <SandpackContainerMobile>
           <SandpackPreview options={{ theme }} />
         </SandpackContainerMobile>
-      </Wrapper>
+
+        <SandpackContainerPlaceholder />
+      </Row>
     </FadeAnimation>
   );
 };

@@ -8,12 +8,14 @@ import { LayoutExampleProvider } from "./Sections/LayoutContext";
 export const Intro: React.FC = () => {
   return (
     <SandpackExampleProvider>
-      <SectionWrapper as="section">
+      <SectionWrapper>
         <SectionContainer
           css={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            "@bp2": {
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            },
           }}
         >
           <Header />

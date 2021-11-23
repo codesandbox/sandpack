@@ -9,18 +9,14 @@ import {
 import { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import {
-  Box,
-  SandpackPreview,
-  Card,
-  CardTitle,
-  CardDescription,
-} from "../../common";
+import { SandpackPreview, CardTitle, CardDescription } from "../../common";
 import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
-  Wrapper,
+  Row,
+  Content,
+  CodeWrapper,
   RefreshButton,
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
@@ -92,27 +88,15 @@ export const CustomExample: React.FC = () => {
 
   return (
     <FadeAnimation>
-      <Wrapper ref={ref}>
-        <Card>
+      <Row ref={ref}>
+        <Content>
           <CardTitle>Easily customise the project to run</CardTitle>
           <CardDescription>
             Use the <code>customSetup</code> prop to add dependencies or change
             the file structure.
           </CardDescription>
 
-          <Box
-            css={{
-              position: "relative",
-              width: "100%",
-
-              pre: { padding: 0 },
-
-              ".sp-code-editor": {
-                borderRadius: "16px",
-                padding: "0 15px",
-              },
-            }}
-          >
+          <CodeWrapper>
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
@@ -136,17 +120,16 @@ export const CustomExample: React.FC = () => {
                 </svg>
               </RefreshButton>
             </SandpackThemeProvider>
-          </Box>
-        </Card>
-
-        <SandpackContainerPlaceholder />
+          </CodeWrapper>
+        </Content>
 
         <SandpackContainerMobile>
           <SandpackPreview
             options={{ customSetup: parseFromSandpackToJson(code) }}
           />
         </SandpackContainerMobile>
-      </Wrapper>
+        <SandpackContainerPlaceholder />
+      </Row>
     </FadeAnimation>
   );
 };

@@ -6,7 +6,6 @@ import { useInView } from "react-intersection-observer";
 import {
   CodeBlock,
   SandpackPreview,
-  Card,
   CardTitle,
   CardDescription,
 } from "../../common";
@@ -14,7 +13,8 @@ import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
-  Wrapper,
+  Row,
+  Content,
   getRelativeCoordinates,
   ToolTip,
   SnippetButton,
@@ -68,8 +68,8 @@ export const TemplateExample: React.FC = () => {
 
   return (
     <FadeAnimation>
-      <Wrapper ref={ref}>
-        <Card>
+      <Row ref={ref}>
+        <Content>
           <CardTitle>Get started in a few lines</CardTitle>
           <CardDescription>
             Set the <code>template</code> prop to get started with Sandpack in a
@@ -108,14 +108,14 @@ export const TemplateExample: React.FC = () => {
               </AnimatePresence>
             )}
           </div>
-        </Card>
-
-        <SandpackContainerPlaceholder />
+        </Content>
 
         <SandpackContainerMobile>
           <SandpackPreview options={{ template }} />
         </SandpackContainerMobile>
-      </Wrapper>
+
+        <SandpackContainerPlaceholder />
+      </Row>
     </FadeAnimation>
   );
 };

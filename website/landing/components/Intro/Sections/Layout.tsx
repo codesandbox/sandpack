@@ -12,11 +12,13 @@ import {
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { Box, Card, CardTitle, CardDescription } from "../../common";
+import { CardTitle, CardDescription } from "../../common";
 
 import { useLayoutExampleContext } from "./LayoutContext";
 import {
-  Wrapper,
+  Row,
+  Content,
+  CodeWrapper,
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
   FadeAnimation,
@@ -46,8 +48,8 @@ export const LayoutExample: React.FC = () => {
 
   return (
     <FadeAnimation>
-      <Wrapper ref={ref}>
-        <Card>
+      <Row ref={ref}>
+        <Content>
           <CardTitle>Build your own Sandpack</CardTitle>
           <CardDescription>
             If you want to fully customise the experience, you can build the UI
@@ -56,19 +58,15 @@ export const LayoutExample: React.FC = () => {
             needs.
           </CardDescription>
 
-          <Box
+          <CodeWrapper
             css={{
-              position: "relative",
-              width: "100%",
-
-              pre: { padding: 0 },
-
               ".sp-tabs": {
                 borderTopLeftRadius: "16px",
                 borderTopRightRadius: "16px",
               },
 
               ".sp-code-editor": {
+                borderRadius: 0,
                 borderBottomLeftRadius: "16px",
                 borderBottomRightRadius: "16px",
                 padding: "0 15px",
@@ -78,14 +76,12 @@ export const LayoutExample: React.FC = () => {
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor />
             </SandpackThemeProvider>
-          </Box>
-        </Card>
+          </CodeWrapper>
+        </Content>
 
         <SandpackContainerPlaceholder />
 
-        <SandpackContainerMobile
-          css={{ width: "100%", ".custom-layout": { height: "5g sta0vh" } }}
-        >
+        <SandpackContainerMobile css={{ ".custom-layout": { height: "50vh" } }}>
           <SandpackProvider
             customSetup={{
               files: layoutFiles,
@@ -108,7 +104,7 @@ export const LayoutExample: React.FC = () => {
             </ClasserProvider>
           </SandpackProvider>
         </SandpackContainerMobile>
-      </Wrapper>
+      </Row>
     </FadeAnimation>
   );
 };

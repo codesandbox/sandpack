@@ -9,18 +9,14 @@ import {
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import {
-  Box,
-  SandpackPreview,
-  Card,
-  CardTitle,
-  CardDescription,
-} from "../../common";
+import { SandpackPreview, CardTitle, CardDescription } from "../../common";
 import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
-  Wrapper,
+  CodeWrapper,
+  Row,
+  Content,
   RefreshButton,
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
@@ -99,27 +95,15 @@ export const EditorExample: React.FC = () => {
 
   return (
     <FadeAnimation>
-      <Wrapper ref={ref}>
-        <Card>
+      <Row ref={ref}>
+        <Content>
           <CardTitle>Configure your editor</CardTitle>
           <CardDescription>
             The <code>options</code> prop allows you to toggle on/off different
             features of the code editor.
           </CardDescription>
 
-          <Box
-            css={{
-              position: "relative",
-              width: "100%",
-
-              pre: { padding: 0 },
-
-              ".sp-code-editor": {
-                borderRadius: "16px",
-                padding: "0 15px",
-              },
-            }}
-          >
+          <CodeWrapper>
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
@@ -144,15 +128,15 @@ export const EditorExample: React.FC = () => {
                 </svg>
               </RefreshButton>
             </SandpackThemeProvider>
-          </Box>
-        </Card>
-
-        <SandpackContainerPlaceholder />
+          </CodeWrapper>
+        </Content>
 
         <SandpackContainerMobile>
           <SandpackPreview options={{ options: custom }} />
         </SandpackContainerMobile>
-      </Wrapper>
+
+        <SandpackContainerPlaceholder />
+      </Row>
     </FadeAnimation>
   );
 };

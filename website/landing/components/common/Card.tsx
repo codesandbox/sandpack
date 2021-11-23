@@ -4,7 +4,7 @@ export const Card = styled("div", {
   alignItems: "center",
   display: "flex",
   flexDirection: "column",
-  gap: "10px",
+  gap: "20px",
   width: "336px",
 
   "@bp1": {
@@ -46,9 +46,11 @@ export const CardTitle = styled("h4", {
   lineHeight: "1.2",
   letterSpacing: "-0.05em",
   margin: 0,
+  textAlign: "center",
 
   "@bp1": {
     fontSize: "36px",
+    textAlign: "left",
   },
 
   variants: {

@@ -15,8 +15,8 @@ export const SectionWrapper = styled("div", {
   color: "$$primaryTextColor",
   display: "flex",
   height: "100%",
-  justifyContent: "center",
   width: "100%",
+  justifyContent: "center",
 
   variants: {
     theme: {
@@ -32,7 +32,7 @@ export const SectionWrapper = styled("div", {
 });
 
 export const SectionContainer = styled("section", {
-  margin: "0 24px",
+  padding: "0 24px",
   maxWidth: "2560px",
   paddingBottom: "100px",
   width: "100%",

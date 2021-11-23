@@ -1,5 +1,6 @@
 import type { SandpackProps } from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
+
 import { styled } from "../../stitches.config";
 
 export const SandpackContainer = styled("div", {
@@ -10,10 +11,11 @@ export const SandpackContainer = styled("div", {
 
   ".custom-wrapper": {
     "--sp-border-radius": "10px",
+    width: "100%",
   },
 
   ".custom-layout": {
-    width: "342px",
+    width: "100%",
     height: "512px",
     border: 0,
 
