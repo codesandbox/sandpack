@@ -2,8 +2,6 @@ import type { SandpackInitMode } from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
 import { useEffect, useState } from "react";
 
-import { sandpackTheme } from "../../styles/sandpackTheme";
-
 import { Box } from "./Box";
 
 export const SandpackPreview: React.FC = () => {
@@ -62,7 +60,7 @@ export const SandpackPreview: React.FC = () => {
           },
         }}
         template="react"
-        theme={sandpackTheme}
+        theme="sandpack-dark"
       />
     </Box>
   );

@@ -19,8 +19,8 @@ Sandpack comes with some predefined themes:
 
 ```jsx
 <>
-  <Sandpack theme="codesandbox-dark" />
-  <Sandpack theme="codesandbox-light" />
+  <Sandpack theme="light" />
+  <Sandpack theme="dark" />
   <Sandpack theme="github-light" />
   <Sandpack theme="night-owl" />
   <Sandpack theme="aqua-blue" />
@@ -33,7 +33,7 @@ You can compare all the themes [in this sandbox](https://codesandbox.io/s/sandpa
 ### Custom Theme
 
 You can also pass a **partial** theme object that overrides properties in the
-**default** theme, which is `codesandbox-light`
+**default** theme, which is `light`
 
 ```jsx
 <Sandpack

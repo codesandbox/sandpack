@@ -120,8 +120,9 @@ export type SandpackPredefinedTemplate =
   | "vue3";
 
 export type SandpackPredefinedTheme =
-  | "codesandbox-light"
-  | "codesandbox-dark"
+  | "light"
+  | "dark"
+  | "sandpack-dark"
   | "night-owl"
   | "aqua-blue"
   | "github-light"

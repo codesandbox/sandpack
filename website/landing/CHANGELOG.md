@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/codesandbox/sandpack/compare/v0.5.4...v0.6.0) (2021-11-22)
+
+
+### Features
+
+* landing - adds gitlab to users section ([#164](https://github.com/codesandbox/sandpack/issues/164)) ([fa885a1](https://github.com/codesandbox/sandpack/commit/fa885a110207cca5db26498bd69f89adc93fbcb4))
+
+
+
+
+
+## [0.5.3](https://github.com/codesandbox/sandpack/compare/v0.5.2...v0.5.3) (2021-11-19)
+
+**Note:** Version bump only for package sandpack-landing
+
+
+
+
+
+## [0.5.2](https://github.com/codesandbox/sandpack/compare/v0.5.1...v0.5.2) (2021-11-19)
+
+**Note:** Version bump only for package sandpack-landing
+
+
+
+
+
+## [0.5.1](https://github.com/codesandbox/sandpack/compare/v0.5.0...v0.5.1) (2021-11-19)
+
+**Note:** Version bump only for package sandpack-landing
+
+
+
+
+
+# [0.5.0](https://github.com/codesandbox/sandpack/compare/v0.4.1...v0.5.0) (2021-11-19)
+
+
+### Features
+
+* **landing:** advanced usage animated examples ([#157](https://github.com/codesandbox/sandpack/issues/157)) ([fde82a5](https://github.com/codesandbox/sandpack/commit/fde82a5ee120f46cd7fa776a57ff35167e98f0f8))
+
+
+
+
+
 # [0.4.0](https://github.com/codesandbox/sandpack/compare/v0.3.10...v0.4.0) (2021-11-18)
 
 

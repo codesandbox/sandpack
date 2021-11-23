@@ -1,3 +1,15 @@
 .navbar {
   border-bottom: 1px solid var(--ifm-toc-border-color);
 }
+
+@media (min-width: 961px) {
+  .navbar {
+    width: var(--doc-sidebar-width);
+    border-right: 1px solid var(--ifm-toc-border-color);
+    border-bottom: 0;
+  }
+
+  .navbar__brand {
+    padding-left: 1rem;
+  }
+}

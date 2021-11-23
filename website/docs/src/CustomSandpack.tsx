@@ -5,14 +5,12 @@ import {
 } from "@codesandbox/sandpack-react";
 import React from "react";
 
-import customTheme from "./scss/sandpack-theme";
-
 const Sandpack: React.FC = (props) => (
-  <SandpackDefault theme={customTheme as SandpackTheme} {...props} />
+  <SandpackDefault theme="sandpack-dark" {...props} />
 );
 
 const SandpackLayout: React.FC = (props) => (
-  <SandpackLayoutDefault theme={customTheme as SandpackTheme} {...props} />
+  <SandpackLayoutDefault theme="sandpack-dark" {...props} />
 );
 
 export { Sandpack, SandpackLayout };
