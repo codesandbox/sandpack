@@ -3,6 +3,73 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/codesandbox/sandpack/compare/v0.6.0...v0.7.0) (2021-11-23)
+
+
+### Features
+
+* **landing:** add examples section ([#160](https://github.com/codesandbox/sandpack/issues/160)) ([5a0b279](https://github.com/codesandbox/sandpack/commit/5a0b2798dbcaead54f997a0c1445a98f4075a005))
+
+
+
+
+
+# [0.6.0](https://github.com/codesandbox/sandpack/compare/v0.5.4...v0.6.0) (2021-11-22)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [0.5.3](https://github.com/codesandbox/sandpack/compare/v0.5.2...v0.5.3) (2021-11-19)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+# [0.5.0](https://github.com/codesandbox/sandpack/compare/v0.4.1...v0.5.0) (2021-11-19)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+# [0.4.0](https://github.com/codesandbox/sandpack/compare/v0.3.10...v0.4.0) (2021-11-18)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [0.3.7](https://github.com/codesandbox/sandpack/compare/v0.3.6...v0.3.7) (2021-11-16)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [0.3.3](https://github.com/codesandbox/sandpack/compare/v0.3.2...v0.3.3) (2021-11-15)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [0.3.2](https://github.com/codesandbox/sandpack/compare/v0.3.1...v0.3.2) (2021-11-15)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
 ## [0.3.1](https://github.com/codesandbox/sandpack/compare/v0.3.0...v0.3.1) (2021-11-15)
 
 

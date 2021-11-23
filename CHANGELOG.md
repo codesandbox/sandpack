@@ -3,6 +3,168 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/codesandbox/sandpack/compare/v0.6.0...v0.7.0) (2021-11-23)
+
+
+### Features
+
+* landing - parallax logo in banner ([#165](https://github.com/codesandbox/sandpack/issues/165)) ([e2ad885](https://github.com/codesandbox/sandpack/commit/e2ad885eec09a0550bf2bbcc9229d109f6c2bbc8))
+* landing - update og content ([#163](https://github.com/codesandbox/sandpack/issues/163)) ([c0c92e6](https://github.com/codesandbox/sandpack/commit/c0c92e6f0c36a47647da129339ec3daaaf3a6378))
+* **landing:** add examples section ([#160](https://github.com/codesandbox/sandpack/issues/160)) ([5a0b279](https://github.com/codesandbox/sandpack/commit/5a0b2798dbcaead54f997a0c1445a98f4075a005))
+* update card description code snippets ([#166](https://github.com/codesandbox/sandpack/issues/166)) ([7d5706f](https://github.com/codesandbox/sandpack/commit/7d5706fb7610c2ff8e8e5146f84b9884e47221f8))
+
+
+
+
+
+# [0.6.0](https://github.com/codesandbox/sandpack/compare/v0.5.4...v0.6.0) (2021-11-22)
+
+
+### Features
+
+* landing - adds gitlab to users section ([#164](https://github.com/codesandbox/sandpack/issues/164)) ([fa885a1](https://github.com/codesandbox/sandpack/commit/fa885a110207cca5db26498bd69f89adc93fbcb4))
+
+
+
+
+
+## [0.5.4](https://github.com/codesandbox/sandpack/compare/v0.5.3...v0.5.4) (2021-11-19)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.5.3](https://github.com/codesandbox/sandpack/compare/v0.5.2...v0.5.3) (2021-11-19)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.5.2](https://github.com/codesandbox/sandpack/compare/v0.5.1...v0.5.2) (2021-11-19)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.5.1](https://github.com/codesandbox/sandpack/compare/v0.5.0...v0.5.1) (2021-11-19)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+# [0.5.0](https://github.com/codesandbox/sandpack/compare/v0.4.1...v0.5.0) (2021-11-19)
+
+
+### Features
+
+* **landing:** advanced usage animated examples ([#157](https://github.com/codesandbox/sandpack/issues/157)) ([fde82a5](https://github.com/codesandbox/sandpack/commit/fde82a5ee120f46cd7fa776a57ff35167e98f0f8))
+
+
+
+
+
+## [0.4.1](https://github.com/codesandbox/sandpack/compare/v0.4.0...v0.4.1) (2021-11-18)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+# [0.4.0](https://github.com/codesandbox/sandpack/compare/v0.3.10...v0.4.0) (2021-11-18)
+
+
+### Features
+
+* **landing:** misc tweaks ([#156](https://github.com/codesandbox/sandpack/issues/156)) ([37109ad](https://github.com/codesandbox/sandpack/commit/37109ad77881e39fd8f2fc777e9407861e888bdf))
+
+
+
+
+
+## [0.3.10](https://github.com/codesandbox/sandpack/compare/v0.3.9...v0.3.10) (2021-11-18)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.3.9](https://github.com/codesandbox/sandpack/compare/v0.3.8...v0.3.9) (2021-11-17)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.3.8](https://github.com/codesandbox/sandpack/compare/v0.3.7...v0.3.8) (2021-11-16)
+
+
+### Bug Fixes
+
+* **landing:** ui feedbacks ([#149](https://github.com/codesandbox/sandpack/issues/149)) ([49bfe6f](https://github.com/codesandbox/sandpack/commit/49bfe6f7bcbcdcf52a6b3a594b51fcef1fc482cd))
+
+
+
+
+
+## [0.3.7](https://github.com/codesandbox/sandpack/compare/v0.3.6...v0.3.7) (2021-11-16)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.3.6](https://github.com/codesandbox/sandpack/compare/v0.3.5...v0.3.6) (2021-11-16)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.3.5](https://github.com/codesandbox/sandpack/compare/v0.3.4...v0.3.5) (2021-11-15)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.3.4](https://github.com/codesandbox/sandpack/compare/v0.3.3...v0.3.4) (2021-11-15)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.3.3](https://github.com/codesandbox/sandpack/compare/v0.3.2...v0.3.3) (2021-11-15)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.3.2](https://github.com/codesandbox/sandpack/compare/v0.3.1...v0.3.2) (2021-11-15)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
 ## [0.3.1](https://github.com/codesandbox/sandpack/compare/v0.3.0...v0.3.1) (2021-11-15)
 
 

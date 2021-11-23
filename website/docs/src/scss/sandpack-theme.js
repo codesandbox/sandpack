@@ -4,7 +4,7 @@ const customTheme = {
     defaultText: "#5a5a5a",
     inactiveText: "#1a1a1a",
     activeBackground: "#272727",
-    defaultBackground: "#131313",
+    defaultBackground: "#141414",
     inputBackground: "#2e2e2e",
     accent: "#90e86f",
     errorBackground: "#dac1fb",

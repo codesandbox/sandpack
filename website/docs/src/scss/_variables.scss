@@ -92,3 +92,9 @@ html[data-theme="dark"] {
     --ifm-navbar-padding-horizontal: 1rem;
   }
 }
+
+@media (min-width: 961px) {
+  :root {
+    --ifm-navbar-height: 100px;
+  }
+}

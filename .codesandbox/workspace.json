@@ -4,6 +4,7 @@
     "type": "SIDEKICK",
     "items": [
       { "type": "PREVIEW", "port": "3000" },
+      { "type": "PREVIEW", "port": "3001" },
       { "type": "PREVIEW", "port": "6006" }
     ]
   }

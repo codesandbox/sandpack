@@ -1,0 +1,198 @@
+{
+  "global": {
+    "title": "Component toolkit for live running code editing experiences | Sandpack",
+    "description": "Sandpack is a component toolkit for creating your own live running code editing experience powered by CodeSandbox."
+  },
+  "meta": [
+    {
+      "name": "og:type",
+      "value": "website"
+    },
+    {
+      "name": "og:site_name",
+      "value": "Sandpack"
+    },
+    {
+      "name": "og:title",
+      "value": "Component toolkit for live running code editing experiences | Sandpack"
+    },
+    {
+      "name": "og:description",
+      "value": "Sandpack is a component toolkit for creating your own live running code editing experience powered by CodeSandbox."
+    },
+    {
+      "name": "og:image",
+      "value": "assets/sandpack_og.jpeg"
+    },
+    {
+      "name": "og:url",
+      "value": "replaced at runtime"
+    }
+  ],
+  "footer": {
+    "text": "powered by"
+  },
+  "commands": {
+    "import": "import { Sandpack } from \"@codesandbox/sandpack-react\";",
+    "install": "npm install @codesandbox/sandpack-react"
+  },
+  "resources": [
+    {
+      "name": "Docs",
+      "url": "https://sandpack.codesandbox.io/docs/"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/codesandbox/sandpack"
+    }
+  ],
+  "advancedUsage": {
+    "title": "Building blocks<br />of the Sandpack<br />ecosystem.",
+    "examples": [
+      {
+        "title": "Providers",
+        "description": "We export a <code>SandpackProvider</code> that manages the state and actions for sandpack and a <code>ThemeProvider</code> that handles the theme and style.",
+        "illustrationKey": "providers"
+      },
+      {
+        "title": "Components",
+        "description": "We also export the smaller parts that make up the <code>&lt;Sandpack /&gt;</code> component, so you can combine them with your custom components.",
+        "illustrationKey": "components"
+      },
+      {
+        "title": "Client",
+        "description": "The bundler is wrapped by a small package called <code>sandpack-client</code>, which is framework agnostic and allows you to tap into the bundler protocol.",
+        "illustrationKey": "client"
+      }
+    ]
+  },
+  "banner": {
+    "title": "Get started<br /> with Sandpack."
+  },
+  "community": {
+    "title": "Get involved in<br />our community.",
+    "list": [
+      {
+        "name": "Twitter",
+        "socialUrl": "https://twitter.com/codesandbox",
+        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "logoUrl": "/assets/logos/Twitter.svg"
+      },
+      {
+        "name": "Discord",
+        "socialUrl": "https://discord.com/invite/5BpufEP7MH",
+        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "logoUrl": "/assets/logos/Discord.svg"
+      },
+      {
+        "name": "GitHub",
+        "socialUrl": "https://github.com/codesandbox/sandpack",
+        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "logoUrl": "/assets/logos/GitHub.svg"
+      }
+    ]
+  },
+  "features": {
+    "title": "Live coding</br>environment</br><span class=\"highlight\">in minutes.</span>",
+    "highlights": [
+      {
+        "title": "Full editor experience",
+        "description": "Sandpack is using CodeMirror under the hood, giving you all the basic capabilities of a code editor and syntax highlight.",
+        "iconKey": "editor"
+      },
+      {
+        "title": "Advanced preview",
+        "description": "Sandpack embeds the browser bundler that powers codesandbox.io and takes advantage of the following features: hot module reloading API, friendly error overlay, powerful transpilation result caching, dependency resolver.",
+        "iconKey": "preview"
+      },
+      {
+        "title": "Export to CodeSandbox",
+        "description": "With Sandpack, you're always one click away from opening your code snippet in codesandbox",
+        "iconKey": "export"
+      }
+    ]
+  },
+  "intro": {
+    "title": "Live coding <span class=\"highlight\">in<br />the browser.</span>"
+  },
+  "showCase": {
+    "title": "Showcase",
+    "highlights": [
+      {
+        "title": "MDX",
+        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+      },
+      {
+        "title": "Sound Demo",
+        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+      },
+      {
+        "title": "Multiple Previews",
+        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+      },
+      {
+        "title": "Step by step code",
+        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+      }
+    ]
+  },
+  "users": {
+    "title": "Who's using Sandpack.",
+    "list": [
+      {
+        "name": "React",
+        "socialUrl": "https://beta.reactjs.org/",
+        "logo": {
+          "url": "/assets/logos/React.svg",
+          "height": 39,
+          "width": 147
+        }
+      },
+      {
+        "name": "CodeAmigo",
+        "socialUrl": "https://codeamigo.dev/",
+        "logo": {
+          "url": "/assets/logos/CodeAmigo.svg",
+          "height": 47,
+          "width": 219
+        }
+      },
+      {
+        "name": "CodeHike",
+        "socialUrl": "#",
+        "logo": {
+          "url": "/assets/logos/CodeHike.svg",
+          "height": 34,
+          "width": 242
+        }
+      },
+      {
+        "name": "CodeSandbox",
+        "socialUrl": "https://codesandbox.io",
+        "logo": {
+          "url": "/assets/logos/CodeSandbox.svg",
+          "height": 40,
+          "width": 245
+        }
+      },
+      {
+        "name": "GitLab",
+        "socialUrl": "https://gitlab.com",
+        "logo": {
+          "url": "/assets/logos/GitLab.svg",
+          "height": 47,
+          "width": 150
+        }
+      },
+      {
+        "name": "Amplify",
+        "socialUrl": "https://ui.docs.amplify.aws/",
+        "logo": {
+          "url": "/assets/logos/Amplify.svg",
+          "height": 40,
+          "width": 210
+        }
+      }
+    ]
+  }
+}

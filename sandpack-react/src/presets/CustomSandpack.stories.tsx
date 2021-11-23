@@ -18,7 +18,6 @@ import {
   useSandpackNavigation,
   SandpackStack,
 } from "../index";
-import { getThemeStyleSheet } from "../themes";
 
 export default {
   title: "presets/Custom Sandpack",
@@ -26,7 +25,7 @@ export default {
 
 export const UsingSandpackLayout: React.FC = () => (
   <SandpackProvider template="react">
-    <SandpackLayout theme="codesandbox-dark">
+    <SandpackLayout theme="dark">
       <SandpackStack>
         <SandpackTranspiledCode />
       </SandpackStack>
@@ -37,7 +36,7 @@ export const UsingSandpackLayout: React.FC = () => (
 
 export const UsingVisualElements: React.FC = () => (
   <SandpackProvider activePath="/App.js" template="react">
-    <SandpackThemeProvider theme="codesandbox-dark">
+    <SandpackThemeProvider theme="dark">
       <SandpackCodeEditor
         customStyle={{
           width: 500,

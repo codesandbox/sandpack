@@ -54,7 +54,7 @@ export const ReactCode: React.FC = () => (
 
 export const VueCode: React.FC = () => (
   <SandpackProvider template="vue">
-    <SandpackThemeProvider theme="codesandbox-dark">
+    <SandpackThemeProvider theme="dark">
       <SandpackCodeViewer />
     </SandpackThemeProvider>
   </SandpackProvider>

@@ -104,8 +104,9 @@ export type SandpackPredefinedTemplate =
   | "vue3";
 
 export type SandpackPredefinedTheme =
-  | "codesandbox-light"
-  | "codesandbox-dark"
+  | "light"
+  | "dark"
+  | "sandpack-dark"
   | "night-owl"
   | "aqua-blue"
   | "github-light"
@@ -171,6 +172,9 @@ export type SandpackThemeProp =
   | SandpackPartialTheme
   | "auto";
 
+/**
+ * @hidden
+ */
 export type DeepPartial<Type> = {
   [Property in keyof Type]?: DeepPartial<Type[Property]>;
 };

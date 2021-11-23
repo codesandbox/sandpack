@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-react",
-  "version": "0.3.1",
+  "version": "0.7.0",
   "description": "",
   "keywords": [],
   "repository": {
@@ -22,7 +22,8 @@
     "build:css": "postcss src/styles/index.css -o dist/index.css -u autoprefixer -u cssnano",
     "start": "tsc -p tsconfig.esm.json --watch",
     "storybook": "start-storybook -p 6006 --no-dll",
-    "build-storybook": "build-storybook --no-dll"
+    "build-storybook": "build-storybook --no-dll",
+    "typecheck": "tsc"
   },
   "files": [
     "dist",
@@ -44,7 +45,7 @@
     "@codemirror/matchbrackets": "^0.19.3",
     "@codemirror/state": "^0.19.5",
     "@codemirror/view": "^0.19.16",
-    "@codesandbox/sandpack-client": "^0.3.0",
+    "@codesandbox/sandpack-client": "^0.7.0",
     "codesandbox-import-util-types": "^2.2.3",
     "codesandbox-import-utils": "^2.2.3"
   },

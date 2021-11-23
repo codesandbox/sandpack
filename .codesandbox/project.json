@@ -7,6 +7,10 @@
     "3000": {
       "name": "Docs",
       "command": "yarn dev:docs"
+    },
+    "3001": {
+      "name": "Landing page",
+      "command": "yarn dev:landing"
     }
   },
   "tasks": {

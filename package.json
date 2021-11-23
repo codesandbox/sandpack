@@ -6,6 +6,7 @@
     "sandpack-client",
     "sandpack-react",
     "website/docs",
+    "website/landing",
     "plugins/*"
   ],
   "nohoist": [
@@ -20,7 +21,8 @@
     "prepare": "husky install",
     "clean": "yarn workspaces run clean",
     "dev:docs": "yarn workspace sandpack-docs start",
-    "dev:react": "yarn workspace @codesandbox/sandpack-react storybook"
+    "dev:react": "yarn workspace @codesandbox/sandpack-react storybook",
+    "dev:landing": "yarn workspace sandpack-landing dev -p 3001"
   },
   "repository": {
     "type": "git",
