@@ -52,7 +52,7 @@ export const TemplateExample: React.FC = () => {
       return;
     }
 
-    if (inView) {git c
+    if (inView) {
       setTemplate(frameworkOptions[0]);
     } else {
       setTemplate(frameworkOptions[0]);
