@@ -14,10 +14,10 @@ import { useBreakpoint } from "../common/useBreakpoint";
 import { SandpackExample } from "./SandpackExample";
 import { CustomExample } from "./Sections/Custom";
 import { EditorExample } from "./Sections/Editor";
-import { TemplateExample } from "./Sections/Template";
-import { ThemeExample } from "./Sections/Theme";
 import { LayoutExample } from "./Sections/Layout";
 import { useLayoutExampleContext } from "./Sections/LayoutContext";
+import { TemplateExample } from "./Sections/Template";
+import { ThemeExample } from "./Sections/Theme";
 
 export const Examples: React.FC = () => {
   const { layoutFiles, visibility } = useLayoutExampleContext();
@@ -73,8 +73,8 @@ export const Examples: React.FC = () => {
           }}
         >
           <motion.div
-            initial={{ opacity: 0 }}
             animate={{ opacity: visibility ? 0 : 1 }}
+            initial={{ opacity: 0 }}
             style={{ position: "relative", zIndex: 1 }}
           >
             <SandpackExample />
@@ -115,15 +115,15 @@ export const Examples: React.FC = () => {
             }}
           >
             <motion.div
-              initial={{ opacity: 0 }}
               animate={{ opacity: visibility ? 1 : 0 }}
+              initial={{ opacity: 0 }}
             >
               <SandpackProvider
-                template="react"
                 customSetup={{
                   files: layoutFiles,
                   dependencies: { "@codesandbox/sandpack-react": "latest" },
                 }}
+                template="react"
               >
                 <ClasserProvider
                   classes={{

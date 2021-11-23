@@ -1,18 +1,24 @@
 import { createContext, useContext, useState } from "react";
 
-const LayoutContext = createContext<{
+interface Context {
   layoutFiles: Record<string, string>;
   setLayoutFiles: (filename: string, code: string) => void;
   visibility: boolean;
   setVisibility: (value: boolean) => void;
-}>({
+}
+
+const LayoutContext = createContext<Context>({
   layoutFiles: {},
-  setLayoutFiles: () => {},
+  setLayoutFiles: () => {
+    return;
+  },
   visibility: false,
-  setVisibility: () => {},
+  setVisibility: () => {
+    return;
+  },
 });
 
-export const useLayoutExampleContext = () => useContext(LayoutContext);
+export const useLayoutExampleContext = (): Context => useContext(LayoutContext);
 
 const ORIGINAL_CODE = {
   "/App.js": `import {

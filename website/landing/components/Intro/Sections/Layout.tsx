@@ -14,6 +14,7 @@ import { useInView } from "react-intersection-observer";
 
 import { Box } from "../../common";
 
+import { useLayoutExampleContext } from "./LayoutContext";
 import {
   Wrapper,
   Title,
@@ -24,7 +25,6 @@ import {
   SandpackContainerMobile,
   FadeAnimation,
 } from "./common";
-import { useLayoutExampleContext } from "./LayoutContext";
 
 export const LayoutExample: React.FC = () => {
   const { ref, inView } = useInView({ threshold: 0.5 });
@@ -92,11 +92,11 @@ export const LayoutExample: React.FC = () => {
           css={{ width: "100%", ".custom-layout": { height: "5g sta0vh" } }}
         >
           <SandpackProvider
-            template="react"
             customSetup={{
               files: layoutFiles,
               dependencies: { "@codesandbox/sandpack-react": "latest" },
             }}
+            template="react"
           >
             <ClasserProvider
               classes={{

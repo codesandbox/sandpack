@@ -2,11 +2,15 @@ import { createContext, useContext, useState } from "react";
 
 import { SandpackPreview } from "../common";
 
-const SandpackExampleContext = createContext<{
-  setOptions: (opts: Record<string, any>) => void;
-  options: Record<string, any>;
-}>({
-  setOptions: () => {},
+interface Context {
+  setOptions: (opts: Record<string, unknown>) => void;
+  options: Record<string, unknown>;
+}
+
+const SandpackExampleContext = createContext<Context>({
+  setOptions: () => {
+    return;
+  },
   options: {},
 });
 
@@ -33,7 +37,8 @@ export const SandpackExampleProvider: React.FC = ({ children }) => {
   );
 };
 
-export const useSandpackExample = () => useContext(SandpackExampleContext);
+export const useSandpackExample = (): Context =>
+  useContext(SandpackExampleContext);
 
 export const SandpackExample: React.FC = () => {
   const { options } = useSandpackExample();

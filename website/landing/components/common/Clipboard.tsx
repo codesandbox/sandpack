@@ -1,8 +1,9 @@
+import { useCallback, useEffect, useState } from "react";
+
+import { styled } from "../../stitches.config";
 import content from "../../website.config.json";
 
 import { Box, Button, Text } from ".";
-import { styled } from "../../stitches.config";
-import { useCallback, useEffect, useState } from "react";
 
 const command = content.commands.install;
 
@@ -75,7 +76,7 @@ export const Clipboard: React.FC = () => {
             },
           }}
         >
-          <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none">
+          <svg fill="none" height="100%" viewBox="0 0 24 24" width="100%">
             <path
               d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"
               fill="currentColor"

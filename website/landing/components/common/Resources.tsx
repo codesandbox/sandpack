@@ -1,7 +1,7 @@
+import { styled } from "../../stitches.config";
 import content from "../../website.config.json";
 
 import { List, Text } from ".";
-import { styled } from "../../stitches.config";
 
 const ResourceLink = styled("a", {
   color: "inherit",

@@ -56,8 +56,8 @@ export const SandpackCodeEditor = React.forwardRef<
 
         <div className={c("code-editor")}>
           <CodeMirror
-            ref={ref}
             key={activePath}
+            ref={ref}
             code={code}
             editorState={editorState}
             filePath={activePath}
