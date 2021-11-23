@@ -30,7 +30,7 @@ export default function App() {
   ${
       nestedProps
           ? nestedProps
-          : `// You can change these examples!
+          : `   // You can change these examples!
     // Try uncommenting any of these lines
     // theme="codesandbox-dark"
     // template="react"`
