@@ -10,7 +10,7 @@ import { styled } from "../../../stitches.config";
 import { Box, Text } from "../../common";
 import { useBreakpoint } from "../../common/useBreakpoint";
 
-export const THRESHOLD_VIEW = 0.7;
+export const THRESHOLD_VIEW = 0.5;
 
 // eslint-disable-next-line react/display-name
 export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
