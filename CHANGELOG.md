@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/codesandbox/sandpack/compare/v0.6.0...v0.7.0) (2021-11-23)
+
+
+### Features
+
+* landing - parallax logo in banner ([#165](https://github.com/codesandbox/sandpack/issues/165)) ([e2ad885](https://github.com/codesandbox/sandpack/commit/e2ad885eec09a0550bf2bbcc9229d109f6c2bbc8))
+* landing - update og content ([#163](https://github.com/codesandbox/sandpack/issues/163)) ([c0c92e6](https://github.com/codesandbox/sandpack/commit/c0c92e6f0c36a47647da129339ec3daaaf3a6378))
+* **landing:** add examples section ([#160](https://github.com/codesandbox/sandpack/issues/160)) ([5a0b279](https://github.com/codesandbox/sandpack/commit/5a0b2798dbcaead54f997a0c1445a98f4075a005))
+* update card description code snippets ([#166](https://github.com/codesandbox/sandpack/issues/166)) ([7d5706f](https://github.com/codesandbox/sandpack/commit/7d5706fb7610c2ff8e8e5146f84b9884e47221f8))
+
+
+
+
+
 # [0.6.0](https://github.com/codesandbox/sandpack/compare/v0.5.4...v0.6.0) (2021-11-22)
 
 

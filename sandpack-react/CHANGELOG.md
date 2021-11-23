@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/codesandbox/sandpack/compare/v0.6.0...v0.7.0) (2021-11-23)
+
+
+### Features
+
+* **landing:** add examples section ([#160](https://github.com/codesandbox/sandpack/issues/160)) ([5a0b279](https://github.com/codesandbox/sandpack/commit/5a0b2798dbcaead54f997a0c1445a98f4075a005))
+
+
+
+
+
 # [0.6.0](https://github.com/codesandbox/sandpack/compare/v0.5.4...v0.6.0) (2021-11-22)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
