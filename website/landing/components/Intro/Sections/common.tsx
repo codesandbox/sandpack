@@ -168,6 +168,7 @@ export const ToolTip = styled(motion.div, {
   lineHeight: "inherit",
   letterSpacing: "inherit",
   padding: "4px 12px",
+  display: "inline-block",
 });
 
 export const SnippetButton = styled("button", {

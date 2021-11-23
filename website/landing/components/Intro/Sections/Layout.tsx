@@ -3,6 +3,10 @@ import {
   SandpackCodeEditor,
   SandpackThemeProvider,
   useActiveCode,
+  SandpackProvider,
+  ClasserProvider,
+  SandpackPreview,
+  SandpackLayout,
   useSandpack,
 } from "@codesandbox/sandpack-react";
 import { useEffect } from "react";
@@ -84,8 +88,31 @@ export const LayoutExample: React.FC = () => {
         </Container>
         <SandpackContainerPlaceholder />
 
-        {/* TODO: pass props */}
-        <SandpackContainerMobile></SandpackContainerMobile>
+        <SandpackContainerMobile
+          css={{ width: "100%", ".custom-layout": { height: "5g sta0vh" } }}
+        >
+          <SandpackProvider
+            template="react"
+            customSetup={{
+              files: layoutFiles,
+              dependencies: { "@codesandbox/sandpack-react": "latest" },
+            }}
+          >
+            <ClasserProvider
+              classes={{
+                "sp-layout": "custom-layout",
+                "sp-stack": "custom-stack",
+                "sp-wrapper": "custom-wrapper",
+              }}
+            >
+              <SandpackThemeProvider>
+                <SandpackLayout>
+                  <SandpackPreview />
+                </SandpackLayout>
+              </SandpackThemeProvider>
+            </ClasserProvider>
+          </SandpackProvider>
+        </SandpackContainerMobile>
       </Wrapper>
     </FadeAnimation>
   );
