@@ -82,7 +82,7 @@ export const CardDescription = styled("p", {
 
     code: {
       display: "inline-flex",
-      alignitems: "center",
+      alignItems: "center",
       justifyContent: "center",
       padding: "2px 8px",
       borderRadius: "6px",
@@ -92,6 +92,13 @@ export const CardDescription = styled("p", {
       letterSpacing: "-0.025em",
       background: "$$codeBlockBackground",
       color: "$$codeBlockForeground",
+      transition: "all .2s ease",
+      cursor: "pointer",
+
+      "&:hover": {
+        background: "$primary",
+        color: "$darkBackground",
+      },
     },
   },
 

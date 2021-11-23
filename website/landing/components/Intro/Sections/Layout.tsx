@@ -59,6 +59,8 @@ export const LayoutExample: React.FC = () => {
           <Box
             css={{
               position: "relative",
+              width: "100%",
+
               pre: { padding: 0 },
 
               ".sp-tabs": {

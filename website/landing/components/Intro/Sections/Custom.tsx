@@ -103,6 +103,8 @@ export const CustomExample: React.FC = () => {
           <Box
             css={{
               position: "relative",
+              width: "100%",
+
               pre: { padding: 0 },
 
               ".sp-code-editor": {

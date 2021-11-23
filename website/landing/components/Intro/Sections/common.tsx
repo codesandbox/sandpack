@@ -94,6 +94,8 @@ export const ToolTip = styled(motion.div, {
 export const SnippetButton = styled("button", {
   background: "none",
   border: "none",
+  width: "100%",
+  padding: 0,
 
   ".sp-wrapper": {
     cursor: "pointer",
