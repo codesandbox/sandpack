@@ -81,11 +81,17 @@ export const CardDescription = styled("p", {
     textAlign: "start",
 
     code: {
-      alignItems: "center",
-      background: "$primary",
-      borderRadius: "145px",
       display: "inline-flex",
-      padding: "2px 14px",
+      alignitems: "center",
+      justifyContent: "center",
+      padding: "2px 8px",
+      background: "rgba(33, 33, 33, 0.15)",
+      borderRadius: "6px",
+      fontFamily: "$mono",
+      fontSize: "16px",
+      lineHeight: 1.4,
+      letterSpacing: "-0.025em",
+      color: "$lightTextSecondary",
     },
   },
 
