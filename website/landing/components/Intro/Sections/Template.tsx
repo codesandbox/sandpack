@@ -47,13 +47,13 @@ export const TemplateExample: React.FC = () => {
 
   useEffect(() => {
     if (!higherMobile) {
-      setTemplate(frameworkOptions[2]);
+      setTemplate(frameworkOptions[0]);
 
       return;
     }
 
-    if (inView) {
-      setTemplate(frameworkOptions[2]);
+    if (inView) {git c
+      setTemplate(frameworkOptions[0]);
     } else {
       setTemplate(frameworkOptions[0]);
     }
