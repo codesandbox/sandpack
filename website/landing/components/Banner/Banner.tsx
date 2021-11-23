@@ -1,54 +1,70 @@
+import { useTransform, useViewportScroll } from "framer-motion";
+import { useLayoutEffect, useRef, useState } from "react";
+
 import content from "../../website.config.json";
-import { Box, Resources, SandpackLogo, Text } from "../common";
+import {
+  Resources,
+  SectionContainer,
+  SectionTitle,
+  SectionWrapper,
+} from "../common";
 import { Clipboard } from "../common";
+import { ParallaxLogo } from "../common/ParallaxLogo";
 
 export const Banner: React.FC = () => {
   const { banner } = content;
+
+  const section = useRef<HTMLDivElement>(null);
+  const [sectionTop, setSectionTop] = useState(0);
+  const [sectionHeight, setSectionHeight] = useState(0);
+
+  const { scrollY } = useViewportScroll();
+
+  const leftRange = useTransform(
+    scrollY,
+    [sectionTop - sectionHeight / 2, sectionTop + sectionHeight / 2],
+    [-20, 40]
+  );
+  const rightRange = useTransform(
+    scrollY,
+    [sectionTop - sectionHeight / 2, sectionTop + sectionHeight / 2],
+    [20, -40]
+  );
+
+  useLayoutEffect(() => {
+    const container = section.current;
+    if (!container || !window) return;
+
+    const onResize = () => {
+      setSectionTop(container.offsetTop);
+      setSectionHeight(container.offsetHeight);
+    };
+
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [section]);
+
   return (
-    <Box
-      as="section"
-      css={{
-        alignItems: "center",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        gap: "48px",
-        padding: "100px 16px 0",
-      }}
-    >
-      <Box
+    <SectionWrapper ref={section}>
+      <SectionContainer
         css={{
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
-          gap: "40px",
+          gap: "50px",
+          overflow: "visible",
+
+          "@bp3": {
+            gap: "100px",
+          },
         }}
       >
-        <Box css={{ width: "60px", "@bp1": { width: "100px" } }}>
-          <SandpackLogo theme="light" />
-        </Box>
-        <Text
-          as="h2"
-          css={{
-            fontWeight: "$semiBold",
-            fontSize: "36px",
-            lineHeight: "100%",
-            textAlign: "center",
-            letterSpacing: "-0.05em",
-
-            "@bp1": {
-              fontSize: "72px",
-            },
-
-            "@bp2": {
-              fontSize: "96px",
-            },
-          }}
-          dangerouslySetInnerHTML={{ __html: banner.title }}
-        />
-      </Box>
-      <Clipboard />
-      <Resources />
-    </Box>
+        <ParallaxLogo leftRange={leftRange} rightRange={rightRange} />
+        <SectionTitle dangerouslySetInnerHTML={{ __html: banner.title }} />
+        <Clipboard />
+        <Resources />
+      </SectionContainer>
+    </SectionWrapper>
   );
 };
