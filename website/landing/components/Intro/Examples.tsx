@@ -50,7 +50,8 @@ export const Examples: React.FC = () => {
     (sandpackSectionTop + sandpackSectionHeight) * 0.8,
   ];
 
-  const progressRangeX = ["0vw", isLarge ? "0vw" : "30vw"];
+  // Max width that the left container can grow
+  const progressRangeX = ["0", isLarge ? "600px" : "35vw"];
   const x = useTransform(scrollY, scrollRangeX, progressRangeX);
 
   return (
