@@ -22,7 +22,7 @@ import { ThemeExample } from "./Sections/Theme";
 export const Examples: React.FC = () => {
   const { layoutFiles, visibility } = useLayoutExampleContext();
 
-  const sandpackSection = useRef(null);
+  const sandpackSection = useRef<HTMLDivElement>(null);
   const { scrollY } = useViewportScroll();
   const isLarge = useBreakpoint("2260");
 
@@ -33,6 +33,8 @@ export const Examples: React.FC = () => {
     if (!sandpackSection.current) return;
 
     const onResize = () => {
+      if (!sandpackSection.current) return;
+
       setSandpackSectionTop(sandpackSection.current?.offsetTop);
       setSandpackSectionHeight(sandpackSection.current?.offsetHeight);
     };
