@@ -208,6 +208,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           "aria-describedby",
           `exit-instructions-${ariaId.current}`
         );
+        view.contentDOM.setAttribute("data-gramm", "false");
       }
 
       cmView.current = view;
