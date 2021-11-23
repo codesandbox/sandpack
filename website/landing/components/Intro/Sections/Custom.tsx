@@ -79,19 +79,7 @@ export const CustomExample: React.FC = () => {
   useEffect(() => {
     if (inView) {
       try {
-        const customSetup = code.match(/customSetup={{([\s\S]*?)}}/)?.[1];
-        if (!customSetup) return;
-
-        const fixString = `{${customSetup}}`
-          .replace(/(\w+:)|(\w+ :)/g, (matchedStr) => {
-            return '"' + matchedStr.substring(0, matchedStr.length - 1) + '":';
-          })
-          .replace(/`([\s\S]*?)`/gm, (matchedStr) => {
-            return `"${matchedStr.replace(/`/gm, "").replace(/\n/gm, "\\n")}"`;
-          });
-
-        const parse = JSON.parse(fixString);
-        setOptions({ customSetup: parse });
+        setOptions({ customSetup: parseFromSandpackToJson(code) });
       } catch (err) {
         console.error(err);
       }
@@ -153,11 +141,27 @@ export const CustomExample: React.FC = () => {
 
         <SandpackContainerPlaceholder />
 
-        {/* TODO: pass props */}
         <SandpackContainerMobile>
-          <SandpackPreview />
+          <SandpackPreview
+            options={{ customSetup: parseFromSandpackToJson(code) }}
+          />
         </SandpackContainerMobile>
       </Wrapper>
     </FadeAnimation>
   );
+};
+
+const parseFromSandpackToJson = (code: string) => {
+  const customSetup = code.match(/customSetup={{([\s\S]*?)}}/)?.[1];
+  if (!customSetup) return;
+
+  const fixString = `{${customSetup}}`
+    .replace(/(\w+:)|(\w+ :)/g, (matchedStr) => {
+      return '"' + matchedStr.substring(0, matchedStr.length - 1) + '":';
+    })
+    .replace(/`([\s\S]*?)`/gm, (matchedStr) => {
+      return `"${matchedStr.replace(/`/gm, "").replace(/\n/gm, "\\n")}"`;
+    });
+
+  return JSON.parse(fixString);
 };

@@ -3,6 +3,7 @@ import { Box } from "../common";
 import { Examples } from "./Examples";
 import { Header } from "./Header";
 import { SandpackExampleProvider } from "./SandpackExample";
+import { LayoutExampleProvider } from "./Sections/LayoutContext";
 
 export const Intro: React.FC = () => {
   return (
@@ -18,7 +19,9 @@ export const Intro: React.FC = () => {
         }}
       >
         <Header />
-        <Examples />
+        <LayoutExampleProvider>
+          <Examples />
+        </LayoutExampleProvider>
       </Box>
     </SandpackExampleProvider>
   );

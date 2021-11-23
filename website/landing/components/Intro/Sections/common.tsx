@@ -8,6 +8,7 @@ import { forwardRef } from "react";
 
 import { styled } from "../../../stitches.config";
 import { Box, Text } from "../../common";
+import { useBreakpoint } from "../../common/useBreakpoint";
 
 // eslint-disable-next-line react/display-name
 export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
@@ -83,7 +84,7 @@ export const Title: React.FC = ({ children }) => {
         lineHeight: "1.2",
         textAlign: "center",
 
-        maxWidth: "400px",
+        maxWidth: "440px",
 
         "@bp1": {
           fontSize: "36px",
@@ -108,7 +109,7 @@ export const Description: React.FC = ({ children }) => {
         lineHeight: "1.4",
         letterSpacing: "-0.025em",
         textAlign: "center",
-        maxWidth: "400px",
+        maxWidth: "440px",
 
         "@bp2": {
           fontSize: "18px",
@@ -167,15 +168,6 @@ export const ToolTip = styled(motion.div, {
   lineHeight: "inherit",
   letterSpacing: "inherit",
   padding: "4px 12px",
-
-  variants: {
-    onlyDesktop: {
-      true: {
-        display: "none",
-        "@bp2": { display: "inline-block" },
-      },
-    },
-  },
 });
 
 export const SnippetButton = styled("button", {
@@ -220,6 +212,8 @@ export const FadeAnimation: React.FC = ({ children }) => {
   const [sectionTop, setSectionTop] = useState(0);
   const [sectionHeight, setSectionHeight] = useState(0);
 
+  const isDesktop = useBreakpoint("bp2");
+
   useLayoutEffect(() => {
     const sectionEl = sectionRef.current;
     if (!sectionEl) return;
@@ -247,7 +241,7 @@ export const FadeAnimation: React.FC = ({ children }) => {
   );
 
   return (
-    <motion.div ref={sectionRef} style={{ opacity }}>
+    <motion.div ref={sectionRef} style={{ opacity: isDesktop ? opacity : 1 }}>
       {children}
     </motion.div>
   );

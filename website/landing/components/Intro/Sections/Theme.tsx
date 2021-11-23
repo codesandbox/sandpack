@@ -89,7 +89,7 @@ export const ThemeExample: React.FC = () => {
           </SnippetButton>
 
           <div style={{ height: 0, marginTop: "-24px" }}>
-            {toolTipVisibility && (
+            {toolTipVisibility && higherMobile && (
               <AnimatePresence>
                 <ToolTip
                   animate={{
@@ -103,7 +103,6 @@ export const ThemeExample: React.FC = () => {
                     x: mousePosition.x,
                     y: mousePosition.y,
                   }}
-                  onlyDesktop
                 >
                   click to change
                 </ToolTip>
