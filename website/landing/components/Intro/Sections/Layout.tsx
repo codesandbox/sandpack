@@ -12,15 +12,11 @@ import {
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { Box } from "../../common";
+import { Box, Card, CardTitle, CardDescription } from "../../common";
 
 import { useLayoutExampleContext } from "./LayoutContext";
 import {
   Wrapper,
-  Title,
-  Description,
-  Container,
-  SeeMoreLink,
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
   FadeAnimation,
@@ -51,14 +47,14 @@ export const LayoutExample: React.FC = () => {
   return (
     <FadeAnimation>
       <Wrapper ref={ref}>
-        <Container>
-          <Title>Build your own Sandpack</Title>
-          <Description>
+        <Card>
+          <CardTitle>Build your own Sandpack</CardTitle>
+          <CardDescription>
             If you want to fully customise the experience, you can build the UI
             yourself. The library exports a set of composable components and
             hooks that allow you to tailor the editing experience to your own
             needs.
-          </Description>
+          </CardDescription>
 
           <Box
             css={{
@@ -81,11 +77,8 @@ export const LayoutExample: React.FC = () => {
               <SandpackCodeEditor />
             </SandpackThemeProvider>
           </Box>
+        </Card>
 
-          <SeeMoreLink href="https://sandpack.codesandbox.io/docs/advanced-usage/components#layout">
-            <span>See more</span>
-          </SeeMoreLink>
-        </Container>
         <SandpackContainerPlaceholder />
 
         <SandpackContainerMobile

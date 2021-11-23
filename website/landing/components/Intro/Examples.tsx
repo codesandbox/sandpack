@@ -8,7 +8,7 @@ import {
 import { motion, useTransform, useViewportScroll } from "framer-motion";
 import { useLayoutEffect, useRef, useState } from "react";
 
-import { Box, List } from "../common";
+import { Box, List, SandpackContainer } from "../common";
 import { useBreakpoint } from "../common/useBreakpoint";
 
 import { SandpackExample } from "./SandpackExample";
@@ -82,40 +82,7 @@ export const Examples: React.FC = () => {
             <SandpackExample />
           </motion.div>
 
-          <Box
-            css={{
-              position: "absolute",
-              top: 0,
-              zIndex: visibility ? 2 : 0,
-
-              ".custom-wrapper": {
-                "--sp-border-radius": "10px",
-              },
-
-              ".custom-layout": {
-                width: "342px",
-                height: "512px",
-                border: 0,
-
-                "@bp1": {
-                  width: "384px",
-                  height: "608px",
-                },
-
-                "@bp2": {
-                  height: "448px",
-                  width: "996px",
-                },
-              },
-
-              ".custom-stack": {
-                "@bp2": {
-                  height: "100% !important",
-                  width: "100% !important",
-                },
-              },
-            }}
-          >
+          <SandpackContainer css={{ position: "absolute", top: "0" }}>
             <motion.div
               animate={{ opacity: visibility ? 1 : 0 }}
               initial={{ opacity: 0 }}
@@ -142,17 +109,28 @@ export const Examples: React.FC = () => {
                 </ClasserProvider>
               </SandpackProvider>
             </motion.div>
-          </Box>
+          </SandpackContainer>
         </Box>
       </motion.div>
 
       <List
         css={{
           display: "flex",
-          flexDirection: "column",
-          gap: "148px",
+          flexWrap: "wrap",
+          gap: "100px",
+          width: "100%",
 
-          "@bp2": { gap: "0" },
+          "@bp1": {
+            gap: "200px",
+          },
+
+          "@bp2": {
+            alignItems: "center",
+            flexDirection: "column",
+            gap: "0",
+            scrollSnapType: "y mandatory",
+            width: "initial",
+          },
         }}
       >
         <TemplateExample />

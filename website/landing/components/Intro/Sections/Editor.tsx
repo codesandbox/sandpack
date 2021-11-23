@@ -9,16 +9,18 @@ import {
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { Box, SandpackPreview } from "../../common";
+import {
+  Box,
+  SandpackPreview,
+  Card,
+  CardTitle,
+  CardDescription,
+} from "../../common";
 import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
   Wrapper,
-  Title,
-  Description,
-  Container,
-  SeeMoreLink,
   RefreshButton,
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
@@ -98,12 +100,12 @@ export const EditorExample: React.FC = () => {
   return (
     <FadeAnimation>
       <Wrapper ref={ref}>
-        <Container>
-          <Title>Configure your editor</Title>
-          <Description>
+        <Card>
+          <CardTitle>Configure your editor</CardTitle>
+          <CardDescription>
             The <code>options</code> prop allows you to toggle on/off different
             features of the code editor.
-          </Description>
+          </CardDescription>
 
           <Box
             css={{
@@ -141,11 +143,7 @@ export const EditorExample: React.FC = () => {
               </RefreshButton>
             </SandpackThemeProvider>
           </Box>
-
-          <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#visual-options">
-            <span>See more</span>
-          </SeeMoreLink>
-        </Container>
+        </Card>
 
         <SandpackContainerPlaceholder />
 

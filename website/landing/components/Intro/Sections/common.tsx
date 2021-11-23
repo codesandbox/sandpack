@@ -7,7 +7,7 @@ import { useLayoutEffect } from "react";
 import { forwardRef } from "react";
 
 import { styled } from "../../../stitches.config";
-import { Box, Text } from "../../common";
+import { Box } from "../../common";
 import { useBreakpoint } from "../../common/useBreakpoint";
 
 // eslint-disable-next-line react/display-name
@@ -16,22 +16,26 @@ export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
     return (
       <Box
         ref={ref as any}
-        as="li"
         css={{
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
+          gap: "40px",
           justifyContent: "center",
-          gap: "24px",
+          width: "100%",
 
           "@bp2": {
-            gap: "48px",
             alignItems: "center",
-            justifyContent: "center",
-            display: "grid",
-            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-            height: "100%",
-            minHeight: "100vh",
+            gap: "240px",
+            flexDirection: "row",
+            height: "100vh",
+            maxHeight: "1080px",
+            scrollSnapAlign: "center",
+            width: "initial",
+          },
+
+          "@bp3": {
+            gap: "320px",
           },
         }}
       >
@@ -41,95 +45,11 @@ export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
   }
 );
 
-export const SandpackContainerPlaceholder = styled("div", { width: "50vw" });
+export const SandpackContainerPlaceholder = styled("div", { width: "560px" });
 
 export const SandpackContainerMobile = styled("div", {
   "@bp2": {
     display: "none",
-  },
-});
-
-export const Container: React.FC = ({ children }) => {
-  return (
-    <Box
-      css={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "24px",
-        margin: "0 auto",
-        width: "calc(100vw - 32px)",
-        maxWidth: "600px",
-
-        "@bp1": {
-          width: "40vw",
-        },
-
-        "@bp2": {
-          width: "30vw",
-        },
-      }}
-    >
-      {children}
-    </Box>
-  );
-};
-
-export const Title: React.FC = ({ children }) => {
-  return (
-    <Text
-      css={{
-        fontSize: "24px",
-        fontWeight: "$semiBold",
-        letterSpacing: "-0.05em",
-        lineHeight: "1.2",
-        textAlign: "center",
-
-        maxWidth: "440px",
-
-        "@bp1": {
-          fontSize: "36px",
-        },
-
-        "@bp2": {
-          textAlign: "start",
-        },
-      }}
-    >
-      {children}
-    </Text>
-  );
-};
-
-export const Description: React.FC = ({ children }) => {
-  return (
-    <Text
-      css={{
-        color: "$darkTextSecondary",
-        fontSize: "16px",
-        lineHeight: "1.4",
-        letterSpacing: "-0.025em",
-        textAlign: "center",
-        maxWidth: "440px",
-
-        "@bp2": {
-          fontSize: "18px",
-          textAlign: "start",
-        },
-      }}
-    >
-      {children}
-    </Text>
-  );
-};
-
-export const SeeMoreLink = styled("a", {
-  fontSize: "18px",
-  span: {
-    color: "$primary",
-    textDecoration: "underline",
-    "&:hover": {
-      textDecoration: "none",
-    },
   },
 });
 
@@ -209,7 +129,7 @@ export const RefreshButton = styled("button", {
 });
 
 export const FadeAnimation: React.FC = ({ children }) => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLLIElement>(null);
   const [sectionTop, setSectionTop] = useState(0);
   const [sectionHeight, setSectionHeight] = useState(0);
 
@@ -242,8 +162,8 @@ export const FadeAnimation: React.FC = ({ children }) => {
   );
 
   return (
-    <motion.div ref={sectionRef} style={{ opacity: isDesktop ? opacity : 1 }}>
+    <motion.li ref={sectionRef} style={{ opacity: isDesktop ? opacity : 1 }}>
       {children}
-    </motion.div>
+    </motion.li>
   );
 };

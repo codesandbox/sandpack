@@ -8,6 +8,8 @@ export const SectionWrapper = styled("div", {
   $$backgroundColor: palette.darkBackground,
   $$primaryTextColor: palette.darkTextPrimary,
   $$secondaryTextColor: palette.darkTextSecondary,
+  $$codeBlockBackground: "$lightTextSecondary",
+  $$codeBlockfForeground: "$lightBackground",
 
   background: "$$backgroundColor",
   color: "$$primaryTextColor",
@@ -22,13 +24,14 @@ export const SectionWrapper = styled("div", {
         $$backgroundColor: palette.lightBackground,
         $$primaryTextColor: palette.lightTextPrimary,
         $$secondaryTextColor: palette.lightTextSecondary,
+        $$codeBlockBackground: "rgba(33, 33, 33, 0.15)",
+        $$codeBlockfForeground: palette.lightTextSecondary,
       },
     },
   },
 });
 
 export const SectionContainer = styled("section", {
-  overflow: "hidden",
   margin: "0 24px",
   maxWidth: "2560px",
   paddingBottom: "100px",

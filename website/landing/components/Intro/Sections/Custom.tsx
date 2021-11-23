@@ -9,16 +9,18 @@ import {
 import { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { Box, SandpackPreview } from "../../common";
+import {
+  Box,
+  SandpackPreview,
+  Card,
+  CardTitle,
+  CardDescription,
+} from "../../common";
 import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
   Wrapper,
-  Title,
-  Description,
-  Container,
-  SeeMoreLink,
   RefreshButton,
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
@@ -91,12 +93,12 @@ export const CustomExample: React.FC = () => {
   return (
     <FadeAnimation>
       <Wrapper ref={ref}>
-        <Container>
-          <Title>Easily customise the project to run</Title>
-          <Description>
+        <Card>
+          <CardTitle>Easily customise the project to run</CardTitle>
+          <CardDescription>
             Use the <code>customSetup</code> prop to add dependencies or change
             the file structure.
-          </Description>
+          </CardDescription>
 
           <Box
             css={{
@@ -133,11 +135,7 @@ export const CustomExample: React.FC = () => {
               </RefreshButton>
             </SandpackThemeProvider>
           </Box>
-
-          <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-content#custom-setup">
-            <span>See more</span>
-          </SeeMoreLink>
-        </Container>
+        </Card>
 
         <SandpackContainerPlaceholder />
 
