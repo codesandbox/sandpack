@@ -1,8 +1,11 @@
+import type { SandpackProps } from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
 
 import { Box } from "./Box";
 
-export const SandpackPreview: React.FC = () => {
+export const SandpackPreview: React.FC<{ options?: SandpackProps }> = ({
+  options,
+}) => {
   return (
     <Box
       css={{
@@ -11,9 +14,14 @@ export const SandpackPreview: React.FC = () => {
         overflow: "hidden",
         width: "100%",
 
+        ".custom-wrapper": {
+          "--sp-border-radius": "10px",
+        },
+
         ".custom-layout": {
           width: "342px",
           height: "512px",
+          border: 0,
 
           "@bp1": {
             width: "384px",
@@ -23,11 +31,6 @@ export const SandpackPreview: React.FC = () => {
           "@bp2": {
             height: "448px",
             width: "996px",
-          },
-
-          "@bp3": {
-            height: "664px",
-            width: "1328px",
           },
         },
 
@@ -40,14 +43,17 @@ export const SandpackPreview: React.FC = () => {
       }}
     >
       <Sandpack
+        template="react"
+        theme="sandpack-dark"
+        {...options}
         options={{
+          ...(options?.options ?? {}),
           classes: {
             "sp-layout": "custom-layout",
             "sp-stack": "custom-stack",
+            "sp-wrapper": "custom-wrapper",
           },
         }}
-        template="react"
-        theme="sandpack-dark"
       />
     </Box>
   );

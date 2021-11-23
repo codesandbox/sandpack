@@ -65,7 +65,11 @@ interface CodeMirrorProps {
   decorators?: Decorators;
 }
 
-export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
+export interface CodeMirrorRef {
+  getCodemirror: () => EditorView | undefined;
+}
+
+export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
   (
     {
       code,
@@ -89,6 +93,10 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
     const c = useClasser("sp");
     const { listen } = useSandpack();
     const ariaId = React.useRef<string>(generateRandomId());
+
+    React.useImperativeHandle(ref, () => ({
+      getCodemirror: () => cmView.current,
+    }));
 
     React.useEffect(() => {
       if (!wrapper.current) {
@@ -200,6 +208,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
           "aria-describedby",
           `exit-instructions-${ariaId.current}`
         );
+        view.contentDOM.setAttribute("data-gramm", "false");
       }
 
       cmView.current = view;

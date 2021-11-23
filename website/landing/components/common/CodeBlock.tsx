@@ -30,7 +30,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
           files: { "index.ts": (children as string)?.trim() },
         }}
       >
-        <SandpackThemeProvider theme="dark">
+        <SandpackThemeProvider theme="sandpack-dark">
           <SandpackCodeViewer />
         </SandpackThemeProvider>
       </SandpackProvider>

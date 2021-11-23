@@ -18,7 +18,6 @@ import {
   useSandpackNavigation,
   SandpackStack,
 } from "../index";
-import { getThemeStyleSheet } from "../themes";
 
 export default {
   title: "presets/Custom Sandpack",

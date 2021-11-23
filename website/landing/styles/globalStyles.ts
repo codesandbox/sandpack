@@ -33,6 +33,7 @@ export const globalStyles = globalCss({
     fontSize: "10px",
     fontFamily: "$base",
     margin: 0,
+    overflowX: "hidden",
   },
 
   "a, a:visited": {
