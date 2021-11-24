@@ -210,7 +210,7 @@ export default function App() {
 
 TODO: Inject example
 
-If both `template` and `customSetup` are provided then the `customSetup` values overwrite the ones from the `template`. With `customSetup` you can build your entire sandbox without using a `template`.
+If both `template` and `customSetup` are provided then the `customSetup` values are merged and might override the ones from the `template`. With `customSetup` you can build your entire sandbox without using a `template`.
 
 ### Dependencies
 
