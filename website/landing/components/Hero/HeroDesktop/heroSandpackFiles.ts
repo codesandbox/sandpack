@@ -51,10 +51,6 @@ export const globalStyles = globalCss({
 
   html: {
     fontSize: "clamp(10px, calc((100vw * 2) / 720 * 10), calc((100vw * 2) / 960 * 10))",
-
-    "@media screen and (min-width: 720px)": {
-      background: "blue",
-    }
   },
 
   body: {
@@ -155,7 +151,6 @@ function Section({ children }) {
       justifyContent: "space-between",
       overflow: "hidden",
       position: "relative",
-      padding: "$1 calc($1 * 1.5)",
       width: "100%",
     }}
     vertical>
