@@ -113,7 +113,7 @@
   font-family: var(--sp-font-mono);
   font-size: var(--sp-font-size);
   color: var(--sp-colors-fg-active);
-  line-height: 1.4;
+  line-height: var(--sp-line-height);
 }
 
 .sp-code-editor {

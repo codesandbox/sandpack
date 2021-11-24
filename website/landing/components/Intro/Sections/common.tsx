@@ -50,11 +50,10 @@ export const Content = styled("div", {
   alignItems: "center",
   display: "flex",
   flexDirection: "column",
-  gap: "20px",
+  gap: "10px",
   width: "100%",
 
   "@bp1": {
-    gap: "20px",
     width: "384px",
   },
 
@@ -201,11 +200,17 @@ export const FadeAnimation: React.FC = ({ children }) => {
 export const CodeWrapper = styled("div", {
   position: "relative",
   width: "100%",
+  marginTop: "30px",
 
   pre: { padding: 0 },
 
   ".sp-code-editor": {
     borderRadius: "16px",
-    padding: "0 15px",
+  },
+});
+
+export const Caption = styled("p", {
+  "@bp1": {
+    display: "none",
   },
 });

@@ -69,7 +69,12 @@ export const Examples: React.FC = () => {
       <div ref={sandpackRefSectionTop} />
       <motion.div
         ref={sandpackRefSectionHeight}
-        style={{ x, position: "sticky", top: "calc(50vh - 25%)" }}
+        style={{
+          x,
+          position: "sticky",
+          top: "calc(50vh - 25%)",
+          marginBottom: "calc(50vh - 15%)",
+        }}
       >
         <Box
           css={{
@@ -89,7 +94,7 @@ export const Examples: React.FC = () => {
           <motion.div
             animate={{ opacity: visibility ? 0 : 1 }}
             initial={{ opacity: 0 }}
-            style={{ position: "relative", zIndex: 1 }}
+            style={{ position: "relative", zIndex: visibility ? -1 : 1 }}
           >
             <SandpackExample />
           </motion.div>
