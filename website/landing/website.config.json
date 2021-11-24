@@ -46,26 +46,7 @@
       "url": "https://github.com/codesandbox/sandpack"
     }
   ],
-  "advancedUsage": {
-    "title": "Building blocks<br />of the Sandpack<br />ecosystem.",
-    "examples": [
-      {
-        "title": "Providers",
-        "description": "We export a <code>SandpackProvider</code> that manages the state and actions for sandpack and a <code>ThemeProvider</code> that handles the theme and style.",
-        "illustrationKey": "providers"
-      },
-      {
-        "title": "Components",
-        "description": "We also export the smaller parts that make up the <code>&lt;Sandpack /&gt;</code> component, so you can combine them with your custom components.",
-        "illustrationKey": "components"
-      },
-      {
-        "title": "Client",
-        "description": "The bundler is wrapped by a small package called <code>sandpack-client</code>, which is framework agnostic and allows you to tap into the bundler protocol.",
-        "illustrationKey": "client"
-      }
-    ]
-  },
+
   "banner": {
     "title": "Get started<br /> with Sandpack."
   },
@@ -97,23 +78,43 @@
     "highlights": [
       {
         "title": "Full editor experience",
-        "description": "Sandpack is using CodeMirror under the hood, giving you all the basic capabilities of a code editor and syntax highlight.",
+        "description": "Sandpack is using <a href='https://codemirror.net/' rel='noreferrer' target='_blank' class='external-link'>CodeMirror</a> under the hood, giving you all the basic capabilities of a code editor and syntax highlight. However, if you want to use your own editor framework, you can add that as a component too!",
         "iconKey": "editor"
       },
       {
         "title": "Advanced preview",
-        "description": "Sandpack embeds the browser bundler that powers codesandbox.io and takes advantage of the following features: hot module reloading API, friendly error overlay, powerful transpilation result caching, dependency resolver.",
+        "description": "Sandpack embeds the browser bundler that powers <a href='http://codesandbox.io' rel='noreferrer' target='_blank' class='external-link'>codesandbox.io</a> and takes advantage of features like npm dependency support, hot module reloading, error overlay, and caching.",
         "iconKey": "preview"
       },
       {
-        "title": "Export to CodeSandbox",
-        "description": "With Sandpack, you're always one click away from opening your code snippet in codesandbox",
+        "title": "Leverege CodeSandbox",
+        "description": "With Sandpack, you're always one click away from opening your code snippet in CodeSandbox. This way you can easily share bug reports, or examples behind a unique URL.",
         "iconKey": "export"
       }
     ]
   },
   "intro": {
     "title": "Live coding <span class=\"highlight\">in<br />the browser.</span>"
+  },
+  "advancedUsage": {
+    "title": "Building blocks<br />of the Sandpack<br />ecosystem.",
+    "examples": [
+      {
+        "title": "Providers & Custom Hooks",
+        "description": "<a href='https://sandpack.codesandbox.io/docs/advanced-usage/provider#sandpack-provider' rel='noreferrer' target='_blank'><code>SandpackProvider</code></a> is available to manage the state and actions and <a href='https://sandpack.codesandbox.io/docs/advanced-usage/provider#theme-provider' rel='noreferrer' target='_blank'><code>ThemeProvider</code></a> is for handling the theme and style. A set of hooks gives you access to the state and offers an API for integrating custom components into Sandpack.",
+        "illustrationKey": "providers"
+      },
+      {
+        "title": "Sandpack Components",
+        "description": "The <a href='https://sandpack.codesandbox.io/docs/advanced-usage/components' rel='noreferrer' target='_blank'><code>&#60;Sandpack /&#62;</code></a> component is made up of smaller parts that you can import separately to combine with your custom components.",
+        "illustrationKey": "components"
+      },
+      {
+        "title": "Sandpack Client",
+        "description": "The bundler is wrapped by a small package called <a href='https://sandpack.codesandbox.io/docs/advanced-usage/client' rel='noreferrer' target='_blank'><code>sandpack-client</code></a>, which is framework agnostic and allows you to tap into the bundler protocol.",
+        "illustrationKey": "client"
+      }
+    ]
   },
   "showCase": {
     "title": "Showcase",

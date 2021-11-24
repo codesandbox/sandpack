@@ -93,8 +93,15 @@ export const CustomExample: React.FC = () => {
         <Content>
           <CardTitle>Easily customise the project to run</CardTitle>
           <CardDescription>
-            Use the <code>customSetup</code> prop to add dependencies or change
-            the file structure.
+            Use the{" "}
+            <a
+              href="https://sandpack.codesandbox.io/docs/getting-started/custom-content#custom-setup"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <code>customSetup</code>
+            </a>{" "}
+            prop to add dependencies or change the file structure.
           </CardDescription>
 
           <CodeWrapper>

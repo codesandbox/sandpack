@@ -73,11 +73,17 @@ export const ThemeExample: React.FC = () => {
     <FadeAnimation>
       <Row ref={ref}>
         <Content>
-          <CardTitle>Apply a theme</CardTitle>
+          <CardTitle>Set a theme, or create your own</CardTitle>
           <CardDescription>
-            Use the <code>theme</code> prop to set a predefined option made by
-            CodeSandbox. Try below, just click to change code and see all the
-            predefined options
+            You can style Sandpack however you&apos;d like by applying a{" "}
+            <a
+              href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#theming"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <code>theme</code>
+            </a>
+            !
           </CardDescription>
           <SnippetButton
             ref={boxRef}

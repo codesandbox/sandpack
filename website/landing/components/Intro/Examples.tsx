@@ -56,8 +56,8 @@ export const Examples: React.FC = () => {
   // Max width that the left container can grow
   const breakpoint = () => {
     if (isXLarge) return "600px";
-    if (isLarge) return "40vw";
-    if (isMedium) return "45vw";
+    if (isLarge) return "30vw";
+    if (isMedium) return "40vw";
 
     return "35vw";
   };

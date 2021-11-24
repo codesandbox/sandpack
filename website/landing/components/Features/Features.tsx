@@ -134,9 +134,12 @@ export const Features: React.FC = () => {
                       {icon}
                     </Box>
                     <CardTitle size="small">{highlight.title}</CardTitle>
-                    <CardDescription size="small">
-                      {highlight.description}
-                    </CardDescription>
+                    <CardDescription
+                      dangerouslySetInnerHTML={{
+                        __html: highlight.description,
+                      }}
+                      size="small"
+                    />
                   </Card>
                 </FeatureFade>
               </ListItem>
