@@ -73,8 +73,15 @@ export const TemplateExample: React.FC = () => {
         <Content>
           <CardTitle>Get started in a few lines</CardTitle>
           <CardDescription>
-            Set the <code>template</code> prop to get started with Sandpack in a
-            few lines of code.
+            Set the{" "}
+            <a
+              href="https://sandpack.codesandbox.io/docs/getting-started/custom-content#template"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <code>template</code>
+            </a>{" "}
+            prop to get started with Sandpack in a few lines of code.
           </CardDescription>
           <SnippetButton
             ref={boxRef}

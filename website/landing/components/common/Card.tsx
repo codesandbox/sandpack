@@ -81,9 +81,23 @@ export const CardDescription = styled("p", {
     letterSpacing: "inherit",
   },
 
+  ".external-link": {
+    color: "$$codeBlockForeground",
+    textDecoration: "underline",
+
+    "&:hover": {
+      textDecoration: "none",
+    },
+  },
+
   "@bp2": {
     fontSize: "18px",
     textAlign: "start",
+
+    "a code:hover": {
+      background: "$primary",
+      color: "$darkBackground",
+    },
 
     code: {
       display: "inline-flex",
@@ -98,12 +112,6 @@ export const CardDescription = styled("p", {
       background: "$$codeBlockBackground",
       color: "$$codeBlockForeground",
       transition: "all .2s ease",
-      cursor: "pointer",
-
-      "&:hover": {
-        background: "$primary",
-        color: "$darkBackground",
-      },
     },
   },
 

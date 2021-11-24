@@ -51,12 +51,20 @@ export const LayoutExample: React.FC = () => {
     <FadeAnimation>
       <Row ref={ref}>
         <Content>
-          <CardTitle>Build your own Sandpack</CardTitle>
+          <CardTitle>Build your own Sandpack UI</CardTitle>
           <CardDescription>
             If you want to fully customise the experience, you can build the UI
-            yourself. The library exports a set of composable components and
-            hooks that allow you to tailor the editing experience to your own
-            needs.
+            yourself. The library exports a set of{" "}
+            <a
+              className="external-link"
+              href="https://sandpack.codesandbox.io/docs/advanced-usage/components#layout"
+              rel="noreferrer"
+              target="_blank"
+            >
+              composable components
+            </a>{" "}
+            and hooks that allow you to tailor the editing experience to your
+            own needs.
           </CardDescription>
 
           <CodeWrapper
