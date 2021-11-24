@@ -21,6 +21,7 @@ import {
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
   FadeAnimation,
+  THRESHOLD_VIEW,
 } from "./common";
 
 const frameworkOptions: SandpackPredefinedTemplate[] = [
@@ -32,7 +33,7 @@ const frameworkOptions: SandpackPredefinedTemplate[] = [
 ];
 
 export const TemplateExample: React.FC = () => {
-  const { ref, inView } = useInView({ threshold: 0.5 });
+  const { ref, inView } = useInView({ threshold: THRESHOLD_VIEW });
   const { setOptions } = useSandpackExample();
   const [toolTipVisibility, setToolTipVisibility] = useState(false);
   const [mousePosition, setMousePosition] = useState<Record<string, number>>(
@@ -48,13 +49,13 @@ export const TemplateExample: React.FC = () => {
 
   useEffect(() => {
     if (!higherMobile) {
-      setTemplate(frameworkOptions[2]);
+      setTemplate(frameworkOptions[0]);
 
       return;
     }
 
     if (inView) {
-      setTemplate(frameworkOptions[2]);
+      setTemplate(frameworkOptions[0]);
     } else {
       setTemplate(frameworkOptions[0]);
     }

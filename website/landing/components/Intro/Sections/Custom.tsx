@@ -21,6 +21,7 @@ import {
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
   FadeAnimation,
+  THRESHOLD_VIEW,
 } from "./common";
 
 const ORIGINAL_CODE = `<Sandpack
@@ -40,7 +41,7 @@ export default function App() {
 `;
 
 export const CustomExample: React.FC = () => {
-  const { ref, inView } = useInView({ threshold: 0.5 });
+  const { ref, inView } = useInView({ threshold: THRESHOLD_VIEW });
   const { setOptions } = useSandpackExample();
   const codeEditorRef = useRef<CodeEditorRef>(null);
   const higherMobile = useBreakpoint("bp1");
