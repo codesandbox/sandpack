@@ -66,7 +66,7 @@ theme={{
   }}
 />
 
-Or you can import an existing theme object and use object composition to override specific fields.
+Furthermore you can import an existing theme object and use object composition to override specific fields.
 
 ```jsx
 import { Sandpack, codesandboxDarkTheme } from "@codesandbox/sandpack-react";
@@ -190,7 +190,7 @@ setting, it will show a `Run` button that initializes the bundling process. This
 
 ### Recompile Mode
 
-The `recompileMode` option also allow you configure what happens when the user starts typing in the code editor. The `immediate` mode will fire the change to the bundler as soon as it is received, while the `delayed` mode will debounce the bundler operation until the user starts typing. Optionally, you can set the delay for the debounce, which by default is `500ms`.
+The `recompileMode` option also allows you configure what happens when the user starts typing in the code editor. The `immediate` mode will fire the change to the bundler as soon as it is received, while the `delayed` mode will debounce the bundler operation until the user starts typing. Optionally, you can set the delay for the debounce, which by default is `500ms`.
 
 By default, the mode is set to `delayed` to ensures the bundler doesn't run on each keystroke. You can customize this
 experience by modifying the `recompileDelay` value or by setting the

@@ -66,7 +66,7 @@ client.updatePreview({
 });
 ```
 
-If you specify a `package.json` in the list of files we will use that as source
+If a `package.json` has been specified in the list of files that will be used as a source
 of truth. Otherwise, we infer `dependencies` and `entry` from it:
 
 ```js
@@ -170,7 +170,7 @@ The client instance has several helper functions you can call.
 
 #### `updatePreview`
 
-Send new content like files and dependencies, to the preview. It will
+Send new content like files and dependencies to the preview. It will
 automatically hot update the preview with the new files and options. Accepts a
 single argument `sandboxInfo` of type `SandboxInfo`.
 

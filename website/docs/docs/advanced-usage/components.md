@@ -46,7 +46,7 @@ const CustomSandpack = () => (
   </SandpackLayout>
 </SandpackProvider>
 
-And now we have pretty much the same component as the preset, minus the prop
+Further now we have pretty much the same component as the preset, minus the prop
 passing, which you can decide based on your specific needs.
 
 You can easily swap the two components inside the `SandpackLayout` to get a different instance of `Sandpack`.
@@ -155,7 +155,7 @@ If you played with the `Sandpack` preset, you should be familiar already with th
 
 ## Code Viewer
 
-For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a readonly version of `codemirror`, so users will not be able to edit the code.
+For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a read-only version of `codemirror`, so users will not be able to edit the code.
 
 ```jsx
 <SandpackProvider template="react">

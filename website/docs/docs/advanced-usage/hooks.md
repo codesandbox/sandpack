@@ -61,9 +61,8 @@ We can test this with the `CustomSandpack` we implemented at the previous step.
 
 If you run this, you will notice that the `SimpleCodeViewer` is in sync with the state of the `SandpackCodeEditor`.
 
-`useSandpack` also exports `dispatch` and `listen`, two functions with which you
-can directly communicate with the bundler. However, at this point, you'd have to
-understand all the different types of messages and payloads that are passed from
+`useSandpack` also exports `dispatch` and `listen`, you can levarage these functions for communicating directly with the bundler. However, at this point, you'd have
+understood all the different types of messages and payloads that are passed from
 the sandpack manager to the iframe and back.
 
 ```jsx
