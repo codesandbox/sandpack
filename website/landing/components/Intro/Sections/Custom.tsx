@@ -9,16 +9,14 @@ import {
 import { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { Box, SandpackPreview } from "../../common";
+import { SandpackPreview, CardTitle, CardDescription } from "../../common";
 import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
-  Wrapper,
-  Title,
-  Description,
-  Container,
-  SeeMoreLink,
+  Row,
+  Content,
+  CodeWrapper,
   RefreshButton,
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
@@ -91,25 +89,15 @@ export const CustomExample: React.FC = () => {
 
   return (
     <FadeAnimation>
-      <Wrapper ref={ref}>
-        <Container>
-          <Title>Easily customise the project to run</Title>
-          <Description>
+      <Row ref={ref}>
+        <Content>
+          <CardTitle>Easily customise the project to run</CardTitle>
+          <CardDescription>
             Use the <code>customSetup</code> prop to add dependencies or change
             the file structure.
-          </Description>
+          </CardDescription>
 
-          <Box
-            css={{
-              position: "relative",
-              pre: { padding: 0 },
-
-              ".sp-code-editor": {
-                borderRadius: "16px",
-                padding: "0 15px",
-              },
-            }}
-          >
+          <CodeWrapper>
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
@@ -133,21 +121,16 @@ export const CustomExample: React.FC = () => {
                 </svg>
               </RefreshButton>
             </SandpackThemeProvider>
-          </Box>
-
-          <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-content#custom-setup">
-            <span>See more</span>
-          </SeeMoreLink>
-        </Container>
-
-        <SandpackContainerPlaceholder />
+          </CodeWrapper>
+        </Content>
 
         <SandpackContainerMobile>
           <SandpackPreview
             options={{ customSetup: parseFromSandpackToJson(code) }}
           />
         </SandpackContainerMobile>
-      </Wrapper>
+        <SandpackContainerPlaceholder />
+      </Row>
     </FadeAnimation>
   );
 };

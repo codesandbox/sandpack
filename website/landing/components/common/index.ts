@@ -7,5 +7,5 @@ export * from "./List";
 export { Resources } from "./Resources";
 export * from "./Section";
 export { SandpackLogo } from "./SandpackLogo";
-export { SandpackPreview } from "./SandpackPreview";
+export { SandpackPreview, SandpackContainer } from "./SandpackPreview";
 export { Text } from "./Text";

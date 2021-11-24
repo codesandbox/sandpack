@@ -72,7 +72,7 @@ export const AdvancedUsage: React.FC = () => {
   }, [section]);
 
   return (
-    <SectionWrapper ref={section} theme="light">
+    <SectionWrapper ref={section} css={{ overflow: "hidden" }} theme="light">
       <SectionContainer>
         <SectionHeader
           css={{

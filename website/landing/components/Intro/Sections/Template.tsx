@@ -3,16 +3,18 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { CodeBlock, SandpackPreview } from "../../common";
+import {
+  CodeBlock,
+  SandpackPreview,
+  CardTitle,
+  CardDescription,
+} from "../../common";
 import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
-  Wrapper,
-  Title,
-  Description,
-  Container,
-  SeeMoreLink,
+  Row,
+  Content,
   getRelativeCoordinates,
   ToolTip,
   SnippetButton,
@@ -67,13 +69,13 @@ export const TemplateExample: React.FC = () => {
 
   return (
     <FadeAnimation>
-      <Wrapper ref={ref}>
-        <Container>
-          <Title>Get started in a few lines</Title>
-          <Description>
+      <Row ref={ref}>
+        <Content>
+          <CardTitle>Get started in a few lines</CardTitle>
+          <CardDescription>
             Set the <code>template</code> prop to get started with Sandpack in a
             few lines of code.
-          </Description>
+          </CardDescription>
           <SnippetButton
             ref={boxRef}
             onClick={shuffleTemplate}
@@ -107,18 +109,14 @@ export const TemplateExample: React.FC = () => {
               </AnimatePresence>
             )}
           </div>
-
-          <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-content#template">
-            <span>See more</span>
-          </SeeMoreLink>
-        </Container>
-
-        <SandpackContainerPlaceholder />
+        </Content>
 
         <SandpackContainerMobile>
           <SandpackPreview options={{ template }} />
         </SandpackContainerMobile>
-      </Wrapper>
+
+        <SandpackContainerPlaceholder />
+      </Row>
     </FadeAnimation>
   );
 };

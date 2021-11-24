@@ -16,6 +16,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   return (
     <Box
       css={{
+        width: "100%",
         pre: { padding: 0 },
 
         ".cm-editor": {

@@ -4,7 +4,7 @@ export const Card = styled("div", {
   alignItems: "center",
   display: "flex",
   flexDirection: "column",
-  gap: "10px",
+  gap: "20px",
   width: "336px",
 
   "@bp1": {
@@ -46,9 +46,14 @@ export const CardTitle = styled("h4", {
   lineHeight: "1.2",
   letterSpacing: "-0.05em",
   margin: 0,
+  textAlign: "center",
 
   "@bp1": {
     fontSize: "36px",
+  },
+
+  "@bp2": {
+    textAlign: "left",
   },
 
   variants: {
@@ -82,16 +87,23 @@ export const CardDescription = styled("p", {
 
     code: {
       display: "inline-flex",
-      alignitems: "center",
+      alignItems: "center",
       justifyContent: "center",
       padding: "2px 8px",
-      background: "rgba(33, 33, 33, 0.15)",
       borderRadius: "6px",
       fontFamily: "$mono",
       fontSize: "16px",
       lineHeight: 1.4,
       letterSpacing: "-0.025em",
-      color: "$lightTextSecondary",
+      background: "$$codeBlockBackground",
+      color: "$$codeBlockForeground",
+      transition: "all .2s ease",
+      cursor: "pointer",
+
+      "&:hover": {
+        background: "$primary",
+        color: "$darkBackground",
+      },
     },
   },
 

@@ -1,18 +1,13 @@
 import content from "../../website.config.json";
-import { Box, CodeBlock, Text } from "../common";
+import { Box, SectionHeader, CodeBlock, Text } from "../common";
 
 export const Header: React.FC = () => {
   const { commands, intro } = content;
 
   return (
-    <Box
+    <SectionHeader
       css={{
-        alignItems: "center",
-        display: "flex",
-        flexDirection: "column",
-        gap: "64px",
-        marginBottom: "100px",
-        overflow: "hidden",
+        gap: "40px",
       }}
     >
       <Text
@@ -38,13 +33,9 @@ export const Header: React.FC = () => {
         }}
         dangerouslySetInnerHTML={{ __html: intro.title }}
       />
-      <Box
-        css={{
-          maxWidth: "calc(100vw - 16px)",
-        }}
-      >
+      <Box css={{ maxWidth: "100%" }}>
         <CodeBlock oneLiner>{commands.import}</CodeBlock>
       </Box>
-    </Box>
+    </SectionHeader>
   );
 };

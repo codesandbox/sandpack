@@ -3,16 +3,18 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { CodeBlock, SandpackPreview } from "../../common";
+import {
+  CodeBlock,
+  SandpackPreview,
+  CardTitle,
+  CardDescription,
+} from "../../common";
 import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
-  Wrapper,
-  Title,
-  Description,
-  Container,
-  SeeMoreLink,
+  Row,
+  Content,
   getRelativeCoordinates,
   ToolTip,
   SnippetButton,
@@ -69,14 +71,14 @@ export const ThemeExample: React.FC = () => {
 
   return (
     <FadeAnimation>
-      <Wrapper ref={ref}>
-        <Container>
-          <Title>Apply a theme</Title>
-          <Description>
+      <Row ref={ref}>
+        <Content>
+          <CardTitle>Apply a theme</CardTitle>
+          <CardDescription>
             Use the <code>theme</code> prop to set a predefined option made by
             CodeSandbox. Try below, just click to change code and see all the
             predefined options
-          </Description>
+          </CardDescription>
           <SnippetButton
             ref={boxRef}
             onClick={shuffleTheme}
@@ -110,17 +112,14 @@ export const ThemeExample: React.FC = () => {
               </AnimatePresence>
             )}
           </div>
+        </Content>
 
-          <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#theming">
-            <span>See more</span>
-          </SeeMoreLink>
-        </Container>
-
-        <SandpackContainerPlaceholder />
         <SandpackContainerMobile>
           <SandpackPreview options={{ theme }} />
         </SandpackContainerMobile>
-      </Wrapper>
+
+        <SandpackContainerPlaceholder />
+      </Row>
     </FadeAnimation>
   );
 };

@@ -8,7 +8,7 @@ import {
 import { motion, useTransform, useViewportScroll } from "framer-motion";
 import { useLayoutEffect, useRef, useState } from "react";
 
-import { Box, List } from "../common";
+import { Box, List, SandpackContainer } from "../common";
 import { useBreakpoint } from "../common/useBreakpoint";
 
 import { SandpackExample } from "./SandpackExample";
@@ -22,28 +22,30 @@ import { ThemeExample } from "./Sections/Theme";
 export const Examples: React.FC = () => {
   const { layoutFiles, visibility } = useLayoutExampleContext();
 
-  const sandpackSection = useRef<HTMLDivElement>(null);
   const { scrollY } = useViewportScroll();
-  const isLarge = useBreakpoint("2260");
+  const isMedium = useBreakpoint("bp2");
+  const isLarge = useBreakpoint("bp3");
+  const isXLarge = useBreakpoint("2260");
 
+  const sandpackRefSectionTop = useRef<HTMLDivElement>(null);
+  const sandpackRefSectionHeight = useRef<HTMLDivElement>(null);
   const [sandpackSectionTop, setSandpackSectionTop] = useState(0);
   const [sandpackSectionHeight, setSandpackSectionHeight] = useState(0);
 
   useLayoutEffect(() => {
-    if (!sandpackSection.current) return;
-
     const onResize = () => {
-      if (!sandpackSection.current) return;
+      if (!sandpackRefSectionTop.current || !sandpackRefSectionHeight.current)
+        return;
 
-      setSandpackSectionTop(sandpackSection.current?.offsetTop);
-      setSandpackSectionHeight(sandpackSection.current?.offsetHeight);
+      setSandpackSectionTop(sandpackRefSectionTop.current?.offsetTop);
+      setSandpackSectionHeight(sandpackRefSectionHeight.current?.offsetHeight);
     };
 
     onResize();
     window.addEventListener("resize", onResize);
 
     return () => window.removeEventListener("resize", onResize);
-  }, [sandpackSection]);
+  }, []);
 
   const scrollRangeX = [
     sandpackSectionTop * 0.7,
@@ -52,13 +54,21 @@ export const Examples: React.FC = () => {
   ];
 
   // Max width that the left container can grow
-  const progressRangeX = ["0", "0", isLarge ? "600px" : "35vw"];
+  const breakpoint = () => {
+    if (isXLarge) return "600px";
+    if (isLarge) return "40vw";
+    if (isMedium) return "45vw";
+
+    return "35vw";
+  };
+  const progressRangeX = ["0", "0", breakpoint()];
   const x = useTransform(scrollY, scrollRangeX, progressRangeX);
 
   return (
     <>
+      <div ref={sandpackRefSectionTop} />
       <motion.div
-        ref={sandpackSection}
+        ref={sandpackRefSectionHeight}
         style={{ x, position: "sticky", top: "calc(50vh - 25%)" }}
       >
         <Box
@@ -84,43 +94,7 @@ export const Examples: React.FC = () => {
             <SandpackExample />
           </motion.div>
 
-          <Box
-            css={{
-              position: "absolute",
-              top: 0,
-              zIndex: visibility ? 2 : 0,
-
-              ".custom-wrapper": {
-                "--sp-border-radius": "10px",
-              },
-
-              ".custom-layout": {
-                width: "342px",
-                height: "512px",
-                border: 0,
-
-                "@bp1": {
-                  width: "384px",
-                  height: "608px",
-                },
-
-                "@bp2": {
-                  height: "448px",
-                  width: "996px",
-                },
-                "@bp3": {
-                  height: "40vh",
-                },
-              },
-
-              ".custom-stack": {
-                "@bp2": {
-                  height: "100% !important",
-                  width: "100% !important",
-                },
-              },
-            }}
-          >
+          <SandpackContainer css={{ position: "absolute", top: "0" }}>
             <motion.div
               animate={{ opacity: visibility ? 1 : 0 }}
               initial={{ opacity: 0 }}
@@ -147,17 +121,28 @@ export const Examples: React.FC = () => {
                 </ClasserProvider>
               </SandpackProvider>
             </motion.div>
-          </Box>
+          </SandpackContainer>
         </Box>
       </motion.div>
 
       <List
         css={{
           display: "flex",
-          flexDirection: "column",
-          gap: "148px",
+          flexWrap: "wrap",
+          gap: "100px",
+          width: "100%",
 
-          "@bp2": { gap: "0" },
+          "@bp1": {
+            gap: "200px",
+          },
+
+          "@bp2": {
+            alignItems: "center",
+            flexDirection: "column",
+            gap: "0",
+            scrollSnapType: "y mandatory",
+            width: "initial",
+          },
         }}
       >
         <TemplateExample />

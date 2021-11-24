@@ -9,16 +9,14 @@ import {
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { Box, SandpackPreview } from "../../common";
+import { SandpackPreview, CardTitle, CardDescription } from "../../common";
 import { useBreakpoint } from "../../common/useBreakpoint";
 import { useSandpackExample } from "../SandpackExample";
 
 import {
-  Wrapper,
-  Title,
-  Description,
-  Container,
-  SeeMoreLink,
+  CodeWrapper,
+  Row,
+  Content,
   RefreshButton,
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
@@ -98,25 +96,15 @@ export const EditorExample: React.FC = () => {
 
   return (
     <FadeAnimation>
-      <Wrapper ref={ref}>
-        <Container>
-          <Title>Configure your editor</Title>
-          <Description>
+      <Row ref={ref}>
+        <Content>
+          <CardTitle>Configure your editor</CardTitle>
+          <CardDescription>
             The <code>options</code> prop allows you to toggle on/off different
             features of the code editor.
-          </Description>
+          </CardDescription>
 
-          <Box
-            css={{
-              position: "relative",
-              pre: { padding: 0 },
-
-              ".sp-code-editor": {
-                borderRadius: "16px",
-                padding: "0 15px",
-              },
-            }}
-          >
+          <CodeWrapper>
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
@@ -141,19 +129,15 @@ export const EditorExample: React.FC = () => {
                 </svg>
               </RefreshButton>
             </SandpackThemeProvider>
-          </Box>
-
-          <SeeMoreLink href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#visual-options">
-            <span>See more</span>
-          </SeeMoreLink>
-        </Container>
-
-        <SandpackContainerPlaceholder />
+          </CodeWrapper>
+        </Content>
 
         <SandpackContainerMobile>
           <SandpackPreview options={{ options: custom }} />
         </SandpackContainerMobile>
-      </Wrapper>
+
+        <SandpackContainerPlaceholder />
+      </Row>
     </FadeAnimation>
   );
 };

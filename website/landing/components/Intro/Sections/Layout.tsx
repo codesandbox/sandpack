@@ -12,15 +12,13 @@ import {
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { Box } from "../../common";
+import { CardTitle, CardDescription } from "../../common";
 
 import { useLayoutExampleContext } from "./LayoutContext";
 import {
-  Wrapper,
-  Title,
-  Description,
-  Container,
-  SeeMoreLink,
+  Row,
+  Content,
+  CodeWrapper,
   SandpackContainerPlaceholder,
   SandpackContainerMobile,
   FadeAnimation,
@@ -51,27 +49,25 @@ export const LayoutExample: React.FC = () => {
 
   return (
     <FadeAnimation>
-      <Wrapper ref={ref}>
-        <Container>
-          <Title>Build your own Sandpack</Title>
-          <Description>
+      <Row ref={ref}>
+        <Content>
+          <CardTitle>Build your own Sandpack</CardTitle>
+          <CardDescription>
             If you want to fully customise the experience, you can build the UI
             yourself. The library exports a set of composable components and
             hooks that allow you to tailor the editing experience to your own
             needs.
-          </Description>
+          </CardDescription>
 
-          <Box
+          <CodeWrapper
             css={{
-              position: "relative",
-              pre: { padding: 0 },
-
               ".sp-tabs": {
                 borderTopLeftRadius: "16px",
                 borderTopRightRadius: "16px",
               },
 
               ".sp-code-editor": {
+                borderRadius: 0,
                 borderBottomLeftRadius: "16px",
                 borderBottomRightRadius: "16px",
                 padding: "0 15px",
@@ -81,17 +77,12 @@ export const LayoutExample: React.FC = () => {
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor />
             </SandpackThemeProvider>
-          </Box>
+          </CodeWrapper>
+        </Content>
 
-          <SeeMoreLink href="https://sandpack.codesandbox.io/docs/advanced-usage/components#layout">
-            <span>See more</span>
-          </SeeMoreLink>
-        </Container>
         <SandpackContainerPlaceholder />
 
-        <SandpackContainerMobile
-          css={{ width: "100%", ".custom-layout": { height: "5g sta0vh" } }}
-        >
+        <SandpackContainerMobile css={{ ".custom-layout": { height: "50vh" } }}>
           <SandpackProvider
             customSetup={{
               files: layoutFiles,
@@ -114,7 +105,7 @@ export const LayoutExample: React.FC = () => {
             </ClasserProvider>
           </SandpackProvider>
         </SandpackContainerMobile>
-      </Wrapper>
+      </Row>
     </FadeAnimation>
   );
 };
