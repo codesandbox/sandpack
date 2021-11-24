@@ -34,7 +34,7 @@ export const globalStyles = globalCss({
   },
 
   "::-webkit-scrollbar-track": {
-    backgroundColor: "#131313",
+    backgroundColor: "#151515",
   },
 
   "::-webkit-scrollbar-corner": {
