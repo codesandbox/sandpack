@@ -75,7 +75,7 @@ export const ThemeExample: React.FC = () => {
         <Content>
           <CardTitle>Set a theme, or create your own</CardTitle>
           <CardDescription>
-            You can style Sandpack however you'd like by applying a{" "}
+            You can style Sandpack however you&apos;d like by applying a{" "}
             <a
               href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#theming"
               rel="noreferrer"
