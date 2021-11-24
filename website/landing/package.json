@@ -13,12 +13,14 @@
     "@codesandbox/sandpack-react": "^0.9.2",
     "@stitches/react": "^1.2.5",
     "framer-motion": "^5.3.2",
+    "lodash.debounce": "^4.0.8",
     "next": "12.0.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-intersection-observer": "^8.32.2"
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.6",
     "@types/node": "16.11.6",
     "@types/react": "17.0.33",
     "eslint-config-next": "12.0.2",
