@@ -47,10 +47,12 @@ export const Examples: React.FC = () => {
 
   const scrollRangeX = [
     sandpackSectionTop * 0.7,
-    (sandpackSectionTop + sandpackSectionHeight) * 0.8,
+    sandpackSectionTop * 0.9,
+    (sandpackSectionTop + sandpackSectionHeight) * 0.9,
   ];
 
-  const progressRangeX = ["0vw", isLarge ? "0vw" : "30vw"];
+  // Max width that the left container can grow
+  const progressRangeX = ["0", "0", isLarge ? "600px" : "35vw"];
   const x = useTransform(scrollY, scrollRangeX, progressRangeX);
 
   return (
@@ -105,6 +107,9 @@ export const Examples: React.FC = () => {
                 "@bp2": {
                   height: "448px",
                   width: "996px",
+                },
+                "@bp3": {
+                  height: "40vh",
                 },
               },
 

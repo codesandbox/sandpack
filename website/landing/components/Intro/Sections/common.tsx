@@ -10,6 +10,8 @@ import { styled } from "../../../stitches.config";
 import { Box, Text } from "../../common";
 import { useBreakpoint } from "../../common/useBreakpoint";
 
+export const THRESHOLD_VIEW = 0.5;
+
 // eslint-disable-next-line react/display-name
 export const Wrapper = forwardRef<unknown, { children: React.ReactNode }>(
   ({ children }, ref) => {
@@ -233,12 +235,14 @@ export const FadeAnimation: React.FC = ({ children }) => {
   const opacity = useTransform(
     scrollY,
     [
+      sectionTop - sectionHeight / 2,
       sectionTop - sectionHeight / 4,
       sectionTop - sectionHeight / 6,
       sectionTop + sectionHeight / 6,
       sectionTop + sectionHeight / 4,
+      sectionTop + sectionHeight / 2,
     ],
-    [0, 1, 1, 0]
+    [0, 1, 1, 1, 1, 0]
   );
 
   return (
