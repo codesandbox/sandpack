@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/codesandbox/sandpack/compare/v0.7.0...v0.7.1) (2021-11-24)
+
+
+### Bug Fixes
+
+* **bundler:** make sure transpiled files are cut ([ef11a7c](https://github.com/codesandbox/sandpack/commit/ef11a7c5178e6d41200ed0b4aa157c6c73096eba))
+
+
+
+
+
 # [0.7.0](https://github.com/codesandbox/sandpack/compare/v0.6.0...v0.7.0) (2021-11-23)
 
 **Note:** Version bump only for package @codesandbox/sandpack-client
