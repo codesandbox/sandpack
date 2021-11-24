@@ -19,3 +19,32 @@ code {
   --sp-colors-fg-active: #f0fdaf;
   display: block;
 }
+
+.nestedSandpack > .sp-wrapper > .sp-layout {
+  display: block;
+}
+
+.nestedSandpack > .sp-wrapper > .sp-layout .sp-stack + .sp-stack {
+  height: 400px;
+}
+
+.sp-wrapper *::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+.sp-wrapper *::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0);
+}
+
+/* Handle */
+.sp-wrapper *::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+/* Handle on hover */
+.sp-wrapper *::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
