@@ -66,11 +66,16 @@ export const Content = styled("div", {
 });
 
 export const SandpackContainerPlaceholder = styled("div", {
-  "@bp2": { width: "560px" },
+  width: "300px",
+  "@bp3": { width: "560px" },
 });
 
 export const SandpackContainerMobile = styled("div", {
   width: "100%",
+
+  "@bp1": {
+    width: "auto",
+  },
 
   "@bp2": {
     display: "none",
@@ -190,10 +195,7 @@ export const FadeAnimation: React.FC = ({ children }) => {
   );
 
   return (
-    <motion.li
-      ref={sectionRef}
-      style={{ opacity: isDesktop ? opacity : 1, width: "100%" }}
-    >
+    <motion.li ref={sectionRef} style={{ opacity, width: "100%" }}>
       {children}
     </motion.li>
   );

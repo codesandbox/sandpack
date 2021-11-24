@@ -22,28 +22,30 @@ import { ThemeExample } from "./Sections/Theme";
 export const Examples: React.FC = () => {
   const { layoutFiles, visibility } = useLayoutExampleContext();
 
-  const sandpackSection = useRef<HTMLDivElement>(null);
   const { scrollY } = useViewportScroll();
-  const isLarge = useBreakpoint("2260");
+  const isMedium = useBreakpoint("bp2");
+  const isLarge = useBreakpoint("bp3");
+  const isXLarge = useBreakpoint("2260");
 
+  const sandpackRefSectionTop = useRef<HTMLDivElement>(null);
+  const sandpackRefSectionHeight = useRef<HTMLDivElement>(null);
   const [sandpackSectionTop, setSandpackSectionTop] = useState(0);
   const [sandpackSectionHeight, setSandpackSectionHeight] = useState(0);
 
   useLayoutEffect(() => {
-    if (!sandpackSection.current) return;
-
     const onResize = () => {
-      if (!sandpackSection.current) return;
+      if (!sandpackRefSectionTop.current || !sandpackRefSectionHeight.current)
+        return;
 
-      setSandpackSectionTop(sandpackSection.current?.offsetTop);
-      setSandpackSectionHeight(sandpackSection.current?.offsetHeight);
+      setSandpackSectionTop(sandpackRefSectionTop.current?.offsetTop);
+      setSandpackSectionHeight(sandpackRefSectionHeight.current?.offsetHeight);
     };
 
     onResize();
     window.addEventListener("resize", onResize);
 
     return () => window.removeEventListener("resize", onResize);
-  }, [sandpackSection]);
+  }, []);
 
   const scrollRangeX = [
     sandpackSectionTop * 0.7,
@@ -52,13 +54,21 @@ export const Examples: React.FC = () => {
   ];
 
   // Max width that the left container can grow
-  const progressRangeX = ["0", "0", isLarge ? "600px" : "35vw"];
+  const breakpoint = () => {
+    if (isXLarge) return "600px";
+    if (isLarge) return "40vw";
+    if (isMedium) return "45vw";
+
+    return "35vw";
+  };
+  const progressRangeX = ["0", "0", breakpoint()];
   const x = useTransform(scrollY, scrollRangeX, progressRangeX);
 
   return (
     <>
+      <div ref={sandpackRefSectionTop} />
       <motion.div
-        ref={sandpackSection}
+        ref={sandpackRefSectionHeight}
         style={{ x, position: "sticky", top: "calc(50vh - 25%)" }}
       >
         <Box

@@ -50,6 +50,9 @@ export const CardTitle = styled("h4", {
 
   "@bp1": {
     fontSize: "36px",
+  },
+
+  "@bp2": {
     textAlign: "left",
   },
 
