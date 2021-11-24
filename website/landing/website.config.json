@@ -56,19 +56,19 @@
       {
         "name": "Twitter",
         "socialUrl": "https://twitter.com/codesandbox",
-        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "description": "Sandpack wouldn't exist without this fantastic community of developers. Follow @codesandbox on Twitter to get the latest updates.",
         "logoUrl": "/assets/logos/Twitter.svg"
       },
       {
         "name": "Discord",
         "socialUrl": "https://discord.com/invite/5BpufEP7MH",
-        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "description": "Our Discord community enables people worldwide to share tips, showcase their best thinking, and forge meaningful connections.",
         "logoUrl": "/assets/logos/Discord.svg"
       },
       {
         "name": "GitHub",
         "socialUrl": "https://github.com/codesandbox/sandpack",
-        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "description": "We're always looking for contributors to help us fix bugs, build new features, or improve the documentation. If you're interested, definitely check out our repository.",
         "logoUrl": "/assets/logos/GitHub.svg"
       }
     ]
@@ -120,20 +120,24 @@
     "title": "Showcase",
     "highlights": [
       {
-        "title": "MDX",
-        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+        "title": "React docs",
+        "showCaseUrl": "https://beta.reactjs.org/learn",
+        "description": "Would you like to try out a solution right on the same page with the guides or examples? With Sandpack you can embed a playground right into your documentation."
       },
       {
         "title": "Sound Demo",
-        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+        "showCaseUrl": "https://code-sound.vercel.app",
+        "description": "How about using sound in software to create an atmosphere around your actions? For example, code an epic task in a fantasy adventure or meditate in a buddhist mountain while fixing a bug."
       },
       {
         "title": "Multiple Previews",
-        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+        "showCaseUrl": "",
+        "description": "For generative art or responsive design, Sandpack can render multiple previews to help you see all the variations you need."
       },
       {
-        "title": "Step by step code",
-        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+        "title": "Interactive blog post by Varun Vachhar",
+        "showCaseUrl": "https://varun.ca/modular-webgl/#data--state",
+        "description": "Sandpack is perfectly suitable for blog posts as you can provide examples for your readers to iterate on, but keep and maintain your code in a repo easily."
       }
     ]
   },
