@@ -16,49 +16,51 @@ ReactDOM.render(
 );`;
 
 const NestedSandpack: React.FC<{ nestedProps?: string; setupCode?: string }> = (
-    props
+  props
 ) => {
-    const { nestedProps, setupCode } = props;
-    const appCode = `${
-        setupCode
-            ? setupCode
-            : `import { Sandpack } from "@codesandbox/sandpack-react";`
-    }
+  const { nestedProps, setupCode } = props;
+  const appCode = `${
+    setupCode
+      ? setupCode
+      : `import { Sandpack } from "@codesandbox/sandpack-react";`
+  }
 
 export default function App() {
-  return <Sandpack 
+  return (
+    <Sandpack 
   ${
-      nestedProps
-          ? nestedProps
-          : `   // You can change these examples!
-    // Try uncommenting any of these lines
-    // theme="codesandbox-dark"
-    // template="react"`
+    nestedProps
+      ? nestedProps
+      : `    // You can change these examples!
+      // Try uncommenting any of these lines
+      // theme="codesandbox-dark"
+      // template="react"`
   }
-  />
+    />
+  );
 }
 `;
-    return (
-        <Sandpack
-            template="react"
-            files={{
-                "/App.js": appCode,
-                "/index.js": {
-                    code: indexCode,
-                    hidden: true,
-                },
-            }}
-            options={{
-                editorHeight: 500,
-            }}
-            customSetup={{
-                dependencies: {
-                    "@codesandbox/sandpack-react": "^0.3.3",
-                },
-            }}
-            {...props}
-        />
-    );
+  return (
+    <Sandpack
+      template="react"
+      files={{
+        "/App.js": appCode,
+        "/index.js": {
+          code: indexCode,
+          hidden: true,
+        },
+      }}
+      options={{
+        editorHeight: 500,
+      }}
+      customSetup={{
+        dependencies: {
+          "@codesandbox/sandpack-react": "^0.3.3",
+        },
+      }}
+      {...props}
+    />
+  );
 };
 
 export { NestedSandpack };

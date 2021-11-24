@@ -21,7 +21,7 @@ Sandpack comes with some predefined themes:
 To see all the themes at a glance, use [this sandbox](https://codesandbox.io/s/sandpack-theme-yqsmj)
 
 <!-- prettier-ignore -->
-<NestedSandpack nestedProps={`// Try out the included themes below!
+<NestedSandpack nestedProps={`  // Try out the included themes below!
     theme="codesandbox-dark"
     // theme="codesandbox-light"
     // theme="github-light"
@@ -36,7 +36,7 @@ You can also pass a **partial** theme object that overrides properties in the
 **default** theme, which is `codesandbox-light`.
 
 <!-- prettier-ignore -->
-<NestedSandpack nestedProps={`  theme={{
+<NestedSandpack nestedProps={`    theme={{
       palette: {
         accent: "rebeccapurple",
       },
@@ -53,7 +53,7 @@ Or you can import an existing theme object and use object composition to overrid
 <!-- prettier-ignore -->
 <NestedSandpack 
   setupCode={`import { Sandpack, codesandboxDarkTheme } from "@codesandbox/sandpack-react";`} 
-  nestedProps={`  theme={{
+  nestedProps={`    theme={{
       ...codesandboxDarkTheme,
       typography: {
         fontSize: "16px",
@@ -100,10 +100,10 @@ By default `Sandpack` will show a refresh button in the lower part of the previe
 
 <!-- prettier-ignore -->
 <NestedSandpack
-  nestedProps={`  template="react"
-  options={{
-    showNavigator: true,
-  }}`}
+  nestedProps={`    template="react"
+      options={{
+        showNavigator: true,
+      }}`}
 />
 
 ### Tabs
@@ -114,10 +114,10 @@ On top of that, the `closableTabs` prop allows you to add a small close button f
 
 <!-- prettier-ignore -->
 <NestedSandpack
-  nestedProps={`  options={{
-      showTabs: true,
-      closableTabs: true,
-    }}`}
+  nestedProps={`    options={{
+        showTabs: true,
+        closableTabs: true,
+      }}`}
 />
 
 ### Editor Settings
@@ -135,13 +135,13 @@ Finally, you can specify the distribution between the width of the editor and th
 
 <!-- prettier-ignore -->
 <NestedSandpack
-  nestedProps={`  options={{
-    showLineNumbers: false, // default - true
-    showInlineErrors: true, // default - false
-    wrapContent: true, // default - false
-    editorHeight: 350, // default - 300
-    editorWidthPercentage: 60, // default - 50
-  }}`}
+  nestedProps={`    options={{
+        showLineNumbers: false, // default - true
+        showInlineErrors: true, // default - false
+        wrapContent: true, // default - false
+        editorHeight: 350, // default - 300
+        editorWidthPercentage: 60, // default - 50
+      }}`}
 />
 
 ### Autorun
@@ -155,10 +155,10 @@ setting, it will show a `Run` button that initializes the bundling process. This
 
 <!-- prettier-ignore -->
 <NestedSandpack
-  nestedProps={`  template="react"
-    options={{
-      autorun: false
-    }}`}
+  nestedProps={`    template="react"
+      options={{
+        autorun: false
+      }}`}
 />
 
 ### Recompile Mode
