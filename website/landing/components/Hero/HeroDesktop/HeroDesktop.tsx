@@ -8,8 +8,8 @@ import {
 import type { CSS } from "@stitches/react";
 import { AnimateSharedLayout, motion } from "framer-motion";
 
-import { styled } from "../../stitches.config";
-import { Box, SectionContainer, SectionWrapper } from "../common";
+import { styled } from "../../../stitches.config";
+import { Box, SectionContainer, SectionWrapper } from "../../common";
 
 import { files } from "./heroSandpackFiles";
 
