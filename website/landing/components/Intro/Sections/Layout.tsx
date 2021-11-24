@@ -83,7 +83,7 @@ export const LayoutExample: React.FC = () => {
             }}
           >
             <SandpackThemeProvider theme="sandpack-dark">
-              <SandpackCodeEditor />
+              <SandpackCodeEditor showTabs={false} />
             </SandpackThemeProvider>
           </CodeWrapper>
         </Content>

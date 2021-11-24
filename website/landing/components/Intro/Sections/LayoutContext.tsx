@@ -21,12 +21,26 @@ const LayoutContext = createContext<Context>({
 export const useLayoutExampleContext = (): Context => useContext(LayoutContext);
 
 const ORIGINAL_CODE = {
-  "/App.js": `import {
-  SandpackProvider,
-  SandpackThemeProvider,
-  SandpackCodeEditor,
-  SandpackTranspiledCode,
-} from "@codesandbox/sandpack-react";
+  "/styles.css": `body {
+  font-family: sans-serif;
+  -webkit-font-smoothing: auto;
+  -moz-font-smoothing: auto;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: auto;
+  text-rendering: optimizeLegibility;
+  font-smooth: always;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+.sp-transpiled-code .sp-tabs { 
+  display: none;
+}
+
+h1 {
+  font-size: 1.5rem;
+}`,
+  "/App.js": `import { SandpackProvider, SandpackThemeProvider, SandpackCodeEditor, SandpackTranspiledCode } from "@codesandbox/sandpack-react";
 import "@codesandbox/sandpack-react/dist/index.css";
 
 export default () => (
