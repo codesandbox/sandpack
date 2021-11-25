@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/codesandbox/sandpack/compare/v0.8.0...v0.9.0) (2021-11-25)
+
+
+### Features
+
+* **template:** svelte  ([#182](https://github.com/codesandbox/sandpack/issues/182)) ([2d0c85c](https://github.com/codesandbox/sandpack/commit/2d0c85c5ef4fa856c83e539e2c9e2ffd804fa366))
+
+
+
+
+
 # [0.8.0](https://github.com/codesandbox/sandpack/compare/v0.7.3...v0.8.0) (2021-11-25)
 
 
