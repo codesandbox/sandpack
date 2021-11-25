@@ -23,6 +23,7 @@ import {
   SandpackContainerMobile,
   FadeAnimation,
   THRESHOLD_VIEW,
+  Caption,
 } from "./common";
 
 export const LayoutExample: React.FC = () => {
@@ -78,10 +79,10 @@ export const LayoutExample: React.FC = () => {
                 borderRadius: 0,
                 borderBottomLeftRadius: "16px",
                 borderBottomRightRadius: "16px",
-                padding: "0 15px",
               },
             }}
           >
+            <Caption>Code snippet</Caption>
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor />
             </SandpackThemeProvider>
@@ -91,6 +92,7 @@ export const LayoutExample: React.FC = () => {
         <SandpackContainerPlaceholder />
 
         <SandpackContainerMobile css={{ ".custom-layout": { height: "50vh" } }}>
+          <Caption>Sandpack preview</Caption>
           <SandpackProvider
             customSetup={{
               files: layoutFiles,

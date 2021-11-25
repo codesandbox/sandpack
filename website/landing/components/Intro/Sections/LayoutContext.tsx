@@ -32,8 +32,8 @@ import "@codesandbox/sandpack-react/dist/index.css";
 export default () => (
   <SandpackProvider template="vanilla">
     <SandpackThemeProvider>
-      <SandpackCodeEditor />
-      <SandpackTranspiledCode />
+      <SandpackCodeEditor showTabs={false} />
+      <SandpackTranspiledCode showTabs={false} />
     </SandpackThemeProvider>
   </SandpackProvider>
 );

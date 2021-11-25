@@ -25,15 +25,7 @@ export const Card = styled("div", {
     size: {
       small: {
         gap: "10px",
-        width: "256px",
-
-        "@bp2": {
-          width: "240px",
-        },
-
-        "@bp3": {
-          width: "320px",
-        },
+        width: "100%",
       },
     },
   },
@@ -83,10 +75,11 @@ export const CardDescription = styled("p", {
 
   ".external-link": {
     color: "$$codeBlockForeground",
-    textDecoration: "underline",
+    textDecoration: "none",
 
     "&:hover": {
-      textDecoration: "none",
+      textDecoration: "underline",
+      color: "$primary",
     },
   },
 
@@ -112,6 +105,14 @@ export const CardDescription = styled("p", {
       background: "$$codeBlockBackground",
       color: "$$codeBlockForeground",
       transition: "all .2s ease",
+
+      "&:after": {
+        content: "↗",
+        display: "inline-block",
+        marginLeft: "8px",
+        position: "relative",
+        top: 1,
+      },
     },
   },
 

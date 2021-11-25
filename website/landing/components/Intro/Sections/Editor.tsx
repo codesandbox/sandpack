@@ -22,6 +22,7 @@ import {
   SandpackContainerMobile,
   FadeAnimation,
   THRESHOLD_VIEW,
+  Caption,
 } from "./common";
 
 const ORIGINAL_CODE = `<Sandpack 
@@ -112,6 +113,7 @@ export const EditorExample: React.FC = () => {
           </CardDescription>
 
           <CodeWrapper>
+            <Caption>Code snippet</Caption>
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
@@ -140,6 +142,7 @@ export const EditorExample: React.FC = () => {
         </Content>
 
         <SandpackContainerMobile>
+          <Caption>Sandpack preview</Caption>
           <SandpackPreview options={{ options: custom }} />
         </SandpackContainerMobile>
 

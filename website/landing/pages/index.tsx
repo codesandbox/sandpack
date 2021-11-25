@@ -58,8 +58,8 @@ const Home: NextPage<HomeProps> = () => {
 
       <Main>
         <Hero />
-        <Intro />
         <Features />
+        <Intro />
         <AdvancedUsage />
         <Showcase />
         <Users />

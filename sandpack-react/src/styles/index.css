@@ -113,7 +113,7 @@
   font-family: var(--sp-font-mono);
   font-size: var(--sp-font-size);
   color: var(--sp-colors-fg-active);
-  line-height: 1.4;
+  line-height: var(--sp-line-height);
 }
 
 .sp-code-editor {
@@ -147,6 +147,34 @@
 
 .sp-cm .cm-scroller:focus {
   outline: 0;
+}
+
+.sp-cm .cm-scroller::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.sp-cm .cm-scroller::-webkit-scrollbar-track {
+  background-color: var(--sp-colors-bg-default);
+}
+
+.sp-cm .cm-scroller::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+/* Handle */
+.sp-cm .cm-scroller::-webkit-scrollbar-thumb {
+  background-color: var(--sp-colors-fg-default);
+  border-radius: 9999px;
+}
+
+.sp-cm .cm-scroller::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.sp-cm .cm-scroller::-webkit-scrollbar-track {
+  border-left: 1px solid var(--sp-colors-fg-inactive);
 }
 
 .sp-transpiled-code {

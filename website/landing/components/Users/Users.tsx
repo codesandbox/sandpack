@@ -89,7 +89,7 @@ export const Users: React.FC = () => {
             const { url, height, width } = user.logo;
 
             return (
-              <ListItem key={user.name}>
+              <ListItem key={user.name} css={{ flex: "none" }}>
                 <UserLink
                   css={{
                     transitionDelay: inView

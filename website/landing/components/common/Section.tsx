@@ -8,7 +8,7 @@ export const SectionWrapper = styled("div", {
   $$backgroundColor: palette.darkBackground,
   $$primaryTextColor: palette.darkTextPrimary,
   $$secondaryTextColor: palette.darkTextSecondary,
-  $$codeBlockBackground: palette.lightTextSecondary,
+  $$codeBlockBackground: "#1d1d1d",
   $$codeBlockForeground: palette.lightBackground,
 
   background: "$$backgroundColor",
