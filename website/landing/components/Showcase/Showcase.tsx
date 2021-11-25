@@ -17,7 +17,8 @@ import {
 } from "../common";
 import { useBreakpoint } from "../common/useBreakpoint";
 
-const AnimatedListItem = styled(motion.a, {});
+const AnimatedListItem = styled(motion.li, {});
+const HighlightAnchor = styled("a", {});
 
 const HighlightPreview: React.FC<{ source: string; alt: string }> = ({
   source,
@@ -33,20 +34,6 @@ const HighlightPreview: React.FC<{ source: string; alt: string }> = ({
         justifyContent: "center",
         margin: "0 auto",
         width: "100%",
-
-        "@bp1": {
-          width: "384px",
-        },
-
-        "@bp2": {
-          height: "540px",
-          width: "360px",
-        },
-
-        "@bp3": {
-          height: "720px",
-          width: "480px",
-        },
       }}
     >
       <Image alt={alt} height={1440} src={source} width={960} />
@@ -113,12 +100,11 @@ export const Showcase: React.FC = () => {
           >
             {showCase.highlights.map((item, hIndex) => (
               <AnimatedListItem
-                key={`section-showcase-${hIndex}`}
+                key={`showcase-highlight-${hIndex}`}
                 css={{
                   "@bp1": {
                     width: "384px",
                   },
-
                   "@bp2": {
                     marginTop: "25%",
                     position: "relative",
@@ -139,22 +125,23 @@ export const Showcase: React.FC = () => {
                     width: "480px",
                   },
                 }}
-                href={item.url}
                 style={{
                   translateY:
                     hIndex % 2 === 0 && shouldAnimate
                       ? leftColumnTranslateY
                       : "0",
                 }}
-                target="_blank"
               >
-                <Box
+                <HighlightAnchor
                   css={{
                     gap: "40px",
                     alignItems: "center",
                     display: "flex",
                     flexDirection: "column",
                   }}
+                  href={item.url}
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <HighlightPreview
                     alt={item.title}
@@ -174,7 +161,7 @@ export const Showcase: React.FC = () => {
                       }}
                     />
                   </Card>
-                </Box>
+                </HighlightAnchor>
               </AnimatedListItem>
             ))}
           </List>
