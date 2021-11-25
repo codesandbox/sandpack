@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.1-alpha.0](https://github.com/codesandbox/sandpack/compare/v0.8.0...v0.8.1-alpha.0) (2021-11-25)
+
+
+### Bug Fixes
+
+* **init-mode:** render placeholder ([8731a2a](https://github.com/codesandbox/sandpack/commit/8731a2a2cb219c2a817a8a96b7fba992c234e33d))
+
+
+
+
+
 # [0.6.0](https://github.com/codesandbox/sandpack/compare/v0.5.4...v0.6.0) (2021-11-22)
 
 
