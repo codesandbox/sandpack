@@ -66,6 +66,7 @@ export const HeroDesktop: React.FC = () => {
   const [heroTop, setHeroTop] = useState(0);
   const [heroHeight, setHeroHeight] = useState(0);
   const [heroScroll, setHeroScroll] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(0);
 
   // Animation tracker
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -108,17 +109,22 @@ export const HeroDesktop: React.FC = () => {
       if (updatedScroll !== heroScroll) {
         setHeroScroll(updatedScroll);
       }
+
+      const updatedWindowWidth = window.innerWidth;
+      if (updatedWindowWidth !== windowWidth) {
+        setWindowWidth(updatedWindowWidth);
+      }
     }, 300);
 
     onResize();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, [heroHeight, heroRef, heroScroll, heroTop]);
+  }, [heroHeight, heroRef, heroScroll, heroTop, windowWidth]);
 
   // Scroll listener
   useLayoutEffect(() => {
     const onScroll = debounce(() => {
-      const hasCompleted = window.scrollY >= heroScroll * 0.75; // Arbitraty number
+      const hasCompleted = window.scrollY >= heroScroll * 0.75; // Arbitrary number
       if (hasCompleted !== animationComplete) {
         setAnimationComplete(hasCompleted);
       }
@@ -154,7 +160,11 @@ export const HeroDesktop: React.FC = () => {
                   maxWidth: "2560px",
                 }}
               >
-                <AnimatedPreview heroScroll={heroScroll} heroTop={heroTop} />
+                <AnimatedPreview
+                  heroScroll={heroScroll}
+                  heroTop={heroTop}
+                  windowWidth={windowWidth}
+                />
                 <StaticPreview animationComplete={animationComplete} />
               </Box>
             </HeroMain>
@@ -167,7 +177,7 @@ export const HeroDesktop: React.FC = () => {
                 width: "100vw",
                 maxWidth: "2560px",
               }}
-            />{" "}
+            />
           </AnimateSharedLayout>
         </Section>
       </SandpackWrapper>

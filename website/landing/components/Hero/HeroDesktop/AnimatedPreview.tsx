@@ -8,21 +8,23 @@ import { SandpackTitle } from "./SandpackTitle";
 interface AnimatedPreviewProps {
   heroTop: number;
   heroScroll: number;
+  windowWidth: number;
 }
 export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
   heroTop,
   heroScroll,
+  windowWidth,
 }) => {
   // Scroll animations start
   const { scrollY } = useViewportScroll();
 
-  const containerScrollInput = [heroTop, heroTop + heroScroll * 0.75];
-
+  const containerScaleInput = [heroTop, heroTop + heroScroll * 0.75];
   const scaleOutput = [2, 1];
-  const scale = useTransform(scrollY, containerScrollInput, scaleOutput);
+  const scale = useTransform(scrollY, containerScaleInput, scaleOutput);
 
+  const opacityInput = [heroTop, heroTop + heroScroll * 0.5];
   const opacityOutput = [1, 0];
-  const opacity = useTransform(scrollY, containerScrollInput, opacityOutput);
+  const opacity = useTransform(scrollY, opacityInput, opacityOutput);
 
   return (
     <Box
@@ -90,11 +92,12 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
         </Box>
       </AnimatedBox>
 
-      {/* <AnimatedBox
+      <AnimatedBox
         css={{
           alignItems: "center",
           display: "flex",
           justifyContent: "center",
+          position: "relative",
           transformOrigin: "center right",
           width: "50%",
         }}
@@ -102,8 +105,26 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
           scale,
         }}
       >
-        <PreviewLogo />
-      </AnimatedBox> */}
+        <AnimatedBox css={{ transformOrigin: "center" }} style={{ opacity }}>
+          <Text
+            css={{
+              fontSize: "1rem",
+              textAlign: "center",
+              transform: "scale(.5)",
+            }}
+          >
+            A component toolkit for creating your
+            <br />
+            own live running code editing experience,
+            <br /> using the power of CodeSandbox.
+          </Text>
+        </AnimatedBox>
+        <PreviewLogo
+          heroTop={heroTop}
+          heroScroll={heroScroll}
+          windowWidth={windowWidth}
+        />
+      </AnimatedBox>
 
       {/* Title */}
       <AnimatedBox
