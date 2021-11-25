@@ -2,9 +2,9 @@ export const PreviewLogo: React.FC = () => {
   return (
     <svg
       fill="none"
-      height="100%"
-      viewBox="0 0 178 217"
-      width="100%"
+      height="217"
+      width="178"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M89.222 48h81.867v162.096H89.222z"
