@@ -1,4 +1,5 @@
 import { motion, useTransform, useViewportScroll } from "framer-motion";
+import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
 
 import { styled } from "../../stitches.config";
@@ -13,13 +14,15 @@ import {
   Card,
   CardTitle,
   CardDescription,
-  Text,
 } from "../common";
 import { useBreakpoint } from "../common/useBreakpoint";
 
-const AnimatedListItem = styled(motion.li, {});
+const AnimatedListItem = styled(motion.a, {});
 
-const HighlightPreview = () => {
+const HighlightPreview: React.FC<{ source: string; alt: string }> = ({
+  source,
+  alt,
+}) => {
   return (
     <Box
       css={{
@@ -30,7 +33,7 @@ const HighlightPreview = () => {
         height: "595px",
         justifyContent: "center",
         margin: "0 auto",
-        width: "343px",
+        width: "100%",
 
         "@bp1": {
           width: "384px",
@@ -47,7 +50,7 @@ const HighlightPreview = () => {
         },
       }}
     >
-      <Text>content landmark.</Text>
+      <Image alt={alt} height={720} src={source} width={480} />
     </Box>
   );
 };
@@ -109,7 +112,7 @@ export const Showcase: React.FC = () => {
               },
             }}
           >
-            {showCase.highlights.map((h, hIndex) => (
+            {showCase.highlights.map((item, hIndex) => (
               <AnimatedListItem
                 key={`section-showcase-${hIndex}`}
                 css={{
@@ -137,12 +140,14 @@ export const Showcase: React.FC = () => {
                     width: "480px",
                   },
                 }}
+                href={item.url}
                 style={{
                   translateY:
                     hIndex % 2 === 0 && shouldAnimate
                       ? leftColumnTranslateY
                       : "0",
                 }}
+                target="_blank"
               >
                 <Box
                   css={{
@@ -152,18 +157,21 @@ export const Showcase: React.FC = () => {
                     flexDirection: "column",
                   }}
                 >
-                  <HighlightPreview />
+                  <HighlightPreview
+                    alt={item.title}
+                    source={item.imageSource}
+                  />
                   <Card css={{ alignItems: "center" }}>
                     <CardTitle
                       css={{ "@bp2": { textAlign: "center" } }}
                       dangerouslySetInnerHTML={{
-                        __html: h.title,
+                        __html: item.title,
                       }}
                     />
                     <CardDescription
                       css={{ textAlign: "center" }}
                       dangerouslySetInnerHTML={{
-                        __html: h.description,
+                        __html: item.description,
                       }}
                     />
                   </Card>

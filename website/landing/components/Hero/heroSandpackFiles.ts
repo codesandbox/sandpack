@@ -170,11 +170,11 @@ function SectionHeader() {
       <button>
         <Text as="span">npm install @codesandbox/sandpack-react</Text>
       </button>
-      <Stack css={{ gap: "$2" }} horizontal>
-        <a href="#" target="_blank">
+      <Stack horizontal>
+        <a href="https://github.com/codesandbox/sandpack" target="_blank">
           <Text as="span" semiBold>Github</Text>
         </a>
-        <a href="#" target="_blank">
+        <a href="https://sandpack.codesandbox.io/docs/" target="_blank" style={{ marginLeft: "24px" }}>
           <Text as="span" semiBold>Docs</Text>
         </a>
       </Stack>
