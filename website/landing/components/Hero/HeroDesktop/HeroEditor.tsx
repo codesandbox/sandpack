@@ -1,16 +1,27 @@
 import { SandpackCodeEditor } from "@codesandbox/sandpack-react";
+import { useTransform } from "framer-motion";
 import type { MotionValue } from "framer-motion";
 
 import { AnimatedBox } from "../../common";
 
 interface HeroEditorProps {
   animationComplete: boolean;
-  translateX: MotionValue<string>;
+  containerScrollInput: number[];
+  scrollY: MotionValue<number>;
 }
 export const HeroEditor: React.FC<HeroEditorProps> = ({
   animationComplete,
-  translateX,
+  containerScrollInput,
+  scrollY,
 }) => {
+  // Editor's width is set to half of the viewport's width. It's initial
+  // x0 = -1 * (viewportWidth / 2). Then it should translate 100% to the right
+  // to be in the middle of the viewport.
+  const translateX = useTransform(scrollY, containerScrollInput, [
+    "0%",
+    "100%",
+  ]);
+
   return (
     <AnimatedBox
       css={{
@@ -19,7 +30,7 @@ export const HeroEditor: React.FC<HeroEditorProps> = ({
         display: "flex",
         flexDirection: "column",
         position: "relative",
-        transform: "translateX($$translateX)",
+        pointerEvents: animationComplete ? "auto" : "none",
         width: "50vw",
         zIndex: "$$editorLevel",
       }}

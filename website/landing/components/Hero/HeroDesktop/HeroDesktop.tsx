@@ -13,10 +13,11 @@ import { useLayoutEffect, useRef, useState } from "react";
 
 import { Box, SectionContainer, SectionWrapper } from "../../common";
 
+import { AnimatedPreview } from "./AnimatedPreview";
 import { HeroEditor } from "./HeroEditor";
 import { HeroMain } from "./HeroMain";
-import { HeroPreview } from "./HeroPreview";
 import { files } from "./heroSandpackFiles";
+import { StaticPreview } from "./StaticPreview";
 
 const CUSTOM_CLASSES_MAP = {
   "sp-stack": "custom-stack__hero",
@@ -77,20 +78,13 @@ export const HeroDesktop: React.FC = () => {
   const containerScrollInput = [heroTop, heroTop + heroScroll * 0.75];
 
   // Translate hero out of view when scrolling past it
-  const heroTranslateYz = useTransform(
+  const heroTranslateY = useTransform(
     scrollY,
     [heroTop + heroScroll, heroHeight + (heroHeight - heroScroll)], // heroHeight - heroScroll = window height: ;
     ["0%", "-100%"]
   );
 
-  // Editor's width is set to half of the viewport's width. It's initial
-  // x0 = -1 * (viewportWidth / 2). Then it should translate 100% to the right
-  // to be in the middle of the viewport.
-  const editorTranslateX = useTransform(scrollY, containerScrollInput, [
-    "0",
-    "100%",
-  ]);
-
+  // Get dimensions
   useLayoutEffect(() => {
     const hero = heroRef.current;
     if (!hero) return;
@@ -121,6 +115,7 @@ export const HeroDesktop: React.FC = () => {
     return () => window.removeEventListener("resize", onResize);
   }, [heroHeight, heroRef, heroScroll, heroTop]);
 
+  // Scroll listener
   useLayoutEffect(() => {
     const onScroll = debounce(() => {
       const hasCompleted = window.scrollY >= heroScroll * 0.75; // Arbitraty number
@@ -139,12 +134,29 @@ export const HeroDesktop: React.FC = () => {
       <SandpackWrapper>
         <Section>
           <AnimateSharedLayout>
-            <HeroMain translateY={heroTranslateYz}>
+            <HeroMain translateY={heroTranslateY}>
               <HeroEditor
                 animationComplete={animationComplete}
-                translateX={editorTranslateX}
+                containerScrollInput={containerScrollInput}
+                scrollY={scrollY}
               />
-              <HeroPreview animationComplete={animationComplete} />
+
+              {/* Preview */}
+              <Box
+                css={{
+                  background: "$surface",
+                  fontSize: "1.6rem" /* TODO: responsive font-sizes (?) */,
+                  lineHeight: 1.6,
+                  letterSpacing: "-0.025em",
+                  height: "100%",
+                  position: "relative",
+                  width: "100vw",
+                  maxWidth: "2560px",
+                }}
+              >
+                <AnimatedPreview heroScroll={heroScroll} heroTop={heroTop} />
+                <StaticPreview animationComplete={animationComplete} />
+              </Box>
             </HeroMain>
             {/* This ghost ref sets the hero dimensions  */}
             <Box
