@@ -56,6 +56,7 @@ export const globalStyles = globalCss({
   body: {
     fontSize: "1.6rem",
     fontSmooth: "antialiased",
+    fontFamily: "sans-serif",
     "-webkit-font-smoothing": "antialiased",
     lineHeight: 1.6,
     letterSpacing: "-0.025em",
@@ -127,7 +128,7 @@ const Text = styled("p", {
       }
     },
     semiBold: {
-      true: { fontWeight: "bolder" },
+      true: { fontWeight: "normal" },
     }
   }
 });
@@ -231,4 +232,5 @@ export const files = {
   "/stitches.config.js": stitchesConfig,
   "/logo.svg": logoFile,
   "/sandpack.svg": sandpackFile,
+  "/styles.css": ""
 };
