@@ -73,10 +73,11 @@ export const Community: React.FC = () => {
           css={{
             display: "flex",
             flexDirection: "column",
-            gap: "120px",
+            gap: "60px",
             justifyContent: "center",
 
             "@bp2": {
+              gap: "120px",
               flexDirection: "row",
             },
           }}

@@ -22,6 +22,7 @@ import {
   SandpackContainerMobile,
   FadeAnimation,
   THRESHOLD_VIEW,
+  Caption,
 } from "./common";
 
 const ORIGINAL_CODE = `<Sandpack 
@@ -98,13 +99,21 @@ export const EditorExample: React.FC = () => {
     <FadeAnimation>
       <Row ref={ref}>
         <Content>
-          <CardTitle>Configure your editor</CardTitle>
+          <CardTitle>Custom UI with ease</CardTitle>
           <CardDescription>
-            The <code>options</code> prop allows you to toggle on/off different
-            features of the code editor.
+            Customizing the UI is possible with the{" "}
+            <a
+              href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#visual-options"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <code>options</code>
+            </a>{" "}
+            prop.
           </CardDescription>
 
           <CodeWrapper>
+            <Caption>Code snippet</Caption>
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
@@ -133,6 +142,7 @@ export const EditorExample: React.FC = () => {
         </Content>
 
         <SandpackContainerMobile>
+          <Caption>Sandpack preview</Caption>
           <SandpackPreview options={{ options: custom }} />
         </SandpackContainerMobile>
 

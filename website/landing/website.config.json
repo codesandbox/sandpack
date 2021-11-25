@@ -46,26 +46,7 @@
       "url": "https://github.com/codesandbox/sandpack"
     }
   ],
-  "advancedUsage": {
-    "title": "Building blocks<br />of the Sandpack<br />ecosystem.",
-    "examples": [
-      {
-        "title": "Providers",
-        "description": "We export a <code>SandpackProvider</code> that manages the state and actions for sandpack and a <code>ThemeProvider</code> that handles the theme and style.",
-        "illustrationKey": "providers"
-      },
-      {
-        "title": "Components",
-        "description": "We also export the smaller parts that make up the <code>&lt;Sandpack /&gt;</code> component, so you can combine them with your custom components.",
-        "illustrationKey": "components"
-      },
-      {
-        "title": "Client",
-        "description": "The bundler is wrapped by a small package called <code>sandpack-client</code>, which is framework agnostic and allows you to tap into the bundler protocol.",
-        "illustrationKey": "client"
-      }
-    ]
-  },
+
   "banner": {
     "title": "Get started<br /> with Sandpack."
   },
@@ -75,19 +56,19 @@
       {
         "name": "Twitter",
         "socialUrl": "https://twitter.com/codesandbox",
-        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "description": "Sandpack wouldn't exist without this fantastic community of developers. Follow @codesandbox on Twitter to get the latest updates.",
         "logoUrl": "/assets/logos/Twitter.svg"
       },
       {
         "name": "Discord",
         "socialUrl": "https://discord.com/invite/5BpufEP7MH",
-        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "description": "Our Discord community enables people worldwide to share tips, showcase their best thinking, and forge meaningful connections.",
         "logoUrl": "/assets/logos/Discord.svg"
       },
       {
         "name": "GitHub",
         "socialUrl": "https://github.com/codesandbox/sandpack",
-        "description": "Lorem Ipsum is simply dummy of the printing and typesetting industry. Lorem Ipsum has.",
+        "description": "We're always looking for contributors to help us fix bugs, build new features, or improve the documentation. If you're interested, definitely check out our repository.",
         "logoUrl": "/assets/logos/GitHub.svg"
       }
     ]
@@ -97,17 +78,17 @@
     "highlights": [
       {
         "title": "Full editor experience",
-        "description": "Sandpack is using CodeMirror under the hood, giving you all the basic capabilities of a code editor and syntax highlight.",
+        "description": "Sandpack is using <a href='https://codemirror.net/' rel='noreferrer' target='_blank' class='external-link'>CodeMirror</a> under the hood, giving you all the basic capabilities of a code editor and syntax highlight. However, if you want to use your own editor framework, you can add that as a component too!",
         "iconKey": "editor"
       },
       {
         "title": "Advanced preview",
-        "description": "Sandpack embeds the browser bundler that powers codesandbox.io and takes advantage of the following features: hot module reloading API, friendly error overlay, powerful transpilation result caching, dependency resolver.",
+        "description": "Sandpack embeds the browser bundler that powers <a href='http://codesandbox.io' rel='noreferrer' target='_blank' class='external-link'>codesandbox.io</a> and takes advantage of features like npm dependency support, hot module reloading, error overlay, and caching.",
         "iconKey": "preview"
       },
       {
-        "title": "Export to CodeSandbox",
-        "description": "With Sandpack, you're always one click away from opening your code snippet in codesandbox",
+        "title": "Leverege CodeSandbox",
+        "description": "With Sandpack, you're always one click away from opening your code snippet in CodeSandbox. This way you can easily share bug reports, or examples behind a unique URL.",
         "iconKey": "export"
       }
     ]
@@ -115,24 +96,52 @@
   "intro": {
     "title": "Live coding <span class=\"highlight\">in<br />the browser.</span>"
   },
+  "advancedUsage": {
+    "title": "Building blocks<br />of the Sandpack<br />ecosystem.",
+    "examples": [
+      {
+        "title": "Providers & Custom Hooks",
+        "description": "<a href='https://sandpack.codesandbox.io/docs/advanced-usage/provider#sandpack-provider' rel='noreferrer' target='_blank'><code>SandpackProvider</code></a> is available to manage the state and actions and <a href='https://sandpack.codesandbox.io/docs/advanced-usage/provider#theme-provider' rel='noreferrer' target='_blank'><code>ThemeProvider</code></a> is for handling the theme and style. A set of hooks gives you access to the state and offers an API for integrating custom components into Sandpack.",
+        "illustrationKey": "providers"
+      },
+      {
+        "title": "Sandpack Components",
+        "description": "The <a href='https://sandpack.codesandbox.io/docs/advanced-usage/components' rel='noreferrer' target='_blank'><code>&#60;Sandpack /&#62;</code></a> component is made up of smaller parts that you can import separately to combine with your custom components.",
+        "illustrationKey": "components"
+      },
+      {
+        "title": "Sandpack Client",
+        "description": "The bundler is wrapped by a small package called <a href='https://sandpack.codesandbox.io/docs/advanced-usage/client' rel='noreferrer' target='_blank'><code>sandpack-client</code></a>, which is framework agnostic and allows you to tap into the bundler protocol.",
+        "illustrationKey": "client"
+      }
+    ]
+  },
   "showCase": {
     "title": "Showcase",
     "highlights": [
       {
-        "title": "MDX",
-        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+        "title": "React docs",
+        "imageSource": "/assets/showcase/react-docs.jpg",
+        "url": "https://beta.reactjs.org/learn",
+        "description": "Would you like to try out a solution right on the same page with the guides or examples? With Sandpack you can embed a playground right into your documentation."
       },
       {
         "title": "Sound Demo",
-        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+        "imageSource": "/assets/showcase/sound-demo.jpg",
+        "url": "https://code-sound.vercel.app",
+        "description": "How about using sound in software to create an atmosphere around your actions? For example, code an epic task in a fantasy adventure or meditate in a buddhist mountain while fixing a bug."
       },
       {
         "title": "Multiple Previews",
-        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+        "imageSource": "/assets/showcase/mulitple-preview.jpg",
+        "url": "",
+        "description": "For generative art or responsive design, Sandpack can render multiple previews to help you see all the variations you need."
       },
       {
-        "title": "Step by step code",
-        "description": "Quisque commodo finibus metus nec viverra. Duis ultricies congue arcu, nec efficitur nibh pellentesque sed. Nullam convallis mi sem."
+        "title": "Interactive blog post by Varun Vachhar",
+        "imageSource": "/assets/showcase/interactive.jpg",
+        "url": "https://varun.ca/modular-webgl/#data--state",
+        "description": "Sandpack is perfectly suitable for blog posts as you can provide examples for your readers to iterate on, but keep and maintain your code in a repo easily."
       }
     ]
   },

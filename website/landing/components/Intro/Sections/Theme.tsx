@@ -22,6 +22,7 @@ import {
   SandpackContainerMobile,
   FadeAnimation,
   THRESHOLD_VIEW,
+  Caption,
 } from "./common";
 
 const themeOptions: SandpackPredefinedTheme[] = [
@@ -73,12 +74,23 @@ export const ThemeExample: React.FC = () => {
     <FadeAnimation>
       <Row ref={ref}>
         <Content>
-          <CardTitle>Apply a theme</CardTitle>
+          <CardTitle>
+            Set a theme, or
+            <br /> create your own
+          </CardTitle>
           <CardDescription>
-            Use the <code>theme</code> prop to set a predefined option made by
-            CodeSandbox. Try below, just click to change code and see all the
-            predefined options
+            You can style Sandpack however you&apos;d like! Use one of our
+            predefined{" "}
+            <a
+              href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#theming"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <code>theme</code>
+            </a>{" "}
+            or apply your own.
           </CardDescription>
+
           <SnippetButton
             ref={boxRef}
             onClick={shuffleTheme}
@@ -107,7 +119,7 @@ export const ThemeExample: React.FC = () => {
                     y: mousePosition.y,
                   }}
                 >
-                  click to change
+                  Click to change
                 </ToolTip>
               </AnimatePresence>
             )}
@@ -115,6 +127,7 @@ export const ThemeExample: React.FC = () => {
         </Content>
 
         <SandpackContainerMobile>
+          <Caption>Sandpack preview</Caption>
           <SandpackPreview options={{ theme }} />
         </SandpackContainerMobile>
 

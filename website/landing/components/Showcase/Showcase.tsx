@@ -1,7 +1,28 @@
-import content from "../../website.config.json";
-import { Box, List, Text } from "../common";
+import { motion, useTransform, useViewportScroll } from "framer-motion";
+import Image from "next/image";
+import { useLayoutEffect, useRef, useState } from "react";
 
-const ContentLandmark = () => {
+import { styled } from "../../stitches.config";
+import content from "../../website.config.json";
+import {
+  Box,
+  List,
+  SectionWrapper,
+  SectionContainer,
+  SectionHeader,
+  SectionTitle,
+  Card,
+  CardTitle,
+  CardDescription,
+} from "../common";
+import { useBreakpoint } from "../common/useBreakpoint";
+
+const AnimatedListItem = styled(motion.a, {});
+
+const HighlightPreview: React.FC<{ source: string; alt: string }> = ({
+  source,
+  alt,
+}) => {
   return (
     <Box
       css={{
@@ -12,7 +33,7 @@ const ContentLandmark = () => {
         height: "595px",
         justifyContent: "center",
         margin: "0 auto",
-        width: "343px",
+        width: "100%",
 
         "@bp1": {
           width: "384px",
@@ -29,142 +50,137 @@ const ContentLandmark = () => {
         },
       }}
     >
-      <Text>content landmark.</Text>
+      <Image alt={alt} height={720} src={source} width={480} />
     </Box>
   );
 };
 
 export const Showcase: React.FC = () => {
+  const shouldAnimate = useBreakpoint("bp2");
+
   const { showCase } = content;
 
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [sectionTop, setSectionTop] = useState(0);
+  const [sectionScroll, setSectionScroll] = useState(0);
+
+  const { scrollY } = useViewportScroll();
+  const scrollInput = [sectionTop, sectionTop + sectionScroll];
+  const translateOutput = ["-25%", "25%"];
+  const leftColumnTranslateY = useTransform(
+    scrollY,
+    scrollInput,
+    translateOutput
+  );
+
+  useLayoutEffect(() => {
+    const container = sectionRef.current;
+    if (!container || !window) return;
+
+    const onResize = () => {
+      setSectionTop(container.offsetTop);
+      setSectionScroll(container.offsetHeight - window.innerHeight);
+    };
+
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [sectionRef]);
+
   return (
-    <Box
-      as="section"
-      css={{
-        alignItems: "center",
-        display: "flex",
-        flexDirection: "column",
-        gap: "200px",
-        justifyContent: "center",
-        padding: "200px 16px",
-
-        "@bp2": {
-          padding: "200px 0 0",
-        },
-      }}
-    >
-      <Text
-        as="h2"
-        css={{
-          fontSize: "36px",
-          fontWeight: "$semiBold",
-          letterSpacing: "-0.05em",
-          lineHeight: "1",
-          textAlign: "center",
-
-          "@bp1": {
-            fontSize: "72px",
-          },
-
-          "@bp2": {
-            fontSize: "96px",
-          },
-
-          "@bp3": {
-            fontSize: "144px",
-          },
-        }}
-        dangerouslySetInnerHTML={{ __html: showCase.title }}
-      />
-      <List
-        css={{
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          gap: "148px",
-          width: "100%",
-
-          "@bp2": {
-            display: "grid",
-            gap: "200px",
-            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-          },
-        }}
-      >
-        {showCase.highlights.map((h, index) => (
-          <Box
-            key={`section-showcase-${index}`}
-            as="li"
+    <SectionWrapper ref={sectionRef}>
+      <SectionContainer>
+        <SectionHeader
+          css={{
+            "@bp2": { padding: "200px 0" },
+          }}
+        >
+          <SectionTitle dangerouslySetInnerHTML={{ __html: showCase.title }} />
+        </SectionHeader>
+        <Box css={{ "@bp2": { marginBottom: "200px", marginTop: "200px" } }}>
+          <List
             css={{
               alignItems: "center",
               display: "flex",
               flexDirection: "column",
-              gap: "40px",
-
-              "@bp1": {
-                width: "384px",
-              },
+              gap: "148px",
 
               "@bp2": {
-                width: "360px",
-
-                "&:nth-of-type(odd)": {
-                  justifySelf: "flex-end",
-                },
-
-                "&:ntt-of-type(even)": {
-                  justifySelf: "flex-start",
-                },
-              },
-
-              "@bp3": {
-                width: "480px",
+                display: "grid",
+                "--gap": "200px",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
               },
             }}
           >
-            <ContentLandmark />
-            <Box
-              css={{
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column",
-                gap: "24px",
-              }}
-            >
-              <Text
+            {showCase.highlights.map((item, hIndex) => (
+              <AnimatedListItem
+                key={`section-showcase-${hIndex}`}
                 css={{
-                  fontSize: "24px",
-                  fontWeight: "$semiBold",
-                  letterSpacing: "-0.05em",
-                  lineHeight: "1.2",
-                  textAlign: "center",
-
                   "@bp1": {
-                    fontSize: "36px",
+                    width: "384px",
                   },
-                }}
-              >
-                {h.title}
-              </Text>
-              <Text
-                css={{
-                  color: "$darkTextSecondary",
-                  fontSize: "16px",
-                  lineHeight: "1.4",
-                  letterSpacing: "-0.025em",
-                  textAlign: "center",
 
                   "@bp2": {
-                    fontSize: "18px",
+                    marginTop: "25%",
+                    position: "relative",
+                    width: "360px",
+
+                    "&:nth-of-type(odd)": {
+                      transform: "translateY(0)",
+                      justifySelf: "flex-end",
+                    },
+
+                    "&:nth-of-type(even)": {
+                      justifySelf: "flex-start",
+                      transform: "translateY(-25%)",
+                    },
+                  },
+
+                  "@bp3": {
+                    width: "480px",
                   },
                 }}
+                href={item.url}
+                style={{
+                  translateY:
+                    hIndex % 2 === 0 && shouldAnimate
+                      ? leftColumnTranslateY
+                      : "0",
+                }}
+                target="_blank"
               >
-                {h.description}
-              </Text>
-            </Box>
-          </Box>
-        ))}
-      </List>
-    </Box>
+                <Box
+                  css={{
+                    gap: "40px",
+                    alignItems: "center",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <HighlightPreview
+                    alt={item.title}
+                    source={item.imageSource}
+                  />
+                  <Card css={{ alignItems: "center" }}>
+                    <CardTitle
+                      css={{ "@bp2": { textAlign: "center" } }}
+                      dangerouslySetInnerHTML={{
+                        __html: item.title,
+                      }}
+                    />
+                    <CardDescription
+                      css={{ textAlign: "center" }}
+                      dangerouslySetInnerHTML={{
+                        __html: item.description,
+                      }}
+                    />
+                  </Card>
+                </Box>
+              </AnimatedListItem>
+            ))}
+          </List>
+        </Box>
+      </SectionContainer>
+    </SectionWrapper>
   );
 };

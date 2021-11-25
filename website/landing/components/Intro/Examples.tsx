@@ -56,7 +56,7 @@ export const Examples: React.FC = () => {
   // Max width that the left container can grow
   const breakpoint = () => {
     if (isXLarge) return "600px";
-    if (isLarge) return "40vw";
+    if (isLarge) return "30vw";
     if (isMedium) return "45vw";
 
     return "35vw";
@@ -67,63 +67,67 @@ export const Examples: React.FC = () => {
   return (
     <>
       <div ref={sandpackRefSectionTop} />
-      <motion.div
-        ref={sandpackRefSectionHeight}
-        style={{ x, position: "sticky", top: "calc(50vh - 25%)" }}
-      >
-        <Box
-          css={{
-            right: 0,
-            display: "none",
-            position: "relative",
 
-            "@bp2": {
-              display: "block",
-            },
-
-            "*": {
-              transition: ".2s ease background, .2s ease color",
-            },
+      {isMedium && (
+        <motion.div
+          ref={sandpackRefSectionHeight}
+          style={{
+            x,
+            position: "sticky",
+            top: "calc(50vh - 25%)",
+            marginBottom: "calc(50vh - 15%)",
           }}
         >
-          <motion.div
-            animate={{ opacity: visibility ? 0 : 1 }}
-            initial={{ opacity: 0 }}
-            style={{ position: "relative", zIndex: 1 }}
-          >
-            <SandpackExample />
-          </motion.div>
+          <Box
+            css={{
+              right: 0,
 
-          <SandpackContainer css={{ position: "absolute", top: "0" }}>
+              position: "relative",
+
+              "*": {
+                transition: ".2s ease background, .2s ease color",
+              },
+            }}
+          >
             <motion.div
-              animate={{ opacity: visibility ? 1 : 0 }}
+              animate={{ opacity: visibility ? 0 : 1 }}
               initial={{ opacity: 0 }}
+              style={{ position: "relative", zIndex: visibility ? -1 : 1 }}
             >
-              <SandpackProvider
-                customSetup={{
-                  files: layoutFiles,
-                  dependencies: { "@codesandbox/sandpack-react": "latest" },
-                }}
-                template="react"
-              >
-                <ClasserProvider
-                  classes={{
-                    "sp-layout": "custom-layout",
-                    "sp-stack": "custom-stack",
-                    "sp-wrapper": "custom-wrapper",
-                  }}
-                >
-                  <SandpackThemeProvider>
-                    <SandpackLayout>
-                      <SandpackPreview />
-                    </SandpackLayout>
-                  </SandpackThemeProvider>
-                </ClasserProvider>
-              </SandpackProvider>
+              <SandpackExample />
             </motion.div>
-          </SandpackContainer>
-        </Box>
-      </motion.div>
+
+            <SandpackContainer css={{ position: "absolute", top: "0" }}>
+              <motion.div
+                animate={{ opacity: visibility ? 1 : 0 }}
+                initial={{ opacity: 0 }}
+              >
+                <SandpackProvider
+                  customSetup={{
+                    files: layoutFiles,
+                    dependencies: { "@codesandbox/sandpack-react": "latest" },
+                  }}
+                  template="react"
+                >
+                  <ClasserProvider
+                    classes={{
+                      "sp-layout": "custom-layout",
+                      "sp-stack": "custom-stack",
+                      "sp-wrapper": "custom-wrapper",
+                    }}
+                  >
+                    <SandpackThemeProvider>
+                      <SandpackLayout>
+                        <SandpackPreview />
+                      </SandpackLayout>
+                    </SandpackThemeProvider>
+                  </ClasserProvider>
+                </SandpackProvider>
+              </motion.div>
+            </SandpackContainer>
+          </Box>
+        </motion.div>
+      )}
 
       <List
         css={{
@@ -133,15 +137,15 @@ export const Examples: React.FC = () => {
           width: "100%",
 
           "@bp1": {
-            gap: "200px",
+            width: "initial",
+            "--gap": "200px",
           },
 
           "@bp2": {
             alignItems: "center",
             flexDirection: "column",
-            gap: "0",
+            "--gap": "0",
             scrollSnapType: "y mandatory",
-            width: "initial",
           },
         }}
       >

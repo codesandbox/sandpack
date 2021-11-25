@@ -1476,37 +1476,6 @@
     style-mod "^4.0.0"
     w3c-keyname "^2.2.4"
 
-"@codesandbox/sandpack-client@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-client/-/sandpack-client-0.6.0.tgz#15c227b0a6d96676a271e29a6c0bed8ab399bb70"
-  integrity sha512-Li6aGnWzC67nGvWg9iQEx933K0n5EVD+cBiPfVCy2judQpggA/+9aAVC3AnFJthZgAloi18RxCH++3m7ITVk1w==
-  dependencies:
-    codesandbox-import-utils "^1.2.3"
-    lodash.isequal "^4.5.0"
-
-"@codesandbox/sandpack-react@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@codesandbox/sandpack-react/-/sandpack-react-0.6.0.tgz#3d4e08c759a04f73dcd580b597d0e86bfc3d424b"
-  integrity sha512-77RrK7qkT9rVQyoV32Hez2G0mNIx3JBHP4BRNuC9friqtLYlarIOf8lI0oKMsaDr1kR1aSnlNQrupWhY2gRNXA==
-  dependencies:
-    "@code-hike/classer" "^0.0.0-aa6efee"
-    "@codemirror/closebrackets" "^0.19.0"
-    "@codemirror/commands" "^0.19.5"
-    "@codemirror/comment" "^0.19.0"
-    "@codemirror/gutter" "^0.19.5"
-    "@codemirror/highlight" "^0.19.6"
-    "@codemirror/history" "^0.19.0"
-    "@codemirror/lang-css" "^0.19.3"
-    "@codemirror/lang-html" "^0.19.3"
-    "@codemirror/lang-javascript" "^0.19.3"
-    "@codemirror/language" "^0.19.4"
-    "@codemirror/matchbrackets" "^0.19.3"
-    "@codemirror/state" "^0.19.5"
-    "@codemirror/view" "^0.19.16"
-    "@codesandbox/sandpack-client" "^0.6.0"
-    codesandbox-import-util-types "^2.2.3"
-    codesandbox-import-utils "^2.2.3"
-
 "@discoveryjs/json-ext@^0.5.3":
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.5.tgz#9283c9ce5b289a3c4f61c12757469e59377f81f3"

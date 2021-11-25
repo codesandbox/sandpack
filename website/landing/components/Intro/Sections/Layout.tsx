@@ -23,6 +23,7 @@ import {
   SandpackContainerMobile,
   FadeAnimation,
   THRESHOLD_VIEW,
+  Caption,
 } from "./common";
 
 export const LayoutExample: React.FC = () => {
@@ -51,12 +52,20 @@ export const LayoutExample: React.FC = () => {
     <FadeAnimation>
       <Row ref={ref}>
         <Content>
-          <CardTitle>Build your own Sandpack</CardTitle>
+          <CardTitle>Build your own Sandpack UI</CardTitle>
           <CardDescription>
             If you want to fully customise the experience, you can build the UI
-            yourself. The library exports a set of composable components and
-            hooks that allow you to tailor the editing experience to your own
-            needs.
+            yourself. The library exports a set of{" "}
+            <a
+              className="external-link"
+              href="https://sandpack.codesandbox.io/docs/advanced-usage/components#layout"
+              rel="noreferrer"
+              target="_blank"
+            >
+              composable components
+            </a>{" "}
+            and hooks that allow you to tailor the editing experience to your
+            own needs.
           </CardDescription>
 
           <CodeWrapper
@@ -70,10 +79,10 @@ export const LayoutExample: React.FC = () => {
                 borderRadius: 0,
                 borderBottomLeftRadius: "16px",
                 borderBottomRightRadius: "16px",
-                padding: "0 15px",
               },
             }}
           >
+            <Caption>Code snippet</Caption>
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor />
             </SandpackThemeProvider>
@@ -83,6 +92,7 @@ export const LayoutExample: React.FC = () => {
         <SandpackContainerPlaceholder />
 
         <SandpackContainerMobile css={{ ".custom-layout": { height: "50vh" } }}>
+          <Caption>Sandpack preview</Caption>
           <SandpackProvider
             customSetup={{
               files: layoutFiles,

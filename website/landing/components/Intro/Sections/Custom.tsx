@@ -22,6 +22,7 @@ import {
   SandpackContainerMobile,
   FadeAnimation,
   THRESHOLD_VIEW,
+  Caption,
 } from "./common";
 
 const ORIGINAL_CODE = `<Sandpack
@@ -91,13 +92,24 @@ export const CustomExample: React.FC = () => {
     <FadeAnimation>
       <Row ref={ref}>
         <Content>
-          <CardTitle>Easily customise the project to run</CardTitle>
+          <CardTitle>
+            Easily customise <br />
+            the project to run
+          </CardTitle>
           <CardDescription>
-            Use the <code>customSetup</code> prop to add dependencies or change
-            the file structure.
+            Use the{" "}
+            <a
+              href="https://sandpack.codesandbox.io/docs/getting-started/custom-content#custom-setup"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <code>customSetup</code>
+            </a>{" "}
+            prop to add dependencies or change the file structure.
           </CardDescription>
 
           <CodeWrapper>
+            <Caption>Code snippet</Caption>
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
@@ -125,6 +137,7 @@ export const CustomExample: React.FC = () => {
         </Content>
 
         <SandpackContainerMobile>
+          <Caption>Sandpack preview</Caption>
           <SandpackPreview
             options={{ customSetup: parseFromSandpackToJson(code) }}
           />

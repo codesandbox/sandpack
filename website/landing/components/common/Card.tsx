@@ -8,7 +8,7 @@ export const Card = styled("div", {
   width: "336px",
 
   "@bp1": {
-    gap: "20px",
+    "--gap": "20px",
     width: "384px",
   },
 
@@ -24,15 +24,10 @@ export const Card = styled("div", {
   variants: {
     size: {
       small: {
-        gap: "10px",
-        width: "256px",
+        "--gap": "10px",
 
         "@bp2": {
-          width: "240px",
-        },
-
-        "@bp3": {
-          width: "320px",
+          width: "100%",
         },
       },
     },
@@ -81,9 +76,24 @@ export const CardDescription = styled("p", {
     letterSpacing: "inherit",
   },
 
+  ".external-link": {
+    color: "$$codeBlockForeground",
+    textDecoration: "none",
+
+    "&:hover": {
+      textDecoration: "underline",
+      color: "$primary",
+    },
+  },
+
   "@bp2": {
     fontSize: "18px",
     textAlign: "start",
+
+    "a code:hover": {
+      background: "$primary",
+      color: "$darkBackground",
+    },
 
     code: {
       display: "inline-flex",
@@ -98,11 +108,13 @@ export const CardDescription = styled("p", {
       background: "$$codeBlockBackground",
       color: "$$codeBlockForeground",
       transition: "all .2s ease",
-      cursor: "pointer",
 
-      "&:hover": {
-        background: "$primary",
-        color: "$darkBackground",
+      "&:after": {
+        content: "↗",
+        display: "inline-block",
+        marginLeft: "8px",
+        position: "relative",
+        top: 1,
       },
     },
   },

@@ -17,11 +17,12 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     <Box
       css={{
         width: "100%",
+        marginTop: "30px !important",
         pre: { padding: 0 },
 
         ".cm-editor": {
           borderRadius: oneLiner ? "78px" : "16px",
-          padding: "15px",
+          padding: "10px 5px",
         },
       }}
     >
