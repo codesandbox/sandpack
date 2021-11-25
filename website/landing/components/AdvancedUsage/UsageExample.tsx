@@ -2,6 +2,7 @@ import React from "react";
 import { useInView } from "react-intersection-observer";
 
 import { Box, Card, CardDescription, CardTitle } from "../common";
+import { useBreakpoint } from "../common/useBreakpoint";
 
 import { ExampleIllustration } from "./ExampleIllustration";
 
@@ -19,6 +20,7 @@ export const UsageExample: React.FC<UsageExampleProps> = ({
   example,
   exampleIndex,
 }) => {
+  const isDesktop = useBreakpoint("bp1");
   const { ref, inView } = useInView({ threshold: 0 });
 
   return (
@@ -49,7 +51,7 @@ export const UsageExample: React.FC<UsageExampleProps> = ({
       <Box ref={ref}>
         <ExampleIllustration
           illustrationKey={example.illustrationKey}
-          visible={inView}
+          visible={!isDesktop || inView}
         />
       </Box>
       <Box>

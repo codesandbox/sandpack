@@ -8,6 +8,7 @@ import { forwardRef } from "react";
 
 import { styled } from "../../../stitches.config";
 import { Box } from "../../common";
+import { useBreakpoint } from "../../common/useBreakpoint";
 
 export const THRESHOLD_VIEW = 0.5;
 
@@ -161,6 +162,7 @@ export const FadeAnimation: React.FC = ({ children }) => {
   const sectionRef = useRef<HTMLLIElement>(null);
   const [sectionTop, setSectionTop] = useState(0);
   const [sectionHeight, setSectionHeight] = useState(0);
+  const isDesktop = useBreakpoint("bp1");
 
   useLayoutEffect(() => {
     const sectionEl = sectionRef.current;
@@ -187,7 +189,7 @@ export const FadeAnimation: React.FC = ({ children }) => {
       sectionTop + sectionHeight / 4,
       sectionTop + sectionHeight / 2,
     ],
-    [0, 1, 1, 1, 1, 0]
+    [isDesktop ? 0 : 1, 1, 1, 1, 1, isDesktop ? 0 : 1]
   );
 
   return (
