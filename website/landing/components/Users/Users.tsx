@@ -48,6 +48,7 @@ export const Users: React.FC = () => {
   // and then do an opacity transition.
   const { ref: listRef, inView } = useInView({
     threshold: [0, 1],
+    triggerOnce: !shouldAnimate,
   });
 
   return (
