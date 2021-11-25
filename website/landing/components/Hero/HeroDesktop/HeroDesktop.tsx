@@ -16,8 +16,8 @@ import { Box, SectionContainer, SectionWrapper } from "../../common";
 import { AnimatedPreview } from "./AnimatedPreview";
 import { HeroEditor } from "./HeroEditor";
 import { HeroMain } from "./HeroMain";
-import { files } from "./heroSandpackFiles";
 import { StaticPreview } from "./StaticPreview";
+import { files } from "./heroSandpackFiles";
 
 const CUSTOM_CLASSES_MAP = {
   "sp-stack": "custom-stack__hero",

@@ -19,6 +19,7 @@ export const StaticPreview: React.FC<StaticPreviewProps> = ({
         left: "auto",
         width: "50%",
         visibility: animationComplete ? "visible" : "hidden",
+        zIndex: animationComplete ? "1" : "-1",
       }}
     >
       <SandpackPreview />
