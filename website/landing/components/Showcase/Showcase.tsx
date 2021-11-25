@@ -96,76 +96,85 @@ export const Showcase: React.FC = () => {
         >
           <SectionTitle dangerouslySetInnerHTML={{ __html: showCase.title }} />
         </SectionHeader>
-        <List
-          css={{
-            alignItems: "center",
-            display: "flex",
-            flexDirection: "column",
-            gap: "148px",
-            width: "100%",
+        <Box css={{ marginBottom: "200px" }}>
+          <List
+            css={{
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+              gap: "148px",
+              marginTop: 0,
 
-            "@bp2": {
-              display: "grid",
-              gap: "200px",
-              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-              marginBottom: "200px",
-            },
-          }}
-        >
-          {showCase.highlights.map((h, hIndex) => (
-            <AnimatedListItem
-              key={`section-showcase-${hIndex}`}
-              css={{
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column",
-                gap: "40px",
-
-                "@bp1": {
-                  width: "384px",
-                },
-
-                "@bp2": {
-                  marginTop: "25%",
-                  position: "relative",
-                  width: "360px",
-
-                  "&:nth-of-type(odd)": {
-                    transform: "translateY(0)",
-                    justifySelf: "flex-end",
+              "@bp2": {
+                display: "grid",
+                "--gap": "200px",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+              },
+            }}
+          >
+            {showCase.highlights.map((h, hIndex) => (
+              <AnimatedListItem
+                key={`section-showcase-${hIndex}`}
+                css={{
+                  "@bp1": {
+                    width: "384px",
                   },
 
-                  "&:nth-of-type(even)": {
-                    justifySelf: "flex-start",
-                    transform: "translateY(-25%)",
-                  },
-                },
+                  "@bp2": {
+                    marginTop: "25%",
+                    position: "relative",
+                    width: "360px",
 
-                "@bp3": {
-                  width: "480px",
-                },
-              }}
-              style={{
-                translateY: hIndex % 2 === 0 && shouldAnimate ? leftColumnTranslateY : "0",
-              }}
-            >
-              <HighlightPreview />
-              <Card css={{ alignItems: "center" }}>
-                <CardTitle
-                  dangerouslySetInnerHTML={{
-                    __html: h.title,
+                    "&:nth-of-type(odd)": {
+                      transform: "translateY(0)",
+                      justifySelf: "flex-end",
+                    },
+
+                    "&:nth-of-type(even)": {
+                      justifySelf: "flex-start",
+                      transform: "translateY(-25%)",
+                    },
+                  },
+
+                  "@bp3": {
+                    width: "480px",
+                  },
+                }}
+                style={{
+                  translateY:
+                    hIndex % 2 === 0 && shouldAnimate
+                      ? leftColumnTranslateY
+                      : "0",
+                }}
+              >
+                <Box
+                  css={{
+                    gap: "40px",
+                    alignItems: "center",
+                    display: "flex",
+                    flexDirection: "column",
                   }}
-                />
-                <CardDescription
-                  css={{ textAlign: "center" }}
-                  dangerouslySetInnerHTML={{
-                    __html: h.description,
-                  }}
-                />
-              </Card>
-            </AnimatedListItem>
-          ))}
-        </List>
+                >
+                  <HighlightPreview />
+                  <Card css={{ alignItems: "center" }}>
+                    <CardTitle
+                      css={{ "@bp2": { textAlign: "center" } }}
+                      dangerouslySetInnerHTML={{
+                        __html: h.title,
+                      }}
+                    />
+                    <CardDescription
+                      css={{ textAlign: "center" }}
+                      dangerouslySetInnerHTML={{
+                        __html: h.description,
+                      }}
+                    />
+                  </Card>
+                </Box>
+              </AnimatedListItem>
+            ))}
+          </List>
+        </Box>
       </SectionContainer>
     </SectionWrapper>
   );

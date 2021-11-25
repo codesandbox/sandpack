@@ -138,13 +138,13 @@ export const Examples: React.FC = () => {
           width: "100%",
 
           "@bp1": {
-            gap: "200px",
+            "--gap": "200px",
           },
 
           "@bp2": {
             alignItems: "center",
             flexDirection: "column",
-            gap: "0",
+            "--gap": "0",
             scrollSnapType: "y mandatory",
             width: "initial",
           },

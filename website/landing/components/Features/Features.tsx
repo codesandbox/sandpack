@@ -99,13 +99,14 @@ export const Features: React.FC = () => {
             transition: "opacity .5s cubic-bezier(0.770, 0.000, 0.175, 1.000)",
 
             "@bp1": {
-              gap: "80px",
+              "--gap": "80px",
             },
 
             "@bp2": {
               alignItems: "flex-start",
               flexDirection: "row",
-              margin: "100px 0 200px",
+              marginTop: "100px",
+              marginBottom: " 200px",
               justifyContent: "space-between",
             },
           }}

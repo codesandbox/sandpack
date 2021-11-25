@@ -23,4 +23,17 @@ export const { globalCss, getCssText, styled } = createStitches({
     fontWeights,
     fonts: fontFamilies,
   },
+  utils: {
+    gap: (value: number) => ({
+      "--gap": value,
+      "--column-gap": "var(--gap)",
+      "--row-gap": "var(--gap)",
+      margin: "calc(var(--row-gap) / -2) calc(var(--row-gap) / -2)",
+
+      "> *": {
+        margin:
+          "calc(var(--row-gap) / 2) calc(var(--column-gap) / 2) !important",
+      },
+    }),
+  },
 });

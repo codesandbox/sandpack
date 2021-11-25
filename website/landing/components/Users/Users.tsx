@@ -76,7 +76,7 @@ export const Users: React.FC = () => {
             justifyContent: "center",
 
             "@bp1": {
-              gap: "100px",
+              "--gap": "100px",
             },
 
             "@bp2": {

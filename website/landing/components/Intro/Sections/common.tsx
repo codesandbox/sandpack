@@ -19,29 +19,38 @@ export const Row = forwardRef<unknown, { children: React.ReactNode }>(
       <Box
         ref={ref as any}
         css={{
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          gap: "40px",
-          justifyContent: "center",
           width: "100%",
-
           "@bp2": {
-            alignItems: "center",
-            gap: "240px",
-            flexDirection: "row",
+            width: "initial",
             height: "100vh",
             maxHeight: "1080px",
-            scrollSnapAlign: "center",
-            width: "initial",
-          },
-
-          "@bp3": {
-            gap: "320px",
           },
         }}
       >
-        {children}
+        <Box
+          css={{
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            height: "100%",
+
+            gap: "40px",
+
+            "@bp2": {
+              "--gap": "240px",
+              alignItems: "center",
+              flexDirection: "row",
+              scrollSnapAlign: "center",
+            },
+
+            "@bp3": {
+              "--gap": "320px",
+            },
+          }}
+        >
+          {children}
+        </Box>
       </Box>
     );
   }
@@ -60,7 +69,7 @@ export const Content = styled("div", {
 
   "@bp2": {
     alignItems: "flex-start",
-    width: "30%",
+    width: "450px",
   },
 });
 
@@ -202,7 +211,7 @@ export const FadeAnimation: React.FC = ({ children }) => {
 export const CodeWrapper = styled("div", {
   position: "relative",
   width: "100%",
-  marginTop: "30px",
+  marginTop: "30px !important",
 
   pre: { padding: 0 },
 

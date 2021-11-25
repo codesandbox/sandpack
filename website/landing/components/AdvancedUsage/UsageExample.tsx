@@ -36,7 +36,7 @@ export const UsageExample: React.FC<UsageExampleProps> = ({
         "@bp2": {
           alignItems: "center",
           flexDirection: exampleIndex % 2 === 0 ? "row-reverse" : "row",
-          gap: "240px",
+          "--gap": "240px",
           height: "100vh",
           maxHeight: "1080px",
           scrollSnapAlign: "center",
@@ -44,7 +44,7 @@ export const UsageExample: React.FC<UsageExampleProps> = ({
         },
 
         "@bp3": {
-          gap: "320px",
+          "--gap": "320px",
         },
       }}
     >
