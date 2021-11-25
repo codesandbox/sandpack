@@ -140,6 +140,10 @@ export const Vue3Editor: Story<SandpackProps> = (args) => (
   <Sandpack {...args} template="vue3" />
 );
 
+export const Svelte: Story<SandpackProps> = (args) => (
+  <Sandpack {...args} template="svelte" />
+);
+
 export const DarkTheme: Story<SandpackProps> = (args) => (
   <Sandpack
     {...args}
