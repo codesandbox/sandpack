@@ -1,8 +1,11 @@
+import { motion, useTransform, useViewportScroll } from "framer-motion";
+import { useLayoutEffect, useRef, useState } from "react";
+
+import { styled } from "../../stitches.config";
 import content from "../../website.config.json";
 import {
   Box,
   List,
-  ListItem,
   SectionWrapper,
   SectionContainer,
   SectionHeader,
@@ -12,8 +15,11 @@ import {
   CardDescription,
   Text,
 } from "../common";
+import { useBreakpoint } from "../common/useBreakpoint";
 
-const ContentLandmark = () => {
+const AnimatedListItem = styled(motion.li, {});
+
+const HighlightPreview = () => {
   return (
     <Box
       css={{
@@ -47,12 +53,47 @@ const ContentLandmark = () => {
 };
 
 export const Showcase: React.FC = () => {
+  const shouldAnimate = useBreakpoint("bp1");
+
   const { showCase } = content;
 
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [sectionTop, setSectionTop] = useState(0);
+  const [sectionScroll, setSectionScroll] = useState(0);
+
+  const { scrollY } = useViewportScroll();
+  const scrollInput = [sectionTop, sectionTop + sectionScroll];
+  const translateOutput = ["-25%", "25%"];
+  const leftColumnTranslateY = useTransform(
+    scrollY,
+    scrollInput,
+    translateOutput
+  );
+
+  useLayoutEffect(() => {
+    const container = sectionRef.current;
+    if (!container || !window) return;
+
+    const onResize = () => {
+      setSectionTop(container.offsetTop);
+      setSectionScroll(container.offsetHeight - window.innerHeight);
+    };
+
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [sectionRef]);
+
   return (
-    <SectionWrapper>
+    <SectionWrapper ref={sectionRef}>
       <SectionContainer>
-        <SectionHeader>
+        <SectionHeader
+          css={{
+            "@bp2": {
+              padding: "200px 0",
+            },
+          }}
+        >
           <SectionTitle dangerouslySetInnerHTML={{ __html: showCase.title }} />
         </SectionHeader>
         <List
@@ -67,12 +108,13 @@ export const Showcase: React.FC = () => {
               display: "grid",
               gap: "200px",
               gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+              marginBottom: "200px",
             },
           }}
         >
-          {showCase.highlights.map((h, index) => (
-            <ListItem
-              key={`section-showcase-${index}`}
+          {showCase.highlights.map((h, hIndex) => (
+            <AnimatedListItem
+              key={`section-showcase-${hIndex}`}
               css={{
                 alignItems: "center",
                 display: "flex",
@@ -84,14 +126,18 @@ export const Showcase: React.FC = () => {
                 },
 
                 "@bp2": {
+                  marginTop: "25%",
+                  position: "relative",
                   width: "360px",
 
                   "&:nth-of-type(odd)": {
+                    transform: "translateY(0)",
                     justifySelf: "flex-end",
                   },
 
-                  "&:ntt-of-type(even)": {
+                  "&:nth-of-type(even)": {
                     justifySelf: "flex-start",
+                    transform: "translateY(-25%)",
                   },
                 },
 
@@ -99,8 +145,11 @@ export const Showcase: React.FC = () => {
                   width: "480px",
                 },
               }}
+              style={{
+                translateY: hIndex % 2 === 0 && shouldAnimate ? leftColumnTranslateY : "0",
+              }}
             >
-              <ContentLandmark />
+              <HighlightPreview />
               <Card css={{ alignItems: "center" }}>
                 <CardTitle
                   dangerouslySetInnerHTML={{
@@ -114,7 +163,7 @@ export const Showcase: React.FC = () => {
                   }}
                 />
               </Card>
-            </ListItem>
+            </AnimatedListItem>
           ))}
         </List>
       </SectionContainer>
