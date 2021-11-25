@@ -208,13 +208,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         });
 
         const parentDiv = wrapper.current;
-        const existingPlaceholder = parentDiv.querySelector(
-          ".sp-pre-placeholder"
-        );
-
-        if (existingPlaceholder) {
-          parentDiv.removeChild(existingPlaceholder);
-        }
 
         const view = new EditorView({
           state: startState,
@@ -334,7 +327,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     if (readOnly) {
       return (
         <pre ref={combinedRef} className={c("cm", editorState)} translate="no">
-          <code className={c("pre-placeholder")}>{code}</code>
+          {!initEditor && <code className={c("pre-placeholder")}>{code}</code>}
         </pre>
       );
     }
@@ -354,14 +347,16 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         tabIndex={0}
         translate="no"
       >
-        <pre
-          className={c("pre-placeholder")}
-          style={{
-            marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
-          }}
-        >
-          {code}
-        </pre>
+        {!initEditor && (
+          <pre
+            className={c("pre-placeholder")}
+            style={{
+              marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
+            }}
+          >
+            {code}
+          </pre>
+        )}
 
         <>
           <p
