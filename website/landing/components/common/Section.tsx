@@ -8,13 +8,15 @@ export const SectionWrapper = styled("div", {
   $$backgroundColor: palette.darkBackground,
   $$primaryTextColor: palette.darkTextPrimary,
   $$secondaryTextColor: palette.darkTextSecondary,
+  $$codeBlockBackground: "#1d1d1d",
+  $$codeBlockForeground: palette.lightBackground,
 
   background: "$$backgroundColor",
   color: "$$primaryTextColor",
   display: "flex",
   height: "100%",
-  justifyContent: "center",
   width: "100%",
+  justifyContent: "center",
 
   variants: {
     theme: {
@@ -22,14 +24,15 @@ export const SectionWrapper = styled("div", {
         $$backgroundColor: palette.lightBackground,
         $$primaryTextColor: palette.lightTextPrimary,
         $$secondaryTextColor: palette.lightTextSecondary,
+        $$codeBlockBackground: "rgba(33, 33, 33, 0.15)",
+        $$codeBlockForeground: palette.lightTextSecondary,
       },
     },
   },
 });
 
 export const SectionContainer = styled("section", {
-  overflow: "hidden",
-  margin: "0 24px",
+  padding: "0 24px",
   maxWidth: "2560px",
   paddingBottom: "100px",
   width: "100%",
@@ -43,7 +46,11 @@ export const SectionHeader = styled("header", {
   alignItems: "center",
   display: "flex",
   flexDirection: "column",
-  padding: "200px 0 100px",
+  padding: "100px 0",
+
+  "@bp2": {
+    padding: "200px 0 100px",
+  },
 
   variants: {
     size: {

@@ -7,6 +7,7 @@ import { SandpackStack } from "../../common/Stack";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
 import { CodeEditor } from "../CodeEditor";
+import type { CodeEditorRef } from "../CodeEditor";
 import type { Decorators } from "../CodeEditor/CodeMirror";
 import { FileTabs } from "../FileTabs";
 
@@ -24,11 +25,8 @@ export interface CodeViewerProps {
   initMode?: SandpackInitMode;
 }
 
-export const SandpackCodeViewer = forwardRef<HTMLDivElement, CodeViewerProps>(
-  (
-    { showTabs, showLineNumbers, decorators, code: propCode, initMode },
-    ref
-  ) => {
+export const SandpackCodeViewer = forwardRef<CodeEditorRef, CodeViewerProps>(
+  ({ showTabs, showLineNumbers, decorators, code: propCode, initMode }, ref) => {
     const { sandpack } = useSandpack();
     const { code } = useActiveCode();
 

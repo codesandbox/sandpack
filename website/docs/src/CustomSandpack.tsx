@@ -1,4 +1,3 @@
-import type { SandpackTheme } from "@codesandbox/sandpack-react";
 import {
   Sandpack as SandpackDefault,
   SandpackLayout as SandpackLayoutDefault,

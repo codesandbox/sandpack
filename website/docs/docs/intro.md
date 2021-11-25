@@ -3,6 +3,8 @@ sidebar_position: 1
 slug: /
 ---
 
+import { NestedSandpack } from "../src/NestedSandpack"
+
 # Introduction
 
 React components that give you the power of editable sandboxes that run in the
@@ -16,6 +18,4 @@ projects, or you can build your own version of `sandpack`, on top of our
 standard components and utilities. As you walk through this guide, you will get
 deeper into our ecosystem.
 
-```js sandpack
-
-```
+<NestedSandpack />

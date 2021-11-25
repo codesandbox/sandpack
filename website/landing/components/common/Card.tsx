@@ -4,11 +4,11 @@ export const Card = styled("div", {
   alignItems: "center",
   display: "flex",
   flexDirection: "column",
-  gap: "10px",
+  gap: "20px",
   width: "336px",
 
   "@bp1": {
-    gap: "20px",
+    "--gap": "20px",
     width: "384px",
   },
 
@@ -24,15 +24,10 @@ export const Card = styled("div", {
   variants: {
     size: {
       small: {
-        gap: "10px",
-        width: "256px",
+        "--gap": "10px",
 
         "@bp2": {
-          width: "240px",
-        },
-
-        "@bp3": {
-          width: "320px",
+          width: "100%",
         },
       },
     },
@@ -46,9 +41,14 @@ export const CardTitle = styled("h4", {
   lineHeight: "1.2",
   letterSpacing: "-0.05em",
   margin: 0,
+  textAlign: "center",
 
   "@bp1": {
     fontSize: "36px",
+  },
+
+  "@bp2": {
+    textAlign: "left",
   },
 
   variants: {
@@ -76,16 +76,46 @@ export const CardDescription = styled("p", {
     letterSpacing: "inherit",
   },
 
+  ".external-link": {
+    color: "$$codeBlockForeground",
+    textDecoration: "none",
+
+    "&:hover": {
+      textDecoration: "underline",
+      color: "$primary",
+    },
+  },
+
   "@bp2": {
     fontSize: "18px",
     textAlign: "start",
 
-    code: {
-      alignItems: "center",
+    "a code:hover": {
       background: "$primary",
-      borderRadius: "145px",
+      color: "$darkBackground",
+    },
+
+    code: {
       display: "inline-flex",
-      padding: "2px 14px",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "2px 8px",
+      borderRadius: "6px",
+      fontFamily: "$mono",
+      fontSize: "16px",
+      lineHeight: 1.4,
+      letterSpacing: "-0.025em",
+      background: "$$codeBlockBackground",
+      color: "$$codeBlockForeground",
+      transition: "all .2s ease",
+
+      "&:after": {
+        content: "↗",
+        display: "inline-block",
+        marginLeft: "8px",
+        position: "relative",
+        top: 1,
+      },
     },
   },
 

@@ -70,7 +70,11 @@ interface CodeMirrorProps {
   initMode: SandpackInitMode;
 }
 
-export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
+export interface CodeMirrorRef {
+  getCodemirror: () => EditorView | undefined;
+}
+
+export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
   (
     {
       code,
@@ -97,6 +101,10 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
     const ariaId = React.useRef<string>(generateRandomId());
 
     const { isIntersecting } = useIntersectionObserver(wrapper);
+
+    React.useImperativeHandle(ref, () => ({
+      getCodemirror: () => cmView.current,
+    }));
 
     const shouldInitEditor = () => {
       if (initMode === "immediate") {
@@ -203,6 +211,7 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
         const existingPlaceholder = parentDiv.querySelector(
           ".sp-pre-placeholder"
         );
+
         if (existingPlaceholder) {
           parentDiv.removeChild(existingPlaceholder);
         }
@@ -220,6 +229,8 @@ export const CodeMirror = React.forwardRef<HTMLElement, CodeMirrorProps>(
             }
           },
         });
+
+        view.contentDOM.setAttribute("data-gramm", "false");
 
         if (!readOnly) {
           view.contentDOM.setAttribute("tabIndex", "-1");

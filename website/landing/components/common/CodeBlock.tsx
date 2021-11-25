@@ -16,11 +16,13 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   return (
     <Box
       css={{
+        width: "100%",
+        marginTop: "30px !important",
         pre: { padding: 0 },
 
         ".cm-editor": {
           borderRadius: oneLiner ? "78px" : "16px",
-          padding: "15px",
+          padding: "10px 5px",
         },
       }}
     >
@@ -29,8 +31,9 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
           entry: "index.ts",
           files: { "index.ts": (children as string)?.trim() },
         }}
+        initMode="user-visible"
       >
-        <SandpackThemeProvider theme="dark">
+        <SandpackThemeProvider theme="sandpack-dark">
           <SandpackCodeViewer />
         </SandpackThemeProvider>
       </SandpackProvider>

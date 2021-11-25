@@ -16,7 +16,14 @@ function removeSourcemaps() {
     }
 
     let contents = file.contents.toString(encoding);
-    contents = contents.replace(/\/\/# sourceMappingURL=.*/g, "");
+
+    const lines = contents.split("\n");
+    const lastLine = lines[lines.length - 1];
+    if (lastLine.startsWith("//# sourceMappingURL=")) {
+      lines.pop();
+    }
+
+    contents = lines.join("\n");
 
     file.contents = Buffer.from(contents, encoding);
 

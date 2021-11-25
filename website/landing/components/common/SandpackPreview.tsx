@@ -1,67 +1,70 @@
-import type { SandpackInitMode } from "@codesandbox/sandpack-react";
+import type {
+  SandpackInitMode,
+  SandpackProps,
+} from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
 import { useEffect, useState } from "react";
 
-import { Box } from "./Box";
+import { styled } from "../../stitches.config";
 
-export const SandpackPreview: React.FC = () => {
-  const [initMode, setInitMode] = useState<SandpackInitMode>("lazy");
+export const SandpackContainer = styled("div", {
+  alignItems: "center",
+  display: "flex",
+  overflow: "hidden",
+  width: "100%",
 
-  useEffect(() => {
-    const t0 = performance.now();
-    new Array(100000).forEach(console.log);
-    const t1 = performance.now();
+  ".custom-wrapper": {
+    "--sp-border-radius": "10px",
+    width: "100%",
+  },
 
-    setInitMode(t1 - t0 > 1 ? "user-visible" : "lazy");
-  }, []);
+  ".custom-layout": {
+    width: "100%",
+    height: "512px",
+    border: 0,
 
+    "@bp1": {
+      width: "384px",
+      height: "608px",
+    },
+
+    "@bp2": {
+      height: "448px",
+      width: "996px",
+    },
+
+    "@bp3": {
+      height: "40vh",
+    },
+  },
+
+  ".custom-stack": {
+    "@bp2": {
+      height: "100% !important",
+      width: "100% !important",
+    },
+  },
+});
+
+export const SandpackPreview: React.FC<{ options?: SandpackProps }> = ({
+  options,
+}) => {
   return (
-    <Box
-      css={{
-        alignItems: "center",
-        display: "flex",
-        overflow: "hidden",
-        width: "100%",
-
-        ".custom-layout": {
-          width: "342px",
-          height: "512px",
-
-          "@bp1": {
-            width: "384px",
-            height: "608px",
-          },
-
-          "@bp2": {
-            height: "448px",
-            width: "996px",
-          },
-
-          "@bp3": {
-            height: "664px",
-            width: "1328px",
-          },
-        },
-
-        ".custom-stack": {
-          "@bp2": {
-            height: "100% !important",
-            width: "100% !important",
-          },
-        },
-      }}
-    >
+    <SandpackContainer>
       <Sandpack
+        template="react"
+        theme="sandpack-dark"
+        {...options}
         options={{
-          initMode,
+          initMode: "user-visible",
+          ...(options?.options ?? {}),
           classes: {
             "sp-layout": "custom-layout",
             "sp-stack": "custom-stack",
+            "sp-wrapper": "custom-wrapper",
           },
         }}
-        template="react"
-        theme="sandpack-dark"
       />
-    </Box>
+    </SandpackContainer>
   );
 };

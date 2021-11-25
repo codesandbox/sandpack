@@ -5,9 +5,10 @@ import { ErrorOverlay } from "../../common/ErrorOverlay";
 import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { useSandpack } from "../../hooks/useSandpack";
 import { useTranspiledCode } from "../../hooks/useTranspiledCode";
+import type { CodeViewerProps } from "../CodeViewer";
 import { SandpackCodeViewer } from "../CodeViewer";
 
-export const SandpackTranspiledCode: React.FC = () => {
+export const SandpackTranspiledCode: React.FC<CodeViewerProps> = (props) => {
   const { sandpack } = useSandpack();
   const transpiledCode = useTranspiledCode();
   const c = useClasser("sp");
@@ -24,10 +25,7 @@ export const SandpackTranspiledCode: React.FC = () => {
   return (
     <div className={c("transpiled-code")}>
       {transpiledCode && (
-        <SandpackCodeViewer
-          code={transpiledCode}
-          initMode={sandpack.initMode}
-        />
+        <SandpackCodeViewer initMode={sandpack.initMode} code={transpiledCode} {...props} />
       )}
       <iframe ref={hiddenIframeRef} style={{ display: "none" }} />
       <ErrorOverlay />
