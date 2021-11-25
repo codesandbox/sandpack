@@ -33,20 +33,6 @@ const HighlightPreview: React.FC<{ source: string; alt: string }> = ({
         justifyContent: "center",
         margin: "0 auto",
         width: "100%",
-
-        "@bp1": {
-          width: "384px",
-        },
-
-        "@bp2": {
-          height: "540px",
-          width: "360px",
-        },
-
-        "@bp3": {
-          height: "720px",
-          width: "480px",
-        },
       }}
     >
       <Image alt={alt} height={1440} src={source} width={960} />
