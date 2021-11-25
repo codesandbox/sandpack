@@ -23,6 +23,7 @@ export const Examples: React.FC = () => {
   const { layoutFiles, visibility } = useLayoutExampleContext();
 
   const { scrollY } = useViewportScroll();
+
   const isMedium = useBreakpoint("bp2");
   const isLarge = useBreakpoint("bp3");
   const isXLarge = useBreakpoint("2260");

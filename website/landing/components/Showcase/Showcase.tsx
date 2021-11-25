@@ -30,7 +30,6 @@ const HighlightPreview: React.FC<{ source: string; alt: string }> = ({
         background: "$surface",
         color: "white",
         display: "flex",
-        height: "595px",
         justifyContent: "center",
         margin: "0 auto",
         width: "100%",
@@ -50,7 +49,7 @@ const HighlightPreview: React.FC<{ source: string; alt: string }> = ({
         },
       }}
     >
-      <Image alt={alt} height={720} src={source} width={480} />
+      <Image alt={alt} height={1440} src={source} width={960} />
     </Box>
   );
 };
