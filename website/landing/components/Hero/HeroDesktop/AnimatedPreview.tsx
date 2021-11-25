@@ -56,7 +56,7 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
               css={{
                 fontFamily: "sans-serif",
                 fontSize: "1.6rem",
-                fontWeight: "bolder",
+                fontWeight: "normal",
               }}
             >
               Github
@@ -68,7 +68,7 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
               css={{
                 fontFamily: "sans-serif",
                 fontSize: "1.6rem",
-                fontWeight: "bolder",
+                fontWeight: "normal",
               }}
             >
               Docs
