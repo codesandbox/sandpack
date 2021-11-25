@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/codesandbox/sandpack/compare/v0.7.3...v0.8.0) (2021-11-25)
+
+
+### Bug Fixes
+
+* landing - showcase preview size on smaller bps ([#185](https://github.com/codesandbox/sandpack/issues/185)) ([f7bda3d](https://github.com/codesandbox/sandpack/commit/f7bda3dc17e931b76befdf4f5b3ce9ca99d8df42))
+* **landing:** update animation trigger ([#184](https://github.com/codesandbox/sandpack/issues/184)) ([8c94cd7](https://github.com/codesandbox/sandpack/commit/8c94cd7e8bcd8fd73927719f719f83287991265e))
+
+
+### Features
+
+* **react:** initilization mode ([#152](https://github.com/codesandbox/sandpack/issues/152)) ([53d9195](https://github.com/codesandbox/sandpack/commit/53d9195fa02f412f99f50d96e43ffd24b269dfa4))
+
+
+
+
+
 ## [0.7.3](https://github.com/codesandbox/sandpack/compare/v0.7.2...v0.7.3) (2021-11-25)
 
 **Note:** Version bump only for package sandpack

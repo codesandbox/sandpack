@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/codesandbox/sandpack/compare/v0.7.3...v0.8.0) (2021-11-25)
+
+
+### Features
+
+* **react:** initilization mode ([#152](https://github.com/codesandbox/sandpack/issues/152)) ([53d9195](https://github.com/codesandbox/sandpack/commit/53d9195fa02f412f99f50d96e43ffd24b269dfa4))
+
+
+
+
+
 ## [0.7.3](https://github.com/codesandbox/sandpack/compare/v0.7.2...v0.7.3) (2021-11-25)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
