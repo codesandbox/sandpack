@@ -28,11 +28,22 @@ export const { globalCss, getCssText, styled } = createStitches({
       "--gap": value,
       "--column-gap": "var(--gap)",
       "--row-gap": "var(--gap)",
-      margin: "calc(var(--row-gap) / -2) calc(var(--row-gap) / -2)",
+
+      marginTop: "calc(var(--row-gap) / -2)",
+      marginBottom: "calc(var(--row-gap) / -2)",
+
+      "@bp1": {
+        margin: "calc(var(--row-gap) / -2) calc(var(--column-gap) / -2)",
+      },
 
       "> *": {
-        margin:
-          "calc(var(--row-gap) / 2) calc(var(--column-gap) / 2) !important",
+        marginTop: "calc(var(--row-gap) / 2) !important",
+        marginBottom: "calc(var(--row-gap) / 2) !important",
+
+        "@bp1": {
+          margin:
+            "calc(var(--row-gap) / 2) calc(var(--column-gap) / 2) !important",
+        },
       },
     }),
   },

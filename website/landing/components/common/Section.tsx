@@ -46,7 +46,11 @@ export const SectionHeader = styled("header", {
   alignItems: "center",
   display: "flex",
   flexDirection: "column",
-  padding: "200px 0 100px",
+  padding: "100px 0",
+
+  "@bp2": {
+    padding: "200px 0 100px",
+  },
 
   variants: {
     size: {

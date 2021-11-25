@@ -91,8 +91,7 @@ export const Clipboard: React.FC = () => {
           color: "$darkTextPrimary",
           cursor: "pointer",
           display: "flex",
-          gap: "12px",
-          transition: "color .2s ease", // TODO: verify transition
+          transition: "color .2s ease",
           willChange: "color",
 
           "&:hover": {
@@ -130,6 +129,7 @@ export const Clipboard: React.FC = () => {
             width: "12px",
             top: 1,
             position: "relative",
+            marginLeft: "12px",
 
             "@bp2": {
               height: "16px",

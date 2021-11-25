@@ -89,21 +89,18 @@ export const Showcase: React.FC = () => {
       <SectionContainer>
         <SectionHeader
           css={{
-            "@bp2": {
-              padding: "200px 0",
-            },
+            "@bp2": { padding: "200px 0" },
           }}
         >
           <SectionTitle dangerouslySetInnerHTML={{ __html: showCase.title }} />
         </SectionHeader>
-        <Box css={{ marginBottom: "200px" }}>
+        <Box css={{ "@bp2": { marginBottom: "200px", marginTop: "200px" } }}>
           <List
             css={{
               alignItems: "center",
               display: "flex",
               flexDirection: "column",
               gap: "148px",
-              marginTop: 0,
 
               "@bp2": {
                 display: "grid",

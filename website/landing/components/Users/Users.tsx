@@ -72,17 +72,14 @@ export const Users: React.FC = () => {
             alignItems: "center",
             display: "flex",
             flexDirection: "column",
-            gap: "48px",
             justifyContent: "center",
 
-            "@bp1": {
-              "--gap": "100px",
-            },
+            margin: "0 auto",
+            marginTop: "-50px",
 
             "@bp2": {
               flexDirection: "row",
               flexFlow: "row wrap",
-              margin: "0 auto",
               width: "75%",
             },
           }}
@@ -91,7 +88,7 @@ export const Users: React.FC = () => {
             const { url, height, width } = user.logo;
 
             return (
-              <ListItem key={user.name} css={{ flex: "none" }}>
+              <ListItem key={user.name} css={{ flex: "none", margin: "50px" }}>
                 <UserLink
                   css={{
                     transitionDelay: inView
