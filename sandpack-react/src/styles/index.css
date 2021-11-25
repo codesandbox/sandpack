@@ -370,6 +370,7 @@
   border-radius: var(--sp-border-radius);
   border: 1px solid var(--sp-colors-fg-inactive);
   height: 24px;
+  line-height: 24px;
   font-size: inherit;
   outline: none;
   flex: 1;

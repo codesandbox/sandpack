@@ -56,7 +56,7 @@ export const Banner: React.FC = () => {
           overflow: "visible",
 
           "@bp3": {
-            gap: "100px",
+            "--gap": "100px",
           },
         }}
       >

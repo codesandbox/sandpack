@@ -15,12 +15,7 @@ const ResourceLink = styled("a", {
 
 export const Resources: React.FC = () => {
   return (
-    <List
-      css={{
-        display: "flex",
-        gap: "48px",
-      }}
-    >
+    <List css={{ display: "flex" }}>
       {content.resources.map((r) => (
         <li key={r.name}>
           <ResourceLink href={r.url}>
@@ -31,6 +26,7 @@ export const Resources: React.FC = () => {
                 lineHeight: "19px",
                 textAlign: "center",
                 letterSpacing: "-0.0125em",
+                margin: "0 24px",
 
                 "@bp1": {
                   fontSize: "18px",

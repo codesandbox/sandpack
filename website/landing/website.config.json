@@ -121,22 +121,26 @@
     "highlights": [
       {
         "title": "React docs",
-        "showCaseUrl": "https://beta.reactjs.org/learn",
+        "imageSource": "/assets/showcase/react-docs.jpg",
+        "url": "https://beta.reactjs.org/learn",
         "description": "Would you like to try out a solution right on the same page with the guides or examples? With Sandpack you can embed a playground right into your documentation."
       },
       {
         "title": "Sound Demo",
-        "showCaseUrl": "https://code-sound.vercel.app",
+        "imageSource": "/assets/showcase/sound-demo.jpg",
+        "url": "https://code-sound.vercel.app",
         "description": "How about using sound in software to create an atmosphere around your actions? For example, code an epic task in a fantasy adventure or meditate in a buddhist mountain while fixing a bug."
       },
       {
         "title": "Multiple Previews",
-        "showCaseUrl": "",
+        "imageSource": "/assets/showcase/mulitple-preview.jpg",
+        "url": "",
         "description": "For generative art or responsive design, Sandpack can render multiple previews to help you see all the variations you need."
       },
       {
         "title": "Interactive blog post by Varun Vachhar",
-        "showCaseUrl": "https://varun.ca/modular-webgl/#data--state",
+        "imageSource": "/assets/showcase/interactive.jpg",
+        "url": "https://varun.ca/modular-webgl/#data--state",
         "description": "Sandpack is perfectly suitable for blog posts as you can provide examples for your readers to iterate on, but keep and maintain your code in a repo easily."
       }
     ]

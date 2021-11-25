@@ -8,7 +8,7 @@ export const Card = styled("div", {
   width: "336px",
 
   "@bp1": {
-    gap: "20px",
+    "--gap": "20px",
     width: "384px",
   },
 
@@ -24,8 +24,11 @@ export const Card = styled("div", {
   variants: {
     size: {
       small: {
-        gap: "10px",
-        width: "100%",
+        "--gap": "10px",
+
+        "@bp2": {
+          width: "100%",
+        },
       },
     },
   },
