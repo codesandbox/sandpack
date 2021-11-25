@@ -1,8 +1,6 @@
-import { useViewportScroll } from "framer-motion";
-
 import { AnimatedBox, Box, Button, Text } from "../../common";
-import { PreviewLogo } from "./PreviewLogo";
 
+import { PreviewLogo } from "./PreviewLogo";
 import { SandpackTitle } from "./SandpackTitle";
 
 interface AnimatedPreviewProps {
@@ -40,7 +38,10 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
         style={{ scale: 0.5 }}
       >
         <Button>
-          <Text as="span" css={{ fontSize: "3.2rem" }}>
+          <Text
+            as="span"
+            css={{ fontFamily: "sans-serif", fontSize: "3.2rem" }}
+          >
             npm install @codesandbox/sandpack-react
           </Text>
         </Button>
@@ -48,7 +49,11 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
           <a href="#placeholder" target="_blank">
             <Text
               as="span"
-              css={{ fontSize: "3.2rem", fontWeight: "$semiBold" }}
+              css={{
+                fontFamily: "sans-serif",
+                fontSize: "3.2rem",
+                fontWeight: "$semiBold",
+              }}
             >
               Github
             </Text>
@@ -56,7 +61,11 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
           <a href="#placeholder" target="_blank">
             <Text
               as="span"
-              css={{ fontSize: "3.2rem", fontWeight: "$semiBold" }}
+              css={{
+                fontFamily: "sans-serif",
+                fontSize: "3.2rem",
+                fontWeight: "$semiBold",
+              }}
             >
               Docs
             </Text>
