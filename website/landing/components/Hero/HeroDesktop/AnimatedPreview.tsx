@@ -1,3 +1,5 @@
+import { useTransform, useViewportScroll } from "framer-motion";
+
 import { AnimatedBox, Box, Button, Text } from "../../common";
 
 import { PreviewLogo } from "./PreviewLogo";
@@ -11,6 +13,17 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
   heroTop,
   heroScroll,
 }) => {
+  // Scroll animations start
+  const { scrollY } = useViewportScroll();
+
+  const containerScrollInput = [heroTop, heroTop + heroScroll * 0.75];
+
+  const scaleOutput = [2, 1];
+  const scale = useTransform(scrollY, containerScrollInput, scaleOutput);
+
+  const opacityOutput = [1, 0];
+  const opacity = useTransform(scrollY, containerScrollInput, opacityOutput);
+
   return (
     <Box
       as="section"
@@ -35,7 +48,7 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
           transformOrigin: "top right",
           width: "50%",
         }}
-        style={{ scale: 1 }}
+        style={{ scale }}
       >
         <Button>
           <Text
@@ -77,7 +90,7 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
         </Box>
       </AnimatedBox>
 
-      <AnimatedBox
+      {/* <AnimatedBox
         css={{
           alignItems: "center",
           display: "flex",
@@ -86,20 +99,20 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
           width: "50%",
         }}
         style={{
-          scale: 1,
+          scale,
         }}
       >
         <PreviewLogo />
-      </AnimatedBox>
+      </AnimatedBox> */}
 
       {/* Title */}
       <AnimatedBox
-        style={{
+        css={{
           display: "flex",
           transformOrigin: "bottom right",
-          scale: 1,
           width: "50%",
         }}
+        style={{ scale }}
       >
         <SandpackTitle />
       </AnimatedBox>
