@@ -140,6 +140,7 @@ export const Showcase: React.FC = () => {
                     flexDirection: "column",
                   }}
                   href={item.url}
+                  rel="noopener noreferrer"
                   target="_blank"
                 >
                   <HighlightPreview
