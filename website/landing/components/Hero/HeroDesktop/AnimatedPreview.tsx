@@ -15,7 +15,7 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
     <Box
       as="section"
       css={{
-        alignItems: "center",
+        alignItems: "flex-end",
         background: "$surface",
         display: "flex",
         flexDirection: "column",
@@ -33,26 +33,30 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
           display: "flex",
           justifyContent: "space-between",
           transformOrigin: "top right",
-          width: "100%",
+          width: "50%",
         }}
-        style={{ scale: 0.5 }}
+        style={{ scale: 1 }}
       >
         <Button>
           <Text
             as="span"
-            css={{ fontFamily: "sans-serif", fontSize: "3.2rem" }}
+            css={{
+              fontFamily: "sans-serif",
+              fontWeight: "normal",
+              fontSize: "1.6rem",
+            }}
           >
             npm install @codesandbox/sandpack-react
           </Text>
         </Button>
-        <Box css={{ alignItems: "center", display: "flex", gap: "4rem" }}>
+        <Box css={{ alignItems: "center", display: "flex", gap: "1rem" }}>
           <a href="#placeholder" target="_blank">
             <Text
               as="span"
               css={{
                 fontFamily: "sans-serif",
-                fontSize: "3.2rem",
-                fontWeight: "$semiBold",
+                fontSize: "1.6rem",
+                fontWeight: "bolder",
               }}
             >
               Github
@@ -63,8 +67,8 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
               as="span"
               css={{
                 fontFamily: "sans-serif",
-                fontSize: "3.2rem",
-                fontWeight: "$semiBold",
+                fontSize: "1.6rem",
+                fontWeight: "bolder",
               }}
             >
               Docs
@@ -79,16 +83,10 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
           display: "flex",
           justifyContent: "center",
           transformOrigin: "center right",
-          width: "100%",
-
-          svg: {
-            height: 434,
-            width: 356,
-          },
+          width: "50%",
         }}
         style={{
-          scale: 0.5,
-          translateY: 77, // Arbitrary value to compensate the sandpack logo scale
+          scale: 1,
         }}
       >
         <PreviewLogo />
@@ -99,8 +97,8 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
         style={{
           display: "flex",
           transformOrigin: "bottom right",
-          scale: 0.5,
-          width: "100%",
+          scale: 1,
+          width: "50%",
         }}
       >
         <SandpackTitle />

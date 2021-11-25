@@ -116,6 +116,7 @@ const Text = styled("p", {
         border: "0 !important",
         clipPath: "inset(50%) !important",
         "-webkit-clip-path": "inset(50%) !important",
+        fontWeight: "normal",
         height: "1px !important",
         margin: "-1px !important",
         overflow: "hidden !important",
@@ -126,7 +127,7 @@ const Text = styled("p", {
       }
     },
     semiBold: {
-      true: { fontWeight: "$semiBold" },
+      true: { fontWeight: "bolder" },
     }
   }
 });
