@@ -57,7 +57,7 @@ export const Examples: React.FC = () => {
   const breakpoint = () => {
     if (isXLarge) return "600px";
     if (isLarge) return "30vw";
-    if (isMedium) return "40vw";
+    if (isMedium) return "45vw";
 
     return "35vw";
   };
@@ -137,6 +137,7 @@ export const Examples: React.FC = () => {
           width: "100%",
 
           "@bp1": {
+            width: "initial",
             "--gap": "200px",
           },
 
@@ -145,7 +146,6 @@ export const Examples: React.FC = () => {
             flexDirection: "column",
             "--gap": "0",
             scrollSnapType: "y mandatory",
-            width: "initial",
           },
         }}
       >

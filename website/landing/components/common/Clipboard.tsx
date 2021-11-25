@@ -19,7 +19,7 @@ const ClipboardToast = styled("div", {
   padding: "15px 20px",
   pointerEvents: "none",
   position: "fixed",
-  transform: "translateX(-50%) translateY(calc(100% + 40px)) ",
+  transform: "translateX(-50%) translateY(calc(100% + 240px)) ",
   transition: "transform .5s cubic-bezier(0.190, 1.000, 0.220, 1.000)",
   zIndex: "1",
 

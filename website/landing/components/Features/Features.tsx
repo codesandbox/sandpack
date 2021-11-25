@@ -33,8 +33,8 @@ const FeatureFade: React.FC<FeatureFadeProps> = ({
   parentHeight,
   scrollY,
 }) => {
-  const isDesktop = useBreakpoint("bp1");
-  const opacityRange = [isDesktop ? 0 : 1, 1];
+  const shouldAnimate = useBreakpoint("bp2");
+  const opacityRange = [shouldAnimate ? 0 : 1, 1];
   const scrollRange = [
     parentTop - parentHeight / (2 * Math.pow(index + 1, 2)), // Stagger elements by their index.
     parentTop + parentHeight / (index === 0 ? 6 : 4), // The title (index === 0) should have opacity 1 sooner than the list elements.

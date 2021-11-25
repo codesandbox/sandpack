@@ -59,8 +59,6 @@ export const AdvancedUsage: React.FC = () => {
         <List
           as="ul"
           css={{
-            display: "flex",
-            flexWrap: "wrap",
             gap: "100px",
             width: "100%",
 
@@ -69,6 +67,8 @@ export const AdvancedUsage: React.FC = () => {
             },
 
             "@bp2": {
+              display: "flex",
+              flexWrap: "wrap",
               alignItems: "center",
               flexDirection: "column",
               "--gap": "0",

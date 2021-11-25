@@ -32,7 +32,7 @@ export const { globalCss, getCssText, styled } = createStitches({
       marginTop: "calc(var(--row-gap) / -2)",
       marginBottom: "calc(var(--row-gap) / -2)",
 
-      "@bp1": {
+      "@bp2": {
         margin: "calc(var(--row-gap) / -2) calc(var(--column-gap) / -2)",
       },
 
@@ -40,7 +40,7 @@ export const { globalCss, getCssText, styled } = createStitches({
         marginTop: "calc(var(--row-gap) / 2) !important",
         marginBottom: "calc(var(--row-gap) / 2) !important",
 
-        "@bp1": {
+        "@bp2": {
           margin:
             "calc(var(--row-gap) / 2) calc(var(--column-gap) / 2) !important",
         },

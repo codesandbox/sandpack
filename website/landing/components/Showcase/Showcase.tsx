@@ -56,7 +56,7 @@ const HighlightPreview: React.FC<{ source: string; alt: string }> = ({
 };
 
 export const Showcase: React.FC = () => {
-  const shouldAnimate = useBreakpoint("bp1");
+  const shouldAnimate = useBreakpoint("bp2");
 
   const { showCase } = content;
 

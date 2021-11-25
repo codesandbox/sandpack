@@ -25,7 +25,10 @@ export const Card = styled("div", {
     size: {
       small: {
         "--gap": "10px",
-        width: "100%",
+
+        "@bp2": {
+          width: "100%",
+        },
       },
     },
   },

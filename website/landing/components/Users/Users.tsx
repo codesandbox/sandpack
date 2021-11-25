@@ -40,7 +40,7 @@ const UserLink = styled("a", {
 
 export const Users: React.FC = () => {
   const content = config.users;
-  const isDesktop = useBreakpoint("bp1");
+  const shouldAnimate = useBreakpoint("bp2");
 
   // The icons are loaded with next/image which tends to blink
   // when first rendered. Because it doesn't support an `onLoad`
@@ -101,7 +101,7 @@ export const Users: React.FC = () => {
                   href={user.socialUrl}
                   rel="noopener noreferrer"
                   target="_blank"
-                  visible={!isDesktop || inView}
+                  visible={!shouldAnimate || inView}
                 >
                   <Image
                     alt={user.name}
