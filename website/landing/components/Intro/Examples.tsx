@@ -108,6 +108,7 @@ export const Examples: React.FC = () => {
                     files: layoutFiles,
                     dependencies: { "@codesandbox/sandpack-react": "latest" },
                   }}
+                  initMode="user-visible"
                   template="react"
                 >
                   <ClasserProvider

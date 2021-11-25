@@ -31,6 +31,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
           entry: "index.ts",
           files: { "index.ts": (children as string)?.trim() },
         }}
+        initMode="user-visible"
       >
         <SandpackThemeProvider theme="sandpack-dark">
           <SandpackCodeViewer />

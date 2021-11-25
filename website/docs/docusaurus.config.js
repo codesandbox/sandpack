@@ -17,7 +17,6 @@ module.exports = {
   favicon: "img/favicon.ico",
   organizationName: "codesandbox",
   projectName: "sandpack",
-
   themes: ["@codesandbox/sandpack-docusaurus"],
 
   plugins: [

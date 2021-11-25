@@ -20,6 +20,7 @@ import type {
   EditorState,
   SandpackPredefinedTemplate,
   SandpackSetup,
+  SandpackInitMode,
 } from "../types";
 import { getSandpackStateFromProps } from "../utils/sandpackUtils";
 import { generateRandomId } from "../utils/stringUtils";
@@ -38,6 +39,7 @@ export interface SandpackProviderState {
   sandpackStatus: SandpackStatus;
   editorState: EditorState;
   renderHiddenIframe: boolean;
+  initMode: SandpackInitMode;
 }
 
 export interface SandpackProviderProps {
@@ -53,6 +55,14 @@ export interface SandpackProviderProps {
   recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;
   autorun?: boolean;
+
+  /**
+   * This provides a way to control how some components are going to
+   * be initialized on the page. The CodeEditor and the Preview components
+   * are quite expensive and might overload the memory usage, so this gives
+   * a certain control of when to initialize them.
+   */
+  initMode?: SandpackInitMode;
 
   // bundler options
   bundlerURL?: string;
@@ -114,6 +124,7 @@ class SandpackProvider extends React.PureComponent<
       sandpackStatus: this.props.autorun ? "initial" : "idle",
       editorState: "pristine",
       renderHiddenIframe: false,
+      initMode: this.props.initMode || "lazy",
     };
 
     /**
@@ -223,20 +234,24 @@ class SandpackProvider extends React.PureComponent<
   /**
    * @hidden
    */
-  componentDidMount(): void {
+  initializeSandpackIframe(): void {
     if (!this.props.autorun) {
       return;
     }
 
-    if (this.lazyAnchorRef.current) {
-      // If any component registerd a lazy anchor ref component, use that for the intersection observer
-      const options = {
-        rootMargin: "600px 0px",
-        threshold: 0.1,
-      };
+    const observerOptions = {
+      rootMargin: "600px 0px",
+      threshold: 0.2,
+    };
 
+    if (this.intersectionObserver) {
+      this.intersectionObserver?.unobserve(this.lazyAnchorRef.current!);
+    }
+
+    if (this.lazyAnchorRef.current && this.state.initMode === "lazy") {
+      // If any component registerd a lazy anchor ref component, use that for the intersection observer
       this.intersectionObserver = new IntersectionObserver((entries) => {
-        if (entries[0]?.intersectionRatio > 0) {
+        if (entries[0]?.isIntersecting) {
           // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
           setTimeout(() => {
             this.runSandpack();
@@ -244,7 +259,23 @@ class SandpackProvider extends React.PureComponent<
 
           this.intersectionObserver?.unobserve(this.lazyAnchorRef.current!);
         }
-      }, options);
+      }, observerOptions);
+
+      this.intersectionObserver.observe(this.lazyAnchorRef.current);
+    } else if (
+      this.lazyAnchorRef.current &&
+      this.state.initMode === "user-visible"
+    ) {
+      this.intersectionObserver = new IntersectionObserver((entries) => {
+        if (entries[0]?.isIntersecting) {
+          // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
+          setTimeout(() => {
+            this.runSandpack();
+          }, 50);
+        } else {
+          Object.keys(this.clients).map(this.unregisterBundler);
+        }
+      }, observerOptions);
 
       this.intersectionObserver.observe(this.lazyAnchorRef.current);
     } else {
@@ -256,7 +287,21 @@ class SandpackProvider extends React.PureComponent<
   /**
    * @hidden
    */
+  componentDidMount(): void {
+    this.initializeSandpackIframe();
+  }
+
+  /**
+   * @hidden
+   */
   componentDidUpdate(prevProps: SandpackProviderProps): void {
+    if (prevProps.initMode !== this.props.initMode && this.props.initMode) {
+      this.setState(
+        { initMode: this.props.initMode },
+        this.initializeSandpackIframe
+      );
+    }
+
     if (
       prevProps.template !== this.props.template ||
       prevProps.activePath !== this.props.activePath ||
@@ -403,6 +448,7 @@ class SandpackProvider extends React.PureComponent<
     const client = this.clients[clientId];
     if (client) {
       client.cleanup();
+      client.iframe.removeAttribute("src");
       delete this.clients[clientId];
     } else {
       delete this.preregisteredIframes[clientId];
@@ -609,6 +655,7 @@ class SandpackProvider extends React.PureComponent<
       error,
       sandpackStatus,
       environment,
+      initMode,
     } = this.state;
 
     return {
@@ -621,6 +668,7 @@ class SandpackProvider extends React.PureComponent<
       bundlerState,
       status: sandpackStatus,
       editorState,
+      initMode,
       closeFile: this.closeFile,
       deleteFile: this.deleteFile,
       dispatch: this.dispatchMessage,

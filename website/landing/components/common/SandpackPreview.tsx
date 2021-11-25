@@ -1,5 +1,9 @@
-import type { SandpackProps } from "@codesandbox/sandpack-react";
+import type {
+  SandpackInitMode,
+  SandpackProps,
+} from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
+import { useEffect, useState } from "react";
 
 import { styled } from "../../stitches.config";
 
@@ -52,6 +56,7 @@ export const SandpackPreview: React.FC<{ options?: SandpackProps }> = ({
         theme="sandpack-dark"
         {...options}
         options={{
+          initMode: "user-visible",
           ...(options?.options ?? {}),
           classes: {
             "sp-layout": "custom-layout",

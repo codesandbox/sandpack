@@ -6,10 +6,12 @@ import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
 import type { PreviewProps } from "../components/Preview";
 import { SandpackPreview } from "../components/Preview";
+import type { SandpackProviderProps } from "../contexts/sandpackContext";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import type {
   FileResolver,
   SandpackFiles,
+  SandpackInitMode,
   SandpackPredefinedTemplate,
   SandpackSetup,
   SandpackThemeProp,
@@ -36,6 +38,13 @@ export interface SandpackProps {
     showTabs?: boolean;
     closableTabs?: boolean;
     wrapContent?: boolean;
+    /**
+     * This provides a way to control how some components are going to
+     * be initialized on the page. The CodeEditor and the Preview components
+     * are quite expensive and might overload the memory usage, so this gives
+     * a certain control of when to initialize them.
+     */
+    initMode?: SandpackInitMode;
 
     bundlerURL?: string;
     startRoute?: string;
@@ -70,9 +79,10 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     showInlineErrors: props.options?.showInlineErrors,
     wrapContent: props.options?.wrapContent,
     closableTabs: props.options?.closableTabs,
+    initMode: props.options?.initMode,
   };
 
-  const providerOptions = {
+  const providerOptions: SandpackProviderProps = {
     openPaths: props.options?.openPaths,
     activePath: props.options?.activePath,
     recompileMode: props.options?.recompileMode,
@@ -82,6 +92,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     startRoute: props.options?.startRoute,
     skipEval: props.options?.skipEval,
     fileResolver: props.options?.fileResolver,
+    initMode: props.options?.initMode,
   };
 
   // Parts are set as `flex` values, so they set the flex shrink/grow

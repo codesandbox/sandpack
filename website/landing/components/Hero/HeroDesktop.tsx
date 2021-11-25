@@ -28,6 +28,7 @@ const SandpackWrapper: React.FC = ({ children }) => {
         files,
         dependencies: { "@stitches/react": "latest" },
       }}
+      initMode="user-visible"
       template="react"
     >
       <SandpackThemeProvider theme="sandpack-dark">
