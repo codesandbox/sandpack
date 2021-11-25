@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.2](https://github.com/codesandbox/sandpack/compare/v0.7.1...v0.7.2) (2021-11-25)
+
+
+### Bug Fixes
+
+* **landing:** ui tweaks ([#176](https://github.com/codesandbox/sandpack/issues/176)) ([5ecf9ed](https://github.com/codesandbox/sandpack/commit/5ecf9eddd9184703e19f61739f559cca21b0595c))
+
+
+### Features
+
+* landing - update showcase structure ([#181](https://github.com/codesandbox/sandpack/issues/181)) ([b35eef3](https://github.com/codesandbox/sandpack/commit/b35eef302f763fb17a29f59c39d76641a6f3484c))
+
+
+
+
+
 ## [0.7.1](https://github.com/codesandbox/sandpack/compare/v0.7.0...v0.7.1) (2021-11-24)
 
 
