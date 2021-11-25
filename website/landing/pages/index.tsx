@@ -8,7 +8,7 @@ import { Features } from "../components/Features";
 import { Footer } from "../components/Footer";
 import { Hero } from "../components/Hero";
 import { Intro } from "../components/Intro";
-// import { Showcase } from "../components/Showcase";
+import { Showcase } from "../components/Showcase";
 import { Users } from "../components/Users";
 import { styled } from "../stitches.config";
 import content from "../website.config.json";
@@ -61,7 +61,7 @@ const Home: NextPage<HomeProps> = () => {
         <Intro />
         <Features />
         <AdvancedUsage />
-        {/* <Showcase />*/}
+        <Showcase />
         <Users />
         <Banner />
         <Community />
