@@ -7,13 +7,47 @@ export const SVELTE_TEMPLATE: SandboxTemplate = {
 
   files: {
     "/App.svelte": {
-      code: "<style>\n  main {\n    font-family: sans-serif;\n    text-align: center;\n  }\n</style>\n\n<main>\n\t<h1>Hello CodeSandbox</h1>\n\t<h2>Start editing to see some magic happen!</h2>\n</main>",
+      code: `<style>
+  main {
+    font-family: sans-serif;
+    text-align: center;
+  }
+</style>
+
+<script>
+  let name = 'world';
+</script>
+
+<main>
+  <h1>Hello {name}!</h1>
+</main>`,
     },
     "/index.js": {
-      code: 'import App from "./App.svelte";\n\nconst app = new App({\n  target: document.body\n});\n\nexport default app;\n',
+      code: `import App from "./App.svelte";
+
+const app = new App({
+  target: document.body
+});
+
+export default app;
+      `,
     },
     "/public/index.html": {
-      code: '<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset="utf8" />\n    <meta name="viewport" content="width=device-width" />\n\n    <title>Svelte app</title>\n\n    <link rel="stylesheet" href="public/bundle.css" />\n  </head>\n\n  <body>\n    <script src="bundle.js"></script>\n  </body>\n</html>\n',
+      code: `<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Svelte app</title>
+
+    <link rel="stylesheet" href="public/bundle.css" />
+  </head>
+
+  <body>
+    <script src="bundle.js"></script>
+  </body>
+</html>`,
     },
   },
   dependencies: {
