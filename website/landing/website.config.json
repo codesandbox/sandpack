@@ -149,21 +149,21 @@
     "title": "Who's using Sandpack.",
     "list": [
       {
-        "name": "React",
-        "socialUrl": "https://beta.reactjs.org/",
-        "logo": {
-          "url": "/assets/logos/React.svg",
-          "height": 39,
-          "width": 147
-        }
-      },
-      {
         "name": "CodeAmigo",
         "socialUrl": "https://codeamigo.dev/",
         "logo": {
           "url": "/assets/logos/CodeAmigo.svg",
-          "height": 47,
-          "width": 219
+          "height": 50,
+          "width": 250
+        }
+      },
+      {
+        "name": "React",
+        "socialUrl": "https://beta.reactjs.org/",
+        "logo": {
+          "url": "/assets/logos/React.svg",
+          "height": 50,
+          "width": 250
         }
       },
       {
@@ -171,17 +171,8 @@
         "socialUrl": "#",
         "logo": {
           "url": "/assets/logos/CodeHike.svg",
-          "height": 34,
-          "width": 242
-        }
-      },
-      {
-        "name": "CodeSandbox",
-        "socialUrl": "https://codesandbox.io",
-        "logo": {
-          "url": "/assets/logos/CodeSandbox.svg",
-          "height": 40,
-          "width": 245
+          "height": 50,
+          "width": 250
         }
       },
       {
@@ -189,8 +180,17 @@
         "socialUrl": "https://gitlab.com",
         "logo": {
           "url": "/assets/logos/GitLab.svg",
-          "height": 47,
-          "width": 150
+          "height": 50,
+          "width": 250
+        }
+      },
+      {
+        "name": "CodeSandbox",
+        "socialUrl": "https://codesandbox.io",
+        "logo": {
+          "url": "/assets/logos/CodeSandbox.svg",
+          "height": 50,
+          "width": 250
         }
       },
       {
@@ -198,8 +198,8 @@
         "socialUrl": "https://ui.docs.amplify.aws/",
         "logo": {
           "url": "/assets/logos/Amplify.svg",
-          "height": 40,
-          "width": 210
+          "height": 50,
+          "width": 250
         }
       }
     ]
