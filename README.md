@@ -4,6 +4,8 @@
 
 Sandpack is a component toolkit for creating your own live running code editing experience powered by CodeSandbox.
 
+[Learn more about Sandpack](https://sandpack.codesandbox.io/).
+
 ## Sandpack client
 
 This is a small foundation package that sits on top of the bundler. It is
@@ -22,13 +24,13 @@ import "@codesandbox/sandpack-react/dist/index.css";
 <Sandpack template="react" />;
 ```
 
-[Read more](https://sandpack.codesandbox.io/)
+[Read more](https://sandpack.codesandbox.io/docs/advanced-usage/components)
 
 ## Documentation
 
-You can find the Sandpack documentation on [https://sandpack.codesandbox.io/docs/](https://sandpack.codesandbox.io/docs/).
+You can find the Sandpack documentation on [https://sandpack.codesandbox.io/docs/](https://sandpack.codesandbox.io/docs).
 
-Start with the [Sandpack introduction](https://sandpack.codesandbox.io/docs/) page for a quick overview and you can kick the tyres as well.
+Start with the [Sandpack introduction](https://sandpack.codesandbox.io/docs) page for a quick overview and you can kick the tyres as well.
 
 The documentation is divided into following sections:
 
