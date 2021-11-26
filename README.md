@@ -4,7 +4,7 @@
 
 Sandpack is a component toolkit for creating your own live running code editing experience powered by CodeSandbox.
 
-[Learn more about Sandpack](https://sandpack.codesandbox.io/).
+[Learn more about Sandpack](https://sandpack.codesandbox.io/)
 
 ## Sandpack client
 
