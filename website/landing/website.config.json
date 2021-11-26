@@ -134,7 +134,7 @@
       {
         "title": "Multiple Previews",
         "imageSource": "/assets/showcase/mulitple-preview.jpg",
-        "url": "",
+        "url": "https://codesandbox.io/s/multiple-previews-forked-9w4f1",
         "description": "For generative art or responsive design, Sandpack can render multiple previews to help you see all the variations you need."
       },
       {
@@ -168,7 +168,7 @@
       },
       {
         "name": "CodeHike",
-        "socialUrl": "#",
+        "socialUrl": "https://codehike.org",
         "logo": {
           "url": "/assets/logos/CodeHike.svg",
           "height": 50,
