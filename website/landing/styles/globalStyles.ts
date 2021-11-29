@@ -59,8 +59,7 @@ export const globalStyles = globalCss({
   },
 
   html: {
-    fontSize:
-      "clamp(10px, calc((100vw * 2) / 1440 * 10), calc((100vw * 2) / 1920 * 10))",
+    fontSize: "10px",
   },
 
   body: {
