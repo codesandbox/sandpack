@@ -202,11 +202,17 @@ export const FadeAnimation: React.FC = ({ children }) => {
   );
 
   return (
-    <motion.li ref={sectionRef} style={{ opacity, width: "100%" }}>
+    <motion.li
+      ref={sectionRef}
+      className="fade-animation"
+      style={{ opacity, width: "100%" }}
+    >
       {children}
     </motion.li>
   );
 };
+
+FadeAnimation.toString = () => `.fade-animation`;
 
 export const CodeWrapper = styled("div", {
   position: "relative",
