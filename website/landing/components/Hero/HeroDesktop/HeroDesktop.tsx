@@ -6,7 +6,6 @@ import {
   SandpackThemeProvider,
 } from "@codesandbox/sandpack-react";
 import { useTransform, useViewportScroll } from "framer-motion";
-import debounce from "lodash.debounce";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 import { AnimatedBox, Box, Clipboard, Resources, Text } from "../../common";
@@ -27,6 +26,7 @@ export const HeroDesktop: React.FC = () => {
   const [scrollPosition, setScrollPosition] = useState(scrollY.get());
   const scrollHeight = useMemo(() => sectionHeight / 3, [sectionHeight]);
   const [animationComplete, setAnimationComplete] = useState(false);
+  const isMounted = useRef(false);
 
   scrollY.onChange((updatedScroll) => setScrollPosition(updatedScroll));
 
@@ -94,17 +94,24 @@ export const HeroDesktop: React.FC = () => {
     const hero = sectionRef.current;
     if (!hero) return;
 
-    const onResize = debounce(() => {
+    const onResize = () => {
       const updatedTop = hero.offsetTop;
       setSectionTop(updatedTop);
 
       const updatedHeight = hero.offsetHeight;
       setSectionHeight(updatedHeight);
-    }, 300);
+    };
 
     onResize();
+
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
+  }, [sectionRef]);
+
+  useLayoutEffect(() => {
+    if (isMounted.current) return;
+
+    isMounted.current = !!sectionRef.current;
   }, [sectionRef]);
 
   return (
@@ -122,13 +129,15 @@ export const HeroDesktop: React.FC = () => {
         id="container"
         style={
           {
-            "--progress": progress,
-            "--opacity": opacity,
-            "--progress-inverse": progressInverse,
-            "--rotate": rotate,
-            "--scale": scale,
-            "--container-scale": containerScale,
-            "--sandpack-preview-opacity": sandpackPreviewOpacity,
+            "--progress": isMounted ? progress : 0,
+            "--opacity": isMounted ? opacity : 1,
+            "--progress-inverse": isMounted ? progressInverse : 1,
+            "--rotate": isMounted ? rotate : -90,
+            "--scale": isMounted ? scale : 2.08,
+            "--container-scale": isMounted ? containerScale : 1,
+            "--sandpack-preview-opacity": isMounted
+              ? sandpackPreviewOpacity
+              : 0,
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
           } as any
         }
@@ -141,6 +150,8 @@ export const HeroDesktop: React.FC = () => {
             position: "sticky",
             top: 0,
             transform: "scale($container-scale)",
+            opacity: isMounted.current ? 1 : 0,
+            transition: "opacity 300ms linear",
 
             display: "flex",
 
@@ -249,8 +260,9 @@ export const HeroDesktop: React.FC = () => {
               flexDirection: "column",
               justifyContent: "space-between",
               alignItems: "center",
-              transition: "opacity 300ms",
               zIndex: animationComplete ? 0 : 1,
+              opacity: isMounted ? 1 : 0,
+              transition: "opacity 300ms",
             }}
           >
             <Box
@@ -274,7 +286,7 @@ export const HeroDesktop: React.FC = () => {
                 "$$logo-height": "18em",
                 "$$logo-margin": "-5em",
 
-                width: "calc(100% + 2 * 3.5em)",
+                width: "calc(100%)",
                 height: "calc(1.15 * $$logo-height + -1 * (2 * $$logo-margin))",
 
                 position: "relative",
