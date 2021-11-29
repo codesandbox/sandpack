@@ -9,37 +9,6 @@ hr {
   height: 1px;
 }
 
-@media (min-width: 961px) {
-  .discord-link,
-  .twitter-link,
-  .releases-link,
-  .github-link {
-    position: fixed;
-    background: var(--sandpack-background-color);
-    width: var(--doc-sidebar-width);
-  }
-  .discord-link {
-    padding-bottom: 15px;
-    bottom: 0;
-  }
-  .twitter-link {
-    bottom: 45px;
-  }
-
-  .github-link {
-    bottom: 75px;
-  }
-  .releases-link {
-    bottom: 105px;
-  }
-  .discord-link .menu__link,
-  .twitter-link .menu__link,
-  .releases-link .menu__link,
-  .github-link .menu__link {
-    font-size: 14px !important;
-  }
-}
-
 main {
   border-left: 1px solid var(--sandpack-border-color) !important;
 }

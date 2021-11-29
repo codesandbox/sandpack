@@ -18,6 +18,7 @@ import { LayoutExample } from "./Sections/Layout";
 import { useLayoutExampleContext } from "./Sections/LayoutContext";
 import { TemplateExample } from "./Sections/Template";
 import { ThemeExample } from "./Sections/Theme";
+import { FadeAnimation } from "./Sections/common";
 
 export const Examples: React.FC = () => {
   const { layoutFiles, visibility } = useLayoutExampleContext();
@@ -76,7 +77,7 @@ export const Examples: React.FC = () => {
             x,
             position: "sticky",
             top: "calc(50vh - 25%)",
-            marginBottom: "calc(50vh - 15%)",
+            marginBottom: "calc(50vh - 15% + 200px)",
           }}
         >
           <Box
@@ -148,6 +149,10 @@ export const Examples: React.FC = () => {
             flexDirection: "column",
             "--gap": "0",
             scrollSnapType: "y mandatory",
+
+            [`${FadeAnimation}:last-child`]: {
+              paddingBottom: "200px ",
+            },
           },
         }}
       >
