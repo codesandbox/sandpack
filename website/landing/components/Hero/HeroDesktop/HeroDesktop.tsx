@@ -1,176 +1,370 @@
 import {
   ClasserProvider,
+  SandpackCodeEditor,
+  SandpackPreview,
   SandpackProvider,
   SandpackThemeProvider,
 } from "@codesandbox/sandpack-react";
-import {
-  AnimateSharedLayout,
-  useTransform,
-  useViewportScroll,
-} from "framer-motion";
+import { useTransform, useViewportScroll } from "framer-motion";
 import debounce from "lodash.debounce";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
-import { Box, SectionContainer, SectionWrapper } from "../../common";
+import { AnimatedBox, Box, Clipboard, Resources, Text } from "../../common";
 
-import { AnimatedPreview } from "./AnimatedPreview";
-import { HeroEditor } from "./HeroEditor";
-import { HeroMain } from "./HeroMain";
-import { StaticPreview } from "./StaticPreview";
+import { SandpackTitle } from "./SandpackTitle";
 import { files } from "./heroSandpackFiles";
 
 const CUSTOM_CLASSES_MAP = {
   "sp-stack": "custom-stack__hero",
-  "sp-wrapper": "custom-wrapper__hero",
-};
-
-const SandpackWrapper: React.FC = ({ children }) => {
-  return (
-    <SandpackProvider
-      customSetup={{
-        files,
-        dependencies: { "@stitches/react": "latest" },
-      }}
-      initMode="user-visible"
-      template="react"
-    >
-      <SandpackThemeProvider theme="sandpack-dark">
-        <ClasserProvider classes={CUSTOM_CLASSES_MAP}>
-          {children}
-        </ClasserProvider>
-      </SandpackThemeProvider>
-    </SandpackProvider>
-  );
-};
-
-const Section: React.FC = ({ children }) => {
-  return (
-    <SectionWrapper css={{ overflow: "hidden" }}>
-      <SectionContainer
-        css={{
-          margin: 0,
-          overflow: "hidden",
-          padding: 0,
-          position: "relative",
-        }}
-      >
-        {children}
-      </SectionContainer>
-    </SectionWrapper>
-  );
 };
 
 export const HeroDesktop: React.FC = () => {
-  // Hero dimensions
-  const heroRef = useRef<HTMLDivElement>(null);
-  const [heroTop, setHeroTop] = useState(0);
-  const [heroHeight, setHeroHeight] = useState(0);
-  const [heroScroll, setHeroScroll] = useState(0);
-
-  // Animation tracker
-  const [animationComplete, setAnimationComplete] = useState(false);
-
-  // Scroll animations start
   const { scrollY } = useViewportScroll();
 
-  // Scroll range for the container animation is from heroTop to 75%
-  // of the hero's height
-  const containerScrollInput = [heroTop, heroTop + heroScroll * 0.75];
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [sectionTop, setSectionTop] = useState(0);
+  const [sectionHeight, setSectionHeight] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(scrollY.get());
+  const scrollHeight = useMemo(() => sectionHeight / 3, [sectionHeight]);
+  const [animationComplete, setAnimationComplete] = useState(false);
 
-  // Translate hero out of view when scrolling past it
-  const heroTranslateY = useTransform(
+  scrollY.onChange(
+    debounce((updatedScroll) => setScrollPosition(updatedScroll), 300)
+  );
+
+  useEffect(() => {
+    const isAnimationComplete = scrollPosition > sectionTop + scrollHeight;
+    if (isAnimationComplete !== animationComplete) {
+      setAnimationComplete(isAnimationComplete);
+    }
+  }, [animationComplete, scrollHeight, scrollPosition, sectionTop]);
+
+  // Push editor into view and adjust wrapper's border radius.
+  const progress = useTransform(
     scrollY,
-    [heroTop + heroScroll, heroHeight + (heroHeight - heroScroll)], // heroHeight - heroScroll = window height: ;
-    ["0%", "-100%"]
+    [sectionTop, sectionTop + scrollHeight],
+    [0, 1]
+  );
+
+  // Subtitle's opacity.
+  const opacity = useTransform(
+    scrollY,
+    [sectionTop + scrollHeight * 0.6, sectionTop + scrollHeight * 0.8],
+    [1, 0]
+  );
+
+  // Push logo pieces into view.
+  const progressInverse = useTransform(
+    scrollY,
+    [sectionTop, sectionTop + scrollHeight],
+    [1, 0]
+  );
+
+  // Rotate logo.
+  const rotate = useTransform(
+    scrollY,
+    [sectionTop + scrollHeight, sectionTop + scrollHeight * 1.2],
+    [-90, 0]
+  );
+
+  // Scale down "fake" preview elements on scroll.
+  const scale = useTransform(
+    scrollY,
+    [sectionTop, sectionTop + scrollHeight],
+    [2.08, 1]
+  );
+
+  // Scale down the whole container on scroll.
+  const containerScale = useTransform(
+    scrollY,
+    [sectionTop, sectionTop + scrollHeight],
+    [1, 0.94]
+  );
+
+  // Sandpack dynamic preview opacity.
+  const sandpackPreviewOpacity = useTransform(
+    scrollY,
+    [
+      sectionTop + (sectionHeight / 4) * 2,
+      sectionTop + (sectionHeight / 4) * 2 + 1,
+    ],
+    [0, 1]
+  );
+
+  const staticPreviewOpacity = useTransform(
+    scrollY,
+    [
+      sectionTop + (sectionHeight / 4) * 2 + 2,
+      sectionTop + (sectionHeight / 4) * 2 + 4,
+    ],
+    [1, 0]
   );
 
   // Get dimensions
   useLayoutEffect(() => {
-    const hero = heroRef.current;
+    const hero = sectionRef.current;
     if (!hero) return;
 
     const onResize = debounce(() => {
-      // The top allows to define when the animation should start
-      // based on the scroll position.
       const updatedTop = hero.offsetTop;
-      if (updatedTop !== heroTop) {
-        setHeroTop(updatedTop);
-      }
+      setSectionTop(updatedTop);
 
-      // The scroll (hero height - window height), when combined
-      // with the top value, defines the animation scroll range
       const updatedHeight = hero.offsetHeight;
-      if (updatedHeight !== heroHeight) {
-        setHeroHeight(updatedHeight);
-      }
-
-      const updatedScroll = updatedHeight - window.innerHeight;
-      if (updatedScroll !== heroScroll) {
-        setHeroScroll(updatedScroll);
-      }
+      setSectionHeight(updatedHeight);
     }, 300);
 
     onResize();
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, [heroHeight, heroRef, heroScroll, heroTop]);
-
-  // Scroll listener
-  useLayoutEffect(() => {
-    const onScroll = debounce(() => {
-      const hasCompleted = window.scrollY >= heroScroll * 0.75; // Arbitraty number
-      if (hasCompleted !== animationComplete) {
-        setAnimationComplete(hasCompleted);
-      }
-    }, 0);
-
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [animationComplete, heroScroll]);
+  }, [sectionRef]);
 
   return (
-    <>
-      <SandpackWrapper>
-        <Section>
-          <AnimateSharedLayout>
-            <HeroMain translateY={heroTranslateY}>
-              <HeroEditor
-                animationComplete={animationComplete}
-                containerScrollInput={containerScrollInput}
-                scrollY={scrollY}
-              />
+    <SandpackProvider
+      customSetup={{
+        dependencies: { "@stitches/react": "latest" },
+        entry: "./index.js",
+        files,
+      }}
+      template="react"
+    >
+      <AnimatedBox
+        ref={sectionRef}
+        css={{ height: "300vh" }}
+        id="container"
+        style={
+          {
+            "--progress": progress,
+            "--opacity": opacity,
+            "--progress-inverse": progressInverse,
+            "--rotate": rotate,
+            "--scale": scale,
+            "--container-scale": containerScale,
+            "--sandpack-preview-opacity": sandpackPreviewOpacity,
+            "--static-preview-opacity": staticPreviewOpacity,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          } as any
+        }
+      >
+        <Box
+          css={{
+            width: "100vw",
+            height: "100vh",
 
-              {/* Preview */}
+            position: "sticky",
+            top: 0,
+            transform: "scale($container-scale)",
+
+            display: "flex",
+
+            "&::after": {
+              borderRadius: "calc($progress * 10px)",
+              content: '""',
+              position: "absolute",
+              top: 0,
+              height: "100%",
+              width: "100%",
+              background: "$surface",
+              zIndex: -1,
+            },
+          }}
+          id="content"
+        >
+          <Box
+            css={{
+              width: "50vw",
+              zIndex: animationComplete ? 1 : 0,
+              pointerEvents: animationComplete ? "auto" : "none",
+
+              ".sp-wrapper": {
+                display: "flex",
+                position: "relative",
+              },
+
+              ".sp-tabs": {
+                borderBottom: "none",
+              },
+
+              ".sp-tabs-scrollable-container": {
+                alignItems: "center",
+                height: "56px",
+              },
+
+              ".sp-tab-button:hover": {
+                background: "none",
+              },
+
+              ".sp-tab-button[data-active=true]": {
+                background: "$primary",
+                borderRadius: "2.4rem",
+                color: "#131313",
+                padding: "0 1.6em",
+              },
+
+              ".sp-preview-container": {
+                background: "transparent",
+              },
+
+              ".sp-preview-actions": {
+                display: "none",
+              },
+
+              ".custom-stack__hero": {
+                height: "100vh",
+                width: "50vw",
+
+                position: "relative",
+              },
+
+              // Editor
+              ".custom-stack__hero:first-of-type": {
+                borderRight: "1px solid #1c1c1c",
+                left: "-50vw",
+                transform: "translateX(calc($progress * 100%))",
+              },
+            }}
+          >
+            <SandpackThemeProvider theme="sandpack-dark">
+              <ClasserProvider classes={CUSTOM_CLASSES_MAP}>
+                <SandpackCodeEditor />
+                <Box
+                  css={{
+                    opacity: "$sandpack-preview-opacity",
+                    position: "absolute",
+                    top: 0,
+                    transform: "translateX(100%)",
+                    transition: "opacity 300ms",
+
+                    ".custom-stack__hero": {
+                      border: "none !important",
+                    },
+                  }}
+                >
+                  <SandpackPreview />
+                </Box>
+              </ClasserProvider>
+            </SandpackThemeProvider>
+          </Box>
+
+          <Box
+            css={{
+              fontSize: "calc(100vw / 1920 * 10)",
+              fontFamily:
+                "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol",
+              width: "50vw",
+              padding: "1.8em 3.5em",
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+              opacity: "$static-preview-opacity",
+              transition: "opacity 300ms",
+              zIndex: animationComplete ? 0 : 1,
+            }}
+          >
+            <Box
+              css={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                position: "relative",
+
+                width: "100%",
+                transformOrigin: "top right",
+                transform: "scale($scale)",
+              }}
+            >
+              <Clipboard />
+              <Resources />
+            </Box>
+
+            <Box
+              css={{
+                "$$logo-height": "18em",
+                "$$logo-margin": "-5em",
+
+                width: "50vw",
+                height: "calc(1.15 * $$logo-height + -1 * (2 * $$logo-margin))",
+
+                position: "relative",
+                overflow: "hidden",
+                right: 0,
+                transformOrigin: "center right",
+                transform: "scale($scale)",
+
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {/* Logo */}
               <Box
                 css={{
-                  background: "$surface",
-                  fontSize: "1.6rem" /* TODO: responsive font-sizes (?) */,
-                  lineHeight: 1.6,
-                  letterSpacing: "-0.025em",
-                  height: "100%",
-                  position: "relative",
-                  width: "100vw",
-                  maxWidth: "2560px",
+                  display: "flex",
+                  flexShrink: 0,
+                  alignItems: "center",
+                  justifyContent: "center",
+
+                  width: "100%",
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform:
+                    "translate(-50%, -50%) rotate(calc($rotate * 1deg))",
+
+                  "&::before, &::after": {
+                    boxSizing: "content-box",
+                    content: "''",
+                    display: "block",
+
+                    border: "2.4em solid $darkTextPrimary",
+                    width: "9em",
+                    height: "$$logo-height",
+                  },
+
+                  "&::before": {
+                    marginTop: "$$logo-margin",
+                    marginRight: "-1.1em",
+                    transform:
+                      "translateY(calc(-1 * ($progress-inverse * 100vw / 2)))",
+                  },
+
+                  "&::after": {
+                    marginBottom: "$$logo-margin",
+                    marginLeft: "-1.1em",
+                    transform:
+                      "translateY(calc(1 * ($progress-inverse * 100vw / 2)))",
+                  },
+                }}
+              />
+
+              <Text
+                css={{
+                  fontSize: "1.2em",
+                  textAlign: "center",
+                  opacity: "$opacity",
                 }}
               >
-                <AnimatedPreview heroScroll={heroScroll} heroTop={heroTop} />
-                <StaticPreview animationComplete={animationComplete} />
-              </Box>
-            </HeroMain>
-            {/* This ghost ref sets the hero dimensions  */}
+                A component toolkit for creating your
+                <br /> own live running code editing experience,
+                <br />
+                using the power of CodeSandbox.
+              </Text>
+            </Box>
+
             <Box
-              ref={heroRef}
-              style={{
-                height: "150vw",
-                maxHeight: "2560px",
-                width: "100vw",
-                maxWidth: "2560px",
+              css={{
+                display: "flex",
+                width: "100%",
+                transform: "scale($scale)",
+                transformOrigin: "bottom right",
               }}
-            />{" "}
-          </AnimateSharedLayout>
-        </Section>
-      </SandpackWrapper>
-    </>
+            >
+              <SandpackTitle />
+            </Box>
+          </Box>
+        </Box>
+      </AnimatedBox>
+    </SandpackProvider>
   );
 };
