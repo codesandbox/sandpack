@@ -2,6 +2,7 @@ import type {
   BundlerState,
   ListenerFunction,
   SandpackBundlerFiles,
+  SandpackClient,
   SandpackError,
   SandpackMessage,
   UnsubscribeFunction,
@@ -34,6 +35,7 @@ export interface SandpackState {
   environment?: SandboxEnvironment;
   status: SandpackStatus;
   initMode: SandpackInitMode;
+  clients: Record<string, SandpackClient>;
 
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
