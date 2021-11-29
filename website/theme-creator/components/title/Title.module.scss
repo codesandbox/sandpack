@@ -1,0 +1,18 @@
+@import "styles/breakpoints.scss";
+
+.heading {
+  font-weight: 500;
+  font-size: 2.4rem;
+  letter-spacing: -0.05em;
+  margin: 0;
+  padding: 0;
+
+  @include respond-to("medium") {
+    padding: 0 var(--space-base);
+  }
+
+  @include respond-to("small") {
+    font-size: 1.4rem;
+    display: none;
+  }
+}
