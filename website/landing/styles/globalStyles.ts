@@ -58,13 +58,17 @@ export const globalStyles = globalCss({
     borderLeft: "1px solid rgba(255,255,255,0.1)",
   },
 
+  "html, body": {
+    backgroundColor: "$darkBackground",
+    color: "$darkTextPrimary",
+    height: "100%",
+  },
+
   html: {
     fontSize: "10px",
   },
 
   body: {
-    backgroundColor: "$darkBackground",
-    color: "$darkTextPrimary",
     fontSize: "1.6rem",
     fontSmooth: "antialiased",
     "-webkit-font-smoothing": "antialiased",
