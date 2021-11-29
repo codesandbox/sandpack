@@ -14,7 +14,7 @@
     },
     "3002": {
       "name": "Theme",
-      "command": "yarn dev:landing"
+      "command": "yarn dev:theme"
     }
   },
   "tasks": {
