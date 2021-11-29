@@ -219,7 +219,7 @@ export const CodeWrapper = styled("div", {
   width: "100%",
   marginTop: "30px !important",
 
-  pre: { padding: 0 },
+  "pre:not(.sp-pre-placeholder)": { padding: 0 },
 
   ".sp-code-editor": {
     borderRadius: "16px",
