@@ -6,14 +6,14 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Sandpack Customization Tool</title>
-        <meta name="description" content="Powered by CodeSandbox" />
+        <title>Sandpack Theme Builder</title>
+        <meta name="description" content="Customize your sandpack theme" />
 
-        <meta property="og:title" content="Sandpack Customization Tool" />
+        <meta property="og:title" content="Sandpack Themes" />
         <meta property="og:description" content="Powered by CodeSandbox" />
         <meta
           property="og:image"
-          content="https://7iydd-3000.pitcher-staging.csb.dev/og-image.jpg"
+          content="https://sandpack.codesandbox.io/theme/og-image.jpg"
         />
 
         <link rel="icon" href="/favicon.ico" />
