@@ -154,6 +154,7 @@ function Section({ children }) {
       overflow: "hidden",
       position: "relative",
       width: "100%",
+      padding: "0 10px",
     }}
     vertical>
       {children}
@@ -232,5 +233,5 @@ export const files = {
   "/stitches.config.js": stitchesConfig,
   "/logo.svg": logoFile,
   "/sandpack.svg": sandpackFile,
-  "/styles.css": ""
+  "/styles.css": "",
 };

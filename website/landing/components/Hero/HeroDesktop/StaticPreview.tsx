@@ -22,7 +22,10 @@ export const StaticPreview: React.FC<StaticPreviewProps> = ({
         zIndex: animationComplete ? "1" : "-1",
       }}
     >
-      <SandpackPreview />
+      <SandpackPreview
+        showOpenInCodeSandbox={false}
+        showRefreshButton={false}
+      />
     </Box>
   );
 };

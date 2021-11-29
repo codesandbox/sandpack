@@ -39,6 +39,7 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
         overflow: "hidden",
         position: "relative",
         width: "100%",
+        padding: "0 10px",
       }}
     >
       {/* Header */}
@@ -64,8 +65,12 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
             npm install @codesandbox/sandpack-react
           </Text>
         </Button>
-        <Box css={{ alignItems: "center", display: "flex", gap: "1rem" }}>
-          <a href="#placeholder" target="_blank">
+        <Box css={{ alignItems: "center", display: "flex" }}>
+          <a
+            href="https://github.com/codesandbox/sandpack"
+            rel="noreferrer"
+            target="_blank"
+          >
             <Text
               as="span"
               css={{
@@ -77,7 +82,12 @@ export const AnimatedPreview: React.FC<AnimatedPreviewProps> = ({
               Github
             </Text>
           </a>
-          <a href="#placeholder" target="_blank">
+          <a
+            href="https://sandpack.codesandbox.io/docs/"
+            rel="noreferrer"
+            style={{ marginLeft: "24px" }}
+            target="_blank"
+          >
             <Text
               as="span"
               css={{
