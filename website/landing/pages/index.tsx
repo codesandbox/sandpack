@@ -47,9 +47,9 @@ const Home: NextPage<HomeProps> = () => {
           let content = value;
 
           if (name === "og:url") {
-            content = `${DEFAULT_HOST}/${content}`;
-          } else if (name === "og:image") {
             content = DEFAULT_HOST;
+          } else if (name === "og:image") {
+            content = `${DEFAULT_HOST}/${content}`;
           }
 
           return <meta key={name} content={content} name={name} />;

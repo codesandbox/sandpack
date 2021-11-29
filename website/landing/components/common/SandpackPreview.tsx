@@ -1,9 +1,5 @@
-import type {
-  SandpackInitMode,
-  SandpackProps,
-} from "@codesandbox/sandpack-react";
+import type { SandpackProps } from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
-import { useEffect, useState } from "react";
 
 import { styled } from "../../stitches.config";
 
