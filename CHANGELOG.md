@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.2](https://github.com/codesandbox/sandpack/compare/v0.9.1...v0.9.2) (2021-11-29)
+
+
+### Bug Fixes
+
+* landing - users logos ([#188](https://github.com/codesandbox/sandpack/issues/188)) ([06f8170](https://github.com/codesandbox/sandpack/commit/06f81706f2b073008f012076b63ec8a2a6620c78))
+
+
+
+
+
 ## [0.9.1](https://github.com/codesandbox/sandpack/compare/v0.9.0...v0.9.1) (2021-11-25)
 
 
