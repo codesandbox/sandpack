@@ -28,12 +28,10 @@ export const HeroDesktop: React.FC = () => {
   const scrollHeight = useMemo(() => sectionHeight / 3, [sectionHeight]);
   const [animationComplete, setAnimationComplete] = useState(false);
 
-  scrollY.onChange(
-    debounce((updatedScroll) => setScrollPosition(updatedScroll), 300)
-  );
+  scrollY.onChange((updatedScroll) => setScrollPosition(updatedScroll));
 
   useEffect(() => {
-    const isAnimationComplete = scrollPosition > sectionTop + scrollHeight;
+    const isAnimationComplete = scrollPosition >= sectionTop + scrollHeight;
     if (isAnimationComplete !== animationComplete) {
       setAnimationComplete(isAnimationComplete);
     }
@@ -91,15 +89,6 @@ export const HeroDesktop: React.FC = () => {
     [0, 1]
   );
 
-  const staticPreviewOpacity = useTransform(
-    scrollY,
-    [
-      sectionTop + (sectionHeight / 4) * 2 + 2,
-      sectionTop + (sectionHeight / 4) * 2 + 4,
-    ],
-    [1, 0]
-  );
-
   // Get dimensions
   useLayoutEffect(() => {
     const hero = sectionRef.current;
@@ -140,7 +129,6 @@ export const HeroDesktop: React.FC = () => {
             "--scale": scale,
             "--container-scale": containerScale,
             "--sandpack-preview-opacity": sandpackPreviewOpacity,
-            "--static-preview-opacity": staticPreviewOpacity,
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
           } as any
         }
@@ -187,6 +175,10 @@ export const HeroDesktop: React.FC = () => {
               ".sp-tabs-scrollable-container": {
                 alignItems: "center",
                 height: "56px",
+              },
+
+              ".sp-tab-button": {
+                transition: "none",
               },
 
               ".sp-tab-button:hover": {
@@ -257,7 +249,6 @@ export const HeroDesktop: React.FC = () => {
               flexDirection: "column",
               justifyContent: "space-between",
               alignItems: "center",
-              opacity: "$static-preview-opacity",
               transition: "opacity 300ms",
               zIndex: animationComplete ? 0 : 1,
             }}
@@ -283,7 +274,7 @@ export const HeroDesktop: React.FC = () => {
                 "$$logo-height": "18em",
                 "$$logo-margin": "-5em",
 
-                width: "50vw",
+                width: "calc(100% + 2 * 3.5em)",
                 height: "calc(1.15 * $$logo-height + -1 * (2 * $$logo-margin))",
 
                 position: "relative",
