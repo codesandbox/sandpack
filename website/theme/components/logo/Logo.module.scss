@@ -1,0 +1,43 @@
+@import "styles/breakpoints.scss";
+
+// @keyframes logoOpening {
+//   0% {
+//     transform: translateX(calc(50vw - calc(var(--width) / 2)))
+//       translateY(calc(50vh - calc(var(--height) / 2))) scale(1.2);
+//   }
+
+//   // 50% {
+//   //   transform: translateX(calc(25vw - calc(var(--width) / 2))) translateY(0);
+//   // }
+
+//   100% {
+//     transform: translateX(0) translateY(0);
+//   }
+// }
+
+.logo {
+  --width: 31.667rem;
+  --height: 3rem;
+
+  width: var(--width);
+  height: var(--height);
+
+  // mix-blend-mode: difference;
+
+  // transform: translateX(calc(50vw - calc(var(--width) / 2)))
+  //   translateY(calc(50vh - calc(var(--height) / 2))) scale(1.2);
+
+  position: relative;
+  z-index: 9999;
+
+  // animation: logoOpening 1s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+
+  path {
+    fill: var(--text-color);
+  }
+
+  @include respond-to("small") {
+    width: 100%;
+    height: auto;
+  }
+}

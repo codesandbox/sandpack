@@ -2,17 +2,8 @@
   "name": "sandpack",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "sandpack-client",
-    "sandpack-react",
-    "website/docs",
-    "website/landing",
-    "plugins/*"
-  ],
-  "nohoist": [
-    "website/docs/**",
-    "**/html-minifier-terser"
-  ],
+  "workspaces": ["sandpack-client", "sandpack-react", "website/*", "plugins/*"],
+  "nohoist": ["website/docs/**", "**/html-minifier-terser"],
   "description": "",
   "scripts": {
     "lint": "eslint '**/*.ts?(x)' --fix",
@@ -22,7 +13,8 @@
     "clean": "yarn workspaces run clean",
     "dev:docs": "yarn workspace sandpack-docs start",
     "dev:react": "yarn workspace @codesandbox/sandpack-react storybook",
-    "dev:landing": "yarn workspace sandpack-landing dev -p 3001"
+    "dev:landing": "yarn workspace sandpack-landing dev -p 3001",
+    "dev:theme": "yarn workspace sandpack-theme dev -p 3002"
   },
   "repository": {
     "type": "git",

@@ -26,7 +26,10 @@ export interface CodeViewerProps {
 }
 
 export const SandpackCodeViewer = forwardRef<CodeEditorRef, CodeViewerProps>(
-  ({ showTabs, showLineNumbers, decorators, code: propCode, initMode }, ref) => {
+  (
+    { showTabs, showLineNumbers, decorators, code: propCode, initMode },
+    ref
+  ) => {
     const { sandpack } = useSandpack();
     const { code } = useActiveCode();
 

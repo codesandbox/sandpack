@@ -52,14 +52,14 @@ export const Examples: React.FC = () => {
   const scrollRangeX = [
     sandpackSectionTop * 0.7,
     sandpackSectionTop * 0.9,
-    (sandpackSectionTop + sandpackSectionHeight) * 0.9,
+    (sandpackSectionTop + sandpackSectionHeight) * 0.8,
   ];
 
   // Max width that the left container can grow
   const breakpoint = () => {
     if (isXLarge) return "600px";
     if (isLarge) return "30vw";
-    if (isMedium) return "45vw";
+    if (isMedium) return "38vw";
 
     return "35vw";
   };
@@ -77,7 +77,6 @@ export const Examples: React.FC = () => {
             x,
             position: "sticky",
             top: "calc(50vh - 25%)",
-            marginBottom: "calc(50vh - 15% + 200px)",
           }}
         >
           <Box
@@ -85,6 +84,7 @@ export const Examples: React.FC = () => {
               right: 0,
 
               position: "relative",
+              marginBottom: "calc(50vh - 15%)",
 
               "*": {
                 transition: ".2s ease background, .2s ease color",
@@ -145,6 +145,7 @@ export const Examples: React.FC = () => {
           },
 
           "@bp2": {
+            marginTop: "calc((50vh - 15%) * -1)",
             alignItems: "center",
             flexDirection: "column",
             "--gap": "0",

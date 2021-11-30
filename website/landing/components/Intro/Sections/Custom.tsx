@@ -78,10 +78,10 @@ export const CustomExample: React.FC = () => {
 
   useEffect(() => {
     if (inView) {
-      try {
-        setOptions({ customSetup: parseFromSandpackToJson(code) });
-      } catch (err) {
-        console.error(err);
+      const customSetup = parseFromSandpackToJson(code);
+
+      if (customSetup) {
+        setOptions({ customSetup });
       }
     } else {
       setOptions({ customSetup: {} });

@@ -234,6 +234,29 @@ export const Main: React.FC<{test: string}> = ({test}) => {
   />
 );
 
+export const ExternalResources: Story<SandpackProps> = (args) => (
+  <Sandpack
+    {...args}
+    files={{
+      "/App.js": `        
+export default () => {
+  return <a
+    href="#"
+    className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
+  >
+    Log in
+  </a>
+}`,
+    }}
+    options={{
+      externalResources: [
+        "https://unpkg.com/@tailwindcss/ui/dist/tailwind-ui.min.css",
+      ],
+    }}
+    template="react"
+  />
+);
+
 const reactWithLibCode = `import ReactMarkdown from 'react-markdown' 
 
 export default function App() {

@@ -25,7 +25,11 @@ export const SandpackTranspiledCode: React.FC<CodeViewerProps> = (props) => {
   return (
     <div className={c("transpiled-code")}>
       {transpiledCode && (
-        <SandpackCodeViewer initMode={sandpack.initMode} code={transpiledCode} {...props} />
+        <SandpackCodeViewer
+          code={transpiledCode}
+          initMode={sandpack.initMode}
+          {...props}
+        />
       )}
       <iframe ref={hiddenIframeRef} style={{ display: "none" }} />
       <ErrorOverlay />

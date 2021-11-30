@@ -1,0 +1,39 @@
+@import "styles/breakpoints.scss";
+
+.container {
+  @include respond-to("small") {
+    display: none;
+  }
+}
+.menuList {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.menuItem {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menuLink {
+  display: inline-flex;
+  align-items: baseline;
+
+  font-weight: 500;
+  font-size: 1.6rem;
+  text-align: center;
+  letter-spacing: -0.025em;
+
+  padding: 1rem;
+  border-radius: 100px;
+
+  @include respond-to("small") {
+    font-size: 1.4rem;
+  }
+
+  &:hover {
+    opacity: 0.5;
+  }
+}

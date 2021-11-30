@@ -69,13 +69,14 @@ export const Content = styled("div", {
 
   "@bp2": {
     alignItems: "flex-start",
-    width: "450px",
+    width: "28%",
   },
 });
 
 export const SandpackContainerPlaceholder = styled("div", {
-  width: "300px",
-  "@bp3": { width: "560px" },
+  width: "500px",
+  "@bp2": { width: "28%" },
+  // "@bp3": { width: "560px" },
 });
 
 export const SandpackContainerMobile = styled("div", {
@@ -217,7 +218,7 @@ FadeAnimation.toString = () => `.fade-animation`;
 export const CodeWrapper = styled("div", {
   position: "relative",
   width: "100%",
-  marginTop: "30px !important",
+  paddingTop: "30px !important",
 
   "pre:not(.sp-pre-placeholder)": { padding: 0 },
 

@@ -1,0 +1,29 @@
+@import "styles/breakpoints.scss";
+
+.container {
+  // width: 50%;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: calc(var(--space-base) * 4) var(--space-base);
+
+  @include respond-to("medium") {
+    width: 100%;
+  }
+}
+
+.warning {
+  font-size: 1.2rem;
+}
+
+.logo {
+  width: auto;
+  height: 3rem;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  justify-content: center;
+  gap: 1.5rem;
+}
