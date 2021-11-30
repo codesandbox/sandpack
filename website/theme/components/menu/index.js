@@ -1,5 +1,6 @@
-import styles from "./Menu.module.scss";
 import React, { useRef, useState } from "react";
+
+import styles from "./Menu.module.scss";
 
 export default function Menu({ setTab }) {
   const [activeSlider, setActiveSlider] = useState({
@@ -26,18 +27,21 @@ export default function Menu({ setTab }) {
     >
       <ul className={styles.menuList}>
         <li className={styles.menuItem} onClick={onClick}>
-          <button onClick={() => setTab("basic")}>
-            <a className={styles.menuLink}>Basic</a>
+          <button className={styles.menuLink} onClick={() => setTab("basic")}>
+            Basic
           </button>
         </li>
         <li className={styles.menuItem} onClick={onClick}>
-          <button onClick={() => setTab("advanced")}>
-            <a className={styles.menuLink}>Advanced</a>
+          <button
+            className={styles.menuLink}
+            onClick={() => setTab("advanced")}
+          >
+            Advanced
           </button>
         </li>
         <li className={styles.menuItem} onClick={onClick}>
-          <button onClick={() => setTab("library")}>
-            <a className={styles.menuLink}>Library</a>
+          <button className={styles.menuLink} onClick={() => setTab("library")}>
+            Library
           </button>
         </li>
       </ul>

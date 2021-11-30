@@ -7,22 +7,22 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Sandpack Theme Builder</title>
-        <meta name="description" content="Customize your sandpack theme" />
+        <meta content="Customize your sandpack theme" name="description" />
 
-        <meta property="og:title" content="Sandpack Themes" />
-        <meta property="og:description" content="Powered by CodeSandbox" />
+        <meta content="Sandpack Themes" property="og:title" />
+        <meta content="Powered by CodeSandbox" property="og:description" />
         <meta
-          property="og:image"
           content="https://sandpack.codesandbox.io/theme/og-image.jpg"
+          property="og:image"
         />
 
-        <link rel="icon" href="/favicon.ico" />
+        <link href="/favicon.ico" rel="icon" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link href="https://fonts.googleapis.com" rel="preconnect" />
         <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
           crossOrigin="true"
+          href="https://fonts.gstatic.com"
+          rel="preconnect"
         />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap"

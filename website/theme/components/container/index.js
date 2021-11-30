@@ -1,6 +1,7 @@
-import styles from "./Container.module.scss";
-import { useClipboard } from "use-clipboard-copy";
 import { useEffect, useRef, useState } from "react";
+import { useClipboard } from "use-clipboard-copy";
+
+import styles from "./Container.module.scss";
 
 export default function Container({ children }) {
   return <main className={styles.container}>{children}</main>;
@@ -32,9 +33,9 @@ export function ContainerPanels({ children, tab }) {
 
   return (
     <div
-      style={{ "--state": tabState }}
       ref={container}
       className={styles.containerPanels}
+      style={{ "--state": tabState }}
     >
       {children}
     </div>

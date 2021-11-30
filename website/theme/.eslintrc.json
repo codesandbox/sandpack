@@ -8,6 +8,6 @@
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
-    "@typescript-eslint/explicit-module-boundary-types": false
+    "@typescript-eslint/explicit-module-boundary-types": 0
   }
 }
