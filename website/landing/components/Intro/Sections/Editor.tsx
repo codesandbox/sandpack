@@ -112,7 +112,17 @@ export const EditorExample: React.FC = () => {
             prop.
           </CardDescription>
 
-          <CodeWrapper>
+          <CodeWrapper
+            css={{
+              ".sp-cm": {
+                height: "208px",
+
+                "@bp2": {
+                  height: "auto",
+                },
+              },
+            }}
+          >
             <Caption>Code snippet</Caption>
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />

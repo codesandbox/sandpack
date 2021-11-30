@@ -11,6 +11,7 @@ import {
   SectionWrapper,
 } from "../common";
 import { ParallaxLogo } from "../common/ParallaxLogo";
+import { useBreakpoint } from "../common/useBreakpoint";
 
 import { UsageExample } from "./UsageExample";
 
@@ -18,17 +19,18 @@ export const AdvancedUsage: React.FC = () => {
   const section = useRef<HTMLDivElement>(null);
   const [sectionTop, setSectionTop] = useState(0);
   const [windowHeight, setWindowHeight] = useState(0);
+  const shouldAnimate = useBreakpoint("bp2");
 
   const { scrollY } = useViewportScroll();
   const leftRange = useTransform(
     scrollY,
     [sectionTop - windowHeight / 2, sectionTop + windowHeight / 2],
-    [-20, 40]
+    shouldAnimate ? [-20, 40] : [-20, -20]
   );
   const rightRange = useTransform(
     scrollY,
     [sectionTop - windowHeight / 2, sectionTop + windowHeight / 2],
-    [20, -40]
+    shouldAnimate ? [20, -40] : [20, 20]
   );
 
   useLayoutEffect(() => {

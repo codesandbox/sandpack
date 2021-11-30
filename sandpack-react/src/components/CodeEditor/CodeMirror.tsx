@@ -100,7 +100,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     const { listen } = useSandpack();
     const ariaId = React.useRef<string>(generateRandomId());
 
-    const { isIntersecting } = useIntersectionObserver(wrapper);
+    const { isIntersecting } = useIntersectionObserver(wrapper, {
+      rootMargin: "600px 0px",
+      threshold: 0.2,
+    });
 
     React.useImperativeHandle(ref, () => ({
       getCodemirror: () => cmView.current,
