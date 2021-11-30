@@ -124,7 +124,7 @@ export const HeroDesktop: React.FC = () => {
       editorElement.focus();
 
       const newState = editorElement.state.update({
-        selection: { anchor: 204 },
+        selection: { anchor: 322 },
       });
 
       if (newState) {
