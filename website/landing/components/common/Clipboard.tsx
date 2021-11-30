@@ -124,7 +124,7 @@ export const Clipboard: React.FC = () => {
           {command}
         </Text>
         <Box
-          aria-label="Copy to cliboard"
+          aria-label="Copy to clipboard"
           css={{
             flexShrink: "0",
             height: "12px",
