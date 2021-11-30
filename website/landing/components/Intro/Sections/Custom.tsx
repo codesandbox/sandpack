@@ -34,7 +34,11 @@ const ORIGINAL_CODE = `<Sandpack
       "/App.js": \`import ReactMarkdown from 'react-markdown' 
 
 export default function App() {
-  return <ReactMarkdown># Hello, *world*!</ReactMarkdown>
+  return (
+    <ReactMarkdown>
+      # Hello, *world*!
+    </ReactMarkdown>
+  )
 }\`
     }
   }}
@@ -51,7 +55,7 @@ export const CustomExample: React.FC = () => {
 
   useEffect(
     function componentOnView() {
-      const position = 225;
+      const position = 238;
       const cmInstance = codeEditorRef.current?.getCodemirror();
 
       if (higherMobile && inView && cmInstance && code.length > position) {
