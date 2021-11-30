@@ -59,7 +59,7 @@ export const Examples: React.FC = () => {
   const breakpoint = () => {
     if (isXLarge) return "600px";
     if (isLarge) return "30vw";
-    if (isMedium) return "45vw";
+    if (isMedium) return "38vw";
 
     return "35vw";
   };
@@ -84,7 +84,7 @@ export const Examples: React.FC = () => {
               right: 0,
 
               position: "relative",
-              marginBottom: "calc(50vh - 15% + 200px)",
+              marginBottom: "calc(50vh - 15%)",
 
               "*": {
                 transition: ".2s ease background, .2s ease color",
@@ -142,10 +142,10 @@ export const Examples: React.FC = () => {
           "@bp1": {
             width: "initial",
             "--gap": "200px",
-            marginTop: "calc((50vh - 15% + 200px) * -1)",
           },
 
           "@bp2": {
+            marginTop: "calc((50vh - 15%) * -1)",
             alignItems: "center",
             flexDirection: "column",
             "--gap": "0",
