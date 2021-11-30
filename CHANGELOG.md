@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.6](https://github.com/codesandbox/sandpack/compare/v0.9.5...v0.9.6) (2021-11-30)
+
+
+### Bug Fixes
+
+* landing - global styles ([#205](https://github.com/codesandbox/sandpack/issues/205)) ([32cc3bd](https://github.com/codesandbox/sandpack/commit/32cc3bd3265efdaa6df59e936824eff3f6b80652))
+
+
+
+
+
 ## [0.9.5](https://github.com/codesandbox/sandpack/compare/v0.9.4...v0.9.5) (2021-11-30)
 
 
