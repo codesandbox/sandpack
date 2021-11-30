@@ -1,7 +1,3 @@
-const TAB = "    ";
-const breakpoints = [768, 1440, 1920];
-const spacing = [0, 1, 2, 3, 4, 5, 6];
-
 const stitchesConfig = `import { createStitches } from '@stitches/react';
 
 export const {
@@ -31,18 +27,10 @@ export const {
       base: 400,
       semiBold: 600,
     },
-    space: [${spacing.map((s) => `"${s}rem"`).join(", ")}],
-  },
-  media: {
-    ${breakpoints
-      .map(
-        (bp, bpIndex) =>
-          `bp${bpIndex + 1}: 'media screen and (min-width: ${bp}px)'`
-      )
-      .join(`,\n${TAB}`)}
-  },
-  utils: {
-  },
+    transitions: {
+      default: "all .2s ease",
+    },
+  }
 });
 
 export const globalStyles = globalCss({
@@ -156,10 +144,13 @@ function Section({ children }) {
       css={{
         background: "$surface",
         fontSize: "calc(100vw / (1920 / 2) * 10)",
+
         width: "100vw",
         height: "100vh",
+        
         padding: "1.8em 3.5em",
         position: "relative",
+
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -179,6 +170,7 @@ function HeaderText({ children, ...props }) {
         fontSize: "2.4em",
         textAlign: "center",
         letterSpacing: "-0.05em",
+        transition: "$default",
 
         "&:hover": {
           color: "$primary",
@@ -191,7 +183,7 @@ function HeaderText({ children, ...props }) {
 }
 
 function Clipboard() {
-  const installComand = "npm install @codesandbox/sandpack-react"
+  const installCommand = "npm install @codesandbox/sandpack-react"
 
   return (
     <Button
@@ -200,26 +192,33 @@ function Clipboard() {
         color: "$darkTextPrimary",
         cursor: "pointer",
         display: "flex",
+        transition: "$default",
+
+        "&:hover": {
+          color: "$primary",
+        },
 
         ".clipboard-icon": {
+          color: "$primary",
+          transition: "$default",
           opacity: 0,
         },
 
         "&:hover .clipboard-icon": {
-          color: "$primary",
           opacity: 1,
         }
       }}
-      onClick={() => navigator.clipboard.writeText(installComand)}
+      onClick={() => navigator.clipboard.writeText(installCommand)}
     >
-      <HeaderText>{installComand}</HeaderText>
+      <HeaderText>{installCommand}</HeaderText>
       <Box
-        aria-label="Copy to cliboard"
+        aria-label="Copy to clipboard"
         className="clipboard-icon"
         css={{
           flexShrink: "0",
           width: "1.6em",
           height: "1.6em",
+          
           position: "relative",
           top: 1,
           marginLeft: "1.2em",
@@ -247,17 +246,20 @@ function Clipboard() {
   )
 }
 
-function SectionHeader() {
+function Link({ href, children }) {
+  return (
+    <a href={href} target="_blank" style={{ marginLeft: "2em" }}>
+      <HeaderText semiBold>{children}</HeaderText>
+    </a>
+  )
+}
+
+function SectionHeader({children}) {
   return (
     <Stack css={{ justifyContent: "space-between", width: "100%" }} horizontal>
       <Clipboard />
       <Stack horizontal>
-        <a href="https://sandpack.codesandbox.io/docs/" target="_blank" style={{ marginRight: "2em" }}>
-          <HeaderText semiBold>Docs</HeaderText>
-        </a>
-        <a href="https://github.com/codesandbox/sandpack" target="_blank">
-          <HeaderText semiBold>GitHub</HeaderText>
-        </a>
+        {children}
       </Stack>
     </Stack>
   )
@@ -310,15 +312,16 @@ function SandpackTitle() {
   )
 }
 
-export { Section, SectionHeader, SandpackLogo, SandpackTitle }
+export { Section, SectionHeader, SandpackLogo, SandpackTitle, Link }
 `;
 
 const app = `import { globalStyles } from './stitches.config';
 import {
-  SandpackLogo,
-  SandpackTitle,
   Section,
-  SectionHeader
+  SandpackLogo,
+  SectionHeader,
+  SandpackTitle,
+  Link
 } from './components';
 
 export default function App() {
@@ -326,7 +329,15 @@ export default function App() {
 
   return (
     <Section>
-      <SectionHeader />
+      <SectionHeader>
+        <Link href="https://sandpack.codesandbox.io/docs">
+          Docs
+        </Link>
+        <Link href="https://github.com/codesandbox/sandpack">
+          GitHub
+        </Link>
+      </SectionHeader>
+
       <SandpackLogo />
       <SandpackTitle />
     </Section>

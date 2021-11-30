@@ -206,7 +206,7 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: stretch;
-  height: 40px;
+  min-height: 40px;
   margin-bottom: -1px;
 }
 

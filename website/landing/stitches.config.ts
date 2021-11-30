@@ -22,6 +22,9 @@ export const { globalCss, getCssText, styled } = createStitches({
     colors: palette,
     fontWeights,
     fonts: fontFamilies,
+    transitions: {
+      default: "all .2s ease",
+    },
   },
   utils: {
     gap: (value: number) => ({
