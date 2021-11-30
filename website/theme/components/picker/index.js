@@ -1,7 +1,9 @@
-import styles from "./Picker.module.scss";
-import { SketchPicker } from "react-color";
 import { useState, useRef } from "react";
+import { SketchPicker } from "react-color";
+
 import useOnClickOutside from "../../hooks/useClickOutside";
+
+import styles from "./Picker.module.scss";
 
 export function PickerContainer({ children, advanced, ...props }) {
   return (
@@ -47,16 +49,16 @@ export default function PickerItem({
       <div className={styles.pickerWrapper}>
         <button
           className={styles.picker}
-          style={{ backgroundColor: color }}
           onClick={() => {
             openPicker(true);
           }}
+          style={{ backgroundColor: color }}
         ></button>
       </div>
       <span className={styles.label}>{label}</span>
 
       {isPickerOpen && (
-        <div className={styles.colorPicker} ref={ref}>
+        <div ref={ref} className={styles.colorPicker}>
           <SketchPicker color={color} onChangeComplete={handleChangeComplete} />
         </div>
       )}
@@ -64,7 +66,7 @@ export default function PickerItem({
   );
 }
 
-export function PickerToogle({
+export function PickerToggle({
   color,
   modeKey,
   label,
@@ -77,10 +79,10 @@ export function PickerToogle({
       <div className={`${styles.pickerWrapper} ${active ? styles.active : ""}`}>
         <button
           className={styles.picker}
-          style={{ backgroundColor: color }}
           onClick={() => {
             updateMode(modeKey);
           }}
+          style={{ backgroundColor: color }}
         ></button>
       </div>
       <span className={styles.label}>{label}</span>
@@ -103,9 +105,6 @@ export function PickerTheme({
       <div className={`${styles.pickerWrapper} ${active ? styles.active : ""}`}>
         <button
           className={styles.picker}
-          style={{
-            background: `linear-gradient(-45deg, ${color1} 50%, ${color2} 50%)`,
-          }}
           onClick={() => {
             if (updateModeFromGallery) {
               updateModeFromGallery(modeKey);
@@ -114,6 +113,9 @@ export function PickerTheme({
             if (updateMode) {
               updateMode(modeKey);
             }
+          }}
+          style={{
+            background: `linear-gradient(-45deg, ${color1} 50%, ${color2} 50%)`,
           }}
         ></button>
       </div>

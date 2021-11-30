@@ -1,6 +1,6 @@
 import styles from "./Logo.module.scss";
 
-export default function Logo({ ...props }) {
+export default function Logo() {
   return (
     <svg
       className={styles.logo}
