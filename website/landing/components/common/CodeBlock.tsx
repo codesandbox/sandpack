@@ -6,13 +6,7 @@ import {
 
 import { Box } from "./Box";
 
-interface CodeBlockProps {
-  oneLiner?: boolean;
-}
-export const CodeBlock: React.FC<CodeBlockProps> = ({
-  children,
-  oneLiner = false,
-}) => {
+export const CodeBlock: React.FC = ({ children }) => {
   return (
     <Box
       css={{
@@ -22,10 +16,11 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
 
         ".sp-pre-placeholder": {
           overflow: "hidden",
+          padding: "10px 5px",
         },
 
         ".cm-editor": {
-          borderRadius: oneLiner ? "78px" : "16px",
+          borderRadius: "16px",
           padding: "10px 5px",
         },
       }}
@@ -35,7 +30,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
           entry: "index.ts",
           files: { "index.ts": (children as string)?.trim() },
         }}
-        initMode="user-visible"
+        initMode="immediate"
       >
         <SandpackThemeProvider theme="sandpack-dark">
           <SandpackCodeViewer />

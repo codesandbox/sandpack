@@ -38,8 +38,7 @@ export default function App() {
 }\`
     }
   }}
-/>;
-`;
+/>;`;
 
 export const CustomExample: React.FC = () => {
   const { ref, inView } = useInView({ threshold: THRESHOLD_VIEW });
@@ -108,7 +107,17 @@ export const CustomExample: React.FC = () => {
             prop to add dependencies or change the file structure.
           </CardDescription>
 
-          <CodeWrapper>
+          <CodeWrapper
+            css={{
+              ".sp-cm": {
+                height: "348px",
+
+                "@bp2": {
+                  height: "auto",
+                },
+              },
+            }}
+          >
             <Caption>Code snippet</Caption>
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />

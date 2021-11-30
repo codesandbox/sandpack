@@ -34,7 +34,7 @@ export const Header: React.FC = () => {
         dangerouslySetInnerHTML={{ __html: intro.title }}
       />
       <Box css={{ maxWidth: "100%" }}>
-        <CodeBlock oneLiner>{commands.import}</CodeBlock>
+        <CodeBlock>{commands.import}</CodeBlock>
       </Box>
     </SectionHeader>
   );

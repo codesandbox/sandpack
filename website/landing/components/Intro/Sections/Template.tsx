@@ -42,7 +42,7 @@ export const TemplateExample: React.FC = () => {
   );
   const boxRef = useRef<HTMLButtonElement>(null);
   const [template, setTemplate] = useState(frameworkOptions[0]);
-  const higherMobile = useBreakpoint("bp1");
+  const higherMobile = useBreakpoint("bp2");
 
   useEffect(() => {
     setOptions({ template });
