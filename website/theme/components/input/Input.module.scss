@@ -1,0 +1,39 @@
+@import "styles/breakpoints.scss";
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-base);
+
+  @include respond-to("medium") {
+    padding: 0 var(--space-base);
+  }
+}
+
+.input {
+  width: 100%;
+
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: -0.025em;
+
+  margin: 0;
+  padding: 1rem;
+  border: solid 1px var(--border-color);
+  border-radius: 1rem;
+
+  @include respond-to("small") {
+    font-size: 1.4rem;
+  }
+}
+
+.label {
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: -0.025em;
+  margin-bottom: 2rem;
+
+  @include respond-to("small") {
+    font-size: 1.4rem;
+  }
+}

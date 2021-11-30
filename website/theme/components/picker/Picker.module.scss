@@ -1,0 +1,130 @@
+@import "styles/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-base);
+  justify-items: center;
+
+  @include respond-to("medium") {
+    flex-wrap: nowrap;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    padding: 0 var(--space-base);
+  }
+}
+
+.containerAdvanced {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-base);
+
+  // @include respond-to("extra-large") {
+  //   grid-template-columns: repeat(2, 1fr);
+  // }
+
+  @include respond-to("extra-large") {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to("medium") {
+    width: 100%;
+    overflow-x: auto;
+    // overflow-y: inh;
+    display: flex;
+
+    padding: 0 var(--space-base);
+  }
+}
+
+.pickerItem {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+
+  @include respond-to("small") {
+    flex-direction: row;
+  }
+}
+
+.pickerItemAdvanced {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 1.6rem;
+
+  @include respond-to("small") {
+    font-size: 1.4rem;
+  }
+
+  text-align: center;
+  letter-spacing: -0.025em;
+}
+
+.pickerWrapper {
+  padding: 0.8rem;
+
+  @include respond-to("small") {
+    padding: 0.5rem;
+  }
+
+  border: solid 1px var(--border-color);
+  border-radius: 100px;
+  line-height: 0;
+  transition: border 500ms;
+  &.active {
+    border: solid 1px var(--text-color);
+  }
+}
+
+.picker {
+  width: 5.2rem;
+  height: 5.2rem;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+
+  @include respond-to("small") {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.colorPicker {
+  position: absolute;
+  top: 6rem;
+  left: 2rem;
+  z-index: 9999;
+
+  @include respond-to("small") {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: auto;
+    width: 100%;
+    border-top: solid 1px var(--border-color);
+    background: var(--background-color);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+}

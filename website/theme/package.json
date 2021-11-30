@@ -1,5 +1,5 @@
 {
-  "name": "sandpack-landing",
+  "name": "sandpack-theme",
   "private": true,
   "version": "0.0.1",
   "scripts": {
@@ -10,19 +10,20 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@codesandbox/sandpack-react": "^0.9.2",
-    "@stitches/react": "^1.2.5",
-    "framer-motion": "^5.3.2",
-    "next": "12.0.2",
+    "@codesandbox/sandpack-react": "^0.9.1",
+    "framer-motion": "^5.3.3",
+    "next": "12.0.3",
     "react": "17.0.2",
+    "react-color": "^2.19.3",
     "react-dom": "17.0.2",
-    "react-intersection-observer": "^8.32.2"
+    "sass": "^1.43.4",
+    "use-clipboard-copy": "^0.2.0",
+    "values.js": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node": "16.11.6",
-    "@types/react": "17.0.33",
-    "eslint-config-next": "12.0.2",
-    "typescript": "4.4.4",
-    "url-loader": "^4.1.1"
-  }
+    "eslint": "7",
+    "eslint-config-next": "12.0.3"
+  },
+  "keywords": [],
+  "description": ""
 }
