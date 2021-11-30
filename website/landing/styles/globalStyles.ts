@@ -22,6 +22,8 @@ export const globalStyles = globalCss({
 
   "*, *::before, *::after": {
     boxSizing: "border-box",
+    fontSmooth: "antialiased",
+    "-webkit-font-smoothing": "antialiased",
   },
 
   "html, body": {
@@ -36,8 +38,6 @@ export const globalStyles = globalCss({
 
   body: {
     fontSize: "1.6rem",
-    fontSmooth: "antialiased",
-    "-webkit-font-smoothing": "antialiased",
     lineHeight: 1.6,
     letterSpacing: "-0.025em",
     fontFamily: "$base",
