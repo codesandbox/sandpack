@@ -34,5 +34,12 @@ deeper into our ecosystem.
 ### Live coding environment in minutes
 
 ```js sandpack
-
+export default function App() {
+  return (
+    <div className="App">
+      <h1>Hello Sandpack ✨</h1>
+      <p>Start editing to see some magic happen!</p>
+    </div>
+  );
+}
 ```
