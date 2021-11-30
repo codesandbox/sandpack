@@ -33,7 +33,7 @@
     "text": "powered by"
   },
   "commands": {
-    "import": "import { Sandpack } from \"@codesandbox/sandpack-react\";",
+    "import": "import { Sandpack } from \"@codesandbox/sandpack-react\"",
     "install": "npm install @codesandbox/sandpack-react"
   },
   "resources": [
