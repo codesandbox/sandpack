@@ -22,7 +22,7 @@ deeper into our ecosystem.
 ### Getting Started
 
 <div class="intro-section">
-  <IntroCard title="Install" description="Install Sandpack package and start coding in minutes." href="/getting-started/install" actionText="Access ->" />
+  <IntroCard title="Install" description="Learn how to add Sandpack to your projects and start coding in minutes." href="/getting-started/install" actionText="Access ->" />
 
   <IntroCard title="Advanced Usage" description="An overview of some Sandpack capabilities and how to extend its API." href="/advanced-usage/provider" actionText="Access ->" />
 
