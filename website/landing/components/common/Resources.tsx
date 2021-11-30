@@ -1,7 +1,7 @@
 import { styled } from "../../stitches.config";
 import content from "../../website.config.json";
 
-import { List, Text } from ".";
+import { List, ListItem, Text } from ".";
 
 const ResourceLink = styled("a", {
   color: "inherit",
@@ -15,34 +15,34 @@ const ResourceLink = styled("a", {
 
 export const Resources: React.FC = () => {
   return (
-    <List css={{ display: "flex" }}>
+    <List
+      css={{
+        display: "flex",
+      }}
+    >
       {content.resources.map((r) => (
-        <li key={r.name}>
+        <ListItem
+          key={r.name}
+          css={{
+            "&:not(:last-of-type)": {
+              marginRight: "2em",
+            },
+          }}
+        >
           <ResourceLink href={r.url}>
             <Text
+              as="span"
               css={{
+                fontFamily: "inherit",
                 fontWeight: "$semiBold",
-                fontSize: "16px",
-                lineHeight: "19px",
-                textAlign: "center",
-                letterSpacing: "-0.0125em",
-                margin: "0 24px",
-
-                "@bp1": {
-                  fontSize: "18px",
-                  lineHeight: "22px",
-                },
-
-                "@bp2": {
-                  fontSize: "24px",
-                  lineHeight: "29px",
-                },
+                fontSize: "2.4em",
+                letterSpacing: "-0.05em",
               }}
             >
               {r.name}
             </Text>
           </ResourceLink>
-        </li>
+        </ListItem>
       ))}
     </List>
   );

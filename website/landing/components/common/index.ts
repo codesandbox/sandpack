@@ -1,4 +1,4 @@
-export { Box } from "./Box";
+export { AnimatedBox, Box } from "./Box";
 export { Button } from "./Button";
 export * from "./Card";
 export { CodeBlock } from "./CodeBlock";

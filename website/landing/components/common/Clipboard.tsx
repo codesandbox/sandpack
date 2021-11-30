@@ -9,9 +9,9 @@ const command = content.commands.install;
 
 const ClipboardToast = styled("div", {
   alignItems: "center",
-  borderRadius: "72px",
-  bottom: "30px",
   background: "$primary",
+  borderRadius: "72px",
+  bottom: "32px",
   display: "flex",
   color: "$lightTextPrimary",
   gap: "10px",
@@ -24,9 +24,7 @@ const ClipboardToast = styled("div", {
   zIndex: "1",
 
   span: {
-    fontWeight: "$normal",
-    fontSize: "16px",
-    lineHeight: "22px",
+    fontSize: "1.6rem",
     letterSpacing: "-0.025em",
     margin: 0,
   },
@@ -63,6 +61,8 @@ export const Clipboard: React.FC = () => {
   return (
     <>
       {/* TODO: implement toast notification system */}
+      {/* Comment clipboard feedback out because it's messing up
+      the hero animation.
       <ClipboardToast visible={toastVisible}>
         <Box
           css={{
@@ -84,7 +84,7 @@ export const Clipboard: React.FC = () => {
           </svg>
         </Box>
         <span>Copied to clipboard</span>
-      </ClipboardToast>
+      </ClipboardToast> */}
       <Button
         css={{
           alignItems: "center",
@@ -94,29 +94,28 @@ export const Clipboard: React.FC = () => {
           transition: "color .2s ease",
           willChange: "color",
 
+          "> div": {
+            opacity: 0,
+            transition: "opacity .2s ease",
+            willChange: "opacity",
+          },
+
           "&:hover": {
             color: "$primary",
+
+            "> div": {
+              opacity: 1,
+            },
           },
         }}
         onClick={copyToClipboard}
       >
         <Text
-          css={{
-            fontWeight: "$normal",
-            fontSize: "16px",
-            lineHeight: "19px",
-            textAlign: "center",
+          as="span"
+          style={{
+            fontFamily: "inherit",
+            fontSize: "2.4em",
             letterSpacing: "-0.05em",
-
-            "@bp1": {
-              fontSize: "18px",
-              lineHeight: "22px",
-            },
-
-            "@bp2": {
-              fontSize: "24px",
-              lineHeight: "29px",
-            },
           }}
         >
           {command}
@@ -136,7 +135,6 @@ export const Clipboard: React.FC = () => {
               width: "16px",
             },
           }}
-          onClick={copyToClipboard}
         >
           <svg fill="none" height="100%" viewBox="0 0 12 13" width="100%">
             <g clipPath="url(#a)">
