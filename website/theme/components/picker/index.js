@@ -64,7 +64,7 @@ export default function PickerItem({
   );
 }
 
-export function PickerToogle({
+export function PickerToggle({
   color,
   modeKey,
   label,

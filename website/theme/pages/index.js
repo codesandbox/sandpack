@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { motion, AnimatePresence } from "framer-motion";
 
 import Header from "components/header";
 import Menu from "components/menu";
@@ -18,7 +17,7 @@ import Container, {
 import Title from "components/title";
 import PickerItem, {
   PickerContainer,
-  PickerToogle,
+  PickerToggle,
   PickerTheme,
 } from "components/picker";
 
@@ -28,10 +27,9 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
   SandpackCodeEditor,
-  SandpackCodeViewer,
 } from "@codesandbox/sandpack-react";
 import { templates } from "../lib/codeExamples";
-import { themeGalery } from "../lib/themeGalery";
+import { themeGallery } from "../lib/themeGallery";
 
 import { generateBasedOnSimpleColors } from "../lib/generateTheme";
 
@@ -44,8 +42,6 @@ const DEFAULT_MODE = "light";
 const DEFAULT_THEME = generateBasedOnSimpleColors(DEFAULT_COLORS, DEFAULT_MODE);
 
 export default function Home({ ...props }) {
-  const { asPath } = useRouter();
-
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [simpleColors, setSimpleColors] = useState(DEFAULT_COLORS);
   const [mode, setMode] = useState("light");
@@ -88,16 +84,12 @@ export default function Home({ ...props }) {
   };
 
   const updateModeFromGallery = (index) => {
-    const newTheme = themeGalery[index].code;
+    const newTheme = themeGallery[index].code;
     setTheme(newTheme);
   };
 
   // -----------------------
   // Effects
-
-  useEffect(() => {
-    setTab(asPath.replace("/#", ""));
-  }, [asPath]);
 
   return (
     <>
@@ -106,11 +98,11 @@ export default function Home({ ...props }) {
       <Container>
         <ContainerControls>
           <Divider />
-          <Menu />
+          <Menu setTab={setTab} />
           <Divider />
 
           <ContainerPanels tab={tab}>
-            <ContainerColors isActive={tab === "/"}>
+            <ContainerColors isActive={tab === "basic"}>
               <Basic
                 updateColor={updateColor}
                 simpleColors={simpleColors}
@@ -125,7 +117,7 @@ export default function Home({ ...props }) {
 
             <ContainerColors isActive={tab === "library"}>
               <Library
-                themeGalery={themeGalery}
+                themeGallery={themeGallery}
                 updateModeFromGallery={updateModeFromGallery}
               />
             </ContainerColors>
@@ -176,14 +168,14 @@ function Basic({ simpleColors, mode, updateColor, updateMode }) {
     <>
       <Title>Appearance</Title>
       <PickerContainer>
-        <PickerToogle
+        <PickerToggle
           modeKey="light"
           label="Light"
           color="#f8f9fb"
           active={mode === "light"}
           updateMode={updateMode}
         />
-        <PickerToogle
+        <PickerToggle
           modeKey="dark"
           label="Dark"
           color="#151515"
@@ -326,12 +318,12 @@ function Advanced({ theme, updateTheme }) {
 // --------------------------------------------
 // Library Tab
 
-function Library({ themeGalery, updateModeFromGallery }) {
+function Library({ themeGallery, updateModeFromGallery }) {
   return (
     <>
       <Title>Themes</Title>
       <PickerContainer>
-        {themeGalery.map((t, i) => (
+        {themeGallery.map((t, i) => (
           <PickerTheme
             key={t.label + i}
             modeKey={i}

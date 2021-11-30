@@ -187,7 +187,7 @@ if (nightOwlTheme.syntax.keyword) {
   nightOwlTheme.syntax.keyword = nightOwlTheme.syntax.keyword.color;
 }
 
-export const themeGalery = [
+export const themeGallery = [
   {
     label: "Night Owl",
     code: nightOwlTheme,
