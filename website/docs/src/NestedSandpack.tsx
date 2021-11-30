@@ -1,10 +1,9 @@
 import React from "react";
 
-import { Sandpack, SandpackLayout } from "./CustomSandpack";
+import { Sandpack } from "./CustomSandpack";
 
 const indexCode = `import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import "@codesandbox/sandpack-react/dist/index.css";
 
 import App from "./App";
 
@@ -23,7 +22,8 @@ const NestedSandpack: React.FC<{ nestedProps?: string; setupCode?: string }> = (
   const appCode = `${
     setupCode
       ? setupCode
-      : `import { Sandpack } from "@codesandbox/sandpack-react";`
+      : `import { Sandpack } from "@codesandbox/sandpack-react";
+import "@codesandbox/sandpack-react/dist/index.css";`
   }
 
 export default function App() {
@@ -46,7 +46,7 @@ export default function App() {
       <Sandpack
         customSetup={{
           dependencies: {
-            "@codesandbox/sandpack-react": "^0.3.3",
+            "@codesandbox/sandpack-react": "latest",
           },
         }}
         files={{

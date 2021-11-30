@@ -1,20 +1,22 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  letter-spacing: -0.05em;
-}
+.markdown {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: -0.05em;
+  }
 
-h1 {
-  font-size: 64px !important;
-}
+  h1 {
+    font-size: 64px;
+  }
 
-h2 {
-  font-size: 48px !important;
-}
+  h2 {
+    font-size: 48px;
+  }
 
-h3 {
-  font-size: 36px !important;
+  h3 {
+    font-size: 36px;
+  }
 }
