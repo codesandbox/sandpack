@@ -24,8 +24,13 @@ export const Resources: React.FC = () => {
         <ListItem
           key={r.name}
           css={{
-            "&:not(:last-of-type)": {
-              marginRight: "2em",
+            margin: "0 1em",
+
+            "@bp1": {
+              margin: 0,
+              "&:not(:last-of-type)": {
+                marginRight: "2em",
+              },
             },
           }}
         >
