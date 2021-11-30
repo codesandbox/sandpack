@@ -33,6 +33,7 @@ export interface SandpackState {
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;
   status: SandpackStatus;
+  initMode: SandpackInitMode;
 
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
@@ -92,6 +93,21 @@ export interface SandpackSetup {
   environment?: SandboxEnvironment;
 }
 
+/**
+ * `immediate`: It immediately mounts all components, such as the code-editor
+ * and the preview - this option might overload the memory usage
+ * and resource from the browser on a page with multiple instances;
+ *
+ * `lazy`: Only initialize the components when the user is about to scroll
+ * them to the viewport and keep these components mounted until the user
+ * leaves the page - this is the default value;
+ *
+ * `user-visible`: Only initialize the components when the user is about
+ * to scroll them to the viewport, but differently from lazy, this option
+ * unmounts those components once it's no longer in the viewport.
+ */
+export type SandpackInitMode = "immediate" | "lazy" | "user-visible";
+
 export type SandboxEnvironment = ITemplate;
 
 export type SandpackPredefinedTemplate =
@@ -101,7 +117,8 @@ export type SandpackPredefinedTemplate =
   | "vanilla"
   | "vanilla-ts"
   | "vue"
-  | "vue3";
+  | "vue3"
+  | "svelte";
 
 export type SandpackPredefinedTheme =
   | "light"

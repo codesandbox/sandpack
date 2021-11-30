@@ -1,5 +1,6 @@
-import { Sandpack } from "./CustomSandpack";
 import React from "react";
+
+import { Sandpack, SandpackLayout } from "./CustomSandpack";
 
 const indexCode = `import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
@@ -41,25 +42,24 @@ export default function App() {
 }
 `;
   return (
-    <Sandpack
-      template="react"
-      files={{
-        "/App.js": appCode,
-        "/index.js": {
-          code: indexCode,
-          hidden: true,
-        },
-      }}
-      options={{
-        editorHeight: 500,
-      }}
-      customSetup={{
-        dependencies: {
-          "@codesandbox/sandpack-react": "^0.3.3",
-        },
-      }}
-      {...props}
-    />
+    <div className="nestedSandpack">
+      <Sandpack
+        customSetup={{
+          dependencies: {
+            "@codesandbox/sandpack-react": "^0.3.3",
+          },
+        }}
+        files={{
+          "/App.js": appCode,
+          "/index.js": {
+            code: indexCode,
+            hidden: true,
+          },
+        }}
+        template="react"
+        {...props}
+      />
+    </div>
   );
 };
 

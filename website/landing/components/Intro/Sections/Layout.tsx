@@ -9,7 +9,7 @@ import {
   SandpackLayout,
   useSandpack,
 } from "@codesandbox/sandpack-react";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { CardTitle, CardDescription } from "../../common";
@@ -23,6 +23,7 @@ import {
   SandpackContainerMobile,
   FadeAnimation,
   THRESHOLD_VIEW,
+  Caption,
 } from "./common";
 
 export const LayoutExample: React.FC = () => {
@@ -33,9 +34,9 @@ export const LayoutExample: React.FC = () => {
   const { layoutFiles, setLayoutFiles, setVisibility } =
     useLayoutExampleContext();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setLayoutFiles(sandpack.activePath, code);
-  }, [code]);
+  }, [code, sandpack.activePath]);
 
   useEffect(() => {
     Object.entries(layoutFiles).map(([filename, fileCode]) => {
@@ -69,21 +70,27 @@ export const LayoutExample: React.FC = () => {
 
           <CodeWrapper
             css={{
+              height: "480px",
+
               ".sp-tabs": {
                 borderTopLeftRadius: "16px",
                 borderTopRightRadius: "16px",
               },
 
               ".sp-code-editor": {
+                height: "200px",
                 borderRadius: 0,
                 borderBottomLeftRadius: "16px",
                 borderBottomRightRadius: "16px",
-                padding: "0 15px",
+              },
+              ".sp-cm": {
+                height: "440px",
               },
             }}
           >
+            <Caption>Code snippet</Caption>
             <SandpackThemeProvider theme="sandpack-dark">
-              <SandpackCodeEditor />
+              <SandpackCodeEditor showInlineErrors />
             </SandpackThemeProvider>
           </CodeWrapper>
         </Content>
@@ -91,6 +98,7 @@ export const LayoutExample: React.FC = () => {
         <SandpackContainerPlaceholder />
 
         <SandpackContainerMobile css={{ ".custom-layout": { height: "50vh" } }}>
+          <Caption>Sandpack preview</Caption>
           <SandpackProvider
             customSetup={{
               files: layoutFiles,

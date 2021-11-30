@@ -11,6 +11,10 @@
     "3001": {
       "name": "Landing page",
       "command": "yarn dev:landing"
+    },
+    "3002": {
+      "name": "Theme",
+      "command": "yarn dev:theme"
     }
   },
   "tasks": {

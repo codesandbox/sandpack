@@ -3,6 +3,7 @@ import type { SandpackPredefinedTemplate, SandboxTemplate } from "../types";
 import { ANGULAR_TEMPLATE } from "./angular";
 import { REACT_TEMPLATE } from "./react";
 import { REACT_TYPESCRIPT_TEMPLATE } from "./react-typescript";
+import { SVELTE_TEMPLATE } from "./svelte";
 import { VANILLA_TEMPLATE } from "./vanilla";
 import { VANILLA_TYPESCRIPT_TEMPLATE } from "./vanilla-typescript";
 import { VUE_TEMPLATE } from "./vue";
@@ -19,4 +20,5 @@ export const SANDBOX_TEMPLATES: Record<
   "vanilla-ts": VANILLA_TYPESCRIPT_TEMPLATE,
   vue3: VUE_TEMPLATE_3,
   angular: ANGULAR_TEMPLATE,
+  svelte: SVELTE_TEMPLATE,
 };

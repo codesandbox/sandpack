@@ -1,0 +1,11 @@
+@import "styles/breakpoints.scss";
+
+.container {
+  width: 100%;
+  padding: var(--space-base);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  grid-template-columns: repeat(2, 1fr);
+}

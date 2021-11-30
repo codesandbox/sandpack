@@ -52,6 +52,7 @@ export const SandpackPreview: React.FC<{ options?: SandpackProps }> = ({
         theme="sandpack-dark"
         {...options}
         options={{
+          initMode: "user-visible",
           ...(options?.options ?? {}),
           classes: {
             "sp-layout": "custom-layout",

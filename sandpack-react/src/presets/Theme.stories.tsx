@@ -12,7 +12,6 @@ Object.keys(SANDPACK_THEMES).forEach((themeName) =>
     <Sandpack
       files={{
         "/App.js": `const Test = () => "Test";
-
 export default function App() {
   return (
     <div>

@@ -12,6 +12,9 @@
 
 .menu__list {
   padding-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   .menu__link {
     border-radius: 0;
@@ -41,6 +44,50 @@
         color: var(--sandpack-primary-color);
       }
     }
+  }
+}
+
+.discord-link svg,
+.twitter-link svg,
+.releases-link svg,
+.github-link svg {
+  display: none;
+}
+
+.divisor {
+  content: "";
+  flex: 1;
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (min-width: 961px) {
+  .discord-link,
+  .twitter-link,
+  .releases-link,
+  .github-link {
+    background: var(--sandpack-background-color);
+    width: var(--doc-sidebar-width);
+  }
+
+  .discord-link {
+    padding-bottom: 15px;
+  }
+  .twitter-link {
+    bottom: 45px;
+  }
+
+  .github-link {
+    bottom: 75px;
+  }
+  .releases-link {
+    bottom: 105px;
+  }
+  .discord-link .menu__link,
+  .twitter-link .menu__link,
+  .releases-link .menu__link,
+  .github-link .menu__link {
+    font-size: 14px !important;
   }
 }
 

@@ -1,0 +1,87 @@
+@import "styles/breakpoints.scss";
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  align-items: start;
+
+  min-height: 100vh;
+  padding: 0 var(--space-base);
+
+  @include respond-to("medium") {
+    padding: 0;
+  }
+}
+
+.containerControls,
+.containerCode {
+  width: calc(50% - 2rem);
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-base);
+
+  position: sticky;
+  top: 0;
+
+  @include respond-to("medium") {
+    width: 100%;
+    position: inherit;
+  }
+}
+
+.containerPanels {
+  width: 300%;
+  display: flex;
+  transform: translateX(calc(var(--state) * (100% / 3) * -1));
+
+  transition: transform 800ms cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.containerColors {
+  width: calc(100% / 3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-base);
+
+  // position: absolute;
+  // top: 100px;
+
+  opacity: 0;
+
+  transform-origin: 50% 0%;
+  transition: opacity 900ms;
+}
+
+.containerColorsActive {
+  opacity: 1;
+}
+
+.containerControls {
+  position: relative;
+  z-index: 9999;
+}
+
+.containerSandpack {
+  position: relative;
+  z-index: 300;
+
+  @include respond-to("medium") {
+    padding: 0 var(--space-base);
+  }
+}
+
+.containerPre {
+  border: solid 1px var(--border-color);
+  overflow-x: scroll;
+  border-radius: 1rem;
+  padding: 2.5rem;
+
+  pre {
+    padding: 0;
+    margin: 0;
+    font-size: 1.4rem;
+  }
+}

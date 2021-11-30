@@ -3,6 +3,99 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.4](https://github.com/codesandbox/sandpack/compare/v0.9.3...v0.9.4) (2021-11-30)
+
+
+### Bug Fixes
+
+* **landing:** shift fonts import ([#201](https://github.com/codesandbox/sandpack/issues/201)) ([455684e](https://github.com/codesandbox/sandpack/commit/455684efa01ed53723d66da1b40f8eaeca320b1f))
+
+
+
+
+
+## [0.9.3](https://github.com/codesandbox/sandpack/compare/v0.9.2...v0.9.3) (2021-11-30)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.9.2](https://github.com/codesandbox/sandpack/compare/v0.9.1...v0.9.2) (2021-11-29)
+
+
+### Bug Fixes
+
+* landing - users logos ([#188](https://github.com/codesandbox/sandpack/issues/188)) ([06f8170](https://github.com/codesandbox/sandpack/commit/06f81706f2b073008f012076b63ec8a2a6620c78))
+
+
+
+
+
+## [0.9.1](https://github.com/codesandbox/sandpack/compare/v0.9.0...v0.9.1) (2021-11-25)
+
+
+### Bug Fixes
+
+* **init-mode:** render placeholder ([#187](https://github.com/codesandbox/sandpack/issues/187)) ([04b0286](https://github.com/codesandbox/sandpack/commit/04b028600dde049d512d16b2fdb176b1789c62ee))
+
+
+
+
+
+# [0.9.0](https://github.com/codesandbox/sandpack/compare/v0.8.0...v0.9.0) (2021-11-25)
+
+
+### Features
+
+* **template:** svelte  ([#182](https://github.com/codesandbox/sandpack/issues/182)) ([2d0c85c](https://github.com/codesandbox/sandpack/commit/2d0c85c5ef4fa856c83e539e2c9e2ffd804fa366))
+
+
+
+
+
+# [0.8.0](https://github.com/codesandbox/sandpack/compare/v0.7.3...v0.8.0) (2021-11-25)
+
+
+### Bug Fixes
+
+* landing - showcase preview size on smaller bps ([#185](https://github.com/codesandbox/sandpack/issues/185)) ([f7bda3d](https://github.com/codesandbox/sandpack/commit/f7bda3dc17e931b76befdf4f5b3ce9ca99d8df42))
+* **landing:** update animation trigger ([#184](https://github.com/codesandbox/sandpack/issues/184)) ([8c94cd7](https://github.com/codesandbox/sandpack/commit/8c94cd7e8bcd8fd73927719f719f83287991265e))
+
+
+### Features
+
+* **react:** initilization mode ([#152](https://github.com/codesandbox/sandpack/issues/152)) ([53d9195](https://github.com/codesandbox/sandpack/commit/53d9195fa02f412f99f50d96e43ffd24b269dfa4))
+
+
+
+
+
+## [0.7.3](https://github.com/codesandbox/sandpack/compare/v0.7.2...v0.7.3) (2021-11-25)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.7.2](https://github.com/codesandbox/sandpack/compare/v0.7.1...v0.7.2) (2021-11-25)
+
+
+### Bug Fixes
+
+* **landing:** ui tweaks ([#176](https://github.com/codesandbox/sandpack/issues/176)) ([5ecf9ed](https://github.com/codesandbox/sandpack/commit/5ecf9eddd9184703e19f61739f559cca21b0595c))
+
+
+### Features
+
+* landing - update showcase structure ([#181](https://github.com/codesandbox/sandpack/issues/181)) ([b35eef3](https://github.com/codesandbox/sandpack/commit/b35eef302f763fb17a29f59c39d76641a6f3484c))
+
+
+
+
+
 ## [0.7.1](https://github.com/codesandbox/sandpack/compare/v0.7.0...v0.7.1) (2021-11-24)
 
 

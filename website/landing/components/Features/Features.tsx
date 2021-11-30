@@ -16,6 +16,7 @@ import {
   SectionTitle,
   SectionWrapper,
 } from "../common";
+import { useBreakpoint } from "../common/useBreakpoint";
 
 import { ICONS } from "./icons";
 
@@ -32,7 +33,8 @@ const FeatureFade: React.FC<FeatureFadeProps> = ({
   parentHeight,
   scrollY,
 }) => {
-  const opacityRange = [0, 1];
+  const shouldAnimate = useBreakpoint("bp2");
+  const opacityRange = [shouldAnimate ? 0 : 1, 1];
   const scrollRange = [
     parentTop - parentHeight / (2 * Math.pow(index + 1, 2)), // Stagger elements by their index.
     parentTop + parentHeight / (index === 0 ? 6 : 4), // The title (index === 0) should have opacity 1 sooner than the list elements.
@@ -97,13 +99,14 @@ export const Features: React.FC = () => {
             transition: "opacity .5s cubic-bezier(0.770, 0.000, 0.175, 1.000)",
 
             "@bp1": {
-              gap: "100px",
+              "--gap": "80px",
             },
 
             "@bp2": {
               alignItems: "flex-start",
               flexDirection: "row",
-              margin: "100px 0 200px",
+              marginTop: "100px",
+              marginBottom: " 200px",
               justifyContent: "space-between",
             },
           }}

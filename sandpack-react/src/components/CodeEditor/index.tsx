@@ -5,6 +5,7 @@ import { RunButton } from "../../common/RunButton";
 import { SandpackStack } from "../../common/Stack";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
+import type { SandpackInitMode } from "../../types";
 import { FileTabs } from "../FileTabs";
 
 import { CodeMirror } from "./CodeMirror";
@@ -19,6 +20,13 @@ export interface CodeEditorProps {
   showRunButton?: boolean;
   wrapContent?: boolean;
   closableTabs?: boolean;
+  /**
+   * This provides a way to control how some components are going to
+   * be initialized on the page. The CodeEditor and the Preview components
+   * are quite expensive and might overload the memory usage, so this gives
+   * a certain control of when to initialize them.
+   */
+  initMode?: SandpackInitMode;
 }
 
 export { CodeMirror as CodeEditor };
@@ -36,6 +44,7 @@ export const SandpackCodeEditor = React.forwardRef<
       showRunButton = true,
       wrapContent = false,
       closableTabs = false,
+      initMode,
     },
     ref
   ) => {
@@ -61,6 +70,7 @@ export const SandpackCodeEditor = React.forwardRef<
             code={code}
             editorState={editorState}
             filePath={activePath}
+            initMode={initMode || sandpack.initMode}
             onCodeUpdate={handleCodeUpdate}
             showInlineErrors={showInlineErrors}
             showLineNumbers={showLineNumbers}

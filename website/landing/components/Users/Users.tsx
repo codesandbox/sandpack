@@ -11,6 +11,7 @@ import {
   SectionTitle,
   SectionWrapper,
 } from "../common";
+import { useBreakpoint } from "../common/useBreakpoint";
 
 const UserLink = styled("a", {
   display: "block",
@@ -39,6 +40,7 @@ const UserLink = styled("a", {
 
 export const Users: React.FC = () => {
   const content = config.users;
+  const shouldAnimate = useBreakpoint("bp2");
 
   // The icons are loaded with next/image which tends to blink
   // when first rendered. Because it doesn't support an `onLoad`
@@ -46,6 +48,7 @@ export const Users: React.FC = () => {
   // and then do an opacity transition.
   const { ref: listRef, inView } = useInView({
     threshold: [0, 1],
+    triggerOnce: !shouldAnimate,
   });
 
   return (
@@ -70,17 +73,14 @@ export const Users: React.FC = () => {
             alignItems: "center",
             display: "flex",
             flexDirection: "column",
-            gap: "48px",
             justifyContent: "center",
 
-            "@bp1": {
-              gap: "100px",
-            },
+            margin: "0 auto",
+            marginTop: "-50px",
 
             "@bp2": {
               flexDirection: "row",
               flexFlow: "row wrap",
-              margin: "0 auto",
               width: "75%",
             },
           }}
@@ -89,7 +89,7 @@ export const Users: React.FC = () => {
             const { url, height, width } = user.logo;
 
             return (
-              <ListItem key={user.name}>
+              <ListItem key={user.name} css={{ flex: "none", margin: "50px" }}>
                 <UserLink
                   css={{
                     transitionDelay: inView
@@ -102,7 +102,7 @@ export const Users: React.FC = () => {
                   href={user.socialUrl}
                   rel="noopener noreferrer"
                   target="_blank"
-                  visible={inView}
+                  visible={!shouldAnimate || inView}
                 >
                   <Image
                     alt={user.name}

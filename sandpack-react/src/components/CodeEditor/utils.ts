@@ -140,6 +140,7 @@ export const getCodeMirrorLanguage = (
       return javascript({ jsx: true, typescript: true });
     case "vue":
     case "html":
+    case "svelte":
       return html();
     case "css":
     case "scss":

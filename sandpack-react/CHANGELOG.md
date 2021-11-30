@@ -3,6 +3,82 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.4](https://github.com/codesandbox/sandpack/compare/v0.9.3...v0.9.4) (2021-11-30)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [0.9.3](https://github.com/codesandbox/sandpack/compare/v0.9.2...v0.9.3) (2021-11-30)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [0.9.2](https://github.com/codesandbox/sandpack/compare/v0.9.1...v0.9.2) (2021-11-29)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [0.9.1](https://github.com/codesandbox/sandpack/compare/v0.9.0...v0.9.1) (2021-11-25)
+
+
+### Bug Fixes
+
+* **init-mode:** render placeholder ([#187](https://github.com/codesandbox/sandpack/issues/187)) ([04b0286](https://github.com/codesandbox/sandpack/commit/04b028600dde049d512d16b2fdb176b1789c62ee))
+
+
+
+
+
+# [0.9.0](https://github.com/codesandbox/sandpack/compare/v0.8.0...v0.9.0) (2021-11-25)
+
+
+### Features
+
+* **template:** svelte  ([#182](https://github.com/codesandbox/sandpack/issues/182)) ([2d0c85c](https://github.com/codesandbox/sandpack/commit/2d0c85c5ef4fa856c83e539e2c9e2ffd804fa366))
+
+
+
+
+
+# [0.8.0](https://github.com/codesandbox/sandpack/compare/v0.7.3...v0.8.0) (2021-11-25)
+
+
+### Features
+
+* **react:** initilization mode ([#152](https://github.com/codesandbox/sandpack/issues/152)) ([53d9195](https://github.com/codesandbox/sandpack/commit/53d9195fa02f412f99f50d96e43ffd24b269dfa4))
+
+
+
+
+
+## [0.7.3](https://github.com/codesandbox/sandpack/compare/v0.7.2...v0.7.3) (2021-11-25)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [0.7.2](https://github.com/codesandbox/sandpack/compare/v0.7.1...v0.7.2) (2021-11-25)
+
+
+### Bug Fixes
+
+* **landing:** ui tweaks ([#176](https://github.com/codesandbox/sandpack/issues/176)) ([5ecf9ed](https://github.com/codesandbox/sandpack/commit/5ecf9eddd9184703e19f61739f559cca21b0595c))
+
+
+
+
+
 ## [0.7.1](https://github.com/codesandbox/sandpack/compare/v0.7.0...v0.7.1) (2021-11-24)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react

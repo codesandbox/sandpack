@@ -6,4 +6,4 @@ export const List = styled("ul", {
   padding: 0,
 });
 
-export const ListItem = styled("li", {});
+export const ListItem = styled("li", { flex: 1 });

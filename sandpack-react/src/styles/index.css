@@ -50,6 +50,37 @@
   box-sizing: border-box;
 }
 
+.sp-wrapper:focus {
+  outline: 0;
+}
+
+.sp-wrapper *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.sp-wrapper *::-webkit-scrollbar-track {
+  background-color: var(--sp-colors-bg-default);
+}
+
+.sp-wrapper *::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.sp-wrapper *::-webkit-scrollbar-thumb {
+  background-color: var(--sp-colors-fg-default);
+  border-radius: 9999px;
+  opacity: 0;
+}
+
+.sp-wrapper *::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}
+
+.sp-wrapper *::-webkit-scrollbar-track {
+  border-left: 1px solid var(--sp-colors-fg-inactive);
+}
+
 .sp-layout {
   border: 1px solid var(--sp-colors-fg-inactive);
   display: flex;
@@ -113,7 +144,7 @@
   font-family: var(--sp-font-mono);
   font-size: var(--sp-font-size);
   color: var(--sp-colors-fg-active);
-  line-height: 1.4;
+  line-height: var(--sp-line-height);
 }
 
 .sp-code-editor {
@@ -143,10 +174,6 @@
 .sp-cm:focus-visible .cm-gutter.cm-lineNumbers {
   padding-left: 0;
   padding-right: var(--sp-space-2);
-}
-
-.sp-cm .cm-scroller:focus {
-  outline: 0;
 }
 
 .sp-transpiled-code {
@@ -342,6 +369,7 @@
   border-radius: var(--sp-border-radius);
   border: 1px solid var(--sp-colors-fg-inactive);
   height: 24px;
+  line-height: 24px;
   font-size: inherit;
   outline: none;
   flex: 1;

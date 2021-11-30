@@ -140,6 +140,10 @@ export const Vue3Editor: Story<SandpackProps> = (args) => (
   <Sandpack {...args} template="vue3" />
 );
 
+export const Svelte: Story<SandpackProps> = (args) => (
+  <Sandpack {...args} template="svelte" />
+);
+
 export const DarkTheme: Story<SandpackProps> = (args) => (
   <Sandpack
     {...args}
@@ -227,6 +231,29 @@ export const Main: React.FC<{test: string}> = ({test}) => {
     }}
     options={{ wrapContent: true }}
     theme="night-owl"
+  />
+);
+
+export const ExternalResources: Story<SandpackProps> = (args) => (
+  <Sandpack
+    {...args}
+    files={{
+      "/App.js": `        
+export default () => {
+  return <a
+    href="#"
+    className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
+  >
+    Log in
+  </a>
+}`,
+    }}
+    options={{
+      externalResources: [
+        "https://unpkg.com/@tailwindcss/ui/dist/tailwind-ui.min.css",
+      ],
+    }}
+    template="react"
   />
 );
 

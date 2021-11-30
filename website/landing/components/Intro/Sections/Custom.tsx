@@ -22,6 +22,7 @@ import {
   SandpackContainerMobile,
   FadeAnimation,
   THRESHOLD_VIEW,
+  Caption,
 } from "./common";
 
 const ORIGINAL_CODE = `<Sandpack
@@ -77,10 +78,10 @@ export const CustomExample: React.FC = () => {
 
   useEffect(() => {
     if (inView) {
-      try {
-        setOptions({ customSetup: parseFromSandpackToJson(code) });
-      } catch (err) {
-        console.error(err);
+      const customSetup = parseFromSandpackToJson(code);
+
+      if (customSetup) {
+        setOptions({ customSetup });
       }
     } else {
       setOptions({ customSetup: {} });
@@ -91,7 +92,10 @@ export const CustomExample: React.FC = () => {
     <FadeAnimation>
       <Row ref={ref}>
         <Content>
-          <CardTitle>Easily customise the project to run</CardTitle>
+          <CardTitle>
+            Easily customise <br />
+            the project to run
+          </CardTitle>
           <CardDescription>
             Use the{" "}
             <a
@@ -105,6 +109,7 @@ export const CustomExample: React.FC = () => {
           </CardDescription>
 
           <CodeWrapper>
+            <Caption>Code snippet</Caption>
             <SandpackThemeProvider theme="sandpack-dark">
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
@@ -132,6 +137,7 @@ export const CustomExample: React.FC = () => {
         </Content>
 
         <SandpackContainerMobile>
+          <Caption>Sandpack preview</Caption>
           <SandpackPreview
             options={{ customSetup: parseFromSandpackToJson(code) }}
           />
@@ -143,16 +149,20 @@ export const CustomExample: React.FC = () => {
 };
 
 const parseFromSandpackToJson = (code: string) => {
-  const customSetup = code.match(/customSetup={{([\s\S]*?)}}/)?.[1];
-  if (!customSetup) return;
+  try {
+    const customSetup = code.match(/customSetup={{([\s\S]*?)}}/)?.[1];
+    if (!customSetup) return;
 
-  const fixString = `{${customSetup}}`
-    .replace(/(\w+:)|(\w+ :)/g, (matchedStr) => {
-      return '"' + matchedStr.substring(0, matchedStr.length - 1) + '":';
-    })
-    .replace(/`([\s\S]*?)`/gm, (matchedStr) => {
-      return `"${matchedStr.replace(/`/gm, "").replace(/\n/gm, "\\n")}"`;
-    });
+    const fixString = `{${customSetup}}`
+      .replace(/(\w+:)|(\w+ :)/g, (matchedStr) => {
+        return '"' + matchedStr.substring(0, matchedStr.length - 1) + '":';
+      })
+      .replace(/`([\s\S]*?)`/gm, (matchedStr) => {
+        return `"${matchedStr.replace(/`/gm, "").replace(/\n/gm, "\\n")}"`;
+      });
 
-  return JSON.parse(fixString);
+    return JSON.parse(fixString);
+  } catch {
+    console.error();
+  }
 };
