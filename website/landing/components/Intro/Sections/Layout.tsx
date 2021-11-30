@@ -78,7 +78,6 @@ export const LayoutExample: React.FC = () => {
               },
 
               ".sp-code-editor": {
-                height: "200px",
                 borderRadius: 0,
                 borderBottomLeftRadius: "16px",
                 borderBottomRightRadius: "16px",

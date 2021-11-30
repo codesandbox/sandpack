@@ -3,7 +3,7 @@ import type { MotionValue } from "framer-motion";
 
 import { styled } from "../../stitches.config";
 
-const LogoWraper = styled("div", {
+const LogoWrapper = styled("div", {
   $$halfHeight: "150px",
   alignItems: "center",
   display: "flex",
@@ -46,13 +46,13 @@ export const ParallaxLogo: React.FC<ParallaxLogoProps> = ({
   const rightY = useSpring(rightRange, SPRING_OPTIONS);
 
   return (
-    <LogoWraper>
+    <LogoWrapper>
       <motion.div style={{ ...baseStyles, y: leftY }}>
         <LogoHalf data-position="left" />
       </motion.div>
       <motion.div style={{ ...baseStyles, y: rightY }}>
         <LogoHalf data-position="right" />
       </motion.div>
-    </LogoWraper>
+    </LogoWrapper>
   );
 };

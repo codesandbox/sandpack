@@ -44,7 +44,7 @@ export const ThemeExample: React.FC = () => {
   );
   const boxRef = useRef<HTMLButtonElement>(null);
   const [theme, setTheme] = useState(themeOptions[0]);
-  const higherMobile = useBreakpoint("bp1");
+  const higherMobile = useBreakpoint("bp2");
 
   useEffect(() => {
     setOptions({ theme });

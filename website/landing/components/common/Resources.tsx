@@ -40,7 +40,6 @@ export const Resources: React.FC = () => {
               css={{
                 fontFamily: "inherit",
                 fontWeight: "$semiBold",
-                fontSize: "16px",
                 letterSpacing: "-0.05em",
 
                 "@bp2": {
