@@ -34,7 +34,8 @@ e=(!e||e.length===0?"$default_instance":e).toLowerCase()
 ;if(!Object.prototype.hasOwnProperty.call(r._iq,e)){r._iq[e]={_q:[]};v(r._iq[e])
 }return r._iq[e]};e.amplitude=r})(window,document);
 
-amplitude.getInstance().init(${API_KEY});`,
+amplitude.getInstance().init(${API_KEY});
+amplitude.logEvent("pageview", { path: window.location.href })`,
           }}
           id="foo"
         />
