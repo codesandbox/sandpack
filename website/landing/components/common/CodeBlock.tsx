@@ -20,6 +20,10 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
         marginTop: "30px !important",
         pre: { padding: 0 },
 
+        ".sp-pre-placeholder": {
+          overflow: "hidden",
+        },
+
         ".cm-editor": {
           borderRadius: oneLiner ? "78px" : "16px",
           padding: "10px 5px",

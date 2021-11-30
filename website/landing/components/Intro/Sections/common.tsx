@@ -219,6 +219,10 @@ export const CodeWrapper = styled("div", {
   width: "100%",
   marginTop: "30px !important",
 
+  ".sp-pre-placeholder": {
+    overflow: "hidden",
+  },
+
   "pre:not(.sp-pre-placeholder)": { padding: 0 },
 
   ".sp-code-editor": {
