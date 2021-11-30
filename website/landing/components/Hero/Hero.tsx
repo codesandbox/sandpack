@@ -16,6 +16,7 @@ export const Hero: React.FC = () => {
         entry: "./index.js",
         files,
       }}
+      initMode="immediate"
       template="react"
     >
       <HeroDesktop />{" "}

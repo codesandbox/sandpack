@@ -22,7 +22,6 @@ export const HeroDesktop: React.FC = () => {
   const { sandpack } = useSandpack();
 
   const editorRef = useRef<CodeEditorRef>(null);
-  const codemirrorInstance = useRef();
   const sectionRef = useRef<HTMLDivElement>(null);
   const [sectionTop, setSectionTop] = useState(0);
   const [sectionHeight, setSectionHeight] = useState(0);
@@ -119,13 +118,41 @@ export const HeroDesktop: React.FC = () => {
 
   useEffect(() => {
     const editorElement = editorRef.current?.getCodemirror();
-
     if (!editorElement) return;
 
     if (animationComplete && !editorElement.hasFocus) {
       editorElement.focus();
+
+      const newState = editorElement.state.update({
+        selection: { anchor: 204 },
+      });
+
+      if (newState) {
+        editorElement.update([newState]);
+      }
     }
   }, [animationComplete, editorRef]);
+
+  // on focus listener
+  useEffect(() => {
+    const editorElement = editorRef.current?.getCodemirror();
+    if (!editorElement) return;
+
+    const finishAnimation = () => {
+      window.scrollTo({
+        top: sectionTop + scrollHeight * 2,
+        behavior: "smooth",
+      });
+    };
+
+    const element = editorElement.scrollDOM.querySelector(".cm-content");
+
+    element?.addEventListener("focus", finishAnimation);
+
+    return () => {
+      element?.removeEventListener("focus", finishAnimation);
+    };
+  }, [editorRef.current]);
 
   // revert all changes on scroll up
   useEffect(() => {
@@ -133,16 +160,6 @@ export const HeroDesktop: React.FC = () => {
       sandpack.resetAllFiles();
     }
   }, [animationComplete]);
-
-  // useEffect(() => {
-  //   const editorElement = editorRef.current?.getCodemirror();
-
-  //   codemirrorInstance.current = editorElement;
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(codemirrorInstance.current?.hasFocus);
-  // }, [codemirrorInstance.current?.hasFocus]);
 
   return (
     <AnimatedBox
