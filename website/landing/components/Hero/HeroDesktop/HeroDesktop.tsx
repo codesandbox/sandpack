@@ -1,3 +1,4 @@
+import type { CodeEditorRef } from "@codesandbox/sandpack-react";
 import {
   ClasserProvider,
   SandpackCodeEditor,
@@ -20,6 +21,7 @@ const CUSTOM_CLASSES_MAP = {
 export const HeroDesktop: React.FC = () => {
   const { scrollY } = useViewportScroll();
 
+  const editorRef = useRef<CodeEditorRef>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [sectionTop, setSectionTop] = useState(0);
   const [sectionHeight, setSectionHeight] = useState(0);
@@ -113,6 +115,15 @@ export const HeroDesktop: React.FC = () => {
 
     isMounted.current = !!sectionRef.current;
   }, [sectionRef]);
+
+  useEffect(() => {
+    const editorElement = editorRef.current?.getCodemirror();
+    if (!editorElement) return;
+
+    if (animationComplete && !editorElement.hasFocus) {
+      editorElement.focus();
+    }
+  }, [animationComplete, editorRef]);
 
   return (
     <SandpackProvider
@@ -228,7 +239,7 @@ export const HeroDesktop: React.FC = () => {
           >
             <SandpackThemeProvider theme="sandpack-dark">
               <ClasserProvider classes={CUSTOM_CLASSES_MAP}>
-                <SandpackCodeEditor />
+                <SandpackCodeEditor ref={editorRef} />
                 <Box
                   css={{
                     opacity: "$sandpack-preview-opacity",
