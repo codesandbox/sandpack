@@ -50,6 +50,7 @@ export interface SandpackProps {
     startRoute?: string;
     skipEval?: boolean;
     fileResolver?: FileResolver;
+    externalResources?: string[];
 
     autorun?: boolean;
     recompileMode?: "immediate" | "delayed";
@@ -93,6 +94,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     skipEval: props.options?.skipEval,
     fileResolver: props.options?.fileResolver,
     initMode: props.options?.initMode,
+    externalResources: props.options?.externalResources,
   };
 
   // Parts are set as `flex` values, so they set the flex shrink/grow
