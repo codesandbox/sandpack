@@ -24,8 +24,13 @@ export const Resources: React.FC = () => {
         <ListItem
           key={r.name}
           css={{
-            "&:not(:last-of-type)": {
-              marginRight: "2em",
+            margin: "0 1em",
+
+            "@bp1": {
+              margin: 0,
+              "&:not(:last-of-type)": {
+                marginRight: "2em",
+              },
             },
           }}
         >
@@ -35,8 +40,12 @@ export const Resources: React.FC = () => {
               css={{
                 fontFamily: "inherit",
                 fontWeight: "$semiBold",
-                fontSize: "2.4em",
+                fontSize: "16px",
                 letterSpacing: "-0.05em",
+
+                "@bp2": {
+                  fontSize: "2.4em",
+                },
               }}
             >
               {r.name}

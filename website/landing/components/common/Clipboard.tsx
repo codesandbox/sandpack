@@ -112,16 +112,19 @@ export const Clipboard: React.FC = () => {
       >
         <Text
           as="span"
-          style={{
+          css={{
             fontFamily: "inherit",
-            fontSize: "2.4em",
             letterSpacing: "-0.05em",
+
+            "@bp2": {
+              fontSize: "2.4em",
+            },
           }}
         >
           {command}
         </Text>
         <Box
-          aria-label="Copy to cliboard"
+          aria-label="Copy to clipboard"
           css={{
             flexShrink: "0",
             height: "12px",
