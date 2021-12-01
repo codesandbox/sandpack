@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.7](https://github.com/codesandbox/sandpack/compare/v0.9.6...v0.9.7) (2021-12-01)
+
+
+### Bug Fixes
+
+* leverege -> leverage ([#210](https://github.com/codesandbox/sandpack/issues/210)) ([6915d24](https://github.com/codesandbox/sandpack/commit/6915d24a3d6d064ca8135b1b7d5e320943bfb156))
+
+
+
+
+
 ## [0.9.6](https://github.com/codesandbox/sandpack/compare/v0.9.5...v0.9.6) (2021-11-30)
 
 
