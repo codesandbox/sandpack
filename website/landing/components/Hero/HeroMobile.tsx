@@ -82,7 +82,7 @@ export const HeroMobile: React.FC = () => {
       </Box>
       <Clipboard />
       <Resources />
-      <Box css={{ display: "flex", justifyContent: "center" }}>
+      <Box css={{ display: "flex", justifyContent: "center", width: "100%" }}>
         <SandpackPreview />
       </Box>
     </Box>
