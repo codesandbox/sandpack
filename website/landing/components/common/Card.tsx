@@ -107,7 +107,7 @@ export const CardDescription = styled("p", {
       letterSpacing: "-0.025em",
       background: "$$codeBlockBackground",
       color: "$$codeBlockForeground",
-      transition: "all .2s ease",
+      transition: "$default",
 
       "&:after": {
         content: "↗",

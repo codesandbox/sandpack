@@ -55,6 +55,7 @@ export const Users: React.FC = () => {
     <SectionWrapper>
       <SectionContainer
         css={{
+          maxWidth: "1600px",
           "@bp1": {
             paddingBottom: "200px",
           },
@@ -65,7 +66,7 @@ export const Users: React.FC = () => {
             padding: "20px 0 100px",
 
             "@bp2": {
-              padding: "100px 0",
+              padding: "200px 0 100px",
             },
           }}
         >

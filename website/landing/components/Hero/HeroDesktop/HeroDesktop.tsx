@@ -191,9 +191,10 @@ export const HeroDesktop: React.FC = () => {
           transition: "opacity 300ms linear",
 
           display: "flex",
+          borderRadius: "calc(var(--progress) * 16px)",
+          overflow: "hidden",
 
           "&::after": {
-            borderRadius: "calc($progress * 10px)",
             content: '""',
             position: "absolute",
             top: 0,
@@ -222,11 +223,15 @@ export const HeroDesktop: React.FC = () => {
 
             ".sp-tabs-scrollable-container": {
               alignItems: "center",
-              height: "56px",
+              paddingTop: "16px",
+              paddingBottom: "2px",
             },
 
             ".sp-tab-button": {
-              transition: "none",
+              padding: "0 1.6em",
+              transition: "color .2s ease",
+              borderRadius: "9999999px",
+              cursor: "pointer",
             },
 
             ".sp-tab-button:hover": {
@@ -235,9 +240,8 @@ export const HeroDesktop: React.FC = () => {
 
             ".sp-tab-button[data-active=true]": {
               background: "$primary",
-              borderRadius: "2.4rem",
               color: "#131313",
-              padding: "0 1.6em",
+              border: "none",
             },
 
             ".sp-preview-container": {

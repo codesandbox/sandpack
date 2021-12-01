@@ -156,7 +156,7 @@ export const RefreshButton = styled("button", {
   bottom: "12px",
   right: "10px",
 
-  transition: ".2s ease all",
+  transition: "$default",
 
   "&:hover": {
     color: "rgba(255,255,255, 1)",
@@ -192,8 +192,8 @@ export const FadeAnimation: React.FC = ({ children }) => {
   const opacity = useTransform(
     scrollY,
     [
-      sectionTop - sectionHeight / 2,
-      sectionTop - sectionHeight / 4,
+      sectionTop - sectionHeight / 1.5,
+      sectionTop - sectionHeight / 3,
       sectionTop - sectionHeight / 6,
       sectionTop + sectionHeight / 6,
       sectionTop + sectionHeight / 4,

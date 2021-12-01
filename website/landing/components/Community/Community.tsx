@@ -38,6 +38,11 @@ const CommunityLink = styled("a", {
   flexDirection: "column",
   margin: "0 auto",
   width: "75%",
+  transition: "$default",
+
+  "&:hover": {
+    color: "$primary",
+  },
 
   "@bp1": {
     width: "50%",
