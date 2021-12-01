@@ -8,15 +8,18 @@ export const globalStyles = globalCss({
       fontFamily: baseFont,
       fontWeight: fontWeights.normal,
       src: `url("assets/fonts/Inter-Regular.woff") format("woff")`,
+      fontDisplay: "swap",
     },
     {
       fontFamily: baseFont,
       fontWeight: fontWeights.semiBold,
       src: `url("assets/fonts/Inter-SemiBold.woff") format("woff")`,
+      fontDisplay: "swap",
     },
     {
       fontFamily: monoFont,
       src: `url("assets/fonts/FiraCode-Regular.woff") format("woff")`,
+      fontDisplay: "swap",
     },
   ],
 

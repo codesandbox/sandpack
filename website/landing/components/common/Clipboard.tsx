@@ -86,6 +86,7 @@ export const Clipboard: React.FC = () => {
         <span>Copied to clipboard</span>
       </ClipboardToast> */}
       <Button
+        aria-label="Copy to clipboard"
         css={{
           alignItems: "center",
           color: "$darkTextPrimary",
@@ -124,7 +125,6 @@ export const Clipboard: React.FC = () => {
           {command}
         </Text>
         <Box
-          aria-label="Copy to clipboard"
           css={{
             flexShrink: "0",
             height: "12px",
