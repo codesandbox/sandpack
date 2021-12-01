@@ -35,13 +35,14 @@ Once you've chosen your starter template, you will most likely want to pass cust
 <!-- prettier-ignore -->
 <NestedSandpack
   setupCode={`import { Sandpack } from "@codesandbox/sandpack-react";
+import "@codesandbox/sandpack-react/dist/index.css";\n
 const code = \`export default function App() {
   return <h1>Hello Sandpack</h1>
 }\`;`}
-  nestedProps={`  template="react"
-    files={{
-      "/App.js": code,
-    }}`}
+  nestedProps={`    template="react"
+      files={{
+        "/App.js": code,
+      }}`}
   />
 
 The `files` prop accepts an object, where each `key` is the **relative path** of that file in the sandbox folder structure. Files passed in through the `files` prop override those in the `template` structure. Since each `template` uses the same type to define the files, you can overwrite the contents of any of the template files.
