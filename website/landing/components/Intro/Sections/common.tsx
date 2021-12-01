@@ -22,7 +22,7 @@ export const Row = forwardRef<unknown, { children: React.ReactNode }>(
           width: "100%",
           "@bp2": {
             width: "initial",
-            height: "100vh",
+            height: "80vh",
             maxHeight: "1080px",
           },
         }}

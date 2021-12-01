@@ -48,6 +48,11 @@ export const globalStyles = globalCss({
     overflowX: "hidden",
   },
 
+  "::selection": {
+    backgroundColor: "$primary",
+    color: "$lightTextPrimary",
+  },
+
   "a, a:visited": {
     color: "inherit",
     textDecoration: "none",
