@@ -90,6 +90,14 @@ export const CardDescription = styled("p", {
     fontSize: "18px",
     textAlign: "start",
 
+    "a code:after": {
+      content: "↗",
+      display: "inline-block",
+      marginLeft: "8px",
+      position: "relative",
+      top: 1,
+    },
+
     "a code:hover": {
       background: "$primary",
       color: "$darkBackground",
@@ -108,14 +116,6 @@ export const CardDescription = styled("p", {
       background: "$$codeBlockBackground",
       color: "$$codeBlockForeground",
       transition: "$default",
-
-      "&:after": {
-        content: "↗",
-        display: "inline-block",
-        marginLeft: "8px",
-        position: "relative",
-        top: 1,
-      },
     },
   },
 

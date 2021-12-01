@@ -81,7 +81,9 @@ export const TemplateExample: React.FC = () => {
             >
               <code>template</code>
             </a>{" "}
-            prop to get started with Sandpack in a few lines of code.
+            prop to get started with Sandpack in a few lines of code. Each
+            template contains all the <code>files</code> and{" "}
+            <code>dependencies</code> needed to start a project right away.
           </CardDescription>
 
           <SnippetButton
