@@ -34,7 +34,7 @@ export default function App() {
       ? nestedProps
       : `    // You can change these examples!
       // Try uncommenting any of these lines
-      // theme="codesandbox-dark"
+      // theme="dark"
       // template="react"`
   }
     />

@@ -21,13 +21,13 @@ Sandpack comes with some predefined themes:
 To see all the themes at a glance, use [this sandbox](https://codesandbox.io/s/sandpack-theme-yqsmj)
 
 <!-- prettier-ignore -->
-<NestedSandpack nestedProps={`  // Try out the included themes below!
-    theme="codesandbox-dark"
-    // theme="codesandbox-light"
-    // theme="github-light"
-    // theme="night-owl"
-    // theme="aqua-blue"
-    // theme="monokai-pro"`}
+<NestedSandpack nestedProps={`    // Try out the included themes below!
+      theme="dark"
+      // theme="light"
+      // theme="github-light"
+      // theme="night-owl"
+      // theme="aqua-blue"
+      // theme="monokai-pro"`}
 />
 
 ### Custom Theme
@@ -37,29 +37,34 @@ You can also pass a **partial** theme object that overrides properties in the
 
 <!-- prettier-ignore -->
 <NestedSandpack nestedProps={`    theme={{
-      palette: {
-        accent: "rebeccapurple",
-      },
-      syntax: {
-        tag: "#006400",
-        string: "rgb(255, 165, 0)",
-        plain: "tomato",
-      },
-    }}`}
+        palette: {
+          accent: "rebeccapurple",
+        },
+        syntax: {
+          tag: "#006400",
+          string: "rgb(255, 165, 0)",
+          plain: "tomato",
+        },
+      }}`}
   />
+
+:::success Sandpack Theme Builder
+You can design your own theme or customize any existing Sandpack theme presets. [Try it now! ↗](https://sandpack.codesandbox.io/theme)
+:::
 
 Furthermore you can import an existing theme object and use object composition to override specific fields.
 
 <!-- prettier-ignore -->
 <NestedSandpack 
-  setupCode={`import { Sandpack, codesandboxDarkTheme } from "@codesandbox/sandpack-react";`} 
+  setupCode={`import { Sandpack, codesandboxDarkTheme } from "@codesandbox/sandpack-react";
+import "@codesandbox/sandpack-react/dist/index.css";`} 
   nestedProps={`    theme={{
-      ...codesandboxDarkTheme,
-      typography: {
-        fontSize: "16px",
-        bodyFont: "Arial",
-      },
-    }}`}
+        ...codesandboxDarkTheme,
+        typography: {
+          fontSize: "16px",
+          bodyFont: "Arial",
+        },
+      }}`}
   />
 
 ## Custom Styling
