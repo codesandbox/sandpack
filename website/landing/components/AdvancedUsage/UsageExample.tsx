@@ -23,7 +23,6 @@ export const UsageExample: React.FC<UsageExampleProps> = ({
   const shouldAnimate = useBreakpoint("bp2");
   const { ref, inView } = useInView({
     threshold: 0,
-    triggerOnce: !shouldAnimate,
   });
 
   return (
@@ -55,7 +54,7 @@ export const UsageExample: React.FC<UsageExampleProps> = ({
         <Box ref={ref}>
           <ExampleIllustration
             illustrationKey={example.illustrationKey}
-            visible={inView}
+            visible={inView || !shouldAnimate}
           />
         </Box>
         <Box>

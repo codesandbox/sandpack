@@ -70,7 +70,9 @@ export const LayoutExample: React.FC = () => {
 
           <CodeWrapper
             css={{
-              height: "480px",
+              ".sp-wrapper": {
+                height: "480px",
+              },
 
               ".sp-tabs": {
                 borderTopLeftRadius: "16px",
@@ -93,8 +95,6 @@ export const LayoutExample: React.FC = () => {
             </SandpackThemeProvider>
           </CodeWrapper>
         </Content>
-
-        <SandpackContainerPlaceholder />
 
         <SandpackContainerMobile css={{ ".custom-layout": { height: "50vh" } }}>
           <Caption>Sandpack preview</Caption>
@@ -120,6 +120,8 @@ export const LayoutExample: React.FC = () => {
             </ClasserProvider>
           </SandpackProvider>
         </SandpackContainerMobile>
+
+        <SandpackContainerPlaceholder />
       </Row>
     </FadeAnimation>
   );

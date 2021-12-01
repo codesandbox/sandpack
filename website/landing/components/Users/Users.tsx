@@ -55,12 +55,21 @@ export const Users: React.FC = () => {
     <SectionWrapper>
       <SectionContainer
         css={{
+          maxWidth: "1600px",
           "@bp1": {
             paddingBottom: "200px",
           },
         }}
       >
-        <SectionHeader>
+        <SectionHeader
+          css={{
+            padding: "20px 0 100px",
+
+            "@bp2": {
+              padding: "200px 0 100px",
+            },
+          }}
+        >
           <SectionTitle
             as="h4"
             dangerouslySetInnerHTML={{ __html: content.title }}
@@ -89,7 +98,16 @@ export const Users: React.FC = () => {
             const { url, height, width } = user.logo;
 
             return (
-              <ListItem key={user.name} css={{ flex: "none", margin: "50px" }}>
+              <ListItem
+                key={user.name}
+                css={{
+                  flex: "none",
+                  margin: "20px",
+                  "@bp2": {
+                    margin: "50px",
+                  },
+                }}
+              >
                 <UserLink
                   css={{
                     transitionDelay: inView

@@ -22,7 +22,6 @@ import {
   SandpackContainerMobile,
   FadeAnimation,
   THRESHOLD_VIEW,
-  Caption,
 } from "./common";
 
 const themeOptions: SandpackPredefinedTheme[] = [
@@ -127,7 +126,6 @@ export const ThemeExample: React.FC = () => {
         </Content>
 
         <SandpackContainerMobile>
-          <Caption>Sandpack preview</Caption>
           <SandpackPreview options={{ theme }} />
         </SandpackContainerMobile>
 

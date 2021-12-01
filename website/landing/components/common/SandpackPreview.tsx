@@ -30,7 +30,8 @@ export const SandpackContainer = styled("div", {
     },
 
     "@bp3": {
-      height: "40vh",
+      width: "1300px",
+      height: "50vh",
     },
   },
 

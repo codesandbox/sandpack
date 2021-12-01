@@ -6,8 +6,12 @@ import { Box, List, Text } from "../common";
 
 const Divider = styled("div", {
   border: "1px solid $darkTextPrimary",
-  margin: "100px 0px",
+  margin: "20px 0px",
   width: "50px",
+
+  "@bp2": {
+    margin: "100px 0px",
+  },
 });
 
 const Title = styled("h3", {
@@ -34,6 +38,11 @@ const CommunityLink = styled("a", {
   flexDirection: "column",
   margin: "0 auto",
   width: "75%",
+  transition: "$default",
+
+  "&:hover": {
+    color: "$primary",
+  },
 
   "@bp1": {
     width: "50%",

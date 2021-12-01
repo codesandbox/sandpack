@@ -22,7 +22,6 @@ import {
   SandpackContainerMobile,
   FadeAnimation,
   THRESHOLD_VIEW,
-  Caption,
 } from "./common";
 
 const frameworkOptions: SandpackPredefinedTemplate[] = [
@@ -121,7 +120,6 @@ export const TemplateExample: React.FC = () => {
         </Content>
 
         <SandpackContainerMobile>
-          <Caption>Sandpack preview</Caption>
           <SandpackPreview options={{ template }} />
         </SandpackContainerMobile>
 

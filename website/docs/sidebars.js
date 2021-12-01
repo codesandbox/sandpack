@@ -21,13 +21,19 @@ module.exports = {
     },
     {
       type: "link",
+      label: "Homepage ↗",
+      href: "https://sandpack.codesandbox.io",
+      className: "releases-link",
+    },
+    {
+      type: "link",
       label: "Releases ↗",
       href: "/releases",
       className: "releases-link",
     },
     {
       type: "link",
-      label: "Github ↗",
+      label: "GitHub ↗",
       href: "https://github.com/codesandbox/sandpack",
       className: "github-link",
     },

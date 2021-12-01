@@ -61,6 +61,11 @@ const IllustrationWrapper = styled("div", {
     width: "360px",
   },
 
+  "@bp3": {
+    height: "720px",
+    width: "480px",
+  },
+
   variants: {
     visible: {
       true: {

@@ -35,18 +35,19 @@ Once you've chosen your starter template, you will most likely want to pass cust
 <!-- prettier-ignore -->
 <NestedSandpack
   setupCode={`import { Sandpack } from "@codesandbox/sandpack-react";
+import "@codesandbox/sandpack-react/dist/index.css";\n
 const code = \`export default function App() {
   return <h1>Hello Sandpack</h1>
 }\`;`}
-  nestedProps={`  template="react"
-    files={{
-      "/App.js": code,
-    }}`}
+  nestedProps={`    template="react"
+      files={{
+        "/App.js": code,
+      }}`}
   />
 
 The `files` prop accepts an object, where each `key` is the **relative path** of that file in the sandbox folder structure. Files passed in through the `files` prop override those in the `template` structure. Since each `template` uses the same type to define the files, you can overwrite the contents of any of the template files.
 
-Keep in mind that the tabs only show the name of the file and not the full path. For instance, if you want to overwrite `/index.js` in the `vanilla` template, you need to specify `/src/index.js` as the corresponding `key` in the `files` object. You can check the full paths for each of the templates in the [template definitions](https://github.com/codesandbox/sandpack/tree/main/sandpack-react/src/templates)
+Keep in mind that the tabs only show the name of the file and not the full path. For instance, if you want to overwrite `/index.js` in the `vanilla` template, you need to specify `/src/index.js` as the corresponding `key` in the `files` object. You can check the full paths for each of the templates in the [template definitions](https://github.com/codesandbox/sandpack/tree/main/sandpack-react/src/templates).
 
 :::note Leading Slash
 Don't forget the leading slash (`/`) when setting the file paths.
@@ -201,4 +202,4 @@ If you change the path of the entry file, make sure you control all the files th
 
 Sometimes you might not want to start from any of the preset templates. If so, you can pass a full `customSetup` object that contains everything needed for your custom `Sandpack` configuration.
 
-Most individual parts of the `customSetup` have been described above, but for a full overview of what is accepted in a custom setup, check out the [type definitions](https://github.com/codesandbox/sandpack/blob/main/sandpack-react/src/types.ts)
+Most individual parts of the `customSetup` have been described above, but for a full overview of what is accepted in a custom setup, check out the [type definitions](https://github.com/codesandbox/sandpack/blob/main/sandpack-react/src/types.ts).

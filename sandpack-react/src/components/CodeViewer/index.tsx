@@ -16,6 +16,7 @@ export interface CodeViewerProps {
   showLineNumbers?: boolean;
   decorators?: Decorators;
   code?: string;
+  wrapContent?: boolean;
   /**
    * This provides a way to control how some components are going to
    * be initialized on the page. The CodeEditor and the Preview components
@@ -27,7 +28,14 @@ export interface CodeViewerProps {
 
 export const SandpackCodeViewer = forwardRef<CodeEditorRef, CodeViewerProps>(
   (
-    { showTabs, showLineNumbers, decorators, code: propCode, initMode },
+    {
+      showTabs,
+      showLineNumbers,
+      decorators,
+      code: propCode,
+      initMode,
+      wrapContent,
+    },
     ref
   ) => {
     const { sandpack } = useSandpack();
@@ -46,6 +54,7 @@ export const SandpackCodeViewer = forwardRef<CodeEditorRef, CodeViewerProps>(
           filePath={sandpack.activePath}
           initMode={initMode || sandpack.initMode}
           showLineNumbers={showLineNumbers}
+          wrapContent={wrapContent}
           readOnly
         />
 

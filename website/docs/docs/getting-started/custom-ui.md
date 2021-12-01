@@ -18,7 +18,7 @@ The overall style can be set through the `theme` prop. Once again, sandpack offe
 
 Sandpack comes with some predefined themes:
 
-To see all the themes at a glance, use [this sandbox](https://codesandbox.io/s/sandpack-theme-yqsmj)
+To see all the themes at a glance, use [this sandbox](https://codesandbox.io/s/sandpack-theme-yqsmj).
 
 <!-- prettier-ignore -->
 <NestedSandpack nestedProps={`    // Try out the included themes below!

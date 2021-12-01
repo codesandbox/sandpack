@@ -34,6 +34,10 @@ const HighlightPreview: React.FC<{ source: string; alt: string }> = ({
         justifyContent: "center",
         margin: "0 auto",
         width: "100%",
+
+        img: {
+          transition: "$default",
+        },
       }}
     >
       <Image alt={alt} height={1440} src={source} width={960} />
@@ -89,11 +93,11 @@ export const Showcase: React.FC = () => {
               alignItems: "center",
               display: "flex",
               flexDirection: "column",
-              gap: "148px",
+              gap: "100px",
 
               "@bp2": {
                 display: "grid",
-                "--gap": "200px",
+                "--gap": "280px",
                 gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
               },
             }}
@@ -124,6 +128,10 @@ export const Showcase: React.FC = () => {
                   "@bp3": {
                     width: "480px",
                   },
+
+                  "&:hover img": {
+                    transform: "scale(1.05)",
+                  },
                 }}
                 style={{
                   translateY:
@@ -143,10 +151,12 @@ export const Showcase: React.FC = () => {
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <HighlightPreview
-                    alt={item.title}
-                    source={item.imageSource}
-                  />
+                  <div>
+                    <HighlightPreview
+                      alt={item.title}
+                      source={item.imageSource}
+                    />
+                  </div>
                   <Card css={{ alignItems: "center" }}>
                     <CardTitle
                       css={{ "@bp2": { textAlign: "center" } }}
