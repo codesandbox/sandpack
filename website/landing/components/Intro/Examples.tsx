@@ -50,9 +50,9 @@ export const Examples: React.FC = () => {
   }, []);
 
   const scrollRangeX = [
-    sandpackSectionTop * 0.8,
-    sandpackSectionTop,
-    (sandpackSectionTop + sandpackSectionHeight) * 0.9,
+    sandpackSectionTop * 0.9,
+    sandpackSectionTop * 0.95,
+    (sandpackSectionTop + sandpackSectionHeight) * 0.85,
   ];
 
   // Max width that the left container can grow
