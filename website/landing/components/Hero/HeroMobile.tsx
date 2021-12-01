@@ -75,7 +75,7 @@ export const HeroMobile: React.FC = () => {
               width: "280px",
             }}
           >
-            A component toolkit for creating your own live running code editing
+            A component toolkit for creating your own live-running code editing
             experience, using the power of CodeSandbox.
           </Text>
         </Box>

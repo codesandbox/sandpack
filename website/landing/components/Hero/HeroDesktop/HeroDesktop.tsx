@@ -386,7 +386,7 @@ export const HeroDesktop: React.FC = () => {
               }}
             >
               A component toolkit for creating your
-              <br /> own live running code editing experience,
+              <br /> own live-running code editing experience,
               <br />
               using the power of CodeSandbox.
             </Text>
