@@ -89,7 +89,7 @@ export const Showcase: React.FC = () => {
               alignItems: "center",
               display: "flex",
               flexDirection: "column",
-              gap: "148px",
+              gap: "100px",
 
               "@bp2": {
                 display: "grid",

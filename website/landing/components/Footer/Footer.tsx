@@ -16,7 +16,11 @@ export const Footer: React.FC = () => {
         flexDirection: "column",
         gap: "20px",
         flexShrink: "O",
-        padding: "100px 0",
+        padding: "50px 0",
+
+        "@bp2": {
+          padding: "100px 0",
+        },
       }}
     >
       <Text
