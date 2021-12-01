@@ -1,5 +1,5 @@
 .svg {
-  width: 180%;
+  width: 140%;
   height: auto;
 
   position: relative;
@@ -27,6 +27,12 @@
   --speed4: 2.5s;
 
   --ease-elastic: cubic-bezier(0.8, -1, 0.2, 2);
+}
+
+@media (min-width: 1040px) {
+  .svg {
+    width: 180%;
+  }
 }
 
 /* motion */

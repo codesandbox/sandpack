@@ -33,10 +33,10 @@ export const HeroDesktop: React.FC = () => {
   scrollY.onChange((updatedScroll) => setScrollPosition(updatedScroll));
 
   useEffect(() => {
-    const isAnimationComplete = scrollPosition >= sectionTop + scrollHeight;
-    if (isAnimationComplete !== animationComplete) {
-      setAnimationComplete(isAnimationComplete);
-    }
+    const isAnimationComplete =
+      scrollPosition >= sectionTop + scrollHeight * 1.2 + 2;
+
+    setAnimationComplete(isAnimationComplete);
   }, [animationComplete, scrollHeight, scrollPosition, sectionTop]);
 
   // Push editor into view and adjust wrapper's border radius.
@@ -63,7 +63,7 @@ export const HeroDesktop: React.FC = () => {
   // Rotate logo.
   const rotate = useTransform(
     scrollY,
-    [sectionTop + scrollHeight, sectionTop + scrollHeight * 1.2],
+    [sectionTop + scrollHeight * 0.9, sectionTop + scrollHeight * 1.1],
     [-90, 0]
   );
 
@@ -84,10 +84,7 @@ export const HeroDesktop: React.FC = () => {
   // Sandpack dynamic preview opacity.
   const sandpackPreviewOpacity = useTransform(
     scrollY,
-    [
-      sectionTop + (sectionHeight / 4) * 2,
-      sectionTop + (sectionHeight / 4) * 2 + 1,
-    ],
+    [sectionTop + scrollHeight * 1.2 + 1, sectionTop + scrollHeight * 1.2 + 2],
     [0, 1]
   );
 
@@ -140,7 +137,7 @@ export const HeroDesktop: React.FC = () => {
 
     const finishAnimation = () => {
       window.scrollTo({
-        top: sectionTop + scrollHeight * 2,
+        top: sectionTop + scrollHeight * 1.2 + 2,
         behavior: "smooth",
       });
     };
@@ -164,7 +161,7 @@ export const HeroDesktop: React.FC = () => {
   return (
     <AnimatedBox
       ref={sectionRef}
-      css={{ height: "300vh" }}
+      css={{ height: "200vh" }}
       id="container"
       style={
         {

@@ -101,7 +101,7 @@ export const EditorExample: React.FC = () => {
         <Content>
           <CardTitle>Custom UI with ease</CardTitle>
           <CardDescription>
-            Customizing the UI is possible with the{" "}
+            With the{" "}
             <a
               href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#visual-options"
               rel="noreferrer"
@@ -109,7 +109,8 @@ export const EditorExample: React.FC = () => {
             >
               <code>options</code>
             </a>{" "}
-            prop.
+            prop you can customize the UI and leverage the built-in component
+            settings.
           </CardDescription>
 
           <CodeWrapper

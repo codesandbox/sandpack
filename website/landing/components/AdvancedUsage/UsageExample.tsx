@@ -26,7 +26,7 @@ export const UsageExample: React.FC<UsageExampleProps> = ({
   });
 
   return (
-    <Box css={{ height: "100vh", maxHeight: "1080px" }}>
+    <Box css={{ "@bp2": { height: "100vh", maxHeight: "1080px" } }}>
       <Box
         css={{
           alignItems: "center",

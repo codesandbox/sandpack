@@ -27,8 +27,6 @@ const IllustrationWrapper = styled("div", {
   display: "flex",
   justifyContent: "center",
   position: "relative",
-  width: "343px",
-  height: "512px",
 
   "&::after": {
     background: "$$wrapperBackground",

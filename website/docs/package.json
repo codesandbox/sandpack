@@ -16,8 +16,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@codesandbox/sandpack-docusaurus": "^0.7.1",
-    "@codesandbox/sandpack-react": "^0.7.1",
+    "@codesandbox/sandpack-docusaurus": "*",
+    "@codesandbox/sandpack-react": "*",
     "@docusaurus/core": "2.0.0-beta.9",
     "@docusaurus/plugin-sitemap": "^2.0.0-beta.9",
     "@docusaurus/preset-classic": "2.0.0-beta.9",
@@ -45,7 +45,11 @@
     "typescript": "^4.3.5"
   },
   "browserslist": {
-    "production": [">0.5%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
