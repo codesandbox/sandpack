@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./Provider.module.css";
 
-export const ProviderIllustration: React.FC<{ isActive: boolean }> = ({
+const ProviderIllustration: React.FC<{ isActive: boolean }> = ({
   isActive,
 }) => {
   return (
@@ -176,3 +176,5 @@ export const ProviderIllustration: React.FC<{ isActive: boolean }> = ({
     </div>
   );
 };
+
+export default ProviderIllustration;

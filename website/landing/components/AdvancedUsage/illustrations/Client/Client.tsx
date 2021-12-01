@@ -2,9 +2,7 @@ import React from "react";
 
 import styles from "./Client.module.css";
 
-export const ClientIllustration: React.FC<{ isActive: boolean }> = ({
-  isActive,
-}) => {
+const ClientIllustration: React.FC<{ isActive: boolean }> = ({ isActive }) => {
   return (
     <div className={isActive ? styles.active : ""}>
       <svg
@@ -1063,3 +1061,5 @@ export const ClientIllustration: React.FC<{ isActive: boolean }> = ({
     </div>
   );
 };
+
+export default ClientIllustration;

@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./Components.module.css";
 
-export const ComponentsIllustration: React.FC<{ isActive: boolean }> = ({
+const ComponentsIllustration: React.FC<{ isActive: boolean }> = ({
   isActive,
 }) => {
   return (
@@ -181,3 +181,5 @@ export const ComponentsIllustration: React.FC<{ isActive: boolean }> = ({
     </div>
   );
 };
+
+export default ComponentsIllustration;

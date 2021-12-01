@@ -34,7 +34,7 @@ export const Card = styled("div", {
   },
 });
 
-export const CardTitle = styled("h4", {
+export const CardTitle = styled("h3", {
   color: "$$primaryTextColor",
   fontSize: "24px",
   fontWeight: "$semiBold",

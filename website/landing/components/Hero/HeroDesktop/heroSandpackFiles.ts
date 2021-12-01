@@ -187,6 +187,7 @@ function Clipboard() {
 
   return (
     <Button
+      aria-label="Copy to clipboard"
       css={{
         alignItems: "center",
         color: "$darkTextPrimary",
@@ -212,7 +213,6 @@ function Clipboard() {
     >
       <HeaderText>{installCommand}</HeaderText>
       <Box
-        aria-label="Copy to clipboard"
         className="clipboard-icon"
         css={{
           flexShrink: "0",

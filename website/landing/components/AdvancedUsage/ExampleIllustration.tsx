@@ -1,12 +1,22 @@
+import lazy from "next/dynamic";
 import React from "react";
 
 import { styled } from "../../stitches.config";
 
-import {
-  ClientIllustration,
-  ComponentsIllustration,
-  ProviderIllustration,
-} from "./illustrations";
+const ClientIllustration = lazy(import("./illustrations/Client/Client"), {
+  ssr: false,
+});
+
+const ComponentsIllustration = lazy(
+  import("./illustrations/Components/Components"),
+  {
+    ssr: false,
+  }
+);
+
+const ProviderIllustration = lazy(import("./illustrations/Provider/Provider"), {
+  ssr: false,
+});
 
 const IllustrationWrapper = styled("div", {
   $$wrapperBackground: "#f1f1f1",
@@ -70,15 +80,16 @@ export const ExampleIllustration: React.FC<ExampleIllustrationProps> = ({
   illustrationKey,
   visible,
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const illustrations: any = {
+    providers: <ProviderIllustration isActive={visible} />,
+    components: <ComponentsIllustration isActive={visible} />,
+    client: <ClientIllustration isActive={visible} />,
+  };
+
   return (
     <IllustrationWrapper visible={visible}>
-      {
-        {
-          providers: <ProviderIllustration isActive={visible} />,
-          components: <ComponentsIllustration isActive={visible} />,
-          client: <ClientIllustration isActive={visible} />,
-        }[illustrationKey]
-      }
+      {illustrations[illustrationKey]}
     </IllustrationWrapper>
   );
 };
