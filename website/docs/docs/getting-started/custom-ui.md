@@ -49,7 +49,7 @@ You can also pass a **partial** theme object that overrides properties in the
   />
 
 :::success Sandpack Theme Builder
-Use can design and customize your own theme, among other Sandpack presets. [Try it now! ↗](https://sandpack.codesandbox.io/theme)
+You can design your own theme or customize any existing Sandpack theme presets. [Try it now! ↗](https://sandpack.codesandbox.io/theme)
 :::
 
 Furthermore you can import an existing theme object and use object composition to override specific fields.
