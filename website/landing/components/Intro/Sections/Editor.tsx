@@ -99,7 +99,7 @@ export const EditorExample: React.FC = () => {
     <FadeAnimation>
       <Row ref={ref}>
         <Content>
-          <CardTitle>Customize UI with ease</CardTitle>
+          <CardTitle>Customize the UI with ease</CardTitle>
           <CardDescription>
             Tweak the UI to your liking using the{" "}
             <a
@@ -109,7 +109,7 @@ export const EditorExample: React.FC = () => {
             >
               <code>options</code>
             </a>{" "}
-            prop and leverage the built-in component settings.
+            prop. Quickly toggle the appearance of built-in components..
           </CardDescription>
 
           <CodeWrapper
