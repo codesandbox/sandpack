@@ -72,7 +72,7 @@ export const HeroMobile: React.FC = () => {
               lineHeight: "19px",
               letterSpacing: "-0.0125em",
               textAlign: "center",
-              width: "280px",
+              maxWidth: "320px",
             }}
           >
             A component toolkit for creating
