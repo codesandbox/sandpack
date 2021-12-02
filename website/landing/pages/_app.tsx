@@ -6,7 +6,7 @@ import { useEffect } from "react";
 const API_KEY = process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY;
 
 if (API_KEY && process.browser) {
-  amplitude.getInstance().init(`"${API_KEY}"`);
+  amplitude.getInstance().init(API_KEY);
 }
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
