@@ -57,7 +57,10 @@ module.exports = {
                 }return r._iq[e]};e.amplitude=r})(window,document);
                 
                 amplitude.getInstance().init("${API_KEY}");
-                amplitude.logEvent("pageview", { path: window.location.href, source: "sandpack-docs" })
+
+                setTimeout(() => {
+                  amplitude.logEvent("pageview", { path: window.location.href, source: "sandpack-docs" });
+                }, 300)
                 `
                   : "",
               },
