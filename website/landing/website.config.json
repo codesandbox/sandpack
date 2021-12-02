@@ -1,7 +1,7 @@
 {
   "global": {
-    "title": "Component toolkit for live running code editing experiences | Sandpack",
-    "description": "Sandpack is a component toolkit for creating your own live running code editing experience powered by CodeSandbox."
+    "title": "Component toolkit for creating live-running code editing experiences | Sandpack",
+    "description": "Sandpack is a component toolkit for creating your own live-running code editing experiences powered by CodeSandbox."
   },
   "meta": [
     {
@@ -14,11 +14,11 @@
     },
     {
       "name": "og:title",
-      "value": "Component toolkit for live running code editing experiences | Sandpack"
+      "value": "Component toolkit for creating live-running code editing experiences | Sandpack"
     },
     {
       "name": "og:description",
-      "value": "Sandpack is a component toolkit for creating your own live running code editing experience powered by CodeSandbox."
+      "value": "Sandpack is a component toolkit for creating live-running code editing experiences powered by CodeSandbox."
     },
     {
       "name": "og:image",
@@ -74,21 +74,21 @@
     ]
   },
   "features": {
-    "title": "Live coding</br>environment</br><span class=\"highlight\">in minutes.</span>",
+    "title": "A live coding</br>environment</br><span class=\"highlight\">in minutes.</span>",
     "highlights": [
       {
         "title": "Full editor experience",
-        "description": "Sandpack is using <a href='https://codemirror.net/' rel='noreferrer' target='_blank' class='external-link'>CodeMirror</a> under the hood, giving you all the basic capabilities of a code editor and syntax highlight. However, if you want to use your own editor framework, you can add that as a component too!",
+        "description": "Sandpack uses <a href='https://codemirror.net/' rel='noreferrer' target='_blank' class='external-link'>CodeMirror</a> under the hood, giving you all the basic capabilities of a code editor and syntax highlight. However, if you want to use your own editor framework, you can add that as a component too!",
         "iconKey": "editor"
       },
       {
         "title": "Advanced preview",
-        "description": "Sandpack embeds the browser bundler that powers <a href='http://codesandbox.io' rel='noreferrer' target='_blank' class='external-link'>codesandbox.io</a> and takes advantage of features like npm dependency support, hot module reloading, error overlay, and caching.",
+        "description": "Sandpack embeds the browser bundler that powers <a href='http://codesandbox.io' rel='noreferrer' target='_blank' class='external-link'>CodeSandbox</a> and takes advantage of features like npm dependency support, hot module reloading, error overlaying, and caching.",
         "iconKey": "preview"
       },
       {
         "title": "Leverage CodeSandbox",
-        "description": "With Sandpack, you're always one click away from opening your code snippet in CodeSandbox. This way you can easily share bug reports, or examples behind a unique URL.",
+        "description": "With Sandpack, you're always one click away from opening your code snippet in CodeSandbox. This way, you can easily share bug reports or examples behind a unique URL.",
         "iconKey": "export"
       }
     ]
@@ -101,7 +101,7 @@
     "examples": [
       {
         "title": "Providers & Custom Hooks",
-        "description": "<a href='https://sandpack.codesandbox.io/docs/advanced-usage/provider#sandpack-provider' rel='noreferrer' target='_blank'><code>SandpackProvider</code></a> is available to manage the state and actions and <a href='https://sandpack.codesandbox.io/docs/advanced-usage/provider#theme-provider' rel='noreferrer' target='_blank'><code>ThemeProvider</code></a> is for handling the theme and style. A set of hooks gives you access to the state and offers an API for integrating custom components into Sandpack.",
+        "description": "<a href='https://sandpack.codesandbox.io/docs/advanced-usage/provider#sandpack-provider' rel='noreferrer' target='_blank'><code>SandpackProvider</code></a> is available to manage the state and actions and <a href='https://sandpack.codesandbox.io/docs/advanced-usage/provider#theme-provider' rel='noreferrer' target='_blank'><code>ThemeProvider</code></a> handles the theme and style. A set of hooks gives you access to the state and offers an API for integrating custom components into Sandpack.",
         "illustrationKey": "providers"
       },
       {
@@ -111,7 +111,7 @@
       },
       {
         "title": "Sandpack Client",
-        "description": "The bundler is wrapped by a small package called <a href='https://sandpack.codesandbox.io/docs/advanced-usage/client' rel='noreferrer' target='_blank'><code>sandpack-client</code></a>, which is framework agnostic and allows you to tap into the bundler protocol.",
+        "description": "The bundler is wrapped by a small package called <a href='https://sandpack.codesandbox.io/docs/advanced-usage/client' rel='noreferrer' target='_blank'><code>sandpack-client</code></a>, which is framework agnostic and allowing you to tap into the bundler protocol.",
         "illustrationKey": "client"
       }
     ]
@@ -123,13 +123,13 @@
         "title": "React docs",
         "imageSource": "/assets/showcase/react-docs.jpg",
         "url": "https://beta.reactjs.org/learn",
-        "description": "Would you like to try out a solution right on the same page with the guides or examples? With Sandpack you can embed a playground right into your documentation."
+        "description": "Want to try out a solution right on the same page alongside the guides or examples? With Sandpack you can embed a playground right into your documentation."
       },
       {
         "title": "Sound Demo",
         "imageSource": "/assets/showcase/sound-demo.jpg",
         "url": "https://code-sound.vercel.app",
-        "description": "How about using sound in software to create an atmosphere around your actions? For example, code an epic task in a fantasy adventure or meditate in a buddhist mountain while fixing a bug."
+        "description": "How about using sound to build an atmospheric editor experience? For instance, try coding an epic feature to the backing score of a fantasy adventure or fix bugs in a meditative zen with atmospheric music."
       },
       {
         "title": "Multiple Previews",
@@ -141,7 +141,7 @@
         "title": "Interactive blog post by Varun Vachhar",
         "imageSource": "/assets/showcase/interactive.jpg",
         "url": "https://varun.ca/modular-webgl/#data--state",
-        "description": "Sandpack is perfectly suitable for blog posts as you can provide examples for your readers to iterate on, but keep and maintain your code in a repo easily."
+        "description": "Sandpack is also well suited for blog posts. Provide inline code examples for readers while keeping your blog's code easy to maintain."
       }
     ]
   },

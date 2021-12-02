@@ -386,8 +386,8 @@ export const HeroDesktop: React.FC = () => {
                 opacity: "$opacity",
               }}
             >
-              A component toolkit for creating your
-              <br /> own live running code editing experience,
+              A component toolkit for creating
+              <br /> live-running code editing experiences,
               <br />
               using the power of CodeSandbox.
             </Text>

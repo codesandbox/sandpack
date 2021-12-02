@@ -96,7 +96,7 @@ export const CustomExample: React.FC = () => {
       <Row ref={ref}>
         <Content>
           <CardTitle>
-            Easily customise <br />
+            Easily configure <br />
             the project to run
           </CardTitle>
           <CardDescription>

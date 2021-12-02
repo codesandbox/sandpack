@@ -72,11 +72,12 @@ export const HeroMobile: React.FC = () => {
               lineHeight: "19px",
               letterSpacing: "-0.0125em",
               textAlign: "center",
-              width: "280px",
+              maxWidth: "320px",
             }}
           >
-            A component toolkit for creating your own live running code editing
-            experience, using the power of CodeSandbox.
+            A component toolkit for creating
+            <br /> live-running code editing experiences,
+            <br /> using the power of CodeSandbox.
           </Text>
         </Box>
       </Box>

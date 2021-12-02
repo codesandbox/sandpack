@@ -74,12 +74,11 @@ export const ThemeExample: React.FC = () => {
       <Row ref={ref}>
         <Content>
           <CardTitle>
-            Set a theme, or
+            Apply a theme, or
             <br /> create your own
           </CardTitle>
           <CardDescription>
-            You can style Sandpack however you&apos;d like! Use one of our
-            predefined{" "}
+            Style Sandpack however you&apos;d like! Use a premade{" "}
             <a
               href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#theming"
               rel="noreferrer"
