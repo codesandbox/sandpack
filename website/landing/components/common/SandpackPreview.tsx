@@ -22,6 +22,7 @@ export const SandpackContainer = styled("div", {
     "@bp1": {
       width: "384px",
       height: "608px",
+      margin: "0 auto",
     },
 
     "@bp2": {

@@ -54,8 +54,8 @@ export const LayoutExample: React.FC = () => {
         <Content>
           <CardTitle>Build your own Sandpack UI</CardTitle>
           <CardDescription>
-            If you want to fully customise the experience, you can build the UI
-            yourself. The library exports a set of{" "}
+            To fully customize the experience, you can build the UI yourself.
+            The library exports a set of{" "}
             <a
               className="external-link"
               href="https://sandpack.codesandbox.io/docs/advanced-usage/components#layout"

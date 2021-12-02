@@ -1,5 +1,6 @@
 .svg {
-  width: 160%;
+  width: 120%;
+  height: 400px;
 
   position: relative;
   left: 50%;
@@ -10,6 +11,13 @@
   --delay2: 0.3s;
   --delay3: 0.4s;
   --ease-elastic: cubic-bezier(0.8, -2, 0.2, 2);
+}
+
+@media (min-width: 1040px) {
+  .svg {
+    width: 160%;
+    height: auto;
+  }
 }
 
 @keyframes editor {
