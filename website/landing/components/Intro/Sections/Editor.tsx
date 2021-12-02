@@ -109,7 +109,7 @@ export const EditorExample: React.FC = () => {
             >
               <code>options</code>
             </a>{" "}
-            prop. Quickly toggle the appearance of built-in components..
+            prop. Quickly toggle the appearance of built-in components.
           </CardDescription>
 
           <CodeWrapper
