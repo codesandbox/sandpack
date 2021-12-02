@@ -220,6 +220,7 @@ export const HeroDesktop: React.FC = () => {
 
             ".sp-tabs-scrollable-container": {
               alignItems: "center",
+              height: "auto",
               paddingTop: "16px",
               paddingBottom: "2px",
             },
