@@ -1,7 +1,7 @@
 {
   "global": {
-    "title": "Component toolkit for live-running code editing experiences | Sandpack",
-    "description": "Sandpack is a component toolkit for creating live-running code editing experiences powered by CodeSandbox."
+    "title": "Component toolkit for creating live-running code editing experiences | Sandpack",
+    "description": "Sandpack is a component toolkit for creating your own live-running code editing experiences powered by CodeSandbox."
   },
   "meta": [
     {
@@ -14,11 +14,11 @@
     },
     {
       "name": "og:title",
-      "value": "Component toolkit for live-running code editing experiences | Sandpack"
+      "value": "Component toolkit for creating live-running code editing experiences | Sandpack"
     },
     {
       "name": "og:description",
-      "value": "Sandpack is a component toolkit for creating live-running code editing experience powered by CodeSandbox."
+      "value": "Sandpack is a component toolkit for creating live-running code editing experiences powered by CodeSandbox."
     },
     {
       "name": "og:image",
