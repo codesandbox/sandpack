@@ -11,7 +11,7 @@ export default function Footer({ ...props }) {
         .
       </p>
       <div className={styles.logoContainer}>
-        Powered by <img className={styles.logo} src="/codesandbox-logo.svg" />
+        Powered by <img className={styles.logo} src="theme/codesandbox-logo.svg" />
       </div>
     </footer>
   );
