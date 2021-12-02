@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.8](https://github.com/codesandbox/sandpack/compare/v0.9.7...v0.9.8) (2021-12-02)
+
+
+### Bug Fixes
+
+* amplitude ([#213](https://github.com/codesandbox/sandpack/issues/213)) ([2ce34d4](https://github.com/codesandbox/sandpack/commit/2ce34d40906c016a48b0d38232795d290377736a))
+* cropped tabs ([#215](https://github.com/codesandbox/sandpack/issues/215)) ([4939202](https://github.com/codesandbox/sandpack/commit/49392028f71abb7dab4eee7bd67125a02f045fe6))
+
+
+
+
+
 ## [0.9.7](https://github.com/codesandbox/sandpack/compare/v0.9.6...v0.9.7) (2021-12-01)
 
 
