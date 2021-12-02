@@ -7,7 +7,7 @@ export default function MenuHeader() {
         <li className={styles.menuItem}>
           <a
             className={styles.menuLink}
-            href="https://sandpack.codesandbox.io/"
+            href="https://sandpack.codesandbox.io/docs"
             rel="noreferrer"
             target="_blank"
           >
@@ -17,7 +17,7 @@ export default function MenuHeader() {
         <li className={styles.menuItem}>
           <a
             className={styles.menuLink}
-            href="https://sandpack.codesandbox.io/docs"
+            href="https://github.com/codesandbox/sandpack"
             rel="noreferrer"
             target="_blank"
           >
