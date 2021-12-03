@@ -201,6 +201,15 @@
           "height": 50,
           "width": 250
         }
+      },
+      {
+        "name": "Storybook",
+        "socialUrl": "https://storybook.js.org/",
+        "logo": {
+          "url": "/assets/logos/Storybook.svg",
+          "height": 40,
+          "width": 200
+        }
       }
     ]
   }
