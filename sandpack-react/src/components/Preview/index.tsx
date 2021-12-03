@@ -39,15 +39,21 @@ export { RefreshButton };
 /**
  * @category Components
  */
-export const SandpackPreview: React.FC<PreviewProps> = ({
-  customStyle,
-  showNavigator = false,
-  showRefreshButton = true,
-  showOpenInCodeSandbox = true,
-  showSandpackErrorOverlay = true,
-  viewportSize = "auto",
-  viewportOrientation = "portrait",
-}) => {
+export const SandpackPreview = React.forwardRef<
+  HTMLIFrameElement,
+  PreviewProps
+>(function SandpackPreview(
+  {
+    customStyle,
+    showNavigator = false,
+    showRefreshButton = true,
+    showOpenInCodeSandbox = true,
+    showSandpackErrorOverlay = true,
+    viewportSize = "auto",
+    viewportOrientation = "portrait",
+  },
+  externalRef
+) {
   const { sandpack, listen } = useSandpack();
   const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
     number | null
@@ -110,7 +116,7 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
 
       <div className={c("preview-container")}>
         <iframe
-          ref={iframeRef}
+          ref={mergeRefs(iframeRef, externalRef)}
           className={c("preview-iframe")}
           style={{
             // set height based on the content only in auto mode
@@ -137,7 +143,7 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
       </div>
     </SandpackStack>
   );
-};
+});
 
 const VIEWPORT_SIZE_PRESET_MAP: Record<
   ViewportSizePreset,
@@ -167,3 +173,17 @@ const computeViewportSize = (
 
   return viewport;
 };
+
+function mergeRefs<T extends HTMLElement>(
+  ...refs: Array<React.ForwardedRef<T> | React.MutableRefObject<T>>
+) {
+  return (node: T) => {
+    refs.forEach((ref) => {
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref && typeof ref === "object") {
+        (ref as React.MutableRefObject<T>).current = node;
+      }
+    });
+  };
+}
