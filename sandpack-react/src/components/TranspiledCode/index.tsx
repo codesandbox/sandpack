@@ -11,7 +11,7 @@ import { SandpackCodeViewer } from "../CodeViewer";
 /**
  * @category Components
  */
-export const SandpackTranspiledCode: React.FC<CodeViewerProps> = (props) => {
+export const SandpackTranspiledCode = (props: CodeViewerProps): JSX.Element => {
   const { sandpack } = useSandpack();
   const transpiledCode = useTranspiledCode();
   const c = useClasser("sp");
