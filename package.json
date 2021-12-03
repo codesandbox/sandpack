@@ -2,11 +2,20 @@
   "name": "sandpack",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["sandpack-client", "sandpack-react", "website/*", "plugins/*"],
-  "nohoist": ["website/docs/**", "**/html-minifier-terser"],
+  "workspaces": [
+    "sandpack-client",
+    "sandpack-react",
+    "website/*",
+    "plugins/*"
+  ],
+  "nohoist": [
+    "website/docs/**",
+    "**/html-minifier-terser"
+  ],
   "description": "",
   "scripts": {
     "lint": "eslint '**/*.ts?(x)' --fix",
+    "format:check": "prettier --check '**/*.{ts,tsx}'",
     "format": "prettier --write '**/*.{ts,tsx}'",
     "build": "yarn workspace @codesandbox/sandpack-client run build && yarn workspace @codesandbox/sandpack-react run build",
     "prepare": "husky install",
