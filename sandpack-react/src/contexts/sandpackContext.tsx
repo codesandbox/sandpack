@@ -76,7 +76,7 @@ export interface SandpackProviderProps {
 
 /**
  * Main context provider that should wraps your entire component.
- * Use * [`useSandpack`](/api/react/hooks/#usesandpack) hook, which gives you the entire context object to play with.
+ * Use * [`useSandpack`](/api/react/#usesandpack) hook, which gives you the entire context object to play with.
  *
  * @category Provider
  * @noInheritDoc
