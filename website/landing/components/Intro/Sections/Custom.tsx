@@ -89,6 +89,7 @@ export const CustomExample: React.FC = () => {
     } else {
       setOptions({ customSetup: {} });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code, inView]);
 
   return (

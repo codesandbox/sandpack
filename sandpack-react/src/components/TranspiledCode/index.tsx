@@ -18,11 +18,15 @@ export const SandpackTranspiledCode: React.FC<CodeViewerProps> = (props) => {
 
   const hiddenIframeRef = React.useRef<HTMLIFrameElement | null>(null);
   React.useEffect(() => {
-    const hiddenIframe = hiddenIframeRef.current!;
-    sandpack.registerBundler(hiddenIframe, "hidden");
+    const hiddenIframe = hiddenIframeRef.current;
+
+    if (hiddenIframe) {
+      sandpack.registerBundler(hiddenIframe, "hidden");
+    }
     return () => {
       sandpack.unregisterBundler("hidden");
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -34,7 +38,11 @@ export const SandpackTranspiledCode: React.FC<CodeViewerProps> = (props) => {
           {...props}
         />
       )}
-      <iframe ref={hiddenIframeRef} style={{ display: "none" }} />
+      <iframe
+        ref={hiddenIframeRef}
+        style={{ display: "none" }}
+        title="transpiled sandpack code"
+      />
       <ErrorOverlay />
       <LoadingOverlay clientId="hidden" />
     </div>

@@ -249,6 +249,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       };
 
       // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [initEditor, showLineNumbers, wrapContent, themeId, decorators]);
 
     React.useEffect(() => {
@@ -261,6 +262,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       ) {
         cmView.current.contentDOM.focus();
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Update editor when code passed as prop from outside sandpack changes
@@ -271,6 +273,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           changes: { from: 0, to: view.state.doc.length, insert: code },
         });
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [code]);
 
     React.useEffect(

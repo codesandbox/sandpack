@@ -38,6 +38,7 @@ export const useCodeSandboxLink = (): string => {
   // Register the usage of the codesandbox link
   React.useEffect(() => {
     sandpack.openInCSBRegisteredRef.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${params}&query=file=${sandpack.activePath}%26from-sandpack=true`;

@@ -47,6 +47,7 @@ export const ThemeExample: React.FC = () => {
 
   useEffect(() => {
     setOptions({ theme });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme]);
 
   useEffect(() => {
@@ -61,7 +62,7 @@ export const ThemeExample: React.FC = () => {
     } else {
       setTheme("sandpack-dark");
     }
-  }, [inView]);
+  }, [higherMobile, inView]);
 
   const shuffleTheme = () => {
     const currentIndex = themeOptions.indexOf(theme);

@@ -45,6 +45,7 @@ export const TemplateExample: React.FC = () => {
 
   useEffect(() => {
     setOptions({ template });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [template]);
 
   useEffect(() => {

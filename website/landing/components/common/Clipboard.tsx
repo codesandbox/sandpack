@@ -1,42 +1,41 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { styled } from "../../stitches.config";
 import content from "../../website.config.json";
 
 import { Box, Button, Text } from ".";
 
 const command = content.commands.install;
 
-const ClipboardToast = styled("div", {
-  alignItems: "center",
-  background: "$primary",
-  borderRadius: "72px",
-  bottom: "32px",
-  display: "flex",
-  color: "$lightTextPrimary",
-  gap: "10px",
-  left: "50%",
-  padding: "15px 20px",
-  pointerEvents: "none",
-  position: "fixed",
-  transform: "translateX(-50%) translateY(calc(100% + 240px)) ",
-  transition: "transform .5s cubic-bezier(0.190, 1.000, 0.220, 1.000)",
-  zIndex: "1",
+// const ClipboardToast = styled("div", {
+//   alignItems: "center",
+//   background: "$primary",
+//   borderRadius: "72px",
+//   bottom: "32px",
+//   display: "flex",
+//   color: "$lightTextPrimary",
+//   gap: "10px",
+//   left: "50%",
+//   padding: "15px 20px",
+//   pointerEvents: "none",
+//   position: "fixed",
+//   transform: "translateX(-50%) translateY(calc(100% + 240px)) ",
+//   transition: "transform .5s cubic-bezier(0.190, 1.000, 0.220, 1.000)",
+//   zIndex: "1",
 
-  span: {
-    fontSize: "1.6rem",
-    letterSpacing: "-0.025em",
-    margin: 0,
-  },
+//   span: {
+//     fontSize: "1.6rem",
+//     letterSpacing: "-0.025em",
+//     margin: 0,
+//   },
 
-  variants: {
-    visible: {
-      true: {
-        transform: "translateX(-50%) translateY(0) ",
-      },
-    },
-  },
-});
+//   variants: {
+//     visible: {
+//       true: {
+//         transform: "translateX(-50%) translateY(0) ",
+//       },
+//     },
+//   },
+// });
 
 export const Clipboard: React.FC = () => {
   const [toastVisible, setToastVisible] = useState(false);

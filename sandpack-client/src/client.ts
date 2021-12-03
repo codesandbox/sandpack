@@ -167,9 +167,11 @@ export class SandpackClient {
             "file-resolver",
             async (data: { m: "isFile" | "readFile"; p: string }) => {
               if (data.m === "isFile") {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 return this.options.fileResolver!.isFile(data.p);
               }
 
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               return this.options.fileResolver!.readFile(data.p);
             },
             this.iframe.contentWindow

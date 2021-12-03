@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { useSandpack } from "../hooks/useSandpack";
 import type { ViewportSize } from "../";
 import {
   Sandpack,
@@ -19,6 +18,7 @@ import {
   useSandpackNavigation,
   SandpackStack,
 } from "../";
+import { useSandpack } from "../hooks/useSandpack";
 
 export default {
   title: "presets/Sandpack: custom",
@@ -180,6 +180,7 @@ const CustomPreview = () => {
 
   useEffect(() => {
     sandpack.registerBundler(iframeRef.current, "custom");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

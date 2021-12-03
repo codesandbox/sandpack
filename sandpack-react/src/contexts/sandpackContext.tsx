@@ -248,8 +248,8 @@ class SandpackProvider extends React.PureComponent<
       threshold: 0.2,
     };
 
-    if (this.intersectionObserver) {
-      this.intersectionObserver?.unobserve(this.lazyAnchorRef.current!);
+    if (this.intersectionObserver && this.lazyAnchorRef.current) {
+      this.intersectionObserver?.unobserve(this.lazyAnchorRef.current);
     }
 
     if (this.lazyAnchorRef.current && this.state.initMode === "lazy") {
@@ -261,7 +261,9 @@ class SandpackProvider extends React.PureComponent<
             this.runSandpack();
           }, 50);
 
-          this.intersectionObserver?.unobserve(this.lazyAnchorRef.current!);
+          if (this.lazyAnchorRef.current) {
+            this.intersectionObserver?.unobserve(this.lazyAnchorRef.current);
+          }
         }
       }, observerOptions);
 

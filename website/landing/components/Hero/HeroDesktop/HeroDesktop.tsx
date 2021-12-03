@@ -149,6 +149,7 @@ export const HeroDesktop: React.FC = () => {
     return () => {
       element?.removeEventListener("focus", finishAnimation);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editorRef.current]);
 
   // revert all changes on scroll up
@@ -156,6 +157,7 @@ export const HeroDesktop: React.FC = () => {
     if (!animationComplete) {
       sandpack.resetAllFiles();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animationComplete]);
 
   return (

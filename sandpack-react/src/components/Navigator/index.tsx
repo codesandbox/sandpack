@@ -45,6 +45,7 @@ export const Navigator: React.FC<NavigatorProps> = ({
     }, clientId);
 
     return () => unsub();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
