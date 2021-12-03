@@ -184,4 +184,7 @@ export type SandpackMessage = BaseSandpackMessage &
     | {
         type: "get-transpiler-context";
       }
+    | {
+        type: "activate-react-devtools";
+      }
   );

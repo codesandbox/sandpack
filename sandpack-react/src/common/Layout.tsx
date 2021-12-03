@@ -7,6 +7,7 @@ import type { SandpackThemeProp } from "../types";
 
 export interface SandpackLayoutProps {
   theme?: SandpackThemeProp;
+  style?: React.CSSProperties;
 }
 
 /**
@@ -15,13 +16,14 @@ export interface SandpackLayoutProps {
 export const SandpackLayout: React.FC<SandpackLayoutProps> = ({
   children,
   theme,
+  style,
 }) => {
   const { sandpack } = useSandpack();
   const c = useClasser("sp");
 
   return (
     <SandpackThemeProvider theme={theme}>
-      <div ref={sandpack.lazyAnchorRef} className={c("layout")}>
+      <div ref={sandpack.lazyAnchorRef} className={c("layout")} style={style}>
         {children}
       </div>
     </SandpackThemeProvider>

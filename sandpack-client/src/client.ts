@@ -87,7 +87,7 @@ export interface SandboxInfo {
   disableDependencyPreprocessing?: boolean;
 }
 
-const BUNDLER_URL = "http://localhost:3000/";
+const BUNDLER_URL = "https://new.csb.app/";
 
 export class SandpackClient {
   selector: string | undefined;
