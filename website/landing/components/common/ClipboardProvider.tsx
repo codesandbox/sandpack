@@ -1,4 +1,3 @@
-import { styled } from "../../stitches.config";
 import {
   useCallback,
   useEffect,
@@ -6,6 +5,8 @@ import {
   createContext,
   useContext,
 } from "react";
+
+import { styled } from "../../stitches.config";
 import content from "../../website.config.json";
 
 import { Box } from ".";
@@ -97,6 +98,7 @@ const ClipboardProvider: React.FC = ({ children }) => {
   );
 };
 
-export const useCliboard = () => useContext(ClipboardContext);
+export const useClipboard = (): { copyToClipboard: () => void } =>
+  useContext(ClipboardContext);
 
 export { ClipboardProvider };
