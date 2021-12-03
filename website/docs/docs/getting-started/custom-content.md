@@ -26,7 +26,7 @@ Each template contains all the `files` and `dependencies` needed to start a proj
     // template="vanilla" // default`}
 />
 
-The template prop accepts a string, and has a variety of presets. The complete list of included templates might change over time, so check the [API reference](/api/react/components/#sandpackpredefinedtemplate) for the supported templates. If the template prop is not passed or has an invalid value, it defaults to `vanilla`.
+The template prop accepts a string, and has a variety of presets. The complete list of included templates might change over time, so check the [API reference](/api/react/#sandpackpredefinedtemplate) for the supported templates. If the template prop is not passed or has an invalid value, it defaults to `vanilla`.
 
 ## Custom File Contents
 
