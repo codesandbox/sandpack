@@ -9,7 +9,8 @@
     "version": {
       "createRelease": "github",
       "conventionalCommits": true,
-      "message": "chore: [skip ci] bump packages"
+      "message": "chore: [skip ci] bump packages",
+      "ignoreChanges": ["**/*.md", "**/*.stories.mdx", "**/*.stories.@(js|jsx|ts|tsx)"]
     },
     "publish": {
       "conventionalCommits": true,
