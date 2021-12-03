@@ -14,7 +14,7 @@ export const RunButton: React.FC = () => {
   return (
     <button
       className={c("button")}
-      onClick={() => sandpack.runSandpack()}
+      onClick={(): void => sandpack.runSandpack()}
       style={{
         position: "absolute",
         bottom: "var(--sp-space-2)",

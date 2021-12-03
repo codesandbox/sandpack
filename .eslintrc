@@ -12,6 +12,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
+    "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-empty-function": "error",
     // Enforce return types on exported functions or public methods

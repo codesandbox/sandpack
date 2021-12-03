@@ -16,7 +16,7 @@ export const FileTabs: React.FC<{ closableTabs?: boolean }> = ({
 
   const { activePath, openPaths, setActiveFile } = sandpack;
 
-  const handleCloseFile = (ev: React.MouseEvent<HTMLDivElement>) => {
+  const handleCloseFile = (ev: React.MouseEvent<HTMLDivElement>): void => {
     ev.stopPropagation();
     const tabElm = (ev.target as HTMLElement).closest(
       "[data-active]"
@@ -41,7 +41,7 @@ export const FileTabs: React.FC<{ closableTabs?: boolean }> = ({
             aria-selected={filePath === activePath}
             className={c("tab-button")}
             data-active={filePath === activePath}
-            onClick={() => setActiveFile(filePath)}
+            onClick={(): void => setActiveFile(filePath)}
             role="tab"
             title={filePath}
             type="button"

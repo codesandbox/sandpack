@@ -71,29 +71,29 @@ export const UsingVisualElements: React.FC = () => (
   </SandpackProvider>
 );
 
-const CustomOpenInCSB = () => {
+const CustomOpenInCSB: React.FC = () => {
   const url = useCodeSandboxLink();
 
   return <a href={url}>Open in CodeSandbox</a>;
 };
 
-const CustomRefreshButton = () => {
+const CustomRefreshButton: React.FC = () => {
   const { refresh } = useSandpackNavigation();
 
   return (
-    <button onClick={() => refresh()} type="button">
+    <button onClick={(): void => refresh()} type="button">
       Refresh Sandpack
     </button>
   );
 };
 
-const CustomCodeEditor = () => {
+const CustomCodeEditor: React.FC = () => {
   const { code, updateCode } = useActiveCode();
   const { theme } = useSandpackTheme();
 
   return (
     <textarea
-      onChange={(evt) => updateCode(evt.target.value)}
+      onChange={(evt): void => updateCode(evt.target.value)}
       style={{
         width: 400,
         height: 200,
@@ -103,7 +103,7 @@ const CustomCodeEditor = () => {
         background: theme.palette.defaultBackground,
         border: `1px solid ${theme.palette.inactiveText}`,
         color: theme.palette.activeText,
-        lineHeight: theme.typography.lineheight,
+        lineHeight: theme.typography.lineHeight,
       }}
     >
       {code}
@@ -174,7 +174,7 @@ export default function KittenGallery() {
   )
 }`;
 
-const CustomPreview = () => {
+const CustomPreview: React.FC = () => {
   const { sandpack } = useSandpack();
   const iframeRef = useRef<HTMLIFrameElement>();
 
@@ -218,7 +218,7 @@ export const JustIframe = (): React.ReactElement => {
         }}
       >
         <CustomRefreshButton />
-        <button onClick={() => setFirst(!first)} type="button">
+        <button onClick={(): void => setFirst(!first)} type="button">
           Switch
         </button>
         <CustomOpenInCSB />
@@ -242,13 +242,13 @@ export const MultiplePreviews: React.FC = () => {
           ))}
         </SandpackLayout>
       </SandpackProvider>
-      <button onClick={() => setCount(count + 1)}>Add</button>
-      <button onClick={() => setCount(count - 1)}>Remove</button>
+      <button onClick={(): void => setCount(count + 1)}>Add</button>
+      <button onClick={(): void => setCount(count - 1)}>Remove</button>
     </>
   );
 };
 
-function SandpackListener() {
+const SandpackListener: React.FC = () => {
   const { listen } = useSandpack();
 
   useEffect(() => {
@@ -258,7 +258,7 @@ function SandpackListener() {
   }, [listen]);
 
   return null;
-}
+};
 
 export const MultiplePreviewsAndListeners: React.FC = () => {
   const [count, setCount] = useState(2);
@@ -279,14 +279,14 @@ export const MultiplePreviewsAndListeners: React.FC = () => {
           ))}
         </SandpackLayout>
       </SandpackProvider>
-      <button onClick={() => setCount(count + 1)}>Add</button>
-      <button onClick={() => setCount(count - 1)}>Remove</button>
+      <button onClick={(): void => setCount(count + 1)}>Add</button>
+      <button onClick={(): void => setCount(count - 1)}>Remove</button>
 
       <p>Amount of listeners: {listenersCount}</p>
-      <button onClick={() => setListenersCount(listenersCount + 1)}>
+      <button onClick={(): void => setListenersCount(listenersCount + 1)}>
         Add listener
       </button>
-      <button onClick={() => setListenersCount(listenersCount - 1)}>
+      <button onClick={(): void => setListenersCount(listenersCount - 1)}>
         Remove listener
       </button>
     </>
@@ -324,8 +324,8 @@ export const MultiplePreviewsRandomViewports: React.FC = () => {
 
   return (
     <>
-      <button onClick={() => setCount(count + 1)}>Add</button>
-      <button onClick={() => setCount(count > 0 ? count - 1 : 0)}>
+      <button onClick={(): void => setCount(count + 1)}>Add</button>
+      <button onClick={(): void => setCount(count > 0 ? count - 1 : 0)}>
         Remove
       </button>
       <SandpackProvider>
@@ -353,7 +353,7 @@ export const ClosableTabs: React.FC = () => (
   <Sandpack options={{ closableTabs: true }} template="react" />
 );
 
-const ResetButtonComp = () => {
+const ResetButtonComp: React.FC = () => {
   const { sandpack } = useSandpack();
 
   return (
@@ -372,13 +372,13 @@ const ResetButtonComp = () => {
   );
 };
 
-const ResetCurrentFileButton = () => {
+const ResetCurrentFileButton: React.FC = () => {
   const { sandpack } = useSandpack();
 
   return (
     <button
       className="sp-tab-button"
-      onClick={() => sandpack.resetFile(sandpack.activePath)}
+      onClick={(): void => sandpack.resetFile(sandpack.activePath)}
       style={{
         background: "none",
         border: 0,

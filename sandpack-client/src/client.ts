@@ -348,7 +348,7 @@ export class SandpackClient {
       this.dispatch({ type: "get-transpiler-context" });
     });
 
-  private getFiles() {
+  private getFiles(): SandpackBundlerFiles {
     const { sandboxInfo } = this;
 
     if (sandboxInfo.files["/package.json"] === undefined) {
@@ -363,7 +363,7 @@ export class SandpackClient {
     return this.sandboxInfo.files;
   }
 
-  private initializeElement() {
+  private initializeElement(): void {
     this.iframe.style.border = "0";
     this.iframe.style.width = this.options.width || "100%";
     this.iframe.style.height = this.options.height || "100%";

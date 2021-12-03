@@ -40,7 +40,7 @@ export const useLoadingOverlayState = (
       }
     }, clientId);
 
-    return () => {
+    return (): void => {
       clearTimeout(outerHook);
       clearTimeout(innerHook);
       unsub();

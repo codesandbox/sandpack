@@ -577,7 +577,7 @@ class SandpackProvider extends React.PureComponent<
 
         this.queuedListeners[clientId][listenerId] = listener;
 
-        const unsubscribeListener = () => {
+        const unsubscribeListener = (): void => {
           if (this.queuedListeners[clientId][listenerId]) {
             // unsubscribe was called before the client was instantiated
             // common example - a component with autorun=false that unmounted
@@ -603,7 +603,7 @@ class SandpackProvider extends React.PureComponent<
         client.listen(listener)
       );
 
-      const unsubscribeListener = () => {
+      const unsubscribeListener = (): void => {
         const unsubscribeQueuedClients = Object.values(
           this.unsubscribeQueuedListeners
         );

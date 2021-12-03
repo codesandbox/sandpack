@@ -83,14 +83,14 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
       }
     }, clientIdValue);
 
-    return () => {
+    return (): void => {
       unsubscribe();
       unregisterBundler(clientIdValue);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleNewURL = (newUrl: string) => {
+  const handleNewURL = (newUrl: string): void => {
     if (!iframeRef.current) {
       return;
     }

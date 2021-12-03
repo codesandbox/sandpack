@@ -48,7 +48,8 @@ export const LayoutExample: React.FC = () => {
 
   useEffect(() => {
     setVisibility(inView);
-  }, [inView, setVisibility]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
 
   return (
     <FadeAnimation>

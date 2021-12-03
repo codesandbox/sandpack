@@ -23,7 +23,7 @@ export const SandpackTranspiledCode: React.FC<CodeViewerProps> = (props) => {
     if (hiddenIframe) {
       sandpack.registerBundler(hiddenIframe, "hidden");
     }
-    return () => {
+    return (): void => {
       sandpack.unregisterBundler("hidden");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

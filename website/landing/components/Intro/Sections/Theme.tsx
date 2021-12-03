@@ -64,7 +64,7 @@ export const ThemeExample: React.FC = () => {
     }
   }, [higherMobile, inView]);
 
-  const shuffleTheme = () => {
+  const shuffleTheme = (): void => {
     const currentIndex = themeOptions.indexOf(theme);
 
     setTheme(themeOptions[(currentIndex + 1) % themeOptions.length]);
@@ -93,9 +93,9 @@ export const ThemeExample: React.FC = () => {
           <SnippetButton
             ref={boxRef}
             onClick={shuffleTheme}
-            onMouseEnter={() => setToolTipVisibility(true)}
-            onMouseLeave={() => setToolTipVisibility(false)}
-            onMouseMove={(event) =>
+            onMouseEnter={(): void => setToolTipVisibility(true)}
+            onMouseLeave={(): void => setToolTipVisibility(false)}
+            onMouseMove={(event): void =>
               setMousePosition(getRelativeCoordinates(event, boxRef.current))
             }
           >

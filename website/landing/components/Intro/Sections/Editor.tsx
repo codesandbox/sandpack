@@ -131,7 +131,7 @@ export const EditorExample: React.FC = () => {
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
               <RefreshButton
-                onClick={() => {
+                onClick={(): void => {
                   sandpack.updateCurrentFile(ORIGINAL_CODE);
                   setOptions(ORIGINAL_CUSTOM);
                 }}

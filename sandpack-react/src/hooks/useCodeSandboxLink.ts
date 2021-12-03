@@ -9,7 +9,7 @@ import { useSandpack } from "./useSandpack";
 const getFileParameters = (
   files: SandpackBundlerFiles,
   environment?: SandboxEnvironment
-) => {
+): string => {
   const normalized: Record<string, { content: string; isBinary: boolean }> =
     Object.keys(files).reduce(
       (prev, next) => ({

@@ -128,7 +128,7 @@ export const CustomExample: React.FC = () => {
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
               <RefreshButton
-                onClick={() => {
+                onClick={(): void => {
                   sandpack.updateCurrentFile(ORIGINAL_CODE);
                 }}
               >
@@ -162,7 +162,7 @@ export const CustomExample: React.FC = () => {
   );
 };
 
-const parseFromSandpackToJson = (code: string) => {
+const parseFromSandpackToJson = (code: string): any => {
   try {
     const customSetup = code.match(/customSetup={{([\s\S]*?)}}/)?.[1];
     if (!customSetup) return;
