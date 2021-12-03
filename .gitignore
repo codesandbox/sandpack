@@ -109,7 +109,4 @@ dist
 
 # Autogenerate docs
 website/docs/docs/api/client
-website/docs/docs/api/react/components
-website/docs/docs/api/react/hooks
-website/docs/docs/api/react/provider
-website/docs/docs/api/react/theme
+website/docs/docs/api/react

@@ -4,6 +4,9 @@ import * as React from "react";
 import { useSandpack } from "../hooks/useSandpack";
 import { RunIcon } from "../icons";
 
+/**
+ * @category Components
+ */
 export const RunButton: React.FC = () => {
   const c = useClasser("sp");
   const { sandpack } = useSandpack();

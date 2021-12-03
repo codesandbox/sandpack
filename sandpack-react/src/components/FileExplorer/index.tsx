@@ -5,6 +5,9 @@ import { useSandpack } from "../../hooks/useSandpack";
 import { ModuleList } from "./ModuleList";
 
 // WIP
+/**
+ * @category Components
+ */
 export const FileExplorer: React.FC = () => {
   const { sandpack } = useSandpack();
 

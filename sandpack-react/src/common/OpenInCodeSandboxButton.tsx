@@ -6,6 +6,9 @@ import { useSandpackTheme } from "../hooks/useSandpackTheme";
 import { CSBIcon } from "../icons";
 import { isDarkColor } from "../utils/stringUtils";
 
+/**
+ * @category Components
+ */
 export const OpenInCodeSandboxButton: React.FC = () => {
   const url = useCodeSandboxLink();
   const { theme } = useSandpackTheme();

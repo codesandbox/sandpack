@@ -7,12 +7,15 @@ import type {
   SandpackState,
 } from "../types";
 
-interface UseSandpackReturnType {
+export interface UseSandpackReturnType {
   sandpack: SandpackState;
   dispatch: SandpackClientDispatch;
   listen: SandpackClientListen;
 }
 
+/**
+ * @category Hooks
+ */
 export function useSandpack(): UseSandpackReturnType {
   const sandpack = React.useContext(SandpackReactContext);
 

@@ -8,6 +8,9 @@ import { useTranspiledCode } from "../../hooks/useTranspiledCode";
 import type { CodeViewerProps } from "../CodeViewer";
 import { SandpackCodeViewer } from "../CodeViewer";
 
+/**
+ * @category Components
+ */
 export const SandpackTranspiledCode: React.FC<CodeViewerProps> = (props) => {
   const { sandpack } = useSandpack();
   const transpiledCode = useTranspiledCode();

@@ -1,5 +1,8 @@
 import { useSandpack } from "./useSandpack";
 
+/**
+ * @category Hooks
+ */
 export const useSandpackNavigation = (
   clientId?: string
 ): {

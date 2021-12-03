@@ -7,6 +7,9 @@ import type {
 import { getDarkModePreference } from "../utils/domUtils";
 import { hexToCSSRGBa } from "../utils/stringUtils";
 
+/**
+ * @category Theme
+ */
 export const defaultLight: SandpackTheme = {
   palette: {
     activeText: "#1f2933",
@@ -40,6 +43,9 @@ export const defaultLight: SandpackTheme = {
   },
 };
 
+/**
+ * @category Theme
+ */
 export const defaultDark: SandpackTheme = {
   palette: {
     activeText: "#FFFFFF",
@@ -73,6 +79,9 @@ export const defaultDark: SandpackTheme = {
   },
 };
 
+/**
+ * @category Theme
+ */
 export const sandpackDark: SandpackTheme = {
   palette: {
     activeText: "#90e86f",
@@ -106,6 +115,9 @@ export const sandpackDark: SandpackTheme = {
   },
 };
 
+/**
+ * @category Theme
+ */
 export const aquaBlueTheme: SandpackTheme = {
   palette: {
     activeText: "#1f2933",
@@ -140,6 +152,9 @@ export const aquaBlueTheme: SandpackTheme = {
   },
 };
 
+/**
+ * @category Theme
+ */
 export const githubLightTheme: SandpackTheme = {
   palette: {
     activeText: "#24292e",
@@ -176,6 +191,9 @@ export const githubLightTheme: SandpackTheme = {
   },
 };
 
+/**
+ * @category Theme
+ */
 export const nightOwlTheme: SandpackTheme = {
   palette: {
     activeText: "rgb(197, 228, 253)",
@@ -209,6 +227,9 @@ export const nightOwlTheme: SandpackTheme = {
   },
 };
 
+/**
+ * @category Theme
+ */
 export const monokaiProTheme: SandpackTheme = {
   palette: {
     activeText: "rgb(252, 252, 250)",
@@ -242,6 +263,9 @@ export const monokaiProTheme: SandpackTheme = {
   },
 };
 
+/**
+ * @category Theme
+ */
 export const SANDPACK_THEMES: Record<SandpackPredefinedTheme, SandpackTheme> = {
   light: defaultLight,
   dark: defaultDark,
@@ -252,6 +276,9 @@ export const SANDPACK_THEMES: Record<SandpackPredefinedTheme, SandpackTheme> = {
   "github-light": githubLightTheme,
 };
 
+/**
+ * @category Theme
+ */
 export const createThemeObject = (
   inputTheme?: SandpackThemeProp
 ): { id: string; theme: SandpackTheme } => {
@@ -319,6 +346,9 @@ const simpleHashFunction = (str: string) => {
 
 // inactive fg and active bg are interchangable to limit the number of colors in the theme
 // bg-default-overlay is determined by adjusting the alpha channel on the default bg to 80%
+/**
+ * @category Theme
+ */
 export const getThemeStyleSheet = (
   theme: SandpackTheme,
   themeId: string
@@ -347,6 +377,9 @@ export const getThemeStyleSheet = (
   --sp-line-height: ${theme.typography.lineHeight};
 `;
 
+/**
+ * @category Theme
+ */
 export const getSyntaxStyle = (
   token: string | SandpackSyntaxStyle
 ): SandpackSyntaxStyle => {

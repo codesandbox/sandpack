@@ -58,6 +58,9 @@ export interface SandpackProps {
   };
 }
 
+/**
+ * @category Presets
+ */
 export const Sandpack: React.FC<SandpackProps> = (props) => {
   // Combine files with customSetup to create the user input structure
   const userInputSetup = props.files

@@ -1,6 +1,9 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
+/**
+ * @category Components
+ */
 export const SandpackStack: React.FC<{ customStyle?: React.CSSProperties }> = ({
   children,
   customStyle,

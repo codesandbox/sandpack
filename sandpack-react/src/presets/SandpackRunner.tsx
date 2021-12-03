@@ -24,6 +24,9 @@ export interface SandpackRunnerProps {
   };
 }
 
+/**
+ * @category Components
+ */
 export const SandpackRunner: React.FC<SandpackRunnerProps> = ({
   code,
   template,

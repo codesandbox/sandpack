@@ -3,6 +3,9 @@ import * as React from "react";
 
 import { useErrorMessage } from "../hooks/useErrorMessage";
 
+/**
+ * @category Components
+ */
 export const ErrorOverlay: React.FC = () => {
   const errorMessage = useErrorMessage();
   const c = useClasser("sp");

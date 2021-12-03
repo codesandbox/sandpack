@@ -16,6 +16,9 @@ const SandpackThemeContext = React.createContext<{
   id: "light",
 });
 
+/**
+ * @category Theme
+ */
 const SandpackThemeProvider: React.FC<{
   theme?: SandpackThemeProp;
 }> = (props) => {

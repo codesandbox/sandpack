@@ -25,6 +25,9 @@ import type {
 import { getSandpackStateFromProps } from "../utils/sandpackUtils";
 import { generateRandomId } from "../utils/stringUtils";
 
+/**
+ * @category Provider
+ */
 const Sandpack = React.createContext<SandpackContext | null>(null);
 const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
 
@@ -75,6 +78,7 @@ export interface SandpackProviderProps {
  * Main context provider that should wraps your entire component.
  * Use * [`useSandpack`](/api/react/hooks/#usesandpack) hook, which gives you the entire context object to play with.
  *
+ * @category Provider
  * @noInheritDoc
  */
 class SandpackProvider extends React.PureComponent<
@@ -703,6 +707,9 @@ class SandpackProvider extends React.PureComponent<
   }
 }
 
+/**
+ * @category Provider
+ */
 const SandpackConsumer = Sandpack.Consumer;
 
 export { SandpackProvider, SandpackConsumer, Sandpack as SandpackReactContext };

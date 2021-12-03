@@ -12,6 +12,9 @@ function getTranspiledCode(sandpack: SandpackState) {
   return tModule?.source?.compiledCode ?? null;
 }
 
+/**
+ * @category Hooks
+ */
 export const useTranspiledCode = (): string | null => {
   const { sandpack } = useSandpack();
   if (sandpack.status !== "running") {

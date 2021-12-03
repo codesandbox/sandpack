@@ -36,6 +36,9 @@ export interface PreviewProps {
 
 export { RefreshButton };
 
+/**
+ * @category Components
+ */
 export const SandpackPreview: React.FC<PreviewProps> = ({
   customStyle,
   showNavigator = false,

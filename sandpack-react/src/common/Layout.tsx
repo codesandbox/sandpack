@@ -9,6 +9,9 @@ export interface SandpackLayoutProps {
   theme?: SandpackThemeProp;
 }
 
+/**
+ * @category Theme
+ */
 export const SandpackLayout: React.FC<SandpackLayoutProps> = ({
   children,
   theme,
