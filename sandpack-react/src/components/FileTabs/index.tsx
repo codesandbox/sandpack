@@ -5,11 +5,12 @@ import { useSandpack } from "../../hooks/useSandpack";
 import { CloseIcon } from "../../icons";
 import { getFileName } from "../../utils/stringUtils";
 
-interface FileTabsProps {
-  closableTabs?: boolean;
-}
-
-export const FileTabs: React.FC<FileTabsProps> = ({ closableTabs }) => {
+/**
+ * @category Components
+ */
+export const FileTabs: React.FC<{ closableTabs?: boolean }> = ({
+  closableTabs,
+}) => {
   const { sandpack } = useSandpack();
   const c = useClasser("sp");
 

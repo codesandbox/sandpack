@@ -28,6 +28,9 @@ const getFileParameters = (
   });
 };
 
+/**
+ * @category Hooks
+ */
 export const useCodeSandboxLink = (): string => {
   const { sandpack } = useSandpack();
   const params = getFileParameters(sandpack.files, sandpack.environment);

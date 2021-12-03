@@ -31,6 +31,9 @@ export interface CodeEditorProps {
 
 export { CodeMirror as CodeEditor };
 
+/**
+ * @category Components
+ */
 export const SandpackCodeEditor = React.forwardRef<
   CodeMirrorRef,
   CodeEditorProps

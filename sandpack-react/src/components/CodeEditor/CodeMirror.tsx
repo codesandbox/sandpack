@@ -74,6 +74,9 @@ export interface CodeMirrorRef {
   getCodemirror: () => EditorView | undefined;
 }
 
+/**
+ * @category Components
+ */
 export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
   (
     {

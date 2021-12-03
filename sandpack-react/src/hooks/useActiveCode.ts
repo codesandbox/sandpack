@@ -1,5 +1,8 @@
 import { useSandpack } from "./useSandpack";
 
+/**
+ * @category Hooks
+ */
 export const useActiveCode = (): {
   code: string;
   updateCode: (newCode: string) => void;

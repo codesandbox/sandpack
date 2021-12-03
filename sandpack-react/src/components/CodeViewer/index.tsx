@@ -26,6 +26,9 @@ export interface CodeViewerProps {
   initMode?: SandpackInitMode;
 }
 
+/**
+ * @category Components
+ */
 export const SandpackCodeViewer = forwardRef<CodeEditorRef, CodeViewerProps>(
   (
     {

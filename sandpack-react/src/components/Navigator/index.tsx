@@ -11,6 +11,9 @@ export interface NavigatorProps {
   onURLChange?: (newURL: string) => void;
 }
 
+/**
+ * @category Components
+ */
 export const Navigator: React.FC<NavigatorProps> = ({
   clientId,
   onURLChange,

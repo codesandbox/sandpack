@@ -9,6 +9,9 @@ export interface LoadingOverlayProps {
   clientId?: string;
 }
 
+/**
+ * @category Components
+ */
 export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
   const loadingOverlayState = useLoadingOverlayState(clientId);
   const c = useClasser("sp");
