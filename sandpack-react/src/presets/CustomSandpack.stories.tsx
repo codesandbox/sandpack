@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { useSandpack } from "../hooks/useSandpack";
-import type { ViewportSize } from "../index";
+import type { ViewportSize } from "../";
 import {
+  Sandpack,
   SandpackPreview,
   SandpackProvider,
   SandpackThemeProvider,
@@ -17,15 +18,15 @@ import {
   useActiveCode,
   useSandpackNavigation,
   SandpackStack,
-} from "../index";
+} from "../";
 
 export default {
-  title: "presets/Custom Sandpack",
+  title: "presets/Sandpack: custom",
 };
 
 export const UsingSandpackLayout: React.FC = () => (
-  <SandpackProvider template="react">
-    <SandpackLayout theme="dark">
+  <SandpackProvider>
+    <SandpackLayout>
       <SandpackStack>
         <SandpackTranspiledCode />
       </SandpackStack>
@@ -36,7 +37,7 @@ export const UsingSandpackLayout: React.FC = () => (
 
 export const UsingVisualElements: React.FC = () => (
   <SandpackProvider activePath="/App.js" template="react">
-    <SandpackThemeProvider theme="dark">
+    <SandpackThemeProvider>
       <SandpackCodeEditor
         customStyle={{
           width: 500,
@@ -72,11 +73,13 @@ export const UsingVisualElements: React.FC = () => (
 
 const CustomOpenInCSB = () => {
   const url = useCodeSandboxLink();
+
   return <a href={url}>Open in CodeSandbox</a>;
 };
 
 const CustomRefreshButton = () => {
   const { refresh } = useSandpackNavigation();
+
   return (
     <button onClick={() => refresh()} type="button">
       Refresh Sandpack
@@ -109,7 +112,7 @@ const CustomCodeEditor = () => {
 };
 
 export const UsingHooks: React.FC = () => (
-  <SandpackProvider template="react">
+  <SandpackProvider>
     <SandpackThemeProvider>
       <CustomCodeEditor />
 
@@ -159,6 +162,7 @@ export default function KittenGallery() {
     </section>
   );
 }`;
+
 const code2 = `import React from 'react'
 
 export default function KittenGallery() {
@@ -229,7 +233,7 @@ export const MultiplePreviews: React.FC = () => {
 
   return (
     <>
-      <SandpackProvider template="react">
+      <SandpackProvider>
         <SandpackLayout>
           <SandpackCodeEditor />
           {previews.map((pr) => (
@@ -323,7 +327,7 @@ export const MultiplePreviewsRandomViewports: React.FC = () => {
       <button onClick={() => setCount(count > 0 ? count - 1 : 0)}>
         Remove
       </button>
-      <SandpackProvider template="react">
+      <SandpackProvider>
         <SandpackThemeProvider>
           <div style={{ display: "flex", alignItems: "flex-start" }}>
             <Box height={400} label="code editor" width={400}>
@@ -343,3 +347,79 @@ export const MultiplePreviewsRandomViewports: React.FC = () => {
     </>
   );
 };
+
+export const ClosableTabs: React.FC = () => (
+  <Sandpack options={{ closableTabs: true }} template="react" />
+);
+
+const ResetButtonComp = () => {
+  const { sandpack } = useSandpack();
+
+  return (
+    <button
+      className="sp-tab-button"
+      onClick={sandpack.resetAllFiles}
+      style={{
+        background: "none",
+        border: 0,
+        position: "absolute",
+        right: "1em",
+      }}
+    >
+      Reset all file
+    </button>
+  );
+};
+
+const ResetCurrentFileButton = () => {
+  const { sandpack } = useSandpack();
+
+  return (
+    <button
+      className="sp-tab-button"
+      onClick={() => sandpack.resetFile(sandpack.activePath)}
+      style={{
+        background: "none",
+        border: 0,
+        position: "absolute",
+        right: "1em",
+      }}
+    >
+      Reset current files
+    </button>
+  );
+};
+
+export const ResetButton: React.FC = () => (
+  <>
+    <SandpackProvider template="react">
+      <SandpackLayout>
+        <div
+          className="sp-stack"
+          style={{ position: "relative", width: "100%" }}
+        >
+          <SandpackCodeEditor />
+          <ResetButtonComp />
+        </div>
+        <SandpackStack>
+          <SandpackPreview />
+        </SandpackStack>
+      </SandpackLayout>
+    </SandpackProvider>
+
+    <SandpackProvider template="react">
+      <SandpackLayout>
+        <div
+          className="sp-stack"
+          style={{ position: "relative", width: "100%" }}
+        >
+          <SandpackCodeEditor />
+          <ResetCurrentFileButton />
+        </div>
+        <SandpackStack>
+          <SandpackPreview />
+        </SandpackStack>
+      </SandpackLayout>
+    </SandpackProvider>
+  </>
+);
