@@ -1,21 +1,16 @@
-import type { Story } from "@storybook/react";
 import React from "react";
 
-import { SandpackProvider, SandpackLayout, SandpackStack } from "..";
-import { SandpackCodeEditor } from "../components/CodeEditor";
-import { SandpackPreview } from "../components/Preview";
-import { useSandpack } from "../hooks/useSandpack";
-import { codesandboxDarkTheme } from "../themes";
-
-import type { SandpackProps } from "./Sandpack";
 import { Sandpack } from "./Sandpack";
 
 export default {
-  title: "presets/Sandpack",
+  title: "presets/Sandpack: options",
   component: Sandpack,
 };
 
-const reactCode = `import Button from './button';
+export const Main: React.FC = () => (
+  <Sandpack
+    files={{
+      "/App.js": `import Button from './button';
 import Link from './link';
 
 export default function App() {
@@ -26,25 +21,14 @@ export default function App() {
       <Link />
     </div>
   )
-}
-`;
-
-const buttonCode = `export default function Button() {
+}`,
+      "/button.js": `export default function Button() {
   return <button>Click me</button>
 }
-`;
-
-const linkCode = `export default function Link() {
+`,
+      "/link.js": `export default function Link() {
   return <a href="https://www.example.com" target="_blank">Click Here</a>
-}`;
-
-export const ReactEditor: Story<SandpackProps> = (args) => (
-  <Sandpack
-    {...args}
-    files={{
-      "/App.js": reactCode,
-      "/button.js": buttonCode,
-      "/link.js": linkCode,
+}`,
     }}
     options={{
       showLineNumbers: true,
@@ -54,117 +38,8 @@ export const ReactEditor: Story<SandpackProps> = (args) => (
   />
 );
 
-const reactCodeTsx = `import Button from './button';
-import Link from './link';
-
-export default function App(): JSX.Element {
-  return (
-    <div>
-      <h1>Hello World</h1>
-      <Button />
-      <Link />
-    </div>
-  )
-}
-`;
-
-const buttonCodeTsx = `export default function Button(): JSX.Element {
-  return <button>Click me</button>
-}
-`;
-
-const linkCodeTsx = `export default function Link(): JSX.Element {
-  return <a href="https://www.example.com" target="_blank">Click Here</a>
-}`;
-
-export const ReactTypescriptEditor: Story<SandpackProps> = (args) => (
+export const CustomSetup: React.FC = () => (
   <Sandpack
-    {...args}
-    files={{
-      "/src/App.tsx": reactCodeTsx,
-      "/src/button.tsx": buttonCodeTsx,
-      "/src/link.tsx": linkCodeTsx,
-    }}
-    options={{
-      showLineNumbers: true,
-      showInlineErrors: true,
-    }}
-    template="react-ts"
-  />
-);
-
-export const VueEditor: Story<SandpackProps> = (args) => (
-  <Sandpack {...args} template="vue" theme="aqua-blue" />
-);
-
-export const VanillaEditor: Story<SandpackProps> = (args) => (
-  <Sandpack
-    {...args}
-    options={{
-      openPaths: ["/src/index.js", "/src/styles.css", "/index.html"],
-      showNavigator: true,
-    }}
-    template="vanilla"
-    theme="dark"
-  />
-);
-
-export const VanillaTypescriptEditor: Story<SandpackProps> = (args) => (
-  <Sandpack
-    {...args}
-    options={{
-      openPaths: ["/src/index.ts", "/src/styles.css", "/index.html"],
-      showNavigator: true,
-    }}
-    template="vanilla-ts"
-    theme="dark"
-  />
-);
-
-export const AngularEditor: Story<SandpackProps> = (args) => (
-  <Sandpack
-    {...args}
-    options={{
-      openPaths: [
-        "/src/app/app.component.css",
-        "/src/app/app.component.html",
-        "/src/app/app.component.ts",
-      ],
-    }}
-    template="angular"
-    theme="monokai-pro"
-  />
-);
-
-export const Vue3Editor: Story<SandpackProps> = (args) => (
-  <Sandpack {...args} template="vue3" />
-);
-
-export const Svelte: Story<SandpackProps> = (args) => (
-  <Sandpack {...args} template="svelte" />
-);
-
-export const DarkTheme: Story<SandpackProps> = (args) => (
-  <Sandpack
-    {...args}
-    files={{
-      "/App.js": reactCode,
-      "/button.js": {
-        code: buttonCode,
-      },
-      "/link.js": {
-        code: linkCode,
-        hidden: true,
-      },
-    }}
-    template="react"
-    theme="dark"
-  />
-);
-
-export const CustomSetup: Story<SandpackProps> = (args) => (
-  <Sandpack
-    {...args}
     customSetup={{
       entry: "/src/index.tsx",
       main: "/src/main.tsx",
@@ -234,9 +109,8 @@ export const Main: React.FC<{test: string}> = ({test}) => {
   />
 );
 
-export const ExternalResources: Story<SandpackProps> = (args) => (
+export const ExternalResources: React.FC = () => (
   <Sandpack
-    {...args}
     files={{
       "/App.js": `        
 export default () => {
@@ -257,160 +131,16 @@ export default () => {
   />
 );
 
-const reactWithLibCode = `import ReactMarkdown from 'react-markdown' 
-
-export default function App() {
-  return <ReactMarkdown># Hello, *world*!</ReactMarkdown>
-}`;
-
-export const WithCustomLibrary: Story<SandpackProps> = (args) => (
-  <Sandpack
-    {...args}
-    customSetup={{
-      dependencies: {
-        "react-markdown": "latest",
-      },
-    }}
-    files={{
-      "/App.js": reactWithLibCode,
-    }}
-    template="react"
-  />
-);
-
-export const WithClosableTabs: Story<SandpackProps> = (args) => (
-  <Sandpack
-    {...args}
-    customSetup={{
-      dependencies: {
-        "react-markdown": "latest",
-      },
-    }}
-    files={{
-      "/App.js": reactWithLibCode,
-    }}
-    options={{
-      closableTabs: true,
-    }}
-    template="react"
-  />
-);
-
-export const MultipleInstances: Story<SandpackProps> = (args) => (
-  <div>
-    <h2>Light Theme</h2>
-    <Sandpack
-      {...args}
-      options={{
-        showTabs: true,
-        showNavigator: true,
-      }}
-      template="react"
-    />
-    <h2>Dark Theme</h2>
-    <Sandpack
-      {...args}
-      options={{
-        showTabs: true,
-        showNavigator: true,
-      }}
-      template="react"
-      theme="dark"
-    />
-    <h2>Night Owl</h2>
-    <Sandpack
-      {...args}
-      options={{
-        showTabs: true,
-        showNavigator: true,
-      }}
-      template="react"
-      theme="night-owl"
-    />
-    <h2>Aqua Theme</h2>
-    <Sandpack
-      {...args}
-      options={{
-        showTabs: true,
-        showNavigator: true,
-      }}
-      template="react"
-      theme="aqua-blue"
-    />
-    <h2>Monokai Theme</h2>
-    <Sandpack
-      {...args}
-      options={{
-        showTabs: true,
-        showNavigator: true,
-      }}
-      template="react"
-      theme="monokai-pro"
-    />
-    <h2>GitHub Light Theme</h2>
-    <Sandpack
-      {...args}
-      options={{
-        showTabs: true,
-        showNavigator: true,
-      }}
-      template="react"
-      theme="github-light"
-    />
-    <h2>Custom Theme Colors</h2>
-    <Sandpack
-      {...args}
-      options={{
-        showTabs: true,
-        showNavigator: true,
-      }}
-      template="react"
-      theme={{
-        palette: {
-          accent: "#fc0e34",
-          inactiveText: "#aaa",
-        },
-        syntax: {
-          keyword: "#6700ff",
-        },
-      }}
-    />
-    <h2>Custom Theme Typography</h2>
-    <Sandpack
-      {...args}
-      options={{
-        showTabs: true,
-        showNavigator: true,
-      }}
-      template="react"
-      theme={{
-        ...codesandboxDarkTheme,
-        typography: {
-          fontSize: "16px",
-          bodyFont: "Arial",
-        },
-      }}
-    />
-    <h2>Theme - Auto</h2>
-    <p>Selects theme using system preference</p>
-    <Sandpack
-      options={{ showTabs: true, showNavigator: true }}
-      template="react"
-      theme="auto"
-    />
-  </div>
-);
-
-const code = `export default function Kitten() {
-  return (
-    <img src="https://placekitten.com/200/250" alt="Kitten" />
-  );
-}`;
+export const WithCustomLibrary: React.FC = () => <Sandpack template="react" />;
 
 export const RunnableComponent = (): React.ReactElement => (
   <Sandpack
     files={{
-      "/App.js": code,
+      "/App.js": `export default function Kitten() {
+  return (
+    <img src="https://placekitten.com/200/250" alt="Kitten" />
+  );
+}`,
     }}
     options={{
       autorun: false,
@@ -420,94 +150,4 @@ export const RunnableComponent = (): React.ReactElement => (
     }}
     template="react"
   />
-);
-
-const ResetButton = () => {
-  const { sandpack } = useSandpack();
-
-  return (
-    <button
-      className="sp-tab-button"
-      onClick={sandpack.resetAllFiles}
-      style={{
-        background: "none",
-        border: 0,
-        position: "absolute",
-        right: "1em",
-      }}
-    >
-      Reset all file
-    </button>
-  );
-};
-
-const ResetCurrentFileButton = () => {
-  const { sandpack } = useSandpack();
-
-  return (
-    <button
-      className="sp-tab-button"
-      onClick={() => sandpack.resetFile(sandpack.activePath)}
-      style={{
-        background: "none",
-        border: 0,
-        position: "absolute",
-        right: "1em",
-      }}
-    >
-      Reset current files
-    </button>
-  );
-};
-
-export const WithResetButton: React.FC = () => (
-  <>
-    <SandpackProvider
-      customSetup={{
-        files: {
-          "/App.js": reactCode,
-          "/button.js": buttonCode,
-          "/link.js": linkCode,
-        },
-      }}
-      template="react"
-    >
-      <SandpackLayout>
-        <div
-          className="sp-stack"
-          style={{ position: "relative", width: "100%" }}
-        >
-          <SandpackCodeEditor />
-          <ResetButton />
-        </div>
-        <SandpackStack>
-          <SandpackPreview />
-        </SandpackStack>
-      </SandpackLayout>
-    </SandpackProvider>
-
-    <SandpackProvider
-      customSetup={{
-        files: {
-          "/App.js": reactCode,
-          "/button.js": buttonCode,
-          "/link.js": linkCode,
-        },
-      }}
-      template="react"
-    >
-      <SandpackLayout>
-        <div
-          className="sp-stack"
-          style={{ position: "relative", width: "100%" }}
-        >
-          <SandpackCodeEditor />
-          <ResetCurrentFileButton />
-        </div>
-        <SandpackStack>
-          <SandpackPreview />
-        </SandpackStack>
-      </SandpackLayout>
-    </SandpackProvider>
-  </>
 );
