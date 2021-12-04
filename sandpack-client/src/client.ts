@@ -66,6 +66,8 @@ export interface ClientOptions {
     isFile: (path: string) => Promise<boolean>;
     readFile: (path: string) => Promise<string>;
   };
+
+  reactDevTools?: boolean;
 }
 
 export interface SandboxInfo {
@@ -87,7 +89,7 @@ export interface SandboxInfo {
   disableDependencyPreprocessing?: boolean;
 }
 
-const BUNDLER_URL = "https://new.csb.app/";
+const BUNDLER_URL = "http://localhost:3000/";
 
 export class SandpackClient {
   selector: string | undefined;
@@ -265,6 +267,7 @@ export class SandpackClient {
       version: 3,
       isInitializationCompile,
       modules,
+      reactDevTools: this.options.reactDevTools,
       externalResources: this.options.externalResources || [],
       hasFileResolver: Boolean(this.options.fileResolver),
       disableDependencyPreprocessing:

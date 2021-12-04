@@ -376,6 +376,7 @@ class SandpackProvider extends React.PureComponent<
         showOpenInCodeSandbox: !this.openInCSBRegistered.current,
         showErrorScreen: !this.errorScreenRegistered.current,
         showLoadingScreen: !this.loadingScreenRegistered.current,
+        reactDevTools: true,
       }
     );
 

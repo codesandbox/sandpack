@@ -171,6 +171,7 @@ export type SandpackMessage = BaseSandpackMessage &
         showLoadingScreen: boolean;
         skipEval: boolean;
         clearConsoleDisabled?: boolean;
+        reactDevTools?: boolean;
       }
     | {
         type: "refresh";
