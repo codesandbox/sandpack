@@ -673,6 +673,7 @@ class SandpackProvider extends React.PureComponent<
       status: sandpackStatus,
       editorState,
       initMode,
+      clients: this.clients,
       closeFile: this.closeFile,
       deleteFile: this.deleteFile,
       dispatch: this.dispatchMessage,
