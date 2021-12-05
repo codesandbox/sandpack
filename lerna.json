@@ -10,12 +10,16 @@
       "createRelease": "github",
       "conventionalCommits": true,
       "message": "chore: [skip ci] bump packages",
-      "ignoreChanges": ["**/*.md", "**/*.stories.mdx", "**/*.stories.@(js|jsx|ts|tsx)"]
+      "ignoreChanges": [
+        "**/*.md",
+        "**/*.stories.mdx",
+        "**/*.stories.@(js|jsx|ts|tsx)"
+      ]
     },
     "publish": {
       "conventionalCommits": true,
       "message": "chore: [skip ci] bump packages"
     }
   },
-  "version": "0.9.10"
+  "version": "0.9.11"
 }
