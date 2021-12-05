@@ -56,7 +56,7 @@ const ListenerIframeMessage = () => {
 
   const sender = () => {
     Object.values(sandpack.clients).forEach((client) => {
-      client.iframe.contentWindow.postMessage("Hello Workd", "*");
+      client.iframe.contentWindow.postMessage("Hello World", "*");
     });
   };
 
