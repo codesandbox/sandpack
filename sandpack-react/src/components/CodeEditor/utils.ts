@@ -6,8 +6,7 @@ import type { LanguageSupport } from "@codemirror/language";
 import type { Extension } from "@codemirror/state";
 import type { Text } from "@codemirror/text";
 import { EditorView } from "@codemirror/view";
-import type { Ref } from "react";
-import { useCallback } from "react";
+import * as React from "react";
 
 import { getSyntaxStyle } from "../../themes";
 import type { SandpackTheme } from "../../types";
@@ -153,9 +152,9 @@ export const getCodeMirrorLanguage = (
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useCombinedRefs = <T extends any>(
-  ...refs: Array<Ref<T>>
-): Ref<T> =>
-  useCallback(
+  ...refs: Array<React.Ref<T>>
+): React.Ref<T> =>
+  React.useCallback(
     (element: T) =>
       refs.forEach((ref) => {
         if (!ref) {

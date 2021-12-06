@@ -1,5 +1,4 @@
 import * as React from "react";
-import { forwardRef } from "react";
 
 import type { SandpackInitMode } from "../..";
 import { RunButton } from "../../common/RunButton";
@@ -29,7 +28,10 @@ export interface CodeViewerProps {
 /**
  * @category Components
  */
-export const SandpackCodeViewer = forwardRef<CodeEditorRef, CodeViewerProps>(
+export const SandpackCodeViewer = React.forwardRef<
+  CodeEditorRef,
+  CodeViewerProps
+>(
   (
     {
       showTabs,

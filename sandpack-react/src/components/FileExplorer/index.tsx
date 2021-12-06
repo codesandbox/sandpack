@@ -8,7 +8,7 @@ import { ModuleList } from "./ModuleList";
 /**
  * @category Components
  */
-export const FileExplorer: React.FC = () => {
+export const FileExplorer = (): JSX.Element => {
   const { sandpack } = useSandpack();
 
   return (

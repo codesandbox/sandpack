@@ -9,3 +9,4 @@ export * from "./Section";
 export { SandpackLogo } from "./SandpackLogo";
 export { SandpackPreview, SandpackContainer } from "./SandpackPreview";
 export { Text } from "./Text";
+export { ClipboardProvider, useClipboard } from "./ClipboardProvider";

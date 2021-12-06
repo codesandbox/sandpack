@@ -6,7 +6,7 @@ import { NestedSandpack } from "../../src/NestedSandpack";
 
 # Custom Content
 
-The `Sandpack` component you used in the precious section is called a `preset`. It wraps the all the individual components and provides sensible defaults.
+The `Sandpack` component you used in the precious section is called a `preset`. It wraps all the individual components and provides sensible defaults.
 
 Presets make it easy to adopt `sandpack`, while offering extensive configurability. The first thing we will look at is how to configure the content that runs inside `sandpack`.
 
