@@ -150,6 +150,11 @@ module.exports = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       sandpack: { theme: "sandpack-dark" },
+      algolia: {
+        apiKey: "cb6b75b34a1f388c0620d79165a44c3b",
+        indexName: "sandpack",
+        appId: "BH4D9OD16A",
+      },
       colorMode: {
         defaultMode: "dark",
         disableSwitch: true,

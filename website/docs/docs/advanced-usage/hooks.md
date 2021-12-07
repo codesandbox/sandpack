@@ -72,15 +72,19 @@ const CustomRefreshButton = () => {
   const { dispatch, listen } = useSandpack();
 
   const handleRefresh = () => {
-    // listens for any message dispatched between sandpack and the bundler
-    const stopListening = listen((message) => console.log(message));
-
     // sends the refresh message to the bundler, should be logged by the listener
     dispatch({ type: "refresh" });
-
-    // unsubscribe
-    stopListening();
   };
+
+  useEffect(() => {
+    // listens for any message dispatched between sandpack and the bundler
+    const stopListening = listen((msg) => console.log(msg));
+
+    return () => {
+      // unsubscribe
+      stopListening();
+    };
+  }, [listen]);
 
   return (
     <button type="button" onClick={handleRefresh}>

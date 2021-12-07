@@ -14,10 +14,10 @@ export interface NavigatorProps {
 /**
  * @category Components
  */
-export const Navigator: React.FC<NavigatorProps> = ({
+export const Navigator = ({
   clientId,
   onURLChange,
-}) => {
+}: NavigatorProps): JSX.Element => {
   const [baseUrl, setBaseUrl] = React.useState<string>("");
   const { sandpack, dispatch, listen } = useSandpack();
 

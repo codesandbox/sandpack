@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.11](https://github.com/codesandbox/sandpack/compare/v0.9.10...v0.9.11) (2021-12-05)
+
+
+### Bug Fixes
+
+* add feedback for clipboard button ([#235](https://github.com/codesandbox/sandpack/issues/235)) ([21a0337](https://github.com/codesandbox/sandpack/commit/21a033736ef8c9cd4fe18fba7bada70fc5a665e1))
+* **types:** react components not actually accepting children ([#239](https://github.com/codesandbox/sandpack/issues/239)) ([44af959](https://github.com/codesandbox/sandpack/commit/44af9599d475db0b4732477c4365fd10d85f7788))
+
+
+
+
+
 ## [0.9.10](https://github.com/codesandbox/sandpack/compare/v0.9.9...v0.9.10) (2021-12-03)
 
 **Note:** Version bump only for package sandpack
