@@ -6,7 +6,7 @@ const API_KEY = process.env.AMPLITUDE_API_KEY;
 module.exports = {
   title: "Sandpack",
   tagline: "Bring the power of CodeSandbox into your project",
-  url: `https://sandpack.vercel.app/`,
+  url: `https://sandpack.codesandbox.io/`,
   baseUrl: BASE_URL,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
