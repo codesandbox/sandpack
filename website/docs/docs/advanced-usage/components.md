@@ -175,7 +175,9 @@ For situations when you strictly want to show some code and run it in the browse
 
 ## UnstyledOpenInCodeSandboxButton & OpenInCodeSandboxButton
 
-You can build a custom button that opens the sandpack files in a new tab on https://codesandbox.io. Let's the use `UnstyledOpenInCodeSandboxButton` for that:
+You can build a custom button that creates a new sandbox from the sandpack files. It will include any edits made in the Sandpack editor, so it is a great way to persist your changes. The created sandbox will open on [CodeSandbox](https://codesandbox.io) in a new tab.
+
+Let's use the `UnstyledOpenInCodeSandboxButton` as an example:
 
 ```jsx
 import {
