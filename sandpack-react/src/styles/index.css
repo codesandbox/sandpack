@@ -514,4 +514,5 @@
 
 .sp-devtools {
   height: var(--sp-layout-height);
+  width: 100%;
 }

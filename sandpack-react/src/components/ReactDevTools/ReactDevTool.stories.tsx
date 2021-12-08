@@ -4,7 +4,7 @@ import { SandpackProvider, SandpackLayout, SandpackThemeProvider } from "../..";
 import { SandpackReactDevTools } from "./";
 
 export default {
-  title: "devtool/React",
+  title: "components/ReactDevTools",
 };
 
 export const ReactDevTool: React.FC = () => (
