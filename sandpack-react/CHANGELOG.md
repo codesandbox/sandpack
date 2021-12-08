@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.13](https://github.com/codesandbox/sandpack/compare/v0.9.12...v0.9.13) (2021-12-08)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
 ## [0.9.12](https://github.com/codesandbox/sandpack/compare/v0.9.11...v0.9.12) (2021-12-08)
 
 
