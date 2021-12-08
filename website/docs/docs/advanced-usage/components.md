@@ -173,7 +173,33 @@ For situations when you strictly want to show some code and run it in the browse
   </SandpackLayout>
 </SandpackProvider>
 
-## UnstyledOpenInCodeSandboxButton & OpenInCodeSandboxButton
+## ReactDevTools
+
+Sandpack also provides a component to add a plugin for React debugging, which allows you to inspect the React component hierarchies in the iframe. This is useful for `props` debugging and understanding the component tree.
+
+![React devtools](/img/docs/react-devtools.png)
+
+```jsx
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  SandpackReactDevTools,
+} from "@codesandbox/sandpack-react";
+
+const CustomSandpack = () => (
+  <SandpackProvider template="react">
+    <SandpackLayout>
+      <SandpackCodeEditor />
+      <SandpackPreview />
+    </SandpackLayout>
+
+    <SandpackReactDevTools />
+  </SandpackProvider>
+);
+```
+
+## OpenInCodeSandboxButton
 
 You can build a custom button that creates a new sandbox from the sandpack files. It will include any edits made in the Sandpack editor, so it is a great way to persist your changes. The created sandbox will open on [CodeSandbox](https://codesandbox.io) in a new tab.
 
