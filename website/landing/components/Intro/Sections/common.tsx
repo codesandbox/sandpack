@@ -201,12 +201,13 @@ export const FadeAnimation: React.FC = ({ children }) => {
     ],
     [shouldAnimate ? 0 : 1, 1, 1, 1, 1, shouldAnimate ? 0 : 1]
   );
+  const pointerEvents = opacity.get() ? "auto" : "none";
 
   return (
     <motion.li
       ref={sectionRef}
       className="fade-animation"
-      style={{ opacity, width: "100%" }}
+      style={{ opacity, pointerEvents, width: "100%" }}
     >
       {children}
     </motion.li>
