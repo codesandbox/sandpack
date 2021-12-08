@@ -19,7 +19,7 @@ export const SandpackReactDevTools: React.FC<{ clientId?: string }> = ({
   useEffect(() => {
     const unsubscribe = listen(async (msg) => {
       if (msg.type === "activate-react-devtools") {
-        const reactDevtools = await require("react-devtools-inline/frontend");
+        const reactDevtools = await import("react-devtools-inline/frontend");
 
         const client = clientId
           ? sandpack.clients[clientId]
