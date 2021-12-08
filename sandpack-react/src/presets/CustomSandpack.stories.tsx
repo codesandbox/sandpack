@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { useSandpack } from "../hooks/useSandpack";
 import type { ViewportSize } from "../";
 import {
   Sandpack,
@@ -13,12 +12,13 @@ import {
   SandpackCodeViewer,
   SandpackCodeEditor,
   SandpackTranspiledCode,
-  useCodeSandboxLink,
   useSandpackTheme,
   useActiveCode,
   useSandpackNavigation,
   SandpackStack,
 } from "../";
+import { UnstyledOpenInCodeSandboxButton } from "../common";
+import { useSandpack } from "../hooks/useSandpack";
 
 export default {
   title: "presets/Sandpack: custom",
@@ -71,12 +71,6 @@ export const UsingVisualElements: React.FC = () => (
   </SandpackProvider>
 );
 
-const CustomOpenInCSB = () => {
-  const url = useCodeSandboxLink();
-
-  return <a href={url}>Open in CodeSandbox</a>;
-};
-
 const CustomRefreshButton = () => {
   const { refresh } = useSandpackNavigation();
 
@@ -84,6 +78,14 @@ const CustomRefreshButton = () => {
     <button onClick={() => refresh()} type="button">
       Refresh Sandpack
     </button>
+  );
+};
+
+const CustomOpenInCSB = () => {
+  return (
+    <UnstyledOpenInCodeSandboxButton>
+      Open in CodeSandbox
+    </UnstyledOpenInCodeSandboxButton>
   );
 };
 
@@ -103,7 +105,7 @@ const CustomCodeEditor = () => {
         background: theme.palette.defaultBackground,
         border: `1px solid ${theme.palette.inactiveText}`,
         color: theme.palette.activeText,
-        lineHeight: theme.typography.lineheight,
+        lineHeight: theme.typography.lineHeight,
       }}
     >
       {code}
