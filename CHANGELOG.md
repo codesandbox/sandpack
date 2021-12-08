@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.12](https://github.com/codesandbox/sandpack/compare/v0.9.11...v0.9.12) (2021-12-08)
+
+
+### Bug Fixes
+
+* docs url ([#244](https://github.com/codesandbox/sandpack/issues/244)) ([ff40f97](https://github.com/codesandbox/sandpack/commit/ff40f9724f1a805890ae70758f746dd4ab7c58ae))
+* **docs:** typo ([3134081](https://github.com/codesandbox/sandpack/commit/3134081ab95762aedbc6a6ae1cbdbb8da787eedc))
+* **open in codesandbox button:** optimize for long sandoxes ([#120](https://github.com/codesandbox/sandpack/issues/120)) ([3ad5261](https://github.com/codesandbox/sandpack/commit/3ad5261ca06fad62ddd9430327645511aa072435))
+
+
+
+
+
 ## [0.9.11](https://github.com/codesandbox/sandpack/compare/v0.9.10...v0.9.11) (2021-12-05)
 
 
