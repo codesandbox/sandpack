@@ -132,6 +132,7 @@ export const EditorExample: React.FC = () => {
                   sandpack.updateCurrentFile(ORIGINAL_CODE);
                   setOptions(ORIGINAL_CUSTOM);
                 }}
+                style={{ opacity: code === ORIGINAL_CODE ? 0.3 : 1 }}
               >
                 <svg
                   fill="currentColor"
