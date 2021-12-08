@@ -1,6 +1,5 @@
 import { useClasser } from "@code-hike/classer";
 import React, { useEffect, useState } from "react";
-import * as reactDevtools from "react-devtools-inline/frontend";
 
 import { useSandpackTheme } from "../..";
 import { useSandpack } from "../../hooks/useSandpack";
@@ -18,8 +17,10 @@ export const SandpackReactDevTools: React.FC<{ clientId?: string }> = ({
   }> | null>(null);
 
   useEffect(() => {
-    const unsubscribe = listen((msg) => {
+    const unsubscribe = listen(async (msg) => {
       if (msg.type === "activate-react-devtools") {
+        const reactDevtools = await require("react-devtools-inline/frontend");
+
         const client = clientId
           ? sandpack.clients[clientId]
           : Object.values(sandpack.clients)[0];
