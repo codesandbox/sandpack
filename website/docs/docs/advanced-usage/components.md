@@ -196,7 +196,7 @@ const CustomSandpack = () => (
 );
 ```
 
-The `UnstyledOpenInCodeSandboxButton` is a basic component that doesn't carry any style, so if you want a ready-to-use component, use the `OpenInCodeSandboxButton` instead, which contains the CodeSandbox logo and the same functionality.
+The `UnstyledOpenInCodeSandboxButton` is a basic component that does not carry any styles. If you want a ready-to-use component, use the `OpenInCodeSandboxButton` instead, which has the same functionality but includes the CodeSandbox logo.
 
 ## Other components
 
