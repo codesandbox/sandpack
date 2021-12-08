@@ -129,24 +129,6 @@ const CustomRefreshButton = () => {
 };
 ```
 
-## useCodeSandboxLink
-
-Similarly, we can build a custom link that opens the sandpack files in a new tab
-on https://codesandbox.io. Let's the use `useCodeSandboxLink` for that:
-
-```jsx
-import { useCodeSandboxLink } from "@codesandbox/sandpack-react";
-
-const CustomOpenInCSB = () => {
-  const url = useCodeSandboxLink();
-  return (
-    <a href={url} target="_blank" rel="noopener noreferrer">
-      Open in CodeSandbox
-    </a>
-  );
-};
-```
-
 ## useActiveCode
 
 We implemented the `SandpackCodeEditor` on top of

@@ -173,6 +173,33 @@ For situations when you strictly want to show some code and run it in the browse
   </SandpackLayout>
 </SandpackProvider>
 
+## UnstyledOpenInCodeSandboxButton & OpenInCodeSandboxButton
+
+You can build a custom button that creates a new sandbox from the sandpack files. It will include any edits made in the Sandpack editor, so it is a great way to persist your changes. The created sandbox will open on [CodeSandbox](https://codesandbox.io) in a new tab.
+
+Let's use the `UnstyledOpenInCodeSandboxButton` as an example:
+
+```jsx
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  UnstyledOpenInCodeSandboxButton,
+} from "@codesandbox/sandpack-react";
+const CustomSandpack = () => (
+  <SandpackProvider template="react">
+    <SandpackLayout>
+      <SandpackCodeEditor />
+      <UnstyledOpenInCodeSandboxButton>
+        Open in CodeSandbox
+      </UnstyledOpenInCodeSandboxButton>
+    </SandpackLayout>
+  </SandpackProvider>
+);
+```
+
+The `UnstyledOpenInCodeSandboxButton` is a basic component that does not carry any styles. If you want a ready-to-use component, use the `OpenInCodeSandboxButton` instead, which has the same functionality but includes the CodeSandbox logo.
+
 ## Other components
 
 You can also bring other components in the mix: `SandpackTranspiledCode`, `FileTabs`, `FileExplorer`, `Navigator` and so on.
