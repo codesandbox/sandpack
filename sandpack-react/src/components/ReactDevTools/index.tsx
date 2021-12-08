@@ -32,6 +32,10 @@ export const SandpackReactDevTools: React.FC<{ clientId?: string }> = ({
     return unsubscribe;
   }, [clientId, listen, sandpack.clients]);
 
+  useEffect(() => {
+    sandpack.registerReactDevTools();
+  }, []);
+
   if (!ReactDevTools) return null;
 
   const isDarkTheme = isDarkColor(theme.palette.defaultBackground);
