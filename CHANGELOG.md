@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0-alpha.0](https://github.com/codesandbox/sandpack/compare/v0.9.13...v0.10.0-alpha.0) (2021-12-08)
+
+
+### Bug Fixes
+
+* **react devtool:** load only on client ([9aee55d](https://github.com/codesandbox/sandpack/commit/9aee55d68cc769c6422cd91e685865aa3b132e6b))
+
+
+### Features
+
+* **react:** react devtool ([bb34f5e](https://github.com/codesandbox/sandpack/commit/bb34f5e4b816d94371652d908d5af15631f47411))
+
+
+
+
+
 ## [0.9.13](https://github.com/codesandbox/sandpack/compare/v0.9.12...v0.9.13) (2021-12-08)
 
 
