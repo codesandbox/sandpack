@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-import { SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@codesandbox/sandpack-react"
+import { Sandpack, SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@codesandbox/sandpack-react"
 import { SandpackLayout } from "../../src/CustomSandpack"
 
 # Components
@@ -175,29 +175,37 @@ For situations when you strictly want to show some code and run it in the browse
 
 ## ReactDevTools
 
-Sandpack also provides a component to add a plugin for React debugging, which allows you to inspect the React component hierarchies in the iframe. This is useful for `props` debugging and understanding the component tree.
+Sandpack also provides a component that adds React DevTools, allowing you to inspect the React component hierarchies in the iframe. This is useful for `props` debugging and understanding the component tree. Our `SandpackReactDevTools` component has the same functionality as the React DevTools browser extensions, but it only shows what is in your Sandpack instance.
 
-![React devtools](/img/docs/react-devtools.png)
-
-```jsx
-import {
+<!-- prettier-ignore -->
+<div className="nestedSandpack">
+  <Sandpack
+    theme="sandpack-dark"
+    customSetup={{
+      dependencies: { "@codesandbox/sandpack-react": "latest" },
+    }}
+    files={{
+      "/App.js": `import {
   SandpackProvider,
   SandpackLayout,
-  SandpackCodeEditor,
+  SandpackPreview,
   SandpackReactDevTools,
 } from "@codesandbox/sandpack-react";
-
-const CustomSandpack = () => (
-  <SandpackProvider template="react">
-    <SandpackLayout>
-      <SandpackCodeEditor />
-      <SandpackPreview />
-    </SandpackLayout>
-
-    <SandpackReactDevTools />
-  </SandpackProvider>
-);
-```
+import "@codesandbox/sandpack-react/dist/index.css";\n
+export default function CustomSandpack() {
+  return (
+    <SandpackProvider template="react">
+      <SandpackLayout>
+        <SandpackPreview />
+        <SandpackReactDevTools style={{ width: "50%" }} />
+      </SandpackLayout>
+    </SandpackProvider>
+  )
+}`
+    }}
+    template="react"
+  />
+</div>
 
 ## OpenInCodeSandboxButton
 

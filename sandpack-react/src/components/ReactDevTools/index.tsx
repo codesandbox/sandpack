@@ -1,13 +1,18 @@
 import { useClasser } from "@code-hike/classer";
+import type { CSSProperties } from "react";
 import React, { useEffect, useRef, useState } from "react";
 
 import { useSandpackTheme } from "../..";
 import { useSandpack } from "../../hooks/useSandpack";
 import { isDarkColor } from "../../utils/stringUtils";
 
-export const SandpackReactDevTools: React.FC<{ clientId?: string }> = ({
+export const SandpackReactDevTools = ({
   clientId,
-}) => {
+  ...props
+}: {
+  clientId?: string;
+  style?: CSSProperties;
+}): JSX.Element | null => {
   const { listen, sandpack } = useSandpack();
   const { theme } = useSandpackTheme();
   const c = useClasser("sp");
@@ -48,7 +53,7 @@ export const SandpackReactDevTools: React.FC<{ clientId?: string }> = ({
   const isDarkTheme = isDarkColor(theme.palette.defaultBackground);
 
   return (
-    <div className={c("devtools")}>
+    <div className={c("devtools")} {...props}>
       <ReactDevTools browserTheme={isDarkTheme ? "dark" : "light"} />
     </div>
   );

@@ -1,11 +1,5 @@
-import { useEffect } from "react";
-import { SandpackCodeEditor, SandpackPreview } from "..";
-import {
-  SandpackProvider,
-  SandpackLayout,
-  SandpackThemeProvider,
-  useSandpack,
-} from "../..";
+import { SandpackPreview } from "..";
+import { SandpackProvider, SandpackLayout, SandpackThemeProvider } from "../..";
 
 import { SandpackReactDevTools } from "./";
 
@@ -13,27 +7,35 @@ export default {
   title: "components/ReactDevTools",
 };
 
-const Listener = () => {
-  const { listen } = useSandpack();
-
-  useEffect(() => {
-    listen(console.log);
-  }, []);
-
-  return null;
-};
-
 export const ReactDevTool: React.FC = () => (
-  <SandpackProvider template="react">
-    <SandpackThemeProvider>
-      <Listener />
-      <SandpackLayout>
-        <SandpackCodeEditor />
-        <SandpackPreview />
-      </SandpackLayout>
+  <SandpackProvider
+    customSetup={{
+      files: {
+        "/App.js": `
+const Container = ({children}) => <div>{children}</div>          
+const Button = () => <p>Button</p>
 
-      <SandpackLayout style={{ marginTop: 12 }}>
-        <SandpackReactDevTools />
+export default function App() {
+return (
+<Container>
+  <div>
+    <Button />
+    <Button />
+    <h1>Hello World</h1>
+    <Button />
+  </div>
+</Container>
+)
+}
+      `,
+      },
+    }}
+    template="react"
+  >
+    <SandpackThemeProvider>
+      <SandpackLayout>
+        <SandpackPreview />
+        <SandpackReactDevTools style={{ width: "50%" }} />
       </SandpackLayout>
     </SandpackThemeProvider>
   </SandpackProvider>
