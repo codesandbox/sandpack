@@ -62,6 +62,7 @@ export const VueCode: React.FC = () => (
 
 export const Decorators: React.FC = () => {
   const [itemClick, setItemClicked] = React.useState();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = React.useRef<any>(null);
 
   React.useEffect(() => {
