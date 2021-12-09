@@ -56,7 +56,13 @@ export const getSandpackStateFromProps = (
 
   if (openPaths.length === 0) {
     // If no files are received, use the project setup / template
-    openPaths = Object.keys(projectSetup.files);
+    openPaths = Object.keys(projectSetup.files).reduce<string[]>((acc, key) => {
+      if (!projectSetup.files[key].hidden) {
+        acc.push(key);
+      }
+
+      return acc;
+    }, []);
   }
 
   // If no activePath is specified, use the first open file

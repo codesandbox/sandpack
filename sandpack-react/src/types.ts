@@ -69,7 +69,7 @@ export type SandpackStatus =
 export type EditorState = "pristine" | "dirty";
 
 export interface SandboxTemplate {
-  files: SandpackBundlerFiles;
+  files: Record<string, SandpackFile>;
   dependencies: Record<string, string>;
   devDependencies?: Record<string, string>;
   entry: string;
