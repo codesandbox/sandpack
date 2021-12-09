@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/codesandbox/sandpack/compare/v0.9.14...v0.10.0) (2021-12-09)
+
+
+### Bug Fixes
+
+* **react:** duplicated import ([512f814](https://github.com/codesandbox/sandpack/commit/512f814a7d045c57f56fbd3eacf7868ccfe2f516))
+
+
+### Features
+
+* **react:** react devtool ([#236](https://github.com/codesandbox/sandpack/issues/236)) ([a67e1b2](https://github.com/codesandbox/sandpack/commit/a67e1b2ccfc38b01ad78d2d7f518148cf94eb15d))
+
+
+
+
+
 ## [0.9.14](https://github.com/codesandbox/sandpack/compare/v0.9.13...v0.9.14) (2021-12-09)
 
 
