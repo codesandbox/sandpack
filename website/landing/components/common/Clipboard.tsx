@@ -1,7 +1,8 @@
 import content from "../../website.config.json";
 
-import { Box, Button, Text } from ".";
 import { useClipboard } from "./ClipboardProvider";
+
+import { Box, Button, Text } from ".";
 
 export const Clipboard: React.FC = () => {
   const { copyToClipboard } = useClipboard();
