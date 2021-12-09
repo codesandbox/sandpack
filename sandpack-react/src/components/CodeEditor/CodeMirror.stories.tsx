@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../contexts/themeContext";

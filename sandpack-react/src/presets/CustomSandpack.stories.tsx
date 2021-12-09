@@ -12,11 +12,11 @@ import {
   SandpackCodeViewer,
   SandpackCodeEditor,
   SandpackTranspiledCode,
-  useCodeSandboxLink,
   useSandpackTheme,
   useActiveCode,
   useSandpackNavigation,
   SandpackStack,
+  UnstyledOpenInCodeSandboxButton,
 } from "../";
 import { useSandpack } from "../hooks/useSandpack";
 
@@ -71,13 +71,7 @@ export const UsingVisualElements: React.FC = () => (
   </SandpackProvider>
 );
 
-const CustomOpenInCSB: React.FC = () => {
-  const url = useCodeSandboxLink();
-
-  return <a href={url}>Open in CodeSandbox</a>;
-};
-
-const CustomRefreshButton: React.FC = () => {
+const CustomRefreshButton = (): JSX.Element => {
   const { refresh } = useSandpackNavigation();
 
   return (
@@ -87,7 +81,15 @@ const CustomRefreshButton: React.FC = () => {
   );
 };
 
-const CustomCodeEditor: React.FC = () => {
+const CustomOpenInCSB = (): JSX.Element => {
+  return (
+    <UnstyledOpenInCodeSandboxButton>
+      Open in CodeSandbox
+    </UnstyledOpenInCodeSandboxButton>
+  );
+};
+
+const CustomCodeEditor = (): JSX.Element => {
   const { code, updateCode } = useActiveCode();
   const { theme } = useSandpackTheme();
 
@@ -423,4 +425,55 @@ export const ResetButton: React.FC = () => (
       </SandpackLayout>
     </SandpackProvider>
   </>
+);
+
+const ListenerIframeMessage = (): JSX.Element => {
+  const [message, setMessage] = useState("Hello World");
+  const { sandpack } = useSandpack();
+
+  const sender = (): void => {
+    Object.values(sandpack.clients).forEach((client) => {
+      client.iframe.contentWindow.postMessage(message, "*");
+    });
+  };
+
+  return (
+    <>
+      <button onClick={sender}>Send message</button>
+      <input
+        onChange={({ target }): void => setMessage(target.value)}
+        value={message}
+      />
+    </>
+  );
+};
+
+export const IframeMessage: React.FC = () => (
+  <SandpackProvider
+    customSetup={{
+      files: {
+        "/App.js": `import {useState, useEffect} from "react";
+
+export default function App() {
+const [message, setMessage] = useState("")
+
+useEffect(() => {
+  window.addEventListener("message", (event) => {
+    setMessage(event.data);
+  });
+}, [])
+
+return <h1>{message}</h1>
+}
+`,
+      },
+    }}
+    template="react"
+  >
+    <ListenerIframeMessage />
+    <SandpackLayout>
+      <SandpackCodeEditor />
+      <SandpackPreview />
+    </SandpackLayout>
+  </SandpackProvider>
 );

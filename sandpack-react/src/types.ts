@@ -2,6 +2,7 @@ import type {
   BundlerState,
   ListenerFunction,
   SandpackBundlerFiles,
+  SandpackClient,
   SandpackError,
   SandpackMessage,
   UnsubscribeFunction,
@@ -34,6 +35,7 @@ export interface SandpackState {
   environment?: SandboxEnvironment;
   status: SandpackStatus;
   initMode: SandpackInitMode;
+  clients: Record<string, SandpackClient>;
 
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
@@ -46,6 +48,7 @@ export interface SandpackState {
   setActiveFile: (path: string) => void;
   resetFile: (path: string) => void;
   resetAllFiles: () => void;
+  registerReactDevTools: () => void;
 
   // Element refs
   // Different components inside the SandpackProvider might register certain elements of interest for sandpack
@@ -69,7 +72,7 @@ export type SandpackStatus =
 export type EditorState = "pristine" | "dirty";
 
 export interface SandboxTemplate {
-  files: SandpackBundlerFiles;
+  files: Record<string, SandpackFile>;
   dependencies: Record<string, string>;
   devDependencies?: Record<string, string>;
   entry: string;

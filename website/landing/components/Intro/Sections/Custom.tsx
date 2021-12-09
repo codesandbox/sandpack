@@ -131,6 +131,7 @@ export const CustomExample: React.FC = () => {
                 onClick={(): void => {
                   sandpack.updateCurrentFile(ORIGINAL_CODE);
                 }}
+                style={{ opacity: code === ORIGINAL_CODE ? 0.3 : 1 }}
               >
                 <svg
                   fill="currentColor"

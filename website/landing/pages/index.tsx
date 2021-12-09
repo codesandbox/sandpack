@@ -12,6 +12,7 @@ import { Showcase } from "../components/Showcase";
 import { Users } from "../components/Users";
 import { styled } from "../stitches.config";
 import content from "../website.config.json";
+import { ClipboardProvider } from "../components/common";
 
 const DEFAULT_HOST = "https://sandpack.codesandbox.io";
 
@@ -56,17 +57,19 @@ const Home: NextPage<HomeProps> = () => {
         })}
       </Head>
 
-      <Main>
-        <Hero />
-        <Features />
-        <Intro />
-        <AdvancedUsage />
-        <Showcase />
-        <Users />
-        <Banner />
-        <Community />
-      </Main>
-      <Footer />
+      <ClipboardProvider>
+        <Main>
+          <Hero />
+          <Features />
+          <Intro />
+          <AdvancedUsage />
+          <Showcase />
+          <Users />
+          <Banner />
+          <Community />
+        </Main>
+        <Footer />
+      </ClipboardProvider>
     </Container>
   );
 };

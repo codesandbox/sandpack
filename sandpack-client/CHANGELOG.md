@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/codesandbox/sandpack/compare/v0.9.14...v0.10.0) (2021-12-09)
+
+
+### Features
+
+* **react:** react devtool ([#236](https://github.com/codesandbox/sandpack/issues/236)) ([a67e1b2](https://github.com/codesandbox/sandpack/commit/a67e1b2ccfc38b01ad78d2d7f518148cf94eb15d))
+
+
+
+
+
+## [0.9.13](https://github.com/codesandbox/sandpack/compare/v0.9.12...v0.9.13) (2021-12-08)
+
+
+### Bug Fixes
+
+* **client:** support reactdevtools ([7f0373f](https://github.com/codesandbox/sandpack/commit/7f0373f328d60229904bbebab0329718616b59bb))
+
+
+
+
+
 ## [0.9.9](https://github.com/codesandbox/sandpack/compare/v0.9.8...v0.9.9) (2021-12-03)
 
 **Note:** Version bump only for package @codesandbox/sandpack-client

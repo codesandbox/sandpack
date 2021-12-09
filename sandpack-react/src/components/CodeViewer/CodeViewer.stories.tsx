@@ -1,5 +1,5 @@
 import type { Story } from "@storybook/react";
-import React, { useEffect, useRef, useState } from "react";
+import * as React from "react";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../contexts/themeContext";
@@ -61,10 +61,10 @@ export const VueCode: React.FC = () => (
 );
 
 export const Decorators: React.FC = () => {
-  const [itemClick, setItemClicked] = useState();
-  const ref = useRef<HTMLDivElement>();
+  const [itemClick, setItemClicked] = React.useState();
+  const ref = React.useRef<any>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handle = (event): void => {
       let id = event.target.dataset.id;
 

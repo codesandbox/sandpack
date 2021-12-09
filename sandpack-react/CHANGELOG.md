@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/codesandbox/sandpack/compare/v0.9.14...v0.10.0) (2021-12-09)
+
+
+### Bug Fixes
+
+* **react:** duplicated import ([512f814](https://github.com/codesandbox/sandpack/commit/512f814a7d045c57f56fbd3eacf7868ccfe2f516))
+
+
+### Features
+
+* **react:** react devtool ([#236](https://github.com/codesandbox/sandpack/issues/236)) ([a67e1b2](https://github.com/codesandbox/sandpack/commit/a67e1b2ccfc38b01ad78d2d7f518148cf94eb15d))
+
+
+
+
+
+## [0.9.14](https://github.com/codesandbox/sandpack/compare/v0.9.13...v0.9.14) (2021-12-09)
+
+
+### Bug Fixes
+
+* **react-context:** expose clients  ([#241](https://github.com/codesandbox/sandpack/issues/241)) ([f47295d](https://github.com/codesandbox/sandpack/commit/f47295d9cd5365ce9482c02922d0ea6e2db61592))
+* **react:** ensure hidden files even for templates ([#231](https://github.com/codesandbox/sandpack/issues/231)) ([a1461a0](https://github.com/codesandbox/sandpack/commit/a1461a0e58e8c5595209463d965aefb6760215fe))
+
+
+
+
+
+## [0.9.13](https://github.com/codesandbox/sandpack/compare/v0.9.12...v0.9.13) (2021-12-08)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [0.9.12](https://github.com/codesandbox/sandpack/compare/v0.9.11...v0.9.12) (2021-12-08)
+
+
+### Bug Fixes
+
+* **open in codesandbox button:** optimize for long sandoxes ([#120](https://github.com/codesandbox/sandpack/issues/120)) ([3ad5261](https://github.com/codesandbox/sandpack/commit/3ad5261ca06fad62ddd9430327645511aa072435))
+
+
+
+
+
+## [0.9.11](https://github.com/codesandbox/sandpack/compare/v0.9.10...v0.9.11) (2021-12-05)
+
+
+### Bug Fixes
+
+* **types:** react components not actually accepting children ([#239](https://github.com/codesandbox/sandpack/issues/239)) ([44af959](https://github.com/codesandbox/sandpack/commit/44af9599d475db0b4732477c4365fd10d85f7788))
+
+
+
+
+
 ## [0.9.10](https://github.com/codesandbox/sandpack/compare/v0.9.9...v0.9.10) (2021-12-03)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react

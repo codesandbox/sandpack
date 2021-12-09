@@ -3,6 +3,71 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/codesandbox/sandpack/compare/v0.9.14...v0.10.0) (2021-12-09)
+
+
+### Bug Fixes
+
+* **react:** duplicated import ([512f814](https://github.com/codesandbox/sandpack/commit/512f814a7d045c57f56fbd3eacf7868ccfe2f516))
+
+
+### Features
+
+* **react:** react devtool ([#236](https://github.com/codesandbox/sandpack/issues/236)) ([a67e1b2](https://github.com/codesandbox/sandpack/commit/a67e1b2ccfc38b01ad78d2d7f518148cf94eb15d))
+
+
+
+
+
+## [0.9.14](https://github.com/codesandbox/sandpack/compare/v0.9.13...v0.9.14) (2021-12-09)
+
+
+### Bug Fixes
+
+* **landing:** set pointerEvents to avoid reset button overlap ([#245](https://github.com/codesandbox/sandpack/issues/245)) ([51be6cf](https://github.com/codesandbox/sandpack/commit/51be6cf8dbee4df309167e07484f67e2c0324ac0))
+* **react-context:** expose clients  ([#241](https://github.com/codesandbox/sandpack/issues/241)) ([f47295d](https://github.com/codesandbox/sandpack/commit/f47295d9cd5365ce9482c02922d0ea6e2db61592))
+* **react:** ensure hidden files even for templates ([#231](https://github.com/codesandbox/sandpack/issues/231)) ([a1461a0](https://github.com/codesandbox/sandpack/commit/a1461a0e58e8c5595209463d965aefb6760215fe))
+
+
+
+
+
+## [0.9.13](https://github.com/codesandbox/sandpack/compare/v0.9.12...v0.9.13) (2021-12-08)
+
+
+### Bug Fixes
+
+* **client:** support reactdevtools ([7f0373f](https://github.com/codesandbox/sandpack/commit/7f0373f328d60229904bbebab0329718616b59bb))
+
+
+
+
+
+## [0.9.12](https://github.com/codesandbox/sandpack/compare/v0.9.11...v0.9.12) (2021-12-08)
+
+
+### Bug Fixes
+
+* docs url ([#244](https://github.com/codesandbox/sandpack/issues/244)) ([ff40f97](https://github.com/codesandbox/sandpack/commit/ff40f9724f1a805890ae70758f746dd4ab7c58ae))
+* **docs:** typo ([3134081](https://github.com/codesandbox/sandpack/commit/3134081ab95762aedbc6a6ae1cbdbb8da787eedc))
+* **open in codesandbox button:** optimize for long sandoxes ([#120](https://github.com/codesandbox/sandpack/issues/120)) ([3ad5261](https://github.com/codesandbox/sandpack/commit/3ad5261ca06fad62ddd9430327645511aa072435))
+
+
+
+
+
+## [0.9.11](https://github.com/codesandbox/sandpack/compare/v0.9.10...v0.9.11) (2021-12-05)
+
+
+### Bug Fixes
+
+* add feedback for clipboard button ([#235](https://github.com/codesandbox/sandpack/issues/235)) ([21a0337](https://github.com/codesandbox/sandpack/commit/21a033736ef8c9cd4fe18fba7bada70fc5a665e1))
+* **types:** react components not actually accepting children ([#239](https://github.com/codesandbox/sandpack/issues/239)) ([44af959](https://github.com/codesandbox/sandpack/commit/44af9599d475db0b4732477c4365fd10d85f7788))
+
+
+
+
+
 ## [0.9.10](https://github.com/codesandbox/sandpack/compare/v0.9.9...v0.9.10) (2021-12-03)
 
 **Note:** Version bump only for package sandpack

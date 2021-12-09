@@ -1,0 +1,10 @@
+{
+  "packages": [
+    "sandpack-client",
+    "sandpack-react"
+  ],
+  "sandboxes": [
+    "1zevr"
+  ],
+  "node": "14"
+}

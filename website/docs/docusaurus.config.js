@@ -6,7 +6,7 @@ const API_KEY = process.env.AMPLITUDE_API_KEY;
 module.exports = {
   title: "Sandpack",
   tagline: "Bring the power of CodeSandbox into your project",
-  url: `https://sandpack.vercel.app/`,
+  url: `https://sandpack.codesandbox.io/`,
   baseUrl: BASE_URL,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -150,6 +150,11 @@ module.exports = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       sandpack: { theme: "sandpack-dark" },
+      algolia: {
+        apiKey: "cb6b75b34a1f388c0620d79165a44c3b",
+        indexName: "sandpack",
+        appId: "BH4D9OD16A",
+      },
       colorMode: {
         defaultMode: "dark",
         disableSwitch: true,
