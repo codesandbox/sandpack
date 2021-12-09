@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.1](https://github.com/codesandbox/sandpack/compare/v0.10.0...v0.10.1) (2021-12-09)
+
+
+### Bug Fixes
+
+* **react-devtool:** add dependency ([#249](https://github.com/codesandbox/sandpack/issues/249)) ([d569a6e](https://github.com/codesandbox/sandpack/commit/d569a6e22d2c09ccb763b1e296e4b37eb17c194c))
+
+
+
+
+
 # [0.10.0](https://github.com/codesandbox/sandpack/compare/v0.9.14...v0.10.0) (2021-12-09)
 
 
