@@ -197,7 +197,7 @@ export default function CustomSandpack() {
     <SandpackProvider template="react">
       <SandpackLayout>
         <SandpackPreview />
-        <SandpackReactDevTools style={{ width: "50%" }} />
+        <SandpackReactDevTools style={{ flex: 1 }} />
       </SandpackLayout>
     </SandpackProvider>
   )
