@@ -66,6 +66,8 @@ export interface ClientOptions {
     isFile: (path: string) => Promise<boolean>;
     readFile: (path: string) => Promise<string>;
   };
+
+  reactDevTools?: boolean;
 }
 
 export interface SandboxInfo {
@@ -271,6 +273,7 @@ export class SandpackClient {
       version: 3,
       isInitializationCompile,
       modules,
+      reactDevTools: this.options.reactDevTools,
       externalResources: this.options.externalResources || [],
       hasFileResolver: Boolean(this.options.fileResolver),
       disableDependencyPreprocessing:

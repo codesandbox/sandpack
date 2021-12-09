@@ -171,6 +171,7 @@ export type SandpackMessage = BaseSandpackMessage &
         showLoadingScreen: boolean;
         skipEval: boolean;
         clearConsoleDisabled?: boolean;
+        reactDevTools?: boolean;
       }
     | {
         type: "refresh";
@@ -183,5 +184,8 @@ export type SandpackMessage = BaseSandpackMessage &
       }
     | {
         type: "get-transpiler-context";
+      }
+    | {
+        type: "activate-react-devtools";
       }
   );

@@ -9,6 +9,7 @@
   --sp-colors-accent: #64d2ff;
   --sp-colors-bg-error: #ffcdca;
   --sp-colors-fg-error: #811e18;
+  --sp-layout-height: 300px;
 
   --sp-font-size: 14px;
   --sp-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -106,7 +107,7 @@
   flex-shrink: 1;
   flex-basis: 0;
   min-width: 350px;
-  height: 300px;
+  height: var(--sp-layout-height);
 }
 
 @media print {
@@ -509,4 +510,9 @@
 .sp-error-message {
   animation: sp-fade-in 0.15s ease-in;
   color: var(--sp-colors-fg-error);
+}
+
+.sp-devtools {
+  height: var(--sp-layout-height);
+  width: 100%;
 }

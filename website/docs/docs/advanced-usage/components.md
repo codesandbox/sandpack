@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-import { SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@codesandbox/sandpack-react"
+import { Sandpack, SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@codesandbox/sandpack-react"
 import { SandpackLayout } from "../../src/CustomSandpack"
 
 # Components
@@ -173,7 +173,41 @@ For situations when you strictly want to show some code and run it in the browse
   </SandpackLayout>
 </SandpackProvider>
 
-## UnstyledOpenInCodeSandboxButton & OpenInCodeSandboxButton
+## ReactDevTools
+
+Sandpack also provides a component that adds React DevTools, allowing you to inspect the React component hierarchies in the iframe. This is useful for `props` debugging and understanding the component tree. Our `SandpackReactDevTools` component has the same functionality as the React DevTools browser extensions, but it only shows what is in your Sandpack instance.
+
+<!-- prettier-ignore -->
+<div className="nestedSandpack">
+  <Sandpack
+    theme="sandpack-dark"
+    customSetup={{
+      dependencies: { "@codesandbox/sandpack-react": "latest" },
+    }}
+    files={{
+      "/App.js": `import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackPreview,
+  SandpackReactDevTools,
+} from "@codesandbox/sandpack-react";
+import "@codesandbox/sandpack-react/dist/index.css";\n
+export default function CustomSandpack() {
+  return (
+    <SandpackProvider template="react">
+      <SandpackLayout>
+        <SandpackPreview />
+        <SandpackReactDevTools style={{ width: "50%" }} />
+      </SandpackLayout>
+    </SandpackProvider>
+  )
+}`
+    }}
+    template="react"
+  />
+</div>
+
+## OpenInCodeSandboxButton
 
 You can build a custom button that creates a new sandbox from the sandpack files. It will include any edits made in the Sandpack editor, so it is a great way to persist your changes. The created sandbox will open on [CodeSandbox](https://codesandbox.io) in a new tab.
 

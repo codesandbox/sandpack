@@ -4,3 +4,4 @@ export * from "./FileTabs";
 export * from "./Navigator";
 export * from "./Preview";
 export * from "./TranspiledCode";
+export * from "./ReactDevTools";

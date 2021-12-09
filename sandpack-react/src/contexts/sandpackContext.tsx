@@ -43,6 +43,7 @@ export interface SandpackProviderState {
   editorState: EditorState;
   renderHiddenIframe: boolean;
   initMode: SandpackInitMode;
+  reactDevTools: boolean;
 }
 
 export interface SandpackProviderProps {
@@ -129,6 +130,7 @@ class SandpackProvider extends React.PureComponent<
       editorState: "pristine",
       renderHiddenIframe: false,
       initMode: this.props.initMode || "lazy",
+      reactDevTools: false,
     };
 
     /**
@@ -179,6 +181,13 @@ class SandpackProvider extends React.PureComponent<
         error: { message: msg.title },
       });
     }
+  };
+
+  /**
+   * @hidden
+   */
+  registerReactDevTools = (): void => {
+    this.setState({ reactDevTools: true });
   };
 
   /**
@@ -376,6 +385,7 @@ class SandpackProvider extends React.PureComponent<
         showOpenInCodeSandbox: !this.openInCSBRegistered.current,
         showErrorScreen: !this.errorScreenRegistered.current,
         showLoadingScreen: !this.loadingScreenRegistered.current,
+        reactDevTools: this.state.reactDevTools,
       }
     );
 
@@ -691,6 +701,7 @@ class SandpackProvider extends React.PureComponent<
       unregisterBundler: this.unregisterBundler,
       updateCurrentFile: this.updateCurrentFile,
       updateFile: this.updateFile,
+      registerReactDevTools: this.registerReactDevTools,
     };
   };
 
