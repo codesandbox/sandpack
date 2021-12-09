@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.1-alpha.0](https://github.com/codesandbox/sandpack/compare/v0.10.0...v0.10.1-alpha.0) (2021-12-09)
+
+
+### Bug Fixes
+
+* ensure devtool is init before use it ([e0879e2](https://github.com/codesandbox/sandpack/commit/e0879e2b8698e50129cb9b20ecea8ed143d0655b))
+
+
+
+
+
 # [0.10.0](https://github.com/codesandbox/sandpack/compare/v0.9.14...v0.10.0) (2021-12-09)
 
 
