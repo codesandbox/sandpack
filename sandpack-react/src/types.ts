@@ -4,7 +4,6 @@ import type {
   SandpackBundlerFiles,
   SandpackClient,
   SandpackError,
-  SandpackClient,
   SandpackMessage,
   UnsubscribeFunction,
 } from "@codesandbox/sandpack-client";
