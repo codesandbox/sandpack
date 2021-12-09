@@ -37,12 +37,14 @@ export const SandpackReactDevTools = ({
           : Object.values(sandpack.clients)[0];
         const contentWindow = client?.iframe?.contentWindow;
 
-        setDevTools(reactDevtools.current.initialize(contentWindow));
+        if (reactDevtools.current && contentWindow) {
+          setDevTools(reactDevtools.current.initialize(contentWindow));
+        }
       }
     });
 
     return unsubscribe;
-  }, [clientId, listen, sandpack.clients]);
+  }, [reactDevtools, clientId, listen, sandpack.clients]);
 
   useEffect(() => {
     sandpack.registerReactDevTools();
