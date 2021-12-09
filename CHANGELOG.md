@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.14](https://github.com/codesandbox/sandpack/compare/v0.9.13...v0.9.14) (2021-12-09)
+
+
+### Bug Fixes
+
+* **landing:** set pointerEvents to avoid reset button overlap ([#245](https://github.com/codesandbox/sandpack/issues/245)) ([51be6cf](https://github.com/codesandbox/sandpack/commit/51be6cf8dbee4df309167e07484f67e2c0324ac0))
+* **react-context:** expose clients  ([#241](https://github.com/codesandbox/sandpack/issues/241)) ([f47295d](https://github.com/codesandbox/sandpack/commit/f47295d9cd5365ce9482c02922d0ea6e2db61592))
+* **react:** ensure hidden files even for templates ([#231](https://github.com/codesandbox/sandpack/issues/231)) ([a1461a0](https://github.com/codesandbox/sandpack/commit/a1461a0e58e8c5595209463d965aefb6760215fe))
+
+
+
+
+
 ## [0.9.13](https://github.com/codesandbox/sandpack/compare/v0.9.12...v0.9.13) (2021-12-08)
 
 
