@@ -425,3 +425,54 @@ export const ResetButton: React.FC = () => (
     </SandpackProvider>
   </>
 );
+
+const ListenerIframeMessage = () => {
+  const [message, setMessage] = useState("Hello World");
+  const { sandpack } = useSandpack();
+
+  const sender = () => {
+    Object.values(sandpack.clients).forEach((client) => {
+      client.iframe.contentWindow.postMessage(message, "*");
+    });
+  };
+
+  return (
+    <>
+      <button onClick={sender}>Send message</button>
+      <input
+        onChange={({ target }) => setMessage(target.value)}
+        value={message}
+      />
+    </>
+  );
+};
+
+export const IframeMessage: React.FC = () => (
+  <SandpackProvider
+    template="react"
+    customSetup={{
+      files: {
+        "/App.js": `import {useState, useEffect} from "react";
+
+export default function App() {
+  const [message, setMessage] = useState("")
+
+  useEffect(() => {
+    window.addEventListener("message", (event) => {
+      setMessage(event.data);
+    });
+  }, [])
+
+  return <h1>{message}</h1>
+}
+`,
+      },
+    }}
+  >
+    <ListenerIframeMessage />
+    <SandpackLayout>
+      <SandpackCodeEditor />
+      <SandpackPreview />
+    </SandpackLayout>
+  </SandpackProvider>
+);

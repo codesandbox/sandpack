@@ -44,6 +44,26 @@ the scenes and the template, if omitted, is `vanilla`.
 However, you will notice that the buttons on the Preview look off. This is
 because there is no styling applied to the sandpack components. For styling and theming, you need the `SandpackThemeProvider`.
 
+### Clients
+
+Under one Sandpack provider, you can have multiple `sandpack-clients`. For example, the most common case for multiple clients is when more than one SandpackPreview has been rendered.
+
+To access all the clients or to pass messages to the iframes under the same provider, use the [`useSandpack`](/api/react/#usesandpack) hook, which gives a way to interact with these clients:
+
+```js
+const ListenerIframeMessage = () => {
+  const { sandpack } = useSandpack();
+
+  const sender = () => {
+    Object.values(sandpack.clients).forEach((client) => {
+      client.iframe.contentWindow.postMessage("Hello World", "*");
+    });
+  };
+
+  return <button onClick={sender}>Send message</button>;
+};
+```
+
 ## Theme Provider
 
 The `SandpackThemeProvider` is also exported from the main package. It needs to render inside the `SandpackProvider` and it needs to surround any component that requires styling from sandpack.
