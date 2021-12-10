@@ -5,9 +5,8 @@ import { SandpackThemeProvider } from "../contexts/themeContext";
 import { useSandpack } from "../hooks/useSandpack";
 import type { SandpackThemeProp } from "../types";
 
-export interface SandpackLayoutProps {
+export interface SandpackLayoutProps extends React.HtmlHTMLAttributes<unknown> {
   theme?: SandpackThemeProp;
-  style?: React.CSSProperties;
 }
 
 /**
