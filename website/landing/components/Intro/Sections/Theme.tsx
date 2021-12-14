@@ -47,6 +47,7 @@ export const ThemeExample: React.FC = () => {
 
   useEffect(() => {
     setOptions({ theme });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme]);
 
   useEffect(() => {
@@ -61,9 +62,9 @@ export const ThemeExample: React.FC = () => {
     } else {
       setTheme("sandpack-dark");
     }
-  }, [inView]);
+  }, [higherMobile, inView]);
 
-  const shuffleTheme = () => {
+  const shuffleTheme = (): void => {
     const currentIndex = themeOptions.indexOf(theme);
 
     setTheme(themeOptions[(currentIndex + 1) % themeOptions.length]);
@@ -92,9 +93,9 @@ export const ThemeExample: React.FC = () => {
           <SnippetButton
             ref={boxRef}
             onClick={shuffleTheme}
-            onMouseEnter={() => setToolTipVisibility(true)}
-            onMouseLeave={() => setToolTipVisibility(false)}
-            onMouseMove={(event) =>
+            onMouseEnter={(): void => setToolTipVisibility(true)}
+            onMouseLeave={(): void => setToolTipVisibility(false)}
+            onMouseMove={(event): void =>
               setMousePosition(getRelativeCoordinates(event, boxRef.current))
             }
           >

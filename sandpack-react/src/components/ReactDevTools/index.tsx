@@ -46,6 +46,7 @@ export const SandpackReactDevTools = ({
 
   React.useEffect(() => {
     sandpack.registerReactDevTools();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!ReactDevTools) return null;

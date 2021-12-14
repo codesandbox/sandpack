@@ -15,11 +15,11 @@ export function highlightDecorators(positions: Decorators): Extension {
         this.decorations = this.getDecoration(view);
       }
 
-      update(update: ViewUpdate) {
+      update(update: ViewUpdate): void {
         return;
       }
 
-      getDecoration(view: EditorView) {
+      getDecoration(view: EditorView): DecorationSet {
         if (!positions) return Decoration.none;
 
         const rangesDecorators = positions.map((item) => {

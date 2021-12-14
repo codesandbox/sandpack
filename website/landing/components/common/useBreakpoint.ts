@@ -20,7 +20,8 @@ export const useBreakpoint = (
     checkBreakpoint();
 
     window.addEventListener("resize", checkBreakpoint);
-    return () => {
+
+    return (): void => {
       window.removeEventListener("resize", checkBreakpoint);
     };
   }, [checkBreakpoint]);

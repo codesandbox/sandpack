@@ -37,14 +37,14 @@ export const Banner: React.FC = () => {
     const container = section.current;
     if (!container || !window) return;
 
-    const onResize = () => {
+    const onResize = (): void => {
       setSectionTop(container.offsetTop);
       setSectionHeight(container.offsetHeight);
     };
 
     onResize();
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    return (): void => window.removeEventListener("resize", onResize);
   }, [section]);
 
   return (

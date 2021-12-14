@@ -62,10 +62,11 @@ export const VueCode: React.FC = () => (
 
 export const Decorators: React.FC = () => {
   const [itemClick, setItemClicked] = React.useState();
-  const ref = React.useRef<HTMLDivElement>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ref = React.useRef<any>(null);
 
   React.useEffect(() => {
-    const handle = (event) => {
+    const handle = (event): void => {
       let id = event.target.dataset.id;
 
       if (!id) {
@@ -80,7 +81,7 @@ export const Decorators: React.FC = () => {
       element.addEventListener("click", handle);
     });
 
-    return () => {
+    return (): void => {
       node?.querySelectorAll(".widget").forEach((element) => {
         element.removeEventListener("click", handle);
       });

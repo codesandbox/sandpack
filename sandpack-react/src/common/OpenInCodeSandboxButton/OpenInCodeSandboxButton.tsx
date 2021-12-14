@@ -10,7 +10,7 @@ import { UnstyledOpenInCodeSandboxButton } from "./UnstyledOpenInCodeSandboxButt
 /**
  * @category Components
  */
-export const OpenInCodeSandboxButton: React.FC = () => {
+export const OpenInCodeSandboxButton = (): JSX.Element | null => {
   const { theme } = useSandpackTheme();
   const c = useClasser("sp");
 

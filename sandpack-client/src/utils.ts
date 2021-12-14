@@ -81,7 +81,9 @@ export function extractErrorDetails(msg: SandpackErrorMessage): SandpackError {
   };
 }
 
-function getRelevantStackFrame(frames?: ErrorStackFrame[]) {
+function getRelevantStackFrame(
+  frames?: ErrorStackFrame[]
+): ErrorStackFrame | undefined {
   if (!frames) {
     return;
   }
@@ -89,13 +91,13 @@ function getRelevantStackFrame(frames?: ErrorStackFrame[]) {
   return frames.find((frame) => !!frame._originalFileName);
 }
 
-function getErrorLocation(errorFrame: ErrorStackFrame) {
+function getErrorLocation(errorFrame: ErrorStackFrame): string {
   return errorFrame
     ? ` (${errorFrame._originalLineNumber}:${errorFrame._originalColumnNumber})`
     : ``;
 }
 
-function getErrorInOriginalCode(errorFrame: ErrorStackFrame) {
+function getErrorInOriginalCode(errorFrame: ErrorStackFrame): string {
   const lastScriptLine =
     errorFrame._originalScriptCode[errorFrame._originalScriptCode.length - 1];
   const numberOfLineNumberCharacters =
@@ -138,7 +140,7 @@ function formatErrorMessage(
   message: string,
   location: string,
   errorInCode: string
-) {
+): string {
   return `${filePath}: ${message}${location}
 ${errorInCode}`;
 }

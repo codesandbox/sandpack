@@ -10,7 +10,7 @@ export default {
   title: "hooks/useSandpackNavigation",
 };
 
-const CustomRefreshButton = () => {
+const CustomRefreshButton: React.FC = () => {
   const { refresh } = useSandpackNavigation();
   return (
     <button onClick={refresh} type="button">

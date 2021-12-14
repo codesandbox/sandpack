@@ -2,7 +2,7 @@ import type { SandpackState } from "../types";
 
 import { useSandpack } from "./useSandpack";
 
-function getTranspiledCode(sandpack: SandpackState) {
+function getTranspiledCode(sandpack: SandpackState): string | null {
   const { activePath, bundlerState } = sandpack;
   if (bundlerState == null) {
     return null;

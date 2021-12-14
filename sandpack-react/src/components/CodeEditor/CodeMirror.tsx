@@ -67,7 +67,7 @@ interface CodeMirrorProps {
   editorState?: SandpackEditorState;
   readOnly?: boolean;
   decorators?: Decorators;
-  initMode: SandpackInitMode;
+  initMode?: SandpackInitMode;
 }
 
 export interface CodeMirrorRef {
@@ -109,10 +109,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     });
 
     React.useImperativeHandle(ref, () => ({
-      getCodemirror: () => cmView.current,
+      getCodemirror: (): EditorView | undefined => cmView.current,
     }));
 
-    const shouldInitEditor = () => {
+    const shouldInitEditor = (): boolean => {
       if (initMode === "immediate") {
         return true;
       }
@@ -151,7 +151,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           },
           {
             key: "Escape",
-            run: () => {
+            run: (): boolean => {
               if (readOnly) return true;
 
               if (wrapper.current) {
@@ -218,7 +218,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         const view = new EditorView({
           state: startState,
           parent: parentDiv,
-          dispatch: (tr) => {
+          dispatch: (tr): void => {
             view.update([tr]);
 
             if (tr.docChanged) {
@@ -242,13 +242,14 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         cmView.current = view;
       }, 0);
 
-      return () => {
+      return (): void => {
         cmView.current?.destroy();
 
         clearTimeout(timer);
       };
 
       // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [initEditor, showLineNumbers, wrapContent, themeId, decorators]);
 
     React.useEffect(() => {
@@ -261,6 +262,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       ) {
         cmView.current.contentDOM.focus();
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Update editor when code passed as prop from outside sandpack changes
@@ -271,11 +273,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           changes: { from: 0, to: view.state.doc.length, insert: code },
         });
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [code]);
 
     React.useEffect(
       function messageToInlineError() {
-        if (!showInlineErrors) return () => null;
+        if (!showInlineErrors) return;
 
         const unsubscribe = listen((message) => {
           const view = cmView.current;
@@ -316,12 +319,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           }
         });
 
-        return () => unsubscribe();
+        return (): void => unsubscribe();
       },
       [listen, showInlineErrors]
     );
 
-    const handleContainerKeyDown = (evt: React.KeyboardEvent) => {
+    const handleContainerKeyDown = (evt: React.KeyboardEvent): void => {
       if (evt.key === "Enter" && cmView.current) {
         evt.preventDefault();
         cmView.current.contentDOM.focus();

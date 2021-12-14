@@ -71,22 +71,26 @@ export const SandpackPreview = ({
   loadingScreenRegisteredRef.current = true;
 
   React.useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const iframeElement = iframeRef.current!;
-    registerBundler(iframeElement, clientId.current);
+    const clientIdValue = clientId.current;
 
-    const unsub = listen((message) => {
+    registerBundler(iframeElement, clientIdValue);
+
+    const unsubscribe = listen((message) => {
       if (message.type === "resize") {
         setComputedAutoHeight(message.height);
       }
-    }, clientId.current);
+    }, clientIdValue);
 
-    return () => {
-      unsub();
-      unregisterBundler(clientId.current);
+    return (): void => {
+      unsubscribe();
+      unregisterBundler(clientIdValue);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleNewURL = (newUrl: string) => {
+  const handleNewURL = (newUrl: string): void => {
     if (!iframeRef.current) {
       return;
     }

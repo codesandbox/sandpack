@@ -93,7 +93,7 @@ export const HeroDesktop: React.FC = () => {
     const hero = sectionRef.current;
     if (!hero) return;
 
-    const onResize = () => {
+    const onResize = (): void => {
       const updatedTop = hero.offsetTop;
       setSectionTop(updatedTop);
 
@@ -104,7 +104,7 @@ export const HeroDesktop: React.FC = () => {
     onResize();
 
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    return (): void => window.removeEventListener("resize", onResize);
   }, [sectionRef]);
 
   useLayoutEffect(() => {
@@ -135,7 +135,7 @@ export const HeroDesktop: React.FC = () => {
     const editorElement = editorRef.current?.getCodemirror();
     if (!editorElement) return;
 
-    const finishAnimation = () => {
+    const finishAnimation = (): void => {
       window.scrollTo({
         top: sectionTop + scrollHeight * 1.2 + 2,
         behavior: "smooth",
@@ -146,9 +146,10 @@ export const HeroDesktop: React.FC = () => {
 
     element?.addEventListener("focus", finishAnimation);
 
-    return () => {
+    return (): void => {
       element?.removeEventListener("focus", finishAnimation);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editorRef.current]);
 
   // revert all changes on scroll up
@@ -156,6 +157,7 @@ export const HeroDesktop: React.FC = () => {
     if (!animationComplete) {
       sandpack.resetAllFiles();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animationComplete]);
 
   return (

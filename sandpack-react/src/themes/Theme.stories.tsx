@@ -1,8 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { SANDPACK_THEMES } from ".";
 import { Sandpack } from "../";
+
+import { SANDPACK_THEMES } from ".";
 
 const stories = storiesOf("presets/Themes", module);
 
