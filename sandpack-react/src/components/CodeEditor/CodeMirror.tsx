@@ -3,7 +3,7 @@ import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
 import {
   defaultKeymap,
   indentLess,
-  deleteGroupBackward,
+  deleteToLineStart,
   insertTab,
 } from "@codemirror/commands";
 import { commentKeymap } from "@codemirror/comment";
@@ -162,8 +162,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             },
           },
           {
-            key: "mod-Backspace",
-            run: deleteGroupBackward,
+            key: "Mod-Backspace",
+            run: deleteToLineStart,
           },
         ];
 
