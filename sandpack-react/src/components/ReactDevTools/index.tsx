@@ -7,12 +7,14 @@ import { isDarkColor } from "../../utils/stringUtils";
 
 export const SandpackReactDevTools = ({
   clientId,
+  theme,
   ...props
 }: {
   clientId?: string;
+  theme?: "dark" | "light";
 } & React.HtmlHTMLAttributes<unknown>): JSX.Element | null => {
   const { listen, sandpack } = useSandpack();
-  const { theme } = useSandpackTheme();
+  const { theme: sandpackTheme } = useSandpackTheme();
   const c = useClasser("sp");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const reactDevtools = React.useRef<any>();
@@ -50,11 +52,17 @@ export const SandpackReactDevTools = ({
 
   if (!ReactDevTools) return null;
 
-  const isDarkTheme = isDarkColor(theme.palette.defaultBackground);
+  const getBrowserTheme = (): "dark" | "light" => {
+    if (theme) return theme;
+
+    const isDarkTheme = isDarkColor(sandpackTheme.palette.defaultBackground);
+
+    return isDarkTheme ? "dark" : "light";
+  };
 
   return (
     <div className={c("devtools")} {...props}>
-      <ReactDevTools browserTheme={isDarkTheme ? "dark" : "light"} />
+      <ReactDevTools browserTheme={getBrowserTheme()} />
     </div>
   );
 };
