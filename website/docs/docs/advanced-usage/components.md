@@ -196,8 +196,10 @@ export default function CustomSandpack() {
   return (
     <SandpackProvider template="react">
       <SandpackLayout>
-        <SandpackPreview />
-        <SandpackReactDevTools style={{ width: "50%" }} />
+        <div style={{ display: "flex", width: "100%" }}>
+          <SandpackPreview />
+          <SandpackReactDevTools />
+        </div>
       </SandpackLayout>
     </SandpackProvider>
   )

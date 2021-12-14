@@ -35,9 +35,9 @@ const getFileParameters = (
   });
 };
 
-export const UnstyledOpenInCodeSandboxButton: React.FC<{
-  className?: string;
-}> = ({ children, ...props }) => {
+export const UnstyledOpenInCodeSandboxButton: React.FC<
+  React.HtmlHTMLAttributes<unknown>
+> = ({ children, ...props }) => {
   const [paramsValues, setParamsValues] = React.useState("");
   const { sandpack } = useSandpack();
   const formRef = React.useRef<HTMLFormElement>(null);

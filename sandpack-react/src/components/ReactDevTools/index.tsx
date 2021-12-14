@@ -1,6 +1,5 @@
 import { useClasser } from "@code-hike/classer";
-import type { CSSProperties } from "react";
-import React, { useEffect, useRef, useState } from "react";
+import * as React from "react";
 
 import { useSandpackTheme } from "../..";
 import { useSandpack } from "../../hooks/useSandpack";
@@ -11,25 +10,24 @@ export const SandpackReactDevTools = ({
   ...props
 }: {
   clientId?: string;
-  style?: CSSProperties;
-}): JSX.Element | null => {
+} & React.HtmlHTMLAttributes<unknown>): JSX.Element | null => {
   const { listen, sandpack } = useSandpack();
   const { theme } = useSandpackTheme();
   const c = useClasser("sp");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const reactDevtools = useRef<any>();
+  const reactDevtools = React.useRef<any>();
 
-  const [ReactDevTools, setDevTools] = useState<React.FunctionComponent<{
+  const [ReactDevTools, setDevTools] = React.useState<React.FunctionComponent<{
     browserTheme: "dark" | "light";
   }> | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     import("react-devtools-inline/frontend").then((module) => {
       reactDevtools.current = module;
     });
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const unsubscribe = listen((msg) => {
       if (msg.type === "activate-react-devtools") {
         const client = clientId
@@ -37,14 +35,16 @@ export const SandpackReactDevTools = ({
           : Object.values(sandpack.clients)[0];
         const contentWindow = client?.iframe?.contentWindow;
 
-        setDevTools(reactDevtools.current.initialize(contentWindow));
+        if (reactDevtools.current && contentWindow) {
+          setDevTools(reactDevtools.current.initialize(contentWindow));
+        }
       }
     });
 
     return unsubscribe;
-  }, [clientId, listen, sandpack.clients]);
+  }, [reactDevtools, clientId, listen, sandpack.clients]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     sandpack.registerReactDevTools();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

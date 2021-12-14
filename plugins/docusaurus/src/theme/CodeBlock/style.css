@@ -1,5 +1,28 @@
 @import "@codesandbox/sandpack-react/dist/index.css";
 
 .sp-wrapper {
-    margin-bottom: 2em;
+  margin-bottom: 2em;
+  position: relative;
+}
+
+.sp-wrapper:hover .sandpack__copy-button {
+  opacity: 1;
+}
+
+.sandpack__copy-button {
+  background: none;
+  border: 0;
+  width: 24px;
+
+  position: absolute;
+  right: 1em;
+  top: 1.5em;
+
+  z-index: 99;
+  color: #fff;
+
+  opacity: 0;
+
+  transition: 0.2s ease;
+  cursor: pointer;
 }
