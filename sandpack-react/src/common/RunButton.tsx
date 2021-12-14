@@ -7,7 +7,7 @@ import { RunIcon } from "../icons";
 /**
  * @category Components
  */
-export const RunButton: React.FC = () => {
+export const RunButton = (): JSX.Element | null => {
   const c = useClasser("sp");
   const { sandpack } = useSandpack();
 
