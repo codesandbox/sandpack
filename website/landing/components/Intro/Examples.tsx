@@ -35,7 +35,7 @@ export const Examples: React.FC = () => {
   const [sandpackSectionHeight, setSandpackSectionHeight] = useState(0);
 
   useLayoutEffect(() => {
-    const onResize = () => {
+    const onResize = (): void => {
       if (!sandpackRefSectionTop.current || !sandpackRefSectionHeight.current)
         return;
 
@@ -46,7 +46,7 @@ export const Examples: React.FC = () => {
     onResize();
     window.addEventListener("resize", onResize);
 
-    return () => window.removeEventListener("resize", onResize);
+    return (): void => window.removeEventListener("resize", onResize);
   }, []);
 
   const scrollRangeX = [
@@ -56,7 +56,7 @@ export const Examples: React.FC = () => {
   ];
 
   // Max width that the left container can grow
-  const breakpoint = () => {
+  const breakpoint = (): string => {
     if (isXLarge) return "600px";
     if (isLarge) return "30vw";
     if (isMedium) return "38vw";

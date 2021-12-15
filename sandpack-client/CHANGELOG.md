@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.3](https://github.com/codesandbox/sandpack/compare/v0.10.2...v0.10.3) (2021-12-14)
+
+
+### Bug Fixes
+
+* lint errors ([#234](https://github.com/codesandbox/sandpack/issues/234)) ([2d51830](https://github.com/codesandbox/sandpack/commit/2d518309cfd86222078fde25d399ea12258b3493))
+
+
+
+
+
 # [0.10.0](https://github.com/codesandbox/sandpack/compare/v0.9.14...v0.10.0) (2021-12-09)
 
 

@@ -57,14 +57,14 @@ export const Features: React.FC = () => {
     const sectionEl = sectionRef.current;
     if (!sectionEl) return;
 
-    const onResize = () => {
+    const onResize = (): void => {
       setSectionTop(sectionEl.offsetTop);
       setSectionHeight(sectionEl.offsetHeight);
     };
 
     onResize();
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    return (): void => window.removeEventListener("resize", onResize);
   }, [sectionRef]);
 
   const fadeProps = useMemo(

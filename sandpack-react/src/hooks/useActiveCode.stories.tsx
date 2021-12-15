@@ -10,10 +10,12 @@ export default {
   title: "hooks/useActiveCode",
 };
 
-const CustomEditor = () => {
+const CustomEditor: React.FC = () => {
   const { code, updateCode } = useActiveCode();
   return (
-    <textarea onChange={(evt) => updateCode(evt.target.value)}>{code}</textarea>
+    <textarea onChange={(evt): void => updateCode(evt.target.value)}>
+      {code}
+    </textarea>
   );
 };
 

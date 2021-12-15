@@ -45,6 +45,7 @@ export const TemplateExample: React.FC = () => {
 
   useEffect(() => {
     setOptions({ template });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [template]);
 
   useEffect(() => {
@@ -61,7 +62,7 @@ export const TemplateExample: React.FC = () => {
     }
   }, [higherMobile, inView]);
 
-  const shuffleTemplate = () => {
+  const shuffleTemplate = (): void => {
     const currentIndex = frameworkOptions.indexOf(template);
 
     setTemplate(frameworkOptions[(currentIndex + 1) % frameworkOptions.length]);
@@ -89,9 +90,9 @@ export const TemplateExample: React.FC = () => {
           <SnippetButton
             ref={boxRef}
             onClick={shuffleTemplate}
-            onMouseEnter={() => setToolTipVisibility(true)}
-            onMouseLeave={() => setToolTipVisibility(false)}
-            onMouseMove={(event) =>
+            onMouseEnter={(): void => setToolTipVisibility(true)}
+            onMouseLeave={(): void => setToolTipVisibility(false)}
+            onMouseMove={(event): void =>
               setMousePosition(getRelativeCoordinates(event, boxRef.current))
             }
           >

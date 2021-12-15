@@ -9,7 +9,7 @@ import {
   SandpackLayout,
   useSandpack,
 } from "@codesandbox/sandpack-react";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { CardTitle, CardDescription } from "../../common";
@@ -36,16 +36,19 @@ export const LayoutExample: React.FC = () => {
 
   useLayoutEffect(() => {
     setLayoutFiles(sandpack.activePath, code);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code, sandpack.activePath]);
 
   useEffect(() => {
-    Object.entries(layoutFiles).map(([filename, fileCode]) => {
+    Object.entries(layoutFiles).forEach(([filename, fileCode]) => {
       sandpack.updateFile(filename, fileCode);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     setVisibility(inView);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
   return (

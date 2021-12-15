@@ -40,11 +40,12 @@ export const useLoadingOverlayState = (
       }
     }, clientId);
 
-    return () => {
+    return (): void => {
       clearTimeout(outerHook);
       clearTimeout(innerHook);
       unsub();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (sandpack.status === "timeout") {

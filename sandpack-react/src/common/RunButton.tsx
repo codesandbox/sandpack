@@ -7,14 +7,14 @@ import { RunIcon } from "../icons";
 /**
  * @category Components
  */
-export const RunButton: React.FC = () => {
+export const RunButton = (): JSX.Element | null => {
   const c = useClasser("sp");
   const { sandpack } = useSandpack();
 
   return (
     <button
       className={c("button")}
-      onClick={() => sandpack.runSandpack()}
+      onClick={(): void => sandpack.runSandpack()}
       style={{
         position: "absolute",
         bottom: "var(--sp-space-2)",

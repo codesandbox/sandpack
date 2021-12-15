@@ -49,7 +49,7 @@ export const LayoutExampleProvider: React.FC = ({ children }) => {
     <LayoutContext.Provider
       value={{
         layoutFiles,
-        setLayoutFiles: (filename, code) =>
+        setLayoutFiles: (filename, code): void =>
           setLayoutFiles((prev) => ({ ...prev, [filename]: code })),
         visibility,
         setVisibility,

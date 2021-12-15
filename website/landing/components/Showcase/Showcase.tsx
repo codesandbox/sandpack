@@ -67,14 +67,14 @@ export const Showcase: React.FC = () => {
     const container = sectionRef.current;
     if (!container || !window) return;
 
-    const onResize = () => {
+    const onResize = (): void => {
       setSectionTop(container.offsetTop);
       setSectionScroll(container.offsetHeight - window.innerHeight);
     };
 
     onResize();
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    return (): void => window.removeEventListener("resize", onResize);
   }, [sectionRef]);
 
   return (

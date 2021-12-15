@@ -53,6 +53,7 @@ export const EditorExample: React.FC = () => {
 
   useEffect(() => {
     setOptions({ options: custom });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [custom]);
 
   useEffect(
@@ -78,13 +79,14 @@ export const EditorExample: React.FC = () => {
 
   useEffect(function componentMount() {
     sandpack.updateCurrentFile(ORIGINAL_CODE);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(
     function listener() {
       const newCustomOptions: Record<string, any> = {};
 
-      Object.keys(custom).map((key) => {
+      Object.keys(custom).forEach((key) => {
         const value = code.match(new RegExp(`${key}:(.+)`));
 
         newCustomOptions[key] = value?.[1]?.includes("true") ?? false;
@@ -92,6 +94,7 @@ export const EditorExample: React.FC = () => {
 
       setCustom((prev) => ({ ...prev, ...(newCustomOptions as any) }));
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [code]
   );
 
@@ -128,7 +131,7 @@ export const EditorExample: React.FC = () => {
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
               <RefreshButton
-                onClick={() => {
+                onClick={(): void => {
                   sandpack.updateCurrentFile(ORIGINAL_CODE);
                   setOptions(ORIGINAL_CUSTOM);
                 }}
