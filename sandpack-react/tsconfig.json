@@ -9,10 +9,9 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noImplicitAny": true,
-    "typeRoots": ["node_modules/@types"],
     "jsx": "react",
     "outDir": "dist/types"
   },
   "include": ["src"],
-  "exclude": ["src/**/*.stories.tsx"]
+  "exclude": ["src/**/*.stories.tsx", "src/**/*.test.tsx", "src/**/*.test.ts"]
 }

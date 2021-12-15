@@ -147,7 +147,7 @@ export const getSetup = (
   };
 };
 
-const createSetupFromUserInput = (
+export const createSetupFromUserInput = (
   setup?: SandpackSetup
 ): Partial<SandboxTemplate> | null => {
   if (!setup) {
