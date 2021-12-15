@@ -1,8 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { SANDBOX_TEMPLATES } from ".";
 import { Sandpack } from "../";
+
+import { SANDBOX_TEMPLATES } from ".";
 
 const stories = storiesOf("presets/Template", module);
 

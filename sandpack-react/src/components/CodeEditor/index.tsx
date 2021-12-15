@@ -58,7 +58,7 @@ export const SandpackCodeEditor = React.forwardRef<
 
     const c = useClasser("sp");
 
-    const handleCodeUpdate = (newCode: string) => {
+    const handleCodeUpdate = (newCode: string): void => {
       updateCode(newCode);
     };
 

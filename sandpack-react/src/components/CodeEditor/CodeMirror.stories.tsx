@@ -16,7 +16,7 @@ export const JustEditor: React.FC = () => (
       <CodeEditor
         code="const c = a+b;"
         fileType="jsx"
-        onCodeUpdate={() => console.log("code update")}
+        onCodeUpdate={(): void => console.log("code update")}
       />
     </SandpackThemeProvider>
   </SandpackProvider>

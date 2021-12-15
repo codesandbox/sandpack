@@ -77,7 +77,7 @@ export class IFrameProtocol {
   // This is needed for the `initialize` message which comes without a channelId
   globalListen(listener: ListenerFunction): UnsubscribeFunction {
     if (typeof listener !== "function") {
-      return () => {
+      return (): void => {
         return;
       };
     }
@@ -85,7 +85,7 @@ export class IFrameProtocol {
     const listenerId = this.globalListenersCount;
     this.globalListeners[listenerId] = listener;
     this.globalListenersCount++;
-    return () => {
+    return (): void => {
       delete this.globalListeners[listenerId];
     };
   }
@@ -94,7 +94,7 @@ export class IFrameProtocol {
   // All other messages (eg: from other iframes) are ignored
   channelListen(listener: ListenerFunction): UnsubscribeFunction {
     if (typeof listener !== "function") {
-      return () => {
+      return (): void => {
         return;
       };
     }
@@ -102,13 +102,13 @@ export class IFrameProtocol {
     const listenerId = this.channelListenersCount;
     this.channelListeners[listenerId] = listener;
     this.channelListenersCount++;
-    return () => {
+    return (): void => {
       delete this.channelListeners[listenerId];
     };
   }
 
   // Handles message windows coming from iframes
-  private eventListener(message: MessageEvent) {
+  private eventListener(message: MessageEvent): void {
     if (!message.data.codesandbox) {
       return;
     }

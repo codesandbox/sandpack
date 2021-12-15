@@ -89,6 +89,7 @@ export const CustomExample: React.FC = () => {
     } else {
       setOptions({ customSetup: {} });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code, inView]);
 
   return (
@@ -127,7 +128,7 @@ export const CustomExample: React.FC = () => {
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
               <RefreshButton
-                onClick={() => {
+                onClick={(): void => {
                   sandpack.updateCurrentFile(ORIGINAL_CODE);
                 }}
                 style={{ opacity: code === ORIGINAL_CODE ? 0.3 : 1 }}
@@ -162,7 +163,7 @@ export const CustomExample: React.FC = () => {
   );
 };
 
-const parseFromSandpackToJson = (code: string) => {
+const parseFromSandpackToJson = (code: string): any => {
   try {
     const customSetup = code.match(/customSetup={{([\s\S]*?)}}/)?.[1];
     if (!customSetup) return;

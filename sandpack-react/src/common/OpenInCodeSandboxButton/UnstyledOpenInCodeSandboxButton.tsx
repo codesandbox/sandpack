@@ -10,7 +10,7 @@ const CSB_URL = "https://codesandbox.io/api/v1/sandboxes/define";
 const getFileParameters = (
   files: SandpackBundlerFiles,
   environment?: SandboxEnvironment
-) => {
+): string => {
   type NormalizedFiles = Record<
     string,
     {
@@ -50,7 +50,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
         setParamsValues(params);
       }, 600);
 
-      return () => {
+      return (): void => {
         clearTimeout(timer);
       };
     },
@@ -60,6 +60,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
   // Register the usage of the codesandbox link
   React.useEffect(function registerUsage() {
     sandpack.openInCSBRegisteredRef.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**
@@ -69,7 +70,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
   if (paramsValues.length > 1500) {
     return (
       <button
-        onClick={() => formRef.current?.submit()}
+        onClick={(): void => formRef.current?.submit()}
         title="Open in CodeSandbox"
         {...props}
       >

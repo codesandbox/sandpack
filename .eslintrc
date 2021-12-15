@@ -12,6 +12,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-empty-function": "error",
     // Enforce return types on exported functions or public methods
@@ -43,7 +44,7 @@
 
     // Consistently sort props
     "react/jsx-sort-props": [
-      "warn",
+      "error",
       {
         "ignoreCase": true,
         // key, ref must always come first
@@ -57,7 +58,7 @@
 
     // Group module and relative imports
     "import/order": [
-      "warn",
+      "error",
       {
         // Imports are grouped as follows:
         "groups": [
@@ -79,6 +80,14 @@
       }
     ]
   },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": ["error"]
+      }
+    }
+  ],
   "settings": {
     "version": "detect"
   }

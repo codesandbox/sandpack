@@ -13,8 +13,8 @@ export const useSandpackNavigation = (
   const { dispatch } = useSandpack();
 
   return {
-    refresh: () => dispatch({ type: "refresh" }, clientId),
-    back: () => dispatch({ type: "urlback" }, clientId),
-    forward: () => dispatch({ type: "urlforward" }, clientId),
+    refresh: (): void => dispatch({ type: "refresh" }, clientId),
+    back: (): void => dispatch({ type: "urlback" }, clientId),
+    forward: (): void => dispatch({ type: "urlforward" }, clientId),
   };
 };

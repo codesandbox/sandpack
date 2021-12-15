@@ -91,7 +91,10 @@ export const SandpackContainerMobile = styled("div", {
   },
 });
 
-export const getRelativeCoordinates = (event: any, referenceElement: any) => {
+export const getRelativeCoordinates = (
+  event: any,
+  referenceElement: any
+): Record<"x" | "y", number> => {
   const position = {
     x: event.pageX,
     y: event.pageY,
@@ -178,14 +181,14 @@ export const FadeAnimation: React.FC = ({ children }) => {
     const sectionEl = sectionRef.current;
     if (!sectionEl) return;
 
-    const onResize = () => {
+    const onResize = (): void => {
       setSectionTop(sectionEl.offsetTop);
       setSectionHeight(sectionEl.offsetHeight);
     };
 
     onResize();
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    return (): void => window.removeEventListener("resize", onResize);
   }, [sectionRef]);
 
   const { scrollY } = useViewportScroll();
@@ -214,7 +217,7 @@ export const FadeAnimation: React.FC = ({ children }) => {
   );
 };
 
-FadeAnimation.toString = () => `.fade-animation`;
+FadeAnimation.toString = (): string => `.fade-animation`;
 
 export const CodeWrapper = styled("div", {
   position: "relative",

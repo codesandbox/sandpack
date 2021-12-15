@@ -18,7 +18,7 @@ const activeLineHighlighter = ViewPlugin.fromClass(
       this.decorations = Decoration.none;
     }
 
-    update(update: ViewUpdate) {
+    update(update: ViewUpdate): void {
       let message = null;
 
       update.transactions.forEach((trans) => {
@@ -47,7 +47,7 @@ const activeLineHighlighter = ViewPlugin.fromClass(
     getDecoration(
       view: EditorView,
       message: { type: "clean-error" } | { type: "error"; value: number } | null
-    ) {
+    ): DecorationSet {
       if (message === null || message.type === "clean-error") {
         return Decoration.none;
       }

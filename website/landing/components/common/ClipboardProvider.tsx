@@ -65,7 +65,7 @@ const ClipboardProvider: React.FC = ({ children }) => {
       setToastVisible(false);
     }, 2000);
 
-    return () => clearTimeout(timeout);
+    return (): void => clearTimeout(timeout);
   }, [toastVisible]);
 
   return (
