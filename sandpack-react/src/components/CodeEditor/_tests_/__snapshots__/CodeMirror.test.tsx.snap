@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CodeMirror SyntaxHighlight: HTML 1`] = `
+<div
+  className="sp-wrapper sp-default"
+>
+  <div
+    aria-describedby="enter-instructions-3061"
+    aria-label="Code Editor"
+    className="sp-cm sp-pristine"
+    onKeyDown={[Function]}
+    role="group"
+    tabIndex={0}
+    translate="no"
+  >
+    <pre
+      className="sp-pre-placeholder"
+      style={
+        Object {
+          "marginLeft": 0,
+        }
+      }
+    />
+    <p
+      id="enter-instructions-3061"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      To enter the code editing mode, press Enter. To exit the edit mode, press Escape
+    </p>
+    <p
+      id="exit-instructions-3061"
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      You are editing the code. To exit the edit mode, press Escape
+    </p>
+  </div>
+</div>
+`;

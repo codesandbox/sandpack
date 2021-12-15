@@ -8,6 +8,7 @@ import {
 } from "@codemirror/commands";
 import { commentKeymap } from "@codemirror/comment";
 import { lineNumbers } from "@codemirror/gutter";
+import { defaultHighlightStyle } from "@codemirror/highlight";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
 import { EditorState } from "@codemirror/state";
@@ -90,7 +91,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       editorState = "pristine",
       readOnly = false,
       decorators,
-      initMode,
+      initMode = "lazy",
     },
     ref
   ) => {
@@ -180,6 +181,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             ...customCommandsKeymap,
           ] as KeyBinding[]),
           langSupport,
+
+          defaultHighlightStyle.fallback,
 
           getEditorTheme(theme),
           getSyntaxHighlight(theme),
