@@ -61,33 +61,6 @@ export const VueCode: React.FC = () => (
 );
 
 export const Decorators: React.FC = () => {
-  const [itemClick, setItemClicked] = React.useState();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const ref = React.useRef<any>(null);
-
-  React.useEffect(() => {
-    const handle = (event): void => {
-      let id = event.target.dataset.id;
-
-      if (!id) {
-        id = event.target.parentElement.dataset.id;
-      }
-
-      setItemClicked(id);
-    };
-    const node = ref.current;
-
-    node?.querySelectorAll(".widget").forEach((element) => {
-      element.addEventListener("click", handle);
-    });
-
-    return (): void => {
-      node?.querySelectorAll(".widget").forEach((element) => {
-        element.removeEventListener("click", handle);
-      });
-    };
-  });
-
   return (
     <SandpackProvider
       customSetup={{
@@ -146,10 +119,9 @@ export default function List() {
       }
       `}
       </style>
-      {itemClick && <p>Widget clicked: {itemClick}</p>}
+
       <SandpackThemeProvider>
         <SandpackCodeViewer
-          ref={ref}
           decorators={[
             { className: "highlight", line: 1 },
             { className: "highlight", line: 9 },
