@@ -187,5 +187,6 @@ export type SandpackMessage = BaseSandpackMessage &
       }
     | {
         type: "activate-react-devtools";
+        uid?: string;
       }
   );

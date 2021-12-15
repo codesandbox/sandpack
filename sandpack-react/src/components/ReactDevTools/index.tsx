@@ -30,20 +30,59 @@ export const SandpackReactDevTools = ({
   }, []);
 
   React.useEffect(() => {
+    let unsubscribeMessageListener: () => void | undefined;
+
     const unsubscribe = listen((msg) => {
       if (msg.type === "activate-react-devtools") {
+        /**
+         * Sandpack client
+         */
+        const uid = msg.uid;
         const client = clientId
           ? sandpack.clients[clientId]
           : Object.values(sandpack.clients)[0];
         const contentWindow = client?.iframe?.contentWindow;
 
+        /**
+         * react-devtools-inline
+         */
         if (reactDevtools.current && contentWindow) {
-          setDevTools(reactDevtools.current.initialize(contentWindow));
+          const wall = {
+            listen(listener: (params: unknown) => void): void {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const listenerCallback = (event: MessageEvent<any>): void => {
+                if (event.data.uid === uid) {
+                  listener(event.data);
+                }
+              };
+
+              window.addEventListener("message", listenerCallback);
+
+              unsubscribeMessageListener = (): void => {
+                window.removeEventListener("message", listenerCallback);
+              };
+            },
+            send(event: unknown, payload: unknown): void {
+              contentWindow.postMessage({ event, payload, uid }, "*");
+            },
+          };
+
+          const { createBridge, createStore, initialize } =
+            reactDevtools.current;
+
+          const bridge = createBridge(contentWindow, wall);
+          const store = createStore(bridge);
+          const DevTools = initialize(contentWindow, { bridge, store });
+
+          setDevTools(DevTools);
         }
       }
     });
 
-    return unsubscribe;
+    return (): void => {
+      unsubscribeMessageListener();
+      unsubscribe();
+    };
   }, [reactDevtools, clientId, listen, sandpack.clients]);
 
   React.useEffect(() => {
