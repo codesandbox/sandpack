@@ -43,7 +43,7 @@ export interface SandpackProviderState {
   editorState: EditorState;
   renderHiddenIframe: boolean;
   initMode: SandpackInitMode;
-  reactDevTools: boolean;
+  reactDevTools: "latest" | "legacy";
 }
 
 export interface SandpackProviderProps {
@@ -130,7 +130,7 @@ class SandpackProvider extends React.PureComponent<
       editorState: "pristine",
       renderHiddenIframe: false,
       initMode: this.props.initMode || "lazy",
-      reactDevTools: false,
+      reactDevTools: "latest",
     };
 
     /**
