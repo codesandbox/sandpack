@@ -81,6 +81,35 @@ describe("getSandpackStateFromProps", () => {
       );
     }
   });
+
+  test("show files which are `hidden` & `active` at the same time", () => {
+    const output = getSandpackStateFromProps({
+      template: "react",
+      customSetup: {
+        files: {
+          "/App.js": { hidden: true, active: true, code: "" },
+          "/custom.js": { hidden: true, code: "" },
+        },
+      },
+    });
+
+    expect(output.openPaths.sort()).toEqual(["/App.js"]);
+  });
+
+  test("show `activePath` even when it's hidden", () => {
+    const output = getSandpackStateFromProps({
+      template: "react",
+      activePath: "/App.js",
+      customSetup: {
+        files: {
+          "/App.js": { hidden: true, code: "" },
+          "/custom.js": { hidden: true, code: "" },
+        },
+      },
+    });
+
+    expect(output.activePath).toEqual("/App.js");
+  });
 });
 
 describe("createSetupFromUserInput", () => {
