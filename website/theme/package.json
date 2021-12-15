@@ -1,7 +1,7 @@
 {
   "name": "sandpack-theme",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.10.3-alpha.0",
   "scripts": {
     "build:deps": "yarn workspace @codesandbox/sandpack-client build && yarn workspace @codesandbox/sandpack-react build",
     "dev": "next dev",
@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@codesandbox/sandpack-react": "*",
+    "@codesandbox/sandpack-react": "^0.10.3-alpha.0",
     "framer-motion": "^5.3.3",
     "next": "12.0.3",
     "react": "17.0.2",
