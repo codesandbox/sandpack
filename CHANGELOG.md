@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.4](https://github.com/codesandbox/sandpack/compare/v0.10.3...v0.10.4) (2021-12-15)
+
+
+### Bug Fixes
+
+* **codemirror:** line-height/gutter] calculation ([#262](https://github.com/codesandbox/sandpack/issues/262)) ([77f3f04](https://github.com/codesandbox/sandpack/commit/77f3f04ffe4c4f72d60349b834fc8ef6af3ca71a))
+
+
+
+
+
 ## [0.10.3](https://github.com/codesandbox/sandpack/compare/v0.10.2...v0.10.3) (2021-12-14)
 
 
