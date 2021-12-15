@@ -5,13 +5,15 @@ import { useSandpackTheme } from "../..";
 import { useSandpack } from "../../hooks/useSandpack";
 import { isDarkColor } from "../../utils/stringUtils";
 
+type DevToolsTheme = "dark" | "light";
+
 export const SandpackReactDevTools = ({
   clientId,
   theme,
   ...props
 }: {
   clientId?: string;
-  theme?: "dark" | "light";
+  theme?: DevToolsTheme;
 } & React.HtmlHTMLAttributes<unknown>): JSX.Element | null => {
   const { listen, sandpack } = useSandpack();
   const { theme: sandpackTheme } = useSandpackTheme();
@@ -20,7 +22,7 @@ export const SandpackReactDevTools = ({
   const reactDevtools = React.useRef<any>();
 
   const [ReactDevTools, setDevTools] = React.useState<React.FunctionComponent<{
-    browserTheme: "dark" | "light";
+    browserTheme: DevToolsTheme;
   }> | null>(null);
 
   React.useEffect(() => {
@@ -92,7 +94,7 @@ export const SandpackReactDevTools = ({
 
   if (!ReactDevTools) return null;
 
-  const getBrowserTheme = (): "dark" | "light" => {
+  const getBrowserTheme = (): DevToolsTheme => {
     if (theme) return theme;
 
     const isDarkTheme = isDarkColor(sandpackTheme.palette.defaultBackground);

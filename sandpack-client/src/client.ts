@@ -89,7 +89,13 @@ export interface SandboxInfo {
   disableDependencyPreprocessing?: boolean;
 }
 
-const BUNDLER_URL = "http://localhost:3000/";
+const BUNDLER_URL =
+  process.env.CODESANDBOX_ENV === "development"
+    ? "http://localhost:3000/"
+    : `https://${process.env.PACKAGE_VERSION?.replace(
+        /\./g,
+        "-"
+      )}-sandpack.codesandbox.io/`;
 
 export class SandpackClient {
   selector: string | undefined;
