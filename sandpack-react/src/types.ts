@@ -7,7 +7,6 @@ import type {
   SandpackMessage,
   UnsubscribeFunction,
 } from "@codesandbox/sandpack-client";
-import type { ITemplate } from "codesandbox-import-util-types";
 
 export type SandpackClientDispatch = (
   msg: SandpackMessage,
@@ -89,6 +88,15 @@ export interface SandpackFile {
 export type SandpackFiles = Record<string, string | SandpackFile>;
 
 export interface SandpackSetup {
+  /**
+   * Examples:
+   * ```js
+   * {
+   *  "react": "latest",
+   *  "@material-ui/core": "4.12.3",
+   * }
+   * ```
+   */
   dependencies?: Record<string, string>;
   entry?: string;
   main?: string;
@@ -111,7 +119,33 @@ export interface SandpackSetup {
  */
 export type SandpackInitMode = "immediate" | "lazy" | "user-visible";
 
-export type SandboxEnvironment = ITemplate;
+export type SandboxEnvironment =
+  | "adonis"
+  | "vue-cli"
+  | "preact-cli"
+  | "svelte"
+  | "create-react-app-typescript"
+  | "create-react-app"
+  | "angular-cli"
+  | "parcel"
+  | "@dojo/cli-create-app"
+  | "cxjs"
+  | "gatsby"
+  | "nuxt"
+  | "next"
+  | "reason"
+  | "apollo"
+  | "sapper"
+  | "ember"
+  | "nest"
+  | "static"
+  | "styleguidist"
+  | "gridsome"
+  | "vuepress"
+  | "mdx-deck"
+  | "quasar"
+  | "docusaurus"
+  | "node";
 
 export type SandpackPredefinedTemplate =
   | "angular"

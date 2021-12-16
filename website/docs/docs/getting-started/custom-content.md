@@ -202,4 +202,4 @@ If you change the path of the entry file, make sure you control all the files th
 
 Sometimes you might not want to start from any of the preset templates. If so, you can pass a full `customSetup` object that contains everything needed for your custom `Sandpack` configuration.
 
-Most individual parts of the `customSetup` have been described above, but for a full overview of what is accepted in a custom setup, check out the [type definitions](https://github.com/codesandbox/sandpack/blob/main/sandpack-react/src/types.ts).
+Most individual parts of the `customSetup` have been described above, but for a full overview of what is accepted in a custom setup, check out the [type definitions](/api/react/interfaces/SandpackSetup).
