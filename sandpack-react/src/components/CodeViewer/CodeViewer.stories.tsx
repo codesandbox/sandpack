@@ -139,7 +139,7 @@ export default function List() {
               endColumn: 17,
             },
           ]}
-          showLineNumbers
+          showLineNumbers={false}
         />
       </SandpackThemeProvider>
     </SandpackProvider>

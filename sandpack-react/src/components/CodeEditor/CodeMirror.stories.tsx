@@ -30,6 +30,7 @@ export const HTML: React.FC = () => (
       fileType="html"
       id="html"
       initMode="immediate"
+      showLineNumbers={false}
     />
   </SandpackProvider>
 );
@@ -67,6 +68,7 @@ switch (expr) {
       fileType="js"
       id="js"
       initMode="immediate"
+      showLineNumbers={false}
     />
   </SandpackProvider>
 );
@@ -92,6 +94,7 @@ export default function App() {
       fileType="jsx"
       id="jsx"
       initMode="immediate"
+      showLineNumbers={false}
     />
   </SandpackProvider>
 );
@@ -117,6 +120,7 @@ p {
       fileType="css"
       id="css"
       initMode="immediate"
+      showLineNumbers={false}
     />
   </SandpackProvider>
 );
@@ -136,6 +140,7 @@ export const Less: React.FC = () => (
       fileType="less"
       id="less"
       initMode="immediate"
+      showLineNumbers={false}
     />
   </SandpackProvider>
 );
@@ -163,6 +168,7 @@ export default {
       fileType="vue"
       id="vue"
       initMode="immediate"
+      showLineNumbers={false}
     />
   </SandpackProvider>
 );
