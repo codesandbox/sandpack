@@ -8,7 +8,8 @@
     // TypeScript specific rules
     "plugin:@typescript-eslint/recommended",
     // Disable eslint rules that conflict with Prettier's formatting
-    "prettier"
+    "prettier",
+    "plugin:cypress/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
