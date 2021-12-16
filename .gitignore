@@ -110,3 +110,6 @@ dist
 # Autogenerate docs
 website/docs/docs/api/client
 website/docs/docs/api/react
+
+cypress/videos
+cypress/screenshots

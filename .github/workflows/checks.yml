@@ -2,8 +2,33 @@ name: Continuous Integration
 on: push
 
 jobs:
+  integration:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Setup | Build
+        run: yarn run build
+
+      - name: Start | Storybook
+        run: yarn dev:react wait-on http://localhost:6006 &&
+
+      - name: Test | Jest
+        run: yarn run test
+
   test:
-    name: Test
+    name: Unit tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

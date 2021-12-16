@@ -18,7 +18,8 @@
     "format:check": "prettier --check '**/*.{ts,tsx}'",
     "format": "prettier --write '**/*.{ts,tsx}'",
     "test": "jest",
-    "cypress:open": "cypress open",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "build": "yarn workspace @codesandbox/sandpack-client run build && yarn workspace @codesandbox/sandpack-react run build",
     "prepare": "husky install",
     "clean": "yarn workspaces run clean",
@@ -58,6 +59,7 @@
     "lerna-changelog": "^2.1.0",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
-    "react-test-renderer": "^17.0.2"
+    "react-test-renderer": "^17.0.2",
+    "wait-on": "^6.0.0"
   }
 }

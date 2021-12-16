@@ -69,6 +69,7 @@ interface CodeMirrorProps {
   readOnly?: boolean;
   decorators?: Decorators;
   initMode: SandpackInitMode;
+  id?: string;
 }
 
 export interface CodeMirrorRef {
@@ -92,6 +93,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       readOnly = false,
       decorators,
       initMode = "lazy",
+      id,
     },
     ref
   ) => {
@@ -102,7 +104,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     const [internalCode, setInternalCode] = React.useState<string>(code);
     const c = useClasser("sp");
     const { listen } = useSandpack();
-    const ariaId = React.useRef<string>(generateRandomId());
+    const ariaId = React.useRef<string>(id ?? generateRandomId());
 
     const { isIntersecting } = useIntersectionObserver(wrapper, {
       rootMargin: "600px 0px",
