@@ -171,5 +171,6 @@ export const useCombinedRefs = <T extends any>(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (ref as any).current = element;
       }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     refs
   );

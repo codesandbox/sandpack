@@ -10,9 +10,9 @@ import { Hero } from "../components/Hero";
 import { Intro } from "../components/Intro";
 import { Showcase } from "../components/Showcase";
 import { Users } from "../components/Users";
+import { ClipboardProvider } from "../components/common";
 import { styled } from "../stitches.config";
 import content from "../website.config.json";
-import { ClipboardProvider } from "../components/common";
 
 const DEFAULT_HOST = "https://sandpack.codesandbox.io";
 

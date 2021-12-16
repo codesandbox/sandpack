@@ -336,7 +336,7 @@ export const createThemeObject = (
   };
 };
 
-const simpleHashFunction = (str: string) => {
+const simpleHashFunction = (str: string): number => {
   let hash = 0;
   for (let i = 0; i < str.length; hash &= hash) {
     hash = 31 * hash + str.charCodeAt(i++);

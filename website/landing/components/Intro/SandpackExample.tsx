@@ -27,7 +27,7 @@ export const SandpackExampleProvider: React.FC = ({ children }) => {
   return (
     <SandpackExampleContext.Provider
       value={{
-        setOptions: (payload) =>
+        setOptions: (payload): void =>
           setOptions((prev) => ({ ...prev, ...payload })),
         options,
       }}
