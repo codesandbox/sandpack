@@ -1,4 +1,4 @@
-name: Release (Canary)
+name: Release (beta)
 
 on:
   push:
