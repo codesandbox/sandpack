@@ -119,7 +119,6 @@ export default function List() {
       }
       `}
       </style>
-
       <SandpackThemeProvider>
         <SandpackCodeViewer
           decorators={[
@@ -140,7 +139,7 @@ export default function List() {
               endColumn: 17,
             },
           ]}
-          showLineNumbers
+          showLineNumbers={false}
         />
       </SandpackThemeProvider>
     </SandpackProvider>

@@ -1,7 +1,47 @@
-name: Continuous Integration
+name: CI
 on: push
 
 jobs:
+  integration:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          build: yarn build
+          start: yarn dev:react
+          config: video=false
+
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Setup | Build
+        run: yarn run build
+
+      - name: Test | Jest
+        run: yarn run test
+
   lint:
     name: Lint
     runs-on: ubuntu-latest

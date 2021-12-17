@@ -1,4 +1,4 @@
-name: "Lint PR"
+name: Lint pull request name
 
 on:
   pull_request:
