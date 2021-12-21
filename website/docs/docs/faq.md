@@ -11,7 +11,7 @@ Sandpack is an open ecosystem of components and utilities that allow you to comp
 
 **How to load local or private dependencies?**
 
-Currently, Sandpack doesn’t have a way to consume private dependencies from any kind of registry service, due to the bundler host is shared with all Sandpack consumers apps. However, you can pass local dependencies just like a regular file or using external resource API:
+Currently, Sandpack doesn’t have a way to consume private dependencies from any kind of registry service, because the bundler host is shared with all Sandpack consumers apps. However, you can pass local dependencies just like a regular file or using the external resource API:
 
 ```jsx
 <Sandpack
