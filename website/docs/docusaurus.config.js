@@ -151,9 +151,9 @@ module.exports = {
     ({
       sandpack: { theme: "sandpack-dark" },
       algolia: {
-        apiKey: "cb6b75b34a1f388c0620d79165a44c3b",
+        apiKey: "055930448277966c60482899d8f5eba7",
         indexName: "sandpack",
-        appId: "BH4D9OD16A",
+        appId: "4CQ5YKSTHC",
       },
       colorMode: {
         defaultMode: "dark",
