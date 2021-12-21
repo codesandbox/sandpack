@@ -33,7 +33,7 @@ Currently, Sandpack doesn’t have a way to consume private dependencies from an
 
 **Does Sandpack support NextJs or other server-side applications?**
 
-Therefore we can't currently support this in the Sandpack library, due to technical limitations. Supporting this in the future would likely require logins and a paid service tier.
+We can't currently support this in the Sandpack library, due to technical limitations. Supporting this in the future would likely require logins and a paid service tier.
 
 **How to highlight TypeScript errors in the editor?**
 
