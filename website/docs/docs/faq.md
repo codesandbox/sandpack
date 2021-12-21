@@ -7,7 +7,7 @@ title: FAQ
 
 **What is Sandpack?**
 
-Sandpack is an open ecosystem of components and utilities that allow you to compile and run modern frameworks in the browser. You can either use one of our predefined `components` for embedding the *CodeSandbox* experience into your projects, or you can build your own version of `sandpack`, on top of our standard components and utilities. As you walk through this guide, you will get deeper into our ecosystem.
+Sandpack is an open ecosystem of components and utilities that allow you to compile and run modern frameworks in the browser. You can either use one of our predefined `components` for embedding the *CodeSandbox* experience into your projects, or you can build your own version of `sandpack`, on top of our standard components and utilities.
 
 **How to load local or private dependencies?**
 
@@ -33,7 +33,7 @@ Currently, Sandpack doesn’t have a way to consume private dependencies from an
 
 **Does Sandpack support NextJs or other server-side applications?**
 
-These kinds of sandboxes are backed by a container running on a server. Therefore we can't easily support this in the Sandpack library, as you'd probably have to host your own servers in that case or integrate entirely with our APIs, which likely requires logins and paying above certain limits.
+Therefore we can't currently support this in the Sandpack library, due to technical limitations. Supporting this in the future would likely require logins and a paid service tier.
 
 **How to highlight TypeScript errors in the editor?**
 
