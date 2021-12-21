@@ -1,6 +1,6 @@
-import { create } from "react-test-renderer";
-import { FileTabs } from "./index";
 import React from "react";
+import { create } from "react-test-renderer";
+
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackCodeEditor } from "../CodeEditor";
 
@@ -8,7 +8,6 @@ describe("FileTabs", () => {
   it("doesn't have duplicate filename", () => {
     const component = create(
       <SandpackProvider
-        template="react"
         customSetup={{
           files: {
             "/foo/App.js": "",
@@ -16,6 +15,7 @@ describe("FileTabs", () => {
             "/baz/App.js": "",
           },
         }}
+        template="react"
       >
         <SandpackCodeEditor />
       </SandpackProvider>

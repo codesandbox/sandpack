@@ -33,7 +33,7 @@ export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
     sandpack.closeFile(pathToClose);
   };
 
-  const getTriggerText = (currentPath: string) => {
+  const getTriggerText = (currentPath: string): string => {
     const documentFileName = getFileName(currentPath);
 
     const pathsWithDuplicateFileNames = openPaths.reduce((prev, curr) => {
