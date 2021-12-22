@@ -48,7 +48,7 @@ export interface SandpackState {
   setActiveFile: (path: string) => void;
   resetFile: (path: string) => void;
   resetAllFiles: () => void;
-  registerReactDevTools: (value: Required<ReactDevToolsMode>) => void;
+  registerReactDevTools: (value: ReactDevToolsMode) => void;
 
   // Element refs
   // Different components inside the SandpackProvider might register certain elements of interest for sandpack

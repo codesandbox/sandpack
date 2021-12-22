@@ -44,7 +44,7 @@ export interface SandpackProviderState {
   editorState: EditorState;
   renderHiddenIframe: boolean;
   initMode: SandpackInitMode;
-  reactDevTools: ReactDevToolsMode;
+  reactDevTools?: ReactDevToolsMode;
 }
 
 export interface SandpackProviderProps {
@@ -187,7 +187,7 @@ class SandpackProvider extends React.PureComponent<
   /**
    * @hidden
    */
-  registerReactDevTools = (value: Required<ReactDevToolsMode>): void => {
+  registerReactDevTools = (value: ReactDevToolsMode): void => {
     this.setState({ reactDevTools: value });
   };
 

@@ -21,7 +21,7 @@ export type Modules = Record<
 
 export type Dependencies = Record<string, string>;
 
-export type ReactDevToolsMode = "latest" | "legacy" | undefined;
+export type ReactDevToolsMode = "latest" | "legacy";
 
 export interface ModuleSource {
   fileName: string;
