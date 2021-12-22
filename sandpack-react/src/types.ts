@@ -1,6 +1,7 @@
 import type {
   BundlerState,
   ListenerFunction,
+  ReactDevToolsMode,
   SandpackBundlerFiles,
   SandpackClient,
   SandpackError,
@@ -47,7 +48,7 @@ export interface SandpackState {
   setActiveFile: (path: string) => void;
   resetFile: (path: string) => void;
   resetAllFiles: () => void;
-  registerReactDevTools: () => void;
+  registerReactDevTools: (value: ReactDevToolsMode) => void;
 
   // Element refs
   // Different components inside the SandpackProvider might register certain elements of interest for sandpack

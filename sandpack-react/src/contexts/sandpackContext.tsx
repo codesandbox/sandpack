@@ -5,8 +5,8 @@ import type {
   SandpackError,
   SandpackMessage,
   UnsubscribeFunction,
+  ReactDevToolsMode,
 } from "@codesandbox/sandpack-client";
-import { ReactDevToolsMode } from "@codesandbox/sandpack-client";
 import {
   SandpackClient,
   extractErrorDetails,
@@ -44,7 +44,7 @@ export interface SandpackProviderState {
   editorState: EditorState;
   renderHiddenIframe: boolean;
   initMode: SandpackInitMode;
-  reactDevTools: ReactDevToolsMode;
+  reactDevTools?: ReactDevToolsMode;
 }
 
 export interface SandpackProviderProps {
@@ -131,7 +131,7 @@ class SandpackProvider extends React.PureComponent<
       editorState: "pristine",
       renderHiddenIframe: false,
       initMode: this.props.initMode || "lazy",
-      reactDevTools: "latest",
+      reactDevTools: undefined,
     };
 
     /**
@@ -187,8 +187,8 @@ class SandpackProvider extends React.PureComponent<
   /**
    * @hidden
    */
-  registerReactDevTools = (): void => {
-    this.setState({ reactDevTools: "latest" });
+  registerReactDevTools = (value: ReactDevToolsMode): void => {
+    this.setState({ reactDevTools: value });
   };
 
   /**
