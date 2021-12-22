@@ -45,7 +45,7 @@ export const SandpackReactDevTools = ({
   }, [reactDevtools, clientId, listen, sandpack.clients]);
 
   React.useEffect(() => {
-    sandpack.registerReactDevTools();
+    sandpack.registerReactDevTools("legacy");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
