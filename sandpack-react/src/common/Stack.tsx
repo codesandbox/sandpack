@@ -4,7 +4,11 @@ import * as React from "react";
 import { css, THEME_PREFIX } from "../styles";
 import { classNames } from "../utils/classNames";
 
-const stack = css({ display: "flex", flexDirection: "column", width: "100%" });
+export const stackClassName = css({
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+});
 
 /**
  * @category Components
@@ -16,7 +20,7 @@ export const SandpackStack: React.FC<{ customStyle?: React.CSSProperties }> = ({
   const c = useClasser(THEME_PREFIX);
 
   return (
-    <div className={classNames(c("stack"), stack)} style={customStyle}>
+    <div className={classNames(c("stack"), stackClassName)} style={customStyle}>
       {children}
     </div>
   );

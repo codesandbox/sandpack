@@ -7,7 +7,7 @@ import { defaultLight } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
 import { classNames } from "../utils/classNames";
 
-const wrapper = css({
+const wrapperClassName = css({
   all: "initial",
   fontSize: "$font$size",
   fontFamily: "$font$body",
@@ -76,7 +76,7 @@ const SandpackThemeProvider: React.FC<{
         className={classNames(
           c("wrapper"),
           themeClassName.toString(),
-          wrapper()
+          wrapperClassName
         )}
       >
         {props.children}

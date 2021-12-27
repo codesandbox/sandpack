@@ -1,37 +1,3 @@
-.sp-layout > .sp-stack {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0;
-  min-width: 350px;
-  height: var(--sp-layout-height);
-}
-
-@media print {
-  .sp-layout > .sp-stack {
-    height: auto;
-    display: block;
-  }
-}
-
-.sp-layout > *:not(:first-child) {
-  border-left: 1px solid var(--sp-colors-inactiveText);
-  border-top: 1px solid var(--sp-colors-inactiveText);
-  margin-left: -1px;
-  margin-top: -1px;
-  position: relative;
-}
-
-.sp-layout > *:first-child .sp-overlay {
-  border-right: 1px solid var(--sp-colors-inactiveText);
-}
-
-@media screen and (max-width: 768px) {
-  .sp-layout > .sp-stack {
-    height: auto;
-    min-width: 100% !important; /* triggers the layout break at the 768px breakpoint, not when the component is less then 700px */
-  }
-}
-
 /* Components styling */
 
 .sp-pre-placeholder {
@@ -279,18 +245,6 @@
   color: var(--sp-colors-activeText);
 }
 
-.sp-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  margin: 0;
-  overflow: auto;
-  height: 100%;
-  z-index: 3;
-}
-
 .sp-loading {
   background-color: var(--sp-colors-defaultBackground);
   z-index: 5;
@@ -394,18 +348,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.sp-error {
-  padding: var(--sp-space-4);
-  white-space: pre-wrap;
-  font-family: var(--sp-font-mono);
-  background-color: var(--sp-colors-errorBackground);
-}
-
-.sp-error-message {
-  animation: sp-fade-in 0.15s ease-in;
-  color: var(--sp-colors-errorForeground);
 }
 
 .sp-devtools {
