@@ -1,4 +1,4 @@
-import { css } from ".";
+import { css, keyframes } from ".";
 
 export const buttonClassName = css({
   appearance: "none",
@@ -21,6 +21,15 @@ export const buttonClassName = css({
   "&:disabled": { color: "$colors$inactiveText" },
   "&:focus": { outline: "none" },
   "&:focus-visible": { outline: "2px solid $colors$accent" },
+
+  "&.sp-csb-icon-dark": {
+    color: "$colors$defaultBackground",
+  },
+
+  "&.sp-csb-icon-dark:hover:not(:disabled)": {
+    backgroundColor: "$colors-activeBackground",
+    color: "var(--sp-colors-activeBackground",
+  },
 });
 
 export const iconStandaloneClassName = css({
@@ -42,3 +51,39 @@ export const explorerClassName = css({
 });
 
 export const iconClassName = css({ padding: 0 });
+
+const fadeIn = keyframes({
+  "0%": {
+    opacity: 0,
+    transform: "translateY(4px)",
+  },
+
+  "100%": {
+    opacity: 1,
+    transform: "translateY(0)",
+  },
+});
+
+export const errorOverlayClassName = css({
+  position: "absolute",
+  bottom: "0",
+  left: "0",
+  right: "0",
+  top: "0",
+  margin: "0",
+  overflow: "auto",
+  height: "100%",
+  zIndex: 3,
+});
+
+export const errorClassName = css({
+  padding: "$space$4",
+  whiteSpace: "pre-wrap",
+  fontFamily: "$font$mono",
+  backgroundColor: "$colors$errorBackground",
+});
+
+export const errorMessageClassName = css({
+  animation: `${fadeIn} 0.15s ease-in`,
+  color: "$colors$errorForeground",
+});

@@ -19,7 +19,6 @@
     "build": "node build.js && yarn run build:types && yarn build:css",
     "build:publish": "yarn build",
     "build:types": "tsc -p tsconfig.json",
-    "build:css": "postcss src/styles/index.css -o dist/index.css -u autoprefixer -u cssnano",
     "start": "tsc -p tsconfig.esm.json --watch",
     "storybook": "start-storybook -p 6006 --no-dll",
     "build-storybook": "build-storybook --no-dll",
@@ -69,8 +68,6 @@
     "cross-env": "^5.1.3",
     "cssnano": "^4.1.10",
     "dotenv": "^8.2.0",
-    "postcss": "^8.2.6",
-    "postcss-cli": "^8.3.1",
     "rimraf": "^2.6.1",
     "storybook-addon-jsx": "^7.3.4",
     "typescript": "4.0.3"

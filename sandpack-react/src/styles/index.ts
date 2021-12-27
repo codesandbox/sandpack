@@ -5,7 +5,7 @@ import { defaultLight, SANDPACK_THEMES } from "..";
 
 export const THEME_PREFIX = "sp";
 
-export const { createTheme, css, getCssText } = createStitches({
+export const { createTheme, css, getCssText, keyframes } = createStitches({
   prefix: THEME_PREFIX,
 });
 

@@ -7,7 +7,7 @@ export const placeholderClassName = css({
   fontFamily: "$font$mono",
   fontSize: "$font$size",
   color: "$colors$activeText",
-  lineHeight: "$line$height",
+  lineHeight: "$font$lineHeight",
 });
 
 export const editorClassName = css({

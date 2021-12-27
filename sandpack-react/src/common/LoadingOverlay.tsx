@@ -2,19 +2,31 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useLoadingOverlayState } from "../hooks/useLoadingOverlayState";
+import { css, THEME_PREFIX } from "../styles";
+import {
+  errorOverlayClassName,
+  errorClassName,
+  errorMessageClassName,
+} from "../styles/shared";
+import { classNames } from "../utils/classNames";
 
-import { OpenInCodeSandboxButton } from "./OpenInCodeSandboxButton";
+import { Loading } from "./Loading";
 
 export interface LoadingOverlayProps {
   clientId?: string;
 }
+
+const loadingClassName = css({
+  backgroundColor: "$colors$defaultBackground",
+  zIndex: 5,
+});
 
 /**
  * @category Components
  */
 export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
   const loadingOverlayState = useLoadingOverlayState(clientId);
-  const c = useClasser("sp");
+  const c = useClasser(THEME_PREFIX);
 
   if (loadingOverlayState === "hidden") {
     return null;
@@ -22,20 +34,28 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
 
   if (loadingOverlayState === "timeout") {
     return (
-      <div className={c("overlay", "error")}>
-        <div className={c("error-message")}>
+      <div
+        className={classNames(
+          c("overlay", "error"),
+          errorOverlayClassName,
+          errorClassName
+        )}
+      >
+        <div
+          className={(classNames(c("error-message")), errorMessageClassName)}
+        >
           Unable to establish connection with the sandpack bundler. Make sure
           you are online or try again later. If the problem persists, please
           report it via{" "}
           <a
-            className={c("error-message")}
+            className={classNames(c("error-message"), errorMessageClassName)}
             href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error"
           >
             email
           </a>{" "}
           or submit an issue on{" "}
           <a
-            className={c("error-message")}
+            className={classNames(c("error-message"), errorMessageClassName)}
             href="https://github.com/codesandbox/sandpack/issues"
             rel="noreferrer noopener"
             target="_blank"
@@ -49,25 +69,17 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
 
   return (
     <div
-      className={c("overlay", "loading")}
+      className={classNames(
+        c("overlay", "loading"),
+        errorOverlayClassName,
+        loadingClassName
+      )}
       style={{
         opacity: loadingOverlayState === "visible" ? 1 : 0,
         transition: "opacity 0.5s ease-out",
       }}
     >
-      <div className="sp-cube-wrapper" title="Open in CodeSandbox">
-        <OpenInCodeSandboxButton />
-        <div className="sp-cube">
-          <div className="sp-sides">
-            <div className="sp-top" />
-            <div className="sp-right" />
-            <div className="sp-bottom" />
-            <div className="sp-left" />
-            <div className="sp-front" />
-            <div className="sp-back" />
-          </div>
-        </div>
-      </div>
+      <Loading />
     </div>
   );
 };

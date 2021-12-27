@@ -23,7 +23,6 @@ const NestedSandpack: React.FC<{ nestedProps?: string; setupCode?: string }> = (
     setupCode
       ? setupCode
       : `import { Sandpack } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";`
   }
 
 export default function App() {

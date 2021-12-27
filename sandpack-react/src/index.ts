@@ -3,7 +3,6 @@
  *
  * ```jsx
  * import { Sandpack } from "@codesandbox/sandpack-react";
- * import "@codesandbox/sandpack-react/dist/index.css";
  *
  * <Sandpack template="react" />;
  * ```

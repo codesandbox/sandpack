@@ -2,32 +2,13 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useErrorMessage } from "../hooks/useErrorMessage";
-import { css, THEME_PREFIX } from "../styles";
+import { THEME_PREFIX } from "../styles";
+import {
+  errorOverlayClassName,
+  errorClassName,
+  errorMessageClassName,
+} from "../styles/shared";
 import { classNames } from "../utils/classNames";
-
-export const errorOverlayClassName = css({
-  position: "absolute",
-  bottom: "0",
-  left: "0",
-  right: "0",
-  top: "0",
-  margin: "0",
-  overflow: "auto",
-  height: "100%",
-  zIndex: 3,
-});
-
-const errorClassName = css({
-  padding: "$space$4",
-  whiteSpace: "pre-wrap",
-  fontFamily: "$font$mono",
-  backgroundColor: "$colors$errorBackground",
-});
-
-const errorMessageClassName = css({
-  animation: "sp-fade-in 0.15s ease-in",
-  color: "$colors$errorForeground",
-});
 
 /**
  * @category Components
