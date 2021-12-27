@@ -18,6 +18,6 @@ export * from "./contexts/sandpackContext";
 export * from "./contexts/themeContext";
 export * from "./themes";
 export * from "./types";
-export { getCssText } from "./styles";
+export { getCssText as getSandpackCssText } from "./styles";
 
 export * from "@code-hike/classer";

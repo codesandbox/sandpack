@@ -1,6 +1,6 @@
-import React from "react";
+import { getSandpackCssText } from "@codesandbox/sandpack-react";
 import NextDocument, { Html, Head, Main, NextScript } from "next/document";
-import { getCssText } from "@codesandbox/sandpack-react";
+import React from "react";
 
 export default class Document extends NextDocument {
   render() {
@@ -8,8 +8,8 @@ export default class Document extends NextDocument {
       <Html lang="en">
         <Head>
           <style
+            dangerouslySetInnerHTML={{ __html: getSandpackCssText() }}
             id="sandpack"
-            dangerouslySetInnerHTML={{ __html: getCssText() }}
           />
         </Head>
         <body>

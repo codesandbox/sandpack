@@ -16,7 +16,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "yarn run clean",
-    "build": "node build.js && yarn run build:types && yarn build:css",
+    "build": "node build.js && yarn run build:types",
     "build:publish": "yarn build",
     "build:types": "tsc -p tsconfig.json",
     "start": "tsc -p tsconfig.esm.json --watch",

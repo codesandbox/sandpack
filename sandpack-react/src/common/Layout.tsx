@@ -4,10 +4,11 @@ import * as React from "react";
 import { SandpackThemeProvider } from "../contexts/themeContext";
 import { useSandpack } from "../hooks/useSandpack";
 import { css, THEME_PREFIX } from "../styles";
+import { errorOverlayClassName } from "../styles/shared";
 import type { SandpackThemeProp } from "../types";
 import { classNames } from "../utils/classNames";
 
-import { errorOverlayClassName, stackClassName } from ".";
+import { stackClassName } from ".";
 
 export interface SandpackLayoutProps extends React.HtmlHTMLAttributes<unknown> {
   theme?: SandpackThemeProp;

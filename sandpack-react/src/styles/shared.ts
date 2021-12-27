@@ -27,8 +27,8 @@ export const buttonClassName = css({
   },
 
   "&.sp-csb-icon-dark:hover:not(:disabled)": {
-    backgroundColor: "$colors-activeBackground",
-    color: "var(--sp-colors-activeBackground",
+    backgroundColor: "$colors$activeBackground",
+    color: "$colors$activeBackground",
   },
 });
 
