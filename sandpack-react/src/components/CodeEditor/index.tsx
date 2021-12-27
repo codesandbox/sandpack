@@ -5,11 +5,14 @@ import { RunButton } from "../../common/RunButton";
 import { SandpackStack } from "../../common/Stack";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
+import { THEME_PREFIX } from "../../styles";
 import type { SandpackInitMode } from "../../types";
+import { classNames } from "../../utils/classNames";
 import { FileTabs } from "../FileTabs";
 
 import { CodeMirror } from "./CodeMirror";
 import type { CodeMirrorRef } from "./CodeMirror";
+import { editorClassName } from "./styles";
 
 export type CodeEditorRef = CodeMirrorRef;
 export interface CodeEditorProps {
@@ -56,7 +59,7 @@ export const SandpackCodeEditor = React.forwardRef<
     const { activePath, status, editorState } = sandpack;
     const shouldShowTabs = showTabs ?? sandpack.openPaths.length > 1;
 
-    const c = useClasser("sp");
+    const c = useClasser(THEME_PREFIX);
 
     const handleCodeUpdate = (newCode: string): void => {
       updateCode(newCode);
@@ -66,7 +69,7 @@ export const SandpackCodeEditor = React.forwardRef<
       <SandpackStack customStyle={customStyle}>
         {shouldShowTabs ? <FileTabs closableTabs={closableTabs} /> : null}
 
-        <div className={c("code-editor")}>
+        <div className={classNames(c("code-editor"), editorClassName)}>
           <CodeMirror
             key={activePath}
             ref={ref}

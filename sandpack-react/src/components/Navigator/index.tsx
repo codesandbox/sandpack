@@ -3,8 +3,41 @@ import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { BackwardIcon, ForwardIcon, RefreshIcon } from "../../icons";
+import { THEME_PREFIX } from "../../styles";
+import { css } from "../../styles";
+import { buttonClassName, iconClassName } from "../../styles/shared";
+import { classNames } from "../../utils/classNames";
 
 import { splitUrl } from "./utils";
+
+const navigatorClassName = css({
+  display: "flex",
+  alignItems: "center",
+  height: "40px",
+  borderBottom: "1px solid $colors$inactiveText",
+  padding: "$space$2 $space$4",
+  background: "$colors$defaultBackground",
+});
+
+const inputClassName = css({
+  backgroundColor: "$colors$inputBackground",
+  color: "$colors$defaultText",
+  padding: "$space$1 $space$2",
+  borderRadius: "$border$radius",
+  border: "1px solid $colors$inactiveText",
+  height: "24px",
+  lineHeight: "24px",
+  fontSize: "inherit",
+  outline: "none",
+  flex: 1,
+  marginLeft: "$space$4",
+  width: "0",
+
+  "&:focus": {
+    border: "1px solid $colors$accent",
+    color: "$colors$activeText",
+  },
+});
 
 export interface NavigatorProps {
   clientId?: string;
@@ -28,7 +61,7 @@ export const Navigator = ({
   const [backEnabled, setBackEnabled] = React.useState(false);
   const [forwardEnabled, setForwardEnabled] = React.useState(false);
 
-  const c = useClasser("sp");
+  const c = useClasser(THEME_PREFIX);
 
   React.useEffect(() => {
     const unsub = listen((message) => {
@@ -81,10 +114,14 @@ export const Navigator = ({
   };
 
   return (
-    <div className={c("navigator")}>
+    <div className={classNames(c("navigator"), navigatorClassName)}>
       <button
         aria-label="Go back one page"
-        className={c("button", "icon")}
+        className={classNames(
+          c("button", "icon"),
+          buttonClassName,
+          iconClassName
+        )}
         disabled={!backEnabled}
         onClick={handleBack}
         type="button"
@@ -93,7 +130,11 @@ export const Navigator = ({
       </button>
       <button
         aria-label="Go forward one page"
-        className={c("button", "icon")}
+        className={classNames(
+          c("button", "icon"),
+          buttonClassName,
+          iconClassName
+        )}
         disabled={!forwardEnabled}
         onClick={handleForward}
         type="button"
@@ -102,7 +143,11 @@ export const Navigator = ({
       </button>
       <button
         aria-label="Refresh page"
-        className={c("button", "icon")}
+        className={classNames(
+          c("button", "icon"),
+          buttonClassName,
+          iconClassName
+        )}
         onClick={handleRefresh}
         type="button"
       >
@@ -111,7 +156,7 @@ export const Navigator = ({
 
       <input
         aria-label="Current Sandpack URL"
-        className={c("input")}
+        className={classNames(c("input"), inputClassName)}
         name="Current Sandpack URL"
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}

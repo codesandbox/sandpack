@@ -18,7 +18,7 @@ const layoutClassName = css({
   display: "flex",
   flexWrap: "wrap",
   alignItems: "stretch",
-  background: "$default$Background",
+  background: "$colors$defaultBackground",
   borderRadius: "$border$radius",
   overflow: "hidden",
   WebkitMaskImage:

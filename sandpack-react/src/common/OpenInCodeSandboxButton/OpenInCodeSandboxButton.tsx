@@ -3,6 +3,9 @@ import * as React from "react";
 
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
 import { CSBIcon } from "../../icons";
+import { THEME_PREFIX } from "../../styles";
+import { buttonClassName, iconStandaloneClassName } from "../../styles/shared";
+import { classNames } from "../../utils/classNames";
 import { isDarkColor } from "../../utils/stringUtils";
 
 import { UnstyledOpenInCodeSandboxButton } from "./UnstyledOpenInCodeSandboxButton";
@@ -12,7 +15,7 @@ import { UnstyledOpenInCodeSandboxButton } from "./UnstyledOpenInCodeSandboxButt
  */
 export const OpenInCodeSandboxButton = (): JSX.Element | null => {
   const { theme } = useSandpackTheme();
-  const c = useClasser("sp");
+  const c = useClasser(THEME_PREFIX);
 
   const csbIconClass = isDarkColor(theme.colors.defaultBackground)
     ? "csb-icon-dark"
@@ -20,7 +23,11 @@ export const OpenInCodeSandboxButton = (): JSX.Element | null => {
 
   return (
     <UnstyledOpenInCodeSandboxButton
-      className={c("button", "icon-standalone", csbIconClass)}
+      className={classNames(
+        c("button", "icon-standalone", csbIconClass),
+        buttonClassName,
+        iconStandaloneClassName
+      )}
     >
       <CSBIcon />
     </UnstyledOpenInCodeSandboxButton>
