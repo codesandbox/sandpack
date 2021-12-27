@@ -6,6 +6,7 @@
     "sandpack-client",
     "sandpack-react",
     "website/*",
+    "examples/*",
     "plugins/*"
   ],
   "nohoist": [
