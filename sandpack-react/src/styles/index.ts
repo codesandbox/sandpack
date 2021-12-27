@@ -11,7 +11,7 @@ export const { createTheme, css, getCssText } = createStitches({
 
 export const defaultVariables = {
   space: new Array(8).fill(" ").reduce((acc, curr, index) => {
-    return { ...acc, [index + 1]: `${index * 4}px` };
+    return { ...acc, [index + 1]: `${(index + 1) * 4}px` };
   }, {}),
   border: { radius: "4px" },
   layout: { height: "300px" },
