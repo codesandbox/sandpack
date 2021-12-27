@@ -22,9 +22,9 @@ export const getCodeMirrorPosition = (
 export const getEditorTheme = (theme: SandpackTheme): Extension =>
   EditorView.theme({
     "&": {
-      backgroundColor: theme.palette.defaultBackground,
+      backgroundColor: theme.colors.defaultBackground,
       color:
-        getSyntaxStyle(theme.syntax.plain).color || theme.palette.activeText,
+        getSyntaxStyle(theme.syntax.plain).color || theme.colors.activeText,
       height: "100%",
     },
 
@@ -33,31 +33,31 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     },
 
     ".cm-activeLine": {
-      backgroundColor: hexToCSSRGBa(theme.palette.activeBackground, 0.5),
+      backgroundColor: hexToCSSRGBa(theme.colors.activeBackground, 0.5),
     },
 
     ".cm-errorLine": {
-      backgroundColor: hexToCSSRGBa(theme.palette.errorBackground, 0.2),
+      backgroundColor: hexToCSSRGBa(theme.colors.errorBackground, 0.2),
     },
 
     ".cm-matchingBracket, .cm-nonmatchingBracket": {
       color: "inherit",
-      background: theme.palette.activeBackground,
+      background: theme.colors.activeBackground,
     },
 
     ".cm-content": {
       padding: 0,
-      caretColor: theme.palette.activeText,
+      caretColor: theme.colors.activeText,
     },
 
     ".cm-scroller": {
-      fontFamily: theme.typography.monoFont,
-      lineHeight: theme.typography.lineHeight,
+      fontFamily: theme.font.mono,
+      lineHeight: theme.font.lineHeight,
     },
 
     ".cm-gutters": {
-      backgroundColor: theme.palette.defaultBackground,
-      color: theme.palette.defaultText,
+      backgroundColor: theme.colors.defaultBackground,
+      color: theme.colors.defaultText,
       border: "none",
     },
 

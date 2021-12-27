@@ -100,12 +100,12 @@ const CustomCodeEditor = (): JSX.Element => {
         width: 400,
         height: 200,
         padding: 8,
-        fontFamily: theme.typography.monoFont,
-        fontSize: theme.typography.fontSize,
-        background: theme.palette.defaultBackground,
-        border: `1px solid ${theme.palette.inactiveText}`,
-        color: theme.palette.activeText,
-        lineHeight: theme.typography.lineHeight,
+        fontFamily: theme.font.mono,
+        fontSize: theme.font.size,
+        background: theme.colors.defaultBackground,
+        border: `1px solid ${theme.colors.inactiveText}`,
+        color: theme.colors.activeText,
+        lineHeight: theme.font.lineHeight,
       }}
     >
       {code}

@@ -14,7 +14,7 @@ export const OpenInCodeSandboxButton = (): JSX.Element | null => {
   const { theme } = useSandpackTheme();
   const c = useClasser("sp");
 
-  const csbIconClass = isDarkColor(theme.palette.defaultBackground)
+  const csbIconClass = isDarkColor(theme.colors.defaultBackground)
     ? "csb-icon-dark"
     : "csb-icon-light";
 

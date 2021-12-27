@@ -51,7 +51,7 @@ export const SandpackReactDevTools = ({
 
   if (!ReactDevTools) return null;
 
-  const isDarkTheme = isDarkColor(theme.palette.defaultBackground);
+  const isDarkTheme = isDarkColor(theme.colors.defaultBackground);
 
   return (
     <div className={c("devtools")} {...props}>
