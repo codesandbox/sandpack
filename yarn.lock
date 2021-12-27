@@ -3758,6 +3758,11 @@
     url "^0.11.0"
     webpack-sources "^1.4.3"
 
+"@stitches/core@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@stitches/core/-/core-1.2.6.tgz#ca464406eb8e5788ed6332548833d5f46e43fa3c"
+  integrity sha512-nDGhYDZw74uL7D4FYwpya2Sgr1LucsdrF7Nr6Ut4jQD49sBK36S2eC2oCAlfAX0JksH0QVfOrWwUipp3uaID1w==
+
 "@stitches/react@^1.2.5":
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/@stitches/react/-/react-1.2.6.tgz#61f2a3d1110334ecd33bcb7463650127d42470cb"

@@ -8,7 +8,7 @@ import type { Text } from "@codemirror/text";
 import { EditorView } from "@codemirror/view";
 import * as React from "react";
 
-import { getSyntaxStyle } from "../../themes";
+import { getSyntaxStyle } from "../../styles";
 import type { SandpackTheme } from "../../types";
 import { hexToCSSRGBa } from "../../utils/stringUtils";
 
