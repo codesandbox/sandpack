@@ -1,5 +1,7 @@
 import { css, keyframes } from ".";
 
+export const iconStandaloneClassName = css({});
+
 export const buttonClassName = css({
   appearance: "none",
   border: "0",
@@ -30,15 +32,17 @@ export const buttonClassName = css({
     backgroundColor: "$colors$activeBackground",
     color: "$colors$activeBackground",
   },
+
+  [`&.${iconStandaloneClassName}`]: {
+    padding: "$space$1",
+    background: "#f8f9fbcf",
+    backdropFilter: "blur(4px)",
+    width: "$space$8",
+    height: "$space$8",
+  },
 });
 
-export const iconStandaloneClassName = css({
-  padding: "$space$1",
-  background: "#f8f9fbcf",
-  backdropFilter: "blur(4px)",
-  width: "$space$8",
-  height: "$space$8",
-});
+console.log(iconStandaloneClassName());
 
 export const explorerClassName = css({
   borderRadius: "0",
