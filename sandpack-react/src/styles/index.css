@@ -8,7 +8,7 @@
   --sp-colors-bg-input: #ffffff;
   --sp-colors-accent: #64d2ff;
   --sp-colors-bg-error: #ffcdca;
-  --sp-colors-fg-error: #811e18;
+  --sp-colors-fg-error: red;
   --sp-layout-height: 300px;
 
   --sp-font-size: 14px;
