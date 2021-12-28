@@ -42,8 +42,6 @@ export const buttonClassName = css({
   },
 });
 
-console.log(iconStandaloneClassName());
-
 export const explorerClassName = css({
   borderRadius: "0",
   width: "100%",
