@@ -41,7 +41,8 @@ const tabButton = css({
   border: "0",
   outline: "none",
   borderBottom: "1px solid transparent",
-  transition: "all 0.15s ease-out",
+  transition:
+    "color 0.15s ease-out, border 0.15s ease-out, background 0.15s ease-out",
   whiteSpace: "nowrap",
 
   '&[data-active="true"]': {
