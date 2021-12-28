@@ -25,14 +25,17 @@ import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
+import { THEME_PREFIX } from "../../styles";
 import type {
   EditorState as SandpackEditorState,
   SandpackInitMode,
 } from "../../types";
+import { classNames } from "../../utils/classNames";
 import { getFileName, generateRandomId } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
+import { cmClassName, placeholderClassName } from "./styles";
 import {
   getCodeMirrorLanguage,
   getEditorTheme,
@@ -102,7 +105,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     const cmView = React.useRef<EditorView>();
     const { theme, themeId } = useSandpackTheme();
     const [internalCode, setInternalCode] = React.useState<string>(code);
-    const c = useClasser("sp");
+    const c = useClasser(THEME_PREFIX);
     const { listen } = useSandpack();
     const ariaId = React.useRef<string>(id ?? generateRandomId());
 
@@ -340,8 +343,18 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
     if (readOnly) {
       return (
-        <pre ref={combinedRef} className={c("cm", editorState)} translate="no">
-          {!initEditor && <code className={c("pre-placeholder")}>{code}</code>}
+        <pre
+          ref={combinedRef}
+          className={classNames(c("cm", editorState), cmClassName)}
+          translate="no"
+        >
+          {!initEditor && (
+            <code
+              className={classNames(c("pre-placeholder"), placeholderClassName)}
+            >
+              {code}
+            </code>
+          )}
         </pre>
       );
     }
@@ -355,7 +368,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
-        className={c("cm", editorState)}
+        className={classNames(c("cm", editorState), cmClassName)}
         onKeyDown={handleContainerKeyDown}
         role="group"
         tabIndex={0}
@@ -363,7 +376,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       >
         {!initEditor && (
           <pre
-            className={c("pre-placeholder")}
+            className={classNames(c("pre-placeholder"), placeholderClassName)}
             style={{
               marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
             }}

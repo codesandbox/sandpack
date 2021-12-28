@@ -194,7 +194,7 @@ export interface SandpackSyntaxStyle {
 }
 
 export interface SandpackTheme {
-  palette: {
+  colors: {
     activeText: string;
     defaultText: string;
     inactiveText: string;
@@ -216,20 +216,17 @@ export interface SandpackTheme {
     static: string | SandpackSyntaxStyle;
     string?: string | SandpackSyntaxStyle; // use static as fallback
   };
-  typography: {
-    bodyFont: string;
-    monoFont: string;
-    fontSize: string;
+  font: {
+    body: string;
+    mono: string;
+    size: string;
     lineHeight: string;
   };
 }
 
 export type SandpackPartialTheme = DeepPartial<SandpackTheme>;
 
-export type SandpackThemeProp =
-  | SandpackPredefinedTheme
-  | SandpackPartialTheme
-  | "auto";
+export type SandpackThemeProp = SandpackPredefinedTheme | SandpackPartialTheme;
 
 /**
  * @hidden
