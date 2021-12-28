@@ -1,8 +1,8 @@
 .sp-wrapper {
-  --sp-colors-fg-active: #1f2933;
-  --sp-colors-fg-default: #757678;
-  --sp-colors-fg-inactive: #e4e7eb;
-  --sp-colors-bg-active: #e4e7eb;
+  --sp-colors-fg-active: red;
+  --sp-colors-fg-default: green;
+  --sp-colors-fg-inactive: blue;
+  --sp-colors-bg-active: blue;
   --sp-colors-bg-default: #f8f9fb;
   --sp-colors-bg-default-overlay: #f8f9fbcf;
   --sp-colors-bg-input: #ffffff;
