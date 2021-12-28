@@ -29,6 +29,14 @@
     "format": {
       "name": "Format Workspace",
       "command": "yarn format"
+    },
+    "watch:tests": {
+      "name": "Watch tests",
+      "command": "yarn test --watch"
+    },
+    "lint": {
+      "name": "Lint Workspace",
+      "command": "yarn lint"
     }
   },
   "setupTasks": [
