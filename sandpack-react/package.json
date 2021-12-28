@@ -24,7 +24,7 @@
     "storybook": "start-storybook -p 6006 --no-dll",
     "build-storybook": "build-storybook --no-dll",
     "typecheck": "tsc",
-    "chromatic": "npx chromatic --project-token=027f769313cd"
+    "chromatic": "chromatic --project-token CHROMATIC_PROJECT_TOKEN"
   },
   "files": [
     "dist",
