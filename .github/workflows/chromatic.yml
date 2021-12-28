@@ -14,6 +14,9 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      - name: Build dependency
+        run: yarn workspace @codesandbox/sandpack-client run build
+
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
