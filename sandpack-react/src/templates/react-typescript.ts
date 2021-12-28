@@ -5,7 +5,7 @@ export const REACT_TYPESCRIPT_TEMPLATE: SandboxTemplate = {
     "tsconfig.json": {
       code: `{
     "include": [
-        "./src/**/*"
+        "./**/*"
     ],
     "compilerOptions": {
         "strict": true,
@@ -18,13 +18,13 @@ export const REACT_TYPESCRIPT_TEMPLATE: SandboxTemplate = {
     }
 }`,
     },
-    "/src/App.tsx": {
+    "/App.tsx": {
       code: `export default function App(): JSX.Element {
   return <h1>Hello World</h1>
 }
 `,
     },
-    "/src/index.tsx": {
+    "/index.tsx": {
       code: `import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
@@ -39,7 +39,7 @@ ReactDOM.render(
   rootElement
 );`,
     },
-    "/src/styles.css": {
+    "/styles.css": {
       code: `body {
   font-family: sans-serif;
   -webkit-font-smoothing: auto;
@@ -80,7 +80,7 @@ h1 {
     "@types/react-dom": "^17.0.0",
     typescript: "^4.0.0",
   },
-  entry: "/src/index.tsx",
-  main: "/src/App.tsx",
+  entry: "/index.tsx",
+  main: "/App.tsx",
   environment: "create-react-app",
 };

@@ -5,7 +5,10 @@ import { useSandpack } from "../../hooks/useSandpack";
 import { CloseIcon } from "../../icons";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
-import { getFileName } from "../../utils/stringUtils";
+import {
+  calculateNearestUniquePath,
+  getFileName,
+} from "../../utils/stringUtils";
 
 const tabsClassName = css({
   borderBottom: "1px solid $colors$inactiveText",
@@ -83,6 +86,34 @@ export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
     sandpack.closeFile(pathToClose);
   };
 
+  const getTriggerText = (currentPath: string): string => {
+    const documentFileName = getFileName(currentPath);
+
+    const pathsWithDuplicateFileNames = openPaths.reduce((prev, curr) => {
+      if (curr === currentPath) {
+        return prev;
+      }
+
+      const fileName = getFileName(curr);
+
+      if (fileName === documentFileName) {
+        prev.push(curr);
+        return prev;
+      }
+
+      return prev;
+    }, [] as string[]);
+
+    if (pathsWithDuplicateFileNames.length === 0) {
+      return documentFileName;
+    } else {
+      return calculateNearestUniquePath(
+        currentPath,
+        pathsWithDuplicateFileNames
+      );
+    }
+  };
+
   return (
     <div className={classNames(c("tabs"), tabsClassName)} translate="no">
       <div
@@ -104,7 +135,7 @@ export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
             title={filePath}
             type="button"
           >
-            {getFileName(filePath)}
+            {getTriggerText(filePath)}
             {closableTabs && openPaths.length > 1 ? (
               <span
                 className={classNames(c("close-button"), closeButtonClassName)}
