@@ -46,7 +46,20 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     },
 
     ".cm-content": {
-      padding: 0,
+      margin: 0,
+      flexGrow: 2,
+      minHeight: "100%",
+      display: "block",
+      whiteSpace: "pre",
+      wordWrap: "normal", // https://github.com/codemirror/codemirror.next/issues/456
+      boxSizing: "border-box",
+
+      padding: "4px 0",
+      outline: "none",
+
+      "&[contenteditable=true]": {
+        WebkitUserModify: "read-write-plaintext-only",
+      },
       caretColor: theme.colors.activeText,
     },
 
