@@ -35,7 +35,6 @@ Once you've chosen your starter template, you will most likely want to pass cust
 <!-- prettier-ignore -->
 <NestedSandpack
   setupCode={`import { Sandpack } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";\n
 const code = \`export default function App() {
   return <h1>Hello Sandpack</h1>
 }\`;`}
