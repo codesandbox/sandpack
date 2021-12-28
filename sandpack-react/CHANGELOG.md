@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.9](https://github.com/codesandbox/sandpack/compare/v0.10.8...v0.10.9) (2021-12-28)
+
+
+### Bug Fixes
+
+* **entry/files:** prevent mismatch with pathname  ([#268](https://github.com/codesandbox/sandpack/issues/268)) ([b618daf](https://github.com/codesandbox/sandpack/commit/b618dafab8595b7dc224f4620a9a8f73caa7762b))
+
+
+
+
+
 ## [0.10.8](https://github.com/codesandbox/sandpack/compare/v0.10.7...v0.10.8) (2021-12-28)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
