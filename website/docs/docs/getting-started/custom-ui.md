@@ -37,7 +37,7 @@ You can also pass a **partial** theme object that overrides properties in the
 
 <!-- prettier-ignore -->
 <NestedSandpack nestedProps={`    theme={{
-        palette: {
+        colors: {
           accent: "rebeccapurple",
         },
         syntax: {
