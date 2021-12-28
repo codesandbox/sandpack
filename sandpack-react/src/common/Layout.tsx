@@ -33,7 +33,7 @@ const layoutClassName = css({
     position: "relative",
   },
 
-  [`> *:first-child ${errorOverlayClassName}`]: {
+  [`> *:first-child .${errorOverlayClassName}`]: {
     borderRight: "1px solid $colors$inactiveText",
   },
 
