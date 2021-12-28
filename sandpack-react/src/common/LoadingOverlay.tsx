@@ -41,9 +41,7 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
           errorClassName
         )}
       >
-        <div
-          className={(classNames(c("error-message")), errorMessageClassName)}
-        >
+        <div className={classNames(c("error-message"), errorMessageClassName)}>
           Unable to establish connection with the sandpack bundler. Make sure
           you are online or try again later. If the problem persists, please
           report it via{" "}

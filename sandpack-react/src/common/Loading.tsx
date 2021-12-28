@@ -10,11 +10,6 @@ import { OpenInCodeSandboxButton } from "./OpenInCodeSandboxButton";
 const cubeClassName = css({
   transform: "translate(-4px, 9px) scale(0.13, 0.13)",
   "*": { position: "absolute", width: "96px", height: "96px" },
-  ".sp-sides *": {
-    border: "10px solid $colors$defaultText",
-    borderRadius: "8px",
-    background: "#f8f9fbcf",
-  },
 });
 
 const wrapperClassName = css({
@@ -48,6 +43,12 @@ const sidesClassNames = css({
   animationFillMode: "forwards",
   transformStyle: "preserve-3d",
   transform: "rotateX(-25.5deg) rotateY(45deg)",
+
+  "*": {
+    border: "10px solid $colors$defaultText",
+    borderRadius: "8px",
+    background: "$colors$defaultBackground",
+  },
 
   ".top": {
     transform: "rotateX(90deg) translateZ(44px)",

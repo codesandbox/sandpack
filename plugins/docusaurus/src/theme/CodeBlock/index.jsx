@@ -4,8 +4,8 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
 } from "@codesandbox/sandpack-react";
-import React from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import React from "react";
 
 import "./style.css";
 

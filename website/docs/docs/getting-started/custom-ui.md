@@ -56,7 +56,7 @@ Furthermore you can import an existing theme object and use object composition t
 
 <!-- prettier-ignore -->
 <NestedSandpack 
-  setupCode={`import { Sandpack, sandpackDark } from "@codesandbox/sandpack-react";
+  setupCode={`import { Sandpack, sandpackDark } from "@codesandbox/sandpack-react";`}
   nestedProps={`    theme={{
         ...sandpackDark,
         typography: {
