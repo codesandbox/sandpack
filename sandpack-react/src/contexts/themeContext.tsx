@@ -1,8 +1,13 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { createTheme, defaultVariables, css, THEME_PREFIX } from "../styles";
-import { standardizeTheme } from "../styles";
+import {
+  css,
+  createTheme,
+  THEME_PREFIX,
+  standardizeTheme,
+  standardizeStitchesTheme,
+} from "../styles";
 import { defaultLight } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
 import { classNames } from "../utils/classNames";
@@ -58,11 +63,7 @@ const SandpackThemeProvider: React.FC<{
   const c = useClasser(THEME_PREFIX);
 
   const themeClassName = React.useMemo(() => {
-    return createTheme(id, {
-      ...defaultVariables,
-      colors: theme.colors,
-      font: theme.font,
-    });
+    return createTheme(id, standardizeStitchesTheme(theme));
   }, [theme, id]);
 
   return (

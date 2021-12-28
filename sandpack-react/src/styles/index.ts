@@ -1,20 +1,62 @@
 import { createStitches } from "@stitches/core";
 
-import type { SandpackThemeProp, SandpackTheme, SandpackSyntaxStyle } from "..";
-import { defaultLight, SANDPACK_THEMES } from "..";
+import { defaultLight, SANDPACK_THEMES } from "../themes";
+import type { SandpackTheme, SandpackThemeProp } from "../types";
 
+/**
+ * @category Theme
+ */
 export const THEME_PREFIX = "sp";
 
+/**
+ * @category Theme
+ */
 export const { createTheme, css, getCssText, keyframes } = createStitches({
   prefix: THEME_PREFIX,
 });
 
-export const defaultVariables = {
+const defaultVariables = {
   space: new Array(8).fill(" ").reduce((acc, curr, index) => {
     return { ...acc, [index + 1]: `${(index + 1) * 4}px` };
   }, {}),
   border: { radius: "4px" },
   layout: { height: "300px" },
+};
+
+/**
+ * @category Theme
+ */
+export const standardizeStitchesTheme = (
+  theme: SandpackTheme
+): Record<string, Record<string, string>> => {
+  // Flat values
+  const syntaxEntries = Object.entries(theme.syntax);
+  const syntax = syntaxEntries.reduce((tokenAcc, [tokenName, tokenValue]) => {
+    // Single property
+    let newValues = { [`color-${tokenName}`]: tokenValue };
+
+    // Multiples properties
+    if (typeof tokenValue === "object") {
+      newValues = Object.entries(tokenValue).reduce(
+        (valueAcc, [styleProp, styleValue]) => {
+          return {
+            ...valueAcc,
+            [`${styleProp}-${tokenName}`]: styleValue,
+          };
+        },
+        {}
+      );
+    }
+
+    return { ...tokenAcc, ...newValues };
+  }, {});
+
+  return {
+    ...defaultVariables,
+    colors: theme.colors,
+    font: theme.font,
+    syntax,
+  };
 };
 
 /**
@@ -66,17 +108,4 @@ const simpleHashFunction = (str: string): number => {
     hash = 31 * hash + str.charCodeAt(i++);
   }
   return Math.abs(hash);
-};
-
-/**
- * @category Theme
- */
-export const getSyntaxStyle = (
-  token: string | SandpackSyntaxStyle
-): SandpackSyntaxStyle => {
-  if (typeof token === "string") {
-    return { color: token };
-  }
-
-  return token;
 };
