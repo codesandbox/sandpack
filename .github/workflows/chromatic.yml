@@ -9,7 +9,10 @@ jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Get entire Git history. Required by Chromatic.
 
       - name: Install dependencies
         run: yarn
