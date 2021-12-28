@@ -30,7 +30,7 @@ const closeButtonClassName = css({
   visibility: "hidden",
 });
 
-const tabButton = css({
+export const tabButton = css({
   display: "block",
   background: "transparent",
   appearance: "none",

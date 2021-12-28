@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import type { ViewportSize } from "../";
+import { stackClassName } from "../";
+import { tabButton } from "../";
 import {
   Sandpack,
   SandpackPreview,
@@ -360,7 +362,7 @@ const ResetButtonComp: React.FC = () => {
 
   return (
     <button
-      className="sp-tab-button"
+      className={tabButton.toString()}
       onClick={sandpack.resetAllFiles}
       style={{
         background: "none",
@@ -379,7 +381,7 @@ const ResetCurrentFileButton: React.FC = () => {
 
   return (
     <button
-      className="sp-tab-button"
+      className={tabButton.toString()}
       onClick={(): void => sandpack.resetFile(sandpack.activePath)}
       style={{
         background: "none",
@@ -398,7 +400,7 @@ export const ResetButton: React.FC = () => (
     <SandpackProvider template="react">
       <SandpackLayout>
         <div
-          className="sp-stack"
+          className={stackClassName.toString()}
           style={{ position: "relative", width: "100%" }}
         >
           <SandpackCodeEditor />
@@ -413,7 +415,7 @@ export const ResetButton: React.FC = () => (
     <SandpackProvider template="react">
       <SandpackLayout>
         <div
-          className="sp-stack"
+          className={stackClassName.toString()}
           style={{ position: "relative", width: "100%" }}
         >
           <SandpackCodeEditor />
