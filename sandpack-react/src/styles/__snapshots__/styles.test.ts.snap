@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`standardizeStitchesTheme converts a theme to the stitches format 1`] = `
+Object {
+  "border": Object {
+    "radius": "4px",
+  },
+  "colors": Object {
+    "accent": "red",
+    "activeBackground": "red",
+    "activeText": "red",
+    "defaultBackground": "red",
+    "defaultText": "red",
+    "errorBackground": "red",
+    "errorForeground": "red",
+    "inactiveText": "red",
+    "inputBackground": "red",
+  },
+  "font": Object {
+    "body": "",
+    "lineHeight": "1.4",
+    "mono": "",
+    "size": "14px",
+  },
+  "layout": Object {
+    "height": "300px",
+  },
+  "space": Object {
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px",
+    "7": "28px",
+    "8": "32px",
+  },
+  "syntax": Object {
+    "color-comment": "blue",
+    "color-definition": "green",
+    "color-keyword": "blue",
+    "color-plain": "blue",
+    "color-property": "blue",
+    "color-punctuation": "blue",
+    "color-static": "blue",
+    "color-string": "blue",
+    "color-tag": "blue",
+    "fontStyle-definition": "italic",
+    "fontStyle-plain": "italic",
+  },
+}
+`;
+
+exports[`standardizeTheme should return a custom theme 1`] = `
+Object {
+  "id": "sp-331485648",
+  "theme": Object {
+    "colors": Object {
+      "accent": "red",
+      "activeBackground": "red",
+      "activeText": "red",
+      "defaultBackground": "red",
+      "defaultText": "red",
+      "errorBackground": "red",
+      "errorForeground": "red",
+      "inactiveText": "red",
+      "inputBackground": "red",
+    },
+    "font": Object {
+      "body": "",
+      "lineHeight": "1.4",
+      "mono": "",
+      "size": "14px",
+    },
+    "syntax": Object {
+      "comment": "blue",
+      "definition": "blue",
+      "keyword": "blue",
+      "plain": "blue",
+      "property": "blue",
+      "punctuation": "blue",
+      "static": "blue",
+      "string": "blue",
+      "tag": "blue",
+    },
+  },
+}
+`;
+
+exports[`standardizeTheme should return a custom theme merged with the default 1`] = `
+Object {
+  "id": "sp-1420813869",
+  "theme": Object {
+    "colors": Object {
+      "accent": "blue",
+      "activeBackground": "#e4e7eb",
+      "activeText": "#1f2933",
+      "defaultBackground": "#f8f9fb",
+      "defaultText": "#757678",
+      "errorBackground": "#ffcdca",
+      "errorForeground": "#811e18",
+      "inactiveText": "#e4e7eb",
+      "inputBackground": "#ffffff",
+    },
+    "font": Object {
+      "body": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Helvetica, Arial, sans-serif, \\"Apple Color Emoji\\", \\"Segoe UI Emoji\\", \\"Segoe UI Symbol\\"",
+      "lineHeight": "1.4",
+      "mono": "\\"Fira Mono\\", \\"DejaVu Sans Mono\\", Menlo, Consolas, \\"Liberation Mono\\", Monaco, \\"Lucida Console\\", monospace",
+      "size": "14px",
+    },
+    "syntax": Object {
+      "comment": Object {
+        "color": "#999",
+        "fontStyle": "italic",
+      },
+      "definition": "#151515",
+      "keyword": "#0971F1",
+      "plain": "#151515",
+      "property": "#151515",
+      "punctuation": "#151515",
+      "static": "#FF453A",
+      "string": "#BF5AF2",
+      "tag": "#0971F1",
+    },
+  },
+}
+`;
+
+exports[`standardizeTheme should return the \`dark\` theme 1`] = `
+Object {
+  "id": "dark",
+  "theme": Object {
+    "colors": Object {
+      "accent": "#6caedd",
+      "activeBackground": "#343434",
+      "activeText": "#FFFFFF",
+      "defaultBackground": "#040404",
+      "defaultText": "#999999",
+      "errorBackground": "#ffcdca",
+      "errorForeground": "#811e18",
+      "inactiveText": "#343434",
+      "inputBackground": "#242424",
+    },
+    "font": Object {
+      "body": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Helvetica, Arial, sans-serif, \\"Apple Color Emoji\\", \\"Segoe UI Emoji\\", \\"Segoe UI Symbol\\"",
+      "lineHeight": "1.4",
+      "mono": "\\"Fira Mono\\", \\"DejaVu Sans Mono\\", Menlo, Consolas, \\"Liberation Mono\\", Monaco, \\"Lucida Console\\", monospace",
+      "size": "14px",
+    },
+    "syntax": Object {
+      "comment": Object {
+        "color": "#757575",
+        "fontStyle": "italic",
+      },
+      "definition": "#86D9CA",
+      "keyword": "#77B7D7",
+      "plain": "#FFFFFF",
+      "property": "#77B7D7",
+      "punctuation": "#ffffff",
+      "static": "#C64640",
+      "string": "#977CDC",
+      "tag": "#DFAB5C",
+    },
+  },
+}
+`;
+
+exports[`standardizeTheme should return the default theme 1`] = `
+Object {
+  "id": "sp-default",
+  "theme": Object {
+    "colors": Object {
+      "accent": "#64D2FF",
+      "activeBackground": "#e4e7eb",
+      "activeText": "#1f2933",
+      "defaultBackground": "#f8f9fb",
+      "defaultText": "#757678",
+      "errorBackground": "#ffcdca",
+      "errorForeground": "#811e18",
+      "inactiveText": "#e4e7eb",
+      "inputBackground": "#ffffff",
+    },
+    "font": Object {
+      "body": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Helvetica, Arial, sans-serif, \\"Apple Color Emoji\\", \\"Segoe UI Emoji\\", \\"Segoe UI Symbol\\"",
+      "lineHeight": "1.4",
+      "mono": "\\"Fira Mono\\", \\"DejaVu Sans Mono\\", Menlo, Consolas, \\"Liberation Mono\\", Monaco, \\"Lucida Console\\", monospace",
+      "size": "14px",
+    },
+    "syntax": Object {
+      "comment": Object {
+        "color": "#999",
+        "fontStyle": "italic",
+      },
+      "definition": "#151515",
+      "keyword": "#0971F1",
+      "plain": "#151515",
+      "property": "#151515",
+      "punctuation": "#151515",
+      "static": "#FF453A",
+      "string": "#BF5AF2",
+      "tag": "#0971F1",
+    },
+  },
+}
+`;
