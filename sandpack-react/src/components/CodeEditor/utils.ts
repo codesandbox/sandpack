@@ -1,4 +1,5 @@
-import { HighlightStyle, tags, TagStyle } from "@codemirror/highlight";
+import type { TagStyle } from "@codemirror/highlight";
+import { HighlightStyle, tags } from "@codemirror/highlight";
 import { css } from "@codemirror/lang-css";
 import { html } from "@codemirror/lang-html";
 import { javascript } from "@codemirror/lang-javascript";
@@ -7,8 +8,8 @@ import type { Extension } from "@codemirror/state";
 import type { Text } from "@codemirror/text";
 import { EditorView } from "@codemirror/view";
 import * as React from "react";
-import { THEME_PREFIX } from "../../styles";
 
+import { THEME_PREFIX } from "../../styles";
 import type { SandpackSyntaxStyle, SandpackTheme } from "../../types";
 import { hexToCSSRGBa } from "../../utils/stringUtils";
 
@@ -24,7 +25,9 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     "&": {
       backgroundColor: theme.colors.defaultBackground,
       color:
-        getSyntaxStyle(theme.syntax.plain).color || theme.colors.activeText,
+        (typeof theme.syntax.plain === "string"
+          ? theme.syntax.plain
+          : theme.syntax.plain.color) || theme.colors.activeText,
       height: "100%",
     },
 
@@ -75,14 +78,8 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     },
   });
 
-const getSyntaxStyle = (
-  style: string | SandpackSyntaxStyle,
-  name: string
-): Omit<TagStyle, "tag"> => {
-  const className = `${THEME_PREFIX}-syntax-${name}`;
-
-  return { class: className };
-};
+const classNameToken = (name: string): string =>
+  `${THEME_PREFIX}-syntax-${name}`;
 
 export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
   HighlightStyle.define([
@@ -92,45 +89,42 @@ export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
 
     {
       tag: tags.keyword,
-      ...getSyntaxStyle(theme.syntax.keyword, "keyword"),
+      class: classNameToken("keyword"),
     },
     {
       tag: [tags.atom, tags.number, tags.bool],
-      ...getSyntaxStyle(theme.syntax.static, "static"),
+      class: classNameToken("static"),
     },
     {
       tag: tags.tagName,
-      ...getSyntaxStyle(theme.syntax.tag, "tag"),
+      class: classNameToken("tag"),
     },
-    { tag: tags.variableName, ...getSyntaxStyle(theme.syntax.plain, "plain") },
+    { tag: tags.variableName, class: classNameToken("plain") },
     {
       // Highlight function call
       tag: tags.function(tags.variableName),
-      ...getSyntaxStyle(theme.syntax.definition, "definition"),
+      class: classNameToken("definition"),
     },
     {
       // Highlight function definition differently (eg: functional component def in React)
       tag: tags.definition(tags.function(tags.variableName)),
-      ...getSyntaxStyle(theme.syntax.definition, "definition"),
+      class: classNameToken("definition"),
     },
     {
       tag: tags.propertyName,
-      ...getSyntaxStyle(theme.syntax.property, "property"),
+      class: classNameToken("property"),
     },
     {
       tag: [tags.literal, tags.inserted],
-      ...getSyntaxStyle(
-        theme.syntax.string ?? theme.syntax.static,
-        theme.syntax.string ? "string" : "static"
-      ),
+      class: classNameToken(theme.syntax.string ? "string" : "static"),
     },
     {
       tag: tags.punctuation,
-      ...getSyntaxStyle(theme.syntax.punctuation, "punctuation"),
+      class: classNameToken("punctuation"),
     },
     {
       tag: [tags.comment, tags.quote],
-      ...getSyntaxStyle(theme.syntax.comment, "comment"),
+      class: classNameToken("comment"),
     },
   ]);
 

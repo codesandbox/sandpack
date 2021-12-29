@@ -1,9 +1,25 @@
 import { useClasser } from "@code-hike/classer";
-import { highlightTree } from "@codemirror/highlight";
-import { syntaxTree } from "@codemirror/language";
+import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
+import {
+  defaultKeymap,
+  indentLess,
+  deleteGroupBackward,
+  insertTab,
+} from "@codemirror/commands";
+import { commentKeymap } from "@codemirror/comment";
+import { lineNumbers } from "@codemirror/gutter";
+import { defaultHighlightStyle } from "@codemirror/highlight";
+import { history, historyKeymap } from "@codemirror/history";
+import { bracketMatching } from "@codemirror/matchbrackets";
 import { EditorState } from "@codemirror/state";
 import type { Annotation } from "@codemirror/state";
-import type { EditorView } from "@codemirror/view";
+import {
+  highlightSpecialChars,
+  highlightActiveLine,
+  keymap,
+  EditorView,
+} from "@codemirror/view";
+import type { KeyBinding } from "@codemirror/view";
 import useIntersectionObserver from "@react-hook/intersection-observer";
 import * as React from "react";
 
@@ -17,7 +33,10 @@ import type {
 import { classNames } from "../../utils/classNames";
 import { getFileName, generateRandomId } from "../../utils/stringUtils";
 
+import { highlightDecorators } from "./highlightDecorators";
+import { highlightInlineError } from "./highlightInlineError";
 import { cmClassName, placeholderClassName } from "./styles";
+import { useSyntaxHighlight } from "./useSyntaxHighlight";
 import {
   getCodeMirrorLanguage,
   getEditorTheme,
@@ -84,6 +103,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
   ) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const wrapper = React.useRef<any | HTMLElement>(null);
+    const combinedRef = useCombinedRefs(wrapper, ref);
+
     const cmView = React.useRef<EditorView>();
     const { theme, themeId } = useSandpackTheme();
     const [internalCode, setInternalCode] = React.useState<string>(code);
@@ -101,8 +122,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     }));
 
     const shouldInitEditor = (): boolean => {
-      return false;
-
       if (initMode === "immediate") {
         return true;
       }
@@ -119,130 +138,136 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     };
 
     const initEditor = shouldInitEditor();
+    const langSupport = getCodeMirrorLanguage(filePath, fileType);
+    const highlightTheme = getSyntaxHighlight(theme);
 
-    // React.useEffect(() => {
-    //   if (!wrapper.current || !initEditor) return;
+    const syntaxHighlightRender = useSyntaxHighlight({
+      langSupport,
+      highlightTheme,
+      code,
+    });
 
-    //   /**
-    //    * TODO: replace this time out to something more efficient
-    //    * waiting for "postTask scheduler" API be ready
-    //    */
-    //   const timer = setTimeout(function delayCodeEditorInit() {
-    //     const langSupport = getCodeMirrorLanguage(filePath, fileType);
+    React.useEffect(() => {
+      if (!wrapper.current || !initEditor) return;
 
-    //     const customCommandsKeymap: KeyBinding[] = [
-    //       {
-    //         key: "Tab",
-    //         run: insertTab,
-    //       },
-    //       {
-    //         key: "Shift-Tab",
-    //         run: indentLess,
-    //       },
-    //       {
-    //         key: "Escape",
-    //         run: (): boolean => {
-    //           if (readOnly) return true;
+      /**
+       * TODO: replace this time out to something more efficient
+       * waiting for "postTask scheduler" API be ready
+       */
+      const timer = setTimeout(function delayCodeEditorInit() {
+        const customCommandsKeymap: KeyBinding[] = [
+          {
+            key: "Tab",
+            run: insertTab,
+          },
+          {
+            key: "Shift-Tab",
+            run: indentLess,
+          },
+          {
+            key: "Escape",
+            run: (): boolean => {
+              if (readOnly) return true;
 
-    //           if (wrapper.current) {
-    //             wrapper.current.focus();
-    //           }
+              if (wrapper.current) {
+                wrapper.current.focus();
+              }
 
-    //           return true;
-    //         },
-    //       },
-    //       {
-    //         key: "mod-Backspace",
-    //         run: deleteGroupBackward,
-    //       },
-    //     ];
+              return true;
+            },
+          },
+          {
+            key: "mod-Backspace",
+            run: deleteGroupBackward,
+          },
+        ];
 
-    //     const extensions = [
-    //       highlightSpecialChars(),
-    //       history(),
-    //       closeBrackets(),
+        const extensions = [
+          highlightSpecialChars(),
+          history(),
+          closeBrackets(),
 
-    //       keymap.of([
-    //         ...closeBracketsKeymap,
-    //         ...defaultKeymap,
-    //         ...historyKeymap,
-    //         ...commentKeymap,
-    //         ...customCommandsKeymap,
-    //       ] as KeyBinding[]),
-    //       langSupport,
+          keymap.of([
+            ...closeBracketsKeymap,
+            ...defaultKeymap,
+            ...historyKeymap,
+            ...commentKeymap,
+            ...customCommandsKeymap,
+          ] as KeyBinding[]),
+          langSupport,
 
-    //       defaultHighlightStyle.fallback,
+          defaultHighlightStyle.fallback,
 
-    //       getEditorTheme(theme),
-    //       getSyntaxHighlight(theme),
-    //     ];
+          getEditorTheme(theme),
+          highlightTheme,
+        ];
 
-    //     if (readOnly) {
-    //       extensions.push(EditorView.editable.of(false));
-    //     } else {
-    //       extensions.push(bracketMatching());
-    //       extensions.push(highlightActiveLine());
-    //     }
+        if (readOnly) {
+          extensions.push(EditorView.editable.of(false));
+        } else {
+          extensions.push(bracketMatching());
+          extensions.push(highlightActiveLine());
+        }
 
-    //     if (decorators) {
-    //       extensions.push(highlightDecorators(decorators));
-    //     }
+        if (decorators) {
+          extensions.push(highlightDecorators(decorators));
+        }
 
-    //     if (wrapContent) {
-    //       extensions.push(EditorView.lineWrapping);
-    //     }
+        if (wrapContent) {
+          extensions.push(EditorView.lineWrapping);
+        }
 
-    //     if (showLineNumbers) {
-    //       extensions.push(lineNumbers());
-    //     }
+        if (showLineNumbers) {
+          extensions.push(lineNumbers());
+        }
 
-    //     if (showInlineErrors) {
-    //       extensions.push(highlightInlineError());
-    //     }
+        if (showInlineErrors) {
+          extensions.push(highlightInlineError());
+        }
 
-    //     const startState = EditorState.create({
-    //       doc: code,
-    //       extensions,
-    //     });
+        const startState = EditorState.create({
+          doc: code,
+          extensions,
+        });
 
-    //     const parentDiv = wrapper.current;
+        const parentDiv = wrapper.current;
 
-    //     const view = new EditorView({
-    //       state: startState,
-    //       parent: parentDiv,
-    //       dispatch: (tr): void => {
-    //         view.update([tr]);
+        const view = new EditorView({
+          state: startState,
+          parent: parentDiv,
+          dispatch: (tr): void => {
+            view.update([tr]);
 
-    //         if (tr.docChanged) {
-    //           const newCode = tr.newDoc.sliceString(0, tr.newDoc.length);
-    //           setInternalCode(newCode);
-    //           onCodeUpdate?.(newCode);
-    //         }
-    //       },
-    //     });
+            if (tr.docChanged) {
+              const newCode = tr.newDoc.sliceString(0, tr.newDoc.length);
+              setInternalCode(newCode);
+              onCodeUpdate?.(newCode);
+            }
+          },
+        });
 
-    //     view.contentDOM.setAttribute("data-gramm", "false");
+        view.contentDOM.setAttribute("data-gramm", "false");
 
-    //     if (!readOnly) {
-    //       view.contentDOM.setAttribute("tabIndex", "-1");
-    //       view.contentDOM.setAttribute(
-    //         "aria-describedby",
-    //         `exit-instructions-${ariaId.current}`
-    //       );
-    //     }
+        if (!readOnly) {
+          view.contentDOM.setAttribute("tabIndex", "-1");
+          view.contentDOM.setAttribute(
+            "aria-describedby",
+            `exit-instructions-${ariaId.current}`
+          );
+        }
 
-    //     cmView.current = view;
-    //   }, 0);
+        cmView.current = view;
+      }, 0);
 
-    //   return (): void => {
-    //     cmView.current?.destroy();
+      return (): void => {
+        cmView.current?.destroy();
 
-    //     clearTimeout(timer);
-    //   };
+        clearTimeout(timer);
+      };
 
-    //   // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
-    //   // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [initEditor, showLineNumbers, wrapContent, themeId, decorators]);
+      // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [initEditor, showLineNumbers, wrapContent, themeId, decorators]);
 
     React.useEffect(() => {
       // When the user clicks on a tab button on a larger screen
@@ -316,48 +341,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       [listen, showInlineErrors]
     );
 
-    const SSRSyntaxHighlight = (): React.ReactNode[] => {
-      const langSupport = getCodeMirrorLanguage(filePath, fileType);
-      const highlightTheme = getSyntaxHighlight(theme);
-      const tree = langSupport.language.parser.parse(code);
-
-      let offSet = 0;
-      const codeElementsRender = [] as React.ReactNode[];
-
-      const addElement = (to: number, className: string): void => {
-        if (to > offSet) {
-          const children = code.slice(offSet, to);
-
-          codeElementsRender.push(
-            className
-              ? React.createElement("span", {
-                  children,
-                  className,
-                })
-              : children
-          );
-
-          offSet = to;
-        }
-      };
-
-      highlightTree(tree, highlightTheme.match, (from, to, className) => {
-        addElement(from, "");
-        addElement(to, className);
-      });
-
-      return codeElementsRender;
-    };
-
     const handleContainerKeyDown = (evt: React.KeyboardEvent): void => {
       if (evt.key === "Enter" && cmView.current) {
         evt.preventDefault();
         cmView.current.contentDOM.focus();
       }
     };
-
-    const combinedRef = useCombinedRefs(wrapper, ref);
-    const codeElementsRender = SSRSyntaxHighlight();
 
     if (readOnly) {
       return (
@@ -370,7 +359,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             <code
               className={classNames(c("pre-placeholder"), placeholderClassName)}
             >
-              {codeElementsRender}
+              {syntaxHighlightRender}
             </code>
           )}
         </pre>
@@ -399,7 +388,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
               marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
             }}
           >
-            {codeElementsRender}
+            {syntaxHighlightRender}
           </pre>
         )}
 

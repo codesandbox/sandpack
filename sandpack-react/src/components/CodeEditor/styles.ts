@@ -11,27 +11,20 @@ export const placeholderClassName = css({
   lineHeight: "$font$lineHeight",
 });
 
-const syntaxHighLightTokens: Array<keyof SandpackTheme["syntax"]> = [
-  "string",
-  "plain",
-  "comment",
-  "keyword",
-  "definition",
-  "punctuation",
-  "property",
-  "tag",
-  "static",
-];
+const classNameTokens = (): Record<string, string> => {
+  const syntaxHighLightTokens: Array<keyof SandpackTheme["syntax"]> = [
+    "string",
+    "plain",
+    "comment",
+    "keyword",
+    "definition",
+    "punctuation",
+    "property",
+    "tag",
+    "static",
+  ];
 
-console.log(syntaxHighLightTokens);
-
-export const editorClassName = css({
-  flex: 1,
-  position: "relative",
-  overflow: "auto",
-  background: "$colors$defaultBackground",
-
-  ...syntaxHighLightTokens.reduce((acc, token) => {
+  return syntaxHighLightTokens.reduce((acc, token) => {
     return {
       ...acc,
       [`.${THEME_PREFIX}-syntax-${token}`]: {
@@ -39,7 +32,15 @@ export const editorClassName = css({
         fontStyle: `$syntax$fontStyle$${token}`,
       },
     };
-  }, {}),
+  }, {});
+};
+
+export const editorClassName = css({
+  flex: 1,
+  position: "relative",
+  overflow: "auto",
+  background: "$colors$defaultBackground",
+  ...classNameTokens(),
 });
 
 export const cmClassName = css({
