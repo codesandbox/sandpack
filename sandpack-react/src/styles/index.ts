@@ -67,16 +67,3 @@ const simpleHashFunction = (str: string): number => {
   }
   return Math.abs(hash);
 };
-
-/**
- * @category Theme
- */
-export const getSyntaxStyle = (
-  token: string | SandpackSyntaxStyle
-): SandpackSyntaxStyle => {
-  if (typeof token === "string") {
-    return { color: token };
-  }
-
-  return token;
-};

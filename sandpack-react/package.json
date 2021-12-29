@@ -17,7 +17,6 @@
     "clean": "rimraf dist",
     "prebuild": "yarn run clean",
     "build": "node build.js && yarn run build:types",
-    "watch": "node build.js --watch && yarn run build:types --watch && yarn build:css --watch",
     "build:publish": "yarn build",
     "build:types": "tsc -p tsconfig.json",
     "start": "tsc -p tsconfig.esm.json --watch",

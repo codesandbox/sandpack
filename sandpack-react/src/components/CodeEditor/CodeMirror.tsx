@@ -316,67 +316,38 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       [listen, showInlineErrors]
     );
 
-    const SSRSyntaxHighlight = () => {
+    const SSRSyntaxHighlight = (): React.ReactNode[] => {
       const langSupport = getCodeMirrorLanguage(filePath, fileType);
       const highlightTheme = getSyntaxHighlight(theme);
       const tree = langSupport.language.parser.parse(code);
 
-      /**
-       * Needs refactor
-       */
-      const getEditorStyle = () => {
-        const style = getEditorTheme(theme);
+      let offSet = 0;
+      const codeElementsRender = [] as React.ReactNode[];
 
-        return {
-          editorClassName: style.find((e) => typeof e.value === "string").value,
-          editorRules: style.find((e) => e.value.rules).value.rules.join("\n"),
-        };
+      const addElement = (to: number, className: string): void => {
+        if (to > offSet) {
+          const children = code.slice(offSet, to);
+
+          codeElementsRender.push(
+            className
+              ? React.createElement("span", {
+                  children,
+                  className,
+                })
+              : children
+          );
+
+          offSet = to;
+        }
       };
 
-      /**
-       * This is done 🎉
-       */
-      const highlighter = (): React.ReactNode[] => {
-        let offSet = 0;
-        const codeElementsRender = [] as React.ReactNode[];
+      highlightTree(tree, highlightTheme.match, (from, to, className) => {
+        addElement(from, "");
+        addElement(to, className);
+      });
 
-        const flush = (to: number, className: string): void => {
-          if (to > offSet) {
-            const children = code.slice(offSet, to);
-
-            codeElementsRender.push(
-              className
-                ? React.createElement("span", {
-                    children,
-                    className,
-                  })
-                : children
-            );
-
-            offSet = to;
-          }
-        };
-
-        highlightTree(tree, highlightTheme.match, (from, to, className) => {
-          flush(from, "");
-          flush(to, className);
-        });
-
-        return codeElementsRender;
-      };
-
-      const { editorClassName, editorRules } = getEditorStyle();
-      const codeElementsRender = highlighter();
-
-      return {
-        editorClassName,
-        stylesheet: `${editorRules} ${highlightTheme.module?.getRules()}`,
-        codeElementsRender,
-      };
+      return codeElementsRender;
     };
-
-    const { stylesheet, editorClassName, codeElementsRender } =
-      SSRSyntaxHighlight();
 
     const handleContainerKeyDown = (evt: React.KeyboardEvent): void => {
       if (evt.key === "Enter" && cmView.current) {
@@ -386,6 +357,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     };
 
     const combinedRef = useCombinedRefs(wrapper, ref);
+    const codeElementsRender = SSRSyntaxHighlight();
 
     if (readOnly) {
       return (
@@ -398,7 +370,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             <code
               className={classNames(c("pre-placeholder"), placeholderClassName)}
             >
-              {code}
+              {codeElementsRender}
             </code>
           )}
         </pre>
@@ -414,11 +386,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
-        className={classNames(
-          c("cm", editorState),
-          cmClassName,
-          editorClassName
-        )}
+        className={classNames(c("cm", editorState), cmClassName)}
         onKeyDown={handleContainerKeyDown}
         role="group"
         tabIndex={0}
@@ -431,7 +399,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
               marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
             }}
           >
-            <style>{stylesheet}</style>
             {codeElementsRender}
           </pre>
         )}

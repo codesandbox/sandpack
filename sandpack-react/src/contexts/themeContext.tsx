@@ -62,6 +62,32 @@ const SandpackThemeProvider: React.FC<{
       ...defaultVariables,
       colors: theme.colors,
       font: theme.font,
+
+      /**
+       * TODO: Refactor
+       */
+      // Flat values
+      syntax: Object.entries(theme.syntax).reduce((acc, [key, value]) => {
+        if (typeof value === "string") {
+          return {
+            ...acc,
+            [`color-${key}`]: value,
+          };
+        }
+
+        return {
+          ...acc,
+          ...Object.entries(value).reduce(
+            (valueAcc, [styleProp, styleValue]) => {
+              return {
+                ...valueAcc,
+                [`${styleProp}-${key}`]: styleValue,
+              };
+            },
+            {}
+          ),
+        };
+      }, {}),
     });
   }, [theme, id]);
 
