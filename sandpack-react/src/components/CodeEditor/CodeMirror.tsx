@@ -318,8 +318,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
     const SSRSyntaxHighlight = () => {
       const langSupport = getCodeMirrorLanguage(filePath, fileType);
+      const highlightTheme = getSyntaxHighlight(theme);
       const tree = langSupport.language.parser.parse(code);
 
+      /**
+       * Needs refactor
+       */
       const getEditorStyle = () => {
         const style = getEditorTheme(theme);
 
@@ -329,20 +333,18 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         };
       };
 
-      const highlightTheme = getSyntaxHighlight(theme);
-
       /**
        * This is done 🎉
        */
       const highlighter = (): React.ReactNode[] => {
         let offSet = 0;
-        const render = [] as React.ReactNode[];
+        const codeElementsRender = [] as React.ReactNode[];
 
         const flush = (to: number, className: string): void => {
           if (to > offSet) {
             const children = code.slice(offSet, to);
 
-            render.push(
+            codeElementsRender.push(
               className
                 ? React.createElement("span", {
                     children,
@@ -360,20 +362,21 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           flush(to, className);
         });
 
-        return render;
+        return codeElementsRender;
       };
 
       const { editorClassName, editorRules } = getEditorStyle();
-      const render = highlighter();
+      const codeElementsRender = highlighter();
 
       return {
         editorClassName,
-        css: `${editorRules} ${highlightTheme.module?.getRules()}`,
-        render,
+        stylesheet: `${editorRules} ${highlightTheme.module?.getRules()}`,
+        codeElementsRender,
       };
     };
 
-    const { css, editorClassName, render } = SSRSyntaxHighlight();
+    const { stylesheet, editorClassName, codeElementsRender } =
+      SSRSyntaxHighlight();
 
     const handleContainerKeyDown = (evt: React.KeyboardEvent): void => {
       if (evt.key === "Enter" && cmView.current) {
@@ -423,17 +426,13 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       >
         {!initEditor && (
           <pre
-            className={classNames(
-              c("pre-placeholder"),
-              placeholderClassName,
-              "cm-content"
-            )}
+            className={classNames(c("pre-placeholder"), placeholderClassName)}
             style={{
               marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
             }}
           >
-            <style>{css}</style>
-            {render}
+            <style>{stylesheet}</style>
+            {codeElementsRender}
           </pre>
         )}
 
