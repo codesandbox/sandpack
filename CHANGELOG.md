@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.10](https://github.com/codesandbox/sandpack/compare/v0.10.9...v0.10.10) (2021-12-29)
+
+
+### Bug Fixes
+
+* **filetab:** not show files that doesn't exist ([#283](https://github.com/codesandbox/sandpack/issues/283)) ([053d695](https://github.com/codesandbox/sandpack/commit/053d695e106683d169ede0bc81d12650f4491605))
+
+
+
+
+
 ## [0.10.9](https://github.com/codesandbox/sandpack/compare/v0.10.8...v0.10.9) (2021-12-28)
 
 
