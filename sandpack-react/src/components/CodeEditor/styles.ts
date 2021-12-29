@@ -35,12 +35,13 @@ const classNameTokens = (): Record<string, string> => {
   }, {});
 };
 
+export const syntaxHighlightToken = css(classNameTokens());
+
 export const editorClassName = css({
   flex: 1,
   position: "relative",
   overflow: "auto",
   background: "$colors$defaultBackground",
-  ...classNameTokens(),
 });
 
 export const cmClassName = css({

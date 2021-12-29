@@ -35,7 +35,12 @@ import { getFileName, generateRandomId } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
-import { cmClassName, placeholderClassName } from "./styles";
+import {
+  cmClassName,
+  editorClassName,
+  placeholderClassName,
+  syntaxHighlightToken,
+} from "./styles";
 import { useSyntaxHighlight } from "./useSyntaxHighlight";
 import {
   getCodeMirrorLanguage,
@@ -352,7 +357,11 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       return (
         <pre
           ref={combinedRef}
-          className={classNames(c("cm", editorState), cmClassName)}
+          className={classNames(
+            c("cm", editorState),
+            cmClassName,
+            syntaxHighlightToken
+          )}
           translate="no"
         >
           {!initEditor && (
@@ -375,7 +384,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
-        className={classNames(c("cm", editorState), cmClassName)}
+        className={classNames(
+          c("cm", editorState),
+          cmClassName,
+          editorClassName,
+          syntaxHighlightToken
+        )}
         onKeyDown={handleContainerKeyDown}
         role="group"
         tabIndex={0}
