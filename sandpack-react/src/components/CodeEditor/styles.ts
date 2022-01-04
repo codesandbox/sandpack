@@ -1,5 +1,7 @@
 import { css } from "../../styles";
 
+import { styleTokens } from "./utils";
+
 export const placeholderClassName = css({
   margin: "0",
   display: "block",
@@ -9,6 +11,8 @@ export const placeholderClassName = css({
   color: "$colors$activeText",
   lineHeight: "$font$lineHeight",
 });
+
+export const tokensClassName = css(styleTokens());
 
 export const editorClassName = css({
   flex: 1,
