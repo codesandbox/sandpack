@@ -1,3 +1,4 @@
+import type { TagStyle } from "@codemirror/highlight";
 import { HighlightStyle, tags } from "@codemirror/highlight";
 import { css } from "@codemirror/lang-css";
 import { html } from "@codemirror/lang-html";
@@ -8,8 +9,8 @@ import type { Text } from "@codemirror/text";
 import { EditorView } from "@codemirror/view";
 import * as React from "react";
 
-import { getSyntaxStyle } from "../../styles";
-import type { SandpackTheme } from "../../types";
+import { THEME_PREFIX } from "../../styles";
+import type { SandpackSyntaxStyle, SandpackTheme } from "../../types";
 import { hexToCSSRGBa } from "../../utils/stringUtils";
 
 export const getCodeMirrorPosition = (
@@ -24,7 +25,9 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     "&": {
       backgroundColor: theme.colors.defaultBackground,
       color:
-        getSyntaxStyle(theme.syntax.plain).color || theme.colors.activeText,
+        (typeof theme.syntax.plain === "string"
+          ? theme.syntax.plain
+          : theme.syntax.plain.color) || theme.colors.activeText,
       height: "100%",
     },
 
@@ -75,6 +78,9 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     },
   });
 
+const classNameToken = (name: string): string =>
+  `${THEME_PREFIX}-syntax-${name}`;
+
 export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
   HighlightStyle.define([
     { tag: tags.link, textDecoration: "underline" },
@@ -83,37 +89,43 @@ export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
 
     {
       tag: tags.keyword,
-      ...getSyntaxStyle(theme.syntax.keyword),
+      class: classNameToken("keyword"),
     },
     {
       tag: [tags.atom, tags.number, tags.bool],
-      ...getSyntaxStyle(theme.syntax.static),
+      class: classNameToken("static"),
     },
     {
       tag: tags.tagName,
-      ...getSyntaxStyle(theme.syntax.tag),
+      class: classNameToken("tag"),
     },
-    { tag: tags.variableName, ...getSyntaxStyle(theme.syntax.plain) },
+    { tag: tags.variableName, class: classNameToken("plain") },
     {
       // Highlight function call
       tag: tags.function(tags.variableName),
-      ...getSyntaxStyle(theme.syntax.definition),
+      class: classNameToken("definition"),
     },
     {
       // Highlight function definition differently (eg: functional component def in React)
       tag: tags.definition(tags.function(tags.variableName)),
-      ...getSyntaxStyle(theme.syntax.definition),
+      class: classNameToken("definition"),
     },
     {
       tag: tags.propertyName,
-      ...getSyntaxStyle(theme.syntax.property),
+      class: classNameToken("property"),
     },
     {
       tag: [tags.literal, tags.inserted],
-      ...getSyntaxStyle(theme.syntax.string ?? theme.syntax.static),
+      class: classNameToken(theme.syntax.string ? "string" : "static"),
     },
-    { tag: tags.punctuation, ...getSyntaxStyle(theme.syntax.punctuation) },
-    { tag: tags.comment, ...getSyntaxStyle(theme.syntax.comment) },
+    {
+      tag: tags.punctuation,
+      class: classNameToken("punctuation"),
+    },
+    {
+      tag: [tags.comment, tags.quote],
+      class: classNameToken("comment"),
+    },
   ]);
 
 export const getCodeMirrorLanguage = (
