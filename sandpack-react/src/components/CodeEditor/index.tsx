@@ -38,6 +38,7 @@ export interface CodeEditorProps {
    * Property to register Codemirror extension keymap.
    */
   extensionsKeymap?: Array<readonly KeyBinding[]>;
+  id?: string;
 }
 
 export { CodeMirror as CodeEditor };
@@ -61,6 +62,7 @@ export const SandpackCodeEditor = React.forwardRef<
       initMode,
       extensions,
       extensionsKeymap,
+      id,
     },
     ref
   ) => {
@@ -88,6 +90,7 @@ export const SandpackCodeEditor = React.forwardRef<
             extensions={extensions}
             extensionsKeymap={extensionsKeymap}
             filePath={activePath}
+            id={id}
             initMode={initMode || sandpack.initMode}
             onCodeUpdate={handleCodeUpdate}
             showInlineErrors={showInlineErrors}

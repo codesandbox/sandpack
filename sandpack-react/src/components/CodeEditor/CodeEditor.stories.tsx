@@ -73,27 +73,14 @@ export const ClosableTabs: React.FC = () => (
   </SandpackProvider>
 );
 
-export const Extensions: React.FC = () => {
-  return (
-    <>
-      <SandpackProvider template="react">
-        <SandpackThemeProvider>
-          <SandpackCodeEditor
-            extensions={[autocompletion()]}
-            extensionsKeymap={[completionKeymap]}
-          />
-        </SandpackThemeProvider>
-      </SandpackProvider>
-
-      <Sandpack
-        options={{
-          codeEditor: {
-            extensions: [autocompletion()],
-            extensionsKeymap: [completionKeymap],
-          },
-        }}
-        template="react"
+export const Extensions: React.FC = () => (
+  <SandpackProvider template="react">
+    <SandpackThemeProvider>
+      <SandpackCodeEditor
+        extensions={[autocompletion()]}
+        extensionsKeymap={[completionKeymap]}
+        id="extensions"
       />
-    </>
-  );
-};
+    </SandpackThemeProvider>
+  </SandpackProvider>
+);
