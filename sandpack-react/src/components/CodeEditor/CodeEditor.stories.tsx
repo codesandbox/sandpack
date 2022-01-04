@@ -1,7 +1,8 @@
+import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 import type { Story } from "@storybook/react";
 import * as React from "react";
-import { vim } from "@replit/codemirror-vim";
 
+import { Sandpack } from "../../";
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../contexts/themeContext";
 import { SandpackPreview } from "../Preview";
@@ -72,10 +73,27 @@ export const ClosableTabs: React.FC = () => (
   </SandpackProvider>
 );
 
-export const Extensions: React.FC = () => (
-  <SandpackProvider template="react">
-    <SandpackThemeProvider>
-      <SandpackCodeEditor extensions={[vim()]} />
-    </SandpackThemeProvider>
-  </SandpackProvider>
-);
+export const Extensions: React.FC = () => {
+  return (
+    <>
+      <SandpackProvider template="react">
+        <SandpackThemeProvider>
+          <SandpackCodeEditor
+            extensions={[autocompletion()]}
+            extensionsKeymap={[completionKeymap]}
+          />
+        </SandpackThemeProvider>
+      </SandpackProvider>
+
+      <Sandpack
+        options={{
+          codeEditor: {
+            extensions: [autocompletion()],
+            extensionsKeymap: [completionKeymap],
+          },
+        }}
+        template="react"
+      />
+    </>
+  );
+};

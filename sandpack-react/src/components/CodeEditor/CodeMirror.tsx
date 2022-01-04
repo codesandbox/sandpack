@@ -11,8 +11,8 @@ import { lineNumbers } from "@codemirror/gutter";
 import { defaultHighlightStyle } from "@codemirror/highlight";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
-import { EditorState, Extension } from "@codemirror/state";
-import type { Annotation } from "@codemirror/state";
+import { EditorState } from "@codemirror/state";
+import type { Annotation, Extension } from "@codemirror/state";
 import {
   highlightSpecialChars,
   highlightActiveLine,
@@ -71,6 +71,7 @@ interface CodeMirrorProps {
   initMode: SandpackInitMode;
   id?: string;
   extensions?: Extension[];
+  extensionsKeymap?: Array<readonly KeyBinding[]>;
 }
 
 export interface CodeMirrorRef {
@@ -96,6 +97,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       initMode = "lazy",
       id,
       extensions = [],
+      extensionsKeymap = [],
     },
     ref
   ) => {
@@ -183,6 +185,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             ...historyKeymap,
             ...commentKeymap,
             ...customCommandsKeymap,
+            ...extensionsKeymap,
           ] as KeyBinding[]),
           langSupport,
 

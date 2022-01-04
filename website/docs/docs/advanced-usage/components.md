@@ -153,6 +153,31 @@ If you played with the `Sandpack` preset, you should be familiar already with th
   </SandpackLayout>
 </SandpackProvider>
 
+### Extensions
+
+Sandpack uses Codemirror behind the hood to provide a nice editor. You can extend the editor with your own extensions, like [`@codemirror/autocomplete`](https://www.npmjs.com/package/@codemirror/autocomplete).
+
+```jsx
+<SandpackProvider template="react">
+  <SandpackThemeProvider>
+    <SandpackCodeEditor
+      extensions={[autocompletion()]}
+      extensionsKeymap={[completionKeymap]}
+    />
+  </SandpackThemeProvider>
+</SandpackProvider>
+
+<Sandpack
+  options={{
+    codeEditor: {
+      extensions: [autocompletion()],
+      extensionsKeymap: [completionKeymap],
+    },
+  }}
+  template="react"
+/>
+```
+
 ## Code Viewer
 
 For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a read-only version of `codemirror`, so users will not be able to edit the code.
