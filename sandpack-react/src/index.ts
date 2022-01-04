@@ -19,5 +19,6 @@ export * from "./contexts/sandpackContext";
 export * from "./contexts/themeContext";
 export * from "./themes";
 export * from "./types";
+export * from "./icons";
 
 export * from "@code-hike/classer";
