@@ -20,4 +20,18 @@ describe("CodeMirror", () => {
 
     cy.get(".cm-content").invoke("attr", "style", "tab-size: 4;").snapshot();
   });
+
+  it("should load a codemirror extension", () => {
+    cy.viewport(600, 1000).visit(
+      `/iframe.html?id=components-code-editor--extensions`
+    );
+
+    cy.get(".cm-content")
+      .type("{selectall}")
+      .type("{backspace}")
+      .type("{ctrl} ");
+    cy.wait(200).focused().type("{enter}");
+
+    cy.get(".cm-content").snapshot();
+  });
 });
