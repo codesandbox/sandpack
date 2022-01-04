@@ -1,5 +1,6 @@
 import type { Story } from "@storybook/react";
 import * as React from "react";
+import { vim } from "@replit/codemirror-vim";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../contexts/themeContext";
@@ -67,6 +68,14 @@ export const ClosableTabs: React.FC = () => (
   <SandpackProvider template="react">
     <SandpackThemeProvider theme="dark">
       <SandpackCodeEditor closableTabs />
+    </SandpackThemeProvider>
+  </SandpackProvider>
+);
+
+export const Extensions: React.FC = () => (
+  <SandpackProvider template="react">
+    <SandpackThemeProvider>
+      <SandpackCodeEditor extensions={[vim()]} />
     </SandpackThemeProvider>
   </SandpackProvider>
 );

@@ -11,7 +11,7 @@ import { lineNumbers } from "@codemirror/gutter";
 import { defaultHighlightStyle } from "@codemirror/highlight";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
-import { EditorState } from "@codemirror/state";
+import { EditorState, Extension } from "@codemirror/state";
 import type { Annotation } from "@codemirror/state";
 import {
   highlightSpecialChars,
@@ -70,6 +70,7 @@ interface CodeMirrorProps {
   decorators?: Decorators;
   initMode: SandpackInitMode;
   id?: string;
+  extensions?: Extension[];
 }
 
 export interface CodeMirrorRef {
@@ -94,6 +95,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       decorators,
       initMode = "lazy",
       id,
+      extensions = [],
     },
     ref
   ) => {
@@ -170,7 +172,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           },
         ];
 
-        const extensions = [
+        const extensionList = [
           highlightSpecialChars(),
           history(),
           closeBrackets(),
@@ -188,34 +190,35 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           getEditorTheme(theme),
           getSyntaxHighlight(theme),
+          ...extensions,
         ];
 
         if (readOnly) {
-          extensions.push(EditorView.editable.of(false));
+          extensionList.push(EditorView.editable.of(false));
         } else {
-          extensions.push(bracketMatching());
-          extensions.push(highlightActiveLine());
+          extensionList.push(bracketMatching());
+          extensionList.push(highlightActiveLine());
         }
 
         if (decorators) {
-          extensions.push(highlightDecorators(decorators));
+          extensionList.push(highlightDecorators(decorators));
         }
 
         if (wrapContent) {
-          extensions.push(EditorView.lineWrapping);
+          extensionList.push(EditorView.lineWrapping);
         }
 
         if (showLineNumbers) {
-          extensions.push(lineNumbers());
+          extensionList.push(lineNumbers());
         }
 
         if (showInlineErrors) {
-          extensions.push(highlightInlineError());
+          extensionList.push(highlightInlineError());
         }
 
         const startState = EditorState.create({
           doc: code,
-          extensions,
+          extensions: extensionList,
         });
 
         const parentDiv = wrapper.current;

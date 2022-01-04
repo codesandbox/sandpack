@@ -10,6 +10,7 @@ import { FileTabs } from "../FileTabs";
 
 import { CodeMirror } from "./CodeMirror";
 import type { CodeMirrorRef } from "./CodeMirror";
+import { Extension } from "@codemirror/state";
 
 export type CodeEditorRef = CodeMirrorRef;
 export interface CodeEditorProps {
@@ -27,6 +28,11 @@ export interface CodeEditorProps {
    * a certain control of when to initialize them.
    */
   initMode?: SandpackInitMode;
+  /**
+   * Codemirror extensions for the editor state, which can
+   * provide extra features and functionalities to the editor component.
+   */
+  extensions?: Extension[];
 }
 
 export { CodeMirror as CodeEditor };
@@ -48,6 +54,7 @@ export const SandpackCodeEditor = React.forwardRef<
       wrapContent = false,
       closableTabs = false,
       initMode,
+      extensions,
     },
     ref
   ) => {
@@ -78,6 +85,7 @@ export const SandpackCodeEditor = React.forwardRef<
             showInlineErrors={showInlineErrors}
             showLineNumbers={showLineNumbers}
             wrapContent={wrapContent}
+            extensions={extensions}
           />
 
           {showRunButton && status === "idle" ? <RunButton /> : null}
