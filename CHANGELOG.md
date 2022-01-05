@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
+
+
+
+## [0.10.11](https://github.com/codesandbox/sandpack/compare/v0.10.10...v0.10.11) (2022-01-05)
+
+
+### Bug Fixes
+
+* **react-devtools:** legacy mode ([#272](https://github.com/codesandbox/sandpack/issues/272)) ([4891ba4](https://github.com/codesandbox/sandpack/commit/4891ba4bdf5ad8ed1aed1f6a37cc4b8e5a94b8e2))
+
+
+
+## [0.10.10](https://github.com/codesandbox/sandpack/compare/v0.10.9...v0.10.10) (2021-12-29)
+
+
+### Bug Fixes
+
+* **filetab:** not show files that doesn't exist ([#283](https://github.com/codesandbox/sandpack/issues/283)) ([053d695](https://github.com/codesandbox/sandpack/commit/053d695e106683d169ede0bc81d12650f4491605))
+
+
+
+## [0.10.9](https://github.com/codesandbox/sandpack/compare/v0.10.8...v0.10.9) (2021-12-28)
+
+
+### Bug Fixes
+
+* **entry/files:** prevent mismatch with pathname  ([#268](https://github.com/codesandbox/sandpack/issues/268)) ([b618daf](https://github.com/codesandbox/sandpack/commit/b618dafab8595b7dc224f4620a9a8f73caa7762b))
+
+
+
+## [0.10.8](https://github.com/codesandbox/sandpack/compare/v0.10.7...v0.10.8) (2021-12-28)
+
+
+
+## [0.10.7](https://github.com/codesandbox/sandpack/compare/v0.10.6...v0.10.7) (2021-12-28)
+
+
+
+
+
 ## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.6...v0.10.7-experimental.0) (2022-01-05)
 
 ### Bug Fixes
