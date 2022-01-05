@@ -21,6 +21,8 @@ export type Modules = Record<
 
 export type Dependencies = Record<string, string>;
 
+export type ReactDevToolsMode = "latest" | "legacy";
+
 export interface ModuleSource {
   fileName: string;
   compiledCode: string;
@@ -171,7 +173,7 @@ export type SandpackMessage = BaseSandpackMessage &
         showLoadingScreen: boolean;
         skipEval: boolean;
         clearConsoleDisabled?: boolean;
-        reactDevTools?: boolean;
+        reactDevTools?: ReactDevToolsMode;
       }
     | {
         type: "refresh";
