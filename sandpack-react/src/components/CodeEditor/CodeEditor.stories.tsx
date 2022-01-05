@@ -73,7 +73,7 @@ export const ClosableTabs: React.FC = () => (
   </SandpackProvider>
 );
 
-export const Extensions: React.FC = () => (
+export const ExtensionAutocomplete: React.FC = () => (
   <SandpackProvider template="react">
     <SandpackThemeProvider>
       <SandpackCodeEditor
