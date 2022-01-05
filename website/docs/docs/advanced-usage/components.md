@@ -155,7 +155,7 @@ If you played with the `Sandpack` preset, you should be familiar already with th
 
 ### Extensions
 
-Sandpack uses CodeMirror behind the hood to provide a nice editor. You can extend the editor with your own extensions, like [`@codemirror/autocomplete`](https://www.npmjs.com/package/@codemirror/autocomplete).
+Sandpack uses CodeMirror under the hood to provide a nice editor. You can extend the editor with any CodeMirror extensions, such as [`@codemirror/autocomplete`](https://www.npmjs.com/package/@codemirror/autocomplete).
 
 ```jsx
 <SandpackProvider template="react">
