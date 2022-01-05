@@ -7,7 +7,7 @@ export default {
   title: "components/ReactDevTools",
 };
 
-export const ReactDevTool: React.FC = () => (
+const ReactDevTool = (): JSX.Element => (
   <SandpackProvider
     customSetup={{
       files: {
@@ -16,16 +16,16 @@ const Container = ({children}) => <div>{children}</div>
 const Button = () => <p>Button</p>
 
 export default function App() {
-return (
-<Container>
-  <div>
-    <Button />
-    <Button />
-    <h1>Hello World</h1>
-    <Button />
-  </div>
-</Container>
-)
+  return (
+    <Container>
+      <div>
+        <Button />
+        <Button />
+        <h1>Hello World</h1>
+        <Button />
+      </div>
+    </Container>
+  )
 }
       `,
       },
@@ -40,3 +40,15 @@ return (
     </SandpackThemeProvider>
   </SandpackProvider>
 );
+
+export { ReactDevTool };
+
+export const MultipleReactDevTool = (): JSX.Element => {
+  return (
+    <>
+      <ReactDevTool />
+      <ReactDevTool />
+      <ReactDevTool />
+    </>
+  );
+};

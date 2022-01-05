@@ -62,5 +62,9 @@
     "prettier": "^2.2.1",
     "react-test-renderer": "^17.0.2",
     "wait-on": "^6.0.0"
+  },
+  "resolutions": {
+    "react": "0.0.0-experimental-ceee524a8-20211217",
+    "react-dom": "0.0.0-experimental-ceee524a8-20211217"
   }
 }

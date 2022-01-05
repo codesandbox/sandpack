@@ -9541,7 +9541,7 @@ es6-shim@^0.35.5:
   resolved "https://registry.yarnpkg.com/es6-shim/-/es6-shim-0.35.6.tgz#d10578301a83af2de58b9eadb7c2c9945f7388a0"
   integrity sha512-EmTr31wppcaIAgblChZiuN/l9Y7DPyw8Xtbg7fIVngn6zMW+IEBJDJngeKC3x6wr0V/vcA2wqeFnaw1bFJbDdA==
 
-es6-symbol@^3, es6-symbol@^3.1.1, es6-symbol@~3.1.3:
+es6-symbol@^3.1.1, es6-symbol@~3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/es6-symbol/-/es6-symbol-3.1.3.tgz#bad5d3c1bcdac28269f4cb331e431c78ac705d18"
   integrity sha512-NJ6Yn3FuDinBaBRWl/q5X/s4koRHBrgKAu+yGI6JCBeiu3qrcbJhwT2GeR/EXVfylRk8dpQVJoLEFhK+Mu31NA==
@@ -17289,12 +17289,13 @@ react-dev-utils@^11.0.4:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
-react-devtools-inline@4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/react-devtools-inline/-/react-devtools-inline-4.4.0.tgz#e032a6eb17a9977b682306f84b46e683adf4bf68"
-  integrity sha512-ES0GolSrKO8wsKbsEkVeiR/ZAaHQTY4zDh1UW8DImVmm8oaGLl3ijJDvSGe+qDRKPZdPRnDtWWnSvvrgxXdThQ==
+react-devtools-inline@4.22.1:
+  version "4.22.1"
+  resolved "https://registry.yarnpkg.com/react-devtools-inline/-/react-devtools-inline-4.22.1.tgz#339ef44279317de10ebafcf12e3e48b9f0c24481"
+  integrity sha512-nYLfc5ZwXZN8ooQ2PNxS2LdLjQeRYYhJoDs6dMVQ8vsNx1m3qjaKBp4baLr4Cv+uv7LWSv2on7Rd2QpkYMLOeQ==
   dependencies:
-    es6-symbol "^3"
+    source-map-js "^0.6.2"
+    sourcemap-codec "^1.4.8"
 
 react-docgen-typescript@^2.0.0:
   version "2.2.2"
@@ -17317,14 +17318,14 @@ react-docgen@^5.0.0:
     node-dir "^0.1.10"
     strip-indent "^3.0.0"
 
-react-dom@17.0.2, react-dom@^17.0.1:
-  version "17.0.2"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
-  integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==
+react-dom@0.0.0-experimental-ceee524a8-20211217, react-dom@^17.0.1, react-dom@experimental:
+  version "0.0.0-experimental-ceee524a8-20211217"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-0.0.0-experimental-ceee524a8-20211217.tgz#0b1f0d68c4cbf5210ab20eb6575957df30a63187"
+  integrity sha512-IA5ujcW3/u59LWRoj8Ypd0fTZejicdk3wdjp7fIJTo3JhYlyp07JU3b/RolErKMPBr02B9I/d4w/4CrNVAgJOA==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-    scheduler "^0.20.2"
+    scheduler "0.0.0-experimental-ceee524a8-20211217"
 
 react-draggable@^4.4.3:
   version "4.4.4"
@@ -17599,10 +17600,10 @@ react-use-measure@^2.1.1:
   dependencies:
     debounce "^1.2.1"
 
-react@17.0.2, react@^17.0.1:
-  version "17.0.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
-  integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
+react@0.0.0-experimental-ceee524a8-20211217, react@^17.0.1, react@experimental:
+  version "0.0.0-experimental-ceee524a8-20211217"
+  resolved "https://registry.yarnpkg.com/react/-/react-0.0.0-experimental-ceee524a8-20211217.tgz#64a36d846f67c3fd8eaf2519361e4d97bde23ee0"
+  integrity sha512-ZqKroULaAePM1MAx2Az81wKlRyXjuKDaRGxmoEVyuRvjhsOaYgZQcMuwYQBubLRZzfbvN+QulAtA5Myq6k8wMg==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -18426,6 +18427,14 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
+scheduler@0.0.0-experimental-ceee524a8-20211217:
+  version "0.0.0-experimental-ceee524a8-20211217"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.0.0-experimental-ceee524a8-20211217.tgz#0ecb082400948a47e5ad84e0bce6dcdbdd2d448d"
+  integrity sha512-D/H+hO/qFNWUS05Pk66yj1+beViAdsvS2625UKTYXHlZslVGsoEnDgdRt1P+YhwRteN3iVto0te4plAjsRWnpA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+
 scheduler@^0.20.2:
   version "0.20.2"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.20.2.tgz#4baee39436e34aa93b4874bddcbf0fe8b8b50e91"
@@ -18937,6 +18946,11 @@ source-list-map@^2.0.0:
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.1.tgz#a1741c131e3c77d048252adfa24e23b908670caf"
   integrity sha512-4+TN2b3tqOCd/kaGRJ/sTYA0tR0mdXx26ipdolxcwtJVqEnqNYvlCAt1q3ypy4QMlYus+Zh34RNtYLoq2oQ4IA==
 
+source-map-js@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-0.6.2.tgz#0bb5de631b41cfbda6cfba8bd05a80efdfd2385e"
+  integrity sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==
+
 source-map-resolve@^0.5.0:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/source-map-resolve/-/source-map-resolve-0.5.3.tgz#190866bece7553e1f8f267a2ee82c606b5509a1a"
@@ -18983,7 +18997,7 @@ source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0, source-map@~0.6.1:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
-sourcemap-codec@^1.4.4:
+sourcemap-codec@^1.4.4, sourcemap-codec@^1.4.8:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/sourcemap-codec/-/sourcemap-codec-1.4.8.tgz#ea804bd94857402e6992d05a38ef1ae35a9ab4c4"
   integrity sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==
