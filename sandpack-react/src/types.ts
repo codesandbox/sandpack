@@ -235,16 +235,16 @@ export type SandpackThemeProp =
 
 /**
  * Custom properties to be used in the SandpackCodeEditor component,
- * some of which are exclusive to customize the Codemirror instance.
+ * some of which are exclusive to customize the CodeMirror instance.
  */
 export interface SandpackCodeOptions {
   /**
-   * Codemirror extensions for the editor state, which can
+   * CodeMirror extensions for the editor state, which can
    * provide extra features and functionalities to the editor component.
    */
   extensions?: CodeEditorProps["extensions"];
   /**
-   * Property to register Codemirror extension keymap.
+   * Property to register CodeMirror extension keymap.
    */
   extensionsKeymap?: CodeEditorProps["extensionsKeymap"];
 }

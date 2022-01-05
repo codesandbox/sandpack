@@ -37,7 +37,7 @@ We can't currently support this in the Sandpack library, due to technical limita
 
 #### How to highlight TypeScript errors in the editor?
 
-Sandpack still doesn't officially support any kind of language server to provide a way to highlight errors in the `SandpackCodeEditor`. However, there is a discussion of how to make it work on [this topic](https://github.com/codesandbox/sandpack/discussions/237), with some examples and Codemirror documentation references of how to implement it.
+Sandpack still doesn't officially support any kind of language server to provide a way to highlight errors in the `SandpackCodeEditor`. However, there is a discussion of how to make it work on [this topic](https://github.com/codesandbox/sandpack/discussions/237), with some examples and CodeMirror documentation references of how to implement it.
 
 #### Why is the bundler hosted externally (iframe) and not a simple JavaScript module?
 
