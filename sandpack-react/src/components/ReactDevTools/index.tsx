@@ -82,7 +82,7 @@ export const SandpackReactDevTools = ({
     });
 
     return (): void => {
-      unsubscribeMessageListener();
+      unsubscribeMessageListener?.();
       unsubscribe();
     };
   }, [reactDevtools, clientId, listen, sandpack.clients]);
