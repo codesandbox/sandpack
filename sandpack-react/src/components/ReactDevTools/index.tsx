@@ -7,14 +7,18 @@ import { isDarkColor } from "../../utils/stringUtils";
 
 type DevToolsTheme = "dark" | "light";
 
+type SandpackReactDevToolsProps = {
+  clientId?: string;
+  theme?: DevToolsTheme;
+  onLoad?: () => void;
+} & React.HtmlHTMLAttributes<unknown>;
+
 export const SandpackReactDevTools = ({
   clientId,
   theme,
+  onLoad,
   ...props
-}: {
-  clientId?: string;
-  theme?: DevToolsTheme;
-} & React.HtmlHTMLAttributes<unknown>): JSX.Element | null => {
+}: SandpackReactDevToolsProps): JSX.Element | null => {
   const { listen, sandpack } = useSandpack();
   const { theme: sandpackTheme } = useSandpackTheme();
   const c = useClasser("sp");
@@ -77,6 +81,7 @@ export const SandpackReactDevTools = ({
           const DevTools = initialize(contentWindow, { bridge, store });
 
           setDevTools(DevTools);
+          onLoad?.();
         }
       }
     });
@@ -85,7 +90,7 @@ export const SandpackReactDevTools = ({
       unsubscribeMessageListener?.();
       unsubscribe();
     };
-  }, [reactDevtools, clientId, listen, sandpack.clients]);
+  }, [reactDevtools, clientId, listen, sandpack.clients, onLoad]);
 
   React.useEffect(() => {
     sandpack.registerReactDevTools("latest");
