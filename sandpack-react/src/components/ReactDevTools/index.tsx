@@ -10,13 +10,13 @@ type DevToolsTheme = "dark" | "light";
 type SandpackReactDevToolsProps = {
   clientId?: string;
   theme?: DevToolsTheme;
-  onLoad?: () => void;
+  onLoadModule?: () => void;
 } & React.HtmlHTMLAttributes<unknown>;
 
 export const SandpackReactDevTools = ({
   clientId,
   theme,
-  onLoad,
+  onLoadModule,
   ...props
 }: SandpackReactDevToolsProps): JSX.Element | null => {
   const { listen, sandpack } = useSandpack();
@@ -81,7 +81,7 @@ export const SandpackReactDevTools = ({
           const DevTools = initialize(contentWindow, { bridge, store });
 
           setDevTools(DevTools);
-          onLoad?.();
+          onLoadModule?.();
         }
       }
     });
@@ -90,7 +90,7 @@ export const SandpackReactDevTools = ({
       unsubscribeMessageListener?.();
       unsubscribe();
     };
-  }, [reactDevtools, clientId, listen, sandpack.clients, onLoad]);
+  }, [reactDevtools, clientId, listen, sandpack.clients]);
 
   React.useEffect(() => {
     sandpack.registerReactDevTools("latest");
