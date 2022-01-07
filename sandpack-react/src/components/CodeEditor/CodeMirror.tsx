@@ -122,8 +122,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     React.useEffect(() => {
       const mode = initMode === "lazy" || initMode === "user-visible";
 
-      // Mode + is inviewport + has already initialized
-      if (mode && isIntersecting && !shouldInitEditor) {
+      if (mode && isIntersecting) {
         setShouldInitEditor(true);
       }
     }, [initMode, isIntersecting]);
