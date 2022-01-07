@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.13-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.4...v0.10.13-experimental.0) (2022-01-07)
+
+
+### Bug Fixes
+
+* **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([60fd43a](https://github.com/codesandbox/sandpack/commit/60fd43a3ffc62ef672660d3176ff51b6f8465f47))
+
+
+
+
+
 ## [0.10.12](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.12) (2022-01-07)
 
 ### Bug Fixes
