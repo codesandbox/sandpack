@@ -102,6 +102,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     const cmView = React.useRef<EditorView>();
     const { theme, themeId } = useSandpackTheme();
     const [internalCode, setInternalCode] = React.useState<string>(code);
+    const [shouldInitEditor, setShouldInitEditor] = React.useState(
+      initMode === "immediate"
+    );
+
     const c = useClasser("sp");
     const { listen } = useSandpack();
     const ariaId = React.useRef<string>(id ?? generateRandomId());
@@ -115,26 +119,16 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       getCodemirror: (): EditorView | undefined => cmView.current,
     }));
 
-    const shouldInitEditor = (): boolean => {
-      if (initMode === "immediate") {
-        return true;
+    React.useEffect(() => {
+      const mode = initMode === "lazy" || initMode === "user-visible";
+
+      if (mode && isIntersecting) {
+        setShouldInitEditor(true);
       }
-
-      if (initMode === "lazy" && isIntersecting) {
-        return true;
-      }
-
-      if (initMode === "user-visible") {
-        return isIntersecting;
-      }
-
-      return false;
-    };
-
-    const initEditor = shouldInitEditor();
+    }, [initMode, isIntersecting]);
 
     React.useEffect(() => {
-      if (!wrapper.current || !initEditor) return;
+      if (!wrapper.current || !shouldInitEditor) return;
 
       /**
        * TODO: replace this time out to something more efficient
@@ -255,7 +249,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
       // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [initEditor, showLineNumbers, wrapContent, themeId, decorators]);
+    }, [shouldInitEditor, showLineNumbers, wrapContent, themeId, decorators]);
 
     React.useEffect(() => {
       // When the user clicks on a tab button on a larger screen
@@ -341,7 +335,9 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     if (readOnly) {
       return (
         <pre ref={combinedRef} className={c("cm", editorState)} translate="no">
-          {!initEditor && <code className={c("pre-placeholder")}>{code}</code>}
+          {!shouldInitEditor && (
+            <code className={c("pre-placeholder")}>{code}</code>
+          )}
         </pre>
       );
     }
@@ -361,7 +357,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         tabIndex={0}
         translate="no"
       >
-        {!initEditor && (
+        {!shouldInitEditor && (
           <pre
             className={c("pre-placeholder")}
             style={{
