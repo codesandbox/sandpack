@@ -3,509 +3,281 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.10.11-experimental.4](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.3...v0.10.11-experimental.4) (2022-01-06)
-
-
-### Bug Fixes
-
-* rename method name ([cf1162c](https://github.com/codesandbox/sandpack/commit/cf1162ce942b1d9151cd1ede7e5121920d7acae7))
-
-
-
-
-
-## [0.10.11-experimental.3](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.2...v0.10.11-experimental.3) (2022-01-06)
-
-
-### Features
-
-* **devtools:** add on load method ([99f1f32](https://github.com/codesandbox/sandpack/commit/99f1f321c57e36e4085bc8be7053acc53238dfbb))
-
-
-
-
-
-## [0.10.11-experimental.2](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.1...v0.10.11-experimental.2) (2022-01-05)
-
+## [0.10.12](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.12) (2022-01-07)
 
 ### Bug Fixes
 
-* unsubscribe function ([1501032](https://github.com/codesandbox/sandpack/commit/1501032a342f351c6a2d8b0dee437d6609baeca5))
-
-
-
-
-
-## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
-
-
+- **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([8a8bc11](https://github.com/codesandbox/sandpack/commit/8a8bc11d160b48225f7f3ec52c3f339f1aa3745e))
 
 ## [0.10.11](https://github.com/codesandbox/sandpack/compare/v0.10.10...v0.10.11) (2022-01-05)
 
+### Bug Fixes
+
+- rename method name ([cf1162c](https://github.com/codesandbox/sandpack/commit/cf1162ce942b1d9151cd1ede7e5121920d7acae7))
+
+## [0.10.11-experimental.3](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.2...v0.10.11-experimental.3) (2022-01-06)
+
+### Features
+
+- **devtools:** add on load method ([99f1f32](https://github.com/codesandbox/sandpack/commit/99f1f321c57e36e4085bc8be7053acc53238dfbb))
+
+## [0.10.11-experimental.2](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.1...v0.10.11-experimental.2) (2022-01-05)
 
 ### Bug Fixes
 
-* **react-devtools:** legacy mode ([#272](https://github.com/codesandbox/sandpack/issues/272)) ([4891ba4](https://github.com/codesandbox/sandpack/commit/4891ba4bdf5ad8ed1aed1f6a37cc4b8e5a94b8e2))
+- unsubscribe function ([1501032](https://github.com/codesandbox/sandpack/commit/1501032a342f351c6a2d8b0dee437d6609baeca5))
 
+## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
 
+## [0.10.11](https://github.com/codesandbox/sandpack/compare/v0.10.10...v0.10.11) (2022-01-05)
+
+### Bug Fixes
+
+- **react-devtools:** legacy mode ([#272](https://github.com/codesandbox/sandpack/issues/272)) ([4891ba4](https://github.com/codesandbox/sandpack/commit/4891ba4bdf5ad8ed1aed1f6a37cc4b8e5a94b8e2))
 
 ## [0.10.10](https://github.com/codesandbox/sandpack/compare/v0.10.9...v0.10.10) (2021-12-29)
 
-
 ### Bug Fixes
 
-* **filetab:** not show files that doesn't exist ([#283](https://github.com/codesandbox/sandpack/issues/283)) ([053d695](https://github.com/codesandbox/sandpack/commit/053d695e106683d169ede0bc81d12650f4491605))
-
-
+- **filetab:** not show files that doesn't exist ([#283](https://github.com/codesandbox/sandpack/issues/283)) ([053d695](https://github.com/codesandbox/sandpack/commit/053d695e106683d169ede0bc81d12650f4491605))
 
 ## [0.10.9](https://github.com/codesandbox/sandpack/compare/v0.10.8...v0.10.9) (2021-12-28)
 
-
 ### Bug Fixes
 
-* **entry/files:** prevent mismatch with pathname  ([#268](https://github.com/codesandbox/sandpack/issues/268)) ([b618daf](https://github.com/codesandbox/sandpack/commit/b618dafab8595b7dc224f4620a9a8f73caa7762b))
-
-
+- **entry/files:** prevent mismatch with pathname ([#268](https://github.com/codesandbox/sandpack/issues/268)) ([b618daf](https://github.com/codesandbox/sandpack/commit/b618dafab8595b7dc224f4620a9a8f73caa7762b))
 
 ## [0.10.8](https://github.com/codesandbox/sandpack/compare/v0.10.7...v0.10.8) (2021-12-28)
 
-
-
 ## [0.10.7](https://github.com/codesandbox/sandpack/compare/v0.10.6...v0.10.7) (2021-12-28)
-
-
-
-
 
 ## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.6...v0.10.7-experimental.0) (2022-01-05)
 
-
 ### Bug Fixes
 
-* **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
-
-
-
-
+- **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
 
 ## [0.10.6](https://github.com/codesandbox/sandpack/compare/v0.10.5...v0.10.6) (2021-12-17)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.10.5](https://github.com/codesandbox/sandpack/compare/v0.10.4...v0.10.5) (2021-12-16)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.10.4](https://github.com/codesandbox/sandpack/compare/v0.10.3...v0.10.4) (2021-12-15)
-
 
 ### Bug Fixes
 
-* **codemirror:** line-height/gutter] calculation ([#262](https://github.com/codesandbox/sandpack/issues/262)) ([77f3f04](https://github.com/codesandbox/sandpack/commit/77f3f04ffe4c4f72d60349b834fc8ef6af3ca71a))
-
-
-
-
+- **codemirror:** line-height/gutter] calculation ([#262](https://github.com/codesandbox/sandpack/issues/262)) ([77f3f04](https://github.com/codesandbox/sandpack/commit/77f3f04ffe4c4f72d60349b834fc8ef6af3ca71a))
 
 ## [0.10.3](https://github.com/codesandbox/sandpack/compare/v0.10.2...v0.10.3) (2021-12-14)
 
-
 ### Bug Fixes
 
-* lint errors ([#234](https://github.com/codesandbox/sandpack/issues/234)) ([2d51830](https://github.com/codesandbox/sandpack/commit/2d518309cfd86222078fde25d399ea12258b3493))
-
-
-
-
+- lint errors ([#234](https://github.com/codesandbox/sandpack/issues/234)) ([2d51830](https://github.com/codesandbox/sandpack/commit/2d518309cfd86222078fde25d399ea12258b3493))
 
 ## [0.10.2](https://github.com/codesandbox/sandpack/compare/v0.10.1...v0.10.2) (2021-12-10)
 
-
 ### Bug Fixes
 
-* **react:** correct types for resting props ([#251](https://github.com/codesandbox/sandpack/issues/251)) ([eff38a6](https://github.com/codesandbox/sandpack/commit/eff38a6cea2259cbdaec7183ba195eb8992af652))
-
-
-
-
+- **react:** correct types for resting props ([#251](https://github.com/codesandbox/sandpack/issues/251)) ([eff38a6](https://github.com/codesandbox/sandpack/commit/eff38a6cea2259cbdaec7183ba195eb8992af652))
 
 ## [0.10.1](https://github.com/codesandbox/sandpack/compare/v0.10.0...v0.10.1) (2021-12-09)
 
-
 ### Bug Fixes
 
-* **react-devtool:** add dependency ([#249](https://github.com/codesandbox/sandpack/issues/249)) ([d569a6e](https://github.com/codesandbox/sandpack/commit/d569a6e22d2c09ccb763b1e296e4b37eb17c194c))
-
-
-
-
+- **react-devtool:** add dependency ([#249](https://github.com/codesandbox/sandpack/issues/249)) ([d569a6e](https://github.com/codesandbox/sandpack/commit/d569a6e22d2c09ccb763b1e296e4b37eb17c194c))
 
 # [0.10.0](https://github.com/codesandbox/sandpack/compare/v0.9.14...v0.10.0) (2021-12-09)
 
-
 ### Bug Fixes
 
-* **react:** duplicated import ([512f814](https://github.com/codesandbox/sandpack/commit/512f814a7d045c57f56fbd3eacf7868ccfe2f516))
-
+- **react:** duplicated import ([512f814](https://github.com/codesandbox/sandpack/commit/512f814a7d045c57f56fbd3eacf7868ccfe2f516))
 
 ### Features
 
-* **react:** react devtool ([#236](https://github.com/codesandbox/sandpack/issues/236)) ([a67e1b2](https://github.com/codesandbox/sandpack/commit/a67e1b2ccfc38b01ad78d2d7f518148cf94eb15d))
-
-
-
-
+- **react:** react devtool ([#236](https://github.com/codesandbox/sandpack/issues/236)) ([a67e1b2](https://github.com/codesandbox/sandpack/commit/a67e1b2ccfc38b01ad78d2d7f518148cf94eb15d))
 
 ## [0.9.14](https://github.com/codesandbox/sandpack/compare/v0.9.13...v0.9.14) (2021-12-09)
 
-
 ### Bug Fixes
 
-* **react-context:** expose clients  ([#241](https://github.com/codesandbox/sandpack/issues/241)) ([f47295d](https://github.com/codesandbox/sandpack/commit/f47295d9cd5365ce9482c02922d0ea6e2db61592))
-* **react:** ensure hidden files even for templates ([#231](https://github.com/codesandbox/sandpack/issues/231)) ([a1461a0](https://github.com/codesandbox/sandpack/commit/a1461a0e58e8c5595209463d965aefb6760215fe))
-
-
-
-
+- **react-context:** expose clients ([#241](https://github.com/codesandbox/sandpack/issues/241)) ([f47295d](https://github.com/codesandbox/sandpack/commit/f47295d9cd5365ce9482c02922d0ea6e2db61592))
+- **react:** ensure hidden files even for templates ([#231](https://github.com/codesandbox/sandpack/issues/231)) ([a1461a0](https://github.com/codesandbox/sandpack/commit/a1461a0e58e8c5595209463d965aefb6760215fe))
 
 ## [0.9.13](https://github.com/codesandbox/sandpack/compare/v0.9.12...v0.9.13) (2021-12-08)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.9.12](https://github.com/codesandbox/sandpack/compare/v0.9.11...v0.9.12) (2021-12-08)
-
 
 ### Bug Fixes
 
-* **open in codesandbox button:** optimize for long sandoxes ([#120](https://github.com/codesandbox/sandpack/issues/120)) ([3ad5261](https://github.com/codesandbox/sandpack/commit/3ad5261ca06fad62ddd9430327645511aa072435))
-
-
-
-
+- **open in codesandbox button:** optimize for long sandoxes ([#120](https://github.com/codesandbox/sandpack/issues/120)) ([3ad5261](https://github.com/codesandbox/sandpack/commit/3ad5261ca06fad62ddd9430327645511aa072435))
 
 ## [0.9.11](https://github.com/codesandbox/sandpack/compare/v0.9.10...v0.9.11) (2021-12-05)
 
-
 ### Bug Fixes
 
-* **types:** react components not actually accepting children ([#239](https://github.com/codesandbox/sandpack/issues/239)) ([44af959](https://github.com/codesandbox/sandpack/commit/44af9599d475db0b4732477c4365fd10d85f7788))
-
-
-
-
+- **types:** react components not actually accepting children ([#239](https://github.com/codesandbox/sandpack/issues/239)) ([44af959](https://github.com/codesandbox/sandpack/commit/44af9599d475db0b4732477c4365fd10d85f7788))
 
 ## [0.9.10](https://github.com/codesandbox/sandpack/compare/v0.9.9...v0.9.10) (2021-12-03)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.9.9](https://github.com/codesandbox/sandpack/compare/v0.9.8...v0.9.9) (2021-12-03)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
-
-
-
-
 
 ## [0.9.8](https://github.com/codesandbox/sandpack/compare/v0.9.7...v0.9.8) (2021-12-02)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.9.7](https://github.com/codesandbox/sandpack/compare/v0.9.6...v0.9.7) (2021-12-01)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
-
-
-
-
 
 ## [0.9.6](https://github.com/codesandbox/sandpack/compare/v0.9.5...v0.9.6) (2021-11-30)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.9.5](https://github.com/codesandbox/sandpack/compare/v0.9.4...v0.9.5) (2021-11-30)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
-
-
-
-
 
 ## [0.9.4](https://github.com/codesandbox/sandpack/compare/v0.9.3...v0.9.4) (2021-11-30)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.9.3](https://github.com/codesandbox/sandpack/compare/v0.9.2...v0.9.3) (2021-11-30)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
-
-
-
-
 
 ## [0.9.2](https://github.com/codesandbox/sandpack/compare/v0.9.1...v0.9.2) (2021-11-29)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.9.1](https://github.com/codesandbox/sandpack/compare/v0.9.0...v0.9.1) (2021-11-25)
-
 
 ### Bug Fixes
 
-* **init-mode:** render placeholder ([#187](https://github.com/codesandbox/sandpack/issues/187)) ([04b0286](https://github.com/codesandbox/sandpack/commit/04b028600dde049d512d16b2fdb176b1789c62ee))
-
-
-
-
+- **init-mode:** render placeholder ([#187](https://github.com/codesandbox/sandpack/issues/187)) ([04b0286](https://github.com/codesandbox/sandpack/commit/04b028600dde049d512d16b2fdb176b1789c62ee))
 
 # [0.9.0](https://github.com/codesandbox/sandpack/compare/v0.8.0...v0.9.0) (2021-11-25)
 
-
 ### Features
 
-* **template:** svelte  ([#182](https://github.com/codesandbox/sandpack/issues/182)) ([2d0c85c](https://github.com/codesandbox/sandpack/commit/2d0c85c5ef4fa856c83e539e2c9e2ffd804fa366))
-
-
-
-
+- **template:** svelte ([#182](https://github.com/codesandbox/sandpack/issues/182)) ([2d0c85c](https://github.com/codesandbox/sandpack/commit/2d0c85c5ef4fa856c83e539e2c9e2ffd804fa366))
 
 # [0.8.0](https://github.com/codesandbox/sandpack/compare/v0.7.3...v0.8.0) (2021-11-25)
 
-
 ### Features
 
-* **react:** initilization mode ([#152](https://github.com/codesandbox/sandpack/issues/152)) ([53d9195](https://github.com/codesandbox/sandpack/commit/53d9195fa02f412f99f50d96e43ffd24b269dfa4))
-
-
-
-
+- **react:** initilization mode ([#152](https://github.com/codesandbox/sandpack/issues/152)) ([53d9195](https://github.com/codesandbox/sandpack/commit/53d9195fa02f412f99f50d96e43ffd24b269dfa4))
 
 ## [0.7.3](https://github.com/codesandbox/sandpack/compare/v0.7.2...v0.7.3) (2021-11-25)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.7.2](https://github.com/codesandbox/sandpack/compare/v0.7.1...v0.7.2) (2021-11-25)
-
 
 ### Bug Fixes
 
-* **landing:** ui tweaks ([#176](https://github.com/codesandbox/sandpack/issues/176)) ([5ecf9ed](https://github.com/codesandbox/sandpack/commit/5ecf9eddd9184703e19f61739f559cca21b0595c))
-
-
-
-
+- **landing:** ui tweaks ([#176](https://github.com/codesandbox/sandpack/issues/176)) ([5ecf9ed](https://github.com/codesandbox/sandpack/commit/5ecf9eddd9184703e19f61739f559cca21b0595c))
 
 ## [0.7.1](https://github.com/codesandbox/sandpack/compare/v0.7.0...v0.7.1) (2021-11-24)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 # [0.7.0](https://github.com/codesandbox/sandpack/compare/v0.6.0...v0.7.0) (2021-11-23)
-
 
 ### Features
 
-* **landing:** add examples section ([#160](https://github.com/codesandbox/sandpack/issues/160)) ([5a0b279](https://github.com/codesandbox/sandpack/commit/5a0b2798dbcaead54f997a0c1445a98f4075a005))
-
-
-
-
+- **landing:** add examples section ([#160](https://github.com/codesandbox/sandpack/issues/160)) ([5a0b279](https://github.com/codesandbox/sandpack/commit/5a0b2798dbcaead54f997a0c1445a98f4075a005))
 
 # [0.6.0](https://github.com/codesandbox/sandpack/compare/v0.5.4...v0.6.0) (2021-11-22)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.5.3](https://github.com/codesandbox/sandpack/compare/v0.5.2...v0.5.3) (2021-11-19)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
-
-
-
-
 
 # [0.5.0](https://github.com/codesandbox/sandpack/compare/v0.4.1...v0.5.0) (2021-11-19)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 # [0.4.0](https://github.com/codesandbox/sandpack/compare/v0.3.10...v0.4.0) (2021-11-18)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
-
-
-
-
 
 ## [0.3.7](https://github.com/codesandbox/sandpack/compare/v0.3.6...v0.3.7) (2021-11-16)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.3.3](https://github.com/codesandbox/sandpack/compare/v0.3.2...v0.3.3) (2021-11-15)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
-
-
-
-
 
 ## [0.3.2](https://github.com/codesandbox/sandpack/compare/v0.3.1...v0.3.2) (2021-11-15)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.3.1](https://github.com/codesandbox/sandpack/compare/v0.3.0...v0.3.1) (2021-11-15)
-
 
 ### Bug Fixes
 
-* **react:** dedupe deps ([#145](https://github.com/codesandbox/sandpack/issues/145)) ([bc86c31](https://github.com/codesandbox/sandpack/commit/bc86c3160fbf07c8c226f8c2462ffcadd3faac0e))
-
-
-
-
+- **react:** dedupe deps ([#145](https://github.com/codesandbox/sandpack/issues/145)) ([bc86c31](https://github.com/codesandbox/sandpack/commit/bc86c3160fbf07c8c226f8c2462ffcadd3faac0e))
 
 # [0.3.0](https://github.com/codesandbox/sandpack/compare/v0.2.3...v0.3.0) (2021-11-15)
 
-
 ### Features
 
-* **template:** add vanilla typescript ([#130](https://github.com/codesandbox/sandpack/issues/130)) ([d33eeb9](https://github.com/codesandbox/sandpack/commit/d33eeb9be6809fb40165d97e34a13471ec5faf1b))
-
-
-
-
+- **template:** add vanilla typescript ([#130](https://github.com/codesandbox/sandpack/issues/130)) ([d33eeb9](https://github.com/codesandbox/sandpack/commit/d33eeb9be6809fb40165d97e34a13471ec5faf1b))
 
 ## [0.2.3](https://github.com/codesandbox/sandpack/compare/v0.2.2...v0.2.3) (2021-11-11)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.2.2](https://github.com/codesandbox/sandpack/compare/v0.2.1...v0.2.2) (2021-11-11)
-
 
 ### Bug Fixes
 
-* **react-layout:** remove max-height limit for print media ([#121](https://github.com/codesandbox/sandpack/issues/121)) ([e0001a5](https://github.com/codesandbox/sandpack/commit/e0001a575b13b17188a0233bab36c38800e6c21b))
-
-
-
-
+- **react-layout:** remove max-height limit for print media ([#121](https://github.com/codesandbox/sandpack/issues/121)) ([e0001a5](https://github.com/codesandbox/sandpack/commit/e0001a575b13b17188a0233bab36c38800e6c21b))
 
 ## [0.2.1](https://github.com/codesandbox/sandpack/compare/v0.2.0...v0.2.1) (2021-11-10)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 # [0.2.0](https://github.com/codesandbox/sandpack/compare/v0.1.20...v0.2.0) (2021-11-10)
-
 
 ### Features
 
-* **template:** add react typescript ([#114](https://github.com/codesandbox/sandpack/issues/114)) ([96aaac8](https://github.com/codesandbox/sandpack/commit/96aaac86afc2287a1e96fa95a9836d156a4bc9de))
-
-
-
-
+- **template:** add react typescript ([#114](https://github.com/codesandbox/sandpack/issues/114)) ([96aaac8](https://github.com/codesandbox/sandpack/commit/96aaac86afc2287a1e96fa95a9836d156a4bc9de))
 
 ## [0.1.20](https://github.com/codesandbox/sandpack/compare/v0.1.19...v0.1.20) (2021-11-08)
 
-
 ### Bug Fixes
 
-* **codemirror:** upgrade dependencies ([#125](https://github.com/codesandbox/sandpack/issues/125)) ([7cbf7f1](https://github.com/codesandbox/sandpack/commit/7cbf7f1aa8f07b4826eb8ebbeb1ca5d868b5c4df))
-
-
-
-
+- **codemirror:** upgrade dependencies ([#125](https://github.com/codesandbox/sandpack/issues/125)) ([7cbf7f1](https://github.com/codesandbox/sandpack/commit/7cbf7f1aa8f07b4826eb8ebbeb1ca5d868b5c4df))
 
 ## [0.1.19](https://github.com/codesandbox/sandpack/compare/v0.1.18...v0.1.19) (2021-11-04)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.1.18](https://github.com/codesandbox/sandpack/compare/v0.1.17...v0.1.18) (2021-11-04)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.1.17](https://github.com/codesandbox/sandpack/compare/v0.1.16...v0.1.17) (2021-11-04)
-
 
 ### Bug Fixes
 
-* **react:** make instructions elements ids unique ([#123](https://github.com/codesandbox/sandpack/issues/123)) ([3bd8a78](https://github.com/codesandbox/sandpack/commit/3bd8a78e87758e97c4bec909d318b5917547f520))
-
-
-
-
+- **react:** make instructions elements ids unique ([#123](https://github.com/codesandbox/sandpack/issues/123)) ([3bd8a78](https://github.com/codesandbox/sandpack/commit/3bd8a78e87758e97c4bec909d318b5917547f520))
 
 ## [0.1.16](https://github.com/codesandbox/sandpack/compare/v0.1.15...v0.1.16) (2021-11-03)
 
-
 ### Bug Fixes
 
-* **react:** do not translate code blocks and error messages ([#117](https://github.com/codesandbox/sandpack/issues/117)) ([c09acfc](https://github.com/codesandbox/sandpack/commit/c09acfcc79bb8456f6bc6d0966ebaa2fdc626256))
+- **react:** do not translate code blocks and error messages ([#117](https://github.com/codesandbox/sandpack/issues/117)) ([c09acfc](https://github.com/codesandbox/sandpack/commit/c09acfcc79bb8456f6bc6d0966ebaa2fdc626256))

@@ -3,79 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.10.11-experimental.4](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.3...v0.10.11-experimental.4) (2022-01-06)
-
-
-### Bug Fixes
-
-* rename method name ([cf1162c](https://github.com/codesandbox/sandpack/commit/cf1162ce942b1d9151cd1ede7e5121920d7acae7))
-
-
-
-
-
-## [0.10.11-experimental.3](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.2...v0.10.11-experimental.3) (2022-01-06)
-
-
-### Features
-
-* **devtools:** add on load method ([99f1f32](https://github.com/codesandbox/sandpack/commit/99f1f321c57e36e4085bc8be7053acc53238dfbb))
-
-
-
-
-
-## [0.10.11-experimental.2](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.1...v0.10.11-experimental.2) (2022-01-05)
-
+## [0.10.12](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.12) (2022-01-07)
 
 ### Bug Fixes
 
-* unsubscribe function ([1501032](https://github.com/codesandbox/sandpack/commit/1501032a342f351c6a2d8b0dee437d6609baeca5))
-
-
-
-
-
-## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
-
-
+- **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([8a8bc11](https://github.com/codesandbox/sandpack/commit/8a8bc11d160b48225f7f3ec52c3f339f1aa3745e))
 
 ## [0.10.11](https://github.com/codesandbox/sandpack/compare/v0.10.10...v0.10.11) (2022-01-05)
 
+### Bug Fixes
+
+- rename method name ([cf1162c](https://github.com/codesandbox/sandpack/commit/cf1162ce942b1d9151cd1ede7e5121920d7acae7))
+
+## [0.10.11-experimental.3](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.2...v0.10.11-experimental.3) (2022-01-06)
+
+### Features
+
+- **devtools:** add on load method ([99f1f32](https://github.com/codesandbox/sandpack/commit/99f1f321c57e36e4085bc8be7053acc53238dfbb))
+
+## [0.10.11-experimental.2](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.1...v0.10.11-experimental.2) (2022-01-05)
 
 ### Bug Fixes
 
-* **react-devtools:** legacy mode ([#272](https://github.com/codesandbox/sandpack/issues/272)) ([4891ba4](https://github.com/codesandbox/sandpack/commit/4891ba4bdf5ad8ed1aed1f6a37cc4b8e5a94b8e2))
+- unsubscribe function ([1501032](https://github.com/codesandbox/sandpack/commit/1501032a342f351c6a2d8b0dee437d6609baeca5))
 
+## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
 
+## [0.10.11](https://github.com/codesandbox/sandpack/compare/v0.10.10...v0.10.11) (2022-01-05)
+
+### Bug Fixes
+
+- **react-devtools:** legacy mode ([#272](https://github.com/codesandbox/sandpack/issues/272)) ([4891ba4](https://github.com/codesandbox/sandpack/commit/4891ba4bdf5ad8ed1aed1f6a37cc4b8e5a94b8e2))
 
 ## [0.10.10](https://github.com/codesandbox/sandpack/compare/v0.10.9...v0.10.10) (2021-12-29)
 
-
 ### Bug Fixes
 
-* **filetab:** not show files that doesn't exist ([#283](https://github.com/codesandbox/sandpack/issues/283)) ([053d695](https://github.com/codesandbox/sandpack/commit/053d695e106683d169ede0bc81d12650f4491605))
-
-
+- **filetab:** not show files that doesn't exist ([#283](https://github.com/codesandbox/sandpack/issues/283)) ([053d695](https://github.com/codesandbox/sandpack/commit/053d695e106683d169ede0bc81d12650f4491605))
 
 ## [0.10.9](https://github.com/codesandbox/sandpack/compare/v0.10.8...v0.10.9) (2021-12-28)
 
-
 ### Bug Fixes
 
-* **entry/files:** prevent mismatch with pathname  ([#268](https://github.com/codesandbox/sandpack/issues/268)) ([b618daf](https://github.com/codesandbox/sandpack/commit/b618dafab8595b7dc224f4620a9a8f73caa7762b))
-
-
+- **entry/files:** prevent mismatch with pathname ([#268](https://github.com/codesandbox/sandpack/issues/268)) ([b618daf](https://github.com/codesandbox/sandpack/commit/b618dafab8595b7dc224f4620a9a8f73caa7762b))
 
 ## [0.10.8](https://github.com/codesandbox/sandpack/compare/v0.10.7...v0.10.8) (2021-12-28)
 
-
-
 ## [0.10.7](https://github.com/codesandbox/sandpack/compare/v0.10.6...v0.10.7) (2021-12-28)
-
-
-
-
 
 ## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.6...v0.10.7-experimental.0) (2022-01-05)
 
