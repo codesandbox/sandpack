@@ -1,5 +1,6 @@
-import { css, THEME_PREFIX } from "../../styles";
-import type { SandpackTheme } from "../../types";
+import { css } from "../../styles";
+
+import { styleTokens } from "./utils";
 
 export const placeholderClassName = css({
   margin: "0",
@@ -11,31 +12,7 @@ export const placeholderClassName = css({
   lineHeight: "$font$lineHeight",
 });
 
-const classNameTokens = (): Record<string, string> => {
-  const syntaxHighLightTokens: Array<keyof SandpackTheme["syntax"]> = [
-    "string",
-    "plain",
-    "comment",
-    "keyword",
-    "definition",
-    "punctuation",
-    "property",
-    "tag",
-    "static",
-  ];
-
-  return syntaxHighLightTokens.reduce((acc, token) => {
-    return {
-      ...acc,
-      [`.${THEME_PREFIX}-syntax-${token}`]: {
-        color: `$syntax$color$${token}`,
-        fontStyle: `$syntax$fontStyle$${token}`,
-      },
-    };
-  }, {});
-};
-
-export const syntaxHighlightToken = css(classNameTokens());
+export const tokensClassName = css(styleTokens());
 
 export const editorClassName = css({
   flex: 1,

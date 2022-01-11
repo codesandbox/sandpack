@@ -1,4 +1,3 @@
-import type { TagStyle } from "@codemirror/highlight";
 import { HighlightStyle, tags } from "@codemirror/highlight";
 import { css } from "@codemirror/lang-css";
 import { html } from "@codemirror/lang-html";
@@ -10,7 +9,7 @@ import { EditorView } from "@codemirror/view";
 import * as React from "react";
 
 import { THEME_PREFIX } from "../../styles";
-import type { SandpackSyntaxStyle, SandpackTheme } from "../../types";
+import type { SandpackTheme } from "../../types";
 import { hexToCSSRGBa } from "../../utils/stringUtils";
 
 export const getCodeMirrorPosition = (
@@ -80,6 +79,30 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
 
 const classNameToken = (name: string): string =>
   `${THEME_PREFIX}-syntax-${name}`;
+
+export const styleTokens = (): Record<string, string> => {
+  const syntaxHighLightTokens: Array<keyof SandpackTheme["syntax"]> = [
+    "string",
+    "plain",
+    "comment",
+    "keyword",
+    "definition",
+    "punctuation",
+    "property",
+    "tag",
+    "static",
+  ];
+
+  return syntaxHighLightTokens.reduce((acc, token) => {
+    return {
+      ...acc,
+      [`.${classNameToken(token)}`]: {
+        color: `$syntax$color$${token}`,
+        fontStyle: `$syntax$fontStyle$${token}`,
+      },
+    };
+  }, {});
+};
 
 export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
   HighlightStyle.define([

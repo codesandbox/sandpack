@@ -37,9 +37,9 @@ import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
 import {
   cmClassName,
-  editorClassName,
   placeholderClassName,
-  syntaxHighlightToken,
+  editorClassName,
+  tokensClassName,
 } from "./styles";
 import { useSyntaxHighlight } from "./useSyntaxHighlight";
 import {
@@ -360,7 +360,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           className={classNames(
             c("cm", editorState),
             cmClassName,
-            syntaxHighlightToken
+            tokensClassName
           )}
           translate="no"
         >
@@ -388,7 +388,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           c("cm", editorState),
           cmClassName,
           editorClassName,
-          syntaxHighlightToken
+          tokensClassName
         )}
         onKeyDown={handleContainerKeyDown}
         role="group"
