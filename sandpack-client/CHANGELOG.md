@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/codesandbox/sandpack/compare/v0.10.12...v0.11.0) (2022-01-11)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
 ## [0.10.11](https://github.com/codesandbox/sandpack/compare/v0.10.10...v0.10.11) (2022-01-05)
 
 
