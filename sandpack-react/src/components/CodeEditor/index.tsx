@@ -1,4 +1,6 @@
 import { useClasser } from "@code-hike/classer";
+import type { Extension } from "@codemirror/state";
+import type { KeyBinding } from "@codemirror/view";
 import * as React from "react";
 
 import { RunButton } from "../../common/RunButton";
@@ -27,6 +29,16 @@ export interface CodeEditorProps {
    * a certain control of when to initialize them.
    */
   initMode?: SandpackInitMode;
+  /**
+   * CodeMirror extensions for the editor state, which can
+   * provide extra features and functionalities to the editor component.
+   */
+  extensions?: Extension[];
+  /**
+   * Property to register CodeMirror extension keymap.
+   */
+  extensionsKeymap?: Array<readonly KeyBinding[]>;
+  id?: string;
 }
 
 export { CodeMirror as CodeEditor };
@@ -48,6 +60,9 @@ export const SandpackCodeEditor = React.forwardRef<
       wrapContent = false,
       closableTabs = false,
       initMode,
+      extensions,
+      extensionsKeymap,
+      id,
     },
     ref
   ) => {
@@ -72,7 +87,10 @@ export const SandpackCodeEditor = React.forwardRef<
             ref={ref}
             code={code}
             editorState={editorState}
+            extensions={extensions}
+            extensionsKeymap={extensionsKeymap}
             filePath={activePath}
+            id={id}
             initMode={initMode || sandpack.initMode}
             onCodeUpdate={handleCodeUpdate}
             showInlineErrors={showInlineErrors}

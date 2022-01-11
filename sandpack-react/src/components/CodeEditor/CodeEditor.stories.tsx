@@ -1,6 +1,8 @@
+import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 import type { Story } from "@storybook/react";
 import * as React from "react";
 
+import { Sandpack } from "../../";
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../contexts/themeContext";
 import { SandpackPreview } from "../Preview";
@@ -67,6 +69,18 @@ export const ClosableTabs: React.FC = () => (
   <SandpackProvider template="react">
     <SandpackThemeProvider theme="dark">
       <SandpackCodeEditor closableTabs />
+    </SandpackThemeProvider>
+  </SandpackProvider>
+);
+
+export const ExtensionAutocomplete: React.FC = () => (
+  <SandpackProvider template="react">
+    <SandpackThemeProvider>
+      <SandpackCodeEditor
+        extensions={[autocompletion()]}
+        extensionsKeymap={[completionKeymap]}
+        id="extensions"
+      />
     </SandpackThemeProvider>
   </SandpackProvider>
 );
