@@ -158,6 +158,8 @@ If you played with the `Sandpack` preset, you should be familiar already with th
 Sandpack uses Codemirror behind the hood to provide a nice editor. You can extend the editor with your own extensions, like [`@codemirror/autocomplete`](https://www.npmjs.com/package/@codemirror/autocomplete).
 
 ```jsx
+import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
+
 <SandpackProvider template="react">
   <SandpackThemeProvider>
     <SandpackCodeEditor
