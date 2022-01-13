@@ -256,6 +256,7 @@
 
 .sp-tab-button {
   display: flex;
+  align-items: center;
   background: transparent;
   appearance: none;
   font-size: inherit;
@@ -267,7 +268,6 @@
   border-bottom: 1px solid transparent;
   transition: all 0.15s ease-out;
   white-space: nowrap;
-  align-items: center;
 }
 
 .sp-tab-button[data-active="true"] {
@@ -300,15 +300,20 @@
   visibility: unset;
 }
 
+.sp-label-wrap {
+  display: inline-flex;
+  margin-left: var(--sp-space-2);
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .sp-label {
   padding: 1px var(--sp-space-1);
   border-radius: var(--sp-border-radius);
-  margin-left: var(--sp-space-2);
   font-size: 0.6em;
   text-transform: uppercase;
   background-color: var(--sp-colors-fg-inactive);
-  position: relative;
-  top: 1px;
 }
 
 .sp-button {

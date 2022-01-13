@@ -18,7 +18,7 @@ export interface FileTabsProps {
  */
 export const FileTabs = ({
   closableTabs,
-  readOnly,
+  readOnly: globalReadOnly,
 }: FileTabsProps): JSX.Element => {
   const { sandpack } = useSandpack();
   const c = useClasser("sp");
@@ -90,13 +90,19 @@ export const FileTabs = ({
               </span>
             )}
 
-            {files[filePath].readOnly && (
-              <span className={c("label")}>Read-only</span>
+            {!globalReadOnly && files[filePath].readOnly && (
+              <span className={c("label-wrap")}>
+                <span className={c("label")}>Read-only</span>
+              </span>
             )}
           </button>
         ))}
 
-        {readOnly && <span className={c("label")}>Read-only</span>}
+        {globalReadOnly && (
+          <span className={c("label-wrap")}>
+            <span className={c("label")}>Read-only</span>
+          </span>
+        )}
       </div>
     </div>
   );
