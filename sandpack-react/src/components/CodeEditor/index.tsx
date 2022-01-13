@@ -39,6 +39,9 @@ export interface CodeEditorProps {
    */
   extensionsKeymap?: Array<readonly KeyBinding[]>;
   id?: string;
+  /**
+   * This disables editing of the editor content by the user.
+   */
   readOnly?: boolean;
 }
 

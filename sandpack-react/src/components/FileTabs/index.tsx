@@ -9,11 +9,19 @@ import {
 } from "../../utils/stringUtils";
 
 export interface FileTabsProps {
+  /**
+   * This adds a close button next to each file with a proper trigger to close it.
+   */
   closableTabs?: boolean;
+  /**
+   * This adds a "Read-only" label beside the file list.
+   */
   readOnly?: boolean;
 }
 
 /**
+ * FileTabs is a list of all open files, active file and its state.
+ * 
  * @category Components
  */
 export const FileTabs = ({

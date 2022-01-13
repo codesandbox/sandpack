@@ -58,6 +58,9 @@ export interface SandpackProps {
     recompileDelay?: number;
     codeEditor?: SandpackCodeOptions;
 
+    /**
+     * This disables editing of the all files content by the user.
+     */
     readOnly?: boolean;
   };
 }

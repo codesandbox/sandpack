@@ -1,6 +1,9 @@
 import { useSandpack } from "./useSandpack";
 
 /**
+ * This returns the current state of the active file
+ * and a method to update its content.
+ *
  * @category Hooks
  */
 export const useActiveCode = (): {
@@ -12,7 +15,7 @@ export const useActiveCode = (): {
 
   return {
     code: sandpack.files[sandpack.activePath].code,
-    readOnly: sandpack.files[sandpack.activePath].readOnly,
+    readOnly: sandpack.files[sandpack.activePath].readOnly ?? false,
     updateCode: sandpack.updateCurrentFile,
   };
 };
