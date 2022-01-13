@@ -190,4 +190,12 @@ export type SandpackMessage = BaseSandpackMessage &
     | {
         type: "activate-react-devtools";
       }
+    | {
+        type: "console";
+        logs: Array<{
+          method: string;
+          id: string;
+          data: string[];
+        }>;
+      }
   );
