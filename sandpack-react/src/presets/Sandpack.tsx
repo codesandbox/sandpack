@@ -57,6 +57,8 @@ export interface SandpackProps {
     recompileMode?: "immediate" | "delayed";
     recompileDelay?: number;
     codeEditor?: SandpackCodeOptions;
+
+    readOnly?: boolean;
   };
 }
 
@@ -88,6 +90,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     initMode: props.options?.initMode,
     extensions: props.options?.codeEditor?.extensions,
     extensionsKeymap: props.options?.codeEditor?.extensionsKeymap,
+    readOnly: props.options?.readOnly,
   };
 
   const providerOptions: SandpackProviderProps = {

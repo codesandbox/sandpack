@@ -10,16 +10,20 @@ import {
 
 export interface FileTabsProps {
   closableTabs?: boolean;
+  readOnly?: boolean;
 }
 
 /**
  * @category Components
  */
-export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
+export const FileTabs = ({
+  closableTabs,
+  readOnly,
+}: FileTabsProps): JSX.Element => {
   const { sandpack } = useSandpack();
   const c = useClasser("sp");
 
-  const { activePath, openPaths, setActiveFile } = sandpack;
+  const { activePath, openPaths, setActiveFile, files } = sandpack;
 
   const handleCloseFile = (ev: React.MouseEvent<HTMLDivElement>): void => {
     ev.stopPropagation();
@@ -80,13 +84,19 @@ export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
             type="button"
           >
             {getTriggerText(filePath)}
-            {closableTabs && openPaths.length > 1 ? (
+            {closableTabs && openPaths.length > 1 && (
               <span className={c("close-button")} onClick={handleCloseFile}>
                 <CloseIcon />
               </span>
-            ) : null}
+            )}
+
+            {files[filePath].readOnly && (
+              <span className={c("label")}>Read-only</span>
+            )}
           </button>
         ))}
+
+        {readOnly && <span className={c("label")}>Read-only</span>}
       </div>
     </div>
   );

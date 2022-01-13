@@ -39,6 +39,7 @@ export interface CodeEditorProps {
    */
   extensionsKeymap?: Array<readonly KeyBinding[]>;
   id?: string;
+  readOnly?: boolean;
 }
 
 export { CodeMirror as CodeEditor };
@@ -63,11 +64,12 @@ export const SandpackCodeEditor = React.forwardRef<
       extensions,
       extensionsKeymap,
       id,
+      readOnly,
     },
     ref
   ) => {
     const { sandpack } = useSandpack();
-    const { code, updateCode } = useActiveCode();
+    const { code, updateCode, readOnly: readOnlyFile } = useActiveCode();
     const { activePath, status, editorState } = sandpack;
     const shouldShowTabs = showTabs ?? sandpack.openPaths.length > 1;
 
@@ -79,7 +81,9 @@ export const SandpackCodeEditor = React.forwardRef<
 
     return (
       <SandpackStack customStyle={customStyle}>
-        {shouldShowTabs ? <FileTabs closableTabs={closableTabs} /> : null}
+        {shouldShowTabs && (
+          <FileTabs readOnly={readOnly} closableTabs={closableTabs} />
+        )}
 
         <div className={c("code-editor")}>
           <CodeMirror
@@ -96,6 +100,7 @@ export const SandpackCodeEditor = React.forwardRef<
             showInlineErrors={showInlineErrors}
             showLineNumbers={showLineNumbers}
             wrapContent={wrapContent}
+            readOnly={readOnly || readOnlyFile}
           />
 
           {showRunButton && status === "idle" ? <RunButton /> : null}
