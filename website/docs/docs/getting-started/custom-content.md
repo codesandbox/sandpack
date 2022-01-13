@@ -134,12 +134,12 @@ default:
 ```jsx
 <Sandpack
   files={{
-    '/App.js': reactCode,
-    '/button.js': {
+    "/App.js": reactCode,
+    "/button.js": {
       code: buttonCode,
       active: true,
-    }
-    '/link.js': {
+    },
+    "/link.js": {
       code: linkCode,
       hidden: true,
     },
@@ -151,6 +151,35 @@ default:
 :::info
 The `active` flag has precendence over the `hidden` flag. So a file with both `hidden` and `active` set as `true` will be visible.
 :::
+
+### Read-only mode
+
+You can set just one or more files as read-only or the entire Sandpack, which will make all files non-editable.
+
+**Per file:**
+
+```jsx
+<Sandpack
+  files={{
+    "/App.js": reactCode,
+    "/button.js": {
+      code: buttonCode,
+      readOnly: true,
+    },
+  }}
+  template="react"
+/>
+```
+
+**Globally:**
+
+```jsx
+<Sandpack
+  options={{
+    readOnly: true,
+  }}
+/>
+```
 
 ### openPaths and activePath
 
