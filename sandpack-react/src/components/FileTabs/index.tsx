@@ -97,13 +97,13 @@ export const FileTabs = ({
             )}
           </button>
         ))}
-
-        {globalReadOnly && (
-          <span className={c("label-wrap")}>
-            <span className={c("label")}>Read-only</span>
-          </span>
-        )}
       </div>
+
+      {globalReadOnly && (
+        <span className={c("label-wrap")}>
+          <span className={c("label")}>Read-only</span>
+        </span>
+      )}
     </div>
   );
 };

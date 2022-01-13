@@ -199,6 +199,7 @@
 .sp-tabs {
   border-bottom: 1px solid var(--sp-colors-fg-inactive);
   background: var(--sp-colors-bg-default);
+  display: flex;
 }
 
 .sp-tabs-scrollable-container {
@@ -209,6 +210,7 @@
   align-items: stretch;
   min-height: 40px;
   margin-bottom: -1px;
+  flex: 1;
 }
 
 .sp-preview-container {
@@ -302,9 +304,7 @@
 
 .sp-label-wrap {
   display: inline-flex;
-  margin-left: var(--sp-space-2);
-  flex: 1;
-  justify-content: flex-end;
+  padding: 0 var(--sp-space-4);
   align-items: center;
 }
 
@@ -314,6 +314,7 @@
   font-size: 0.6em;
   text-transform: uppercase;
   background-color: var(--sp-colors-fg-inactive);
+  white-space: nowrap;
 }
 
 .sp-button {
