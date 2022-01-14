@@ -255,8 +255,7 @@
 /* Common Styling */
 
 .sp-tab-button {
-  display: flex;
-  align-items: center;
+  display: block;
   background: transparent;
   appearance: none;
   font-size: inherit;
@@ -307,6 +306,8 @@
   padding: var(--sp-space-1) var(--sp-space-3) var(--sp-space-1)
     var(--sp-space-2);
   border-radius: var(--sp-border-radius);
+  display: flex;
+  align-items: center;
   color: var(--sp-colors-fg-default);
   background-color: var(--sp-colors-bg-default);
   font-size: inherit;
