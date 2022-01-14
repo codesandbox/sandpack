@@ -10,7 +10,7 @@ import {
 
 export interface FileTabsProps {
   /**
-   * This adds a close button next to each file with a proper trigger to close it.
+   * This adds a close button next to each file with a unique trigger to close it.
    */
   closableTabs?: boolean;
   /**
