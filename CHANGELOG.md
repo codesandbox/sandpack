@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.1](https://github.com/codesandbox/sandpack/compare/v0.13.0...v0.13.1) (2022-01-14)
+
+
+### Bug Fixes
+
+* **ui:** visual regression ([#304](https://github.com/codesandbox/sandpack/issues/304)) ([ced8b49](https://github.com/codesandbox/sandpack/commit/ced8b492e52c6db8565e66c228ee4c2bd85b3ef8))
+
+
+
+
+
 # [0.13.0](https://github.com/codesandbox/sandpack/compare/v0.12.0...v0.13.0) (2022-01-14)
 
 
