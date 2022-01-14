@@ -90,7 +90,7 @@ export const ReadOnlyByFile: React.FC = () => (
     customSetup={{ entry: "/index.tsx", main: "/App.tsx" }}
     files={{
       "/index.tsx": { code: "", hidden: true },
-      "/src/App.tsx": { code: "Hello", readOnly: true },
+      "/src/App.tsx": { code: "Hello", readOnly: true, active: true },
       "/src/components/button.tsx": { code: "World", readOnly: false },
     }}
     options={{ showTabs: true }}

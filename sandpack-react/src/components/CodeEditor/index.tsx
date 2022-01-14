@@ -43,6 +43,11 @@ export interface CodeEditorProps {
    * This disables editing of the editor content by the user.
    */
   readOnly?: boolean;
+  /**
+   * Controls the visibility of Read-only label, which will only
+   * appears when `readOnly` is `true`
+   */
+  showReadOnly?: boolean;
 }
 
 export { CodeMirror as CodeEditor };
@@ -68,6 +73,7 @@ export const SandpackCodeEditor = React.forwardRef<
       extensionsKeymap,
       id,
       readOnly,
+      showReadOnly,
     },
     ref
   ) => {
@@ -84,9 +90,7 @@ export const SandpackCodeEditor = React.forwardRef<
 
     return (
       <SandpackStack customStyle={customStyle}>
-        {shouldShowTabs && (
-          <FileTabs readOnly={readOnly} closableTabs={closableTabs} />
-        )}
+        {shouldShowTabs && <FileTabs closableTabs={closableTabs} />}
 
         <div className={c("code-editor")}>
           <CodeMirror
@@ -104,6 +108,7 @@ export const SandpackCodeEditor = React.forwardRef<
             showLineNumbers={showLineNumbers}
             wrapContent={wrapContent}
             readOnly={readOnly || readOnlyFile}
+            showReadOnly={showReadOnly}
           />
 
           {showRunButton && status === "idle" ? <RunButton /> : null}
