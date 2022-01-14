@@ -20,7 +20,7 @@ export interface FileTabsProps {
 }
 
 /**
- * FileTabs is a list of all open files, active file and its state.
+ * FileTabs is a list of all open files, the active file, and its state.
  * 
  * @category Components
  */
