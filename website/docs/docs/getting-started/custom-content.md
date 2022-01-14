@@ -154,7 +154,7 @@ The `active` flag has precendence over the `hidden` flag. So a file with both `h
 
 ### Read-only mode
 
-You can set just one or more files as read-only or the entire Sandpack, which will make all files non-editable.
+You can set one, multiple files, or the entire Sandpack as read-only, which will make all files non-editable.
 
 **Per file:**
 
