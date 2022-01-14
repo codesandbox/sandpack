@@ -14,7 +14,7 @@ export interface FileTabsProps {
    */
   closableTabs?: boolean;
   /**
-   * This adds a "Read-only" label beside the file list.
+   * This adds a "Read-only" label next to the file list.
    */
   readOnly?: boolean;
 }
