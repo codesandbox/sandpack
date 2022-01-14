@@ -181,6 +181,17 @@ You can set one, multiple files, or the entire Sandpack as read-only, which will
 />
 ```
 
+Plus, you can hide the Read-only label which appears on top of the code editor:
+
+```jsx
+<Sandpack
+  options={{
+    readOnly: true,
+    showReadOnly: false,
+  }}
+/>
+```
+
 ### openPaths and activePath
 
 You can override the entire hidden/active system with two settings (`openPaths` and `activePath`) inside the
