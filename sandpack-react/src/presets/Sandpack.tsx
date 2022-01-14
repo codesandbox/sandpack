@@ -59,7 +59,7 @@ export interface SandpackProps {
     codeEditor?: SandpackCodeOptions;
 
     /**
-     * This disables editing of the all files content by the user.
+     * This disables editing of content by the user in all files.
      */
     readOnly?: boolean;
   };
