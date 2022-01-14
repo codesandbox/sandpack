@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/codesandbox/sandpack/compare/v0.12.0...v0.13.0) (2022-01-14)
+
+
+### Bug Fixes
+
+* **who's using:** remove csb ([#299](https://github.com/codesandbox/sandpack/issues/299)) ([b20d498](https://github.com/codesandbox/sandpack/commit/b20d4983992ea5b567cfb165d880bb17fe6191ed))
+
+
+### Features
+
+* **files:** read-only mode ([#300](https://github.com/codesandbox/sandpack/issues/300)) ([9d5d1bf](https://github.com/codesandbox/sandpack/commit/9d5d1bfc3ac0d21d57958ee61057a706762701f2))
+
+
+
+
+
 # [0.12.0](https://github.com/codesandbox/sandpack/compare/v0.11.0...v0.12.0) (2022-01-11)
 
 
