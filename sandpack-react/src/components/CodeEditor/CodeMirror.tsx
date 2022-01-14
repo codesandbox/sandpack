@@ -66,7 +66,15 @@ interface CodeMirrorProps {
   showInlineErrors?: boolean;
   wrapContent?: boolean;
   editorState?: SandpackEditorState;
+  /**
+   * This disables editing of content by the user in all files.
+   */
   readOnly?: boolean;
+  /**
+   * Controls the visibility of Read-only label, which will only
+   * appears when `readOnly` is `true`
+   */
+  showReadOnly?: boolean;
   decorators?: Decorators;
   initMode: SandpackInitMode;
   id?: string;
@@ -93,6 +101,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       wrapContent = false,
       editorState = "pristine",
       readOnly = false,
+      showReadOnly = true,
       decorators,
       initMode = "lazy",
       id,
@@ -343,6 +352,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         <pre ref={combinedRef} className={c("cm", editorState)} translate="no">
           {!shouldInitEditor && (
             <code className={c("pre-placeholder")}>{code}</code>
+          )}
+
+          {readOnly && showReadOnly && (
+            <span className={c("read-only")}>Read-only</span>
           )}
         </pre>
       );

@@ -255,7 +255,8 @@
 /* Common Styling */
 
 .sp-tab-button {
-  display: block;
+  display: flex;
+  align-items: center;
   background: transparent;
   appearance: none;
   font-size: inherit;
@@ -306,8 +307,6 @@
   padding: var(--sp-space-1) var(--sp-space-3) var(--sp-space-1)
     var(--sp-space-2);
   border-radius: var(--sp-border-radius);
-  display: flex;
-  align-items: center;
   color: var(--sp-colors-fg-default);
   background-color: var(--sp-colors-bg-default);
   font-size: inherit;
@@ -515,4 +514,17 @@
 .sp-devtools {
   height: var(--sp-layout-height);
   width: 100%;
+}
+
+.sp-read-only {
+  font-family: var(--sp-font-mono);
+  font-size: 0.8em;
+  position: absolute;
+  right: var(--sp-space-2);
+  bottom: var(--sp-space-2);
+  z-index: 2;
+  color: var(--sp-colors-bg-active);
+  background-color: var(--sp-colors-fg-active);
+  border-radius: 99999px;
+  padding: calc(var(--sp-space-1) / 2) var(--sp-space-2);
 }

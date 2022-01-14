@@ -57,6 +57,16 @@ export interface SandpackProps {
     recompileMode?: "immediate" | "delayed";
     recompileDelay?: number;
     codeEditor?: SandpackCodeOptions;
+
+    /**
+     * This disables editing of content by the user in all files.
+     */
+    readOnly?: boolean;
+    /**
+     * Controls the visibility of Read-only label, which will only
+     * appears when `readOnly` is `true`
+     */
+    showReadOnly?: boolean;
   };
 }
 
@@ -88,6 +98,8 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     initMode: props.options?.initMode,
     extensions: props.options?.codeEditor?.extensions,
     extensionsKeymap: props.options?.codeEditor?.extensionsKeymap,
+    readOnly: props.options?.readOnly,
+    showReadOnly: props.options?.showReadOnly,
   };
 
   const providerOptions: SandpackProviderProps = {

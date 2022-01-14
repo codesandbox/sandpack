@@ -84,3 +84,60 @@ export const ExtensionAutocomplete: React.FC = () => (
     </SandpackThemeProvider>
   </SandpackProvider>
 );
+
+export const ReadOnly: React.FC = () => {
+  return (
+    <>
+      <p>Read-only by file</p>
+      <Sandpack
+        customSetup={{ entry: "/index.tsx", main: "/App.tsx" }}
+        files={{
+          "/index.tsx": { code: "", hidden: true },
+          "/src/App.tsx": { code: "Hello", readOnly: true, active: true },
+          "/src/components/button.tsx": { code: "World", readOnly: false },
+        }}
+        options={{ showTabs: true }}
+        template="react-ts"
+      />
+
+      <p>Read-only global</p>
+      <Sandpack
+        options={{ showTabs: true, readOnly: true }}
+        template="react-ts"
+      />
+
+      <p>Read-only global and by file</p>
+      <Sandpack
+        options={{ showTabs: false, readOnly: true }}
+        files={{
+          "/index.tsx": { code: "", hidden: true },
+          "/src/App.tsx": { code: "Hello", readOnly: true },
+          "/src/components/button.tsx": { code: "World", readOnly: false },
+        }}
+        template="react-ts"
+      />
+
+      <p>Read-only global, but no label</p>
+      <Sandpack
+        options={{ showTabs: false, readOnly: true, showReadOnly: false }}
+        files={{
+          "/index.tsx": { code: "", hidden: true },
+          "/src/App.tsx": { code: "Hello", readOnly: true },
+          "/src/components/button.tsx": { code: "World", readOnly: false },
+        }}
+        template="react-ts"
+      />
+
+      <p>Read-only by file, but no label</p>
+      <Sandpack
+        options={{ showTabs: true, readOnly: false, showReadOnly: false }}
+        files={{
+          "/index.tsx": { code: "", hidden: true },
+          "/src/App.tsx": { code: "Hello", readOnly: true, active: true },
+          "/src/components/button.tsx": { code: "World", readOnly: false },
+        }}
+        template="react-ts"
+      />
+    </>
+  );
+};

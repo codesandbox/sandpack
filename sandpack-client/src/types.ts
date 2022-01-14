@@ -2,6 +2,7 @@ import type { ITemplate } from "codesandbox-import-util-types";
 
 export interface SandpackBundlerFile {
   code: string;
+  readOnly?: boolean;
 }
 
 export type SandpackBundlerFiles = Record<string, SandpackBundlerFile>;
