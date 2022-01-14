@@ -199,7 +199,6 @@
 .sp-tabs {
   border-bottom: 1px solid var(--sp-colors-fg-inactive);
   background: var(--sp-colors-bg-default);
-  display: flex;
 }
 
 .sp-tabs-scrollable-container {
@@ -210,7 +209,6 @@
   align-items: stretch;
   min-height: 40px;
   margin-bottom: -1px;
-  flex: 1;
 }
 
 .sp-preview-container {
@@ -302,21 +300,6 @@
   visibility: unset;
 }
 
-.sp-label-wrap {
-  display: inline-flex;
-  padding: 0 var(--sp-space-4);
-  align-items: center;
-}
-
-.sp-label {
-  padding: 1px var(--sp-space-1);
-  border-radius: var(--sp-border-radius);
-  font-size: 0.6em;
-  text-transform: uppercase;
-  background-color: var(--sp-colors-fg-inactive);
-  white-space: nowrap;
-}
-
 .sp-button {
   appearance: none;
   border: 0;
@@ -324,8 +307,6 @@
   padding: var(--sp-space-1) var(--sp-space-3) var(--sp-space-1)
     var(--sp-space-2);
   border-radius: var(--sp-border-radius);
-  display: flex;
-  align-items: center;
   color: var(--sp-colors-fg-default);
   background-color: var(--sp-colors-bg-default);
   font-size: inherit;

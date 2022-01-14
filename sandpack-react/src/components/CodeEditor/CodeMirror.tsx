@@ -66,6 +66,9 @@ interface CodeMirrorProps {
   showInlineErrors?: boolean;
   wrapContent?: boolean;
   editorState?: SandpackEditorState;
+  /**
+   * This disables editing of content by the user in all files.
+   */
   readOnly?: boolean;
   decorators?: Decorators;
   initMode: SandpackInitMode;

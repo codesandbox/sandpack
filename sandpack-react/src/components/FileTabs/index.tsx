@@ -13,25 +13,18 @@ export interface FileTabsProps {
    * This adds a close button next to each file with a unique trigger to close it.
    */
   closableTabs?: boolean;
-  /**
-   * This adds a "Read-only" label next to the file list.
-   */
-  readOnly?: boolean;
 }
 
 /**
  * FileTabs is a list of all open files, the active file, and its state.
- * 
+ *
  * @category Components
  */
-export const FileTabs = ({
-  closableTabs,
-  readOnly: globalReadOnly,
-}: FileTabsProps): JSX.Element => {
+export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
   const { sandpack } = useSandpack();
   const c = useClasser("sp");
 
-  const { activePath, openPaths, setActiveFile, files } = sandpack;
+  const { activePath, openPaths, setActiveFile } = sandpack;
 
   const handleCloseFile = (ev: React.MouseEvent<HTMLDivElement>): void => {
     ev.stopPropagation();
@@ -97,21 +90,9 @@ export const FileTabs = ({
                 <CloseIcon />
               </span>
             )}
-
-            {!globalReadOnly && files[filePath].readOnly && (
-              <span className={c("label-wrap")}>
-                <span className={c("label")}>Read-only</span>
-              </span>
-            )}
           </button>
         ))}
       </div>
-
-      {globalReadOnly && (
-        <span className={c("label-wrap")}>
-          <span className={c("label")}>Read-only</span>
-        </span>
-      )}
     </div>
   );
 };

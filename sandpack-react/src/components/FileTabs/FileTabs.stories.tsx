@@ -61,32 +61,3 @@ export const WithHiddenFiles: React.FC = () => (
     </SandpackLayout>
   </SandpackProvider>
 );
-
-export const ReadOnlyByFile: React.FC = () => (
-  <Sandpack
-    customSetup={{ entry: "/index.tsx", main: "/App.tsx" }}
-    files={{
-      "/index.tsx": { code: "", hidden: true },
-      "/src/App.tsx": { code: "Hello", readOnly: true },
-      "/src/components/button.tsx": { code: "World", readOnly: false },
-    }}
-    options={{ showTabs: true }}
-    template="react-ts"
-  />
-);
-
-export const ReadOnlyGlobal: React.FC = () => (
-  <Sandpack options={{ showTabs: true, readOnly: true }} template="react-ts" />
-);
-
-export const ReadOnlyGlobalAndPerFile: React.FC = () => (
-  <Sandpack
-    options={{ showTabs: true, readOnly: true }}
-    files={{
-      "/index.tsx": { code: "", hidden: true },
-      "/src/App.tsx": { code: "Hello", readOnly: true },
-      "/src/components/button.tsx": { code: "World", readOnly: false },
-    }}
-    template="react-ts"
-  />
-);
