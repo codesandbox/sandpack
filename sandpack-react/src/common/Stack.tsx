@@ -8,6 +8,7 @@ export const stackClassName = css({
   display: "flex",
   flexDirection: "column",
   width: "100%",
+  position: "relative",
 });
 
 /**

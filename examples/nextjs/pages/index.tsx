@@ -7,6 +7,7 @@ const Home: NextPage = () => {
       <Sandpack />
       <Sandpack theme="sandpack-dark" />
       <Sandpack theme="github-light" />
+      <Sandpack options={{ readOnly: true }} theme="github-light" />
     </div>
   );
 };
