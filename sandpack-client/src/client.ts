@@ -13,6 +13,7 @@ import type {
   SandpackMessage,
   ListenerFunction,
   SandpackError,
+  ReactDevToolsMode,
 } from "./types";
 import {
   createPackageJSON,
@@ -67,7 +68,7 @@ export interface ClientOptions {
     readFile: (path: string) => Promise<string>;
   };
 
-  reactDevTools?: boolean;
+  reactDevTools?: ReactDevToolsMode;
 }
 
 export interface SandboxInfo {

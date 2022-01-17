@@ -1,7 +1,11 @@
 import { createStitches } from "@stitches/core";
 
 import { defaultLight, SANDPACK_THEMES } from "../themes";
-import type { SandpackTheme, SandpackThemeProp } from "../types";
+import type {
+  SandpackSyntaxStyle,
+  SandpackTheme,
+  SandpackThemeProp,
+} from "../types";
 
 /**
  * @category Theme
@@ -108,4 +112,17 @@ const simpleHashFunction = (str: string): number => {
     hash = 31 * hash + str.charCodeAt(i++);
   }
   return Math.abs(hash);
+};
+
+/**
+ * @category Theme
+ */
+export const getSyntaxStyle = (
+  token: string | SandpackSyntaxStyle
+): SandpackSyntaxStyle => {
+  if (typeof token === "string") {
+    return { color: token };
+  }
+
+  return token;
 };

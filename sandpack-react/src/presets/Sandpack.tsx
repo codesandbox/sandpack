@@ -9,6 +9,7 @@ import { SandpackPreview } from "../components/Preview";
 import type { SandpackProviderProps } from "../contexts/sandpackContext";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import type {
+  SandpackCodeOptions,
   FileResolver,
   SandpackFiles,
   SandpackInitMode,
@@ -55,6 +56,17 @@ export interface SandpackProps {
     autorun?: boolean;
     recompileMode?: "immediate" | "delayed";
     recompileDelay?: number;
+    codeEditor?: SandpackCodeOptions;
+
+    /**
+     * This disables editing of content by the user in all files.
+     */
+    readOnly?: boolean;
+    /**
+     * Controls the visibility of Read-only label, which will only
+     * appears when `readOnly` is `true`
+     */
+    showReadOnly?: boolean;
   };
 }
 
@@ -84,6 +96,10 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     wrapContent: props.options?.wrapContent,
     closableTabs: props.options?.closableTabs,
     initMode: props.options?.initMode,
+    extensions: props.options?.codeEditor?.extensions,
+    extensionsKeymap: props.options?.codeEditor?.extensionsKeymap,
+    readOnly: props.options?.readOnly,
+    showReadOnly: props.options?.showReadOnly,
   };
 
   const providerOptions: SandpackProviderProps = {

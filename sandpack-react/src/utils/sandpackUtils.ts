@@ -89,8 +89,9 @@ export const getSandpackStateFromProps = (
   );
 
   const environment = projectSetup.environment;
+  const existOpenPath = openPaths.filter((file) => files[file]);
 
-  return { openPaths, activePath, files, environment };
+  return { openPaths: existOpenPath, activePath, files, environment };
 };
 
 // The template is predefined (eg: react, vue, vanilla)

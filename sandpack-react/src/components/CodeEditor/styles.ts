@@ -34,3 +34,16 @@ export const cmClassName = css({
     paddingRight: "$space$2",
   },
 });
+
+export const readOnlyClassName = css({
+  fontFamily: "$font$mono",
+  fontSize: "0.8em",
+  position: "absolute",
+  right: "$space$2",
+  bottom: "$space$2",
+  zIndex: 2,
+  color: "$colors$activeBackground", //var(--sp-colors-bg-active);
+  backgroundColor: "$colors$activeText", // var(--sp-colors-fg-active);
+  borderRadius: "99999px",
+  padding: "calc($space$1 / 2) $space$2",
+});
