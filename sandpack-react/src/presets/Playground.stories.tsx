@@ -14,8 +14,8 @@ export const Main = (): JSX.Element => {
   return (
     <Sandpack
       customSetup={{ entry: "/index.tsx", main: "/App.tsx" }}
-      files={{ "/App.tsx": { code, readOnly: true } }}
-      options={{ showTabs: true }}
+      files={{ "/App.tsx": { code, readOnly: false } }}
+      options={{ showTabs: true, showLineNumbers: true }}
       template="react-ts"
     />
   );

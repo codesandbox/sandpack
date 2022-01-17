@@ -35,7 +35,14 @@ import { getFileName, generateRandomId } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
-import { cmClassName, placeholderClassName, readOnlyClassName } from "./styles";
+import {
+  cmClassName,
+  placeholderClassName,
+  editorClassName,
+  tokensClassName,
+  readOnlyClassName,
+} from "./styles";
+import { useSyntaxHighlight } from "./useSyntaxHighlight";
 import {
   getCodeMirrorLanguage,
   getEditorTheme,
@@ -115,6 +122,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
   ) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const wrapper = React.useRef<any | HTMLElement>(null);
+    const combinedRef = useCombinedRefs(wrapper, ref);
+
     const cmView = React.useRef<EditorView>();
     const { theme, themeId } = useSandpackTheme();
     const [internalCode, setInternalCode] = React.useState<string>(code);
@@ -143,6 +152,15 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       }
     }, [initMode, isIntersecting]);
 
+    const langSupport = getCodeMirrorLanguage(filePath, fileType);
+    const highlightTheme = getSyntaxHighlight(theme);
+
+    const syntaxHighlightRender = useSyntaxHighlight({
+      langSupport,
+      highlightTheme,
+      code,
+    });
+
     React.useEffect(() => {
       if (!wrapper.current || !shouldInitEditor) return;
 
@@ -151,8 +169,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
        * waiting for "postTask scheduler" API be ready
        */
       const timer = setTimeout(function delayCodeEditorInit() {
-        const langSupport = getCodeMirrorLanguage(filePath, fileType);
-
         const customCommandsKeymap: KeyBinding[] = [
           {
             key: "Tab",
@@ -198,7 +214,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           defaultHighlightStyle.fallback,
 
           getEditorTheme(theme),
-          getSyntaxHighlight(theme),
+          highlightTheme,
           ...extensions,
         ];
 
@@ -348,14 +364,16 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       }
     };
 
-    const combinedRef = useCombinedRefs(wrapper, ref);
-
     if (readOnly) {
       return (
         <>
           <pre
             ref={combinedRef}
-            className={classNames(c("cm", editorState), cmClassName)}
+            className={classNames(
+              c("cm", editorState),
+              cmClassName,
+              tokensClassName
+            )}
             translate="no"
           >
             {!shouldInitEditor && (
@@ -365,7 +383,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
                   placeholderClassName
                 )}
               >
-                {code}
+                {syntaxHighlightRender}
               </code>
             )}
           </pre>
@@ -388,7 +406,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
-        className={classNames(c("cm", editorState), cmClassName)}
+        className={classNames(
+          c("cm", editorState),
+          cmClassName,
+          editorClassName,
+          tokensClassName
+        )}
         onKeyDown={handleContainerKeyDown}
         role="group"
         tabIndex={0}
@@ -401,7 +424,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
               marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
             }}
           >
-            {code}
+            {syntaxHighlightRender}
           </pre>
         )}
 

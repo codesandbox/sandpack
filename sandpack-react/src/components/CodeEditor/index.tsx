@@ -14,7 +14,6 @@ import { FileTabs } from "../FileTabs";
 
 import { CodeMirror } from "./CodeMirror";
 import type { CodeMirrorRef } from "./CodeMirror";
-import { editorClassName } from "./styles";
 
 export type CodeEditorRef = CodeMirrorRef;
 export interface CodeEditorProps {
@@ -95,7 +94,7 @@ export const SandpackCodeEditor = React.forwardRef<
       <SandpackStack customStyle={customStyle}>
         {shouldShowTabs && <FileTabs closableTabs={closableTabs} />}
 
-        <div className={classNames(c("code-editor"), editorClassName)}>
+        <div className={classNames(c("code-editor"))}>
           <CodeMirror
             key={activePath}
             ref={ref}
