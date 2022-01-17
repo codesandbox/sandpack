@@ -5,7 +5,7 @@ import {
 } from "@codesandbox/sandpack-react";
 
 const fantasy = {
-  palette: {
+  colors: {
     activeText: "#69c6b1",
     defaultText: "#7D8982",
     inactiveText: "#1b211e",
@@ -30,18 +30,18 @@ const fantasy = {
     static: "#b5caa5",
     string: "#cc967c",
   },
-  typography: {
-    bodyFont:
+  font: {
+    body:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    monoFont:
+    mono:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    fontSize: "14px",
+    size: "14px",
     lineHeight: "1.4",
   },
 };
 
 const dracula = {
-  palette: {
+  colors: {
     activeText: "#f8f8f2",
     defaultText: "#6272a4",
     inactiveText: "#282a36",
@@ -63,18 +63,18 @@ const dracula = {
     static: "#bd93f9",
     string: "#f1fa8c",
   },
-  typography: {
-    bodyFont:
+  font: {
+    body:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    monoFont:
+    mono:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    fontSize: "14px",
+    size: "14px",
     lineHeight: "1.4",
   },
 };
 
 const cobalt = {
-  palette: {
+  colors: {
     activeText: "#0088ff",
     defaultText: "#858585",
     inactiveText: "#062f52",
@@ -99,18 +99,18 @@ const cobalt = {
     static: "#ce9278",
     string: "#ce9278",
   },
-  typography: {
-    bodyFont:
+  font: {
+    body:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    monoFont:
+    mono:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    fontSize: "14px",
+    size: "14px",
     lineHeight: "1.4",
   },
 };
 
 const amy = {
-  palette: {
+  colors: {
     activeText: "#3cc9b0",
     defaultText: "#dcdcdc",
     inactiveText: "#360136",
@@ -135,18 +135,18 @@ const amy = {
     static: "#ce9278",
     string: "#999999",
   },
-  typography: {
-    bodyFont:
+  font: {
+    body:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    monoFont:
+    mono:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    fontSize: "14px",
+    size: "14px",
     lineHeight: "1.4",
   },
 };
 
 const base = {
-  palette: {
+  colors: {
     activeText: "#FF8A00",
     defaultText: "#FF8A00",
     inactiveText: "#FF8A00",
@@ -171,12 +171,12 @@ const base = {
     static: "#FF8A00",
     string: "#FF8A00",
   },
-  typography: {
-    bodyFont:
+  font: {
+    body:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    monoFont:
+    mono:
       '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    fontSize: "14px",
+    size: "14px",
     lineHeight: "1.4",
   },
 };

@@ -7,8 +7,9 @@ on:
 
 jobs:
   bundler:
-    timeout-minutes: 20
+    name: Build bundler
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - name: Setup | Clone codesandbox-client
@@ -33,7 +34,7 @@ jobs:
       - name: Prepare | Build dependencies
         run: yarn build:deps
 
-      - name: Prepare | Build CodeSandbox bundler
+      - name: Prepare | Build Sandpack bundler
         run: yarn build:sandpack
 
       - name: Archive bundler artifacts
@@ -43,6 +44,7 @@ jobs:
           path: www/**/*.*
 
   publish:
+    name: Publish
     timeout-minutes: 20
     runs-on: ubuntu-latest
     needs: [bundler]

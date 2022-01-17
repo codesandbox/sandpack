@@ -20,4 +20,34 @@ describe("CodeMirror", () => {
 
     cy.get(".cm-content").invoke("attr", "style", "tab-size: 4;").snapshot();
   });
+
+  it("should load the autocomplete CodeMirror extension", () => {
+    cy.viewport(600, 1000).visit(
+      `/iframe.html?id=components-code-editor--extension-autocomplete`
+    );
+
+    // Remove all content from element editable
+    cy.get(".cm-content").type("{selectall}").type("{backspace}");
+
+    // Trigger autocomplete keybinding
+    cy.get(".cm-content").type("{ctrl} ");
+
+    // Wait for the autocomplete modal appears and select the first item
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(200).focused().type("{enter}");
+
+    /**
+     * Take a snapshot of the current editor state,
+     * which should contains a snippet code:
+     *
+     * ```
+     * class name {
+     *   constructor(params) {
+     *
+     *   }
+     * }
+     * ```
+     */
+    cy.get(".cm-content").snapshot();
+  });
 });

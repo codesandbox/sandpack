@@ -11,21 +11,24 @@ const devToolClassName = css({
   height: "$layout$height",
   width: "100%",
 });
+type DevToolsTheme = "dark" | "light";
 
 export const SandpackReactDevTools = ({
   clientId,
+  theme,
   ...props
 }: {
   clientId?: string;
+  theme?: DevToolsTheme;
 } & React.HtmlHTMLAttributes<unknown>): JSX.Element | null => {
   const { listen, sandpack } = useSandpack();
-  const { theme } = useSandpackTheme();
+  const { theme: sandpackTheme } = useSandpackTheme();
   const c = useClasser(THEME_PREFIX);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const reactDevtools = React.useRef<any>();
 
   const [ReactDevTools, setDevTools] = React.useState<React.FunctionComponent<{
-    browserTheme: "dark" | "light";
+    browserTheme: DevToolsTheme;
   }> | null>(null);
 
   React.useEffect(() => {
@@ -52,17 +55,23 @@ export const SandpackReactDevTools = ({
   }, [reactDevtools, clientId, listen, sandpack.clients]);
 
   React.useEffect(() => {
-    sandpack.registerReactDevTools();
+    sandpack.registerReactDevTools("legacy");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!ReactDevTools) return null;
 
-  const isDarkTheme = isDarkColor(theme.colors.defaultBackground);
+  const getBrowserTheme = (): DevToolsTheme => {
+    if (theme) return theme;
+
+    const isDarkTheme = isDarkColor(sandpackTheme.colors.defaultBackground);
+
+    return isDarkTheme ? "dark" : "light";
+  };
 
   return (
     <div className={classNames(c("devtools"), devToolClassName)} {...props}>
-      <ReactDevTools browserTheme={isDarkTheme ? "dark" : "light"} />
+      <ReactDevTools browserTheme={getBrowserTheme()} />
     </div>
   );
 };
