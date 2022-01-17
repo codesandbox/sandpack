@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.2-experimental-ssr.0](https://github.com/codesandbox/sandpack/compare/v0.10.13-experimental.0...v0.13.2-experimental-ssr.0) (2022-01-17)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
 # [0.13.0](https://github.com/codesandbox/sandpack/compare/v0.12.0...v0.13.0) (2022-01-14)
 
 ### Features

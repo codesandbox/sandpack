@@ -1,7 +1,7 @@
 {
   "name": "@codesandbox/sandpack-docusaurus",
   "private": true,
-  "version": "0.10.13-experimental.0",
+  "version": "0.13.2-experimental-ssr.0",
   "description": "",
   "main": "src/index.js",
   "publishConfig": {
