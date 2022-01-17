@@ -3,7 +3,6 @@
  *
  * ```jsx
  * import { Sandpack } from "@codesandbox/sandpack-react";
- * import "@codesandbox/sandpack-react/dist/index.css";
  *
  * <Sandpack template="react" />;
  * ```
@@ -19,5 +18,7 @@ export * from "./contexts/sandpackContext";
 export * from "./contexts/themeContext";
 export * from "./themes";
 export * from "./types";
+export * from "./icons";
 
+export { getCssText as getSandpackCssText } from "./styles";
 export * from "@code-hike/classer";

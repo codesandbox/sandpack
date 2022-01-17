@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-react",
-  "version": "0.10.13-experimental.0",
+  "version": "0.13.1",
   "description": "",
   "keywords": [],
   "repository": {
@@ -16,10 +16,9 @@
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "yarn run clean",
-    "build": "node build.js && yarn run build:types && yarn build:css",
+    "build": "node build.js && yarn run build:types",
     "build:publish": "yarn build",
     "build:types": "tsc -p tsconfig.json",
-    "build:css": "postcss src/styles/index.css -o dist/index.css -u autoprefixer -u cssnano",
     "start": "tsc -p tsconfig.esm.json --watch",
     "storybook": "start-storybook -p 6006 --no-dll",
     "build-storybook": "build-storybook --no-dll",
@@ -46,8 +45,9 @@
     "@codemirror/matchbrackets": "^0.19.3",
     "@codemirror/state": "^0.19.6",
     "@codemirror/view": "^0.19.32",
-    "@codesandbox/sandpack-client": "^0.10.11-experimental.1",
+    "@codesandbox/sandpack-client": "^0.13.0",
     "@react-hook/intersection-observer": "^3.1.1",
+    "@stitches/core": "^1.2.6",
     "codesandbox-import-util-types": "^2.2.3",
     "codesandbox-import-utils": "^2.2.3",
     "react-devtools-inline": "4.22.1",
@@ -70,11 +70,9 @@
     "cross-env": "^5.1.3",
     "cssnano": "^4.1.10",
     "dotenv": "^8.2.0",
-    "postcss": "^8.2.6",
-    "postcss-cli": "^8.3.1",
     "rimraf": "^2.6.1",
     "storybook-addon-jsx": "^7.3.4",
-    "typescript": "4.0.3"
+    "typescript": "4.4.4"
   },
   "peerDependencies": {
     "react": "experimental",

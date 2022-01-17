@@ -3,20 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
+# [0.13.0](https://github.com/codesandbox/sandpack/compare/v0.12.0...v0.13.0) (2022-01-14)
 
+### Features
 
+- **files:** read-only mode ([#300](https://github.com/codesandbox/sandpack/issues/300)) ([9d5d1bf](https://github.com/codesandbox/sandpack/commit/9d5d1bfc3ac0d21d57958ee61057a706762701f2))
+
+# [0.12.0](https://github.com/codesandbox/sandpack/compare/v0.11.0...v0.12.0) (2022-01-11)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+# [0.11.0](https://github.com/codesandbox/sandpack/compare/v0.10.12...v0.11.0) (2022-01-11)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
 
 ## [0.10.11](https://github.com/codesandbox/sandpack/compare/v0.10.10...v0.10.11) (2022-01-05)
 
-
 ### Bug Fixes
 
-* **react-devtools:** legacy mode ([#272](https://github.com/codesandbox/sandpack/issues/272)) ([4891ba4](https://github.com/codesandbox/sandpack/commit/4891ba4bdf5ad8ed1aed1f6a37cc4b8e5a94b8e2))
-
-
-
-
+- **react-devtools:** legacy mode ([#272](https://github.com/codesandbox/sandpack/issues/272)) ([4891ba4](https://github.com/codesandbox/sandpack/commit/4891ba4bdf5ad8ed1aed1f6a37cc4b8e5a94b8e2))
 
 ## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.6...v0.10.7-experimental.0) (2022-01-05)
 

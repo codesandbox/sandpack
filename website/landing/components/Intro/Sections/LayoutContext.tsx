@@ -27,7 +27,6 @@ const ORIGINAL_CODE = {
   SandpackCodeEditor,
   SandpackTranspiledCode,
 } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";
 
 export default () => (
   <SandpackProvider template="vanilla">

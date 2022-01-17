@@ -215,10 +215,10 @@ function Advanced({ theme, updateTheme }) {
   });
 
   const [typeControls, setTypeControls] = useState({
-    bodyFont: theme.typography.bodyFont,
-    monoFont: theme.typography.monoFont,
-    fontSize: Number(theme.typography.fontSize.replace("px", "")),
-    lineHeight: Number(theme.typography.lineHeight),
+    body: theme.font.body,
+    mono: theme.font.mono,
+    size: Number(theme.font.size.replace("px", "")),
+    lineHeight: Number(theme.font.lineHeight),
   });
 
   useEffect(() => {
@@ -261,36 +261,36 @@ function Advanced({ theme, updateTheme }) {
       })}
 
       <Divider />
-      <Title>Typography</Title>
+      <Title>font</Title>
 
       <InputContainer>
         <Input
-          label="bodyFont"
+          label="body"
           onChange={(e) => {
-            setTypeControls({ ...typeControls, bodyFont: e.target.value });
-            updateTheme("typography.bodyFont", e.target.value);
+            setTypeControls({ ...typeControls, body: e.target.value });
+            updateTheme("font.body", e.target.value);
           }}
           type="text"
-          value={typeControls.bodyFont}
+          value={typeControls.body}
         />
         <Input
-          label="monoFont"
+          label="mono"
           onChange={(e) => {
-            setTypeControls({ ...typeControls, monoFont: e.target.value });
-            updateTheme("typography.monoFont", e.target.value);
+            setTypeControls({ ...typeControls, mono: e.target.value });
+            updateTheme("font.mono", e.target.value);
           }}
           type="text"
-          value={typeControls.monoFont}
+          value={typeControls.mono}
         />
         <Input
           grid="2"
-          label="fontSize (px)"
+          label="size (px)"
           onChange={(e) => {
-            setTypeControls({ ...typeControls, fontSize: e.target.value });
-            updateTheme("typography.fontSize", `${e.target.value}px`);
+            setTypeControls({ ...typeControls, size: e.target.value });
+            updateTheme("font.size", `${e.target.value}px`);
           }}
           type="number"
-          value={typeControls.fontSize}
+          value={typeControls.size}
         />
         <Input
           grid="2"
@@ -300,7 +300,7 @@ function Advanced({ theme, updateTheme }) {
               ...typeControls,
               lineHeight: e.target.value,
             });
-            updateTheme("typography.lineHeight", e.target.value);
+            updateTheme("font.lineHeight", e.target.value);
           }}
           type="number"
           value={typeControls.lineHeight}
@@ -321,7 +321,7 @@ function Library({ themeGallery, updateModeFromGallery }) {
         {themeGallery.map((t, i) => (
           <PickerTheme
             key={t.label + i}
-            colors={[t.code.syntax.keyword, t.code.palette.defaultBackground]}
+            colors={[t.code.syntax.keyword, t.code.colors.defaultBackground]}
             label={t.label}
             modeKey={i}
             updateModeFromGallery={updateModeFromGallery}

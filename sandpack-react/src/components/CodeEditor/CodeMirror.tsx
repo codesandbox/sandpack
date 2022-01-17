@@ -12,7 +12,7 @@ import { defaultHighlightStyle } from "@codemirror/highlight";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
 import { EditorState } from "@codemirror/state";
-import type { Annotation } from "@codemirror/state";
+import type { Annotation, Extension } from "@codemirror/state";
 import {
   highlightSpecialChars,
   highlightActiveLine,
@@ -25,14 +25,24 @@ import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
+import { THEME_PREFIX } from "../../styles";
 import type {
   EditorState as SandpackEditorState,
   SandpackInitMode,
 } from "../../types";
+import { classNames } from "../../utils/classNames";
 import { getFileName, generateRandomId } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
+import {
+  cmClassName,
+  placeholderClassName,
+  editorClassName,
+  tokensClassName,
+  readOnlyClassName,
+} from "./styles";
+import { useSyntaxHighlight } from "./useSyntaxHighlight";
 import {
   getCodeMirrorLanguage,
   getEditorTheme,
@@ -66,10 +76,20 @@ interface CodeMirrorProps {
   showInlineErrors?: boolean;
   wrapContent?: boolean;
   editorState?: SandpackEditorState;
+  /**
+   * This disables editing of content by the user in all files.
+   */
   readOnly?: boolean;
+  /**
+   * Controls the visibility of Read-only label, which will only
+   * appears when `readOnly` is `true`
+   */
+  showReadOnly?: boolean;
   decorators?: Decorators;
   initMode: SandpackInitMode;
   id?: string;
+  extensions?: Extension[];
+  extensionsKeymap?: Array<readonly KeyBinding[]>;
 }
 
 export interface CodeMirrorRef {
@@ -91,14 +111,19 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       wrapContent = false,
       editorState = "pristine",
       readOnly = false,
+      showReadOnly = true,
       decorators,
       initMode = "lazy",
       id,
+      extensions = [],
+      extensionsKeymap = [],
     },
     ref
   ) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const wrapper = React.useRef<any | HTMLElement>(null);
+    const combinedRef = useCombinedRefs(wrapper, ref);
+
     const cmView = React.useRef<EditorView>();
     const { theme, themeId } = useSandpackTheme();
     const [internalCode, setInternalCode] = React.useState<string>(code);
@@ -106,7 +131,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       initMode === "immediate"
     );
 
-    const c = useClasser("sp");
+    const c = useClasser(THEME_PREFIX);
     const { listen } = useSandpack();
     const ariaId = React.useRef<string>(id ?? generateRandomId());
 
@@ -127,6 +152,15 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       }
     }, [initMode, isIntersecting]);
 
+    const langSupport = getCodeMirrorLanguage(filePath, fileType);
+    const highlightTheme = getSyntaxHighlight(theme);
+
+    const syntaxHighlightRender = useSyntaxHighlight({
+      langSupport,
+      highlightTheme,
+      code,
+    });
+
     React.useEffect(() => {
       if (!wrapper.current || !shouldInitEditor) return;
 
@@ -135,8 +169,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
        * waiting for "postTask scheduler" API be ready
        */
       const timer = setTimeout(function delayCodeEditorInit() {
-        const langSupport = getCodeMirrorLanguage(filePath, fileType);
-
         const customCommandsKeymap: KeyBinding[] = [
           {
             key: "Tab",
@@ -164,7 +196,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           },
         ];
 
-        const extensions = [
+        const extensionList = [
           highlightSpecialChars(),
           history(),
           closeBrackets(),
@@ -175,41 +207,43 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             ...historyKeymap,
             ...commentKeymap,
             ...customCommandsKeymap,
+            ...extensionsKeymap,
           ] as KeyBinding[]),
           langSupport,
 
           defaultHighlightStyle.fallback,
 
           getEditorTheme(theme),
-          getSyntaxHighlight(theme),
+          highlightTheme,
+          ...extensions,
         ];
 
         if (readOnly) {
-          extensions.push(EditorView.editable.of(false));
+          extensionList.push(EditorView.editable.of(false));
         } else {
-          extensions.push(bracketMatching());
-          extensions.push(highlightActiveLine());
+          extensionList.push(bracketMatching());
+          extensionList.push(highlightActiveLine());
         }
 
         if (decorators) {
-          extensions.push(highlightDecorators(decorators));
+          extensionList.push(highlightDecorators(decorators));
         }
 
         if (wrapContent) {
-          extensions.push(EditorView.lineWrapping);
+          extensionList.push(EditorView.lineWrapping);
         }
 
         if (showLineNumbers) {
-          extensions.push(lineNumbers());
+          extensionList.push(lineNumbers());
         }
 
         if (showInlineErrors) {
-          extensions.push(highlightInlineError());
+          extensionList.push(highlightInlineError());
         }
 
         const startState = EditorState.create({
           doc: code,
-          extensions,
+          extensions: extensionList,
         });
 
         const parentDiv = wrapper.current;
@@ -330,15 +364,36 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       }
     };
 
-    const combinedRef = useCombinedRefs(wrapper, ref);
-
     if (readOnly) {
       return (
-        <pre ref={combinedRef} className={c("cm", editorState)} translate="no">
-          {!shouldInitEditor && (
-            <code className={c("pre-placeholder")}>{code}</code>
+        <>
+          <pre
+            ref={combinedRef}
+            className={classNames(
+              c("cm", editorState),
+              cmClassName,
+              tokensClassName
+            )}
+            translate="no"
+          >
+            {!shouldInitEditor && (
+              <code
+                className={classNames(
+                  c("pre-placeholder"),
+                  placeholderClassName
+                )}
+              >
+                {syntaxHighlightRender}
+              </code>
+            )}
+          </pre>
+
+          {readOnly && showReadOnly && (
+            <span className={classNames(c("read-only"), readOnlyClassName)}>
+              Read-only
+            </span>
           )}
-        </pre>
+        </>
       );
     }
 
@@ -351,7 +406,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
-        className={c("cm", editorState)}
+        className={classNames(
+          c("cm", editorState),
+          cmClassName,
+          editorClassName,
+          tokensClassName
+        )}
         onKeyDown={handleContainerKeyDown}
         role="group"
         tabIndex={0}
@@ -359,12 +419,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       >
         {!shouldInitEditor && (
           <pre
-            className={c("pre-placeholder")}
+            className={classNames(c("pre-placeholder"), placeholderClassName)}
             style={{
               marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
             }}
           >
-            {code}
+            {syntaxHighlightRender}
           </pre>
         )}
 

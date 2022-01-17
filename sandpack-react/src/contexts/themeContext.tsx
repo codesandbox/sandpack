@@ -1,9 +1,46 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { createThemeObject, defaultLight } from "../themes";
+import {
+  createTheme,
+  css,
+  THEME_PREFIX,
+  standardizeStitchesTheme,
+} from "../styles";
+import { standardizeTheme } from "../styles";
+import { defaultLight } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
-import { injectThemeStyleSheet } from "../utils/domUtils";
+import { classNames } from "../utils/classNames";
+
+const wrapperClassName = css({
+  all: "initial",
+  fontSize: "$font$size",
+  fontFamily: "$font$body",
+  display: "block",
+  boxSizing: "border-box",
+  textRendering: "optimizeLegibility",
+  WebkitTapHighlightColor: "transparent",
+  WebkitFontSmoothing: "subpixel-antialiased",
+
+  "@media screen and (min-resolution: 2dppx)": {
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
+  },
+  "*": { boxSizing: "border-box" },
+  ".sp-wrapper:focus": { outline: "0" },
+  "*::-webkit-scrollbar": { width: "8px", height: "8px" },
+  "*::-webkit-scrollbar-track": {
+    backgroundColor: "$colors$defaultBackground",
+    borderLeft: "1px solid $colors$inactiveText",
+  },
+  "*::-webkit-scrollbar-corner": { backgroundColor: "transparent" },
+  "*::-webkit-scrollbar-thumb": {
+    backgroundColor: "$colors$defaultText",
+    borderRadius: "9999px",
+    opacity: 0,
+  },
+  "*::-webkit-scrollbar-thumb:hover": { opacity: 1 },
+});
 
 /**
  * @hidden
@@ -22,12 +59,12 @@ const SandpackThemeContext = React.createContext<{
 const SandpackThemeProvider: React.FC<{
   theme?: SandpackThemeProp;
 }> = (props) => {
-  const { theme, id } = createThemeObject(props.theme);
-  const c = useClasser("sp");
-  // If theme is not explicitly set, don't inject any stylesheet
-  if (props.theme) {
-    injectThemeStyleSheet(theme, id);
-  }
+  const { theme, id } = standardizeTheme(props.theme);
+  const c = useClasser(THEME_PREFIX);
+
+  const themeClassName = React.useMemo(() => {
+    return createTheme(id, standardizeStitchesTheme(theme));
+  }, [theme, id]);
 
   return (
     <SandpackThemeContext.Provider
@@ -36,7 +73,15 @@ const SandpackThemeProvider: React.FC<{
         id,
       }}
     >
-      <div className={c("wrapper", id)}>{props.children}</div>
+      <div
+        className={classNames(
+          c("wrapper"),
+          themeClassName.toString(),
+          wrapperClassName
+        )}
+      >
+        {props.children}
+      </div>
     </SandpackThemeContext.Provider>
   );
 };

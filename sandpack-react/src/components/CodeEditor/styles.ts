@@ -1,0 +1,53 @@
+import { css } from "../../styles";
+
+import { styleTokens } from "./utils";
+
+export const placeholderClassName = css({
+  margin: "0",
+  display: "block",
+  padding: "0 $space$3",
+  fontFamily: "$font$mono",
+  fontSize: "$font$size",
+  color: "$colors$activeText",
+  lineHeight: "$font$lineHeight",
+});
+
+export const tokensClassName = css(styleTokens());
+
+export const editorClassName = css({
+  flex: 1,
+  position: "relative",
+  overflow: "auto",
+  background: "$colors$defaultBackground",
+});
+
+export const cmClassName = css({
+  padding: "$space$4 0",
+  margin: "0",
+  outline: "none",
+  height: "100%",
+
+  "&:focus-visible": {
+    boxShadow: "inset 0 0 0 4px $colors$accent",
+    paddingLeft: "$space$1",
+    paddingRight: "$space$1",
+  },
+  "&:focus-visible .cm-line": { padding: "0 $space$2" },
+  "&:focus-visible .cm-gutter.cm-lineNumbers": {
+    paddingLeft: "0",
+    paddingRight: "$space$2",
+  },
+});
+
+export const readOnlyClassName = css({
+  fontFamily: "$font$mono",
+  fontSize: "0.8em",
+  position: "absolute",
+  right: "$space$2",
+  bottom: "$space$2",
+  zIndex: 2,
+  color: "$colors$activeBackground", //var(--sp-colors-bg-active);
+  backgroundColor: "$colors$activeText", // var(--sp-colors-fg-active);
+  borderRadius: "99999px",
+  padding: "calc($space$1 / 2) $space$2",
+});

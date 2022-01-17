@@ -18,13 +18,13 @@ export const generateBasedOnSimpleColors = (color, base) => {
     pShades = pShades.reverse();
   }
 
-  theme.palette = {
+  theme.colors = {
     activeText: color.primary,
-    defaultText: theme.palette.defaultText,
+    defaultText: theme.colors.defaultText,
     inactiveText: pShades[6].hexString(),
-    activeBackground: theme.palette.activeBackground,
-    defaultBackground: theme.palette.defaultBackground,
-    inputBackground: theme.palette.inputBackground,
+    activeBackground: theme.colors.activeBackground,
+    defaultBackground: theme.colors.defaultBackground,
+    inputBackground: theme.colors.inputBackground,
     accent: color.primary,
     errorBackground: color.tertiary,
     errorForeground: tShades[3].hexString(),

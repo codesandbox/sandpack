@@ -19,7 +19,6 @@ React components that give you the power of editable sandboxes that run in the b
 
 ```jsx
 import { Sandpack } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";
 
 <Sandpack template="react" />;
 ```
@@ -34,7 +33,7 @@ Start with the [Sandpack introduction](https://sandpack.codesandbox.io/docs) pag
 
 The documentation is divided into following sections:
 
--   [Getting Started](https://sandpack.codesandbox.io/docs/getting-started/install)
--   [Advanced Guides](https://sandpack.codesandbox.io/docs/advanced-usage/provider)
--   [API reference](https://sandpack.codesandbox.io/docs/api/client)
--   [Releases](https://sandpack.codesandbox.io/docs/releases)
+- [Getting Started](https://sandpack.codesandbox.io/docs/getting-started/install)
+- [Advanced Guides](https://sandpack.codesandbox.io/docs/advanced-usage/provider)
+- [API reference](https://sandpack.codesandbox.io/docs/api/client)
+- [Releases](https://sandpack.codesandbox.io/docs/releases)
