@@ -1,7 +1,11 @@
 import { createStitches } from "@stitches/core";
 
 import { defaultLight, SANDPACK_THEMES } from "../themes";
-import type { SandpackTheme, SandpackThemeProp } from "../types";
+import type {
+  SandpackSyntaxStyle,
+  SandpackTheme,
+  SandpackThemeProp,
+} from "../types";
 
 /**
  * @category Theme

@@ -5,7 +5,7 @@ import {
   createSetupFromUserInput,
 } from "./sandpackUtils";
 
-describe("getSandpackStateFromProps", () => {
+describe(getSandpackStateFromProps, () => {
   test("always return an activeFile", () => {
     const template = getSandpackStateFromProps({ template: "react" });
     expect(template.activePath).toBe("/App.js");
@@ -110,9 +110,18 @@ describe("getSandpackStateFromProps", () => {
 
     expect(output.activePath).toEqual("/App.js");
   });
+
+  test("should not show invalid files into `openPaths`", () => {
+    const output = getSandpackStateFromProps({
+      template: "react",
+      openPaths: ["/App.js", "not-exist.js"],
+    });
+
+    expect(output.openPaths).toEqual(["/App.js"]);
+  });
 });
 
-describe("createSetupFromUserInput", () => {
+describe(createSetupFromUserInput, () => {
   test("convert `files` to a key/value format", () => {
     const output = createSetupFromUserInput({ files: { "App.js": "" } });
     expect(output).toStrictEqual({ files: { "App.js": { code: "" } } });

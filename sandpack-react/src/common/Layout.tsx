@@ -23,7 +23,7 @@ const layoutClassName = css({
   borderRadius: "$border$radius",
   overflow: "hidden",
   WebkitMaskImage:
-    "-webkit-radial-gradient(\n    var(--sp-colors-inputBackground),\n    var(--sp-colors-defaultBackground)\n  )",
+    "-webkit-radial-gradient($colors$inputBackground,$colors$defaultBackground)",
 
   "> *:not(:first-child)": {
     borderLeft: "1px solid $colors$inactiveText",

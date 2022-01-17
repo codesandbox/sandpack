@@ -19,8 +19,9 @@ export const getCodeMirrorPosition = (
   return doc.line(line).from + (column ?? 0) - 1;
 };
 
-export const getEditorTheme = (theme: SandpackTheme): Extension =>
-  EditorView.theme({
+export const getEditorTheme = (theme: SandpackTheme): Extension => {
+  console.log(theme);
+  return EditorView.theme({
     "&": {
       backgroundColor: theme.colors.defaultBackground,
       color:
@@ -76,6 +77,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
       padding: "0 var(--sp-space-3)",
     },
   });
+};
 
 const classNameToken = (name: string): string =>
   `${THEME_PREFIX}-syntax-${name}`;

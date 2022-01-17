@@ -3,6 +3,88 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.1](https://github.com/codesandbox/sandpack/compare/v0.13.0...v0.13.1) (2022-01-14)
+
+
+### Bug Fixes
+
+* **ui:** visual regression ([#304](https://github.com/codesandbox/sandpack/issues/304)) ([ced8b49](https://github.com/codesandbox/sandpack/commit/ced8b492e52c6db8565e66c228ee4c2bd85b3ef8))
+
+
+
+
+
+# [0.13.0](https://github.com/codesandbox/sandpack/compare/v0.12.0...v0.13.0) (2022-01-14)
+
+
+### Bug Fixes
+
+* **who's using:** remove csb ([#299](https://github.com/codesandbox/sandpack/issues/299)) ([b20d498](https://github.com/codesandbox/sandpack/commit/b20d4983992ea5b567cfb165d880bb17fe6191ed))
+
+
+### Features
+
+* **files:** read-only mode ([#300](https://github.com/codesandbox/sandpack/issues/300)) ([9d5d1bf](https://github.com/codesandbox/sandpack/commit/9d5d1bfc3ac0d21d57958ee61057a706762701f2))
+
+
+
+
+
+# [0.12.0](https://github.com/codesandbox/sandpack/compare/v0.11.0...v0.12.0) (2022-01-11)
+
+
+### Features
+
+* **codeeditor:** support to extensions ([#286](https://github.com/codesandbox/sandpack/issues/286)) ([47e73a9](https://github.com/codesandbox/sandpack/commit/47e73a94e072e544c4be692810c736547a4ef6f9))
+
+
+
+
+
+# [0.11.0](https://github.com/codesandbox/sandpack/compare/v0.10.12...v0.11.0) (2022-01-11)
+
+
+### Features
+
+* **icons:** export sandpack icons ([#288](https://github.com/codesandbox/sandpack/issues/288)) ([ec184f7](https://github.com/codesandbox/sandpack/commit/ec184f750c2852236ef92e949a089beaac31a308))
+
+
+
+
+
+## [0.10.12](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.12) (2022-01-07)
+
+
+### Bug Fixes
+
+* **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([8a8bc11](https://github.com/codesandbox/sandpack/commit/8a8bc11d160b48225f7f3ec52c3f339f1aa3745e))
+
+
+
+
+
+## [0.10.11](https://github.com/codesandbox/sandpack/compare/v0.10.10...v0.10.11) (2022-01-05)
+
+
+### Bug Fixes
+
+* **react-devtools:** legacy mode ([#272](https://github.com/codesandbox/sandpack/issues/272)) ([4891ba4](https://github.com/codesandbox/sandpack/commit/4891ba4bdf5ad8ed1aed1f6a37cc4b8e5a94b8e2))
+
+
+
+
+
+## [0.10.10](https://github.com/codesandbox/sandpack/compare/v0.10.9...v0.10.10) (2021-12-29)
+
+
+### Bug Fixes
+
+* **filetab:** not show files that doesn't exist ([#283](https://github.com/codesandbox/sandpack/issues/283)) ([053d695](https://github.com/codesandbox/sandpack/commit/053d695e106683d169ede0bc81d12650f4491605))
+
+
+
+
+
 ## [0.10.9](https://github.com/codesandbox/sandpack/compare/v0.10.8...v0.10.9) (2021-12-28)
 
 

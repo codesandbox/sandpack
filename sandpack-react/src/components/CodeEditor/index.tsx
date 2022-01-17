@@ -1,4 +1,6 @@
 import { useClasser } from "@code-hike/classer";
+import type { Extension } from "@codemirror/state";
+import type { KeyBinding } from "@codemirror/view";
 import * as React from "react";
 
 import { RunButton } from "../../common/RunButton";
@@ -29,6 +31,25 @@ export interface CodeEditorProps {
    * a certain control of when to initialize them.
    */
   initMode?: SandpackInitMode;
+  /**
+   * CodeMirror extensions for the editor state, which can
+   * provide extra features and functionalities to the editor component.
+   */
+  extensions?: Extension[];
+  /**
+   * Property to register CodeMirror extension keymap.
+   */
+  extensionsKeymap?: Array<readonly KeyBinding[]>;
+  id?: string;
+  /**
+   * This disables editing of the editor content by the user.
+   */
+  readOnly?: boolean;
+  /**
+   * Controls the visibility of Read-only label, which will only
+   * appears when `readOnly` is `true`
+   */
+  showReadOnly?: boolean;
 }
 
 export { CodeMirror as CodeEditor };
@@ -50,11 +71,16 @@ export const SandpackCodeEditor = React.forwardRef<
       wrapContent = false,
       closableTabs = false,
       initMode,
+      extensions,
+      extensionsKeymap,
+      id,
+      readOnly,
+      showReadOnly,
     },
     ref
   ) => {
     const { sandpack } = useSandpack();
-    const { code, updateCode } = useActiveCode();
+    const { code, updateCode, readOnly: readOnlyFile } = useActiveCode();
     const { activePath, status, editorState } = sandpack;
     const shouldShowTabs = showTabs ?? sandpack.openPaths.length > 1;
 
@@ -66,7 +92,7 @@ export const SandpackCodeEditor = React.forwardRef<
 
     return (
       <SandpackStack customStyle={customStyle}>
-        {shouldShowTabs ? <FileTabs closableTabs={closableTabs} /> : null}
+        {shouldShowTabs && <FileTabs closableTabs={closableTabs} />}
 
         <div className={classNames(c("code-editor"))}>
           <CodeMirror
@@ -74,12 +100,17 @@ export const SandpackCodeEditor = React.forwardRef<
             ref={ref}
             code={code}
             editorState={editorState}
+            extensions={extensions}
+            extensionsKeymap={extensionsKeymap}
             filePath={activePath}
+            id={id}
             initMode={initMode || sandpack.initMode}
             onCodeUpdate={handleCodeUpdate}
             showInlineErrors={showInlineErrors}
             showLineNumbers={showLineNumbers}
             wrapContent={wrapContent}
+            readOnly={readOnly || readOnlyFile}
+            showReadOnly={showReadOnly}
           />
 
           {showRunButton && status === "idle" ? <RunButton /> : null}

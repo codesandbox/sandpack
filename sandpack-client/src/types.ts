@@ -2,6 +2,7 @@ import type { ITemplate } from "codesandbox-import-util-types";
 
 export interface SandpackBundlerFile {
   code: string;
+  readOnly?: boolean;
 }
 
 export type SandpackBundlerFiles = Record<string, SandpackBundlerFile>;
@@ -20,6 +21,8 @@ export type Modules = Record<
 >;
 
 export type Dependencies = Record<string, string>;
+
+export type ReactDevToolsMode = "latest" | "legacy";
 
 export interface ModuleSource {
   fileName: string;
@@ -171,7 +174,7 @@ export type SandpackMessage = BaseSandpackMessage &
         showLoadingScreen: boolean;
         skipEval: boolean;
         clearConsoleDisabled?: boolean;
-        reactDevTools?: boolean;
+        reactDevTools?: ReactDevToolsMode;
       }
     | {
         type: "refresh";

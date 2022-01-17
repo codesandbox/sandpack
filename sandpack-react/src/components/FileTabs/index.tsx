@@ -62,10 +62,15 @@ export const tabButton = css({
 });
 
 export interface FileTabsProps {
+  /**
+   * This adds a close button next to each file with a unique trigger to close it.
+   */
   closableTabs?: boolean;
 }
 
 /**
+ * FileTabs is a list of all open files, the active file, and its state.
+ *
  * @category Components
  */
 export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
@@ -136,14 +141,14 @@ export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
             type="button"
           >
             {getTriggerText(filePath)}
-            {closableTabs && openPaths.length > 1 ? (
+            {closableTabs && openPaths.length > 1 && (
               <span
                 className={classNames(c("close-button"), closeButtonClassName)}
                 onClick={handleCloseFile}
               >
                 <CloseIcon />
               </span>
-            ) : null}
+            )}
           </button>
         ))}
       </div>
