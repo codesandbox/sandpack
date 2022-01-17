@@ -27,7 +27,6 @@ Additionally, there is a small **stylesheet** you need to import globally into y
 
 ```jsx
 import { Sandpack } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";
 
 /* JSX Usage */
 <Sandpack template="react" />;

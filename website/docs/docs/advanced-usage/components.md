@@ -218,7 +218,6 @@ Sandpack also provides a component that adds React DevTools, allowing you to ins
   SandpackPreview,
   SandpackReactDevTools,
 } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";\n
 export default function CustomSandpack() {
   return (
     <SandpackProvider template="react">
