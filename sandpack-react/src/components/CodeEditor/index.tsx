@@ -11,7 +11,7 @@ import type { SandpackInitMode } from "../../types";
 import { FileTabs } from "../FileTabs";
 
 import { CodeMirror } from "./CodeMirror";
-import type { CodeMirrorRef } from "./CodeMirror";
+import type { Decorators, CodeMirrorRef } from "./CodeMirror";
 
 export type CodeEditorRef = CodeMirrorRef;
 export interface CodeEditorProps {
@@ -22,6 +22,7 @@ export interface CodeEditorProps {
   showRunButton?: boolean;
   wrapContent?: boolean;
   closableTabs?: boolean;
+  decorators?: Decorators;
   /**
    * This provides a way to control how some components are going to
    * be initialized on the page. The CodeEditor and the Preview components
