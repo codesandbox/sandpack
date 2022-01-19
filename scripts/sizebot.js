@@ -21,11 +21,11 @@ const ratio = (base, current) => {
   if (current === base) return `✅ ${format(0)}`;
 
   let diff = current - base;
-  let ratioAmount = ((current - base) / base).toFixed(0);
+  let ratioAmount = (((base - current) / base) * -1).toFixed(2);
 
   if (current > base) return `⚠️ +${format(diff)} (+${ratioAmount}%)`;
 
-  ratioAmount = (((base - current) / base) * 100).toFixed(0);
+  ratioAmount = (((base - current) / base) * 100).toFixed(2);
   diff = base - current;
 
   if (current < base) return `🎉 -${format(diff)} (-${ratioAmount}%)`;
@@ -105,13 +105,33 @@ const getPackageSize = async (packageName) => {
 
   const content = Object.entries(currentSizes).map(([name, currentDeps]) => {
     const baseDeps = baseSizes[name];
+
+    const removedFiles = baseDeps
+      .map((base) => {
+        const fileStillExist = currentDeps.find((e) => e.name === base.name);
+        if (fileStillExist) return undefined;
+
+        const fileName = base.name.replace(`./${name}/dist/esm/`, "");
+        return `| \`${fileName}\` | ${format(
+          base.gzip
+        )} | File removed | ⚠️ | \n`;
+      })
+      .filter(Boolean);
+
     const tableContent = currentDeps.map((item) => {
-      const baseSize = baseDeps.find((p) => p.name === item.name).gzip;
+      const baseFile = baseDeps.find((p) => p.name === item.name);
+      const fileName = item.name.replace(`./${name}/dist/esm/`, "");
+
+      if (!baseFile) {
+        return `| \`${fileName}\` | New file | ${format(item.gzip)} | ⚠️ | \n`;
+      }
+
+      const baseSize = baseFile.gzip;
       const currentFormat = format(item.gzip);
       const baseFormat = format(baseSize);
       const ratioFormat = ratio(baseSize, item.gzip);
 
-      return `| ${item.name} | ${baseFormat} | ${currentFormat} |  ${ratioFormat} | \n`;
+      return `| \`${fileName}\` | ${baseFormat} | ${currentFormat} |  ${ratioFormat} | \n`;
     });
 
     const baseAmount = amount(baseDeps);
@@ -125,9 +145,15 @@ const getPackageSize = async (packageName) => {
       currentAmount
     )} |
 
+<details>
+ <summary>Details</summary>
+
 | Dependency name / file | Base | Current | +/- |
 | - | - | - | - |
-${tableContent.join("")} \n\n`;
+${removedFiles.join("")}${tableContent.join("")} \n\n
+</details>
+
+`;
   });
 
   fs.writeFile(
