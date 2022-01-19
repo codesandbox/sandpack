@@ -36,7 +36,6 @@
   "author": "CodeSandbox",
   "license": "GPL-2.0",
   "devDependencies": {
-    "@actions/core": "^1.6.0",
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
@@ -46,7 +45,6 @@
     "@typescript-eslint/parser": "^4.0.0",
     "babel-eslint": "^10.0.0",
     "babel-jest": "^27.4.5",
-    "bundlewatch": "^0.3.3",
     "cypress": "^9.1.1",
     "esbuild": "^0.12.21",
     "eslint": "^7.5.0",
@@ -67,15 +65,5 @@
     "prettier": "^2.2.1",
     "react-test-renderer": "^17.0.2",
     "wait-on": "^6.0.0"
-  },
-  "bundlewatch": {
-    "files": [
-      {
-        "path": "./sandpack-client/dist/esm/**/*.js"
-      },
-      {
-        "path": "./sandpack-react/dist/esm/**/*.js"
-      }
-    ]
   }
 }

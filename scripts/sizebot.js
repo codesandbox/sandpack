@@ -2,13 +2,12 @@ import { promises as fs } from "fs";
 import util from "util";
 import zlib from "zlib";
 
-import core from "@actions/core";
 import { Octokit } from "@octokit/rest";
 import glob from "glob";
 import fetch from "node-fetch";
 
 const octokit = new Octokit({
-  auth: process.env.TOKEN || core.getInput("repo-token"),
+  auth: process.env.GH_TOKEN,
 });
 
 const gzip = util.promisify(zlib.gzip);
