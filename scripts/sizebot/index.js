@@ -90,6 +90,18 @@ const getPackageSize = async (packageName) => {
   return [...fileSizes, ...allDependenciesSize].filter((data) => data.gzip);
 };
 
+const findComment = async (parameters) => {
+  for await (const { data: comments } of octokit.paginate.iterator(
+    octokit.rest.issues.listComments,
+    parameters
+  )) {
+    const comment = comments.find((comment) =>
+      comment.body.includes("Size changes")
+    );
+    if (comment) return comment;
+  }
+};
+
 /**
  * Main func
  */
@@ -104,9 +116,14 @@ const getPackageSize = async (packageName) => {
     ...cur,
   }));
 
-  const baseSizes = JSON.parse(await fs.readFile("./scripts/size-bot.json"));
+  const baseSizes = JSON.parse(
+    await fs.readFile("./scripts/sizebot/sizebot.json")
+  );
 
-  await fs.writeFile("./scripts/size-bot.json", JSON.stringify(currentSizes));
+  await fs.writeFile(
+    "./scripts/sizebot/sizebot.json",
+    JSON.stringify(currentSizes)
+  );
 
   const content = Object.entries(currentSizes).map(([name, currentDeps]) => {
     const baseDeps = baseSizes[name];
@@ -161,14 +178,32 @@ ${removedFiles.join("")}${tableContent.join("")} \n\n
 `;
   });
 
+  /**
+   * Creating comment
+   */
   const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
+  const issue_number =
+    process.env.GITHUB_REF.split("refs/pull/")[1].split("/")[0];
 
-  octokit.rest.pulls.createReviewComment({
-    owner,
-    repo,
-    pull_number: process.env.GITHUB_REF.split("refs/pull/")[1].split("/")[0],
-    body: `## Size changes
+  const comment = await findComment({ owner, repo, issue_number });
 
-    ${content.join("")}`,
-  });
+  if (comment) {
+    await octokit.rest.issues.updateComment({
+      owner,
+      repo,
+      comment_id: comment.id,
+      body: `## Size changes
+
+  //   ${content.join("")}`,
+    });
+  } else {
+    await octokit.rest.issues.createComment({
+      owner,
+      repo,
+      issue_number: "308",
+      body: `## Size changes
+
+  //   ${content.join("")}`,
+    });
+  }
 })();
