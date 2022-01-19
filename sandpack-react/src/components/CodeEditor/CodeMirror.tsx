@@ -75,6 +75,9 @@ interface CodeMirrorProps {
    * appears when `readOnly` is `true`
    */
   showReadOnly?: boolean;
+  /**
+   * Provides a way to draw or style a piece of the content.
+   */
   decorators?: Decorators;
   initMode: SandpackInitMode;
   id?: string;
