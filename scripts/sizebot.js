@@ -2,8 +2,14 @@ import { promises as fs } from "fs";
 import util from "util";
 import zlib from "zlib";
 
+import core from "@actions/core";
+import { Octokit } from "@octokit/rest";
 import glob from "glob";
 import fetch from "node-fetch";
+
+const octokit = new Octokit({
+  auth: process.env.TOKEN || core.getInput("repo-token"),
+});
 
 const gzip = util.promisify(zlib.gzip);
 const globAsync = util.promisify(glob);
@@ -156,10 +162,14 @@ ${removedFiles.join("")}${tableContent.join("")} \n\n
 `;
   });
 
-  fs.writeFile(
-    "./scripts/size-bot.md",
-    `## Size changes
+  const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
-${content.join("")}`
-  );
+  octokit.rest.pulls.createReviewComment({
+    owner,
+    repo,
+    pull_number: process.env.GITHUB_REF.split("refs/pull/")[1].split("/")[0],
+    body: `## Size changes
+
+    ${content.join("")}`,
+  });
 })();
