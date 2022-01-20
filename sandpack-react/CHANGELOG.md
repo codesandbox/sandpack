@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.2](https://github.com/codesandbox/sandpack/compare/v0.13.1...v0.13.2) (2022-01-20)
+
+
+### Bug Fixes
+
+* **codemirror:** shift approach to remove placeholder ([#310](https://github.com/codesandbox/sandpack/issues/310)) ([4021b16](https://github.com/codesandbox/sandpack/commit/4021b16f956b52ed14e8fbb8b4c1784a5b43a1f8))
+
+
+
+
+
 ## [0.13.1](https://github.com/codesandbox/sandpack/compare/v0.13.0...v0.13.1) (2022-01-14)
 
 
