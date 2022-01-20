@@ -55,33 +55,6 @@
   outline: 0;
 }
 
-.sp-wrapper *::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-.sp-wrapper *::-webkit-scrollbar-track {
-  background-color: var(--sp-colors-bg-default);
-}
-
-.sp-wrapper *::-webkit-scrollbar-corner {
-  background-color: transparent;
-}
-
-.sp-wrapper *::-webkit-scrollbar-thumb {
-  background-color: var(--sp-colors-fg-default);
-  border-radius: 9999px;
-  opacity: 0;
-}
-
-.sp-wrapper *::-webkit-scrollbar-thumb:hover {
-  opacity: 1;
-}
-
-.sp-wrapper *::-webkit-scrollbar-track {
-  border-left: 1px solid var(--sp-colors-fg-inactive);
-}
-
 .sp-layout {
   border: 1px solid var(--sp-colors-fg-inactive);
   display: flex;
