@@ -28,6 +28,12 @@ describe(calculateNearestUniquePath, () => {
     ).toBe("test/something/index.js");
   });
 
+  it("keeps path when same level and same name", () => {
+    expect(
+      calculateNearestUniquePath("/other/index.js", ["/test/index.js"])
+    ).toBe("other/index.js");
+  });
+
   it("adds a leading `..` when other open paths have the same fileName, but different paths", () => {
     expect(
       calculateNearestUniquePath("/test/something/index.js", [
