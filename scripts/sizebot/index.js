@@ -14,8 +14,6 @@ function format(bytes) {
   return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
 }
 
-const amount = (deps) => deps.reduce((acc, curr) => acc + curr.gzip, 0);
-
 const ratio = (base, current) => {
   if (current === base) return `✅ ${format(0)}`;
 
@@ -58,46 +56,46 @@ const findComment = async (parameters) => {
   };
   const baseSizes = await loadBaseFile();
 
-  const content = Object.entries(currentSizes).map(([name, currentDeps]) => {
-    const baseDeps = baseSizes[name];
+  const content = Object.entries(currentSizes).map(([name, current]) => {
+    const baseDeps = baseSizes[name].assets;
 
     const removedFiles = baseDeps
       .map((base) => {
-        const fileStillExist = currentDeps.find((e) => e.name === base.name);
+        const fileStillExist = current.assets.find((e) => e.name === base.name);
         if (fileStillExist) return undefined;
 
         const fileName = base.name.replace(`./${name}/dist/esm/`, "");
         return `| \`${fileName}\` | ${format(
-          base.gzip
+          base.size
         )} | File removed | ⚠️ | \n`;
       })
       .filter(Boolean);
 
-    const tableContent = currentDeps.map((item) => {
+    const tableContent = current.assets.map((item) => {
       const baseFile = baseDeps.find((p) => p.name === item.name);
       const fileName = item.name.replace(`./${name}/dist/esm/`, "");
 
       if (!baseFile) {
-        return `| \`${fileName}\` | New file | ${format(item.gzip)} | ⚠️ | \n`;
+        return `| \`${fileName}\` | New file | ${format(item.size)} | ⚠️ | \n`;
       }
 
-      const baseSize = baseFile.gzip;
-      const currentFormat = format(item.gzip);
+      const baseSize = baseFile.size;
+      const currentFormat = format(item.size);
       const baseFormat = format(baseSize);
-      const ratioFormat = ratio(baseSize, item.gzip);
+      const ratioFormat = ratio(baseSize, item.size);
 
       return `| \`${fileName}\` | ${baseFormat} | ${currentFormat} |  ${ratioFormat} | \n`;
     });
 
-    const baseAmount = amount(baseDeps);
-    const currentAmount = amount(currentDeps);
+    const baseFormat = format(baseSizes[name].gzip);
+    const currentFormat = format(current.gzip);
 
     return `### ${name}
-| Total base | Total current | +/- |
+| Total base (gzip) | Total current (gzip) | +/- |
 | - | - | - |
-| ${format(baseAmount)} | ${format(currentAmount)} | ${ratio(
-      baseAmount,
-      currentAmount
+| ${baseFormat} | ${currentFormat} | ${ratio(
+      baseSizes[name].gzip,
+      current.gzip
     )} |
 
 <details>
