@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.4](https://github.com/codesandbox/sandpack/compare/v0.13.3...v0.13.4) (2022-01-20)
+
+
+### Bug Fixes
+
+* **scrollbar:** remove hijack custom style ([#315](https://github.com/codesandbox/sandpack/issues/315)) ([5781e97](https://github.com/codesandbox/sandpack/commit/5781e974d0fd410394efac20cb11530ade6cfd8d))
+
+
+
+
+
 ## [0.13.3](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3) (2022-01-20)
 
 
