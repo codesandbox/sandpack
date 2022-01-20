@@ -28,13 +28,10 @@ jobs:
       - name: Setup | Checkout
         uses: actions/checkout@v1
 
-      - uses: actions/cache@v2
+      - name: Install dependencies and cache
+        uses: bahmutov/npm-install@v1
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+          useLockFile: true
 
       - name: Setup | Build
         run: yarn run build
@@ -50,13 +47,10 @@ jobs:
       - name: Setup | Checkout
         uses: actions/checkout@v1
 
-      - uses: actions/cache@v2
+      - name: Install dependencies and cache
+        uses: bahmutov/npm-install@v1
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+          useLockFile: true
 
       - name: Lint | Eslint
         run: yarn run lint
@@ -69,13 +63,10 @@ jobs:
       - name: Setup | Checkout
         uses: actions/checkout@v1
 
-      - uses: actions/cache@v2
+      - name: Install dependencies and cache
+        uses: bahmutov/npm-install@v1
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+          useLockFile: true
 
       - name: Build
         run: yarn run build
@@ -88,13 +79,10 @@ jobs:
       - name: Setup | Checkout
         uses: actions/checkout@v1
 
-      - uses: actions/cache@v2
+      - name: Install dependencies and cache
+        uses: bahmutov/npm-install@v1
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+          useLockFile: true
 
       - name: Build
         run: yarn run format:check

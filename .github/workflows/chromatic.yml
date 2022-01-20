@@ -11,13 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: actions/cache@v2
+      - name: Install dependencies and cache
+        uses: bahmutov/npm-install@v1
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Install dependencies
-        run: yarn
+          useLockFile: true
 
       - name: Build dependency
         run: yarn workspace @codesandbox/sandpack-client run build
