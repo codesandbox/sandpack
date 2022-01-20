@@ -133,7 +133,7 @@ ${removedFiles.join("")}${tableContent.join("")} \n\n
     await octokit.rest.issues.createComment({
       owner,
       repo,
-      issue_number: "308",
+      issue_number,
       body: `## Size changes
 
   ${content.join("")}`,
