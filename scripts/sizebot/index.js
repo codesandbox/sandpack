@@ -20,7 +20,7 @@ const ratio = (base, current) => {
   if (current === base) return `✅ ${format(0)}`;
 
   let diff = current - base;
-  let ratioAmount = (((base - current) / base) * -1).toFixed(2);
+  let ratioAmount = (((base - current) / base) * -100).toFixed(2);
 
   if (current > base) return `⚠️ +${format(diff)} (+${ratioAmount}%)`;
 
