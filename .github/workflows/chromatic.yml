@@ -11,8 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Install dependencies
-        run: yarn
+      - name: Install dependencies and cache
+        uses: bahmutov/npm-install@v1
+        with:
+          useLockFile: true
 
       - name: Build dependency
         run: yarn workspace @codesandbox/sandpack-client run build

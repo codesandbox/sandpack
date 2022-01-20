@@ -61,6 +61,7 @@ export const SandpackCodeViewer = React.forwardRef<
           showLineNumbers={showLineNumbers}
           wrapContent={wrapContent}
           readOnly
+          showReadOnly={false}
         />
 
         {sandpack.status === "idle" ? <RunButton /> : null}

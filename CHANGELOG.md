@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.3](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3) (2022-01-20)
+
+
+### Bug Fixes
+
+* **calculateNearestUniquePath:** ensures unique paths ([#311](https://github.com/codesandbox/sandpack/issues/311)) ([a337269](https://github.com/codesandbox/sandpack/commit/a33726914e22c5b009c3ad5a5a6a7976ea29fd3f))
+
+
+
+
+
+## [0.13.2](https://github.com/codesandbox/sandpack/compare/v0.13.1...v0.13.2) (2022-01-20)
+
+
+### Bug Fixes
+
+* **codemirror:** shift approach to remove placeholder ([#310](https://github.com/codesandbox/sandpack/issues/310)) ([4021b16](https://github.com/codesandbox/sandpack/commit/4021b16f956b52ed14e8fbb8b4c1784a5b43a1f8))
+
+
+
+
+
+## [0.13.1](https://github.com/codesandbox/sandpack/compare/v0.13.0...v0.13.1) (2022-01-14)
+
+
+### Bug Fixes
+
+* **ui:** visual regression ([#304](https://github.com/codesandbox/sandpack/issues/304)) ([ced8b49](https://github.com/codesandbox/sandpack/commit/ced8b492e52c6db8565e66c228ee4c2bd85b3ef8))
+
+
+
+
+
+# [0.13.0](https://github.com/codesandbox/sandpack/compare/v0.12.0...v0.13.0) (2022-01-14)
+
+
+### Bug Fixes
+
+* **who's using:** remove csb ([#299](https://github.com/codesandbox/sandpack/issues/299)) ([b20d498](https://github.com/codesandbox/sandpack/commit/b20d4983992ea5b567cfb165d880bb17fe6191ed))
+
+
+### Features
+
+* **files:** read-only mode ([#300](https://github.com/codesandbox/sandpack/issues/300)) ([9d5d1bf](https://github.com/codesandbox/sandpack/commit/9d5d1bfc3ac0d21d57958ee61057a706762701f2))
+
+
+
+
+
 # [0.12.0](https://github.com/codesandbox/sandpack/compare/v0.11.0...v0.12.0) (2022-01-11)
 
 

@@ -3,6 +3,7 @@ import * as React from "react";
 import { SandpackLayout } from "../../common/Layout";
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackCodeViewer } from "../CodeViewer";
+import { Sandpack } from "../../";
 
 import { FileTabs } from "./index";
 

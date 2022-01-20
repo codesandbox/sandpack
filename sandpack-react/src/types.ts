@@ -86,6 +86,7 @@ export interface SandpackFile {
   code: string;
   hidden?: boolean;
   active?: boolean;
+  readOnly?: boolean;
 }
 
 export type SandpackFiles = Record<string, string | SandpackFile>;
