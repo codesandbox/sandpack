@@ -39,7 +39,10 @@ const getDependenciesSize = async (packageName) => {
 };
 
 const getDistSize = async (packageName) => {
-  const distFiles = await globAsync(`./${packageName}/dist/esm/**/*.js`);
+  const distFiles = [
+    ...(await globAsync(`./${packageName}/dist/esm/**/*.js`)),
+    ...(await globAsync(`./${packageName}/dist/index.css`)),
+  ];
   return await Promise.all(
     distFiles.map(async (file) => {
       return {
