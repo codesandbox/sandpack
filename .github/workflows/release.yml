@@ -94,6 +94,9 @@ jobs:
       - name: Sizebot
         run: node scripts/sizebot/createCurrentSizes.js
 
+      - name: Commit Sizebot results
+        run: "git add scripts/sizebot/sizebot.json && git commit -am 'chore: [skip ci] update sizebot'"
+
       - name: Prepare | Build
         run: |
           yarn workspace @codesandbox/sandpack-client build:publish 
