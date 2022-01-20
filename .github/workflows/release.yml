@@ -96,5 +96,8 @@ jobs:
           yarn workspace @codesandbox/sandpack-client build:publish 
           yarn workspace @codesandbox/sandpack-react build:publish
 
+      - name: Sizebot
+        run: node scripts/sizebot/createCurrentSizes.js
+
       - name: Release | Lerna Publish
         run: lerna publish from-package --yes

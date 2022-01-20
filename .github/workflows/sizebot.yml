@@ -1,0 +1,36 @@
+name: Sizebot
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+
+jobs:
+  integration:
+    name: Sizebot
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Setup | Build
+        run: yarn run build
+
+      - name: Bot script
+        run: node scripts/sizebot/index.js
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
