@@ -1,17 +1,11 @@
-import { promises as fs } from "fs";
-import util from "util";
-import zlib from "zlib";
-
 import { Octokit } from "@octokit/rest";
-import glob from "glob";
 import fetch from "node-fetch";
+
+import createCurrentSizes from "./createCurrentSizes.js";
 
 const octokit = new Octokit({
   auth: process.env.GH_TOKEN,
 });
-
-const gzip = util.promisify(zlib.gzip);
-const globAsync = util.promisify(glob);
 
 function format(bytes) {
   var sizes = ["bytes", "kb", "mb"];
@@ -38,58 +32,6 @@ const ratio = (base, current) => {
   return diff;
 };
 
-const packages = ["sandpack-react", "sandpack-client"];
-
-const getDependenciesSize = async (packageName) => {
-  let reactPackage = JSON.parse(
-    await fs.readFile(`./${packageName}/package.json`)
-  );
-
-  const { dependencies } = reactPackage;
-
-  return await Promise.all(
-    Object.entries(dependencies).map(async ([name, version]) => {
-      return fetch(
-        `https://bundlephobia.com/api/size?package=${name}@${version}`,
-        {
-          headers: {
-            "User-Agent": "bundle-phobia-cli",
-            "X-Bundlephobia-User": "bundle-phobia-cli",
-          },
-        }
-      )
-        .then((data) => data.json())
-        .then((data) => ({
-          name,
-          version,
-          gzip: data.assets ? data.assets[0].gzip : undefined,
-        }));
-    })
-  );
-};
-
-const getDistSize = async (packageName) => {
-  const distFiles = await globAsync(`./${packageName}/dist/esm/**/*.js`);
-  return await Promise.all(
-    distFiles.map(async (file) => {
-      return {
-        name: file,
-        gzip: await fs
-          .readFile(file)
-          .then(gzip)
-          .then((data) => data.length),
-      };
-    })
-  );
-};
-
-const getPackageSize = async (packageName) => {
-  const allDependenciesSize = await getDependenciesSize(packageName);
-  const fileSizes = await getDistSize(packageName);
-
-  return [...fileSizes, ...allDependenciesSize].filter((data) => data.gzip);
-};
-
 const findComment = async (parameters) => {
   for await (const { data: comments } of octokit.paginate.iterator(
     octokit.rest.issues.listComments,
@@ -106,24 +48,15 @@ const findComment = async (parameters) => {
  * Main func
  */
 (async () => {
-  const packagePromises = await Promise.all(
-    packages.map(async (name) => ({
-      [name]: await getPackageSize(name),
-    }))
-  );
-  const currentSizes = packagePromises.reduce((acc, cur) => ({
-    ...acc,
-    ...cur,
-  }));
+  const currentSizes = await createCurrentSizes();
 
-  const baseSizes = JSON.parse(
-    await fs.readFile("./scripts/sizebot/sizebot.json")
-  );
-
-  await fs.writeFile(
-    "./scripts/sizebot/sizebot.json",
-    JSON.stringify(currentSizes)
-  );
+  const loadBaseFile = async () => {
+    const data = await fetch(
+      "https://raw.githubusercontent.com/codesandbox/sandpack/main/scripts/sizebot/sizebot.json"
+    );
+    return await data.json();
+  };
+  const baseSizes = await loadBaseFile();
 
   const content = Object.entries(currentSizes).map(([name, currentDeps]) => {
     const baseDeps = baseSizes[name];
@@ -194,7 +127,7 @@ ${removedFiles.join("")}${tableContent.join("")} \n\n
       comment_id: comment.id,
       body: `## Size changes
 
-  //   ${content.join("")}`,
+  ${content.join("")}`,
     });
   } else {
     await octokit.rest.issues.createComment({
@@ -203,7 +136,7 @@ ${removedFiles.join("")}${tableContent.join("")} \n\n
       issue_number: "308",
       body: `## Size changes
 
-  //   ${content.join("")}`,
+  ${content.join("")}`,
     });
   }
 })();
