@@ -91,6 +91,9 @@ jobs:
       - name: Prepare | Lerna Version
         run: yarn lerna version --yes --no-private
 
+      - name: Sizebot
+        run: node scripts/sizebot/createCurrentSizes.js
+
       - name: Prepare | Build
         run: |
           yarn workspace @codesandbox/sandpack-client build:publish 
