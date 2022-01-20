@@ -98,7 +98,7 @@ jobs:
         run: |
           git add scripts/sizebot/sizebot.json 
           git commit -am 'chore: [skip ci] update sizebot'
-          git push origin main"
+          git push origin main
 
       - name: Prepare | Build
         run: |
