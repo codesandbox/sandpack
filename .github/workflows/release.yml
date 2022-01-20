@@ -91,6 +91,15 @@ jobs:
       - name: Prepare | Lerna Version
         run: yarn lerna version --yes --no-private
 
+      - name: Sizebot
+        run: node scripts/sizebot/createCurrentSizes.js
+
+      - name: Commit Sizebot results
+        run: |
+          git add scripts/sizebot/sizebot.json 
+          git commit -am 'chore: [skip ci] update sizebot'
+          git push origin main"
+
       - name: Prepare | Build
         run: |
           yarn workspace @codesandbox/sandpack-client build:publish 

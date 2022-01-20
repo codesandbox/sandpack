@@ -185,15 +185,6 @@
         }
       },
       {
-        "name": "CodeSandbox",
-        "socialUrl": "https://codesandbox.io",
-        "logo": {
-          "url": "/assets/logos/CodeSandbox.svg",
-          "height": 50,
-          "width": 250
-        }
-      },
-      {
         "name": "Amplify",
         "socialUrl": "https://ui.docs.amplify.aws/",
         "logo": {

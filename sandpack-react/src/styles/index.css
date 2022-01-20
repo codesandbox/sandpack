@@ -516,3 +516,16 @@
   height: var(--sp-layout-height);
   width: 100%;
 }
+
+.sp-read-only {
+  font-family: var(--sp-font-mono);
+  font-size: 0.8em;
+  position: absolute;
+  right: var(--sp-space-2);
+  bottom: var(--sp-space-2);
+  z-index: 2;
+  color: var(--sp-colors-bg-active);
+  background-color: var(--sp-colors-fg-active);
+  border-radius: 99999px;
+  padding: calc(var(--sp-space-1) / 2) var(--sp-space-2);
+}

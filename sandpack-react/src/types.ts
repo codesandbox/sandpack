@@ -9,6 +9,8 @@ import type {
   UnsubscribeFunction,
 } from "@codesandbox/sandpack-client";
 
+import type { CodeEditorProps } from ".";
+
 export type SandpackClientDispatch = (
   msg: SandpackMessage,
   clientId?: string
@@ -84,6 +86,7 @@ export interface SandpackFile {
   code: string;
   hidden?: boolean;
   active?: boolean;
+  readOnly?: boolean;
 }
 
 export type SandpackFiles = Record<string, string | SandpackFile>;
@@ -231,6 +234,22 @@ export type SandpackThemeProp =
   | SandpackPredefinedTheme
   | SandpackPartialTheme
   | "auto";
+
+/**
+ * Custom properties to be used in the SandpackCodeEditor component,
+ * some of which are exclusive to customize the CodeMirror instance.
+ */
+export interface SandpackCodeOptions {
+  /**
+   * CodeMirror extensions for the editor state, which can
+   * provide extra features and functionalities to the editor component.
+   */
+  extensions?: CodeEditorProps["extensions"];
+  /**
+   * Property to register CodeMirror extension keymap.
+   */
+  extensionsKeymap?: CodeEditorProps["extensionsKeymap"];
+}
 
 /**
  * @hidden

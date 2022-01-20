@@ -12,7 +12,7 @@ import { defaultHighlightStyle } from "@codemirror/highlight";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
 import { EditorState } from "@codemirror/state";
-import type { Annotation } from "@codemirror/state";
+import type { Annotation, Extension } from "@codemirror/state";
 import {
   highlightSpecialChars,
   highlightActiveLine,
@@ -66,10 +66,20 @@ interface CodeMirrorProps {
   showInlineErrors?: boolean;
   wrapContent?: boolean;
   editorState?: SandpackEditorState;
+  /**
+   * This disables editing of content by the user in all files.
+   */
   readOnly?: boolean;
+  /**
+   * Controls the visibility of Read-only label, which will only
+   * appears when `readOnly` is `true`
+   */
+  showReadOnly?: boolean;
   decorators?: Decorators;
   initMode: SandpackInitMode;
   id?: string;
+  extensions?: Extension[];
+  extensionsKeymap?: Array<readonly KeyBinding[]>;
 }
 
 export interface CodeMirrorRef {
@@ -91,9 +101,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       wrapContent = false,
       editorState = "pristine",
       readOnly = false,
+      showReadOnly = true,
       decorators,
       initMode = "lazy",
       id,
+      extensions = [],
+      extensionsKeymap = [],
     },
     ref
   ) => {
@@ -164,7 +177,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           },
         ];
 
-        const extensions = [
+        const extensionList = [
           highlightSpecialChars(),
           history(),
           closeBrackets(),
@@ -175,6 +188,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             ...historyKeymap,
             ...commentKeymap,
             ...customCommandsKeymap,
+            ...extensionsKeymap,
           ] as KeyBinding[]),
           langSupport,
 
@@ -182,37 +196,44 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           getEditorTheme(theme),
           getSyntaxHighlight(theme),
+          ...extensions,
         ];
 
         if (readOnly) {
-          extensions.push(EditorView.editable.of(false));
+          extensionList.push(EditorView.editable.of(false));
         } else {
-          extensions.push(bracketMatching());
-          extensions.push(highlightActiveLine());
+          extensionList.push(bracketMatching());
+          extensionList.push(highlightActiveLine());
         }
 
         if (decorators) {
-          extensions.push(highlightDecorators(decorators));
+          extensionList.push(highlightDecorators(decorators));
         }
 
         if (wrapContent) {
-          extensions.push(EditorView.lineWrapping);
+          extensionList.push(EditorView.lineWrapping);
         }
 
         if (showLineNumbers) {
-          extensions.push(lineNumbers());
+          extensionList.push(lineNumbers());
         }
 
         if (showInlineErrors) {
-          extensions.push(highlightInlineError());
+          extensionList.push(highlightInlineError());
         }
 
         const startState = EditorState.create({
           doc: code,
-          extensions,
+          extensions: extensionList,
         });
 
         const parentDiv = wrapper.current;
+        const existingPlaceholder = parentDiv.querySelector(
+          ".sp-pre-placeholder"
+        );
+        if (existingPlaceholder) {
+          parentDiv.removeChild(existingPlaceholder);
+        }
 
         const view = new EditorView({
           state: startState,
@@ -335,8 +356,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     if (readOnly) {
       return (
         <pre ref={combinedRef} className={c("cm", editorState)} translate="no">
-          {!shouldInitEditor && (
-            <code className={c("pre-placeholder")}>{code}</code>
+          <code className={c("pre-placeholder")}>{code}</code>
+
+          {readOnly && showReadOnly && (
+            <span className={c("read-only")}>Read-only</span>
           )}
         </pre>
       );
@@ -357,16 +380,14 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         tabIndex={0}
         translate="no"
       >
-        {!shouldInitEditor && (
-          <pre
-            className={c("pre-placeholder")}
-            style={{
-              marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
-            }}
-          >
-            {code}
-          </pre>
-        )}
+        <pre
+          className={c("pre-placeholder")}
+          style={{
+            marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
+          }}
+        >
+          {code}
+        </pre>
 
         <>
           <p
