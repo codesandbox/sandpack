@@ -383,10 +383,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             translate="no"
           >
             <code
-              className={classNames(
-                c("pre-placeholder"),
-                placeholderClassName
-              )}
+              className={classNames(c("pre-placeholder"), placeholderClassName)}
             >
               {syntaxHighlightRender}
             </code>
