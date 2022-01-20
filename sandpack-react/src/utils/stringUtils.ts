@@ -7,7 +7,9 @@ export const calculateNearestUniquePath = (
   currentPath: string,
   otherPaths: string[]
 ): string => {
-  const currentPathParts = currentPath.split("/");
+  const currentPathParts = (
+    currentPath[0] === "/" ? currentPath.slice(1) : currentPath
+  ).split("/");
   const resultPathParts: string[] = [];
 
   // If path is on root, there are no parts to loop through
@@ -20,17 +22,19 @@ export const calculateNearestUniquePath = (
       const otherPathParts = otherPaths[fileIndex].split("/");
       for (
         let partsFromEnd = 1;
-        partsFromEnd < currentPathParts.length;
+        partsFromEnd <= currentPathParts.length;
         partsFromEnd++
       ) {
         const currentPathPart =
           currentPathParts[currentPathParts.length - partsFromEnd];
         const otherPathPart =
           otherPathParts[otherPathParts.length - partsFromEnd];
+
         // If this part hasn't been added to the result path, we add it here
         if (resultPathParts.length < partsFromEnd) {
           resultPathParts.unshift(currentPathPart);
         }
+
         // If this part is different between the current path and other path we break
         // as from this moment the current path is unique compared to this other path
         if (currentPathPart !== otherPathPart) {
@@ -41,7 +45,7 @@ export const calculateNearestUniquePath = (
   }
 
   // Add `..` if this is a relative path
-  if (resultPathParts.length + 1 < currentPathParts.length) {
+  if (resultPathParts.length < currentPathParts.length) {
     resultPathParts.unshift("..");
   }
 
