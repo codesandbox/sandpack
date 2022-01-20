@@ -7,7 +7,9 @@ export const calculateNearestUniquePath = (
   currentPath: string,
   otherPaths: string[]
 ): string => {
-  const currentPathParts = currentPath.split("/");
+  const currentPathParts = (
+    currentPath[0] === "/" ? currentPath.slice(1) : currentPath
+  ).split("/");
   const resultPathParts: string[] = [];
 
   // If path is on root, there are no parts to loop through
@@ -43,7 +45,7 @@ export const calculateNearestUniquePath = (
   }
 
   // Add `..` if this is a relative path
-  if (resultPathParts.length + 1 < currentPathParts.length) {
+  if (resultPathParts.length < currentPathParts.length) {
     resultPathParts.unshift("..");
   }
 
