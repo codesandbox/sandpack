@@ -73,7 +73,7 @@ export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
         className={c("tabs-scrollable-container")}
         role="tablist"
       >
-        {openPaths.map((filePath) => (
+        {[...openPaths,...openPaths].map((filePath) => (
           <button
             key={filePath}
             aria-selected={filePath === activePath}
