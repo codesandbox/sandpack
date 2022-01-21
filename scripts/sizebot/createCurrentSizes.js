@@ -12,13 +12,17 @@ const getDependenciesSize = async (packageName) => {
 
   // include css file
   if (packageName === "sandpack-react") {
-    const indexCssPath = `./${packageName}/dist/index.css`;
-    const sizeGzip = await fs.readFile(indexCssPath).then(gzipSize);
-    const { size } = await fs.stat(indexCssPath);
+    try {
+      const indexCssPath = `./${packageName}/dist/index.css`;
+      const sizeGzip = await fs.readFile(indexCssPath).then(gzipSize);
+      const { size } = await fs.stat(indexCssPath);
 
-    results.assets = [...results.assets, { name: "index.css", size }];
+      results.assets = [...results.assets, { name: "index.css", size }];
 
-    results.gzip = results.gzip + sizeGzip;
+      results.gzip = results.gzip + sizeGzip;
+    } catch {
+      console.error("index.css no longer exist");
+    }
   }
 
   return {
