@@ -10,7 +10,8 @@
     "emitDecoratorMetadata": true,
     "noImplicitAny": true,
     "jsx": "react",
-    "outDir": "dist/types"
+    "outDir": "dist/types",
+    "skipLibCheck": true
   },
   "include": ["src"],
   "exclude": ["src/**/*.stories.tsx", "src/**/*.test.tsx", "src/**/*.test.ts"]

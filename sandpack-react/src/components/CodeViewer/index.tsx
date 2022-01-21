@@ -59,9 +59,9 @@ export const SandpackCodeViewer = React.forwardRef<
           filePath={sandpack.activePath}
           initMode={initMode || sandpack.initMode}
           showLineNumbers={showLineNumbers}
+          showReadOnly={false}
           wrapContent={wrapContent}
           readOnly
-          showReadOnly={false}
         />
 
         {sandpack.status === "idle" ? <RunButton /> : null}

@@ -18,19 +18,16 @@ jobs:
         with:
           repository: codesandbox/codesandbox-client
 
-      - uses: actions/cache@v2
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "10.23.2"
           registry-url: "https://npm.pkg.github.com/"
 
-      - name: Setup | Install dependencies
-        run: yarn
+      - name: Install dependencies and cache
+        uses: bahmutov/npm-install@v1
+        with:
+          useLockFile: true
 
       - name: Prepare | Build dependencies
         run: yarn build:deps
@@ -75,13 +72,10 @@ jobs:
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
-      - uses: actions/cache@v2
+      - name: Install dependencies and cache
+        uses: bahmutov/npm-install@v1
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+          useLockFile: true
 
       - name: Prepare | Download artifacts
         uses: actions/download-artifact@v2
