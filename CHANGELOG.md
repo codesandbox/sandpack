@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.5](https://github.com/codesandbox/sandpack/compare/v0.13.4...v0.13.5) (2022-01-21)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.13.4](https://github.com/codesandbox/sandpack/compare/v0.13.3...v0.13.4) (2022-01-20)
+
+
+### Bug Fixes
+
+* **scrollbar:** remove hijack custom style ([#315](https://github.com/codesandbox/sandpack/issues/315)) ([5781e97](https://github.com/codesandbox/sandpack/commit/5781e974d0fd410394efac20cb11530ade6cfd8d))
+
+
+
+
+
+## [0.13.3](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3) (2022-01-20)
+
+
+### Bug Fixes
+
+* **calculateNearestUniquePath:** ensures unique paths ([#311](https://github.com/codesandbox/sandpack/issues/311)) ([a337269](https://github.com/codesandbox/sandpack/commit/a33726914e22c5b009c3ad5a5a6a7976ea29fd3f))
+
+
+
+
+
+## [0.13.2](https://github.com/codesandbox/sandpack/compare/v0.13.1...v0.13.2) (2022-01-20)
+
+
+### Bug Fixes
+
+* **codemirror:** shift approach to remove placeholder ([#310](https://github.com/codesandbox/sandpack/issues/310)) ([4021b16](https://github.com/codesandbox/sandpack/commit/4021b16f956b52ed14e8fbb8b4c1784a5b43a1f8))
+
+
+
+
+
 ## [0.13.1](https://github.com/codesandbox/sandpack/compare/v0.13.0...v0.13.1) (2022-01-14)
 
 
