@@ -1,1 +1,56 @@
-{"sandpack-react":{"gzip":155579,"assets":[{"name":"0","size":539457},{"name":"main","size":463312},{"name":"@codesandbox/sandpack-react","size":72918},{"name":"@code-hike/classer","size":1354},{"name":"@codesandbox/sandpack-client","size":13165},{"name":"@codemirror/state","size":35337},{"name":"@codemirror/view","size":167326},{"name":"@codemirror/closebrackets","size":6167},{"name":"@codemirror/matchbrackets","size":4040},{"name":"@codemirror/commands","size":24761},{"name":"@codemirror/comment","size":4421},{"name":"@codemirror/gutter","size":10559},{"name":"@codemirror/highlight","size":12422},{"name":"@codemirror/history","size":8939},{"name":"@react-hook/intersection-observer","size":2536},{"name":"@codemirror/lang-css","size":10854},{"name":"@codemirror/lang-javascript","size":6430},{"name":"@codemirror/lang-html","size":15443},{"name":"@codemirror/text","size":13773},{"name":"style-mod","size":2618},{"name":"@codemirror/rangeset","size":16188},{"name":"w3c-keyname","size":1952},{"name":"@lezer/common","size":34258},{"name":"@codemirror/language","size":19137},{"name":"@react-hook/passive-layout-effect","size":191},{"name":"@lezer/css","size":9509},{"name":"@lezer/html","size":12342},{"name":"@lezer/javascript","size":54323},{"name":"@codemirror/autocomplete","size":34219},{"name":"@lezer/lr","size":31147},{"name":"@codemirror/tooltip","size":14248},{"name":"codesandbox-import-utils","size":367},{"name":"react-devtools-inline","size":842468},{"name":"lodash.isequal","size":18521},{"name":"intersection-observer","size":12825},{"name":"lz-string","size":9259},{"name":"webpack","size":487},{"name":"react-is","size":2244},{"name":"scheduler","size":4717}]},"sandpack-client":{"gzip":7200,"assets":[{"name":"main","size":20585},{"name":"@codesandbox/sandpack-client","size":10575},{"name":"codesandbox-import-utils","size":2590},{"name":"lodash.isequal","size":18521},{"name":"webpack","size":487}]}}
+{
+  "sandpack-react": {
+    "gzip": 181176,
+    "assets": [
+      { "name": "0", "size": 540470 },
+      { "name": "main", "size": 531153 },
+      { "name": "@codesandbox/sandpack-react", "size": 67446 },
+      { "name": "@codemirror/state", "size": 23979 },
+      { "name": "@codemirror/highlight", "size": 9233 },
+      { "name": "@codemirror/view", "size": 122899 },
+      { "name": "w3c-keyname", "size": 1778 },
+      { "name": "@code-hike/classer", "size": 814 },
+      { "name": "@codemirror/matchbrackets", "size": 2551 },
+      { "name": "@codemirror/lang-javascript", "size": 5281 },
+      { "name": "@lezer/javascript", "size": 53521 },
+      { "name": "@codemirror/autocomplete", "size": 25251 },
+      { "name": "@codemirror/tooltip", "size": 11452 },
+      { "name": "@codemirror/lang-css", "size": 10180 },
+      { "name": "@lezer/css", "size": 8970 },
+      { "name": "@codesandbox/sandpack-client", "size": 10365 },
+      { "name": "@codemirror/closebrackets", "size": 4053 },
+      { "name": "@codemirror/commands", "size": 15665 },
+      { "name": "@codemirror/comment", "size": 2758 },
+      { "name": "@codemirror/gutter", "size": 7937 },
+      { "name": "@codemirror/history", "size": 6073 },
+      { "name": "codesandbox-import-utils", "size": 342 },
+      { "name": "@react-hook/intersection-observer", "size": 1472 },
+      { "name": "@react-hook/passive-layout-effect", "size": 142 },
+      { "name": "@codemirror/lang-html", "size": 13119 },
+      { "name": "@lezer/html", "size": 10333 },
+      { "name": "react-devtools-inline", "size": 534040 },
+      { "name": "@codemirror/text", "size": 10115 },
+      { "name": "@codemirror/language", "size": 14105 },
+      { "name": "@lezer/common", "size": 23966 },
+      { "name": "@codemirror/rangeset", "size": 12404 },
+      { "name": "style-mod", "size": 1998 },
+      { "name": "lodash.isequal", "size": 14503 },
+      { "name": "intersection-observer", "size": 8572 },
+      { "name": "lz-string", "size": 4729 },
+      { "name": "@lezer/lr", "size": 24078 },
+      { "name": "webpack", "size": 429 },
+      { "name": "react-is", "size": 2252 },
+      { "name": "scheduler", "size": 4727 }
+    ]
+  },
+  "sandpack-client": {
+    "gzip": 7563,
+    "assets": [
+      { "name": "main", "size": 21106 },
+      { "name": "@codesandbox/sandpack-client", "size": 8395 },
+      { "name": "codesandbox-import-utils", "size": 1970 },
+      { "name": "lodash.isequal", "size": 14503 },
+      { "name": "webpack", "size": 429 }
+    ]
+  }
+}
