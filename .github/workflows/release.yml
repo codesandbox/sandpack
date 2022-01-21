@@ -96,7 +96,7 @@ jobs:
       - name: Sizebot | Commit results
         run: |
           git add scripts/sizebot/sizebot.json 
-          git commit -am 'chore: [skip ci] update sizebot'
+          git commit -am 'chore: [skip ci] update sizebot' --no-verify
           git push origin main
 
       - name: Release | Lerna Publish

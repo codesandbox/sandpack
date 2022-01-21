@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 
+import { gzipSize } from "gzip-size";
 import packageStats from "package-build-stats";
 
 const packages = ["sandpack-react", "sandpack-client"];
@@ -8,6 +9,17 @@ const packages = ["sandpack-react", "sandpack-client"];
 const getDependenciesSize = async (packageName) => {
   const { getPackageStats } = packageStats;
   const results = await getPackageStats(path.resolve(packageName));
+
+  // include css file
+  if (packageName === "sandpack-react") {
+    const indexCssPath = `./${packageName}/dist/index.css`;
+    const sizeGzip = await fs.readFile(indexCssPath).then(gzipSize);
+    const { size } = await fs.stat(indexCssPath);
+
+    results.assets = [...results.assets, { name: "index.css", size }];
+
+    results.gzip = results.gzip + sizeGzip;
+  }
 
   return {
     gzip: results.gzip,
