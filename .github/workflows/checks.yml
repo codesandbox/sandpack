@@ -10,6 +10,11 @@ jobs:
       - name: Setup | Checkout
         uses: actions/checkout@v1
 
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14.16.1"
+
       - name: Setup | Install dependencies
         run: yarn install --frozen-lockfile
 
@@ -27,6 +32,11 @@ jobs:
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
+
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14.16.1"
 
       - name: Install dependencies and cache
         uses: bahmutov/npm-install@v1
@@ -47,6 +57,11 @@ jobs:
       - name: Setup | Checkout
         uses: actions/checkout@v1
 
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14.16.1"
+
       - name: Install dependencies and cache
         uses: bahmutov/npm-install@v1
         with:
@@ -63,6 +78,11 @@ jobs:
       - name: Setup | Checkout
         uses: actions/checkout@v1
 
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14.16.1"
+
       - name: Install dependencies and cache
         uses: bahmutov/npm-install@v1
         with:
@@ -78,6 +98,11 @@ jobs:
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
+
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14.16.1"
 
       - name: Install dependencies and cache
         uses: bahmutov/npm-install@v1
