@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.6-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.5...v0.13.6-experimental.0) (2022-01-24)
+
+
+
+## [0.13.3-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3-experimental.0) (2022-01-20)
+
+
+
+## [0.10.13-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.12...v0.10.13-experimental.0) (2022-01-07)
+
+
+### Bug Fixes
+
+* **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([60fd43a](https://github.com/codesandbox/sandpack/commit/60fd43a3ffc62ef672660d3176ff51b6f8465f47))
+
+
+
+## [0.10.11-experimental.4](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.3...v0.10.11-experimental.4) (2022-01-06)
+
+
+### Bug Fixes
+
+* rename method name ([cf1162c](https://github.com/codesandbox/sandpack/commit/cf1162ce942b1d9151cd1ede7e5121920d7acae7))
+
+
+
+## [0.10.11-experimental.3](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.2...v0.10.11-experimental.3) (2022-01-06)
+
+
+### Features
+
+* **devtools:** add on load method ([99f1f32](https://github.com/codesandbox/sandpack/commit/99f1f321c57e36e4085bc8be7053acc53238dfbb))
+
+
+
+## [0.10.11-experimental.2](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.1...v0.10.11-experimental.2) (2022-01-05)
+
+
+### Bug Fixes
+
+* unsubscribe function ([1501032](https://github.com/codesandbox/sandpack/commit/1501032a342f351c6a2d8b0dee437d6609baeca5))
+
+
+
+## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
+
+
+
+## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.7-experimental.0) (2022-01-05)
+
+
+### Bug Fixes
+
+* **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
+
+
+
+
+
 ## [0.13.5](https://github.com/codesandbox/sandpack/compare/v0.13.4...v0.13.5) (2022-01-21)
 
 **Note:** Version bump only for package sandpack

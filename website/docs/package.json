@@ -1,6 +1,6 @@
 {
   "name": "sandpack-docs",
-  "version": "0.13.3-experimental.0",
+  "version": "0.13.6-experimental.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
