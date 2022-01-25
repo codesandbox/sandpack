@@ -104,11 +104,11 @@ export const SandpackCodeEditor = React.forwardRef<
             id={id}
             initMode={initMode || sandpack.initMode}
             onCodeUpdate={handleCodeUpdate}
+            readOnly={readOnly || readOnlyFile}
             showInlineErrors={showInlineErrors}
             showLineNumbers={showLineNumbers}
-            wrapContent={wrapContent}
-            readOnly={readOnly || readOnlyFile}
             showReadOnly={showReadOnly}
+            wrapContent={wrapContent}
           />
 
           {showRunButton && status === "idle" ? <RunButton /> : null}

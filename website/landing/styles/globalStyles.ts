@@ -61,4 +61,25 @@ export const globalStyles = globalCss({
   code: {
     fontFamily: "$mono",
   },
+
+  ".sp-wrapper *::-webkit-scrollbar": {
+    width: "8px",
+    height: "8px",
+    opacity: 0,
+    display: "none",
+    transition: "opacity 0.1s ease",
+  },
+  ".sp-wrapper *:hover::-webkit-scrollbar": { display: "block", opacity: 1 },
+  ".sp-wrapper *::-webkit-scrollbar-track": {
+    backgroundColor: "var(--sp-colors-bg-default)",
+    boxShadow: "none",
+    borderLeft: "1px solid var(--sp-colors-fg-inactive)",
+  },
+  ".sp-wrapper *::-webkit-scrollbar-corner": { backgroundColor: "transparent" },
+  ".sp-wrapper *::-webkit-scrollbar-thumb": {
+    backgroundColor: "var(--sp-colors-fg-default)",
+    borderRadius: "9999px",
+    opacity: 0,
+  },
+  ".sp-wrapper *::-webkit-scrollbar-thumb:hover": { opacity: 1 },
 });

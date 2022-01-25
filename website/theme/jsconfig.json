@@ -1,8 +1,9 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "styles/*": ["./styles/*"]
-        }
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "styles/*": ["./styles/*"]
     }
+  }
 }
