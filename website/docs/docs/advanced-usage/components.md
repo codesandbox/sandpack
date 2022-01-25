@@ -2,8 +2,9 @@
 sidebar_position: 2
 ---
 
-import { Sandpack, SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview } from "@codesandbox/sandpack-react"
-import { SandpackLayout } from "../../src/CustomSandpack"
+import { SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview, SandpackThemeProvider } from "@codesandbox/sandpack-react"
+import { Sandpack, SandpackLayout } from "../../src/CustomSandpack"
+import SandpackDecorators from "../../src/examples/Decorators"
 
 # Components
 
@@ -200,6 +201,15 @@ For situations when you strictly want to show some code and run it in the browse
   </SandpackLayout>
 </SandpackProvider>
 
+### CodeMirror decorations
+
+This API provides a way to draw or style a piece of code in the editor content. You can implement it in the following ways:
+
+- Entire line: add `className` or elements attributes to an entire line;
+- Range: add `className` or elements attributes to a piece of content, given a `line`, `startColumn` and `endColumn`;
+
+<SandpackDecorators />
+
 ## ReactDevTools
 
 Sandpack also provides a component that adds React DevTools, allowing you to inspect the React component hierarchies in the iframe. This is useful for `props` debugging and understanding the component tree. Our `SandpackReactDevTools` component has the same functionality as the React DevTools browser extensions, but it only shows what is in your Sandpack instance.
@@ -249,6 +259,7 @@ import {
   SandpackCodeEditor,
   UnstyledOpenInCodeSandboxButton,
 } from "@codesandbox/sandpack-react";
+
 const CustomSandpack = () => (
   <SandpackProvider template="react">
     <SandpackLayout>
