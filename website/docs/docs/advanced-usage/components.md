@@ -201,9 +201,9 @@ For situations when you strictly want to show some code and run it in the browse
   </SandpackLayout>
 </SandpackProvider>
 
-### Decorators
+### CodeMirror decorations
 
-Decorators provide a way to draw or style a piece of the editor, and you can implement it in the following ways:
+This API provides a way to draw or style a piece of code in the editor content. You can implement it in the following ways:
 
 - Entire line: add `className` or elements attributes to an entire line;
 - Range: add `className` or elements attributes to a piece of content, given a `line`, `startColumn` and `endColumn`;
