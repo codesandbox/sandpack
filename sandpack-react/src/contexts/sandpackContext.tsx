@@ -22,6 +22,7 @@ import type {
   SandpackPredefinedTemplate,
   SandpackSetup,
   SandpackInitMode,
+  SandboxTemplate,
 } from "../types";
 import { getSandpackStateFromProps } from "../utils/sandpackUtils";
 import { generateRandomId } from "../utils/stringUtils";
@@ -48,6 +49,8 @@ export interface SandpackProviderState {
 }
 
 export interface SandpackProviderProps {
+  sandboxId?: string;
+
   template?: SandpackPredefinedTemplate;
   customSetup?: SandpackSetup;
 
@@ -158,6 +161,15 @@ class SandpackProvider extends React.PureComponent<
     this.loadingScreenRegistered =
       React.createRef<boolean>() as React.MutableRefObject<boolean>;
   }
+
+  /**
+   * @hidden
+   */
+  fetchSandbox = async (sandboxId: string): Promise<SandboxTemplate> => {
+    return await fetch(
+      `https://codesandbox.io/api/v1/sandboxes/${sandboxId}/sandpack`
+    ).then((data) => data.json());
+  };
 
   /**
    * @hidden
@@ -304,7 +316,24 @@ class SandpackProvider extends React.PureComponent<
    * @hidden
    */
   componentDidMount(): void {
-    this.initializeSandpackIframe();
+    if (this.props.sandboxId) {
+      this.fetchSandbox(this.props.sandboxId).then((template) => {
+        const { activePath, openPaths, files, environment } =
+          getSandpackStateFromProps({ customSetup: template });
+
+        this.setState(
+          {
+            files,
+            environment,
+            activePath,
+            openPaths,
+          },
+          this.initializeSandpackIframe
+        );
+      });
+    } else {
+      this.initializeSandpackIframe();
+    }
   }
 
   /**

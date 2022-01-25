@@ -24,6 +24,7 @@ export interface SandpackProps {
   customSetup?: SandpackSetup;
 
   theme?: SandpackThemeProp;
+  sandboxId?: string;
 
   options?: {
     openPaths?: string[];
@@ -127,6 +128,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     <SandpackProvider
       customSetup={userInputSetup}
       template={props.template}
+      sandboxId={props.sandboxId}
       {...providerOptions}
     >
       <ClasserProvider classes={props.options?.classes}>
