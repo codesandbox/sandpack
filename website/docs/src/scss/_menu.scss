@@ -47,13 +47,6 @@
   }
 }
 
-.discord-link svg,
-.twitter-link svg,
-.releases-link svg,
-.github-link svg {
-  display: none;
-}
-
 .divisor {
   content: "";
   flex: 1;
@@ -61,32 +54,42 @@
   visibility: hidden;
 }
 
+.olvy-unread-indicator.olvy-organisation-codesandbox.top-right {
+  right: auto;
+  left: 114px;
+  background: var(--ifm-link-hover-color);
+  box-shadow: 0 0 0 var(--ifm-link-hover-color);
+  color: var(--ifm-background-color);
+  animation: olvyPulse 2s infinite;
+}
+
+@keyframes olvyPulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 var(--ifm-link-hover-color);
+    box-shadow: 0 0 0 0 var(--ifm-link-hover-color);
+  }
+  70% {
+    -moz-box-shadow: 0 0 0 6px #0000;
+    box-shadow: 0 0 0 6px #0000;
+  }
+  100% {
+    -moz-box-shadow: 0 0 0 0 #0000;
+    box-shadow: 0 0 0 0 #0000;
+  }
+}
+
 @media (min-width: 961px) {
-  .discord-link,
-  .twitter-link,
-  .releases-link,
-  .github-link {
+  .bottom-link {
     background: var(--sandpack-background-color);
     width: var(--doc-sidebar-width);
+    width: 100%;
   }
 
-  .discord-link {
+  .menu__list-item:last-child {
     padding-bottom: 15px;
   }
-  .twitter-link {
-    bottom: 45px;
-  }
 
-  .github-link {
-    bottom: 75px;
-  }
-  .releases-link {
-    bottom: 105px;
-  }
-  .discord-link .menu__link,
-  .twitter-link .menu__link,
-  .releases-link .menu__link,
-  .github-link .menu__link {
+  .bottom-link .menu__link {
     font-size: 14px !important;
   }
 }

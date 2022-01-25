@@ -25,6 +25,29 @@ module.exports = {
             headTags: [
               {
                 tagName: "script",
+                innerHTML: `var OlvyConfig = {
+    organisation: "codesandbox",
+    target: ".olvy-target",
+    type: "sidebar",
+    view: {
+      showSearch: false,
+      compact: false,
+      showHeader: true, // only applies when widget type is embed. you cannot hide header for modal and sidebar widgets
+      showUnreadIndicator: true,
+      unreadIndicatorColor: "#cc1919",
+      unreadIndicatorPosition: "top-right"
+    }
+  };`,
+              },
+              {
+                tagName: "script",
+                attributes: {
+                  src: "https://app.olvy.co/script.js",
+                  defer: "defer",
+                },
+              },
+              {
+                tagName: "script",
                 innerHTML: API_KEY
                   ? `
                 (function(e,t){var r=e.amplitude||{_q:[],_iq:{}};var n=t.createElement("script")
