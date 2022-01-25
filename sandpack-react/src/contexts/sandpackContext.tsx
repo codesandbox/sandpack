@@ -167,7 +167,7 @@ class SandpackProvider extends React.PureComponent<
    */
   fetchSandbox = async (sandboxId: string): Promise<SandboxTemplate> => {
     return await fetch(
-      `https://codesandbox.io/api/v1/sandboxes/${sandboxId}/sandpack`
+      `https://codesandbox.io/api/v1/sandboxes/csb-id-${sandboxId}/sandpack`
     ).then((data) => data.json());
   };
 

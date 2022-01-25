@@ -65,6 +65,16 @@ export const getSandpackStateFromProps = (
     }, []);
   }
 
+  // Make sure it resolves the main file
+  if (!projectSetup.files[projectSetup.main]) {
+    projectSetup.main = resolveFile(projectSetup.main, projectSetup.files);
+  }
+
+  // Make sure it resolves the entry file
+  if (!projectSetup.files[projectSetup.entry]) {
+    projectSetup.entry = resolveFile(projectSetup.entry, projectSetup.files);
+  }
+
   // If no activePath is specified, use the first open file
   if (!activePath) {
     activePath = projectSetup.main || openPaths[0];
@@ -73,12 +83,6 @@ export const getSandpackStateFromProps = (
   // If for whatever reason the active path was not set as open, set it
   if (!openPaths.includes(activePath)) {
     openPaths.push(activePath);
-  }
-
-  if (!projectSetup.files[activePath]) {
-    throw new Error(
-      `${activePath} was set as the active file but was not provided`
-    );
   }
 
   const files = addPackageJSONIfNeeded(
@@ -92,6 +96,32 @@ export const getSandpackStateFromProps = (
   const existOpenPath = openPaths.filter((file) => files[file]);
 
   return { openPaths: existOpenPath, activePath, files, environment };
+};
+
+const resolveFile = (path: string, files: Record<string, any>) => {
+  let resolvedPath = null;
+
+  let index = 0;
+  const strategies = [".js", ".jsx", ".ts", ".tsx"];
+  const leadingSlash = Object.keys(files).every((file) => file.startsWith("/"));
+
+  while (!resolvedPath && index < strategies.length) {
+    const slashPath = !path.startsWith("/") && leadingSlash ? `/${path}` : path;
+    const removeExtension = slashPath.split(".")[0];
+    const attemptPath = `${removeExtension}${strategies[index]}`;
+
+    if (files[attemptPath]) {
+      resolvedPath = attemptPath;
+    }
+
+    index++;
+  }
+
+  if (resolvedPath) {
+    return resolvedPath;
+  }
+
+  throw new Error(`${path} was set as the active file but was not provided`);
 };
 
 // The template is predefined (eg: react, vue, vanilla)

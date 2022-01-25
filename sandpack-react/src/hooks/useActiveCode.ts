@@ -13,8 +13,6 @@ export const useActiveCode = (): {
 } => {
   const { sandpack } = useSandpack();
 
-  console.log(sandpack);
-
   return {
     code: sandpack.files[sandpack.activePath].code,
     readOnly: sandpack.files[sandpack.activePath].readOnly ?? false,
