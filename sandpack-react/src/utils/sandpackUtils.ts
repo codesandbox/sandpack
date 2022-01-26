@@ -65,18 +65,20 @@ export const getSandpackStateFromProps = (
     }, []);
   }
 
-  // Make sure it resolves the main file
-  if (!projectSetup.files[projectSetup.main]) {
-    projectSetup.main = resolveFile(projectSetup.main, projectSetup.files);
-  }
-
   // Make sure it resolves the entry file
   if (!projectSetup.files[projectSetup.entry]) {
+    // @ts-ignore
     projectSetup.entry = resolveFile(projectSetup.entry, projectSetup.files);
   }
 
+  // Make sure it resolves the main file
+  if (!projectSetup.files[projectSetup.main]) {
+    projectSetup.main =
+      resolveFile(projectSetup.main, projectSetup.files) || projectSetup.entry;
+  }
+
   // If no activePath is specified, use the first open file
-  if (!activePath) {
+  if (!activePath || !projectSetup.files[activePath]) {
     activePath = projectSetup.main || openPaths[0];
   }
 
@@ -95,33 +97,48 @@ export const getSandpackStateFromProps = (
   const environment = projectSetup.environment;
   const existOpenPath = openPaths.filter((file) => files[file]);
 
+  if (!projectSetup.main) {
+    throw new Error(`The "main" was not provided`);
+  }
+
+  if (!projectSetup.entry) {
+    throw new Error(`The "entry" was not provided`);
+  }
+
   return { openPaths: existOpenPath, activePath, files, environment };
 };
 
-const resolveFile = (path: string, files: Record<string, any>) => {
-  let resolvedPath = null;
+export const resolveFile = (
+  path: string,
+  files: Record<string, any>
+): string | undefined => {
+  if (!path) return undefined;
+
+  let resolvedPath = undefined;
 
   let index = 0;
   const strategies = [".js", ".jsx", ".ts", ".tsx"];
   const leadingSlash = Object.keys(files).every((file) => file.startsWith("/"));
 
   while (!resolvedPath && index < strategies.length) {
-    const slashPath = !path.startsWith("/") && leadingSlash ? `/${path}` : path;
-    const removeExtension = slashPath.split(".")[0];
+    const slashPath = () => {
+      if (path.startsWith("/")) {
+        return leadingSlash ? path : path.replace(/^\/+/, "");
+      }
+
+      return `/${path}`;
+    };
+    const removeExtension = slashPath().split(".")[0];
     const attemptPath = `${removeExtension}${strategies[index]}`;
 
-    if (files[attemptPath]) {
+    if (files[attemptPath] !== undefined) {
       resolvedPath = attemptPath;
     }
 
     index++;
   }
 
-  if (resolvedPath) {
-    return resolvedPath;
-  }
-
-  throw new Error(`${path} was set as the active file but was not provided`);
+  return resolvedPath;
 };
 
 // The template is predefined (eg: react, vue, vanilla)

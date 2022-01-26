@@ -3,9 +3,40 @@ import { REACT_TEMPLATE } from "../templates/react";
 import {
   getSandpackStateFromProps,
   createSetupFromUserInput,
+  resolveFile,
 } from "./sandpackUtils";
 
+describe(resolveFile, () => {
+  test("it finds the file based on the extension", () => {
+    const data = resolveFile("/file.js", { "/file.ts": "" });
+
+    expect(data).toBe("/file.ts");
+  });
+
+  test("it adds the leading slash and find the file", () => {
+    const data = resolveFile("file.js", { "/file.js": "" });
+
+    expect(data).toBe("/file.js");
+  });
+
+  test("it removes the leading slash and find the file", () => {
+    const data = resolveFile("/file.js", { "file.js": "" });
+
+    expect(data).toBe("file.js");
+  });
+});
+
 describe(getSandpackStateFromProps, () => {
+  test("it retuns the main file in case activePath doesn't exist", () => {
+    const data = getSandpackStateFromProps({
+      template: "react",
+      activePath: "NO_EXIST.js",
+    });
+
+    expect(data.activePath).not.toBe("NO_EXIST.js");
+    expect(data.activePath).toBe(REACT_TEMPLATE.main);
+  });
+
   test("always return an activeFile", () => {
     const template = getSandpackStateFromProps({ template: "react" });
     expect(template.activePath).toBe("/App.js");
@@ -63,11 +94,10 @@ describe(getSandpackStateFromProps, () => {
     expect(output.openPaths.sort()).toEqual(["/App.js"]);
   });
 
-  test("not allow to hidden the entry file", () => {
+  test("it needs to provide a entry file", () => {
     try {
       getSandpackStateFromProps({
         customSetup: {
-          entry: "/App.js",
           files: {
             "/App.js": { hidden: true, code: "" },
             "/custom.js": { hidden: true, code: "" },
@@ -77,7 +107,7 @@ describe(getSandpackStateFromProps, () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       expect(err.message).toEqual(
-        "undefined was set as the active file but was not provided"
+        "Missing 'entry' parameter. Either specify an entry point, or pass in a package.json with the 'main' field set."
       );
     }
   });

@@ -15,7 +15,6 @@ export default {
 export const Main = (): JSX.Element => {
   return (
     <>
-      {/**
       <SandpackProvider sandboxId="bx70k">
         <SandpackLayout>
           <SandpackCodeEditor />
@@ -23,9 +22,9 @@ export const Main = (): JSX.Element => {
         </SandpackLayout>
       </SandpackProvider>
 
-      <Sandpack sandboxId="bx70k" /> */}
+      <Sandpack sandboxId="uo1h0" />
 
-      <Sandpack sandboxId="citxd" options={{ openPaths: ["/src/index.tsx"] }} />
+      <Sandpack sandboxId="citxd" options={{ activePath: "/src/App.tsx" }} />
     </>
   );
 };

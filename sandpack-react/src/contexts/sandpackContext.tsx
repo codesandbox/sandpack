@@ -166,15 +166,6 @@ class SandpackProvider extends React.PureComponent<
   /**
    * @hidden
    */
-  fetchSandbox = async (sandboxId: string): Promise<SandboxTemplate> => {
-    return await fetch(
-      `https://codesandbox.io/api/v1/sandboxes/csb-id-${sandboxId}/sandpack`
-    ).then((data) => data.json());
-  };
-
-  /**
-   * @hidden
-   */
   handleMessage = (msg: SandpackMessage): void => {
     if (this.timeoutHook) {
       clearTimeout(this.timeoutHook);
@@ -261,6 +252,38 @@ class SandpackProvider extends React.PureComponent<
   /**
    * @hidden
    */
+  fetchSandbox = async (sandboxId: string, onDone: () => void) => {
+    const template: SandboxTemplate & { is_sse: boolean } = await fetch(
+      `https://codesandbox.io/api/v1/sandboxes/csb-id-${sandboxId}/sandpack`
+    )
+      .then((data) => data.json())
+      .catch(() => {
+        console.error(
+          `Something went wrong while fetching \`${sandboxId}\` sandbox`
+        );
+      });
+
+    if (template.is_sse) {
+      throw Error("Sandpack doesn't support sandboxes that runs on server.");
+    }
+
+    const { activePath, openPaths, files, environment } =
+      getSandpackStateFromProps({ customSetup: template });
+
+    this.setState(
+      {
+        files,
+        environment,
+        activePath: this.props.activePath || activePath,
+        openPaths: this.props.openPaths || openPaths,
+      },
+      onDone
+    );
+  };
+
+  /**
+   * @hidden
+   */
   initializeSandpackIframe(): void {
     if (!this.props.autorun) {
       return;
@@ -318,20 +341,7 @@ class SandpackProvider extends React.PureComponent<
    */
   componentDidMount(): void {
     if (this.props.sandboxId) {
-      this.fetchSandbox(this.props.sandboxId).then((template) => {
-        const { activePath, openPaths, files, environment } =
-          getSandpackStateFromProps({ customSetup: template });
-
-        this.setState(
-          {
-            files,
-            environment,
-            activePath,
-            openPaths,
-          },
-          this.initializeSandpackIframe
-        );
-      });
+      this.fetchSandbox(this.props.sandboxId, this.initializeSandpackIframe);
     } else {
       this.initializeSandpackIframe();
     }
