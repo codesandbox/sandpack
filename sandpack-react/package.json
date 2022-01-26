@@ -1,13 +1,13 @@
 {
   "name": "@codesandbox/sandpack-react",
-  "version": "0.13.5",
+  "version": "0.13.7",
   "description": "",
   "keywords": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/codesandbox/sandpack"
   },
-  "license": "GPL-2.0",
+  "license": "Apache-2.0",
   "author": "CodeSandbox",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -46,10 +46,11 @@
     "@codemirror/matchbrackets": "^0.19.3",
     "@codemirror/state": "^0.19.6",
     "@codemirror/view": "^0.19.32",
-    "@codesandbox/sandpack-client": "^0.13.5",
+    "@codesandbox/sandpack-client": "^0.13.7",
     "@react-hook/intersection-observer": "^3.1.1",
     "codesandbox-import-util-types": "^2.2.3",
     "codesandbox-import-utils": "^2.2.3",
+    "lodash.isequal": "^4.5.0",
     "react-devtools-inline": "4.4.0",
     "react-is": "^17.0.2"
   },
@@ -62,6 +63,7 @@
     "@storybook/react": "^6.1.9",
     "@types/fs-extra": "^5.0.4",
     "@types/glob": "^5.0.35",
+    "@types/lodash.isequal": "^4.5.2",
     "@types/node": "^9.4.6",
     "@types/react": "^17.0.2",
     "autoprefixer": "^10.2.4",
