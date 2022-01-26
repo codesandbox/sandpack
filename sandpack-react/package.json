@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/codesandbox/sandpack"
   },
-  "license": "GPL-2.0",
+  "license": "Apache-2.0",
   "author": "CodeSandbox",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
