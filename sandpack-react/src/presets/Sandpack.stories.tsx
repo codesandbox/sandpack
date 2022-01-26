@@ -1,6 +1,12 @@
 import React from "react";
 
-import { Sandpack } from "./Sandpack";
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  SandpackPreview,
+  Sandpack,
+} from "../";
 
 export default {
   title: "presets/Sandpack: options",
@@ -151,3 +157,20 @@ export const RunnableComponent = (): React.ReactElement => (
     template="react"
   />
 );
+
+export const ExternalSandboxes: React.FC = () => {
+  return (
+    <>
+      <SandpackProvider sandboxId="bx70k">
+        <SandpackLayout>
+          <SandpackCodeEditor />
+          <SandpackPreview />
+        </SandpackLayout>
+      </SandpackProvider>
+
+      <Sandpack sandboxId="uo1h0" />
+
+      <Sandpack sandboxId="citxd" options={{ activePath: "/src/App.tsx" }} />
+    </>
+  );
+};

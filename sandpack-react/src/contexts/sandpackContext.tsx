@@ -147,6 +147,7 @@ class SandpackProvider extends React.PureComponent<
      * - A client already exists, set a new listener and then one more client has been created;
      */
     this.queuedListeners = { global: {} };
+
     /**
      * Global list of unsubscribe function for the listeners
      */
@@ -253,7 +254,7 @@ class SandpackProvider extends React.PureComponent<
    * @hidden
    */
   fetchSandbox = async (sandboxId: string, onDone: () => void) => {
-    const template: SandboxTemplate & { is_sse: boolean } = await fetch(
+    const customSetup: SandboxTemplate & { is_sse: boolean } = await fetch(
       `https://codesandbox.io/api/v1/sandboxes/csb-id-${sandboxId}/sandpack`
     )
       .then((data) => data.json())
@@ -263,12 +264,12 @@ class SandpackProvider extends React.PureComponent<
         );
       });
 
-    if (template.is_sse) {
+    if (customSetup.is_sse) {
       throw Error("Sandpack doesn't support sandboxes that runs on server.");
     }
 
     const { activePath, openPaths, files, environment } =
-      getSandpackStateFromProps({ customSetup: template });
+      getSandpackStateFromProps({ customSetup });
 
     this.setState(
       {

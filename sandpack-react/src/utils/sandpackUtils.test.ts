@@ -7,34 +7,49 @@ import {
 } from "./sandpackUtils";
 
 describe(resolveFile, () => {
-  test("it finds the file based on the extension", () => {
+  test("it resolves the file path based on the extension", () => {
     const data = resolveFile("/file.js", { "/file.ts": "" });
 
     expect(data).toBe("/file.ts");
   });
 
-  test("it adds the leading slash and find the file", () => {
+  test("it adds the leading slash and resolves the file path", () => {
     const data = resolveFile("file.js", { "/file.js": "" });
 
     expect(data).toBe("/file.js");
   });
 
-  test("it removes the leading slash and find the file", () => {
+  test("it resolves the file path without leading slash", () => {
+    const data = resolveFile("file.ts", { "file.js": "" });
+
+    expect(data).toBe("file.js");
+  });
+
+  test("it removes the leading slash and resolves the file path", () => {
     const data = resolveFile("/file.js", { "file.js": "" });
+
+    expect(data).toBe("file.js");
+  });
+
+  test("it fixes (add/remove) the leading slash and fixes the extension", () => {
+    const data = resolveFile("/file.ts", { "file.js": "" });
 
     expect(data).toBe("file.js");
   });
 });
 
 describe(getSandpackStateFromProps, () => {
+  /**
+   * activePath
+   */
   test("it retuns the main file in case activePath doesn't exist", () => {
-    const data = getSandpackStateFromProps({
+    const setup = getSandpackStateFromProps({
       template: "react",
       activePath: "NO_EXIST.js",
     });
 
-    expect(data.activePath).not.toBe("NO_EXIST.js");
-    expect(data.activePath).toBe(REACT_TEMPLATE.main);
+    expect(setup.activePath).not.toBe("NO_EXIST.js");
+    expect(setup.activePath).toBe(REACT_TEMPLATE.main);
   });
 
   test("always return an activeFile", () => {
@@ -50,8 +65,42 @@ describe(getSandpackStateFromProps, () => {
     expect(customSetup.activePath).toBe("foo.js");
   });
 
+  test("show activePath even when it's hidden", () => {
+    const setup = getSandpackStateFromProps({
+      template: "react",
+      activePath: "/App.js",
+      customSetup: {
+        files: {
+          "/App.js": { hidden: true, code: "" },
+          "/custom.js": { hidden: true, code: "" },
+        },
+      },
+    });
+
+    expect(setup.activePath).toEqual("/App.js");
+  });
+
+  test("activePath overrides the customSetup.main", () => {
+    const setup = getSandpackStateFromProps({
+      template: "react",
+      activePath: "/App.js",
+      customSetup: {
+        main: "/custom.js",
+        files: {
+          "/App.js": "",
+          "/custom.js": "",
+        },
+      },
+    });
+
+    expect(setup.activePath).toEqual("/App.js");
+  });
+
+  /**
+   * hidden file
+   */
   test("exclude hidden files from template", () => {
-    const output = getSandpackStateFromProps({ template: "react" });
+    const setup = getSandpackStateFromProps({ template: "react" });
     const collectFilenames = Object.entries(REACT_TEMPLATE.files).reduce(
       (acc, [key, value]) => {
         if (!value.hidden) {
@@ -63,11 +112,11 @@ describe(getSandpackStateFromProps, () => {
       [] as string[]
     );
 
-    expect(output.openPaths.sort()).toEqual(collectFilenames.sort());
+    expect(setup.openPaths.sort()).toEqual(collectFilenames.sort());
   });
 
   test("exclude hidden files from custom files", () => {
-    const output = getSandpackStateFromProps({
+    const setup = getSandpackStateFromProps({
       customSetup: {
         entry: "/App.js",
         files: {
@@ -77,11 +126,11 @@ describe(getSandpackStateFromProps, () => {
       },
     });
 
-    expect(output.openPaths.sort()).toEqual(["/App.js"]);
+    expect(setup.openPaths.sort()).toEqual(["/App.js"]);
   });
 
   test("exclude hidden files from custom files & template", () => {
-    const output = getSandpackStateFromProps({
+    const setup = getSandpackStateFromProps({
       template: "react",
       customSetup: {
         files: {
@@ -91,10 +140,27 @@ describe(getSandpackStateFromProps, () => {
       },
     });
 
-    expect(output.openPaths.sort()).toEqual(["/App.js"]);
+    expect(setup.openPaths.sort()).toEqual(["/App.js"]);
   });
 
-  test("it needs to provide a entry file", () => {
+  test("show files which are `hidden` & `active` at the same time", () => {
+    const setup = getSandpackStateFromProps({
+      template: "react",
+      customSetup: {
+        files: {
+          "/App.js": { hidden: true, active: true, code: "" },
+          "/custom.js": { hidden: true, code: "" },
+        },
+      },
+    });
+
+    expect(setup.openPaths.sort()).toEqual(["/App.js"]);
+  });
+
+  /**
+   * entry file
+   */
+  test("it needs to provide a entry file, when template is omitted", () => {
     try {
       getSandpackStateFromProps({
         customSetup: {
@@ -112,35 +178,35 @@ describe(getSandpackStateFromProps, () => {
     }
   });
 
-  test("show files which are `hidden` & `active` at the same time", () => {
-    const output = getSandpackStateFromProps({
+  test("it updates the entry file in the package.json", () => {
+    const setup = getSandpackStateFromProps({
       template: "react",
       customSetup: {
-        files: {
-          "/App.js": { hidden: true, active: true, code: "" },
-          "/custom.js": { hidden: true, code: "" },
-        },
+        entry: "foo.ts",
+        files: { "foo.ts": "" },
       },
     });
 
-    expect(output.openPaths.sort()).toEqual(["/App.js"]);
+    const packageContent = JSON.parse(setup.files["/package.json"].code);
+    expect(packageContent.main).toBe("foo.ts");
   });
 
-  test("show `activePath` even when it's hidden", () => {
-    const output = getSandpackStateFromProps({
+  test("it resolves the entry file, even when the extension is wrong", () => {
+    const setup = getSandpackStateFromProps({
       template: "react",
-      activePath: "/App.js",
       customSetup: {
-        files: {
-          "/App.js": { hidden: true, code: "" },
-          "/custom.js": { hidden: true, code: "" },
-        },
+        entry: "entry.ts",
+        files: { "entry.js": "" },
       },
     });
 
-    expect(output.activePath).toEqual("/App.js");
+    const packageContent = JSON.parse(setup.files["/package.json"].code);
+    expect(packageContent.main).toBe("entry.js");
   });
 
+  /**
+   * openPaths
+   */
   test("should not show invalid files into `openPaths`", () => {
     const output = getSandpackStateFromProps({
       template: "react",
@@ -149,6 +215,21 @@ describe(getSandpackStateFromProps, () => {
 
     expect(output.openPaths).toEqual(["/App.js"]);
   });
+
+  /**
+   * main file
+   */
+  // TODO
+
+  /**
+   * dependencies
+   */
+  // TODO
+
+  /**
+   * environment
+   */
+  // TODO
 });
 
 describe(createSetupFromUserInput, () => {

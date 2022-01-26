@@ -40,6 +40,7 @@ export interface SandpackProps {
     showTabs?: boolean;
     closableTabs?: boolean;
     wrapContent?: boolean;
+
     /**
      * This provides a way to control how some components are going to
      * be initialized on the page. The CodeEditor and the Preview components

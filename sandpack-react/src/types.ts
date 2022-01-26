@@ -116,7 +116,9 @@ export interface SandpackSetup {
   /**
    * The entry file is the starting point of the bundle process.
    *
-   * If you change the path of the entry file, make sure you control all the files that go into the bundle process, as prexisting settings in the template might not work anymore.
+   * If you change the path of the entry file, make sure you control
+   * all the files that go into the bundle process, as prexisting
+   * settings in the template might not work anymore.
    */
   entry?: string;
   main?: string;

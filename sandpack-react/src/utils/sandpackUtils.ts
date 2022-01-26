@@ -13,7 +13,7 @@ import type {
   SandpackSetup,
 } from "../types";
 
-export interface SandpackContextInfo {
+interface SandpackContextInfo {
   activePath: string;
   openPaths: string[];
   files: Record<string, SandpackBundlerFile>;
@@ -94,18 +94,14 @@ export const getSandpackStateFromProps = (
     projectSetup.entry
   );
 
-  const environment = projectSetup.environment;
-  const existOpenPath = openPaths.filter((file) => files[file]);
+  const existOpenPath = openPaths.filter((path) => files[path]);
 
-  if (!projectSetup.main) {
-    throw new Error(`The "main" was not provided`);
-  }
-
-  if (!projectSetup.entry) {
-    throw new Error(`The "entry" was not provided`);
-  }
-
-  return { openPaths: existOpenPath, activePath, files, environment };
+  return {
+    openPaths: existOpenPath,
+    activePath,
+    files,
+    environment: projectSetup.environment,
+  };
 };
 
 export const resolveFile = (
@@ -126,7 +122,7 @@ export const resolveFile = (
         return leadingSlash ? path : path.replace(/^\/+/, "");
       }
 
-      return `/${path}`;
+      return leadingSlash ? `/${path}` : path;
     };
     const removeExtension = slashPath().split(".")[0];
     const attemptPath = `${removeExtension}${strategies[index]}`;
@@ -141,15 +137,18 @@ export const resolveFile = (
   return resolvedPath;
 };
 
-// The template is predefined (eg: react, vue, vanilla)
-// The setup can overwrite anything from the template (eg: files, dependencies, environment, etc.)
+/**
+ * The template is predefined (eg: react, vue, vanilla)
+ * The setup can overwrite anything from the template (eg: files, dependencies, environment, etc.)
+ */
 export const getSetup = (
   template?: SandpackPredefinedTemplate,
   inputSetup?: SandpackSetup
 ): SandboxTemplate => {
-  // The input setup might have files in the simple form Record<string, string>
-  // so we convert them to the sandbox template format
-
+  /**
+   * The input setup might have files in the simple form Record<string, string>
+   * so we convert them to the sandbox template format
+   */
   const setup = createSetupFromUserInput(inputSetup);
 
   if (!template) {
