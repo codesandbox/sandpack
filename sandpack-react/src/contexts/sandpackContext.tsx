@@ -12,6 +12,7 @@ import {
   extractErrorDetails,
 } from "@codesandbox/sandpack-client";
 import * as React from "react";
+import isEqual from "lodash.isequal";
 
 import type {
   SandpackContext,
@@ -311,6 +312,9 @@ class SandpackProvider extends React.PureComponent<
    * @hidden
    */
   componentDidUpdate(prevProps: SandpackProviderProps): void {
+    /**
+     * Watch the changes on the initMode prop
+     */
     if (prevProps.initMode !== this.props.initMode && this.props.initMode) {
       this.setState(
         { initMode: this.props.initMode },
@@ -318,17 +322,21 @@ class SandpackProvider extends React.PureComponent<
       );
     }
 
+    /**
+     * Custom setup derived from props
+     */
+    const { activePath, openPaths, files, environment } =
+      getSandpackStateFromProps(this.props);
+
+    /**
+     * What the changes on the customSetup props
+     */
     if (
       prevProps.template !== this.props.template ||
       prevProps.activePath !== this.props.activePath ||
-      JSON.stringify(prevProps.openPaths) !==
-        JSON.stringify(this.props.openPaths) ||
-      JSON.stringify(prevProps.customSetup) !==
-        JSON.stringify(this.props.customSetup)
+      !isEqual(prevProps.openPaths, this.props.openPaths) ||
+      !isEqual(prevProps.customSetup, this.props.customSetup)
     ) {
-      const { activePath, openPaths, files, environment } =
-        getSandpackStateFromProps(this.props);
-
       /* eslint-disable react/no-did-update-set-state */
       this.setState({ activePath, openPaths, files, environment });
 
@@ -343,6 +351,12 @@ class SandpackProvider extends React.PureComponent<
         })
       );
     }
+
+    /**
+     * Watch the changes on editorState
+     */
+    const editorState = isEqual(files, this.state.files) ? "pristine" : "dirty";
+    this.setState({ editorState });
   }
 
   /**
@@ -475,8 +489,8 @@ class SandpackProvider extends React.PureComponent<
   /**
    * @hidden
    */
-  setActiveFile = (path: string): void => {
-    this.setState({ activePath: path, editorState: "dirty" });
+  setActiveFile = (activePath: string): void => {
+    this.setState({ activePath });
   };
 
   /**
@@ -491,7 +505,6 @@ class SandpackProvider extends React.PureComponent<
       return {
         activePath: path,
         openPaths: newPaths,
-        editorState: "dirty",
       };
     });
   };
@@ -516,7 +529,6 @@ class SandpackProvider extends React.PureComponent<
               : openPaths[indexOfRemovedPath - 1]
             : activePath,
         openPaths: newPaths,
-        editorState: "dirty",
       };
     });
   };
@@ -541,7 +553,6 @@ class SandpackProvider extends React.PureComponent<
       return {
         openPaths: newPaths,
         files: newFiles,
-        editorState: "dirty",
       };
     });
     this.updateClients();
