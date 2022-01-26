@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1-alpha.0](https://github.com/codesandbox/sandpack/compare/v0.13.5...v1.0.1-alpha.0) (2022-01-26)
+
+
+### Features
+
+* **editor:** highlight placeholder ([#290](https://github.com/codesandbox/sandpack/issues/290)) ([26f1b2a](https://github.com/codesandbox/sandpack/commit/26f1b2aab5eba8082054f823c4fbba8c8583c005))
+* **react:** ssr support ([5b9050f](https://github.com/codesandbox/sandpack/commit/5b9050febb15250e6a57f90bff4455750eb5d52b))
+
+
+
+
+
 ## [0.13.5](https://github.com/codesandbox/sandpack/compare/v0.13.4...v0.13.5) (2022-01-21)
 
 **Note:** Version bump only for package sandpack
