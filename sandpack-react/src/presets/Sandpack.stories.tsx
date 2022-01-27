@@ -151,3 +151,17 @@ export const RunnableComponent = (): React.ReactElement => (
     template="react"
   />
 );
+
+export const InitModeUserVisible: React.FC = () => {
+  return (
+    <>
+      {new Array(30).fill(" ").map(() => {
+        return (
+          <div style={{ marginBottom: 200 }}>
+            <Sandpack options={{ initMode: "user-visible" }} />
+          </div>
+        );
+      })}
+    </>
+  );
+};

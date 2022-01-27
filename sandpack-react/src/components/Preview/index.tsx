@@ -105,7 +105,6 @@ export const SandpackPreview = ({
       customStyle={{
         ...customStyle,
         ...viewportStyle,
-        display: status !== "idle" ? "flex" : "none",
       }}
     >
       {showNavigator ? (
