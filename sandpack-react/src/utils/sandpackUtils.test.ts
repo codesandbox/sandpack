@@ -1,4 +1,5 @@
 import { REACT_TEMPLATE } from "../templates/react";
+import { VANILLA_TEMPLATE } from "../templates/vanilla";
 
 import {
   getSandpackStateFromProps,
@@ -160,24 +161,6 @@ describe(getSandpackStateFromProps, () => {
   /**
    * entry file
    */
-  test("it needs to provide a entry file, when template is omitted", () => {
-    try {
-      getSandpackStateFromProps({
-        customSetup: {
-          files: {
-            "/App.js": { hidden: true, code: "" },
-            "/custom.js": { hidden: true, code: "" },
-          },
-        },
-      });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      expect(err.message).toEqual(
-        "Missing 'entry' parameter. Either specify an entry point, or pass in a package.json with the 'main' field set."
-      );
-    }
-  });
-
   test("it updates the entry file in the package.json", () => {
     const setup = getSandpackStateFromProps({
       template: "react",
@@ -264,16 +247,84 @@ describe(getSandpackStateFromProps, () => {
   /**
    * environment
    */
-  it("environment default to parcel", () => {
+  test("environment default to parcel", () => {
     const setup = getSandpackStateFromProps({});
 
     expect(setup.environment).toBe("parcel");
   });
 
-  it("environment default to the custom template environment", () => {
+  test("environment default to the custom template environment", () => {
     const setup = getSandpackStateFromProps({ template: "svelte" });
 
     expect(setup.environment).toBe("svelte");
+  });
+
+  /**
+   * Template
+   */
+  test("it defaults to a default template, when `template` is an external sandbox", () => {
+    const setup = getSandpackStateFromProps({
+      template: { sandboxId: "SANDBOX_ID" },
+    });
+
+    expect(setup.files).toEqual({
+      ...VANILLA_TEMPLATE.files,
+      "/package.json": {
+        code: `{
+  "name": "sandpack-project",
+  "main": "/src/index.js",
+  "dependencies": {},
+  "devDependencies": {}
+}`,
+      },
+    });
+  });
+
+  /**
+   * Errors handling
+   */
+  test("it needs to provide a entry file, when template is omitted", () => {
+    try {
+      getSandpackStateFromProps({
+        customSetup: {
+          files: {
+            "/App.js": { hidden: true, code: "" },
+            "/custom.js": { hidden: true, code: "" },
+          },
+        },
+      });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      expect(err.message).toEqual(
+        "Missing 'entry' parameter. Either specify an entry point, or pass in a package.json with the 'main' field set."
+      );
+    }
+  });
+
+  test("it needs to provide whether template or files", () => {
+    try {
+      getSandpackStateFromProps({
+        customSetup: {},
+      });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      expect(err.message).toEqual(
+        "When using the customSetup without a template, you must pass at least one file for sandpack to work"
+      );
+    }
+  });
+
+  test("it throws an error when the given template doesn't exist", () => {
+    try {
+      getSandpackStateFromProps({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        template: "WHATEVER",
+      });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      expect(err.message).toEqual(`Invalid template 'WHATEVER' provided.`);
+    }
   });
 });
 

@@ -4,12 +4,12 @@ import type {
 } from "@codesandbox/sandpack-client";
 import { addPackageJSONIfNeeded } from "@codesandbox/sandpack-client";
 
-import type { SandpackProviderProps } from "../contexts/sandpackContext";
 import { SANDBOX_TEMPLATES } from "../templates";
 import type {
   SandboxEnvironment,
   SandboxTemplate,
   SandpackPredefinedTemplate,
+  SandpackProviderProps,
   SandpackSetup,
 } from "../types";
 
@@ -23,8 +23,11 @@ interface SandpackContextInfo {
 export const getSandpackStateFromProps = (
   props: SandpackProviderProps
 ): SandpackContextInfo => {
+  const internalTemplate =
+    typeof props.template === "string" ? props.template : undefined;
+
   // Merge predefined template with custom setup
-  const projectSetup = getSetup(props.template, props.customSetup);
+  const projectSetup = getSetup(internalTemplate, props.customSetup);
 
   // openPaths and activePath override the setup flags
   let openPaths = props.openPaths ?? [];

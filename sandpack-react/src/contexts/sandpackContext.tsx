@@ -1,8 +1,6 @@
 import type {
-  BundlerState,
   ListenerFunction,
   SandpackBundlerFiles,
-  SandpackError,
   SandpackMessage,
   UnsubscribeFunction,
   ReactDevToolsMode,
@@ -16,13 +14,8 @@ import * as React from "react";
 
 import type {
   SandpackContext,
-  SandboxEnvironment,
-  FileResolver,
-  SandpackStatus,
-  EditorState,
-  SandpackPredefinedTemplate,
-  SandpackSetup,
-  SandpackInitMode,
+  SandpackProviderState,
+  SandpackProviderProps,
   SandboxTemplate,
 } from "../types";
 import { getSandpackStateFromProps } from "../utils/sandpackUtils";
@@ -33,52 +26,6 @@ import { generateRandomId } from "../utils/stringUtils";
  */
 const Sandpack = React.createContext<SandpackContext | null>(null);
 const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
-
-export interface SandpackProviderState {
-  files: SandpackBundlerFiles;
-  environment?: SandboxEnvironment;
-  activePath: string;
-  openPaths: string[];
-  startRoute?: string;
-  bundlerState?: BundlerState;
-  error: SandpackError | null;
-  sandpackStatus: SandpackStatus;
-  editorState: EditorState;
-  renderHiddenIframe: boolean;
-  initMode: SandpackInitMode;
-  reactDevTools?: ReactDevToolsMode;
-}
-
-export interface SandpackProviderProps {
-  sandboxId?: string;
-
-  template?: SandpackPredefinedTemplate;
-  customSetup?: SandpackSetup;
-
-  // editor state (override values)
-  activePath?: string;
-  openPaths?: string[];
-
-  // execution and recompile
-  recompileMode?: "immediate" | "delayed";
-  recompileDelay?: number;
-  autorun?: boolean;
-
-  /**
-   * This provides a way to control how some components are going to
-   * be initialized on the page. The CodeEditor and the Preview components
-   * are quite expensive and might overload the memory usage, so this gives
-   * a certain control of when to initialize them.
-   */
-  initMode?: SandpackInitMode;
-
-  // bundler options
-  bundlerURL?: string;
-  startRoute?: string;
-  skipEval?: boolean;
-  fileResolver?: FileResolver;
-  externalResources?: string[];
-}
 
 /**
  * Main context provider that should wraps your entire component.
@@ -344,8 +291,11 @@ class SandpackProvider extends React.PureComponent<
    * @hidden
    */
   componentDidMount(): void {
-    if (this.props.sandboxId) {
-      this.fetchSandbox(this.props.sandboxId, this.initializeSandpackIframe);
+    if (this.props.template && typeof this.props.template !== "string") {
+      this.fetchSandbox(
+        this.props.template.sandboxId,
+        this.initializeSandpackIframe
+      );
     } else {
       this.initializeSandpackIframe();
     }

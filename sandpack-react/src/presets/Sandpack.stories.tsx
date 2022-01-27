@@ -161,16 +161,19 @@ export const RunnableComponent = (): React.ReactElement => (
 export const ExternalSandboxes: React.FC = () => {
   return (
     <>
-      <SandpackProvider sandboxId="bx70k">
+      <SandpackProvider template={{ sandboxId: "bx70k" }}>
         <SandpackLayout>
           <SandpackCodeEditor />
           <SandpackPreview />
         </SandpackLayout>
       </SandpackProvider>
 
-      <Sandpack sandboxId="uo1h0" />
+      <Sandpack template={{ sandboxId: "uo1h0" }} />
 
-      <Sandpack options={{ activePath: "/src/App.tsx" }} sandboxId="citxd" />
+      <Sandpack
+        options={{ activePath: "/src/App.tsx" }}
+        template={{ sandboxId: "citxd" }}
+      />
     </>
   );
 };

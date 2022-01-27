@@ -11,6 +11,110 @@ import type {
 
 import type { CodeEditorProps } from ".";
 
+/**
+ * Preset types
+ */
+export interface SandpackProps {
+  files?: SandpackFiles;
+  template?: SandpackProviderProps["template"];
+  customSetup?: SandpackSetup;
+
+  theme?: SandpackThemeProp;
+  sandboxId?: string;
+
+  options?: {
+    openPaths?: string[];
+    activePath?: string;
+
+    editorWidthPercentage?: number;
+    editorHeight?: React.CSSProperties["height"];
+    classes?: Record<string, string>;
+
+    showNavigator?: boolean;
+    showLineNumbers?: boolean;
+    showInlineErrors?: boolean;
+    showTabs?: boolean;
+    closableTabs?: boolean;
+    wrapContent?: boolean;
+
+    /**
+     * This provides a way to control how some components are going to
+     * be initialized on the page. The CodeEditor and the Preview components
+     * are quite expensive and might overload the memory usage, so this gives
+     * a certain control of when to initialize them.
+     */
+    initMode?: SandpackInitMode;
+
+    bundlerURL?: string;
+    startRoute?: string;
+    skipEval?: boolean;
+    fileResolver?: FileResolver;
+    externalResources?: string[];
+
+    autorun?: boolean;
+    recompileMode?: "immediate" | "delayed";
+    recompileDelay?: number;
+    codeEditor?: SandpackCodeOptions;
+
+    /**
+     * This disables editing of content by the user in all files.
+     */
+    readOnly?: boolean;
+    /**
+     * Controls the visibility of Read-only label, which will only
+     * appears when `readOnly` is `true`
+     */
+    showReadOnly?: boolean;
+  };
+}
+
+/**
+ * Providers types
+ */
+export interface SandpackProviderState {
+  files: SandpackBundlerFiles;
+  environment?: SandboxEnvironment;
+  activePath: string;
+  openPaths: string[];
+  startRoute?: string;
+  bundlerState?: BundlerState;
+  error: SandpackError | null;
+  sandpackStatus: SandpackStatus;
+  editorState: EditorState;
+  renderHiddenIframe: boolean;
+  initMode: SandpackInitMode;
+  reactDevTools?: ReactDevToolsMode;
+}
+
+export interface SandpackProviderProps {
+  template?: SandpackPredefinedTemplate | { sandboxId: string };
+  customSetup?: SandpackSetup;
+
+  // editor state (override values)
+  activePath?: string;
+  openPaths?: string[];
+
+  // execution and recompile
+  recompileMode?: "immediate" | "delayed";
+  recompileDelay?: number;
+  autorun?: boolean;
+
+  /**
+   * This provides a way to control how some components are going to
+   * be initialized on the page. The CodeEditor and the Preview components
+   * are quite expensive and might overload the memory usage, so this gives
+   * a certain control of when to initialize them.
+   */
+  initMode?: SandpackInitMode;
+
+  // bundler options
+  bundlerURL?: string;
+  startRoute?: string;
+  skipEval?: boolean;
+  fileResolver?: FileResolver;
+  externalResources?: string[];
+}
+
 export type SandpackClientDispatch = (
   msg: SandpackMessage,
   clientId?: string
