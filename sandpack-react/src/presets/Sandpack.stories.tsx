@@ -174,3 +174,17 @@ export const ExternalSandboxes: React.FC = () => {
     </>
   );
 };
+
+export const InitModeUserVisible: React.FC = () => {
+  return (
+    <>
+      {new Array(30).fill(" ").map(() => {
+        return (
+          <div style={{ marginBottom: 200 }}>
+            <Sandpack options={{ initMode: "user-visible" }} />
+          </div>
+        );
+      })}
+    </>
+  );
+};

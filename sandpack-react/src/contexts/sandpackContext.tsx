@@ -292,7 +292,7 @@ class SandpackProvider extends React.PureComponent<
 
     const observerOptions = {
       rootMargin: "600px 0px",
-      threshold: 0.2,
+      threshold: 0.4,
     };
 
     if (this.intersectionObserver && this.lazyAnchorRef.current) {
@@ -524,6 +524,8 @@ class SandpackProvider extends React.PureComponent<
     } else {
       delete this.preregisteredIframes[clientId];
     }
+
+    this.setState({ sandpackStatus: "idle" });
   };
 
   /**

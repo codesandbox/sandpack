@@ -45,8 +45,7 @@ export const useLoadingOverlayState = (
       clearTimeout(innerHook);
       unsub();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [clientId, sandpack.status === "idle"]);
 
   if (sandpack.status === "timeout") {
     return "timeout";

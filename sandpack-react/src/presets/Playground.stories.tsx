@@ -1,9 +1,9 @@
 import {
+  Sandpack,
+  SandpackPreview,
   SandpackProvider,
   SandpackLayout,
   SandpackCodeEditor,
-  SandpackPreview,
-  Sandpack,
 } from "../";
 
 import { FileExplorer } from "../components/FileExplorer";
