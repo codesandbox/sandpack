@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.9-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.8...v0.13.9-experimental.0) (2022-01-27)
+
+
+
+## [0.13.6-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.5...v0.13.6-experimental.0) (2022-01-24)
+
+
+
+## [0.13.3-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3-experimental.0) (2022-01-20)
+
+
+
+## [0.10.13-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.12...v0.10.13-experimental.0) (2022-01-07)
+
+
+
+## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.7-experimental.0) (2022-01-05)
+
+**Note:** Version bump only for package sandpack-docs
+
+
+
+
+
 ## [0.13.6-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.5...v0.13.6-experimental.0) (2022-01-24)
 
 
