@@ -116,13 +116,13 @@ export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
     { tag: tags.comment, ...getSyntaxStyle(theme.syntax.comment) },
   ]);
 
-export const getCodeMirrorLanguage = (
+type SandpackLanguageSupport = "javascript" | "typescript" | "html" | "css";
+
+export const getLanguageFromFile = (
   filePath?: string,
   fileType?: string
-): LanguageSupport => {
-  if (!filePath && !fileType) {
-    return javascript();
-  }
+): SandpackLanguageSupport => {
+  if (!filePath && !fileType) return "javascript";
 
   let extension = fileType;
   if (!extension && filePath) {
@@ -133,21 +133,34 @@ export const getCodeMirrorLanguage = (
   switch (extension) {
     case "js":
     case "jsx":
-      return javascript({ jsx: true, typescript: false });
+      return "javascript";
     case "ts":
     case "tsx":
-      return javascript({ jsx: true, typescript: true });
-    case "vue":
+      return "typescript";
     case "html":
     case "svelte":
-      return html();
+    case "vue":
+      return "html";
     case "css":
-    case "scss":
     case "less":
-      return css();
+    case "scss":
+      return "css";
     default:
-      return javascript();
+      return "javascript";
   }
+};
+
+export const getCodeMirrorLanguage = (
+  extension: SandpackLanguageSupport
+): LanguageSupport => {
+  const options: Record<SandpackLanguageSupport, LanguageSupport> = {
+    javascript: javascript({ jsx: true, typescript: false }),
+    typescript: javascript({ jsx: true, typescript: true }),
+    html: html(),
+    css: css(),
+  };
+
+  return options[extension];
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

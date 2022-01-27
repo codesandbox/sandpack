@@ -42,7 +42,7 @@ describe(getSandpackStateFromProps, () => {
   /**
    * activePath
    */
-  test("it retuns the main file in case activePath doesn't exist", () => {
+  test("it returns the main file in case activePath doesn't exist", () => {
     const setup = getSandpackStateFromProps({
       template: "react",
       activePath: "NO_EXIST.js",
@@ -208,28 +208,73 @@ describe(getSandpackStateFromProps, () => {
    * openPaths
    */
   test("should not show invalid files into `openPaths`", () => {
-    const output = getSandpackStateFromProps({
+    const setup = getSandpackStateFromProps({
       template: "react",
       openPaths: ["/App.js", "not-exist.js"],
     });
 
-    expect(output.openPaths).toEqual(["/App.js"]);
+    expect(setup.openPaths).toEqual(["/App.js"]);
   });
 
   /**
-   * main file
+   * main file (will be deprecated)
    */
-  // TODO
+  test("it uses main as activePath", () => {
+    const setup = getSandpackStateFromProps({
+      template: "react",
+      customSetup: {
+        main: "myfile.js",
+        files: { "myfile.js": "" },
+      },
+    });
+
+    expect(setup.activePath).toEqual("myfile.js");
+  });
 
   /**
    * dependencies
    */
-  // TODO
+  test("it creates a package.json with the dependencies", () => {
+    const setup = getSandpackStateFromProps({
+      customSetup: {
+        entry: "index.js",
+        files: { "index.js": "" },
+        dependencies: { foo: "*" },
+      },
+    });
+
+    const packageContent = JSON.parse(setup.files["/package.json"].code);
+    expect(packageContent.dependencies).toEqual({ foo: "*" });
+  });
+
+  test("it defatuls to a package.json", () => {
+    const setup = getSandpackStateFromProps({
+      customSetup: {
+        entry: "index.js",
+        files: {
+          "index.js": "",
+        },
+      },
+    });
+
+    const packageContent = JSON.parse(setup.files["/package.json"].code);
+    expect(packageContent.dependencies).toEqual({});
+  });
 
   /**
    * environment
    */
-  // TODO
+  it("environment default to parcel", () => {
+    const setup = getSandpackStateFromProps({});
+
+    expect(setup.environment).toBe("parcel");
+  });
+
+  it("environment default to the custom template environment", () => {
+    const setup = getSandpackStateFromProps({ template: "svelte" });
+
+    expect(setup.environment).toBe("svelte");
+  });
 });
 
 describe(createSetupFromUserInput, () => {
