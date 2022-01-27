@@ -2,8 +2,16 @@
   "name": "sandpack",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["sandpack-client", "sandpack-react", "website/*", "plugins/*"],
-  "nohoist": ["website/docs/**", "**/html-minifier-terser"],
+  "workspaces": [
+    "sandpack-client",
+    "sandpack-react",
+    "website/*",
+    "plugins/*"
+  ],
+  "nohoist": [
+    "website/docs/**",
+    "**/html-minifier-terser"
+  ],
   "description": "",
   "scripts": {
     "lint": "eslint '**/*.ts?(x)' --fix",
@@ -33,6 +41,7 @@
     "@babel/preset-typescript": "^7.16.5",
     "@cypress/snapshot": "^2.1.7",
     "@octokit/rest": "^18.12.0",
+    "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
     "babel-eslint": "^10.0.0",

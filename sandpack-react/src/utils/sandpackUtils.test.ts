@@ -3,7 +3,40 @@ import { REACT_TEMPLATE } from "../templates/react";
 import {
   getSandpackStateFromProps,
   createSetupFromUserInput,
+  resolveFile,
 } from "./sandpackUtils";
+
+describe(resolveFile, () => {
+  test("it resolves the file path based on the extension", () => {
+    const data = resolveFile("/file.js", { "/file.ts": "" });
+
+    expect(data).toBe("/file.ts");
+  });
+
+  test("it adds the leading slash and resolves the file path", () => {
+    const data = resolveFile("file.js", { "/file.js": "" });
+
+    expect(data).toBe("/file.js");
+  });
+
+  test("it resolves the file path without leading slash", () => {
+    const data = resolveFile("file.ts", { "file.js": "" });
+
+    expect(data).toBe("file.js");
+  });
+
+  test("it removes the leading slash and resolves the file path", () => {
+    const data = resolveFile("/file.js", { "file.js": "" });
+
+    expect(data).toBe("file.js");
+  });
+
+  test("it fixes (add/remove) the leading slash and fixes the extension", () => {
+    const data = resolveFile("/file.ts", { "file.js": "" });
+
+    expect(data).toBe("file.js");
+  });
+});
 
 describe(getSandpackStateFromProps, () => {
   /**
@@ -140,7 +173,7 @@ describe(getSandpackStateFromProps, () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       expect(err.message).toEqual(
-        "undefined was set as the active file but was not provided"
+        "Missing 'entry' parameter. Either specify an entry point, or pass in a package.json with the 'main' field set."
       );
     }
   });
@@ -156,6 +189,19 @@ describe(getSandpackStateFromProps, () => {
 
     const packageContent = JSON.parse(setup.files["/package.json"].code);
     expect(packageContent.main).toBe("foo.ts");
+  });
+
+  test("it resolves the entry file, even when the extension is wrong", () => {
+    const setup = getSandpackStateFromProps({
+      template: "react",
+      customSetup: {
+        entry: "entry.ts",
+        files: { "entry.js": "" },
+      },
+    });
+
+    const packageContent = JSON.parse(setup.files["/package.json"].code);
+    expect(packageContent.main).toBe("entry.js");
   });
 
   /**

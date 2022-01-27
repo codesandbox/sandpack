@@ -13,7 +13,7 @@ import type {
   SandpackSetup,
 } from "../types";
 
-export interface SandpackContextInfo {
+interface SandpackContextInfo {
   activePath: string;
   openPaths: string[];
   files: Record<string, SandpackBundlerFile>;
@@ -65,6 +65,20 @@ export const getSandpackStateFromProps = (
     }, []);
   }
 
+  // Make sure it resolves the entry file
+  if (!projectSetup.files[projectSetup.entry]) {
+    /* eslint-disable */
+    // @ts-ignore
+    projectSetup.entry = resolveFile(projectSetup.entry, projectSetup.files);
+    /* eslint-enable */
+  }
+
+  // Make sure it resolves the main file
+  if (!projectSetup.files[projectSetup.main]) {
+    projectSetup.main =
+      resolveFile(projectSetup.main, projectSetup.files) || projectSetup.entry;
+  }
+
   // If no activePath is specified, use the first open file
   if (!activePath || !projectSetup.files[activePath]) {
     activePath = projectSetup.main || openPaths[0];
@@ -75,12 +89,6 @@ export const getSandpackStateFromProps = (
     openPaths.push(activePath);
   }
 
-  if (!projectSetup.files[activePath]) {
-    throw new Error(
-      `${activePath} was set as the active file but was not provided`
-    );
-  }
-
   const files = addPackageJSONIfNeeded(
     projectSetup.files,
     projectSetup.dependencies || {},
@@ -88,21 +96,62 @@ export const getSandpackStateFromProps = (
     projectSetup.entry
   );
 
-  const environment = projectSetup.environment;
-  const existOpenPath = openPaths.filter((file) => files[file]);
+  const existOpenPath = openPaths.filter((path) => files[path]);
 
-  return { openPaths: existOpenPath, activePath, files, environment };
+  return {
+    openPaths: existOpenPath,
+    activePath,
+    files,
+    environment: projectSetup.environment,
+  };
 };
 
-// The template is predefined (eg: react, vue, vanilla)
-// The setup can overwrite anything from the template (eg: files, dependencies, environment, etc.)
+export const resolveFile = (
+  path: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  files: Record<string, any>
+): string | undefined => {
+  if (!path) return undefined;
+
+  let resolvedPath = undefined;
+
+  let index = 0;
+  const strategies = [".js", ".jsx", ".ts", ".tsx"];
+  const leadingSlash = Object.keys(files).every((file) => file.startsWith("/"));
+
+  while (!resolvedPath && index < strategies.length) {
+    const slashPath = (): string => {
+      if (path.startsWith("/")) {
+        return leadingSlash ? path : path.replace(/^\/+/, "");
+      }
+
+      return leadingSlash ? `/${path}` : path;
+    };
+    const removeExtension = slashPath().split(".")[0];
+    const attemptPath = `${removeExtension}${strategies[index]}`;
+
+    if (files[attemptPath] !== undefined) {
+      resolvedPath = attemptPath;
+    }
+
+    index++;
+  }
+
+  return resolvedPath;
+};
+
+/**
+ * The template is predefined (eg: react, vue, vanilla)
+ * The setup can overwrite anything from the template (eg: files, dependencies, environment, etc.)
+ */
 export const getSetup = (
   template?: SandpackPredefinedTemplate,
   inputSetup?: SandpackSetup
 ): SandboxTemplate => {
-  // The input setup might have files in the simple form Record<string, string>
-  // so we convert them to the sandbox template format
-
+  /**
+   * The input setup might have files in the simple form Record<string, string>
+   * so we convert them to the sandbox template format
+   */
   const setup = createSetupFromUserInput(inputSetup);
 
   if (!template) {

@@ -11,8 +11,8 @@ import {
   SandpackClient,
   extractErrorDetails,
 } from "@codesandbox/sandpack-client";
-import * as React from "react";
 import isEqual from "lodash.isequal";
+import * as React from "react";
 
 import type {
   SandpackContext,
@@ -23,6 +23,7 @@ import type {
   SandpackPredefinedTemplate,
   SandpackSetup,
   SandpackInitMode,
+  SandboxTemplate,
 } from "../types";
 import { getSandpackStateFromProps } from "../utils/sandpackUtils";
 import { generateRandomId } from "../utils/stringUtils";
@@ -49,6 +50,8 @@ export interface SandpackProviderState {
 }
 
 export interface SandpackProviderProps {
+  sandboxId?: string;
+
   template?: SandpackPredefinedTemplate;
   customSetup?: SandpackSetup;
 
@@ -144,6 +147,7 @@ class SandpackProvider extends React.PureComponent<
      * - A client already exists, set a new listener and then one more client has been created;
      */
     this.queuedListeners = { global: {} };
+
     /**
      * Global list of unsubscribe function for the listeners
      */
@@ -249,6 +253,41 @@ class SandpackProvider extends React.PureComponent<
   /**
    * @hidden
    */
+  fetchSandbox = async (
+    sandboxId: string,
+    onDone: () => void
+  ): Promise<void> => {
+    const customSetup: SandboxTemplate & { is_sse: boolean } = await fetch(
+      `https://codesandbox.io/api/v1/sandboxes/csb-id-${sandboxId}/sandpack`
+    )
+      .then((data) => data.json())
+      .catch(() => {
+        console.error(
+          `Something went wrong while fetching \`${sandboxId}\` sandbox`
+        );
+      });
+
+    if (customSetup.is_sse) {
+      throw Error("Sandpack doesn't support sandboxes that runs on server.");
+    }
+
+    const { activePath, openPaths, files, environment } =
+      getSandpackStateFromProps({ customSetup });
+
+    this.setState(
+      {
+        files,
+        environment,
+        activePath: this.props.activePath || activePath,
+        openPaths: this.props.openPaths || openPaths,
+      },
+      onDone
+    );
+  };
+
+  /**
+   * @hidden
+   */
   initializeSandpackIframe(): void {
     if (!this.props.autorun) {
       return;
@@ -305,7 +344,11 @@ class SandpackProvider extends React.PureComponent<
    * @hidden
    */
   componentDidMount(): void {
-    this.initializeSandpackIframe();
+    if (this.props.sandboxId) {
+      this.fetchSandbox(this.props.sandboxId, this.initializeSandpackIframe);
+    } else {
+      this.initializeSandpackIframe();
+    }
   }
 
   /**

@@ -24,6 +24,7 @@ export interface SandpackProps {
   customSetup?: SandpackSetup;
 
   theme?: SandpackThemeProp;
+  sandboxId?: string;
 
   options?: {
     openPaths?: string[];
@@ -39,6 +40,7 @@ export interface SandpackProps {
     showTabs?: boolean;
     closableTabs?: boolean;
     wrapContent?: boolean;
+
     /**
      * This provides a way to control how some components are going to
      * be initialized on the page. The CodeEditor and the Preview components
@@ -126,6 +128,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
   return (
     <SandpackProvider
       customSetup={userInputSetup}
+      sandboxId={props.sandboxId}
       template={props.template}
       {...providerOptions}
     >
