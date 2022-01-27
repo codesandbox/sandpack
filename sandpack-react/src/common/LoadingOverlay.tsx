@@ -48,13 +48,7 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
   }
 
   return (
-    <div
-      className={c("overlay", "loading")}
-      style={{
-        opacity: loadingOverlayState === "visible" ? 1 : 0,
-        transition: "opacity 0.5s ease-out",
-      }}
-    >
+    <div className={c("overlay", "loading", loadingOverlayState)}>
       <div className="sp-cube-wrapper" title="Open in CodeSandbox">
         <OpenInCodeSandboxButton />
         <div className="sp-cube">
