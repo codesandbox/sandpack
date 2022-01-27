@@ -28,6 +28,9 @@
   --sp-space-8: 32px;
   --sp-border-radius: 4px;
 
+  --sp-loading-transition: opacity 0.5s ease-out;
+  --sp-loading-opacity: 0;
+
   all: initial;
 
   font-size: var(--sp-font-size);
@@ -370,7 +373,13 @@
 
 .sp-loading {
   background-color: var(--sp-colors-bg-default);
+  transition: var(--sp-loading-transition);
+  opacity: var(--sp-loading-opacity);
   z-index: 5;
+}
+
+.sp-visible {
+  opacity: 1;
 }
 
 .sp-cube-wrapper {
