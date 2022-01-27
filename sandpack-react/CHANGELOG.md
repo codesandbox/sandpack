@@ -3,233 +3,154 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.13.6-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.5...v0.13.6-experimental.0) (2022-01-24)
+## [0.13.8](https://github.com/codesandbox/sandpack/compare/v0.13.7...v0.13.8) (2022-01-27)
 
+### Bug Fixes
 
+- **codemirror:** adds language extension as classname ([#334](https://github.com/codesandbox/sandpack/issues/334)) ([9155a1e](https://github.com/codesandbox/sandpack/commit/9155a1e36b380113533b6db54272b8b06a4ab5fa))
+- **init-mode:** reset bundler state on unmount ([#337](https://github.com/codesandbox/sandpack/issues/337)) ([98d4745](https://github.com/codesandbox/sandpack/commit/98d4745563b9e022cef030fb61df957910781555))
+
+## [0.13.7](https://github.com/codesandbox/sandpack/compare/v0.13.6...v0.13.7) (2022-01-26)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+## [0.13.6](https://github.com/codesandbox/sandpack/compare/v0.13.5...v0.13.6) (2022-01-26)
+
+### Bug Fixes
+
+- **editorstate:** watch changes on files instead of each method ([#333](https://github.com/codesandbox/sandpack/issues/333)) ([75ebadb](https://github.com/codesandbox/sandpack/commit/75ebadb6bab1fa7c0ed0a4eff507fc432dd91844))
+
+## [0.13.5](https://github.com/codesandbox/sandpack/compare/v0.13.4...v0.13.5) (2022-01-21)
 
 ## [0.13.3-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3-experimental.0) (2022-01-20)
 
-
-
 ## [0.10.13-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.12...v0.10.13-experimental.0) (2022-01-07)
-
 
 ### Bug Fixes
 
-* **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([60fd43a](https://github.com/codesandbox/sandpack/commit/60fd43a3ffc62ef672660d3176ff51b6f8465f47))
-
-
+- **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([60fd43a](https://github.com/codesandbox/sandpack/commit/60fd43a3ffc62ef672660d3176ff51b6f8465f47))
 
 ## [0.10.11-experimental.4](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.3...v0.10.11-experimental.4) (2022-01-06)
 
-
 ### Bug Fixes
 
-* rename method name ([cf1162c](https://github.com/codesandbox/sandpack/commit/cf1162ce942b1d9151cd1ede7e5121920d7acae7))
-
-
+- rename method name ([cf1162c](https://github.com/codesandbox/sandpack/commit/cf1162ce942b1d9151cd1ede7e5121920d7acae7))
 
 ## [0.10.11-experimental.3](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.2...v0.10.11-experimental.3) (2022-01-06)
 
-
 ### Features
 
-* **devtools:** add on load method ([99f1f32](https://github.com/codesandbox/sandpack/commit/99f1f321c57e36e4085bc8be7053acc53238dfbb))
-
-
+- **devtools:** add on load method ([99f1f32](https://github.com/codesandbox/sandpack/commit/99f1f321c57e36e4085bc8be7053acc53238dfbb))
 
 ## [0.10.11-experimental.2](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.1...v0.10.11-experimental.2) (2022-01-05)
 
-
 ### Bug Fixes
 
-* unsubscribe function ([1501032](https://github.com/codesandbox/sandpack/commit/1501032a342f351c6a2d8b0dee437d6609baeca5))
-
-
+- unsubscribe function ([1501032](https://github.com/codesandbox/sandpack/commit/1501032a342f351c6a2d8b0dee437d6609baeca5))
 
 ## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
 
-
-
 ## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.7-experimental.0) (2022-01-05)
-
 
 ### Bug Fixes
 
-* **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
-
-
-
-
+- **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
 
 ## [0.13.5](https://github.com/codesandbox/sandpack/compare/v0.13.4...v0.13.5) (2022-01-21)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
 
-
-
-
-
 ## [0.13.4](https://github.com/codesandbox/sandpack/compare/v0.13.3...v0.13.4) (2022-01-20)
-
 
 ### Bug Fixes
 
-* **scrollbar:** remove hijack custom style ([#315](https://github.com/codesandbox/sandpack/issues/315)) ([5781e97](https://github.com/codesandbox/sandpack/commit/5781e974d0fd410394efac20cb11530ade6cfd8d))
-
-
-
-
+- **scrollbar:** remove hijack custom style ([#315](https://github.com/codesandbox/sandpack/issues/315)) ([5781e97](https://github.com/codesandbox/sandpack/commit/5781e974d0fd410394efac20cb11530ade6cfd8d))
 
 ## [0.13.3](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3) (2022-01-20)
 
-
 ### Bug Fixes
 
-* **calculateNearestUniquePath:** ensures unique paths ([#311](https://github.com/codesandbox/sandpack/issues/311)) ([a337269](https://github.com/codesandbox/sandpack/commit/a33726914e22c5b009c3ad5a5a6a7976ea29fd3f))
-
-
-
-
+- **calculateNearestUniquePath:** ensures unique paths ([#311](https://github.com/codesandbox/sandpack/issues/311)) ([a337269](https://github.com/codesandbox/sandpack/commit/a33726914e22c5b009c3ad5a5a6a7976ea29fd3f))
 
 ## [0.13.2](https://github.com/codesandbox/sandpack/compare/v0.13.1...v0.13.2) (2022-01-20)
 
-
 ### Bug Fixes
 
-* **codemirror:** shift approach to remove placeholder ([#310](https://github.com/codesandbox/sandpack/issues/310)) ([4021b16](https://github.com/codesandbox/sandpack/commit/4021b16f956b52ed14e8fbb8b4c1784a5b43a1f8))
-
-
-
-
+- **codemirror:** shift approach to remove placeholder ([#310](https://github.com/codesandbox/sandpack/issues/310)) ([4021b16](https://github.com/codesandbox/sandpack/commit/4021b16f956b52ed14e8fbb8b4c1784a5b43a1f8))
 
 ## [0.10.13-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.12...v0.10.13-experimental.0) (2022-01-07)
 
-
 ### Bug Fixes
 
-* **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([60fd43a](https://github.com/codesandbox/sandpack/commit/60fd43a3ffc62ef672660d3176ff51b6f8465f47))
-
-
+- **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([60fd43a](https://github.com/codesandbox/sandpack/commit/60fd43a3ffc62ef672660d3176ff51b6f8465f47))
 
 ## [0.10.11-experimental.4](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.3...v0.10.11-experimental.4) (2022-01-06)
 
-
 ### Bug Fixes
 
-* rename method name ([cf1162c](https://github.com/codesandbox/sandpack/commit/cf1162ce942b1d9151cd1ede7e5121920d7acae7))
-
-
+- rename method name ([cf1162c](https://github.com/codesandbox/sandpack/commit/cf1162ce942b1d9151cd1ede7e5121920d7acae7))
 
 ## [0.10.11-experimental.3](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.2...v0.10.11-experimental.3) (2022-01-06)
 
-
 ### Features
 
-* **devtools:** add on load method ([99f1f32](https://github.com/codesandbox/sandpack/commit/99f1f321c57e36e4085bc8be7053acc53238dfbb))
-
-
+- **devtools:** add on load method ([99f1f32](https://github.com/codesandbox/sandpack/commit/99f1f321c57e36e4085bc8be7053acc53238dfbb))
 
 ## [0.10.11-experimental.2](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.1...v0.10.11-experimental.2) (2022-01-05)
 
-
 ### Bug Fixes
 
-* unsubscribe function ([1501032](https://github.com/codesandbox/sandpack/commit/1501032a342f351c6a2d8b0dee437d6609baeca5))
-
-
+- unsubscribe function ([1501032](https://github.com/codesandbox/sandpack/commit/1501032a342f351c6a2d8b0dee437d6609baeca5))
 
 ## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
 
-
-
 ## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.7-experimental.0) (2022-01-05)
-
 
 ### Bug Fixes
 
-* **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
-
-
-
-
+- **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
 
 ## [0.13.2](https://github.com/codesandbox/sandpack/compare/v0.13.1...v0.13.2) (2022-01-20)
 
-
 ### Bug Fixes
 
-* **codemirror:** shift approach to remove placeholder ([#310](https://github.com/codesandbox/sandpack/issues/310)) ([4021b16](https://github.com/codesandbox/sandpack/commit/4021b16f956b52ed14e8fbb8b4c1784a5b43a1f8))
-
-
-
-
+- **codemirror:** shift approach to remove placeholder ([#310](https://github.com/codesandbox/sandpack/issues/310)) ([4021b16](https://github.com/codesandbox/sandpack/commit/4021b16f956b52ed14e8fbb8b4c1784a5b43a1f8))
 
 ## [0.13.1](https://github.com/codesandbox/sandpack/compare/v0.13.0...v0.13.1) (2022-01-14)
 
-
 ### Bug Fixes
 
-* **ui:** visual regression ([#304](https://github.com/codesandbox/sandpack/issues/304)) ([ced8b49](https://github.com/codesandbox/sandpack/commit/ced8b492e52c6db8565e66c228ee4c2bd85b3ef8))
-
-
-
-
+- **ui:** visual regression ([#304](https://github.com/codesandbox/sandpack/issues/304)) ([ced8b49](https://github.com/codesandbox/sandpack/commit/ced8b492e52c6db8565e66c228ee4c2bd85b3ef8))
 
 # [0.13.0](https://github.com/codesandbox/sandpack/compare/v0.12.0...v0.13.0) (2022-01-14)
 
-
 ### Features
 
-* **files:** read-only mode ([#300](https://github.com/codesandbox/sandpack/issues/300)) ([9d5d1bf](https://github.com/codesandbox/sandpack/commit/9d5d1bfc3ac0d21d57958ee61057a706762701f2))
-
-
-
-
+- **files:** read-only mode ([#300](https://github.com/codesandbox/sandpack/issues/300)) ([9d5d1bf](https://github.com/codesandbox/sandpack/commit/9d5d1bfc3ac0d21d57958ee61057a706762701f2))
 
 # [0.12.0](https://github.com/codesandbox/sandpack/compare/v0.11.0...v0.12.0) (2022-01-11)
 
-
 ### Features
 
-* **codeeditor:** support to extensions ([#286](https://github.com/codesandbox/sandpack/issues/286)) ([47e73a9](https://github.com/codesandbox/sandpack/commit/47e73a94e072e544c4be692810c736547a4ef6f9))
-
-
-
-
+- **codeeditor:** support to extensions ([#286](https://github.com/codesandbox/sandpack/issues/286)) ([47e73a9](https://github.com/codesandbox/sandpack/commit/47e73a94e072e544c4be692810c736547a4ef6f9))
 
 # [0.11.0](https://github.com/codesandbox/sandpack/compare/v0.10.12...v0.11.0) (2022-01-11)
 
-
 ### Features
 
-* **icons:** export sandpack icons ([#288](https://github.com/codesandbox/sandpack/issues/288)) ([ec184f7](https://github.com/codesandbox/sandpack/commit/ec184f750c2852236ef92e949a089beaac31a308))
-
-
-
-
+- **icons:** export sandpack icons ([#288](https://github.com/codesandbox/sandpack/issues/288)) ([ec184f7](https://github.com/codesandbox/sandpack/commit/ec184f750c2852236ef92e949a089beaac31a308))
 
 ## [0.10.12](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.12) (2022-01-07)
 
-
 ### Bug Fixes
 
-* **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([8a8bc11](https://github.com/codesandbox/sandpack/commit/8a8bc11d160b48225f7f3ec52c3f339f1aa3745e))
-
-
-
-
+- **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([8a8bc11](https://github.com/codesandbox/sandpack/commit/8a8bc11d160b48225f7f3ec52c3f339f1aa3745e))
 
 ## [0.10.11](https://github.com/codesandbox/sandpack/compare/v0.10.10...v0.10.11) (2022-01-05)
 
-
 ### Bug Fixes
 
-* **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([60fd43a](https://github.com/codesandbox/sandpack/commit/60fd43a3ffc62ef672660d3176ff51b6f8465f47))
-
-
-
-
+- **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([60fd43a](https://github.com/codesandbox/sandpack/commit/60fd43a3ffc62ef672660d3176ff51b6f8465f47))
 
 ## [0.10.12](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.12) (2022-01-07)
 

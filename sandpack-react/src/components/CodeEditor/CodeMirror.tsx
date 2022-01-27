@@ -35,6 +35,7 @@ import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
 import {
   getCodeMirrorLanguage,
+  getLanguageFromFile,
   getEditorTheme,
   getSyntaxHighlight,
   useCombinedRefs,
@@ -75,6 +76,9 @@ interface CodeMirrorProps {
    * appears when `readOnly` is `true`
    */
   showReadOnly?: boolean;
+  /**
+   * Provides a way to draw or style a piece of the content.
+   */
   decorators?: Decorators;
   initMode: SandpackInitMode;
   id?: string;
@@ -140,6 +144,9 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       }
     }, [initMode, isIntersecting]);
 
+    const languageExtension = getLanguageFromFile(filePath, fileType);
+    const langSupport = getCodeMirrorLanguage(languageExtension);
+
     React.useEffect(() => {
       if (!wrapper.current || !shouldInitEditor) return;
 
@@ -148,8 +155,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
        * waiting for "postTask scheduler" API be ready
        */
       const timer = setTimeout(function delayCodeEditorInit() {
-        const langSupport = getCodeMirrorLanguage(filePath, fileType);
-
         const customCommandsKeymap: KeyBinding[] = [
           {
             key: "Tab",
@@ -355,7 +360,11 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
     if (readOnly) {
       return (
-        <pre ref={combinedRef} className={c("cm", editorState)} translate="no">
+        <pre
+          ref={combinedRef}
+          className={c("cm", editorState, languageExtension)}
+          translate="no"
+        >
           <code className={c("pre-placeholder")}>{code}</code>
 
           {readOnly && showReadOnly && (
@@ -374,7 +383,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
-        className={c("cm", editorState)}
+        className={c("cm", editorState, languageExtension)}
         onKeyDown={handleContainerKeyDown}
         role="group"
         tabIndex={0}

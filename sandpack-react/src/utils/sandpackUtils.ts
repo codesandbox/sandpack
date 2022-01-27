@@ -66,7 +66,7 @@ export const getSandpackStateFromProps = (
   }
 
   // If no activePath is specified, use the first open file
-  if (!activePath) {
+  if (!activePath || !projectSetup.files[activePath]) {
     activePath = projectSetup.main || openPaths[0];
   }
 

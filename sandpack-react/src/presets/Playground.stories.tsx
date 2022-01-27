@@ -1,22 +1,27 @@
-import { Sandpack } from "./Sandpack";
+import {
+  Sandpack,
+  SandpackPreview,
+  SandpackProvider,
+  SandpackLayout,
+} from "../";
 
 export default {
   title: "Playground",
-  component: Sandpack,
 };
-
-const code = `export default function App() {
-  return '12312312';
-};
-`;
 
 export const Main = (): JSX.Element => {
   return (
-    <Sandpack
-      customSetup={{ entry: "/index.tsx", main: "/App.tsx" }}
-      files={{ "/App.tsx": { code, readOnly: true } }}
-      options={{ showTabs: true }}
-      template="react-ts"
-    />
+    <>
+      {new Array(30).fill(" ").map(() => {
+        return (
+          <SandpackProvider initMode="user-visible">
+            <SandpackLayout>
+              <SandpackPreview />
+            </SandpackLayout>
+          </SandpackProvider>
+        );
+        return <Sandpack options={{ initMode: "lazy" }} />;
+      })}
+    </>
   );
 };

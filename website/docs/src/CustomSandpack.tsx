@@ -5,7 +5,11 @@ import {
 import React from "react";
 
 const Sandpack: React.FC = (props) => (
-  <SandpackDefault theme="sandpack-dark" {...props} />
+  <SandpackDefault
+    options={{ editorHeight: 400, ...(props?.options ?? {}) }}
+    theme="sandpack-dark"
+    {...props}
+  />
 );
 
 const SandpackLayout: React.FC = (props) => (
