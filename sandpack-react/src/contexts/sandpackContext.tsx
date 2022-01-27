@@ -11,8 +11,8 @@ import {
   SandpackClient,
   extractErrorDetails,
 } from "@codesandbox/sandpack-client";
-import * as React from "react";
 import isEqual from "lodash.isequal";
+import * as React from "react";
 
 import type {
   SandpackContext,
@@ -253,7 +253,10 @@ class SandpackProvider extends React.PureComponent<
   /**
    * @hidden
    */
-  fetchSandbox = async (sandboxId: string, onDone: () => void) => {
+  fetchSandbox = async (
+    sandboxId: string,
+    onDone: () => void
+  ): Promise<void> => {
     const customSetup: SandboxTemplate & { is_sse: boolean } = await fetch(
       `https://codesandbox.io/api/v1/sandboxes/csb-id-${sandboxId}/sandpack`
     )

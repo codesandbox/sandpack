@@ -170,7 +170,7 @@ export const ExternalSandboxes: React.FC = () => {
 
       <Sandpack sandboxId="uo1h0" />
 
-      <Sandpack sandboxId="citxd" options={{ activePath: "/src/App.tsx" }} />
+      <Sandpack options={{ activePath: "/src/App.tsx" }} sandboxId="citxd" />
     </>
   );
 };

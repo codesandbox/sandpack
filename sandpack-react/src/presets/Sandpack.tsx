@@ -128,8 +128,8 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
   return (
     <SandpackProvider
       customSetup={userInputSetup}
-      template={props.template}
       sandboxId={props.sandboxId}
+      template={props.template}
       {...providerOptions}
     >
       <ClasserProvider classes={props.options?.classes}>

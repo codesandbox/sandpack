@@ -67,8 +67,10 @@ export const getSandpackStateFromProps = (
 
   // Make sure it resolves the entry file
   if (!projectSetup.files[projectSetup.entry]) {
+    /* eslint-disable */
     // @ts-ignore
     projectSetup.entry = resolveFile(projectSetup.entry, projectSetup.files);
+    /* eslint-enable */
   }
 
   // Make sure it resolves the main file
@@ -106,6 +108,7 @@ export const getSandpackStateFromProps = (
 
 export const resolveFile = (
   path: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   files: Record<string, any>
 ): string | undefined => {
   if (!path) return undefined;
@@ -117,7 +120,7 @@ export const resolveFile = (
   const leadingSlash = Object.keys(files).every((file) => file.startsWith("/"));
 
   while (!resolvedPath && index < strategies.length) {
-    const slashPath = () => {
+    const slashPath = (): string => {
       if (path.startsWith("/")) {
         return leadingSlash ? path : path.replace(/^\/+/, "");
       }
