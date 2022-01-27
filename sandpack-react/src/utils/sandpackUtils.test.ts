@@ -46,7 +46,9 @@ describe(getSandpackStateFromProps, () => {
   test("it returns the main file in case activePath doesn't exist", () => {
     const setup = getSandpackStateFromProps({
       template: "react",
-      activePath: "NO_EXIST.js",
+      options: {
+        activePath: "NO_EXIST.js",
+      },
     });
 
     expect(setup.activePath).not.toBe("NO_EXIST.js");
@@ -69,7 +71,9 @@ describe(getSandpackStateFromProps, () => {
   test("show activePath even when it's hidden", () => {
     const setup = getSandpackStateFromProps({
       template: "react",
-      activePath: "/App.js",
+      options: {
+        activePath: "/App.js",
+      },
       customSetup: {
         files: {
           "/App.js": { hidden: true, code: "" },
@@ -84,7 +88,9 @@ describe(getSandpackStateFromProps, () => {
   test("activePath overrides the customSetup.main", () => {
     const setup = getSandpackStateFromProps({
       template: "react",
-      activePath: "/App.js",
+      options: {
+        activePath: "/App.js",
+      },
       customSetup: {
         main: "/custom.js",
         files: {
@@ -193,7 +199,9 @@ describe(getSandpackStateFromProps, () => {
   test("should not show invalid files into `openPaths`", () => {
     const setup = getSandpackStateFromProps({
       template: "react",
-      openPaths: ["/App.js", "not-exist.js"],
+      options: {
+        openPaths: ["/App.js", "not-exist.js"],
+      },
     });
 
     expect(setup.openPaths).toEqual(["/App.js"]);
