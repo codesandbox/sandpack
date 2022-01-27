@@ -6,19 +6,17 @@ import { addPackageJSONIfNeeded } from "@codesandbox/sandpack-client";
 
 import { SANDBOX_TEMPLATES } from "../templates";
 import type {
-  SandboxEnvironment,
+  SandpackProviderState,
   SandboxTemplate,
   SandpackPredefinedTemplate,
   SandpackProviderProps,
   SandpackSetup,
 } from "../types";
 
-interface SandpackContextInfo {
-  activePath: string;
-  openPaths: string[];
-  files: Record<string, SandpackBundlerFile>;
-  environment: SandboxEnvironment;
-}
+type SandpackContextInfo = Pick<
+  SandpackProviderState,
+  "activePath" | "openPaths" | "files" | "environment"
+>;
 
 export const getSandpackStateFromProps = (
   props: SandpackProviderProps

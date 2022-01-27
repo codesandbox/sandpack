@@ -90,13 +90,13 @@ export interface SandpackProviderProps extends SandpackRootProps {
 export interface SandpackProviderState {
   // Setup
   files: SandpackBundlerFiles;
-  environment?: SandpackSetup["environment"];
+  environment?: SandboxEnvironment;
 
   // Options
-  activePath: NonNullable<SandpackOptions["activePath"]>;
-  openPaths: NonNullable<SandpackOptions["openPaths"]>;
-  startRoute?: NonNullable<SandpackOptions["startRoute"]>;
-  initMode: NonNullable<SandpackOptions["initMode"]>;
+  activePath: string;
+  openPaths: string[];
+  startRoute?: string;
+  initMode: SandpackInitMode;
 
   // Internally
   bundlerState?: BundlerState;
