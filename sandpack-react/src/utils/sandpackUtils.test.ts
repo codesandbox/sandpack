@@ -8,31 +8,31 @@ import {
 } from "./sandpackUtils";
 
 describe(resolveFile, () => {
-  test("it resolves the file path based on the extension", () => {
+  it("resolves the file path based on the extension", () => {
     const data = resolveFile("/file.js", { "/file.ts": "" });
 
     expect(data).toBe("/file.ts");
   });
 
-  test("it adds the leading slash and resolves the file path", () => {
+  it("adds the leading slash and resolves the file path", () => {
     const data = resolveFile("file.js", { "/file.js": "" });
 
     expect(data).toBe("/file.js");
   });
 
-  test("it resolves the file path without leading slash", () => {
+  it("resolves the file path without leading slash", () => {
     const data = resolveFile("file.ts", { "file.js": "" });
 
     expect(data).toBe("file.js");
   });
 
-  test("it removes the leading slash and resolves the file path", () => {
+  it("removes the leading slash and resolves the file path", () => {
     const data = resolveFile("/file.js", { "file.js": "" });
 
     expect(data).toBe("file.js");
   });
 
-  test("it fixes (add/remove) the leading slash and fixes the extension", () => {
+  it("fixes (add/remove) the leading slash and fixes the extension", () => {
     const data = resolveFile("/file.ts", { "file.js": "" });
 
     expect(data).toBe("file.js");

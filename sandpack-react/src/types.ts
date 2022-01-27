@@ -11,21 +11,46 @@ import type {
 
 import type { CodeEditorProps } from ".";
 
-/**
- * Preset types
- */
-export interface SandpackProps {
-  files?: SandpackFiles;
-  template?: SandpackProviderProps["template"];
+export interface SandpackOptions {
+  /**
+   * TODO: Editor state - docs
+   */
+  openPaths?: string[];
+  /**
+   * TODO: Editor state -docs
+   */
+  activePath?: string;
+
+  /**
+   * Execution and recompile
+   */
+
+  /**
+   * This provides a way to control how some components are going to
+   * be initialized on the page. The CodeEditor and the Preview components
+   * are quite expensive and might overload the memory usage, so this gives
+   * a certain control of when to initialize them.
+   */
+  initMode?: SandpackInitMode;
+  autorun?: boolean;
+  recompileMode?: "immediate" | "delayed";
+  recompileDelay?: number;
+
+  bundlerURL?: string;
+  startRoute?: string;
+  skipEval?: boolean;
+  fileResolver?: FileResolver;
+  externalResources?: string[];
+}
+
+interface SandpackRootProps {
+  files?: SandpackSetup["files"];
+  template?: SandpackPredefinedTemplate | { sandboxId: string };
   customSetup?: SandpackSetup;
+}
 
-  theme?: SandpackThemeProp;
-  sandboxId?: string;
-
-  options?: {
-    openPaths?: string[];
-    activePath?: string;
-
+interface SandpackPresetOptions {
+  options?: SandpackOptions & {
     editorWidthPercentage?: number;
     editorHeight?: React.CSSProperties["height"];
     classes?: Record<string, string>;
@@ -37,29 +62,13 @@ export interface SandpackProps {
     closableTabs?: boolean;
     wrapContent?: boolean;
 
-    /**
-     * This provides a way to control how some components are going to
-     * be initialized on the page. The CodeEditor and the Preview components
-     * are quite expensive and might overload the memory usage, so this gives
-     * a certain control of when to initialize them.
-     */
-    initMode?: SandpackInitMode;
-
-    bundlerURL?: string;
-    startRoute?: string;
-    skipEval?: boolean;
-    fileResolver?: FileResolver;
-    externalResources?: string[];
-
-    autorun?: boolean;
-    recompileMode?: "immediate" | "delayed";
-    recompileDelay?: number;
     codeEditor?: SandpackCodeOptions;
 
     /**
      * This disables editing of content by the user in all files.
      */
     readOnly?: boolean;
+
     /**
      * Controls the visibility of Read-only label, which will only
      * appears when `readOnly` is `true`
@@ -68,51 +77,34 @@ export interface SandpackProps {
   };
 }
 
-/**
- * Providers types
- */
+export interface SandpackProps
+  extends SandpackRootProps,
+    SandpackPresetOptions {
+  theme?: SandpackThemeProp;
+}
+
+export interface SandpackProviderProps extends SandpackRootProps {
+  options?: SandpackOptions;
+}
+
 export interface SandpackProviderState {
+  // Setup
   files: SandpackBundlerFiles;
-  environment?: SandboxEnvironment;
-  activePath: string;
-  openPaths: string[];
-  startRoute?: string;
+  environment?: SandpackSetup["environment"];
+
+  // Options
+  activePath: NonNullable<SandpackOptions["activePath"]>;
+  openPaths: NonNullable<SandpackOptions["openPaths"]>;
+  startRoute?: NonNullable<SandpackOptions["startRoute"]>;
+  initMode: NonNullable<SandpackOptions["initMode"]>;
+
+  // Internally
   bundlerState?: BundlerState;
   error: SandpackError | null;
   sandpackStatus: SandpackStatus;
   editorState: EditorState;
   renderHiddenIframe: boolean;
-  initMode: SandpackInitMode;
   reactDevTools?: ReactDevToolsMode;
-}
-
-export interface SandpackProviderProps {
-  template?: SandpackPredefinedTemplate | { sandboxId: string };
-  customSetup?: SandpackSetup;
-
-  // editor state (override values)
-  activePath?: string;
-  openPaths?: string[];
-
-  // execution and recompile
-  recompileMode?: "immediate" | "delayed";
-  recompileDelay?: number;
-  autorun?: boolean;
-
-  /**
-   * This provides a way to control how some components are going to
-   * be initialized on the page. The CodeEditor and the Preview components
-   * are quite expensive and might overload the memory usage, so this gives
-   * a certain control of when to initialize them.
-   */
-  initMode?: SandpackInitMode;
-
-  // bundler options
-  bundlerURL?: string;
-  startRoute?: string;
-  skipEval?: boolean;
-  fileResolver?: FileResolver;
-  externalResources?: string[];
 }
 
 export type SandpackClientDispatch = (

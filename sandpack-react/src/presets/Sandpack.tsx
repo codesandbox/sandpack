@@ -4,31 +4,15 @@ import * as React from "react";
 import { SandpackLayout } from "../common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
-import type { PreviewProps } from "../components/Preview";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackProvider } from "../contexts/sandpackContext";
-import type { SandpackProviderProps } from "../types";
+import type { SandpackOptions } from "../types";
 import type { SandpackProps } from "../types";
 
 /**
  * @category Presets
  */
 export const Sandpack: React.FC<SandpackProps> = (props) => {
-  // Combine files with customSetup to create the user input structure
-  const userInputSetup = props.files
-    ? {
-        ...props.customSetup,
-        files: {
-          ...props.customSetup?.files,
-          ...props.files,
-        },
-      }
-    : props.customSetup;
-
-  const previewOptions: PreviewProps = {
-    showNavigator: props.options?.showNavigator,
-  };
-
   const codeEditorOptions: CodeEditorProps = {
     showTabs: props.options?.showTabs,
     showLineNumbers: props.options?.showLineNumbers,
@@ -42,12 +26,12 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     showReadOnly: props.options?.showReadOnly,
   };
 
-  const providerOptions: SandpackProviderProps = {
+  const providerOptions: SandpackOptions = {
     openPaths: props.options?.openPaths,
     activePath: props.options?.activePath,
     recompileMode: props.options?.recompileMode,
     recompileDelay: props.options?.recompileDelay,
-    autorun: props.options?.autorun ?? true,
+    autorun: props.options?.autorun,
     bundlerURL: props.options?.bundlerURL,
     startRoute: props.options?.startRoute,
     skipEval: props.options?.skipEval,
@@ -56,18 +40,21 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     externalResources: props.options?.externalResources,
   };
 
-  // Parts are set as `flex` values, so they set the flex shrink/grow
-  // Cannot use width percentages as it doesn't work with
-  // the automatic layout break when the component is under 700px
+  /**
+   * Parts are set as `flex` values, so they set the flex shrink/grow
+   * Cannot use width percentages as it doesn't work with
+   * the automatic layout break when the component is under 700px
+   */
   const editorPart = props.options?.editorWidthPercentage || 50;
   const previewPart = 100 - editorPart;
   const editorHeight = props.options?.editorHeight;
 
   return (
     <SandpackProvider
-      customSetup={userInputSetup}
+      customSetup={props.customSetup}
+      files={props.files}
+      options={providerOptions}
       template={props.template}
-      {...providerOptions}
     >
       <ClasserProvider classes={props.options?.classes}>
         <SandpackLayout theme={props.theme}>
@@ -81,13 +68,13 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
             }}
           />
           <SandpackPreview
-            {...previewOptions}
             customStyle={{
               height: editorHeight,
               flexGrow: previewPart,
               flexShrink: previewPart,
               minWidth: 700 * (previewPart / (previewPart + editorPart)),
             }}
+            showNavigator={props.options?.showNavigator}
           />
         </SandpackLayout>
       </ClasserProvider>

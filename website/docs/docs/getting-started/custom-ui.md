@@ -4,7 +4,6 @@ sidebar_position: 4
 
 import { Sandpack } from "../../src/CustomSandpack";
 import { NestedSandpack } from "../../src/NestedSandpack";
-import { SandpackRunner } from "@codesandbox/sandpack-react"
 
 # Custom UI
 
@@ -183,42 +182,6 @@ experience by modifying the `recompileDelay` value or by setting the
   template="react"
 />
 ```
-
-## Sandpack Runner
-
-In all the examples so far, we used the `Sandpack` preset. As a reminder, a `preset` is a fixed configuration of sandpack
-components and default settings, ready to use.
-
-In case you want to have the bundler running and you don't want the code editing
-component, you can use a `SandpackRunner` preset.
-
-The `SandpackRunner` has some of the props we already described above:
-`template`, `customSetup` and `theme`. They work exactly the same on this
-preset.
-
-However, your input will be sent through the `code` prop. This is a single
-string that will replace the main file of the project.
-
-```jsx
-import { SandpackRunner } from "@codesandbox/sandpack-react";
-
-const code = `export default function App() {
-  return <h1>Hello CodeSandbox</h1>
-}`
-
-<SandpackRunner code={code} template="react" />;
-```
-
-<SandpackRunner code={`export default function App() { return <h1>Hello CodeSandbox</h1> }`} template="react" />
-
-:::note
-The `main` file is also be set in the `template` or the `customSetup` and is not the same as the `entry` file. In this example, `code` will replace the `App.js` file, because that is the
-**main** file in the react template. For `vue`, this would be the `App.vue` file.
-:::
-
-If you need to pass multiple files you can use the [`customSetup` prop](/getting-started/custom-content#custom-setup).
-
-`SandpackRunner` is already powering the popular [`code-hike` library](https://github.com/code-hike/codehike), maintained by Rodrigo Pombo.
 
 ---
 

@@ -38,13 +38,6 @@ class SandpackProvider extends React.PureComponent<
   SandpackProviderProps,
   SandpackProviderState
 > {
-  static defaultProps = {
-    skipEval: false,
-    recompileMode: "delayed",
-    recompileDelay: 500,
-    autorun: true,
-  };
-
   lazyAnchorRef: React.RefObject<HTMLDivElement>;
 
   preregisteredIframes: Record<string, HTMLIFrameElement>;
@@ -75,13 +68,13 @@ class SandpackProvider extends React.PureComponent<
       environment,
       openPaths,
       activePath,
-      startRoute: this.props.startRoute,
+      startRoute: this.props.options?.startRoute,
       bundlerState: undefined,
       error: null,
-      sandpackStatus: this.props.autorun ? "initial" : "idle",
+      sandpackStatus: this.props.options?.autorun ?? true ? "initial" : "idle",
       editorState: "pristine",
       renderHiddenIframe: false,
-      initMode: this.props.initMode || "lazy",
+      initMode: this.props.options?.initMode || "lazy",
       reactDevTools: undefined,
     };
 
@@ -172,7 +165,9 @@ class SandpackProvider extends React.PureComponent<
    */
   updateClients = (): void => {
     const { files, sandpackStatus } = this.state;
-    const { recompileMode, recompileDelay } = this.props;
+    const recompileMode = this.props.options?.recompileMode ?? "delayed";
+    const recompileDelay = this.props.options?.recompileDelay ?? 500;
+
     if (sandpackStatus !== "running") {
       return;
     }
@@ -225,8 +220,8 @@ class SandpackProvider extends React.PureComponent<
       {
         files,
         environment,
-        activePath: this.props.activePath || activePath,
-        openPaths: this.props.openPaths || openPaths,
+        activePath: this.props.options?.activePath || activePath,
+        openPaths: this.props.options?.openPaths || openPaths,
       },
       onDone
     );
@@ -236,7 +231,9 @@ class SandpackProvider extends React.PureComponent<
    * @hidden
    */
   initializeSandpackIframe(): void {
-    if (!this.props.autorun) {
+    const autorun = this.props.options?.autorun ?? true;
+
+    if (!autorun) {
       return;
     }
 
@@ -308,9 +305,12 @@ class SandpackProvider extends React.PureComponent<
     /**
      * Watch the changes on the initMode prop
      */
-    if (prevProps.initMode !== this.props.initMode && this.props.initMode) {
+    if (
+      prevProps.options?.initMode !== this.props.options?.initMode &&
+      this.props.options?.initMode
+    ) {
       this.setState(
-        { initMode: this.props.initMode },
+        { initMode: this.props.options?.initMode },
         this.initializeSandpackIframe
       );
     }
@@ -326,8 +326,8 @@ class SandpackProvider extends React.PureComponent<
      */
     if (
       prevProps.template !== this.props.template ||
-      prevProps.activePath !== this.props.activePath ||
-      !isEqual(prevProps.openPaths, this.props.openPaths) ||
+      prevProps.options?.activePath !== this.props.options?.activePath ||
+      !isEqual(prevProps.options?.openPaths, this.props.options?.openPaths) ||
       !isEqual(prevProps.customSetup, this.props.customSetup)
     ) {
       /* eslint-disable react/no-did-update-set-state */
@@ -387,11 +387,11 @@ class SandpackProvider extends React.PureComponent<
         template: this.state.environment,
       },
       {
-        externalResources: this.props.externalResources,
-        bundlerURL: this.props.bundlerURL,
-        startRoute: this.props.startRoute,
-        fileResolver: this.props.fileResolver,
-        skipEval: this.props.skipEval,
+        externalResources: this.props.options?.externalResources,
+        bundlerURL: this.props.options?.bundlerURL,
+        startRoute: this.props.options?.startRoute,
+        fileResolver: this.props.options?.fileResolver,
+        skipEval: this.props.options?.skipEval ?? false,
         showOpenInCodeSandbox: !this.openInCSBRegistered.current,
         showErrorScreen: !this.errorScreenRegistered.current,
         showLoadingScreen: !this.loadingScreenRegistered.current,

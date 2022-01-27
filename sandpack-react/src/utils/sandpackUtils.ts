@@ -23,18 +23,35 @@ interface SandpackContextInfo {
 export const getSandpackStateFromProps = (
   props: SandpackProviderProps
 ): SandpackContextInfo => {
+  /**
+   * Combine files with customSetup to create the user input structure
+   */
+  const userInputSetup = props.files
+    ? {
+        ...props.customSetup,
+        files: {
+          ...props.customSetup?.files,
+          ...props.files,
+        },
+      }
+    : props.customSetup;
+
+  if (props.files && props.customSetup?.files) {
+    console.warn("TODO: don't use both");
+  }
+
   const internalTemplate =
     typeof props.template === "string" ? props.template : undefined;
 
   // Merge predefined template with custom setup
-  const projectSetup = getSetup(internalTemplate, props.customSetup);
+  const projectSetup = getSetup(internalTemplate, userInputSetup);
 
   // openPaths and activePath override the setup flags
-  let openPaths = props.openPaths ?? [];
-  let activePath = props.activePath;
+  let openPaths = props.options?.openPaths ?? [];
+  let activePath = props.options?.activePath;
 
-  if (openPaths.length === 0 && props.customSetup?.files) {
-    const inputFiles = props.customSetup.files;
+  if (openPaths.length === 0 && userInputSetup?.files) {
+    const inputFiles = userInputSetup.files;
 
     // extract open and active files from the custom input files
     Object.keys(inputFiles).forEach((filePath) => {
