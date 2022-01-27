@@ -140,7 +140,7 @@ describe(getSandpackStateFromProps, () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       expect(err.message).toEqual(
-        "Missing 'entry' parameter. Either specify an entry point, or pass in a package.json with the 'main' field set."
+        "undefined was set as the active file but was not provided"
       );
     }
   });
