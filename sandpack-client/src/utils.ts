@@ -31,7 +31,18 @@ export function addPackageJSONIfNeeded(
 ): SandpackBundlerFiles {
   const newFiles = { ...files };
 
-  if (!newFiles["/package.json"]) {
+  const getPackageJsonFile = () => {
+    if (newFiles["/package.json"]) return "/package.json";
+    if (newFiles["package.json"]) return "package.json";
+
+    return undefined;
+  };
+  let packageJsonFile = getPackageJsonFile();
+
+  /**
+   * Create a new package json
+   */
+  if (!packageJsonFile) {
     if (!dependencies) {
       throw new Error(
         "No dependencies specified, please specify either a package.json or dependencies."
@@ -46,6 +57,43 @@ export function addPackageJSONIfNeeded(
 
     newFiles["/package.json"] = {
       code: createPackageJSON(dependencies, devDependencies, entry),
+    };
+
+    return newFiles;
+  }
+
+  /**
+   * Merge package json with custom setup
+   */
+  if (packageJsonFile) {
+    let packageJsonContent = JSON.parse(newFiles[packageJsonFile].code);
+
+    if (!dependencies && !packageJsonContent.dependencies) {
+      throw new Error(
+        "No dependencies specified, please specify either a package.json or dependencies."
+      );
+    }
+
+    if (dependencies) {
+      packageJsonContent.dependencies = {
+        ...(packageJsonContent.dependencies ?? {}),
+        ...(dependencies ?? {}),
+      };
+    }
+
+    if (devDependencies) {
+      packageJsonContent.devDependencies = {
+        ...(packageJsonContent.devDependencies ?? {}),
+        ...(devDependencies ?? {}),
+      };
+    }
+
+    if (entry) {
+      packageJsonContent.main = entry;
+    }
+
+    newFiles[packageJsonFile] = {
+      code: JSON.stringify(packageJsonContent, null, 2),
     };
   }
 

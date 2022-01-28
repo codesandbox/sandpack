@@ -1,5 +1,6 @@
 import {
   Sandpack,
+  SandpackCodeEditor,
   SandpackPreview,
   SandpackProvider,
   SandpackLayout,
@@ -12,16 +13,10 @@ export default {
 export const Main = (): JSX.Element => {
   return (
     <>
-      {new Array(30).fill(" ").map(() => {
-        return (
-          <SandpackProvider initMode="user-visible">
-            <SandpackLayout>
-              <SandpackPreview />
-            </SandpackLayout>
-          </SandpackProvider>
-        );
-        return <Sandpack options={{ initMode: "lazy" }} />;
-      })}
+      <Sandpack
+        files={{ "/package.json": `{ "main": "old-entry.ts" }` }}
+        customSetup={{ entry: "new-entry.js" }}
+      />
     </>
   );
 };

@@ -79,11 +79,13 @@ export const getSandpackStateFromProps = (
     /* eslint-enable */
   }
 
-  // Make sure it resolves the main file
+  // Make sure it resolves the main file (will be deprecated)
   if (!projectSetup.files[projectSetup.main]) {
     projectSetup.main =
-      resolveFile(projectSetup.main, projectSetup.files) || projectSetup.entry;
+      resolveFile(projectSetup.main, projectSetup.files) ?? projectSetup.entry;
   }
+
+  console.log(projectSetup);
 
   // If no activePath is specified, use the first open file
   if (!activePath || !projectSetup.files[activePath]) {
@@ -97,8 +99,8 @@ export const getSandpackStateFromProps = (
 
   const files = addPackageJSONIfNeeded(
     projectSetup.files,
-    projectSetup.dependencies || {},
-    projectSetup.devDependencies || {},
+    projectSetup.dependencies ?? {},
+    projectSetup.devDependencies ?? {},
     projectSetup.entry
   );
 

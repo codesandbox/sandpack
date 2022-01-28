@@ -215,6 +215,19 @@ describe(getSandpackStateFromProps, () => {
     expect(packageContent.main).toBe("entry.js");
   });
 
+  test("it merges the entry into package.json main", () => {
+    const setup = getSandpackStateFromProps({
+      files: {
+        "/package.json": `{ "main": "old-entry.ts" }`,
+        "new-entry.js": "",
+      },
+      customSetup: { entry: "new-entry.js" },
+    });
+
+    const packageContent = JSON.parse(setup.files["/package.json"].code);
+    expect(packageContent.main).toEqual("new-entry.js");
+  });
+
   /**
    * openPaths
    */
@@ -268,6 +281,31 @@ describe(getSandpackStateFromProps, () => {
 
     const packageContent = JSON.parse(setup.files["/package.json"].code);
     expect(packageContent.dependencies).toEqual({});
+  });
+
+  test("it merges the dependencies into package.json dependencies", () => {
+    const setup = getSandpackStateFromProps({
+      files: { "/package.json": `{ "dependencies": { "baz": "*" } }` },
+      customSetup: { dependencies: { foo: "*" } },
+    });
+
+    const packageContent = JSON.parse(setup.files["/package.json"].code);
+    expect(packageContent.dependencies).toEqual({ foo: "*", baz: "*" });
+  });
+
+  test("it merges the dependencies from template into package.json dependencies", () => {
+    const setup = getSandpackStateFromProps({
+      template: "react",
+      customSetup: { dependencies: { foo: "*" } },
+    });
+
+    const packageContent = JSON.parse(setup.files["/package.json"].code);
+    expect(packageContent.dependencies).toEqual({
+      foo: "*",
+      react: "^17.0.0",
+      "react-dom": "^17.0.0",
+      "react-scripts": "^4.0.0",
+    });
   });
 
   /**
