@@ -44,7 +44,7 @@ export interface SandpackOptions {
 }
 
 interface SandpackRootProps {
-  files?: SandpackSetup["files"];
+  files?: SandpackFiles;
   template?: SandpackPredefinedTemplate | { sandboxId: string };
   customSetup?: SandpackSetup;
 }
@@ -216,7 +216,6 @@ export interface SandpackSetup {
    */
   entry?: string;
   main?: string;
-  files?: SandpackFiles;
   environment?: SandboxEnvironment;
 }
 

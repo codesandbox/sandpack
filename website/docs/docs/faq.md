@@ -15,17 +15,15 @@ Currently, Sandpack doesn’t have a way to consume private dependencies from an
 
 ```jsx
 <Sandpack
-  customSetup={{
-    files: {
-      "/App.js": APP_CODE,
-      "/node_modules/fake-library/package.json": JSON.stringify({
-        name: "fake-library",
-        main: "./index.js",
-      }),
-      "/node_modules/fake-library/index.js": `module.exports = {
+  files={{
+    "/App.js": APP_CODE,
+    "/node_modules/fake-library/package.json": JSON.stringify({
+      name: "fake-library",
+      main: "./index.js",
+    }),
+    "/node_modules/fake-library/index.js": `module.exports = {
     hello: (name) => "Hello " + name
   }`,
-    },
   }}
   template="react"
 />

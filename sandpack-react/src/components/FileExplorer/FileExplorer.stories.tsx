@@ -15,11 +15,11 @@ export const Component: React.FC = () => (
     <SandpackProvider
       customSetup={{
         entry: "/index.tsx",
-        files: {
-          "/index.tsx": "",
-          "/src/app.tsx": "",
-          "/src/components/button.tsx": "",
-        },
+      }}
+      files={{
+        "/index.tsx": "",
+        "/src/app.tsx": "",
+        "/src/components/button.tsx": "",
       }}
     >
       <SandpackLayout>
@@ -30,11 +30,11 @@ export const Component: React.FC = () => (
     <SandpackProvider
       customSetup={{
         entry: "/index.tsx",
-        files: {
-          "/index.tsx": "",
-          "/src/app.tsx": "",
-          "/src/components/button.tsx": "",
-        },
+      }}
+      files={{
+        "/index.tsx": "",
+        "/src/app.tsx": "",
+        "/src/components/button.tsx": "",
       }}
     >
       <SandpackLayout theme="night-owl">

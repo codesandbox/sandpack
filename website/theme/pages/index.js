@@ -128,10 +128,10 @@ export default function Home({ ...props }) {
             <SandpackProvider
               customSetup={{
                 entry: "index.js",
-                files: {
-                  "/App.js": templates.js,
-                  "/style.css": templates.css,
-                },
+              }}
+              files={{
+                "/App.js": templates.js,
+                "/style.css": templates.css,
               }}
               template="react"
             >

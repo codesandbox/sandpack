@@ -8,12 +8,10 @@ describe("FileTabs", () => {
   it("doesn't have duplicate filename", () => {
     const component = create(
       <SandpackProvider
-        customSetup={{
-          files: {
-            "/foo/App.js": "",
-            "/App.js": "",
-            "/baz/App.js": "",
-          },
+        files={{
+          "/foo/App.js": "",
+          "/App.js": "",
+          "/baz/App.js": "",
         }}
         template="react"
       >

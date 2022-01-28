@@ -30,7 +30,7 @@ const ORIGINAL_CODE = `<Sandpack
     dependencies: { 
       "react-markdown": "latest" 
     }, 
-    files: {
+    files={{
       "/App.js": \`import ReactMarkdown from 'react-markdown' 
 
 export default function App() {
@@ -40,7 +40,6 @@ export default function App() {
     </ReactMarkdown>
   )
 }\`
-    }
   }}
 />;`;
 

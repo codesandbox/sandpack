@@ -36,7 +36,7 @@ export const UsingSandpackLayout: React.FC = () => (
 );
 
 export const UsingVisualElements: React.FC = () => (
-  <SandpackProvider activePath="/App.js" template="react">
+  <SandpackProvider options={{ activePath: "/App.js" }} template="react">
     <SandpackThemeProvider>
       <SandpackCodeEditor
         customStyle={{
@@ -203,10 +203,8 @@ export const JustIframe = (): React.ReactElement => {
 
   return (
     <SandpackProvider
-      customSetup={{
-        files: {
-          "/App.js": code,
-        },
+      files={{
+        "/App.js": code,
       }}
       template="react"
     >
@@ -450,9 +448,8 @@ const ListenerIframeMessage = (): JSX.Element => {
 
 export const IframeMessage: React.FC = () => (
   <SandpackProvider
-    customSetup={{
-      files: {
-        "/App.js": `import {useState, useEffect} from "react";
+    files={{
+      "/App.js": `import {useState, useEffect} from "react";
 
 export default function App() {
 const [message, setMessage] = useState("")
@@ -466,7 +463,6 @@ useEffect(() => {
 return <h1>{message}</h1>
 }
 `,
-      },
     }}
     template="react"
   >

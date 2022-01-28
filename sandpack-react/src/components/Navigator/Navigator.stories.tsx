@@ -119,7 +119,9 @@ export const WithRouting: React.FC = () => (
 export const WithStartingRoute: React.FC = () => (
   <SandpackProvider
     customSetup={routingSetup}
-    startRoute={"/about"}
+    options={{
+      startRoute: "/about",
+    }}
     template="react"
   >
     <SandpackLayout>

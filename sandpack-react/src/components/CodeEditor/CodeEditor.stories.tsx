@@ -17,13 +17,13 @@ export default {
 
 export const Component: Story<CodeEditorProps> = (args) => (
   <SandpackProvider
+    files={{
+      "/index.js": {
+        code: 'const title = "This is a simple code editor"',
+      },
+    }}
     customSetup={{
       entry: "/index.js",
-      files: {
-        "/index.js": {
-          code: 'const title = "This is a simple code editor"',
-        },
-      },
     }}
   >
     <SandpackThemeProvider>

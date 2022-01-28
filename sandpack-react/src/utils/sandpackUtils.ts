@@ -11,6 +11,7 @@ import type {
   SandpackPredefinedTemplate,
   SandpackProviderProps,
   SandpackSetup,
+  SandpackFiles,
 } from "../types";
 
 type SandpackContextInfo = Pick<
@@ -21,35 +22,22 @@ type SandpackContextInfo = Pick<
 export const getSandpackStateFromProps = (
   props: SandpackProviderProps
 ): SandpackContextInfo => {
-  /**
-   * Combine files with customSetup to create the user input structure
-   */
-  const userInputSetup = props.files
-    ? {
-        ...props.customSetup,
-        files: {
-          ...props.customSetup?.files,
-          ...props.files,
-        },
-      }
-    : props.customSetup;
-
-  if (props.files && props.customSetup?.files) {
-    console.warn("TODO: don't use both");
-  }
-
   const internalTemplate =
     typeof props.template === "string" ? props.template : undefined;
 
   // Merge predefined template with custom setup
-  const projectSetup = getSetup(internalTemplate, userInputSetup);
+  const projectSetup = getSetup({
+    template: internalTemplate,
+    customSetup: props.customSetup,
+    files: props.files,
+  });
 
   // openPaths and activePath override the setup flags
   let openPaths = props.options?.openPaths ?? [];
   let activePath = props.options?.activePath;
 
-  if (openPaths.length === 0 && userInputSetup?.files) {
-    const inputFiles = userInputSetup.files;
+  if (openPaths.length === 0 && props?.files) {
+    const inputFiles = props.files;
 
     // extract open and active files from the custom input files
     Object.keys(inputFiles).forEach((filePath) => {
@@ -162,15 +150,20 @@ export const resolveFile = (
  * The template is predefined (eg: react, vue, vanilla)
  * The setup can overwrite anything from the template (eg: files, dependencies, environment, etc.)
  */
-export const getSetup = (
-  template?: SandpackPredefinedTemplate,
-  inputSetup?: SandpackSetup
-): SandboxTemplate => {
+export const getSetup = ({
+  files,
+  template,
+  customSetup,
+}: {
+  files?: SandpackFiles;
+  template?: SandpackPredefinedTemplate;
+  customSetup?: SandpackSetup;
+}): SandboxTemplate => {
   /**
    * The input setup might have files in the simple form Record<string, string>
    * so we convert them to the sandbox template format
    */
-  const setup = createSetupFromUserInput(inputSetup);
+  const setup = createSetupFromUserInput({ customSetup, files });
 
   if (!template) {
     // If not input, default to vanilla
@@ -215,18 +208,20 @@ export const getSetup = (
   };
 };
 
-export const createSetupFromUserInput = (
-  setup?: SandpackSetup
-): Partial<SandboxTemplate> | null => {
-  if (!setup) {
+export const createSetupFromUserInput = ({
+  files,
+  customSetup,
+}: {
+  files?: SandpackFiles;
+  customSetup?: SandpackSetup;
+}): Partial<SandboxTemplate> | null => {
+  if (!files && !customSetup) {
     return null;
   }
 
-  if (!setup.files) {
-    return setup as Partial<SandboxTemplate>;
+  if (!files) {
+    return customSetup as Partial<SandboxTemplate>;
   }
-
-  const { files } = setup;
 
   const convertedFiles = Object.keys(files).reduce(
     (acc: SandpackBundlerFiles, key) => {
@@ -242,7 +237,7 @@ export const createSetupFromUserInput = (
   );
 
   return {
-    ...setup,
+    ...customSetup,
     files: convertedFiles,
   };
 };

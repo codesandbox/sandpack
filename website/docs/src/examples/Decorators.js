@@ -65,8 +65,9 @@ export default App = () => {
   return (
     <SandpackProvider
       customSetup={{
-          entry: "index.js",
-          files: {
+          entry: "index.js"
+      }}
+      files={{
             "index.js": \`const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -84,7 +85,6 @@ export default function List() {
   );
   return <ul>{listItems}</ul>;
 }\`,
-          },
         }}
     >
       <SandpackThemeProvider>
