@@ -41,6 +41,31 @@ describe(resolveFile, () => {
 
 describe(getSandpackStateFromProps, () => {
   /**
+   * Files
+   */
+  test("it should merge template and files props", () => {
+    const setup = getSandpackStateFromProps({
+      template: "react",
+      files: {
+        "foo.ts": "foo",
+      },
+    });
+
+    expect(setup.files["foo.ts"].code).toBe("foo");
+  });
+
+  test("files should override template files", () => {
+    const setup = getSandpackStateFromProps({
+      template: "react",
+      files: {
+        "/App.js": "foo",
+      },
+    });
+
+    expect(setup.files["/App.js"].code).toBe("foo");
+  });
+
+  /**
    * activePath
    */
   test("it returns the main file in case activePath doesn't exist", () => {
