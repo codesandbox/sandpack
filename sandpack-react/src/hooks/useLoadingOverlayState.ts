@@ -4,8 +4,7 @@ import { useSandpack } from "./useSandpack";
 
 export type LoadingOverlayState = "visible" | "fading" | "hidden" | "timeout";
 
-const FADE_DELAY = 1000; // 1 second delay one initial load, only relevant if the loading overlay is visible.
-const FADE_ANIMATION_DURATION = 500; // 500 ms fade animation
+export const FADE_ANIMATION_DURATION = 200;
 
 /**
  * @category Hooks
@@ -19,8 +18,7 @@ export const useLoadingOverlayState = (
 
   React.useEffect(() => {
     sandpack.loadingScreenRegisteredRef.current = true;
-    let innerHook: NodeJS.Timer;
-    let outerHook: NodeJS.Timer;
+    let fadeTimeout: NodeJS.Timer;
 
     const unsub = listen((message) => {
       if (message.type === "start" && message.firstLoad === true) {
@@ -28,21 +26,18 @@ export const useLoadingOverlayState = (
       }
 
       if (message.type === "done") {
-        outerHook = setTimeout(() => {
-          setLoadingOverlayState(
-            (prev) => (prev === "visible" ? "fading" : "hidden") // Only set 'fading' if the current state is 'visible'
-          );
-          innerHook = setTimeout(
-            () => setLoadingOverlayState("hidden"),
-            FADE_ANIMATION_DURATION
-          );
-        }, FADE_DELAY);
+        setLoadingOverlayState(
+          (prev) => (prev === "visible" ? "fading" : "hidden") // Only set 'fading' if the current state is 'visible'
+        );
+        fadeTimeout = setTimeout(
+          () => setLoadingOverlayState("hidden"),
+          FADE_ANIMATION_DURATION
+        );
       }
     }, clientId);
 
     return (): void => {
-      clearTimeout(outerHook);
-      clearTimeout(innerHook);
+      clearTimeout(fadeTimeout);
       unsub();
     };
   }, [clientId, sandpack.status === "idle"]);

@@ -1,7 +1,10 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { useLoadingOverlayState } from "../hooks/useLoadingOverlayState";
+import {
+  useLoadingOverlayState,
+  FADE_ANIMATION_DURATION,
+} from "../hooks/useLoadingOverlayState";
 
 import { OpenInCodeSandboxButton } from "./OpenInCodeSandboxButton";
 
@@ -15,6 +18,8 @@ export interface LoadingOverlayProps {
 export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
   const loadingOverlayState = useLoadingOverlayState(clientId);
   const c = useClasser("sp");
+
+  // return loadingOverlayState;
 
   if (loadingOverlayState === "hidden") {
     return null;
@@ -52,7 +57,7 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
       className={c("overlay", "loading")}
       style={{
         opacity: loadingOverlayState === "visible" ? 1 : 0,
-        transition: "opacity 0.5s ease-out",
+        transition: `opacity ${FADE_ANIMATION_DURATION}ms ease-out`,
       }}
     >
       <div className="sp-cube-wrapper" title="Open in CodeSandbox">
