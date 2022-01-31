@@ -256,7 +256,7 @@ class SandpackProvider extends React.PureComponent<
     }
 
     const observerOptions = this.props.initModeObserverOptions ?? {
-      rootMargin: `${window.innerHeight}px 0px`,
+      rootMargin: `1000px 0px`,
     };
 
     if (this.intersectionObserver && this.lazyAnchorRef.current) {
