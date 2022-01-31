@@ -158,7 +158,12 @@ export const InitModeUserVisible: React.FC = () => {
       {new Array(30).fill(" ").map(() => {
         return (
           <div style={{ marginBottom: 200 }}>
-            <Sandpack options={{ initMode: "user-visible" }} />
+            <Sandpack
+              options={{
+                initMode: "user-visible",
+                initModeObserverOptions: { rootMargin: "2000px 0px" },
+              }}
+            />
           </div>
         );
       })}
