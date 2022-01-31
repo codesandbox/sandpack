@@ -19,8 +19,6 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
   const loadingOverlayState = useLoadingOverlayState(clientId);
   const c = useClasser("sp");
 
-  // return loadingOverlayState;
-
   if (loadingOverlayState === "hidden") {
     return null;
   }
