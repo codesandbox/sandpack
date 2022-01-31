@@ -42,12 +42,6 @@ export const useLoadingOverlayState = (
     };
   }, [clientId, sandpack.status === "idle"]);
 
-  React.useEffect(() => {
-    if (sandpack.initMode === "user-visible" && sandpack.status === "idle") {
-      setLoadingOverlayState("visible");
-    }
-  }, [sandpack.initMode, sandpack.status]);
-
   if (sandpack.status === "timeout") {
     return "timeout";
   }
