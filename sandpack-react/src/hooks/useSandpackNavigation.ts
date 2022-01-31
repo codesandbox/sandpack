@@ -10,10 +10,13 @@ export const useSandpackNavigation = (
   back: () => void;
   forward: () => void;
 } => {
-  const { dispatch } = useSandpack();
+  const { dispatch, sandpack } = useSandpack();
 
   return {
-    refresh: (): void => dispatch({ type: "refresh" }, clientId),
+    refresh: (): void => {
+      console.log(sandpack.clients);
+      dispatch({ type: "refresh" }, clientId);
+    },
     back: (): void => dispatch({ type: "urlback" }, clientId),
     forward: (): void => dispatch({ type: "urlforward" }, clientId),
   };
