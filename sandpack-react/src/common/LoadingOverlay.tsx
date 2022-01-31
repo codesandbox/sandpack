@@ -10,16 +10,24 @@ import { OpenInCodeSandboxButton } from "./OpenInCodeSandboxButton";
 
 export interface LoadingOverlayProps {
   clientId?: string;
+
+  /**
+   * Any other loading state that is blocking the application
+   */
+  isLoading?: boolean;
 }
 
 /**
  * @category Components
  */
-export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
+export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
+  clientId,
+  isLoading,
+}) => {
   const loadingOverlayState = useLoadingOverlayState(clientId);
   const c = useClasser("sp");
 
-  if (loadingOverlayState === "hidden") {
+  if (loadingOverlayState === "hidden" && !isLoading) {
     return null;
   }
 
