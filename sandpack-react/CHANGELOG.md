@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.9-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.0...v0.13.9-experimental.1) (2022-01-31)
+
+
+### Bug Fixes
+
+* **loading:** remove unnecessary timeout ([57299ae](https://github.com/codesandbox/sandpack/commit/57299ae2c573e63e79a60b1b4156b49dd9ed005c))
+* **observer:** improve threshold ([53bdb1e](https://github.com/codesandbox/sandpack/commit/53bdb1e61896489a75a6542b5c6d40787ae9cf33))
+
+
+
+
+
 ## [0.13.9-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.8...v0.13.9-experimental.0) (2022-01-27)
 
 
