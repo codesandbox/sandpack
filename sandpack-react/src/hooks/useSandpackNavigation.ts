@@ -10,7 +10,7 @@ export const useSandpackNavigation = (
   back: () => void;
   forward: () => void;
 } => {
-  const { dispatch, sandpack } = useSandpack();
+  const { dispatch } = useSandpack();
 
   return {
     refresh: (): void => dispatch({ type: "refresh" }, clientId),
