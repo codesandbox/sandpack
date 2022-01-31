@@ -68,6 +68,7 @@ export interface SandpackProviderProps {
    * a certain control of when to initialize them.
    */
   initMode?: SandpackInitMode;
+  initModeObserverOptions?: IntersectionObserverInit;
 
   // bundler options
   bundlerURL?: string;
@@ -254,9 +255,8 @@ class SandpackProvider extends React.PureComponent<
       return;
     }
 
-    const observerOptions = {
-      rootMargin: "600px 0px",
-      threshold: 0.4,
+    const observerOptions = this.props.initModeObserverOptions ?? {
+      rootMargin: `1000px 0px`,
     };
 
     if (this.intersectionObserver && this.lazyAnchorRef.current) {
@@ -266,7 +266,7 @@ class SandpackProvider extends React.PureComponent<
     if (this.lazyAnchorRef.current && this.state.initMode === "lazy") {
       // If any component registerd a lazy anchor ref component, use that for the intersection observer
       this.intersectionObserver = new IntersectionObserver((entries) => {
-        if (entries[0]?.isIntersecting) {
+        if (entries.some((entry) => entry.isIntersecting)) {
           // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
           setTimeout(() => {
             this.runSandpack();
@@ -284,7 +284,7 @@ class SandpackProvider extends React.PureComponent<
       this.state.initMode === "user-visible"
     ) {
       this.intersectionObserver = new IntersectionObserver((entries) => {
-        if (entries[0]?.isIntersecting) {
+        if (entries.some((entry) => entry.isIntersecting)) {
           // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
           setTimeout(() => {
             this.runSandpack();
