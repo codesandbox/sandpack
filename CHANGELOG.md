@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.9-experimental.5](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.4...v0.13.9-experimental.5) (2022-02-01)
+
+
+### Bug Fixes
+
+* prevent run sandpack after unregister it ([58ee91c](https://github.com/codesandbox/sandpack/commit/58ee91c7e2d2d2a80e1a2b2754ce401b7fe093ba))
+
+
+
+
+
 ## [0.13.9-experimental.4](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.3...v0.13.9-experimental.4) (2022-01-31)
 
 **Note:** Version bump only for package sandpack
