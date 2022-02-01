@@ -45,7 +45,7 @@ export interface SandpackOptions {
 
 interface SandpackRootProps {
   files?: SandpackFiles;
-  template?: SandpackPredefinedTemplate | { sandboxId: string };
+  template?: SandpackPredefinedTemplate;
   customSetup?: SandpackSetup;
 }
 

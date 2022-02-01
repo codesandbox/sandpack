@@ -16,8 +16,6 @@ import type {
   SandpackContext,
   SandpackProviderState,
   SandpackProviderProps,
-  SandboxTemplate,
-  SandpackStatus,
 } from "../types";
 import { getSandpackStateFromProps } from "../utils/sandpackUtils";
 import { generateRandomId } from "../utils/stringUtils";
@@ -27,43 +25,6 @@ import { generateRandomId } from "../utils/stringUtils";
  */
 const Sandpack = React.createContext<SandpackContext | null>(null);
 const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
-
-const generateInitialState = (
-  props: SandpackProviderProps
-): SandpackProviderState => {
-  const commonInitialState = {
-    startRoute: props.options?.startRoute,
-    bundlerState: undefined,
-    error: null,
-    sandpackStatus:
-      (props.options?.autorun ?? true ? "initial" : "idle" as SandpackStatus),
-    editorState: "pristine",
-    renderHiddenIframe: false,
-    initMode: props.options?.initMode || "lazy",
-    reactDevTools: undefined,
-  };
-
-  if (typeof props.template === "object") {
-    return {
-      files: {},
-      environment: "create-react-app",
-      openPaths: [],
-      activePath: "",
-      ...commonInitialState,
-    };
-  }
-
-  const { activePath, openPaths, files, environment } =
-    getSandpackStateFromProps(props);
-
-  return {
-    files,
-    environment,
-    openPaths,
-    activePath,
-    ...commonInitialState,
-  } as SandpackProviderState;
-};
 
 /**
  * Main context provider that should wraps your entire component.
@@ -98,7 +59,23 @@ class SandpackProvider extends React.PureComponent<
   constructor(props: SandpackProviderProps) {
     super(props);
 
-    this.state = generateInitialState(props);
+    const { activePath, openPaths, files, environment } =
+      getSandpackStateFromProps(props);
+
+    this.state = {
+      files,
+      environment,
+      openPaths,
+      activePath,
+      startRoute: this.props.options?.startRoute,
+      bundlerState: undefined,
+      error: null,
+      sandpackStatus: this.props.options?.autorun ?? true ? "initial" : "idle",
+      editorState: "pristine",
+      renderHiddenIframe: false,
+      initMode: this.props.options?.initMode || "lazy",
+      reactDevTools: undefined,
+    };
 
     /**
      * List of functions to be registered in the client, once it has been created
@@ -217,41 +194,6 @@ class SandpackProvider extends React.PureComponent<
   /**
    * @hidden
    */
-  fetchSandbox = async (
-    sandboxId: string,
-    onDone: () => void
-  ): Promise<void> => {
-    const customSetup: SandboxTemplate & { is_sse: boolean } = await fetch(
-      `https://codesandbox.io/api/v1/sandboxes/csb-id-${sandboxId}/sandpack`
-    )
-      .then((data) => data.json())
-      .catch(() => {
-        console.error(
-          `Something went wrong while fetching \`${sandboxId}\` sandbox`
-        );
-      });
-
-    if (customSetup.is_sse) {
-      throw Error("Sandpack doesn't support sandboxes that runs on server.");
-    }
-
-    const { activePath, openPaths, files, environment } =
-      getSandpackStateFromProps({ customSetup });
-
-    this.setState(
-      {
-        files,
-        environment,
-        activePath: this.props.options?.activePath || activePath,
-        openPaths: this.props.options?.openPaths || openPaths,
-      },
-      onDone
-    );
-  };
-
-  /**
-   * @hidden
-   */
   initializeSandpackIframe(): void {
     const autorun = this.props.options?.autorun ?? true;
 
@@ -310,14 +252,7 @@ class SandpackProvider extends React.PureComponent<
    * @hidden
    */
   componentDidMount(): void {
-    if (this.props.template && typeof this.props.template !== "string") {
-      this.fetchSandbox(
-        this.props.template.sandboxId,
-        this.initializeSandpackIframe
-      );
-    } else {
-      this.initializeSandpackIframe();
-    }
+    this.initializeSandpackIframe();
   }
 
   /**

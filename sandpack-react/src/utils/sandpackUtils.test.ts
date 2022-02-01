@@ -324,27 +324,6 @@ describe(getSandpackStateFromProps, () => {
   });
 
   /**
-   * Template
-   */
-  test("it defaults to a default template, when `template` is an external sandbox", () => {
-    const setup = getSandpackStateFromProps({
-      template: { sandboxId: "SANDBOX_ID" },
-    });
-
-    expect(setup.files).toEqual({
-      ...VANILLA_TEMPLATE.files,
-      "/package.json": {
-        code: `{
-  "name": "sandpack-project",
-  "main": "/src/index.js",
-  "dependencies": {},
-  "devDependencies": {}
-}`,
-      },
-    });
-  });
-
-  /**
    * Errors handling
    */
   test("it needs to provide a entry file, when template is omitted", () => {
