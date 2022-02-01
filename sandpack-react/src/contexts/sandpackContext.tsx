@@ -17,6 +17,7 @@ import type {
   SandpackProviderState,
   SandpackProviderProps,
   SandboxTemplate,
+  SandpackStatus,
 } from "../types";
 import { getSandpackStateFromProps } from "../utils/sandpackUtils";
 import { generateRandomId } from "../utils/stringUtils";
@@ -26,6 +27,43 @@ import { generateRandomId } from "../utils/stringUtils";
  */
 const Sandpack = React.createContext<SandpackContext | null>(null);
 const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
+
+const generateInitialState = (
+  props: SandpackProviderProps
+): SandpackProviderState => {
+  const commonInitialState = {
+    startRoute: props.options?.startRoute,
+    bundlerState: undefined,
+    error: null,
+    sandpackStatus:
+      (props.options?.autorun ?? true ? "initial" : "idle" as SandpackStatus),
+    editorState: "pristine",
+    renderHiddenIframe: false,
+    initMode: props.options?.initMode || "lazy",
+    reactDevTools: undefined,
+  };
+
+  if (typeof props.template === "object") {
+    return {
+      files: {},
+      environment: "create-react-app",
+      openPaths: [],
+      activePath: "",
+      ...commonInitialState,
+    };
+  }
+
+  const { activePath, openPaths, files, environment } =
+    getSandpackStateFromProps(props);
+
+  return {
+    files,
+    environment,
+    openPaths,
+    activePath,
+    ...commonInitialState,
+  } as SandpackProviderState;
+};
 
 /**
  * Main context provider that should wraps your entire component.
@@ -60,23 +98,7 @@ class SandpackProvider extends React.PureComponent<
   constructor(props: SandpackProviderProps) {
     super(props);
 
-    const { activePath, openPaths, files, environment } =
-      getSandpackStateFromProps(props);
-
-    this.state = {
-      files,
-      environment,
-      openPaths,
-      activePath,
-      startRoute: this.props.options?.startRoute,
-      bundlerState: undefined,
-      error: null,
-      sandpackStatus: this.props.options?.autorun ?? true ? "initial" : "idle",
-      editorState: "pristine",
-      renderHiddenIframe: false,
-      initMode: this.props.options?.initMode || "lazy",
-      reactDevTools: undefined,
-    };
+    this.state = generateInitialState(props);
 
     /**
      * List of functions to be registered in the client, once it has been created

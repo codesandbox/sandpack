@@ -85,8 +85,6 @@ export const getSandpackStateFromProps = (
       resolveFile(projectSetup.main, projectSetup.files) ?? projectSetup.entry;
   }
 
-  console.log(projectSetup);
-
   // If no activePath is specified, use the first open file
   if (!activePath || !projectSetup.files[activePath]) {
     activePath = projectSetup.main || openPaths[0];

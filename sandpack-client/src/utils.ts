@@ -31,7 +31,7 @@ export function addPackageJSONIfNeeded(
 ): SandpackBundlerFiles {
   const newFiles = { ...files };
 
-  const getPackageJsonFile = () => {
+  const getPackageJsonFile = (): string | undefined => {
     if (newFiles["/package.json"]) return "/package.json";
     if (newFiles["package.json"]) return "package.json";
 

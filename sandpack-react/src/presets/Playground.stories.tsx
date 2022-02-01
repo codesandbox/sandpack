@@ -1,10 +1,4 @@
-import {
-  Sandpack,
-  SandpackCodeEditor,
-  SandpackPreview,
-  SandpackProvider,
-  SandpackLayout,
-} from "../";
+import { Sandpack } from "../";
 
 export default {
   title: "Playground",
@@ -13,9 +7,10 @@ export default {
 export const Main = (): JSX.Element => {
   return (
     <>
+      <Sandpack template={{ sandboxId: "bx70k" }} />
       <Sandpack
-        files={{ "/package.json": `{ "main": "old-entry.ts" }` }}
-        customSetup={{ entry: "new-entry.js" }}
+        template={{ sandboxId: "uo1h0" }}
+        customSetup={{ dependencies: { foo: "*" } }}
       />
     </>
   );
