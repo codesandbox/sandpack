@@ -180,6 +180,35 @@ describe(getSandpackStateFromProps, () => {
   });
 
   /**
+   * Files - openPaths - activePath
+   */
+  test("openPaths override the files configurations", () => {
+    const setup = getSandpackStateFromProps({
+      files: {
+        A: { hidden: true, code: "" },
+        B: { hidden: true, code: "" },
+      },
+      customSetup: { entry: "A" },
+      options: { openPaths: ["A", "B"] },
+    });
+
+    expect(setup.openPaths).toEqual(["A", "B"]);
+  });
+
+  test("activePath override the files configurations", () => {
+    const setup = getSandpackStateFromProps({
+      files: {
+        A: { active: true, code: "" },
+        B: { code: "" },
+      },
+      customSetup: { entry: "A" },
+      options: { activePath: "B" },
+    });
+
+    expect(setup.activePath).toEqual("B");
+  });
+
+  /**
    * entry file
    */
   test("it updates the entry file in the package.json", () => {

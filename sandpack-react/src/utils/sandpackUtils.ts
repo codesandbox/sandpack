@@ -22,12 +22,9 @@ type SandpackContextInfo = Pick<
 export const getSandpackStateFromProps = (
   props: SandpackProviderProps
 ): SandpackContextInfo => {
-  const internalTemplate =
-    typeof props.template === "string" ? props.template : undefined;
-
   // Merge predefined template with custom setup
   const projectSetup = getSetup({
-    template: internalTemplate,
+    template: props.template,
     customSetup: props.customSetup,
     files: props.files,
   });

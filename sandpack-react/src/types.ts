@@ -13,17 +13,15 @@ import type { CodeEditorProps } from ".";
 
 export interface SandpackOptions {
   /**
-   * TODO: Editor state - docs
+   * List the file path listed in the file tab,
+   * which will allow the user to interact with.
    */
   openPaths?: string[];
-  /**
-   * TODO: Editor state -docs
-   */
-  activePath?: string;
 
   /**
-   * Execution and recompile
+   * Path to the file will be open in the code editor when the component mounts
    */
+  activePath?: string;
 
   /**
    * This provides a way to control how some components are going to

@@ -1,12 +1,6 @@
 import React from "react";
 
-import {
-  SandpackProvider,
-  SandpackLayout,
-  SandpackCodeEditor,
-  SandpackPreview,
-  Sandpack,
-} from "../";
+import { Sandpack } from "../";
 
 export default {
   title: "presets/Sandpack: options",
