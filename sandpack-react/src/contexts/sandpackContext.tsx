@@ -114,6 +114,7 @@ class SandpackProvider extends React.PureComponent<
   unsubscribe?: UnsubscribeFunction;
   debounceHook?: number;
   timeoutHook: NodeJS.Timer | null = null;
+  initializeSandpackIframeHook: NodeJS.Timer | null = null;
 
   constructor(props: SandpackProviderProps) {
     super(props);
@@ -268,7 +269,7 @@ class SandpackProvider extends React.PureComponent<
       this.intersectionObserver = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
           // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
-          setTimeout(() => {
+          this.initializeSandpackIframeHook = setTimeout(() => {
             this.runSandpack();
           }, 50);
 
@@ -286,10 +287,14 @@ class SandpackProvider extends React.PureComponent<
       this.intersectionObserver = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
           // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
-          setTimeout(() => {
+          this.initializeSandpackIframeHook = setTimeout(() => {
             this.runSandpack();
           }, 50);
         } else {
+          if (this.initializeSandpackIframeHook) {
+            clearTimeout(this.initializeSandpackIframeHook);
+          }
+
           Object.keys(this.clients).map(this.unregisterBundler);
         }
       }, observerOptions);
@@ -297,7 +302,10 @@ class SandpackProvider extends React.PureComponent<
       this.intersectionObserver.observe(this.lazyAnchorRef.current);
     } else {
       // else run the sandpack on mount, with a slight delay to allow all subcomponents to mount/register components
-      setTimeout(() => this.runSandpack(), 50);
+      this.initializeSandpackIframeHook = setTimeout(
+        () => this.runSandpack(),
+        50
+      );
     }
   }
 
@@ -373,6 +381,10 @@ class SandpackProvider extends React.PureComponent<
 
     if (this.debounceHook) {
       clearTimeout(this.debounceHook);
+    }
+
+    if (this.initializeSandpackIframeHook) {
+      clearTimeout(this.initializeSandpackIframeHook);
     }
 
     if (this.intersectionObserver) {
@@ -483,6 +495,10 @@ class SandpackProvider extends React.PureComponent<
       delete this.clients[clientId];
     } else {
       delete this.preregisteredIframes[clientId];
+    }
+
+    if (this.timeoutHook) {
+      clearTimeout(this.timeoutHook);
     }
 
     this.setState({ sandpackStatus: "idle" });
