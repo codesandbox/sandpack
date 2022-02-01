@@ -109,22 +109,16 @@ describe(getSandpackStateFromProps, () => {
     expect(setup.activePath).toEqual("/App.js");
   });
 
-  test("activePath overrides the customSetup.main", () => {
+  test("it uses entry as activePath", () => {
     const setup = getSandpackStateFromProps({
       template: "react",
-      options: {
-        activePath: "/App.js",
-      },
-      files: {
-        "/App.js": "",
-        "/custom.js": "",
-      },
+      files: { "entry.js": "" },
       customSetup: {
-        main: "/custom.js",
+        entry: "entry.js",
       },
     });
 
-    expect(setup.activePath).toEqual("/App.js");
+    expect(setup.activePath).toEqual("entry.js");
   });
 
   /**
@@ -243,21 +237,6 @@ describe(getSandpackStateFromProps, () => {
   });
 
   /**
-   * main file (will be deprecated)
-   */
-  test("it uses main as activePath", () => {
-    const setup = getSandpackStateFromProps({
-      template: "react",
-      files: { "myfile.js": "" },
-      customSetup: {
-        main: "myfile.js",
-      },
-    });
-
-    expect(setup.activePath).toEqual("myfile.js");
-  });
-
-  /**
    * dependencies
    */
   test("it creates a package.json with the dependencies", () => {
@@ -293,7 +272,7 @@ describe(getSandpackStateFromProps, () => {
     expect(packageContent.dependencies).toEqual({ foo: "*", baz: "*" });
   });
 
-  test("it merges the dependencies from template into package.json dependencies", () => {
+  test("it merges the dependencies from template into the package.json dependencies", () => {
     const setup = getSandpackStateFromProps({
       template: "react",
       customSetup: { dependencies: { foo: "*" } },

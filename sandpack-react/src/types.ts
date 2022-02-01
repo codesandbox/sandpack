@@ -215,7 +215,6 @@ export interface SandpackSetup {
    * If you change the path of the entry file, make sure you control all the files that go into the bundle process, as prexisting settings in the template might not work anymore.
    */
   entry?: string;
-  main?: string;
   environment?: SandboxEnvironment;
 }
 

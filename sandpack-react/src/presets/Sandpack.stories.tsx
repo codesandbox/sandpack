@@ -48,7 +48,6 @@ export const CustomSetup: React.FC = () => (
   <Sandpack
     customSetup={{
       entry: "/src/index.tsx",
-      main: "/src/main.tsx",
       dependencies: {
         react: "latest",
         "react-dom": "latest",
@@ -110,7 +109,7 @@ export const Main: React.FC<{test: string}> = ({test}) => {
 }`,
       },
     }}
-    options={{ wrapContent: true }}
+    options={{ wrapContent: true, activePath: "/src/main.tsx" }}
     theme="night-owl"
   />
 );

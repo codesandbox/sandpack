@@ -8,7 +8,7 @@ export const Main = (): JSX.Element => {
   return (
     <>
       <Sandpack />
-      <Sandpack customSetup={{ dependencies: { foo: "*" } }} />
+      <Sandpack customSetup={{ dependencies: { foo: "*" } }} template="react" />
     </>
   );
 };

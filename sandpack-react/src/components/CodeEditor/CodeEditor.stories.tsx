@@ -90,13 +90,13 @@ export const ReadOnly: React.FC = () => {
     <>
       <p>Read-only by file</p>
       <Sandpack
-        customSetup={{ entry: "/index.tsx", main: "/App.tsx" }}
+        customSetup={{ entry: "/index.tsx" }}
         files={{
           "/index.tsx": { code: "", hidden: true },
           "/src/App.tsx": { code: "Hello", readOnly: true, active: true },
           "/src/components/button.tsx": { code: "World", readOnly: false },
         }}
-        options={{ showTabs: true }}
+        options={{ showTabs: true, activePath: "/App.tsx" }}
         template="react-ts"
       />
 
