@@ -1,16 +1,15 @@
 ---
 name: 🐛 Bug Report
 about: What went wrong?
-title: 'Bug: '
-labels: 'bug'
+labels: ["bug", "triage"]
 ---
 
 # Bug report
 
 ## Packages affected
 
-- [ ] sandpack-client
-- [ ] sandpack-react
+-   [ ] sandpack-client
+-   [ ] sandpack-react
 
 ## Description of the problem
 
