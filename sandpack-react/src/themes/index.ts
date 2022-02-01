@@ -310,7 +310,9 @@ export const createThemeObject = (
   if (typeof inputTheme === "string") {
     const predefinedTheme = SANDPACK_THEMES[inputTheme];
     if (!predefinedTheme) {
-      throw new Error(`Invalid theme '${inputTheme}' provided.`);
+      throw new Error(
+        `[sandpack-react]: invalid theme "${inputTheme}" provided`
+      );
     }
 
     return {

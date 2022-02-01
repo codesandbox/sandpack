@@ -515,7 +515,9 @@ class SandpackProvider extends React.PureComponent<
    */
   dispatchMessage = (message: SandpackMessage, clientId?: string): void => {
     if (this.state.sandpackStatus !== "running") {
-      console.warn("dispatch cannot be called while in idle mode");
+      console.warn(
+        `[sandpack-react]: dispatch cannot be called while in idle mode`
+      );
       return;
     }
 

@@ -1,5 +1,4 @@
 import { REACT_TEMPLATE } from "../templates/react";
-import { VANILLA_TEMPLATE } from "../templates/vanilla";
 
 import {
   getSandpackStateFromProps,
@@ -316,7 +315,7 @@ describe(getSandpackStateFromProps, () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       expect(err.message).toEqual(
-        "Missing 'entry' parameter. Either specify an entry point, or pass in a package.json with the 'main' field set."
+        `[sandpack-client]: "entry" was not specified - provide either a package.json with the "main" field or a "entry" value`
       );
     }
   });
@@ -329,7 +328,7 @@ describe(getSandpackStateFromProps, () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       expect(err.message).toEqual(
-        "When using the customSetup without a template, you must pass at least one file for sandpack to work"
+        "[sandpack-react]: without a template, you must pass at least one file"
       );
     }
   });
@@ -343,7 +342,9 @@ describe(getSandpackStateFromProps, () => {
       });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      expect(err.message).toEqual(`Invalid template 'WHATEVER' provided.`);
+      expect(err.message).toEqual(
+        `[sandpack-react]: invalid template "WHATEVER" provided`
+      );
     }
   });
 });

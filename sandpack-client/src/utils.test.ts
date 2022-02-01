@@ -50,7 +50,7 @@ describe(addPackageJSONIfNeeded, () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       expect(err.message).toBe(
-        "No dependencies specified, please specify either a package.json or dependencies."
+        '[sandpack-client]: "dependencies" was not specified - provide either a package.json or a "dependencies" value'
       );
     }
   });

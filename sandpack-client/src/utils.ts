@@ -6,6 +6,9 @@ import type {
   ErrorStackFrame,
 } from "./types";
 
+const DEPENDENCY_ERROR_MESSAGE = `[sandpack-client]: "dependencies" was not specified - provide either a package.json or a "dependencies" value`;
+const ENTRY_ERROR_MESSAGE = `[sandpack-client]: "entry" was not specified - provide either a package.json with the "main" field or a "entry" value`;
+
 export function createPackageJSON(
   dependencies: Dependencies = {},
   devDependencies: Dependencies = {},
@@ -37,23 +40,14 @@ export function addPackageJSONIfNeeded(
 
     return undefined;
   };
-  let packageJsonFile = getPackageJsonFile();
+  const packageJsonFile = getPackageJsonFile();
 
   /**
    * Create a new package json
    */
   if (!packageJsonFile) {
-    if (!dependencies) {
-      throw new Error(
-        "No dependencies specified, please specify either a package.json or dependencies."
-      );
-    }
-
-    if (!entry) {
-      throw new Error(
-        "Missing 'entry' parameter. Either specify an entry point, or pass in a package.json with the 'main' field set."
-      );
-    }
+    if (!dependencies) throw new Error(DEPENDENCY_ERROR_MESSAGE);
+    if (!entry) throw new Error(ENTRY_ERROR_MESSAGE);
 
     newFiles["/package.json"] = {
       code: createPackageJSON(dependencies, devDependencies, entry),
@@ -66,12 +60,10 @@ export function addPackageJSONIfNeeded(
    * Merge package json with custom setup
    */
   if (packageJsonFile) {
-    let packageJsonContent = JSON.parse(newFiles[packageJsonFile].code);
+    const packageJsonContent = JSON.parse(newFiles[packageJsonFile].code);
 
     if (!dependencies && !packageJsonContent.dependencies) {
-      throw new Error(
-        "No dependencies specified, please specify either a package.json or dependencies."
-      );
+      throw new Error(DEPENDENCY_ERROR_MESSAGE);
     }
 
     if (dependencies) {

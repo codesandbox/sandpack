@@ -167,7 +167,7 @@ export const getSetup = ({
 
     if (!setup.files || Object.keys(setup.files).length === 0) {
       throw new Error(
-        `When using the customSetup without a template, you must pass at least one file for sandpack to work`
+        `[sandpack-react]: without a template, you must pass at least one file`
       );
     }
 
@@ -177,7 +177,9 @@ export const getSetup = ({
 
   const baseTemplate = SANDBOX_TEMPLATES[template];
   if (!baseTemplate) {
-    throw new Error(`Invalid template '${template}' provided.`);
+    throw new Error(
+      `[sandpack-react]: invalid template "${template}" provided`
+    );
   }
 
   // If no setup, the template is used entirely

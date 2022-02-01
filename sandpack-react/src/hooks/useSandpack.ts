@@ -21,7 +21,7 @@ export function useSandpack(): UseSandpackReturnType {
 
   if (sandpack === null) {
     throw new Error(
-      `useSandpack can only be used inside components wrapped by 'SandpackProvider'`
+      `[sandpack-react]: "useSandpack" must be wrapped by a "SandpackProvider"`
     );
   }
 
