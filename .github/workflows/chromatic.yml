@@ -2,7 +2,6 @@ name: "Chromatic"
 
 on:
   push:
-    types: [review_requested, ready_for_review]
     paths:
       - "sandpack-react/src/**"
 

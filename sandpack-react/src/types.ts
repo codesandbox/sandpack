@@ -11,6 +11,12 @@ import type {
 
 import type { CodeEditorProps } from ".";
 
+interface SandpackRootProps {
+  files?: SandpackFiles;
+  template?: SandpackPredefinedTemplate;
+  customSetup?: SandpackSetup;
+}
+
 export interface SandpackOptions {
   /**
    * List the file path listed in the file tab,
@@ -41,13 +47,8 @@ export interface SandpackOptions {
   externalResources?: string[];
 }
 
-interface SandpackRootProps {
-  files?: SandpackFiles;
-  template?: SandpackPredefinedTemplate;
-  customSetup?: SandpackSetup;
-}
-
-interface SandpackPresetOptions {
+export interface SandpackProps extends SandpackRootProps {
+  theme?: SandpackThemeProp;
   options?: SandpackOptions & {
     editorWidthPercentage?: number;
     editorHeight?: React.CSSProperties["height"];
@@ -73,12 +74,6 @@ interface SandpackPresetOptions {
      */
     showReadOnly?: boolean;
   };
-}
-
-export interface SandpackProps
-  extends SandpackRootProps,
-    SandpackPresetOptions {
-  theme?: SandpackThemeProp;
 }
 
 export interface SandpackProviderProps extends SandpackRootProps {
