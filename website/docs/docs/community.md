@@ -91,7 +91,7 @@ Please follow our [Code of conduct](https://github.com/codesandbox/codesandbox-c
 
 ### Open development
 
-Anyone can contribute. The primary communication about development on Sandpack happens in [Github issues](https://github.com/codesandbox/sandpack/issues) and [GitHub discussions](https://github.com/codesandbox/sandpack/discussions) where the Sandpack team and contributors can collaborate.
+Anyone can contribute. The primary communication about development on Sandpack happens in [GitHub issues](https://github.com/codesandbox/sandpack/issues) and [GitHub discussions](https://github.com/codesandbox/sandpack/discussions) where the Sandpack team and contributors can collaborate.
 
 ### Your first contribution
 
@@ -103,9 +103,9 @@ We appreciate first time contributors and we are happy to assist you in getting 
 
 Our goal is to keep our docs comprehensive and updated. If you would like to help us in doing so, we are grateful for any kind of contribution:
 
-- Report missing content
-- Fix errors and possible typos in existing docs
-- Help us add more guides to our docs
+-   Report missing content
+-   Fix errors and possible typos in existing docs
+-   Help us add more guides to our docs
 
 #### Plugins
 
