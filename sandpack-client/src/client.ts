@@ -135,7 +135,7 @@ export class SandpackClient {
 
       if (!element) {
         throw new Error(
-          `[sandpack-client]: the element '${selector}' was not founded`
+          `[sandpack-client]: the element '${selector}' was not found`
         );
       }
 
