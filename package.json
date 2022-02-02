@@ -2,7 +2,13 @@
   "name": "sandpack",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["sandpack-client", "sandpack-react", "website/*", "plugins/*"],
+  "workspaces": [
+    "sandpack-client",
+    "sandpack-react",
+    "themes",
+    "website/*",
+    "plugins/*"
+  ],
   "nohoist": ["website/docs/**", "**/html-minifier-terser"],
   "description": "",
   "scripts": {
