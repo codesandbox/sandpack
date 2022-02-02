@@ -12,9 +12,10 @@ export interface LoadingOverlayProps {
   clientId?: string;
 
   /**
-   * Any other loading state that is blocking the application
+   * It enforces keeping the loading state visible,
+   * which is helpful for external loading states.
    */
-  isLoading?: boolean;
+  loading?: boolean;
 }
 
 /**
@@ -22,16 +23,16 @@ export interface LoadingOverlayProps {
  */
 export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
   clientId,
-  isLoading,
+  loading,
 }) => {
-  const loadingOverlayState = useLoadingOverlayState(clientId);
+  const loadingOverlayState = useLoadingOverlayState(clientId, loading);
   const c = useClasser("sp");
 
-  if (loadingOverlayState === "hidden" && !isLoading) {
+  if (loadingOverlayState === "HIDDEN") {
     return null;
   }
 
-  if (loadingOverlayState === "timeout") {
+  if (loadingOverlayState === "TIMEOUT") {
     return (
       <div className={c("overlay", "error")}>
         <div className={c("error-message")}>
@@ -58,11 +59,14 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
     );
   }
 
+  const stillLoading =
+    loadingOverlayState === "LOADING" || loadingOverlayState === "PRE_FADING";
+
   return (
     <div
       className={c("overlay", "loading")}
       style={{
-        opacity: loadingOverlayState === "visible" ? 1 : 0,
+        opacity: stillLoading ? 1 : 0,
         transition: `opacity ${FADE_ANIMATION_DURATION}ms ease-out`,
       }}
     >
