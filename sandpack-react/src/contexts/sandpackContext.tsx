@@ -68,6 +68,7 @@ export interface SandpackProviderProps {
    * a certain control of when to initialize them.
    */
   initMode?: SandpackInitMode;
+  initModeObserverOptions?: IntersectionObserverInit;
 
   // bundler options
   bundlerURL?: string;
@@ -113,6 +114,7 @@ class SandpackProvider extends React.PureComponent<
   unsubscribe?: UnsubscribeFunction;
   debounceHook?: number;
   timeoutHook: NodeJS.Timer | null = null;
+  initializeSandpackIframeHook: NodeJS.Timer | null = null;
 
   constructor(props: SandpackProviderProps) {
     super(props);
@@ -254,9 +256,8 @@ class SandpackProvider extends React.PureComponent<
       return;
     }
 
-    const observerOptions = {
-      rootMargin: "600px 0px",
-      threshold: 0.4,
+    const observerOptions = this.props.initModeObserverOptions ?? {
+      rootMargin: `1000px 0px`,
     };
 
     if (this.intersectionObserver && this.lazyAnchorRef.current) {
@@ -266,9 +267,9 @@ class SandpackProvider extends React.PureComponent<
     if (this.lazyAnchorRef.current && this.state.initMode === "lazy") {
       // If any component registerd a lazy anchor ref component, use that for the intersection observer
       this.intersectionObserver = new IntersectionObserver((entries) => {
-        if (entries[0]?.isIntersecting) {
+        if (entries.some((entry) => entry.isIntersecting)) {
           // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
-          setTimeout(() => {
+          this.initializeSandpackIframeHook = setTimeout(() => {
             this.runSandpack();
           }, 50);
 
@@ -284,20 +285,28 @@ class SandpackProvider extends React.PureComponent<
       this.state.initMode === "user-visible"
     ) {
       this.intersectionObserver = new IntersectionObserver((entries) => {
-        if (entries[0]?.isIntersecting) {
+        if (entries.some((entry) => entry.isIntersecting)) {
           // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
-          setTimeout(() => {
+          this.initializeSandpackIframeHook = setTimeout(() => {
             this.runSandpack();
           }, 50);
         } else {
+          if (this.initializeSandpackIframeHook) {
+            clearTimeout(this.initializeSandpackIframeHook);
+          }
+
           Object.keys(this.clients).map(this.unregisterBundler);
+          this.unregisterAllClients();
         }
       }, observerOptions);
 
       this.intersectionObserver.observe(this.lazyAnchorRef.current);
     } else {
       // else run the sandpack on mount, with a slight delay to allow all subcomponents to mount/register components
-      setTimeout(() => this.runSandpack(), 50);
+      this.initializeSandpackIframeHook = setTimeout(
+        () => this.runSandpack(),
+        50
+      );
     }
   }
 
@@ -375,6 +384,10 @@ class SandpackProvider extends React.PureComponent<
       clearTimeout(this.debounceHook);
     }
 
+    if (this.initializeSandpackIframeHook) {
+      clearTimeout(this.initializeSandpackIframeHook);
+    }
+
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
     }
@@ -406,9 +419,11 @@ class SandpackProvider extends React.PureComponent<
       }
     );
 
-    // Subscribe inside the context with the first client that gets instantiated.
-    // This subscription is for global states like error and timeout, so no need for a per client listen
-    // Also, set the timeout timer only when the first client is instantiated
+    /**
+     * Subscribe inside the context with the first client that gets instantiated.
+     * This subscription is for global states like error and timeout, so no need for a per client listen
+     * Also, set the timeout timer only when the first client is instantiated
+     */
     if (typeof this.unsubscribe !== "function") {
       this.unsubscribe = client.listen(this.handleMessage);
 
@@ -485,7 +500,23 @@ class SandpackProvider extends React.PureComponent<
       delete this.preregisteredIframes[clientId];
     }
 
+    if (this.timeoutHook) {
+      clearTimeout(this.timeoutHook);
+    }
+
     this.setState({ sandpackStatus: "idle" });
+  };
+
+  /**
+   * @hidden
+   */
+  unregisterAllClients = (): void => {
+    Object.keys(this.clients).map(this.unregisterBundler);
+
+    if (typeof this.unsubscribe === "function") {
+      this.unsubscribe();
+      this.unsubscribe = undefined;
+    }
   };
 
   /**

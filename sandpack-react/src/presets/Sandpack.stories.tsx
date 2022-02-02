@@ -155,9 +155,9 @@ export const RunnableComponent = (): React.ReactElement => (
 export const InitModeUserVisible: React.FC = () => {
   return (
     <>
-      {new Array(30).fill(" ").map(() => {
+      {new Array(30).fill(" ").map((_, index) => {
         return (
-          <div style={{ marginBottom: 200 }}>
+          <div key={index} style={{ marginBottom: 200 }}>
             <Sandpack options={{ initMode: "user-visible" }} />
           </div>
         );
