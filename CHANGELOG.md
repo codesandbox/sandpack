@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.9-experimental.6](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.5...v0.13.9-experimental.6) (2022-02-02)
+
+
+### Bug Fixes
+
+* listen new client ([62d6cee](https://github.com/codesandbox/sandpack/commit/62d6ceef40864ea81095a8732cf3d389f531f613))
+
+
+
+
+
 ## [0.13.9-experimental.5](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.4...v0.13.9-experimental.5) (2022-02-01)
 
 
