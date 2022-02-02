@@ -2,11 +2,6 @@
   "default": {
     "name": "Default",
     "type": "SIDEKICK",
-    "items": [
-      { "type": "PREVIEW", "port": "3000" },
-      { "type": "PREVIEW", "port": "3001" },
-      { "type": "PREVIEW", "port": "3002" },
-      { "type": "PREVIEW", "port": "6006" }
-    ]
+    "items": [{ "type": "PREVIEW", "port": "6006" }]
   }
 }

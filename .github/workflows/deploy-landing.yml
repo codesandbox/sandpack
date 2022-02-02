@@ -1,0 +1,30 @@
+name: Deploy Landing page
+on:
+  push:
+    paths:
+      - "sandpack-client/**"
+      - "sandpack-react/**"
+      - "website/landing/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set Vercel args
+        uses: haya14busa/action-cond@v1
+        id: vercel-args
+        with:
+          cond: ${{ github.ref == 'refs/heads/main' }}
+          if_true: "--prod" # deploy straight to production
+          if_false: ""
+
+      - uses: amondnet/vercel-action@v20
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          scope: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-args: ${{ steps.vercel-args.outputs.value }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_SANDPACK_LANDING }}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-comment: false

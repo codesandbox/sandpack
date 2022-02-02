@@ -35,7 +35,7 @@
     "url": "https://github.com/codesandbox/sandpack"
   },
   "author": "CodeSandbox",
-  "license": "GPL-2.0",
+  "license": "Apache-2.0",
   "devDependencies": {
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",

@@ -13,6 +13,9 @@ import { FileTabs } from "../FileTabs";
 export interface CodeViewerProps {
   showTabs?: boolean;
   showLineNumbers?: boolean;
+  /**
+   * Provides a way to draw or style a piece of the content.
+   */
   decorators?: Decorators;
   code?: string;
   wrapContent?: boolean;

@@ -46,6 +46,7 @@ export interface SandpackProps {
      * a certain control of when to initialize them.
      */
     initMode?: SandpackInitMode;
+    initModeObserverOptions?: IntersectionObserverInit;
 
     bundlerURL?: string;
     startRoute?: string;
@@ -113,6 +114,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     skipEval: props.options?.skipEval,
     fileResolver: props.options?.fileResolver,
     initMode: props.options?.initMode,
+    initModeObserverOptions: props.options?.initModeObserverOptions,
     externalResources: props.options?.externalResources,
   };
 

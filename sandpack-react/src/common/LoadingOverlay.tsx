@@ -1,7 +1,10 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { useLoadingOverlayState } from "../hooks/useLoadingOverlayState";
+import {
+  useLoadingOverlayState,
+  FADE_ANIMATION_DURATION,
+} from "../hooks/useLoadingOverlayState";
 import { css, THEME_PREFIX } from "../styles";
 import {
   errorOverlayClassName,
@@ -14,6 +17,12 @@ import { Loading } from "./Loading";
 
 export interface LoadingOverlayProps {
   clientId?: string;
+
+  /**
+   * It enforces keeping the loading state visible,
+   * which is helpful for external loading states.
+   */
+  loading?: boolean;
 }
 
 const loadingClassName = css({
@@ -24,15 +33,18 @@ const loadingClassName = css({
 /**
  * @category Components
  */
-export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
-  const loadingOverlayState = useLoadingOverlayState(clientId);
+export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
+  clientId,
+  loading,
+}) => {
+  const loadingOverlayState = useLoadingOverlayState(clientId, loading);
   const c = useClasser(THEME_PREFIX);
 
-  if (loadingOverlayState === "hidden") {
+  if (loadingOverlayState === "HIDDEN") {
     return null;
   }
 
-  if (loadingOverlayState === "timeout") {
+  if (loadingOverlayState === "TIMEOUT") {
     return (
       <div
         className={classNames(
@@ -65,6 +77,9 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
     );
   }
 
+  const stillLoading =
+    loadingOverlayState === "LOADING" || loadingOverlayState === "PRE_FADING";
+
   return (
     <div
       className={classNames(
@@ -73,8 +88,8 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ clientId }) => {
         loadingClassName
       )}
       style={{
-        opacity: loadingOverlayState === "visible" ? 1 : 0,
-        transition: "opacity 0.5s ease-out",
+        opacity: stillLoading ? 1 : 0,
+        transition: `opacity ${FADE_ANIMATION_DURATION}ms ease-out`,
       }}
     >
       <Loading />

@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.8](https://github.com/codesandbox/sandpack/compare/v0.13.7...v0.13.8) (2022-01-27)
+
+
+### Bug Fixes
+
+* **codemirror:** adds language extension as classname ([#334](https://github.com/codesandbox/sandpack/issues/334)) ([9155a1e](https://github.com/codesandbox/sandpack/commit/9155a1e36b380113533b6db54272b8b06a4ab5fa))
+* **init-mode:** reset bundler state on unmount ([#337](https://github.com/codesandbox/sandpack/issues/337)) ([98d4745](https://github.com/codesandbox/sandpack/commit/98d4745563b9e022cef030fb61df957910781555))
+
+
+
+
+
+## [0.13.7](https://github.com/codesandbox/sandpack/compare/v0.13.6...v0.13.7) (2022-01-26)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [0.13.6](https://github.com/codesandbox/sandpack/compare/v0.13.5...v0.13.6) (2022-01-26)
+
+
+### Bug Fixes
+
+* **editorstate:** watch changes on files instead of each method ([#333](https://github.com/codesandbox/sandpack/issues/333)) ([75ebadb](https://github.com/codesandbox/sandpack/commit/75ebadb6bab1fa7c0ed0a4eff507fc432dd91844))
+
+
+
+
+
 ## [0.13.5](https://github.com/codesandbox/sandpack/compare/v0.13.4...v0.13.5) (2022-01-21)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
