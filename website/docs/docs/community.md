@@ -103,9 +103,9 @@ We appreciate first time contributors and we are happy to assist you in getting 
 
 Our goal is to keep our docs comprehensive and updated. If you would like to help us in doing so, we are grateful for any kind of contribution:
 
--   Report missing content
--   Fix errors and possible typos in existing docs
--   Help us add more guides to our docs
+- Report missing content
+- Fix errors and possible typos in existing docs
+- Help us add more guides to our docs
 
 #### Plugins
 
