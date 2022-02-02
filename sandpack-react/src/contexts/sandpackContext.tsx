@@ -425,7 +425,6 @@ class SandpackProvider extends React.PureComponent<
      * Also, set the timeout timer only when the first client is instantiated
      */
     if (typeof this.unsubscribe !== "function") {
-      console.log("create client");
       this.unsubscribe = client.listen(this.handleMessage);
 
       this.timeoutHook = setTimeout(() => {
