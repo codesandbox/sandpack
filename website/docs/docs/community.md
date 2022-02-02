@@ -27,7 +27,7 @@ Also, it embeds the browser bundler that powers [CodeSandbox](http://codesandbo
 
 The following represents a high-level overview of Sandpack's roadmap.
 
-Check out the [roadmap on GitHub](https://github.com/codesandbox/sandpack/projects/1) to get informed about what we’re working on, and what will come later. If you have any questions or comments please provide us feedback on [Discord](discord.gg/Pr4ft3gBTx) or [GitHub](https://github.com/codesandbox/sandpack/discussions).
+Check out the [roadmap on GitHub](https://github.com/codesandbox/sandpack/projects/1) to get informed about what we’re working on, and what will come later. If you have any questions or comments please provide us feedback on [Discord](https://discord.gg/Pr4ft3gBTx) or [GitHub](https://github.com/codesandbox/sandpack/discussions).
 
 ### Areas
 
@@ -61,7 +61,7 @@ The purpose of our roadmap is to outline the general product direction for Sandp
 
 For general help using Sandpack, please check out the documentation. For additional help, you can use one of these channels to ask a question or find out if somebody else had the same before:
 
-[Discord](discord.gg/Pr4ft3gBTx) - For live discussions with the Community
+[Discord](https://discord.gg/Pr4ft3gBTx) - For live discussions with the Community
 
 [GitHub issues](https://github.com/codesandbox/sandpack/issues) - Bug reports, feature requests, and contributions
 
@@ -79,11 +79,11 @@ Please see the [LICENSE file](https://github.com/codesandbox/sandpack/blob/main/
 
 Any type of contribution is welcome! Sandpack can grow faster through the contributions of the community! Thanks so much for your enthusiasm and your work — we appreciate everything you do!
 
-Before getting started please check out our contribution guide. If you would like to contribute to Sandpack and get involved but you’re not sure where to start with feel free to dive into [issues](https://github.com/codesandbox/sandpack/issues) with a `good first issue` label. If you have any questions, please open a draft PR or visit our [Discord](discord.gg/Pr4ft3gBTx) where the Sandpack team can help you.
+Before getting started please check out our contribution guide. If you would like to contribute to Sandpack and get involved but you’re not sure where to start with feel free to dive into [issues](https://github.com/codesandbox/sandpack/issues) with a `good first issue` label. If you have any questions, please open a draft PR or visit our [Discord](htpps://discord.gg/Pr4ft3gBTx) where the Sandpack team can help you.
 
 ### Contributing to Sandpack
 
-Thank you for your interest in contributing! We embrace community contributions as it brings Sandpack to a larger audience and makes the project better. Contribution guidelines are listed below. If you're unsure about how to start contributing or have any questions even after reading our guide, feel free to reach out us on [Discord](discord.gg/Pr4ft3gBTx).
+Thank you for your interest in contributing! We embrace community contributions as it brings Sandpack to a larger audience and makes the project better. Contribution guidelines are listed below. If you're unsure about how to start contributing or have any questions even after reading our guide, feel free to reach out us on [Discord](https://discord.gg/Pr4ft3gBTx).
 
 ### Code of conduct
 
@@ -95,7 +95,7 @@ Anyone can contribute. The primary communication about development on Sandpack h
 
 ### Your first contribution
 
-We appreciate first time contributors and we are happy to assist you in getting started. In case of questions, just create a draft PR or reach out to us via [Discord](discord.gg/Pr4ft3gBTx).
+We appreciate first time contributors and we are happy to assist you in getting started. In case of questions, just create a draft PR or reach out to us via [Discord](https://discord.gg/Pr4ft3gBTx).
 
 ### Types of contributions
 
