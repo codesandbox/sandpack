@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.9](https://github.com/codesandbox/sandpack/compare/v0.13.8...v0.13.9) (2022-02-02)
+
+
+### Bug Fixes
+
+* **initMode:** improve the reliability of the "user-visible" mode ([#343](https://github.com/codesandbox/sandpack/issues/343)) ([177f0ab](https://github.com/codesandbox/sandpack/commit/177f0ab43e33bc50a7595f81ede3b6693e2e0d0d))
+
+
+
+
+
 ## [0.13.8](https://github.com/codesandbox/sandpack/compare/v0.13.7...v0.13.8) (2022-01-27)
 
 

@@ -36,6 +36,7 @@ export interface SandpackOptions {
    * a certain control of when to initialize them.
    */
   initMode?: SandpackInitMode;
+  initModeObserverOptions?: IntersectionObserverInit;
   autorun?: boolean;
   recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;

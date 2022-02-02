@@ -37,6 +37,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     skipEval: props.options?.skipEval,
     fileResolver: props.options?.fileResolver,
     initMode: props.options?.initMode,
+    initModeObserverOptions: props.options?.initModeObserverOptions,
     externalResources: props.options?.externalResources,
   };
 
