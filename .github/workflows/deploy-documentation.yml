@@ -1,7 +1,6 @@
 name: Deploy Documentation
 on:
   push:
-    types: [review_requested, ready_for_review]
     paths:
       - "sandpack-client/**"
       - "sandpack-react/**"
