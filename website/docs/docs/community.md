@@ -15,8 +15,6 @@ As a result, Sandpack creates interactive code snippets to be easily integrated 
 
 ### Collaboration
 
-Sandpack brings the development experience from CodeSandbox closer to the content of your website, giving you a fully live coding experience in the browser. We believe that getting live coding experience should not be harder than this.
-
 With Sandpack, you're always one click away from opening a sandpack in CodeSandbox. This way, you can easily share bug reports, provide feedback on someone’s else sandpack, or fork your changes behind a unique URL.
 
 ### Empowerment
@@ -33,7 +31,7 @@ Check out the [roadmap on GitHub](https://github.com/codesandbox/sandpack/projec
 
 ### Areas
 
-We break our roadmap into 3 key areas: Community, DevX, and Usability.
+We break our roadmap into 3 key areas: **Community, DevX, and Usability**.
 
 #### Community
 
@@ -66,6 +64,7 @@ For general help using Sandpack, please check out the documentation. For additio
 [Discord](discord.gg/Pr4ft3gBTx) - For live discussions with the Community
 
 [GitHub issues](https://github.com/codesandbox/sandpack/issues) - Bug reports, feature requests, and contributions
+
 [GitHub discussions](https://github.com/codesandbox/sandpack/discussions) - Ideas, Q&A, show and tell, and general thoughts
 
 [GitHub projects](https://github.com/codesandbox/sandpack/projects/1) - Our roadmap
@@ -74,11 +73,11 @@ For general help using Sandpack, please check out the documentation. For additio
 
 ## License
 
-Please see the LICENSE file for licensing information, and our FAQ for any questions you may have on that topic.
+Please see the [LICENSE file](https://github.com/codesandbox/sandpack/blob/main/LICENSE) for licensing information, and our [FAQ](/faq#sandpack-license) for any questions you may have on that topic.
 
 ## Contribution Guide
 
-Any type of contribution is welcome! Sandpack can grow faster through the contributions of the community! Thanks so much for your enthusiasm and your work—we appreciate everything you do!
+Any type of contribution is welcome! Sandpack can grow faster through the contributions of the community! Thanks so much for your enthusiasm and your work — we appreciate everything you do!
 
 Before getting started please check out our contribution guide. If you would like to contribute to Sandpack and get involved but you’re not sure where to start with feel free to dive into [issues](https://github.com/codesandbox/sandpack/issues) with a `good first issue` label. If you have any questions, please open a draft PR or visit our [Discord](discord.gg/Pr4ft3gBTx) where the Sandpack team can help you.
 
@@ -88,11 +87,11 @@ Thank you for your interest in contributing! We embrace community contributions 
 
 ### Code of conduct
 
-Please follow our Code of conduct in the context of any contributions made to Sandpack.
+Please follow our [Code of conduct](https://github.com/codesandbox/codesandbox-client/blob/master/CODE_OF_CONDUCT.md) in the context of any contributions made to Sandpack.
 
 ### Open development
 
-Anyone can contribute. The primary communication about work on Sandpack happens in [Github issues](https://github.com/codesandbox/sandpack/issues) and [GitHub discussions](https://github.com/codesandbox/sandpack/discussions) where the Sandpack team and contributors can collaborate.
+Anyone can contribute. The primary communication about development on Sandpack happens in [Github issues](https://github.com/codesandbox/sandpack/issues) and [GitHub discussions](https://github.com/codesandbox/sandpack/discussions) where the Sandpack team and contributors can collaborate.
 
 ### Your first contribution
 
@@ -114,7 +113,7 @@ Empowering developers to include live coding experiences over the web is our key
 
 #### Features
 
-To request new features, please create an issue on this project. Automatically a triage label will be added and the Sandpack team will follow up on your issue if that needs some clarification.
+To request new features, please create an issue on this project. Automatically a `triage` label will be added and the Sandpack team will follow up on your issue if that needs some clarification.
 
 #### Upvoting issues and features
 
@@ -124,4 +123,4 @@ We will consider 👍 as the given issue is important to you.
 
 #### Reporting bugs
 
-Bug reports can make Sandpack better. So if you spot any issues with Sandpack please create an issue and follow the instructions using the bug report template.
+Bug reports can make Sandpack better. So if you spot any issues with Sandpack please create an issue and follow the instructions using the [bug report template](https://github.com/codesandbox/sandpack/issues/new?assignees=&labels=bug%2Ctriage&template=BUG.md).
