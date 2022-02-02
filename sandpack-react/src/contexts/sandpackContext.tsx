@@ -296,6 +296,7 @@ class SandpackProvider extends React.PureComponent<
           }
 
           Object.keys(this.clients).map(this.unregisterBundler);
+          this.unregisterAllClients();
         }
       }, observerOptions);
 
@@ -418,10 +419,13 @@ class SandpackProvider extends React.PureComponent<
       }
     );
 
-    // Subscribe inside the context with the first client that gets instantiated.
-    // This subscription is for global states like error and timeout, so no need for a per client listen
-    // Also, set the timeout timer only when the first client is instantiated
+    /**
+     * Subscribe inside the context with the first client that gets instantiated.
+     * This subscription is for global states like error and timeout, so no need for a per client listen
+     * Also, set the timeout timer only when the first client is instantiated
+     */
     if (typeof this.unsubscribe !== "function") {
+      console.log("create client");
       this.unsubscribe = client.listen(this.handleMessage);
 
       this.timeoutHook = setTimeout(() => {
@@ -502,6 +506,18 @@ class SandpackProvider extends React.PureComponent<
     }
 
     this.setState({ sandpackStatus: "idle" });
+  };
+
+  /**
+   * @hidden
+   */
+  unregisterAllClients = (): void => {
+    Object.keys(this.clients).map(this.unregisterBundler);
+
+    if (typeof this.unsubscribe === "function") {
+      this.unsubscribe();
+      this.unsubscribe = undefined;
+    }
   };
 
   /**

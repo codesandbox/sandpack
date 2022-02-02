@@ -1,16 +1,15 @@
 ---
 name: 🌈 Feature
 about: What cool thing would you like to add?
-title: 'Feature request: '
-labels: 'feature request'
+labels: ["feature:request", "triage"]
 ---
 
 # Tell us how you think we can improve Sandpack
 
 ## Packages affected
 
-- [ ] sandpack-client
-- [ ] sandpack-react
+-   [ ] sandpack-client
+-   [ ] sandpack-react
 
 ## What is this feature?
 
