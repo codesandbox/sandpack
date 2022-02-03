@@ -19,16 +19,6 @@ export const defaultLight: SandpackTheme = {
     errorSurface: "#FCF1F0",
     warning: "#6A4516",
     warningSurface: "#FEF2C0",
-
-    // activeText: "#1f2933",
-    // defaultText: "#757678",
-    // inactiveText: "#e4e7eb",
-    // activeBackground: "#e4e7eb",
-    // defaultBackground: "#f8f9fb",
-    // inputBackground: "#ffffff",
-    // accent: "#64D2FF",
-    // errorBackground: "#ffcdca",
-    // errorForeground: "#811e18",
   },
   syntax: {
     plain: "#151515",
@@ -64,21 +54,11 @@ export const defaultDark: SandpackTheme = {
     hover: "#C5C5C5",
     accent: "#E5E5E5",
 
-    // Confirm
+    // TODO: Confirm
     error: "#EA3323",
     errorSurface: "#FCF1F0",
     warning: "#6A4516",
     warningSurface: "#FEF2C0",
-
-    // activeText: "#FFFFFF",
-    // defaultText: "#999999",
-    // inactiveText: "#343434",
-    // activeBackground: "#343434",
-    // defaultBackground: "#040404",
-    // inputBackground: "#242424",
-    // accent: "#6caedd",
-    // errorBackground: "#ffcdca",
-    // errorForeground: "#811e18",
   },
   syntax: {
     plain: "#FFFFFF",

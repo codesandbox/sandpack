@@ -36,6 +36,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     ".cm-activeLine": {
       // TODO: confirm
       backgroundColor: theme.colors.surface2,
+      borderRadius: "4px",
     },
 
     ".cm-errorLine": {
@@ -51,6 +52,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     ".cm-content": {
       padding: 0,
       caretColor: theme.colors.accent,
+      paddingRight: `var(--${THEME_PREFIX}-space-4)`,
     },
 
     ".cm-scroller": {
@@ -62,22 +64,18 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
       backgroundColor: theme.colors.surface1,
       color: theme.colors.disabled,
       border: "none",
+      padding: `0 var(--${THEME_PREFIX}-space-4) 0 var(--${THEME_PREFIX}-space-1)`,
     },
 
     ".cm-gutter.cm-lineNumbers": {
-      paddingLeft: "var(--sp-space-1)",
-      paddingRight: "var(--sp-space-1)",
       fontSize: ".6em",
     },
 
     ".cm-lineNumbers .cm-gutterElement": {
-      padding: 0,
-      lineHeight: "var(--sp-font-lineHeight)",
+      lineHeight: `var(--${THEME_PREFIX}-font-lineHeight)`,
     },
 
-    ".cm-line": {
-      padding: "0 var(--sp-space-3)",
-    },
+    ".cm-line": {},
   });
 
 const classNameToken = (name: string): string =>

@@ -6,14 +6,24 @@ export default {
 
 export const Main = (): JSX.Element => {
   return (
-    <Sandpack
-      theme="dark"
-      template="react"
-      options={{
-        showLineNumbers: true,
-        showNavigator: true,
-        showInlineErrors: true,
-      }}
-    />
+    <>
+      <Sandpack
+        theme="dark"
+        template="react"
+        options={{
+          showLineNumbers: true,
+          showNavigator: true,
+          showInlineErrors: true,
+        }}
+      />
+      <Sandpack
+        template="react"
+        options={{
+          showLineNumbers: true,
+          showNavigator: true,
+          showInlineErrors: true,
+        }}
+      />
+    </>
   );
 };

@@ -23,6 +23,10 @@ export const editorClassName = css({
   ".cm-scroller": {
     padding: "$space$4 0",
   },
+
+  [`.${placeholderClassName}`]: {
+    padding: "$space$4 0",
+  },
 });
 
 export const cmClassName = css({

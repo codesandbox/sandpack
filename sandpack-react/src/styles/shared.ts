@@ -14,6 +14,7 @@ export const buttonClassName = css({
   fontFamily: "inherit",
   backgroundColor: "transparent",
   transition: "all $default",
+  cursor: "pointer",
 
   color: "$colors$clickable",
 
@@ -21,6 +22,8 @@ export const buttonClassName = css({
   "&:disabled": { color: "$colors$disabled" },
 
   "&:hover:not(:disabled)": { color: "$colors$hover" },
+
+  '&[data-active="true"]': { color: "$colors$accent" },
 
   [`&.${iconStandaloneClassName}`]: {
     padding: "$space$1",

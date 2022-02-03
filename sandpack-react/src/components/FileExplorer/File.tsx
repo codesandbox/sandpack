@@ -12,10 +12,6 @@ const explorerClassName = css({
   padding: 0,
   marginBottom: "$space$2",
 
-  '&[data-active="true"]': {
-    color: "$colors$accent",
-  },
-
   svg: {
     marginRight: "$space$1",
   },
