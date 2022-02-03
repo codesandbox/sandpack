@@ -1,6 +1,8 @@
 import { css, keyframes } from ".";
 
-export const iconStandaloneClassName = css({});
+export const iconStandaloneClassName = css({
+  svg: { margin: "auto" },
+});
 
 export const buttonClassName = css({
   appearance: "none",
@@ -22,9 +24,19 @@ export const buttonClassName = css({
 
   [`&.${iconStandaloneClassName}`]: {
     padding: "$space$1",
-    backdropFilter: "blur(4px)",
     width: "$space$8",
     height: "$space$8",
+  },
+});
+
+export const actionButtonClassName = css({
+  backgroundColor: "$colors$surface2",
+  borderRadius: "99999px",
+  transition: "all $transitions$default",
+
+  "&:hover": {
+    backgroundColor: "$colors$surface3",
+    color: "$colors$hover",
   },
 });
 
@@ -42,7 +54,7 @@ const fadeIn = keyframes({
   },
 });
 
-export const errorOverlayClassName = css({
+export const absoluteClassName = css({
   position: "absolute",
   bottom: "0",
   left: "0",
@@ -51,17 +63,17 @@ export const errorOverlayClassName = css({
   margin: "0",
   overflow: "auto",
   height: "100%",
-  zIndex: 3,
+  zIndex: "$top",
 });
 
 export const errorClassName = css({
   padding: "$space$4",
   whiteSpace: "pre-wrap",
   fontFamily: "$font$mono",
-  backgroundColor: "$colors$errorBackground",
+  backgroundColor: "$colors$errorSurface",
 });
 
 export const errorMessageClassName = css({
-  animation: `${fadeIn} 0.15s ease-in`,
-  color: "$colors$errorForeground",
+  animation: `${fadeIn} 150ms ease`,
+  color: "$colors$error",
 });

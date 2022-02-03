@@ -40,7 +40,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     },
 
     ".cm-errorLine": {
-      backgroundColor: hexToCSSRGBa(theme.colors.error, 0.2),
+      backgroundColor: theme.colors.errorSurface,
     },
 
     ".cm-matchingBracket, .cm-nonmatchingBracket": {
@@ -51,7 +51,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
 
     ".cm-content": {
       padding: 0,
-      caretColor: theme.colors.base,
+      caretColor: theme.colors.accent,
     },
 
     ".cm-scroller": {
@@ -61,7 +61,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
 
     ".cm-gutters": {
       backgroundColor: theme.colors.surface1,
-      color: theme.colors.disable,
+      color: theme.colors.disabled,
       border: "none",
     },
 

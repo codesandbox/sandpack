@@ -4,7 +4,7 @@ import * as React from "react";
 import { useErrorMessage } from "../hooks/useErrorMessage";
 import { THEME_PREFIX } from "../styles";
 import {
-  errorOverlayClassName,
+  absoluteClassName,
   errorClassName,
   errorMessageClassName,
 } from "../styles/shared";
@@ -24,7 +24,7 @@ export const ErrorOverlay = (): JSX.Element | null => {
     <div
       className={classNames(
         c("overlay", "error"),
-        errorOverlayClassName,
+        absoluteClassName,
         errorClassName
       )}
       translate="no"

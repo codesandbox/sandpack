@@ -57,14 +57,14 @@ const previewIframe = css({
   flex: 1,
 });
 
-const previewActions = css({
+const previewActionsClassName = css({
   display: "flex",
   position: "absolute",
   bottom: "$space$2",
   right: "$space$2",
-  zIndex: 4,
+  zIndex: "$overlay",
 
-  "> *": { marginLeft: "$space$2" },
+  "> *": { marginLeft: "$space$1" },
 });
 
 /**
@@ -159,7 +159,9 @@ export const SandpackPreview = ({
 
         {showSandpackErrorOverlay ? <ErrorOverlay /> : null}
 
-        <div className={classNames(c("preview-actions"), previewActions)}>
+        <div
+          className={classNames(c("preview-actions"), previewActionsClassName)}
+        >
           {!showNavigator && showRefreshButton && status === "running" ? (
             <RefreshButton clientId={clientId.current} />
           ) : null}

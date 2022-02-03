@@ -16,10 +16,9 @@ const wrapperClassName = css({
   position: "absolute",
   right: "$space$2",
   bottom: "$space$2",
-  zIndex: 4,
+  zIndex: "$top",
   width: "32px",
   height: "32px",
-  background: "$colors$surface1",
   borderRadius: "$border$radius",
 
   [`.${cubeClassName}`]: { display: "block" },
@@ -45,7 +44,7 @@ const sidesClassNames = css({
   transform: "rotateX(-25.5deg) rotateY(45deg)",
 
   "*": {
-    border: "10px solid $colors$defaultText",
+    border: "10px solid $colors$clickable",
     borderRadius: "8px",
     background: "$colors$surface1",
   },

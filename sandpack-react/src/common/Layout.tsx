@@ -5,7 +5,7 @@ import { useCombinedRefs } from "../components/CodeEditor/utils";
 import { SandpackThemeProvider } from "../contexts/themeContext";
 import { useSandpack } from "../hooks/useSandpack";
 import { css, THEME_PREFIX } from "../styles";
-import { errorOverlayClassName } from "../styles/shared";
+import { absoluteClassName } from "../styles/shared";
 import type { SandpackThemeProp } from "../types";
 import { classNames } from "../utils/classNames";
 
@@ -34,7 +34,7 @@ export const layoutClassName = css({
     position: "relative",
   },
 
-  [`> *:first-child .${errorOverlayClassName}`]: {
+  [`> *:first-child .${absoluteClassName}`]: {
     borderRight: "1px solid $colors$surface2",
   },
 

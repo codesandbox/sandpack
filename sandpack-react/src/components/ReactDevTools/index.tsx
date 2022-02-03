@@ -11,6 +11,7 @@ const devToolClassName = css({
   height: "$layout$height",
   width: "100%",
 });
+
 type DevToolsTheme = "dark" | "light";
 
 export const SandpackReactDevTools = ({

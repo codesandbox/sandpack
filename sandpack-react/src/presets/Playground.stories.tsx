@@ -7,7 +7,11 @@ export default {
 export const Main = (): JSX.Element => {
   return (
     <Sandpack
-      options={{ showLineNumbers: true, showNavigator: true, readOnly: true }}
+      options={{
+        showLineNumbers: true,
+        showNavigator: true,
+        showInlineErrors: true,
+      }}
     />
   );
 };

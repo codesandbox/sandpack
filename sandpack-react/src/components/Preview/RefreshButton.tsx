@@ -4,7 +4,11 @@ import * as React from "react";
 import { useSandpackNavigation } from "../../hooks/useSandpackNavigation";
 import { RefreshIcon } from "../../icons";
 import { THEME_PREFIX } from "../../styles";
-import { buttonClassName, iconStandaloneClassName } from "../../styles/shared";
+import {
+  buttonClassName,
+  iconStandaloneClassName,
+  actionButtonClassName,
+} from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
 interface RefreshButtonProps {
@@ -25,7 +29,8 @@ export const RefreshButton = ({
       className={classNames(
         c("button", "icon-standalone"),
         buttonClassName,
-        iconStandaloneClassName
+        iconStandaloneClassName,
+        actionButtonClassName
       )}
       onClick={refresh}
       title="Refresh Sandpack"

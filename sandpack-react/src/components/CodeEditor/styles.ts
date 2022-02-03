@@ -48,7 +48,7 @@ export const readOnlyClassName = css({
   position: "absolute",
   right: "$space$2",
   bottom: "$space$2",
-  zIndex: 2,
+  zIndex: "$top",
   color: "$colors$clickable",
   backgroundColor: "$colors$surface2",
   borderRadius: "99999px",

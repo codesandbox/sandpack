@@ -16,6 +16,7 @@ export const defaultLight: SandpackTheme = {
     accent: "#3973E0",
 
     error: "#EA3323",
+    errorSurface: "#FCF1F0",
 
     // activeText: "#1f2933",
     // defaultText: "#757678",
@@ -62,6 +63,7 @@ export const defaultDark: SandpackTheme = {
     accent: "#E5E5E5",
 
     error: "#EA3323",
+    errorSurface: "#FCF1F0",
 
     // activeText: "#FFFFFF",
     // defaultText: "#999999",
