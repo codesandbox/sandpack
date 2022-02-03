@@ -28,18 +28,6 @@ const wrapperClassName = css({
   },
   "*": { boxSizing: "border-box" },
   ".sp-wrapper:focus": { outline: "0" },
-  "*::-webkit-scrollbar": { width: "8px", height: "8px" },
-  "*::-webkit-scrollbar-track": {
-    backgroundColor: "$colors$defaultBackground",
-    borderLeft: "1px solid $colors$inactiveText",
-  },
-  "*::-webkit-scrollbar-corner": { backgroundColor: "transparent" },
-  "*::-webkit-scrollbar-thumb": {
-    backgroundColor: "$colors$defaultText",
-    borderRadius: "9999px",
-    opacity: 0,
-  },
-  "*::-webkit-scrollbar-thumb:hover": { opacity: 1 },
 });
 
 /**

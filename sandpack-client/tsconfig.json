@@ -10,7 +10,8 @@
     "emitDecoratorMetadata": true,
     "noImplicitAny": true,
     "typeRoots": ["node_modules/@types"],
-    "outDir": "dist/types"
+    "outDir": "dist/types",
+    "skipLibCheck": true
   },
   "include": ["./src"],
   "exclude": ["node_modules"]

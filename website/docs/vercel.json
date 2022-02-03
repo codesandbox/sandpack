@@ -1,4 +1,4 @@
 {
-  "github": { "silent": true },
+  "github": { "silent": true, "enabled": false },
   "redirects": [{ "source": "/docs", "destination": "/docs/" }]
 }

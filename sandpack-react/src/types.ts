@@ -31,6 +31,12 @@ export interface SandpackState {
   openPaths: string[];
   activePath: string;
   startRoute?: string;
+
+  /**
+   * Returns the current state of the editor, meaning that any
+   * changes from the original `files` must return a `dirty` value;
+   * otherwise, it'll return `pristine`
+   */
   editorState: EditorState;
   error: SandpackError | null;
   files: SandpackBundlerFiles;
@@ -52,14 +58,18 @@ export interface SandpackState {
   resetAllFiles: () => void;
   registerReactDevTools: (value: ReactDevToolsMode) => void;
 
-  // Element refs
-  // Different components inside the SandpackProvider might register certain elements of interest for sandpack
-  // eg: lazy anchor - if no component registers this, then the sandpack runs on mount, without lazy mode
+  /**
+   * Element refs
+   * Different components inside the SandpackProvider might register certain elements of interest for sandpack
+   * eg: lazy anchor - if no component registers this, then the sandpack runs on mount, without lazy mode
+   */
   lazyAnchorRef: React.RefObject<HTMLDivElement>;
 
-  // eg: error screen - if no component registers this, the bundler needs to show the custom error screen
-  // When the value is boolean, we only care if the components have the responsibility to render the elements,
-  // we don't need the actual element reference
+  /**
+   * eg: error screen - if no component registers this, the bundler needs to show the custom error screen
+   * When the value is boolean, we only care if the components have the responsibility to render the elements,
+   * we don't need the actual element reference
+   */
   errorScreenRegisteredRef: React.MutableRefObject<boolean>;
   openInCSBRegisteredRef: React.MutableRefObject<boolean>;
   loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
@@ -102,6 +112,7 @@ export interface SandpackSetup {
    * ```
    */
   dependencies?: Record<string, string>;
+
   /**
    * The entry file is the starting point of the bundle process.
    *

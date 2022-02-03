@@ -1,13 +1,13 @@
 {
   "name": "@codesandbox/sandpack-client",
-  "version": "0.13.0",
+  "version": "0.13.7",
   "description": "",
   "keywords": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/codesandbox/sandpack"
   },
-  "license": "GPL-2.0",
+  "license": "Apache-2.0",
   "author": "CodeSandbox",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
