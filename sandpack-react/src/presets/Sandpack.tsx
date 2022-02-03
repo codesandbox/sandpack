@@ -76,6 +76,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
               minWidth: 700 * (previewPart / (previewPart + editorPart)),
             }}
             showNavigator={props.options?.showNavigator}
+            showRefreshButton={props.options?.showRefreshButton}
           />
         </SandpackLayout>
       </ClasserProvider>

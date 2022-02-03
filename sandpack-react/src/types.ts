@@ -58,6 +58,7 @@ export interface SandpackProps extends SandpackRootProps {
     showNavigator?: boolean;
     showLineNumbers?: boolean;
     showInlineErrors?: boolean;
+    showRefreshButton?: boolean;
     showTabs?: boolean;
     closableTabs?: boolean;
     wrapContent?: boolean;
