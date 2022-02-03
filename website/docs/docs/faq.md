@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 title: FAQ
 ---
 
@@ -42,3 +42,19 @@ Sandpack still doesn't officially support any kind of language server to provide
 #### Why is the bundler hosted externally (iframe) and not a simple JavaScript module?
 
 There are a few reasons for hosting the bundler like this, as opposed to having it exported as library code, read more [here](/advanced-usage/client#why).
+
+#### Sandpack License
+
+Sandpack is licensed under the Apache License 2.0.
+
+The Apache License 2.0 is in the permissive category, meaning that you can do (nearly) anything you want with the code, with very few exceptions. Also you must include the following in the copy of the code, whether you have modified it or not: the original copyright notice, copy of the license, statement of significant changes have been made(only if applicable), and copy of the notice file.
+
+
+Under this license, you can
+
+- Use Sandpack commercially: Companies can include the licensed code in proprietary software that they then sell to customers.
+- Alter the code: You are permitted to make modifications to the original code.
+- Distribute any copies or modifications of Sandpack: An individual or organization is allowed to copy and/or update Sandpack, then make that version available to others (even commercially).
+- Sublicense the code: A company can distribute their reworked version of Sandpack under a stronger license.
+- Use patent claims: Under the terms of the Apache License 2.0, contributors to the code explicitly grant patent rights to users.
+- Place warranty: Users of Sandpack can place a warranty on the licensed software.
