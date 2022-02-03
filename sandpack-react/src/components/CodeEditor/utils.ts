@@ -36,11 +36,12 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     ".cm-activeLine": {
       // TODO: confirm
       backgroundColor: theme.colors.surface2,
-      borderRadius: "4px",
+      borderRadius: `var(--${THEME_PREFIX}-border-radius)`,
     },
 
     ".cm-errorLine": {
       backgroundColor: theme.colors.errorSurface!,
+      borderRadius: `var(--${THEME_PREFIX}-border-radius)`,
     },
 
     ".cm-matchingBracket, .cm-nonmatchingBracket": {
@@ -50,9 +51,8 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     },
 
     ".cm-content": {
-      padding: 0,
       caretColor: theme.colors.accent,
-      paddingRight: `var(--${THEME_PREFIX}-space-4)`,
+      padding: `0 var(--${THEME_PREFIX}-space-4)`,
     },
 
     ".cm-scroller": {
@@ -64,7 +64,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
       backgroundColor: theme.colors.surface1,
       color: theme.colors.disabled,
       border: "none",
-      padding: `0 var(--${THEME_PREFIX}-space-4) 0 var(--${THEME_PREFIX}-space-1)`,
+      paddingLeft: `var(--${THEME_PREFIX}-space-1)`,
     },
 
     ".cm-gutter.cm-lineNumbers": {

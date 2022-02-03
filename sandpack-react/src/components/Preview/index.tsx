@@ -64,7 +64,7 @@ const previewActionsClassName = css({
   right: "$space$2",
   zIndex: "$overlay",
 
-  "> *": { marginLeft: "$space$1" },
+  "> *": { marginLeft: "$space$2" },
 });
 
 /**

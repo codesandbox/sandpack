@@ -19,7 +19,7 @@ const defaultVariables = {
   space: new Array(8).fill(" ").reduce((acc, _, index) => {
     return { ...acc, [index + 1]: `${(index + 1) * 4}px` };
   }, {}),
-  border: { radius: "6px" },
+  border: { radius: "4px" },
   layout: { height: "300px" },
   transitions: { default: "150ms ease" },
   zIndices: {

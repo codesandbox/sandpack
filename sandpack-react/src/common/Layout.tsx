@@ -23,8 +23,6 @@ export const layoutClassName = css({
   background: "$colors$surface1",
   borderRadius: "$border$radius",
   overflow: "hidden",
-  WebkitMaskImage:
-    "-webkit-radial-gradient($colors$inputBackground,$colors$surface1)",
 
   "> *:not(:first-child)": {
     borderLeft: "1px solid $colors$surface2",
