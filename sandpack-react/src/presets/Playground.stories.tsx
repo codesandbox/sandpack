@@ -16,6 +16,8 @@ export const Main = (): JSX.Element => {
           showInlineErrors: true,
         }}
       />
+      <br />
+      <br />
       <Sandpack
         template="react"
         options={{

@@ -22,7 +22,7 @@ const navigatorClassName = css({
 const inputClassName = css({
   backgroundColor: "$colors$surface2",
   color: "$colors$clickable",
-  padding: "$space$1 $space$2",
+  padding: "$space$1 $space$3",
   borderRadius: "99999px",
   border: "1px solid $colors$surface2",
   height: "24px",
