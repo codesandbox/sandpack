@@ -1,12 +1,5 @@
 import type { SandpackTheme, SandpackPredefinedTheme } from "../types";
 
-const feedbackColors = {
-  error: "#EA3323",
-  errorSurface: "#FCF1F0",
-  warning: "#6A4516",
-  warningSurface: "#FEF2C0",
-};
-
 /**
  * @category Theme
  */
@@ -22,7 +15,10 @@ export const defaultLight: SandpackTheme = {
     hover: "#4D4D4D",
     accent: "#3973E0",
 
-    ...feedbackColors,
+    error: "#EA3323",
+    errorSurface: "#FCF1F0",
+    warning: "#6A4516",
+    warningSurface: "#FEF2C0",
 
     // activeText: "#1f2933",
     // defaultText: "#757678",
@@ -37,13 +33,13 @@ export const defaultLight: SandpackTheme = {
   syntax: {
     plain: "#151515",
     comment: { color: "#999", fontStyle: "italic" },
-    keyword: "#0971F1",
+    keyword: "#7C5AE3",
     tag: "#0971F1",
-    punctuation: "#151515",
-    definition: "#151515",
-    property: "#151515",
-    static: "#FF453A",
-    string: "#BF5AF2",
+    punctuation: "#3B3B3B",
+    definition: "#85A600",
+    property: "#3B3B3B",
+    static: "#3B3B3B",
+    string: "#2E6BD0",
   },
   font: {
     body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
@@ -68,7 +64,11 @@ export const defaultDark: SandpackTheme = {
     hover: "#C5C5C5",
     accent: "#E5E5E5",
 
-    ...feedbackColors,
+    // Confirm
+    error: "#EA3323",
+    errorSurface: "#FCF1F0",
+    warning: "#6A4516",
+    warningSurface: "#FEF2C0",
 
     // activeText: "#FFFFFF",
     // defaultText: "#999999",
