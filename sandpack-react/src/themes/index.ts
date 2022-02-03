@@ -1,5 +1,12 @@
 import type { SandpackTheme, SandpackPredefinedTheme } from "../types";
 
+const feedbackColors = {
+  error: "#EA3323",
+  errorSurface: "#FCF1F0",
+  warning: "#6A4516",
+  warningSurface: "#FEF2C0",
+};
+
 /**
  * @category Theme
  */
@@ -15,8 +22,7 @@ export const defaultLight: SandpackTheme = {
     hover: "#4D4D4D",
     accent: "#3973E0",
 
-    error: "#EA3323",
-    errorSurface: "#FCF1F0",
+    ...feedbackColors,
 
     // activeText: "#1f2933",
     // defaultText: "#757678",
@@ -62,8 +68,7 @@ export const defaultDark: SandpackTheme = {
     hover: "#C5C5C5",
     accent: "#E5E5E5",
 
-    error: "#EA3323",
-    errorSurface: "#FCF1F0",
+    ...feedbackColors,
 
     // activeText: "#FFFFFF",
     // defaultText: "#999999",

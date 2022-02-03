@@ -23,9 +23,9 @@ const defaultVariables = {
   layout: { height: "300px" },
   transitions: { default: "150ms ease" },
   zIndices: {
-    base: 1,
-    overlay: 2,
-    top: 3,
+    base: "1",
+    overlay: "2",
+    top: "3",
   },
 };
 

@@ -202,22 +202,25 @@ export interface SandpackSyntaxStyle {
 }
 
 export interface SandpackTheme {
-  colors: Record<
-    // Surfaces
-    | "surface1"
-    | "surface2"
-    | "surface3"
+  colors: {
+    // Surface
+    surface1: string;
+    surface2: string;
+    surface3: string;
     // UI
-    | "disabled"
-    | "base"
-    | "clickable"
-    | "hover"
+    disabled: string;
+    base: string;
+    clickable: string;
+    hover: string;
     // Brand
-    | "accent"
+    accent: string;
     // Feedbacks
-    | "error",
-    string
-  >;
+    error?: string;
+    errorSurface?: string;
+    warning?: string;
+    warningSurface?: string;
+  };
+
   // {
 
   //   activeText: string;

@@ -10,7 +10,6 @@ import * as React from "react";
 
 import { THEME_PREFIX } from "../../styles";
 import type { SandpackTheme } from "../../types";
-import { hexToCSSRGBa } from "../../utils/stringUtils";
 
 export const getCodeMirrorPosition = (
   doc: Text,
@@ -40,7 +39,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     },
 
     ".cm-errorLine": {
-      backgroundColor: theme.colors.errorSurface,
+      backgroundColor: theme.colors.errorSurface!,
     },
 
     ".cm-matchingBracket, .cm-nonmatchingBracket": {
