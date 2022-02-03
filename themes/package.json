@@ -16,7 +16,16 @@
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "yarn run clean",
+    "build": "node build.js && yarn run build:types",
+    "build:types": "tsc -p tsconfig.json",
     "typecheck": "tsc"
   },
-  "files": ["dist", "package.json", "README.md"]
+  "devDependencies": {
+    "typescript": "4.0.3"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ]
 }
