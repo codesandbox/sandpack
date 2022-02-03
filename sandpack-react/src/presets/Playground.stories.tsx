@@ -5,5 +5,9 @@ export default {
 };
 
 export const Main = (): JSX.Element => {
-  return <Sandpack options={{ showLineNumbers: true, showNavigator: true }} />;
+  return (
+    <Sandpack
+      options={{ showLineNumbers: true, showNavigator: true, readOnly: true }}
+    />
+  );
 };

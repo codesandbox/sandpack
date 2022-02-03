@@ -11,6 +11,7 @@ export const buttonClassName = css({
   fontSize: "inherit",
   fontFamily: "inherit",
   backgroundColor: "transparent",
+  transition: "all $default",
 
   color: "$colors$clickable",
 
@@ -24,16 +25,6 @@ export const buttonClassName = css({
     backdropFilter: "blur(4px)",
     width: "$space$8",
     height: "$space$8",
-  },
-});
-
-export const explorerClassName = css({
-  borderRadius: "0",
-  width: "100%",
-  height: "28px",
-
-  svg: {
-    marginRight: "$space$1",
   },
 });
 

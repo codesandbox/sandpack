@@ -37,15 +37,15 @@ export class Directory extends React.Component<Props, State> {
           path={prefixedPath + "/"}
         />
 
-        {this.state.open ? (
+        {this.state.open && (
           <ModuleList
             activePath={activePath}
-            depth={depth}
+            depth={depth + 1}
             files={files}
             prefixedPath={prefixedPath}
             selectFile={selectFile}
           />
-        ) : null}
+        )}
       </div>
     );
   }

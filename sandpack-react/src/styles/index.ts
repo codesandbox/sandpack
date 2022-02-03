@@ -21,6 +21,7 @@ const defaultVariables = {
   }, {}),
   border: { radius: "4px" },
   layout: { height: "300px" },
+  transitions: { default: "150ms ease-in-out" },
 };
 
 /**

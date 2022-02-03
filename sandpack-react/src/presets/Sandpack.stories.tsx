@@ -105,7 +105,7 @@ export const Main: React.FC<{test: string}> = ({test}) => {
       },
     }}
     options={{ wrapContent: true }}
-    theme="night-owl"
+    theme="dark"
   />
 );
 

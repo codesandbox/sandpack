@@ -42,7 +42,7 @@ export class ModuleList extends React.PureComponent<Props> {
           <Directory
             key={dir}
             activePath={activePath}
-            depth={depth + 1}
+            depth={depth}
             files={files}
             prefixedPath={dir}
             selectFile={selectFile}
@@ -53,7 +53,7 @@ export class ModuleList extends React.PureComponent<Props> {
           <File
             key={file.path}
             active={activePath === file.path}
-            depth={depth + 1}
+            depth={depth}
             path={file.path}
             selectFile={this.props.selectFile}
           />

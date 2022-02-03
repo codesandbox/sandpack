@@ -1,18 +1,29 @@
 import * as React from "react";
 
+import { classNames } from "../../utils/classNames";
 import { useSandpack } from "../../hooks/useSandpack";
 
+import { css } from "../../styles";
 import { ModuleList } from "./ModuleList";
 
-// WIP
+const fileExplorerClassName = css({
+  padding: "$space$3",
+  overflow: "auto",
+  height: "100%",
+});
+
 /**
  * @category Components
  */
-export const FileExplorer = (): JSX.Element => {
+export const FileExplorer = ({
+  className,
+}: {
+  className?: string;
+}): JSX.Element => {
   const { sandpack } = useSandpack();
 
   return (
-    <div>
+    <div className={classNames(fileExplorerClassName, className)}>
       <ModuleList
         activePath={sandpack.activePath}
         files={sandpack.files}

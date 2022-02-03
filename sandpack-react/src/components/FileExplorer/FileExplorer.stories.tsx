@@ -1,10 +1,8 @@
 import * as React from "react";
 
-import { SandpackLayout } from "../../common/Layout";
-import { SandpackCodeEditor } from "../../components/CodeEditor";
-import { SandpackProvider } from "../../contexts/sandpackContext";
+import { SandpackLayout, SandpackCodeEditor, SandpackProvider } from "../../";
 
-import { FileExplorer } from "./index";
+import { FileExplorer } from "./";
 
 export default {
   title: "components/File Explorer",
@@ -13,31 +11,36 @@ export default {
 export const Component: React.FC = () => (
   <>
     <SandpackProvider
+      template="react"
       customSetup={{
         entry: "/index.tsx",
         files: {
           "/index.tsx": "",
           "/src/app.tsx": "",
           "/src/components/button.tsx": "",
+          "/src/components/text.tsx": "",
         },
       }}
     >
       <SandpackLayout>
         <FileExplorer />
+
         <SandpackCodeEditor />
       </SandpackLayout>
     </SandpackProvider>
     <SandpackProvider
+      template="react"
       customSetup={{
         entry: "/index.tsx",
         files: {
           "/index.tsx": "",
           "/src/app.tsx": "",
           "/src/components/button.tsx": "",
+          "/src/components/text.tsx": "",
         },
       }}
     >
-      <SandpackLayout theme="night-owl">
+      <SandpackLayout theme="dark">
         <FileExplorer />
         <SandpackCodeEditor />
       </SandpackLayout>

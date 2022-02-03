@@ -49,8 +49,8 @@ export const readOnlyClassName = css({
   right: "$space$2",
   bottom: "$space$2",
   zIndex: 2,
-  color: "$colors$activeBackground", //var(--sp-colors-bg-active);
-  backgroundColor: "$colors$activeText", // var(--sp-colors-fg-active);
+  color: "$colors$clickable",
+  backgroundColor: "$colors$surface2",
   borderRadius: "99999px",
   padding: "calc($space$1 / 2) $space$2",
 });
