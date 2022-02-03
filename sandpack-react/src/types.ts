@@ -208,7 +208,7 @@ export interface SandpackTheme {
     | "surface2"
     | "surface3"
     // UI
-    | "disable"
+    | "disabled"
     | "base"
     | "clickable"
     | "hover"

@@ -19,10 +19,13 @@ export const editorClassName = css({
   position: "relative",
   overflow: "auto",
   background: "$colors$surface1",
+
+  ".cm-scroller": {
+    padding: "$space$4 0",
+  },
 });
 
 export const cmClassName = css({
-  padding: "$space$4 0",
   margin: "0",
   outline: "none",
   height: "100%",

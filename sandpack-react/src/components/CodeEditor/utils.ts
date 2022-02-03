@@ -73,6 +73,7 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
 
     ".cm-lineNumbers .cm-gutterElement": {
       padding: 0,
+      lineHeight: "var(--sp-font-lineHeight)",
     },
 
     ".cm-line": {

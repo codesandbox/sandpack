@@ -6,36 +6,21 @@ export const buttonClassName = css({
   appearance: "none",
   border: "0",
   outline: "none",
-  padding: "$space$1 $space$3 $space$1 $space$2",
-  borderRadius: "$border$radius",
   display: "flex",
   alignItems: "center",
-  color: "$colors$defaultText",
-  backgroundColor: "red",
   fontSize: "inherit",
   fontFamily: "inherit",
-  transition: "all 0.15s ease-in-out",
+  backgroundColor: "transparent",
 
-  "&:hover:not(:disabled)": {
-    backgroundColor: "$colors$activeBackground",
-    color: "$colors$activeText",
-  },
-  "&:disabled": { color: "$colors$inactiveText" },
-  "&:focus": { outline: "none" },
-  "&:focus-visible": { outline: "2px solid $colors$accent" },
+  color: "$colors$clickable",
 
-  "&.sp-csb-icon-dark": {
-    color: "blue",
-  },
+  // TODO: increase the contrast
+  "&:disabled": { color: "$colors$disabled" },
 
-  "&.sp-csb-icon-dark:hover:not(:disabled)": {
-    backgroundColor: "$colors$activeBackground",
-    color: "$colors$activeBackground",
-  },
+  "&:hover:not(:disabled)": { color: "$colors$hover" },
 
   [`&.${iconStandaloneClassName}`]: {
     padding: "$space$1",
-    background: "#f8f9fbcf",
     backdropFilter: "blur(4px)",
     width: "$space$8",
     height: "$space$8",

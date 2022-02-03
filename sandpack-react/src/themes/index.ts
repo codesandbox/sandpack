@@ -9,7 +9,7 @@ export const defaultLight: SandpackTheme = {
     surface2: "#EFEFEF",
     surface3: "#E1E3E5",
 
-    disable: "#C5C5C5",
+    disabled: "#C5C5C5",
     base: "#323232",
     clickable: "#808080",
     hover: "#4D4D4D",
@@ -55,7 +55,7 @@ export const defaultDark: SandpackTheme = {
     surface2: "#252525",
     surface3: "#2F2F2F",
 
-    disable: "#4D4D4D",
+    disabled: "#4D4D4D",
     base: "#808080",
     clickable: "#999999",
     hover: "#C5C5C5",

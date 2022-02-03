@@ -55,7 +55,6 @@ const previewIframe = css({
   minHeight: "160px",
   maxHeight: "2000px",
   flex: 1,
-  transition: "height 0.15s ease-out",
 });
 
 const previewActions = css({

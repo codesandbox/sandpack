@@ -38,7 +38,6 @@ import { highlightInlineError } from "./highlightInlineError";
 import {
   cmClassName,
   placeholderClassName,
-  editorClassName,
   tokensClassName,
   readOnlyClassName,
 } from "./styles";
@@ -415,7 +414,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         className={classNames(
           c("cm", editorState, languageExtension),
           cmClassName,
-          editorClassName,
           tokensClassName
         )}
         onKeyDown={handleContainerKeyDown}
