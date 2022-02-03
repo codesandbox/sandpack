@@ -11,12 +11,12 @@ import {
 } from "../../utils/stringUtils";
 
 const tabsClassName = css({
-  borderBottom: "1px solid $colors$inactiveText",
-  background: "$colors$defaultBackground",
+  borderBottom: "1px solid $colors$surface2",
+  background: "$colors$surface1",
 });
 
 const tabsScrollableClassName = css({
-  padding: "0 $space$4",
+  padding: "0 $space$2",
   overflow: "auto",
   display: "flex",
   flexWrap: "nowrap",
@@ -39,23 +39,22 @@ export const tabButton = css({
   appearance: "none",
   fontSize: "inherit",
   padding: "0 $space$2",
-  color: "$colors$defaultText",
+  color: "$colors$clickable",
   height: "40px",
   border: "0",
   outline: "none",
-  borderBottom: "1px solid transparent",
   transition:
     "color 0.15s ease-out, border 0.15s ease-out, background 0.15s ease-out",
   whiteSpace: "nowrap",
 
-  '&[data-active="true"]': {
-    color: "$colors$activeText",
-    borderBottom: "1px solid $colors$accent",
-  },
   "&:hover": {
-    color: "$colors$activeText",
-    background: "$colors$activeBackground",
+    color: "$colors$hover",
   },
+
+  '&[data-active="true"]': {
+    color: "$colors$accent",
+  },
+
   "&:focus": { outline: "none" },
   "&:focus-visible": { boxShadow: "inset 0 0 0 2px $colors$accent" },
   [`&:hover > .${closeButtonClassName}`]: { visibility: "unset" },

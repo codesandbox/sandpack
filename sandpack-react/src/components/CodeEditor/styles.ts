@@ -18,7 +18,7 @@ export const editorClassName = css({
   flex: 1,
   position: "relative",
   overflow: "auto",
-  background: "$colors$defaultBackground",
+  background: "$colors$surface1",
 });
 
 export const cmClassName = css({

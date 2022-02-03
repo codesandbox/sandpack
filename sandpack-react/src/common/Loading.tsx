@@ -19,7 +19,7 @@ const wrapperClassName = css({
   zIndex: 4,
   width: "32px",
   height: "32px",
-  background: "$colors$defaultBackground",
+  background: "$colors$surface1",
   borderRadius: "$border$radius",
 
   [`.${cubeClassName}`]: { display: "block" },
@@ -47,7 +47,7 @@ const sidesClassNames = css({
   "*": {
     border: "10px solid $colors$defaultText",
     borderRadius: "8px",
-    background: "$colors$defaultBackground",
+    background: "$colors$surface1",
   },
 
   ".top": {

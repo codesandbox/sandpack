@@ -104,9 +104,9 @@ const CustomCodeEditor = (): JSX.Element => {
         padding: 8,
         fontFamily: theme.font.mono,
         fontSize: theme.font.size,
-        background: theme.colors.defaultBackground,
-        border: `1px solid ${theme.colors.inactiveText}`,
-        color: theme.colors.activeText,
+        background: theme.colors.surface1,
+        border: `1px solid ${theme.colors.surface2}`,
+        color: theme.colors.base,
         lineHeight: theme.font.lineHeight,
       }}
     >

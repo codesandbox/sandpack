@@ -177,14 +177,7 @@ export type SandpackPredefinedTemplate =
   | "vue3"
   | "svelte";
 
-export type SandpackPredefinedTheme =
-  | "light"
-  | "dark"
-  | "sandpack-dark"
-  | "night-owl"
-  | "aqua-blue"
-  | "github-light"
-  | "monokai-pro";
+export type SandpackPredefinedTheme = "light" | "dark";
 
 export interface SandpackSyntaxStyle {
   color?: string;
@@ -209,17 +202,34 @@ export interface SandpackSyntaxStyle {
 }
 
 export interface SandpackTheme {
-  colors: {
-    activeText: string;
-    defaultText: string;
-    inactiveText: string;
-    activeBackground: string;
-    defaultBackground: string;
-    inputBackground: string;
-    accent: string;
-    errorBackground: string;
-    errorForeground: string;
-  };
+  colors: Record<
+    // Surfaces
+    | "surface1"
+    | "surface2"
+    | "surface3"
+    // UI
+    | "disable"
+    | "base"
+    | "clickable"
+    | "hover"
+    // Brand
+    | "accent"
+    // Feedbacks
+    | "error",
+    string
+  >;
+  // {
+
+  //   activeText: string;
+  //   defaultText: string;
+  //   inactiveText: string;
+  //   activeBackground: string;
+  //   defaultBackground: string;
+  //   inputBackground: string;
+  //   accent: string;
+  //   errorBackground: string;
+  //   errorForeground: string;
+  // };
   syntax: {
     plain: string | SandpackSyntaxStyle;
     comment: string | SandpackSyntaxStyle;

@@ -16,7 +16,7 @@ const navigatorClassName = css({
   height: "40px",
   borderBottom: "1px solid $colors$inactiveText",
   padding: "$space$2 $space$4",
-  background: "$colors$defaultBackground",
+  background: "$colors$surface1",
 });
 
 const inputClassName = css({

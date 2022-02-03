@@ -26,7 +26,7 @@ export interface LoadingOverlayProps {
 }
 
 const loadingClassName = css({
-  backgroundColor: "$colors$defaultBackground",
+  backgroundColor: "$colors$surface1",
   zIndex: 5,
 });
 

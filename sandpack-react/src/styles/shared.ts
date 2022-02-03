@@ -11,7 +11,7 @@ export const buttonClassName = css({
   display: "flex",
   alignItems: "center",
   color: "$colors$defaultText",
-  backgroundColor: "$colors$defaultBackground",
+  backgroundColor: "red",
   fontSize: "inherit",
   fontFamily: "inherit",
   transition: "all 0.15s ease-in-out",
@@ -25,7 +25,7 @@ export const buttonClassName = css({
   "&:focus-visible": { outline: "2px solid $colors$accent" },
 
   "&.sp-csb-icon-dark": {
-    color: "$colors$defaultBackground",
+    color: "blue",
   },
 
   "&.sp-csb-icon-dark:hover:not(:disabled)": {

@@ -22,11 +22,11 @@ export const getCodeMirrorPosition = (
 export const getEditorTheme = (theme: SandpackTheme): Extension =>
   EditorView.theme({
     "&": {
-      backgroundColor: theme.colors.defaultBackground,
+      backgroundColor: theme.colors.surface1,
       color:
         (typeof theme.syntax.plain === "string"
           ? theme.syntax.plain
-          : theme.syntax.plain.color) || theme.colors.activeText,
+          : theme.syntax.plain.color) || theme.colors.base,
       height: "100%",
     },
 
@@ -35,21 +35,23 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     },
 
     ".cm-activeLine": {
-      backgroundColor: hexToCSSRGBa(theme.colors.activeBackground, 0.5),
+      // TODO: confirm
+      backgroundColor: theme.colors.surface2,
     },
 
     ".cm-errorLine": {
-      backgroundColor: hexToCSSRGBa(theme.colors.errorBackground, 0.2),
+      backgroundColor: hexToCSSRGBa(theme.colors.error, 0.2),
     },
 
     ".cm-matchingBracket, .cm-nonmatchingBracket": {
       color: "inherit",
-      background: theme.colors.activeBackground,
+      // TODO: confirm
+      backgroundColor: theme.colors.surface2,
     },
 
     ".cm-content": {
       padding: 0,
-      caretColor: theme.colors.activeText,
+      caretColor: theme.colors.base,
     },
 
     ".cm-scroller": {
@@ -58,14 +60,15 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     },
 
     ".cm-gutters": {
-      backgroundColor: theme.colors.defaultBackground,
-      color: theme.colors.defaultText,
+      backgroundColor: theme.colors.surface1,
+      color: theme.colors.disable,
       border: "none",
     },
 
     ".cm-gutter.cm-lineNumbers": {
       paddingLeft: "var(--sp-space-1)",
       paddingRight: "var(--sp-space-1)",
+      fontSize: ".6em",
     },
 
     ".cm-lineNumbers .cm-gutterElement": {

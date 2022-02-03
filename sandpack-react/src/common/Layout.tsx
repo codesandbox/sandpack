@@ -16,26 +16,26 @@ export interface SandpackLayoutProps extends React.HtmlHTMLAttributes<unknown> {
 }
 
 export const layoutClassName = css({
-  border: "1px solid $colors$inactiveText",
+  border: "1px solid $colors$surface2",
   display: "flex",
   flexWrap: "wrap",
   alignItems: "stretch",
-  background: "$colors$defaultBackground",
+  background: "$colors$surface1",
   borderRadius: "$border$radius",
   overflow: "hidden",
   WebkitMaskImage:
-    "-webkit-radial-gradient($colors$inputBackground,$colors$defaultBackground)",
+    "-webkit-radial-gradient($colors$inputBackground,$colors$surface1)",
 
   "> *:not(:first-child)": {
-    borderLeft: "1px solid $colors$inactiveText",
-    borderTop: "1px solid $colors$inactiveText",
+    borderLeft: "1px solid $colors$surface2",
+    borderTop: "1px solid $colors$surface2",
     marginLeft: "-1px",
     marginTop: "-1px",
     position: "relative",
   },
 
   [`> *:first-child .${errorOverlayClassName}`]: {
-    borderRight: "1px solid $colors$inactiveText",
+    borderRight: "1px solid $colors$surface2",
   },
 
   [`> .${stackClassName}`]: {
