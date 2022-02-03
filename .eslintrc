@@ -13,6 +13,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
+    "no-console": ["error", { "allow": ["error", "warn"] }],
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-empty-function": "error",

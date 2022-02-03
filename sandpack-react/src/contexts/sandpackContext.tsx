@@ -11,8 +11,8 @@ import {
   SandpackClient,
   extractErrorDetails,
 } from "@codesandbox/sandpack-client";
-import * as React from "react";
 import isEqual from "lodash.isequal";
+import * as React from "react";
 
 import type {
   SandpackContext,
