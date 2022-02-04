@@ -18,10 +18,9 @@ export const buttonClassName = css({
 
   color: "$colors$clickable",
 
-  // TODO: increase the contrast
   "&:disabled": { color: "$colors$disabled" },
 
-  "&:hover:not(:disabled)": { color: "$colors$hover" },
+  "&:hover:not(:disabled,[data-active='true'])": { color: "$colors$hover" },
 
   '&[data-active="true"]': { color: "$colors$accent" },
 
