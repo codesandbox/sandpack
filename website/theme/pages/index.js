@@ -2,6 +2,7 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
   SandpackCodeEditor,
+  SandpackLayout,
 } from "@codesandbox/sandpack-react";
 import Container, {
   ContainerControls,
@@ -135,9 +136,9 @@ export default function Home({ ...props }) {
               }}
               template="react"
             >
-              <SandpackThemeProvider theme={theme}>
+              <SandpackLayout theme={theme}>
                 <SandpackCodeEditor />
-              </SandpackThemeProvider>
+              </SandpackLayout>
             </SandpackProvider>
           </ContainerSandpack>
 
@@ -211,7 +212,7 @@ function Advanced({ theme, updateTheme }) {
   //Using state to update the pickers when the color change
   const [controls, setControls] = useState({
     syntax: { ...theme.syntax },
-    palette: { ...theme.palette },
+    colors: { ...theme.colors },
   });
 
   const [typeControls, setTypeControls] = useState({
@@ -223,7 +224,7 @@ function Advanced({ theme, updateTheme }) {
 
   useEffect(() => {
     let newControls = {
-      palette: { ...theme.palette },
+      colors: { ...theme.colors },
       syntax: { ...theme.syntax },
     };
 

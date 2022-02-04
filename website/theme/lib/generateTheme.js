@@ -19,15 +19,19 @@ export const generateBasedOnSimpleColors = (color, base) => {
   }
 
   theme.colors = {
-    activeText: color.primary,
-    defaultText: theme.colors.defaultText,
-    inactiveText: pShades[6].hexString(),
-    activeBackground: theme.colors.activeBackground,
-    defaultBackground: theme.colors.defaultBackground,
-    inputBackground: theme.colors.inputBackground,
+    surface1: theme.colors.surface1,
+    surface2: theme.colors.surface2,
+    surface3: theme.colors.surface3,
+
+    clickable: theme.colors.clickable,
+    base: color.base,
+    disabled: pShades[6].hexString(),
+    hover: theme.colors.hover,
+
     accent: color.primary,
-    errorBackground: color.tertiary,
-    errorForeground: tShades[3].hexString(),
+
+    error: tShades[3].hexString(),
+    errorSurface: color.tertiary,
   };
   theme.syntax = {
     plain: theme.syntax.plain,
