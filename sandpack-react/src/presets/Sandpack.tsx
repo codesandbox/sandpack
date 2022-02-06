@@ -6,13 +6,17 @@ import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackProvider } from "../contexts/sandpackContext";
-import type { SandpackOptions } from "../types";
-import type { SandpackProps } from "../types";
+import type {
+  SandpackPreset,
+  SandpackOptions,
+  SandpackFiles,
+  SandpackPredefinedTemplate,
+} from "../types";
 
 /**
  * @category Presets
  */
-export const Sandpack: React.FC<SandpackProps> = (props) => {
+export const Sandpack: SandpackPreset = (props) => {
   const codeEditorOptions: CodeEditorProps = {
     showTabs: props.options?.showTabs,
     showLineNumbers: props.options?.showLineNumbers,
@@ -26,7 +30,10 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     showReadOnly: props.options?.showReadOnly,
   };
 
-  const providerOptions: SandpackOptions = {
+  const providerOptions: SandpackOptions<
+    SandpackFiles,
+    SandpackPredefinedTemplate
+  > = {
     openPaths: props.options?.openPaths,
     activePath: props.options?.activePath,
     recompileMode: props.options?.recompileMode,

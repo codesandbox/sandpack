@@ -9,25 +9,48 @@ import type {
   UnsubscribeFunction,
 } from "@codesandbox/sandpack-client";
 
+import type { SANDBOX_TEMPLATES } from "./templates";
+
 import type { CodeEditorProps } from ".";
 
-interface SandpackRootProps {
-  files?: SandpackFiles;
+export interface SandpackPreset {
+  <
+    Files extends SandpackFiles,
+    TemplateName extends SandpackPredefinedTemplate
+  >(
+    props: Files extends SandpackFiles
+      ? SandpackProps<Files, TemplateName> & {
+          files?: Files;
+          template?: TemplateName;
+        }
+      : never
+  ): React.ReactElement;
+}
+
+interface SandpackRootProps<Files> {
+  files?: Files;
   template?: SandpackPredefinedTemplate;
   customSetup?: SandpackSetup;
 }
 
-export interface SandpackOptions {
+export interface SandpackOptions<
+  Paths extends SandpackFiles,
+  TemplateName extends SandpackPredefinedTemplate
+> {
   /**
    * List the file path listed in the file tab,
    * which will allow the user to interact with.
    */
-  openPaths?: string[];
+  openPaths?: Array<
+    keyof typeof SANDBOX_TEMPLATES[TemplateName]["files"] | keyof Paths
+  >;
 
   /**
    * Path to the file will be open in the code editor when the component mounts
    */
-  activePath?: string;
+  activePath?:
+    | keyof typeof SANDBOX_TEMPLATES[TemplateName]["files"]
+    | keyof Paths;
 
   /**
    * This provides a way to control how some components are going to
@@ -48,9 +71,12 @@ export interface SandpackOptions {
   externalResources?: string[];
 }
 
-export interface SandpackProps extends SandpackRootProps {
+export interface SandpackProps<
+  Files extends SandpackFiles,
+  TemplateName extends SandpackPredefinedTemplate
+> extends SandpackRootProps<Files> {
   theme?: SandpackThemeProp;
-  options?: SandpackOptions & {
+  options?: SandpackOptions<Files, TemplateName> & {
     editorWidthPercentage?: number;
     editorHeight?: React.CSSProperties["height"];
     classes?: Record<string, string>;
@@ -78,8 +104,9 @@ export interface SandpackProps extends SandpackRootProps {
   };
 }
 
-export interface SandpackProviderProps extends SandpackRootProps {
-  options?: SandpackOptions;
+export interface SandpackProviderProps
+  extends SandpackRootProps<SandpackFiles> {
+  options?: SandpackOptions<SandpackFiles, SandpackPredefinedTemplate>;
 }
 
 export interface SandpackProviderState {

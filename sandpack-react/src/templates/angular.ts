@@ -1,6 +1,4 @@
-import type { SandboxTemplate } from "../types";
-
-export const ANGULAR_TEMPLATE: SandboxTemplate = {
+export const ANGULAR_TEMPLATE = {
   files: {
     "/src/app/app.component.css": {
       code: `div {

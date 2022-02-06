@@ -5,5 +5,17 @@ export default {
 };
 
 export const Main = (): JSX.Element => {
-  return <Sandpack />;
+  return (
+    <Sandpack
+      files={{
+        "Foo.js": "",
+      }}
+      options={{
+        showTabs: true,
+        openPaths: ["/src/app/app.component.css", "Foo.js"],
+        activePath: "/src/index.html",
+      }}
+      template="angular"
+    />
+  );
 };

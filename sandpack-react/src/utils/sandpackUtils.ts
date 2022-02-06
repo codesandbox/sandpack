@@ -161,7 +161,7 @@ export const getSetup = ({
   if (!template) {
     // If not input, default to vanilla
     if (!setup) {
-      return SANDBOX_TEMPLATES.vanilla;
+      return SANDBOX_TEMPLATES.vanilla as SandboxTemplate;
     }
 
     if (!setup.files || Object.keys(setup.files).length === 0) {
@@ -183,7 +183,7 @@ export const getSetup = ({
 
   // If no setup, the template is used entirely
   if (!setup) {
-    return baseTemplate;
+    return baseTemplate as SandboxTemplate;
   }
 
   // Merge the setup on top of the template
@@ -194,13 +194,13 @@ export const getSetup = ({
       ...setup.dependencies,
     },
     devDependencies: {
-      ...baseTemplate.devDependencies,
+      ...(baseTemplate.devDependencies as SandboxTemplate["dependencies"]),
       ...setup.devDependencies,
     },
     entry: setup.entry || baseTemplate.entry,
     main: setup.main || baseTemplate.main,
     environment: setup.environment || baseTemplate.environment,
-  };
+  } as SandboxTemplate;
 };
 
 export const createSetupFromUserInput = ({
