@@ -63,6 +63,14 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const searchParams = new URLSearchParams({
+    parameters: paramsValues,
+    query: new URLSearchParams({
+      file: sandpack.activePath,
+      "from-sandpack": "true",
+    }).toString(),
+  });
+
   /**
    * This is a safe limit to avoid too long requests (401),
    * as all parameters are attached in the URL
@@ -75,7 +83,12 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
         {...props}
       >
         <form ref={formRef} action={CSB_URL} method="POST" target="_blank">
-          <input name="parameters" type="hidden" value={paramsValues} />
+          {Array.from(
+            searchParams as unknown as Array<[string, string]>,
+            ([k, v]) => (
+              <input key={k} name={k} type="hidden" value={v} />
+            )
+          )}
         </form>
         {children}
       </button>
@@ -84,7 +97,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
 
   return (
     <a
-      href={`${CSB_URL}?parameters=${paramsValues}&query=file=${sandpack.activePath}%26from-sandpack=true`}
+      href={`${CSB_URL}?${searchParams.toString()}`}
       rel="noreferrer noopener"
       target="_blank"
       title="Open in CodeSandbox"
