@@ -62,12 +62,12 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
     sandpack.openInCSBRegisteredRef.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   const searchParams = new URLSearchParams({
     parameters: paramsValues,
     query: new URLSearchParams({
       file: sandpack.activePath,
-      'from-sandpack': true,
+      "from-sandpack": "true",
     }).toString(),
   });
 
@@ -84,8 +84,10 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
       >
         <form ref={formRef} action={CSB_URL} method="POST" target="_blank">
           {Array.from(
-            searchParams,
-            ([k, v]) => <input key={k} name={k} type="hidden" value={v} />,
+            searchParams as unknown as Array<[string, string]>,
+            ([k, v]) => (
+              <input key={k} name={k} type="hidden" value={v} />
+            )
           )}
         </form>
         {children}
