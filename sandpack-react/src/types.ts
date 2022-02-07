@@ -13,6 +13,11 @@ import type { SANDBOX_TEMPLATES } from "./templates";
 
 import type { CodeEditorProps } from ".";
 
+type TemplateFiles<Name extends SandpackPredefinedTemplate> =
+  keyof typeof SANDBOX_TEMPLATES[Name]["files"];
+type SandpackFilesDerivedTemplate<Template extends SandpackPredefinedTemplate> =
+  Partial<Record<TemplateFiles<Template>, string | SandpackFile>>;
+
 export interface SandpackPreset {
   <
     Files extends SandpackFiles,
@@ -20,15 +25,18 @@ export interface SandpackPreset {
   >(
     props: Files extends SandpackFiles
       ? SandpackProps<Files, TemplateName> & {
-          files?: Files;
+          files?: SandpackFilesDerivedTemplate<TemplateName>;
           template?: TemplateName;
         }
       : never
   ): React.ReactElement;
 }
 
-interface SandpackRootProps<Files> {
-  files?: Files;
+interface SandpackRootProps<
+  Files,
+  TemplateName extends SandpackPredefinedTemplate
+> {
+  files?: Files & SandpackFilesDerivedTemplate<TemplateName>;
   template?: SandpackPredefinedTemplate;
   customSetup?: SandpackSetup;
 }
@@ -41,16 +49,12 @@ export interface SandpackOptions<
    * List the file path listed in the file tab,
    * which will allow the user to interact with.
    */
-  openPaths?: Array<
-    keyof typeof SANDBOX_TEMPLATES[TemplateName]["files"] | keyof Paths
-  >;
+  openPaths?: Array<TemplateFiles<TemplateName> | keyof Paths>;
 
   /**
    * Path to the file will be open in the code editor when the component mounts
    */
-  activePath?:
-    | keyof typeof SANDBOX_TEMPLATES[TemplateName]["files"]
-    | keyof Paths;
+  activePath?: TemplateFiles<TemplateName> | keyof Paths;
 
   /**
    * This provides a way to control how some components are going to
@@ -74,7 +78,7 @@ export interface SandpackOptions<
 export interface SandpackProps<
   Files extends SandpackFiles,
   TemplateName extends SandpackPredefinedTemplate
-> extends SandpackRootProps<Files> {
+> extends SandpackRootProps<Files, TemplateName> {
   theme?: SandpackThemeProp;
   options?: SandpackOptions<Files, TemplateName> & {
     editorWidthPercentage?: number;
@@ -105,7 +109,7 @@ export interface SandpackProps<
 }
 
 export interface SandpackProviderProps
-  extends SandpackRootProps<SandpackFiles> {
+  extends SandpackRootProps<SandpackFiles, SandpackPredefinedTemplate> {
   options?: SandpackOptions<SandpackFiles, SandpackPredefinedTemplate>;
 }
 

@@ -8,14 +8,13 @@ export const Main = (): JSX.Element => {
   return (
     <Sandpack
       files={{
-        "Foo.js": "",
+        "Foo.tsx": "",
       }}
       options={{
-        showTabs: true,
-        openPaths: ["/src/app/app.component.css", "Foo.js"],
-        activePath: "/src/index.html",
+        activePath: "Foo.tsx",
+        openPaths: ["/index.js", "/App.svelte"],
       }}
-      template="angular"
+      template="svelte"
     />
   );
 };
