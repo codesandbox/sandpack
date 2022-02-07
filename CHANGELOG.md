@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.11](https://github.com/codesandbox/sandpack/compare/v0.13.10...v0.13.11) (2022-02-07)
+
+
+### Bug Fixes
+
+* **OpenInCodeSandboxButton:** preserve ?file= param for big sandboxes ([#357](https://github.com/codesandbox/sandpack/issues/357)) ([85f126d](https://github.com/codesandbox/sandpack/commit/85f126d184ae6139b6cc7e2c3dc66c6fd9fd603c))
+
+
+
+
+
 ## [0.13.10](https://github.com/codesandbox/sandpack/compare/v0.13.9...v0.13.10) (2022-02-03)
 
 **Note:** Version bump only for package sandpack
