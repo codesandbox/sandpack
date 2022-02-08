@@ -33,7 +33,7 @@ Currently, Sandpack doesn’t have a way to consume private dependencies from an
 
 #### Does Sandpack support NextJs or other server-side applications?
 
-We can't currently support this in the Sandpack library, due to technical limitations. Supporting this in the future would likely require logins and a paid service tier.
+You can run sandpack-react in a NextJs application but currently Sandpack doesn't support passing over a NextJs application into a sandpack as files, due to technical limitations(a server is required to run the project). Supporting this in the future would likely require logins and a paid service tier.
 
 #### How to highlight TypeScript errors in the editor?
 
@@ -48,7 +48,6 @@ There are a few reasons for hosting the bundler like this, as opposed to having 
 Sandpack is licensed under the Apache License 2.0.
 
 The Apache License 2.0 is in the permissive category, meaning that you can do (nearly) anything you want with the code, with very few exceptions. Also you must include the following in the copy of the code, whether you have modified it or not: the original copyright notice, copy of the license, statement of significant changes have been made(only if applicable), and copy of the notice file.
-
 
 Under this license, you can
 
