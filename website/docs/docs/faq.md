@@ -33,7 +33,7 @@ Currently, Sandpack doesn’t have a way to consume private dependencies from an
 
 #### Does Sandpack support NextJs or other server-side applications?
 
-You can run sandpack-react in a NextJs application but currently Sandpack doesn't support passing over a NextJs application into a sandpack as files, due to technical limitations(a server is required to run the project). Supporting this in the future would likely require logins and a paid service tier.
+You can run sandpack-react in a NextJs application but currently Sandpack doesn't support passing over a NextJs application into a sandpack as files, due to technical limitations (a server is required to run the project). Supporting this in the future would likely require logins and a paid service tier.
 
 #### How to highlight TypeScript errors in the editor?
 
