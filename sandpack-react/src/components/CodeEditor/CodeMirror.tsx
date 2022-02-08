@@ -347,7 +347,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
         return (): void => unsubscribe();
       },
-      [listen, showInlineErrors]
+      [cmView, listen, showInlineErrors]
     );
 
     const handleContainerKeyDown = (evt: React.KeyboardEvent): void => {
