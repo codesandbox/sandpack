@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.13](https://github.com/codesandbox/sandpack/compare/v0.13.12...v0.13.13) (2022-02-08)
+
+
+### Bug Fixes
+
+* **codemirror instance:** refresh instance on rerender ([#365](https://github.com/codesandbox/sandpack/issues/365)) ([930c7be](https://github.com/codesandbox/sandpack/commit/930c7bea1d6a8e8d5e825c19c8f392091bbfce8c))
+
+
+
+
+
 ## [0.13.12](https://github.com/codesandbox/sandpack/compare/v0.13.11...v0.13.12) (2022-02-08)
 
 
