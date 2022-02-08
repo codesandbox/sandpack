@@ -174,7 +174,7 @@ export const getSetup = ({
     return setup as SandboxTemplate;
   }
 
-  const baseTemplate = SANDBOX_TEMPLATES[template];
+  const baseTemplate = SANDBOX_TEMPLATES[template] as SandboxTemplate;
   if (!baseTemplate) {
     throw new Error(
       `[sandpack-react]: invalid template "${template}" provided`
@@ -183,7 +183,7 @@ export const getSetup = ({
 
   // If no setup, the template is used entirely
   if (!setup) {
-    return baseTemplate as SandboxTemplate;
+    return baseTemplate;
   }
 
   // Merge the setup on top of the template
@@ -194,7 +194,7 @@ export const getSetup = ({
       ...setup.dependencies,
     },
     devDependencies: {
-      ...(baseTemplate.devDependencies as SandboxTemplate["dependencies"]),
+      ...baseTemplate.devDependencies,
       ...setup.devDependencies,
     },
     entry: setup.entry || baseTemplate.entry,
