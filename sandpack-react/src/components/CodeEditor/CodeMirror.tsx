@@ -116,7 +116,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
   ) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const wrapper = React.useRef<any | HTMLElement>(null);
-    const cmView = React.useRef<EditorView>();
+    const [cmView, setCmView] = React.useState<EditorView>();
     const { theme, themeId } = useSandpackTheme();
     const [internalCode, setInternalCode] = React.useState<string>(code);
     const [shouldInitEditor, setShouldInitEditor] = React.useState(
@@ -132,9 +132,13 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       threshold: 0.2,
     });
 
-    React.useImperativeHandle(ref, () => ({
-      getCodemirror: (): EditorView | undefined => cmView.current,
-    }));
+    React.useImperativeHandle(
+      ref,
+      () => ({
+        getCodemirror: (): EditorView | undefined => cmView,
+      }),
+      [cmView]
+    );
 
     React.useEffect(() => {
       const mode = initMode === "lazy" || initMode === "user-visible";
@@ -264,11 +268,11 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           );
         }
 
-        cmView.current = view;
+        setCmView(view);
       }, 0);
 
       return (): void => {
-        cmView.current?.destroy();
+        cmView?.destroy();
 
         clearTimeout(timer);
       };
@@ -281,21 +285,20 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       // When the user clicks on a tab button on a larger screen
       // Avoid autofocus on mobile as it leads to a bad experience and an unexpected layout shift
       if (
-        cmView.current &&
+        cmView &&
         editorState === "dirty" &&
         window.matchMedia("(min-width: 768px)").matches
       ) {
-        cmView.current.contentDOM.focus();
+        cmView.contentDOM.focus();
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Update editor when code passed as prop from outside sandpack changes
     React.useEffect(() => {
-      if (cmView.current && code !== internalCode) {
-        const view = cmView.current;
-        view.dispatch({
-          changes: { from: 0, to: view.state.doc.length, insert: code },
+      if (cmView && code !== internalCode) {
+        cmView.dispatch({
+          changes: { from: 0, to: cmView.state.doc.length, insert: code },
         });
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -306,10 +309,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         if (!showInlineErrors) return;
 
         const unsubscribe = listen((message) => {
-          const view = cmView.current;
-
           if (message.type === "success") {
-            view?.dispatch({
+            cmView?.dispatch({
               // Pass message to clean up inline error
               annotations: [
                 {
@@ -321,10 +322,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
               // Trigger a doc change to remove inline error
               changes: {
                 from: 0,
-                to: view.state.doc.length,
-                insert: view.state.doc,
+                to: cmView.state.doc.length,
+                insert: cmView.state.doc,
               },
-              selection: view.state.selection,
+              selection: cmView.state.selection,
             });
           }
 
@@ -333,7 +334,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             message.action === "show-error" &&
             "line" in message
           ) {
-            view?.dispatch({
+            cmView?.dispatch({
               annotations: [
                 {
                   type: "error",
@@ -346,13 +347,13 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
         return (): void => unsubscribe();
       },
-      [listen, showInlineErrors]
+      [cmView, listen, showInlineErrors]
     );
 
     const handleContainerKeyDown = (evt: React.KeyboardEvent): void => {
-      if (evt.key === "Enter" && cmView.current) {
+      if (evt.key === "Enter" && cmView) {
         evt.preventDefault();
-        cmView.current.contentDOM.focus();
+        cmView.contentDOM.focus();
       }
     };
 
