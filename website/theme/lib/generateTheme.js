@@ -45,3 +45,7 @@ export const generateBasedOnSimpleColors = (color, base) => {
 
   return { ...theme };
 };
+
+
+  return { ...theme };
+};

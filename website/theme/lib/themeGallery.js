@@ -1,44 +1,46 @@
-import { defaultLight, defaultDark } from "@codesandbox/sandpack-react";
+import {
+  defaultLight as Light,
+  defaultDark as Dark,
+} from "@codesandbox/sandpack-react";
 
-const amy = {
+export { Light, Dark };
+
+export const SandpackDark = {
   colors: {
-    surface1: "#200020",
-    surface2: "#37021a",
-    surface3: "#a080ff",
-
-    clickable: "#3cc9b0",
-    base: "#dcdcdc",
-    disabled: "#360136",
-    hover: "#360136",
-
-    accent: "#3cc9b0",
-
-    error: "#37021a",
-    errorSurface: "#37021a",
+    surface1: "#151515",
+    surface2: "#252525",
+    surface3: "#2F2F2F",
+    clickable: "#999999",
+    base: "#808080",
+    disabled: "#4D4D4D",
+    hover: "#C5C5C5",
+    accent: "#90e86f",
+    error: "#b08df8",
+    errorSurface: "#dac1fb",
   },
   syntax: {
-    plain: "#3cc9b0",
+    plain: "#f0fdaf",
     comment: {
-      color: "#5f8a4d",
+      color: "#757575",
       fontStyle: "italic",
     },
-    keyword: "#a080ff",
-    tag: "#dcdcdc",
-    punctuation: "#dcdcdc",
-    definition: "#3a857f",
-    property: "#9cdbfe",
-    static: "#ce9278",
-    string: "#999999",
+    keyword: "#e5fd78",
+    tag: "#f0fdaf",
+    punctuation: "#ffffff",
+    definition: "#eeeeee",
+    property: "#90e86f",
+    static: "#ffffff",
+    string: "#dafecf",
   },
   font: {
     body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     size: "14px",
-    lineHeight: "1.4",
+    lineHeight: "1.6",
   },
 };
 
-const base = {
+export const Base = {
   colors: {
     surface1: "#FF8A00",
     surface2: "#FF8A00",
@@ -75,22 +77,40 @@ const base = {
     lineHeight: "1.4",
   },
 };
+export const Base = {
+  colors: {
+    surface1: "#FF8A00",
+    surface2: "#FF8A00",
+    surface3: "#FF8A00",
 
-export const themeGallery = [
-  {
-    label: "Light",
-    code: defaultLight,
+    clickable: "#FF8A00",
+    base: "#FF8A00",
+    disabled: "#FF8A00",
+    hover: "#FF8A00",
+
+    accent: "#FF8A00",
+
+    error: "#FF8A00",
+    errorSurface: "#FF8A00",
   },
-  {
-    label: "Dark",
-    code: defaultDark,
+  syntax: {
+    plain: "#FF8A00",
+    comment: {
+      color: "#FF8A00",
+      fontStyle: "italic",
+    },
+    keyword: "#FF8A00",
+    tag: "#FF8A00",
+    punctuation: "#FF8A00",
+    definition: "#FF8A00",
+    property: "#FF8A00",
+    static: "#FF8A00",
+    string: "#FF8A00",
   },
-  {
-    label: "Amy",
-    code: amy,
+  font: {
+    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    size: "14px",
+    lineHeight: "1.4",
   },
-  {
-    label: "Base",
-    code: base,
-  },
-];
+};

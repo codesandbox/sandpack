@@ -79,3 +79,6 @@ export const errorMessageClassName = css({
   animation: `${fadeIn} 150ms ease`,
   color: "$colors$error",
 });
+e`,
+  color: "$colors$error",
+});

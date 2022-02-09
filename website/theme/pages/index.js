@@ -22,7 +22,7 @@ import { useEffect, useState, Fragment } from "react";
 
 import { templates } from "../lib/codeExamples";
 import { generateBasedOnSimpleColors } from "../lib/generateTheme";
-import { themeGallery } from "../lib/themeGallery";
+import * as themeGallery from "../lib/themeGallery";
 
 const DEFAULT_COLORS = {
   primary: "#0971F1",
@@ -296,12 +296,12 @@ function Library({ setTheme }) {
     <>
       <Title>Themes</Title>
       <PickerContainer>
-        {themeGallery.map((theme) => (
+        {Object.entries(themeGallery).map(([label, payload]) => (
           <PickerTheme
-            key={JSON.stringify(theme)}
-            colors={[theme.code.colors.accent, theme.code.colors.surface1]}
-            label={theme.label}
-            onClick={() => setTheme(theme.code)}
+            key={JSON.stringify(payload)}
+            colors={[payload.colors.accent, payload.colors.surface1]}
+            label={label}
+            onClick={() => setTheme(payload)}
           />
         ))}
       </PickerContainer>
