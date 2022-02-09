@@ -1,6 +1,4 @@
-import type { SandboxTemplate } from "../types";
-
-export const SVELTE_TEMPLATE: SandboxTemplate = {
+export const SVELTE_TEMPLATE = {
   environment: "svelte",
   main: "/index.js",
   entry: "/index.js",

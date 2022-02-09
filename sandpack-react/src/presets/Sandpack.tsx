@@ -6,13 +6,12 @@ import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackProvider } from "../contexts/sandpackContext";
-import type { SandpackOptions } from "../types";
-import type { SandpackProps } from "../types";
+import type { SandpackPreset, SandpackOptions, TemplateFiles } from "../types";
 
 /**
  * @category Presets
  */
-export const Sandpack: React.FC<SandpackProps> = (props) => {
+export const Sandpack: SandpackPreset = (props) => {
   const codeEditorOptions: CodeEditorProps = {
     showTabs: props.options?.showTabs,
     showLineNumbers: props.options?.showLineNumbers,
@@ -27,8 +26,11 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
   };
 
   const providerOptions: SandpackOptions = {
-    openPaths: props.options?.openPaths,
-    activePath: props.options?.activePath,
+    /**
+     * TS-why: Type 'string | number | symbol' is not assignable to type 'string'
+     */
+    activePath: props.options?.activePath as unknown as string,
+    openPaths: props.options?.openPaths as unknown as string[],
     recompileMode: props.options?.recompileMode,
     recompileDelay: props.options?.recompileDelay,
     autorun: props.options?.autorun,
@@ -53,7 +55,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
   return (
     <SandpackProvider
       customSetup={props.customSetup}
-      files={props.files}
+      files={props.files as TemplateFiles}
       options={providerOptions}
       template={props.template}
     >

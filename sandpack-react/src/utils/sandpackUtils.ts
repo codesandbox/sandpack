@@ -161,7 +161,7 @@ export const getSetup = ({
   if (!template) {
     // If not input, default to vanilla
     if (!setup) {
-      return SANDBOX_TEMPLATES.vanilla;
+      return SANDBOX_TEMPLATES.vanilla as SandboxTemplate;
     }
 
     if (!setup.files || Object.keys(setup.files).length === 0) {
@@ -174,7 +174,7 @@ export const getSetup = ({
     return setup as SandboxTemplate;
   }
 
-  const baseTemplate = SANDBOX_TEMPLATES[template];
+  const baseTemplate = SANDBOX_TEMPLATES[template] as SandboxTemplate;
   if (!baseTemplate) {
     throw new Error(
       `[sandpack-react]: invalid template "${template}" provided`
@@ -200,7 +200,7 @@ export const getSetup = ({
     entry: setup.entry || baseTemplate.entry,
     main: setup.main || baseTemplate.main,
     environment: setup.environment || baseTemplate.environment,
-  };
+  } as SandboxTemplate;
 };
 
 export const createSetupFromUserInput = ({

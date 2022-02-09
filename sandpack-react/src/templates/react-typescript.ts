@@ -1,6 +1,4 @@
-import type { SandboxTemplate } from "../types";
-
-export const REACT_TYPESCRIPT_TEMPLATE: SandboxTemplate = {
+export const REACT_TYPESCRIPT_TEMPLATE = {
   files: {
     "tsconfig.json": {
       code: `{

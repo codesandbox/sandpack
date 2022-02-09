@@ -1,6 +1,4 @@
-import type { SandboxTemplate } from "../types";
-
-export const REACT_TEMPLATE: SandboxTemplate = {
+export const REACT_TEMPLATE = {
   files: {
     "/App.js": {
       code: `export default function App() {

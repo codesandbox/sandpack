@@ -1,6 +1,4 @@
-import type { SandboxTemplate } from "../types";
-
-export const VUE_TEMPLATE: SandboxTemplate = {
+export const VUE_TEMPLATE = {
   files: {
     "/src/App.vue": {
       code: `<template>

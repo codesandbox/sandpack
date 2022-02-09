@@ -14,6 +14,7 @@ import * as React from "react";
 
 import type {
   SandpackContext,
+  SandpackProviderComponent,
   SandpackProviderState,
   SandpackProviderProps,
 } from "../types";
@@ -33,7 +34,7 @@ const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
  * @category Provider
  * @noInheritDoc
  */
-class SandpackProvider extends React.PureComponent<
+class SandpackProviderClass extends React.PureComponent<
   SandpackProviderProps,
   SandpackProviderState
 > {
@@ -716,6 +717,10 @@ class SandpackProvider extends React.PureComponent<
     );
   }
 }
+
+const SandpackProvider: SandpackProviderComponent =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  SandpackProviderClass as any;
 
 /**
  * @category Provider

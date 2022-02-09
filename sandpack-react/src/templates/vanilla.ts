@@ -1,6 +1,4 @@
-import type { SandboxTemplate } from "../types";
-
-export const VANILLA_TEMPLATE: SandboxTemplate = {
+export const VANILLA_TEMPLATE = {
   files: {
     "/src/index.js": {
       code: `import "./styles.css";
