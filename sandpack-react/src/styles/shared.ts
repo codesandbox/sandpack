@@ -13,7 +13,7 @@ export const buttonClassName = css({
   fontSize: "inherit",
   fontFamily: "inherit",
   backgroundColor: "transparent",
-  transition: "all $default",
+  transition: "color $default, background $default",
   cursor: "pointer",
 
   color: "$colors$clickable",

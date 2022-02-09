@@ -1,8 +1,6 @@
 import { defaultLight, defaultDark } from "@codesandbox/sandpack-react";
 import Values from "values.js";
 
-export const DEFAULT_COLORS = [];
-
 export const generateBasedOnSimpleColors = (color, base) => {
   const primaryColors = new Values(color.primary);
   const secondaryColors = new Values(color.secondary);
@@ -24,14 +22,14 @@ export const generateBasedOnSimpleColors = (color, base) => {
     surface3: theme.colors.surface3,
 
     clickable: theme.colors.clickable,
-    base: color.base,
-    disabled: pShades[6].hexString(),
+    base: theme.colors.base,
+    disabled: theme.colors.disabled,
     hover: theme.colors.hover,
 
     accent: color.primary,
 
     error: tShades[3].hexString(),
-    errorSurface: color.tertiary,
+    errorSurface: tShades[0].hexString(),
   };
   theme.syntax = {
     plain: theme.syntax.plain,

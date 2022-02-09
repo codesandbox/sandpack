@@ -1,3 +1,5 @@
+import { defaultLight, defaultDark } from "@codesandbox/sandpack-react";
+
 const amy = {
   colors: {
     surface1: "#200020",
@@ -75,6 +77,14 @@ const base = {
 };
 
 export const themeGallery = [
+  {
+    label: "Light",
+    code: defaultLight,
+  },
+  {
+    label: "Dark",
+    code: defaultDark,
+  },
   {
     label: "Amy",
     code: amy,
