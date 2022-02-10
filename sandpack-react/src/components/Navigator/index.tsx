@@ -32,6 +32,7 @@ export const Navigator = ({
 
   React.useEffect(() => {
     const unsub = listen((message) => {
+      console.log(message);
       if (message.type === "urlchange") {
         const { url, back, forward } = message;
 
