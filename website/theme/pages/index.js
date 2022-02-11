@@ -123,6 +123,11 @@ export default function Home() {
               }}
               template="react"
               theme={theme}
+              options={{
+                readOnly: true,
+                showLineNumbers: true,
+                showInlineErrors: true,
+              }}
             />
           </ContainerSandpack>
 
