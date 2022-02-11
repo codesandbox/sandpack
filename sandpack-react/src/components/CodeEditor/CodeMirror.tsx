@@ -388,6 +388,9 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           >
             <code
               className={classNames(c("pre-placeholder"), placeholderClassName)}
+              style={{
+                marginLeft: showLineNumbers ? 44 : 20, // gutter line offset
+              }}
             >
               {syntaxHighlightRender}
             </code>
