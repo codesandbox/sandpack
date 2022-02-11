@@ -91,24 +91,3 @@ export function PickerTheme({ colors, label, active, onClick, ...props }) {
     </div>
   );
 }
-`${styles.pickerWrapper} ${active ? styles.active : ""}`}>
-        <button
-          className={styles.picker}
-          onClick={() => {
-            if (updateModeFromGallery) {
-              updateModeFromGallery(modeKey);
-            }
-
-            if (updateMode) {
-              updateMode(modeKey);
-            }
-          }}
-          style={{
-            background: `linear-gradient(-45deg, ${color1} 50%, ${color2} 50%)`,
-          }}
-        ></button>
-      </div>
-      <span className={styles.label}>{label}</span>
-    </div>
-  );
-}
