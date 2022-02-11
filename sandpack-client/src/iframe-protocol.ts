@@ -108,21 +108,27 @@ export class IFrameProtocol {
   }
 
   // Handles message windows coming from iframes
-  private eventListener(message: MessageEvent): void {
-    if (!message.data.codesandbox) {
+  private eventListener(evt: MessageEvent): void {
+    // skip events originating from different iframes
+    if (evt.source !== this.frameWindow) {
+      return;
+    }
+
+    const message = evt.data;
+    if (!message.codesandbox) {
       return;
     }
 
     Object.values(this.globalListeners).forEach((listener) =>
-      listener(message.data)
+      listener(message)
     );
 
-    if (message.data.$id !== this.channelId) {
+    if (message.$id !== this.channelId) {
       return;
     }
 
     Object.values(this.channelListeners).forEach((listener) =>
-      listener(message.data)
+      listener(message)
     );
   }
 }
