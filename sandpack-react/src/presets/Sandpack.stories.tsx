@@ -158,7 +158,44 @@ export const InitModeUserVisible: React.FC = () => {
       {new Array(30).fill(" ").map((_, index) => {
         return (
           <div key={index} style={{ marginBottom: 200 }}>
-            <Sandpack options={{ initMode: "user-visible" }} />
+            <Sandpack
+              customSetup={{
+                environment: "create-react-app",
+                entry: "/index.js",
+                dependencies: {
+                  react: "^17.0.0",
+                  "react-dom": "^17.0.0",
+                  "react-scripts": "^4.0.0",
+                },
+              }}
+              files={{
+                "/App.js": {
+                  code: `export default function App() {
+  return <h1>Hello World</h1>
+}
+`,
+                },
+                "/index.js": {
+                  code: `import React, { StrictMode } from "react";
+import ReactDOM from "react-dom";
+
+import App from "./App";
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+  rootElement
+);`,
+                },
+              }}
+              options={{
+                // initMode: "user-visible",
+                // InitModeUserVisible: "0px 0px",
+                bundlerURL: "https://sandpack-next.pages.dev",
+              }}
+            />
           </div>
         );
       })}
