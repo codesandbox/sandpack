@@ -114,19 +114,20 @@ export default function Home() {
 
           <ContainerSandpack>
             <Sandpack
-              customSetup={{
-                entry: "index.js",
-                files: {
-                  "/App.js": templates.js,
-                  "/style.css": templates.css,
-                },
-              }}
+              // customSetup={{
+              //   entry: "index.js",
+              //   files: {
+              //     "/App.js": templates.js,
+              //     "/style.css": templates.css,
+              //   },
+              // }}
               template="react"
               theme={theme}
               options={{
                 // readOnly: true,
                 showLineNumbers: true,
                 showInlineErrors: true,
+                showNavigator: true,
               }}
             />
           </ContainerSandpack>

@@ -28,6 +28,7 @@ export const buttonClassName = css({
     padding: "$space$1",
     width: "$space$8",
     height: "$space$8",
+    display: "flex",
   },
 });
 

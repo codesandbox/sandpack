@@ -7,7 +7,7 @@ export const defaultLight: SandpackTheme = {
   colors: {
     surface1: "#ffffff",
     surface2: "#EFEFEF",
-    surface3: "#E1E3E5",
+    surface3: "#F3F3F3",
 
     disabled: "#C5C5C5",
     base: "#323232",

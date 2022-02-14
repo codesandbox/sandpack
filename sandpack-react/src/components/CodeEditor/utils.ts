@@ -32,7 +32,7 @@ export const getEditorTheme = (): Extension =>
 
     ".cm-activeLine": {
       // TODO: confirm
-      backgroundColor: `var(--${THEME_PREFIX}-colors-surface2)`,
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface3)`,
       borderRadius: `var(--${THEME_PREFIX}-border-radius)`,
     },
 
