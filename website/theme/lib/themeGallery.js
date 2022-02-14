@@ -112,7 +112,7 @@ export const monokaiProTheme = {
   colors: {
     surface1: "#2D2A2E",
     surface2: "#444344",
-    surface3: "#636263",
+    surface3: "#484747",
 
     clickable: "#939293",
     base: "#C1C0C1",
@@ -151,7 +151,7 @@ export const githubLightTheme = {
 
     clickable: "#959da5",
     base: "#24292e",
-    disabled: "#e4e7eb",
+    disabled: "#d1d4d8",
     hover: "#24292e",
 
     accent: "#24292e",

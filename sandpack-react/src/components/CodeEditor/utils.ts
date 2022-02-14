@@ -58,7 +58,7 @@ export const getEditorTheme = (): Extension =>
     },
 
     ".cm-gutters": {
-      backgroundColor: `var(--${THEME_PREFIX}-colors-surface)`,
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface1)`,
       color: `var(--${THEME_PREFIX}-colors-disabled)`,
       border: "none",
       paddingLeft: `var(--${THEME_PREFIX}-space-1)`,
