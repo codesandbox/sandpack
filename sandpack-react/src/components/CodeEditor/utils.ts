@@ -18,14 +18,11 @@ export const getCodeMirrorPosition = (
   return doc.line(line).from + (column ?? 0) - 1;
 };
 
-export const getEditorTheme = (theme: SandpackTheme): Extension =>
+export const getEditorTheme = (): Extension =>
   EditorView.theme({
     "&": {
-      backgroundColor: theme.colors.surface1,
-      color:
-        (typeof theme.syntax.plain === "string"
-          ? theme.syntax.plain
-          : theme.syntax.plain.color) || theme.colors.base,
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface1)`,
+      color: `var(--${THEME_PREFIX}-syntax-color-plain)`,
       height: "100%",
     },
 
@@ -35,34 +32,34 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
 
     ".cm-activeLine": {
       // TODO: confirm
-      backgroundColor: theme.colors.surface2,
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface2)`,
       borderRadius: `var(--${THEME_PREFIX}-border-radius)`,
     },
 
     ".cm-errorLine": {
-      backgroundColor: theme.colors.errorSurface!,
+      backgroundColor: `var(--${THEME_PREFIX}-colors-errorSurface)`,
       borderRadius: `var(--${THEME_PREFIX}-border-radius)`,
     },
 
     ".cm-matchingBracket, .cm-nonmatchingBracket": {
       color: "inherit",
       // TODO: confirm
-      backgroundColor: theme.colors.surface2,
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface2)`,
     },
 
     ".cm-content": {
-      caretColor: theme.colors.accent,
+      caretColor: `var(--${THEME_PREFIX}-colors-accent)`,
       padding: `0 var(--${THEME_PREFIX}-space-4)`,
     },
 
     ".cm-scroller": {
-      fontFamily: theme.font.mono,
-      lineHeight: theme.font.lineHeight,
+      fontFamily: `var(--${THEME_PREFIX}-font-mono)`,
+      lineHeight: `var(--${THEME_PREFIX}-font-lineHeight)`,
     },
 
     ".cm-gutters": {
-      backgroundColor: theme.colors.surface1,
-      color: theme.colors.disabled,
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface)`,
+      color: `var(--${THEME_PREFIX}-colors-disabled)`,
       border: "none",
       paddingLeft: `var(--${THEME_PREFIX}-space-1)`,
     },
@@ -72,10 +69,8 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     },
 
     ".cm-lineNumbers .cm-gutterElement": {
-      lineHeight: `var(--${THEME_PREFIX}-font-lineHeight)`,
+      lineHeight: `calc(var(--${THEME_PREFIX}-font-lineHeight) * 1.6)`,
     },
-
-    ".cm-line": {},
   });
 
 const classNameToken = (name: string): string =>

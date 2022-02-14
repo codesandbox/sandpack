@@ -217,7 +217,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           defaultHighlightStyle.fallback,
 
-          getEditorTheme(theme),
+          getEditorTheme(),
           highlightTheme,
           ...extensions,
         ];

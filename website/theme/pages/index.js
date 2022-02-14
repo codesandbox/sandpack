@@ -124,7 +124,7 @@ export default function Home() {
               template="react"
               theme={theme}
               options={{
-                readOnly: true,
+                // readOnly: true,
                 showLineNumbers: true,
                 showInlineErrors: true,
               }}
@@ -203,7 +203,7 @@ function Advanced({ theme, updateTheme }) {
     body: theme.font.body,
     mono: theme.font.mono,
     size: Number(theme.font.size.replace("px", "")),
-    lineHeight: Number(theme.font.lineHeight),
+    lineHeight: Number(theme.font.lineHeight.replace("px", "")),
   });
 
   useEffect(() => {
@@ -220,6 +220,8 @@ function Advanced({ theme, updateTheme }) {
   }, [theme]);
 
   const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
+
+  console.log(theme.font);
 
   return (
     <>
