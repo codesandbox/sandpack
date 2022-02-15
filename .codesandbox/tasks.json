@@ -1,9 +1,15 @@
 {
-  "previews": {
-    "6006": {
-      "name": "Storybook",
-      "command": "yarn workspace @codesandbox/sandpack-react storybook"
+  "setupTasks": [
+    {
+      "name": "Installing Dependencies",
+      "command": "yarn install"
     },
+    {
+      "name": "Building Workspace",
+      "command": "yarn build"
+    }
+  ],
+  "portTasks": {
     "3000": {
       "name": "Docs",
       "command": "yarn dev:docs"
@@ -15,6 +21,11 @@
     "3002": {
       "name": "Theme",
       "command": "yarn dev:theme"
+    },
+    "6006": {
+      "name": "Storybook",
+      "command": "yarn workspace @codesandbox/sandpack-react storybook",
+      "runAtStart": true
     }
   },
   "tasks": {
@@ -38,15 +49,5 @@
       "name": "Lint Workspace",
       "command": "yarn lint"
     }
-  },
-  "setupTasks": [
-    {
-      "name": "Installing Dependencies",
-      "command": "yarn install"
-    },
-    {
-      "name": "Building Workspace",
-      "command": "yarn build"
-    }
-  ]
+  }
 }
