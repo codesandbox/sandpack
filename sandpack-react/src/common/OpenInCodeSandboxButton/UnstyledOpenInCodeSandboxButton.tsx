@@ -38,23 +38,32 @@ const getFileParameters = (
 export const UnstyledOpenInCodeSandboxButton: React.FC<
   React.HtmlHTMLAttributes<unknown>
 > = ({ children, ...props }) => {
-  const [paramsValues, setParamsValues] = React.useState("");
   const { sandpack } = useSandpack();
   const formRef = React.useRef<HTMLFormElement>(null);
+
+  const [paramsValues, setParamsValues] = React.useState<URLSearchParams>();
 
   React.useEffect(
     function debounce() {
       const timer = setTimeout(() => {
         const params = getFileParameters(sandpack.files, sandpack.environment);
 
-        setParamsValues(params);
+        const searchParams = new URLSearchParams({
+          parameters: params,
+          query: new URLSearchParams({
+            file: sandpack.activePath,
+            "from-sandpack": "true",
+          }).toString(),
+        });
+
+        setParamsValues(searchParams);
       }, 600);
 
       return (): void => {
         clearTimeout(timer);
       };
     },
-    [sandpack.environment, sandpack.files]
+    [sandpack.activePath, sandpack.environment, sandpack.files]
   );
 
   // Register the usage of the codesandbox link
@@ -67,7 +76,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
    * This is a safe limit to avoid too long requests (401),
    * as all parameters are attached in the URL
    */
-  if (paramsValues.length > 1500) {
+  if ((paramsValues?.get?.("parameters")?.length ?? 0) > 1500) {
     return (
       <button
         onClick={(): void => formRef.current?.submit()}
@@ -75,7 +84,12 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
         {...props}
       >
         <form ref={formRef} action={CSB_URL} method="POST" target="_blank">
-          <input name="parameters" type="hidden" value={paramsValues} />
+          {Array.from(
+            paramsValues as unknown as Array<[string, string]>,
+            ([k, v]) => (
+              <input key={k} name={k} type="hidden" value={v} />
+            )
+          )}
         </form>
         {children}
       </button>
@@ -84,7 +98,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
 
   return (
     <a
-      href={`${CSB_URL}?parameters=${paramsValues}&query=file=${sandpack.activePath}%26from-sandpack=true`}
+      href={`${CSB_URL}?${paramsValues?.toString()}`}
       rel="noreferrer noopener"
       target="_blank"
       title="Open in CodeSandbox"
