@@ -24,6 +24,7 @@ export interface SandpackProps {
   customSetup?: SandpackSetup;
 
   theme?: SandpackThemeProp;
+  id?: string;
 
   options?: {
     openPaths?: string[];
@@ -58,6 +59,7 @@ export interface SandpackProps {
     recompileMode?: "immediate" | "delayed";
     recompileDelay?: number;
     codeEditor?: SandpackCodeOptions;
+    id?: string;
 
     /**
      * This disables editing of content by the user in all files.
@@ -101,6 +103,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     extensionsKeymap: props.options?.codeEditor?.extensionsKeymap,
     readOnly: props.options?.readOnly,
     showReadOnly: props.options?.showReadOnly,
+    id: props.options?.id,
   };
 
   const providerOptions: SandpackProviderProps = {
