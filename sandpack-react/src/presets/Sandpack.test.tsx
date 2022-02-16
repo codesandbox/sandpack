@@ -10,14 +10,6 @@ describe("Sandpack", () => {
       renderToString(<Sandpack options={{ id: "test" }} />);
     expect(renderOnServer).not.toThrow();
   });
-
-  it("match the snapshot on server render", () => {
-    const renderOnServer = renderToString(
-      <Sandpack options={{ id: "test" }} />
-    );
-
-    expect(renderOnServer).toMatchSnapshot();
-  });
 });
 
 describe("getSandpackCssText", () => {
@@ -61,6 +53,35 @@ describe("getSandpackCssText", () => {
     );
 
     expect(getSandpackCssText()).toContain(componentClassName);
+  });
+
+  it("should not duplicate the component CSS if there'is more than one component", () => {
+    let sandpackModule = null;
+    let renderToString = null;
+
+    jest.isolateModules(() => {
+      sandpackModule = require("../");
+      renderToString = require("react-dom/server").renderToString;
+    });
+
+    const componentClassName = editorClassName().className;
+    const { SandpackProvider, SandpackCodeEditor, getSandpackCssText } =
+      sandpackModule;
+
+    renderToString(
+      <>
+        <SandpackProvider>
+          <SandpackCodeEditor />
+          <SandpackCodeEditor />
+        </SandpackProvider>
+        <SandpackProvider>
+          <SandpackCodeEditor />
+        </SandpackProvider>
+      </>
+    );
+
+    const selector = new RegExp(`${componentClassName}{`, "gm");
+    expect(getSandpackCssText().match(selector).length).toBe(1);
   });
 
   it("should not duplicate the CSS if two Sandpack has the same theme", () => {
