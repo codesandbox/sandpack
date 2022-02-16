@@ -17,21 +17,22 @@ describe(standardizeTheme, () => {
     const input = standardizeTheme({ colors: { accent: "blue" } });
 
     expect(input).toMatchSnapshot();
-    expect(input.id).toBe("sp-1420813869");
+    expect(input.id).toBe("sp-1791144801");
   });
 
   it("should return a custom theme", () => {
     const input = standardizeTheme({
       colors: {
-        activeText: "red",
-        defaultText: "red",
-        inactiveText: "red",
-        activeBackground: "red",
-        defaultBackground: "red",
-        inputBackground: "red",
+        surface1: "red",
+        surface2: "red",
+        surface3: "red",
         accent: "red",
-        errorBackground: "red",
-        errorForeground: "red",
+        base: "red",
+        clickable: "red",
+        disabled: "red",
+        hover: "red",
+        error: "red",
+        errorSurface: "red",
       },
       syntax: {
         plain: "blue",
@@ -60,15 +61,16 @@ describe(standardizeStitchesTheme, () => {
   it("converts a theme to the stitches format", () => {
     const { theme } = standardizeTheme({
       colors: {
-        activeText: "red",
-        defaultText: "red",
-        inactiveText: "red",
-        activeBackground: "red",
-        defaultBackground: "red",
-        inputBackground: "red",
+        surface1: "red",
+        surface2: "red",
+        surface3: "red",
         accent: "red",
-        errorBackground: "red",
-        errorForeground: "red",
+        base: "red",
+        clickable: "red",
+        disabled: "red",
+        hover: "red",
+        error: "red",
+        errorSurface: "red",
       },
       syntax: {
         plain: { color: "blue", fontStyle: "italic" },
