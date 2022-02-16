@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { classNames } from "../../utils/classNames";
 import { useSandpack } from "../../hooks/useSandpack";
-
 import { css } from "../../styles";
+import { classNames } from "../../utils/classNames";
+
 import { ModuleList } from "./ModuleList";
 
 const fileExplorerClassName = css({

@@ -8,23 +8,23 @@ export const Main = (): JSX.Element => {
   return (
     <>
       <Sandpack
-        theme="dark"
-        template="react"
         options={{
           showLineNumbers: true,
           showNavigator: true,
           showInlineErrors: true,
         }}
+        template="react"
+        theme="dark"
       />
       <br />
       <br />
       <Sandpack
-        template="react"
         options={{
           showLineNumbers: true,
           showNavigator: true,
           showInlineErrors: true,
         }}
+        template="react"
       />
     </>
   );

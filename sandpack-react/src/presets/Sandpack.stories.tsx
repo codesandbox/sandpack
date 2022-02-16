@@ -172,14 +172,14 @@ export const InitModeUserVisible: React.FC = () => {
 export const showInlineErrors: React.FC = () => {
   return (
     <Sandpack
-      template="react"
-      options={{ showInlineErrors: true }}
       files={{
         "/App.js": `export default function App() {
   return <h1>Hello Woadwadrld</h1
 }
 `,
       }}
+      options={{ showInlineErrors: true }}
+      template="react"
     />
   );
 };

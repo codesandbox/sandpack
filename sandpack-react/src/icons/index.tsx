@@ -70,11 +70,11 @@ export const FullScreenIcon = (): React.ReactElement => (
 
 export const ExportIcon = (): React.ReactElement => (
   <svg
+    fill="none"
     height="16"
     viewBox="0 0 16 16"
     width="16"
     xmlns="http://www.w3.org/2000/svg"
-    fill="none"
   >
     <path
       d="M6.66671 3.33337H4.33337C3.78109 3.33337 3.33337 3.78109 3.33337 4.33337V11.6667C3.33337 12.219 3.78109 12.6667 4.33337 12.6667H11.6667C12.219 12.6667 12.6667 12.219 12.6667 11.6667V9.33337"

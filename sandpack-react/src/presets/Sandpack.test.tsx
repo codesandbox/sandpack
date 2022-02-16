@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import React from "react";
 import { renderToString } from "react-dom/server";
-import { Sandpack } from "../";
 
+import { Sandpack } from "../";
 import { editorClassName } from "../components/CodeEditor/styles";
 
 describe("Sandpack", () => {
   it("renders on a server without crashing", () => {
-    const renderOnServer = () =>
+    const renderOnServer = (): string =>
       renderToString(<Sandpack options={{ id: "test" }} />);
     expect(renderOnServer).not.toThrow();
   });

@@ -11,7 +11,6 @@ export default {
 export const Component: React.FC = () => (
   <>
     <SandpackProvider
-      template="react"
       customSetup={{
         entry: "/index.tsx",
         files: {
@@ -21,6 +20,7 @@ export const Component: React.FC = () => (
           "/src/components/text.tsx": "",
         },
       }}
+      template="react"
     >
       <SandpackLayout>
         <FileExplorer />
@@ -29,7 +29,6 @@ export const Component: React.FC = () => (
       </SandpackLayout>
     </SandpackProvider>
     <SandpackProvider
-      template="react"
       customSetup={{
         entry: "/index.tsx",
         files: {
@@ -39,6 +38,7 @@ export const Component: React.FC = () => (
           "/src/components/text.tsx": "",
         },
       }}
+      template="react"
     >
       <SandpackLayout theme="dark">
         <FileExplorer />
