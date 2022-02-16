@@ -158,6 +158,20 @@ export const InitModeUserVisible: React.FC = () => {
       {new Array(30).fill(" ").map((_, index) => {
         return (
           <div key={index} style={{ marginBottom: 200 }}>
+            <Sandpack template="react" options={{ initMode: "user-visible" }} />
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+export const NewBundler: React.FC = () => {
+  return (
+    <>
+      {new Array(30).fill(" ").map((_, index) => {
+        return (
+          <div key={index} style={{ marginBottom: 200 }}>
             <Sandpack
               customSetup={{
                 environment: "create-react-app",
@@ -191,8 +205,7 @@ ReactDOM.render(
                 },
               }}
               options={{
-                // initMode: "user-visible",
-                // InitModeUserVisible: "0px 0px",
+                initMode: "user-visible",
                 bundlerURL: "https://sandpack-next.pages.dev",
               }}
             />
