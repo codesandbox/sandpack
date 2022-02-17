@@ -3,6 +3,63 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.15](https://github.com/codesandbox/sandpack/compare/v0.13.14...v0.13.15) (2022-02-11)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [0.13.14](https://github.com/codesandbox/sandpack/compare/v0.13.13...v0.13.14) (2022-02-09)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [0.13.13](https://github.com/codesandbox/sandpack/compare/v0.13.12...v0.13.13) (2022-02-08)
+
+
+### Bug Fixes
+
+* **codemirror instance:** refresh instance on rerender ([#365](https://github.com/codesandbox/sandpack/issues/365)) ([930c7be](https://github.com/codesandbox/sandpack/commit/930c7bea1d6a8e8d5e825c19c8f392091bbfce8c))
+
+
+
+
+
+## [0.13.12](https://github.com/codesandbox/sandpack/compare/v0.13.11...v0.13.12) (2022-02-08)
+
+
+### Bug Fixes
+
+* **open cdb:** move window api to useeffect ([#362](https://github.com/codesandbox/sandpack/issues/362)) ([7b40dc2](https://github.com/codesandbox/sandpack/commit/7b40dc2799dfc53911503698f82b55fcdd4637da))
+
+
+
+
+
+## [0.13.11](https://github.com/codesandbox/sandpack/compare/v0.13.10...v0.13.11) (2022-02-07)
+
+
+### Bug Fixes
+
+* **OpenInCodeSandboxButton:** preserve ?file= param for big sandboxes ([#357](https://github.com/codesandbox/sandpack/issues/357)) ([85f126d](https://github.com/codesandbox/sandpack/commit/85f126d184ae6139b6cc7e2c3dc66c6fd9fd603c))
+
+
+
+
+
+## [0.13.10](https://github.com/codesandbox/sandpack/compare/v0.13.9...v0.13.10) (2022-02-03)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
 ## [0.13.9](https://github.com/codesandbox/sandpack/compare/v0.13.8...v0.13.9) (2022-02-02)
 
 

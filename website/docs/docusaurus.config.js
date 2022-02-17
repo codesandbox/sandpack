@@ -25,6 +25,17 @@ module.exports = {
             headTags: [
               {
                 tagName: "script",
+                innerHTML: `var OlvyConfig = { workspaceAlias: "codesandbox" };`,
+              },
+              {
+                tagName: "script",
+                attributes: {
+                  src: "https://app.olvy.co/scriptV2.js",
+                  async: true,
+                },
+              },
+              {
+                tagName: "script",
                 innerHTML: API_KEY
                   ? `
                 (function(e,t){var r=e.amplitude||{_q:[],_iq:{}};var n=t.createElement("script")

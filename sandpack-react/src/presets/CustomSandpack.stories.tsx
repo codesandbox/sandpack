@@ -254,6 +254,7 @@ const SandpackListener: React.FC = () => {
   const { listen } = useSandpack();
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     const unsubscribe = listen((msg) => console.log(msg));
 
     return unsubscribe;
