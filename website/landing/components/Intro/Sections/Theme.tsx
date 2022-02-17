@@ -52,7 +52,7 @@ export const ThemeExample: React.FC = () => {
     if (inView) {
       setTheme("light");
     } else {
-      setTheme("sandpack-dark");
+      setTheme("dark");
     }
   }, [higherMobile, inView]);
 

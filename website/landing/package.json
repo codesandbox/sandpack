@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@codesandbox/sandpack-react": "*",
+    "@codesandbox/sandpack-themes": "*",
     "@stitches/react": "^1.2.5",
     "amplitude-js": "^8.13.0",
     "framer-motion": "^5.3.2",

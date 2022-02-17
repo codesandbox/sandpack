@@ -1,20 +1,24 @@
 import type { SandpackTheme } from "./types";
 
 export const sandpackDark: SandpackTheme = {
-  palette: {
-    activeText: "#90e86f",
-    defaultText: "#5a5a5a",
-    inactiveText: "#1a1a1a",
-    activeBackground: "#272727",
-    defaultBackground: "#151515",
-    inputBackground: "#2e2e2e",
+  colors: {
+    surface1: "#151515",
+    surface2: "#252525",
+    surface3: "#2F2F2F",
+    clickable: "#999999",
+    base: "#808080",
+    disabled: "#4D4D4D",
+    hover: "#C5C5C5",
     accent: "#90e86f",
-    errorBackground: "#dac1fb",
-    errorForeground: "#b08df8",
+    error: "#b08df8",
+    errorSurface: "#dac1fb",
   },
   syntax: {
     plain: "#f0fdaf",
-    comment: { color: "#757575", fontStyle: "italic" },
+    comment: {
+      color: "#757575",
+      fontStyle: "italic",
+    },
     keyword: "#e5fd78",
     tag: "#f0fdaf",
     punctuation: "#ffffff",
@@ -23,12 +27,10 @@ export const sandpackDark: SandpackTheme = {
     static: "#ffffff",
     string: "#dafecf",
   },
-  typography: {
-    bodyFont:
-      'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    monoFont:
-      '"Fira Code", "Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    fontSize: "14px",
+  font: {
+    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    size: "14px",
     lineHeight: "1.6",
   },
 };

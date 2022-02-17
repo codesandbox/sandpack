@@ -1,13 +1,13 @@
 import { Sandpack } from "@codesandbox/sandpack-react";
-import type { NextPage } from "next";
+import { githubLightTheme, sandpackDark } from "@codesandbox/sandpack-themes";
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <div>
       <Sandpack />
-      <Sandpack theme="sandpack-dark" />
-      <Sandpack theme="github-light" />
-      <Sandpack options={{ readOnly: true }} theme="github-light" />
+      <Sandpack theme="dark" />
+      <Sandpack theme={githubLightTheme} />
+      <Sandpack options={{ readOnly: true }} theme={sandpackDark} />
     </div>
   );
 };

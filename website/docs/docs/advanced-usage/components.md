@@ -217,7 +217,7 @@ Sandpack also provides a component that adds React DevTools, allowing you to ins
 <!-- prettier-ignore -->
 <div className="nestedSandpack">
   <Sandpack
-    theme="sandpack-dark"
+    theme="dark"
     customSetup={{
       dependencies: { "@codesandbox/sandpack-react": "latest" },
     }}

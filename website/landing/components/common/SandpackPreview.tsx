@@ -1,5 +1,6 @@
 import type { SandpackProps } from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
+import {sandpackDark} from "@codesandbox/sandpack-themes";
 
 import { styled } from "../../stitches.config";
 
@@ -51,7 +52,7 @@ export const SandpackPreview: React.FC<{ options?: SandpackProps }> = ({
     <SandpackContainer>
       <Sandpack
         template="react"
-        theme="sandpack-dark"
+        theme={sandpackDark}
         {...options}
         options={{
           initMode: "user-visible",

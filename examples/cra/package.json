@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@codesandbox/sandpack-react": "*",
+    "@codesandbox/sandpack-themes": "*",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.17",
     "@types/react": "^17.0.38",

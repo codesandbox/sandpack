@@ -1,16 +1,20 @@
 import type { SandpackTheme } from "./types";
 
 export const monokaiProTheme: SandpackTheme = {
-  palette: {
-    activeText: "rgb(252, 252, 250)",
-    defaultText: "rgb(147, 146, 147)",
-    inactiveText: "#444344",
-    activeBackground: "#444344",
-    defaultBackground: "rgb(45, 42, 46)",
-    inputBackground: "rgb(25, 24, 26)",
-    accent: "rgb(255, 216, 102)",
-    errorBackground: "#ffcdca",
-    errorForeground: "#811e18",
+  colors: {
+    surface1: "#2D2A2E",
+    surface2: "#444344",
+    surface3: "#484747",
+
+    clickable: "#939293",
+    base: "#C1C0C1",
+    disabled: "#444344",
+    hover: "#FCFCFA",
+
+    accent: "#FFD866",
+
+    error: "#811e18",
+    errorSurface: "#ffcdca",
   },
   syntax: {
     plain: "rgb(252, 252, 250)",
@@ -23,12 +27,10 @@ export const monokaiProTheme: SandpackTheme = {
     static: "rgb(171, 157, 242)",
     string: "rgb(255, 216, 102)",
   },
-  typography: {
-    bodyFont:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    monoFont:
-      '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    fontSize: "14px",
+  font: {
+    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    size: "14px",
     lineHeight: "1.4",
   },
 };
