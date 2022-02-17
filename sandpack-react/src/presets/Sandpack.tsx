@@ -59,6 +59,7 @@ export interface SandpackProps {
     recompileMode?: "immediate" | "delayed";
     recompileDelay?: number;
     codeEditor?: SandpackCodeOptions;
+    // TODO: documentation
     id?: string;
 
     /**

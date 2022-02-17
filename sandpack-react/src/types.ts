@@ -220,19 +220,6 @@ export interface SandpackTheme {
     warning?: string;
     warningSurface?: string;
   };
-
-  // {
-
-  //   activeText: string;
-  //   defaultText: string;
-  //   inactiveText: string;
-  //   activeBackground: string;
-  //   defaultBackground: string;
-  //   inputBackground: string;
-  //   accent: string;
-  //   errorBackground: string;
-  //   errorForeground: string;
-  // };
   syntax: {
     plain: string | SandpackSyntaxStyle;
     comment: string | SandpackSyntaxStyle;
