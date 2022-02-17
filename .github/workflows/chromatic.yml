@@ -22,7 +22,9 @@ jobs:
           useLockFile: true
 
       - name: Build dependency
-        run: yarn workspace @codesandbox/sandpack-client run build
+        run: |
+          yarn workspace @codesandbox/sandpack-client build
+          yarn workspace @codesandbox/sandpack-themes build
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1

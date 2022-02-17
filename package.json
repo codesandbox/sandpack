@@ -22,7 +22,7 @@
     "test": "jest sandpack-react sandpack-client",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "build": "yarn workspace @codesandbox/sandpack-client run build && yarn workspace @codesandbox/sandpack-react run build && yarn workspace @codesandbox/sandpack-themes run build",
+    "build": "yarn workspace @codesandbox/sandpack-client build && yarn workspace @codesandbox/sandpack-react build && yarn workspace @codesandbox/sandpack-themes build",
     "prepare": "husky install",
     "clean": "yarn workspaces run clean",
     "dev:docs": "yarn workspace sandpack-docs start",
