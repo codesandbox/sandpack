@@ -3,6 +3,7 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
 } from "@codesandbox/sandpack-react";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 
 import { Box } from "./Box";
 
@@ -30,7 +31,7 @@ export const CodeBlock: React.FC = ({ children }) => {
         files={{ "index.ts": (children as string)?.trim() }}
         options={{ initMode: "immediate" }}
       >
-        <SandpackThemeProvider theme="sandpack-dark">
+        <SandpackThemeProvider theme={sandpackDark}>
           <SandpackCodeViewer />
         </SandpackThemeProvider>
       </SandpackProvider>

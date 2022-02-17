@@ -36,7 +36,7 @@ You can also pass a **partial** theme object that overrides properties in the
 
 <!-- prettier-ignore -->
 <NestedSandpack nestedProps={`    theme={{
-        palette: {
+        colors: {
           accent: "rebeccapurple",
         },
         syntax: {
@@ -55,8 +55,7 @@ Furthermore you can import an existing theme object and use object composition t
 
 <!-- prettier-ignore -->
 <NestedSandpack 
-  setupCode={`import { Sandpack, sandpackDark } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";`} 
+  setupCode={`import { Sandpack, sandpackDark } from "@codesandbox/sandpack-react";`}
   nestedProps={`    theme={{
         ...sandpackDark,
         typography: {

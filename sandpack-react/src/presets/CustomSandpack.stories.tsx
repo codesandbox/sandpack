@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import type { ViewportSize } from "../";
+import { stackClassName } from "../";
+import { tabButton } from "../";
 import {
   Sandpack,
   SandpackPreview,
@@ -100,12 +102,12 @@ const CustomCodeEditor = (): JSX.Element => {
         width: 400,
         height: 200,
         padding: 8,
-        fontFamily: theme.typography.monoFont,
-        fontSize: theme.typography.fontSize,
-        background: theme.palette.defaultBackground,
-        border: `1px solid ${theme.palette.inactiveText}`,
-        color: theme.palette.activeText,
-        lineHeight: theme.typography.lineHeight,
+        fontFamily: theme.font.mono,
+        fontSize: theme.font.size,
+        background: theme.colors.surface1,
+        border: `1px solid ${theme.colors.surface2}`,
+        color: theme.colors.base,
+        lineHeight: theme.font.lineHeight,
       }}
     >
       {code}
@@ -358,7 +360,7 @@ const ResetButtonComp: React.FC = () => {
 
   return (
     <button
-      className="sp-tab-button"
+      className={tabButton.toString()}
       onClick={sandpack.resetAllFiles}
       style={{
         background: "none",
@@ -377,7 +379,7 @@ const ResetCurrentFileButton: React.FC = () => {
 
   return (
     <button
-      className="sp-tab-button"
+      className={tabButton.toString()}
       onClick={(): void => sandpack.resetFile(sandpack.activePath)}
       style={{
         background: "none",
@@ -396,7 +398,7 @@ export const ResetButton: React.FC = () => (
     <SandpackProvider template="react">
       <SandpackLayout>
         <div
-          className="sp-stack"
+          className={stackClassName.toString()}
           style={{ position: "relative", width: "100%" }}
         >
           <SandpackCodeEditor />
@@ -411,7 +413,7 @@ export const ResetButton: React.FC = () => (
     <SandpackProvider template="react">
       <SandpackLayout>
         <div
-          className="sp-stack"
+          className={stackClassName.toString()}
           style={{ position: "relative", width: "100%" }}
         >
           <SandpackCodeEditor />

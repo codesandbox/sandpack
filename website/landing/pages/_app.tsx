@@ -1,4 +1,3 @@
-import "@codesandbox/sandpack-react/dist/index.css";
 import amplitude from "amplitude-js";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";

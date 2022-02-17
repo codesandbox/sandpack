@@ -25,14 +25,23 @@ import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
+import { THEME_PREFIX } from "../../styles";
 import type {
   EditorState as SandpackEditorState,
   SandpackInitMode,
 } from "../../types";
+import { classNames } from "../../utils/classNames";
 import { getFileName, generateRandomId } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
+import {
+  cmClassName,
+  placeholderClassName,
+  tokensClassName,
+  readOnlyClassName,
+} from "./styles";
+import { useSyntaxHighlight } from "./useSyntaxHighlight";
 import {
   getCodeMirrorLanguage,
   getLanguageFromFile,
@@ -116,6 +125,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
   ) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const wrapper = React.useRef<any | HTMLElement>(null);
+    const combinedRef = useCombinedRefs(wrapper, ref);
+
     const cmView = React.useRef<EditorView>();
     const { theme, themeId } = useSandpackTheme();
     const [internalCode, setInternalCode] = React.useState<string>(code);
@@ -123,7 +134,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       initMode === "immediate"
     );
 
-    const c = useClasser("sp");
+    const c = useClasser(THEME_PREFIX);
     const { listen } = useSandpack();
     const ariaId = React.useRef<string>(id ?? generateRandomId());
 
@@ -146,6 +157,13 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
     const languageExtension = getLanguageFromFile(filePath, fileType);
     const langSupport = getCodeMirrorLanguage(languageExtension);
+    const highlightTheme = getSyntaxHighlight(theme);
+
+    const syntaxHighlightRender = useSyntaxHighlight({
+      langSupport,
+      highlightTheme,
+      code,
+    });
 
     React.useEffect(() => {
       if (!wrapper.current || !shouldInitEditor) return;
@@ -199,8 +217,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           defaultHighlightStyle.fallback,
 
-          getEditorTheme(theme),
-          getSyntaxHighlight(theme),
+          getEditorTheme(),
+          highlightTheme,
           ...extensions,
         ];
 
@@ -356,21 +374,34 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       }
     };
 
-    const combinedRef = useCombinedRefs(wrapper, ref);
-
     if (readOnly) {
       return (
-        <pre
-          ref={combinedRef}
-          className={c("cm", editorState, languageExtension)}
-          translate="no"
-        >
-          <code className={c("pre-placeholder")}>{code}</code>
+        <>
+          <pre
+            ref={combinedRef}
+            className={classNames(
+              c("cm", editorState, languageExtension),
+              cmClassName,
+              tokensClassName
+            )}
+            translate="no"
+          >
+            <code
+              className={classNames(c("pre-placeholder"), placeholderClassName)}
+              style={{
+                marginLeft: showLineNumbers ? 44 : 20, // gutter line offset
+              }}
+            >
+              {syntaxHighlightRender}
+            </code>
+          </pre>
 
           {readOnly && showReadOnly && (
-            <span className={c("read-only")}>Read-only</span>
+            <span className={classNames(c("read-only"), readOnlyClassName)}>
+              Read-only
+            </span>
           )}
-        </pre>
+        </>
       );
     }
 
@@ -383,19 +414,23 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
-        className={c("cm", editorState, languageExtension)}
+        className={classNames(
+          c("cm", editorState, languageExtension),
+          cmClassName,
+          tokensClassName
+        )}
         onKeyDown={handleContainerKeyDown}
         role="group"
         tabIndex={0}
         translate="no"
       >
         <pre
-          className={c("pre-placeholder")}
+          className={classNames(c("pre-placeholder"), placeholderClassName)}
           style={{
-            marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
+            marginLeft: showLineNumbers ? 44 : 20, // gutter line offset
           }}
         >
-          {code}
+          {syntaxHighlightRender}
         </pre>
 
         <>

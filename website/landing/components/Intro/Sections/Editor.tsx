@@ -6,6 +6,7 @@ import {
   SandpackThemeProvider,
   SandpackCodeEditor,
 } from "@codesandbox/sandpack-react";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -127,7 +128,7 @@ export const EditorExample: React.FC = () => {
             }}
           >
             <Caption>Code snippet</Caption>
-            <SandpackThemeProvider theme="sandpack-dark">
+            <SandpackThemeProvider theme={sandpackDark}>
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
               <RefreshButton

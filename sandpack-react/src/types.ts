@@ -98,6 +98,9 @@ export interface SandpackOptions<
   recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;
 
+  // TODO: documentation
+  id?: string;
+
   bundlerURL?: string;
   startRoute?: string;
   skipEval?: boolean;
@@ -336,14 +339,7 @@ export type SandpackPredefinedTemplate =
   | "vue3"
   | "svelte";
 
-export type SandpackPredefinedTheme =
-  | "light"
-  | "dark"
-  | "sandpack-dark"
-  | "night-owl"
-  | "aqua-blue"
-  | "github-light"
-  | "monokai-pro";
+export type SandpackPredefinedTheme = "light" | "dark";
 
 export interface SandpackSyntaxStyle {
   color?: string;
@@ -368,16 +364,23 @@ export interface SandpackSyntaxStyle {
 }
 
 export interface SandpackTheme {
-  palette: {
-    activeText: string;
-    defaultText: string;
-    inactiveText: string;
-    activeBackground: string;
-    defaultBackground: string;
-    inputBackground: string;
+  colors: {
+    // Surface
+    surface1: string;
+    surface2: string;
+    surface3: string;
+    // UI
+    disabled: string;
+    base: string;
+    clickable: string;
+    hover: string;
+    // Brand
     accent: string;
-    errorBackground: string;
-    errorForeground: string;
+    // Feedbacks
+    error?: string;
+    errorSurface?: string;
+    warning?: string;
+    warningSurface?: string;
   };
   syntax: {
     plain: string | SandpackSyntaxStyle;
@@ -390,20 +393,17 @@ export interface SandpackTheme {
     static: string | SandpackSyntaxStyle;
     string?: string | SandpackSyntaxStyle; // use static as fallback
   };
-  typography: {
-    bodyFont: string;
-    monoFont: string;
-    fontSize: string;
+  font: {
+    body: string;
+    mono: string;
+    size: string;
     lineHeight: string;
   };
 }
 
 export type SandpackPartialTheme = DeepPartial<SandpackTheme>;
 
-export type SandpackThemeProp =
-  | SandpackPredefinedTheme
-  | SandpackPartialTheme
-  | "auto";
+export type SandpackThemeProp = SandpackPredefinedTheme | SandpackPartialTheme;
 
 /**
  * Custom properties to be used in the SandpackCodeEditor component,

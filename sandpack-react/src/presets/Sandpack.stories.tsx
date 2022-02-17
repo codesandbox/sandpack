@@ -104,15 +104,14 @@ export const Main: React.FC<{test: string}> = ({test}) => {
       },
     }}
     options={{ wrapContent: true, activePath: "/src/main.tsx" }}
-    theme="night-owl"
+    theme="dark"
   />
 );
 
 export const ExternalResources: React.FC = () => (
   <Sandpack
     files={{
-      "/App.js": `        
-export default () => {
+      "/App.js": `export default () => {
   return <a
     href="#"
     className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
@@ -131,6 +130,10 @@ export default () => {
 );
 
 export const WithCustomLibrary: React.FC = () => <Sandpack template="react" />;
+
+export const wrapContent: React.FC = () => (
+  <Sandpack options={{ wrapContent: true, showLineNumbers: true }} />
+);
 
 export const RunnableComponent = (): React.ReactElement => (
   <Sandpack
@@ -162,5 +165,20 @@ export const InitModeUserVisible: React.FC = () => {
         );
       })}
     </>
+  );
+};
+
+export const showInlineErrors: React.FC = () => {
+  return (
+    <Sandpack
+      files={{
+        "/App.js": `export default function App() {
+  return <h1>Hello Woadwadrld</h1
+}
+`,
+      }}
+      options={{ showInlineErrors: true }}
+      template="react"
+    />
   );
 };

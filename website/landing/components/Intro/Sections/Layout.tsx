@@ -9,6 +9,7 @@ import {
   SandpackLayout,
   useSandpack,
 } from "@codesandbox/sandpack-react";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { useEffect, useLayoutEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -93,7 +94,7 @@ export const LayoutExample: React.FC = () => {
             }}
           >
             <Caption>Code snippet</Caption>
-            <SandpackThemeProvider theme="sandpack-dark">
+            <SandpackThemeProvider theme={sandpackDark}>
               <SandpackCodeEditor showInlineErrors />
             </SandpackThemeProvider>
           </CodeWrapper>
