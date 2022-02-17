@@ -1,161 +1,201 @@
 import {
-  nightOwlTheme,
-  monokaiProTheme,
-  sandpackDark,
+  defaultLight as Light,
+  defaultDark as Dark,
 } from "@codesandbox/sandpack-react";
 
-const fantasy = {
-  colors: {
-    activeText: "#69c6b1",
-    defaultText: "#7D8982",
-    inactiveText: "#1b211e",
-    activeBackground: "#1b211e",
-    defaultBackground: "#242c28",
-    inputBackground: "#fcb900",
-    accent: "#69c6b1",
-    errorBackground: "#fcb900",
-    errorForeground: "#9900ef",
-  },
-  syntax: {
-    plain: "#69c6b1",
-    keyword: "#a29e6b",
-    commment: {
-      color: "#bbb",
-      fontStyle: "italic",
-    },
-    tag: "#d4d4d4",
-    punctuation: "#dcdcdc",
-    definition: "#529383",
-    property: "#ffffff",
-    static: "#b5caa5",
-    string: "#cc967c",
-  },
-  font: {
-    body:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    mono:
-      '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    size: "14px",
-    lineHeight: "1.4",
-  },
-};
+export { Light, Dark };
 
-const dracula = {
+export const SandpackDark = {
   colors: {
-    activeText: "#f8f8f2",
-    defaultText: "#6272a4",
-    inactiveText: "#282a36",
-    activeBackground: "#21222c",
-    defaultBackground: "#282a36",
-    inputBackground: "#f8f8f2",
-    accent: "#f8f8f2",
-    errorBackground: "#ff79c6",
-    errorForeground: "#cb6da3",
+    surface1: "#151515",
+    surface2: "#252525",
+    surface3: "#2F2F2F",
+    clickable: "#999999",
+    base: "#808080",
+    disabled: "#4D4D4D",
+    hover: "#C5C5C5",
+    accent: "#90e86f",
+    error: "#b08df8",
+    errorSurface: "#dac1fb",
   },
   syntax: {
-    plain: "#f8f8f2",
-    keyword: "#ff79c6",
-    commment: "#6272a4",
-    tag: "#8be9fd",
-    punctuation: "#f8f8f2",
-    definition: "#50fa7b",
-    property: "#8be9fd",
-    static: "#bd93f9",
-    string: "#f1fa8c",
-  },
-  font: {
-    body:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    mono:
-      '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    size: "14px",
-    lineHeight: "1.4",
-  },
-};
-
-const cobalt = {
-  colors: {
-    activeText: "#0088ff",
-    defaultText: "#858585",
-    inactiveText: "#062f52",
-    activeBackground: "#021529",
-    defaultBackground: "#002240",
-    inputBackground: "#002240",
-    accent: "#0088ff",
-    errorBackground: "#FF453A",
-    errorForeground: "#ff453a",
-  },
-  syntax: {
-    plain: "#3cc9b0",
+    plain: "#f0fdaf",
     comment: {
-      color: "#0088ff",
+      color: "#757575",
       fontStyle: "italic",
     },
-    keyword: "#ff9d00",
-    tag: "#d4d4d4",
-    punctuation: "#d4d4d4",
-    definition: "#26918c",
-    property: "#9cdbfe",
-    static: "#ce9278",
-    string: "#ce9278",
+    keyword: "#e5fd78",
+    tag: "#f0fdaf",
+    punctuation: "#ffffff",
+    definition: "#eeeeee",
+    property: "#90e86f",
+    static: "#ffffff",
+    string: "#dafecf",
   },
   font: {
-    body:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    mono:
-      '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     size: "14px",
-    lineHeight: "1.4",
+    lineHeight: "1.6",
   },
 };
 
-const amy = {
+export const nightOwlTheme = {
   colors: {
-    activeText: "#3cc9b0",
-    defaultText: "#dcdcdc",
-    inactiveText: "#360136",
-    activeBackground: "#37021a",
-    defaultBackground: "#200020",
-    inputBackground: "#a080ff",
-    accent: "#3cc9b0",
-    errorBackground: "#37021a",
-    errorForeground: "#37021a",
+    surface1: "#011627",
+    surface2: "#343E4E",
+    surface3: "#2D3645",
+    clickable: "#6988a1",
+    base: "#808080",
+    disabled: "#4D4D4D",
+    hover: "#c5e4fd",
+    accent: "#c5e4fd",
+    error: "#811e18",
+    errorSurface: "#ffcdca",
   },
   syntax: {
-    plain: "#3cc9b0",
-    comment: {
-      color: "#5f8a4d",
-      fontStyle: "italic",
-    },
-    keyword: "#a080ff",
-    tag: "#dcdcdc",
-    punctuation: "#dcdcdc",
-    definition: "#3a857f",
-    property: "#9cdbfe",
-    static: "#ce9278",
-    string: "#999999",
+    plain: "#d6deeb",
+    comment: { color: "#999999", fontStyle: "italic" },
+    keyword: { color: "#c792ea", fontStyle: "italic" },
+    tag: "#7fdbca",
+    punctuation: "#7fdbca",
+    definition: "#82aaff",
+    property: { color: "#addb67", fontStyle: "italic" },
+    static: "#f78c6c",
+    string: "#ecc48d",
   },
   font: {
-    body:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    mono:
-      '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     size: "14px",
     lineHeight: "1.4",
   },
 };
 
-const base = {
+export const aquaBlueTheme = {
   colors: {
-    activeText: "#FF8A00",
-    defaultText: "#FF8A00",
-    inactiveText: "#FF8A00",
-    activeBackground: "#FF8A00",
-    defaultBackground: "#FF8A00",
-    inputBackground: "#FF8A00",
+    surface1: "#f8f9fb",
+    surface2: "#e4e7eb",
+    surface3: "#EBEDF0",
+
+    clickable: "#737373",
+    base: "#323232",
+    disabled: "#C5C5C5",
+    hover: "#1f2933",
+
+    accent: "#6caedd",
+
+    error: "#ffcdca",
+    errorSurface: "#811e18",
+  },
+
+  syntax: {
+    plain: "#1F2933",
+    comment: { color: "#A7B6C2", fontStyle: "italic" },
+    keyword: "#1A56DB",
+    tag: "#1A56DB",
+    punctuation: "#394b59",
+    definition: "#A23DAD",
+    property: "#14919B",
+    static: "#1A56DB",
+    string: "#1992D4",
+  },
+  font: {
+    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    size: "14px",
+    lineHeight: "1.4",
+  },
+};
+
+export const monokaiProTheme = {
+  colors: {
+    surface1: "#2D2A2E",
+    surface2: "#444344",
+    surface3: "#484747",
+
+    clickable: "#939293",
+    base: "#C1C0C1",
+    disabled: "#444344",
+    hover: "#FCFCFA",
+
+    accent: "#FFD866",
+
+    error: "#811e18",
+    errorSurface: "#ffcdca",
+  },
+  syntax: {
+    plain: "rgb(252, 252, 250)",
+    comment: { color: "#757575", fontStyle: "italic" },
+    keyword: "rgb(255, 97, 136)",
+    tag: "rgb(120, 220, 232)",
+    punctuation: "rgb(147, 146, 147)",
+    definition: "rgb(169, 220, 118)",
+    property: { color: "rgb(120, 220, 232)", fontStyle: "italic" },
+    static: "rgb(171, 157, 242)",
+    string: "rgb(255, 216, 102)",
+  },
+  font: {
+    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    size: "14px",
+    lineHeight: "1.4",
+  },
+};
+
+export const githubLightTheme = {
+  colors: {
+    surface1: "#ffffff",
+    surface2: "#e4e7eb",
+    surface3: "#F3F3F3",
+
+    clickable: "#959da5",
+    base: "#24292e",
+    disabled: "#d1d4d8",
+    hover: "#24292e",
+
+    accent: "#24292e",
+
+    error: "#811e18",
+    errorSurface: "#ffcdca",
+  },
+  syntax: {
+    keyword: "#d73a49",
+    property: "#005cc5",
+    plain: "#24292e",
+    static: "#032f62",
+    string: "#032f62",
+    definition: "#6f42c1",
+    punctuation: "#24292e",
+    tag: "#22863a",
+    comment: {
+      color: "#6a737d",
+      fontStyle: "normal",
+    },
+  },
+  font: {
+    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    size: "14px",
+    lineHeight: "1.4",
+  },
+};
+
+export const Base = {
+  colors: {
+    surface1: "#FF8A00",
+    surface2: "#FF8A00",
+    surface3: "#FF8A00",
+
+    clickable: "#FF8A00",
+    base: "#FF8A00",
+    disabled: "#FF8A00",
+    hover: "#FF8A00",
+
     accent: "#FF8A00",
-    errorBackground: "#FF8A00",
-    errorForeground: "#FF8A00",
+
+    error: "#FF8A00",
+    errorSurface: "#FF8A00",
   },
   syntax: {
     plain: "#FF8A00",
@@ -172,53 +212,9 @@ const base = {
     string: "#FF8A00",
   },
   font: {
-    body:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    mono:
-      '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     size: "14px",
     lineHeight: "1.4",
   },
 };
-
-// Workaround nightOwlTheme theme
-// TODO: Create a function to getColor
-if (nightOwlTheme.syntax.keyword) {
-  nightOwlTheme.syntax.keyword = nightOwlTheme.syntax.keyword.color;
-}
-
-export const themeGallery = [
-  {
-    label: "Night Owl",
-    code: nightOwlTheme,
-  },
-  {
-    label: "Monokai",
-    code: monokaiProTheme,
-  },
-  {
-    label: "Sandpack Dark",
-    code: sandpackDark,
-  },
-  {
-    label: "Fantasy",
-    code: fantasy,
-  },
-  {
-    label: "Dracula",
-    code: dracula,
-  },
-  {
-    label: "Cobalt",
-    code: cobalt,
-  },
-
-  {
-    label: "Amy",
-    code: amy,
-  },
-  {
-    label: "Base",
-    code: base,
-  },
-];

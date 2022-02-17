@@ -5,7 +5,7 @@ import { useCombinedRefs } from "../components/CodeEditor/utils";
 import { SandpackThemeProvider } from "../contexts/themeContext";
 import { useSandpack } from "../hooks/useSandpack";
 import { css, THEME_PREFIX } from "../styles";
-import { errorOverlayClassName } from "../styles/shared";
+import { absoluteClassName } from "../styles/shared";
 import type { SandpackThemeProp } from "../types";
 import { classNames } from "../utils/classNames";
 
@@ -16,26 +16,24 @@ export interface SandpackLayoutProps extends React.HtmlHTMLAttributes<unknown> {
 }
 
 export const layoutClassName = css({
-  border: "1px solid $colors$inactiveText",
+  border: "1px solid $colors$surface2",
   display: "flex",
   flexWrap: "wrap",
   alignItems: "stretch",
-  background: "$colors$defaultBackground",
+  background: "$colors$surface1",
   borderRadius: "$border$radius",
   overflow: "hidden",
-  WebkitMaskImage:
-    "-webkit-radial-gradient($colors$inputBackground,$colors$defaultBackground)",
 
   "> *:not(:first-child)": {
-    borderLeft: "1px solid $colors$inactiveText",
-    borderTop: "1px solid $colors$inactiveText",
+    borderLeft: "1px solid $colors$surface2",
+    borderTop: "1px solid $colors$surface2",
     marginLeft: "-1px",
     marginTop: "-1px",
     position: "relative",
   },
 
-  [`> *:first-child .${errorOverlayClassName}`]: {
-    borderRight: "1px solid $colors$inactiveText",
+  [`> *:first-child .${absoluteClassName}`]: {
+    borderRight: "1px solid $colors$surface2",
   },
 
   [`> .${stackClassName}`]: {

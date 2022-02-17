@@ -11,6 +11,7 @@ const devToolClassName = css({
   height: "$layout$height",
   width: "100%",
 });
+
 type DevToolsTheme = "dark" | "light";
 
 export const SandpackReactDevTools = ({
@@ -64,7 +65,7 @@ export const SandpackReactDevTools = ({
   const getBrowserTheme = (): DevToolsTheme => {
     if (theme) return theme;
 
-    const isDarkTheme = isDarkColor(sandpackTheme.colors.defaultBackground);
+    const isDarkTheme = isDarkColor(sandpackTheme.colors.surface1);
 
     return isDarkTheme ? "dark" : "light";
   };

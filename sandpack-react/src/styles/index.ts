@@ -4,7 +4,7 @@ import { defaultLight, SANDPACK_THEMES } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
 
 /**
- * @category Theme
+ * @category ThemeisDarkColor
  */
 export const THEME_PREFIX = "sp";
 
@@ -16,11 +16,17 @@ export const { createTheme, css, getCssText, keyframes } = createStitches({
 });
 
 const defaultVariables = {
-  space: new Array(8).fill(" ").reduce((acc, curr, index) => {
+  space: new Array(8).fill(" ").reduce((acc, _, index) => {
     return { ...acc, [index + 1]: `${(index + 1) * 4}px` };
   }, {}),
   border: { radius: "4px" },
   layout: { height: "300px" },
+  transitions: { default: "150ms ease" },
+  zIndices: {
+    base: "1",
+    overlay: "2",
+    top: "3",
+  },
 };
 
 /**

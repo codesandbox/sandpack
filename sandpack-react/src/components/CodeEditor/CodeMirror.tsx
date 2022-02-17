@@ -38,7 +38,6 @@ import { highlightInlineError } from "./highlightInlineError";
 import {
   cmClassName,
   placeholderClassName,
-  editorClassName,
   tokensClassName,
   readOnlyClassName,
 } from "./styles";
@@ -218,7 +217,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           defaultHighlightStyle.fallback,
 
-          getEditorTheme(theme),
+          getEditorTheme(),
           highlightTheme,
           ...extensions,
         ];
@@ -389,6 +388,9 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           >
             <code
               className={classNames(c("pre-placeholder"), placeholderClassName)}
+              style={{
+                marginLeft: showLineNumbers ? 44 : 20, // gutter line offset
+              }}
             >
               {syntaxHighlightRender}
             </code>
@@ -415,7 +417,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         className={classNames(
           c("cm", editorState, languageExtension),
           cmClassName,
-          editorClassName,
           tokensClassName
         )}
         onKeyDown={handleContainerKeyDown}
@@ -426,7 +427,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         <pre
           className={classNames(c("pre-placeholder"), placeholderClassName)}
           style={{
-            marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
+            marginLeft: showLineNumbers ? 44 : 20, // gutter line offset
           }}
         >
           {syntaxHighlightRender}

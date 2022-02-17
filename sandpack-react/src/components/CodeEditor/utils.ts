@@ -10,7 +10,6 @@ import * as React from "react";
 
 import { THEME_PREFIX } from "../../styles";
 import type { SandpackTheme } from "../../types";
-import { hexToCSSRGBa } from "../../utils/stringUtils";
 
 export const getCodeMirrorPosition = (
   doc: Text,
@@ -19,14 +18,11 @@ export const getCodeMirrorPosition = (
   return doc.line(line).from + (column ?? 0) - 1;
 };
 
-export const getEditorTheme = (theme: SandpackTheme): Extension =>
+export const getEditorTheme = (): Extension =>
   EditorView.theme({
     "&": {
-      backgroundColor: theme.colors.defaultBackground,
-      color:
-        (typeof theme.syntax.plain === "string"
-          ? theme.syntax.plain
-          : theme.syntax.plain.color) || theme.colors.activeText,
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface1)`,
+      color: `var(--${THEME_PREFIX}-syntax-color-plain)`,
       height: "100%",
     },
 
@@ -35,45 +31,45 @@ export const getEditorTheme = (theme: SandpackTheme): Extension =>
     },
 
     ".cm-activeLine": {
-      backgroundColor: hexToCSSRGBa(theme.colors.activeBackground, 0.5),
+      // TODO: confirm
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface3)`,
+      borderRadius: `var(--${THEME_PREFIX}-border-radius)`,
     },
 
     ".cm-errorLine": {
-      backgroundColor: hexToCSSRGBa(theme.colors.errorBackground, 0.2),
+      backgroundColor: `var(--${THEME_PREFIX}-colors-errorSurface)`,
+      borderRadius: `var(--${THEME_PREFIX}-border-radius)`,
     },
 
     ".cm-matchingBracket, .cm-nonmatchingBracket": {
       color: "inherit",
-      background: theme.colors.activeBackground,
+      // TODO: confirm
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface2)`,
     },
 
     ".cm-content": {
-      padding: 0,
-      caretColor: theme.colors.activeText,
+      caretColor: `var(--${THEME_PREFIX}-colors-accent)`,
+      padding: `0 var(--${THEME_PREFIX}-space-4)`,
     },
 
     ".cm-scroller": {
-      fontFamily: theme.font.mono,
-      lineHeight: theme.font.lineHeight,
+      fontFamily: `var(--${THEME_PREFIX}-font-mono)`,
+      lineHeight: `var(--${THEME_PREFIX}-font-lineHeight)`,
     },
 
     ".cm-gutters": {
-      backgroundColor: theme.colors.defaultBackground,
-      color: theme.colors.defaultText,
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface1)`,
+      color: `var(--${THEME_PREFIX}-colors-disabled)`,
       border: "none",
+      paddingLeft: `var(--${THEME_PREFIX}-space-1)`,
     },
 
     ".cm-gutter.cm-lineNumbers": {
-      paddingLeft: "var(--sp-space-1)",
-      paddingRight: "var(--sp-space-1)",
+      fontSize: ".6em",
     },
 
     ".cm-lineNumbers .cm-gutterElement": {
-      padding: 0,
-    },
-
-    ".cm-line": {
-      padding: "0 var(--sp-space-3)",
+      lineHeight: `calc(var(--${THEME_PREFIX}-font-lineHeight) * 1.6)`,
     },
   });
 

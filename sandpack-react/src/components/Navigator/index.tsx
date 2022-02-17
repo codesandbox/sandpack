@@ -14,17 +14,17 @@ const navigatorClassName = css({
   display: "flex",
   alignItems: "center",
   height: "40px",
-  borderBottom: "1px solid $colors$inactiveText",
+  borderBottom: "1px solid $colors$surface2",
   padding: "$space$2 $space$4",
-  background: "$colors$defaultBackground",
+  background: "$colors$surface1",
 });
 
 const inputClassName = css({
-  backgroundColor: "$colors$inputBackground",
-  color: "$colors$defaultText",
-  padding: "$space$1 $space$2",
-  borderRadius: "$border$radius",
-  border: "1px solid $colors$inactiveText",
+  backgroundColor: "$colors$surface2",
+  color: "$colors$clickable",
+  padding: "$space$1 $space$3",
+  borderRadius: "99999px",
+  border: "1px solid $colors$surface2",
   height: "24px",
   lineHeight: "24px",
   fontSize: "inherit",
@@ -32,10 +32,16 @@ const inputClassName = css({
   flex: 1,
   marginLeft: "$space$4",
   width: "0",
+  transition: "all $transitions$default",
+
+  "&:hover": {
+    backgroundColor: "$colors$surface3",
+  },
 
   "&:focus": {
+    backgroundColor: "$surface1",
     border: "1px solid $colors$accent",
-    color: "$colors$activeText",
+    color: "$colors$base",
   },
 });
 

@@ -18,11 +18,18 @@ export const editorClassName = css({
   flex: 1,
   position: "relative",
   overflow: "auto",
-  background: "$colors$defaultBackground",
+  background: "$colors$surface1",
+
+  ".cm-scroller": {
+    padding: "$space$4 0",
+  },
+
+  [`.${placeholderClassName}`]: {
+    padding: "$space$4 0",
+  },
 });
 
 export const cmClassName = css({
-  padding: "$space$4 0",
   margin: "0",
   outline: "none",
   height: "100%",
@@ -45,9 +52,9 @@ export const readOnlyClassName = css({
   position: "absolute",
   right: "$space$2",
   bottom: "$space$2",
-  zIndex: 2,
-  color: "$colors$activeBackground", //var(--sp-colors-bg-active);
-  backgroundColor: "$colors$activeText", // var(--sp-colors-fg-active);
+  zIndex: "$top",
+  color: "$colors$clickable",
+  backgroundColor: "$colors$surface2",
   borderRadius: "99999px",
   padding: "calc($space$1 / 2) $space$2",
 });

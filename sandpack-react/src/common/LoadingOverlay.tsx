@@ -7,7 +7,7 @@ import {
 } from "../hooks/useLoadingOverlayState";
 import { css, THEME_PREFIX } from "../styles";
 import {
-  errorOverlayClassName,
+  absoluteClassName,
   errorClassName,
   errorMessageClassName,
 } from "../styles/shared";
@@ -26,8 +26,7 @@ export interface LoadingOverlayProps {
 }
 
 const loadingClassName = css({
-  backgroundColor: "$colors$defaultBackground",
-  zIndex: 5,
+  backgroundColor: "$colors$surface1",
 });
 
 /**
@@ -49,7 +48,7 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
       <div
         className={classNames(
           c("overlay", "error"),
-          errorOverlayClassName,
+          absoluteClassName,
           errorClassName
         )}
       >
@@ -84,7 +83,7 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
     <div
       className={classNames(
         c("overlay", "loading"),
-        errorOverlayClassName,
+        absoluteClassName,
         loadingClassName
       )}
       style={{

@@ -4,6 +4,7 @@ import * as React from "react";
 import { useSandpack } from "../../hooks/useSandpack";
 import { CloseIcon } from "../../icons";
 import { css, THEME_PREFIX } from "../../styles";
+import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 import {
   calculateNearestUniquePath,
@@ -11,12 +12,12 @@ import {
 } from "../../utils/stringUtils";
 
 const tabsClassName = css({
-  borderBottom: "1px solid $colors$inactiveText",
-  background: "$colors$defaultBackground",
+  borderBottom: "1px solid $colors$surface2",
+  background: "$colors$surface1",
 });
 
 const tabsScrollableClassName = css({
-  padding: "0 $space$4",
+  padding: "0 $space$2",
   overflow: "auto",
   display: "flex",
   flexWrap: "nowrap",
@@ -35,27 +36,10 @@ const closeButtonClassName = css({
 
 export const tabButton = css({
   display: "block",
-  background: "transparent",
-  appearance: "none",
-  fontSize: "inherit",
   padding: "0 $space$2",
-  color: "$colors$defaultText",
   height: "40px",
-  border: "0",
-  outline: "none",
-  borderBottom: "1px solid transparent",
-  transition:
-    "color 0.15s ease-out, border 0.15s ease-out, background 0.15s ease-out",
   whiteSpace: "nowrap",
 
-  '&[data-active="true"]': {
-    color: "$colors$activeText",
-    borderBottom: "1px solid $colors$accent",
-  },
-  "&:hover": {
-    color: "$colors$activeText",
-    background: "$colors$activeBackground",
-  },
   "&:focus": { outline: "none" },
   "&:focus-visible": { boxShadow: "inset 0 0 0 2px $colors$accent" },
   [`&:hover > .${closeButtonClassName}`]: { visibility: "unset" },
@@ -133,7 +117,7 @@ export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
           <button
             key={filePath}
             aria-selected={filePath === activePath}
-            className={classNames(c("tab-button"), tabButton)}
+            className={classNames(c("tab-button"), buttonClassName, tabButton)}
             data-active={filePath === activePath}
             onClick={(): void => setActiveFile(filePath)}
             role="tab"

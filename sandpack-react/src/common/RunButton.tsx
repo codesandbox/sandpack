@@ -3,9 +3,16 @@ import * as React from "react";
 
 import { useSandpack } from "../hooks/useSandpack";
 import { RunIcon } from "../icons";
-import { THEME_PREFIX } from "../styles";
-import { buttonClassName } from "../styles/shared";
+import { css, THEME_PREFIX } from "../styles";
+import { actionButtonClassName, buttonClassName } from "../styles/shared";
 import { classNames } from "../utils/classNames";
+
+const runButtonClassName = css({
+  position: "absolute",
+  bottom: "$space$2",
+  right: "$space$2",
+  paddingRight: "$space$3",
+});
 
 /**
  * @category Components
@@ -16,13 +23,13 @@ export const RunButton = (): JSX.Element | null => {
 
   return (
     <button
-      className={classNames(c("button"), buttonClassName)}
-      onClick={(): void => sandpack.runSandpack()}
-      style={{
-        position: "absolute",
-        bottom: "var(--sp-space-2)",
-        right: "var(--sp-space-2)",
-      }}
+      className={classNames(
+        c("button"),
+        buttonClassName,
+        actionButtonClassName,
+        runButtonClassName
+      )}
+      onClick={sandpack.runSandpack}
       type="button"
     >
       <RunIcon />

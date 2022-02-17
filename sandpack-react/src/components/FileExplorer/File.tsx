@@ -2,9 +2,20 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { DirectoryIcon, FileIcon } from "../../icons";
-import { THEME_PREFIX } from "../../styles";
-import { buttonClassName, explorerClassName } from "../../styles/shared";
+import { THEME_PREFIX, css } from "../../styles";
+import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
+
+const explorerClassName = css({
+  borderRadius: "0",
+  width: "100%",
+  padding: 0,
+  marginBottom: "$space$2",
+
+  svg: {
+    marginRight: "$space$1",
+  },
+});
 
 export interface Props {
   path: string;
@@ -43,7 +54,7 @@ export const File: React.FC<Props> = ({
       )}
       data-active={active}
       onClick={onClickButton}
-      style={{ paddingLeft: 8 * depth + "px" }}
+      style={{ paddingLeft: 18 * depth + "px" }}
       type="button"
     >
       {selectFile ? <FileIcon /> : <DirectoryIcon isOpen={isDirOpen} />}
