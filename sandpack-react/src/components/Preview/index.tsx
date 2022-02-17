@@ -6,6 +6,8 @@ import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { OpenInCodeSandboxButton } from "../../common/OpenInCodeSandboxButton";
 import { SandpackStack } from "../../common/Stack";
 import { useSandpack } from "../../hooks/useSandpack";
+import { css, THEME_PREFIX } from "../../styles";
+import { classNames } from "../../utils/classNames";
 import { generateRandomId } from "../../utils/stringUtils";
 import { Navigator } from "../Navigator";
 
@@ -36,6 +38,35 @@ export interface PreviewProps {
 
 export { RefreshButton };
 
+const previewClassName = css({
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  background: "white",
+  overflow: "auto",
+  position: "relative",
+});
+
+const previewIframe = css({
+  border: "0",
+  outline: "0",
+  width: "100%",
+  height: "100%",
+  minHeight: "160px",
+  maxHeight: "2000px",
+  flex: 1,
+});
+
+const previewActionsClassName = css({
+  display: "flex",
+  position: "absolute",
+  bottom: "$space$2",
+  right: "$space$2",
+  zIndex: "$overlay",
+
+  "> *": { marginLeft: "$space$2" },
+});
+
 /**
  * @category Components
  */
@@ -61,7 +92,7 @@ export const SandpackPreview = ({
     loadingScreenRegisteredRef,
   } = sandpack;
 
-  const c = useClasser("sp");
+  const c = useClasser(THEME_PREFIX);
   const clientId = React.useRef<string>(generateRandomId());
   const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
 
@@ -111,10 +142,10 @@ export const SandpackPreview = ({
         <Navigator clientId={clientId.current} onURLChange={handleNewURL} />
       ) : null}
 
-      <div className={c("preview-container")}>
+      <div className={classNames(c("preview-container"), previewClassName)}>
         <iframe
           ref={iframeRef}
-          className={c("preview-iframe")}
+          className={classNames(c("preview-iframe"), previewIframe)}
           style={{
             // set height based on the content only in auto mode
             // and when the computed height was returned by the bundler
@@ -128,7 +159,9 @@ export const SandpackPreview = ({
 
         {showSandpackErrorOverlay ? <ErrorOverlay /> : null}
 
-        <div className={c("preview-actions")}>
+        <div
+          className={classNames(c("preview-actions"), previewActionsClassName)}
+        >
           {!showNavigator && showRefreshButton && status === "running" ? (
             <RefreshButton clientId={clientId.current} />
           ) : null}

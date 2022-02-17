@@ -8,15 +8,13 @@ code {
 }
 
 .sp-wrapper {
-  --sp-border-radius: 10px !important;
-
   .sp-layout {
     border: 0;
   }
 }
 
 .sp-pre-placeholder {
-  --sp-colors-fg-active: #f0fdaf;
+  --sp-colors-activeText: #f0fdaf;
   display: block;
 }
 

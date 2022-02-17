@@ -6,6 +6,7 @@ import {
   SandpackThemeProvider,
   useSandpack,
 } from "@codesandbox/sandpack-react";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { useTransform, useViewportScroll } from "framer-motion";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
@@ -267,7 +268,7 @@ export const HeroDesktop: React.FC = () => {
             },
           }}
         >
-          <SandpackThemeProvider theme="sandpack-dark">
+          <SandpackThemeProvider theme={sandpackDark}>
             <ClasserProvider classes={CUSTOM_CLASSES_MAP}>
               <SandpackCodeEditor ref={editorRef} />
               <Box

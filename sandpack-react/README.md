@@ -6,7 +6,6 @@ React components that give you the power of editable sandboxes that run in the b
 
 ```jsx
 import { Sandpack } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";
 
 <Sandpack template="react" />;
 ```

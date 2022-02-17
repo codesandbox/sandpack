@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-page-custom-font */
-import "@codesandbox/sandpack-react/dist/index.css";
 import "../styles/globals.scss";
 import Head from "next/head";
 

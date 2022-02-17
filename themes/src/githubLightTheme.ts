@@ -1,16 +1,20 @@
 import type { SandpackTheme } from "./types";
 
 export const githubLightTheme: SandpackTheme = {
-  palette: {
-    activeText: "#24292e",
-    defaultText: "#959da5",
-    inactiveText: "#e4e7eb",
-    activeBackground: "#e4e7eb",
-    defaultBackground: "#ffffff",
-    inputBackground: "#ffffff",
-    accent: "#c8c8fa",
-    errorBackground: "#ffcdca",
-    errorForeground: "#811e18",
+  colors: {
+    surface1: "#ffffff",
+    surface2: "#e4e7eb",
+    surface3: "#F3F3F3",
+
+    clickable: "#959da5",
+    base: "#24292e",
+    disabled: "#d1d4d8",
+    hover: "#24292e",
+
+    accent: "#24292e",
+
+    error: "#811e18",
+    errorSurface: "#ffcdca",
   },
   syntax: {
     keyword: "#d73a49",
@@ -26,12 +30,10 @@ export const githubLightTheme: SandpackTheme = {
       fontStyle: "normal",
     },
   },
-  typography: {
-    bodyFont:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    monoFont:
-      '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    fontSize: "14px",
+  font: {
+    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    size: "14px",
     lineHeight: "1.4",
   },
 };

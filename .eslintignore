@@ -2,3 +2,5 @@ dist/
 esm/
 sandpack/
 file-resolver-protocol.ts
+examples/
+cypress/

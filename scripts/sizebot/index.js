@@ -138,3 +138,4 @@ ${removedFiles.join("")}${tableContent.join("")} \n\n
     });
   }
 })();
+;

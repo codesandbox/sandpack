@@ -4,8 +4,9 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
 } from "@codesandbox/sandpack-react";
-import React from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import CodeBlock from "@theme-init/CodeBlock";
+import React from "react";
 
 import "./style.css";
 
@@ -19,6 +20,10 @@ const RenderSandpack = (props) => {
     file = "/App.js",
     theme = sandpackPluginOptions.theme,
   } = props;
+
+  if (props.className === "language-diff") {
+    return <CodeBlock {...props} />;
+  }
 
   if (props.sandpack) {
     const occurrences = children

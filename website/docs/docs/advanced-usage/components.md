@@ -217,7 +217,7 @@ Sandpack also provides a component that adds React DevTools, allowing you to ins
 <!-- prettier-ignore -->
 <div className="nestedSandpack">
   <Sandpack
-    theme="sandpack-dark"
+    theme="dark"
     customSetup={{
       dependencies: { "@codesandbox/sandpack-react": "latest" },
     }}
@@ -228,7 +228,6 @@ Sandpack also provides a component that adds React DevTools, allowing you to ins
   SandpackPreview,
   SandpackReactDevTools,
 } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";\n
 export default function CustomSandpack() {
   return (
     <SandpackProvider template="react">

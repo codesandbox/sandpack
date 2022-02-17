@@ -21,16 +21,23 @@ interface SandpackSyntaxStyle {
 }
 
 export interface SandpackTheme {
-  palette: {
-    activeText: string;
-    defaultText: string;
-    inactiveText: string;
-    activeBackground: string;
-    defaultBackground: string;
-    inputBackground: string;
+  colors: {
+    // Surface
+    surface1: string;
+    surface2: string;
+    surface3: string;
+    // UI
+    disabled: string;
+    base: string;
+    clickable: string;
+    hover: string;
+    // Brand
     accent: string;
-    errorBackground: string;
-    errorForeground: string;
+    // Feedbacks
+    error?: string;
+    errorSurface?: string;
+    warning?: string;
+    warningSurface?: string;
   };
   syntax: {
     plain: string | SandpackSyntaxStyle;
@@ -43,10 +50,10 @@ export interface SandpackTheme {
     static: string | SandpackSyntaxStyle;
     string?: string | SandpackSyntaxStyle; // use static as fallback
   };
-  typography: {
-    bodyFont: string;
-    monoFont: string;
-    fontSize: string;
+  font: {
+    body: string;
+    mono: string;
+    size: string;
     lineHeight: string;
   };
 }

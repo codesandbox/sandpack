@@ -1,16 +1,20 @@
 import type { SandpackTheme } from "./types";
 
 export const aquaBlueTheme: SandpackTheme = {
-  palette: {
-    activeText: "#1f2933",
-    defaultText: "#737373",
-    inactiveText: "#e4e7eb",
-    activeBackground: "#e4e7eb",
-    defaultBackground: "#f8f9fb",
-    inputBackground: "#ffffff",
+  colors: {
+    surface1: "#f8f9fb",
+    surface2: "#e4e7eb",
+    surface3: "#EBEDF0",
+
+    clickable: "#737373",
+    base: "#323232",
+    disabled: "#C5C5C5",
+    hover: "#1f2933",
+
     accent: "#6caedd",
-    errorBackground: "#ffcdca",
-    errorForeground: "#811e18",
+
+    error: "#ffcdca",
+    errorSurface: "#811e18",
   },
 
   syntax: {
@@ -24,12 +28,10 @@ export const aquaBlueTheme: SandpackTheme = {
     static: "#1A56DB",
     string: "#1992D4",
   },
-  typography: {
-    bodyFont:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    monoFont:
-      '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    fontSize: "14px",
+  font: {
+    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
+    size: "14px",
     lineHeight: "1.4",
   },
 };

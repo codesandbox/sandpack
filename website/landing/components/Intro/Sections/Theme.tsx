@@ -24,15 +24,7 @@ import {
   THRESHOLD_VIEW,
 } from "./common";
 
-const themeOptions: SandpackPredefinedTheme[] = [
-  "dark",
-  "light",
-  "sandpack-dark",
-  "github-light",
-  "monokai-pro",
-  "night-owl",
-  "aqua-blue",
-];
+const themeOptions: SandpackPredefinedTheme[] = ["dark", "light"];
 
 export const ThemeExample: React.FC = () => {
   const { ref, inView } = useInView({ threshold: THRESHOLD_VIEW });
@@ -60,7 +52,7 @@ export const ThemeExample: React.FC = () => {
     if (inView) {
       setTheme("light");
     } else {
-      setTheme("sandpack-dark");
+      setTheme("dark");
     }
   }, [higherMobile, inView]);
 

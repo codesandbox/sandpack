@@ -77,15 +77,6 @@ export const hexToRGB = (
   };
 };
 
-export const hexToCSSRGBa = (hex: string, alpha: number): string => {
-  if (hex.startsWith("#") && (hex.length === 4 || hex.length === 7)) {
-    const { red, green, blue } = hexToRGB(hex);
-    return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
-  }
-
-  return hex;
-};
-
 // Checks both rgb and hex colors for contrast and returns true if the color is in the dark spectrum
 export const isDarkColor = (color: string): boolean => {
   let r = 0;
