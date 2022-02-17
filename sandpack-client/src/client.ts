@@ -134,7 +134,9 @@ export class SandpackClient {
       const element = document.querySelector(selector);
 
       if (!element) {
-        throw new Error(`No element found for selector '${selector}'`);
+        throw new Error(
+          `[sandpack-client]: the element '${selector}' was not found`
+        );
       }
 
       this.element = element;
@@ -254,7 +256,8 @@ export class SandpackClient {
       packageJSON = JSON.parse(files["/package.json"].code);
     } catch (e) {
       console.error(
-        "Could not parse package.json file: " + (e as Error).message
+        "[sandpack-client]: could not parse package.json file: " +
+          (e as Error).message
       );
     }
 
@@ -375,7 +378,9 @@ export class SandpackClient {
 
     if (!this.element.parentNode) {
       // This should never happen
-      throw new Error("Given element does not have a parent.");
+      throw new Error(
+        `[sandpack-client]: the given iframe does not have a parent.`
+      );
     }
 
     this.element.parentNode.replaceChild(this.iframe, this.element);

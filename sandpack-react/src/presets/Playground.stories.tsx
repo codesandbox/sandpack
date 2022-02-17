@@ -1,4 +1,5 @@
-import { Sandpack } from "../";
+import { Sandpack, SandpackProvider } from "../";
+import { SandpackCodeEditor } from "../components";
 
 export default {
   title: "Playground",
@@ -8,24 +9,29 @@ export const Main = (): JSX.Element => {
   return (
     <>
       <Sandpack
-        options={{
-          showLineNumbers: true,
-          showNavigator: true,
-          showInlineErrors: true,
+        files={{
+          "Foo.tsx": "",
         }}
-        template="react"
-        theme="dark"
-      />
-      <br />
-      <br />
-      <Sandpack
         options={{
-          showLineNumbers: true,
+          activePath: "Foo.tsx",
+          openPaths: ["/index.js", "Foo.tsx"],
           showNavigator: true,
-          showInlineErrors: true,
         }}
         template="react"
       />
+      <SandpackProvider
+        files={{
+          dawada: "",
+        }}
+        options={{
+          activePath: "dawada",
+          openPaths: ["/index.js", "/App.svelte", "dawada"],
+          initMode: "immediate",
+        }}
+        template="svelte"
+      >
+        <SandpackCodeEditor />
+      </SandpackProvider>
     </>
   );
 };

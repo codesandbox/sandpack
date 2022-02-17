@@ -982,7 +982,12 @@ Array [
   <span
     className="sp-syntax-string"
   >
-    \`Sorry, we are out of \${
+    \`Sorry, we are out of 
+  </span>,
+  <span
+    className="sp-syntax-punctuation"
+  >
+    \${
   </span>,
   <span
     className="sp-syntax-plain"
@@ -990,9 +995,14 @@ Array [
     expr
   </span>,
   <span
+    className="sp-syntax-punctuation"
+  >
+    }
+  </span>,
+  <span
     className="sp-syntax-string"
   >
-    }.\`
+    .\`
   </span>,
   <span
     className="sp-syntax-punctuation"

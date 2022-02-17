@@ -35,16 +35,13 @@ const DEFAULT_THEME = generateBasedOnSimpleColors(DEFAULT_COLORS, DEFAULT_MODE);
 const themeGallery = {
   ...originalThemes,
   ...themes,
-}
-
+};
 
 export default function Home() {
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [simpleColors, setSimpleColors] = useState(DEFAULT_COLORS);
   const [mode, setMode] = useState("light");
   const [tab, setTab] = useState("basic");
-
-
 
   // -----------------------
   // Updates
@@ -122,21 +119,13 @@ export default function Home() {
 
           <ContainerSandpack>
             <Sandpack
-              // customSetup={{
-              //   entry: "index.js",
-              //   files: {
-              //     "/App.js": templates.js,
-              //     "/style.css": templates.css,
-              //   },
-              // }}
-              template="react"
-              theme={theme}
               options={{
-                // readOnly: true,
                 showLineNumbers: true,
                 showInlineErrors: true,
                 showNavigator: true,
               }}
+              template="react"
+              theme={theme}
             />
           </ContainerSandpack>
 

@@ -104,9 +104,9 @@ export const LayoutExample: React.FC = () => {
           <Caption>Sandpack preview</Caption>
           <SandpackProvider
             customSetup={{
-              files: layoutFiles,
               dependencies: { "@codesandbox/sandpack-react": "latest" },
             }}
+            files={layoutFiles}
             template="react"
           >
             <ClasserProvider

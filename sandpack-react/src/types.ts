@@ -8,8 +8,172 @@ import type {
   SandpackMessage,
   UnsubscribeFunction,
 } from "@codesandbox/sandpack-client";
+import type React from "react";
+
+import type { SANDBOX_TEMPLATES } from "./templates";
 
 import type { CodeEditorProps } from ".";
+
+export type TemplateFiles<
+  Name extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
+> = keyof typeof SANDBOX_TEMPLATES[Name]["files"];
+type SandpackFilesDerivedTemplate<Template extends SandpackPredefinedTemplate> =
+  Partial<Record<TemplateFiles<Template>, string | SandpackFile>>;
+
+export interface SandpackPreset {
+  <
+    Files extends SandpackFiles = SandpackFiles,
+    TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
+  >(
+    /**
+     * Infer files & template values
+     */
+    props: Files extends SandpackFiles
+      ? SandpackProps<Files, TemplateName> & {
+          files?: SandpackFilesDerivedTemplate<TemplateName>;
+          template?: TemplateName;
+        }
+      : never
+  ): JSX.Element;
+}
+
+export interface SandpackProviderComponent {
+  <
+    Files extends SandpackFiles,
+    TemplateName extends SandpackPredefinedTemplate
+  >(
+    /**
+     * Infer files & template values
+     */
+    props: Files extends SandpackFiles
+      ? React.PropsWithChildren<
+          SandpackProviderProps<Files, TemplateName> & {
+            files?: SandpackFilesDerivedTemplate<TemplateName>;
+            template?: TemplateName;
+          }
+        >
+      : never
+  ): React.ReactElement<
+    SandpackProviderProps,
+    React.Provider<SandpackProviderState>
+  > | null;
+}
+
+interface SandpackRootProps<
+  Files,
+  TemplateName extends SandpackPredefinedTemplate
+> {
+  // TODO
+  files?: Files & SandpackFilesDerivedTemplate<TemplateName>;
+  // TODO
+  template?: SandpackPredefinedTemplate;
+  // TODO
+  customSetup?: SandpackSetup;
+}
+
+export interface SandpackOptions<
+  Paths extends SandpackFiles = SandpackFiles,
+  TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
+> {
+  /**
+   * List the file path listed in the file tab,
+   * which will allow the user to interact with.
+   */
+  openPaths?: Array<TemplateFiles<TemplateName> | keyof Paths>;
+
+  /**
+   * Path to the file will be open in the code editor when the component mounts
+   */
+  activePath?: TemplateFiles<TemplateName> | keyof Paths;
+
+  /**
+   * This provides a way to control how some components are going to
+   * be initialized on the page. The CodeEditor and the Preview components
+   * are quite expensive and might overload the memory usage, so this gives
+   * a certain control of when to initialize them.
+   */
+  initMode?: SandpackInitMode;
+  initModeObserverOptions?: IntersectionObserverInit;
+  autorun?: boolean;
+  recompileMode?: "immediate" | "delayed";
+  recompileDelay?: number;
+
+  // TODO: documentation
+  id?: string;
+
+  bundlerURL?: string;
+  startRoute?: string;
+  skipEval?: boolean;
+  fileResolver?: FileResolver;
+  externalResources?: string[];
+}
+
+export interface SandpackProps<
+  Files extends SandpackFiles = SandpackFiles,
+  TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
+> extends SandpackRootProps<Files, TemplateName> {
+  theme?: SandpackThemeProp;
+  options?: SandpackOptions<Files, TemplateName> & {
+    editorWidthPercentage?: number;
+    editorHeight?: React.CSSProperties["height"];
+    classes?: Record<string, string>;
+
+    showNavigator?: boolean;
+    showLineNumbers?: boolean;
+    showInlineErrors?: boolean;
+    showRefreshButton?: boolean;
+    showTabs?: boolean;
+    closableTabs?: boolean;
+    wrapContent?: boolean;
+
+    codeEditor?: SandpackCodeOptions;
+
+    /**
+     * This disables editing of content by the user in all files.
+     */
+    readOnly?: boolean;
+
+    /**
+     * Controls the visibility of Read-only label, which will only
+     * appears when `readOnly` is `true`
+     */
+    showReadOnly?: boolean;
+  };
+}
+
+export interface SandpackProviderProps<
+  Files extends SandpackFiles = SandpackFiles,
+  TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
+> extends SandpackRootProps<Files, TemplateName> {
+  options?: SandpackOptions<Files, TemplateName>;
+}
+
+export interface SandpackProviderState {
+  // Setup
+  files: SandpackBundlerFiles;
+  environment?: SandboxEnvironment;
+
+  // Options
+  /**
+   * List the file path listed in the file tab,
+   * which will allow the user to interact with.
+   */
+  openPaths: Array<TemplateFiles | string>;
+  /**
+   * Path to the file will be open in the code editor when the component mounts
+   */
+  activePath: TemplateFiles | string;
+  startRoute?: string;
+  initMode: SandpackInitMode;
+
+  // Internally
+  bundlerState?: BundlerState;
+  error: SandpackError | null;
+  sandpackStatus: SandpackStatus;
+  editorState: EditorState;
+  renderHiddenIframe: boolean;
+  reactDevTools?: ReactDevToolsMode;
+}
 
 export type SandpackClientDispatch = (
   msg: SandpackMessage,
@@ -119,8 +283,6 @@ export interface SandpackSetup {
    * If you change the path of the entry file, make sure you control all the files that go into the bundle process, as prexisting settings in the template might not work anymore.
    */
   entry?: string;
-  main?: string;
-  files?: SandpackFiles;
   environment?: SandboxEnvironment;
 }
 

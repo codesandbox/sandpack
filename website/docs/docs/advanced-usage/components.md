@@ -87,8 +87,6 @@ The `Preview` component is running the `sandpack` bundler, so without rendering 
 </SandpackProvider>
 ```
 
-This will give you a component that looks approximately the same as the `SandpackRunner` preset.
-
 There's nothing stopping you from rendering multiple previews in the same `Provider`. They will all be connected to the same state source, but they can for example point to different pages of the same application.
 
 ```jsx
