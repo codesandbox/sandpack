@@ -2,8 +2,17 @@
   "name": "sandpack",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["sandpack-client", "sandpack-react", "website/*", "plugins/*"],
-  "nohoist": ["website/docs/**", "**/html-minifier-terser"],
+  "workspaces": [
+    "sandpack-client",
+    "sandpack-react",
+    "themes",
+    "website/*",
+    "plugins/*"
+  ],
+  "nohoist": [
+    "website/docs/**",
+    "**/html-minifier-terser"
+  ],
   "description": "",
   "scripts": {
     "lint": "eslint '**/*.ts?(x)' --fix",
@@ -12,7 +21,7 @@
     "test": "jest sandpack-react",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "build": "yarn workspace @codesandbox/sandpack-client run build && yarn workspace @codesandbox/sandpack-react run build",
+    "build": "yarn workspace @codesandbox/sandpack-client run build && yarn workspace @codesandbox/sandpack-react run build && yarn workspace @codesandbox/sandpack-themes run build",
     "prepare": "husky install",
     "clean": "yarn workspaces run clean",
     "dev:docs": "yarn workspace sandpack-docs start",

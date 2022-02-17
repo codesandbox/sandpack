@@ -55,6 +55,7 @@
     "react-is": "^17.0.2"
   },
   "devDependencies": {
+    "@codesandbox/sandpack-themes": "*",
     "@babel/core": "^7.12.3",
     "@storybook/addon-actions": "^6.1.9",
     "@storybook/addon-essentials": "^6.1.9",
