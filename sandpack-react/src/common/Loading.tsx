@@ -75,13 +75,17 @@ const sidesClassNames = css({
   },
 });
 
-export const Loading = (): JSX.Element => {
+export const Loading = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const c = useClasser(THEME_PREFIX);
 
   return (
     <div
-      className={classNames(c("cube-wrapper"), wrapperClassName)}
+      className={classNames(c("cube-wrapper"), wrapperClassName, className)}
       title="Open in CodeSandbox"
+      {...props}
     >
       <OpenInCodeSandboxButton />
       <div className={classNames(c("cube"), cubeClassName)}>

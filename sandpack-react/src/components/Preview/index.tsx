@@ -27,7 +27,7 @@ export type ViewportSize =
 
 export type ViewportOrientation = "portrait" | "landscape";
 export interface PreviewProps {
-  customStyle?: React.CSSProperties;
+  style?: React.CSSProperties;
   viewportSize?: ViewportSize;
   viewportOrientation?: ViewportOrientation;
   showNavigator?: boolean;
@@ -71,7 +71,7 @@ const previewActionsClassName = css({
  * @category Components
  */
 export const SandpackPreview = ({
-  customStyle,
+  style,
   showNavigator = false,
   showRefreshButton = true,
   showOpenInCodeSandbox = true,
@@ -133,8 +133,8 @@ export const SandpackPreview = ({
 
   return (
     <SandpackStack
-      customStyle={{
-        ...customStyle,
+      style={{
+        ...style,
         ...viewportStyle,
       }}
     >

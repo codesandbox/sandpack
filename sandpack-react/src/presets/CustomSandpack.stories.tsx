@@ -41,14 +41,14 @@ export const UsingVisualElements: React.FC = () => (
   <SandpackProvider options={{ activePath: "/App.js" }} template="react">
     <SandpackThemeProvider>
       <SandpackCodeEditor
-        customStyle={{
+        style={{
           width: 500,
           height: 300,
         }}
       />
 
       <SandpackPreview
-        customStyle={{
+        style={{
           border: "1px solid red",
           marginBottom: 4,
           marginTop: 4,
@@ -121,7 +121,7 @@ export const UsingHooks: React.FC = () => (
       <CustomCodeEditor />
 
       <SandpackPreview
-        customStyle={{ border: "1px solid red", width: 400, height: 300 }}
+        style={{ border: "1px solid red", width: 400, height: 300 }}
         showOpenInCodeSandbox={false}
         showRefreshButton={false}
       />

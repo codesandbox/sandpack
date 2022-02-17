@@ -14,15 +14,10 @@ export const stackClassName = css({
 /**
  * @category Components
  */
-export const SandpackStack: React.FC<{ customStyle?: React.CSSProperties }> = ({
-  children,
-  customStyle,
-}) => {
+export const SandpackStack: React.FC<React.HTMLAttributes<HTMLDivElement>> = (
+  props
+) => {
   const c = useClasser(THEME_PREFIX);
 
-  return (
-    <div className={classNames(c("stack"), stackClassName)} style={customStyle}>
-      {children}
-    </div>
-  );
+  return <div className={classNames(c("stack"), stackClassName)} {...props} />;
 };

@@ -18,7 +18,7 @@ import { editorClassName } from "./styles";
 
 export type CodeEditorRef = CodeMirrorRef;
 export interface CodeEditorProps {
-  customStyle?: React.CSSProperties;
+  style?: React.CSSProperties;
   showTabs?: boolean;
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
@@ -65,7 +65,7 @@ export const SandpackCodeEditor = React.forwardRef<
 >(
   (
     {
-      customStyle,
+      style,
       showTabs,
       showLineNumbers = false,
       showInlineErrors = false,
@@ -93,7 +93,7 @@ export const SandpackCodeEditor = React.forwardRef<
     };
 
     return (
-      <SandpackStack customStyle={customStyle}>
+      <SandpackStack style={style}>
         {shouldShowTabs && <FileTabs closableTabs={closableTabs} />}
 
         <div className={classNames(c("code-editor"), editorClassName)}>
