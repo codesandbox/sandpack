@@ -6,7 +6,7 @@ import {
   SandpackThemeProvider,
   useSandpack,
 } from "@codesandbox/sandpack-react";
-import {sandpackDark} from "@codesandbox/sandpack-themes";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { useTransform, useViewportScroll } from "framer-motion";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 

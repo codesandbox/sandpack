@@ -1,6 +1,6 @@
 import type { SandpackProps } from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
-import {sandpackDark} from "@codesandbox/sandpack-themes";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 
 import { styled } from "../../stitches.config";
 

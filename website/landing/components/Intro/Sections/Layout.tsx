@@ -9,7 +9,7 @@ import {
   SandpackLayout,
   useSandpack,
 } from "@codesandbox/sandpack-react";
-import {sandpackDark} from "@codesandbox/sandpack-themes";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { useEffect, useLayoutEffect } from "react";
 import { useInView } from "react-intersection-observer";
 

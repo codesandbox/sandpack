@@ -6,7 +6,7 @@ import {
   SandpackThemeProvider,
   SandpackCodeEditor,
 } from "@codesandbox/sandpack-react";
-import {sandpackDark} from "@codesandbox/sandpack-themes";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
