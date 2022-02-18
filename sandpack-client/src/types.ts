@@ -30,6 +30,14 @@ export interface ModuleSource {
   sourceMap: unknown | undefined;
 }
 
+export enum SandpackLogLevel {
+  None = 0,
+  Error = 10,
+  Warning = 20,
+  Info = 30,
+  Debug = 40,
+}
+
 export interface ErrorStackFrame {
   columnNumber: number;
   fileName: string;
@@ -175,6 +183,7 @@ export type SandpackMessage = BaseSandpackMessage &
         skipEval: boolean;
         clearConsoleDisabled?: boolean;
         reactDevTools?: ReactDevToolsMode;
+        logLevel?: SandpackLogLevel;
       }
     | {
         type: "refresh";
