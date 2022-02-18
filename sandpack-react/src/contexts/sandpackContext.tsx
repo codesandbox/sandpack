@@ -6,6 +6,7 @@ import type {
   SandpackMessage,
   UnsubscribeFunction,
   ReactDevToolsMode,
+  SandpackLogLevel,
 } from "@codesandbox/sandpack-client";
 import {
   SandpackClient,
@@ -72,6 +73,7 @@ export interface SandpackProviderProps {
 
   // bundler options
   bundlerURL?: string;
+  logLevel?: SandpackLogLevel;
   startRoute?: string;
   skipEval?: boolean;
   fileResolver?: FileResolver;
@@ -409,6 +411,7 @@ class SandpackProvider extends React.PureComponent<
       {
         externalResources: this.props.externalResources,
         bundlerURL: this.props.bundlerURL,
+        logLevel: this.props.logLevel,
         startRoute: this.props.startRoute,
         fileResolver: this.props.fileResolver,
         skipEval: this.props.skipEval,
