@@ -367,7 +367,9 @@ class SandpackProvider extends React.PureComponent<
      * Watch the changes on editorState
      */
     const editorState = isEqual(files, this.state.files) ? "pristine" : "dirty";
-    this.setState({ editorState });
+    if (editorState !== this.state.editorState) {
+      this.setState({ editorState });
+    }
   }
 
   /**
