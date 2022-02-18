@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/codesandbox/sandpack/compare/v0.13.15...v0.14.0) (2022-02-18)
+
+
+### Features
+
+* add loglevel to sandpack opts ([#378](https://github.com/codesandbox/sandpack/issues/378)) ([a3216e8](https://github.com/codesandbox/sandpack/commit/a3216e8f4940373df87e938148632e46cb661b4f))
+
+
+
+
+
 ## [0.13.15](https://github.com/codesandbox/sandpack/compare/v0.13.14...v0.13.15) (2022-02-11)
 
 **Note:** Version bump only for package @codesandbox/sandpack-client
