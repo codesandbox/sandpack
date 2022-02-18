@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useTimer } from "use-timer";
+import { SandpackLayout } from "../common";
+import { SandpackPreview } from "../components";
+import { SandpackProvider } from "../contexts/sandpackContext";
+import { useSandpack } from "../hooks";
 
 import { Sandpack } from "./Sandpack";
 
@@ -166,52 +171,54 @@ export const InitModeUserVisible: React.FC = () => {
   );
 };
 
+const Timer: React.FC = () => {
+  const { time, start, pause } = useTimer({ interval: 1 });
+  const { listen } = useSandpack();
+
+  useEffect(() => {
+    const unsub = listen((message) => {
+      if (message.type === "start") {
+        start();
+      } else if (message.type === "done") {
+        pause();
+      }
+    });
+
+    return () => unsub();
+  }, []);
+
+  return <>{time}ms</>;
+};
+
 export const NewBundler: React.FC = () => {
   return (
     <>
-      {new Array(30).fill(" ").map((_, index) => {
-        return (
-          <div key={index} style={{ marginBottom: 200 }}>
-            <Sandpack
-              customSetup={{
-                environment: "create-react-app",
-                entry: "/index.js",
-                dependencies: {
-                  react: "^17.0.0",
-                  "react-dom": "^17.0.0",
-                  "react-scripts": "^4.0.0",
-                },
-              }}
-              files={{
-                "/App.js": {
-                  code: `export default function App() {
-  return <h1>Hello World</h1>
-}
-`,
-                },
-                "/index.js": {
-                  code: `import React, { StrictMode } from "react";
-import ReactDOM from "react-dom";
+      {new Array(1).fill(" ").map(() => (
+        <>
+          <SandpackProvider
+            template="react"
+            bundlerURL="https://sandpack-next.pages.dev"
+          >
+            <p>
+              Bundler v2: <Timer />
+            </p>
 
-import App from "./App";
+            <SandpackLayout>
+              <SandpackPreview />
+            </SandpackLayout>
+          </SandpackProvider>
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-  rootElement
-);`,
-                },
-              }}
-              options={{
-                initMode: "user-visible",
-                bundlerURL: "https://sandpack-next.pages.dev",
-              }}
-            />
-          </div>
-        );
-      })}
+          <SandpackProvider template="react">
+            <p>
+              Bundler v1: <Timer />
+            </p>
+
+            <SandpackLayout>
+              <SandpackPreview />
+            </SandpackLayout>
+          </SandpackProvider>
+        </>
+      ))}
     </>
   );
 };

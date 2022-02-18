@@ -48,6 +48,10 @@
     "lint": {
       "name": "Lint Workspace",
       "command": "yarn lint"
+    },
+    "clear-cache": {
+      "name": "Clean yarn cache",
+      "command": "yarn cache clean"
     }
   }
 }
