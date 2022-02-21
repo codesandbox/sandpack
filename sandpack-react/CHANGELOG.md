@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.1](https://github.com/codesandbox/sandpack/compare/v0.14.0...v0.14.1) (2022-02-21)
+
+
+### Bug Fixes
+
+* **read-only:** make editor-state read-only not only editor-view ([#386](https://github.com/codesandbox/sandpack/issues/386)) ([5a6a973](https://github.com/codesandbox/sandpack/commit/5a6a973a8e9be9c7dbd8fb4d233123d38a7d4789))
+
+
+
+
+
 # [0.14.0](https://github.com/codesandbox/sandpack/compare/v0.13.15...v0.14.0) (2022-02-18)
 
 
