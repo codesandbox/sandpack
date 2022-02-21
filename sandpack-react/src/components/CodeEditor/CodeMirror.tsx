@@ -205,7 +205,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         ];
 
         if (readOnly) {
-          extensionList.push(EditorView.editable.of(false));
+          extensionList.push(EditorState.readOnly.of(true));
         } else {
           extensionList.push(bracketMatching());
           extensionList.push(highlightActiveLine());
