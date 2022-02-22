@@ -1,5 +1,6 @@
 import { getTemplate } from "codesandbox-import-utils/lib/create-sandbox/templates";
 import isEqual from "lodash.isequal";
+import { SandpackLogLevel } from ".";
 
 import Protocol from "./file-resolver-protocol";
 import { IFrameProtocol } from "./iframe-protocol";
@@ -30,6 +31,10 @@ export interface ClientOptions {
    * Location of the bundler.
    */
   bundlerURL?: string;
+  /**
+   * Level of logging to do in the bundler
+   */
+  logLevel?: SandpackLogLevel;
   /**
    * Relative path that the iframe loads (eg: /about)
    */
@@ -289,6 +294,7 @@ export class SandpackClient {
       showLoadingScreen: this.options.showLoadingScreen ?? true,
       skipEval: this.options.skipEval || false,
       clearConsoleDisabled: !this.options.clearConsoleOnFirstCompile,
+      logLevel: this.options.logLevel,
     });
   }
 
