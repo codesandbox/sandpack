@@ -147,6 +147,16 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     const languageExtension = getLanguageFromFile(filePath, fileType);
     const langSupport = getCodeMirrorLanguage(languageExtension);
 
+    // decorators need to be sorted by `line`, otherwise it will throw error
+    // see https://github.com/codesandbox/sandpack/issues/383
+    const sortedDecorators = React.useMemo(
+      () =>
+        decorators
+          ? decorators.sort((d1, d2) => d1.line - d2.line)
+          : decorators,
+      [decorators]
+    );
+
     React.useEffect(() => {
       if (!wrapper.current || !shouldInitEditor) return;
 
@@ -211,8 +221,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           extensionList.push(highlightActiveLine());
         }
 
-        if (decorators) {
-          extensionList.push(highlightDecorators(decorators));
+        if (sortedDecorators) {
+          extensionList.push(highlightDecorators(sortedDecorators));
         }
 
         if (wrapContent) {
@@ -275,7 +285,13 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
       // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [shouldInitEditor, showLineNumbers, wrapContent, themeId, decorators]);
+    }, [
+      shouldInitEditor,
+      showLineNumbers,
+      wrapContent,
+      themeId,
+      sortedDecorators,
+    ]);
 
     React.useEffect(() => {
       // When the user clicks on a tab button on a larger screen
