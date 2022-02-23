@@ -64,9 +64,7 @@
     "lint-staged": "^10.5.4",
     "package-build-stats": "7.3.6",
     "prettier": "^2.2.1",
-    "react-test-renderer": "^17.0.2"
-  },
-  "dependencies": {
+    "react-test-renderer": "^17.0.2",
     "cypress-real-events": "^1.7.0"
   }
 }
