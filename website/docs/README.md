@@ -2,6 +2,25 @@
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
+### Building Locally
+- Install [Node.js](https://nodejs.org/en/) version 14(latest stable)
+    - If you are using [nvm](https://github.com/nvm-sh/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
+- Clone [this repo](https://github.com/codesandbox/sandpack) and install dependecies
+
+```
+git clone https://github.com/codesandbox/sandpack
+cd sandpack/website/docs && yarn 
+```
+
+before you start the local development server you need to build all dependencies running the next command:
+```
+yarn build
+```
+and finally run:
+```
+yarn run serve
+```
+
 ### Installation
 
 ```
