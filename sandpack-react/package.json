@@ -50,6 +50,7 @@
     "@react-hook/intersection-observer": "^3.1.1",
     "codesandbox-import-util-types": "^2.2.3",
     "codesandbox-import-utils": "^2.2.3",
+    "esbuild": "^0.14.14",
     "lodash.isequal": "^4.5.0",
     "react-devtools-inline": "4.4.0",
     "react-is": "^17.0.2"
