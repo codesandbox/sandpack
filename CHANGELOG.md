@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.3](https://github.com/codesandbox/sandpack/compare/v0.14.2...v0.14.3) (2022-02-23)
+
+
+### Bug Fixes
+
+* **codeviewer:** make CM view read-only ([#390](https://github.com/codesandbox/sandpack/issues/390)) ([56ac9f2](https://github.com/codesandbox/sandpack/commit/56ac9f2f89d510cce71dd08f2e656e739d91c46d))
+
+
+
+
+
 ## [0.14.2](https://github.com/codesandbox/sandpack/compare/v0.14.1...v0.14.2) (2022-02-22)
 
 **Note:** Version bump only for package sandpack
