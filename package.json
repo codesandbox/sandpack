@@ -2,8 +2,16 @@
   "name": "sandpack",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["sandpack-client", "sandpack-react", "website/*", "plugins/*"],
-  "nohoist": ["website/docs/**", "**/html-minifier-terser"],
+  "workspaces": [
+    "sandpack-client",
+    "sandpack-react",
+    "website/*",
+    "plugins/*"
+  ],
+  "nohoist": [
+    "website/docs/**",
+    "**/html-minifier-terser"
+  ],
   "description": "",
   "scripts": {
     "lint": "eslint '**/*.ts?(x)' --fix",
@@ -57,5 +65,8 @@
     "package-build-stats": "7.3.6",
     "prettier": "^2.2.1",
     "react-test-renderer": "^17.0.2"
+  },
+  "dependencies": {
+    "cypress-real-events": "^1.7.0"
   }
 }
