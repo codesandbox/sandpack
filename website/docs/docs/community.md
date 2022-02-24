@@ -165,3 +165,12 @@ Or at the landing folder run:
 ```
 yarn dev
 ```
+
+**Running Sandpack React in development mode**
+
+It will open a playground page powered by [Storybook](https://storybook.js.org/).
+
+At the root folder run:
+```
+yarn dev:react
+```
