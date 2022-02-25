@@ -78,7 +78,9 @@ export const SandpackPreview = ({
   showSandpackErrorOverlay = true,
   viewportSize = "auto",
   viewportOrientation = "portrait",
-}: PreviewProps): JSX.Element => {
+  className,
+  ...props
+}: PreviewProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const { sandpack, listen } = useSandpack();
   const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
     number | null
@@ -133,10 +135,12 @@ export const SandpackPreview = ({
 
   return (
     <SandpackStack
+      className={className}
       style={{
         ...style,
         ...viewportStyle,
       }}
+      {...props}
     >
       {showNavigator ? (
         <Navigator clientId={clientId.current} onURLChange={handleNewURL} />

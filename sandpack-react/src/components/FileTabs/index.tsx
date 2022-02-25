@@ -57,7 +57,12 @@ export interface FileTabsProps {
  *
  * @category Components
  */
-export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
+
+export const FileTabs = ({
+  closableTabs,
+  className,
+  ...props
+}: FileTabsProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const { sandpack } = useSandpack();
   const c = useClasser(THEME_PREFIX);
 
@@ -104,7 +109,11 @@ export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
   };
 
   return (
-    <div className={classNames(c("tabs"), tabsClassName)} translate="no">
+    <div
+      className={classNames(c("tabs"), tabsClassName, className)}
+      translate="no"
+      {...props}
+    >
       <div
         aria-label="Select active file"
         className={classNames(

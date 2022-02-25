@@ -17,11 +17,12 @@ type DevToolsTheme = "dark" | "light";
 export const SandpackReactDevTools = ({
   clientId,
   theme,
+  className,
   ...props
 }: {
   clientId?: string;
   theme?: DevToolsTheme;
-} & React.HtmlHTMLAttributes<unknown>): JSX.Element | null => {
+} & React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const { listen, sandpack } = useSandpack();
   const { theme: sandpackTheme } = useSandpackTheme();
   const c = useClasser(THEME_PREFIX);
@@ -71,7 +72,10 @@ export const SandpackReactDevTools = ({
   };
 
   return (
-    <div className={classNames(c("devtools"), devToolClassName)} {...props}>
+    <div
+      className={classNames(c("devtools"), devToolClassName, className)}
+      {...props}
+    >
       <ReactDevTools browserTheme={getBrowserTheme()} />
     </div>
   );

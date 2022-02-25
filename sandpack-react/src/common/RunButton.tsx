@@ -34,7 +34,7 @@ export const RunButton = ({
         runButtonClassName,
         className
       )}
-      onClick={(event) => {
+      onClick={(event): void => {
         sandpack.runSandpack();
         onClick?.(event);
       }}
