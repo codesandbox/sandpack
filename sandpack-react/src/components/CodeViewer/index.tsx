@@ -43,6 +43,7 @@ export const SandpackCodeViewer = React.forwardRef<
       code: propCode,
       initMode,
       wrapContent,
+      ...props
     },
     ref
   ) => {
@@ -52,7 +53,7 @@ export const SandpackCodeViewer = React.forwardRef<
     const shouldShowTabs = showTabs ?? sandpack.openPaths.length > 1;
 
     return (
-      <SandpackStack>
+      <SandpackStack {...props}>
         {shouldShowTabs ? <FileTabs /> : null}
 
         <CodeEditor

@@ -23,7 +23,10 @@ const transpiledCodeClassName = css({
 /**
  * @category Components
  */
-export const SandpackTranspiledCode = (props: CodeViewerProps): JSX.Element => {
+export const SandpackTranspiledCode = ({
+  className,
+  ...props
+}: CodeViewerProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const { sandpack } = useSandpack();
   const transpiledCode = useTranspiledCode();
   const c = useClasser(THEME_PREFIX);
@@ -42,7 +45,14 @@ export const SandpackTranspiledCode = (props: CodeViewerProps): JSX.Element => {
   }, []);
 
   return (
-    <div className={classNames(c("transpiled-code"), transpiledCodeClassName)}>
+    <div
+      className={classNames(
+        c("transpiled-code"),
+        transpiledCodeClassName,
+        className
+      )}
+      {...props}
+    >
       {transpiledCode && (
         <SandpackCodeViewer
           code={transpiledCode}

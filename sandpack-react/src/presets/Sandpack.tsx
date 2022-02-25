@@ -64,7 +64,7 @@ export const Sandpack: SandpackPreset = (props) => {
         <SandpackLayout theme={props.theme}>
           <SandpackCodeEditor
             {...codeEditorOptions}
-            customStyle={{
+            style={{
               height: editorHeight,
               flexGrow: editorPart,
               flexShrink: editorPart,
@@ -72,7 +72,7 @@ export const Sandpack: SandpackPreset = (props) => {
             }}
           />
           <SandpackPreview
-            customStyle={{
+            style={{
               height: editorHeight,
               flexGrow: previewPart,
               flexShrink: previewPart,

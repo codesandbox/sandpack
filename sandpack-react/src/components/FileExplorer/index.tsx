@@ -17,13 +17,12 @@ const fileExplorerClassName = css({
  */
 export const FileExplorer = ({
   className,
-}: {
-  className?: string;
-}): JSX.Element => {
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const { sandpack } = useSandpack();
 
   return (
-    <div className={classNames(fileExplorerClassName, className)}>
+    <div className={classNames(fileExplorerClassName, className)} {...props}>
       <ModuleList
         activePath={sandpack.activePath}
         files={sandpack.files}

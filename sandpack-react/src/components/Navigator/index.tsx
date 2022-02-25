@@ -56,7 +56,9 @@ export interface NavigatorProps {
 export const Navigator = ({
   clientId,
   onURLChange,
-}: NavigatorProps): JSX.Element => {
+  className,
+  ...props
+}: NavigatorProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const [baseUrl, setBaseUrl] = React.useState<string>("");
   const { sandpack, dispatch, listen } = useSandpack();
 
@@ -120,7 +122,10 @@ export const Navigator = ({
   };
 
   return (
-    <div className={classNames(c("navigator"), navigatorClassName)}>
+    <div
+      className={classNames(c("navigator"), navigatorClassName, className)}
+      {...props}
+    >
       <button
         aria-label="Go back one page"
         className={classNames(

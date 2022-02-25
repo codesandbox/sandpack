@@ -32,10 +32,14 @@ const loadingClassName = css({
 /**
  * @category Components
  */
-export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
+export const LoadingOverlay = ({
   clientId,
   loading,
-}) => {
+  className,
+  style,
+  ...props
+}: LoadingOverlayProps &
+  React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const loadingOverlayState = useLoadingOverlayState(clientId, loading);
   const c = useClasser(THEME_PREFIX);
 
@@ -49,8 +53,10 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
         className={classNames(
           c("overlay", "error"),
           absoluteClassName,
-          errorClassName
+          errorClassName,
+          className
         )}
+        {...props}
       >
         <div className={classNames(c("error-message"), errorMessageClassName)}>
           Unable to establish connection with the sandpack bundler. Make sure
@@ -84,12 +90,15 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
       className={classNames(
         c("overlay", "loading"),
         absoluteClassName,
-        loadingClassName
+        loadingClassName,
+        className
       )}
       style={{
+        ...style,
         opacity: stillLoading ? 1 : 0,
         transition: `opacity ${FADE_ANIMATION_DURATION}ms ease-out`,
       }}
+      {...props}
     >
       <Loading />
     </div>

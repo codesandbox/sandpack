@@ -27,7 +27,7 @@ export type ViewportSize =
 
 export type ViewportOrientation = "portrait" | "landscape";
 export interface PreviewProps {
-  customStyle?: React.CSSProperties;
+  style?: React.CSSProperties;
   viewportSize?: ViewportSize;
   viewportOrientation?: ViewportOrientation;
   showNavigator?: boolean;
@@ -71,14 +71,16 @@ const previewActionsClassName = css({
  * @category Components
  */
 export const SandpackPreview = ({
-  customStyle,
+  style,
   showNavigator = false,
   showRefreshButton = true,
   showOpenInCodeSandbox = true,
   showSandpackErrorOverlay = true,
   viewportSize = "auto",
   viewportOrientation = "portrait",
-}: PreviewProps): JSX.Element => {
+  className,
+  ...props
+}: PreviewProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const { sandpack, listen } = useSandpack();
   const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
     number | null
@@ -133,10 +135,12 @@ export const SandpackPreview = ({
 
   return (
     <SandpackStack
-      customStyle={{
-        ...customStyle,
+      className={className}
+      style={{
+        ...style,
         ...viewportStyle,
       }}
+      {...props}
     >
       {showNavigator ? (
         <Navigator clientId={clientId.current} onURLChange={handleNewURL} />

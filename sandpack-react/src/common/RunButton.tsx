@@ -17,7 +17,11 @@ const runButtonClassName = css({
 /**
  * @category Components
  */
-export const RunButton = (): JSX.Element | null => {
+export const RunButton = ({
+  className,
+  onClick,
+  ...props
+}: React.HTMLAttributes<HTMLButtonElement>): JSX.Element | null => {
   const c = useClasser(THEME_PREFIX);
   const { sandpack } = useSandpack();
 
@@ -27,10 +31,15 @@ export const RunButton = (): JSX.Element | null => {
         c("button"),
         buttonClassName,
         actionButtonClassName,
-        runButtonClassName
+        runButtonClassName,
+        className
       )}
-      onClick={sandpack.runSandpack}
+      onClick={(event): void => {
+        sandpack.runSandpack();
+        onClick?.(event);
+      }}
       type="button"
+      {...props}
     >
       <RunIcon />
       Run
