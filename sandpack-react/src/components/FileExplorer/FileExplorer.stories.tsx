@@ -4,9 +4,10 @@ import { SandpackLayout } from "../../common/Layout";
 import { SandpackCodeEditor } from "../../components/CodeEditor";
 import { SandpackProvider } from "../../contexts/sandpackContext";
 
-import { FileExplorer } from "./";
-import { File } from "./File";
 import { Directory } from "./Directory";
+import { File } from "./File";
+
+import { FileExplorer } from "./";
 
 export default {
   title: "components/File Explorer",
@@ -77,11 +78,12 @@ export const DirectoryIconStory: React.FC = () => (
   <SandpackProvider>
     <SandpackLayout>
       <Directory
-        depth={1}
         activePath="file.ts"
-        prefixedPath="/src"
+        depth={1}
         files={{ App: { code: "" } }}
-        selectFile={(): any => {}}
+        prefixedPath="/src"
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        selectFile={(): any => null}
       />
     </SandpackLayout>
   </SandpackProvider>

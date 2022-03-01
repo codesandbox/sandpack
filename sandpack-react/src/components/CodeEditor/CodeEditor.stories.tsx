@@ -34,7 +34,6 @@ export const Component: Story<CodeEditorProps> = (args) => (
 
 export const InlineError: React.FC = () => (
   <SandpackProvider
-    template="react"
     customSetup={{
       files: {
         "/App.js": `export default function App() 
@@ -43,6 +42,7 @@ export const InlineError: React.FC = () => (
 `,
       },
     }}
+    template="react"
   >
     <SandpackThemeProvider>
       <SandpackCodeEditor showInlineErrors showLineNumbers />

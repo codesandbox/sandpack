@@ -188,7 +188,7 @@ export const ShowLineNumber: React.FC = () => (
       fileType="less"
       id="less"
       initMode="immediate"
-      showLineNumbers={true}
+      showLineNumbers
     />
   </SandpackProvider>
 );
@@ -199,8 +199,8 @@ export const WrapContent: React.FC = () => (
       code={Array(20).fill("Lorem ipsum").join("")}
       id="wrap"
       initMode="immediate"
-      showLineNumbers={true}
-      wrapContent={true}
+      showLineNumbers
+      wrapContent
     />
   </SandpackProvider>
 );
@@ -230,9 +230,6 @@ export default function List() {
   );
   return <ul>{listItems}</ul>;
 }`}
-      fileType="jsx"
-      id="decorators"
-      initMode="immediate"
       decorators={[
         { className: "highlight", line: 1 },
         { className: "highlight", line: 9 },
@@ -251,6 +248,9 @@ export default function List() {
           endColumn: 38,
         },
       ]}
+      fileType="jsx"
+      id="decorators"
+      initMode="immediate"
     />
   </SandpackProvider>
 );

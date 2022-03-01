@@ -165,9 +165,9 @@ export const InitModeUserVisible: React.FC = () => {
 };
 
 export const ShowLineNumber: React.FC = () => (
-  <Sandpack template="react" options={{ showLineNumbers: true }} />
+  <Sandpack options={{ showLineNumbers: true }} template="react" />
 );
 
 export const wrapContent: React.FC = () => (
-  <Sandpack template="vanilla" options={{ wrapContent: true }} />
+  <Sandpack options={{ wrapContent: true }} template="vanilla" />
 );

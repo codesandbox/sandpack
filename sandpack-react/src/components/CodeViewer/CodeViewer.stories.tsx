@@ -31,7 +31,7 @@ export const ShowTabs: Story<CodeViewerProps> = () => (
 export const showLineNumbers: Story<CodeViewerProps> = () => (
   <SandpackProvider>
     <SandpackThemeProvider>
-      <SandpackCodeViewer showLineNumbers showTabs={false} />
+      <SandpackCodeViewer showTabs={false} showLineNumbers />
     </SandpackThemeProvider>
   </SandpackProvider>
 );
