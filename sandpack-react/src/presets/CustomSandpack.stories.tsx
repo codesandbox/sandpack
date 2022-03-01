@@ -48,6 +48,8 @@ export const UsingVisualElements: React.FC = () => (
       />
 
       <SandpackPreview
+        showOpenInCodeSandbox={false}
+        showRefreshButton={false}
         style={{
           border: "1px solid red",
           marginBottom: 4,
@@ -55,8 +57,6 @@ export const UsingVisualElements: React.FC = () => (
           width: 500,
           height: 300,
         }}
-        showOpenInCodeSandbox={false}
-        showRefreshButton={false}
       />
 
       <div
@@ -121,9 +121,9 @@ export const UsingHooks: React.FC = () => (
       <CustomCodeEditor />
 
       <SandpackPreview
-        style={{ border: "1px solid red", width: 400, height: 300 }}
         showOpenInCodeSandbox={false}
         showRefreshButton={false}
+        style={{ border: "1px solid red", width: 400, height: 300 }}
       />
 
       <div

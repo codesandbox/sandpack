@@ -72,14 +72,14 @@ export const Sandpack: SandpackPreset = (props) => {
             }}
           />
           <SandpackPreview
+            showNavigator={props.options?.showNavigator}
+            showRefreshButton={props.options?.showRefreshButton}
             style={{
               height: editorHeight,
               flexGrow: previewPart,
               flexShrink: previewPart,
               minWidth: 700 * (previewPart / (previewPart + editorPart)),
             }}
-            showNavigator={props.options?.showNavigator}
-            showRefreshButton={props.options?.showRefreshButton}
           />
         </SandpackLayout>
       </ClasserProvider>
