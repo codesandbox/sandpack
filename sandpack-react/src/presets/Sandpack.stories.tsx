@@ -131,8 +131,6 @@ export default () => {
   />
 );
 
-export const WithCustomLibrary: React.FC = () => <Sandpack template="react" />;
-
 export const RunnableComponent = (): React.ReactElement => (
   <Sandpack
     files={{
@@ -165,3 +163,11 @@ export const InitModeUserVisible: React.FC = () => {
     </>
   );
 };
+
+export const ShowLineNumber: React.FC = () => (
+  <Sandpack template="react" options={{ showLineNumbers: true }} />
+);
+
+export const wrapContent: React.FC = () => (
+  <Sandpack template="vanilla" options={{ wrapContent: true }} />
+);
