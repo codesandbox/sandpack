@@ -1,6 +1,5 @@
 import { getTemplate } from "codesandbox-import-utils/lib/create-sandbox/templates";
 import isEqual from "lodash.isequal";
-import { SandpackLogLevel } from ".";
 
 import Protocol from "./file-resolver-protocol";
 import { IFrameProtocol } from "./iframe-protocol";
@@ -21,6 +20,8 @@ import {
   addPackageJSONIfNeeded,
   extractErrorDetails,
 } from "./utils";
+
+import type { SandpackLogLevel } from ".";
 
 export interface ClientOptions {
   /**
