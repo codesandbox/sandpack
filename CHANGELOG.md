@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.3](https://github.com/codesandbox/sandpack/compare/v0.14.2...v0.14.3) (2022-02-23)
+
+
+### Bug Fixes
+
+* **codeviewer:** make CM view read-only ([#390](https://github.com/codesandbox/sandpack/issues/390)) ([56ac9f2](https://github.com/codesandbox/sandpack/commit/56ac9f2f89d510cce71dd08f2e656e739d91c46d))
+
+
+
+
+
+## [0.14.2](https://github.com/codesandbox/sandpack/compare/v0.14.1...v0.14.2) (2022-02-22)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [0.14.1](https://github.com/codesandbox/sandpack/compare/v0.14.0...v0.14.1) (2022-02-21)
+
+
+### Bug Fixes
+
+* **read-only:** make editor-state read-only not only editor-view ([#386](https://github.com/codesandbox/sandpack/issues/386)) ([5a6a973](https://github.com/codesandbox/sandpack/commit/5a6a973a8e9be9c7dbd8fb4d233123d38a7d4789))
+
+
+
+
+
+# [0.14.0](https://github.com/codesandbox/sandpack/compare/v0.13.15...v0.14.0) (2022-02-18)
+
+
+### Features
+
+* add loglevel to sandpack opts ([#378](https://github.com/codesandbox/sandpack/issues/378)) ([a3216e8](https://github.com/codesandbox/sandpack/commit/a3216e8f4940373df87e938148632e46cb661b4f))
+
+
+
+
+
 ## [0.13.15](https://github.com/codesandbox/sandpack/compare/v0.13.14...v0.13.15) (2022-02-11)
 
 **Note:** Version bump only for package sandpack

@@ -7,6 +7,7 @@ import type {
   SandpackError,
   SandpackMessage,
   UnsubscribeFunction,
+  SandpackLogLevel,
 } from "@codesandbox/sandpack-client";
 import type React from "react";
 
@@ -101,6 +102,7 @@ export interface SandpackOptions<
   // TODO: documentation
   id?: string;
 
+  logLevel?: SandpackLogLevel;
   bundlerURL?: string;
   startRoute?: string;
   skipEval?: boolean;

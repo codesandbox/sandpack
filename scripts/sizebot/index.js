@@ -16,7 +16,7 @@ function format(bytes) {
 
 const ratio = (base, current) => {
   let diff = current - base;
-  if (current === base || Math.abs(diff) < 1024) return `✅ ${format(0)}`;
+  if (current === base || Math.abs(diff) < 3) return `✅ ${format(0)}`;
 
   let ratioAmount = (((base - current) / base) * -100).toFixed(2);
 

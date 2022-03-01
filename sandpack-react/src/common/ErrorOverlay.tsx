@@ -13,14 +13,16 @@ import { classNames } from "../utils/classNames";
 /**
  * @category Components
  */
-export const ErrorOverlay = ({
+
+export const ErrorOverlay: React.FC<React.DOMAttributes<HTMLDivElement>> = ({
+  children,
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const errorMessage = useErrorMessage();
   const c = useClasser(THEME_PREFIX);
 
-  if (!errorMessage) {
+  if (!errorMessage && !children) {
     return null;
   }
 
@@ -36,7 +38,7 @@ export const ErrorOverlay = ({
       {...props}
     >
       <div className={classNames(c("error-message"), errorMessageClassName)}>
-        {errorMessage}
+        {errorMessage || children}
       </div>
     </div>
   );

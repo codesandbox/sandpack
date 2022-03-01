@@ -33,34 +33,20 @@ export const Component: Story<CodeEditorProps> = (args) => (
 );
 
 export const InlineError: React.FC = () => (
-  <SandpackProvider template="react">
+  <SandpackProvider
+    customSetup={{
+      files: {
+        "/App.js": `export default function App() 
+  return <h1>Hello World</h1>
+}
+`,
+      },
+    }}
+    template="react"
+  >
     <SandpackThemeProvider>
       <SandpackCodeEditor showInlineErrors showLineNumbers />
       <SandpackPreview />
-    </SandpackThemeProvider>
-  </SandpackProvider>
-);
-
-export const ReactCode: React.FC = () => (
-  <SandpackProvider template="react">
-    <SandpackThemeProvider>
-      <SandpackCodeEditor showLineNumbers />
-    </SandpackThemeProvider>
-  </SandpackProvider>
-);
-
-export const VueCode: React.FC = () => (
-  <SandpackProvider template="vue">
-    <SandpackThemeProvider>
-      <SandpackCodeEditor />
-    </SandpackThemeProvider>
-  </SandpackProvider>
-);
-
-export const DarkTheme: React.FC = () => (
-  <SandpackProvider template="vue">
-    <SandpackThemeProvider theme="dark">
-      <SandpackCodeEditor />
     </SandpackThemeProvider>
   </SandpackProvider>
 );

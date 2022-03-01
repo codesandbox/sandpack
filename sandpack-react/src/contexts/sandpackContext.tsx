@@ -315,7 +315,9 @@ class SandpackProviderClass extends React.PureComponent<
      * Watch the changes on editorState
      */
     const editorState = isEqual(files, this.state.files) ? "pristine" : "dirty";
-    this.setState({ editorState });
+    if (editorState !== this.state.editorState) {
+      this.setState({ editorState });
+    }
   }
 
   /**
@@ -362,6 +364,7 @@ class SandpackProviderClass extends React.PureComponent<
         startRoute: this.props.options?.startRoute,
         fileResolver: this.props.options?.fileResolver,
         skipEval: this.props.options?.skipEval ?? false,
+        logLevel: this.props.options?.logLevel,
         showOpenInCodeSandbox: !this.openInCSBRegistered.current,
         showErrorScreen: !this.errorScreenRegistered.current,
         showLoadingScreen: !this.loadingScreenRegistered.current,

@@ -129,12 +129,6 @@ export const ExternalResources: React.FC = () => (
   />
 );
 
-export const WithCustomLibrary: React.FC = () => <Sandpack template="react" />;
-
-export const wrapContent: React.FC = () => (
-  <Sandpack options={{ wrapContent: true, showLineNumbers: true }} />
-);
-
 export const RunnableComponent = (): React.ReactElement => (
   <Sandpack
     files={{
@@ -168,17 +162,10 @@ export const InitModeUserVisible: React.FC = () => {
   );
 };
 
-export const showInlineErrors: React.FC = () => {
-  return (
-    <Sandpack
-      files={{
-        "/App.js": `export default function App() {
-  return <h1>Hello Woadwadrld</h1
-}
-`,
-      }}
-      options={{ showInlineErrors: true }}
-      template="react"
-    />
-  );
-};
+export const ShowLineNumber: React.FC = () => (
+  <Sandpack options={{ showLineNumbers: true }} template="react" />
+);
+
+export const wrapContent: React.FC = () => (
+  <Sandpack options={{ wrapContent: true }} template="vanilla" />
+);

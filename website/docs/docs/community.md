@@ -124,3 +124,53 @@ We will consider 👍 as the given issue is important to you.
 #### Reporting bugs
 
 Bug reports can make Sandpack better. So if you spot any issues with Sandpack please create an issue and follow the instructions using the [bug report template](https://github.com/codesandbox/sandpack/issues/new?assignees=&labels=bug%2Ctriage&template=BUG.md).
+
+### Running Locally
+
+**General**  
+
+- Install [Node.js](https://nodejs.org/en/) version 14(latest stable)
+    - If you are using [nvm](https://github.com/nvm-sh/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
+```
+nvm use 14
+```
+- Install all project dependencies by running:
+```
+yarn
+```
+- To start the development mode you need to build all dependencies first by running:
+```
+yarn build
+```
+**Running Sandpack Docs** 
+
+At the root folder run:
+```
+yarn dev:docs 
+```
+Or at the docs folder run:
+```
+yarn run serve
+```
+
+**Running Sandpack Landing** 
+
+The landing page is powered by [Next.js](https://nextjs.org/)
+
+At the root folder run:
+```
+yarn dev:landing 
+```
+Or at the landing folder run:
+```
+yarn dev
+```
+
+**Running Sandpack React in development mode**
+
+It will open a playground page powered by [Storybook](https://storybook.js.org/).
+
+At the root folder run:
+```
+yarn dev:react
+```

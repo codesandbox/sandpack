@@ -21,6 +21,8 @@ import {
   extractErrorDetails,
 } from "./utils";
 
+import type { SandpackLogLevel } from ".";
+
 export interface ClientOptions {
   /**
    * Paths to external resources
@@ -30,6 +32,10 @@ export interface ClientOptions {
    * Location of the bundler.
    */
   bundlerURL?: string;
+  /**
+   * Level of logging to do in the bundler
+   */
+  logLevel?: SandpackLogLevel;
   /**
    * Relative path that the iframe loads (eg: /about)
    */
@@ -292,6 +298,7 @@ export class SandpackClient {
       showLoadingScreen: this.options.showLoadingScreen ?? true,
       skipEval: this.options.skipEval || false,
       clearConsoleDisabled: !this.options.clearConsoleOnFirstCompile,
+      logLevel: this.options.logLevel,
     });
   }
 
