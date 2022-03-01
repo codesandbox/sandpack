@@ -81,7 +81,7 @@ export const DirectoryIconStory: React.FC = () => (
         activePath="file.ts"
         prefixedPath="/src"
         files={{ App: { code: "" } }}
-        selectFile={() => {}}
+        selectFile={(): any => {}}
       />
     </SandpackLayout>
   </SandpackProvider>
