@@ -6,16 +6,17 @@ import { useErrorMessage } from "../hooks/useErrorMessage";
 /**
  * @category Components
  */
-export const ErrorOverlay = (): JSX.Element | null => {
+export const ErrorOverlay: React.FC = ({ children }) => {
   const errorMessage = useErrorMessage();
   const c = useClasser("sp");
 
-  if (!errorMessage) {
+  if (!errorMessage && !children) {
     return null;
   }
+
   return (
     <div className={c("overlay", "error")} translate="no">
-      <div className={c("error-message")}>{errorMessage}</div>
+      <div className={c("error-message")}>{errorMessage || children}</div>
     </div>
   );
 };
