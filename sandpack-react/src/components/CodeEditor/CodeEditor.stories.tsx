@@ -34,13 +34,10 @@ export const Component: Story<CodeEditorProps> = (args) => (
 
 export const InlineError: React.FC = () => (
   <SandpackProvider
-    customSetup={{
-      files: {
-        "/App.js": `export default function App() 
+    files={{
+      "/App.js": `export default function App() 
   return <h1>Hello World</h1>
-}
-`,
-      },
+}`,
     }}
     template="react"
   >
