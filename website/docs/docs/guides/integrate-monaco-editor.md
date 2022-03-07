@@ -29,8 +29,6 @@ If you are not familiar with the Monaco library this is how a basic `Editor` com
 
 ```jsx
 import React from "react";
-import ReactDOM from "react-dom";
-
 import Editor from "@monaco-editor/react";
 
 function App() {
@@ -42,13 +40,9 @@ function App() {
     />
   );
 }
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
 ```
 
 Now create a component called `MonacoEditor`, and put the Editor component inside a `SandpackStack`.
-
 This is what the `MonacoEditor` component could look like, you can play with the properties to meet your needs.
 
 ```jsx
@@ -84,9 +78,11 @@ function MonacoEditor() {
 }
 ```
 
-If you are unfamiliar with any of the code below make sure to check the [**Advances Usage**](https://sandpack.codesandbox.io/docs/advanced-usage/provider) section for a better understanding.
+:::info
+If you are unfamiliar with any of the code in this guide make sure to check the [**Advances Usage**](https://sandpack.codesandbox.io/docs/advanced-usage/provider) section for a better understanding.
+:::
 
-Finally, using a `SandpackProvider` you can integrate the `MonacoEditor` component like the following example shows:
+Finally, using a `SandpackProvider` you can integrate the `MonacoEditor` component like the following example:
 
 ```jsx
 export default function MySandpack() {
@@ -98,7 +94,7 @@ export default function MySandpack() {
         }}
       >
         <SandpackLayout theme="dark">
-          <MonacoEditor /> // Your Monaco Editor
+          <MonacoEditor /> // Your Monaco Editor Component
           <SandpackPreview customStyle={{ height: "100vh" }} />
         </SandpackLayout>
       </ClasserProvider>
