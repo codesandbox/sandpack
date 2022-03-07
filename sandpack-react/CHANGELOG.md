@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.5](https://github.com/codesandbox/sandpack/compare/v0.14.4...v0.14.5) (2022-03-07)
+
+
+### Bug Fixes
+
+* side effect should contain css ([#396](https://github.com/codesandbox/sandpack/issues/396)) ([4c2b149](https://github.com/codesandbox/sandpack/commit/4c2b1491838d2fe654c426f1429f96a76cace3ca))
+
+
+
+
+
 ## [0.14.4](https://github.com/codesandbox/sandpack/compare/v0.14.3...v0.14.4) (2022-03-07)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
