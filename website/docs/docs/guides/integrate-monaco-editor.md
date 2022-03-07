@@ -88,16 +88,10 @@ Finally, using a `SandpackProvider` you can integrate the `MonacoEditor` compone
 export default function MySandpack() {
   return (
     <SandpackProvider template="react">
-      <ClasserProvider
-        classes={{
-          "sp-layout": "no-border",
-        }}
-      >
-        <SandpackLayout theme="dark">
-          <MonacoEditor /> // Your Monaco Editor Component
-          <SandpackPreview customStyle={{ height: "100vh" }} />
-        </SandpackLayout>
-      </ClasserProvider>
+      <SandpackLayout theme="dark">
+        <MonacoEditor /> // Your Monaco Editor Component
+        <SandpackPreview customStyle={{ height: "100vh" }} />
+      </SandpackLayout>
     </SandpackProvider>
   );
 }
