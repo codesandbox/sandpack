@@ -12,7 +12,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
-  "sideEffects": false,
+  "sideEffects": ["dist/index.css"],
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "yarn run clean",
