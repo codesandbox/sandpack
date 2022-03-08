@@ -9,26 +9,24 @@
       "command": "yarn build"
     }
   ],
-  "portTasks": {
-    "3000": {
+  "tasks": {
+    "docs": {
       "name": "Docs",
       "command": "yarn dev:docs"
     },
-    "3001": {
+    "landing": {
       "name": "Landing page",
       "command": "yarn dev:landing"
     },
-    "3002": {
+    "theme": {
       "name": "Theme",
       "command": "yarn dev:theme"
     },
-    "6006": {
+    "storybook": {
       "name": "Storybook",
       "command": "yarn workspace @codesandbox/sandpack-react storybook",
       "runAtStart": true
-    }
-  },
-  "tasks": {
+    },
     "setup": {
       "name": "Install Dependencies",
       "command": "yarn"
