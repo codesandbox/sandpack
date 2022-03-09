@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const SVG = (props): React.ReactElement => (
+const SVG: React.FC<HtmlHTMLAttributes<SVGAElement>> = (props) => (
   <svg
     fill="currentColor"
     height="24"
