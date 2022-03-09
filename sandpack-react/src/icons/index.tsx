@@ -39,25 +39,17 @@ export const RefreshIcon = (): React.ReactElement => (
   </SVG>
 );
 
-export const CSBIcon = (): React.ReactElement => (
+export const ExportIcon = (): React.ReactElement => (
   <svg
-    fill="currentColor"
-    // stroke="currentColor"
+    stroke="currentColor"
     height="24"
     viewBox="0 0 24 24"
     width="24"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path
-      clipRule="evenodd"
-      d="M17.5 6.5H6.5V17.5H17.5V6.5ZM5 5V19H19V5H5Z"
-      fillRule="evenodd"
-    />
-    {/* 
     <path d="M10.5714 7H8.07143C7.4797 7 7 7.4797 7 8.07143V15.9286C7 16.5203 7.4797 17 8.07143 17H15.9286C16.5203 17 17 16.5203 17 15.9286V13.4286" />
     <path d="M14.1429 7H16.8929C16.952 7 17 7.04798 17 7.10714V9.85715" />
     <path d="M11.2858 12.7143L16.8572 7.14282" />
-    */}
   </svg>
 );
 

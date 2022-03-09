@@ -1,7 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { CSBIcon } from "../../icons";
+import { ExportIcon } from "../../icons";
 
 import { UnstyledOpenInCodeSandboxButton } from "./UnstyledOpenInCodeSandboxButton";
 
@@ -13,7 +13,7 @@ export const OpenInCodeSandboxButton = (): JSX.Element | null => {
 
   return (
     <UnstyledOpenInCodeSandboxButton className={c("button", "icon-standalone")}>
-      <CSBIcon />
+      <ExportIcon />
     </UnstyledOpenInCodeSandboxButton>
   );
 };
