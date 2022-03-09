@@ -2,7 +2,6 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { CSBIcon } from "../../icons";
-import { isDarkColor } from "../../utils/stringUtils";
 
 import { UnstyledOpenInCodeSandboxButton } from "./UnstyledOpenInCodeSandboxButton";
 

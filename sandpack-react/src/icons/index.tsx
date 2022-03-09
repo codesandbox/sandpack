@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const SVG: React.FC<React.SVGAttributes<{}>> = (props) => (
+const SVG: React.FC<React.SVGAttributes<unknown>> = (props) => (
   <svg
     fill="currentColor"
     height="24"
@@ -49,9 +49,9 @@ export const CSBIcon = (): React.ReactElement => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fillRule="evenodd"
       clipRule="evenodd"
       d="M17.5 6.5H6.5V17.5H17.5V6.5ZM5 5V19H19V5H5Z"
+      fillRule="evenodd"
     />
     {/* 
     <path d="M10.5714 7H8.07143C7.4797 7 7 7.4797 7 8.07143V15.9286C7 16.5203 7.4797 17 8.07143 17H15.9286C16.5203 17 17 16.5203 17 15.9286V13.4286" />
