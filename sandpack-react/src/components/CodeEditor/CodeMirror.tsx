@@ -313,6 +313,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         const view = cmView.current;
         view.dispatch({
           changes: { from: 0, to: view.state.doc.length, insert: code },
+          selection: view.state.selection,
         });
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
