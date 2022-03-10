@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.7](https://github.com/codesandbox/sandpack/compare/v0.14.6...v0.14.7) (2022-03-10)
+
+
+### Bug Fixes
+
+* **logo:** update icons ([#402](https://github.com/codesandbox/sandpack/issues/402)) ([e7b0e46](https://github.com/codesandbox/sandpack/commit/e7b0e4630985b6e875a39087a1c4757b5729dd91))
+
+
+
+
+
 ## [0.14.6](https://github.com/codesandbox/sandpack/compare/v0.14.5...v0.14.6) (2022-03-10)
 
 
