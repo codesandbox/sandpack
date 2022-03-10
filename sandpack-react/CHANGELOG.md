@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.6](https://github.com/codesandbox/sandpack/compare/v0.14.5...v0.14.6) (2022-03-10)
+
+
+### Bug Fixes
+
+* **codemirror:** persist selection position on code change ([#406](https://github.com/codesandbox/sandpack/issues/406)) ([65534eb](https://github.com/codesandbox/sandpack/commit/65534ebfdc785057b0ebff417a51867e5f8ba242))
+
+
+
+
+
 ## [0.14.5](https://github.com/codesandbox/sandpack/compare/v0.14.4...v0.14.5) (2022-03-07)
 
 
