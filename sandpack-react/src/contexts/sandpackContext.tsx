@@ -499,7 +499,7 @@ class SandpackProvider extends React.PureComponent<
     const client = this.clients[clientId];
     if (client) {
       client.cleanup();
-      client.iframe.removeAttribute("src");
+      client.iframe.contentWindow?.location.replace("about:blank");
       delete this.clients[clientId];
     } else {
       delete this.preregisteredIframes[clientId];

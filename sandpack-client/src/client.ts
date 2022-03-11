@@ -157,9 +157,12 @@ export class SandpackClient {
       );
     }
 
-    this.iframe.src = options.startRoute
+    const urlSource = options.startRoute
       ? new URL(options.startRoute, this.bundlerURL).toString()
       : this.bundlerURL;
+
+    this.iframe.contentWindow?.location.replace(urlSource);
+
     this.iframeProtocol = new IFrameProtocol(this.iframe, this.bundlerURL);
 
     this.unsubscribeGlobalListener = this.iframeProtocol.globalListen(
