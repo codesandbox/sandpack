@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.8](https://github.com/codesandbox/sandpack/compare/v0.14.7...v0.14.8) (2022-03-11)
+
+
+### Bug Fixes
+
+* **client:** prevent add route into the main page browser history ([#407](https://github.com/codesandbox/sandpack/issues/407)) ([1e5230a](https://github.com/codesandbox/sandpack/commit/1e5230af5dff6c9afec8a96d1b9281cc585a826d))
+
+
+
+
+
 ## [0.14.4](https://github.com/codesandbox/sandpack/compare/v0.14.3...v0.14.4) (2022-03-07)
 
 **Note:** Version bump only for package @codesandbox/sandpack-client
