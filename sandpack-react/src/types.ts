@@ -140,32 +140,13 @@ export interface SandpackSetup {
 export type SandpackInitMode = "immediate" | "lazy" | "user-visible";
 
 export type SandboxEnvironment =
-  | "adonis"
-  | "vue-cli"
-  | "preact-cli"
-  | "svelte"
-  | "create-react-app-typescript"
-  | "create-react-app"
   | "angular-cli"
+  | "create-react-app"
+  | "create-react-app-typescript"
+  | "svelte"
   | "parcel"
-  | "@dojo/cli-create-app"
-  | "cxjs"
-  | "gatsby"
-  | "nuxt"
-  | "next"
-  | "reason"
-  | "apollo"
-  | "sapper"
-  | "ember"
-  | "nest"
-  | "static"
-  | "styleguidist"
-  | "gridsome"
-  | "vuepress"
-  | "mdx-deck"
-  | "quasar"
-  | "docusaurus"
-  | "node";
+  | "vue-cli"
+  | "static";
 
 export type SandpackPredefinedTemplate =
   | "angular"
