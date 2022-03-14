@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.9](https://github.com/codesandbox/sandpack/compare/v0.14.8...v0.14.9) (2022-03-14)
+
+
+### Bug Fixes
+
+* **environment:** remove sse envs ([#410](https://github.com/codesandbox/sandpack/issues/410)) ([cf65e50](https://github.com/codesandbox/sandpack/commit/cf65e500321c4d18674c05b3fcc3d1b81c8d2e6c))
+
+
+
+
+
 ## [0.14.8](https://github.com/codesandbox/sandpack/compare/v0.14.7...v0.14.8) (2022-03-11)
 
 
