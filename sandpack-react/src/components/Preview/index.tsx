@@ -1,6 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
+import type { SandpackMessage } from "../../../../sandpack-client";
 import { ErrorOverlay } from "../../common/ErrorOverlay";
 import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { OpenInCodeSandboxButton } from "../../common/OpenInCodeSandboxButton";
@@ -60,7 +61,7 @@ export const SandpackPreview = ({
     openInCSBRegisteredRef,
     loadingScreenRegisteredRef,
   } = sandpack;
-
+  
   const c = useClasser("sp");
   const clientId = React.useRef<string>(generateRandomId());
   const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
@@ -77,7 +78,7 @@ export const SandpackPreview = ({
 
     registerBundler(iframeElement, clientIdValue);
 
-    const unsubscribe = listen((message) => {
+    const unsubscribe = listen((message: SandpackMessage) => {
       if (message.type === "resize") {
         setComputedAutoHeight(message.height);
       }
