@@ -1,7 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import type { SandpackMessage } from "../../../../sandpack-client";
+import type { SandpackMessage } from "@codesandbox/sandpack-client";
 import { ErrorOverlay } from "../../common/ErrorOverlay";
 import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { OpenInCodeSandboxButton } from "../../common/OpenInCodeSandboxButton";
