@@ -111,7 +111,7 @@ There's nothing stopping you from rendering multiple previews in the same `Provi
   </SandpackLayout>
 </SandpackProvider>
 
-## Additional buttons
+### Additional buttons
 The `<SandpackPreview />` component also allows you to add additional buttons to the preview area.
 
 ```jsx
