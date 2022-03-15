@@ -118,7 +118,7 @@ The `<SandpackPreview />` component also allows you to add additional buttons to
 <SandpackProvider template="react">
   <SandpackLayout>
     <SandpackPreview
-      additionalButtons={
+      actionsChildren={
         <button
           className="sp-button"
           style={{ padding: 'var(--sp-space-1) var(--sp-space-3)' }}
@@ -135,7 +135,7 @@ The `<SandpackPreview />` component also allows you to add additional buttons to
 <SandpackProvider template="react">
   <SandpackLayout>
     <SandpackPreview
-      additionalButtons={
+      actionsChildren={
         <button
           className="sp-button"
           style={{ padding: 'var(--sp-space-1) var(--sp-space-3)' }}
