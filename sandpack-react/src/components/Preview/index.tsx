@@ -33,7 +33,7 @@ export interface PreviewProps {
   showOpenInCodeSandbox?: boolean;
   showRefreshButton?: boolean;
   showSandpackErrorOverlay?: boolean;
-  additionalActions?: JSX.Element[];
+  additionalButtons?: JSX.Element;
 }
 
 export { RefreshButton };
@@ -47,7 +47,7 @@ export const SandpackPreview = ({
   showRefreshButton = true,
   showOpenInCodeSandbox = true,
   showSandpackErrorOverlay = true,
-  additionalActions = [],
+  additionalButtons = <></>,
   viewportSize = "auto",
   viewportOrientation = "portrait",
 }: PreviewProps): JSX.Element => {
@@ -132,7 +132,7 @@ export const SandpackPreview = ({
         {showSandpackErrorOverlay ? <ErrorOverlay /> : null}
 
         <div className={c("preview-actions")}>
-          {...additionalActions}
+          {additionalButtons}
           {!showNavigator && showRefreshButton && status === "running" ? (
             <RefreshButton clientId={clientId.current} />
           ) : null}
