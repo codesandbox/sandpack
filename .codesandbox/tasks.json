@@ -41,7 +41,8 @@
     },
     "watch:tests": {
       "name": "Watch tests",
-      "command": "yarn test --watch"
+      "command": "yarn test --watch",
+      "runAtStart": true
     },
     "lint": {
       "name": "Lint Workspace",
