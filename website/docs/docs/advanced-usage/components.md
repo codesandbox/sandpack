@@ -122,7 +122,8 @@ The `<SandpackPreview />` component also allows you to add additional buttons to
         <button
           className="sp-button"
           style={{ padding: 'var(--sp-space-1) var(--sp-space-3)' }}
-          onClick={() => window.alert('Bug reported!')}>
+          onClick={() => window.alert('Bug reported!')}
+        >
           Report bug
         </button>
       }
@@ -139,7 +140,8 @@ The `<SandpackPreview />` component also allows you to add additional buttons to
         <button
           className="sp-button"
           style={{ padding: 'var(--sp-space-1) var(--sp-space-3)' }}
-          onClick={() => window.alert('Bug reported!')}>
+          onClick={() => window.alert('Bug reported!')}
+        >
           Report bug
         </button>
       }
