@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/codesandbox/sandpack/compare/v0.14.9...v0.15.0) (2022-03-16)
+
+
+### Features
+
+* Add slot for additional buttons ([#412](https://github.com/codesandbox/sandpack/issues/412)) ([7a59d18](https://github.com/codesandbox/sandpack/commit/7a59d18fd286163a72e3b4675456ca6b22a8468c))
+
+
+
+
+
 ## [0.14.9](https://github.com/codesandbox/sandpack/compare/v0.14.8...v0.14.9) (2022-03-14)
 
 
