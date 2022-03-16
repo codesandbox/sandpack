@@ -1,7 +1,7 @@
 import { useClasser } from "@code-hike/classer";
+import type { SandpackMessage } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-import type { SandpackMessage } from "@codesandbox/sandpack-client";
 import { ErrorOverlay } from "../../common/ErrorOverlay";
 import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { OpenInCodeSandboxButton } from "../../common/OpenInCodeSandboxButton";
@@ -63,7 +63,7 @@ export const SandpackPreview = ({
     openInCSBRegisteredRef,
     loadingScreenRegisteredRef,
   } = sandpack;
-  
+
   const c = useClasser("sp");
   const clientId = React.useRef<string>(generateRandomId());
   const iframeRef = React.useRef<HTMLIFrameElement | null>(null);

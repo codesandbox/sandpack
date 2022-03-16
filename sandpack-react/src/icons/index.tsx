@@ -41,9 +41,9 @@ export const RefreshIcon = (): React.ReactElement => (
 
 export const ExportIcon = (): React.ReactElement => (
   <svg
-    stroke="currentColor"
     fill="none"
     height="24"
+    stroke="currentColor"
     viewBox="0 0 24 24"
     width="24"
     xmlns="http://www.w3.org/2000/svg"

@@ -111,8 +111,8 @@ export const AdditionalButtons: React.FC = () => (
         actionsChildren={
           <button
             className="sp-button"
+            onClick={(): void => window.alert("Bug reported!")}
             style={{ padding: "var(--sp-space-1) var(--sp-space-3)" }}
-            onClick={() => window.alert("Bug reported!")}
           >
             Report bug
           </button>
