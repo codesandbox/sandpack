@@ -1,9 +1,12 @@
 import type { Story } from "@storybook/react";
 import * as React from "react";
 
-import { SandpackLayout } from "../../common/Layout";
-import { SandpackProvider } from "../../contexts/sandpackContext";
-import { SandpackThemeProvider } from "../../contexts/themeContext";
+import {
+  SandpackCodeEditor,
+  SandpackThemeProvider,
+  SandpackProvider,
+  SandpackLayout,
+} from "../../";
 
 import type { PreviewProps } from "./index";
 import { SandpackPreview } from "./index";
@@ -98,5 +101,24 @@ export const AutoResize: React.FC = () => (
     <SandpackThemeProvider>
       <SandpackPreview />
     </SandpackThemeProvider>
+  </SandpackProvider>
+);
+
+export const AdditionalButtons: React.FC = () => (
+  <SandpackProvider template="react">
+    <SandpackLayout>
+      <SandpackPreview
+        actionsChildren={
+          <button
+            className="sp-button"
+            style={{ padding: "var(--sp-space-1) var(--sp-space-3)" }}
+            onClick={() => window.alert("Bug reported!")}
+          >
+            Report bug
+          </button>
+        }
+      />
+      <SandpackCodeEditor />
+    </SandpackLayout>
   </SandpackProvider>
 );
