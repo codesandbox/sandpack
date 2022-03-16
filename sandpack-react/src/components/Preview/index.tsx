@@ -1,6 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
+import type { SandpackMessage } from "@codesandbox/sandpack-client";
 import { ErrorOverlay } from "../../common/ErrorOverlay";
 import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { OpenInCodeSandboxButton } from "../../common/OpenInCodeSandboxButton";
@@ -32,6 +33,7 @@ export interface PreviewProps {
   showOpenInCodeSandbox?: boolean;
   showRefreshButton?: boolean;
   showSandpackErrorOverlay?: boolean;
+  actionsChildren?: JSX.Element;
 }
 
 export { RefreshButton };
@@ -45,6 +47,7 @@ export const SandpackPreview = ({
   showRefreshButton = true,
   showOpenInCodeSandbox = true,
   showSandpackErrorOverlay = true,
+  actionsChildren = <></>,
   viewportSize = "auto",
   viewportOrientation = "portrait",
 }: PreviewProps): JSX.Element => {
@@ -60,7 +63,7 @@ export const SandpackPreview = ({
     openInCSBRegisteredRef,
     loadingScreenRegisteredRef,
   } = sandpack;
-
+  
   const c = useClasser("sp");
   const clientId = React.useRef<string>(generateRandomId());
   const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
@@ -77,7 +80,7 @@ export const SandpackPreview = ({
 
     registerBundler(iframeElement, clientIdValue);
 
-    const unsubscribe = listen((message) => {
+    const unsubscribe = listen((message: SandpackMessage) => {
       if (message.type === "resize") {
         setComputedAutoHeight(message.height);
       }
@@ -129,6 +132,7 @@ export const SandpackPreview = ({
         {showSandpackErrorOverlay ? <ErrorOverlay /> : null}
 
         <div className={c("preview-actions")}>
+          {actionsChildren}
           {!showNavigator && showRefreshButton && status === "running" ? (
             <RefreshButton clientId={clientId.current} />
           ) : null}

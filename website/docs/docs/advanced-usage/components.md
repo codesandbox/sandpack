@@ -111,6 +111,45 @@ There's nothing stopping you from rendering multiple previews in the same `Provi
   </SandpackLayout>
 </SandpackProvider>
 
+### Additional buttons
+The `<SandpackPreview />` component also allows you to add additional buttons to the preview area.
+
+```jsx
+<SandpackProvider template="react">
+  <SandpackLayout>
+    <SandpackPreview
+      actionsChildren={
+        <button
+          className="sp-button"
+          style={{ padding: 'var(--sp-space-1) var(--sp-space-3)' }}
+          onClick={() => window.alert('Bug reported!')}
+        >
+          Report bug
+        </button>
+      }
+    />
+    <SandpackCodeEditor />
+  </SandpackLayout>
+</SandpackProvider>
+```
+
+<SandpackProvider template="react">
+  <SandpackLayout>
+    <SandpackPreview
+      actionsChildren={
+        <button
+          className="sp-button"
+          style={{ padding: 'var(--sp-space-1) var(--sp-space-3)' }}
+          onClick={() => window.alert('Bug reported!')}
+        >
+          Report bug
+        </button>
+      }
+    />
+    <SandpackCodeEditor />
+  </SandpackLayout>
+</SandpackProvider>
+
 ## Code Editor
 
 The `SandpackCodeEditor` component renders a wrapper over [`codemirror`](https://github.com/codemirror/codemirror.next), a lightweight code editor we use inside `sandpack`.
