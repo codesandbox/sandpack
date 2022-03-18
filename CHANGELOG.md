@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.2](https://github.com/codesandbox/sandpack/compare/v0.15.1...v0.15.2) (2022-03-18)
+
+
+### Bug Fixes
+
+* **loglevel:** set default ([#418](https://github.com/codesandbox/sandpack/issues/418)) ([abf0243](https://github.com/codesandbox/sandpack/commit/abf0243e5f106888ac3829daa6a5e6d6dd4f41b5))
+
+
+
+
+
 ## [0.15.1](https://github.com/codesandbox/sandpack/compare/v0.15.0...v0.15.1) (2022-03-18)
 
 
