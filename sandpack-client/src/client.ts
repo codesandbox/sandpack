@@ -298,7 +298,7 @@ export class SandpackClient {
       showLoadingScreen: this.options.showLoadingScreen ?? true,
       skipEval: this.options.skipEval || false,
       clearConsoleDisabled: !this.options.clearConsoleOnFirstCompile,
-      logLevel: this.options.logLevel || SandpackLogLevel.Debug,
+      logLevel: this.options.logLevel ?? SandpackLogLevel.Info,
     });
   }
 
