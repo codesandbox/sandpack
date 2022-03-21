@@ -16,3 +16,7 @@ main {
 aside {
   border: 0 !important;
 }
+
+.markdown img {
+  border-radius: var(--sandpack-border-radius);
+}
