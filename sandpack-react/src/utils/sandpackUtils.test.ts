@@ -110,7 +110,6 @@ describe(getSandpackStateFromProps, () => {
 
   test("it uses entry as activePath", () => {
     const setup = getSandpackStateFromProps({
-      template: "react",
       files: { "entry.js": "" },
       customSetup: {
         entry: "entry.js",
@@ -127,7 +126,8 @@ describe(getSandpackStateFromProps, () => {
     const setup = getSandpackStateFromProps({ template: "react" });
     const collectFilenames = Object.entries(REACT_TEMPLATE.files).reduce(
       (acc, [key, value]) => {
-        if (!value.hidden) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if (!(value as any).hidden) {
           acc.push(key);
         }
 
@@ -237,17 +237,30 @@ describe(getSandpackStateFromProps, () => {
     expect(packageContent.main).toBe("entry.js");
   });
 
-  test("it merges the entry into package.json main", () => {
+  test("it keeps the entry into package.json main", () => {
     const setup = getSandpackStateFromProps({
       files: {
-        "/package.json": `{ "main": "old-entry.ts" }`,
+        "/package.json": `{ "main": "main-entry.ts" }`,
         "new-entry.js": "",
       },
-      customSetup: { entry: "new-entry.js" },
+      customSetup: { entry: "entry.js" },
     });
 
     const packageContent = JSON.parse(setup.files["/package.json"].code);
-    expect(packageContent.main).toEqual("new-entry.js");
+    expect(packageContent.main).toEqual("main-entry.ts");
+  });
+
+  test("it needs to set the entry into package.json as main", () => {
+    const setup = getSandpackStateFromProps({
+      files: {
+        "/package.json": `{}`,
+        "entry.js": "",
+      },
+      customSetup: { entry: "entry.js" },
+    });
+
+    const packageContent = JSON.parse(setup.files["/package.json"].code);
+    expect(packageContent.main).toEqual("entry.js");
   });
 
   /**

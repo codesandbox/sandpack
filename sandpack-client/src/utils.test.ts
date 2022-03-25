@@ -39,6 +39,27 @@ describe(addPackageJSONIfNeeded, () => {
     );
 
     expect(JSON.parse(output["/package.json"].code).main).toEqual(
+      "old-entry.js"
+    );
+  });
+
+  test("it set the entry file into package.json", () => {
+    const output = addPackageJSONIfNeeded(
+      {
+        "/package.json": {
+          code: `{
+        "name": "custom-package",
+        "dependencies": { "baz": "*" },
+        "devDependencies": { "baz": "*" }
+      }`,
+        },
+      },
+      undefined,
+      undefined,
+      "new-entry.js"
+    );
+
+    expect(JSON.parse(output["/package.json"].code).main).toEqual(
       "new-entry.js"
     );
   });
@@ -60,7 +81,6 @@ describe(addPackageJSONIfNeeded, () => {
       {
         "package.json": {
           code: `{
-  "main": "old-entry.js",
   "dependencies": { "baz": "*" },
   "devDependencies": { "baz": "*" }
 }`,
