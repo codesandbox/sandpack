@@ -34,7 +34,7 @@ export interface PreviewProps {
   showRefreshButton?: boolean;
   showSandpackErrorOverlay?: boolean;
   actionsChildren?: JSX.Element;
-  children?: JSX.Element;
+  children?: React.FC;
 }
 
 export { RefreshButton };

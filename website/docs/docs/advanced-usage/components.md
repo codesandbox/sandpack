@@ -151,7 +151,7 @@ The `<SandpackPreview />` component also allows you to add additional buttons to
 </SandpackProvider>
 
 ### Additional content
-For advanced use cases, children of `<SandpackPreview>` are rendered at the end of the [preview container](https://github.com/codesandbox/sandpack/blob/main/sandpack-react/src/components/Preview/index.tsx#L117).
+For advanced use cases, children of `<SandpackPreview>` are rendered at the end of the preview container.
 
 ## Code Editor
 
