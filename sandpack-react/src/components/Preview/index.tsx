@@ -34,7 +34,6 @@ export interface PreviewProps {
   showRefreshButton?: boolean;
   showSandpackErrorOverlay?: boolean;
   actionsChildren?: JSX.Element;
-  children?: React.FC;
 }
 
 export { RefreshButton };
@@ -42,7 +41,7 @@ export { RefreshButton };
 /**
  * @category Components
  */
-export const SandpackPreview = ({
+export const SandpackPreview: React.FC<PreviewProps> = ({
   customStyle,
   showNavigator = false,
   showRefreshButton = true,
@@ -52,7 +51,7 @@ export const SandpackPreview = ({
   viewportSize = "auto",
   viewportOrientation = "portrait",
   children
-}: PreviewProps): JSX.Element => {
+}) => {
   const { sandpack, listen } = useSandpack();
   const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
     number | null
