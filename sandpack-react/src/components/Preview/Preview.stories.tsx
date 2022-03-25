@@ -122,3 +122,14 @@ export const AdditionalButtons: React.FC = () => (
     </SandpackLayout>
   </SandpackProvider>
 );
+
+export const AdditionalContent: React.FC = () => (
+  <SandpackProvider template="react">
+    <SandpackLayout>
+      <SandpackPreview>
+        <div style={{ background: "lightgreen" }}>content after iframe</div>
+      </SandpackPreview>
+      <SandpackCodeEditor />
+    </SandpackLayout>
+  </SandpackProvider>
+);

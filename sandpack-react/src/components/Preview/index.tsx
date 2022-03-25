@@ -34,6 +34,7 @@ export interface PreviewProps {
   showRefreshButton?: boolean;
   showSandpackErrorOverlay?: boolean;
   actionsChildren?: JSX.Element;
+  children?: JSX.Element;
 }
 
 export { RefreshButton };
@@ -50,6 +51,7 @@ export const SandpackPreview = ({
   actionsChildren = <></>,
   viewportSize = "auto",
   viewportOrientation = "portrait",
+  children
 }: PreviewProps): JSX.Element => {
   const { sandpack, listen } = useSandpack();
   const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
@@ -141,6 +143,8 @@ export const SandpackPreview = ({
         </div>
 
         <LoadingOverlay clientId={clientId.current} />
+
+        {children}
       </div>
     </SandpackStack>
   );
