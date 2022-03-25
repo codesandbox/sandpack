@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useSandboxData } from "../hooks/useSandboxData";
+
 import { Sandpack } from "./Sandpack";
 
 export default {
@@ -33,10 +35,42 @@ export default function App() {
     options={{
       showLineNumbers: true,
       showInlineErrors: true,
+      bundlerURL: "http://localhost:1234",
     }}
     template="react"
   />
 );
+
+export const CodesandboxData: React.FC = () => {
+  const { data, error, isLoading } = useSandboxData(
+    "kc88v1",
+    "https://cors-anywhere.herokuapp.com/https://codesandbox.io/api"
+  );
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (isLoading) {
+    return <div>Loading sandbox...</div>;
+  }
+
+  if (!data) {
+    return <div>Could not load sandbox</div>;
+  }
+
+  return (
+    <Sandpack
+      files={data.files}
+      options={{
+        showLineNumbers: true,
+        showInlineErrors: true,
+        bundlerURL: "http://localhost:1234",
+      }}
+      template="react"
+    />
+  );
+};
 
 export const CustomSetup: React.FC = () => (
   <Sandpack
