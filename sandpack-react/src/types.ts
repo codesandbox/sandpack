@@ -99,9 +99,11 @@ export interface SandpackOptions<
   recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;
 
-  // TODO: documentation
+  /**
+   * By default, Sandpack generates a random value to use as an id.
+   * Use this to override this value if you need predictable values.
+   */
   id?: string;
-
   logLevel?: SandpackLogLevel;
   bundlerURL?: string;
   startRoute?: string;

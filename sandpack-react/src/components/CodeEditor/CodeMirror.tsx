@@ -90,6 +90,10 @@ interface CodeMirrorProps {
    */
   decorators?: Decorators;
   initMode: SandpackInitMode;
+  /**
+   * By default, Sandpack generates a random value to use as an id.
+   * Use this to override this value if you need predictable values.
+   */
   id?: string;
   extensions?: Extension[];
   extensionsKeymap?: Array<readonly KeyBinding[]>;
@@ -426,6 +430,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       <div
+        suppressHydrationWarning
         ref={combinedRef}
         aria-describedby={`enter-instructions-${ariaId.current}`}
         aria-label={
@@ -452,6 +457,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
         <>
           <p
+            suppressHydrationWarning
             id={`enter-instructions-${ariaId.current}`}
             style={{ display: "none" }}
           >
@@ -459,6 +465,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             press Escape
           </p>
           <p
+            suppressHydrationWarning
             id={`exit-instructions-${ariaId.current}`}
             style={{ display: "none" }}
           >
