@@ -50,7 +50,7 @@ export const SandpackPreview: React.FC<PreviewProps> = ({
   actionsChildren = <></>,
   viewportSize = "auto",
   viewportOrientation = "portrait",
-  children
+  children,
 }) => {
   const { sandpack, listen } = useSandpack();
   const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
