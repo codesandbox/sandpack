@@ -23,7 +23,7 @@ export const Sandpack: SandpackPreset = (props) => {
     extensionsKeymap: props.options?.codeEditor?.extensionsKeymap,
     readOnly: props.options?.readOnly,
     showReadOnly: props.options?.showReadOnly,
-    id: props.options?.id,
+    id: props?.id,
   };
 
   const providerOptions: SandpackOptions = {

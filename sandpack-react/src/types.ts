@@ -70,6 +70,11 @@ interface SandpackRootProps<
   template?: SandpackPredefinedTemplate;
   // TODO
   customSetup?: SandpackSetup;
+  /**
+   * By default, Sandpack generates a random value to use as an id.
+   * Use this to override this value if you need predictable values.
+   */
+  id?: string;
 }
 
 export interface SandpackOptions<
@@ -98,9 +103,6 @@ export interface SandpackOptions<
   autorun?: boolean;
   recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;
-
-  // TODO: documentation
-  id?: string;
 
   logLevel?: SandpackLogLevel;
   bundlerURL?: string;
