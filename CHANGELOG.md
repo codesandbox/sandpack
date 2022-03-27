@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/codesandbox/sandpack/compare/v0.15.2...v0.16.0) (2022-03-27)
+
+
+### Bug Fixes
+
+* Add year and company name to license ([#417](https://github.com/codesandbox/sandpack/issues/417)) ([d3adcac](https://github.com/codesandbox/sandpack/commit/d3adcac9c45fd90bb04754f286da203eda8a5a56))
+
+
+### Features
+
+* **preview:** additional content in preview container ([#422](https://github.com/codesandbox/sandpack/issues/422)) ([98103a8](https://github.com/codesandbox/sandpack/commit/98103a8b43fd16525ad8106b149c8c1747907be1))
+
+
+
+
+
 ## [0.15.2](https://github.com/codesandbox/sandpack/compare/v0.15.1...v0.15.2) (2022-03-18)
 
 
