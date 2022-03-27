@@ -150,6 +150,9 @@ The `<SandpackPreview />` component also allows you to add additional buttons to
   </SandpackLayout>
 </SandpackProvider>
 
+### Additional content
+For advanced use cases, children of `<SandpackPreview>` are rendered at the end of the preview container.
+
 ## Code Editor
 
 The `SandpackCodeEditor` component renders a wrapper over [`codemirror`](https://github.com/codemirror/codemirror.next), a lightweight code editor we use inside `sandpack`.
