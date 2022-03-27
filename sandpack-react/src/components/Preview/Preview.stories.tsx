@@ -133,3 +133,18 @@ export const AdditionalContent: React.FC = () => (
     </SandpackLayout>
   </SandpackProvider>
 );
+
+export const GetClient: React.FC = () => {
+  const client = React.useRef();
+
+  console.log(client.current);
+
+  return (
+    <SandpackProvider template="react">
+      <SandpackLayout>
+        <SandpackPreview ref={client} />
+        <SandpackCodeEditor />
+      </SandpackLayout>
+    </SandpackProvider>
+  );
+};
