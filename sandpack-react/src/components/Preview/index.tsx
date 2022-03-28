@@ -42,8 +42,9 @@ export interface PreviewProps {
 
 export { RefreshButton };
 
-interface SandpackPreviewRef {
-  client: SandpackClient | undefined;
+export interface SandpackPreviewRef {
+  getClient: () => SandpackClient | undefined;
+  clientId: string;
 }
 
 /**
@@ -112,9 +113,12 @@ export const SandpackPreview = React.forwardRef<
     React.useImperativeHandle(
       ref,
       () => ({
-        client: sandpack.clients[clientId.current],
+        clientId: clientId.current,
+        getClient(): SandpackClient | undefined {
+          return sandpack.clients[clientId.current];
+        },
       }),
-      [sandpack.clients]
+      [sandpack]
     );
 
     const handleNewURL = (newUrl: string): void => {

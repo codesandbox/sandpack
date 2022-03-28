@@ -7,8 +7,9 @@ import {
   SandpackProvider,
   SandpackLayout,
 } from "../../";
+import { useSandpack } from "../../hooks";
 
-import type { PreviewProps } from "./index";
+import { PreviewProps, SandpackPreviewRef } from "./index";
 import { SandpackPreview } from "./index";
 
 export default {
@@ -134,15 +135,28 @@ export const AdditionalContent: React.FC = () => (
   </SandpackProvider>
 );
 
+const SandpackClient: React.FC = () => {
+  const { sandpack } = useSandpack();
+  const previewRef = React.useRef<SandpackPreviewRef>();
+
+  React.useEffect(() => {
+    const client = previewRef.current?.getClient();
+    const clientId = previewRef.current?.clientId;
+
+    if (client && clientId) {
+      console.log(client);
+      console.log(sandpack.clients[clientId]);
+    }
+  }, [sandpack]);
+
+  return <SandpackPreview ref={previewRef} />;
+};
+
 export const GetClient: React.FC = () => {
-  const client = React.useRef();
-
-  console.log(client.current);
-
   return (
     <SandpackProvider template="react">
       <SandpackLayout>
-        <SandpackPreview ref={client} />
+        <SandpackClient />
         <SandpackCodeEditor />
       </SandpackLayout>
     </SandpackProvider>
