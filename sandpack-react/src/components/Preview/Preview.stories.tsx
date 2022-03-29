@@ -141,9 +141,11 @@ const SandpackClient: React.FC = () => {
 
   React.useEffect(() => {
     const client = previewRef.current?.getClient();
+    const clientId = previewRef.current?.clientId;
 
-    if (client) {
+    if (client && clientId) {
       console.log(client);
+      console.log(sandpack.clients[clientId]);
     }
   }, [sandpack]);
 
