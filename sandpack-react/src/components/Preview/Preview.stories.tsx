@@ -9,7 +9,7 @@ import {
 } from "../../";
 import { useSandpack } from "../../hooks";
 
-import { PreviewProps, SandpackPreviewRef } from "./index";
+import type { PreviewProps, SandpackPreviewRef } from "./index";
 import { SandpackPreview } from "./index";
 
 export default {
@@ -144,6 +144,7 @@ const SandpackClient: React.FC = () => {
     const clientId = previewRef.current?.clientId;
 
     if (client && clientId) {
+      /* eslint-disable no-console */
       console.log(client);
       console.log(sandpack.clients[clientId]);
     }
