@@ -43,7 +43,14 @@ export interface PreviewProps {
 export { RefreshButton };
 
 export interface SandpackPreviewRef {
+  /**
+   * Retrieve the current Sandpack client instance from preview
+   */
   getClient: () => SandpackClient | undefined;
+  /**
+   * Returns the client id, which will be used to
+   * initialize a client in the main Sandpack context
+   */
   clientId: string;
 }
 

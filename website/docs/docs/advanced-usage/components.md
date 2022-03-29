@@ -153,6 +153,39 @@ The `<SandpackPreview />` component also allows you to add additional buttons to
 ### Additional content
 For advanced use cases, children of `<SandpackPreview>` are rendered at the end of the preview container.
 
+### Getting client instanceSandpackPreviewRef
+
+You can imperatively retrieve the Sandpack client from a SandpackPreview, consume and interact with the current state of the preview. Check out the [type definitions](/api/react/interfaces/SandpackPreviewRef) for more details.
+
+```jsx
+import { SandpackPreviewRef, useSandpack, SandpackPreview } from "@codesandbox/sandpack-react"
+
+const SandpackPreviewClient: React.FC = () => {
+  const { sandpack } = useSandpack();
+  const previewRef = React.useRef<SandpackPreviewRef>();
+
+  React.useEffect(() => {
+    const client = previewRef.current?.getClient();
+    const clientId = previewRef.current?.clientId;
+
+    if (client && clientId) {
+      console.log(client);
+      console.log(sandpack.clients[clientId]);
+    }
+  /**
+   * NOTE: In order to make sure that the client will be available
+   * use the whole `sandpack` object as a dependencie.
+   */
+  }, [sandpack]);
+
+  return <SandpackPreview ref={previewRef} />;
+};
+```
+
+:::note
+Worth mentioning that the SandpackClient will not be instantly available. Sandpack has its own rules to decide what is the "right" moment to initialize an instance from a preview component (take into account properties such as autorun, initMode, and the current client stack priority), which means that it's expected that `getClient` function returns `undefined` and it's a valid state.
+:::
+
 ## Code Editor
 
 The `SandpackCodeEditor` component renders a wrapper over [`codemirror`](https://github.com/codemirror/codemirror.next), a lightweight code editor we use inside `sandpack`.
