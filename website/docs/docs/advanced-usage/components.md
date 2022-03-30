@@ -153,7 +153,7 @@ The `<SandpackPreview />` component also allows you to add additional buttons to
 ### Additional content
 For advanced use cases, children of `<SandpackPreview>` are rendered at the end of the preview container.
 
-### Getting client instanceSandpackPreviewRef
+### Getting the client instance from SandpackPreview
 
 You can imperatively retrieve the Sandpack client from a SandpackPreview ref, and also consume or interact with the current state of the preview. Check out the [type definitions](/api/react/interfaces/SandpackPreviewRef) for more details.
 
