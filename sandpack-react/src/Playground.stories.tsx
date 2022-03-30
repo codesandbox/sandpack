@@ -1,7 +1,7 @@
 import { Sandpack } from "../";
 
 export default {
-  title: "Playground",
+  title: "Intro/Playground",
 };
 
 export const Main = (): JSX.Element => {
