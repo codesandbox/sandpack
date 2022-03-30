@@ -183,7 +183,8 @@ const SandpackPreviewClient: React.FC = () => {
 ```
 
 :::note
-Worth mentioning that the SandpackClient will not be instantly available. Sandpack has its own rules to decide what is the "right" moment to initialize an instance from a preview component (take into account properties such as autorun, initMode, and the current client stack priority), which means that it's expected that `getClient` function returns `undefined` and it's a valid state.
+Worth mentioning that the SandpackClient will not be instantly available. Sandpack has its own rules to decide when it'is the "right" moment to initialize an instance from a preview component. (Sandpack will take into account properties such as autorun, initMode, and the current client stack priority) 
+This means that it's expected that `getClient` function returns `undefined` which is a valid state.
 :::
 
 ## Code Editor
