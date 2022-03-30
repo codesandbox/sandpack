@@ -155,7 +155,7 @@ For advanced use cases, children of `<SandpackPreview>` are rendered at the end 
 
 ### Getting client instanceSandpackPreviewRef
 
-You can imperatively retrieve the Sandpack client from a SandpackPreview, consume and interact with the current state of the preview. Check out the [type definitions](/api/react/interfaces/SandpackPreviewRef) for more details.
+You can imperatively retrieve the Sandpack client from a SandpackPreview ref, and also consume or interact with the current state of the preview. Check out the [type definitions](/api/react/interfaces/SandpackPreviewRef) for more details.
 
 ```jsx
 import { SandpackPreviewRef, useSandpack, SandpackPreview } from "@codesandbox/sandpack-react"
