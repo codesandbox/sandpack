@@ -21,7 +21,7 @@ yarn add @monaco-editor/react
 ```
 
 This library handles the setup process of the Monaco editor and provides a clean API to interact with Monaco from any React environment.
-Here is the [Github repository](https://github.com/suren-atoyan/monaco-react#readme) if you want to learn more about the library
+Here is the [GitHub repository](https://github.com/suren-atoyan/monaco-react#readme) if you want to learn more about the library
 
 ## Integration
 

@@ -7,4 +7,4 @@ Here you can find some guides or recipes on using the Sandpack in different situ
 
 - Integrate [Monaco Editor](../guides/integrate-monaco-editor.md)
 - Integrate Prettier for code formatting: [CodeSandbox example](https://codesandbox.io/s/sandpack-prettier-1po91?file=/src/App.js)
-- Integrate Eslint for static code analysis: [CodeSandbox example](https://codesandbox.io/s/sandpack-eslint-vztlt?file=/src/App.tsx)
+- Integrate ESLint for static code analysis: [CodeSandbox example](https://codesandbox.io/s/sandpack-eslint-vztlt?file=/src/App.tsx)
