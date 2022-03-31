@@ -14,10 +14,16 @@ export const stackClassName = css({
 /**
  * @category Components
  */
-export const SandpackStack: React.FC<React.HTMLAttributes<HTMLDivElement>> = (
-  props
-) => {
+export const SandpackStack: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  className,
+  ...props
+}) => {
   const c = useClasser(THEME_PREFIX);
 
-  return <div className={classNames(c("stack"), stackClassName)} {...props} />;
+  return (
+    <div
+      className={classNames(c("stack"), stackClassName, className)}
+      {...props}
+    />
+  );
 };
