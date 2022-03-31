@@ -89,14 +89,22 @@ export default class Protocol {
       return;
     }
 
-    const result = await this.handleMessage(data.$data);
-
-    const returnMessage = {
+    // any is fine for now... gotta refactor this later...
+    let returnMessage: any = {
       $originId: this.internalId,
       $type: this.getTypeId(),
-      $data: result,
       $id: data.$id,
     };
+
+    try {
+      const result = await this.handleMessage(data.$data);
+      returnMessage.$data = result;
+    } catch (err: any) {
+      if (!err.message) {
+        console.error(err);
+      }
+      returnMessage.$error = { message: err.message ?? "Unknown error" };
+    }
 
     if (e.source) {
       // @ts-ignore
