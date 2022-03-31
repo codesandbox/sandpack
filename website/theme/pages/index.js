@@ -1,4 +1,5 @@
 import { Sandpack } from "@codesandbox/sandpack-react";
+import * as themeGallery from "@codesandbox/sandpack-themes";
 import Container, {
   ContainerControls,
   ContainerCode,
@@ -21,8 +22,6 @@ import Title from "components/title";
 import { useEffect, useState, Fragment } from "react";
 
 import { generateBasedOnSimpleColors } from "../lib/generateTheme";
-import * as themes from "../lib/themeGallery";
-import * as originalThemes from "@codesandbox/sandpack-themes";
 
 const DEFAULT_COLORS = {
   primary: "#0971F1",
@@ -31,11 +30,6 @@ const DEFAULT_COLORS = {
 };
 const DEFAULT_MODE = "light";
 const DEFAULT_THEME = generateBasedOnSimpleColors(DEFAULT_COLORS, DEFAULT_MODE);
-
-const themeGallery = {
-  ...originalThemes,
-  ...themes,
-};
 
 export default function Home() {
   const [theme, setTheme] = useState(DEFAULT_THEME);
