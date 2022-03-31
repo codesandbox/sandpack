@@ -59,10 +59,23 @@ export const CodesandboxData: React.FC = () => {
     return <div>Could not load sandbox</div>;
   }
 
+  const files = data.files;
   return (
     <Sandpack
-      files={data.files}
+      files={{ "/package.json": files["/package.json"] }}
       options={{
+        fileResolver: {
+          isFile: (path: string): Promise<boolean> => {
+            return Promise.resolve(!!files[path]);
+          },
+          readFile: (path: string): Promise<string> => {
+            const code = files[path]?.code;
+            if (code === undefined) {
+              return Promise.reject(new Error("File not found"));
+            }
+            return Promise.resolve(files[path]?.code);
+          },
+        },
         showLineNumbers: true,
         showInlineErrors: true,
         bundlerURL: "http://localhost:1234",
