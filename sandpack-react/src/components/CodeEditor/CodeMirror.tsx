@@ -295,6 +295,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             "aria-describedby",
             `exit-instructions-${ariaId.current}`
           );
+        } else {
+          view.contentDOM.classList.add("cm-readonly");
         }
 
         cmView.current = view;
@@ -395,6 +397,23 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       }
     };
 
+    const gutterLineOffset = (): string => {
+      // padding-left
+      let offset = 4;
+
+      // line-number-gutter-width
+      if (showLineNumbers) {
+        offset += 5;
+      }
+
+      // line-padding
+      if (!readOnly) {
+        offset += 1;
+      }
+
+      return `var(--${THEME_PREFIX}-space-${offset})`;
+    };
+
     if (readOnly) {
       return (
         <>
@@ -409,9 +428,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           >
             <code
               className={classNames(c("pre-placeholder"), placeholderClassName)}
-              style={{
-                marginLeft: showLineNumbers ? 44 : 20, // gutter line offset
-              }}
+              style={{ marginLeft: gutterLineOffset() }}
             >
               {syntaxHighlightRender}
             </code>
@@ -430,7 +447,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       <div
-        suppressHydrationWarning
         ref={combinedRef}
         aria-describedby={`enter-instructions-${ariaId.current}`}
         aria-label={
@@ -445,29 +461,28 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         role="group"
         tabIndex={0}
         translate="no"
+        suppressHydrationWarning
       >
         <pre
           className={classNames(c("pre-placeholder"), placeholderClassName)}
-          style={{
-            marginLeft: showLineNumbers ? 44 : 20, // gutter line offset
-          }}
+          style={{ marginLeft: gutterLineOffset() }}
         >
           {syntaxHighlightRender}
         </pre>
 
         <>
           <p
-            suppressHydrationWarning
             id={`enter-instructions-${ariaId.current}`}
             style={{ display: "none" }}
+            suppressHydrationWarning
           >
             To enter the code editing mode, press Enter. To exit the edit mode,
             press Escape
           </p>
           <p
-            suppressHydrationWarning
             id={`exit-instructions-${ariaId.current}`}
             style={{ display: "none" }}
+            suppressHydrationWarning
           >
             You are editing the code. To exit the edit mode, press Escape
           </p>

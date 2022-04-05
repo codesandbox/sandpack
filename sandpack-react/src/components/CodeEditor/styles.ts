@@ -5,7 +5,6 @@ import { styleTokens } from "./utils";
 export const placeholderClassName = css({
   margin: "0",
   display: "block",
-  padding: "0 $space$3",
   fontFamily: "$font$mono",
   fontSize: "$font$size",
   color: "$colors$activeText",

@@ -31,7 +31,6 @@ export const getEditorTheme = (): Extension =>
     },
 
     ".cm-activeLine": {
-      // TODO: confirm
       backgroundColor: `var(--${THEME_PREFIX}-colors-surface3)`,
       borderRadius: `var(--${THEME_PREFIX}-border-radius)`,
     },
@@ -69,8 +68,12 @@ export const getEditorTheme = (): Extension =>
     },
 
     ".cm-lineNumbers .cm-gutterElement": {
-      lineHeight: `var(--${THEME_PREFIX}-font-lineHeight`,
+      lineHeight: `var(--${THEME_PREFIX}-font-lineHeight)`,
+      minWidth: `var(--${THEME_PREFIX}-space-5)`,
     },
+
+    ".cm-content .cm-line": { paddingLeft: `var(--${THEME_PREFIX}-space-1)` },
+    ".cm-content.cm-readonly .cm-line": { paddingLeft: 0 },
   });
 
 const classNameToken = (name: string): string =>
