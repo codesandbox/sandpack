@@ -1,6 +1,6 @@
 import type { SandpackTheme } from "./types";
 
-export const monokaiProTheme: SandpackTheme = {
+export const monokaiPro: SandpackTheme = {
   colors: {
     surface1: "#2D2A2E",
     surface2: "#444344",
@@ -30,7 +30,7 @@ export const monokaiProTheme: SandpackTheme = {
   font: {
     body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    size: "14px",
-    lineHeight: "1.4",
+    size: "13px",
+    lineHeight: "20px",
   },
 };

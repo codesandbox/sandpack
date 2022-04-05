@@ -1,6 +1,6 @@
 import type { SandpackTheme } from "./types";
 
-export const nightOwlTheme: SandpackTheme = {
+export const nightOwl: SandpackTheme = {
   colors: {
     surface1: "#011627",
     surface2: "#343E4E",
@@ -27,7 +27,7 @@ export const nightOwlTheme: SandpackTheme = {
   font: {
     body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    size: "14px",
-    lineHeight: "1.4",
+    size: "13px",
+    lineHeight: "20px",
   },
 };

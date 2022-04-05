@@ -85,4 +85,7 @@ export const defaultDark: SandpackTheme = {
 export const SANDPACK_THEMES: Record<SandpackPredefinedTheme, SandpackTheme> = {
   light: defaultLight,
   dark: defaultDark,
+  auto: window?.matchMedia?.("(prefers-color-scheme: dark)").matches
+    ? defaultDark
+    : defaultLight,
 };

@@ -69,7 +69,7 @@ export const getEditorTheme = (): Extension =>
     },
 
     ".cm-lineNumbers .cm-gutterElement": {
-      lineHeight: `calc(var(--${THEME_PREFIX}-font-lineHeight) * 1.6)`,
+      lineHeight: `var(--${THEME_PREFIX}-font-lineHeight`,
     },
   });
 

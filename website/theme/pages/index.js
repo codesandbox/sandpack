@@ -123,8 +123,6 @@ export default function Home() {
             />
           </ContainerSandpack>
 
-          <Divider />
-
           <Title>Export</Title>
 
           <ContainerSandpack>
@@ -212,8 +210,6 @@ function Advanced({ theme, updateTheme }) {
   }, [theme]);
 
   const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
-
-  console.log(theme.font);
 
   return (
     <>

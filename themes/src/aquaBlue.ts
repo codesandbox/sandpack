@@ -1,6 +1,6 @@
 import type { SandpackTheme } from "./types";
 
-export const aquaBlueTheme: SandpackTheme = {
+export const aquaBlue: SandpackTheme = {
   colors: {
     surface1: "#f8f9fb",
     surface2: "#e4e7eb",
@@ -31,7 +31,7 @@ export const aquaBlueTheme: SandpackTheme = {
   font: {
     body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    size: "14px",
-    lineHeight: "1.4",
+    size: "13px",
+    lineHeight: "20px",
   },
 };

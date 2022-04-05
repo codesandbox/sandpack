@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { SketchPicker } from "react-color";
+import humanizeString from "humanize-string";
 
 import useOnClickOutside from "../../hooks/useClickOutside";
 
@@ -87,7 +88,7 @@ export function PickerTheme({ colors, label, active, onClick, ...props }) {
           }}
         ></button>
       </div>
-      <span className={styles.label}>{label}</span>
+      <span className={styles.label}>{humanizeString(label)}</span>
     </div>
   );
 }
