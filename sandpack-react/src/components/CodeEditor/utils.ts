@@ -42,7 +42,6 @@ export const getEditorTheme = (): Extension =>
 
     ".cm-matchingBracket, .cm-nonmatchingBracket": {
       color: "inherit",
-      // TODO: confirm
       backgroundColor: `var(--${THEME_PREFIX}-colors-surface2)`,
     },
 
@@ -68,7 +67,8 @@ export const getEditorTheme = (): Extension =>
     },
 
     ".cm-lineNumbers .cm-gutterElement": {
-      lineHeight: `var(--${THEME_PREFIX}-font-lineHeight`,
+      lineHeight: `var(--${THEME_PREFIX}-font-lineHeight)`,
+      minWidth: `var(--${THEME_PREFIX}-space-5)`,
     },
 
     ".cm-content .cm-line": { paddingLeft: `var(--${THEME_PREFIX}-space-1)` },
