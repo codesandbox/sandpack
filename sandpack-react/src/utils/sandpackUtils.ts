@@ -78,6 +78,10 @@ export const getSandpackStateFromProps = (
     /* eslint-enable */
   }
 
+  if (!activePath && projectSetup.main) {
+    activePath = projectSetup.main;
+  }
+
   // If no activePath is specified, use the first open file
   if (!activePath || !projectSetup.files[activePath]) {
     activePath = openPaths[0];

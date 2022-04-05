@@ -80,7 +80,7 @@ export function addPackageJSONIfNeeded(
       };
     }
 
-    if (entry) {
+    if (entry && !packageJsonContent.main) {
       packageJsonContent.main = entry;
     }
 

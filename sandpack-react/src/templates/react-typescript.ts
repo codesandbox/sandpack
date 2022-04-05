@@ -2,18 +2,15 @@ export const REACT_TYPESCRIPT_TEMPLATE = {
   files: {
     "tsconfig.json": {
       code: `{
-    "include": [
-        "./**/*"
-    ],
-    "compilerOptions": {
-        "strict": true,
-        "esModuleInterop": true,
-        "lib": [
-            "dom",
-            "es2015"
-        ],
-        "jsx": "react-jsx"
-    }
+  "include": [
+    "./**/*"
+  ],
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "lib": [ "dom", "es2015" ],
+    "jsx": "react-jsx"
+  }
 }`,
     },
     "/App.tsx": {

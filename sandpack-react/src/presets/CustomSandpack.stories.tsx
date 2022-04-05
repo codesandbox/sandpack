@@ -32,6 +32,7 @@ export const UsingSandpackLayout: React.FC = () => (
       <SandpackStack>
         <SandpackTranspiledCode />
       </SandpackStack>
+      <SandpackCodeEditor />
       <SandpackCodeViewer />
     </SandpackLayout>
   </SandpackProvider>

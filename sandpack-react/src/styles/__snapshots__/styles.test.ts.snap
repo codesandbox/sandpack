@@ -30,6 +30,8 @@ Object {
   },
   "space": Object {
     "1": "4px",
+    "10": "40px",
+    "11": "44px",
     "2": "8px",
     "3": "12px",
     "4": "16px",
@@ -37,6 +39,7 @@ Object {
     "6": "24px",
     "7": "28px",
     "8": "32px",
+    "9": "36px",
   },
   "syntax": Object {
     "color-comment": "blue",

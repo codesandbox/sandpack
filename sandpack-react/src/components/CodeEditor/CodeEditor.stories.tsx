@@ -32,6 +32,23 @@ export const Component: Story<CodeEditorProps> = (args) => (
   </SandpackProvider>
 );
 
+export const ShowTabs: Story<CodeEditorProps> = (args) => (
+  <SandpackProvider
+    customSetup={{
+      entry: "/index.js",
+    }}
+    files={{
+      "/index.js": {
+        code: 'const title = "This is a simple code editor"',
+      },
+    }}
+  >
+    <SandpackThemeProvider>
+      <SandpackCodeEditor showTabs {...args} />
+    </SandpackThemeProvider>
+  </SandpackProvider>
+);
+
 export const InlineError: React.FC = () => (
   <SandpackProvider
     files={{
@@ -76,7 +93,7 @@ export const ReadOnly: React.FC = () => {
         customSetup={{ entry: "/index.tsx" }}
         files={{
           "/index.tsx": { code: "", hidden: true },
-          "/src/App.tsx": { code: "Hello", readOnly: true, active: true },
+          "/App.tsx": { code: "Hello", readOnly: true, active: true },
           "/src/components/button.tsx": { code: "World", readOnly: false },
         }}
         options={{ showTabs: true, activePath: "/App.tsx" }}

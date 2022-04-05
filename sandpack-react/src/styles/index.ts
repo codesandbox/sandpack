@@ -16,7 +16,7 @@ export const { createTheme, css, getCssText, keyframes } = createStitches({
 });
 
 const defaultVariables = {
-  space: new Array(8).fill(" ").reduce((acc, _, index) => {
+  space: new Array(11).fill(" ").reduce((acc, _, index) => {
     return { ...acc, [index + 1]: `${(index + 1) * 4}px` };
   }, {}),
   border: { radius: "4px" },
