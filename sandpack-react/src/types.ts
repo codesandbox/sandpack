@@ -343,7 +343,7 @@ export type SandpackPredefinedTemplate =
   | "vue3"
   | "svelte";
 
-export type SandpackPredefinedTheme = "light" | "dark";
+export type SandpackPredefinedTheme = "light" | "dark" | "auto";
 
 export interface SandpackSyntaxStyle {
   color?: string;

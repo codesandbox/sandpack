@@ -1,6 +1,6 @@
 import type { SandpackTheme } from "./types";
 
-export const githubLightTheme: SandpackTheme = {
+export const githubLight: SandpackTheme = {
   colors: {
     surface1: "#ffffff",
     surface2: "#e4e7eb",
@@ -33,7 +33,7 @@ export const githubLightTheme: SandpackTheme = {
   font: {
     body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    size: "14px",
-    lineHeight: "1.4",
+    size: "13px",
+    lineHeight: "20px",
   },
 };
