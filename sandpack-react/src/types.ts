@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type {
   BundlerState,
   ListenerFunction,
@@ -15,26 +17,18 @@ import type { SANDBOX_TEMPLATES } from "./templates";
 
 import type { CodeEditorProps } from ".";
 
-export type TemplateFiles<
-  Name extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
-> = keyof typeof SANDBOX_TEMPLATES[Name]["files"];
-type SandpackFilesDerivedTemplate<Template extends SandpackPredefinedTemplate> =
-  Partial<Record<TemplateFiles<Template>, string | SandpackFile>>;
+export type TemplateFiles<Name extends SandpackPredefinedTemplate> =
+  keyof typeof SANDBOX_TEMPLATES[Name]["files"];
 
 export interface SandpackPreset {
   <
-    Files extends SandpackFiles = SandpackFiles,
-    TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
+    Files extends SandpackFiles | any,
+    TemplateName extends SandpackPredefinedTemplate = "react"
   >(
-    /**
-     * Infer files & template values
-     */
-    props: Files extends SandpackFiles
-      ? SandpackProps<Files, TemplateName> & {
-          files?: SandpackFilesDerivedTemplate<TemplateName>;
-          template?: TemplateName;
-        }
-      : never
+    props: SandpackProps<Files, TemplateName> & {
+      files?: Files;
+      template?: TemplateName;
+    }
   ): JSX.Element;
 }
 
@@ -46,14 +40,12 @@ export interface SandpackProviderComponent {
     /**
      * Infer files & template values
      */
-    props: Files extends SandpackFiles
-      ? React.PropsWithChildren<
-          SandpackProviderProps<Files, TemplateName> & {
-            files?: SandpackFilesDerivedTemplate<TemplateName>;
-            template?: TemplateName;
-          }
-        >
-      : never
+    props: React.PropsWithChildren<
+      SandpackProviderProps<Files, TemplateName> & {
+        files?: Files;
+        template?: TemplateName;
+      }
+    >
   ): React.ReactElement<
     SandpackProviderProps,
     React.Provider<SandpackProviderState>
@@ -61,7 +53,7 @@ export interface SandpackProviderComponent {
 }
 
 interface SandpackRootProps<
-  Files,
+  Files extends SandpackFiles | any,
   TemplateName extends SandpackPredefinedTemplate
 > {
   /**
@@ -72,14 +64,14 @@ interface SandpackRootProps<
    * Since each template uses the same type to define the files, you can
    * overwrite the contents of any of the template files.
    */
-  files?: Files & SandpackFilesDerivedTemplate<TemplateName>;
+  files?: Files;
 
   /**
    * Set of presets to easily initialize sandboxes. Each template contains
    * its files, environment and dependencies, and you can overwrite it
    * using `customSetup` or `dependencies`.
    */
-  template?: SandpackPredefinedTemplate;
+  template?: TemplateName;
 
   /**
    * Pass custom properties to configurate your own Sandpack environment.
@@ -91,19 +83,25 @@ interface SandpackRootProps<
 }
 
 export interface SandpackOptions<
-  Paths extends SandpackFiles = SandpackFiles,
-  TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
+  Files extends SandpackFiles | any,
+  TemplateName extends SandpackPredefinedTemplate
 > {
   /**
    * List the file path listed in the file tab,
    * which will allow the user to interact with.
    */
-  openPaths?: Array<TemplateFiles<TemplateName> | keyof Paths>;
+  openPaths?: Array<
+    Files extends SandpackFiles
+      ? TemplateFiles<TemplateName> | keyof Files
+      : TemplateFiles<TemplateName>
+  >;
 
   /**
    * Path to the file will be open in the code editor when the component mounts
    */
-  activePath?: TemplateFiles<TemplateName> | keyof Paths;
+  activePath?: Files extends SandpackFiles
+    ? TemplateFiles<TemplateName> | keyof Files
+    : TemplateFiles<TemplateName>;
 
   /**
    * This provides a way to control how some components are going to
@@ -131,8 +129,8 @@ export interface SandpackOptions<
 }
 
 interface SandpackProps<
-  Files extends SandpackFiles = SandpackFiles,
-  TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
+  Files extends SandpackFiles | any,
+  TemplateName extends SandpackPredefinedTemplate
 > extends SandpackRootProps<Files, TemplateName> {
   theme?: SandpackThemeProp;
   options?: SandpackOptions<Files, TemplateName> & {
@@ -462,8 +460,8 @@ export interface FileResolver {
 export interface SandpackProviderState {
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;
-  openPaths: Array<TemplateFiles | string>;
-  activePath: TemplateFiles | string;
+  openPaths: Array<TemplateFiles<SandpackPredefinedTemplate> | string>;
+  activePath: TemplateFiles<SandpackPredefinedTemplate> | string;
   startRoute?: string;
   initMode: SandpackInitMode;
   bundlerState?: BundlerState;

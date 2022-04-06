@@ -10,8 +10,9 @@ export default {
 export const Main = (): JSX.Element => {
   return (
     <Sandpack
-      template="svelte"
-      options={{ showLineNumbers: false, activePath: "" }}
+      // template="vue"
+      files={{ path: "" }}
+      options={{ activePath: "path", openPaths: ["/index.js", "path"] }}
     />
   );
 

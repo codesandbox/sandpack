@@ -6,7 +6,13 @@ import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackProvider } from "../contexts/sandpackContext";
-import type { SandpackPreset, SandpackOptions, TemplateFiles } from "../types";
+import type {
+  SandpackPreset,
+  SandpackOptions,
+  TemplateFiles,
+  SandpackFiles,
+  SandpackPredefinedTemplate,
+} from "../types";
 
 /**
  * @category Presets
@@ -26,7 +32,10 @@ export const Sandpack: SandpackPreset = (props) => {
     id: props.options?.id,
   };
 
-  const providerOptions: SandpackOptions = {
+  const providerOptions: SandpackOptions<
+    SandpackFiles,
+    SandpackPredefinedTemplate
+  > = {
     /**
      * TS-why: Type 'string | number | symbol' is not assignable to type 'string'
      */
@@ -56,7 +65,7 @@ export const Sandpack: SandpackPreset = (props) => {
   return (
     <SandpackProvider
       customSetup={props.customSetup}
-      files={props.files as TemplateFiles}
+      files={props.files as TemplateFiles<SandpackPredefinedTemplate>}
       options={providerOptions}
       template={props.template}
     >
