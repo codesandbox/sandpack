@@ -64,11 +64,29 @@ interface SandpackRootProps<
   Files,
   TemplateName extends SandpackPredefinedTemplate
 > {
-  // TODO
+  /**
+   * It accepts an object, where each key is the relative
+   * path of that file in the sandbox folder structure. Files passed in
+   * through the files prop override those in the template structure.
+   *
+   * Since each template uses the same type to define the files, you can
+   * overwrite the contents of any of the template files.
+   */
   files?: Files & SandpackFilesDerivedTemplate<TemplateName>;
-  // TODO
+
+  /**
+   * Set of presets to easily initialize sandboxes. Each template contains
+   * its files, environment and dependencies, and you can overwrite it
+   * using `customSetup` or `dependencies`.
+   */
   template?: SandpackPredefinedTemplate;
-  // TODO
+
+  /**
+   * Pass custom properties to configurate your own Sandpack environment.
+   *
+   * Since each template uses the same type to define the files, you can
+   * overwrite the contents of any of the template files.
+   */
   customSetup?: SandpackSetup;
 }
 
@@ -112,7 +130,7 @@ export interface SandpackOptions<
   externalResources?: string[];
 }
 
-export interface SandpackProps<
+interface SandpackProps<
   Files extends SandpackFiles = SandpackFiles,
   TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
 > extends SandpackRootProps<Files, TemplateName> {
@@ -152,33 +170,6 @@ export interface SandpackProviderProps<
   options?: SandpackOptions<Files, TemplateName>;
 }
 
-export interface SandpackProviderState {
-  // Setup
-  files: SandpackBundlerFiles;
-  environment?: SandboxEnvironment;
-
-  // Options
-  /**
-   * List the file path listed in the file tab,
-   * which will allow the user to interact with.
-   */
-  openPaths: Array<TemplateFiles | string>;
-  /**
-   * Path to the file will be open in the code editor when the component mounts
-   */
-  activePath: TemplateFiles | string;
-  startRoute?: string;
-  initMode: SandpackInitMode;
-
-  // Internally
-  bundlerState?: BundlerState;
-  error: SandpackError | null;
-  sandpackStatus: SandpackStatus;
-  editorState: EditorState;
-  renderHiddenIframe: boolean;
-  reactDevTools?: ReactDevToolsMode;
-}
-
 export type SandpackClientDispatch = (
   msg: SandpackMessage,
   clientId?: string
@@ -194,9 +185,22 @@ export type SandpackContext = SandpackState & {
   listen: SandpackClientListen;
 };
 
+/**
+ * TODO: missing documentation
+ */
 export interface SandpackState {
   bundlerState: BundlerState | undefined;
+
+  /**
+   * List the file path listed in the file tab,
+   * which will allow the user to interact with.
+   */
   openPaths: string[];
+
+  /**
+   * Path to the file will be open in the code editor
+   * when the component mounts
+   */
   activePath: string;
   startRoute?: string;
 
@@ -271,6 +275,11 @@ export type SandpackFiles = Record<string, string | SandpackFile>;
 
 export interface SandpackSetup {
   /**
+   * Any template will include the needed dependencies,
+   * but you can specify any additional dependencies. The key
+   * should be the name of the package, while the value is the version,
+   * in exactly the same format as it would be inside package.json.
+   *
    * Examples:
    * ```js
    * {
@@ -284,9 +293,19 @@ export interface SandpackSetup {
   /**
    * The entry file is the starting point of the bundle process.
    *
-   * If you change the path of the entry file, make sure you control all the files that go into the bundle process, as prexisting settings in the template might not work anymore.
+   * If you change the path of the entry file, make sure you control
+   * all the files that go into the bundle process, as prexisting
+   * settings in the template might not work anymore.
    */
   entry?: string;
+
+  /**
+   * Each sandbox has its own bundler attached to them which are configured
+   * to support a specific framework and emulate their official CLI tools.
+   * They are not one-to-one implementations and thus do not support advanced
+   * configuration like custom webpack configurations or ejecting. However,
+   * they are designed to mirror the default behavior of the framework
+   */
   environment?: SandboxEnvironment;
 }
 
@@ -345,7 +364,7 @@ export type SandpackPredefinedTemplate =
 
 export type SandpackPredefinedTheme = "light" | "dark" | "auto";
 
-export interface SandpackSyntaxStyle {
+interface SandpackSyntaxStyle {
   color?: string;
   fontStyle?: "normal" | "italic";
   fontWeight?:
@@ -435,4 +454,22 @@ export type DeepPartial<Type> = {
 export interface FileResolver {
   isFile: (path: string) => Promise<boolean>;
   readFile: (path: string) => Promise<string>;
+}
+
+/**
+ * @hidden
+ */
+export interface SandpackProviderState {
+  files: SandpackBundlerFiles;
+  environment?: SandboxEnvironment;
+  openPaths: Array<TemplateFiles | string>;
+  activePath: TemplateFiles | string;
+  startRoute?: string;
+  initMode: SandpackInitMode;
+  bundlerState?: BundlerState;
+  error: SandpackError | null;
+  sandpackStatus: SandpackStatus;
+  editorState: EditorState;
+  renderHiddenIframe: boolean;
+  reactDevTools?: ReactDevToolsMode;
 }

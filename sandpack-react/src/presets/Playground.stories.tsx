@@ -8,16 +8,18 @@ export default {
 };
 
 export const Main = (): JSX.Element => {
-  // return <Sandpack options={{ showLineNumbers: false }} />;
-
   return (
-    <SandpackProvider>
-      <SandpackLayout>
-        <SandpackPreview
-          viewportOrientation="portrait"
-          viewportSize="iPhone X"
-        />
-      </SandpackLayout>
-    </SandpackProvider>
+    <Sandpack
+      template="svelte"
+      options={{ showLineNumbers: false, activePath: "" }}
+    />
   );
+
+  // return (
+  //   <SandpackProvider template="svelte" options={{activePath: }}>
+  //     <SandpackLayout>
+  //       <SandpackPreview />
+  //     </SandpackLayout>
+  //   </SandpackProvider>
+  // );
 };

@@ -54,7 +54,6 @@ export const defaultDark: SandpackTheme = {
     hover: "#C5C5C5",
     accent: "#E5E5E5",
 
-    // TODO: Confirm
     error: "#EA3323",
     errorSurface: "#FCF1F0",
     warning: "#6A4516",
