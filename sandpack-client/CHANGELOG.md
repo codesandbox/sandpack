@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/codesandbox/sandpack/compare/v0.17.1...v0.18.0) (2022-03-31)
+
+
+### Features
+
+* file-resolver protocol error handling ([#427](https://github.com/codesandbox/sandpack/issues/427)) ([c3b3cca](https://github.com/codesandbox/sandpack/commit/c3b3cca98ca4aba2c0744545969683e41d963ab4))
+
+
+
+
+
+# [0.17.0](https://github.com/codesandbox/sandpack/compare/v0.16.1...v0.17.0) (2022-03-30)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
+## [0.16.1](https://github.com/codesandbox/sandpack/compare/v0.16.0...v0.16.1) (2022-03-29)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
+# [0.16.0](https://github.com/codesandbox/sandpack/compare/v0.15.2...v0.16.0) (2022-03-27)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
+## [0.15.2](https://github.com/codesandbox/sandpack/compare/v0.15.1...v0.15.2) (2022-03-18)
+
+
+### Bug Fixes
+
+* **loglevel:** set default ([#418](https://github.com/codesandbox/sandpack/issues/418)) ([abf0243](https://github.com/codesandbox/sandpack/commit/abf0243e5f106888ac3829daa6a5e6d6dd4f41b5))
+
+
+
+
+
+# [0.15.0](https://github.com/codesandbox/sandpack/compare/v0.14.9...v0.15.0) (2022-03-16)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
+## [0.14.8](https://github.com/codesandbox/sandpack/compare/v0.14.7...v0.14.8) (2022-03-11)
+
+
+### Bug Fixes
+
+* **client:** prevent add route into the main page browser history ([#407](https://github.com/codesandbox/sandpack/issues/407)) ([1e5230a](https://github.com/codesandbox/sandpack/commit/1e5230af5dff6c9afec8a96d1b9281cc585a826d))
+
+
+
+
+
+## [0.14.4](https://github.com/codesandbox/sandpack/compare/v0.14.3...v0.14.4) (2022-03-07)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
 # [0.14.0](https://github.com/codesandbox/sandpack/compare/v0.13.15...v0.14.0) (2022-02-18)
 
 

@@ -1,96 +1,56 @@
 import * as React from "react";
 
-export const RunIcon = (): React.ReactElement => (
+const SVG: React.FC<React.SVGAttributes<unknown>> = (props) => (
   <svg
     fill="currentColor"
     height="24"
-    viewBox="0 0 17 16"
+    viewBox="0 0 24 24"
     width="24"
     xmlns="http://www.w3.org/2000/svg"
-  >
+    {...props}
+  />
+);
+
+export const RunIcon = (): React.ReactElement => (
+  <SVG viewBox="0 0 17 16">
     <path d="M11.0792 8.1078C11.2793 8.25007 11.27 8.55012 11.0616 8.67981L6.02535 11.8135C5.79638 11.956 5.5 11.7913 5.5 11.5216L5.5 8.40703L5.5 4.80661C5.5 4.52735 5.81537 4.36463 6.04296 4.52647L11.0792 8.1078Z" />
-  </svg>
+  </SVG>
 );
 
 export const BackwardIcon = (): React.ReactElement => (
-  <svg
-    fill="currentColor"
-    height="24"
-    viewBox="0 0 24 24"
-    width="24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <SVG>
     <path d="M8.99126 12.2106L14.0455 6.98196L13.2998 6.21057L7.5 12.2106L13.2998 18.2106L14.0455 17.3924L8.99126 12.2106Z" />
-  </svg>
+  </SVG>
 );
 
 export const ForwardIcon = (): React.ReactElement => (
-  <svg
-    fill="currentColor"
-    height="24"
-    viewBox="0 0 24 24"
-    width="24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <SVG>
     <path d="M13.5087 12.2105L8.45455 17.4392L9.2002 18.2106L15 12.2106L9.2002 6.21057L8.45455 7.02875L13.5087 12.2105Z" />
-  </svg>
+  </SVG>
 );
 
 export const RefreshIcon = (): React.ReactElement => (
-  <svg
-    fill="currentColor"
-    height="24"
-    viewBox="0 0 24 24"
-    width="24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <SVG>
     <path
       clipRule="evenodd"
       d="M16.48 12.8571C16.0883 15.1705 14.1389 16.9286 11.7931 16.9286C9.16499 16.9286 7.03448 14.722 7.03448 12C7.03448 9.27803 9.16499 7.07143 11.7931 7.07143C13.6797 7.07143 15.3099 8.20855 16.0796 9.85714L14.2759 9.85714V11.1429H16.48H16.7586H17.5275H18V6.85714L16.7586 6.85714V8.90778C15.7449 7.16536 13.9004 6 11.7931 6C8.59366 6 6 8.68629 6 12C6 15.3137 8.59366 18 11.7931 18C14.7116 18 17.126 15.7648 17.5275 12.8571H16.48Z"
       fillRule="evenodd"
     />
-  </svg>
-);
-
-export const FullScreenIcon = (): React.ReactElement => (
-  <svg
-    fill="currentColor"
-    height="24"
-    viewBox="0 0 24 24"
-    width="24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      clipRule="evenodd"
-      d="M11 5H6H5.70715H5V6V11H6L6 6.70706L10.2238 10.9309L10.9309 10.2238L6.70715 6H11V5ZM12.9957 18.9956L17.9957 18.9956H18.2886H18.9957V17.9956L18.9957 12.9956H17.9957V17.2885L13.8252 13.118L13.1181 13.8251L17.2886 17.9956L12.9957 17.9956V18.9956Z"
-      fillRule="evenodd"
-    />
-  </svg>
+  </SVG>
 );
 
 export const ExportIcon = (): React.ReactElement => (
   <svg
     fill="none"
-    height="16"
-    viewBox="0 0 16 16"
-    width="16"
+    height="24"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    width="24"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path
-      d="M6.66671 3.33337H4.33337C3.78109 3.33337 3.33337 3.78109 3.33337 4.33337V11.6667C3.33337 12.219 3.78109 12.6667 4.33337 12.6667H11.6667C12.219 12.6667 12.6667 12.219 12.6667 11.6667V9.33337"
-      stroke="currentColor"
-      strokeLinecap="round"
-    />
-    <path
-      d="M10 3.33337H12.5667C12.6219 3.33337 12.6667 3.37815 12.6667 3.43337V6.00004"
-      stroke="currentColor"
-      strokeLinecap="round"
-    />
-    <path
-      d="M7.33337 8.66668L12.5334 3.46667"
-      stroke="currentColor"
-      strokeLinecap="round"
-    />
+    <path d="M10.5714 7H8.07143C7.4797 7 7 7.4797 7 8.07143V15.9286C7 16.5203 7.4797 17 8.07143 17H15.9286C16.5203 17 17 16.5203 17 15.9286V13.4286" />
+    <path d="M14.1429 7H16.8929C16.952 7 17 7.04798 17 7.10714V9.85715" />
+    <path d="M11.2858 12.7143L16.8572 7.14282" />
   </svg>
 );
 
@@ -99,12 +59,7 @@ export const DirectoryIcon = ({
 }: {
   isOpen?: boolean;
 }): React.ReactElement => (
-  <svg
-    height="12"
-    viewBox="0 0 12 11"
-    width="11"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <SVG height="12" viewBox="0 0 12 11" width="11">
     {isOpen ? (
       <>
         <path
@@ -126,7 +81,7 @@ export const DirectoryIcon = ({
         strokeLinecap="round"
       />
     )}
-  </svg>
+  </SVG>
 );
 
 export const FileIcon = (): React.ReactElement => (
@@ -145,13 +100,7 @@ export const FileIcon = (): React.ReactElement => (
 );
 
 export const CloseIcon = (): React.ReactElement => (
-  <svg
-    fill="currentColor"
-    height="8"
-    viewBox="0 0 16 16"
-    width="8"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <SVG height="8" viewBox="0 0 16 16" width="8">
     <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />
-  </svg>
+  </SVG>
 );

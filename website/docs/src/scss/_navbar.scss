@@ -5,11 +5,11 @@
 @media (min-width: 961px) {
   .navbar {
     width: var(--doc-sidebar-width);
-    border-right: 1px solid var(--ifm-toc-border-color);
     border-bottom: 0;
   }
 
   .navbar__brand {
+    font-size: 18px;
     padding-left: 1rem;
   }
 }

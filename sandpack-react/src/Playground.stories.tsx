@@ -4,7 +4,7 @@ import { SandpackPreview } from "../components";
 import { SandpackProvider } from "../contexts/sandpackContext";
 
 export default {
-  title: "Playground",
+  title: "Intro/Playground",
 };
 
 export const Main = (): JSX.Element => {

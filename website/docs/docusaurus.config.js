@@ -142,14 +142,6 @@ module.exports = {
           editUrl:
             "https://github.com/codesandbox/sandpack/edit/main/website/docs",
         },
-        blog: {
-          blogSidebarTitle: "Latest",
-          path: "./releases",
-          routeBasePath: "releases",
-          showReadingTime: true,
-          editUrl:
-            "https://github.com/codesandbox/sandpack/edit/main/website/docs",
-        },
         theme: {
           customCss: [require.resolve("./src/scss/custom.scss")],
         },
@@ -201,10 +193,6 @@ module.exports = {
           {
             title: "More",
             items: [
-              {
-                label: "Releases",
-                to: "/releases",
-              },
               {
                 label: "GitHub",
                 href: "https://github.com/codesandbox/sandpack",

@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-react",
-  "version": "0.14.3",
+  "version": "0.18.0",
   "description": "",
   "keywords": [],
   "repository": {
@@ -12,7 +12,9 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
-  "sideEffects": false,
+  "sideEffects": [
+    "dist/index.css"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "yarn run clean",
@@ -45,7 +47,7 @@
     "@codemirror/matchbrackets": "^0.19.3",
     "@codemirror/state": "^0.19.6",
     "@codemirror/view": "^0.19.32",
-    "@codesandbox/sandpack-client": "^0.14.0",
+    "@codesandbox/sandpack-client": "^0.18.0",
     "@react-hook/intersection-observer": "^3.1.1",
     "@stitches/core": "^1.2.6",
     "codesandbox-import-util-types": "^2.2.3",

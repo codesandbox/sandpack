@@ -1,11 +1,15 @@
 import type { Story } from "@storybook/react";
 import * as React from "react";
 
-import { SandpackLayout } from "../../common/Layout";
-import { SandpackProvider } from "../../contexts/sandpackContext";
-import { SandpackThemeProvider } from "../../contexts/themeContext";
+import {
+  SandpackCodeEditor,
+  SandpackThemeProvider,
+  SandpackProvider,
+  SandpackLayout,
+} from "../../";
+import { useSandpack } from "../../hooks";
 
-import type { PreviewProps } from "./index";
+import type { PreviewProps, SandpackPreviewRef } from "./index";
 import { SandpackPreview } from "./index";
 
 export default {
@@ -92,3 +96,62 @@ export const AutoResize: React.FC = () => (
     </SandpackThemeProvider>
   </SandpackProvider>
 );
+
+export const AdditionalButtons: React.FC = () => (
+  <SandpackProvider template="react">
+    <SandpackLayout>
+      <SandpackPreview
+        actionsChildren={
+          <button
+            className="sp-button"
+            onClick={(): void => window.alert("Bug reported!")}
+            style={{ padding: "var(--sp-space-1) var(--sp-space-3)" }}
+          >
+            Report bug
+          </button>
+        }
+      />
+      <SandpackCodeEditor />
+    </SandpackLayout>
+  </SandpackProvider>
+);
+
+export const AdditionalContent: React.FC = () => (
+  <SandpackProvider template="react">
+    <SandpackLayout>
+      <SandpackPreview>
+        <div style={{ background: "lightgreen" }}>content after iframe</div>
+      </SandpackPreview>
+      <SandpackCodeEditor />
+    </SandpackLayout>
+  </SandpackProvider>
+);
+
+const SandpackClient: React.FC = () => {
+  const { sandpack } = useSandpack();
+  const previewRef = React.useRef<SandpackPreviewRef>();
+
+  React.useEffect(() => {
+    const client = previewRef.current?.getClient();
+    const clientId = previewRef.current?.clientId;
+
+    if (client && clientId) {
+      /* eslint-disable no-console */
+      console.log(client);
+      console.log(sandpack.clients[clientId]);
+    }
+  }, [sandpack]);
+
+  return <SandpackPreview ref={previewRef} />;
+};
+
+export const GetClient: React.FC = () => {
+  return (
+    <SandpackProvider template="react">
+      <SandpackLayout>
+        <SandpackClient />
+        <SandpackCodeEditor />
+      </SandpackLayout>
+    </SandpackProvider>
+  );
+};

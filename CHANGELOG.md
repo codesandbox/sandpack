@@ -3,6 +3,156 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/codesandbox/sandpack/compare/v0.17.1...v0.18.0) (2022-03-31)
+
+
+### Features
+
+* file-resolver protocol error handling ([#427](https://github.com/codesandbox/sandpack/issues/427)) ([c3b3cca](https://github.com/codesandbox/sandpack/commit/c3b3cca98ca4aba2c0744545969683e41d963ab4))
+
+
+
+
+
+## [0.17.1](https://github.com/codesandbox/sandpack/compare/v0.17.0...v0.17.1) (2022-03-30)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+# [0.17.0](https://github.com/codesandbox/sandpack/compare/v0.16.1...v0.17.0) (2022-03-30)
+
+
+### Features
+
+* **preview:** consume client ([#425](https://github.com/codesandbox/sandpack/issues/425)) ([ec854c1](https://github.com/codesandbox/sandpack/commit/ec854c12d5b9ccdb862637e03f5f2d37dfa88e82))
+
+
+
+
+
+## [0.16.1](https://github.com/codesandbox/sandpack/compare/v0.16.0...v0.16.1) (2022-03-29)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+# [0.16.0](https://github.com/codesandbox/sandpack/compare/v0.15.2...v0.16.0) (2022-03-27)
+
+
+### Bug Fixes
+
+* Add year and company name to license ([#417](https://github.com/codesandbox/sandpack/issues/417)) ([d3adcac](https://github.com/codesandbox/sandpack/commit/d3adcac9c45fd90bb04754f286da203eda8a5a56))
+
+
+### Features
+
+* **preview:** additional content in preview container ([#422](https://github.com/codesandbox/sandpack/issues/422)) ([98103a8](https://github.com/codesandbox/sandpack/commit/98103a8b43fd16525ad8106b149c8c1747907be1))
+
+
+
+
+
+## [0.15.2](https://github.com/codesandbox/sandpack/compare/v0.15.1...v0.15.2) (2022-03-18)
+
+
+### Bug Fixes
+
+* **loglevel:** set default ([#418](https://github.com/codesandbox/sandpack/issues/418)) ([abf0243](https://github.com/codesandbox/sandpack/commit/abf0243e5f106888ac3829daa6a5e6d6dd4f41b5))
+
+
+
+
+
+## [0.15.1](https://github.com/codesandbox/sandpack/compare/v0.15.0...v0.15.1) (2022-03-18)
+
+
+### Bug Fixes
+
+* format & lint [skip ci] ([#413](https://github.com/codesandbox/sandpack/issues/413)) ([95ce023](https://github.com/codesandbox/sandpack/commit/95ce023e4c4e3809c0588997b651842baae91a4e))
+
+
+
+
+
+# [0.15.0](https://github.com/codesandbox/sandpack/compare/v0.14.9...v0.15.0) (2022-03-16)
+
+
+### Features
+
+* Add slot for additional buttons ([#412](https://github.com/codesandbox/sandpack/issues/412)) ([7a59d18](https://github.com/codesandbox/sandpack/commit/7a59d18fd286163a72e3b4675456ca6b22a8468c))
+
+
+
+
+
+## [0.14.9](https://github.com/codesandbox/sandpack/compare/v0.14.8...v0.14.9) (2022-03-14)
+
+
+### Bug Fixes
+
+* **environment:** remove sse envs ([#410](https://github.com/codesandbox/sandpack/issues/410)) ([cf65e50](https://github.com/codesandbox/sandpack/commit/cf65e500321c4d18674c05b3fcc3d1b81c8d2e6c))
+
+
+
+
+
+## [0.14.8](https://github.com/codesandbox/sandpack/compare/v0.14.7...v0.14.8) (2022-03-11)
+
+
+### Bug Fixes
+
+* **client:** prevent add route into the main page browser history ([#407](https://github.com/codesandbox/sandpack/issues/407)) ([1e5230a](https://github.com/codesandbox/sandpack/commit/1e5230af5dff6c9afec8a96d1b9281cc585a826d))
+
+
+
+
+
+## [0.14.7](https://github.com/codesandbox/sandpack/compare/v0.14.6...v0.14.7) (2022-03-10)
+
+
+### Bug Fixes
+
+* **logo:** update icons ([#402](https://github.com/codesandbox/sandpack/issues/402)) ([e7b0e46](https://github.com/codesandbox/sandpack/commit/e7b0e4630985b6e875a39087a1c4757b5729dd91))
+
+
+
+
+
+## [0.14.6](https://github.com/codesandbox/sandpack/compare/v0.14.5...v0.14.6) (2022-03-10)
+
+
+### Bug Fixes
+
+* **codemirror:** persist selection position on code change ([#406](https://github.com/codesandbox/sandpack/issues/406)) ([65534eb](https://github.com/codesandbox/sandpack/commit/65534ebfdc785057b0ebff417a51867e5f8ba242))
+
+
+
+
+
+## [0.14.5](https://github.com/codesandbox/sandpack/compare/v0.14.4...v0.14.5) (2022-03-07)
+
+
+### Bug Fixes
+
+* side effect should contain css ([#396](https://github.com/codesandbox/sandpack/issues/396)) ([4c2b149](https://github.com/codesandbox/sandpack/commit/4c2b1491838d2fe654c426f1429f96a76cace3ca))
+
+
+
+
+
+## [0.14.4](https://github.com/codesandbox/sandpack/compare/v0.14.3...v0.14.4) (2022-03-07)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
 ## [0.14.3](https://github.com/codesandbox/sandpack/compare/v0.14.2...v0.14.3) (2022-02-23)
 
 

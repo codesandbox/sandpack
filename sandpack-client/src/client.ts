@@ -21,7 +21,7 @@ import {
   extractErrorDetails,
 } from "./utils";
 
-import type { SandpackLogLevel } from ".";
+import { SandpackLogLevel } from ".";
 
 export interface ClientOptions {
   /**
@@ -159,9 +159,12 @@ export class SandpackClient {
       );
     }
 
-    this.iframe.src = options.startRoute
+    const urlSource = options.startRoute
       ? new URL(options.startRoute, this.bundlerURL).toString()
       : this.bundlerURL;
+
+    this.iframe.contentWindow?.location.replace(urlSource);
+
     this.iframeProtocol = new IFrameProtocol(this.iframe, this.bundlerURL);
 
     this.unsubscribeGlobalListener = this.iframeProtocol.globalListen(
@@ -298,7 +301,7 @@ export class SandpackClient {
       showLoadingScreen: this.options.showLoadingScreen ?? true,
       skipEval: this.options.skipEval || false,
       clearConsoleDisabled: !this.options.clearConsoleOnFirstCompile,
-      logLevel: this.options.logLevel,
+      logLevel: this.options.logLevel ?? SandpackLogLevel.Info,
     });
   }
 

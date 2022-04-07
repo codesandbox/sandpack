@@ -1,4 +1,8 @@
 import { useClasser } from "@code-hike/classer";
+import type {
+  SandpackClient,
+  SandpackMessage,
+} from "@codesandbox/sandpack-client";
 import * as React from "react";
 
 import { ErrorOverlay } from "../../common/ErrorOverlay";
@@ -19,6 +23,8 @@ export interface PreviewProps {
   showOpenInCodeSandbox?: boolean;
   showRefreshButton?: boolean;
   showSandpackErrorOverlay?: boolean;
+  actionsChildren?: JSX.Element;
+  children?: JSX.Element;
 }
 
 export { RefreshButton };
@@ -52,106 +58,146 @@ const previewActionsClassName = css({
   "> *": { marginLeft: "$space$2" },
 });
 
+export interface SandpackPreviewRef {
+  /**
+   * Retrieve the current Sandpack client instance from preview
+   */
+  getClient: () => SandpackClient | undefined;
+  /**
+   * Returns the client id, which will be used to
+   * initialize a client in the main Sandpack context
+   */
+  clientId: string;
+}
+
 /**
  * @category Components
  */
-export const SandpackPreview = ({
-  style,
-  showNavigator = false,
-  showRefreshButton = true,
-  showOpenInCodeSandbox = true,
-  showSandpackErrorOverlay = true,
-  className,
-  ...props
-}: PreviewProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
-  const { sandpack, listen } = useSandpack();
-  const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
-    number | null
-  >(null);
-  const {
-    status,
-    registerBundler,
-    unregisterBundler,
-    errorScreenRegisteredRef,
-    openInCSBRegisteredRef,
-    loadingScreenRegisteredRef,
-  } = sandpack;
+export const SandpackPreview = React.forwardRef<
+  SandpackPreviewRef,
+  PreviewProps & React.HTMLAttributes<HTMLDivElement>
+>(
+  (
+    {
+      showNavigator = false,
+      showRefreshButton = true,
+      showOpenInCodeSandbox = true,
+      showSandpackErrorOverlay = true,
+      actionsChildren = <></>,
+      className,
+      children,
+      style,
+      ...props
+    },
+    ref
+  ) => {
+    const { sandpack, listen } = useSandpack();
+    const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
+      number | null
+    >(null);
+    const {
+      status,
+      registerBundler,
+      unregisterBundler,
+      errorScreenRegisteredRef,
+      openInCSBRegisteredRef,
+      loadingScreenRegisteredRef,
+    } = sandpack;
 
-  const c = useClasser(THEME_PREFIX);
-  const clientId = React.useRef<string>(generateRandomId());
-  const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
+    const c = useClasser(THEME_PREFIX);
+    const clientId = React.useRef<string>(generateRandomId());
+    const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
 
-  // SandpackPreview immediately registers the custom screens/components so the bundler does not render any of them
-  openInCSBRegisteredRef.current = true;
-  errorScreenRegisteredRef.current = true;
-  loadingScreenRegisteredRef.current = true;
+    // SandpackPreview immediately registers the custom screens/components so the bundler does not render any of them
+    openInCSBRegisteredRef.current = true;
+    errorScreenRegisteredRef.current = true;
+    loadingScreenRegisteredRef.current = true;
 
-  React.useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const iframeElement = iframeRef.current!;
-    const clientIdValue = clientId.current;
+    React.useEffect(() => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const iframeElement = iframeRef.current!;
+      const clientIdValue = clientId.current;
 
-    registerBundler(iframeElement, clientIdValue);
+      registerBundler(iframeElement, clientIdValue);
 
-    const unsubscribe = listen((message) => {
-      if (message.type === "resize") {
-        setComputedAutoHeight(message.height);
+      const unsubscribe = listen((message: SandpackMessage) => {
+        if (message.type === "resize") {
+          setComputedAutoHeight(message.height);
+        }
+      }, clientIdValue);
+
+      return (): void => {
+        unsubscribe();
+        unregisterBundler(clientIdValue);
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    React.useImperativeHandle(
+      ref,
+      () => ({
+        clientId: clientId.current,
+        getClient(): SandpackClient | undefined {
+          return sandpack.clients[clientId.current];
+        },
+      }),
+      [sandpack]
+    );
+
+    const handleNewURL = (newUrl: string): void => {
+      if (!iframeRef.current) {
+        return;
       }
-    }, clientIdValue);
 
-    return (): void => {
-      unsubscribe();
-      unregisterBundler(clientIdValue);
+      iframeRef.current.src = newUrl;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  const handleNewURL = (newUrl: string): void => {
-    if (!iframeRef.current) {
-      return;
-    }
+    return (
+      <SandpackStack
+        className={className}
+        style={{
+          ...style,
+        }}
+        {...props}
+      >
+        {showNavigator ? (
+          <Navigator clientId={clientId.current} onURLChange={handleNewURL} />
+        ) : null}
 
-    iframeRef.current.src = newUrl;
-  };
+        <div className={classNames(c("preview-container"), previewClassName)}>
+          <iframe
+            ref={iframeRef}
+            className={classNames(c("preview-iframe"), previewIframe)}
+            style={{
+              // set height based on the content only in auto mode
+              // and when the computed height was returned by the bundler
+              height: iframeComputedHeight ? iframeComputedHeight : undefined,
+            }}
+            title="Sandpack Preview"
+          />
 
-  return (
-    <SandpackStack
-      className={className}
-      style={{
-        ...style,
-      }}
-      {...props}
-    >
-      {showNavigator ? (
-        <Navigator clientId={clientId.current} onURLChange={handleNewURL} />
-      ) : null}
+          {showSandpackErrorOverlay ? <ErrorOverlay /> : null}
 
-      <div className={classNames(c("preview-container"), previewClassName)}>
-        <iframe
-          ref={iframeRef}
-          className={classNames(c("preview-iframe"), previewIframe)}
-          style={{
-            // set height based on the content only in auto mode
-            // and when the computed height was returned by the bundler
-            height: iframeComputedHeight ? iframeComputedHeight : undefined,
-          }}
-          title="Sandpack Preview"
-        />
+          <div
+            className={classNames(
+              c("preview-actions"),
+              previewActionsClassName
+            )}
+          >
+            {actionsChildren}
+            {!showNavigator && showRefreshButton && status === "running" ? (
+              <RefreshButton clientId={clientId.current} />
+            ) : null}
 
-        {showSandpackErrorOverlay ? <ErrorOverlay /> : null}
+            {showOpenInCodeSandbox ? <OpenInCodeSandboxButton /> : null}
+          </div>
 
-        <div
-          className={classNames(c("preview-actions"), previewActionsClassName)}
-        >
-          {!showNavigator && showRefreshButton && status === "running" ? (
-            <RefreshButton clientId={clientId.current} />
-          ) : null}
+          <LoadingOverlay clientId={clientId.current} />
 
-          {showOpenInCodeSandbox ? <OpenInCodeSandboxButton /> : null}
+          {children}
         </div>
-
-        <LoadingOverlay clientId={clientId.current} />
-      </div>
-    </SandpackStack>
-  );
-};
+      </SandpackStack>
+    );
+  }
+);

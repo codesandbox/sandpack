@@ -34,12 +34,6 @@ module.exports = {
     },
     {
       type: "link",
-      label: "Releases ↗",
-      href: "/releases",
-      className: "bottom-link",
-    },
-    {
-      type: "link",
       label: "GitHub ↗",
       href: "https://github.com/codesandbox/sandpack",
       className: "bottom-link",

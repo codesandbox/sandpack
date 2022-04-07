@@ -8,6 +8,8 @@ import { IntroCard } from "../src/IntroCard"
 
 # Introduction
 
+![Sandpack](/img/opening.jpg)
+
 React components that give you the power of editable sandboxes that run in the
 browser. Powered by `Sandpack`, the online bundler used by
 [CodeSandbox](https://codesandbox.io/).
