@@ -7,7 +7,7 @@ export const placeholderClassName = css({
   display: "block",
   fontFamily: "$font$mono",
   fontSize: "$font$size",
-  color: "$colors$activeText",
+  color: "$syntax$color$plain",
   lineHeight: "$font$lineHeight",
 });
 

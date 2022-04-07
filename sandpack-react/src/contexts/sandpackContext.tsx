@@ -292,9 +292,8 @@ class SandpackProviderClass extends React.PureComponent<
      */
     if (
       prevProps.template !== this.props.template ||
-      prevProps.options?.activePath !== this.props.options?.activePath ||
-      !isEqual(prevProps.options?.openPaths, this.props.options?.openPaths) ||
-      !isEqual(prevProps.customSetup, this.props.customSetup)
+      !isEqual(prevProps.customSetup, this.props.customSetup) ||
+      !isEqual(prevProps.files, this.props.files)
     ) {
       /* eslint-disable react/no-did-update-set-state */
       this.setState({ activePath, openPaths, files, environment });
