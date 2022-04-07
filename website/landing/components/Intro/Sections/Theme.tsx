@@ -24,7 +24,7 @@ import {
   THRESHOLD_VIEW,
 } from "./common";
 
-const themeOptions: SandpackPredefinedTheme[] = ["dark", "light"];
+const themeOptions: SandpackPredefinedTheme[] = ["dark", "light", "auto"];
 
 export const ThemeExample: React.FC = () => {
   const { ref, inView } = useInView({ threshold: THRESHOLD_VIEW });

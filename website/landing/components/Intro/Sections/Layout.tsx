@@ -75,7 +75,7 @@ export const LayoutExample: React.FC = () => {
           <CodeWrapper
             css={{
               ".sp-wrapper": {
-                height: "480px",
+                height: "420px",
               },
 
               ".sp-tabs": {
@@ -89,7 +89,7 @@ export const LayoutExample: React.FC = () => {
                 borderBottomRightRadius: "16px",
               },
               ".sp-cm": {
-                height: "440px",
+                height: "380px",
               },
             }}
           >

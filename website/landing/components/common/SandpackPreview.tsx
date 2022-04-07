@@ -1,4 +1,3 @@
-import type { SandpackOptions } from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
 import { sandpackDark } from "@codesandbox/sandpack-themes";
 
@@ -44,9 +43,10 @@ export const SandpackContainer = styled("div", {
   },
 });
 
-export const SandpackPreview: React.FC<{ options?: SandpackOptions }> = ({
-  options,
-}) => {
+export const SandpackPreview: React.FC<{
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  options?: any;
+}> = ({ options }) => {
   return (
     <SandpackContainer>
       <Sandpack
