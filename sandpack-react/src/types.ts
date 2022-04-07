@@ -83,8 +83,8 @@ interface SandpackRootProps<
 }
 
 export interface SandpackOptions<
-  Files extends SandpackFiles | any,
-  TemplateName extends SandpackPredefinedTemplate
+  Files extends SandpackFiles | any = any,
+  TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
 > {
   /**
    * List the file path listed in the file tab,

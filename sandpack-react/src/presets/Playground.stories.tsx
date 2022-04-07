@@ -10,9 +10,9 @@ export default {
 export const Main = (): JSX.Element => {
   return (
     <Sandpack
-      // template="vue"
+      template="vue"
       files={{ path: "" }}
-      options={{ activePath: "path", openPaths: ["/index.js", "path"] }}
+      options={{ activePath: "path", openPaths: ["/src/App.vue", "path"] }}
     />
   );
 

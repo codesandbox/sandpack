@@ -15,14 +15,13 @@ export const CodeBlock: React.FC = ({ children }) => {
         paddingTop: "30px !important",
         pre: { padding: 0 },
 
-        ".sp-pre-placeholder": {
-          overflow: "hidden",
-          padding: "10px 5px",
+        ".cm-scroller": {
+          padding: "var(--sp-space-3) 0 !important",
         },
 
-        ".cm-editor": {
+        ".sp-code-editor": {
           borderRadius: "16px",
-          padding: "10px 5px",
+          overflow: "hidden",
         },
       }}
     >

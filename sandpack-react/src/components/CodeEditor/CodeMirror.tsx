@@ -401,9 +401,9 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       // padding-left
       let offset = 4;
 
-      // line-number-gutter-width
       if (showLineNumbers) {
-        offset += 5;
+        // line-number-gutter-width + gutter-padding
+        offset += 6;
       }
 
       // line-padding
