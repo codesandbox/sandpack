@@ -1,6 +1,6 @@
+import humanizeString from "humanize-string";
 import { useState, useRef } from "react";
 import { SketchPicker } from "react-color";
-import humanizeString from "humanize-string";
 
 import useOnClickOutside from "../../hooks/useClickOutside";
 
