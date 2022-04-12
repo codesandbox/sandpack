@@ -14,14 +14,14 @@
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "clean": "rm -rf dist sandpack",
+    "clean": "rimraf dist sandpack",
     "prebuild": "yarn run clean",
     "build": "node build.js && yarn run build:types",
-    "build:types": "yarn tsc -p tsconfig.json",
+    "build:types": "tsc -p tsconfig.json",
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "build:publish": "yarn build && gulp",
     "build:bundler": "gulp",
-    "start": "yarn tsc -p tsconfig.esm.json --watch"
+    "start": "tsc -p tsconfig.esm.json --watch"
   },
   "files": [
     "dist",
@@ -43,6 +43,7 @@
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "regenerator-runtime": "^0.13.7",
+    "rimraf": "^2.6.2",
     "ts-node": "^4.1.0",
     "tslint": "^5.8.0",
     "tslint-config-prettier": "^1.1.0",
