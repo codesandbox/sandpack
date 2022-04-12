@@ -35,7 +35,7 @@ export const HTML: React.FC = () => (
   </SandpackProvider>
 );
 
-export const JavaScript: React.FC = () => (
+export const Javascript: React.FC = () => (
   <SandpackProvider>
     <CodeEditor
       code={`
