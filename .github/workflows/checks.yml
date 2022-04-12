@@ -66,6 +66,45 @@ jobs:
           path: sandpack-client/dist
           key: sandpack-client-${{ github.run_id }}
           restore-keys: sandpack-client-
+          
+  sizebot:
+    name: Sizebot
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [install, build]
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: .nvmrc
+          
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
+        
+      - name: Setup | Restore react build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-react/dist
+          key: sandpack-react-${{ github.run_id }}
+        
+      - name: Setup | Restore client build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-client/dist
+          key: sandpack-client-${{ github.run_id }}
+
+      - name: Bot script
+        run: node scripts/sizebot/index.js
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   integration:
     name: Integration tests
