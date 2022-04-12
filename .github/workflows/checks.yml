@@ -2,8 +2,8 @@ name: CI
 on: [pull_request, push]
 
 jobs:
-  integration:
-    name: Integration tests
+  install:
+    name: Install
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -13,15 +13,177 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14.16.1"
+          node-version-file: .nvmrc
+
+      - name: Setup | Cache
+        uses: c-hive/gha-yarn-cache@v2
+
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
+        
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        id: cache-node-modules
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
+        
+  build:
+    name: Build
+    runs-on: ubuntu-18.04
+    timeout-minutes: 10
+    needs: install
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: .nvmrc
+          
+      - name: Setup | Cache
+        uses: c-hive/gha-yarn-cache@v2
 
       - name: Setup | Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Build
+        run: yarn run build
+        
+      - name: Cache react build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-react/dist
+          key: sandpack-react-${{ github.run_id }}
+          restore-keys: sandpack-react-
+           
+      - name: Cache client build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-client/dist
+          key: sandpack-client-${{ github.run_id }}
+          restore-keys: sandpack-client-
+          
+  sizebot:
+    name: Sizebot
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [install, build]
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: .nvmrc
+          
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
+        
+      - name: Setup | Restore react build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-react/dist
+          key: sandpack-react-${{ github.run_id }}
+        
+      - name: Setup | Restore client build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-client/dist
+          key: sandpack-client-${{ github.run_id }}
+
+      - name: Bot script
+        run: node scripts/sizebot/index.js
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+  chromatic-deployment:
+    name: Chromatic deployment
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [install, build]
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: .nvmrc
+          
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
+        
+      - name: Setup | Restore react build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-react/dist
+          key: sandpack-react-${{ github.run_id }}
+        
+      - name: Setup | Restore client build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-client/dist
+          key: sandpack-client-${{ github.run_id }}
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          buildScriptName: "chromatic:react"
+
+  integration:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [install, build]
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: .nvmrc
+          
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
+        
+      - name: Setup | Restore react build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-react/dist
+          key: sandpack-react-${{ github.run_id }}
+        
+      - name: Setup | Restore client build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-client/dist
+          key: sandpack-client-${{ github.run_id }}
+
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          build: yarn build
           start: yarn dev:react
           config: video=false
 
@@ -29,6 +191,7 @@ jobs:
     name: Unit tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    needs: [install, build]
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -36,15 +199,27 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14.16.1"
-
-      - name: Install dependencies and cache
-        uses: bahmutov/npm-install@v1
+          node-version-file: .nvmrc
+          
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
         with:
-          useLockFile: true
-
-      - name: Setup | Build
-        run: yarn run build
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
+        
+      - name: Setup | Restore react build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-react/dist
+          key: sandpack-react-${{ github.run_id }}
+        
+      - name: Setup | Restore client build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-client/dist
+          key: sandpack-client-${{ github.run_id }}
 
       - name: Test | Jest
         run: yarn run test
@@ -53,6 +228,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -60,41 +236,24 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14.16.1"
-
-      - name: Install dependencies and cache
-        uses: bahmutov/npm-install@v1
+          node-version-file: .nvmrc
+          
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
         with:
-          useLockFile: true
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
 
       - name: Lint | Eslint
         run: yarn run lint
-
-  build:
-    name: Build
-    runs-on: ubuntu-18.04
-    timeout-minutes: 10
-    steps:
-      - name: Setup | Checkout
-        uses: actions/checkout@v1
-
-      - name: Setup | Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "14.16.1"
-
-      - name: Install dependencies and cache
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: true
-
-      - name: Build
-        run: yarn run build
 
   format:
     name: Format
     runs-on: ubuntu-18.04
     timeout-minutes: 10
+    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -102,12 +261,15 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14.16.1"
-
-      - name: Install dependencies and cache
-        uses: bahmutov/npm-install@v1
+          node-version-file: .nvmrc
+          
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
         with:
-          useLockFile: true
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
 
-      - name: Build
+      - name: Format
         run: yarn run format:check
