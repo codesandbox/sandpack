@@ -193,5 +193,5 @@ jobs:
             packages/*/node_modules
           key: modules-${{ hashFiles('yarn.lock') }}
 
-      - name: Build
+      - name: Format
         run: yarn run format:check

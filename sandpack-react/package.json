@@ -16,7 +16,7 @@
     "dist/index.css"
   ],
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "yarn rimraf dist",
     "prebuild": "yarn run clean",
     "build": "node build.js && yarn run build:types && yarn build:css",
     "build:publish": "yarn build",
