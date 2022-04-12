@@ -2,8 +2,8 @@ name: CI
 on: [pull_request, push]
 
 jobs:
-  integration:
-    name: Integration tests
+  install:
+    name: Install
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -13,10 +13,30 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14.16.1"
+          node-version-file: .nvmrc
+
+      - name: Setup | Cache
+        uses: c-hive/gha-yarn-cache@v2
 
       - name: Setup | Install dependencies
         run: yarn install --frozen-lockfile
+
+  integration:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: install
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: .nvmrc
+
+      - name: Setup | Setup
+        uses: c-hive/gha-yarn-cache@v2
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
@@ -29,6 +49,7 @@ jobs:
     name: Unit tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -36,12 +57,10 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14.16.1"
+          node-version-file: .nvmrc
 
-      - name: Install dependencies and cache
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: true
+      - name: Setup | Setup
+        uses: c-hive/gha-yarn-cache@v2
 
       - name: Setup | Build
         run: yarn run build
@@ -53,6 +72,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -60,12 +80,10 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14.16.1"
+          node-version-file: .nvmrc
 
-      - name: Install dependencies and cache
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: true
+      - name: Setup | Setup
+        uses: c-hive/gha-yarn-cache@v2
 
       - name: Lint | Eslint
         run: yarn run lint
@@ -74,6 +92,7 @@ jobs:
     name: Build
     runs-on: ubuntu-18.04
     timeout-minutes: 10
+    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -81,12 +100,10 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14.16.1"
+          node-version-file: .nvmrc
 
-      - name: Install dependencies and cache
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: true
+      - name: Setup | Setup
+        uses: c-hive/gha-yarn-cache@v2
 
       - name: Build
         run: yarn run build
@@ -95,6 +112,7 @@ jobs:
     name: Format
     runs-on: ubuntu-18.04
     timeout-minutes: 10
+    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -102,12 +120,10 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14.16.1"
+          node-version-file: .nvmrc
 
-      - name: Install dependencies and cache
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: true
+      - name: Setup | Setup
+        uses: c-hive/gha-yarn-cache@v2
 
       - name: Build
         run: yarn run format:check
