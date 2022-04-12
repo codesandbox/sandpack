@@ -21,6 +21,15 @@ jobs:
       - name: Setup | Install dependencies
         run: yarn install --frozen-lockfile
         
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        id: cache-node-modules
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
+        
   build:
     name: Build
     runs-on: ubuntu-18.04
@@ -34,12 +43,14 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-
-      - name: Setup | Cache
-        uses: c-hive/gha-yarn-cache@v2
-      
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile --prefer-offline
+          
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
 
       - name: Build
         run: yarn run build
@@ -71,12 +82,14 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-
-      - name: Setup | Cache
-        uses: c-hive/gha-yarn-cache@v2
-      
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile --prefer-offline
+          
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
         
       - name: Setup | Restore react build
         uses: actions/cache@v3
@@ -109,12 +122,14 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-
-      - name: Setup | Cache
-        uses: c-hive/gha-yarn-cache@v2
-      
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile --prefer-offline
+          
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
         
       - name: Setup | Restore react build
         uses: actions/cache@v3
@@ -144,12 +159,14 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-
-      - name: Setup | Cache
-        uses: c-hive/gha-yarn-cache@v2
-      
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile --prefer-offline
+          
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
 
       - name: Lint | Eslint
         run: yarn run lint
@@ -167,12 +184,14 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-
-      - name: Setup | Cache
-        uses: c-hive/gha-yarn-cache@v2
-      
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile --prefer-offline
+          
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
 
       - name: Build
         run: yarn run format:check
