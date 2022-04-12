@@ -117,8 +117,7 @@ export interface SandpackSetup {
    * Examples:
    * ```js
    * {
-   *  "react": "latest",
-   *  "@material-ui/core": "4.12.3",
+   *  "@types/react": "latest",
    * }
    * ```
    */
