@@ -114,6 +114,16 @@ export interface SandpackSetup {
   dependencies?: Record<string, string>;
 
   /**
+   * Examples:
+   * ```js
+   * {
+   *  "@types/react": "latest",
+   * }
+   * ```
+   */
+  devDependencies?: Record<string, string>;
+
+  /**
    * The entry file is the starting point of the bundle process.
    *
    * If you change the path of the entry file, make sure you control all the files that go into the bundle process, as prexisting settings in the template might not work anymore.
