@@ -39,7 +39,7 @@ jobs:
         uses: c-hive/gha-yarn-cache@v2
       
       - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
 
       - name: Build
         run: yarn run build
@@ -76,7 +76,7 @@ jobs:
         uses: c-hive/gha-yarn-cache@v2
       
       - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
         
       - name: Setup | Restore react build
         uses: actions/cache@v3
@@ -114,7 +114,7 @@ jobs:
         uses: c-hive/gha-yarn-cache@v2
       
       - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
         
       - name: Setup | Restore react build
         uses: actions/cache@v3
@@ -149,7 +149,7 @@ jobs:
         uses: c-hive/gha-yarn-cache@v2
       
       - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
 
       - name: Lint | Eslint
         run: yarn run lint
@@ -172,7 +172,7 @@ jobs:
         uses: c-hive/gha-yarn-cache@v2
       
       - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
 
       - name: Build
         run: yarn run format:check
