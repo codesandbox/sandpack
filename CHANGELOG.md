@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.1](https://github.com/codesandbox/sandpack/compare/v0.18.0...v0.18.1) (2022-04-12)
+
+
+### Bug Fixes
+
+* **custom-setup:** add dev-dependencies ([#436](https://github.com/codesandbox/sandpack/issues/436)) ([df2f906](https://github.com/codesandbox/sandpack/commit/df2f906257b763aed07181f053a7ed4781831195))
+
+
+
+
+
 # [0.18.0](https://github.com/codesandbox/sandpack/compare/v0.17.1...v0.18.0) (2022-03-31)
 
 
