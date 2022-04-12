@@ -44,13 +44,11 @@ jobs:
         with:
           node-version-file: .nvmrc
           
-      - name: Setup | Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ hashFiles('yarn.lock') }}
+      - name: Setup | Cache
+        uses: c-hive/gha-yarn-cache@v2
+
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Build
         run: yarn run build
