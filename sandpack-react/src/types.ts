@@ -289,6 +289,20 @@ export interface SandpackSetup {
   dependencies?: Record<string, string>;
 
   /**
+   * Sandpack doesn't install devDependencies, because most tools in there
+   * were build tools, which is not necessary to properly run a sandbox,
+   * but maybe required for running locally or export to CodeSandbox.
+   *
+   * Examples:
+   * ```js
+   * {
+   *  "@types/react": "latest",
+   * }
+   * ```
+   */
+  devDependencies?: Record<string, string>;
+
+  /**
    * The entry file is the starting point of the bundle process.
    *
    * If you change the path of the entry file, make sure you control
