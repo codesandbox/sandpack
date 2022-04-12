@@ -7,7 +7,7 @@ describe("CodeMirror", () => {
         `/iframe.html?id=components-codemirror--${lang}`
       );
       cy.get(".cm-content")
-        .wait(index === 0 ? 400 : 0) // warm-up storybook
+        .wait(index === 0 ? 600 : 200) // warm-up storybook
         .invoke("attr", "style", "tab-size: 4;")
         .snapshot();
     });
