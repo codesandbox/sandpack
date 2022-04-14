@@ -257,6 +257,47 @@ import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 />
 ```
 
+### Advanced usage
+
+If you want to interact directly with CodeMirror, use the component ref to access the `getCodemirror` function, which will return the CodeMirror instance. Check out how to use it:
+
+```jsx
+const App = () => {
+  const codemirrorInstance = useRef();
+
+  useEffect(() => {
+    // Getting CodeMirror instance
+    const cmInstance = codemirrorInstance.current.getCodemirror();
+    
+    if(!cmInstance) return 
+    
+    // Current position
+    const currentPosition = cmInstance.state.selection;
+
+    // Setting a new position
+    const trans = cmInstance.state.update({
+      selection: currentPosition + 1,
+      changes: {
+        from: 0,
+        to: cmInstance.state.doc.length,
+        insert: code
+      }
+    });
+    cmInstance.update([trans]);
+  }, []);
+
+  return (
+    <SandpackProvider template="react">
+      <SandpackThemeProvider>
+        <SandpackCodeEditor ref={codemirrorInstance} />
+      </SandpackThemeProvider>
+    </SandpackProvider>
+  );
+};
+```
+
+This is especially useful to get the cursor's current position, add custom decorators, set the selection in a specific position, etc.
+
 ## Code Viewer
 
 For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a read-only version of `codemirror`, so users will not be able to edit the code.
