@@ -259,7 +259,7 @@ import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 
 ### Advanced usage
 
-If you want to interact directly with CodeMirror, you can use the component ref to retrieve the CodeMirror instance from `getCodemirror`. Check out how to use it:
+If you want to interact directly with CodeMirror, use the component ref to access the `getCodemirror` function, which will return the CodeMirror instance. Check out how to use it:
 
 ```jsx
 const App = () => {
@@ -296,7 +296,7 @@ const App = () => {
 };
 ```
 
-This might be useful if you want to get the current position of the cursor, add custom decorators, set the selection in a specific position, etc.
+This is especially useful to get the cursor's current position, add custom decorators, set the selection in a specific position, etc.
 
 ## Code Viewer
 
