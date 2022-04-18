@@ -1,9 +1,28 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
-import { getParameters } from "codesandbox-import-utils/lib/api/define";
+import LZString from "lz-string";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import type { SandboxEnvironment } from "../../types";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getParameters = (parameters: Record<string, any>): string =>
+  LZString.compressToBase64(JSON.stringify(parameters))
+    .replace(/\+/g, "-") // Convert '+' to '-'
+    .replace(/\//g, "_") // Convert '/' to '_'
+    .replace(/=+$/, ""); /* Remove ending '='*/
+
+function makeid(length: number) {
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 const CSB_URL = "https://codesandbox.io/api/v1/sandboxes/define";
 
@@ -29,8 +48,17 @@ const getFileParameters = (
     return { ...prev, [fileName]: value };
   }, {} as NormalizedFiles);
 
+  /**
+   * Proposal: break in smaller tasks
+   *
+   * files.forEach(file => {
+   *  return setTimeout(compress(file), 0);
+   * }
+   *
+   */
+
   return getParameters({
-    files: normalizedFiles,
+    files: { ...normalizedFiles, foo: makeid(10000000) },
     ...(environment ? { template: environment } : null),
   });
 };
@@ -45,8 +73,11 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
 
   React.useEffect(
     function debounce() {
-      const timer = setTimeout(() => {
-        const params = getFileParameters(sandpack.files, sandpack.environment);
+      const timer = setTimeout(async () => {
+        const params = await getFileParameters(
+          sandpack.files,
+          sandpack.environment
+        );
 
         const searchParams = new URLSearchParams({
           parameters: params,
@@ -66,7 +97,9 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
     [sandpack.activePath, sandpack.environment, sandpack.files]
   );
 
-  // Register the usage of the codesandbox link
+  /**
+   * Register the usage of the codesandbox link
+   */
   React.useEffect(function registerUsage() {
     sandpack.openInCSBRegisteredRef.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -86,8 +119,8 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
         <form ref={formRef} action={CSB_URL} method="POST" target="_blank">
           {Array.from(
             paramsValues as unknown as Array<[string, string]>,
-            ([k, v]) => (
-              <input key={k} name={k} type="hidden" value={v} />
+            ([key, value]) => (
+              <input key={key} name={key} type="hidden" value={value} />
             )
           )}
         </form>
