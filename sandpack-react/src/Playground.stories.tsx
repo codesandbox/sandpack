@@ -5,5 +5,5 @@ export default {
 };
 
 export const Main = (): JSX.Element => {
-  return <Sandpack options={{ showOpenInCodeSandbox: true }} />;
+  return <Sandpack />;
 };

@@ -13,17 +13,6 @@ const getParameters = (parameters: Record<string, any>): string =>
     .replace(/\//g, "_") // Convert '/' to '_'
     .replace(/=+$/, ""); /* Remove ending '='*/
 
-function makeid(length: number) {
-  let result = "";
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
-
 const CSB_URL = "https://codesandbox.io/api/v1/sandboxes/define";
 
 const getFileParameters = (
@@ -48,17 +37,8 @@ const getFileParameters = (
     return { ...prev, [fileName]: value };
   }, {} as NormalizedFiles);
 
-  /**
-   * Proposal: break in smaller tasks
-   *
-   * files.forEach(file => {
-   *  return setTimeout(compress(file), 0);
-   * }
-   *
-   */
-
   return getParameters({
-    files: { ...normalizedFiles, foo: makeid(10000000) },
+    files: normalizedFiles,
     ...(environment ? { template: environment } : null),
   });
 };
@@ -73,11 +53,8 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
 
   React.useEffect(
     function debounce() {
-      const timer = setTimeout(async () => {
-        const params = await getFileParameters(
-          sandpack.files,
-          sandpack.environment
-        );
+      const timer = setTimeout(() => {
+        const params = getFileParameters(sandpack.files, sandpack.environment);
 
         const searchParams = new URLSearchParams({
           parameters: params,
