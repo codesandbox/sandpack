@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.2](https://github.com/codesandbox/sandpack/compare/v0.18.1...v0.18.2) (2022-04-19)
+
+
+### Bug Fixes
+
+* **sandpack:** expose `showOpenInCodeSandbox` prop ([#443](https://github.com/codesandbox/sandpack/issues/443)) ([f5b9eda](https://github.com/codesandbox/sandpack/commit/f5b9eda0854f267e1c89b191294f10e65cf48c25))
+
+
+
+
+
 ## [0.18.1](https://github.com/codesandbox/sandpack/compare/v0.18.0...v0.18.1) (2022-04-12)
 
 
