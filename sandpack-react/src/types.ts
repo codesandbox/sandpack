@@ -156,7 +156,8 @@ export type SandboxEnvironment =
   | "svelte"
   | "parcel"
   | "vue-cli"
-  | "static";
+  | "static"
+  | "solid";
 
 export type SandpackPredefinedTemplate =
   | "angular"
