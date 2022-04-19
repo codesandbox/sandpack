@@ -36,6 +36,7 @@ export interface SandpackProps {
     showNavigator?: boolean;
     showLineNumbers?: boolean;
     showInlineErrors?: boolean;
+    showOpenInCodeSandbox?: boolean;
     showTabs?: boolean;
     closableTabs?: boolean;
     wrapContent?: boolean;
@@ -88,6 +89,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
 
   const previewOptions: PreviewProps = {
     showNavigator: props.options?.showNavigator,
+    showOpenInCodeSandbox: props?.options?.showOpenInCodeSandbox,
   };
 
   const codeEditorOptions: CodeEditorProps = {
