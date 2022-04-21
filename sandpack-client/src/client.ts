@@ -237,7 +237,10 @@ export class SandpackClient {
     sandboxInfo = this.sandboxInfo,
     isInitializationCompile?: boolean
   ): void {
-    this.sandboxInfo = sandboxInfo;
+    this.sandboxInfo = {
+      ...this.sandboxInfo,
+      ...sandboxInfo,
+    };
 
     const files = this.getFiles();
 
@@ -279,6 +282,11 @@ export class SandpackClient {
       {}
     );
 
+    const template =
+      this.sandboxInfo.template || getTemplate(packageJSON, normalizedModules);
+
+    console.log({ template, sandboxInfo: this.sandboxInfo });
+
     this.dispatch({
       type: "compile",
       codesandbox: true,
@@ -290,9 +298,7 @@ export class SandpackClient {
       hasFileResolver: Boolean(this.options.fileResolver),
       disableDependencyPreprocessing:
         this.sandboxInfo.disableDependencyPreprocessing,
-      template:
-        this.sandboxInfo.template ||
-        getTemplate(packageJSON, normalizedModules),
+      template,
       showOpenInCodeSandbox: this.options.showOpenInCodeSandbox ?? true,
       showErrorScreen: this.options.showErrorScreen ?? true,
       showLoadingScreen: this.options.showLoadingScreen ?? true,
