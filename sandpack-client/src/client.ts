@@ -237,7 +237,10 @@ export class SandpackClient {
     sandboxInfo = this.sandboxInfo,
     isInitializationCompile?: boolean
   ): void {
-    this.sandboxInfo = sandboxInfo;
+    this.sandboxInfo = {
+      ...this.sandboxInfo,
+      ...sandboxInfo,
+    };
 
     const files = this.getFiles();
 

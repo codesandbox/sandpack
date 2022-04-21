@@ -1,4 +1,4 @@
-import { Sandpack } from "../";
+import { Sandpack } from "./";
 
 export default {
   title: "Intro/Playground",
