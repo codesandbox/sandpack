@@ -1,4 +1,5 @@
 import { ClasserProvider } from "@code-hike/classer";
+import type { SandpackLogLevel } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
 import { SandpackLayout } from "../common/Layout";
@@ -69,6 +70,7 @@ export interface SandpackProps {
      * appears when `readOnly` is `true`
      */
     showReadOnly?: boolean;
+    logLevel?: SandpackLogLevel;
   };
 }
 
@@ -118,6 +120,7 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     initMode: props.options?.initMode,
     initModeObserverOptions: props.options?.initModeObserverOptions,
     externalResources: props.options?.externalResources,
+    logLevel: props.options?.logLevel,
   };
 
   // Parts are set as `flex` values, so they set the flex shrink/grow

@@ -5,12 +5,5 @@ export default {
 };
 
 export const Main = (): JSX.Element => {
-  return (
-    <Sandpack
-      options={{
-        bundlerURL: "https://02079e92.sandpack-bundler.pages.dev/",
-      }}
-      template="solid-beta"
-    />
-  );
+  return <Sandpack />;
 };
