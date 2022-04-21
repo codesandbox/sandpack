@@ -282,11 +282,6 @@ export class SandpackClient {
       {}
     );
 
-    const template =
-      this.sandboxInfo.template || getTemplate(packageJSON, normalizedModules);
-
-    console.log({ template, sandboxInfo: this.sandboxInfo });
-
     this.dispatch({
       type: "compile",
       codesandbox: true,
@@ -298,7 +293,9 @@ export class SandpackClient {
       hasFileResolver: Boolean(this.options.fileResolver),
       disableDependencyPreprocessing:
         this.sandboxInfo.disableDependencyPreprocessing,
-      template,
+      template:
+        this.sandboxInfo.template ||
+        getTemplate(packageJSON, normalizedModules),
       showOpenInCodeSandbox: this.options.showOpenInCodeSandbox ?? true,
       showErrorScreen: this.options.showErrorScreen ?? true,
       showLoadingScreen: this.options.showLoadingScreen ?? true,
