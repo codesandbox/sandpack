@@ -22,5 +22,5 @@ export const SANDBOX_TEMPLATES: Record<
   vue3: VUE_TEMPLATE_3,
   angular: ANGULAR_TEMPLATE,
   svelte: SVELTE_TEMPLATE,
-  "solid-beta": SOLID_TEMPLATE,
+  solid: SOLID_TEMPLATE,
 };
