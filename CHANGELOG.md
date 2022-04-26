@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.2](https://github.com/codesandbox/sandpack/compare/v0.19.1...v0.19.2) (2022-04-26)
+
+
+### Bug Fixes
+
+* **solid template:** deprecate beta version ([#451](https://github.com/codesandbox/sandpack/issues/451)) ([8278c71](https://github.com/codesandbox/sandpack/commit/8278c71e33c9ca8197827f041f4c6da68c33d4f5))
+
+
+
+
+
 ## [0.19.1](https://github.com/codesandbox/sandpack/compare/v0.19.0...v0.19.1) (2022-04-26)
 
 
