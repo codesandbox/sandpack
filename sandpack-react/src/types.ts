@@ -168,7 +168,7 @@ export type SandpackPredefinedTemplate =
   | "vue"
   | "vue3"
   | "svelte"
-  | "solid-beta";
+  | "solid";
 
 export type SandpackPredefinedTheme =
   | "light"
