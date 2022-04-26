@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.1](https://github.com/codesandbox/sandpack/compare/v0.19.0...v0.19.1) (2022-04-26)
+
+
+### Bug Fixes
+
+* **client:** update bundler version ([#450](https://github.com/codesandbox/sandpack/issues/450)) ([1b6a663](https://github.com/codesandbox/sandpack/commit/1b6a663d8d7ff0bf3c3449b4aa0bfd675e37a221))
+
+
+
+
+
 # [0.19.0](https://github.com/codesandbox/sandpack/compare/v0.18.2...v0.19.0) (2022-04-21)
 
 
