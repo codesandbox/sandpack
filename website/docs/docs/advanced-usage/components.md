@@ -262,6 +262,8 @@ import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 If you want to interact directly with CodeMirror, use the component ref to access the `getCodemirror` function, which will return the CodeMirror instance. Check out how to use it:
 
 ```jsx
+import { EditorSelection } from "@codemirror/state";
+
 const App = () => {
   const codemirrorInstance = useRef();
 
@@ -272,17 +274,18 @@ const App = () => {
     if(!cmInstance) return 
     
     // Current position
-    const currentPosition = cmInstance.state.selection;
+    const currentPosition = cmInstance.state.selection.ranges[0].to;
 
     // Setting a new position
     const trans = cmInstance.state.update({
-      selection: currentPosition + 1,
+      selection: EditorSelection.cursor(currentPosition + 1),
       changes: {
         from: 0,
         to: cmInstance.state.doc.length,
         insert: code
       }
     });
+    
     cmInstance.update([trans]);
   }, []);
 
