@@ -11,7 +11,7 @@ import { lineNumbers } from "@codemirror/gutter";
 import { defaultHighlightStyle } from "@codemirror/highlight";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
-import { EditorState } from "@codemirror/state";
+import { EditorState, EditorSelection } from "@codemirror/state";
 import type { Annotation, Extension } from "@codemirror/state";
 import {
   highlightSpecialChars,
@@ -311,10 +311,16 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     React.useEffect(() => {
       if (cmView.current && code !== internalCode) {
         const view = cmView.current;
-        view.dispatch({
-          changes: { from: 0, to: view.state.doc.length, insert: code },
-          selection: view.state.selection,
-        });
+
+        const selection = view.state.selection.ranges.some(
+          ({ to, from }) => to > code.length || from > code.length
+        )
+          ? EditorSelection.cursor(code.length)
+          : view.state.selection;
+
+        const changes = { from: 0, to: view.state.doc.length, insert: code };
+
+        view.dispatch({ changes, selection });
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [code]);
