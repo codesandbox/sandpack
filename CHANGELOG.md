@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.3](https://github.com/codesandbox/sandpack/compare/v0.19.2...v0.19.3) (2022-04-27)
+
+
+### Bug Fixes
+
+* **codeeditor:** ensure selections are inside of the document length ([#452](https://github.com/codesandbox/sandpack/issues/452)) ([7391c6e](https://github.com/codesandbox/sandpack/commit/7391c6e5fc896eb9b937323f918562beef694061))
+
+
+
+
+
 ## [0.19.2](https://github.com/codesandbox/sandpack/compare/v0.19.1...v0.19.2) (2022-04-26)
 
 
