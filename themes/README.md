@@ -1,4 +1,4 @@
-<img style="width:100%" src="https://user-images.githubusercontent.com/4838076/143581035-ebee5ba2-9cb1-4fe8-a05b-2f44bd69bb4b.gif" alt="Component toolkit for live running code editing experiences" />
+<img style="width:100%" src="https://user-images.githubusercontent.com/4838076/165913019-2903e055-0399-4b2a-ba10-db9ae9ded1e2.jpg" alt="Component toolkit for live running code editing experiences" />
 
 # Sandpack Themes
 

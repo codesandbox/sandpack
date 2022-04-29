@@ -4,6 +4,7 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
 } from "@codesandbox/sandpack-react";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import CodeBlock from "@theme-init/CodeBlock";
 import React from "react";
@@ -18,7 +19,7 @@ const RenderSandpack = (props) => {
     children,
     template = "react",
     file = "/App.js",
-    theme = sandpackPluginOptions.theme,
+    theme = sandpackDark || sandpackDark,
   } = props;
 
   if (props.className === "language-diff") {
@@ -61,7 +62,9 @@ const RenderSandpack = (props) => {
     <SandpackProvider
       customSetup={{
         entry: "index.ts",
-        files: { "index.ts": children.trim() },
+      }}
+      files={{
+        "index.ts": children.trim(),
       }}
     >
       <SandpackThemeProvider theme={theme}>

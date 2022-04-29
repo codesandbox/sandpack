@@ -3,8 +3,8 @@ import type { SandpackTheme } from "./types";
 export const githubLight: SandpackTheme = {
   colors: {
     surface1: "#ffffff",
-    surface2: "#e4e7eb",
-    surface3: "#F3F3F3",
+    surface2: "#F3F3F3",
+    surface3: "#f5f5f5",
 
     clickable: "#959da5",
     base: "#24292e",

@@ -3,8 +3,8 @@ import type { SandpackTheme } from "./types";
 export const nightOwl: SandpackTheme = {
   colors: {
     surface1: "#011627",
-    surface2: "#343E4E",
-    surface3: "#2D3645",
+    surface2: "#243b4c",
+    surface3: "#112331",
     clickable: "#6988a1",
     base: "#808080",
     disabled: "#4D4D4D",

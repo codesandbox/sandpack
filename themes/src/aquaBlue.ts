@@ -3,15 +3,15 @@ import type { SandpackTheme } from "./types";
 export const aquaBlue: SandpackTheme = {
   colors: {
     surface1: "#f8f9fb",
-    surface2: "#e4e7eb",
-    surface3: "#EBEDF0",
+    surface2: "#EBEDF0",
+    surface3: "#e4e7eb",
 
     clickable: "#737373",
     base: "#323232",
     disabled: "#C5C5C5",
     hover: "#1f2933",
 
-    accent: "#6caedd",
+    accent: "#2e7692",
 
     error: "#ffcdca",
     errorSurface: "#811e18",
@@ -24,7 +24,7 @@ export const aquaBlue: SandpackTheme = {
     tag: "#1A56DB",
     punctuation: "#394b59",
     definition: "#A23DAD",
-    property: "#14919B",
+    property: "#2e7692",
     static: "#1A56DB",
     string: "#1992D4",
   },
