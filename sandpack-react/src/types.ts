@@ -48,7 +48,7 @@ export interface SandpackState {
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
   unregisterBundler: (clientId: string) => void;
-  updateFile: (path: string, newCode: string) => void;
+  updateFile: (pathOrFiles: string | SandpackFiles, code?: string) => void;
   updateCurrentFile: (newCode: string) => void;
   openFile: (path: string) => void;
   closeFile: (path: string) => void;
