@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.4](https://github.com/codesandbox/sandpack/compare/v0.19.3...v0.19.4) (2022-04-29)
+
+
+### Bug Fixes
+
+* **updatefile:** support multiple files ([#453](https://github.com/codesandbox/sandpack/issues/453)) ([a05faac](https://github.com/codesandbox/sandpack/commit/a05faaca453b60f1ffab7b9d6fd7b6bb8050f8b2))
+
+
+
+
+
 ## [0.19.3](https://github.com/codesandbox/sandpack/compare/v0.19.2...v0.19.3) (2022-04-27)
 
 
