@@ -16,7 +16,7 @@ import { IntroCard } from "../../src/IntroCard"
   <IntroCard title="Sandpack Theme Builder" description="Design and customize your own theme, among other Sandpack presets." href="https://sandpack.codesandbox.io/theme" actionText="Try it now" external />
 </div>
 
-The overall style can be set through the `theme` prop. Once again, sandpack offers a set of predefined options, but you can also pass individual values to style your `Sandpack` instance.
+The overall style can be set through the `theme` prop. Sandpack offers a set of predefined options, but individual values can be passed to customize the style of your `Sandpack` instance.
 
 ## Standard Themes
 
@@ -31,7 +31,7 @@ Sandpack comes with some predefined themes:
 
 ### All themes
 
-Besides the included themes, you can also consume a set of themes from `@codesandbox/sandpack-themes`, an open-source package that contains many other themes compatible with Sandpack. You can find a list of all themes available on [@codesandbox/sandpack-themes](/docs/api/themes). To use a custom theme, you need to import it into your code:
+Besides the included themes, you can also consume a set of themes from `@codesandbox/sandpack-themes`, an open-source package that contains many other themes compatible with Sandpack. You can find a list of all themes available on [@codesandbox/sandpack-themes](/docs/api/themes). To use a custom theme, you need to import and reference it in your code.
 
 ```jsx
 import { githubLightTheme } from "@codesandbox/sandpack-themes";
