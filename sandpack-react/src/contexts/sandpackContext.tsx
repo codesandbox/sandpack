@@ -14,6 +14,7 @@ import {
 } from "@codesandbox/sandpack-client";
 import isEqual from "lodash.isequal";
 import * as React from "react";
+import { SandpackFiles } from "..";
 
 import type {
   SandpackContext,
@@ -25,7 +26,10 @@ import type {
   SandpackSetup,
   SandpackInitMode,
 } from "../types";
-import { getSandpackStateFromProps } from "../utils/sandpackUtils";
+import {
+  convertedFilesToBundlerFiles,
+  getSandpackStateFromProps,
+} from "../utils/sandpackUtils";
 import { generateRandomId } from "../utils/stringUtils";
 
 /**
@@ -199,25 +203,27 @@ class SandpackProvider extends React.PureComponent<
   /**
    * @hidden
    */
-  updateCurrentFile = (newCode: string): void => {
-    this.updateFile(this.state.activePath, newCode);
+  updateCurrentFile = (code: string): void => {
+    this.updateFile(this.state.activePath, code);
   };
 
   /**
    * @hidden
    */
-  updateFile = (path: string, newCode: string): void => {
-    if (newCode === this.state.files[this.state.activePath]?.code) {
-      return;
+  updateFile = (pathOrFiles: string | SandpackFiles, code?: string): void => {
+    let files = this.state.files;
+
+    if (typeof pathOrFiles === "string" && code) {
+      if (code === this.state.files[pathOrFiles]?.code) {
+        return;
+      }
+
+      files = { ...files, [pathOrFiles]: { code: code } };
+    } else if (typeof pathOrFiles === "object") {
+      files = { ...files, ...convertedFilesToBundlerFiles(pathOrFiles) };
     }
 
-    const { files } = this.state;
-    const newFiles = {
-      ...files,
-      [path]: { code: newCode },
-    };
-
-    this.setState({ files: newFiles }, this.updateClients);
+    this.setState({ files });
   };
 
   /**
@@ -226,6 +232,7 @@ class SandpackProvider extends React.PureComponent<
   updateClients = (): void => {
     const { files, sandpackStatus } = this.state;
     const { recompileMode, recompileDelay } = this.props;
+
     if (sandpackStatus !== "running") {
       return;
     }

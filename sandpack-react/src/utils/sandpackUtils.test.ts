@@ -3,6 +3,7 @@ import { REACT_TEMPLATE } from "../templates/react";
 import {
   getSandpackStateFromProps,
   createSetupFromUserInput,
+  convertedFilesToBundlerFiles,
 } from "./sandpackUtils";
 
 describe(getSandpackStateFromProps, () => {
@@ -245,6 +246,22 @@ describe(createSetupFromUserInput, () => {
     expect(output).toStrictEqual({
       environment: "create-react-app",
       files: { "App.js": { code: "" } },
+    });
+  });
+});
+
+describe(convertedFilesToBundlerFiles, () => {
+  it("converts regular files to bundler files", () => {
+    expect(convertedFilesToBundlerFiles({ name: "code" })).toEqual({
+      name: { code: "code" },
+    });
+  });
+
+  it("keeps bundler files original", () => {
+    expect(
+      convertedFilesToBundlerFiles({ name: { code: "code", hidden: true } })
+    ).toEqual({
+      name: { code: "code", hidden: true },
     });
   });
 });
