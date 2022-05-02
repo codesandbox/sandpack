@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.6](https://github.com/codesandbox/sandpack/compare/v0.19.5...v0.19.6) (2022-05-02)
+
+
+### Bug Fixes
+
+* **readonly:** toggle remounting ([#456](https://github.com/codesandbox/sandpack/issues/456)) ([b4162bc](https://github.com/codesandbox/sandpack/commit/b4162bcd7d284c0b3cb2d3acdfff2e7f9818870d))
+
+
+
+
+
 ## [0.19.5](https://github.com/codesandbox/sandpack/compare/v0.19.4...v0.19.5) (2022-05-02)
 
 
