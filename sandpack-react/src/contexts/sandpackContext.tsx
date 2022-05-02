@@ -223,7 +223,7 @@ class SandpackProvider extends React.PureComponent<
       files = { ...files, ...convertedFilesToBundlerFiles(pathOrFiles) };
     }
 
-    this.setState({ files });
+    this.setState({ files }, this.updateClients);
   };
 
   /**

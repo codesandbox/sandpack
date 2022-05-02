@@ -1,6 +1,13 @@
 import React from "react";
 import { SandpackProvider } from "./sandpackContext";
 
+// jest.mock("./sandpackContext");
+
+// beforeEach(() => {
+//   // Clear all instances and calls to constructor and all methods:
+//   SandpackProvider.mockClear();
+// });
+
 import { create } from "react-test-renderer";
 describe(SandpackProvider, () => {
   it("updates a file", () => {
