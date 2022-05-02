@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.5](https://github.com/codesandbox/sandpack/compare/v0.19.4...v0.19.5) (2022-05-02)
+
+
+### Bug Fixes
+
+* **updatefile:** update all clients ([#455](https://github.com/codesandbox/sandpack/issues/455)) ([fc2e13c](https://github.com/codesandbox/sandpack/commit/fc2e13c00e2339c1ef18d18f4cb895248787b0d5))
+
+
+
+
+
 ## [0.19.4](https://github.com/codesandbox/sandpack/compare/v0.19.3...v0.19.4) (2022-04-29)
 
 
