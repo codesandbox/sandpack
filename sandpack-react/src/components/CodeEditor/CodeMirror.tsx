@@ -29,7 +29,7 @@ import type {
   EditorState as SandpackEditorState,
   SandpackInitMode,
 } from "../../types";
-import { getFileName, generateRandomId } from "../../utils/stringUtils";
+import { getFileName } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
@@ -125,7 +125,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
     const c = useClasser("sp");
     const { listen } = useSandpack();
-    const ariaId = React.useRef<string>(id ?? generateRandomId());
+    const generatedId = typeof React.useId === 'function' ?
+      React.useId() :
+      React.useRef<string>(generateRandomId()).current;
+    const ariaId = id ?? generatedId;
 
     const { isIntersecting } = useIntersectionObserver(wrapper, {
       rootMargin: "600px 0px",
@@ -271,7 +274,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           view.contentDOM.setAttribute("tabIndex", "-1");
           view.contentDOM.setAttribute(
             "aria-describedby",
-            `exit-instructions-${ariaId.current}`
+            `exit-instructions-${ariaId}`
           );
         }
 
@@ -404,7 +407,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       <div
         ref={combinedRef}
-        aria-describedby={`enter-instructions-${ariaId.current}`}
+        aria-describedby={`enter-instructions-${ariaId}`}
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
@@ -425,14 +428,14 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
         <>
           <p
-            id={`enter-instructions-${ariaId.current}`}
+            id={`enter-instructions-${ariaId}`}
             style={{ display: "none" }}
           >
             To enter the code editing mode, press Enter. To exit the edit mode,
             press Escape
           </p>
           <p
-            id={`exit-instructions-${ariaId.current}`}
+            id={`exit-instructions-${ariaId}`}
             style={{ display: "none" }}
           >
             You are editing the code. To exit the edit mode, press Escape
