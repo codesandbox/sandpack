@@ -356,7 +356,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           if (
             message.type === "action" &&
             message.action === "show-error" &&
-            "line" in message
+            "line" in message &&
+            message.line
           ) {
             view?.dispatch({
               annotations: [
