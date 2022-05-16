@@ -33,6 +33,7 @@ import { getFileName } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
+import { useGeneratedId } from "./useGeneratedId";
 import {
   getCodeMirrorLanguage,
   getLanguageFromFile,
@@ -125,10 +126,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
     const c = useClasser("sp");
     const { listen } = useSandpack();
-    const generatedId = typeof React.useId === 'function' ?
-      React.useId() :
-      React.useRef<string>(generateRandomId()).current;
-    const ariaId = id ?? generatedId;
+    const ariaId = useGeneratedId(id);
 
     const { isIntersecting } = useIntersectionObserver(wrapper, {
       rootMargin: "600px 0px",
@@ -427,17 +425,11 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         </pre>
 
         <>
-          <p
-            id={`enter-instructions-${ariaId}`}
-            style={{ display: "none" }}
-          >
+          <p id={`enter-instructions-${ariaId}`} style={{ display: "none" }}>
             To enter the code editing mode, press Enter. To exit the edit mode,
             press Escape
           </p>
-          <p
-            id={`exit-instructions-${ariaId}`}
-            style={{ display: "none" }}
-          >
+          <p id={`exit-instructions-${ariaId}`} style={{ display: "none" }}>
             You are editing the code. To exit the edit mode, press Escape
           </p>
         </>
