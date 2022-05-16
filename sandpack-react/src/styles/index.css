@@ -327,15 +327,6 @@
   outline: 2px solid var(--sp-colors-accent);
 }
 
-.sp-button.sp-csb-icon-dark {
-  color: var(--sp-colors-bg-default);
-}
-
-.sp-button.sp-csb-icon-dark:hover:not(:disabled) {
-  background-color: var(--sp-colors-bg-active);
-  color: var(--sp-colors-bg-active);
-}
-
 .sp-input {
   background-color: var(--sp-colors-bg-input);
   color: var(--sp-colors-fg-default);

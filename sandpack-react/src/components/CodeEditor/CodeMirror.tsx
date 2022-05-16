@@ -11,7 +11,7 @@ import { lineNumbers } from "@codemirror/gutter";
 import { defaultHighlightStyle } from "@codemirror/highlight";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
-import { EditorState } from "@codemirror/state";
+import { EditorState, EditorSelection } from "@codemirror/state";
 import type { Annotation, Extension } from "@codemirror/state";
 import {
   highlightSpecialChars,
@@ -29,7 +29,7 @@ import type {
   EditorState as SandpackEditorState,
   SandpackInitMode,
 } from "../../types";
-import { getFileName, generateRandomId } from "../../utils/stringUtils";
+import { getFileName } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
@@ -125,7 +125,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
     const c = useClasser("sp");
     const { listen } = useSandpack();
-    const ariaId = React.useRef<string>(id ?? generateRandomId());
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const ariaId = id ?? React.useId();
 
     const { isIntersecting } = useIntersectionObserver(wrapper, {
       rootMargin: "600px 0px",
@@ -271,7 +272,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           view.contentDOM.setAttribute("tabIndex", "-1");
           view.contentDOM.setAttribute(
             "aria-describedby",
-            `exit-instructions-${ariaId.current}`
+            `exit-instructions-${ariaId}`
           );
         }
 
@@ -292,6 +293,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       wrapContent,
       themeId,
       sortedDecorators,
+      readOnly,
     ]);
 
     React.useEffect(() => {
@@ -311,9 +313,16 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     React.useEffect(() => {
       if (cmView.current && code !== internalCode) {
         const view = cmView.current;
-        view.dispatch({
-          changes: { from: 0, to: view.state.doc.length, insert: code },
-        });
+
+        const selection = view.state.selection.ranges.some(
+          ({ to, from }) => to > code.length || from > code.length
+        )
+          ? EditorSelection.cursor(code.length)
+          : view.state.selection;
+
+        const changes = { from: 0, to: view.state.doc.length, insert: code };
+
+        view.dispatch({ changes, selection });
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [code]);
@@ -348,7 +357,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           if (
             message.type === "action" &&
             message.action === "show-error" &&
-            "line" in message
+            message.line
           ) {
             view?.dispatch({
               annotations: [
@@ -396,7 +405,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       <div
         ref={combinedRef}
-        aria-describedby={`enter-instructions-${ariaId.current}`}
+        aria-describedby={`enter-instructions-${ariaId}`}
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
@@ -416,17 +425,11 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         </pre>
 
         <>
-          <p
-            id={`enter-instructions-${ariaId.current}`}
-            style={{ display: "none" }}
-          >
+          <p id={`enter-instructions-${ariaId}`} style={{ display: "none" }}>
             To enter the code editing mode, press Enter. To exit the edit mode,
             press Escape
           </p>
-          <p
-            id={`exit-instructions-${ariaId.current}`}
-            style={{ display: "none" }}
-          >
+          <p id={`exit-instructions-${ariaId}`} style={{ display: "none" }}>
             You are editing the code. To exit the edit mode, press Escape
           </p>
         </>

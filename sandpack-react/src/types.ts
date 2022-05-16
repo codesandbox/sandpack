@@ -48,7 +48,7 @@ export interface SandpackState {
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
   unregisterBundler: (clientId: string) => void;
-  updateFile: (path: string, newCode: string) => void;
+  updateFile: (pathOrFiles: string | SandpackFiles, code?: string) => void;
   updateCurrentFile: (newCode: string) => void;
   openFile: (path: string) => void;
   closeFile: (path: string) => void;
@@ -114,6 +114,16 @@ export interface SandpackSetup {
   dependencies?: Record<string, string>;
 
   /**
+   * Examples:
+   * ```js
+   * {
+   *  "@types/react": "latest",
+   * }
+   * ```
+   */
+  devDependencies?: Record<string, string>;
+
+  /**
    * The entry file is the starting point of the bundle process.
    *
    * If you change the path of the entry file, make sure you control all the files that go into the bundle process, as prexisting settings in the template might not work anymore.
@@ -140,32 +150,14 @@ export interface SandpackSetup {
 export type SandpackInitMode = "immediate" | "lazy" | "user-visible";
 
 export type SandboxEnvironment =
-  | "adonis"
-  | "vue-cli"
-  | "preact-cli"
-  | "svelte"
-  | "create-react-app-typescript"
-  | "create-react-app"
   | "angular-cli"
+  | "create-react-app"
+  | "create-react-app-typescript"
+  | "svelte"
   | "parcel"
-  | "@dojo/cli-create-app"
-  | "cxjs"
-  | "gatsby"
-  | "nuxt"
-  | "next"
-  | "reason"
-  | "apollo"
-  | "sapper"
-  | "ember"
-  | "nest"
+  | "vue-cli"
   | "static"
-  | "styleguidist"
-  | "gridsome"
-  | "vuepress"
-  | "mdx-deck"
-  | "quasar"
-  | "docusaurus"
-  | "node";
+  | "solid";
 
 export type SandpackPredefinedTemplate =
   | "angular"
@@ -175,7 +167,8 @@ export type SandpackPredefinedTemplate =
   | "vanilla-ts"
   | "vue"
   | "vue3"
-  | "svelte";
+  | "svelte"
+  | "solid";
 
 export type SandpackPredefinedTheme =
   | "light"

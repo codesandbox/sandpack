@@ -21,7 +21,7 @@ export const Component: React.FC = () => (
 
 const routingSetup = {
   dependencies: {
-    "react-router-dom": "latest",
+    "react-router-dom": "5.3.0",
     "react-scripts": "latest",
     react: "latest",
     "react-dom": "latest",

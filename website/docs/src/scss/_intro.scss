@@ -15,7 +15,7 @@
 
 .intro-card {
   background: #151515;
-  border-radius: 10px;
+  border-radius: var(--sandpack-border-radius);
   padding: 20px;
   color: var(--sandpack-text-color);
 

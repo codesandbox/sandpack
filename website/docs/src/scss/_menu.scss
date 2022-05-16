@@ -78,6 +78,10 @@
   }
 }
 
+.bottom-link svg {
+  display: none;
+}
+
 @media (min-width: 961px) {
   .bottom-link {
     background: var(--sandpack-background-color);

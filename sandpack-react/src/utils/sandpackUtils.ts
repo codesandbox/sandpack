@@ -9,6 +9,7 @@ import { SANDBOX_TEMPLATES } from "../templates";
 import type {
   SandboxEnvironment,
   SandboxTemplate,
+  SandpackFiles,
   SandpackPredefinedTemplate,
   SandpackSetup,
 } from "../types";
@@ -148,6 +149,20 @@ export const getSetup = (
   };
 };
 
+export const convertedFilesToBundlerFiles = (
+  files: SandpackFiles
+): SandpackBundlerFiles => {
+  return Object.keys(files).reduce((acc: SandpackBundlerFiles, key) => {
+    if (typeof files[key] === "string") {
+      acc[key] = { code: files[key] as string };
+    } else {
+      acc[key] = files[key] as SandpackBundlerFile;
+    }
+
+    return acc;
+  }, {});
+};
+
 export const createSetupFromUserInput = (
   setup?: SandpackSetup
 ): Partial<SandboxTemplate> | null => {
@@ -161,18 +176,7 @@ export const createSetupFromUserInput = (
 
   const { files } = setup;
 
-  const convertedFiles = Object.keys(files).reduce(
-    (acc: SandpackBundlerFiles, key) => {
-      if (typeof files[key] === "string") {
-        acc[key] = { code: files[key] as string };
-      } else {
-        acc[key] = files[key] as SandpackBundlerFile;
-      }
-
-      return acc;
-    },
-    {}
-  );
+  const convertedFiles = convertedFilesToBundlerFiles(files);
 
   return {
     ...setup,

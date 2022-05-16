@@ -3,131 +3,230 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.14.3-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.14.3-experimental.0...v0.14.3-experimental.1) (2022-02-23)
-
-
-### Bug Fixes
-
-* **codeviewer:** make CM view read-only ([#390](https://github.com/codesandbox/sandpack/issues/390)) ([56ac9f2](https://github.com/codesandbox/sandpack/commit/56ac9f2f89d510cce71dd08f2e656e739d91c46d))
-
-
-
-
-
-## [0.14.3-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.14.2...v0.14.3-experimental.0) (2022-02-22)
-
-
-
-## [0.13.16-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.15...v0.13.16-experimental.0) (2022-02-15)
-
-
-
-## [0.13.11-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.10...v0.13.11-experimental.0) (2022-02-03)
-
-
-
-## [0.13.9-experimental.6](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.5...v0.13.9-experimental.6) (2022-02-02)
-
+## [0.19.7](https://github.com/codesandbox/sandpack/compare/v0.19.6...v0.19.7) (2022-05-16)
 
 ### Bug Fixes
 
-* listen new client ([62d6cee](https://github.com/codesandbox/sandpack/commit/62d6ceef40864ea81095a8732cf3d389f531f613))
+- **inline-error:** check if error message has a valid value ([#466](https://github.com/codesandbox/sandpack/issues/466)) ([b088a2e](https://github.com/codesandbox/sandpack/commit/b088a2e7011a6c688916cb2e6a40e7cae5a66e9b))
 
-
-
-## [0.13.9-experimental.5](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.4...v0.13.9-experimental.5) (2022-02-01)
-
+## [0.19.6](https://github.com/codesandbox/sandpack/compare/v0.19.5...v0.19.6) (2022-05-02)
 
 ### Bug Fixes
 
-* prevent run sandpack after unregister it ([58ee91c](https://github.com/codesandbox/sandpack/commit/58ee91c7e2d2d2a80e1a2b2754ce401b7fe093ba))
+- **readonly:** toggle remounting ([#456](https://github.com/codesandbox/sandpack/issues/456)) ([b4162bc](https://github.com/codesandbox/sandpack/commit/b4162bcd7d284c0b3cb2d3acdfff2e7f9818870d))
 
-
-
-## [0.13.9-experimental.4](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.3...v0.13.9-experimental.4) (2022-01-31)
-
-
-
-## [0.13.9-experimental.3](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.2...v0.13.9-experimental.3) (2022-01-31)
-
-
-
-## [0.13.9-experimental.2](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.1...v0.13.9-experimental.2) (2022-01-31)
-
-
-
-## [0.13.9-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.0...v0.13.9-experimental.1) (2022-01-31)
-
+## [0.19.5](https://github.com/codesandbox/sandpack/compare/v0.19.4...v0.19.5) (2022-05-02)
 
 ### Bug Fixes
 
-* **loading:** remove unnecessary timeout ([57299ae](https://github.com/codesandbox/sandpack/commit/57299ae2c573e63e79a60b1b4156b49dd9ed005c))
-* **observer:** improve threshold ([53bdb1e](https://github.com/codesandbox/sandpack/commit/53bdb1e61896489a75a6542b5c6d40787ae9cf33))
+- **updatefile:** update all clients ([#455](https://github.com/codesandbox/sandpack/issues/455)) ([fc2e13c](https://github.com/codesandbox/sandpack/commit/fc2e13c00e2339c1ef18d18f4cb895248787b0d5))
 
-
-
-## [0.13.9-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.8...v0.13.9-experimental.0) (2022-01-27)
-
-
-
-## [0.13.6-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.5...v0.13.6-experimental.0) (2022-01-24)
-
-
-
-## [0.13.3-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3-experimental.0) (2022-01-20)
-
-
-
-## [0.10.13-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.12...v0.10.13-experimental.0) (2022-01-07)
-
+## [0.19.4](https://github.com/codesandbox/sandpack/compare/v0.19.3...v0.19.4) (2022-04-29)
 
 ### Bug Fixes
 
-* **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([60fd43a](https://github.com/codesandbox/sandpack/commit/60fd43a3ffc62ef672660d3176ff51b6f8465f47))
+- **updatefile:** support multiple files ([#453](https://github.com/codesandbox/sandpack/issues/453)) ([a05faac](https://github.com/codesandbox/sandpack/commit/a05faaca453b60f1ffab7b9d6fd7b6bb8050f8b2))
 
-
-
-## [0.10.11-experimental.4](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.3...v0.10.11-experimental.4) (2022-01-06)
-
+## [0.19.3](https://github.com/codesandbox/sandpack/compare/v0.19.2...v0.19.3) (2022-04-27)
 
 ### Bug Fixes
 
-* rename method name ([cf1162c](https://github.com/codesandbox/sandpack/commit/cf1162ce942b1d9151cd1ede7e5121920d7acae7))
+- **codeeditor:** ensure selections are inside of the document length ([#452](https://github.com/codesandbox/sandpack/issues/452)) ([7391c6e](https://github.com/codesandbox/sandpack/commit/7391c6e5fc896eb9b937323f918562beef694061))
 
+## [0.19.2](https://github.com/codesandbox/sandpack/compare/v0.19.1...v0.19.2) (2022-04-26)
 
+### Bug Fixes
 
-## [0.10.11-experimental.3](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.2...v0.10.11-experimental.3) (2022-01-06)
+- **solid template:** deprecate beta version ([#451](https://github.com/codesandbox/sandpack/issues/451)) ([8278c71](https://github.com/codesandbox/sandpack/commit/8278c71e33c9ca8197827f041f4c6da68c33d4f5))
 
+## [0.19.1](https://github.com/codesandbox/sandpack/compare/v0.19.0...v0.19.1) (2022-04-26)
+
+### Bug Fixes
+
+- **client:** update bundler version ([#450](https://github.com/codesandbox/sandpack/issues/450)) ([1b6a663](https://github.com/codesandbox/sandpack/commit/1b6a663d8d7ff0bf3c3449b4aa0bfd675e37a221))
+
+# [0.19.0](https://github.com/codesandbox/sandpack/compare/v0.18.2...v0.19.0) (2022-04-21)
 
 ### Features
 
-* **devtools:** add on load method ([99f1f32](https://github.com/codesandbox/sandpack/commit/99f1f321c57e36e4085bc8be7053acc53238dfbb))
+- **template:** add solidjs (beta) ([#447](https://github.com/codesandbox/sandpack/issues/447)) ([7b03882](https://github.com/codesandbox/sandpack/commit/7b038827add0001b460af7574e12e4c664a075d2))
 
+## [0.18.2](https://github.com/codesandbox/sandpack/compare/v0.18.1...v0.18.2) (2022-04-19)
 
+### Bug Fixes
+
+- **sandpack:** expose `showOpenInCodeSandbox` prop ([#443](https://github.com/codesandbox/sandpack/issues/443)) ([f5b9eda](https://github.com/codesandbox/sandpack/commit/f5b9eda0854f267e1c89b191294f10e65cf48c25))
+
+## [0.18.1](https://github.com/codesandbox/sandpack/compare/v0.18.0...v0.18.1) (2022-04-12)
+
+### Bug Fixes
+
+- **custom-setup:** add dev-dependencies ([#436](https://github.com/codesandbox/sandpack/issues/436)) ([df2f906](https://github.com/codesandbox/sandpack/commit/df2f906257b763aed07181f053a7ed4781831195))
+
+# [0.18.0](https://github.com/codesandbox/sandpack/compare/v0.17.1...v0.18.0) (2022-03-31)
+
+### Features
+
+- file-resolver protocol error handling ([#427](https://github.com/codesandbox/sandpack/issues/427)) ([c3b3cca](https://github.com/codesandbox/sandpack/commit/c3b3cca98ca4aba2c0744545969683e41d963ab4))
+
+## [0.17.1](https://github.com/codesandbox/sandpack/compare/v0.17.0...v0.17.1) (2022-03-30)
+
+**Note:** Version bump only for package sandpack
+
+# [0.17.0](https://github.com/codesandbox/sandpack/compare/v0.16.1...v0.17.0) (2022-03-30)
+
+### Features
+
+- **preview:** consume client ([#425](https://github.com/codesandbox/sandpack/issues/425)) ([ec854c1](https://github.com/codesandbox/sandpack/commit/ec854c12d5b9ccdb862637e03f5f2d37dfa88e82))
+
+## [0.16.1](https://github.com/codesandbox/sandpack/compare/v0.16.0...v0.16.1) (2022-03-29)
+
+**Note:** Version bump only for package sandpack
+
+# [0.16.0](https://github.com/codesandbox/sandpack/compare/v0.15.2...v0.16.0) (2022-03-27)
+
+### Bug Fixes
+
+- Add year and company name to license ([#417](https://github.com/codesandbox/sandpack/issues/417)) ([d3adcac](https://github.com/codesandbox/sandpack/commit/d3adcac9c45fd90bb04754f286da203eda8a5a56))
+
+### Features
+
+- **preview:** additional content in preview container ([#422](https://github.com/codesandbox/sandpack/issues/422)) ([98103a8](https://github.com/codesandbox/sandpack/commit/98103a8b43fd16525ad8106b149c8c1747907be1))
+
+## [0.15.2](https://github.com/codesandbox/sandpack/compare/v0.15.1...v0.15.2) (2022-03-18)
+
+### Bug Fixes
+
+- **loglevel:** set default ([#418](https://github.com/codesandbox/sandpack/issues/418)) ([abf0243](https://github.com/codesandbox/sandpack/commit/abf0243e5f106888ac3829daa6a5e6d6dd4f41b5))
+
+## [0.15.1](https://github.com/codesandbox/sandpack/compare/v0.15.0...v0.15.1) (2022-03-18)
+
+### Bug Fixes
+
+- format & lint [skip ci] ([#413](https://github.com/codesandbox/sandpack/issues/413)) ([95ce023](https://github.com/codesandbox/sandpack/commit/95ce023e4c4e3809c0588997b651842baae91a4e))
+
+# [0.15.0](https://github.com/codesandbox/sandpack/compare/v0.14.9...v0.15.0) (2022-03-16)
+
+### Features
+
+- Add slot for additional buttons ([#412](https://github.com/codesandbox/sandpack/issues/412)) ([7a59d18](https://github.com/codesandbox/sandpack/commit/7a59d18fd286163a72e3b4675456ca6b22a8468c))
+
+## [0.14.9](https://github.com/codesandbox/sandpack/compare/v0.14.8...v0.14.9) (2022-03-14)
+
+### Bug Fixes
+
+- **environment:** remove sse envs ([#410](https://github.com/codesandbox/sandpack/issues/410)) ([cf65e50](https://github.com/codesandbox/sandpack/commit/cf65e500321c4d18674c05b3fcc3d1b81c8d2e6c))
+
+## [0.14.8](https://github.com/codesandbox/sandpack/compare/v0.14.7...v0.14.8) (2022-03-11)
+
+### Bug Fixes
+
+- **client:** prevent add route into the main page browser history ([#407](https://github.com/codesandbox/sandpack/issues/407)) ([1e5230a](https://github.com/codesandbox/sandpack/commit/1e5230af5dff6c9afec8a96d1b9281cc585a826d))
+
+## [0.14.7](https://github.com/codesandbox/sandpack/compare/v0.14.6...v0.14.7) (2022-03-10)
+
+### Bug Fixes
+
+- **logo:** update icons ([#402](https://github.com/codesandbox/sandpack/issues/402)) ([e7b0e46](https://github.com/codesandbox/sandpack/commit/e7b0e4630985b6e875a39087a1c4757b5729dd91))
+
+## [0.14.6](https://github.com/codesandbox/sandpack/compare/v0.14.5...v0.14.6) (2022-03-10)
+
+### Bug Fixes
+
+- **codemirror:** persist selection position on code change ([#406](https://github.com/codesandbox/sandpack/issues/406)) ([65534eb](https://github.com/codesandbox/sandpack/commit/65534ebfdc785057b0ebff417a51867e5f8ba242))
+
+## [0.14.5](https://github.com/codesandbox/sandpack/compare/v0.14.4...v0.14.5) (2022-03-07)
+
+### Bug Fixes
+
+- side effect should contain css ([#396](https://github.com/codesandbox/sandpack/issues/396)) ([4c2b149](https://github.com/codesandbox/sandpack/commit/4c2b1491838d2fe654c426f1429f96a76cace3ca))
+
+## [0.14.4](https://github.com/codesandbox/sandpack/compare/v0.14.3...v0.14.4) (2022-03-07)
+
+**Note:** Version bump only for package sandpack
+
+## [0.14.3](https://github.com/codesandbox/sandpack/compare/v0.14.2...v0.14.3) (2022-02-23)
+
+### Bug Fixes
+
+- **codeviewer:** make CM view read-only ([#390](https://github.com/codesandbox/sandpack/issues/390)) ([56ac9f2](https://github.com/codesandbox/sandpack/commit/56ac9f2f89d510cce71dd08f2e656e739d91c46d))
+
+## [0.14.2](https://github.com/codesandbox/sandpack/compare/v0.14.1...v0.14.2) (2022-02-22)
+
+**Note:** Version bump only for package sandpack
+
+### Bug Fixes
+
+- **codeviewer:** make CM view read-only ([#390](https://github.com/codesandbox/sandpack/issues/390)) ([56ac9f2](https://github.com/codesandbox/sandpack/commit/56ac9f2f89d510cce71dd08f2e656e739d91c46d))
+
+## [0.14.3-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.14.2...v0.14.3-experimental.0) (2022-02-22)
+
+## [0.13.16-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.15...v0.13.16-experimental.0) (2022-02-15)
+
+## [0.13.11-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.10...v0.13.11-experimental.0) (2022-02-03)
+
+## [0.13.9-experimental.6](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.5...v0.13.9-experimental.6) (2022-02-02)
+
+### Bug Fixes
+
+- listen new client ([62d6cee](https://github.com/codesandbox/sandpack/commit/62d6ceef40864ea81095a8732cf3d389f531f613))
+
+## [0.13.9-experimental.5](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.4...v0.13.9-experimental.5) (2022-02-01)
+
+### Bug Fixes
+
+- prevent run sandpack after unregister it ([58ee91c](https://github.com/codesandbox/sandpack/commit/58ee91c7e2d2d2a80e1a2b2754ce401b7fe093ba))
+
+## [0.13.9-experimental.4](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.3...v0.13.9-experimental.4) (2022-01-31)
+
+## [0.13.9-experimental.3](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.2...v0.13.9-experimental.3) (2022-01-31)
+
+## [0.13.9-experimental.2](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.1...v0.13.9-experimental.2) (2022-01-31)
+
+## [0.13.9-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.13.9-experimental.0...v0.13.9-experimental.1) (2022-01-31)
+
+### Bug Fixes
+
+- **loading:** remove unnecessary timeout ([57299ae](https://github.com/codesandbox/sandpack/commit/57299ae2c573e63e79a60b1b4156b49dd9ed005c))
+- **observer:** improve threshold ([53bdb1e](https://github.com/codesandbox/sandpack/commit/53bdb1e61896489a75a6542b5c6d40787ae9cf33))
+
+## [0.13.9-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.8...v0.13.9-experimental.0) (2022-01-27)
+
+## [0.13.6-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.5...v0.13.6-experimental.0) (2022-01-24)
+
+## [0.13.3-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3-experimental.0) (2022-01-20)
+
+## [0.10.13-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.12...v0.10.13-experimental.0) (2022-01-07)
+
+### Bug Fixes
+
+- **init-mode:** avoid unnecessary unmonted state ([#294](https://github.com/codesandbox/sandpack/issues/294)) ([60fd43a](https://github.com/codesandbox/sandpack/commit/60fd43a3ffc62ef672660d3176ff51b6f8465f47))
+
+## [0.10.11-experimental.4](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.3...v0.10.11-experimental.4) (2022-01-06)
+
+### Bug Fixes
+
+- rename method name ([cf1162c](https://github.com/codesandbox/sandpack/commit/cf1162ce942b1d9151cd1ede7e5121920d7acae7))
+
+## [0.10.11-experimental.3](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.2...v0.10.11-experimental.3) (2022-01-06)
+
+### Features
+
+- **devtools:** add on load method ([99f1f32](https://github.com/codesandbox/sandpack/commit/99f1f321c57e36e4085bc8be7053acc53238dfbb))
 
 ## [0.10.11-experimental.2](https://github.com/codesandbox/sandpack/compare/v0.10.11-experimental.1...v0.10.11-experimental.2) (2022-01-05)
 
-
 ### Bug Fixes
 
-* unsubscribe function ([1501032](https://github.com/codesandbox/sandpack/commit/1501032a342f351c6a2d8b0dee437d6609baeca5))
-
-
+- unsubscribe function ([1501032](https://github.com/codesandbox/sandpack/commit/1501032a342f351c6a2d8b0dee437d6609baeca5))
 
 ## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
 
-
-
 ## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.7-experimental.0) (2022-01-05)
-
 
 ### Bug Fixes
 
-* **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
-
-
-
-
+- **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
 
 ## [0.14.2](https://github.com/codesandbox/sandpack/compare/v0.14.1...v0.14.2) (2022-02-22)
 

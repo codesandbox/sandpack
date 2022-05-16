@@ -3,82 +3,95 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.14.3-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.14.2...v0.14.3-experimental.0) (2022-02-22)
-
-
-
-## [0.13.16-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.15...v0.13.16-experimental.0) (2022-02-15)
-
-
-
-## [0.13.9-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.8...v0.13.9-experimental.0) (2022-01-27)
-
-
-
-## [0.13.6-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.5...v0.13.6-experimental.0) (2022-01-24)
-
-
-
-## [0.13.3-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3-experimental.0) (2022-01-20)
-
-
-
-## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
-
-
-
-## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.7-experimental.0) (2022-01-05)
-
+## [0.19.1](https://github.com/codesandbox/sandpack/compare/v0.19.0...v0.19.1) (2022-04-26)
 
 ### Bug Fixes
 
-* **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
+- **client:** update bundler version ([#450](https://github.com/codesandbox/sandpack/issues/450)) ([1b6a663](https://github.com/codesandbox/sandpack/commit/1b6a663d8d7ff0bf3c3449b4aa0bfd675e37a221))
 
-
-
-
-
-# [0.14.0](https://github.com/codesandbox/sandpack/compare/v0.13.15...v0.14.0) (2022-02-18)
-
+# [0.19.0](https://github.com/codesandbox/sandpack/compare/v0.18.2...v0.19.0) (2022-04-21)
 
 ### Features
 
-* add loglevel to sandpack opts ([#378](https://github.com/codesandbox/sandpack/issues/378)) ([a3216e8](https://github.com/codesandbox/sandpack/commit/a3216e8f4940373df87e938148632e46cb661b4f))
+- **template:** add solidjs (beta) ([#447](https://github.com/codesandbox/sandpack/issues/447)) ([7b03882](https://github.com/codesandbox/sandpack/commit/7b038827add0001b460af7574e12e4c664a075d2))
 
+# [0.18.0](https://github.com/codesandbox/sandpack/compare/v0.17.1...v0.18.0) (2022-03-31)
 
+### Features
 
+- file-resolver protocol error handling ([#427](https://github.com/codesandbox/sandpack/issues/427)) ([c3b3cca](https://github.com/codesandbox/sandpack/commit/c3b3cca98ca4aba2c0744545969683e41d963ab4))
 
+# [0.17.0](https://github.com/codesandbox/sandpack/compare/v0.16.1...v0.17.0) (2022-03-30)
 
-## [0.13.15](https://github.com/codesandbox/sandpack/compare/v0.13.14...v0.13.15) (2022-02-11)
+**Note:** Version bump only for package @codesandbox/sandpack-client
 
+## [0.16.1](https://github.com/codesandbox/sandpack/compare/v0.16.0...v0.16.1) (2022-03-29)
 
+**Note:** Version bump only for package @codesandbox/sandpack-client
 
-## [0.13.9-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.8...v0.13.9-experimental.0) (2022-01-27)
+# [0.16.0](https://github.com/codesandbox/sandpack/compare/v0.15.2...v0.16.0) (2022-03-27)
 
+**Note:** Version bump only for package @codesandbox/sandpack-client
 
-
-## [0.13.6-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.5...v0.13.6-experimental.0) (2022-01-24)
-
-
-
-## [0.13.3-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3-experimental.0) (2022-01-20)
-
-
-
-## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
-
-
-
-## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.7-experimental.0) (2022-01-05)
-
+## [0.15.2](https://github.com/codesandbox/sandpack/compare/v0.15.1...v0.15.2) (2022-03-18)
 
 ### Bug Fixes
 
-* **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
+- **loglevel:** set default ([#418](https://github.com/codesandbox/sandpack/issues/418)) ([abf0243](https://github.com/codesandbox/sandpack/commit/abf0243e5f106888ac3829daa6a5e6d6dd4f41b5))
 
+# [0.15.0](https://github.com/codesandbox/sandpack/compare/v0.14.9...v0.15.0) (2022-03-16)
 
+**Note:** Version bump only for package @codesandbox/sandpack-client
 
+## [0.14.8](https://github.com/codesandbox/sandpack/compare/v0.14.7...v0.14.8) (2022-03-11)
 
+### Bug Fixes
+
+- **client:** prevent add route into the main page browser history ([#407](https://github.com/codesandbox/sandpack/issues/407)) ([1e5230a](https://github.com/codesandbox/sandpack/commit/1e5230af5dff6c9afec8a96d1b9281cc585a826d))
+
+## [0.14.4](https://github.com/codesandbox/sandpack/compare/v0.14.3...v0.14.4) (2022-03-07)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+# [0.14.0](https://github.com/codesandbox/sandpack/compare/v0.13.15...v0.14.0) (2022-02-18)
+
+## [0.13.16-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.15...v0.13.16-experimental.0) (2022-02-15)
+
+## [0.13.9-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.8...v0.13.9-experimental.0) (2022-01-27)
+
+## [0.13.6-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.5...v0.13.6-experimental.0) (2022-01-24)
+
+## [0.13.3-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3-experimental.0) (2022-01-20)
+
+## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
+
+## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.7-experimental.0) (2022-01-05)
+
+### Bug Fixes
+
+- **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
+
+# [0.14.0](https://github.com/codesandbox/sandpack/compare/v0.13.15...v0.14.0) (2022-02-18)
+
+### Features
+
+- add loglevel to sandpack opts ([#378](https://github.com/codesandbox/sandpack/issues/378)) ([a3216e8](https://github.com/codesandbox/sandpack/commit/a3216e8f4940373df87e938148632e46cb661b4f))
+
+## [0.13.15](https://github.com/codesandbox/sandpack/compare/v0.13.14...v0.13.15) (2022-02-11)
+
+## [0.13.9-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.8...v0.13.9-experimental.0) (2022-01-27)
+
+## [0.13.6-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.5...v0.13.6-experimental.0) (2022-01-24)
+
+## [0.13.3-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.13.2...v0.13.3-experimental.0) (2022-01-20)
+
+## [0.10.11-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.10.7-experimental.0...v0.10.11-experimental.1) (2022-01-05)
+
+## [0.10.7-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.10.11...v0.10.7-experimental.0) (2022-01-05)
+
+### Bug Fixes
+
+- **react-devtools:** latest mode ([#263](https://github.com/codesandbox/sandpack/issues/263)) ([7c892a4](https://github.com/codesandbox/sandpack/commit/7c892a48baea7a74aa093ef5351e168291ec1e03))
 
 ## [0.13.15](https://github.com/codesandbox/sandpack/compare/v0.13.14...v0.13.15) (2022-02-11)
 
