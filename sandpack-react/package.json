@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-react",
-  "version": "0.19.7",
+  "version": "0.19.8-experimental.0",
   "description": "",
   "keywords": [],
   "repository": {
@@ -48,12 +48,12 @@
     "@codemirror/matchbrackets": "^0.19.3",
     "@codemirror/state": "^0.19.6",
     "@codemirror/view": "^0.19.32",
-    "@codesandbox/sandpack-client": "^0.19.1",
+    "@codesandbox/sandpack-client": "^0.19.8-experimental.0",
     "@react-hook/intersection-observer": "^3.1.1",
     "codesandbox-import-util-types": "^2.2.3",
     "lodash.isequal": "^4.5.0",
-    "react-devtools-inline": "4.22.1",
     "lz-string": "^1.4.4",
+    "react-devtools-inline": "4.22.1",
     "react-is": "^17.0.2"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 {
   "name": "sandpack-theme",
   "private": true,
-  "version": "0.13.9-experimental.1",
+  "version": "0.19.8-experimental.0",
   "scripts": {
     "build:deps": "yarn workspace @codesandbox/sandpack-client build && yarn workspace @codesandbox/sandpack-react build",
     "dev": "next dev",
