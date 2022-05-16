@@ -6,7 +6,10 @@ import { useErrorMessage } from "../hooks/useErrorMessage";
 /**
  * @category Components
  */
-export const ErrorOverlay: React.FC = ({ children }) => {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const ErrorOverlay: React.FC<React.PropsWithChildren<{}>> = ({
+  children,
+}) => {
   const errorMessage = useErrorMessage();
   const c = useClasser("sp");
 

@@ -19,9 +19,11 @@ const SandpackThemeContext = React.createContext<{
 /**
  * @category Theme
  */
-const SandpackThemeProvider: React.FC<{
-  theme?: SandpackThemeProp;
-}> = (props) => {
+const SandpackThemeProvider: React.FC<
+  React.PropsWithChildren<{
+    theme?: SandpackThemeProp;
+  }>
+> = (props) => {
   const { theme, id } = createThemeObject(props.theme);
   const c = useClasser("sp");
   // If theme is not explicitly set, don't inject any stylesheet

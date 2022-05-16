@@ -4,10 +4,9 @@ import * as React from "react";
 /**
  * @category Components
  */
-export const SandpackStack: React.FC<{ customStyle?: React.CSSProperties }> = ({
-  children,
-  customStyle,
-}) => {
+export const SandpackStack: React.FC<
+  React.PropsWithChildren<{ customStyle?: React.CSSProperties }>
+> = ({ children, customStyle }) => {
   const c = useClasser("sp");
 
   return (

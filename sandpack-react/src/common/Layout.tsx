@@ -12,11 +12,9 @@ export interface SandpackLayoutProps extends React.HtmlHTMLAttributes<unknown> {
 /**
  * @category Theme
  */
-export const SandpackLayout: React.FC<SandpackLayoutProps> = ({
-  children,
-  theme,
-  ...props
-}) => {
+export const SandpackLayout: React.FC<
+  React.PropsWithChildren<SandpackLayoutProps>
+> = ({ children, theme, ...props }) => {
   const { sandpack } = useSandpack();
   const c = useClasser("sp");
 

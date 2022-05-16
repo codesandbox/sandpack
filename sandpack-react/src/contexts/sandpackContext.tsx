@@ -14,8 +14,8 @@ import {
 } from "@codesandbox/sandpack-client";
 import isEqual from "lodash.isequal";
 import * as React from "react";
-import { SandpackFiles } from "..";
 
+import type { SandpackFiles } from "..";
 import type {
   SandpackContext,
   SandboxEnvironment,
@@ -92,7 +92,7 @@ export interface SandpackProviderProps {
  * @noInheritDoc
  */
 class SandpackProvider extends React.PureComponent<
-  SandpackProviderProps,
+  React.PropsWithChildren<SandpackProviderProps>,
   SandpackProviderState
 > {
   static defaultProps = {
