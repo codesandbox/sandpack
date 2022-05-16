@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.7](https://github.com/codesandbox/sandpack/compare/v0.19.6...v0.19.7) (2022-05-16)
+
+
+### Bug Fixes
+
+* **inline-error:** check if error message has a valid value ([#466](https://github.com/codesandbox/sandpack/issues/466)) ([b088a2e](https://github.com/codesandbox/sandpack/commit/b088a2e7011a6c688916cb2e6a40e7cae5a66e9b))
+
+
+
+
+
 ## [0.19.6](https://github.com/codesandbox/sandpack/compare/v0.19.5...v0.19.6) (2022-05-02)
 
 
