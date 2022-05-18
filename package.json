@@ -5,7 +5,7 @@
   "workspaces": [
     "sandpack-client",
     "sandpack-react",
-    "themes",
+    "sandpack-themes",
     "website/*",
     "examples/*",
     "plugins/*"

@@ -7,7 +7,9 @@ import { sandpackDark } from "@codesandbox/sandpack-themes";
 
 import { Box } from "./Box";
 
-export const CodeBlock: React.FC = ({ children }) => {
+export const CodeBlock: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
   return (
     <Box
       css={{

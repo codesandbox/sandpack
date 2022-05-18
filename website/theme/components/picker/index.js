@@ -53,14 +53,7 @@ export default function PickerItem({
   );
 }
 
-export function PickerToggle({
-  color,
-  modeKey,
-  label,
-  active,
-  onClick,
-  ...props
-}) {
+export function PickerToggle({ color, label, active, onClick, ...props }) {
   return (
     <div className={styles.pickerItem} {...props}>
       <div className={`${styles.pickerWrapper} ${active ? styles.active : ""}`}>

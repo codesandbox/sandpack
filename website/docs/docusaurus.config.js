@@ -121,8 +121,8 @@ module.exports = {
         id: "themes",
         readme: "none",
         plugin: ["typedoc-plugin-no-inherit"],
-        entryPoints: ["../../themes/src/index.ts"],
-        tsconfig: "../../themes/tsconfig.json",
+        entryPoints: ["../../sandpack-themes/src/index.ts"],
+        tsconfig: "../../sandpack-themes/tsconfig.json",
         out: "api/themes",
         indexTitle: "Sandpack themes",
         sidebar: {

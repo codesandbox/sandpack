@@ -171,7 +171,9 @@ export const RefreshButton = styled("button", {
   },
 });
 
-export const FadeAnimation: React.FC = ({ children }) => {
+export const FadeAnimation: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
   const sectionRef = useRef<HTMLLIElement>(null);
   const [sectionTop, setSectionTop] = useState(0);
   const [sectionHeight, setSectionHeight] = useState(0);

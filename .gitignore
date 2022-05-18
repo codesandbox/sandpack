@@ -107,10 +107,5 @@ dist
 # Mac
 .DS_Store
 
-# Autogenerate docs
-website/docs/docs/api/client
-website/docs/docs/api/react
-website/docs/docs/api/themes
-
 cypress/videos
 cypress/screenshots
