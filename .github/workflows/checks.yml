@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   install:
-    name: Install
+    name: Install & build
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -15,45 +15,37 @@ jobs:
         with:
           node-version-file: .nvmrc
 
-      - name: Setup | Cache
-        uses: c-hive/gha-yarn-cache@v2
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
 
       - name: Setup | Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Setup | Cache node_modules
-        uses: actions/cache@v3
-        id: cache-node-modules
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ hashFiles('yarn.lock') }}
-
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    needs: install
-    steps:
-      - name: Setup | Checkout
-        uses: actions/checkout@v1
-
-      - name: Setup | Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version-file: .nvmrc
-
-      - name: Setup | Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ hashFiles('yarn.lock') }}
-
       - name: Build
         run: yarn run build
+
+      - name: Cache | react build
+        uses: actions/upload-artifact@v2
+        with:
+          path: sandpack-react/dist
+          name: sandpack-react-${{ github.sha }}
+
+      - name: Cache | client build
+        uses: actions/upload-artifact@v2
+        with:
+          path: sandpack-client/dist
+          name: sandpack-client-${{ github.sha }}
+
+      - name: Cache | theme build
+        uses: actions/upload-artifact@v2
+        with:
+          path: sandpack-themes/dist
+          name: sandpack-themes-${{ github.sha }}
 
   sizebot:
     name: Sizebot
@@ -77,8 +69,23 @@ jobs:
             packages/*/node_modules
           key: modules-${{ hashFiles('yarn.lock') }}
 
-      - name: Build
-        run: yarn run build
+      - name: Setup | Restore react build
+        uses: actions/download-artifact@v2
+        with:
+          name: sandpack-react-${{ github.sha }}
+          path: sandpack-react/dist
+
+      - name: Setup | Restore client build
+        uses: actions/download-artifact@v2
+        with:
+          name: sandpack-client-${{ github.sha }}
+          path: sandpack-client/dist
+
+      - name: Setup | Restore themes build
+        uses: actions/download-artifact@v2
+        with:
+          name: sandpack-themes-${{ github.sha }}
+          path: sandpack-themes/dist
 
       - name: Bot script
         run: node scripts/sizebot/index.js
@@ -107,8 +114,23 @@ jobs:
             packages/*/node_modules
           key: modules-${{ hashFiles('yarn.lock') }}
 
-      - name: Build
-        run: yarn run build
+      - name: Setup | Restore react build
+        uses: actions/download-artifact@v2
+        with:
+          name: sandpack-react-${{ github.sha }}
+          path: sandpack-react/dist
+
+      - name: Setup | Restore client build
+        uses: actions/download-artifact@v2
+        with:
+          name: sandpack-client-${{ github.sha }}
+          path: sandpack-client/dist
+
+      - name: Setup | Restore theme build
+        uses: actions/download-artifact@v2
+        with:
+          name: sandpack-themes-${{ github.sha }}
+          path: sandpack-themes/dist
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1
@@ -139,14 +161,23 @@ jobs:
             packages/*/node_modules
           key: modules-${{ hashFiles('yarn.lock') }}
 
-      - name: Build
-        run: yarn run build
+      - name: Setup | Restore react build
+        uses: actions/download-artifact@v2
+        with:
+          name: sandpack-react-${{ github.sha }}
+          path: sandpack-react/dist
+
+      - name: Setup | Restore client build
+        uses: actions/download-artifact@v2
+        with:
+          name: sandpack-client-${{ github.sha }}
+          path: sandpack-client/dist
 
       - name: Setup | Restore theme build
-        uses: actions/cache@v3
+        uses: actions/download-artifact@v2
         with:
+          name: sandpack-themes-${{ github.sha }}
           path: sandpack-themes/dist
-          key: sandpack-themes-${{ github.sha }}
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
@@ -176,8 +207,17 @@ jobs:
             packages/*/node_modules
           key: modules-${{ hashFiles('yarn.lock') }}
 
-      - name: Build
-        run: yarn run build
+      - name: Setup | Restore react build
+        uses: actions/download-artifact@v2
+        with:
+          name: sandpack-react-${{ github.sha }}
+          path: sandpack-react/dist
+
+      - name: Setup | Restore client build
+        uses: actions/download-artifact@v2
+        with:
+          name: sandpack-client-${{ github.sha }}
+          path: sandpack-client/dist
 
       - name: Test | Jest
         run: yarn run test
@@ -186,7 +226,6 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -211,7 +250,6 @@ jobs:
     name: Format
     runs-on: ubuntu-18.04
     timeout-minutes: 10
-    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
