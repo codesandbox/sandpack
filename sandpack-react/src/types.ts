@@ -166,6 +166,7 @@ export interface SandpackProviderProps<
   TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
 > extends SandpackRootProps<Files, TemplateName> {
   options?: SandpackOptions<Files, TemplateName>;
+  children?: React.ReactNode;
 }
 
 export type SandpackClientDispatch = (

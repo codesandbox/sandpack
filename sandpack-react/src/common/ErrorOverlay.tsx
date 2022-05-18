@@ -13,8 +13,9 @@ import { classNames } from "../utils/classNames";
 /**
  * @category Components
  */
-
-export const ErrorOverlay: React.FC<React.DOMAttributes<HTMLDivElement>> = ({
+export const ErrorOverlay: React.FC<
+  React.DOMAttributes<HTMLDivElement> & { children?: React.ReactNode }
+> = ({
   children,
   className,
   ...props
