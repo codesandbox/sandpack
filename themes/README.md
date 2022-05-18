@@ -5,9 +5,9 @@
 A list of themes to customize your Sandpack components.
 
 ```jsx
-import { githubLightTheme } from "@codesandbox/sandpack-themes";
+import { githubLight } from "@codesandbox/sandpack-themes";
 
-<Sandpack theme={githubLightTheme} />;
+<Sandpack theme={githubLight} />;
 ```
 
 [Read more](https://sandpack.codesandbox.io/)

@@ -34,9 +34,9 @@ Sandpack comes with some predefined themes:
 Besides the included themes, you can also consume a set of themes from `@codesandbox/sandpack-themes`, an open-source package that contains many other themes compatible with Sandpack. You can find a list of all themes available on [@codesandbox/sandpack-themes](/docs/api/themes). To use a custom theme, you need to import and reference it in your code.
 
 ```jsx
-import { githubLightTheme } from "@codesandbox/sandpack-themes";
+import { githubLight } from "@codesandbox/sandpack-themes";
 
-<Sandpack theme={githubLightTheme} />;
+<Sandpack theme={githubLight} />;
 ```
 
 ## Custom Theme
