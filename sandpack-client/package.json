@@ -14,7 +14,7 @@
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "clean": "rimraf dist sandpack",
+    "clean": "rm -rf dist sandpack",
     "prebuild": "yarn run clean",
     "build": "node build.js && yarn run build:types",
     "build:types": "tsc -p tsconfig.json",
@@ -42,7 +42,6 @@
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "regenerator-runtime": "^0.13.7",
-    "rimraf": "^2.6.2",
     "ts-node": "^4.1.0",
     "tslint": "^5.8.0",
     "tslint-config-prettier": "^1.1.0",

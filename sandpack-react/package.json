@@ -16,7 +16,7 @@
     "dist/index.css"
   ],
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rm -rf dist",
     "prebuild": "yarn run clean",
     "build": "node build.js && yarn run build:types",
     "build:publish": "yarn build",
@@ -76,7 +76,6 @@
     "cross-env": "^5.1.3",
     "cssnano": "^4.1.10",
     "dotenv": "^8.2.0",
-    "rimraf": "^2.6.1",
     "storybook-addon-jsx": "^7.3.4",
     "typescript": "4.4.4"
   },
