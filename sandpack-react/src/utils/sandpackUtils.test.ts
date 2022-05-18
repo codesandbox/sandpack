@@ -323,8 +323,8 @@ describe(getSandpackStateFromProps, () => {
     const packageContent = JSON.parse(setup.files["/package.json"].code);
     expect(packageContent.dependencies).toEqual({
       foo: "*",
-      react: "^17.0.0",
-      "react-dom": "^17.0.0",
+      react: "^18.0.0",
+      "react-dom": "^18.0.0",
       "react-scripts": "^4.0.0",
     });
   });

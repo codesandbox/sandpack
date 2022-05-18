@@ -13,11 +13,11 @@ export const SVELTE_TEMPLATE = {
 </style>
 
 <script>
-  let name = 'world';
+  let name = 'World';
 </script>
 
 <main>
-  <h1>Hello {name}!</h1>
+  <h1>Hello {name}</h1>
 </main>`,
     },
     "/index.js": {
