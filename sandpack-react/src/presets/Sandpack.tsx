@@ -51,6 +51,7 @@ export const Sandpack: SandpackPreset = (props) => {
     initMode: props.options?.initMode,
     initModeObserverOptions: props.options?.initModeObserverOptions,
     externalResources: props.options?.externalResources,
+    logLevel: props.options?.logLevel,
   };
 
   /**

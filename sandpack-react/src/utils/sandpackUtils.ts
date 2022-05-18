@@ -207,6 +207,20 @@ export const getSetup = ({
   } as SandboxTemplate;
 };
 
+export const convertedFilesToBundlerFiles = (
+  files: SandpackFiles
+): SandpackBundlerFiles => {
+  return Object.keys(files).reduce((acc: SandpackBundlerFiles, key) => {
+    if (typeof files[key] === "string") {
+      acc[key] = { code: files[key] as string };
+    } else {
+      acc[key] = files[key] as SandpackBundlerFile;
+    }
+
+    return acc;
+  }, {});
+};
+
 export const createSetupFromUserInput = ({
   files,
   customSetup,
@@ -222,18 +236,7 @@ export const createSetupFromUserInput = ({
     return customSetup as Partial<SandboxTemplate>;
   }
 
-  const convertedFiles = Object.keys(files).reduce(
-    (acc: SandpackBundlerFiles, key) => {
-      if (typeof files[key] === "string") {
-        acc[key] = { code: files[key] as string };
-      } else {
-        acc[key] = files[key] as SandpackBundlerFile;
-      }
-
-      return acc;
-    },
-    {}
-  );
+  const convertedFiles = convertedFilesToBundlerFiles(files);
 
   return {
     ...customSetup,

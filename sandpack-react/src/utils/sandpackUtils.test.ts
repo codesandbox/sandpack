@@ -4,6 +4,7 @@ import {
   getSandpackStateFromProps,
   createSetupFromUserInput,
   resolveFile,
+  convertedFilesToBundlerFiles,
 } from "./sandpackUtils";
 
 describe(resolveFile, () => {
@@ -407,6 +408,22 @@ describe(createSetupFromUserInput, () => {
     expect(setup).toStrictEqual({
       environment: "create-react-app",
       files: { "App.js": { code: "" } },
+    });
+  });
+});
+
+describe(convertedFilesToBundlerFiles, () => {
+  it("converts regular files to bundler files", () => {
+    expect(convertedFilesToBundlerFiles({ name: "code" })).toEqual({
+      name: { code: "code" },
+    });
+  });
+
+  it("keeps bundler files original", () => {
+    expect(
+      convertedFilesToBundlerFiles({ name: { code: "code", hidden: true } })
+    ).toEqual({
+      name: { code: "code", hidden: true },
     });
   });
 });
