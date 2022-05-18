@@ -1,7 +1,7 @@
 import React from "react";
-import { SandpackProvider } from "./sandpackContext";
-
 import { create } from "react-test-renderer";
+
+import { SandpackProvider } from "./sandpackContext";
 
 describe(SandpackProvider, () => {
   it("updates a file", () => {

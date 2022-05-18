@@ -1,11 +1,11 @@
 import { SANDBOX_TEMPLATES } from "../../sandpack-react/src/templates";
 
 const accessPage = (template) => {
-  const timeout = template === "solid" ? 10000 : 7000;
+  const timeout = template === "solid" ? 15000 : 10000;
   // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.viewport(600, 1000)
-    .visit(`/iframe.html?id=presets-template--${template}`, { timeout })
-    .wait(7000); // warm-up sandbox
+    .visit(`/iframe.html?id=presets-template--${template}`)
+    .wait(timeout); // warm-up sandbox
 };
 const getIframeDocument = () => {
   return cy.get(".sp-preview-iframe").its("0.contentDocument");
