@@ -57,15 +57,22 @@ jobs:
         uses: actions/cache@v3
         with:
           path: sandpack-react/dist
-          key: sandpack-react-${{ github.run_id }}
+          key: sandpack-react-${{ github.sha }}
           restore-keys: sandpack-react-
 
       - name: Cache client build
         uses: actions/cache@v3
         with:
           path: sandpack-client/dist
-          key: sandpack-client-${{ github.run_id }}
+          key: sandpack-client-${{ github.sha }}
           restore-keys: sandpack-client-
+
+      - name: Cache theme build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-themes/dist
+          key: sandpack-themes-${{ github.sha }}
+          restore-keys: sandpack-themes-
 
   sizebot:
     name: Sizebot
@@ -93,13 +100,13 @@ jobs:
         uses: actions/cache@v3
         with:
           path: sandpack-react/dist
-          key: sandpack-react-${{ github.run_id }}
+          key: sandpack-react-${{ github.sha }}
 
       - name: Setup | Restore client build
         uses: actions/cache@v3
         with:
           path: sandpack-client/dist
-          key: sandpack-client-${{ github.run_id }}
+          key: sandpack-client-${{ github.sha }}
 
       - name: Bot script
         run: node scripts/sizebot/index.js
@@ -132,13 +139,19 @@ jobs:
         uses: actions/cache@v3
         with:
           path: sandpack-react/dist
-          key: sandpack-react-${{ github.run_id }}
+          key: sandpack-react-${{ github.sha }}
 
       - name: Setup | Restore client build
         uses: actions/cache@v3
         with:
           path: sandpack-client/dist
-          key: sandpack-client-${{ github.run_id }}
+          key: sandpack-client-${{ github.sha }}
+
+      - name: Setup | Restore theme build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-themes/dist
+          key: sandpack-themes-${{ github.sha }}
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1
@@ -173,13 +186,19 @@ jobs:
         uses: actions/cache@v3
         with:
           path: sandpack-react/dist
-          key: sandpack-react-${{ github.run_id }}
+          key: sandpack-react-${{ github.sha }}
 
       - name: Setup | Restore client build
         uses: actions/cache@v3
         with:
           path: sandpack-client/dist
-          key: sandpack-client-${{ github.run_id }}
+          key: sandpack-client-${{ github.sha }}
+
+      - name: Setup | Restore theme build
+        uses: actions/cache@v3
+        with:
+          path: sandpack-themes/dist
+          key: sandpack-themes-${{ github.sha }}
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
@@ -213,13 +232,13 @@ jobs:
         uses: actions/cache@v3
         with:
           path: sandpack-react/dist
-          key: sandpack-react-${{ github.run_id }}
+          key: sandpack-react-${{ github.sha }}
 
       - name: Setup | Restore client build
         uses: actions/cache@v3
         with:
           path: sandpack-client/dist
-          key: sandpack-client-${{ github.run_id }}
+          key: sandpack-client-${{ github.sha }}
 
       - name: Test | Jest
         run: yarn run test
