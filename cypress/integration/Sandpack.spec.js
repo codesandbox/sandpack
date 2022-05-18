@@ -25,7 +25,10 @@ describe("Sandpack", () => {
     cy.get(".cm-content").type(`export default function App() {
   return <p className="target">Hello Sandpack</p>`);
 
-    getIframeBody().find("p.target").should("have.text", "Hello Sandpack");
+    getIframeBody()
+      .wait(3000)
+      .find("p.target")
+      .should("have.text", "Hello Sandpack");
   });
 
   it(`Should be able to navigate between files`, () => {

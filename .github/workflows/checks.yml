@@ -32,7 +32,7 @@ jobs:
 
   build:
     name: Build
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: install
     steps:
@@ -44,41 +44,22 @@ jobs:
         with:
           node-version-file: .nvmrc
 
-      - name: Setup | Cache
-        uses: c-hive/gha-yarn-cache@v2
-
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
 
       - name: Build
         run: yarn run build
-
-      - name: Cache react build
-        uses: actions/cache@v3
-        with:
-          path: sandpack-react/dist
-          key: sandpack-react-${{ github.sha }}
-          restore-keys: sandpack-react-
-
-      - name: Cache client build
-        uses: actions/cache@v3
-        with:
-          path: sandpack-client/dist
-          key: sandpack-client-${{ github.sha }}
-          restore-keys: sandpack-client-
-
-      - name: Cache theme build
-        uses: actions/cache@v3
-        with:
-          path: sandpack-themes/dist
-          key: sandpack-themes-${{ github.sha }}
-          restore-keys: sandpack-themes-
 
   sizebot:
     name: Sizebot
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [install, build]
+    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -96,17 +77,8 @@ jobs:
             packages/*/node_modules
           key: modules-${{ hashFiles('yarn.lock') }}
 
-      - name: Setup | Restore react build
-        uses: actions/cache@v3
-        with:
-          path: sandpack-react/dist
-          key: sandpack-react-${{ github.sha }}
-
-      - name: Setup | Restore client build
-        uses: actions/cache@v3
-        with:
-          path: sandpack-client/dist
-          key: sandpack-client-${{ github.sha }}
+      - name: Build
+        run: yarn run build
 
       - name: Bot script
         run: node scripts/sizebot/index.js
@@ -117,7 +89,7 @@ jobs:
     name: Chromatic deployment
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [install, build]
+    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -135,23 +107,8 @@ jobs:
             packages/*/node_modules
           key: modules-${{ hashFiles('yarn.lock') }}
 
-      - name: Setup | Restore react build
-        uses: actions/cache@v3
-        with:
-          path: sandpack-react/dist
-          key: sandpack-react-${{ github.sha }}
-
-      - name: Setup | Restore client build
-        uses: actions/cache@v3
-        with:
-          path: sandpack-client/dist
-          key: sandpack-client-${{ github.sha }}
-
-      - name: Setup | Restore theme build
-        uses: actions/cache@v3
-        with:
-          path: sandpack-themes/dist
-          key: sandpack-themes-${{ github.sha }}
+      - name: Build
+        run: yarn run build
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1
@@ -164,7 +121,7 @@ jobs:
     name: Integration tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [install, build]
+    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -182,17 +139,8 @@ jobs:
             packages/*/node_modules
           key: modules-${{ hashFiles('yarn.lock') }}
 
-      - name: Setup | Restore react build
-        uses: actions/cache@v3
-        with:
-          path: sandpack-react/dist
-          key: sandpack-react-${{ github.sha }}
-
-      - name: Setup | Restore client build
-        uses: actions/cache@v3
-        with:
-          path: sandpack-client/dist
-          key: sandpack-client-${{ github.sha }}
+      - name: Build
+        run: yarn run build
 
       - name: Setup | Restore theme build
         uses: actions/cache@v3
@@ -210,7 +158,7 @@ jobs:
     name: Unit tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [install, build]
+    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -228,17 +176,8 @@ jobs:
             packages/*/node_modules
           key: modules-${{ hashFiles('yarn.lock') }}
 
-      - name: Setup | Restore react build
-        uses: actions/cache@v3
-        with:
-          path: sandpack-react/dist
-          key: sandpack-react-${{ github.sha }}
-
-      - name: Setup | Restore client build
-        uses: actions/cache@v3
-        with:
-          path: sandpack-client/dist
-          key: sandpack-client-${{ github.sha }}
+      - name: Build
+        run: yarn run build
 
       - name: Test | Jest
         run: yarn run test
