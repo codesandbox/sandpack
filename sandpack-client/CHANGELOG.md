@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-alpha.0](https://github.com/codesandbox/sandpack/compare/v0.19.7...v1.1.0-alpha.0) (2022-05-19)
+
+
+### Features
+
+* **api:** refactor sandpack provider  ([#342](https://github.com/codesandbox/sandpack/issues/342)) ([6f28197](https://github.com/codesandbox/sandpack/commit/6f2819710be3ca693e6805e9ed64a964139d7d35))
+
+
+
+
+
 ## [0.19.1](https://github.com/codesandbox/sandpack/compare/v0.19.0...v0.19.1) (2022-04-26)
 
 
