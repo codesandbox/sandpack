@@ -18,6 +18,7 @@
     "prebuild": "yarn run clean",
     "build": "node build.js && yarn run build:types",
     "build:types": "tsc -p tsconfig.json",
+    "build:publish": "yarn build",
     "typecheck": "tsc"
   },
   "devDependencies": {
