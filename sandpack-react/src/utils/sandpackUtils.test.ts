@@ -4,6 +4,7 @@ import {
   getSandpackStateFromProps,
   createSetupFromUserInput,
   resolveFile,
+  convertedFilesToBundlerFiles,
 } from "./sandpackUtils";
 
 describe(resolveFile, () => {
@@ -322,8 +323,8 @@ describe(getSandpackStateFromProps, () => {
     const packageContent = JSON.parse(setup.files["/package.json"].code);
     expect(packageContent.dependencies).toEqual({
       foo: "*",
-      react: "^17.0.0",
-      "react-dom": "^17.0.0",
+      react: "^18.0.0",
+      "react-dom": "^18.0.0",
       "react-scripts": "^4.0.0",
     });
   });
@@ -407,6 +408,22 @@ describe(createSetupFromUserInput, () => {
     expect(setup).toStrictEqual({
       environment: "create-react-app",
       files: { "App.js": { code: "" } },
+    });
+  });
+});
+
+describe(convertedFilesToBundlerFiles, () => {
+  it("converts regular files to bundler files", () => {
+    expect(convertedFilesToBundlerFiles({ name: "code" })).toEqual({
+      name: { code: "code" },
+    });
+  });
+
+  it("keeps bundler files original", () => {
+    expect(
+      convertedFilesToBundlerFiles({ name: { code: "code", hidden: true } })
+    ).toEqual({
+      name: { code: "code", hidden: true },
     });
   });
 });

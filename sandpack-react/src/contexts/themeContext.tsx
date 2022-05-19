@@ -46,6 +46,7 @@ const SandpackThemeContext = React.createContext<{
  */
 const SandpackThemeProvider: React.FC<{
   theme?: SandpackThemeProp;
+  children?: React.ReactNode;
 }> = (props) => {
   const { theme, id } = standardizeTheme(props.theme);
   const c = useClasser(THEME_PREFIX);

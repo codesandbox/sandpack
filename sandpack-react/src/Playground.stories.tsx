@@ -1,7 +1,4 @@
-import { Sandpack } from "../";
-import { SandpackLayout } from "../common";
-import { SandpackPreview } from "../components";
-import { SandpackProvider } from "../contexts/sandpackContext";
+import { Sandpack } from "./";
 
 export default {
   title: "Intro/Playground",

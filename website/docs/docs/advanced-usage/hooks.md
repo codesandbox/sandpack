@@ -106,7 +106,8 @@ Plus, `useSandpack` exposes a bunch of methods that you can use to manage the cu
 | `resetAllFiles` | Reset all files for all paths to the original state |
 | `resetFile`     | Reset the code for a given path                     |
 | `setActiveFile` | Set a specific file as active in a given path       |
-| `updateFile`    | Update the content of a file in a given path        |
+| `updateFile`    | Update the content of a file in a given path or multiple files       |
+| `updateCurrentFile` | Update the content of the current file |
 
 ## useSandpackNavigation
 

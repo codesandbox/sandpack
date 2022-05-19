@@ -40,7 +40,9 @@ export default () => (
 // ✨ BTW, all examples are built in Sandpack`,
 };
 
-export const LayoutExampleProvider: React.FC = ({ children }) => {
+export const LayoutExampleProvider: React.FC<{
+  children?: React.ReactNode;
+}> = ({ children }) => {
   const [layoutFiles, setLayoutFiles] = useState(ORIGINAL_CODE);
   const [visibility, setVisibility] = useState(false);
 

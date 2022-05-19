@@ -26,6 +26,13 @@ export const getEditorTheme = (): Extension =>
       height: "100%",
     },
 
+    ".cm-matchingBracket, .cm-nonmatchingBracket, &.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket":
+      {
+        color: "inherit",
+        backgroundColor: `rgba(128,128,128,.25)`,
+        backgroundBlendMode: "difference",
+      },
+
     "&.cm-editor.cm-focused": {
       outline: "none",
     },
@@ -38,11 +45,6 @@ export const getEditorTheme = (): Extension =>
     ".cm-errorLine": {
       backgroundColor: `var(--${THEME_PREFIX}-colors-errorSurface)`,
       borderRadius: `var(--${THEME_PREFIX}-border-radius)`,
-    },
-
-    ".cm-matchingBracket, .cm-nonmatchingBracket": {
-      color: "inherit",
-      backgroundColor: `var(--${THEME_PREFIX}-colors-surface2)`,
     },
 
     ".cm-content": {

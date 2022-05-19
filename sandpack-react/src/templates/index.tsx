@@ -1,6 +1,7 @@
 import { ANGULAR_TEMPLATE } from "./angular";
 import { REACT_TEMPLATE } from "./react";
 import { REACT_TYPESCRIPT_TEMPLATE } from "./react-typescript";
+import { SOLID_TEMPLATE } from "./solid";
 import { SVELTE_TEMPLATE } from "./svelte";
 import { VANILLA_TEMPLATE } from "./vanilla";
 import { VANILLA_TYPESCRIPT_TEMPLATE } from "./vanilla-typescript";
@@ -16,4 +17,5 @@ export const SANDBOX_TEMPLATES = {
   vue3: VUE_TEMPLATE_3,
   angular: ANGULAR_TEMPLATE,
   svelte: SVELTE_TEMPLATE,
+  solid: SOLID_TEMPLATE,
 };

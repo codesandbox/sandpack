@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { SandpackPredefinedTemplate } from "@codesandbox/sandpack-react";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
@@ -23,6 +24,8 @@ import {
   FadeAnimation,
   THRESHOLD_VIEW,
 } from "./common";
+
+const AnimatedPresenceTyped = AnimatePresence as any;
 
 const frameworkOptions: SandpackPredefinedTemplate[] = [
   "react",
@@ -101,23 +104,25 @@ export const TemplateExample: React.FC = () => {
 
           <div style={{ height: 0, marginTop: "-24px" }}>
             {toolTipVisibility && higherMobile && (
-              <AnimatePresence>
-                <ToolTip
-                  animate={{
-                    opacity: 1,
-                    x: mousePosition.x,
-                    y: mousePosition.y,
-                  }}
-                  exit={{ opacity: 0 }}
-                  initial={{
-                    opacity: 0,
-                    x: mousePosition.x,
-                    y: mousePosition.y,
-                  }}
-                >
-                  Click to change
-                </ToolTip>
-              </AnimatePresence>
+              <AnimatedPresenceTyped>
+                <>
+                  <ToolTip
+                    animate={{
+                      opacity: 1,
+                      x: mousePosition.x,
+                      y: mousePosition.y,
+                    }}
+                    exit={{ opacity: 0 }}
+                    initial={{
+                      opacity: 0,
+                      x: mousePosition.x,
+                      y: mousePosition.y,
+                    }}
+                  >
+                    Click to change
+                  </ToolTip>
+                </>
+              </AnimatedPresenceTyped>
             )}
           </div>
         </Content>

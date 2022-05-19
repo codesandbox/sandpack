@@ -25,6 +25,7 @@ interface FeatureFadeProps {
   parentTop: number;
   parentHeight: number;
   scrollY: MotionValue<number>;
+  children?: React.ReactNode;
 }
 const FeatureFade: React.FC<FeatureFadeProps> = ({
   children,

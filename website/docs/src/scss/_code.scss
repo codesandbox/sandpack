@@ -1,9 +1,10 @@
 pre {
   font: inherit;
   background: #151515;
+  padding: 0;
 }
 
-code {
+.sp-code-editor {
   border-radius: 6px;
 }
 
@@ -11,11 +12,6 @@ code {
   .sp-layout {
     border: 0;
   }
-}
-
-.sp-pre-placeholder {
-  --sp-colors-activeText: #f0fdaf;
-  display: block;
 }
 
 .nestedSandpack > .sp-wrapper > .sp-layout {

@@ -13,6 +13,7 @@ import { stackClassName } from ".";
 
 export interface SandpackLayoutProps extends React.HtmlHTMLAttributes<unknown> {
   theme?: SandpackThemeProp;
+  children?: React.ReactNode;
 }
 
 export const layoutClassName = css({

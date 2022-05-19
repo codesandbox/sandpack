@@ -3,7 +3,7 @@ export const VUE_TEMPLATE = {
     "/src/App.vue": {
       code: `<template>
   <main id="app">
-    <h1>Hello world</h1>
+    <h1>Hello World</h1>
   </main>
 </template>
 

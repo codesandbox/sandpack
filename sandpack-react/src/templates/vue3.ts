@@ -12,7 +12,7 @@ import { ref } from "vue";
 export default {
    name: "App",
    setup() {
-      const helloWorld = ref("hello world");
+      const helloWorld = ref("Hello World");
       return { helloWorld };
    }
 };

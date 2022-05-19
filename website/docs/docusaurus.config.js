@@ -115,6 +115,23 @@ module.exports = {
         },
       },
     ],
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        id: "themes",
+        readme: "none",
+        plugin: ["typedoc-plugin-no-inherit"],
+        entryPoints: ["../../sandpack-themes/src/index.ts"],
+        tsconfig: "../../sandpack-themes/tsconfig.json",
+        out: "api/themes",
+        indexTitle: "Sandpack themes",
+        sidebar: {
+          categoryLabel: "Sandpack themes",
+          readmeLabel: "Sandpack themes",
+          position: 5,
+        },
+      },
+    ],
     /** END */
 
     "docusaurus-plugin-sass",
@@ -123,7 +140,6 @@ module.exports = {
       {
         changefreq: "weekly",
         priority: 0.5,
-        trailingSlash: false,
         id: "sitemap",
       },
     ],
@@ -152,7 +168,6 @@ module.exports = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      sandpack: { theme: "dark" },
       algolia: {
         apiKey: "055930448277966c60482899d8f5eba7",
         indexName: "sandpack",

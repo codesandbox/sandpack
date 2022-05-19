@@ -6,11 +6,11 @@ import { createElement } from "react";
 export const useSyntaxHighlight = ({
   langSupport,
   highlightTheme,
-  code,
+  code = "",
 }: {
   langSupport: LanguageSupport;
   highlightTheme: HighlightStyle;
-  code: string;
+  code?: string;
 }): React.ReactNode[] => {
   const tree = langSupport.language.parser.parse(code);
 
