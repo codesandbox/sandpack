@@ -19,6 +19,5 @@ export * from "./contexts/themeContext";
 export * from "./themes";
 export * from "./types";
 export * from "./icons";
-
 export { getCssText as getSandpackCssText } from "./styles";
 export * from "@code-hike/classer";
