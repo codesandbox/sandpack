@@ -9,6 +9,7 @@ The `getSandpackCssText` function, which is available in the main package, is re
 
 ```jsx
 import { getSandpackCssText } from "@codesandbox/sandpack-react";
+
 const cssTextOutput = getSandpackCssText();
 ```
 
@@ -27,6 +28,7 @@ For a better hydration strategy, we highly recommend adding an `id="sandpack"` t
 import { getSandpackCssText } from "@codesandbox/sandpack-react";
 import NextDocument, { Html, Head, Main, NextScript } from "next/document";
 import React from "react";
+
 export default class Document extends NextDocument {
   render() {
     return (
@@ -53,6 +55,7 @@ export default class Document extends NextDocument {
 // examples/gatsby/gatsby-ssr.js
 import * as React from "react";
 import { getSandpackCssText } from "@codesandbox/sandpack-react";
+
 export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
     <style

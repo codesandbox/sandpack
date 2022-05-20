@@ -5,7 +5,7 @@ import { SandpackLayout, SandpackCodeEditor, SandpackProvider } from "../../";
 import { Directory } from "./Directory";
 import { File } from "./File";
 
-import { FileExplorer } from "./";
+import { SandpackFileExplorer } from "./";
 
 export default {
   title: "components/File Explorer",
@@ -25,7 +25,7 @@ export const Component: React.FC = () => (
       template="react"
     >
       <SandpackLayout>
-        <FileExplorer />
+        <SandpackFileExplorer />
 
         <SandpackCodeEditor />
       </SandpackLayout>
@@ -43,7 +43,7 @@ export const Component: React.FC = () => (
       template="react"
     >
       <SandpackLayout theme="dark">
-        <FileExplorer />
+        <SandpackFileExplorer />
         <SandpackCodeEditor />
       </SandpackLayout>
     </SandpackProvider>
@@ -60,7 +60,7 @@ export const LongFileTree: React.FC = () => (
     template="react"
   >
     <SandpackLayout>
-      <FileExplorer />
+      <SandpackFileExplorer />
     </SandpackLayout>
   </SandpackProvider>
 );

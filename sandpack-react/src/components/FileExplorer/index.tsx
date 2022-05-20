@@ -15,7 +15,7 @@ const fileExplorerClassName = css({
 /**
  * @category Components
  */
-export const FileExplorer = ({
+export const SandpackFileExplorer = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
