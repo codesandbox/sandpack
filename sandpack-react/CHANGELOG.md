@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.8-experimental.1](https://github.com/codesandbox/sandpack/compare/v0.19.8-experimental.0...v0.19.8-experimental.1) (2022-05-23)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
 ## [0.19.8-experimental.0](https://github.com/codesandbox/sandpack/compare/v0.19.7...v0.19.8-experimental.0) (2022-05-16)
 
 
