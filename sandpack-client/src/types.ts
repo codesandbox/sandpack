@@ -114,6 +114,19 @@ export interface SandpackErrorMessage {
   };
 }
 
+export type SandpackMessageConsoleMethods =
+  | "log"
+  | "debug"
+  | "info"
+  | "warn"
+  | "error"
+  | "table"
+  | "clear"
+  | "time"
+  | "timeEnd"
+  | "count"
+  | "assert";
+
 export interface BaseSandpackMessage {
   type: string;
   $id?: number;
@@ -202,8 +215,8 @@ export type SandpackMessage = BaseSandpackMessage &
       }
     | {
         type: "console";
-        logs: Array<{
-          method: string;
+        log: Array<{
+          method: SandpackMessageConsoleMethods;
           id: string;
           data: string[];
         }>;
