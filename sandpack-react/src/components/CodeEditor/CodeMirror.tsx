@@ -293,6 +293,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       themeId,
       sortedDecorators,
       readOnly,
+      extensions,
+      extensionsKeymap,
     ]);
 
     React.useEffect(() => {
