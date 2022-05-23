@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.8-experimental.4](https://github.com/codesandbox/sandpack/compare/v0.19.8-experimental.3...v0.19.8-experimental.4) (2022-05-23)
+
+
+### Bug Fixes
+
+* **codemirror:** watch extensions changes from props ([1d4e1fe](https://github.com/codesandbox/sandpack/commit/1d4e1fee37061f709e51be823025a70da889678f))
+
+
+
+
+
 ## [0.19.8-experimental.3](https://github.com/codesandbox/sandpack/compare/v0.19.8-experimental.2...v0.19.8-experimental.3) (2022-05-23)
 
 
