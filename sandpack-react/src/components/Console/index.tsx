@@ -2,12 +2,15 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
-import { getType, ConsoleData } from "./utils";
 import { RefreshIcon } from "../../icons";
 import { CodeEditor } from "../CodeEditor";
 
+import type { ConsoleData } from "./utils";
+import { getType } from "./utils";
+
 const MAX_MESSAGE_COUNT = 100;
 
+// TODO: consume clientid
 export const SandpackConsole: React.FC<{ clientId?: string }> = ({
   clientId,
 }) => {
@@ -20,7 +23,6 @@ export const SandpackConsole: React.FC<{ clientId?: string }> = ({
   React.useEffect(() => {
     const unsubscribe = listen((message) => {
       if (message.type === "console" && message.codesandbox) {
-        console.log(message);
         setLogs((prev) => {
           const messages = [...prev, ...message.log];
           messages.slice(Math.max(0, messages.length - MAX_MESSAGE_COUNT));
@@ -41,7 +43,7 @@ export const SandpackConsole: React.FC<{ clientId?: string }> = ({
 
   return (
     <div className={c("console")}>
-      <div className={c("console-scroll")} ref={wrapperRef}>
+      <div ref={wrapperRef} className={c("console-scroll")}>
         {logs.map(({ data, id, method }) => {
           return (
             <p
@@ -58,11 +60,11 @@ export const SandpackConsole: React.FC<{ clientId?: string }> = ({
                   const children = JSON.stringify(msg);
 
                   return (
-                    <span className={c("console-span")} key={`${msg}-${index}`}>
+                    <span key={`${msg}-${index}`} className={c("console-span")}>
                       <CodeEditor
-                        initMode="user-visible"
-                        fileType="js"
                         code={children}
+                        fileType="js"
+                        initMode="user-visible"
                         readOnly
                       />
                     </span>
@@ -74,7 +76,7 @@ export const SandpackConsole: React.FC<{ clientId?: string }> = ({
         })}
       </div>
 
-      <button className={c("console-clean")} onClick={() => setLogs([])}>
+      <button className={c("console-clean")} onClick={(): void => setLogs([])}>
         <RefreshIcon />
       </button>
     </div>

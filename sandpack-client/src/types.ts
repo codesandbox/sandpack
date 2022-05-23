@@ -112,6 +112,19 @@ export interface BaseSandpackMessage {
   codesandbox?: boolean;
 }
 
+export type SandpackConsoleMethods =
+  | "log"
+  | "debug"
+  | "info"
+  | "warn"
+  | "error"
+  | "table"
+  | "clear"
+  | "time"
+  | "timeEnd"
+  | "count"
+  | "assert";
+
 export type SandpackMessage = BaseSandpackMessage &
   (
     | {
@@ -193,8 +206,8 @@ export type SandpackMessage = BaseSandpackMessage &
       }
     | {
         type: "console";
-        logs: Array<{
-          method: string;
+        log: Array<{
+          method: SandpackConsoleMethods;
           id: string;
           data: string[];
         }>;

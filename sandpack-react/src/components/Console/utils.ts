@@ -1,4 +1,8 @@
-export const getType = (message: Methods): "info" | "warning" | "error" => {
+import type { SandpackConsoleMethods } from "@codesandbox/sandpack-client";
+
+export const getType = (
+  message: SandpackConsoleMethods
+): "info" | "warning" | "error" => {
   if (message === "log" || message === "info") {
     return "info";
   }
@@ -13,18 +17,5 @@ export const getType = (message: Methods): "info" | "warning" | "error" => {
 export type ConsoleData = Array<{
   data: Array<string | Record<string, string>>;
   id: string;
-  method: Methods;
+  method: SandpackConsoleMethods;
 }>;
-
-type Methods =
-  | "log"
-  | "debug"
-  | "info"
-  | "warn"
-  | "error"
-  | "table"
-  | "clear"
-  | "time"
-  | "timeEnd"
-  | "count"
-  | "assert";
