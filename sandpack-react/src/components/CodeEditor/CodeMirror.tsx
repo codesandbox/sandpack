@@ -11,7 +11,7 @@ import { lineNumbers } from "@codemirror/gutter";
 import { defaultHighlightStyle } from "@codemirror/highlight";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
-import { EditorState, EditorSelection } from "@codemirror/state";
+import { EditorState, EditorSelection, StateEffect } from "@codemirror/state";
 import type { Annotation, Extension } from "@codemirror/state";
 import {
   highlightSpecialChars,
@@ -201,8 +201,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             ...closeBracketsKeymap,
             ...defaultKeymap,
             ...historyKeymap,
-            ...commentKeymap,
             ...customCommandsKeymap,
+            ...commentKeymap,
             ...extensionsKeymap,
           ] as KeyBinding[]),
           langSupport,
@@ -293,9 +293,26 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       themeId,
       sortedDecorators,
       readOnly,
-      extensions,
-      extensionsKeymap,
     ]);
+
+    React.useEffect(
+      function applyExtensions() {
+        const view = cmView.current;
+
+        if (view) {
+          view.dispatch({
+            effects: StateEffect.appendConfig.of(extensions),
+          });
+
+          view.dispatch({
+            effects: StateEffect.appendConfig.of(
+              keymap.of([...extensionsKeymap] as unknown as KeyBinding[])
+            ),
+          });
+        }
+      },
+      [extensions, extensionsKeymap]
+    );
 
     React.useEffect(() => {
       // When the user clicks on a tab button on a larger screen
