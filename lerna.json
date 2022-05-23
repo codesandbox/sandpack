@@ -1,8 +1,5 @@
 {
-  "packages": [
-    "sandpack-client",
-    "sandpack-react"
-  ],
+  "packages": ["sandpack-client", "sandpack-react"],
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
