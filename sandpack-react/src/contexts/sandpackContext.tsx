@@ -24,6 +24,7 @@ import {
   getSandpackStateFromProps,
 } from "../utils/sandpackUtils";
 import { generateRandomId } from "../utils/stringUtils";
+import { SandpackThemeProvider } from "../contexts/themeContext";
 
 /**
  * @category Provider
@@ -716,11 +717,11 @@ class SandpackProviderClass extends React.PureComponent<
    * @hidden
    */
   render(): React.ReactElement {
-    const { children } = this.props;
+    const { children, theme } = this.props;
 
     return (
       <Sandpack.Provider value={this._getSandpackState()}>
-        {children}
+        <SandpackThemeProvider theme={theme}>{children}</SandpackThemeProvider>
       </Sandpack.Provider>
     );
   }

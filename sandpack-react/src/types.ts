@@ -392,6 +392,7 @@ interface SandpackRootProps<
   files?: Files;
   template?: TemplateName;
   customSetup?: SandpackSetup;
+  theme?: SandpackThemeProp;
 }
 
 /**
@@ -431,7 +432,6 @@ interface SandpackInternalProps<
   Files extends SandpackFiles | any,
   TemplateName extends SandpackPredefinedTemplate
 > extends SandpackRootProps<Files, TemplateName> {
-  theme?: SandpackThemeProp;
   options?: SandpackInternalOptions<Files, TemplateName> & {
     editorWidthPercentage?: number;
     editorHeight?: React.CSSProperties["height"];
