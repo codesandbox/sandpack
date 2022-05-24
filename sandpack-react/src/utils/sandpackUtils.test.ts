@@ -123,22 +123,6 @@ describe(getSandpackStateFromProps, () => {
   /**
    * hidden file
    */
-  test("exclude hidden files from template", () => {
-    const setup = getSandpackStateFromProps({ template: "react" });
-    const collectFilenames = Object.entries(REACT_TEMPLATE.files).reduce(
-      (acc, [key, value]) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if (!(value as any).hidden) {
-          acc.push(key);
-        }
-
-        return acc;
-      },
-      [] as string[]
-    );
-
-    expect(setup.openPaths.sort()).toEqual(collectFilenames.sort());
-  });
 
   test("exclude hidden files from custom files", () => {
     const setup = getSandpackStateFromProps({
@@ -183,6 +167,12 @@ describe(getSandpackStateFromProps, () => {
   /**
    * Files - openPaths - activePath
    */
+  test("only the main file is visible in a default setup", () => {
+    const setup = getSandpackStateFromProps({ template: "react" });
+
+    expect(setup.openPaths.sort()).toEqual([REACT_TEMPLATE.main]);
+  });
+
   test("openPaths override the files configurations", () => {
     const setup = getSandpackStateFromProps({
       files: {

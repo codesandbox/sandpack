@@ -257,7 +257,7 @@ export type SandpackPredefinedTheme = "light" | "dark" | "auto";
 /**
  * @category Theme
  */
-export type SandpackTheme = {
+export interface SandpackTheme {
   colors: {
     // Surface
     surface1: string;
@@ -293,7 +293,7 @@ export type SandpackTheme = {
     size: string;
     lineHeight: string;
   };
-};
+}
 
 /**
  * @category Theme
@@ -423,6 +423,7 @@ export interface SandpackInternalOptions<
   skipEval?: boolean;
   fileResolver?: FileResolver;
   externalResources?: string[];
+  classes?: Record<string, string>;
 }
 
 /**
@@ -435,7 +436,6 @@ interface SandpackInternalProps<
   options?: SandpackInternalOptions<Files, TemplateName> & {
     editorWidthPercentage?: number;
     editorHeight?: React.CSSProperties["height"];
-    classes?: Record<string, string>;
 
     showNavigator?: boolean;
     showLineNumbers?: boolean;

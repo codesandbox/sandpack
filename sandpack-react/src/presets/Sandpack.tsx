@@ -1,4 +1,3 @@
-import { ClasserProvider } from "@code-hike/classer";
 import * as React from "react";
 
 import { SandpackLayout } from "../common/Layout";
@@ -52,6 +51,7 @@ export const Sandpack: SandpackInternal = (props) => {
     initModeObserverOptions: props.options?.initModeObserverOptions,
     externalResources: props.options?.externalResources,
     logLevel: props.options?.logLevel,
+    classes: props.options?.classes,
   };
 
   /**
@@ -69,30 +69,29 @@ export const Sandpack: SandpackInternal = (props) => {
       files={props.files as TemplateFiles<SandpackPredefinedTemplate>}
       options={providerOptions}
       template={props.template}
+      theme={props.theme}
     >
-      <ClasserProvider classes={props.options?.classes}>
-        <SandpackLayout theme={props.theme}>
-          <SandpackCodeEditor
-            {...codeEditorOptions}
-            style={{
-              height: editorHeight,
-              flexGrow: editorPart,
-              flexShrink: editorPart,
-              minWidth: 700 * (editorPart / (previewPart + editorPart)),
-            }}
-          />
-          <SandpackPreview
-            showNavigator={props.options?.showNavigator}
-            showRefreshButton={props.options?.showRefreshButton}
-            style={{
-              height: editorHeight,
-              flexGrow: previewPart,
-              flexShrink: previewPart,
-              minWidth: 700 * (previewPart / (previewPart + editorPart)),
-            }}
-          />
-        </SandpackLayout>
-      </ClasserProvider>
+      <SandpackLayout>
+        <SandpackCodeEditor
+          {...codeEditorOptions}
+          style={{
+            height: editorHeight,
+            flexGrow: editorPart,
+            flexShrink: editorPart,
+            minWidth: 700 * (editorPart / (previewPart + editorPart)),
+          }}
+        />
+        <SandpackPreview
+          showNavigator={props.options?.showNavigator}
+          showRefreshButton={props.options?.showRefreshButton}
+          style={{
+            height: editorHeight,
+            flexGrow: previewPart,
+            flexShrink: previewPart,
+            minWidth: 700 * (previewPart / (previewPart + editorPart)),
+          }}
+        />
+      </SandpackLayout>
     </SandpackProvider>
   );
 };
