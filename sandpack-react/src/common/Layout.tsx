@@ -11,11 +11,17 @@ import { classNames } from "../utils/classNames";
 
 import { stackClassName } from ".";
 
+/**
+ * @category Components
+ */
 export interface SandpackLayoutProps extends React.HtmlHTMLAttributes<unknown> {
   theme?: SandpackThemeProp;
   children?: React.ReactNode;
 }
 
+/**
+ * @hidden
+ */
 export const layoutClassName = css({
   border: "1px solid $colors$surface2",
   display: "flex",
@@ -58,7 +64,7 @@ export const layoutClassName = css({
 });
 
 /**
- * @category Theme
+ * @category Components
  */
 export const SandpackLayout = React.forwardRef<
   HTMLDivElement,

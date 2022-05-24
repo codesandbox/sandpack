@@ -1,3 +1,6 @@
+/**
+ * @category Template
+ */
 export const REACT_TYPESCRIPT_TEMPLATE = {
   files: {
     "tsconfig.json": {

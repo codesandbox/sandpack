@@ -1,3 +1,6 @@
+/**
+ * @category Template
+ */
 export const VANILLA_TYPESCRIPT_TEMPLATE = {
   files: {
     "tsconfig.json": {

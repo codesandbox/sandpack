@@ -1,3 +1,6 @@
+/**
+ * @category Template
+ */
 export const ANGULAR_TEMPLATE = {
   files: {
     "/src/app/app.component.css": {

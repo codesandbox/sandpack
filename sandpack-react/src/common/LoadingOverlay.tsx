@@ -15,6 +15,9 @@ import { classNames } from "../utils/classNames";
 
 import { Loading } from "./Loading";
 
+/**
+ * @category Components
+ */
 export interface LoadingOverlayProps {
   clientId?: string;
 

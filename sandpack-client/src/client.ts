@@ -176,7 +176,6 @@ export class SandpackClient {
         this.iframeProtocol.register();
 
         if (this.options.fileResolver) {
-          // TODO: Find a common place for the Protocol to be implemented for both sandpack-core and sandpack-client
           this.fileResolverProtocol = new Protocol(
             "file-resolver",
             async (data: { m: "isFile" | "readFile"; p: string }) => {

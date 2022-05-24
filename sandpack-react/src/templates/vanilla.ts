@@ -1,3 +1,6 @@
+/**
+ * @category Template
+ */
 export const VANILLA_TEMPLATE = {
   files: {
     "/src/index.js": {

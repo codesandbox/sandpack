@@ -11,24 +11,36 @@ const SVG: React.FC<React.SVGAttributes<unknown>> = (props) => (
   />
 );
 
+/**
+ * @hidden
+ */
 export const RunIcon = (): React.ReactElement => (
   <SVG viewBox="0 0 17 16">
     <path d="M11.0792 8.1078C11.2793 8.25007 11.27 8.55012 11.0616 8.67981L6.02535 11.8135C5.79638 11.956 5.5 11.7913 5.5 11.5216L5.5 8.40703L5.5 4.80661C5.5 4.52735 5.81537 4.36463 6.04296 4.52647L11.0792 8.1078Z" />
   </SVG>
 );
 
+/**
+ * @hidden
+ */
 export const BackwardIcon = (): React.ReactElement => (
   <SVG>
     <path d="M8.99126 12.2106L14.0455 6.98196L13.2998 6.21057L7.5 12.2106L13.2998 18.2106L14.0455 17.3924L8.99126 12.2106Z" />
   </SVG>
 );
 
+/**
+ * @hidden
+ */
 export const ForwardIcon = (): React.ReactElement => (
   <SVG>
     <path d="M13.5087 12.2105L8.45455 17.4392L9.2002 18.2106L15 12.2106L9.2002 6.21057L8.45455 7.02875L13.5087 12.2105Z" />
   </SVG>
 );
 
+/**
+ * @hidden
+ */
 export const RefreshIcon = (): React.ReactElement => (
   <SVG>
     <path
@@ -39,6 +51,9 @@ export const RefreshIcon = (): React.ReactElement => (
   </SVG>
 );
 
+/**
+ * @hidden
+ */
 export const ExportIcon = (): React.ReactElement => (
   <svg
     fill="none"
@@ -54,6 +69,9 @@ export const ExportIcon = (): React.ReactElement => (
   </svg>
 );
 
+/**
+ * @hidden
+ */
 export const DirectoryIcon = ({
   isOpen = false,
 }: {
@@ -84,6 +102,9 @@ export const DirectoryIcon = ({
   </SVG>
 );
 
+/**
+ * @hidden
+ */
 export const FileIcon = (): React.ReactElement => (
   <svg
     fill="currentColor"
@@ -99,6 +120,9 @@ export const FileIcon = (): React.ReactElement => (
   </svg>
 );
 
+/**
+ * @hidden
+ */
 export const CloseIcon = (): React.ReactElement => (
   <SVG height="8" viewBox="0 0 16 16" width="8">
     <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />

@@ -2,6 +2,9 @@ import * as React from "react";
 
 import { useSandpack } from "./useSandpack";
 
+/**
+ * @hidden
+ */
 export type LoadingOverlayState =
   | "LOADING"
   | "PRE_FADING"
@@ -9,6 +12,9 @@ export type LoadingOverlayState =
   | "HIDDEN"
   | "TIMEOUT";
 
+/**
+ * @hidden
+ */
 export const FADE_ANIMATION_DURATION = 200;
 
 /**

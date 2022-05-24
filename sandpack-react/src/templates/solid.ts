@@ -1,6 +1,7 @@
-import type { SandboxTemplate } from "../types";
-
-export const SOLID_TEMPLATE: SandboxTemplate = {
+/**
+ * @category Template
+ */
+export const SOLID_TEMPLATE = {
   files: {
     "/App.tsx": {
       code: `import { Component } from "solid-js";

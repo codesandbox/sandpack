@@ -1,3 +1,6 @@
+/**
+ * @category Template
+ */
 export const SVELTE_TEMPLATE = {
   environment: "svelte",
   main: "/index.js",

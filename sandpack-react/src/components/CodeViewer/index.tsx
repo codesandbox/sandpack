@@ -14,6 +14,9 @@ import type { Decorators } from "../CodeEditor/CodeMirror";
 import { editorClassName } from "../CodeEditor/styles";
 import { FileTabs } from "../FileTabs";
 
+/**
+ * @category Components
+ */
 export interface CodeViewerProps {
   showTabs?: boolean;
   showLineNumbers?: boolean;

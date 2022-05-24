@@ -43,6 +43,9 @@ const getFileParameters = (
   });
 };
 
+/**
+ * @category Components
+ */
 export const UnstyledOpenInCodeSandboxButton: React.FC<
   React.HtmlHTMLAttributes<unknown>
 > = ({ children, ...props }) => {

@@ -152,7 +152,7 @@ export type SandpackMessage = BaseSandpackMessage &
       }
     | {
         type: "done";
-        compilatonError: boolean; // TODO: fix typo?
+        compilatonError: boolean;
       }
     | {
         type: "urlchange";

@@ -1,3 +1,6 @@
+/**
+ * @category Template
+ */
 export const REACT_TEMPLATE = {
   files: {
     "/App.js": {

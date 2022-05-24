@@ -15,7 +15,7 @@ import * as React from "react";
 import type { SandpackFiles } from "..";
 import type {
   SandpackContext,
-  SandpackProviderComponent,
+  SandpackInternalProvider,
   SandpackProviderState,
   SandpackProviderProps,
 } from "../types";
@@ -726,7 +726,10 @@ class SandpackProviderClass extends React.PureComponent<
   }
 }
 
-const SandpackProvider: SandpackProviderComponent =
+/**
+ * @hidden
+ */
+const SandpackProvider: SandpackInternalProvider =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   SandpackProviderClass as any;
 

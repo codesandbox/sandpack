@@ -7,17 +7,17 @@ import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import type {
-  SandpackPreset,
-  SandpackOptions,
+  SandpackInternal,
+  SandpackInternalOptions,
   TemplateFiles,
   SandpackFiles,
   SandpackPredefinedTemplate,
 } from "../types";
 
 /**
- * @category Presets
+ * @hidden
  */
-export const Sandpack: SandpackPreset = (props) => {
+export const Sandpack: SandpackInternal = (props) => {
   const codeEditorOptions: CodeEditorProps = {
     showTabs: props.options?.showTabs,
     showLineNumbers: props.options?.showLineNumbers,
@@ -32,7 +32,7 @@ export const Sandpack: SandpackPreset = (props) => {
     id: props.options?.id,
   };
 
-  const providerOptions: SandpackOptions<
+  const providerOptions: SandpackInternalOptions<
     SandpackFiles,
     SandpackPredefinedTemplate
   > = {

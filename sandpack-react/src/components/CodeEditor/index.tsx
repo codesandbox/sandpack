@@ -16,7 +16,14 @@ import { CodeMirror } from "./CodeMirror";
 import type { CodeMirrorRef } from "./CodeMirror";
 import { editorClassName } from "./styles";
 
+/**
+ * @category Components
+ */
 export type CodeEditorRef = CodeMirrorRef;
+
+/**
+ * @category Components
+ */
 export interface CodeEditorProps {
   style?: React.CSSProperties;
   showTabs?: boolean;

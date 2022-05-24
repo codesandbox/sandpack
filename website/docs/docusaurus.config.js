@@ -87,6 +87,8 @@ module.exports = {
         plugin: ["typedoc-plugin-no-inherit"],
         entryPoints: ["../../sandpack-react/src/index.ts"],
         tsconfig: "../../sandpack-react/tsconfig.json",
+        categorizeByGroup: false,
+        includeVersion: true,
         out: "api/react",
         indexTitle: "Sandpack React",
         exclude: "**/{node_modules,test}/**/*",
@@ -107,6 +109,8 @@ module.exports = {
         entryPoints: ["../../sandpack-client/src/index.ts"],
         tsconfig: "../../sandpack-client/tsconfig.json",
         out: "api/client",
+        categorizeByGroup: false,
+        includeVersion: true,
         indexTitle: "Sandpack client",
         sidebar: {
           categoryLabel: "Sandpack client",
@@ -124,6 +128,8 @@ module.exports = {
         entryPoints: ["../../sandpack-themes/src/index.ts"],
         tsconfig: "../../sandpack-themes/tsconfig.json",
         out: "api/themes",
+        categorizeByGroup: false,
+        includeVersion: true,
         indexTitle: "Sandpack themes",
         sidebar: {
           categoryLabel: "Sandpack themes",
