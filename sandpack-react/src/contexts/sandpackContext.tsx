@@ -67,14 +67,14 @@ class SandpackProviderClass extends React.PureComponent<
   constructor(props: SandpackProviderProps) {
     super(props);
 
-    const { activePath, openPaths, files, environment } =
+    const { activeFile, visibleFiles, files, environment } =
       getSandpackStateFromProps(props);
 
     this.state = {
       files,
       environment,
-      openPaths,
-      activePath,
+      visibleFiles,
+      activeFile,
       startRoute: this.props.options?.startRoute,
       bundlerState: undefined,
       error: null,
@@ -138,7 +138,7 @@ class SandpackProviderClass extends React.PureComponent<
   };
 
   updateCurrentFile = (code: string): void => {
-    this.updateFile(this.state.activePath, code);
+    this.updateFile(this.state.activeFile, code);
   };
 
   updateFile = (pathOrFiles: string | SandpackFiles, code?: string): void => {
@@ -268,7 +268,7 @@ class SandpackProviderClass extends React.PureComponent<
     /**
      * Custom setup derived from props
      */
-    const { activePath, openPaths, files, environment } =
+    const { activeFile, visibleFiles, files, environment } =
       getSandpackStateFromProps(this.props);
 
     /**
@@ -280,7 +280,7 @@ class SandpackProviderClass extends React.PureComponent<
       !isEqual(prevProps.files, this.props.files)
     ) {
       /* eslint-disable react/no-did-update-set-state */
-      this.setState({ activePath, openPaths, files, environment });
+      this.setState({ activeFile, visibleFiles, files, environment });
 
       if (this.state.sandpackStatus !== "running") {
         return;
@@ -437,47 +437,47 @@ class SandpackProviderClass extends React.PureComponent<
     }
   };
 
-  setActiveFile = (activePath: string): void => {
-    this.setState({ activePath });
+  setActiveFile = (activeFile: string): void => {
+    this.setState({ activeFile });
   };
 
   openFile = (path: string): void => {
-    this.setState(({ openPaths }) => {
-      const newPaths = openPaths.includes(path)
-        ? openPaths
-        : [...openPaths, path];
+    this.setState(({ visibleFiles }) => {
+      const newPaths = visibleFiles.includes(path)
+        ? visibleFiles
+        : [...visibleFiles, path];
 
       return {
-        activePath: path,
-        openPaths: newPaths,
+        activeFile: path,
+        visibleFiles: newPaths,
       };
     });
   };
 
   closeFile = (path: string): void => {
-    if (this.state.openPaths.length === 1) {
+    if (this.state.visibleFiles.length === 1) {
       return;
     }
 
-    this.setState(({ openPaths, activePath }) => {
-      const indexOfRemovedPath = openPaths.indexOf(path);
-      const newPaths = openPaths.filter((openPath) => openPath !== path);
+    this.setState(({ visibleFiles, activeFile }) => {
+      const indexOfRemovedPath = visibleFiles.indexOf(path);
+      const newPaths = visibleFiles.filter((openPath) => openPath !== path);
 
       return {
-        activePath:
-          path === activePath
+        activeFile:
+          path === activeFile
             ? indexOfRemovedPath === 0
-              ? openPaths[1]
-              : openPaths[indexOfRemovedPath - 1]
-            : activePath,
-        openPaths: newPaths,
+              ? visibleFiles[1]
+              : visibleFiles[indexOfRemovedPath - 1]
+            : activeFile,
+        visibleFiles: newPaths,
       };
     });
   };
 
   deleteFile = (path: string): void => {
-    this.setState(({ openPaths, files }) => {
-      const newPaths = openPaths.filter((openPath) => openPath !== path);
+    this.setState(({ visibleFiles, files }) => {
+      const newPaths = visibleFiles.filter((openPath) => openPath !== path);
       const newFiles = Object.keys(files).reduce(
         (acc: SandpackBundlerFiles, filePath) => {
           if (filePath === path) {
@@ -490,7 +490,7 @@ class SandpackProviderClass extends React.PureComponent<
       );
 
       return {
-        openPaths: newPaths,
+        visibleFiles: newPaths,
         files: newFiles,
       };
     });
@@ -601,8 +601,8 @@ class SandpackProviderClass extends React.PureComponent<
   _getSandpackState = (): SandpackContext => {
     const {
       files,
-      activePath,
-      openPaths,
+      activeFile,
+      visibleFiles,
       startRoute,
       bundlerState,
       editorState,
@@ -615,8 +615,8 @@ class SandpackProviderClass extends React.PureComponent<
     return {
       files,
       environment,
-      openPaths,
-      activePath,
+      visibleFiles,
+      activeFile,
       startRoute,
       error,
       bundlerState,

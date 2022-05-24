@@ -15,8 +15,8 @@ import type {
 } from "../types";
 
 export interface SandpackContextInfo {
-  activePath: string;
-  openPaths: string[];
+  activeFile: string;
+  visibleFiles: string[];
   files: Record<string, SandpackBundlerFile>;
   environment: SandboxEnvironment;
 }
@@ -31,37 +31,37 @@ export const getSandpackStateFromProps = (
     files: props.files,
   });
 
-  // openPaths and activePath override the setup flags
-  let openPaths = props.options?.openPaths ?? [];
-  let activePath = props.options?.activePath;
+  // visibleFiles and activeFile override the setup flags
+  let visibleFiles = props.options?.visibleFiles ?? [];
+  let activeFile = props.options?.activeFile;
 
-  if (openPaths.length === 0 && props?.files) {
+  if (visibleFiles.length === 0 && props?.files) {
     const inputFiles = props.files;
 
     // extract open and active files from the custom input files
     Object.keys(inputFiles).forEach((filePath) => {
       const file = inputFiles[filePath];
       if (typeof file === "string") {
-        openPaths.push(filePath);
+        visibleFiles.push(filePath);
         return;
       }
 
-      if (!activePath && file.active) {
-        activePath = filePath;
+      if (!activeFile && file.active) {
+        activeFile = filePath;
         if (file.hidden === true) {
-          openPaths.push(filePath); // active file needs to be available even if someone sets it as hidden by accident
+          visibleFiles.push(filePath); // active file needs to be available even if someone sets it as hidden by accident
         }
       }
 
       if (!file.hidden) {
-        openPaths.push(filePath);
+        visibleFiles.push(filePath);
       }
     });
   }
 
-  if (openPaths.length === 0) {
+  if (visibleFiles.length === 0) {
     // If no files are received, use the project setup / template
-    openPaths = [projectSetup.main];
+    visibleFiles = [projectSetup.main];
   }
 
   // Make sure it resolves the entry file
@@ -72,18 +72,18 @@ export const getSandpackStateFromProps = (
     /* eslint-enable */
   }
 
-  if (!activePath && projectSetup.main) {
-    activePath = projectSetup.main;
+  if (!activeFile && projectSetup.main) {
+    activeFile = projectSetup.main;
   }
 
-  // If no activePath is specified, use the first open file
-  if (!activePath || !projectSetup.files[activePath]) {
-    activePath = openPaths[0];
+  // If no activeFile is specified, use the first open file
+  if (!activeFile || !projectSetup.files[activeFile]) {
+    activeFile = visibleFiles[0];
   }
 
   // If for whatever reason the active path was not set as open, set it
-  if (!openPaths.includes(activePath)) {
-    openPaths.push(activePath);
+  if (!visibleFiles.includes(activeFile)) {
+    visibleFiles.push(activeFile);
   }
 
   const files = addPackageJSONIfNeeded(
@@ -93,11 +93,11 @@ export const getSandpackStateFromProps = (
     projectSetup.entry
   );
 
-  const existOpenPath = openPaths.filter((path) => files[path]);
+  const existOpenPath = visibleFiles.filter((path) => files[path]);
 
   return {
-    openPaths: existOpenPath,
-    activePath,
+    visibleFiles: existOpenPath,
+    activeFile,
     files,
     environment: projectSetup.environment,
   };

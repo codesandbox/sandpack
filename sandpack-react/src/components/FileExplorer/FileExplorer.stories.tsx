@@ -77,7 +77,7 @@ export const DirectoryIconStory: React.FC = () => (
   <SandpackProvider>
     <SandpackLayout>
       <Directory
-        activePath="file.ts"
+        activeFile="file.ts"
         depth={1}
         files={{ App: { code: "" } }}
         prefixedPath="/src"

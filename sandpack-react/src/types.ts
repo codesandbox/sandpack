@@ -82,15 +82,16 @@ export interface SandpackProps {
  */
 export interface SandpackOptions {
   /**
-   * TODO: List the file path listed in the file tab,
-   * which will allow the user to interact with.
+   * List of files that will be visible for the user interacts with.
+   * It defaults to the main file from a given template.
    */
-  openPaths?: string[];
+  visibleFiles?: string[];
 
   /**
-   * TODO: Path to the file will be open in the code editor when the component mounts
+   * Use this to set a file as active by default in the editor component.
+   * It defaults to the main file from a given template.
    */
-  activePath?: string;
+  activeFile?: string;
 
   editorWidthPercentage?: number;
   editorHeight?: React.CSSProperties["height"];
@@ -402,12 +403,12 @@ export interface SandpackInternalOptions<
   Files extends SandpackFiles | any = any,
   TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
 > {
-  openPaths?: Array<
+  visibleFiles?: Array<
     Files extends SandpackFiles
       ? TemplateFiles<TemplateName> | keyof Files
       : TemplateFiles<TemplateName>
   >;
-  activePath?: Files extends SandpackFiles
+  activeFile?: Files extends SandpackFiles
     ? TemplateFiles<TemplateName> | keyof Files
     : TemplateFiles<TemplateName>;
 
@@ -505,13 +506,13 @@ export interface SandpackState {
    * List the file path listed in the file tab,
    * which will allow the user to interact with.
    */
-  openPaths: string[];
+  visibleFiles: string[];
 
   /**
    * Path to the file will be open in the code editor
    * when the component mounts
    */
-  activePath: string;
+  activeFile: string;
   startRoute?: string;
 
   /**
@@ -627,8 +628,8 @@ export interface FileResolver {
 export interface SandpackProviderState {
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;
-  openPaths: Array<TemplateFiles<SandpackPredefinedTemplate> | string>;
-  activePath: TemplateFiles<SandpackPredefinedTemplate> | string;
+  visibleFiles: Array<TemplateFiles<SandpackPredefinedTemplate> | string>;
+  activeFile: TemplateFiles<SandpackPredefinedTemplate> | string;
   startRoute?: string;
   initMode: SandpackInitMode;
   bundlerState?: BundlerState;

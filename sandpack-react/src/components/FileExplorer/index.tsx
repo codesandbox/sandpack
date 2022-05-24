@@ -24,7 +24,7 @@ export const SandpackFileExplorer = ({
   return (
     <div className={classNames(fileExplorerClassName, className)} {...props}>
       <ModuleList
-        activePath={sandpack.activePath}
+        activeFile={sandpack.activeFile}
         files={sandpack.files}
         prefixedPath="/"
         selectFile={sandpack.openFile}

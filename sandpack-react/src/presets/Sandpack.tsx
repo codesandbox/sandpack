@@ -38,8 +38,8 @@ export const Sandpack: SandpackInternal = (props) => {
     /**
      * TS-why: Type 'string | number | symbol' is not assignable to type 'string'
      */
-    activePath: props.options?.activePath as unknown as string,
-    openPaths: props.options?.openPaths as unknown as string[],
+    activeFile: props.options?.activeFile as unknown as string,
+    visibleFiles: props.options?.visibleFiles as unknown as string[],
     recompileMode: props.options?.recompileMode,
     recompileDelay: props.options?.recompileDelay,
     autorun: props.options?.autorun,

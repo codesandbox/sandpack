@@ -8,7 +8,7 @@ export interface Props {
   prefixedPath: string;
   files: SandpackBundlerFiles;
   selectFile: (path: string) => void;
-  activePath: string;
+  activeFile: string;
   depth: number;
 }
 
@@ -26,7 +26,7 @@ export class Directory extends React.Component<Props, State> {
   };
 
   render(): React.ReactElement {
-    const { prefixedPath, files, selectFile, activePath, depth } = this.props;
+    const { prefixedPath, files, selectFile, activeFile, depth } = this.props;
 
     return (
       <div key={prefixedPath}>
@@ -39,7 +39,7 @@ export class Directory extends React.Component<Props, State> {
 
         {this.state.open && (
           <ModuleList
-            activePath={activePath}
+            activeFile={activeFile}
             depth={depth + 1}
             files={files}
             prefixedPath={prefixedPath}

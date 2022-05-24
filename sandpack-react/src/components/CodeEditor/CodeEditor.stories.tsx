@@ -96,7 +96,7 @@ export const ReadOnly: React.FC = () => {
           "/App.tsx": { code: "Hello", readOnly: true, active: true },
           "/src/components/button.tsx": { code: "World", readOnly: false },
         }}
-        options={{ showTabs: true, activePath: "/App.tsx" }}
+        options={{ showTabs: true, activeFile: "/App.tsx" }}
         template="react-ts"
       />
 

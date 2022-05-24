@@ -103,7 +103,7 @@ export const Main: React.FC<{test: string}> = ({test}) => {
 }`,
       },
     }}
-    options={{ wrapContent: true, activePath: "/src/main.tsx" }}
+    options={{ wrapContent: true, activeFile: "/src/main.tsx" }}
     theme="dark"
   />
 );
