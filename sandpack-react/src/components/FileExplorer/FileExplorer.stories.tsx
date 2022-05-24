@@ -41,8 +41,9 @@ export const Component: React.FC = () => (
         "/src/components/button.tsx": "",
       }}
       template="react"
+      theme="dark"
     >
-      <SandpackLayout theme="dark">
+      <SandpackLayout>
         <SandpackFileExplorer />
         <SandpackCodeEditor />
       </SandpackLayout>
