@@ -53,7 +53,7 @@ export const Component: React.FC = () => (
 export const LongFileTree: React.FC = () => (
   <SandpackProvider
     customSetup={{
-      entry: "/index.tsx",
+      entry: "/src/com0.js",
     }}
     files={new Array(20).fill(" ").reduce((acc, _curr, index) => {
       acc[`/src/com${index}.js`] = "";
