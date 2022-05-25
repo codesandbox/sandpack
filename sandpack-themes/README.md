@@ -10,7 +10,7 @@ import { githubLight } from "@codesandbox/sandpack-themes";
 <Sandpack theme={githubLight} />;
 ```
 
-[Read more](https://sandpack.codesandbox.io/)
+[Read more](https://sandpack.codesandbox.io/docs/getting-started/themes)
 
 ## Documentation
 
