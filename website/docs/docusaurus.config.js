@@ -96,7 +96,7 @@ module.exports = {
           categoryLabel: "Sandpack React",
           fullNames: false,
           readmeLabel: "Sandpack React",
-          position: 0,
+          collapsed: true,
         },
       },
     ],
@@ -115,7 +115,7 @@ module.exports = {
         sidebar: {
           categoryLabel: "Sandpack client",
           readmeLabel: "Sandpack client",
-          position: 4,
+          collapsed: true,
         },
       },
     ],
@@ -134,7 +134,7 @@ module.exports = {
         sidebar: {
           categoryLabel: "Sandpack themes",
           readmeLabel: "Sandpack themes",
-          position: 5,
+          collapsed: true,
         },
       },
     ],
