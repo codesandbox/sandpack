@@ -1,5 +1,5 @@
-import type { SandpackProps } from "@codesandbox/sandpack-react";
 import { Sandpack } from "@codesandbox/sandpack-react";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 
 import { styled } from "../../stitches.config";
 
@@ -10,7 +10,6 @@ export const SandpackContainer = styled("div", {
   width: "100%",
 
   ".custom-wrapper": {
-    "--sp-border-radius": "10px",
     width: "100%",
   },
 
@@ -44,14 +43,15 @@ export const SandpackContainer = styled("div", {
   },
 });
 
-export const SandpackPreview: React.FC<{ options?: SandpackProps }> = ({
-  options,
-}) => {
+export const SandpackPreview: React.FC<{
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  options?: any;
+}> = ({ options }) => {
   return (
     <SandpackContainer>
       <Sandpack
         template="react"
-        theme="sandpack-dark"
+        theme={sandpackDark}
         {...options}
         options={{
           initMode: "user-visible",

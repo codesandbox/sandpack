@@ -25,15 +25,24 @@ import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
+import { THEME_PREFIX } from "../../styles";
 import type {
   EditorState as SandpackEditorState,
   SandpackInitMode,
 } from "../../types";
+import { classNames } from "../../utils/classNames";
 import { getFileName } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
+import {
+  cmClassName,
+  placeholderClassName,
+  tokensClassName,
+  readOnlyClassName,
+} from "./styles";
 import { useGeneratedId } from "./useGeneratedId";
+import { useSyntaxHighlight } from "./useSyntaxHighlight";
 import {
   getCodeMirrorLanguage,
   getLanguageFromFile,
@@ -82,6 +91,10 @@ interface CodeMirrorProps {
    */
   decorators?: Decorators;
   initMode: SandpackInitMode;
+  /**
+   * By default, Sandpack generates a random value to use as an id.
+   * Use this to override this value if you need predictable values.
+   */
   id?: string;
   extensions?: Extension[];
   extensionsKeymap?: Array<readonly KeyBinding[]>;
@@ -117,6 +130,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
   ) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const wrapper = React.useRef<any | HTMLElement>(null);
+    const combinedRef = useCombinedRefs(wrapper, ref);
+
     const cmView = React.useRef<EditorView>();
     const { theme, themeId } = useSandpackTheme();
     const [internalCode, setInternalCode] = React.useState<string>(code);
@@ -124,7 +139,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       initMode === "immediate"
     );
 
-    const c = useClasser("sp");
+    const c = useClasser(THEME_PREFIX);
     const { listen } = useSandpack();
     const ariaId = useGeneratedId(id);
 
@@ -147,6 +162,13 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
     const languageExtension = getLanguageFromFile(filePath, fileType);
     const langSupport = getCodeMirrorLanguage(languageExtension);
+    const highlightTheme = getSyntaxHighlight(theme);
+
+    const syntaxHighlightRender = useSyntaxHighlight({
+      langSupport,
+      highlightTheme,
+      code,
+    });
 
     // decorators need to be sorted by `line`, otherwise it will throw error
     // see https://github.com/codesandbox/sandpack/issues/383
@@ -210,8 +232,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           defaultHighlightStyle.fallback,
 
-          getEditorTheme(theme),
-          getSyntaxHighlight(theme),
+          getEditorTheme(),
+          highlightTheme,
           ...extensions,
         ];
 
@@ -274,6 +296,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             "aria-describedby",
             `exit-instructions-${ariaId}`
           );
+        } else {
+          view.contentDOM.classList.add("cm-readonly");
         }
 
         cmView.current = view;
@@ -285,7 +309,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         clearTimeout(timer);
       };
 
-      // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
       shouldInitEditor,
@@ -401,21 +424,49 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       }
     };
 
-    const combinedRef = useCombinedRefs(wrapper, ref);
+    const gutterLineOffset = (): string => {
+      // padding-left
+      let offset = 4;
+
+      if (showLineNumbers) {
+        // line-number-gutter-width + gutter-padding
+        offset += 6;
+      }
+
+      // line-padding
+      if (!readOnly) {
+        offset += 1;
+      }
+
+      return `var(--${THEME_PREFIX}-space-${offset})`;
+    };
 
     if (readOnly) {
       return (
-        <pre
-          ref={combinedRef}
-          className={c("cm", editorState, languageExtension)}
-          translate="no"
-        >
-          <code className={c("pre-placeholder")}>{code}</code>
+        <>
+          <pre
+            ref={combinedRef}
+            className={classNames(
+              c("cm", editorState, languageExtension),
+              cmClassName,
+              tokensClassName
+            )}
+            translate="no"
+          >
+            <code
+              className={classNames(c("pre-placeholder"), placeholderClassName)}
+              style={{ marginLeft: gutterLineOffset() }}
+            >
+              {syntaxHighlightRender}
+            </code>
+          </pre>
 
           {readOnly && showReadOnly && (
-            <span className={c("read-only")}>Read-only</span>
+            <span className={classNames(c("read-only"), readOnlyClassName)}>
+              Read-only
+            </span>
           )}
-        </pre>
+        </>
       );
     }
 
@@ -428,27 +479,38 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
-        className={c("cm", editorState, languageExtension)}
+        className={classNames(
+          c("cm", editorState, languageExtension),
+          cmClassName,
+          tokensClassName
+        )}
         onKeyDown={handleContainerKeyDown}
         role="group"
         tabIndex={0}
         translate="no"
+        suppressHydrationWarning
       >
         <pre
-          className={c("pre-placeholder")}
-          style={{
-            marginLeft: showLineNumbers ? 28 : 0, // gutter line offset
-          }}
+          className={classNames(c("pre-placeholder"), placeholderClassName)}
+          style={{ marginLeft: gutterLineOffset() }}
         >
-          {code}
+          {syntaxHighlightRender}
         </pre>
 
         <>
-          <p id={`enter-instructions-${ariaId}`} style={{ display: "none" }}>
+          <p
+            id={`enter-instructions-${ariaId}`}
+            style={{ display: "none" }}
+            suppressHydrationWarning
+          >
             To enter the code editing mode, press Enter. To exit the edit mode,
             press Escape
           </p>
-          <p id={`exit-instructions-${ariaId}`} style={{ display: "none" }}>
+          <p
+            id={`exit-instructions-${ariaId}`}
+            style={{ display: "none" }}
+            suppressHydrationWarning
+          >
             You are editing the code. To exit the edit mode, press Escape
           </p>
         </>

@@ -1,99 +1,22 @@
-import { ClasserProvider } from "@code-hike/classer";
-import type { SandpackLogLevel } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
 import { SandpackLayout } from "../common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
-import type { PreviewProps } from "../components/Preview";
 import { SandpackPreview } from "../components/Preview";
-import type { SandpackProviderProps } from "../contexts/sandpackContext";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import type {
-  SandpackCodeOptions,
-  FileResolver,
+  SandpackInternal,
+  SandpackInternalOptions,
+  TemplateFiles,
   SandpackFiles,
-  SandpackInitMode,
   SandpackPredefinedTemplate,
-  SandpackSetup,
-  SandpackThemeProp,
 } from "../types";
 
-export interface SandpackProps {
-  files?: SandpackFiles;
-  template?: SandpackPredefinedTemplate;
-  customSetup?: SandpackSetup;
-
-  theme?: SandpackThemeProp;
-
-  options?: {
-    openPaths?: string[];
-    activePath?: string;
-
-    editorWidthPercentage?: number;
-    editorHeight?: React.CSSProperties["height"];
-    classes?: Record<string, string>;
-
-    showNavigator?: boolean;
-    showLineNumbers?: boolean;
-    showInlineErrors?: boolean;
-    showOpenInCodeSandbox?: boolean;
-    showTabs?: boolean;
-    closableTabs?: boolean;
-    wrapContent?: boolean;
-    /**
-     * This provides a way to control how some components are going to
-     * be initialized on the page. The CodeEditor and the Preview components
-     * are quite expensive and might overload the memory usage, so this gives
-     * a certain control of when to initialize them.
-     */
-    initMode?: SandpackInitMode;
-    initModeObserverOptions?: IntersectionObserverInit;
-
-    bundlerURL?: string;
-    startRoute?: string;
-    skipEval?: boolean;
-    fileResolver?: FileResolver;
-    externalResources?: string[];
-
-    autorun?: boolean;
-    recompileMode?: "immediate" | "delayed";
-    recompileDelay?: number;
-    codeEditor?: SandpackCodeOptions;
-
-    /**
-     * This disables editing of content by the user in all files.
-     */
-    readOnly?: boolean;
-    /**
-     * Controls the visibility of Read-only label, which will only
-     * appears when `readOnly` is `true`
-     */
-    showReadOnly?: boolean;
-    logLevel?: SandpackLogLevel;
-  };
-}
-
 /**
- * @category Presets
+ * @hidden
  */
-export const Sandpack: React.FC<SandpackProps> = (props) => {
-  // Combine files with customSetup to create the user input structure
-  const userInputSetup = props.files
-    ? {
-        ...props.customSetup,
-        files: {
-          ...props.customSetup?.files,
-          ...props.files,
-        },
-      }
-    : props.customSetup;
-
-  const previewOptions: PreviewProps = {
-    showNavigator: props.options?.showNavigator,
-    showOpenInCodeSandbox: props?.options?.showOpenInCodeSandbox,
-  };
-
+export const Sandpack: SandpackInternal = (props) => {
   const codeEditorOptions: CodeEditorProps = {
     showTabs: props.options?.showTabs,
     showLineNumbers: props.options?.showLineNumbers,
@@ -105,14 +28,21 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     extensionsKeymap: props.options?.codeEditor?.extensionsKeymap,
     readOnly: props.options?.readOnly,
     showReadOnly: props.options?.showReadOnly,
+    id: props.options?.id,
   };
 
-  const providerOptions: SandpackProviderProps = {
-    openPaths: props.options?.openPaths,
-    activePath: props.options?.activePath,
+  const providerOptions: SandpackInternalOptions<
+    SandpackFiles,
+    SandpackPredefinedTemplate
+  > = {
+    /**
+     * TS-why: Type 'string | number | symbol' is not assignable to type 'string'
+     */
+    activeFile: props.options?.activeFile as unknown as string,
+    visibleFiles: props.options?.visibleFiles as unknown as string[],
     recompileMode: props.options?.recompileMode,
     recompileDelay: props.options?.recompileDelay,
-    autorun: props.options?.autorun ?? true,
+    autorun: props.options?.autorun,
     bundlerURL: props.options?.bundlerURL,
     startRoute: props.options?.startRoute,
     skipEval: props.options?.skipEval,
@@ -121,43 +51,47 @@ export const Sandpack: React.FC<SandpackProps> = (props) => {
     initModeObserverOptions: props.options?.initModeObserverOptions,
     externalResources: props.options?.externalResources,
     logLevel: props.options?.logLevel,
+    classes: props.options?.classes,
   };
 
-  // Parts are set as `flex` values, so they set the flex shrink/grow
-  // Cannot use width percentages as it doesn't work with
-  // the automatic layout break when the component is under 700px
+  /**
+   * Parts are set as `flex` values, so they set the flex shrink/grow
+   * Cannot use width percentages as it doesn't work with
+   * the automatic layout break when the component is under 700px
+   */
   const editorPart = props.options?.editorWidthPercentage || 50;
   const previewPart = 100 - editorPart;
   const editorHeight = props.options?.editorHeight;
 
   return (
     <SandpackProvider
-      customSetup={userInputSetup}
+      customSetup={props.customSetup}
+      files={props.files as TemplateFiles<SandpackPredefinedTemplate>}
+      options={providerOptions}
       template={props.template}
-      {...providerOptions}
+      theme={props.theme}
     >
-      <ClasserProvider classes={props.options?.classes}>
-        <SandpackLayout theme={props.theme}>
-          <SandpackCodeEditor
-            {...codeEditorOptions}
-            customStyle={{
-              height: editorHeight,
-              flexGrow: editorPart,
-              flexShrink: editorPart,
-              minWidth: 700 * (editorPart / (previewPart + editorPart)),
-            }}
-          />
-          <SandpackPreview
-            {...previewOptions}
-            customStyle={{
-              height: editorHeight,
-              flexGrow: previewPart,
-              flexShrink: previewPart,
-              minWidth: 700 * (previewPart / (previewPart + editorPart)),
-            }}
-          />
-        </SandpackLayout>
-      </ClasserProvider>
+      <SandpackLayout>
+        <SandpackCodeEditor
+          {...codeEditorOptions}
+          style={{
+            height: editorHeight,
+            flexGrow: editorPart,
+            flexShrink: editorPart,
+            minWidth: 700 * (editorPart / (previewPart + editorPart)),
+          }}
+        />
+        <SandpackPreview
+          showNavigator={props.options?.showNavigator}
+          showRefreshButton={props.options?.showRefreshButton}
+          style={{
+            height: editorHeight,
+            flexGrow: previewPart,
+            flexShrink: previewPart,
+            minWidth: 700 * (previewPart / (previewPart + editorPart)),
+          }}
+        />
+      </SandpackLayout>
     </SandpackProvider>
   );
 };

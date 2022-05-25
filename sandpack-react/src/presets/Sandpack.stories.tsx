@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Sandpack } from "./Sandpack";
+import { Sandpack } from "../";
 
 export default {
   title: "presets/Sandpack: options",
@@ -42,7 +42,6 @@ export const CustomSetup: React.FC = () => (
   <Sandpack
     customSetup={{
       entry: "/src/index.tsx",
-      main: "/src/main.tsx",
       dependencies: {
         react: "latest",
         "react-dom": "latest",
@@ -104,16 +103,15 @@ export const Main: React.FC<{test: string}> = ({test}) => {
 }`,
       },
     }}
-    options={{ wrapContent: true }}
-    theme="night-owl"
+    options={{ wrapContent: true, activeFile: "/src/main.tsx" }}
+    theme="dark"
   />
 );
 
 export const ExternalResources: React.FC = () => (
   <Sandpack
     files={{
-      "/App.js": `        
-export default () => {
+      "/App.js": `export default () => {
   return <a
     href="#"
     className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"

@@ -10,28 +10,18 @@ import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { OpenInCodeSandboxButton } from "../../common/OpenInCodeSandboxButton";
 import { SandpackStack } from "../../common/Stack";
 import { useSandpack } from "../../hooks/useSandpack";
+import { css, THEME_PREFIX } from "../../styles";
+import { classNames } from "../../utils/classNames";
 import { generateRandomId } from "../../utils/stringUtils";
 import { Navigator } from "../Navigator";
 
 import { RefreshButton } from "./RefreshButton";
 
-export type ViewportSizePreset =
-  | "iPhone X"
-  | "Pixel 2"
-  | "iPad"
-  | "Moto G4"
-  | "Surface Duo";
-
-export type ViewportSize =
-  | ViewportSizePreset
-  | "auto"
-  | { width: number; height: number };
-
-export type ViewportOrientation = "portrait" | "landscape";
+/**
+ * @category Components
+ */
 export interface PreviewProps {
-  customStyle?: React.CSSProperties;
-  viewportSize?: ViewportSize;
-  viewportOrientation?: ViewportOrientation;
+  style?: React.CSSProperties;
   showNavigator?: boolean;
   showOpenInCodeSandbox?: boolean;
   showRefreshButton?: boolean;
@@ -42,6 +32,38 @@ export interface PreviewProps {
 
 export { RefreshButton };
 
+const previewClassName = css({
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  background: "white",
+  overflow: "auto",
+  position: "relative",
+});
+
+const previewIframe = css({
+  border: "0",
+  outline: "0",
+  width: "100%",
+  height: "100%",
+  minHeight: "160px",
+  maxHeight: "2000px",
+  flex: 1,
+});
+
+const previewActionsClassName = css({
+  display: "flex",
+  position: "absolute",
+  bottom: "$space$2",
+  right: "$space$2",
+  zIndex: "$overlay",
+
+  "> *": { marginLeft: "$space$2" },
+});
+
+/**
+ * @category Components
+ */
 export interface SandpackPreviewRef {
   /**
    * Retrieve the current Sandpack client instance from preview
@@ -59,19 +81,19 @@ export interface SandpackPreviewRef {
  */
 export const SandpackPreview = React.forwardRef<
   SandpackPreviewRef,
-  PreviewProps
+  PreviewProps & React.HTMLAttributes<HTMLDivElement>
 >(
   (
     {
-      customStyle,
       showNavigator = false,
       showRefreshButton = true,
       showOpenInCodeSandbox = true,
       showSandpackErrorOverlay = true,
       actionsChildren = <></>,
-      viewportSize = "auto",
-      viewportOrientation = "portrait",
+      className,
       children,
+      style,
+      ...props
     },
     ref
   ) => {
@@ -88,7 +110,7 @@ export const SandpackPreview = React.forwardRef<
       loadingScreenRegisteredRef,
     } = sandpack;
 
-    const c = useClasser("sp");
+    const c = useClasser(THEME_PREFIX);
     const clientId = React.useRef<string>(generateRandomId());
     const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
 
@@ -134,42 +156,41 @@ export const SandpackPreview = React.forwardRef<
       }
 
       iframeRef.current.src = newUrl;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     };
-
-    const viewportStyle = computeViewportSize(
-      viewportSize,
-      viewportOrientation
-    );
 
     return (
       <SandpackStack
-        customStyle={{
-          ...customStyle,
-          ...viewportStyle,
+        className={className}
+        style={{
+          ...style,
         }}
+        {...props}
       >
         {showNavigator ? (
           <Navigator clientId={clientId.current} onURLChange={handleNewURL} />
         ) : null}
 
-        <div className={c("preview-container")}>
+        <div className={classNames(c("preview-container"), previewClassName)}>
           <iframe
             ref={iframeRef}
-            className={c("preview-iframe")}
+            className={classNames(c("preview-iframe"), previewIframe)}
             style={{
               // set height based on the content only in auto mode
               // and when the computed height was returned by the bundler
-              height:
-                viewportSize === "auto" && iframeComputedHeight
-                  ? iframeComputedHeight
-                  : undefined,
+              height: iframeComputedHeight ? iframeComputedHeight : undefined,
             }}
             title="Sandpack Preview"
           />
 
           {showSandpackErrorOverlay ? <ErrorOverlay /> : null}
 
-          <div className={c("preview-actions")}>
+          <div
+            className={classNames(
+              c("preview-actions"),
+              previewActionsClassName
+            )}
+          >
             {actionsChildren}
             {!showNavigator && showRefreshButton && status === "running" ? (
               <RefreshButton clientId={clientId.current} />
@@ -186,32 +207,3 @@ export const SandpackPreview = React.forwardRef<
     );
   }
 );
-
-const VIEWPORT_SIZE_PRESET_MAP: Record<
-  ViewportSizePreset,
-  { x: number; y: number }
-> = {
-  "iPhone X": { x: 375, y: 812 },
-  iPad: { x: 768, y: 1024 },
-  "Pixel 2": { x: 411, y: 731 },
-  "Moto G4": { x: 360, y: 640 },
-  "Surface Duo": { x: 540, y: 720 },
-};
-
-const computeViewportSize = (
-  viewport: ViewportSize,
-  orientation: ViewportOrientation
-): { width?: number; height?: number } => {
-  if (viewport === "auto") {
-    return {};
-  }
-
-  if (typeof viewport === "string") {
-    const { x, y } = VIEWPORT_SIZE_PRESET_MAP[viewport];
-    return orientation === "portrait"
-      ? { width: x, height: y }
-      : { width: y, height: x };
-  }
-
-  return viewport;
-};

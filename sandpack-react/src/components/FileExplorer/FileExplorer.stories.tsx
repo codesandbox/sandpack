@@ -7,7 +7,7 @@ import { SandpackProvider } from "../../contexts/sandpackContext";
 import { Directory } from "./Directory";
 import { File } from "./File";
 
-import { FileExplorer } from "./";
+import { SandpackFileExplorer } from "./";
 
 export default {
   title: "components/File Explorer",
@@ -18,15 +18,15 @@ export const Component: React.FC = () => (
     <SandpackProvider
       customSetup={{
         entry: "/index.tsx",
-        files: {
-          "/index.tsx": "",
-          "/src/app.tsx": "",
-          "/src/components/button.tsx": "",
-        },
+      }}
+      files={{
+        "/index.tsx": "",
+        "/src/app.tsx": "",
+        "/src/components/button.tsx": "",
       }}
     >
       <SandpackLayout>
-        <FileExplorer />
+        <SandpackFileExplorer />
         <SandpackCodeEditor />
       </SandpackLayout>
     </SandpackProvider>
@@ -34,15 +34,16 @@ export const Component: React.FC = () => (
     <SandpackProvider
       customSetup={{
         entry: "/index.tsx",
-        files: {
-          "/index.tsx": "",
-          "/src/app.tsx": "",
-          "/src/components/button.tsx": "",
-        },
       }}
+      files={{
+        "/index.tsx": "",
+        "/src/app.tsx": "",
+        "/src/components/button.tsx": "",
+      }}
+      theme="dark"
     >
-      <SandpackLayout theme="night-owl">
-        <FileExplorer />
+      <SandpackLayout>
+        <SandpackFileExplorer />
         <SandpackCodeEditor />
       </SandpackLayout>
     </SandpackProvider>
@@ -52,16 +53,16 @@ export const Component: React.FC = () => (
 export const LongFileTree: React.FC = () => (
   <SandpackProvider
     customSetup={{
-      entry: "/index.tsx",
-      files: new Array(20).fill(" ").reduce((acc, _curr, index) => {
-        acc[`/src/com${index}.js`] = "";
-
-        return acc;
-      }, {}),
+      entry: "/src/com0.js",
     }}
+    files={new Array(20).fill(" ").reduce((acc, _curr, index) => {
+      acc[`/src/com${index}.js`] = "";
+
+      return acc;
+    }, {})}
   >
     <SandpackLayout>
-      <FileExplorer />
+      <SandpackFileExplorer />
     </SandpackLayout>
   </SandpackProvider>
 );
@@ -78,7 +79,7 @@ export const DirectoryIconStory: React.FC = () => (
   <SandpackProvider>
     <SandpackLayout>
       <Directory
-        activePath="file.ts"
+        activeFile="file.ts"
         depth={1}
         files={{ App: { code: "" } }}
         prefixedPath="/src"

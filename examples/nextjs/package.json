@@ -1,0 +1,22 @@
+{
+  "name": "nextjs",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@codesandbox/sandpack-react": "*",
+    "@codesandbox/sandpack-themes": "*",
+    "next": "12.1.6",
+    "react": "18.1.0",
+    "react-dom": "18.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.9",
+    "typescript": "4.6.4"
+  }
+}

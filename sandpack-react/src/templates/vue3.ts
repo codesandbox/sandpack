@@ -1,6 +1,7 @@
-import type { SandboxTemplate } from "../types";
-
-export const VUE_TEMPLATE_3: SandboxTemplate = {
+/**
+ * @category Template
+ */
+export const VUE_TEMPLATE_3 = {
   files: {
     "/src/App.vue": {
       code: `<template>
@@ -14,7 +15,7 @@ import { ref } from "vue";
 export default {
    name: "App",
    setup() {
-      const helloWorld = ref("hello world");
+      const helloWorld = ref("Hello World");
       return { helloWorld };
    }
 };

@@ -19,10 +19,10 @@ export const Component: Story<CodeEditorProps> = (args) => (
   <SandpackProvider
     customSetup={{
       entry: "/index.js",
-      files: {
-        "/index.js": {
-          code: 'const title = "This is a simple code editor"',
-        },
+    }}
+    files={{
+      "/index.js": {
+        code: 'const title = "This is a simple code editor"',
       },
     }}
   >
@@ -32,15 +32,29 @@ export const Component: Story<CodeEditorProps> = (args) => (
   </SandpackProvider>
 );
 
-export const InlineError: React.FC = () => (
+export const ShowTabs: Story<CodeEditorProps> = (args) => (
   <SandpackProvider
     customSetup={{
-      files: {
-        "/App.js": `export default function App() 
-  return <h1>Hello World</h1>
-}
-`,
+      entry: "/index.js",
+    }}
+    files={{
+      "/index.js": {
+        code: 'const title = "This is a simple code editor"',
       },
+    }}
+  >
+    <SandpackThemeProvider>
+      <SandpackCodeEditor showTabs {...args} />
+    </SandpackThemeProvider>
+  </SandpackProvider>
+);
+
+export const InlineError: React.FC = () => (
+  <SandpackProvider
+    files={{
+      "/App.js": `export default function App() 
+  return <h1>Hello World</h1>
+}`,
     }}
     template="react"
   >
@@ -84,13 +98,13 @@ export const ReadOnly: React.FC = () => {
     <>
       <p>Read-only by file</p>
       <Sandpack
-        customSetup={{ entry: "/index.tsx", main: "/App.tsx" }}
+        customSetup={{ entry: "/index.tsx" }}
         files={{
           "/index.tsx": { code: "", hidden: true },
-          "/src/App.tsx": { code: "Hello", readOnly: true, active: true },
+          "/App.tsx": { code: "Hello", readOnly: true, active: true },
           "/src/components/button.tsx": { code: "World", readOnly: false },
         }}
-        options={{ showTabs: true }}
+        options={{ showTabs: true, activeFile: "/App.tsx" }}
         template="react-ts"
       />
 

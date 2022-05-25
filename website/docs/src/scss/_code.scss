@@ -1,23 +1,17 @@
 pre {
   font: inherit;
   background: #151515;
+  padding: 0;
 }
 
-code {
+.sp-code-editor {
   border-radius: 6px;
 }
 
 .sp-wrapper {
-  --sp-border-radius: var(--sandpack-border-radius) !important;
-
   .sp-layout {
     border: 0;
   }
-}
-
-.sp-pre-placeholder {
-  --sp-colors-fg-active: #f0fdaf;
-  display: block;
 }
 
 .nestedSandpack > .sp-wrapper > .sp-layout {

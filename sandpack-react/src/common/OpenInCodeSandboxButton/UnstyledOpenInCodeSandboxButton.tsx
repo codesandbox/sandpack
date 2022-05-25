@@ -43,6 +43,9 @@ const getFileParameters = (
   });
 };
 
+/**
+ * @category Components
+ */
 export const UnstyledOpenInCodeSandboxButton: React.FC<
   React.HtmlHTMLAttributes<unknown>
 > = ({ children, ...props }) => {
@@ -59,7 +62,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
         const searchParams = new URLSearchParams({
           parameters: params,
           query: new URLSearchParams({
-            file: sandpack.activePath,
+            file: sandpack.activeFile,
             "from-sandpack": "true",
           }).toString(),
         });
@@ -71,7 +74,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
         clearTimeout(timer);
       };
     },
-    [sandpack.activePath, sandpack.environment, sandpack.files]
+    [sandpack.activeFile, sandpack.environment, sandpack.files]
   );
 
   /**

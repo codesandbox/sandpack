@@ -106,10 +106,10 @@ export const Examples: React.FC = () => {
               >
                 <SandpackProvider
                   customSetup={{
-                    files: layoutFiles,
                     dependencies: { "@codesandbox/sandpack-react": "latest" },
                   }}
-                  initMode="user-visible"
+                  files={layoutFiles}
+                  options={{ initMode: "user-visible" }}
                   template="react"
                 >
                   <ClasserProvider

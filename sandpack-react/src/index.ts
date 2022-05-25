@@ -3,22 +3,26 @@
  *
  * ```jsx
  * import { Sandpack } from "@codesandbox/sandpack-react";
- * import "@codesandbox/sandpack-react/dist/index.css";
  *
  * <Sandpack template="react" />;
  * ```
  * @module
  */
 
-export * from "./presets/";
+// Components
+export * from "./icons";
 export * from "./components";
 export * from "./common";
 export * from "./hooks";
 
-export * from "./contexts/sandpackContext";
+// Contexts
+export * from "@code-hike/classer";
+export { getCssText as getSandpackCssText } from "./styles";
 export * from "./contexts/themeContext";
+export * from "./contexts/sandpackContext";
+
+// Presets
+export * from "./presets/";
 export * from "./themes";
 export * from "./types";
-export * from "./icons";
-
-export * from "@code-hike/classer";
+export * from "./templates";

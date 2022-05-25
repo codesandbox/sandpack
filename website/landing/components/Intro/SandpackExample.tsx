@@ -14,7 +14,9 @@ const SandpackExampleContext = createContext<Context>({
   options: {},
 });
 
-export const SandpackExampleProvider: React.FC = ({ children }) => {
+export const SandpackExampleProvider: React.FC<{
+  children?: React.ReactNode;
+}> = ({ children }) => {
   const [options, setOptions] = useState({
     options: {
       showNavigator: true,

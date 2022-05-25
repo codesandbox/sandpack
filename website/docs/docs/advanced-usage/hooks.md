@@ -27,9 +27,9 @@ import { useSandpack } from "@codesandbox/sandpack-react";
 
 const SimpleCodeViewer = () => {
   const { sandpack } = useSandpack();
-  const { files, activePath } = sandpack;
+  const { files, activeFile } = sandpack;
 
-  const code = files[activePath].code;
+  const code = files[activeFile].code;
   return <pre>{code}</pre>;
 };
 ```
@@ -38,13 +38,13 @@ The `sandpack` object is available in any component and exposes all the internal
 state:
 
 - the `files` including all the setup/template files
-- the `activePath` / `openPaths` fields
+- the `activeFile` / `visibleFiles` fields
 - the `error` object, if any
 - multiple functions for changing the state of sandpack: `updateCurrentFile`,
   `setActiveFile`, etc.
 
 In the component above, you get the active code string by calling
-`files[activePath].code`, so any change of state will trigger a re-render of the
+`files[activeFile].code`, so any change of state will trigger a re-render of the
 component and an update of the code.
 
 We can test this with the `CustomSandpack` we implemented at the previous step.
@@ -96,18 +96,18 @@ const CustomRefreshButton = () => {
 
 Plus, `useSandpack` exposes a bunch of methods that you can use to manage the current state of the Sandpack instance:
 
-| Method          | Description                                         |
-| --------------- | --------------------------------------------------- |
-| `closeFile`     | Close the given path in the editor                  |
-| `deleteFile`    | Delete the given path in the editor                 |
-| `dispatch`      | Sends a message to the bundler                      |
-| `listen`        | Listens for messages from the bundler               |
-| `openFile`      | Open the given path in the editor                   |
-| `resetAllFiles` | Reset all files for all paths to the original state |
-| `resetFile`     | Reset the code for a given path                     |
-| `setActiveFile` | Set a specific file as active in a given path       |
-| `updateFile`    | Update the content of a file in a given path or multiple files       |
-| `updateCurrentFile` | Update the content of the current file |
+| Method              | Description                                                    |
+| ------------------- | -------------------------------------------------------------- |
+| `closeFile`         | Close the given path in the editor                             |
+| `deleteFile`        | Delete the given path in the editor                            |
+| `dispatch`          | Sends a message to the bundler                                 |
+| `listen`            | Listens for messages from the bundler                          |
+| `openFile`          | Open the given path in the editor                              |
+| `resetAllFiles`     | Reset all files for all paths to the original state            |
+| `resetFile`         | Reset the code for a given path                                |
+| `setActiveFile`     | Set a specific file as active in a given path                  |
+| `updateFile`        | Update the content of a file in a given path or multiple files |
+| `updateCurrentFile` | Update the content of the current file                         |
 
 ## useSandpackNavigation
 

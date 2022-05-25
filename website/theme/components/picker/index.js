@@ -1,3 +1,4 @@
+import humanizeString from "humanize-string";
 import { useState, useRef } from "react";
 import { SketchPicker } from "react-color";
 
@@ -18,28 +19,14 @@ export function PickerContainer({ children, advanced, ...props }) {
 
 export default function PickerItem({
   advanced,
-  colorKey,
   label,
   color,
-  updateColor,
-  updateTheme,
+  onChange,
   ...props
 }) {
   const [isPickerOpen, openPicker] = useState(false);
   const ref = useRef();
   useOnClickOutside(ref, () => openPicker(false));
-
-  const handleChangeComplete = (color) => {
-    if (updateColor) {
-      updateColor(colorKey, color.hex);
-    }
-
-    if (updateTheme) {
-      updateTheme(colorKey, color.hex);
-    }
-
-    //openPicker(false);
-  };
 
   return (
     <div
@@ -59,29 +46,20 @@ export default function PickerItem({
 
       {isPickerOpen && (
         <div ref={ref} className={styles.colorPicker}>
-          <SketchPicker color={color} onChangeComplete={handleChangeComplete} />
+          <SketchPicker color={color} onChangeComplete={onChange} />
         </div>
       )}
     </div>
   );
 }
 
-export function PickerToggle({
-  color,
-  modeKey,
-  label,
-  active,
-  updateMode,
-  ...props
-}) {
+export function PickerToggle({ color, label, active, onClick, ...props }) {
   return (
     <div className={styles.pickerItem} {...props}>
       <div className={`${styles.pickerWrapper} ${active ? styles.active : ""}`}>
         <button
           className={styles.picker}
-          onClick={() => {
-            updateMode(modeKey);
-          }}
+          onClick={onClick}
           style={{ backgroundColor: color }}
         ></button>
       </div>
@@ -90,36 +68,20 @@ export function PickerToggle({
   );
 }
 
-export function PickerTheme({
-  colors,
-  modeKey,
-  label,
-  active,
-  updateMode,
-  updateModeFromGallery,
-  ...props
-}) {
+export function PickerTheme({ colors, label, active, onClick, ...props }) {
   const [color1, color2] = colors;
   return (
     <div className={styles.pickerItem} {...props}>
       <div className={`${styles.pickerWrapper} ${active ? styles.active : ""}`}>
         <button
           className={styles.picker}
-          onClick={() => {
-            if (updateModeFromGallery) {
-              updateModeFromGallery(modeKey);
-            }
-
-            if (updateMode) {
-              updateMode(modeKey);
-            }
-          }}
+          onClick={onClick}
           style={{
-            background: `linear-gradient(-45deg, ${color1} 50%, ${color2} 50%)`,
+            background: `linear-gradient(-45deg, ${color2} 50%, ${color1} 50%)`,
           }}
         ></button>
       </div>
-      <span className={styles.label}>{label}</span>
+      <span className={styles.label}>{humanizeString(label)}</span>
     </div>
   );
 }

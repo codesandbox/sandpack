@@ -48,7 +48,9 @@ const ClipboardToast = styled("div", {
   },
 });
 
-const ClipboardProvider: React.FC = ({ children }) => {
+const ClipboardProvider: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
   const [toastVisible, setToastVisible] = useState(false);
 
   const copyToClipboard = useCallback(() => {

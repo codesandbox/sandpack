@@ -1,4 +1,4 @@
-<img style="width:100%" src="https://user-images.githubusercontent.com/4838076/143581035-ebee5ba2-9cb1-4fe8-a05b-2f44bd69bb4b.gif" alt="Component toolkit for live running code editing experiences" />
+<img style="width:100%" src="https://user-images.githubusercontent.com/4838076/163777661-a44ec0a9-ee7c-483a-bdbb-7898ba665f68.gif" alt="Component toolkit for live running code editing experiences" />
 
 # Sandpack
 
@@ -19,7 +19,6 @@ React components that give you the power of editable sandboxes that run in the b
 
 ```jsx
 import { Sandpack } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";
 
 <Sandpack template="react" />;
 ```
@@ -34,7 +33,7 @@ Start with the [Sandpack introduction](https://sandpack.codesandbox.io/docs) pag
 
 The documentation is divided into following sections:
 
--   [Getting Started](https://sandpack.codesandbox.io/docs/getting-started/install)
--   [Advanced Guides](https://sandpack.codesandbox.io/docs/advanced-usage/provider)
--   [API reference](https://sandpack.codesandbox.io/docs/api/client)
--   [Releases](https://sandpack.codesandbox.io/docs/releases)
+- [Getting Started](https://sandpack.codesandbox.io/docs/getting-started/install)
+- [Advanced Guides](https://sandpack.codesandbox.io/docs/advanced-usage/provider)
+- [API reference](https://sandpack.codesandbox.io/docs/api/client)
+- [Releases](https://sandpack.codesandbox.io/docs/releases)

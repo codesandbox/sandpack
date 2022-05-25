@@ -9,6 +9,7 @@ import {
   SandpackLayout,
   useSandpack,
 } from "@codesandbox/sandpack-react";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { useEffect, useLayoutEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -35,9 +36,9 @@ export const LayoutExample: React.FC = () => {
     useLayoutExampleContext();
 
   useLayoutEffect(() => {
-    setLayoutFiles(sandpack.activePath, code);
+    setLayoutFiles(sandpack.activeFile, code);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code, sandpack.activePath]);
+  }, [code, sandpack.activeFile]);
 
   useEffect(() => {
     Object.entries(layoutFiles).forEach(([filename, fileCode]) => {
@@ -74,7 +75,7 @@ export const LayoutExample: React.FC = () => {
           <CodeWrapper
             css={{
               ".sp-wrapper": {
-                height: "480px",
+                height: "420px",
               },
 
               ".sp-tabs": {
@@ -88,12 +89,12 @@ export const LayoutExample: React.FC = () => {
                 borderBottomRightRadius: "16px",
               },
               ".sp-cm": {
-                height: "440px",
+                height: "380px",
               },
             }}
           >
             <Caption>Code snippet</Caption>
-            <SandpackThemeProvider theme="sandpack-dark">
+            <SandpackThemeProvider theme={sandpackDark}>
               <SandpackCodeEditor showInlineErrors />
             </SandpackThemeProvider>
           </CodeWrapper>
@@ -103,9 +104,9 @@ export const LayoutExample: React.FC = () => {
           <Caption>Sandpack preview</Caption>
           <SandpackProvider
             customSetup={{
-              files: layoutFiles,
               dependencies: { "@codesandbox/sandpack-react": "latest" },
             }}
+            files={layoutFiles}
             template="react"
           >
             <ClasserProvider

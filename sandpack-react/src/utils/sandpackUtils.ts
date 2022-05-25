@@ -4,19 +4,19 @@ import type {
 } from "@codesandbox/sandpack-client";
 import { addPackageJSONIfNeeded } from "@codesandbox/sandpack-client";
 
-import type { SandpackProviderProps } from "../contexts/sandpackContext";
 import { SANDBOX_TEMPLATES } from "../templates";
 import type {
-  SandboxEnvironment,
   SandboxTemplate,
-  SandpackFiles,
   SandpackPredefinedTemplate,
+  SandpackProviderProps,
   SandpackSetup,
+  SandpackFiles,
+  SandboxEnvironment,
 } from "../types";
 
 export interface SandpackContextInfo {
-  activePath: string;
-  openPaths: string[];
+  activeFile: string;
+  visibleFiles: string[];
   files: Record<string, SandpackBundlerFile>;
   environment: SandboxEnvironment;
 }
@@ -25,96 +25,146 @@ export const getSandpackStateFromProps = (
   props: SandpackProviderProps
 ): SandpackContextInfo => {
   // Merge predefined template with custom setup
-  const projectSetup = getSetup(props.template, props.customSetup);
+  const projectSetup = getSetup({
+    template: props.template,
+    customSetup: props.customSetup,
+    files: props.files,
+  });
 
-  // openPaths and activePath override the setup flags
-  let openPaths = props.openPaths ?? [];
-  let activePath = props.activePath;
+  // visibleFiles and activeFile override the setup flags
+  let visibleFiles = props.options?.visibleFiles ?? [];
+  let activeFile = props.options?.activeFile;
 
-  if (openPaths.length === 0 && props.customSetup?.files) {
-    const inputFiles = props.customSetup.files;
+  if (visibleFiles.length === 0 && props?.files) {
+    const inputFiles = props.files;
 
     // extract open and active files from the custom input files
     Object.keys(inputFiles).forEach((filePath) => {
       const file = inputFiles[filePath];
       if (typeof file === "string") {
-        openPaths.push(filePath);
+        visibleFiles.push(filePath);
         return;
       }
 
-      if (!activePath && file.active) {
-        activePath = filePath;
+      if (!activeFile && file.active) {
+        activeFile = filePath;
         if (file.hidden === true) {
-          openPaths.push(filePath); // active file needs to be available even if someone sets it as hidden by accident
+          visibleFiles.push(filePath); // active file needs to be available even if someone sets it as hidden by accident
         }
       }
 
       if (!file.hidden) {
-        openPaths.push(filePath);
+        visibleFiles.push(filePath);
       }
     });
   }
 
-  if (openPaths.length === 0) {
+  if (visibleFiles.length === 0) {
     // If no files are received, use the project setup / template
-    openPaths = Object.keys(projectSetup.files).reduce<string[]>((acc, key) => {
-      if (!projectSetup.files[key].hidden) {
-        acc.push(key);
-      }
-
-      return acc;
-    }, []);
+    visibleFiles = [projectSetup.main];
   }
 
-  // If no activePath is specified, use the first open file
-  if (!activePath || !projectSetup.files[activePath]) {
-    activePath = projectSetup.main || openPaths[0];
+  // Make sure it resolves the entry file
+  if (!projectSetup.files[projectSetup.entry]) {
+    /* eslint-disable */
+    // @ts-ignore
+    projectSetup.entry = resolveFile(projectSetup.entry, projectSetup.files);
+    /* eslint-enable */
+  }
+
+  if (!activeFile && projectSetup.main) {
+    activeFile = projectSetup.main;
+  }
+
+  // If no activeFile is specified, use the first open file
+  if (!activeFile || !projectSetup.files[activeFile]) {
+    activeFile = visibleFiles[0];
   }
 
   // If for whatever reason the active path was not set as open, set it
-  if (!openPaths.includes(activePath)) {
-    openPaths.push(activePath);
-  }
-
-  if (!projectSetup.files[activePath]) {
-    throw new Error(
-      `${activePath} was set as the active file but was not provided`
-    );
+  if (!visibleFiles.includes(activeFile)) {
+    visibleFiles.push(activeFile);
   }
 
   const files = addPackageJSONIfNeeded(
     projectSetup.files,
-    projectSetup.dependencies || {},
-    projectSetup.devDependencies || {},
+    projectSetup.dependencies ?? {},
+    projectSetup.devDependencies ?? {},
     projectSetup.entry
   );
 
-  const environment = projectSetup.environment;
-  const existOpenPath = openPaths.filter((file) => files[file]);
+  const existOpenPath = visibleFiles.filter((path) => files[path]);
 
-  return { openPaths: existOpenPath, activePath, files, environment };
+  return {
+    visibleFiles: existOpenPath,
+    activeFile,
+    files,
+    environment: projectSetup.environment,
+  };
 };
 
-// The template is predefined (eg: react, vue, vanilla)
-// The setup can overwrite anything from the template (eg: files, dependencies, environment, etc.)
-export const getSetup = (
-  template?: SandpackPredefinedTemplate,
-  inputSetup?: SandpackSetup
-): SandboxTemplate => {
-  // The input setup might have files in the simple form Record<string, string>
-  // so we convert them to the sandbox template format
+export const resolveFile = (
+  path: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  files: Record<string, any>
+): string | undefined => {
+  if (!path) return undefined;
 
-  const setup = createSetupFromUserInput(inputSetup);
+  let resolvedPath = undefined;
+
+  let index = 0;
+  const strategies = [".js", ".jsx", ".ts", ".tsx"];
+  const leadingSlash = Object.keys(files).every((file) => file.startsWith("/"));
+
+  while (!resolvedPath && index < strategies.length) {
+    const slashPath = (): string => {
+      if (path.startsWith("/")) {
+        return leadingSlash ? path : path.replace(/^\/+/, "");
+      }
+
+      return leadingSlash ? `/${path}` : path;
+    };
+    const removeExtension = slashPath().split(".")[0];
+    const attemptPath = `${removeExtension}${strategies[index]}`;
+
+    if (files[attemptPath] !== undefined) {
+      resolvedPath = attemptPath;
+    }
+
+    index++;
+  }
+
+  return resolvedPath;
+};
+
+/**
+ * The template is predefined (eg: react, vue, vanilla)
+ * The setup can overwrite anything from the template (eg: files, dependencies, environment, etc.)
+ */
+export const getSetup = ({
+  files,
+  template,
+  customSetup,
+}: {
+  files?: SandpackFiles;
+  template?: SandpackPredefinedTemplate;
+  customSetup?: SandpackSetup;
+}): SandboxTemplate => {
+  /**
+   * The input setup might have files in the simple form Record<string, string>
+   * so we convert them to the sandbox template format
+   */
+  const setup = createSetupFromUserInput({ customSetup, files });
 
   if (!template) {
     // If not input, default to vanilla
     if (!setup) {
-      return SANDBOX_TEMPLATES.vanilla;
+      return SANDBOX_TEMPLATES.vanilla as SandboxTemplate;
     }
 
     if (!setup.files || Object.keys(setup.files).length === 0) {
       throw new Error(
-        `When using the customSetup without a template, you must pass at least one file for sandpack to work`
+        `[sandpack-react]: without a template, you must pass at least one file`
       );
     }
 
@@ -122,9 +172,11 @@ export const getSetup = (
     return setup as SandboxTemplate;
   }
 
-  const baseTemplate = SANDBOX_TEMPLATES[template];
+  const baseTemplate = SANDBOX_TEMPLATES[template] as SandboxTemplate;
   if (!baseTemplate) {
-    throw new Error(`Invalid template '${template}' provided.`);
+    throw new Error(
+      `[sandpack-react]: invalid template "${template}" provided`
+    );
   }
 
   // If no setup, the template is used entirely
@@ -146,7 +198,7 @@ export const getSetup = (
     entry: setup.entry || baseTemplate.entry,
     main: setup.main || baseTemplate.main,
     environment: setup.environment || baseTemplate.environment,
-  };
+  } as SandboxTemplate;
 };
 
 export const convertedFilesToBundlerFiles = (
@@ -163,23 +215,25 @@ export const convertedFilesToBundlerFiles = (
   }, {});
 };
 
-export const createSetupFromUserInput = (
-  setup?: SandpackSetup
-): Partial<SandboxTemplate> | null => {
-  if (!setup) {
+export const createSetupFromUserInput = ({
+  files,
+  customSetup,
+}: {
+  files?: SandpackFiles;
+  customSetup?: SandpackSetup;
+}): Partial<SandboxTemplate> | null => {
+  if (!files && !customSetup) {
     return null;
   }
 
-  if (!setup.files) {
-    return setup as Partial<SandboxTemplate>;
+  if (!files) {
+    return customSetup as Partial<SandboxTemplate>;
   }
-
-  const { files } = setup;
 
   const convertedFiles = convertedFilesToBundlerFiles(files);
 
   return {
-    ...setup,
+    ...customSetup,
     files: convertedFiles,
   };
 };

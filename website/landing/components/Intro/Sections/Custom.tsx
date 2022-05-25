@@ -6,6 +6,7 @@ import {
   SandpackThemeProvider,
   SandpackCodeEditor,
 } from "@codesandbox/sandpack-react";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -29,9 +30,10 @@ const ORIGINAL_CODE = `<Sandpack
   customSetup={{ 
     dependencies: { 
       "react-markdown": "latest" 
-    }, 
-    files: {
-      "/App.js": \`import ReactMarkdown from 'react-markdown' 
+    }
+  }}
+  files={{
+    "/App.js": \`import ReactMarkdown from 'react-markdown' 
 
 export default function App() {
   return (
@@ -40,7 +42,6 @@ export default function App() {
     </ReactMarkdown>
   )
 }\`
-    }
   }}
 />;`;
 
@@ -81,13 +82,14 @@ export const CustomExample: React.FC = () => {
 
   useEffect(() => {
     if (inView) {
-      const customSetup = parseFromSandpackToJson(code);
+      const customSetup = parseFromSandpackToJson(code, "customSetup");
+      const files = parseFromSandpackToJson(code, "files");
 
-      if (customSetup) {
-        setOptions({ customSetup });
+      if (customSetup && files) {
+        setOptions({ customSetup, files });
       }
     } else {
-      setOptions({ customSetup: {} });
+      setOptions({ customSetup: {}, files: undefined });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code, inView]);
@@ -124,7 +126,7 @@ export const CustomExample: React.FC = () => {
             }}
           >
             <Caption>Code snippet</Caption>
-            <SandpackThemeProvider theme="sandpack-dark">
+            <SandpackThemeProvider theme={sandpackDark}>
               <SandpackCodeEditor ref={codeEditorRef} showTabs={false} />
 
               <RefreshButton
@@ -154,7 +156,12 @@ export const CustomExample: React.FC = () => {
         <SandpackContainerMobile>
           <Caption>Sandpack preview</Caption>
           <SandpackPreview
-            options={{ customSetup: parseFromSandpackToJson(code) }}
+            options={
+              {
+                customSetup: parseFromSandpackToJson(code, "customSetup"),
+                files: parseFromSandpackToJson(code, "files"),
+              } as any
+            }
           />
         </SandpackContainerMobile>
         <SandpackContainerPlaceholder />
@@ -163,9 +170,10 @@ export const CustomExample: React.FC = () => {
   );
 };
 
-const parseFromSandpackToJson = (code: string): any => {
+const parseFromSandpackToJson = (code: string, key: string): any => {
   try {
-    const customSetup = code.match(/customSetup={{([\s\S]*?)}}/)?.[1];
+    const search = new RegExp(`${key}={{([\\s\\S]*?)}}`);
+    const customSetup = code.match(search)?.[1];
     if (!customSetup) return;
 
     const fixString = `{${customSetup}}`

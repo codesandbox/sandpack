@@ -9,9 +9,8 @@ export default {
 
 export const ReactDevTool: React.FC = () => (
   <SandpackProvider
-    customSetup={{
-      files: {
-        "/App.js": `
+    files={{
+      "/App.js": `
 const Container = ({children}) => <div>{children}</div>          
 const Button = () => <p>Button</p>
 
@@ -28,7 +27,6 @@ return (
 )
 }
       `,
-      },
     }}
     template="react"
   >

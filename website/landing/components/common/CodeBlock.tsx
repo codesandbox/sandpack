@@ -3,10 +3,13 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
 } from "@codesandbox/sandpack-react";
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 
 import { Box } from "./Box";
 
-export const CodeBlock: React.FC = ({ children }) => {
+export const CodeBlock: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
   return (
     <Box
       css={{
@@ -14,25 +17,22 @@ export const CodeBlock: React.FC = ({ children }) => {
         paddingTop: "30px !important",
         pre: { padding: 0 },
 
-        ".sp-pre-placeholder": {
-          overflow: "hidden",
-          padding: "10px 5px",
+        ".cm-scroller": {
+          padding: "var(--sp-space-3) 0 !important",
         },
 
-        ".cm-editor": {
+        ".sp-code-editor": {
           borderRadius: "16px",
-          padding: "10px 5px",
+          overflow: "hidden",
         },
       }}
     >
       <SandpackProvider
-        customSetup={{
-          entry: "index.ts",
-          files: { "index.ts": (children as string)?.trim() },
-        }}
-        initMode="immediate"
+        customSetup={{ entry: "index.ts" }}
+        files={{ "index.ts": (children as string)?.trim() }}
+        options={{ initMode: "immediate" }}
       >
-        <SandpackThemeProvider theme="sandpack-dark">
+        <SandpackThemeProvider theme={sandpackDark}>
           <SandpackCodeViewer />
         </SandpackThemeProvider>
       </SandpackProvider>

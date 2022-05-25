@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { SandpackPredefinedTheme } from "@codesandbox/sandpack-react";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
@@ -24,15 +25,8 @@ import {
   THRESHOLD_VIEW,
 } from "./common";
 
-const themeOptions: SandpackPredefinedTheme[] = [
-  "dark",
-  "light",
-  "sandpack-dark",
-  "github-light",
-  "monokai-pro",
-  "night-owl",
-  "aqua-blue",
-];
+const AnimatePresenceTyped = AnimatePresence as any;
+const themeOptions: SandpackPredefinedTheme[] = ["dark", "light", "auto"];
 
 export const ThemeExample: React.FC = () => {
   const { ref, inView } = useInView({ threshold: THRESHOLD_VIEW });
@@ -60,7 +54,7 @@ export const ThemeExample: React.FC = () => {
     if (inView) {
       setTheme("light");
     } else {
-      setTheme("sandpack-dark");
+      setTheme("dark");
     }
   }, [higherMobile, inView]);
 
@@ -104,7 +98,7 @@ export const ThemeExample: React.FC = () => {
 
           <div style={{ height: 0, marginTop: "-24px" }}>
             {toolTipVisibility && higherMobile && (
-              <AnimatePresence>
+              <AnimatePresenceTyped>
                 <ToolTip
                   animate={{
                     opacity: 1,
@@ -120,7 +114,7 @@ export const ThemeExample: React.FC = () => {
                 >
                   Click to change
                 </ToolTip>
-              </AnimatePresence>
+              </AnimatePresenceTyped>
             )}
           </div>
         </Content>

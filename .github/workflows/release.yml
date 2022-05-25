@@ -59,7 +59,7 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14.16.1"
+          node-version: "14.17.0"
 
       - name: Setup | Authenticate with Registry
         run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
@@ -83,12 +83,13 @@ jobs:
           path: bundler
 
       - name: Prepare | Lerna Version
-        run: yarn lerna version --yes --no-private
+        run: yarn lerna version major --yes --no-private
 
       - name: Prepare | Build
         run: |
           yarn workspace @codesandbox/sandpack-client build:publish 
           yarn workspace @codesandbox/sandpack-react build:publish
+          yarn workspace @codesandbox/sandpack-themes build:publish
 
       - name: Sizebot | Generate
         run: node scripts/sizebot/createCurrentSizes.js

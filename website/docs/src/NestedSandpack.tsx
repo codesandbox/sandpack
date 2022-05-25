@@ -22,8 +22,7 @@ const NestedSandpack: React.FC<{ nestedProps?: string; setupCode?: string }> = (
   const appCode = `${
     setupCode
       ? setupCode
-      : `import { Sandpack } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";`
+      : `import { Sandpack } from "@codesandbox/sandpack-react";`
   }
 
 export default function App() {
@@ -46,7 +45,8 @@ export default function App() {
       <Sandpack
         customSetup={{
           dependencies: {
-            "@codesandbox/sandpack-react": "latest",
+            "@codesandbox/sandpack-react": "1.1.0-alpha.1",
+            "@codesandbox/sandpack-themes": "1.1.0-alpha.1",
           },
         }}
         files={{

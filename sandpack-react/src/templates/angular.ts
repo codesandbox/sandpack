@@ -1,84 +1,83 @@
-import type { SandboxTemplate } from "../types";
-
-export const ANGULAR_TEMPLATE: SandboxTemplate = {
+/**
+ * @category Template
+ */
+export const ANGULAR_TEMPLATE = {
   files: {
     "/src/app/app.component.css": {
       code: `div {
-    text-align: center;
-}              
+  text-align: center;
+}        
 `,
     },
     "/src/app/app.component.html": {
       code: `<div>
-<h1>
-    {{ helloWorld }}
-</h1>
-</div>         
+<h1>{{ helloWorld }}</h1>
+</div>     
 `,
     },
     "/src/app/app.component.ts": {
       code: `import { Component } from "@angular/core";
 
 @Component({
-    selector: "app-root",
-    templateUrl: "./app.component.html",
-     styleUrls: ["./app.component.css"]
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-    helloWorld = "hello world";
-}                   
+  helloWorld = "Hello World";
+}           
 `,
     },
     "/src/app/app.module.ts": {
       code: `import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-            
+      
 import { AppComponent } from "./app.component";
-            
+      
 @NgModule({
-    declarations: [AppComponent],
-    imports: [BrowserModule],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}           
+export class AppModule {}       
 `,
     },
     "/src/index.html": {
       code: `<!doctype html>
 <html lang="en">
-            
+      
 <head>
-    <meta charset="utf-8">
-    <title>Angular</title>
-    <base href="/">
-            
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="utf-8">
+  <title>Angular</title>
+  <base href="/">
+      
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
-            
+      
 <body>
    <app-root></app-root>
 </body>
-            
+      
 </html>
 `,
     },
     "/src/main.ts": {
       code: `import { enableProdMode } from "@angular/core";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
-            
-import { AppModule } from "./app/app.module";            
+      
+import { AppModule } from "./app/app.module";      
 
 platformBrowserDynamic()
-    .bootstrapModule(AppModule)
-    .catch(err => console.log(err));
-            
+  .bootstrapModule(AppModule)
+  .catch(err => console.log(err));
+      
 `,
     },
     "/src/polyfills.ts": {
       code: `import "core-js/proposals/reflect-metadata";   
-            import "zone.js/dist/zone";
+      import "zone.js/dist/zone";
 `,
     },
   },

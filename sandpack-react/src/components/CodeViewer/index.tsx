@@ -1,3 +1,4 @@
+import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import type { SandpackInitMode } from "../..";
@@ -5,11 +6,17 @@ import { RunButton } from "../../common/RunButton";
 import { SandpackStack } from "../../common/Stack";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
+import { THEME_PREFIX } from "../../styles";
+import { classNames } from "../../utils/classNames";
 import { CodeEditor } from "../CodeEditor";
 import type { CodeEditorRef } from "../CodeEditor";
 import type { Decorators } from "../CodeEditor/CodeMirror";
+import { editorClassName } from "../CodeEditor/styles";
 import { FileTabs } from "../FileTabs";
 
+/**
+ * @category Components
+ */
 export interface CodeViewerProps {
   showTabs?: boolean;
   showLineNumbers?: boolean;
@@ -43,29 +50,33 @@ export const SandpackCodeViewer = React.forwardRef<
       code: propCode,
       initMode,
       wrapContent,
+      ...props
     },
     ref
   ) => {
     const { sandpack } = useSandpack();
     const { code } = useActiveCode();
+    const c = useClasser(THEME_PREFIX);
 
-    const shouldShowTabs = showTabs ?? sandpack.openPaths.length > 1;
+    const shouldShowTabs = showTabs ?? sandpack.visibleFiles.length > 1;
 
     return (
-      <SandpackStack>
+      <SandpackStack {...props}>
         {shouldShowTabs ? <FileTabs /> : null}
 
-        <CodeEditor
-          ref={ref}
-          code={propCode ?? code}
-          decorators={decorators}
-          filePath={sandpack.activePath}
-          initMode={initMode || sandpack.initMode}
-          showLineNumbers={showLineNumbers}
-          showReadOnly={false}
-          wrapContent={wrapContent}
-          readOnly
-        />
+        <div className={classNames(c("code-editor"), editorClassName)}>
+          <CodeEditor
+            ref={ref}
+            code={propCode ?? code}
+            decorators={decorators}
+            filePath={sandpack.activeFile}
+            initMode={initMode || sandpack.initMode}
+            showLineNumbers={showLineNumbers}
+            showReadOnly={false}
+            wrapContent={wrapContent}
+            readOnly
+          />
+        </div>
 
         {sandpack.status === "idle" ? <RunButton /> : null}
       </SandpackStack>

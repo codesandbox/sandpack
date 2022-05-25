@@ -54,7 +54,7 @@
   visibility: hidden;
 }
 
-.olvy-unread-indicator.olvy-organisation-codesandbox.top-right {
+.olvy-unread-indicator.olvy-widget-sandpack_widget.top-right {
   right: auto;
   left: 114px;
   background: var(--ifm-link-hover-color);
@@ -82,6 +82,10 @@
   display: none;
 }
 
+.menu__list .menu__list {
+  --ifm-menu-link-padding-horizontal: 1em;
+}
+
 @media (min-width: 961px) {
   .bottom-link {
     background: var(--sandpack-background-color);
@@ -101,13 +105,9 @@
 .menu__list-item {
   .menu__list-item {
     margin-top: 0;
-
-    .menu__list-item {
-      margin-left: 1em;
-    }
   }
 
-  .menu__link--sublist {
+  &.theme-doc-sidebar-item-category-level-1 {
     padding-bottom: 0;
   }
 

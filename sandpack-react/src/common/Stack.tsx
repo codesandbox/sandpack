@@ -1,18 +1,31 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
+import { css, THEME_PREFIX } from "../styles";
+import { classNames } from "../utils/classNames";
+
+/**
+ * @hidden
+ */
+export const stackClassName = css({
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  position: "relative",
+});
+
 /**
  * @category Components
  */
-export const SandpackStack: React.FC<{ customStyle?: React.CSSProperties }> = ({
-  children,
-  customStyle,
-}) => {
-  const c = useClasser("sp");
+export const SandpackStack: React.FC<
+  React.HTMLAttributes<HTMLDivElement> & { children?: React.ReactNode }
+> = ({ className, ...props }) => {
+  const c = useClasser(THEME_PREFIX);
 
   return (
-    <div className={c("stack")} style={customStyle}>
-      {children}
-    </div>
+    <div
+      className={classNames(c("stack"), stackClassName, className)}
+      {...props}
+    />
   );
 };

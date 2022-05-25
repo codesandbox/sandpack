@@ -41,9 +41,10 @@ export const Decorators: React.FC = () => {
     <SandpackProvider
       customSetup={{
         entry: "/index.js",
-        files: {
-          "/index.js": {
-            code: `const people = [{
+      }}
+      files={{
+        "/index.js": {
+          code: `const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
   profession: 'mathematician',
@@ -60,7 +61,6 @@ export default function List() {
   );
   return <ul>{listItems}</ul>;
 }`,
-          },
         },
       }}
     >

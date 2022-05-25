@@ -1,0 +1,231 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`standardizeStitchesTheme converts a theme to the stitches format 1`] = `
+Object {
+  "border": Object {
+    "radius": "4px",
+  },
+  "colors": Object {
+    "accent": "red",
+    "base": "red",
+    "clickable": "red",
+    "disabled": "red",
+    "error": "red",
+    "errorSurface": "red",
+    "hover": "red",
+    "surface1": "red",
+    "surface2": "red",
+    "surface3": "red",
+    "warning": "#6A4516",
+    "warningSurface": "#FEF2C0",
+  },
+  "font": Object {
+    "body": "",
+    "lineHeight": "1.4",
+    "mono": "",
+    "size": "14px",
+  },
+  "layout": Object {
+    "height": "300px",
+  },
+  "space": Object {
+    "1": "4px",
+    "10": "40px",
+    "11": "44px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px",
+    "7": "28px",
+    "8": "32px",
+    "9": "36px",
+  },
+  "syntax": Object {
+    "color-comment": "blue",
+    "color-definition": "green",
+    "color-keyword": "blue",
+    "color-plain": "blue",
+    "color-property": "blue",
+    "color-punctuation": "blue",
+    "color-static": "blue",
+    "color-string": "blue",
+    "color-tag": "blue",
+    "fontStyle-definition": "italic",
+    "fontStyle-plain": "italic",
+  },
+  "transitions": Object {
+    "default": "150ms ease",
+  },
+  "zIndices": Object {
+    "base": "1",
+    "overlay": "2",
+    "top": "3",
+  },
+}
+`;
+
+exports[`standardizeTheme should return a custom theme 1`] = `
+Object {
+  "id": "sp-376277195",
+  "theme": Object {
+    "colors": Object {
+      "accent": "red",
+      "base": "red",
+      "clickable": "red",
+      "disabled": "red",
+      "error": "red",
+      "errorSurface": "red",
+      "hover": "red",
+      "surface1": "red",
+      "surface2": "red",
+      "surface3": "red",
+      "warning": "#6A4516",
+      "warningSurface": "#FEF2C0",
+    },
+    "font": Object {
+      "body": "",
+      "lineHeight": "1.4",
+      "mono": "",
+      "size": "14px",
+    },
+    "syntax": Object {
+      "comment": "blue",
+      "definition": "blue",
+      "keyword": "blue",
+      "plain": "blue",
+      "property": "blue",
+      "punctuation": "blue",
+      "static": "blue",
+      "string": "blue",
+      "tag": "blue",
+    },
+  },
+}
+`;
+
+exports[`standardizeTheme should return a custom theme merged with the default 1`] = `
+Object {
+  "id": "sp-1791144801",
+  "theme": Object {
+    "colors": Object {
+      "accent": "blue",
+      "base": "#323232",
+      "clickable": "#808080",
+      "disabled": "#C5C5C5",
+      "error": "#EA3323",
+      "errorSurface": "#FCF1F0",
+      "hover": "#4D4D4D",
+      "surface1": "#ffffff",
+      "surface2": "#EFEFEF",
+      "surface3": "#F3F3F3",
+      "warning": "#6A4516",
+      "warningSurface": "#FEF2C0",
+    },
+    "font": Object {
+      "body": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Helvetica, Arial, sans-serif, \\"Apple Color Emoji\\", \\"Segoe UI Emoji\\", \\"Segoe UI Symbol\\"",
+      "lineHeight": "20px",
+      "mono": "\\"Fira Mono\\", \\"DejaVu Sans Mono\\", Menlo, Consolas, \\"Liberation Mono\\", Monaco, \\"Lucida Console\\", monospace",
+      "size": "13px",
+    },
+    "syntax": Object {
+      "comment": Object {
+        "color": "#999",
+        "fontStyle": "italic",
+      },
+      "definition": "#85A600",
+      "keyword": "#7C5AE3",
+      "plain": "#151515",
+      "property": "#3B3B3B",
+      "punctuation": "#3B3B3B",
+      "static": "#3B3B3B",
+      "string": "#2E6BD0",
+      "tag": "#0971F1",
+    },
+  },
+}
+`;
+
+exports[`standardizeTheme should return the \`dark\` theme 1`] = `
+Object {
+  "id": "dark",
+  "theme": Object {
+    "colors": Object {
+      "accent": "#E5E5E5",
+      "base": "#808080",
+      "clickable": "#999999",
+      "disabled": "#4D4D4D",
+      "error": "#EA3323",
+      "errorSurface": "#FCF1F0",
+      "hover": "#C5C5C5",
+      "surface1": "#151515",
+      "surface2": "#252525",
+      "surface3": "#2F2F2F",
+      "warning": "#6A4516",
+      "warningSurface": "#FEF2C0",
+    },
+    "font": Object {
+      "body": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Helvetica, Arial, sans-serif, \\"Apple Color Emoji\\", \\"Segoe UI Emoji\\", \\"Segoe UI Symbol\\"",
+      "lineHeight": "20px",
+      "mono": "\\"Fira Mono\\", \\"DejaVu Sans Mono\\", Menlo, Consolas, \\"Liberation Mono\\", Monaco, \\"Lucida Console\\", monospace",
+      "size": "13px",
+    },
+    "syntax": Object {
+      "comment": Object {
+        "color": "#757575",
+        "fontStyle": "italic",
+      },
+      "definition": "#86D9CA",
+      "keyword": "#77B7D7",
+      "plain": "#FFFFFF",
+      "property": "#77B7D7",
+      "punctuation": "#ffffff",
+      "static": "#C64640",
+      "string": "#977CDC",
+      "tag": "#DFAB5C",
+    },
+  },
+}
+`;
+
+exports[`standardizeTheme should return the default theme 1`] = `
+Object {
+  "id": "sp-default",
+  "theme": Object {
+    "colors": Object {
+      "accent": "#3973E0",
+      "base": "#323232",
+      "clickable": "#808080",
+      "disabled": "#C5C5C5",
+      "error": "#EA3323",
+      "errorSurface": "#FCF1F0",
+      "hover": "#4D4D4D",
+      "surface1": "#ffffff",
+      "surface2": "#EFEFEF",
+      "surface3": "#F3F3F3",
+      "warning": "#6A4516",
+      "warningSurface": "#FEF2C0",
+    },
+    "font": Object {
+      "body": "-apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Helvetica, Arial, sans-serif, \\"Apple Color Emoji\\", \\"Segoe UI Emoji\\", \\"Segoe UI Symbol\\"",
+      "lineHeight": "20px",
+      "mono": "\\"Fira Mono\\", \\"DejaVu Sans Mono\\", Menlo, Consolas, \\"Liberation Mono\\", Monaco, \\"Lucida Console\\", monospace",
+      "size": "13px",
+    },
+    "syntax": Object {
+      "comment": Object {
+        "color": "#999",
+        "fontStyle": "italic",
+      },
+      "definition": "#85A600",
+      "keyword": "#7C5AE3",
+      "plain": "#151515",
+      "property": "#3B3B3B",
+      "punctuation": "#3B3B3B",
+      "static": "#3B3B3B",
+      "string": "#2E6BD0",
+      "tag": "#0971F1",
+    },
+  },
+}
+`;

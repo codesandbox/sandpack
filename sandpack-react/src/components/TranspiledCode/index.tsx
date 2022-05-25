@@ -5,16 +5,31 @@ import { ErrorOverlay } from "../../common/ErrorOverlay";
 import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { useSandpack } from "../../hooks/useSandpack";
 import { useTranspiledCode } from "../../hooks/useTranspiledCode";
+import { css, THEME_PREFIX } from "../../styles";
+import { classNames } from "../../utils/classNames";
 import type { CodeViewerProps } from "../CodeViewer";
 import { SandpackCodeViewer } from "../CodeViewer";
+
+const transpiledCodeClassName = css({
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  position: "relative",
+  overflow: "auto",
+  minHeight: "160px",
+  flex: 1,
+});
 
 /**
  * @category Components
  */
-export const SandpackTranspiledCode = (props: CodeViewerProps): JSX.Element => {
+export const SandpackTranspiledCode = ({
+  className,
+  ...props
+}: CodeViewerProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const { sandpack } = useSandpack();
   const transpiledCode = useTranspiledCode();
-  const c = useClasser("sp");
+  const c = useClasser(THEME_PREFIX);
 
   const hiddenIframeRef = React.useRef<HTMLIFrameElement | null>(null);
   React.useEffect(() => {
@@ -30,14 +45,20 @@ export const SandpackTranspiledCode = (props: CodeViewerProps): JSX.Element => {
   }, []);
 
   return (
-    <div className={c("transpiled-code")}>
-      {transpiledCode && (
-        <SandpackCodeViewer
-          code={transpiledCode}
-          initMode={sandpack.initMode}
-          {...props}
-        />
+    <div
+      className={classNames(
+        c("transpiled-code"),
+        transpiledCodeClassName,
+        className
       )}
+      {...props}
+    >
+      <SandpackCodeViewer
+        code={transpiledCode ?? ""}
+        initMode={sandpack.initMode}
+        {...props}
+      />
+
       <iframe
         ref={hiddenIframeRef}
         style={{ display: "none" }}

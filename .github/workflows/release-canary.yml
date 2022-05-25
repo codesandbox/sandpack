@@ -60,7 +60,7 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14.16.1"
+          node-version: "14.17.0"
 
       - name: Setup | Authenticate with Registry
         run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
@@ -87,6 +87,7 @@ jobs:
         run: |
           yarn workspace @codesandbox/sandpack-client build:publish 
           yarn workspace @codesandbox/sandpack-react build:publish
+          yarn workspace @codesandbox/sandpack-themes build:publish
 
       - name: Prepare | Lerna Version
         run: lerna version --conventional-commits --conventional-prerelease --yes
