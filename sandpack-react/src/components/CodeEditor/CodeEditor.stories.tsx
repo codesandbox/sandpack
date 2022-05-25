@@ -59,17 +59,25 @@ export const ClosableTabs: React.FC = () => (
   </SandpackProvider>
 );
 
-export const ExtensionAutocomplete: React.FC = () => (
-  <SandpackProvider template="react">
-    <SandpackThemeProvider>
-      <SandpackCodeEditor
-        extensions={[autocompletion()]}
-        extensionsKeymap={[completionKeymap]}
-        id="extensions"
-      />
-    </SandpackThemeProvider>
-  </SandpackProvider>
-);
+export const ExtensionAutocomplete: React.FC = () => {
+  const [active, setActive] = React.useState(false);
+  return (
+    <>
+      <button onClick={(): void => setActive((prev): boolean => !prev)}>
+        Toggle
+      </button>
+      <SandpackProvider template="react">
+        <SandpackThemeProvider>
+          <SandpackCodeEditor
+            extensions={active ? [autocompletion()] : []}
+            extensionsKeymap={active ? [completionKeymap] : []}
+            id="extensions"
+          />
+        </SandpackThemeProvider>
+      </SandpackProvider>
+    </>
+  );
+};
 
 export const ReadOnly: React.FC = () => {
   return (

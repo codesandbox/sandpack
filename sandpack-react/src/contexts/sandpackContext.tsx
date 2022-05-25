@@ -14,8 +14,8 @@ import {
 } from "@codesandbox/sandpack-client";
 import isEqual from "lodash.isequal";
 import * as React from "react";
-import { SandpackFiles } from "..";
 
+import type { SandpackFiles } from "..";
 import type {
   SandpackContext,
   SandboxEnvironment,
