@@ -45,8 +45,8 @@ export default function App() {
       <Sandpack
         customSetup={{
           dependencies: {
-            "@codesandbox/sandpack-react": "1.1.0-alpha.1",
-            "@codesandbox/sandpack-themes": "1.1.0-alpha.1",
+            "@codesandbox/sandpack-react": "1.0.0",
+            "@codesandbox/sandpack-themes": "1.0.0",
           },
         }}
         files={{
