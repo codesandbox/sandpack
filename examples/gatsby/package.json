@@ -1,6 +1,6 @@
 {
   "name": "gatsby",
-  "version": "1.1.0-alpha.1",
+  "version": "1.1.0-alpha.2",
   "private": true,
   "description": "gatsby",
   "author": "Danilo Woznica",
@@ -15,7 +15,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "@codesandbox/sandpack-react": "^1.1.0-alpha.1",
+    "@codesandbox/sandpack-react": "^1.1.0-alpha.2",
     "@codesandbox/sandpack-themes": "^1.1.0-alpha.1",
     "gatsby": "^4.14.1",
     "react": "^18.1.0",
