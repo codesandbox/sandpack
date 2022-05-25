@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/codesandbox/sandpack/compare/v1.0.0...v1.0.1) (2022-05-25)
+
+
+### Bug Fixes
+
+* **theme context component:** extend props support ([#472](https://github.com/codesandbox/sandpack/issues/472)) ([a11dce4](https://github.com/codesandbox/sandpack/commit/a11dce418973a66c5fa36862161ea1cd98ba280f))
+
+
+
+
+
 # [1.0.0](https://github.com/codesandbox/sandpack/compare/v0.19.10...v1.0.0) (2022-05-25)
 
 
