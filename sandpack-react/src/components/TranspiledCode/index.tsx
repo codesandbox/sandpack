@@ -53,13 +53,12 @@ export const SandpackTranspiledCode = ({
       )}
       {...props}
     >
-      {transpiledCode && (
-        <SandpackCodeViewer
-          code={transpiledCode}
-          initMode={sandpack.initMode}
-          {...props}
-        />
-      )}
+      <SandpackCodeViewer
+        code={transpiledCode ?? ""}
+        initMode={sandpack.initMode}
+        {...props}
+      />
+
       <iframe
         ref={hiddenIframeRef}
         style={{ display: "none" }}

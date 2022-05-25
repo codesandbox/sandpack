@@ -1,7 +1,7 @@
 const accessPage = (wait) => {
   // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.viewport(600, 1000)
-    .visit(`/iframe.html?id=presets-template--react`)
+    .visit(`/iframe.html?id=bug-reports-issues--file-tab`)
     .wait(wait ? 10000 : 0); // warm-up sandbox
 };
 

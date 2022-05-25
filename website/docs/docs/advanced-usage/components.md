@@ -393,7 +393,7 @@ The `UnstyledOpenInCodeSandboxButton` is a basic component that does not carry a
 
 ## Other components
 
-You can also bring other components in the mix: `SandpackTranspiledCode`, `FileTabs`, `FileExplorer`, `Navigator` and so on.
+You can also bring other components in the mix: `SandpackTranspiledCode`, `FileTabs`, `SandpackFileExplorer`, `Navigator` and so on.
 
 For example, you can create an editor instance that gives you the transpiled
 code of your **active** component instead of the preview page:

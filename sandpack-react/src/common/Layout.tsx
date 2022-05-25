@@ -2,20 +2,23 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useCombinedRefs } from "../components/CodeEditor/utils";
-import { SandpackThemeProvider } from "../contexts/themeContext";
 import { useSandpack } from "../hooks/useSandpack";
 import { css, THEME_PREFIX } from "../styles";
 import { absoluteClassName } from "../styles/shared";
-import type { SandpackThemeProp } from "../types";
 import { classNames } from "../utils/classNames";
 
 import { stackClassName } from ".";
 
+/**
+ * @category Components
+ */
 export interface SandpackLayoutProps extends React.HtmlHTMLAttributes<unknown> {
-  theme?: SandpackThemeProp;
   children?: React.ReactNode;
 }
 
+/**
+ * @hidden
+ */
 export const layoutClassName = css({
   border: "1px solid $colors$surface2",
   display: "flex",
@@ -58,25 +61,23 @@ export const layoutClassName = css({
 });
 
 /**
- * @category Theme
+ * @category Components
  */
 export const SandpackLayout = React.forwardRef<
   HTMLDivElement,
   SandpackLayoutProps
->(({ children, theme, className, ...props }, ref) => {
+>(({ children, className, ...props }, ref) => {
   const { sandpack } = useSandpack();
   const c = useClasser(THEME_PREFIX);
   const combinedRef = useCombinedRefs(sandpack.lazyAnchorRef, ref);
 
   return (
-    <SandpackThemeProvider theme={theme}>
-      <div
-        ref={combinedRef}
-        className={classNames(c("layout"), layoutClassName, className)}
-        {...props}
-      >
-        {children}
-      </div>
-    </SandpackThemeProvider>
+    <div
+      ref={combinedRef}
+      className={classNames(c("layout"), layoutClassName, className)}
+      {...props}
+    >
+      {children}
+    </div>
   );
 });

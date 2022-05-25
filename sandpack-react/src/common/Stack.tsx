@@ -4,6 +4,9 @@ import * as React from "react";
 import { css, THEME_PREFIX } from "../styles";
 import { classNames } from "../utils/classNames";
 
+/**
+ * @hidden
+ */
 export const stackClassName = css({
   display: "flex",
   flexDirection: "column",

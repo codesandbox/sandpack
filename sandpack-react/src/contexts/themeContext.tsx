@@ -56,12 +56,7 @@ const SandpackThemeProvider: React.FC<{
   }, [theme, id]);
 
   return (
-    <SandpackThemeContext.Provider
-      value={{
-        theme,
-        id,
-      }}
-    >
+    <SandpackThemeContext.Provider value={{ theme, id }}>
       <div
         className={classNames(
           c("wrapper"),

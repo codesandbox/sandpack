@@ -8,7 +8,7 @@ export interface Props {
   prefixedPath: string;
   files: SandpackBundlerFiles;
   selectFile: (path: string) => void;
-  activePath: string;
+  activeFile: string;
   depth?: number;
 }
 
@@ -16,7 +16,7 @@ export class ModuleList extends React.PureComponent<Props> {
   render(): JSX.Element {
     const {
       depth = 0,
-      activePath,
+      activeFile,
       selectFile,
       prefixedPath,
       files,
@@ -41,7 +41,7 @@ export class ModuleList extends React.PureComponent<Props> {
         {Array.from(directoriesToShow).map((dir) => (
           <Directory
             key={dir}
-            activePath={activePath}
+            activeFile={activeFile}
             depth={depth}
             files={files}
             prefixedPath={dir}
@@ -52,7 +52,7 @@ export class ModuleList extends React.PureComponent<Props> {
         {filesToShow.map((file) => (
           <File
             key={file.path}
-            active={activePath === file.path}
+            active={activeFile === file.path}
             depth={depth}
             path={file.path}
             selectFile={this.props.selectFile}

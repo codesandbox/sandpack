@@ -1,3 +1,4 @@
+import { ClasserProvider } from "@code-hike/classer";
 import type {
   ListenerFunction,
   SandpackBundlerFiles,
@@ -13,9 +14,10 @@ import isEqual from "lodash.isequal";
 import * as React from "react";
 
 import type { SandpackFiles } from "..";
+import { SandpackThemeProvider } from "../contexts/themeContext";
 import type {
   SandpackContext,
-  SandpackProviderComponent,
+  SandpackInternalProvider,
   SandpackProviderState,
   SandpackProviderProps,
 } from "../types";
@@ -36,7 +38,7 @@ const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
  * Use * [`useSandpack`](/api/react/#usesandpack) hook, which gives you the entire context object to play with.
  *
  * @category Provider
- * @noInheritDoc
+ * @hidden
  */
 class SandpackProviderClass extends React.PureComponent<
   SandpackProviderProps,
@@ -65,14 +67,14 @@ class SandpackProviderClass extends React.PureComponent<
   constructor(props: SandpackProviderProps) {
     super(props);
 
-    const { activePath, openPaths, files, environment } =
+    const { activeFile, visibleFiles, files, environment } =
       getSandpackStateFromProps(props);
 
     this.state = {
       files,
       environment,
-      openPaths,
-      activePath,
+      visibleFiles,
+      activeFile,
       startRoute: this.props.options?.startRoute,
       bundlerState: undefined,
       error: null,
@@ -109,9 +111,6 @@ class SandpackProviderClass extends React.PureComponent<
       React.createRef<boolean>() as React.MutableRefObject<boolean>;
   }
 
-  /**
-   * @hidden
-   */
   handleMessage = (msg: SandpackMessage): void => {
     if (this.timeoutHook) {
       clearTimeout(this.timeoutHook);
@@ -134,23 +133,14 @@ class SandpackProviderClass extends React.PureComponent<
     }
   };
 
-  /**
-   * @hidden
-   */
   registerReactDevTools = (value: ReactDevToolsMode): void => {
     this.setState({ reactDevTools: value });
   };
 
-  /**
-   * @hidden
-   */
   updateCurrentFile = (code: string): void => {
-    this.updateFile(this.state.activePath, code);
+    this.updateFile(this.state.activeFile, code);
   };
 
-  /**
-   * @hidden
-   */
   updateFile = (pathOrFiles: string | SandpackFiles, code?: string): void => {
     let files = this.state.files;
 
@@ -167,9 +157,6 @@ class SandpackProviderClass extends React.PureComponent<
     this.setState({ files }, this.updateClients);
   };
 
-  /**
-   * @hidden
-   */
   updateClients = (): void => {
     const { files, sandpackStatus } = this.state;
     const recompileMode = this.props.options?.recompileMode ?? "delayed";
@@ -199,9 +186,6 @@ class SandpackProviderClass extends React.PureComponent<
     }
   };
 
-  /**
-   * @hidden
-   */
   initializeSandpackIframe(): void {
     const autorun = this.props.options?.autorun ?? true;
 
@@ -263,16 +247,10 @@ class SandpackProviderClass extends React.PureComponent<
     }
   }
 
-  /**
-   * @hidden
-   */
   componentDidMount(): void {
     this.initializeSandpackIframe();
   }
 
-  /**
-   * @hidden
-   */
   componentDidUpdate(prevProps: SandpackProviderProps): void {
     /**
      * Watch the changes on the initMode prop
@@ -290,7 +268,7 @@ class SandpackProviderClass extends React.PureComponent<
     /**
      * Custom setup derived from props
      */
-    const { activePath, openPaths, files, environment } =
+    const { activeFile, visibleFiles, files, environment } =
       getSandpackStateFromProps(this.props);
 
     /**
@@ -302,7 +280,7 @@ class SandpackProviderClass extends React.PureComponent<
       !isEqual(prevProps.files, this.props.files)
     ) {
       /* eslint-disable react/no-did-update-set-state */
-      this.setState({ activePath, openPaths, files, environment });
+      this.setState({ activeFile, visibleFiles, files, environment });
 
       if (this.state.sandpackStatus !== "running") {
         return;
@@ -325,9 +303,6 @@ class SandpackProviderClass extends React.PureComponent<
     }
   }
 
-  /**
-   * @hidden
-   */
   componentWillUnmount(): void {
     if (typeof this.unsubscribe === "function") {
       this.unsubscribe();
@@ -350,9 +325,6 @@ class SandpackProviderClass extends React.PureComponent<
     }
   }
 
-  /**
-   * @hidden
-   */
   createClient = (
     iframe: HTMLIFrameElement,
     clientId: string
@@ -422,9 +394,6 @@ class SandpackProviderClass extends React.PureComponent<
     return client;
   };
 
-  /**
-   * @hidden
-   */
   runSandpack = (): void => {
     Object.keys(this.preregisteredIframes).forEach((clientId) => {
       const iframe = this.preregisteredIframes[clientId];
@@ -434,9 +403,6 @@ class SandpackProviderClass extends React.PureComponent<
     this.setState({ sandpackStatus: "running" });
   };
 
-  /**
-   * @hidden
-   */
   registerBundler = (iframe: HTMLIFrameElement, clientId: string): void => {
     if (this.state.sandpackStatus === "running") {
       this.clients[clientId] = this.createClient(iframe, clientId);
@@ -445,9 +411,6 @@ class SandpackProviderClass extends React.PureComponent<
     }
   };
 
-  /**
-   * @hidden
-   */
   unregisterBundler = (clientId: string): void => {
     const client = this.clients[clientId];
     if (client) {
@@ -465,9 +428,6 @@ class SandpackProviderClass extends React.PureComponent<
     this.setState({ sandpackStatus: "idle" });
   };
 
-  /**
-   * @hidden
-   */
   unregisterAllClients = (): void => {
     Object.keys(this.clients).map(this.unregisterBundler);
 
@@ -477,59 +437,47 @@ class SandpackProviderClass extends React.PureComponent<
     }
   };
 
-  /**
-   * @hidden
-   */
-  setActiveFile = (activePath: string): void => {
-    this.setState({ activePath });
+  setActiveFile = (activeFile: string): void => {
+    this.setState({ activeFile });
   };
 
-  /**
-   * @hidden
-   */
   openFile = (path: string): void => {
-    this.setState(({ openPaths }) => {
-      const newPaths = openPaths.includes(path)
-        ? openPaths
-        : [...openPaths, path];
+    this.setState(({ visibleFiles }) => {
+      const newPaths = visibleFiles.includes(path)
+        ? visibleFiles
+        : [...visibleFiles, path];
 
       return {
-        activePath: path,
-        openPaths: newPaths,
+        activeFile: path,
+        visibleFiles: newPaths,
       };
     });
   };
 
-  /**
-   * @hidden
-   */
   closeFile = (path: string): void => {
-    if (this.state.openPaths.length === 1) {
+    if (this.state.visibleFiles.length === 1) {
       return;
     }
 
-    this.setState(({ openPaths, activePath }) => {
-      const indexOfRemovedPath = openPaths.indexOf(path);
-      const newPaths = openPaths.filter((openPath) => openPath !== path);
+    this.setState(({ visibleFiles, activeFile }) => {
+      const indexOfRemovedPath = visibleFiles.indexOf(path);
+      const newPaths = visibleFiles.filter((openPath) => openPath !== path);
 
       return {
-        activePath:
-          path === activePath
+        activeFile:
+          path === activeFile
             ? indexOfRemovedPath === 0
-              ? openPaths[1]
-              : openPaths[indexOfRemovedPath - 1]
-            : activePath,
-        openPaths: newPaths,
+              ? visibleFiles[1]
+              : visibleFiles[indexOfRemovedPath - 1]
+            : activeFile,
+        visibleFiles: newPaths,
       };
     });
   };
 
-  /**
-   * @hidden
-   */
   deleteFile = (path: string): void => {
-    this.setState(({ openPaths, files }) => {
-      const newPaths = openPaths.filter((openPath) => openPath !== path);
+    this.setState(({ visibleFiles, files }) => {
+      const newPaths = visibleFiles.filter((openPath) => openPath !== path);
       const newFiles = Object.keys(files).reduce(
         (acc: SandpackBundlerFiles, filePath) => {
           if (filePath === path) {
@@ -542,16 +490,13 @@ class SandpackProviderClass extends React.PureComponent<
       );
 
       return {
-        openPaths: newPaths,
+        visibleFiles: newPaths,
         files: newFiles,
       };
     });
     this.updateClients();
   };
 
-  /**
-   * @hidden
-   */
   dispatchMessage = (message: SandpackMessage, clientId?: string): void => {
     if (this.state.sandpackStatus !== "running") {
       console.warn(
@@ -569,9 +514,6 @@ class SandpackProviderClass extends React.PureComponent<
     }
   };
 
-  /**
-   * @hidden
-   */
   addListener = (
     listener: ListenerFunction,
     clientId?: string
@@ -639,9 +581,6 @@ class SandpackProviderClass extends React.PureComponent<
     }
   };
 
-  /**
-   * @hidden
-   */
   resetFile = (path: string): void => {
     const { files } = getSandpackStateFromProps(this.props);
 
@@ -653,23 +592,17 @@ class SandpackProviderClass extends React.PureComponent<
     );
   };
 
-  /**
-   * @hidden
-   */
   resetAllFiles = (): void => {
     const { files } = getSandpackStateFromProps(this.props);
 
     this.setState({ files }, this.updateClients);
   };
 
-  /**
-   * @hidden
-   */
   _getSandpackState = (): SandpackContext => {
     const {
       files,
-      activePath,
-      openPaths,
+      activeFile,
+      visibleFiles,
       startRoute,
       bundlerState,
       editorState,
@@ -682,8 +615,8 @@ class SandpackProviderClass extends React.PureComponent<
     return {
       files,
       environment,
-      openPaths,
-      activePath,
+      visibleFiles,
+      activeFile,
       startRoute,
       error,
       bundlerState,
@@ -712,21 +645,25 @@ class SandpackProviderClass extends React.PureComponent<
     };
   };
 
-  /**
-   * @hidden
-   */
   render(): React.ReactElement {
-    const { children } = this.props;
+    const { children, theme } = this.props;
 
     return (
       <Sandpack.Provider value={this._getSandpackState()}>
-        {children}
+        <ClasserProvider classes={this.props.options?.classes}>
+          <SandpackThemeProvider theme={theme}>
+            {children}
+          </SandpackThemeProvider>
+        </ClasserProvider>
       </Sandpack.Provider>
     );
   }
 }
 
-const SandpackProvider: SandpackProviderComponent =
+/**
+ * @hidden
+ */
+const SandpackProvider: SandpackInternalProvider =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   SandpackProviderClass as any;
 

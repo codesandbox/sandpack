@@ -14,6 +14,9 @@ import type { Decorators } from "../CodeEditor/CodeMirror";
 import { editorClassName } from "../CodeEditor/styles";
 import { FileTabs } from "../FileTabs";
 
+/**
+ * @category Components
+ */
 export interface CodeViewerProps {
   showTabs?: boolean;
   showLineNumbers?: boolean;
@@ -55,7 +58,7 @@ export const SandpackCodeViewer = React.forwardRef<
     const { code } = useActiveCode();
     const c = useClasser(THEME_PREFIX);
 
-    const shouldShowTabs = showTabs ?? sandpack.openPaths.length > 1;
+    const shouldShowTabs = showTabs ?? sandpack.visibleFiles.length > 1;
 
     return (
       <SandpackStack {...props}>
@@ -66,7 +69,7 @@ export const SandpackCodeViewer = React.forwardRef<
             ref={ref}
             code={propCode ?? code}
             decorators={decorators}
-            filePath={sandpack.activePath}
+            filePath={sandpack.activeFile}
             initMode={initMode || sandpack.initMode}
             showLineNumbers={showLineNumbers}
             showReadOnly={false}

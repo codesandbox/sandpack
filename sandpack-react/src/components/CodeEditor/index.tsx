@@ -16,7 +16,14 @@ import { CodeMirror } from "./CodeMirror";
 import type { CodeMirrorRef } from "./CodeMirror";
 import { editorClassName } from "./styles";
 
+/**
+ * @category Components
+ */
 export type CodeEditorRef = CodeMirrorRef;
+
+/**
+ * @category Components
+ */
 export interface CodeEditorProps {
   style?: React.CSSProperties;
   showTabs?: boolean;
@@ -87,8 +94,8 @@ export const SandpackCodeEditor = React.forwardRef<
   ) => {
     const { sandpack } = useSandpack();
     const { code, updateCode, readOnly: readOnlyFile } = useActiveCode();
-    const { activePath, status, editorState } = sandpack;
-    const shouldShowTabs = showTabs ?? sandpack.openPaths.length > 1;
+    const { activeFile, status, editorState } = sandpack;
+    const shouldShowTabs = showTabs ?? sandpack.visibleFiles.length > 1;
 
     const c = useClasser(THEME_PREFIX);
 
@@ -102,13 +109,13 @@ export const SandpackCodeEditor = React.forwardRef<
 
         <div className={classNames(c("code-editor"), editorClassName)}>
           <CodeMirror
-            key={activePath}
+            key={activeFile}
             ref={ref}
             code={code}
             editorState={editorState}
             extensions={extensions}
             extensionsKeymap={extensionsKeymap}
-            filePath={activePath}
+            filePath={activeFile}
             id={id}
             initMode={initMode || sandpack.initMode}
             onCodeUpdate={handleCodeUpdate}

@@ -1,4 +1,3 @@
-import { ClasserProvider } from "@code-hike/classer";
 import * as React from "react";
 
 import { SandpackLayout } from "../common/Layout";
@@ -7,17 +6,17 @@ import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import type {
-  SandpackPreset,
-  SandpackOptions,
+  SandpackInternal,
+  SandpackInternalOptions,
   TemplateFiles,
   SandpackFiles,
   SandpackPredefinedTemplate,
 } from "../types";
 
 /**
- * @category Presets
+ * @hidden
  */
-export const Sandpack: SandpackPreset = (props) => {
+export const Sandpack: SandpackInternal = (props) => {
   const codeEditorOptions: CodeEditorProps = {
     showTabs: props.options?.showTabs,
     showLineNumbers: props.options?.showLineNumbers,
@@ -32,15 +31,15 @@ export const Sandpack: SandpackPreset = (props) => {
     id: props.options?.id,
   };
 
-  const providerOptions: SandpackOptions<
+  const providerOptions: SandpackInternalOptions<
     SandpackFiles,
     SandpackPredefinedTemplate
   > = {
     /**
      * TS-why: Type 'string | number | symbol' is not assignable to type 'string'
      */
-    activePath: props.options?.activePath as unknown as string,
-    openPaths: props.options?.openPaths as unknown as string[],
+    activeFile: props.options?.activeFile as unknown as string,
+    visibleFiles: props.options?.visibleFiles as unknown as string[],
     recompileMode: props.options?.recompileMode,
     recompileDelay: props.options?.recompileDelay,
     autorun: props.options?.autorun,
@@ -52,6 +51,7 @@ export const Sandpack: SandpackPreset = (props) => {
     initModeObserverOptions: props.options?.initModeObserverOptions,
     externalResources: props.options?.externalResources,
     logLevel: props.options?.logLevel,
+    classes: props.options?.classes,
   };
 
   /**
@@ -69,30 +69,29 @@ export const Sandpack: SandpackPreset = (props) => {
       files={props.files as TemplateFiles<SandpackPredefinedTemplate>}
       options={providerOptions}
       template={props.template}
+      theme={props.theme}
     >
-      <ClasserProvider classes={props.options?.classes}>
-        <SandpackLayout theme={props.theme}>
-          <SandpackCodeEditor
-            {...codeEditorOptions}
-            style={{
-              height: editorHeight,
-              flexGrow: editorPart,
-              flexShrink: editorPart,
-              minWidth: 700 * (editorPart / (previewPart + editorPart)),
-            }}
-          />
-          <SandpackPreview
-            showNavigator={props.options?.showNavigator}
-            showRefreshButton={props.options?.showRefreshButton}
-            style={{
-              height: editorHeight,
-              flexGrow: previewPart,
-              flexShrink: previewPart,
-              minWidth: 700 * (previewPart / (previewPart + editorPart)),
-            }}
-          />
-        </SandpackLayout>
-      </ClasserProvider>
+      <SandpackLayout>
+        <SandpackCodeEditor
+          {...codeEditorOptions}
+          style={{
+            height: editorHeight,
+            flexGrow: editorPart,
+            flexShrink: editorPart,
+            minWidth: 700 * (editorPart / (previewPart + editorPart)),
+          }}
+        />
+        <SandpackPreview
+          showNavigator={props.options?.showNavigator}
+          showRefreshButton={props.options?.showRefreshButton}
+          style={{
+            height: editorHeight,
+            flexGrow: previewPart,
+            flexShrink: previewPart,
+            minWidth: 700 * (previewPart / (previewPart + editorPart)),
+          }}
+        />
+      </SandpackLayout>
     </SandpackProvider>
   );
 };

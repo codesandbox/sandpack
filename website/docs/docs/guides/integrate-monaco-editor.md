@@ -68,7 +68,7 @@ function MonacoEditor() {
           height="100%"
           language="javascript"
           theme="vs-dark"
-          key={sandpack.activePath}
+          key={sandpack.activeFile}
           defaultValue={code}
           onChange={(value) => updateCode(value || "")}
         />

@@ -25,11 +25,15 @@ describe("getSandpackCssText", () => {
       renderToString = require("react-dom/server").renderToString;
     });
 
-    const { getSandpackCssText } = sandpackModule;
+    const { getSandpackCssText, SandpackProvider } = sandpackModule;
 
-    renderToString(<div />);
+    renderToString(
+      <SandpackProvider>
+        <div />
+      </SandpackProvider>
+    );
 
-    expect(getSandpackCssText().length).toBe(1688);
+    expect(getSandpackCssText().length).toBe(3456);
     expect(getSandpackCssText()).not.toContain(componentClassName);
   });
 
@@ -75,6 +79,7 @@ describe("getSandpackCssText", () => {
           <SandpackCodeEditor />
           <SandpackCodeEditor />
         </SandpackProvider>
+
         <SandpackProvider>
           <SandpackCodeEditor />
         </SandpackProvider>
@@ -107,7 +112,7 @@ describe("getSandpackCssText", () => {
     expect(getSandpackCssText().match(/--sp-colors-surface1:/g).length).toBe(1);
   });
 
-  it("should only include the new theme variables if a theme is diferent", () => {
+  it("should only include the new theme variables if a theme is different", () => {
     let sandpackModule = null;
     let renderToString = null;
 

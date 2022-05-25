@@ -39,7 +39,7 @@ export const UsingSandpackLayout: React.FC = () => (
 );
 
 export const UsingVisualElements: React.FC = () => (
-  <SandpackProvider options={{ activePath: "/App.js" }} template="react">
+  <SandpackProvider options={{ activeFile: "/App.js" }} template="react">
     <SandpackThemeProvider>
       <SandpackCodeEditor
         style={{
@@ -382,7 +382,7 @@ const ResetCurrentFileButton: React.FC = () => {
   return (
     <button
       className={tabButton.toString()}
-      onClick={(): void => sandpack.resetFile(sandpack.activePath)}
+      onClick={(): void => sandpack.resetFile(sandpack.activeFile)}
       style={{
         background: "none",
         border: 0,

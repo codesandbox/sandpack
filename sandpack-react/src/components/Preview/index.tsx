@@ -17,6 +17,9 @@ import { Navigator } from "../Navigator";
 
 import { RefreshButton } from "./RefreshButton";
 
+/**
+ * @category Components
+ */
 export interface PreviewProps {
   style?: React.CSSProperties;
   showNavigator?: boolean;
@@ -58,6 +61,9 @@ const previewActionsClassName = css({
   "> *": { marginLeft: "$space$2" },
 });
 
+/**
+ * @category Components
+ */
 export interface SandpackPreviewRef {
   /**
    * Retrieve the current Sandpack client instance from preview

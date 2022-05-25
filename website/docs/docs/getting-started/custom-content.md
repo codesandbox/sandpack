@@ -191,9 +191,9 @@ Plus, you can hide the Read-only label which appears on top of the code editor:
 />
 ```
 
-### openPaths and activePath
+### visibleFiles and activeFile
 
-You can override the entire hidden/active system with two settings (`openPaths` and `activePath`) inside the
+You can override the entire hidden/active system with two settings (`visibleFiles` and `activeFile`) inside the
 `options` prop.
 
 Notice that both options require you to match the exact file paths inside the sandbox, so use with caution as this can quite easily create errors in the long term.
@@ -206,14 +206,14 @@ Notice that both options require you to match the exact file paths inside the sa
     "/button.js": buttonCode,
   }}
   options={{
-    openPaths: ["/App.js", "/button.js", "/index.js"],
-    activePath: "/index.js",
+    visibleFiles: ["/App.js", "/button.js", "/index.js"],
+    activeFile: "/index.js",
   }}
 />
 ```
 
 :::info
-When `openPaths` or `activePath` are set, the `hidden` and `active` flags on the
+When `visibleFiles` or `activeFile` are set, the `hidden` and `active` flags on the
 `files` prop are ignored.
 :::
 

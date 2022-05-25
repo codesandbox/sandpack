@@ -7,6 +7,9 @@ import type {
   SandpackState,
 } from "../types";
 
+/**
+ * @category Hooks
+ */
 export interface UseSandpack {
   sandpack: SandpackState;
   dispatch: SandpackClientDispatch;

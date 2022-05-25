@@ -1,3 +1,6 @@
+/**
+ * @category Template
+ */
 export const VUE_TEMPLATE = {
   files: {
     "/src/App.vue": {

@@ -17,45 +17,19 @@ import type { SANDBOX_TEMPLATES } from "./templates";
 
 import type { CodeEditorProps } from ".";
 
-export type TemplateFiles<Name extends SandpackPredefinedTemplate> =
-  keyof typeof SANDBOX_TEMPLATES[Name]["files"];
+/**
+ * ------------------------ Public documentation ------------------------
+ *
+ * From this section on, all types are artificially created and maintained
+ * for public documentation purposes. So, this might not reflect precisely
+ * the component behavior, but it still needs to be reliable and clear for
+ * general usage.
+ */
 
-export interface SandpackPreset {
-  <
-    Files extends SandpackFiles | any,
-    TemplateName extends SandpackPredefinedTemplate = "react"
-  >(
-    props: SandpackProps<Files, TemplateName> & {
-      files?: Files;
-      template?: TemplateName;
-    }
-  ): JSX.Element;
-}
-
-export interface SandpackProviderComponent {
-  <
-    Files extends SandpackFiles,
-    TemplateName extends SandpackPredefinedTemplate
-  >(
-    /**
-     * Infer files & template values
-     */
-    props: React.PropsWithChildren<
-      SandpackProviderProps<Files, TemplateName> & {
-        files?: Files;
-        template?: TemplateName;
-      }
-    >
-  ): React.ReactElement<
-    SandpackProviderProps,
-    React.Provider<SandpackProviderState>
-  > | null;
-}
-
-interface SandpackRootProps<
-  Files extends SandpackFiles | any,
-  TemplateName extends SandpackPredefinedTemplate
-> {
+/**
+ * @category Components
+ */
+export interface SandpackProps {
   /**
    * It accepts an object, where each key is the relative
    * path of that file in the sandbox folder structure. Files passed in
@@ -63,45 +37,86 @@ interface SandpackRootProps<
    *
    * Since each template uses the same type to define the files, you can
    * overwrite the contents of any of the template files.
+   *
+   * Example:
+   * ```js
+   * {
+   *  "/App.js": "export default () => 'foo'"
+   * }
+   * ```
    */
-  files?: Files;
+  files?: Record<string, string> | SandpackFile;
 
   /**
    * Set of presets to easily initialize sandboxes. Each template contains
    * its files, environment and dependencies, and you can overwrite it
    * using `customSetup` or `dependencies`.
    */
-  template?: TemplateName;
+  template?: SandpackPredefinedTemplate;
 
   /**
-   * Pass custom properties to configurate your own Sandpack environment.
+   * Pass custom properties to set your own Sandpack environment.
    *
    * Since each template uses the same type to define the files, you can
    * overwrite the contents of any of the template files.
    */
   customSetup?: SandpackSetup;
+
+  /**
+   * The theme specifies the color set of the components, syntax highlight,
+   * and typography. Use this prop in order to match the design aspect of your website.
+   *
+   * Set as `auto` to turn it color scheme sensitive
+   */
+  theme?: SandpackThemeProp;
+
+  /**
+   * Pass custom properties to customize the interface and the behavior
+   * of the sandbox, such as initialization mode, recompile mode, files resolver, etc.
+   */
+  options?: SandpackOptions;
 }
 
-export interface SandpackOptions<
-  Files extends SandpackFiles | any = any,
-  TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
-> {
+/**
+ * @category Setup
+ */
+export interface SandpackOptions {
   /**
-   * List the file path listed in the file tab,
-   * which will allow the user to interact with.
+   * List of files that will be visible for the user interacts with.
+   * It defaults to the main file from a given template.
    */
-  openPaths?: Array<
-    Files extends SandpackFiles
-      ? TemplateFiles<TemplateName> | keyof Files
-      : TemplateFiles<TemplateName>
-  >;
+  visibleFiles?: string[];
 
   /**
-   * Path to the file will be open in the code editor when the component mounts
+   * Use this to set a file as active by default in the editor component.
+   * It defaults to the main file from a given template.
    */
-  activePath?: Files extends SandpackFiles
-    ? TemplateFiles<TemplateName> | keyof Files
-    : TemplateFiles<TemplateName>;
+  activeFile?: string;
+
+  editorWidthPercentage?: number;
+  editorHeight?: React.CSSProperties["height"];
+  classes?: Record<string, string>;
+
+  showNavigator?: boolean;
+  showLineNumbers?: boolean;
+  showInlineErrors?: boolean;
+  showRefreshButton?: boolean;
+  showTabs?: boolean;
+  closableTabs?: boolean;
+  wrapContent?: boolean;
+
+  codeEditor?: SandpackCodeOptions;
+
+  /**
+   * This disables editing of content by the user in all files.
+   */
+  readOnly?: boolean;
+
+  /**
+   * Controls the visibility of Read-only label, which will only
+   * appears when `readOnly` is `true`
+   */
+  showReadOnly?: boolean;
 
   /**
    * This provides a way to control how some components are going to
@@ -128,150 +143,9 @@ export interface SandpackOptions<
   externalResources?: string[];
 }
 
-interface SandpackProps<
-  Files extends SandpackFiles | any,
-  TemplateName extends SandpackPredefinedTemplate
-> extends SandpackRootProps<Files, TemplateName> {
-  theme?: SandpackThemeProp;
-  options?: SandpackOptions<Files, TemplateName> & {
-    editorWidthPercentage?: number;
-    editorHeight?: React.CSSProperties["height"];
-    classes?: Record<string, string>;
-
-    showNavigator?: boolean;
-    showLineNumbers?: boolean;
-    showInlineErrors?: boolean;
-    showRefreshButton?: boolean;
-    showTabs?: boolean;
-    closableTabs?: boolean;
-    wrapContent?: boolean;
-
-    codeEditor?: SandpackCodeOptions;
-
-    /**
-     * This disables editing of content by the user in all files.
-     */
-    readOnly?: boolean;
-
-    /**
-     * Controls the visibility of Read-only label, which will only
-     * appears when `readOnly` is `true`
-     */
-    showReadOnly?: boolean;
-  };
-}
-
-export interface SandpackProviderProps<
-  Files extends SandpackFiles = SandpackFiles,
-  TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
-> extends SandpackRootProps<Files, TemplateName> {
-  options?: SandpackOptions<Files, TemplateName>;
-  children?: React.ReactNode;
-}
-
-export type SandpackClientDispatch = (
-  msg: SandpackMessage,
-  clientId?: string
-) => void;
-
-export type SandpackClientListen = (
-  listener: ListenerFunction,
-  clientId?: string
-) => UnsubscribeFunction;
-
-export type SandpackContext = SandpackState & {
-  dispatch: SandpackClientDispatch;
-  listen: SandpackClientListen;
-};
-
 /**
- * TODO: missing documentation
+ * @category Setup
  */
-export interface SandpackState {
-  bundlerState: BundlerState | undefined;
-
-  /**
-   * List the file path listed in the file tab,
-   * which will allow the user to interact with.
-   */
-  openPaths: string[];
-
-  /**
-   * Path to the file will be open in the code editor
-   * when the component mounts
-   */
-  activePath: string;
-  startRoute?: string;
-
-  /**
-   * Returns the current state of the editor, meaning that any
-   * changes from the original `files` must return a `dirty` value;
-   * otherwise, it'll return `pristine`
-   */
-  editorState: EditorState;
-  error: SandpackError | null;
-  files: SandpackBundlerFiles;
-  environment?: SandboxEnvironment;
-  status: SandpackStatus;
-  initMode: SandpackInitMode;
-  clients: Record<string, SandpackClient>;
-
-  runSandpack: () => void;
-  registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
-  unregisterBundler: (clientId: string) => void;
-  updateFile: (pathOrFiles: string | SandpackFiles, code?: string) => void;
-  updateCurrentFile: (newCode: string) => void;
-  openFile: (path: string) => void;
-  closeFile: (path: string) => void;
-  deleteFile: (path: string) => void;
-  setActiveFile: (path: string) => void;
-  resetFile: (path: string) => void;
-  resetAllFiles: () => void;
-  registerReactDevTools: (value: ReactDevToolsMode) => void;
-
-  /**
-   * Element refs
-   * Different components inside the SandpackProvider might register certain elements of interest for sandpack
-   * eg: lazy anchor - if no component registers this, then the sandpack runs on mount, without lazy mode
-   */
-  lazyAnchorRef: React.RefObject<HTMLDivElement>;
-
-  /**
-   * eg: error screen - if no component registers this, the bundler needs to show the custom error screen
-   * When the value is boolean, we only care if the components have the responsibility to render the elements,
-   * we don't need the actual element reference
-   */
-  errorScreenRegisteredRef: React.MutableRefObject<boolean>;
-  openInCSBRegisteredRef: React.MutableRefObject<boolean>;
-  loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
-}
-
-export type SandpackStatus =
-  | "initial"
-  | "idle"
-  | "running"
-  | "timeout"
-  | "done";
-export type EditorState = "pristine" | "dirty";
-
-export interface SandboxTemplate {
-  files: Record<string, SandpackFile>;
-  dependencies: Record<string, string>;
-  devDependencies?: Record<string, string>;
-  entry: string;
-  main: string;
-  environment: SandboxEnvironment;
-}
-
-export interface SandpackFile {
-  code: string;
-  hidden?: boolean;
-  active?: boolean;
-  readOnly?: boolean;
-}
-
-export type SandpackFiles = Record<string, string | SandpackFile>;
-
 export interface SandpackSetup {
   /**
    * Any template will include the needed dependencies,
@@ -323,20 +197,8 @@ export interface SandpackSetup {
 }
 
 /**
- * `immediate`: It immediately mounts all components, such as the code-editor
- * and the preview - this option might overload the memory usage
- * and resource from the browser on a page with multiple instances;
- *
- * `lazy`: Only initialize the components when the user is about to scroll
- * them to the viewport and keep these components mounted until the user
- * leaves the page - this is the default value;
- *
- * `user-visible`: Only initialize the components when the user is about
- * to scroll them to the viewport, but differently from lazy, this option
- * unmounts those components once it's no longer in the viewport.
+ * @category Setup
  */
-export type SandpackInitMode = "immediate" | "lazy" | "user-visible";
-
 export type SandboxEnvironment =
   | "angular-cli"
   | "create-react-app"
@@ -347,6 +209,9 @@ export type SandboxEnvironment =
   | "static"
   | "solid";
 
+/**
+ * @category Setup
+ */
 export type SandpackPredefinedTemplate =
   | "angular"
   | "react"
@@ -358,30 +223,41 @@ export type SandpackPredefinedTemplate =
   | "svelte"
   | "solid";
 
-export type SandpackPredefinedTheme = "light" | "dark" | "auto";
-
-interface SandpackSyntaxStyle {
-  color?: string;
-  fontStyle?: "normal" | "italic";
-  fontWeight?:
-    | "normal"
-    | "bold"
-    | "100"
-    | "200"
-    | "300"
-    | "400"
-    | "500"
-    | "600"
-    | "700"
-    | "800"
-    | "900";
-  textDecoration?:
-    | "none"
-    | "underline"
-    | "line-through"
-    | "underline line-through";
+/**
+ * @category Setup
+ */
+export interface SandpackFile {
+  code: string;
+  hidden?: boolean;
+  active?: boolean;
+  readOnly?: boolean;
 }
 
+/**
+ * `immediate`: It immediately mounts all components, such as the code-editor
+ * and the preview - this option might overload the memory usage
+ * and resource from the browser on a page with multiple instances;
+ *
+ * `lazy`: Only initialize the components when the user is about to scroll
+ * them to the viewport and keep these components mounted until the user
+ * leaves the page - this is the default value;
+ *
+ * `user-visible`: Only initialize the components when the user is about
+ * to scroll them to the viewport, but differently from lazy, this option
+ * unmounts those components once it's no longer in the viewport.
+ *
+ * @category Setup
+ */
+export type SandpackInitMode = "immediate" | "lazy" | "user-visible";
+
+/**
+ * @category Theme
+ */
+export type SandpackPredefinedTheme = "light" | "dark" | "auto";
+
+/**
+ * @category Theme
+ */
 export interface SandpackTheme {
   colors: {
     // Surface
@@ -420,13 +296,304 @@ export interface SandpackTheme {
   };
 }
 
-export type SandpackPartialTheme = DeepPartial<SandpackTheme>;
+/**
+ * @category Theme
+ */
+interface SandpackSyntaxStyle {
+  color?: string;
+  fontStyle?: "normal" | "italic";
+  fontWeight?:
+    | "normal"
+    | "bold"
+    | "100"
+    | "200"
+    | "300"
+    | "400"
+    | "500"
+    | "600"
+    | "700"
+    | "800"
+    | "900";
+  textDecoration?:
+    | "none"
+    | "underline"
+    | "line-through"
+    | "underline line-through";
+}
 
-export type SandpackThemeProp = SandpackPredefinedTheme | SandpackPartialTheme;
+/**
+ * @category Theme
+ */
+export type SandpackThemeProp =
+  | SandpackPredefinedTheme
+  | DeepPartial<SandpackTheme>;
+
+/**
+ *
+ * ------------------------ Internal types ---------------------------
+ *
+ * From this section on, all types are hidden because most of them are
+ * strictly related to the internal typing system, and they are not
+ * helpful for public documentation.
+ *
+ * For public purpose use SandpackProps instead.
+ */
+
+/**
+ * @hidden
+ */
+export type TemplateFiles<Name extends SandpackPredefinedTemplate> =
+  keyof typeof SANDBOX_TEMPLATES[Name]["files"];
+
+/**
+ * @hidden
+ */
+export interface SandpackInternal {
+  <
+    Files extends SandpackFiles | any,
+    TemplateName extends SandpackPredefinedTemplate = "react"
+  >(
+    props: SandpackInternalProps<Files, TemplateName> & {
+      files?: Files;
+      template?: TemplateName;
+    }
+  ): JSX.Element;
+}
+
+/**
+ * @hidden
+ */
+export interface SandpackInternalProvider {
+  <
+    Files extends SandpackFiles,
+    TemplateName extends SandpackPredefinedTemplate
+  >(
+    /**
+     * Infer files & template values
+     */
+    props: React.PropsWithChildren<
+      SandpackProviderProps<Files, TemplateName> & {
+        files?: Files;
+        template?: TemplateName;
+      }
+    >
+  ): React.ReactElement<
+    SandpackProviderProps,
+    React.Provider<SandpackProviderState>
+  > | null;
+}
+
+/**
+ * @hidden
+ */
+interface SandpackRootProps<
+  Files extends SandpackFiles | any,
+  TemplateName extends SandpackPredefinedTemplate
+> {
+  files?: Files;
+  template?: TemplateName;
+  customSetup?: SandpackSetup;
+  theme?: SandpackThemeProp;
+}
+
+/**
+ * @hidden
+ */
+export interface SandpackInternalOptions<
+  Files extends SandpackFiles | any = any,
+  TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
+> {
+  visibleFiles?: Array<
+    Files extends SandpackFiles
+      ? TemplateFiles<TemplateName> | keyof Files
+      : TemplateFiles<TemplateName>
+  >;
+  activeFile?: Files extends SandpackFiles
+    ? TemplateFiles<TemplateName> | keyof Files
+    : TemplateFiles<TemplateName>;
+
+  initMode?: SandpackInitMode;
+  initModeObserverOptions?: IntersectionObserverInit;
+  autorun?: boolean;
+  recompileMode?: "immediate" | "delayed";
+  recompileDelay?: number;
+  id?: string;
+  logLevel?: SandpackLogLevel;
+  bundlerURL?: string;
+  startRoute?: string;
+  skipEval?: boolean;
+  fileResolver?: FileResolver;
+  externalResources?: string[];
+  classes?: Record<string, string>;
+}
+
+/**
+ * @hidden
+ */
+interface SandpackInternalProps<
+  Files extends SandpackFiles | any,
+  TemplateName extends SandpackPredefinedTemplate
+> extends SandpackRootProps<Files, TemplateName> {
+  options?: SandpackInternalOptions<Files, TemplateName> & {
+    editorWidthPercentage?: number;
+    editorHeight?: React.CSSProperties["height"];
+
+    showNavigator?: boolean;
+    showLineNumbers?: boolean;
+    showInlineErrors?: boolean;
+    showRefreshButton?: boolean;
+    showTabs?: boolean;
+    closableTabs?: boolean;
+    wrapContent?: boolean;
+
+    codeEditor?: SandpackCodeOptions;
+
+    /**
+     * This disables editing of content by the user in all files.
+     */
+    readOnly?: boolean;
+
+    /**
+     * Controls the visibility of Read-only label, which will only
+     * appears when `readOnly` is `true`
+     */
+    showReadOnly?: boolean;
+  };
+}
+
+/**
+ * @hidden
+ */
+export interface SandpackProviderProps<
+  Files extends SandpackFiles = SandpackFiles,
+  TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
+> extends SandpackRootProps<Files, TemplateName> {
+  options?: SandpackInternalOptions<Files, TemplateName>;
+  children?: React.ReactNode;
+}
+
+/**
+ * @hidden
+ */
+export type SandpackClientDispatch = (
+  msg: SandpackMessage,
+  clientId?: string
+) => void;
+
+/**
+ * @hidden
+ */
+export type SandpackClientListen = (
+  listener: ListenerFunction,
+  clientId?: string
+) => UnsubscribeFunction;
+
+/**
+ * @hidden
+ */
+export type SandpackContext = SandpackState & {
+  dispatch: SandpackClientDispatch;
+  listen: SandpackClientListen;
+};
+
+/**
+ * @hidden
+ */
+export interface SandpackState {
+  bundlerState: BundlerState | undefined;
+
+  /**
+   * List the file path listed in the file tab,
+   * which will allow the user to interact with.
+   */
+  visibleFiles: string[];
+
+  /**
+   * Path to the file will be open in the code editor
+   * when the component mounts
+   */
+  activeFile: string;
+  startRoute?: string;
+
+  /**
+   * Returns the current state of the editor, meaning that any
+   * changes from the original `files` must return a `dirty` value;
+   * otherwise, it'll return `pristine`
+   */
+  editorState: EditorState;
+  error: SandpackError | null;
+  files: SandpackBundlerFiles;
+  environment?: SandboxEnvironment;
+  status: SandpackStatus;
+  initMode: SandpackInitMode;
+  clients: Record<string, SandpackClient>;
+
+  runSandpack: () => void;
+  registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
+  unregisterBundler: (clientId: string) => void;
+  updateFile: (pathOrFiles: string | SandpackFiles, code?: string) => void;
+  updateCurrentFile: (newCode: string) => void;
+  openFile: (path: string) => void;
+  closeFile: (path: string) => void;
+  deleteFile: (path: string) => void;
+  setActiveFile: (path: string) => void;
+  resetFile: (path: string) => void;
+  resetAllFiles: () => void;
+  registerReactDevTools: (value: ReactDevToolsMode) => void;
+
+  /**
+   * Element refs
+   * Different components inside the SandpackProvider might register certain elements of interest for sandpack
+   * eg: lazy anchor - if no component registers this, then the sandpack runs on mount, without lazy mode
+   */
+  lazyAnchorRef: React.RefObject<HTMLDivElement>;
+
+  /**
+   * eg: error screen - if no component registers this, the bundler needs to show the custom error screen
+   * When the value is boolean, we only care if the components have the responsibility to render the elements,
+   * we don't need the actual element reference
+   */
+  errorScreenRegisteredRef: React.MutableRefObject<boolean>;
+  openInCSBRegisteredRef: React.MutableRefObject<boolean>;
+  loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
+}
+
+/**
+ * @hidden
+ */
+export type SandpackStatus =
+  | "initial"
+  | "idle"
+  | "running"
+  | "timeout"
+  | "done";
+
+/**
+ * @hidden
+ */
+export type EditorState = "pristine" | "dirty";
+
+/**
+ * @hidden
+ */
+export interface SandboxTemplate {
+  files: Record<string, SandpackFile>;
+  dependencies: Record<string, string>;
+  devDependencies?: Record<string, string>;
+  entry: string;
+  main: string;
+  environment: SandboxEnvironment;
+}
+
+/**
+ * @hidden
+ */
+export type SandpackFiles = Record<string, string | SandpackFile>;
 
 /**
  * Custom properties to be used in the SandpackCodeEditor component,
  * some of which are exclusive to customize the CodeMirror instance.
+ * @hidden
  */
 export interface SandpackCodeOptions {
   /**
@@ -447,6 +614,9 @@ export type DeepPartial<Type> = {
   [Property in keyof Type]?: DeepPartial<Type[Property]>;
 };
 
+/**
+ * @hidden
+ */
 export interface FileResolver {
   isFile: (path: string) => Promise<boolean>;
   readFile: (path: string) => Promise<string>;
@@ -458,8 +628,8 @@ export interface FileResolver {
 export interface SandpackProviderState {
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;
-  openPaths: Array<TemplateFiles<SandpackPredefinedTemplate> | string>;
-  activePath: TemplateFiles<SandpackPredefinedTemplate> | string;
+  visibleFiles: Array<TemplateFiles<SandpackPredefinedTemplate> | string>;
+  activeFile: TemplateFiles<SandpackPredefinedTemplate> | string;
   startRoute?: string;
   initMode: SandpackInitMode;
   bundlerState?: BundlerState;

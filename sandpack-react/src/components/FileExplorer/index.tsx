@@ -15,7 +15,7 @@ const fileExplorerClassName = css({
 /**
  * @category Components
  */
-export const FileExplorer = ({
+export const SandpackFileExplorer = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
@@ -24,7 +24,7 @@ export const FileExplorer = ({
   return (
     <div className={classNames(fileExplorerClassName, className)} {...props}>
       <ModuleList
-        activePath={sandpack.activePath}
+        activeFile={sandpack.activeFile}
         files={sandpack.files}
         prefixedPath="/"
         selectFile={sandpack.openFile}

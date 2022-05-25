@@ -5,7 +5,7 @@ import { SandpackLayout, SandpackCodeEditor, SandpackProvider } from "../../";
 import { Directory } from "./Directory";
 import { File } from "./File";
 
-import { FileExplorer } from "./";
+import { SandpackFileExplorer } from "./";
 
 export default {
   title: "components/File Explorer",
@@ -25,7 +25,7 @@ export const Component: React.FC = () => (
       template="react"
     >
       <SandpackLayout>
-        <FileExplorer />
+        <SandpackFileExplorer />
 
         <SandpackCodeEditor />
       </SandpackLayout>
@@ -41,9 +41,10 @@ export const Component: React.FC = () => (
         "/src/components/button.tsx": "",
       }}
       template="react"
+      theme="dark"
     >
-      <SandpackLayout theme="dark">
-        <FileExplorer />
+      <SandpackLayout>
+        <SandpackFileExplorer />
         <SandpackCodeEditor />
       </SandpackLayout>
     </SandpackProvider>
@@ -60,7 +61,7 @@ export const LongFileTree: React.FC = () => (
     template="react"
   >
     <SandpackLayout>
-      <FileExplorer />
+      <SandpackFileExplorer />
     </SandpackLayout>
   </SandpackProvider>
 );
@@ -77,7 +78,7 @@ export const DirectoryIconStory: React.FC = () => (
   <SandpackProvider>
     <SandpackLayout>
       <Directory
-        activePath="file.ts"
+        activeFile="file.ts"
         depth={1}
         files={{ App: { code: "" } }}
         prefixedPath="/src"

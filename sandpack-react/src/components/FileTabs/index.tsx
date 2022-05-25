@@ -34,6 +34,9 @@ const closeButtonClassName = css({
   visibility: "hidden",
 });
 
+/**
+ * @hidden
+ */
 export const tabButton = css({
   display: "block",
   padding: "0 $space$2",
@@ -45,6 +48,9 @@ export const tabButton = css({
   [`&:hover > .${closeButtonClassName}`]: { visibility: "unset" },
 });
 
+/**
+ * @category Components
+ */
 export interface FileTabsProps {
   /**
    * This adds a close button next to each file with a unique trigger to close it.
@@ -66,7 +72,7 @@ export const FileTabs = ({
   const { sandpack } = useSandpack();
   const c = useClasser(THEME_PREFIX);
 
-  const { activePath, openPaths, setActiveFile } = sandpack;
+  const { activeFile, visibleFiles, setActiveFile } = sandpack;
 
   const handleCloseFile = (ev: React.MouseEvent<HTMLDivElement>): void => {
     ev.stopPropagation();
@@ -83,7 +89,7 @@ export const FileTabs = ({
   const getTriggerText = (currentPath: string): string => {
     const documentFileName = getFileName(currentPath);
 
-    const pathsWithDuplicateFileNames = openPaths.reduce((prev, curr) => {
+    const pathsWithDuplicateFileNames = visibleFiles.reduce((prev, curr) => {
       if (curr === currentPath) {
         return prev;
       }
@@ -122,19 +128,19 @@ export const FileTabs = ({
         )}
         role="tablist"
       >
-        {openPaths.map((filePath) => (
+        {visibleFiles.map((filePath) => (
           <button
             key={filePath}
-            aria-selected={filePath === activePath}
+            aria-selected={filePath === activeFile}
             className={classNames(c("tab-button"), buttonClassName, tabButton)}
-            data-active={filePath === activePath}
+            data-active={filePath === activeFile}
             onClick={(): void => setActiveFile(filePath)}
             role="tab"
             title={filePath}
             type="button"
           >
             {getTriggerText(filePath)}
-            {closableTabs && openPaths.length > 1 && (
+            {closableTabs && visibleFiles.length > 1 && (
               <span
                 className={classNames(c("close-button"), closeButtonClassName)}
                 onClick={handleCloseFile}

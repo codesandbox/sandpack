@@ -36,9 +36,9 @@ export const LayoutExample: React.FC = () => {
     useLayoutExampleContext();
 
   useLayoutEffect(() => {
-    setLayoutFiles(sandpack.activePath, code);
+    setLayoutFiles(sandpack.activeFile, code);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code, sandpack.activePath]);
+  }, [code, sandpack.activeFile]);
 
   useEffect(() => {
     Object.entries(layoutFiles).forEach(([filename, fileCode]) => {

@@ -308,7 +308,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         clearTimeout(timer);
       };
 
-      // TODO: Would be nice to reconfigure the editor when these change, instead of recreating with all the extensions from scratch
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
       shouldInitEditor,

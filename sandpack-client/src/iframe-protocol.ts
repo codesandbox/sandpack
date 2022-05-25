@@ -51,7 +51,7 @@ export class IFrameProtocol {
       {
         type: "register-frame",
         origin: document.location.origin,
-        id: this.channelId, // TODO: Rename in codesandbox-api to channelId
+        id: this.channelId,
       },
       this.origin
     );
