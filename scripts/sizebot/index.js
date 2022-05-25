@@ -116,6 +116,8 @@ ${removedFiles.join("")}${tableContent.join("")} \n\n
   const issue_number =
     process.env.GITHUB_REF.split("refs/pull/")[1].split("/")[0];
 
+  console.log(process.env.GITHUB_REF);
+
   const comment = await findComment({ owner, repo, issue_number });
 
   if (comment) {
@@ -138,4 +140,3 @@ ${removedFiles.join("")}${tableContent.join("")} \n\n
     });
   }
 })();
-;
