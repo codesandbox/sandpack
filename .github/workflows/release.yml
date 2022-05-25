@@ -83,7 +83,7 @@ jobs:
           path: bundler
 
       - name: Prepare | Lerna Version
-        run: yarn lerna version major --yes --no-private
+        run: yarn lerna version --yes --no-private
 
       - name: Prepare | Build
         run: |
