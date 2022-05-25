@@ -63,7 +63,7 @@ export const ExtensionAutocomplete: React.FC = () => {
   const [active, setActive] = React.useState(false);
   return (
     <>
-      <button onClick={() => setActive((prev): boolean => !prev)}>
+      <button onClick={(): void => setActive((prev): boolean => !prev)}>
         Toggle
       </button>
       <SandpackProvider template="react">
