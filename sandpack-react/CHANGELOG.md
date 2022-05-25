@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.10](https://github.com/codesandbox/sandpack/compare/v0.19.9...v0.19.10) (2022-05-25)
+
+
+### Bug Fixes
+
+* **codemirror:** watch extensions changes from props ([#469](https://github.com/codesandbox/sandpack/issues/469)) ([10ac96a](https://github.com/codesandbox/sandpack/commit/10ac96ab7ec912b559e1977db85809d32bc40cdc))
+* **editor:** prefer useId when available ([#461](https://github.com/codesandbox/sandpack/issues/461)) ([a7187db](https://github.com/codesandbox/sandpack/commit/a7187db5784ff403396e1d792b5dd5d3300bcf04))
+
+
+
+
+
 ## [0.19.9](https://github.com/codesandbox/sandpack/compare/v0.19.8...v0.19.9) (2022-05-23)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
