@@ -44,11 +44,13 @@ const SandpackThemeContext = React.createContext<{
 /**
  * @category Theme
  */
-const SandpackThemeProvider: React.FC<{
-  theme?: SandpackThemeProp;
-  children?: React.ReactNode;
-}> = (props) => {
-  const { theme, id } = standardizeTheme(props.theme);
+const SandpackThemeProvider: React.FC<
+  React.HTMLAttributes<HTMLDivElement> & {
+    theme?: SandpackThemeProp;
+    children?: React.ReactNode;
+  }
+> = ({ theme: themeFromProps, children, className, ...props }) => {
+  const { theme, id } = standardizeTheme(themeFromProps);
   const c = useClasser(THEME_PREFIX);
 
   const themeClassName = React.useMemo(() => {
@@ -61,10 +63,12 @@ const SandpackThemeProvider: React.FC<{
         className={classNames(
           c("wrapper"),
           themeClassName.toString(),
-          wrapperClassName
+          wrapperClassName,
+          className
         )}
+        {...props}
       >
-        {props.children}
+        {children}
       </div>
     </SandpackThemeContext.Provider>
   );
