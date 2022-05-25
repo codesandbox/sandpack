@@ -351,7 +351,7 @@ export type TemplateFiles<Name extends SandpackPredefinedTemplate> =
 export interface SandpackInternal {
   <
     Files extends SandpackFiles | any,
-    TemplateName extends SandpackPredefinedTemplate = "react"
+    TemplateName extends SandpackPredefinedTemplate = "vanilla"
   >(
     props: SandpackInternalProps<Files, TemplateName> & {
       files?: Files;

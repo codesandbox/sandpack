@@ -173,6 +173,26 @@ describe(getSandpackStateFromProps, () => {
     expect(setup.visibleFiles.sort()).toEqual([REACT_TEMPLATE.main]);
   });
 
+  test("it uses the visible path prop properly with a default template", () => {
+    const setup = getSandpackStateFromProps({
+      options: { visibleFiles: ["/src/styles.css"] },
+    });
+
+    expect(setup.visibleFiles.sort()).toEqual([
+      "/src/index.js",
+      "/src/styles.css",
+    ]);
+  });
+
+  test("it uses the visible path prop properly with a template", () => {
+    const setup = getSandpackStateFromProps({
+      template: "react",
+      options: { visibleFiles: ["/styles.css"] },
+    });
+
+    expect(setup.visibleFiles.sort()).toEqual(["/App.js", "/styles.css"]);
+  });
+
   test("visibleFiles override the files configurations", () => {
     const setup = getSandpackStateFromProps({
       files: {
