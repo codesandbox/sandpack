@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-react",
-  "version": "0.19.10",
+  "version": "1.0.0",
   "description": "",
   "keywords": [],
   "repository": {
@@ -47,7 +47,7 @@
     "@codemirror/matchbrackets": "^0.19.3",
     "@codemirror/state": "^0.19.6",
     "@codemirror/view": "^0.19.32",
-    "@codesandbox/sandpack-client": "^0.19.9",
+    "@codesandbox/sandpack-client": "^1.0.0",
     "@react-hook/intersection-observer": "^3.1.1",
     "@stitches/core": "^1.2.6",
     "codesandbox-import-util-types": "^2.2.3",
@@ -57,8 +57,8 @@
     "react-is": "^17.0.2"
   },
   "devDependencies": {
-    "@codesandbox/sandpack-themes": "*",
     "@babel/core": "^7.12.3",
+    "@codesandbox/sandpack-themes": "^1.0.0",
     "@storybook/addon-actions": "^6.1.9",
     "@storybook/addon-essentials": "^6.1.9",
     "@storybook/addon-knobs": "^6.1.9",
