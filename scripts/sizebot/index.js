@@ -112,7 +112,6 @@ ${removedFiles.join("")}${tableContent.join("")} \n\n
   /**
    * Creating comment
    */
-  console.log(process.env.GITHUB_REF);
   const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
   const issue_number =
     process.env.GITHUB_REF.split("refs/pull/")[1].split("/")[0];
