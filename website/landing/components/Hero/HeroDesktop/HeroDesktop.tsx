@@ -292,6 +292,7 @@ export const HeroDesktop: React.FC = () => {
 
         <Box
           css={{
+            color: "$darkTextPrimary",
             fontSize: "calc(100vw / 1920 * 10)",
             fontFamily:
               "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol",

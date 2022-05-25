@@ -467,7 +467,8 @@ interface SandpackInternalProps<
 export interface SandpackProviderProps<
   Files extends SandpackFiles = SandpackFiles,
   TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
-> extends SandpackRootProps<Files, TemplateName> {
+> extends SandpackRootProps<Files, TemplateName>,
+    React.HTMLAttributes<HTMLDivElement> {
   options?: SandpackInternalOptions<Files, TemplateName>;
   children?: React.ReactNode;
 }

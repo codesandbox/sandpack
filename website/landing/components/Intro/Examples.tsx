@@ -5,6 +5,7 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
 } from "@codesandbox/sandpack-react";
+import { styled } from "@stitches/react";
 import { motion, useTransform, useViewportScroll } from "framer-motion";
 import { useLayoutEffect, useRef, useState } from "react";
 
@@ -19,6 +20,10 @@ import { useLayoutExampleContext } from "./Sections/LayoutContext";
 import { TemplateExample } from "./Sections/Template";
 import { ThemeExample } from "./Sections/Theme";
 import { FadeAnimation } from "./Sections/common";
+
+const SandpackProviderStretch = styled(SandpackProvider, {
+  width: "100% !important",
+});
 
 export const Examples: React.FC = () => {
   const { layoutFiles, visibility } = useLayoutExampleContext();
@@ -159,19 +164,19 @@ export const Examples: React.FC = () => {
       >
         <TemplateExample />
 
-        <SandpackProvider>
+        <SandpackProviderStretch>
           <CustomExample />
-        </SandpackProvider>
+        </SandpackProviderStretch>
 
-        <SandpackProvider>
+        <SandpackProviderStretch>
           <EditorExample />
-        </SandpackProvider>
+        </SandpackProviderStretch>
 
         <ThemeExample />
 
-        <SandpackProvider template="react">
+        <SandpackProviderStretch template="react">
           <LayoutExample />
-        </SandpackProvider>
+        </SandpackProviderStretch>
       </List>
     </>
   );

@@ -646,12 +646,16 @@ class SandpackProviderClass extends React.PureComponent<
   };
 
   render(): React.ReactElement {
-    const { children, theme } = this.props;
+    const { children, theme, className, style } = this.props;
 
     return (
       <Sandpack.Provider value={this._getSandpackState()}>
         <ClasserProvider classes={this.props.options?.classes}>
-          <SandpackThemeProvider theme={theme}>
+          <SandpackThemeProvider
+            className={className}
+            style={style}
+            theme={theme}
+          >
             {children}
           </SandpackThemeProvider>
         </ClasserProvider>
