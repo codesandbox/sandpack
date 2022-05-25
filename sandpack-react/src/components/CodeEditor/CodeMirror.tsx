@@ -35,13 +35,13 @@ import { getFileName } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
-import { useGeneratedId } from "./useGeneratedId";
 import {
   cmClassName,
   placeholderClassName,
   tokensClassName,
   readOnlyClassName,
 } from "./styles";
+import { useGeneratedId } from "./useGeneratedId";
 import { useSyntaxHighlight } from "./useSyntaxHighlight";
 import {
   getCodeMirrorLanguage,
