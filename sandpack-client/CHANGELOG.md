@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.9](https://github.com/codesandbox/sandpack/compare/v0.19.8...v0.19.9) (2022-05-23)
+
+
+### Bug Fixes
+
+* **client:** console message methods ([1b76dcf](https://github.com/codesandbox/sandpack/commit/1b76dcf5ccfd0db61cda8d70329424cdf27116ad))
+
+
+
+
+
+## [0.19.8](https://github.com/codesandbox/sandpack/compare/v0.19.7...v0.19.8) (2022-05-23)
+
+
+### Bug Fixes
+
+* **sandpack messages:** add console type ([3edcb4d](https://github.com/codesandbox/sandpack/commit/3edcb4d11238f47ecbc286a8535205579856d3f3))
+
+
+
+
+
 ## [0.19.1](https://github.com/codesandbox/sandpack/compare/v0.19.0...v0.19.1) (2022-04-26)
 
 

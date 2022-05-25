@@ -11,7 +11,7 @@ import { lineNumbers } from "@codemirror/gutter";
 import { defaultHighlightStyle } from "@codemirror/highlight";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
-import { EditorState, EditorSelection } from "@codemirror/state";
+import { EditorState, EditorSelection, StateEffect } from "@codemirror/state";
 import type { Annotation, Extension } from "@codemirror/state";
 import {
   highlightSpecialChars,
@@ -31,10 +31,11 @@ import type {
   SandpackInitMode,
 } from "../../types";
 import { classNames } from "../../utils/classNames";
-import { getFileName, generateRandomId } from "../../utils/stringUtils";
+import { getFileName } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
+import { useGeneratedId } from "./useGeneratedId";
 import {
   cmClassName,
   placeholderClassName,
@@ -140,7 +141,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
     const c = useClasser(THEME_PREFIX);
     const { listen } = useSandpack();
-    const ariaId = React.useRef<string>(id ?? generateRandomId());
+    const ariaId = useGeneratedId(id);
 
     const { isIntersecting } = useIntersectionObserver(wrapper, {
       rootMargin: "600px 0px",
@@ -293,7 +294,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           view.contentDOM.setAttribute("tabIndex", "-1");
           view.contentDOM.setAttribute(
             "aria-describedby",
-            `exit-instructions-${ariaId.current}`
+            `exit-instructions-${ariaId}`
           );
         } else {
           view.contentDOM.classList.add("cm-readonly");
@@ -317,6 +318,25 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       sortedDecorators,
       readOnly,
     ]);
+
+    React.useEffect(
+      function applyExtensions() {
+        const view = cmView.current;
+
+        if (view) {
+          view.dispatch({
+            effects: StateEffect.appendConfig.of(extensions),
+          });
+
+          view.dispatch({
+            effects: StateEffect.appendConfig.of(
+              keymap.of([...extensionsKeymap] as unknown as KeyBinding[])
+            ),
+          });
+        }
+      },
+      [extensions, extensionsKeymap]
+    );
 
     React.useEffect(() => {
       // When the user clicks on a tab button on a larger screen
@@ -455,7 +475,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       <div
         ref={combinedRef}
-        aria-describedby={`enter-instructions-${ariaId.current}`}
+        aria-describedby={`enter-instructions-${ariaId}`}
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
@@ -479,7 +499,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
         <>
           <p
-            id={`enter-instructions-${ariaId.current}`}
+            id={`enter-instructions-${ariaId}`}
             style={{ display: "none" }}
             suppressHydrationWarning
           >
@@ -487,7 +507,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             press Escape
           </p>
           <p
-            id={`exit-instructions-${ariaId.current}`}
+            id={`exit-instructions-${ariaId}`}
             style={{ display: "none" }}
             suppressHydrationWarning
           >
