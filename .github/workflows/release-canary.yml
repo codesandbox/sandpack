@@ -63,7 +63,7 @@ jobs:
           node-version: "14.17.0"
 
       - name: Setup | Authenticate with Registry
-        run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+        run: echo //npm.pkg.github.com/:_authToken=${NPM_TOKEN} > .npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
