@@ -21,7 +21,6 @@ import {
 } from "@codemirror/view";
 import type { KeyBinding } from "@codemirror/view";
 import useIntersectionObserver from "@react-hook/intersection-observer";
-import isEqual from "lodash.isequal";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
@@ -30,6 +29,7 @@ import type {
   EditorState as SandpackEditorState,
   SandpackInitMode,
 } from "../../types";
+import { shallowEqual } from "../../utils/array";
 import { getFileName } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
@@ -305,8 +305,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         const view = cmView.current;
 
         const dependenciesAreDiff =
-          !isEqual(prevExtension.current, extensions) ||
-          !isEqual(prevExtensionKeymap.current, extensionsKeymap);
+          !shallowEqual(extensions, prevExtension.current) ||
+          !shallowEqual(extensionsKeymap, prevExtensionKeymap.current);
 
         if (view && dependenciesAreDiff) {
           view.dispatch({
