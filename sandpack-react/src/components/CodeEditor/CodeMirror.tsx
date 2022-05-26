@@ -29,6 +29,7 @@ import type {
   EditorState as SandpackEditorState,
   SandpackInitMode,
 } from "../../types";
+import { shallowEqual } from "../../utils/array";
 import { getFileName } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
@@ -132,6 +133,9 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       rootMargin: "600px 0px",
       threshold: 0.2,
     });
+
+    const prevExtension = React.useRef<Extension[]>([]);
+    const prevExtensionKeymap = React.useRef<Array<readonly KeyBinding[]>>([]);
 
     React.useImperativeHandle(ref, () => ({
       getCodemirror: (): EditorView | undefined => cmView.current,
@@ -300,7 +304,11 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       function applyExtensions() {
         const view = cmView.current;
 
-        if (view) {
+        const dependenciesAreDiff =
+          !shallowEqual(extensions, prevExtension.current) ||
+          !shallowEqual(extensionsKeymap, prevExtensionKeymap.current);
+
+        if (view && dependenciesAreDiff) {
           view.dispatch({
             effects: StateEffect.appendConfig.of(extensions),
           });
@@ -310,6 +318,9 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
               keymap.of([...extensionsKeymap] as unknown as KeyBinding[])
             ),
           });
+
+          prevExtension.current = extensions;
+          prevExtensionKeymap.current = extensionsKeymap;
         }
       },
       [extensions, extensionsKeymap]
