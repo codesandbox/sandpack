@@ -23,6 +23,7 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "build": "yarn workspace @codesandbox/sandpack-client build && yarn workspace @codesandbox/sandpack-react build && yarn workspace @codesandbox/sandpack-themes build",
+    "build:client": "yarn workspace @codesandbox/sandpack-client build",
     "prepare": "husky install",
     "clean": "yarn workspaces run clean",
     "dev:docs": "yarn workspace sandpack-docs start",

@@ -121,6 +121,7 @@ export class SandpackClient {
 
   unsubscribeGlobalListener: UnsubscribeFunction;
   unsubscribeChannelListener: UnsubscribeFunction;
+  clientId: string;
 
   constructor(
     selector: string | HTMLIFrameElement,
@@ -134,6 +135,7 @@ export class SandpackClient {
     this.bundlerState = undefined;
     this.errors = [];
     this.status = "initializing";
+    this.clientId = Math.floor(Math.random() * 10000).toString();
 
     if (typeof selector === "string") {
       this.selector = selector;
@@ -177,15 +179,22 @@ export class SandpackClient {
 
         if (this.options.fileResolver) {
           this.fileResolverProtocol = new Protocol(
-            "file-resolver",
-            async (data: { m: "isFile" | "readFile"; p: string }) => {
-              if (data.m === "isFile") {
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                return this.options.fileResolver!.isFile(data.p);
-              }
+            `file-resolver`,
+            async (data: {
+              m: "isFile" | "readFile";
+              p: string;
+              id: string;
+            }) => {
+              // backwards compatibilty or same origin client
+              if (data.id === undefined || data.id === this.clientId) {
+                if (data.m === "isFile") {
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  return this.options.fileResolver!.isFile(data.p);
+                }
 
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              return this.options.fileResolver!.readFile(data.p);
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                return this.options.fileResolver!.readFile(data.p);
+              }
             },
             this.iframe.contentWindow
           );
@@ -285,6 +294,7 @@ export class SandpackClient {
     );
 
     this.dispatch({
+      clientId: this.clientId,
       type: "compile",
       codesandbox: true,
       version: 3,

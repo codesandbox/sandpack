@@ -182,6 +182,7 @@ export type SandpackMessage = BaseSandpackMessage &
         data: Record<string, Record<string, unknown>>;
       }
     | {
+        clientId: string;
         type: "compile";
         version: number;
         isInitializationCompile?: boolean;

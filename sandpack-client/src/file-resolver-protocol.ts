@@ -80,6 +80,8 @@ export default class Protocol {
   private _messageListener = async (e: MessageEvent) => {
     const { data } = e;
 
+    console.log(data);
+
     if (data.$type !== this.getTypeId()) {
       return;
     }

@@ -35,6 +35,10 @@
       "name": "Build Workspace",
       "command": "yarn build"
     },
+    "build:client": {
+      "name": "Build client",
+      "command": "yarn build:client"
+    },
     "format": {
       "name": "Format Workspace",
       "command": "yarn format"

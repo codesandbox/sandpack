@@ -10,6 +10,7 @@ import type {
   SandpackMessage,
   UnsubscribeFunction,
   SandpackLogLevel,
+  ClientOptions,
 } from "@codesandbox/sandpack-client";
 import type React from "react";
 
@@ -139,7 +140,7 @@ export interface SandpackOptions {
   bundlerURL?: string;
   startRoute?: string;
   skipEval?: boolean;
-  fileResolver?: FileResolver;
+  fileResolver?: ClientOptions["fileResolver"];
   externalResources?: string[];
 }
 
@@ -422,7 +423,7 @@ export interface SandpackInternalOptions<
   bundlerURL?: string;
   startRoute?: string;
   skipEval?: boolean;
-  fileResolver?: FileResolver;
+  fileResolver?: ClientOptions["fileResolver"];
   externalResources?: string[];
   classes?: Record<string, string>;
 }
@@ -614,14 +615,6 @@ export interface SandpackCodeOptions {
 export type DeepPartial<Type> = {
   [Property in keyof Type]?: DeepPartial<Type[Property]>;
 };
-
-/**
- * @hidden
- */
-export interface FileResolver {
-  isFile: (path: string) => Promise<boolean>;
-  readFile: (path: string) => Promise<string>;
-}
 
 /**
  * @hidden
