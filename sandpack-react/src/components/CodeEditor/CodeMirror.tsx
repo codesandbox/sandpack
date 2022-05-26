@@ -109,8 +109,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       decorators,
       initMode = "lazy",
       id,
-      extensions = [],
-      extensionsKeymap = [],
+      extensions,
+      extensionsKeymap,
     },
     ref
   ) => {
@@ -204,7 +204,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             ...historyKeymap,
             ...commentKeymap,
             ...customCommandsKeymap,
-            ...extensionsKeymap,
+            ...(extensionsKeymap ?? []),
           ] as KeyBinding[]),
           langSupport,
 
@@ -212,7 +212,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           getEditorTheme(theme),
           getSyntaxHighlight(theme),
-          ...extensions,
+          ...(extensions ?? []),
         ];
 
         if (readOnly) {
@@ -302,12 +302,14 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
         if (view) {
           view.dispatch({
-            effects: StateEffect.appendConfig.of(extensions),
+            effects: StateEffect.appendConfig.of(extensions ?? []),
           });
 
           view.dispatch({
             effects: StateEffect.appendConfig.of(
-              keymap.of([...extensionsKeymap] as unknown as KeyBinding[])
+              keymap.of([
+                ...(extensionsKeymap ?? []),
+              ] as unknown as KeyBinding[])
             ),
           });
         }
