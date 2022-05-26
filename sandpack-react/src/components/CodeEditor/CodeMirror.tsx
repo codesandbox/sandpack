@@ -21,6 +21,7 @@ import {
 } from "@codemirror/view";
 import type { KeyBinding } from "@codemirror/view";
 import useIntersectionObserver from "@react-hook/intersection-observer";
+import isEqual from "lodash.isequal";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
@@ -109,8 +110,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       decorators,
       initMode = "lazy",
       id,
-      extensions,
-      extensionsKeymap,
+      extensions = [],
+      extensionsKeymap = [],
     },
     ref
   ) => {
@@ -132,6 +133,9 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       rootMargin: "600px 0px",
       threshold: 0.2,
     });
+
+    const prevExtension = React.useRef<Extension[]>([]);
+    const prevExtensionKeymap = React.useRef<Array<readonly KeyBinding[]>>([]);
 
     React.useImperativeHandle(ref, () => ({
       getCodemirror: (): EditorView | undefined => cmView.current,
@@ -204,7 +208,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             ...historyKeymap,
             ...commentKeymap,
             ...customCommandsKeymap,
-            ...(extensionsKeymap ?? []),
+            ...extensionsKeymap,
           ] as KeyBinding[]),
           langSupport,
 
@@ -212,7 +216,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           getEditorTheme(theme),
           getSyntaxHighlight(theme),
-          ...(extensions ?? []),
+          ...extensions,
         ];
 
         if (readOnly) {
@@ -300,18 +304,23 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       function applyExtensions() {
         const view = cmView.current;
 
-        if (view) {
+        const dependenciesAreDiff =
+          !isEqual(prevExtension.current, extensions) ||
+          !isEqual(prevExtensionKeymap.current, extensionsKeymap);
+
+        if (view && dependenciesAreDiff) {
           view.dispatch({
-            effects: StateEffect.appendConfig.of(extensions ?? []),
+            effects: StateEffect.appendConfig.of(extensions),
           });
 
           view.dispatch({
             effects: StateEffect.appendConfig.of(
-              keymap.of([
-                ...(extensionsKeymap ?? []),
-              ] as unknown as KeyBinding[])
+              keymap.of([...extensionsKeymap] as unknown as KeyBinding[])
             ),
           });
+
+          prevExtension.current = extensions;
+          prevExtensionKeymap.current = extensionsKeymap;
         }
       },
       [extensions, extensionsKeymap]

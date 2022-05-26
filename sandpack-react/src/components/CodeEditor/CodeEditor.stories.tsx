@@ -79,9 +79,25 @@ export const EslintIntegration: React.FC = () => {
   const { lintErrors, lintExtensions } = useSandpackLint();
 
   return (
-    <SandpackProvider template="react">
+    <SandpackProvider
+      customSetup={{
+        files: {
+          "/App.js": `export default function App() {
+  if(true) {
+    useState()
+  }
+  return <h1>Hello World</h1>
+}`,
+        },
+      }}
+      template="react"
+    >
       <SandpackThemeProvider>
-        <SandpackCodeEditor extensions={lintExtensions} id="extensions" />
+        <SandpackCodeEditor
+          extensions={lintExtensions}
+          extensionsKeymap={[]}
+          id="extensions"
+        />
 
         {JSON.stringify(lintErrors)}
       </SandpackThemeProvider>
