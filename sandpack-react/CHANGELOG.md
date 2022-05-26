@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.8-experimental.5](https://github.com/codesandbox/sandpack/compare/v0.19.8-experimental.4...v0.19.8-experimental.5) (2022-05-26)
+
+
+### Bug Fixes
+
+* **codemirror:** remove inline props ([#474](https://github.com/codesandbox/sandpack/issues/474)) ([c6440c1](https://github.com/codesandbox/sandpack/commit/c6440c1acb0c171d473d75259c003424c1ac55a0))
+
+
+
+
+
 ## [0.19.8-experimental.4](https://github.com/codesandbox/sandpack/compare/v0.19.8-experimental.3...v0.19.8-experimental.4) (2022-05-23)
 
 
