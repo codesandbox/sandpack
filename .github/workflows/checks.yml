@@ -243,6 +243,9 @@ jobs:
             packages/*/node_modules
           key: modules-${{ hashFiles('yarn.lock') }}
 
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
+
       - name: Lint | Eslint
         run: yarn run lint
 
@@ -266,6 +269,9 @@ jobs:
             node_modules
             packages/*/node_modules
           key: modules-${{ hashFiles('yarn.lock') }}
+
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Format
         run: yarn run format:check
