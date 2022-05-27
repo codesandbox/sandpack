@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.4](https://github.com/codesandbox/sandpack/compare/v1.0.3...v1.0.4) (2022-05-27)
+
+
+### Bug Fixes
+
+* **release-script:** trigger release ([#480](https://github.com/codesandbox/sandpack/issues/480)) ([46890fd](https://github.com/codesandbox/sandpack/commit/46890fdc6748f997cad38a39860b573869af1c60))
+
+
+
+
+
 ## [1.0.2](https://github.com/codesandbox/sandpack/compare/v1.0.1...v1.0.2) (2022-05-26)
 
 
