@@ -6,7 +6,7 @@ Sandpack is a component toolkit for creating your own live running code editing 
 
 [Learn more about Sandpack](https://sandpack.codesandbox.io/)
 
-## Sandpack client
+## Sandpack Client
 
 This is a small foundation package that sits on top of the bundler. It is
 framework agnostic and facilitates the handshake between your context and the bundler iframe.
@@ -25,6 +25,18 @@ import { Sandpack } from "@codesandbox/sandpack-react";
 
 [Read more](https://sandpack.codesandbox.io/docs/advanced-usage/components)
 
+## Sandpack Themes
+
+A list of themes to customize your Sandpack components.
+
+```jsx
+import { githubLight } from "@codesandbox/sandpack-themes";
+
+<Sandpack theme={githubLight} />;
+```
+
+[Read more](https://sandpack.codesandbox.io/docs/getting-started/themes)
+
 ## Documentation
 
 You can find the Sandpack documentation on [https://sandpack.codesandbox.io/docs/](https://sandpack.codesandbox.io/docs).
@@ -36,4 +48,4 @@ The documentation is divided into following sections:
 - [Getting Started](https://sandpack.codesandbox.io/docs/getting-started/install)
 - [Advanced Guides](https://sandpack.codesandbox.io/docs/advanced-usage/provider)
 - [API reference](https://sandpack.codesandbox.io/docs/api/client)
-- [Releases](https://sandpack.codesandbox.io/docs/releases)
+- [Migration guide from v0.x to v1.x](https://sandpack.codesandbox.io/docs/releases/v1)

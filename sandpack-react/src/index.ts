@@ -8,7 +8,6 @@
  * ```
  * @module
  */
-
 // Components
 export * from "./icons";
 export * from "./components";
