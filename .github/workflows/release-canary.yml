@@ -6,46 +6,10 @@ on:
       - next
 
 jobs:
-  bundler:
-    name: Build bundler
-    if: github.event_name == 'push' && github.ref == 'refs/heads/next'
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-
-    steps:
-      - name: Setup | Clone codesandbox-client
-        uses: actions/checkout@v2
-        with:
-          repository: codesandbox/codesandbox-client
-
-      - name: Setup | Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "10.23.2"
-          registry-url: "https://npm.pkg.github.com/"
-
-      - name: Install dependencies and cache
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: true
-
-      - name: Prepare | Build dependencies
-        run: yarn build:deps
-
-      - name: Prepare | Build Sandpack bundler
-        run: yarn build:sandpack
-
-      - name: Archive bundler artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: bundler
-          path: www/**/*.*
-
   publish:
     name: Publish
     timeout-minutes: 20
     runs-on: ubuntu-latest
-    needs: [bundler]
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -63,9 +27,9 @@ jobs:
           node-version: "14.17.0"
 
       - name: Setup | Authenticate with Registry
-        run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+        run: echo //registry.npmjs.org/:_authToken=${GITHUB_TOKEN} > .npmrc
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup | Configure git user
         run: |
