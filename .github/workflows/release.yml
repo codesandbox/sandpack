@@ -21,7 +21,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "10.23.2"
-          registry-url: "https://npm.pkg.github.com/"
 
       - name: Install dependencies and cache
         uses: bahmutov/npm-install@v1
@@ -55,16 +54,19 @@ jobs:
         with:
           # pulls all commits (needed for lerna / semantic release to correctly version)
           fetch-depth: "0"
+          
+      - name: Setup | Authenticate with Registry
+        run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Setup | Ensure registry access
+        run: npm whoami 
 
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "14.17.0"
-
-      - name: Setup | Authenticate with Registry
-        run: echo //npm.pkg.github.com/:_authToken=${NPM_TOKEN} > .npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Setup | Configure git user
         run: |
