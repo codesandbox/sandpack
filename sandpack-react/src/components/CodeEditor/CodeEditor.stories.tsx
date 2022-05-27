@@ -9,9 +9,6 @@ import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../contexts/themeContext";
 import { SandpackPreview } from "../Preview";
 
-import type { CodeEditorProps } from "./index";
-import { SandpackCodeEditor } from "./index";
-
 import { useSandpackLint } from "./eslint";
 
 import type { CodeEditorProps } from "./";
