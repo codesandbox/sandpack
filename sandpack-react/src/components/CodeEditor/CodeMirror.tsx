@@ -30,6 +30,7 @@ import type {
   EditorState as SandpackEditorState,
   SandpackInitMode,
 } from "../../types";
+import { shallowEqual } from "../../utils/array";
 import { classNames } from "../../utils/classNames";
 import { getFileName } from "../../utils/stringUtils";
 
@@ -142,6 +143,9 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     const c = useClasser(THEME_PREFIX);
     const { listen } = useSandpack();
     const ariaId = useGeneratedId(id);
+
+    const prevExtension = React.useRef<Extension[]>([]);
+    const prevExtensionKeymap = React.useRef<Array<readonly KeyBinding[]>>([]);
 
     const { isIntersecting } = useIntersectionObserver(wrapper, {
       rootMargin: "600px 0px",
@@ -323,7 +327,11 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       function applyExtensions() {
         const view = cmView.current;
 
-        if (view) {
+        const dependenciesAreDiff =
+          !shallowEqual(extensions, prevExtension.current) ||
+          !shallowEqual(extensionsKeymap, prevExtensionKeymap.current);
+
+        if (view && dependenciesAreDiff) {
           view.dispatch({
             effects: StateEffect.appendConfig.of(extensions),
           });
@@ -333,6 +341,9 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
               keymap.of([...extensionsKeymap] as unknown as KeyBinding[])
             ),
           });
+
+          prevExtension.current = extensions;
+          prevExtensionKeymap.current = extensionsKeymap;
         }
       },
       [extensions, extensionsKeymap]

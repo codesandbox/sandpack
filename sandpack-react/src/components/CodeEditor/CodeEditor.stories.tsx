@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 import type { Story } from "@storybook/react";
 import * as React from "react";
@@ -7,12 +9,42 @@ import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../contexts/themeContext";
 import { SandpackPreview } from "../Preview";
 
-import type { CodeEditorProps } from "./index";
-import { SandpackCodeEditor } from "./index";
+import { useSandpackLint } from "./eslint";
+
+import type { CodeEditorProps } from "./";
+import { SandpackCodeEditor } from "./";
 
 export default {
   title: "components/Code Editor",
   component: SandpackCodeEditor,
+};
+
+export const EslintIntegration: React.FC = () => {
+  const { lintErrors, lintExtensions } = useSandpackLint();
+
+  return (
+    <SandpackProvider
+      files={{
+        "/App.js": `export default function App() {
+  if(true) {
+    useState()
+  }
+  return <h1>Hello World</h1>
+}`,
+      }}
+      template="react"
+    >
+      <SandpackThemeProvider>
+        <SandpackCodeEditor
+          extensions={lintExtensions}
+          extensionsKeymap={[]}
+          id="extensions"
+        />
+
+        {JSON.stringify(lintErrors)}
+      </SandpackThemeProvider>
+    </SandpackProvider>
+  );
 };
 
 export const Component: Story<CodeEditorProps> = (args) => (
