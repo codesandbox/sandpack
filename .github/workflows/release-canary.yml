@@ -26,10 +26,8 @@ jobs:
         with:
           node-version: "14.17.0"
 
-      - name: Setup | Authenticate with Registry
-        run: echo //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN} > .npmrc
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup | Ensure registry access
+        run: npm whoami --registry https://npm.pkg.github.com/
 
       - name: Setup | Configure git user
         run: |
