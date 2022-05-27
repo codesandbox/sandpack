@@ -7,8 +7,6 @@ on:
 
 jobs:
   publish:
-    name: Publish
-    timeout-minutes: 20
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -24,7 +22,7 @@ jobs:
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14.17.0"
+          node-version: "14"
           registry-url: "https://npm.pkg.github.com/"
 
       - name: Setup | Ensure registry access
@@ -34,20 +32,15 @@ jobs:
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-
-      - name: Install dependencies and cache
+          
+      - name: Setup | Yarn Install
         uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: true
-
-      - name: Prepare | Build
-        run: |
-          yarn workspace @codesandbox/sandpack-client build:publish 
-          yarn workspace @codesandbox/sandpack-react build:publish
-          yarn workspace @codesandbox/sandpack-themes build:publish
-
+        
       - name: Prepare | Lerna Version
         run: lerna version --conventional-commits --conventional-prerelease --yes
+
+      - name: Prepare | Build
+        run: yarn build
 
       - name: Release | Lerna Publish
         run: lerna publish from-package --yes --canary
