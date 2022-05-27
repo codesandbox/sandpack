@@ -25,7 +25,7 @@ jobs:
           node-version: "14"
     
       - name: Setup | Authenticate with Registry
-        run: echo //npm.pkg.github.com/:_authToken=${NPM_TOKEN} > .npmrc
+        run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -36,6 +36,7 @@ jobs:
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          
       - name: Setup | Yarn Install
         uses: bahmutov/npm-install@v1
 
@@ -46,4 +47,4 @@ jobs:
         run: yarn build
 
       - name: Release | Lerna Publish
-        run: lerna publish from-package --yes
+        run: lerna publish from-package --canary --yes
