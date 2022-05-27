@@ -41,12 +41,6 @@ jobs:
         with:
           useLockFile: true
 
-      - name: Prepare | Download artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: bundler
-          path: bundler
-
       - name: Prepare | Build
         run: |
           yarn workspace @codesandbox/sandpack-client build:publish 
