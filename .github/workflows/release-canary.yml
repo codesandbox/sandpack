@@ -25,6 +25,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "14.17.0"
+          registry-url: "https://npm.pkg.github.com/"
 
       - name: Setup | Ensure registry access
         run: npm whoami --registry https://npm.pkg.github.com/
