@@ -23,24 +23,27 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "14"
-          registry-url: "https://npm.pkg.github.com/"
+    
+      - name: Setup | Authenticate with Registry
+        run: echo //npm.pkg.github.com/:_authToken=${NPM_TOKEN} > .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Setup | Ensure registry access
-        run: npm whoami --registry https://npm.pkg.github.com/
+        run: npm whoami 
 
       - name: Setup | Configure git user
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          
       - name: Setup | Yarn Install
         uses: bahmutov/npm-install@v1
-        
+
       - name: Prepare | Lerna Version
-        run: lerna version --conventional-commits --conventional-prerelease --yes
+        run: yarn lerna version --create-release github --yes
 
       - name: Prepare | Build
         run: yarn build
 
       - name: Release | Lerna Publish
-        run: lerna publish from-package --yes --canary
+        run: lerna publish from-package --yes
