@@ -243,8 +243,4 @@ export type SandpackMessage = BaseSandpackMessage &
           data: string[];
         }>;
       }
-    // custom protocol messages
-    | ProtocolErrorMessage
-    | ProtocolResultMessage
-    | ProtocolRequestMessage
   );

@@ -50,7 +50,7 @@ export const Main = (): JSX.Element => {
         }}
         files={defaultFiles}
         options={{
-          bundlerURL: "https://lk61tx-1234.preview.csb.app/",
+          bundlerURL: "http://localhost:1234",
           fileResolver: {
             isFile: async (fileName): any =>
               new Promise((resolve) => resolve(!!filesA[fileName])),
@@ -67,7 +67,7 @@ export const Main = (): JSX.Element => {
         }}
         files={defaultFiles}
         options={{
-          bundlerURL: "https://lk61tx-1234.preview.csb.app/",
+          bundlerURL: "http://localhost:1234",
           fileResolver: {
             isFile: async (fileName): any =>
               new Promise((resolve) => resolve(!!filesB[fileName])),

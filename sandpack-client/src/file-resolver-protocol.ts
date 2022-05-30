@@ -6,7 +6,12 @@
  */
 
 import { IFrameProtocol } from "./iframe-protocol";
-import type { UnsubscribeFunction, ProtocolRequestMessage } from "./types";
+import type {
+  UnsubscribeFunction,
+  ProtocolRequestMessage,
+  ProtocolResultMessage,
+  ProtocolErrorMessage,
+} from "./types";
 
 export default class Protocol {
   private _disposeMessageListener: UnsubscribeFunction;
@@ -16,27 +21,31 @@ export default class Protocol {
     private handleMessage: (message: ProtocolRequestMessage) => any,
     private protocol: IFrameProtocol
   ) {
-    this._disposeMessageListener = this.protocol.channelListen(async (msg) => {
-      if (msg.type === this.getTypeId()) {
-        const message = msg as ProtocolRequestMessage;
-        try {
-          const result = await this.handleMessage(message);
-          this.protocol.dispatch({
-            type: this.getTypeId(),
-            msgId: message.msgId,
-            result: result,
-          });
-        } catch (err: any) {
-          this.protocol.dispatch({
-            type: this.getTypeId(),
-            msgId: message.msgId,
-            error: {
-              message: err.message,
-            },
-          });
+    this._disposeMessageListener = this.protocol.channelListen(
+      async (msg: any) => {
+        if (msg.type === this.getTypeId() && msg.method) {
+          const message = msg as ProtocolRequestMessage;
+          try {
+            const result = await this.handleMessage(message);
+            const response: ProtocolResultMessage = {
+              type: this.getTypeId(),
+              msgId: message.msgId,
+              result: result,
+            };
+            this.protocol.dispatch(response as any);
+          } catch (err: any) {
+            const response: ProtocolErrorMessage = {
+              type: this.getTypeId(),
+              msgId: message.msgId,
+              error: {
+                message: err.message,
+              },
+            };
+            this.protocol.dispatch(response as any);
+          }
         }
       }
-    });
+    );
   }
 
   getTypeId() {
