@@ -179,7 +179,6 @@ export class SandpackClient {
           this.fileResolverProtocol = new Protocol(
             "fs",
             async (data) => {
-              console.log(data);
               if (data.method === "isFile") {
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 return this.options.fileResolver!.isFile(data.params[0]);
