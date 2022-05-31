@@ -169,3 +169,98 @@ export const ShowLineNumber: React.FC = () => (
 export const wrapContent: React.FC = () => (
   <Sandpack options={{ wrapContent: true }} template="vanilla" />
 );
+
+const defaultFiles = {
+  "/styles.css": `body {
+  font-family: sans-serif;
+  -webkit-font-smoothing: auto;
+  -moz-font-smoothing: auto;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: auto;
+  text-rendering: optimizeLegibility;
+  font-smooth: always;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+h1 {
+  font-size: 1.5rem;
+}`,
+  "/index.js": `import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+const root = createRoot(document.getElementById("root"));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);`,
+  "/package.json": `{
+  "name": "test-sandbox",
+  "main": "/index.js",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "^4.0.0"
+  }
+}
+`,
+};
+
+const filesA = {
+  "/App.js": `import "./styles.css";
+  
+export default function App() {
+  return <h1>File A</h1>
+}`,
+};
+
+const filesB = {
+  "/App.js": `import "./styles.css";
+  
+export default function App() {
+  return <h1>File B</h1>
+}`,
+};
+
+export const FileResolver = (): JSX.Element => {
+  return (
+    <>
+      <Sandpack
+        customSetup={{
+          environment: "create-react-app",
+          entry: "/index.js",
+        }}
+        files={defaultFiles}
+        options={{
+          bundlerURL: "https://1ad528b9.sandpack-bundler.pages.dev",
+          fileResolver: {
+            isFile: async (fileName): Promise<boolean> =>
+              new Promise((resolve) => resolve(!!filesA[fileName])),
+            readFile: async (fileName): Promise<string> =>
+              new Promise((resolve) => resolve(filesA[fileName])),
+          },
+        }}
+      />
+
+      <Sandpack
+        customSetup={{
+          environment: "create-react-app",
+          entry: "/index.js",
+        }}
+        files={defaultFiles}
+        options={{
+          bundlerURL: "https://1ad528b9.sandpack-bundler.pages.dev",
+          fileResolver: {
+            isFile: async (fileName): Promise<boolean> =>
+              new Promise((resolve) => resolve(!!filesB[fileName])),
+            readFile: async (fileName): Promise<string> =>
+              new Promise((resolve) => resolve(filesB[fileName])),
+          },
+        }}
+      />
+    </>
+  );
+};
