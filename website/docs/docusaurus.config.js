@@ -87,6 +87,8 @@ module.exports = {
         plugin: ["typedoc-plugin-no-inherit"],
         entryPoints: ["../../sandpack-react/src/index.ts"],
         tsconfig: "../../sandpack-react/tsconfig.json",
+        categorizeByGroup: false,
+        includeVersion: true,
         out: "api/react",
         indexTitle: "Sandpack React",
         exclude: "**/{node_modules,test}/**/*",
@@ -94,7 +96,7 @@ module.exports = {
           categoryLabel: "Sandpack React",
           fullNames: false,
           readmeLabel: "Sandpack React",
-          position: 0,
+          collapsed: true,
         },
       },
     ],
@@ -107,11 +109,32 @@ module.exports = {
         entryPoints: ["../../sandpack-client/src/index.ts"],
         tsconfig: "../../sandpack-client/tsconfig.json",
         out: "api/client",
+        categorizeByGroup: false,
+        includeVersion: true,
         indexTitle: "Sandpack client",
         sidebar: {
           categoryLabel: "Sandpack client",
           readmeLabel: "Sandpack client",
-          position: 4,
+          collapsed: true,
+        },
+      },
+    ],
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        id: "themes",
+        readme: "none",
+        plugin: ["typedoc-plugin-no-inherit"],
+        entryPoints: ["../../sandpack-themes/src/index.ts"],
+        tsconfig: "../../sandpack-themes/tsconfig.json",
+        out: "api/themes",
+        categorizeByGroup: false,
+        includeVersion: true,
+        indexTitle: "Sandpack themes",
+        sidebar: {
+          categoryLabel: "Sandpack themes",
+          readmeLabel: "Sandpack themes",
+          collapsed: true,
         },
       },
     ],
@@ -123,7 +146,6 @@ module.exports = {
       {
         changefreq: "weekly",
         priority: 0.5,
-        trailingSlash: false,
         id: "sitemap",
       },
     ],
@@ -152,7 +174,6 @@ module.exports = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      sandpack: { theme: "sandpack-dark" },
       algolia: {
         apiKey: "055930448277966c60482899d8f5eba7",
         indexName: "sandpack",

@@ -3,6 +3,216 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.4](https://github.com/codesandbox/sandpack/compare/v1.0.3...v1.0.4) (2022-05-27)
+
+
+### Bug Fixes
+
+* **release-script:** trigger release ([#480](https://github.com/codesandbox/sandpack/issues/480)) ([46890fd](https://github.com/codesandbox/sandpack/commit/46890fdc6748f997cad38a39860b573869af1c60))
+
+
+
+
+
+## [1.0.3](https://github.com/codesandbox/sandpack/compare/v1.0.2...v1.0.3) (2022-05-27)
+
+
+### Bug Fixes
+
+* **codemirror:** remove inline props ([#477](https://github.com/codesandbox/sandpack/issues/477)) ([b3d9c63](https://github.com/codesandbox/sandpack/commit/b3d9c63f6b4dde06b7fdb682fb2874d0dab079ec))
+
+
+
+
+
+## [1.0.2](https://github.com/codesandbox/sandpack/compare/v1.0.1...v1.0.2) (2022-05-26)
+
+
+### Bug Fixes
+
+* **package registry:** trigger deploy ([#475](https://github.com/codesandbox/sandpack/issues/475)) ([551c7c0](https://github.com/codesandbox/sandpack/commit/551c7c08898e5a49ceae36572b3e16bff5e9d64c))
+
+
+
+
+
+## [1.0.1](https://github.com/codesandbox/sandpack/compare/v1.0.0...v1.0.1) (2022-05-25)
+
+
+### Bug Fixes
+
+* **theme context component:** extend props support ([#472](https://github.com/codesandbox/sandpack/issues/472)) ([a11dce4](https://github.com/codesandbox/sandpack/commit/a11dce418973a66c5fa36862161ea1cd98ba280f))
+
+
+
+
+
+# [1.0.0](https://github.com/codesandbox/sandpack/compare/v0.19.10...v1.0.0) (2022-05-25)
+
+
+### Features
+
+* **react/client:** BREAKING CHANGES ([#375](https://github.com/codesandbox/sandpack/issues/375)) ([20a8993](https://github.com/codesandbox/sandpack/commit/20a899337343e35a8d8e0b4e00c42e7190625747))
+
+
+
+
+
+## [0.19.10](https://github.com/codesandbox/sandpack/compare/v0.19.9...v0.19.10) (2022-05-25)
+
+
+### Bug Fixes
+
+* **codemirror:** watch extensions changes from props ([#469](https://github.com/codesandbox/sandpack/issues/469)) ([10ac96a](https://github.com/codesandbox/sandpack/commit/10ac96ab7ec912b559e1977db85809d32bc40cdc))
+* **editor:** prefer useId when available ([#461](https://github.com/codesandbox/sandpack/issues/461)) ([a7187db](https://github.com/codesandbox/sandpack/commit/a7187db5784ff403396e1d792b5dd5d3300bcf04))
+
+
+
+
+
+## [0.19.9](https://github.com/codesandbox/sandpack/compare/v0.19.8...v0.19.9) (2022-05-23)
+
+
+### Bug Fixes
+
+* **client:** console message methods ([1b76dcf](https://github.com/codesandbox/sandpack/commit/1b76dcf5ccfd0db61cda8d70329424cdf27116ad))
+
+
+
+
+
+## [0.19.8](https://github.com/codesandbox/sandpack/compare/v0.19.7...v0.19.8) (2022-05-23)
+
+
+### Bug Fixes
+
+* **sandpack messages:** add console type ([3edcb4d](https://github.com/codesandbox/sandpack/commit/3edcb4d11238f47ecbc286a8535205579856d3f3))
+
+
+
+
+
+## [0.19.7](https://github.com/codesandbox/sandpack/compare/v0.19.6...v0.19.7) (2022-05-16)
+
+
+### Bug Fixes
+
+* **inline-error:** check if error message has a valid value ([#466](https://github.com/codesandbox/sandpack/issues/466)) ([b088a2e](https://github.com/codesandbox/sandpack/commit/b088a2e7011a6c688916cb2e6a40e7cae5a66e9b))
+
+
+
+
+
+## [0.19.6](https://github.com/codesandbox/sandpack/compare/v0.19.5...v0.19.6) (2022-05-02)
+
+
+### Bug Fixes
+
+* **readonly:** toggle remounting ([#456](https://github.com/codesandbox/sandpack/issues/456)) ([b4162bc](https://github.com/codesandbox/sandpack/commit/b4162bcd7d284c0b3cb2d3acdfff2e7f9818870d))
+
+
+
+
+
+## [0.19.5](https://github.com/codesandbox/sandpack/compare/v0.19.4...v0.19.5) (2022-05-02)
+
+
+### Bug Fixes
+
+* **updatefile:** update all clients ([#455](https://github.com/codesandbox/sandpack/issues/455)) ([fc2e13c](https://github.com/codesandbox/sandpack/commit/fc2e13c00e2339c1ef18d18f4cb895248787b0d5))
+
+
+
+
+
+## [0.19.4](https://github.com/codesandbox/sandpack/compare/v0.19.3...v0.19.4) (2022-04-29)
+
+
+### Bug Fixes
+
+* **updatefile:** support multiple files ([#453](https://github.com/codesandbox/sandpack/issues/453)) ([a05faac](https://github.com/codesandbox/sandpack/commit/a05faaca453b60f1ffab7b9d6fd7b6bb8050f8b2))
+
+
+
+
+
+## [0.19.3](https://github.com/codesandbox/sandpack/compare/v0.19.2...v0.19.3) (2022-04-27)
+
+
+### Bug Fixes
+
+* **codeeditor:** ensure selections are inside of the document length ([#452](https://github.com/codesandbox/sandpack/issues/452)) ([7391c6e](https://github.com/codesandbox/sandpack/commit/7391c6e5fc896eb9b937323f918562beef694061))
+
+
+
+
+
+## [0.19.2](https://github.com/codesandbox/sandpack/compare/v0.19.1...v0.19.2) (2022-04-26)
+
+
+### Bug Fixes
+
+* **solid template:** deprecate beta version ([#451](https://github.com/codesandbox/sandpack/issues/451)) ([8278c71](https://github.com/codesandbox/sandpack/commit/8278c71e33c9ca8197827f041f4c6da68c33d4f5))
+
+
+
+
+
+## [0.19.1](https://github.com/codesandbox/sandpack/compare/v0.19.0...v0.19.1) (2022-04-26)
+
+
+### Bug Fixes
+
+* **client:** update bundler version ([#450](https://github.com/codesandbox/sandpack/issues/450)) ([1b6a663](https://github.com/codesandbox/sandpack/commit/1b6a663d8d7ff0bf3c3449b4aa0bfd675e37a221))
+
+
+
+
+
+# [0.19.0](https://github.com/codesandbox/sandpack/compare/v0.18.2...v0.19.0) (2022-04-21)
+
+
+### Features
+
+* **template:** add solidjs (beta) ([#447](https://github.com/codesandbox/sandpack/issues/447)) ([7b03882](https://github.com/codesandbox/sandpack/commit/7b038827add0001b460af7574e12e4c664a075d2))
+
+
+
+
+
+## [0.18.2](https://github.com/codesandbox/sandpack/compare/v0.18.1...v0.18.2) (2022-04-19)
+
+
+### Bug Fixes
+
+* **sandpack:** expose `showOpenInCodeSandbox` prop ([#443](https://github.com/codesandbox/sandpack/issues/443)) ([f5b9eda](https://github.com/codesandbox/sandpack/commit/f5b9eda0854f267e1c89b191294f10e65cf48c25))
+
+
+
+
+
+## [0.18.1](https://github.com/codesandbox/sandpack/compare/v0.18.0...v0.18.1) (2022-04-12)
+
+
+### Bug Fixes
+
+* **custom-setup:** add dev-dependencies ([#436](https://github.com/codesandbox/sandpack/issues/436)) ([df2f906](https://github.com/codesandbox/sandpack/commit/df2f906257b763aed07181f053a7ed4781831195))
+
+
+
+
+
+# [0.18.0](https://github.com/codesandbox/sandpack/compare/v0.17.1...v0.18.0) (2022-03-31)
+
+
+### Features
+
+* file-resolver protocol error handling ([#427](https://github.com/codesandbox/sandpack/issues/427)) ([c3b3cca](https://github.com/codesandbox/sandpack/commit/c3b3cca98ca4aba2c0744545969683e41d963ab4))
+
+
+
+
+
 ## [0.17.1](https://github.com/codesandbox/sandpack/compare/v0.17.0...v0.17.1) (2022-03-30)
 
 **Note:** Version bump only for package sandpack

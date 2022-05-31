@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import lazy from "next/dynamic";
 import React from "react";
 
@@ -5,18 +6,18 @@ import { styled } from "../../stitches.config";
 
 const ClientIllustration = lazy(import("./illustrations/Client/Client"), {
   ssr: false,
-});
+}) as any;
 
 const ComponentsIllustration = lazy(
   import("./illustrations/Components/Components"),
   {
     ssr: false,
   }
-);
+) as any;
 
 const ProviderIllustration = lazy(import("./illustrations/Provider/Provider"), {
   ssr: false,
-});
+}) as any;
 
 const IllustrationWrapper = styled("div", {
   $$wrapperBackground: "#f1f1f1",

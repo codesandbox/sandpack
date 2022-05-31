@@ -1,8 +1,5 @@
-import {
-  SandpackProvider,
-  SandpackThemeProvider,
-  SandpackCodeEditor,
-} from "@codesandbox/sandpack-react";
+import { Sandpack } from "@codesandbox/sandpack-react";
+import * as themeGallery from "@codesandbox/sandpack-themes";
 import Container, {
   ContainerControls,
   ContainerCode,
@@ -22,11 +19,9 @@ import PickerItem, {
   PickerTheme,
 } from "components/picker";
 import Title from "components/title";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 
-import { templates } from "../lib/codeExamples";
 import { generateBasedOnSimpleColors } from "../lib/generateTheme";
-import { themeGallery } from "../lib/themeGallery";
 
 const DEFAULT_COLORS = {
   primary: "#0971F1",
@@ -36,7 +31,7 @@ const DEFAULT_COLORS = {
 const DEFAULT_MODE = "light";
 const DEFAULT_THEME = generateBasedOnSimpleColors(DEFAULT_COLORS, DEFAULT_MODE);
 
-export default function Home({ ...props }) {
+export default function Home() {
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [simpleColors, setSimpleColors] = useState(DEFAULT_COLORS);
   const [mode, setMode] = useState("light");
@@ -71,16 +66,11 @@ export default function Home({ ...props }) {
     setTheme(newTheme);
   };
 
-  const updateMode = (mode) => {
-    let newTheme = generateBasedOnSimpleColors(simpleColors, mode);
+  const updateMode = (newMode) => {
+    let newTheme = generateBasedOnSimpleColors(simpleColors, newMode);
 
     setTheme(newTheme);
-    setMode(mode);
-  };
-
-  const updateModeFromGallery = (index) => {
-    const newTheme = themeGallery[index].code;
-    setTheme(newTheme);
+    setMode(newMode);
   };
 
   // -----------------------
@@ -111,10 +101,7 @@ export default function Home({ ...props }) {
             </ContainerColors>
 
             <ContainerColors isActive={tab === "library"}>
-              <Library
-                themeGallery={themeGallery}
-                updateModeFromGallery={updateModeFromGallery}
-              />
+              <Library setTheme={setTheme} />
             </ContainerColors>
           </ContainerPanels>
         </ContainerControls>
@@ -125,23 +112,16 @@ export default function Home({ ...props }) {
           <Title>Preview</Title>
 
           <ContainerSandpack>
-            <SandpackProvider
-              customSetup={{
-                entry: "index.js",
-                files: {
-                  "/App.js": templates.js,
-                  "/style.css": templates.css,
-                },
+            <Sandpack
+              options={{
+                showLineNumbers: true,
+                showInlineErrors: true,
+                showNavigator: true,
               }}
               template="react"
-            >
-              <SandpackThemeProvider theme={theme}>
-                <SandpackCodeEditor />
-              </SandpackThemeProvider>
-            </SandpackProvider>
+              theme={theme}
+            />
           </ContainerSandpack>
-
-          <Divider />
 
           <Title>Export</Title>
 
@@ -167,15 +147,13 @@ function Basic({ simpleColors, mode, updateColor, updateMode }) {
           active={mode === "light"}
           color="#f8f9fb"
           label="Light"
-          modeKey="light"
-          updateMode={updateMode}
+          onClick={() => updateMode("light")}
         />
         <PickerToggle
           active={mode === "dark"}
           color="#151515"
           label="Dark"
-          modeKey="dark"
-          updateMode={updateMode}
+          onClick={() => updateMode("dark")}
         />
       </PickerContainer>
       <Divider />
@@ -183,21 +161,18 @@ function Basic({ simpleColors, mode, updateColor, updateMode }) {
       <PickerContainer>
         <PickerItem
           color={simpleColors.primary}
-          colorKey="primary"
           label="Primary"
-          updateColor={updateColor}
+          onChange={(color) => updateColor("primary", color.hex)}
         />
         <PickerItem
           color={simpleColors.secondary}
-          colorKey="secondary"
           label="Secondary"
-          updateColor={updateColor}
+          onChange={(color) => updateColor("secondary", color.hex)}
         />
         <PickerItem
           color={simpleColors.tertiary}
-          colorKey="tertiary"
           label="Tertiary"
-          updateColor={updateColor}
+          onChange={(color) => updateColor("tertiary", color.hex)}
         />
       </PickerContainer>
     </>
@@ -211,19 +186,19 @@ function Advanced({ theme, updateTheme }) {
   //Using state to update the pickers when the color change
   const [controls, setControls] = useState({
     syntax: { ...theme.syntax },
-    palette: { ...theme.palette },
+    colors: { ...theme.colors },
   });
 
   const [typeControls, setTypeControls] = useState({
-    bodyFont: theme.typography.bodyFont,
-    monoFont: theme.typography.monoFont,
-    fontSize: Number(theme.typography.fontSize.replace("px", "")),
-    lineHeight: Number(theme.typography.lineHeight),
+    body: theme.font.body,
+    mono: theme.font.mono,
+    size: Number(theme.font.size.replace("px", "")),
+    lineHeight: Number(theme.font.lineHeight.replace("px", "")),
   });
 
   useEffect(() => {
     let newControls = {
-      palette: { ...theme.palette },
+      colors: { ...theme.colors },
       syntax: { ...theme.syntax },
     };
 
@@ -240,7 +215,7 @@ function Advanced({ theme, updateTheme }) {
     <>
       {Object.keys(controls).map((area, i) => {
         return (
-          <>
+          <Fragment key={i}>
             <Title>{capitalize(area)}</Title>
             <PickerContainer advanced>
               {Object.keys(controls[area]).map((c, i) => {
@@ -248,49 +223,48 @@ function Advanced({ theme, updateTheme }) {
                   <PickerItem
                     key={c + i}
                     color={controls[area][c]}
-                    colorKey={`${area}.${c}`}
                     label={c}
-                    updateTheme={updateTheme}
+                    onChange={(color) => updateTheme(`${area}.${c}`, color.hex)}
                     advanced
                   />
                 );
               })}
             </PickerContainer>
-          </>
+          </Fragment>
         );
       })}
 
       <Divider />
-      <Title>Typography</Title>
+      <Title>font</Title>
 
       <InputContainer>
         <Input
-          label="bodyFont"
+          label="body"
           onChange={(e) => {
-            setTypeControls({ ...typeControls, bodyFont: e.target.value });
-            updateTheme("typography.bodyFont", e.target.value);
+            setTypeControls({ ...typeControls, body: e.target.value });
+            updateTheme("font.body", e.target.value);
           }}
           type="text"
-          value={typeControls.bodyFont}
+          value={typeControls.body}
         />
         <Input
-          label="monoFont"
+          label="mono"
           onChange={(e) => {
-            setTypeControls({ ...typeControls, monoFont: e.target.value });
-            updateTheme("typography.monoFont", e.target.value);
+            setTypeControls({ ...typeControls, mono: e.target.value });
+            updateTheme("font.mono", e.target.value);
           }}
           type="text"
-          value={typeControls.monoFont}
+          value={typeControls.mono}
         />
         <Input
           grid="2"
-          label="fontSize (px)"
+          label="size (px)"
           onChange={(e) => {
-            setTypeControls({ ...typeControls, fontSize: e.target.value });
-            updateTheme("typography.fontSize", `${e.target.value}px`);
+            setTypeControls({ ...typeControls, size: e.target.value });
+            updateTheme("font.size", `${e.target.value}px`);
           }}
           type="number"
-          value={typeControls.fontSize}
+          value={typeControls.size}
         />
         <Input
           grid="2"
@@ -300,7 +274,7 @@ function Advanced({ theme, updateTheme }) {
               ...typeControls,
               lineHeight: e.target.value,
             });
-            updateTheme("typography.lineHeight", e.target.value);
+            updateTheme("font.lineHeight", e.target.value);
           }}
           type="number"
           value={typeControls.lineHeight}
@@ -312,19 +286,17 @@ function Advanced({ theme, updateTheme }) {
 
 // --------------------------------------------
 // Library Tab
-
-function Library({ themeGallery, updateModeFromGallery }) {
+function Library({ setTheme }) {
   return (
     <>
       <Title>Themes</Title>
       <PickerContainer>
-        {themeGallery.map((t, i) => (
+        {Object.entries(themeGallery).map(([label, payload]) => (
           <PickerTheme
-            key={t.label + i}
-            colors={[t.code.syntax.keyword, t.code.palette.defaultBackground]}
-            label={t.label}
-            modeKey={i}
-            updateModeFromGallery={updateModeFromGallery}
+            key={JSON.stringify(payload)}
+            colors={[payload.colors.accent, payload.colors.surface1]}
+            label={label}
+            onClick={() => setTheme(payload)}
           />
         ))}
       </PickerContainer>

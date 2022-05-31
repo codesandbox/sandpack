@@ -8,9 +8,8 @@ import type { Text } from "@codemirror/text";
 import { EditorView } from "@codemirror/view";
 import * as React from "react";
 
-import { getSyntaxStyle } from "../../themes";
+import { THEME_PREFIX } from "../../styles";
 import type { SandpackTheme } from "../../types";
-import { hexToCSSRGBa } from "../../utils/stringUtils";
 
 export const getCodeMirrorPosition = (
   doc: Text,
@@ -19,61 +18,91 @@ export const getCodeMirrorPosition = (
   return doc.line(line).from + (column ?? 0) - 1;
 };
 
-export const getEditorTheme = (theme: SandpackTheme): Extension =>
+export const getEditorTheme = (): Extension =>
   EditorView.theme({
     "&": {
-      backgroundColor: theme.palette.defaultBackground,
-      color:
-        getSyntaxStyle(theme.syntax.plain).color || theme.palette.activeText,
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface1)`,
+      color: `var(--${THEME_PREFIX}-syntax-color-plain)`,
       height: "100%",
     },
+
+    ".cm-matchingBracket, .cm-nonmatchingBracket, &.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket":
+      {
+        color: "inherit",
+        backgroundColor: `rgba(128,128,128,.25)`,
+        backgroundBlendMode: "difference",
+      },
 
     "&.cm-editor.cm-focused": {
       outline: "none",
     },
 
     ".cm-activeLine": {
-      backgroundColor: hexToCSSRGBa(theme.palette.activeBackground, 0.5),
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface3)`,
+      borderRadius: `var(--${THEME_PREFIX}-border-radius)`,
     },
 
     ".cm-errorLine": {
-      backgroundColor: hexToCSSRGBa(theme.palette.errorBackground, 0.2),
-    },
-
-    ".cm-matchingBracket, .cm-nonmatchingBracket": {
-      color: "inherit",
-      background: theme.palette.activeBackground,
+      backgroundColor: `var(--${THEME_PREFIX}-colors-errorSurface)`,
+      borderRadius: `var(--${THEME_PREFIX}-border-radius)`,
     },
 
     ".cm-content": {
-      padding: 0,
-      caretColor: theme.palette.activeText,
+      caretColor: `var(--${THEME_PREFIX}-colors-accent)`,
+      padding: `0 var(--${THEME_PREFIX}-space-4)`,
     },
 
     ".cm-scroller": {
-      fontFamily: theme.typography.monoFont,
-      lineHeight: theme.typography.lineHeight,
+      fontFamily: `var(--${THEME_PREFIX}-font-mono)`,
+      lineHeight: `var(--${THEME_PREFIX}-font-lineHeight)`,
     },
 
     ".cm-gutters": {
-      backgroundColor: theme.palette.defaultBackground,
-      color: theme.palette.defaultText,
+      backgroundColor: `var(--${THEME_PREFIX}-colors-surface1)`,
+      color: `var(--${THEME_PREFIX}-colors-disabled)`,
       border: "none",
+      paddingLeft: `var(--${THEME_PREFIX}-space-1)`,
     },
 
     ".cm-gutter.cm-lineNumbers": {
-      paddingLeft: "var(--sp-space-1)",
-      paddingRight: "var(--sp-space-1)",
+      fontSize: ".6em",
     },
 
     ".cm-lineNumbers .cm-gutterElement": {
-      padding: 0,
+      lineHeight: `var(--${THEME_PREFIX}-font-lineHeight)`,
+      minWidth: `var(--${THEME_PREFIX}-space-5)`,
     },
 
-    ".cm-line": {
-      padding: "0 var(--sp-space-3)",
-    },
+    ".cm-content .cm-line": { paddingLeft: `var(--${THEME_PREFIX}-space-1)` },
+    ".cm-content.cm-readonly .cm-line": { paddingLeft: 0 },
   });
+
+const classNameToken = (name: string): string =>
+  `${THEME_PREFIX}-syntax-${name}`;
+
+export const styleTokens = (): Record<string, string> => {
+  const syntaxHighLightTokens: Array<keyof SandpackTheme["syntax"]> = [
+    "string",
+    "plain",
+    "comment",
+    "keyword",
+    "definition",
+    "punctuation",
+    "property",
+    "tag",
+    "static",
+  ];
+
+  return syntaxHighLightTokens.reduce((acc, token) => {
+    return {
+      ...acc,
+      [`.${classNameToken(token)}`]: {
+        color: `$syntax$color$${token}`,
+        fontStyle: `$syntax$fontStyle$${token}`,
+      },
+    };
+  }, {});
+};
 
 export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
   HighlightStyle.define([
@@ -83,37 +112,43 @@ export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
 
     {
       tag: tags.keyword,
-      ...getSyntaxStyle(theme.syntax.keyword),
+      class: classNameToken("keyword"),
     },
     {
       tag: [tags.atom, tags.number, tags.bool],
-      ...getSyntaxStyle(theme.syntax.static),
+      class: classNameToken("static"),
     },
     {
       tag: tags.tagName,
-      ...getSyntaxStyle(theme.syntax.tag),
+      class: classNameToken("tag"),
     },
-    { tag: tags.variableName, ...getSyntaxStyle(theme.syntax.plain) },
+    { tag: tags.variableName, class: classNameToken("plain") },
     {
       // Highlight function call
       tag: tags.function(tags.variableName),
-      ...getSyntaxStyle(theme.syntax.definition),
+      class: classNameToken("definition"),
     },
     {
       // Highlight function definition differently (eg: functional component def in React)
       tag: tags.definition(tags.function(tags.variableName)),
-      ...getSyntaxStyle(theme.syntax.definition),
+      class: classNameToken("definition"),
     },
     {
       tag: tags.propertyName,
-      ...getSyntaxStyle(theme.syntax.property),
+      class: classNameToken("property"),
     },
     {
       tag: [tags.literal, tags.inserted],
-      ...getSyntaxStyle(theme.syntax.string ?? theme.syntax.static),
+      class: classNameToken(theme.syntax.string ? "string" : "static"),
     },
-    { tag: tags.punctuation, ...getSyntaxStyle(theme.syntax.punctuation) },
-    { tag: tags.comment, ...getSyntaxStyle(theme.syntax.comment) },
+    {
+      tag: tags.punctuation,
+      class: classNameToken("punctuation"),
+    },
+    {
+      tag: [tags.comment, tags.quote],
+      class: classNameToken("comment"),
+    },
   ]);
 
 type SandpackLanguageSupport = "javascript" | "typescript" | "html" | "css";

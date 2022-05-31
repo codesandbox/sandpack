@@ -87,8 +87,6 @@ The `Preview` component is running the `sandpack` bundler, so without rendering 
 </SandpackProvider>
 ```
 
-This will give you a component that looks approximately the same as the `SandpackRunner` preset.
-
 There's nothing stopping you from rendering multiple previews in the same `Provider`. They will all be connected to the same state source, but they can for example point to different pages of the same application.
 
 ```jsx
@@ -257,6 +255,50 @@ import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 />
 ```
 
+### Advanced usage
+
+If you want to interact directly with CodeMirror, use the component ref to access the `getCodemirror` function, which will return the CodeMirror instance. Check out how to use it:
+
+```jsx
+import { EditorSelection } from "@codemirror/state";
+
+const App = () => {
+  const codemirrorInstance = useRef();
+
+  useEffect(() => {
+    // Getting CodeMirror instance
+    const cmInstance = codemirrorInstance.current.getCodemirror();
+    
+    if(!cmInstance) return 
+    
+    // Current position
+    const currentPosition = cmInstance.state.selection.ranges[0].to;
+
+    // Setting a new position
+    const trans = cmInstance.state.update({
+      selection: EditorSelection.cursor(currentPosition + 1),
+      changes: {
+        from: 0,
+        to: cmInstance.state.doc.length,
+        insert: code
+      }
+    });
+    
+    cmInstance.update([trans]);
+  }, []);
+
+  return (
+    <SandpackProvider template="react">
+      <SandpackThemeProvider>
+        <SandpackCodeEditor ref={codemirrorInstance} />
+      </SandpackThemeProvider>
+    </SandpackProvider>
+  );
+};
+```
+
+This is especially useful to get the cursor's current position, add custom decorators, set the selection in a specific position, etc.
+
 ## Code Viewer
 
 For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a read-only version of `codemirror`, so users will not be able to edit the code.
@@ -293,7 +335,7 @@ Sandpack also provides a component that adds React DevTools, allowing you to ins
 <!-- prettier-ignore -->
 <div className="nestedSandpack">
   <Sandpack
-    theme="sandpack-dark"
+    theme="dark"
     customSetup={{
       dependencies: { "@codesandbox/sandpack-react": "latest" },
     }}
@@ -304,7 +346,6 @@ Sandpack also provides a component that adds React DevTools, allowing you to ins
   SandpackPreview,
   SandpackReactDevTools,
 } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";\n
 export default function CustomSandpack() {
   return (
     <SandpackProvider template="react">
@@ -352,7 +393,7 @@ The `UnstyledOpenInCodeSandboxButton` is a basic component that does not carry a
 
 ## Other components
 
-You can also bring other components in the mix: `SandpackTranspiledCode`, `FileTabs`, `FileExplorer`, `Navigator` and so on.
+You can also bring other components in the mix: `SandpackTranspiledCode`, `FileTabs`, `SandpackFileExplorer`, `Navigator` and so on.
 
 For example, you can create an editor instance that gives you the transpiled
 code of your **active** component instead of the preview page:

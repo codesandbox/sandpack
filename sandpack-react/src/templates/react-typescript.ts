@@ -1,21 +1,19 @@
-import type { SandboxTemplate } from "../types";
-
-export const REACT_TYPESCRIPT_TEMPLATE: SandboxTemplate = {
+/**
+ * @category Template
+ */
+export const REACT_TYPESCRIPT_TEMPLATE = {
   files: {
     "tsconfig.json": {
       code: `{
-    "include": [
-        "./**/*"
-    ],
-    "compilerOptions": {
-        "strict": true,
-        "esModuleInterop": true,
-        "lib": [
-            "dom",
-            "es2015"
-        ],
-        "jsx": "react-jsx"
-    }
+  "include": [
+    "./**/*"
+  ],
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "lib": [ "dom", "es2015" ],
+    "jsx": "react-jsx"
+  }
 }`,
     },
     "/App.tsx": {
@@ -26,17 +24,16 @@ export const REACT_TYPESCRIPT_TEMPLATE: SandboxTemplate = {
     },
     "/index.tsx": {
       code: `import React, { StrictMode } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "./styles.css";
 
 import App from "./App";
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(
+const root = createRoot(document.getElementById("root"));
+root.render(
   <StrictMode>
     <App />
-  </StrictMode>,
-  rootElement
+  </StrictMode>
 );`,
     },
     "/styles.css": {
@@ -71,13 +68,13 @@ h1 {
     },
   },
   dependencies: {
-    react: "^17.0.0",
-    "react-dom": "^17.0.0",
+    react: "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-scripts": "^4.0.0",
   },
   devDependencies: {
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     typescript: "^4.0.0",
   },
   entry: "/index.tsx",

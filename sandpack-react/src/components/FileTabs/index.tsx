@@ -3,11 +3,54 @@ import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { CloseIcon } from "../../icons";
+import { css, THEME_PREFIX } from "../../styles";
+import { buttonClassName } from "../../styles/shared";
+import { classNames } from "../../utils/classNames";
 import {
   calculateNearestUniquePath,
   getFileName,
 } from "../../utils/stringUtils";
 
+const tabsClassName = css({
+  borderBottom: "1px solid $colors$surface2",
+  background: "$colors$surface1",
+});
+
+const tabsScrollableClassName = css({
+  padding: "0 $space$2",
+  overflow: "auto",
+  display: "flex",
+  flexWrap: "nowrap",
+  alignItems: "stretch",
+  minHeight: "40px",
+  marginBottom: "-1px",
+});
+
+const closeButtonClassName = css({
+  padding: "0px $space$1 2px $space$1",
+  borderRadius: "$border-radius",
+  marginLeft: "$space$1",
+  width: "20px",
+  visibility: "hidden",
+});
+
+/**
+ * @hidden
+ */
+export const tabButton = css({
+  display: "block",
+  padding: "0 $space$2",
+  height: "40px",
+  whiteSpace: "nowrap",
+
+  "&:focus": { outline: "none" },
+  "&:focus-visible": { boxShadow: "inset 0 0 0 2px $colors$accent" },
+  [`&:hover > .${closeButtonClassName}`]: { visibility: "unset" },
+});
+
+/**
+ * @category Components
+ */
 export interface FileTabsProps {
   /**
    * This adds a close button next to each file with a unique trigger to close it.
@@ -20,11 +63,16 @@ export interface FileTabsProps {
  *
  * @category Components
  */
-export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
-  const { sandpack } = useSandpack();
-  const c = useClasser("sp");
 
-  const { activePath, openPaths, setActiveFile } = sandpack;
+export const FileTabs = ({
+  closableTabs,
+  className,
+  ...props
+}: FileTabsProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
+  const { sandpack } = useSandpack();
+  const c = useClasser(THEME_PREFIX);
+
+  const { activeFile, visibleFiles, setActiveFile } = sandpack;
 
   const handleCloseFile = (ev: React.MouseEvent<HTMLDivElement>): void => {
     ev.stopPropagation();
@@ -41,7 +89,7 @@ export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
   const getTriggerText = (currentPath: string): string => {
     const documentFileName = getFileName(currentPath);
 
-    const pathsWithDuplicateFileNames = openPaths.reduce((prev, curr) => {
+    const pathsWithDuplicateFileNames = visibleFiles.reduce((prev, curr) => {
       if (curr === currentPath) {
         return prev;
       }
@@ -67,26 +115,36 @@ export const FileTabs = ({ closableTabs }: FileTabsProps): JSX.Element => {
   };
 
   return (
-    <div className={c("tabs")} translate="no">
+    <div
+      className={classNames(c("tabs"), tabsClassName, className)}
+      translate="no"
+      {...props}
+    >
       <div
         aria-label="Select active file"
-        className={c("tabs-scrollable-container")}
+        className={classNames(
+          c("tabs-scrollable-container"),
+          tabsScrollableClassName
+        )}
         role="tablist"
       >
-        {openPaths.map((filePath) => (
+        {visibleFiles.map((filePath) => (
           <button
             key={filePath}
-            aria-selected={filePath === activePath}
-            className={c("tab-button")}
-            data-active={filePath === activePath}
+            aria-selected={filePath === activeFile}
+            className={classNames(c("tab-button"), buttonClassName, tabButton)}
+            data-active={filePath === activeFile}
             onClick={(): void => setActiveFile(filePath)}
             role="tab"
             title={filePath}
             type="button"
           >
             {getTriggerText(filePath)}
-            {closableTabs && openPaths.length > 1 && (
-              <span className={c("close-button")} onClick={handleCloseFile}>
+            {closableTabs && visibleFiles.length > 1 && (
+              <span
+                className={classNames(c("close-button"), closeButtonClassName)}
+                onClick={handleCloseFile}
+              >
                 <CloseIcon />
               </span>
             )}

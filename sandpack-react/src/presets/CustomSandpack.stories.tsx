@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import type { ViewportSize } from "../";
+import { stackClassName } from "../";
+import { tabButton } from "../";
 import {
   Sandpack,
   SandpackPreview,
@@ -30,31 +32,32 @@ export const UsingSandpackLayout: React.FC = () => (
       <SandpackStack>
         <SandpackTranspiledCode />
       </SandpackStack>
+      <SandpackCodeEditor />
       <SandpackCodeViewer />
     </SandpackLayout>
   </SandpackProvider>
 );
 
 export const UsingVisualElements: React.FC = () => (
-  <SandpackProvider activePath="/App.js" template="react">
+  <SandpackProvider options={{ activeFile: "/App.js" }} template="react">
     <SandpackThemeProvider>
       <SandpackCodeEditor
-        customStyle={{
+        style={{
           width: 500,
           height: 300,
         }}
       />
 
       <SandpackPreview
-        customStyle={{
+        showOpenInCodeSandbox={false}
+        showRefreshButton={false}
+        style={{
           border: "1px solid red",
           marginBottom: 4,
           marginTop: 4,
           width: 500,
           height: 300,
         }}
-        showOpenInCodeSandbox={false}
-        showRefreshButton={false}
       />
 
       <div
@@ -100,12 +103,12 @@ const CustomCodeEditor = (): JSX.Element => {
         width: 400,
         height: 200,
         padding: 8,
-        fontFamily: theme.typography.monoFont,
-        fontSize: theme.typography.fontSize,
-        background: theme.palette.defaultBackground,
-        border: `1px solid ${theme.palette.inactiveText}`,
-        color: theme.palette.activeText,
-        lineHeight: theme.typography.lineHeight,
+        fontFamily: theme.font.mono,
+        fontSize: theme.font.size,
+        background: theme.colors.surface1,
+        border: `1px solid ${theme.colors.surface2}`,
+        color: theme.colors.base,
+        lineHeight: theme.font.lineHeight,
       }}
     >
       {code}
@@ -119,9 +122,9 @@ export const UsingHooks: React.FC = () => (
       <CustomCodeEditor />
 
       <SandpackPreview
-        customStyle={{ border: "1px solid red", width: 400, height: 300 }}
         showOpenInCodeSandbox={false}
         showRefreshButton={false}
+        style={{ border: "1px solid red", width: 400, height: 300 }}
       />
 
       <div
@@ -203,10 +206,8 @@ export const JustIframe = (): React.ReactElement => {
 
   return (
     <SandpackProvider
-      customSetup={{
-        files: {
-          "/App.js": code,
-        },
+      files={{
+        "/App.js": code,
       }}
       template="react"
     >
@@ -361,7 +362,7 @@ const ResetButtonComp: React.FC = () => {
 
   return (
     <button
-      className="sp-tab-button"
+      className={tabButton.toString()}
       onClick={sandpack.resetAllFiles}
       style={{
         background: "none",
@@ -380,8 +381,8 @@ const ResetCurrentFileButton: React.FC = () => {
 
   return (
     <button
-      className="sp-tab-button"
-      onClick={(): void => sandpack.resetFile(sandpack.activePath)}
+      className={tabButton.toString()}
+      onClick={(): void => sandpack.resetFile(sandpack.activeFile)}
       style={{
         background: "none",
         border: 0,
@@ -399,7 +400,7 @@ export const ResetButton: React.FC = () => (
     <SandpackProvider template="react">
       <SandpackLayout>
         <div
-          className="sp-stack"
+          className={stackClassName.toString()}
           style={{ position: "relative", width: "100%" }}
         >
           <SandpackCodeEditor />
@@ -414,7 +415,7 @@ export const ResetButton: React.FC = () => (
     <SandpackProvider template="react">
       <SandpackLayout>
         <div
-          className="sp-stack"
+          className={stackClassName.toString()}
           style={{ position: "relative", width: "100%" }}
         >
           <SandpackCodeEditor />
@@ -451,9 +452,8 @@ const ListenerIframeMessage = (): JSX.Element => {
 
 export const IframeMessage: React.FC = () => (
   <SandpackProvider
-    customSetup={{
-      files: {
-        "/App.js": `import {useState, useEffect} from "react";
+    files={{
+      "/App.js": `import {useState, useEffect} from "react";
 
 export default function App() {
 const [message, setMessage] = useState("")
@@ -467,7 +467,6 @@ useEffect(() => {
 return <h1>{message}</h1>
 }
 `,
-      },
     }}
     template="react"
   >

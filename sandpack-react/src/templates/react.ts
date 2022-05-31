@@ -1,6 +1,7 @@
-import type { SandboxTemplate } from "../types";
-
-export const REACT_TEMPLATE: SandboxTemplate = {
+/**
+ * @category Template
+ */
+export const REACT_TEMPLATE = {
   files: {
     "/App.js": {
       code: `export default function App() {
@@ -10,17 +11,16 @@ export const REACT_TEMPLATE: SandboxTemplate = {
     },
     "/index.js": {
       code: `import React, { StrictMode } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "./styles.css";
 
 import App from "./App";
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(
+const root = createRoot(document.getElementById("root"));
+root.render(
   <StrictMode>
     <App />
-  </StrictMode>,
-  rootElement
+  </StrictMode>
 );`,
     },
     "/styles.css": {
@@ -55,8 +55,8 @@ h1 {
     },
   },
   dependencies: {
-    react: "^17.0.0",
-    "react-dom": "^17.0.0",
+    react: "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-scripts": "^4.0.0",
   },
   entry: "/index.js",

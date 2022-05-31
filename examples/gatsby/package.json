@@ -1,0 +1,24 @@
+{
+  "name": "gatsby",
+  "version": "1.0.0",
+  "private": true,
+  "description": "gatsby",
+  "author": "Danilo Woznica",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@codesandbox/sandpack-react": "*",
+    "@codesandbox/sandpack-themes": "*",
+    "gatsby": "^4.14.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  }
+}

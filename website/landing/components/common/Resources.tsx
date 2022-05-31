@@ -5,7 +5,7 @@ import { List, ListItem, Text } from ".";
 
 const ResourceLink = styled("a", {
   color: "inherit",
-  transition: "color .2s ease", // TODO: verify transition
+  transition: "color .2s ease",
   willChange: "color",
 
   "&:hover": {

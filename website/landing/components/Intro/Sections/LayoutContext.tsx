@@ -27,7 +27,6 @@ const ORIGINAL_CODE = {
   SandpackCodeEditor,
   SandpackTranspiledCode,
 } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";
 
 export default () => (
   <SandpackProvider template="vanilla">
@@ -41,7 +40,9 @@ export default () => (
 // ✨ BTW, all examples are built in Sandpack`,
 };
 
-export const LayoutExampleProvider: React.FC = ({ children }) => {
+export const LayoutExampleProvider: React.FC<{
+  children?: React.ReactNode;
+}> = ({ children }) => {
   const [layoutFiles, setLayoutFiles] = useState(ORIGINAL_CODE);
   const [visibility, setVisibility] = useState(false);
 

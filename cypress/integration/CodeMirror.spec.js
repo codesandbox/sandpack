@@ -1,7 +1,7 @@
-describe("CodeMirror", () => {
-  const languages = ["html", "javascript", "jsx", "css", "less", "vue"];
+import * as mocks from "../../sandpack-react/src/components/CodeEditor/languages-mocks";
 
-  languages.forEach((lang, index) => {
+describe("CodeMirror", () => {
+  Object.keys(mocks).forEach((lang, index) => {
     it(`Should render a "${lang}" component with a proper syntax-highlight`, () => {
       cy.viewport(600, 1000).visit(
         `/iframe.html?id=components-codemirror--${lang}`

@@ -5,7 +5,9 @@
   "workspaces": [
     "sandpack-client",
     "sandpack-react",
+    "sandpack-themes",
     "website/*",
+    "examples/*",
     "plugins/*"
   ],
   "nohoist": [
@@ -17,10 +19,10 @@
     "lint": "eslint '**/*.ts?(x)' --fix",
     "format:check": "prettier --check '**/*.{ts,tsx}'",
     "format": "prettier --write '**/*.{ts,tsx}'",
-    "test": "jest sandpack-react",
+    "test": "jest sandpack-react sandpack-client",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "build": "yarn workspace @codesandbox/sandpack-client run build && yarn workspace @codesandbox/sandpack-react run build",
+    "build": "yarn workspace @codesandbox/sandpack-client build && yarn workspace @codesandbox/sandpack-react build && yarn workspace @codesandbox/sandpack-themes build",
     "prepare": "husky install",
     "clean": "yarn workspaces run clean",
     "dev:docs": "yarn workspace sandpack-docs start",
@@ -41,6 +43,7 @@
     "@babel/preset-typescript": "^7.16.5",
     "@cypress/snapshot": "^2.1.7",
     "@octokit/rest": "^18.12.0",
+    "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
     "babel-eslint": "^10.0.0",
@@ -64,7 +67,7 @@
     "lint-staged": "^10.5.4",
     "package-build-stats": "7.3.6",
     "prettier": "^2.2.1",
-    "react-test-renderer": "^17.0.2",
+    "react-test-renderer": "^18.1.0",
     "cypress-real-events": "^1.7.0"
   }
 }

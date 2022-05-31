@@ -17,7 +17,6 @@ export const fontWeights: Record<FontWeight, number> = {
   semiBold,
 };
 
-// TODO: replace hard coded font sizes with theme
 export const fontSizes = [16, 18, 24, 36, 72, 96, 144];
 
 export const lineHeights = [1, 1.2, 1.4];

@@ -29,10 +29,8 @@ const code = `export default function Kitten() {
 
 export const Component: React.FC = () => (
   <SandpackProvider
-    customSetup={{
-      files: {
-        "/App.js": code,
-      },
+    files={{
+      "/App.js": code,
     }}
     template="react"
   >
@@ -44,10 +42,8 @@ export const Component: React.FC = () => (
 
 export const Viewport: Story<PreviewProps> = (args) => (
   <SandpackProvider
-    customSetup={{
-      files: {
-        "/App.js": code,
-      },
+    files={{
+      "/App.js": code,
     }}
     template="react"
   >
@@ -77,10 +73,8 @@ Viewport.argTypes = {
 
 export const WithNavigator: React.FC = () => (
   <SandpackProvider
-    customSetup={{
-      files: {
-        "/App.js": code,
-      },
+    files={{
+      "/App.js": code,
     }}
     template="react"
   >
@@ -92,10 +86,8 @@ export const WithNavigator: React.FC = () => (
 
 export const AutoResize: React.FC = () => (
   <SandpackProvider
-    customSetup={{
-      files: {
-        "/App.js": code,
-      },
+    files={{
+      "/App.js": code,
     }}
     template="react"
   >

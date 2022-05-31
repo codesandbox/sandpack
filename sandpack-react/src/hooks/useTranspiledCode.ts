@@ -3,12 +3,12 @@ import type { SandpackState } from "../types";
 import { useSandpack } from "./useSandpack";
 
 function getTranspiledCode(sandpack: SandpackState): string | null {
-  const { activePath, bundlerState } = sandpack;
+  const { activeFile, bundlerState } = sandpack;
   if (bundlerState == null) {
     return null;
   }
 
-  const tModule = bundlerState.transpiledModules[activePath + ":"];
+  const tModule = bundlerState.transpiledModules[activeFile + ":"];
   return tModule?.source?.compiledCode ?? null;
 }
 

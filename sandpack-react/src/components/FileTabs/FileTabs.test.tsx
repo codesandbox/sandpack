@@ -8,12 +8,10 @@ describe("FileTabs", () => {
   it("doesn't have duplicate filename", () => {
     const component = create(
       <SandpackProvider
-        customSetup={{
-          files: {
-            "/foo/App.js": "",
-            "/App.js": "",
-            "/baz/App.js": "",
-          },
+        files={{
+          "/foo/App.js": "",
+          "/App.js": "",
+          "/baz/App.js": "",
         }}
         template="react"
       >
@@ -21,9 +19,9 @@ describe("FileTabs", () => {
       </SandpackProvider>
     ).root;
 
-    const buttons = component.findAllByProps({
-      className: "sp-tab-button",
-    });
+    const buttons = component.findAll((el) =>
+      el.props.className?.includes("sp-tab-button")
+    );
     const buttonsTex = buttons.map((item) => item.props.children[0]);
 
     expect(buttonsTex).toEqual(["foo/App.js", "App.js", "baz/App.js"]);

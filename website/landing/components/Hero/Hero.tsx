@@ -13,10 +13,10 @@ export const Hero: React.FC = () => {
     <SandpackProvider
       customSetup={{
         dependencies: { "@stitches/react": "latest" },
-        entry: "./index.js",
-        files,
+        entry: "/index.js",
       }}
-      initMode="immediate"
+      files={files}
+      options={{ initMode: "immediate" }}
       template="react"
     >
       <HeroDesktop />{" "}

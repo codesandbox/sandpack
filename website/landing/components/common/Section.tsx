@@ -2,9 +2,6 @@ import { styled } from "../../stitches.config";
 import { palette } from "../../styles/palette";
 
 export const SectionWrapper = styled("div", {
-  // TODO: investigate if it's possible to set
-  // values defined from the theme and provided
-  // by stitches rather than "hardcoding" them
   $$backgroundColor: palette.darkBackground,
   $$primaryTextColor: palette.darkTextPrimary,
   $$secondaryTextColor: palette.darkTextSecondary,

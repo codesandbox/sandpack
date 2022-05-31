@@ -1,6 +1,7 @@
-import type { SandboxTemplate } from "../types";
-
-export const SVELTE_TEMPLATE: SandboxTemplate = {
+/**
+ * @category Template
+ */
+export const SVELTE_TEMPLATE = {
   environment: "svelte",
   main: "/index.js",
   entry: "/index.js",
@@ -15,11 +16,11 @@ export const SVELTE_TEMPLATE: SandboxTemplate = {
 </style>
 
 <script>
-  let name = 'world';
+  let name = 'World';
 </script>
 
 <main>
-  <h1>Hello {name}!</h1>
+  <h1>Hello {name}</h1>
 </main>`,
     },
     "/index.js": {

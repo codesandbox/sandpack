@@ -3,9 +3,51 @@ import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { BackwardIcon, ForwardIcon, RefreshIcon } from "../../icons";
+import { THEME_PREFIX } from "../../styles";
+import { css } from "../../styles";
+import { buttonClassName, iconClassName } from "../../styles/shared";
+import { classNames } from "../../utils/classNames";
 
 import { splitUrl } from "./utils";
 
+const navigatorClassName = css({
+  display: "flex",
+  alignItems: "center",
+  height: "40px",
+  borderBottom: "1px solid $colors$surface2",
+  padding: "$space$2 $space$4",
+  background: "$colors$surface1",
+});
+
+const inputClassName = css({
+  backgroundColor: "$colors$surface2",
+  color: "$colors$clickable",
+  padding: "$space$1 $space$3",
+  borderRadius: "99999px",
+  border: "1px solid $colors$surface2",
+  height: "24px",
+  lineHeight: "24px",
+  fontSize: "inherit",
+  outline: "none",
+  flex: 1,
+  marginLeft: "$space$4",
+  width: "0",
+  transition: "all $transitions$default",
+
+  "&:hover": {
+    backgroundColor: "$colors$surface3",
+  },
+
+  "&:focus": {
+    backgroundColor: "$surface1",
+    border: "1px solid $colors$accent",
+    color: "$colors$base",
+  },
+});
+
+/**
+ * @category Components
+ */
 export interface NavigatorProps {
   clientId?: string;
   onURLChange?: (newURL: string) => void;
@@ -17,7 +59,9 @@ export interface NavigatorProps {
 export const Navigator = ({
   clientId,
   onURLChange,
-}: NavigatorProps): JSX.Element => {
+  className,
+  ...props
+}: NavigatorProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const [baseUrl, setBaseUrl] = React.useState<string>("");
   const { sandpack, dispatch, listen } = useSandpack();
 
@@ -28,7 +72,7 @@ export const Navigator = ({
   const [backEnabled, setBackEnabled] = React.useState(false);
   const [forwardEnabled, setForwardEnabled] = React.useState(false);
 
-  const c = useClasser("sp");
+  const c = useClasser(THEME_PREFIX);
 
   React.useEffect(() => {
     const unsub = listen((message) => {
@@ -81,10 +125,17 @@ export const Navigator = ({
   };
 
   return (
-    <div className={c("navigator")}>
+    <div
+      className={classNames(c("navigator"), navigatorClassName, className)}
+      {...props}
+    >
       <button
         aria-label="Go back one page"
-        className={c("button", "icon")}
+        className={classNames(
+          c("button", "icon"),
+          buttonClassName,
+          iconClassName
+        )}
         disabled={!backEnabled}
         onClick={handleBack}
         type="button"
@@ -93,7 +144,11 @@ export const Navigator = ({
       </button>
       <button
         aria-label="Go forward one page"
-        className={c("button", "icon")}
+        className={classNames(
+          c("button", "icon"),
+          buttonClassName,
+          iconClassName
+        )}
         disabled={!forwardEnabled}
         onClick={handleForward}
         type="button"
@@ -102,7 +157,11 @@ export const Navigator = ({
       </button>
       <button
         aria-label="Refresh page"
-        className={c("button", "icon")}
+        className={classNames(
+          c("button", "icon"),
+          buttonClassName,
+          iconClassName
+        )}
         onClick={handleRefresh}
         type="button"
       >
@@ -111,7 +170,7 @@ export const Navigator = ({
 
       <input
         aria-label="Current Sandpack URL"
-        className={c("input")}
+        className={classNames(c("input"), inputClassName)}
         name="Current Sandpack URL"
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}

@@ -1,12 +1,10 @@
+import { ClasserProvider } from "@code-hike/classer";
 import type {
-  BundlerState,
   ListenerFunction,
   SandpackBundlerFiles,
-  SandpackError,
   SandpackMessage,
   UnsubscribeFunction,
   ReactDevToolsMode,
-  SandpackLogLevel,
 } from "@codesandbox/sandpack-client";
 import {
   SandpackClient,
@@ -15,17 +13,18 @@ import {
 import isEqual from "lodash.isequal";
 import * as React from "react";
 
+import type { SandpackFiles } from "..";
+import { SandpackThemeProvider } from "../contexts/themeContext";
 import type {
   SandpackContext,
-  SandboxEnvironment,
-  FileResolver,
-  SandpackStatus,
-  EditorState,
-  SandpackPredefinedTemplate,
-  SandpackSetup,
-  SandpackInitMode,
+  SandpackInternalProvider,
+  SandpackProviderState,
+  SandpackProviderProps,
 } from "../types";
-import { getSandpackStateFromProps } from "../utils/sandpackUtils";
+import {
+  convertedFilesToBundlerFiles,
+  getSandpackStateFromProps,
+} from "../utils/sandpackUtils";
 import { generateRandomId } from "../utils/stringUtils";
 
 /**
@@ -34,70 +33,17 @@ import { generateRandomId } from "../utils/stringUtils";
 const Sandpack = React.createContext<SandpackContext | null>(null);
 const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
 
-export interface SandpackProviderState {
-  files: SandpackBundlerFiles;
-  environment?: SandboxEnvironment;
-  activePath: string;
-  openPaths: string[];
-  startRoute?: string;
-  bundlerState?: BundlerState;
-  error: SandpackError | null;
-  sandpackStatus: SandpackStatus;
-  editorState: EditorState;
-  renderHiddenIframe: boolean;
-  initMode: SandpackInitMode;
-  reactDevTools?: ReactDevToolsMode;
-}
-
-export interface SandpackProviderProps {
-  template?: SandpackPredefinedTemplate;
-  customSetup?: SandpackSetup;
-
-  // editor state (override values)
-  activePath?: string;
-  openPaths?: string[];
-
-  // execution and recompile
-  recompileMode?: "immediate" | "delayed";
-  recompileDelay?: number;
-  autorun?: boolean;
-
-  /**
-   * This provides a way to control how some components are going to
-   * be initialized on the page. The CodeEditor and the Preview components
-   * are quite expensive and might overload the memory usage, so this gives
-   * a certain control of when to initialize them.
-   */
-  initMode?: SandpackInitMode;
-  initModeObserverOptions?: IntersectionObserverInit;
-
-  // bundler options
-  bundlerURL?: string;
-  logLevel?: SandpackLogLevel;
-  startRoute?: string;
-  skipEval?: boolean;
-  fileResolver?: FileResolver;
-  externalResources?: string[];
-}
-
 /**
  * Main context provider that should wraps your entire component.
  * Use * [`useSandpack`](/api/react/#usesandpack) hook, which gives you the entire context object to play with.
  *
  * @category Provider
- * @noInheritDoc
+ * @hidden
  */
-class SandpackProvider extends React.PureComponent<
+class SandpackProviderClass extends React.PureComponent<
   SandpackProviderProps,
   SandpackProviderState
 > {
-  static defaultProps = {
-    skipEval: false,
-    recompileMode: "delayed",
-    recompileDelay: 500,
-    autorun: true,
-  };
-
   lazyAnchorRef: React.RefObject<HTMLDivElement>;
 
   preregisteredIframes: Record<string, HTMLIFrameElement>;
@@ -121,21 +67,21 @@ class SandpackProvider extends React.PureComponent<
   constructor(props: SandpackProviderProps) {
     super(props);
 
-    const { activePath, openPaths, files, environment } =
+    const { activeFile, visibleFiles, files, environment } =
       getSandpackStateFromProps(props);
 
     this.state = {
       files,
       environment,
-      openPaths,
-      activePath,
-      startRoute: this.props.startRoute,
+      visibleFiles,
+      activeFile,
+      startRoute: this.props.options?.startRoute,
       bundlerState: undefined,
       error: null,
-      sandpackStatus: this.props.autorun ? "initial" : "idle",
+      sandpackStatus: this.props.options?.autorun ?? true ? "initial" : "idle",
       editorState: "pristine",
       renderHiddenIframe: false,
-      initMode: this.props.initMode || "lazy",
+      initMode: this.props.options?.initMode || "lazy",
       reactDevTools: undefined,
     };
 
@@ -148,6 +94,7 @@ class SandpackProvider extends React.PureComponent<
      * - A client already exists, set a new listener and then one more client has been created;
      */
     this.queuedListeners = { global: {} };
+
     /**
      * Global list of unsubscribe function for the listeners
      */
@@ -164,9 +111,6 @@ class SandpackProvider extends React.PureComponent<
       React.createRef<boolean>() as React.MutableRefObject<boolean>;
   }
 
-  /**
-   * @hidden
-   */
   handleMessage = (msg: SandpackMessage): void => {
     if (this.timeoutHook) {
       clearTimeout(this.timeoutHook);
@@ -189,43 +133,35 @@ class SandpackProvider extends React.PureComponent<
     }
   };
 
-  /**
-   * @hidden
-   */
   registerReactDevTools = (value: ReactDevToolsMode): void => {
     this.setState({ reactDevTools: value });
   };
 
-  /**
-   * @hidden
-   */
-  updateCurrentFile = (newCode: string): void => {
-    this.updateFile(this.state.activePath, newCode);
+  updateCurrentFile = (code: string): void => {
+    this.updateFile(this.state.activeFile, code);
   };
 
-  /**
-   * @hidden
-   */
-  updateFile = (path: string, newCode: string): void => {
-    if (newCode === this.state.files[this.state.activePath]?.code) {
-      return;
+  updateFile = (pathOrFiles: string | SandpackFiles, code?: string): void => {
+    let files = this.state.files;
+
+    if (typeof pathOrFiles === "string" && code) {
+      if (code === this.state.files[pathOrFiles]?.code) {
+        return;
+      }
+
+      files = { ...files, [pathOrFiles]: { code: code } };
+    } else if (typeof pathOrFiles === "object") {
+      files = { ...files, ...convertedFilesToBundlerFiles(pathOrFiles) };
     }
 
-    const { files } = this.state;
-    const newFiles = {
-      ...files,
-      [path]: { code: newCode },
-    };
-
-    this.setState({ files: newFiles }, this.updateClients);
+    this.setState({ files }, this.updateClients);
   };
 
-  /**
-   * @hidden
-   */
   updateClients = (): void => {
     const { files, sandpackStatus } = this.state;
-    const { recompileMode, recompileDelay } = this.props;
+    const recompileMode = this.props.options?.recompileMode ?? "delayed";
+    const recompileDelay = this.props.options?.recompileDelay ?? 500;
+
     if (sandpackStatus !== "running") {
       return;
     }
@@ -250,15 +186,14 @@ class SandpackProvider extends React.PureComponent<
     }
   };
 
-  /**
-   * @hidden
-   */
   initializeSandpackIframe(): void {
-    if (!this.props.autorun) {
+    const autorun = this.props.options?.autorun ?? true;
+
+    if (!autorun) {
       return;
     }
 
-    const observerOptions = this.props.initModeObserverOptions ?? {
+    const observerOptions = this.props.options?.initModeObserverOptions ?? {
       rootMargin: `1000px 0px`,
     };
 
@@ -312,23 +247,20 @@ class SandpackProvider extends React.PureComponent<
     }
   }
 
-  /**
-   * @hidden
-   */
   componentDidMount(): void {
     this.initializeSandpackIframe();
   }
 
-  /**
-   * @hidden
-   */
   componentDidUpdate(prevProps: SandpackProviderProps): void {
     /**
      * Watch the changes on the initMode prop
      */
-    if (prevProps.initMode !== this.props.initMode && this.props.initMode) {
+    if (
+      prevProps.options?.initMode !== this.props.options?.initMode &&
+      this.props.options?.initMode
+    ) {
       this.setState(
-        { initMode: this.props.initMode },
+        { initMode: this.props.options?.initMode },
         this.initializeSandpackIframe
       );
     }
@@ -336,7 +268,7 @@ class SandpackProvider extends React.PureComponent<
     /**
      * Custom setup derived from props
      */
-    const { activePath, openPaths, files, environment } =
+    const { activeFile, visibleFiles, files, environment } =
       getSandpackStateFromProps(this.props);
 
     /**
@@ -344,12 +276,11 @@ class SandpackProvider extends React.PureComponent<
      */
     if (
       prevProps.template !== this.props.template ||
-      prevProps.activePath !== this.props.activePath ||
-      !isEqual(prevProps.openPaths, this.props.openPaths) ||
-      !isEqual(prevProps.customSetup, this.props.customSetup)
+      !isEqual(prevProps.customSetup, this.props.customSetup) ||
+      !isEqual(prevProps.files, this.props.files)
     ) {
       /* eslint-disable react/no-did-update-set-state */
-      this.setState({ activePath, openPaths, files, environment });
+      this.setState({ activeFile, visibleFiles, files, environment });
 
       if (this.state.sandpackStatus !== "running") {
         return;
@@ -372,9 +303,6 @@ class SandpackProvider extends React.PureComponent<
     }
   }
 
-  /**
-   * @hidden
-   */
   componentWillUnmount(): void {
     if (typeof this.unsubscribe === "function") {
       this.unsubscribe();
@@ -397,9 +325,6 @@ class SandpackProvider extends React.PureComponent<
     }
   }
 
-  /**
-   * @hidden
-   */
   createClient = (
     iframe: HTMLIFrameElement,
     clientId: string
@@ -411,12 +336,12 @@ class SandpackProvider extends React.PureComponent<
         template: this.state.environment,
       },
       {
-        externalResources: this.props.externalResources,
-        bundlerURL: this.props.bundlerURL,
-        logLevel: this.props.logLevel,
-        startRoute: this.props.startRoute,
-        fileResolver: this.props.fileResolver,
-        skipEval: this.props.skipEval,
+        externalResources: this.props.options?.externalResources,
+        bundlerURL: this.props.options?.bundlerURL,
+        startRoute: this.props.options?.startRoute,
+        fileResolver: this.props.options?.fileResolver,
+        skipEval: this.props.options?.skipEval ?? false,
+        logLevel: this.props.options?.logLevel,
         showOpenInCodeSandbox: !this.openInCSBRegistered.current,
         showErrorScreen: !this.errorScreenRegistered.current,
         showLoadingScreen: !this.loadingScreenRegistered.current,
@@ -469,9 +394,6 @@ class SandpackProvider extends React.PureComponent<
     return client;
   };
 
-  /**
-   * @hidden
-   */
   runSandpack = (): void => {
     Object.keys(this.preregisteredIframes).forEach((clientId) => {
       const iframe = this.preregisteredIframes[clientId];
@@ -481,9 +403,6 @@ class SandpackProvider extends React.PureComponent<
     this.setState({ sandpackStatus: "running" });
   };
 
-  /**
-   * @hidden
-   */
   registerBundler = (iframe: HTMLIFrameElement, clientId: string): void => {
     if (this.state.sandpackStatus === "running") {
       this.clients[clientId] = this.createClient(iframe, clientId);
@@ -492,9 +411,6 @@ class SandpackProvider extends React.PureComponent<
     }
   };
 
-  /**
-   * @hidden
-   */
   unregisterBundler = (clientId: string): void => {
     const client = this.clients[clientId];
     if (client) {
@@ -512,9 +428,6 @@ class SandpackProvider extends React.PureComponent<
     this.setState({ sandpackStatus: "idle" });
   };
 
-  /**
-   * @hidden
-   */
   unregisterAllClients = (): void => {
     Object.keys(this.clients).map(this.unregisterBundler);
 
@@ -524,59 +437,47 @@ class SandpackProvider extends React.PureComponent<
     }
   };
 
-  /**
-   * @hidden
-   */
-  setActiveFile = (activePath: string): void => {
-    this.setState({ activePath });
+  setActiveFile = (activeFile: string): void => {
+    this.setState({ activeFile });
   };
 
-  /**
-   * @hidden
-   */
   openFile = (path: string): void => {
-    this.setState(({ openPaths }) => {
-      const newPaths = openPaths.includes(path)
-        ? openPaths
-        : [...openPaths, path];
+    this.setState(({ visibleFiles }) => {
+      const newPaths = visibleFiles.includes(path)
+        ? visibleFiles
+        : [...visibleFiles, path];
 
       return {
-        activePath: path,
-        openPaths: newPaths,
+        activeFile: path,
+        visibleFiles: newPaths,
       };
     });
   };
 
-  /**
-   * @hidden
-   */
   closeFile = (path: string): void => {
-    if (this.state.openPaths.length === 1) {
+    if (this.state.visibleFiles.length === 1) {
       return;
     }
 
-    this.setState(({ openPaths, activePath }) => {
-      const indexOfRemovedPath = openPaths.indexOf(path);
-      const newPaths = openPaths.filter((openPath) => openPath !== path);
+    this.setState(({ visibleFiles, activeFile }) => {
+      const indexOfRemovedPath = visibleFiles.indexOf(path);
+      const newPaths = visibleFiles.filter((openPath) => openPath !== path);
 
       return {
-        activePath:
-          path === activePath
+        activeFile:
+          path === activeFile
             ? indexOfRemovedPath === 0
-              ? openPaths[1]
-              : openPaths[indexOfRemovedPath - 1]
-            : activePath,
-        openPaths: newPaths,
+              ? visibleFiles[1]
+              : visibleFiles[indexOfRemovedPath - 1]
+            : activeFile,
+        visibleFiles: newPaths,
       };
     });
   };
 
-  /**
-   * @hidden
-   */
   deleteFile = (path: string): void => {
-    this.setState(({ openPaths, files }) => {
-      const newPaths = openPaths.filter((openPath) => openPath !== path);
+    this.setState(({ visibleFiles, files }) => {
+      const newPaths = visibleFiles.filter((openPath) => openPath !== path);
       const newFiles = Object.keys(files).reduce(
         (acc: SandpackBundlerFiles, filePath) => {
           if (filePath === path) {
@@ -589,19 +490,18 @@ class SandpackProvider extends React.PureComponent<
       );
 
       return {
-        openPaths: newPaths,
+        visibleFiles: newPaths,
         files: newFiles,
       };
     });
     this.updateClients();
   };
 
-  /**
-   * @hidden
-   */
   dispatchMessage = (message: SandpackMessage, clientId?: string): void => {
     if (this.state.sandpackStatus !== "running") {
-      console.warn("dispatch cannot be called while in idle mode");
+      console.warn(
+        `[sandpack-react]: dispatch cannot be called while in idle mode`
+      );
       return;
     }
 
@@ -614,9 +514,6 @@ class SandpackProvider extends React.PureComponent<
     }
   };
 
-  /**
-   * @hidden
-   */
   addListener = (
     listener: ListenerFunction,
     clientId?: string
@@ -684,9 +581,6 @@ class SandpackProvider extends React.PureComponent<
     }
   };
 
-  /**
-   * @hidden
-   */
   resetFile = (path: string): void => {
     const { files } = getSandpackStateFromProps(this.props);
 
@@ -698,23 +592,17 @@ class SandpackProvider extends React.PureComponent<
     );
   };
 
-  /**
-   * @hidden
-   */
   resetAllFiles = (): void => {
     const { files } = getSandpackStateFromProps(this.props);
 
     this.setState({ files }, this.updateClients);
   };
 
-  /**
-   * @hidden
-   */
   _getSandpackState = (): SandpackContext => {
     const {
       files,
-      activePath,
-      openPaths,
+      activeFile,
+      visibleFiles,
       startRoute,
       bundlerState,
       editorState,
@@ -727,8 +615,8 @@ class SandpackProvider extends React.PureComponent<
     return {
       files,
       environment,
-      openPaths,
-      activePath,
+      visibleFiles,
+      activeFile,
       startRoute,
       error,
       bundlerState,
@@ -757,19 +645,31 @@ class SandpackProvider extends React.PureComponent<
     };
   };
 
-  /**
-   * @hidden
-   */
   render(): React.ReactElement {
-    const { children } = this.props;
+    const { children, theme, className, style } = this.props;
 
     return (
       <Sandpack.Provider value={this._getSandpackState()}>
-        {children}
+        <ClasserProvider classes={this.props.options?.classes}>
+          <SandpackThemeProvider
+            className={className}
+            style={style}
+            theme={theme}
+          >
+            {children}
+          </SandpackThemeProvider>
+        </ClasserProvider>
       </Sandpack.Provider>
     );
   }
 }
+
+/**
+ * @hidden
+ */
+const SandpackProvider: SandpackInternalProvider =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  SandpackProviderClass as any;
 
 /**
  * @category Provider

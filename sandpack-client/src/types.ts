@@ -114,6 +114,19 @@ export interface SandpackErrorMessage {
   };
 }
 
+export type SandpackMessageConsoleMethods =
+  | "log"
+  | "debug"
+  | "info"
+  | "warn"
+  | "error"
+  | "table"
+  | "clear"
+  | "time"
+  | "timeEnd"
+  | "count"
+  | "assert";
+
 export interface BaseSandpackMessage {
   type: string;
   $id?: number;
@@ -152,7 +165,7 @@ export type SandpackMessage = BaseSandpackMessage &
       }
     | {
         type: "done";
-        compilatonError: boolean; // TODO: fix typo?
+        compilatonError: boolean;
       }
     | {
         type: "urlchange";
@@ -199,5 +212,13 @@ export type SandpackMessage = BaseSandpackMessage &
       }
     | {
         type: "activate-react-devtools";
+      }
+    | {
+        type: "console";
+        log: Array<{
+          method: SandpackMessageConsoleMethods;
+          id: string;
+          data: string[];
+        }>;
       }
   );

@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.4](https://github.com/codesandbox/sandpack/compare/v1.0.3...v1.0.4) (2022-05-27)
+
+
+### Bug Fixes
+
+* **release-script:** trigger release ([#480](https://github.com/codesandbox/sandpack/issues/480)) ([46890fd](https://github.com/codesandbox/sandpack/commit/46890fdc6748f997cad38a39860b573869af1c60))
+
+
+
+
+
+## [1.0.2](https://github.com/codesandbox/sandpack/compare/v1.0.1...v1.0.2) (2022-05-26)
+
+
+### Bug Fixes
+
+* **package registry:** trigger deploy ([#475](https://github.com/codesandbox/sandpack/issues/475)) ([551c7c0](https://github.com/codesandbox/sandpack/commit/551c7c08898e5a49ceae36572b3e16bff5e9d64c))
+
+
+
+
+
+# [1.0.0](https://github.com/codesandbox/sandpack/compare/v0.19.10...v1.0.0) (2022-05-25)
+
+
+### Features
+
+* **react/client:** BREAKING CHANGES ([#375](https://github.com/codesandbox/sandpack/issues/375)) ([20a8993](https://github.com/codesandbox/sandpack/commit/20a899337343e35a8d8e0b4e00c42e7190625747))
+
+
+
+
+
+## [0.19.9](https://github.com/codesandbox/sandpack/compare/v0.19.8...v0.19.9) (2022-05-23)
+
+
+### Bug Fixes
+
+* **client:** console message methods ([1b76dcf](https://github.com/codesandbox/sandpack/commit/1b76dcf5ccfd0db61cda8d70329424cdf27116ad))
+
+
+
+
+
+## [0.19.8](https://github.com/codesandbox/sandpack/compare/v0.19.7...v0.19.8) (2022-05-23)
+
+
+### Bug Fixes
+
+* **sandpack messages:** add console type ([3edcb4d](https://github.com/codesandbox/sandpack/commit/3edcb4d11238f47ecbc286a8535205579856d3f3))
+
+
+
+
+
+## [0.19.1](https://github.com/codesandbox/sandpack/compare/v0.19.0...v0.19.1) (2022-04-26)
+
+
+### Bug Fixes
+
+* **client:** update bundler version ([#450](https://github.com/codesandbox/sandpack/issues/450)) ([1b6a663](https://github.com/codesandbox/sandpack/commit/1b6a663d8d7ff0bf3c3449b4aa0bfd675e37a221))
+
+
+
+
+
+# [0.19.0](https://github.com/codesandbox/sandpack/compare/v0.18.2...v0.19.0) (2022-04-21)
+
+
+### Features
+
+* **template:** add solidjs (beta) ([#447](https://github.com/codesandbox/sandpack/issues/447)) ([7b03882](https://github.com/codesandbox/sandpack/commit/7b038827add0001b460af7574e12e4c664a075d2))
+
+
+
+
+
+# [0.18.0](https://github.com/codesandbox/sandpack/compare/v0.17.1...v0.18.0) (2022-03-31)
+
+
+### Features
+
+* file-resolver protocol error handling ([#427](https://github.com/codesandbox/sandpack/issues/427)) ([c3b3cca](https://github.com/codesandbox/sandpack/commit/c3b3cca98ca4aba2c0744545969683e41d963ab4))
+
+
+
+
+
 # [0.17.0](https://github.com/codesandbox/sandpack/compare/v0.16.1...v0.17.0) (2022-03-30)
 
 **Note:** Version bump only for package @codesandbox/sandpack-client

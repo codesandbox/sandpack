@@ -1,71 +1,13 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 import { Sandpack } from "../../src/CustomSandpack";
 import { NestedSandpack } from "../../src/NestedSandpack";
-import { SandpackRunner } from "@codesandbox/sandpack-react"
 
 # Custom UI
 
 In this next section, you can read about all the different options for customizing the UI of the sandpack components that render inside the `Sandpack` preset.
-
-## Theming
-
-The overall style can be set through the `theme` prop. Once again, sandpack offers a set of predefined options, but you can also pass individual values to style your `Sandpack` instance.
-
-### Standard Themes
-
-Sandpack comes with some predefined themes:
-
-To see all the themes at a glance, use [this sandbox](https://codesandbox.io/s/sandpack-theme-yqsmj).
-
-<!-- prettier-ignore -->
-<NestedSandpack nestedProps={`    // Try out the included themes below!
-      theme="dark"
-      // theme="light"
-      // theme="github-light"
-      // theme="night-owl"
-      // theme="aqua-blue"
-      // theme="monokai-pro"`}
-/>
-
-### Custom Theme
-
-You can also pass a **partial** theme object that overrides properties in the
-**default** theme, which is `codesandbox-light`.
-
-<!-- prettier-ignore -->
-<NestedSandpack nestedProps={`    theme={{
-        palette: {
-          accent: "rebeccapurple",
-        },
-        syntax: {
-          tag: "#006400",
-          string: "rgb(255, 165, 0)",
-          plain: "tomato",
-        },
-      }}`}
-  />
-
-:::success Sandpack Theme Builder
-You can design your own theme or customize any existing Sandpack theme presets. [Try it now! ↗](https://sandpack.codesandbox.io/theme)
-:::
-
-Furthermore you can import an existing theme object and use object composition to override specific fields.
-
-<!-- prettier-ignore -->
-<NestedSandpack 
-  setupCode={`import { Sandpack, sandpackDark } from "@codesandbox/sandpack-react";
-import "@codesandbox/sandpack-react/dist/index.css";`} 
-  nestedProps={`    theme={{
-        ...sandpackDark,
-        typography: {
-          fontSize: "16px",
-          bodyFont: "Arial",
-        },
-      }}`}
-  />
 
 ## Custom Styling
 
@@ -183,42 +125,6 @@ experience by modifying the `recompileDelay` value or by setting the
   template="react"
 />
 ```
-
-## Sandpack Runner
-
-In all the examples so far, we used the `Sandpack` preset. As a reminder, a `preset` is a fixed configuration of sandpack
-components and default settings, ready to use.
-
-In case you want to have the bundler running and you don't want the code editing
-component, you can use a `SandpackRunner` preset.
-
-The `SandpackRunner` has some of the props we already described above:
-`template`, `customSetup` and `theme`. They work exactly the same on this
-preset.
-
-However, your input will be sent through the `code` prop. This is a single
-string that will replace the main file of the project.
-
-```jsx
-import { SandpackRunner } from "@codesandbox/sandpack-react";
-
-const code = `export default function App() {
-  return <h1>Hello CodeSandbox</h1>
-}`
-
-<SandpackRunner code={code} template="react" />;
-```
-
-<SandpackRunner code={`export default function App() { return <h1>Hello CodeSandbox</h1> }`} template="react" />
-
-:::note
-The `main` file is also be set in the `template` or the `customSetup` and is not the same as the `entry` file. In this example, `code` will replace the `App.js` file, because that is the
-**main** file in the react template. For `vue`, this would be the `App.vue` file.
-:::
-
-If you need to pass multiple files you can use the [`customSetup` prop](/getting-started/custom-content#custom-setup).
-
-`SandpackRunner` is already powering the popular [`code-hike` library](https://github.com/code-hike/codehike), maintained by Rodrigo Pombo.
 
 ---
 

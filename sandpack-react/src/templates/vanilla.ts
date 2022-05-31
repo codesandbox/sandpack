@@ -1,12 +1,13 @@
-import type { SandboxTemplate } from "../types";
-
-export const VANILLA_TEMPLATE: SandboxTemplate = {
+/**
+ * @category Template
+ */
+export const VANILLA_TEMPLATE = {
   files: {
     "/src/index.js": {
       code: `import "./styles.css";
 
 document.getElementById("app").innerHTML = \`
-<h1>Hello Vanilla!</h1>
+<h1>Hello World</h1>
 <div>
   We use the same configuration as Parcel to bundle this sandbox, you can find more
   info about Parcel 

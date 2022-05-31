@@ -15,14 +15,14 @@ export const Component: React.FC = () => (
   <SandpackProvider
     customSetup={{
       entry: "/index.js",
-      files: {
-        "/index.js": {
-          code: `const text = 'Hello World!'
+      dependencies: { "@babel/runtime": "latest" },
+    }}
+    files={{
+      "/index.js": {
+        code: `const text = 'Hello World!'
 const str = \`<div>\${text}</div>\`
 `,
-        },
       },
-      dependencies: { "@babel/runtime": "latest" },
     }}
   >
     <SandpackLayout>

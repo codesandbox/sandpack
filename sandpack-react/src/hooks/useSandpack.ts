@@ -7,7 +7,10 @@ import type {
   SandpackState,
 } from "../types";
 
-export interface UseSandpackReturnType {
+/**
+ * @category Hooks
+ */
+export interface UseSandpack {
   sandpack: SandpackState;
   dispatch: SandpackClientDispatch;
   listen: SandpackClientListen;
@@ -16,12 +19,12 @@ export interface UseSandpackReturnType {
 /**
  * @category Hooks
  */
-export function useSandpack(): UseSandpackReturnType {
+export function useSandpack(): UseSandpack {
   const sandpack = React.useContext(SandpackReactContext);
 
   if (sandpack === null) {
     throw new Error(
-      `useSandpack can only be used inside components wrapped by 'SandpackProvider'`
+      `[sandpack-react]: "useSandpack" must be wrapped by a "SandpackProvider"`
     );
   }
 

@@ -1,4 +1,4 @@
-import "@codesandbox/sandpack-react/dist/index.css";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import amplitude from "amplitude-js";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
@@ -9,7 +9,10 @@ if (API_KEY && process.browser) {
   amplitude.getInstance().init(API_KEY);
 }
 
-function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
+const MyApp: React.FC<AppProps & { Component: any }> = ({
+  Component,
+  pageProps,
+}) => {
   useEffect(() => {
     amplitude.getInstance().logEvent("pageview", {
       path: window.location.href,
@@ -18,6 +21,6 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   }, []);
 
   return <Component {...pageProps} />;
-}
+};
 
 export default MyApp;
