@@ -35,7 +35,7 @@ export default function App() {
     options={{
       showLineNumbers: true,
       showInlineErrors: true,
-      bundlerURL: "http://localhost:1234",
+      bundlerURL: "https://sandpack-bundler.pages.dev",
     }}
     template="react"
   />
@@ -44,7 +44,7 @@ export default function App() {
 export const CodesandboxData: React.FC = () => {
   const { data, error, isLoading } = useSandboxData(
     "kc88v1",
-    "https://cors-anywhere.herokuapp.com/https://codesandbox.io/api"
+    "https://codesandbox.io/api"
   );
 
   if (error) {
@@ -78,7 +78,7 @@ export const CodesandboxData: React.FC = () => {
         },
         showLineNumbers: true,
         showInlineErrors: true,
-        bundlerURL: "http://localhost:1234",
+        bundlerURL: "https://sandpack-bundler.pages.dev",
       }}
       template="react"
     />
