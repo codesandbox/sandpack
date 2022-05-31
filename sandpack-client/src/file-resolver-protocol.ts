@@ -5,127 +5,54 @@
  * an abstraction over the actions that can be dispatched between the bundler and the iframe.
  */
 
-const generateId = () =>
-  // Such a random ID
-  Math.floor(Math.random() * 1000000 + Math.random() * 1000000);
-
-const getConstructorName = (x: any) => {
-  try {
-    return x.constructor.name;
-  } catch (e) {
-    return "";
-  }
-};
+import { IFrameProtocol } from "./iframe-protocol";
+import type {
+  UnsubscribeFunction,
+  ProtocolRequestMessage,
+  ProtocolResultMessage,
+  ProtocolErrorMessage,
+} from "./types";
 
 export default class Protocol {
-  private outgoingMessages: Set<number> = new Set();
-  private internalId: number;
-  private isWorker: boolean;
+  private _disposeMessageListener: UnsubscribeFunction;
 
   constructor(
     private type: string,
-    private handleMessage: (message: any) => any,
-    private target: Worker | Window
+    private handleMessage: (message: ProtocolRequestMessage) => any,
+    private protocol: IFrameProtocol
   ) {
-    this.createConnection();
-    this.internalId = generateId();
-    this.isWorker = getConstructorName(target) === "Worker";
+    this._disposeMessageListener = this.protocol.channelListen(
+      async (msg: any) => {
+        if (msg.type === this.getTypeId() && msg.method) {
+          const message = msg as ProtocolRequestMessage;
+          try {
+            const result = await this.handleMessage(message);
+            const response: ProtocolResultMessage = {
+              type: this.getTypeId(),
+              msgId: message.msgId,
+              result: result,
+            };
+            this.protocol.dispatch(response as any);
+          } catch (err: any) {
+            const response: ProtocolErrorMessage = {
+              type: this.getTypeId(),
+              msgId: message.msgId,
+              error: {
+                message: err.message,
+              },
+            };
+            this.protocol.dispatch(response as any);
+          }
+        }
+      }
+    );
   }
 
   getTypeId() {
-    return `p-${this.type}`;
-  }
-
-  createConnection() {
-    self.addEventListener("message", this._messageListener);
+    return `protocol-${this.type}`;
   }
 
   public dispose() {
-    self.removeEventListener("message", this._messageListener);
-  }
-
-  sendMessage<PromiseType>(data: any): Promise<PromiseType> {
-    return new Promise((resolve) => {
-      const messageId = generateId();
-
-      const message = {
-        $originId: this.internalId,
-        $type: this.getTypeId(),
-        $data: data,
-        $id: messageId,
-      };
-
-      this.outgoingMessages.add(messageId);
-
-      const listenFunction = (e: MessageEvent) => {
-        const { data } = e;
-
-        if (
-          data.$type === this.getTypeId() &&
-          data.$id === messageId &&
-          data.$originId !== this.internalId
-        ) {
-          resolve(data.$data);
-
-          self.removeEventListener("message", listenFunction);
-        }
-      };
-
-      self.addEventListener("message", listenFunction);
-
-      this._postMessage(message);
-    });
-  }
-
-  private _messageListener = async (e: MessageEvent) => {
-    const { data } = e;
-
-    if (data.$type !== this.getTypeId()) {
-      return;
-    }
-
-    // We are getting a response to the message
-    if (this.outgoingMessages.has(data.$id)) {
-      return;
-    }
-
-    // any is fine for now... gotta refactor this later...
-    let returnMessage: any = {
-      $originId: this.internalId,
-      $type: this.getTypeId(),
-      $id: data.$id,
-    };
-
-    try {
-      const result = await this.handleMessage(data.$data);
-      returnMessage.$data = result;
-    } catch (err: any) {
-      if (!err.message) {
-        console.error(err);
-      }
-      returnMessage.$error = { message: err.message ?? "Unknown error" };
-    }
-
-    if (e.source) {
-      // @ts-ignore
-      e.source.postMessage(returnMessage, "*");
-    } else {
-      this._postMessage(returnMessage);
-    }
-  };
-
-  private _postMessage(m: any) {
-    if (
-      this.isWorker ||
-      // @ts-ignore Unknown to TS
-      (typeof DedicatedWorkerGlobalScope !== "undefined" &&
-        // @ts-ignore Unknown to TS
-        this.target instanceof DedicatedWorkerGlobalScope)
-    ) {
-      // @ts-ignore
-      this.target.postMessage(m);
-    } else {
-      (this.target as Window).postMessage(m, "*");
-    }
+    this._disposeMessageListener();
   }
 }

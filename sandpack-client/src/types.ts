@@ -133,6 +133,28 @@ export interface BaseSandpackMessage {
   codesandbox?: boolean;
 }
 
+export interface BaseProtocolMessage {
+  type: string;
+  msgId: string;
+}
+
+export interface ProtocolErrorMessage extends BaseProtocolMessage {
+  error: {
+    message: string;
+  };
+}
+
+export interface ProtocolResultMessage extends BaseProtocolMessage {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  result: any;
+}
+
+export interface ProtocolRequestMessage extends BaseProtocolMessage {
+  method: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params: any[];
+}
+
 export type SandpackMessage = BaseSandpackMessage &
   (
     | {

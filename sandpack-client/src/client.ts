@@ -177,17 +177,19 @@ export class SandpackClient {
 
         if (this.options.fileResolver) {
           this.fileResolverProtocol = new Protocol(
-            "file-resolver",
-            async (data: { m: "isFile" | "readFile"; p: string }) => {
-              if (data.m === "isFile") {
+            "fs",
+            async (data) => {
+              if (data.method === "isFile") {
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                return this.options.fileResolver!.isFile(data.p);
+                return this.options.fileResolver!.isFile(data.params[0]);
+              } else if (data.method === "readFile") {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                return this.options.fileResolver!.readFile(data.params[0]);
+              } else {
+                throw new Error("Method not supported");
               }
-
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              return this.options.fileResolver!.readFile(data.p);
             },
-            this.iframe.contentWindow
+            this.iframeProtocol
           );
         }
 
