@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/codesandbox/sandpack/compare/v1.0.4...v1.1.0) (2022-05-31)
+
+
+### Features
+
+* **client:** refactor iFrame fs protocol ([#483](https://github.com/codesandbox/sandpack/issues/483)) ([28f93d0](https://github.com/codesandbox/sandpack/commit/28f93d05b978ae59655d4c574a1393ce4b9d6e53))
+
+
+
+
+
 ## [1.0.4](https://github.com/codesandbox/sandpack/compare/v1.0.3...v1.0.4) (2022-05-27)
 
 
