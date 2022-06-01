@@ -65,7 +65,7 @@ export const SandpackTranspiledCode = ({
         title="transpiled sandpack code"
       />
       <ErrorOverlay />
-      <LoadingOverlay clientId="hidden" />
+      <LoadingOverlay clientId="hidden" showOpenInCodeSandbox={false} />
     </div>
   );
 };
