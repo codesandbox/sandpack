@@ -77,8 +77,11 @@ const sidesClassNames = css({
 
 export const Loading = ({
   className,
+  showOpenInCodeSandbox,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
+}: React.HTMLAttributes<HTMLDivElement> & {
+  showOpenInCodeSandbox: boolean;
+}): JSX.Element => {
   const c = useClasser(THEME_PREFIX);
 
   return (
@@ -87,7 +90,7 @@ export const Loading = ({
       title="Open in CodeSandbox"
       {...props}
     >
-      <OpenInCodeSandboxButton />
+      {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
       <div className={classNames(c("cube"), cubeClassName)}>
         <div className={classNames(c("sides"), sidesClassNames)}>
           <div className="top" />

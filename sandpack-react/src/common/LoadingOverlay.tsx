@@ -26,6 +26,8 @@ export interface LoadingOverlayProps {
    * which is helpful for external loading states.
    */
   loading?: boolean;
+
+  showOpenInCodeSandbox: boolean;
 }
 
 const loadingClassName = css({
@@ -40,6 +42,7 @@ export const LoadingOverlay = ({
   loading,
   className,
   style,
+  showOpenInCodeSandbox,
   ...props
 }: LoadingOverlayProps &
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
@@ -103,7 +106,7 @@ export const LoadingOverlay = ({
       }}
       {...props}
     >
-      <Loading />
+      <Loading showOpenInCodeSandbox={showOpenInCodeSandbox} />
     </div>
   );
 };
