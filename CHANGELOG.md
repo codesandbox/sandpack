@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/codesandbox/sandpack/compare/v1.1.0...v1.1.1) (2022-06-01)
+
+
+### Bug Fixes
+
+* **showOpenInCodeSandbox:** pass prop to loading component ([#486](https://github.com/codesandbox/sandpack/issues/486)) ([ba81506](https://github.com/codesandbox/sandpack/commit/ba8150628a47ad5f0f3374d36047ea3886bfba9e))
+
+
+
+
+
 # [1.1.0](https://github.com/codesandbox/sandpack/compare/v1.0.4...v1.1.0) (2022-05-31)
 
 
