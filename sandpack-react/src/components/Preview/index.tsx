@@ -167,9 +167,9 @@ export const SandpackPreview = React.forwardRef<
         }}
         {...props}
       >
-        {showNavigator ? (
+        {showNavigator && (
           <Navigator clientId={clientId.current} onURLChange={handleNewURL} />
-        ) : null}
+        )}
 
         <div className={classNames(c("preview-container"), previewClassName)}>
           <iframe
@@ -183,7 +183,7 @@ export const SandpackPreview = React.forwardRef<
             title="Sandpack Preview"
           />
 
-          {showSandpackErrorOverlay ? <ErrorOverlay /> : null}
+          {showSandpackErrorOverlay && <ErrorOverlay />}
 
           <div
             className={classNames(
@@ -192,14 +192,17 @@ export const SandpackPreview = React.forwardRef<
             )}
           >
             {actionsChildren}
-            {!showNavigator && showRefreshButton && status === "running" ? (
+            {!showNavigator && showRefreshButton && status === "running" && (
               <RefreshButton clientId={clientId.current} />
-            ) : null}
+            )}
 
-            {showOpenInCodeSandbox ? <OpenInCodeSandboxButton /> : null}
+            {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
           </div>
 
-          <LoadingOverlay clientId={clientId.current} />
+          <LoadingOverlay
+            clientId={clientId.current}
+            showOpenInCodeSandbox={showOpenInCodeSandbox}
+          />
 
           {children}
         </div>
