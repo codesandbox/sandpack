@@ -27,7 +27,7 @@ export interface LoadingOverlayProps {
    */
   loading?: boolean;
 
-  showOpenInCodeSandbox?: boolean;
+  showOpenInCodeSandbox: boolean;
 }
 
 const loadingClassName = css({
