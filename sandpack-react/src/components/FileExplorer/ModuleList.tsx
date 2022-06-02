@@ -1,10 +1,16 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
+
+import type{ SandpackContext } from "../..";
+import { SandpackReactContext } from "../../contexts/sandpackContext";
+
 import { Directory } from "./Directory";
 import { File } from "./File";
 
-export interface Props {
+import type {  SandpackFileExplorerProp } from ".";
+
+export interface Props extends SandpackFileExplorerProp {
   prefixedPath: string;
   files: SandpackBundlerFiles;
   selectFile: (path: string) => void;
@@ -13,6 +19,8 @@ export interface Props {
 }
 
 export class ModuleList extends React.PureComponent<Props> {
+  static contextType = SandpackReactContext;
+  
   render(): JSX.Element {
     const {
       depth = 0,
@@ -20,10 +28,30 @@ export class ModuleList extends React.PureComponent<Props> {
       selectFile,
       prefixedPath,
       files,
+      enableAutoHiddenFile,
     } = this.props;
 
-    const fileListWithoutPrefix = Object.keys(files)
-      .filter((file) => file.startsWith(prefixedPath))
+    let fileListWithoutPrefix: string[] = [];
+    const { visibleFiles = [] } = this.context as SandpackContext ;
+    const hasVisibleFilesOption = visibleFiles.length > 0;
+
+    // When visibleFiles or activeFile are set, the hidden and active flags on the files prop are ignored.
+    // see: https://sandpack.codesandbox.io/docs/getting-started/custom-content#visiblefiles-and-activefile
+    const filterByHiddenProperty = enableAutoHiddenFile && !hasVisibleFilesOption;
+    const filterByVisibleFilesOption = enableAutoHiddenFile && !!hasVisibleFilesOption;
+
+    fileListWithoutPrefix = Object.keys(files)
+      .filter((filePath) => {
+        const isValidatedPath = filePath.startsWith(prefixedPath);
+        if (filterByVisibleFilesOption) {
+          return isValidatedPath && visibleFiles.includes(filePath);
+        }
+        if (filterByHiddenProperty) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          return isValidatedPath && !(files[filePath] as any).hidden;
+        }
+        return isValidatedPath;
+      })
       .map((file) => file.substring(prefixedPath.length));
 
     const directoriesToShow = new Set(
@@ -43,6 +71,7 @@ export class ModuleList extends React.PureComponent<Props> {
             key={dir}
             activeFile={activeFile}
             depth={depth}
+            enableAutoHiddenFile={enableAutoHiddenFile}
             files={files}
             prefixedPath={dir}
             selectFile={selectFile}
