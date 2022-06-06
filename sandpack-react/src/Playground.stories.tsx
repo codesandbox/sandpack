@@ -4,6 +4,6 @@ export default {
   title: "Intro/Playground",
 };
 
-export const Main = (): JSaX.Element => {
-  return <Sandpack theme="auto" />;
+export const Main = (): JSX.Element => {
+  return <Sandpack />;
 };
