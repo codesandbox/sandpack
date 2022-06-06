@@ -15,7 +15,7 @@ const fileExplorerClassName = css({
 export interface SandpackFileExplorerProp {
   /**
    * enable auto hidden file in file explorer
-   * 
+   *
    * @description set with hidden property in files property
    * @default false
    */
@@ -29,7 +29,8 @@ export const SandpackFileExplorer = ({
   className,
   enableAutoHiddenFile = false,
   ...props
-}: SandpackFileExplorerProp & React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
+}: SandpackFileExplorerProp &
+  React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const { sandpack } = useSandpack();
 
   return (

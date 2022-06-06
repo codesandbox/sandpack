@@ -1,14 +1,13 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-
-import type{ SandpackContext } from "../..";
+import type { SandpackContext } from "../..";
 import { SandpackReactContext } from "../../contexts/sandpackContext";
 
 import { Directory } from "./Directory";
 import { File } from "./File";
 
-import type {  SandpackFileExplorerProp } from ".";
+import type { SandpackFileExplorerProp } from ".";
 
 export interface Props extends SandpackFileExplorerProp {
   prefixedPath: string;
@@ -20,7 +19,7 @@ export interface Props extends SandpackFileExplorerProp {
 
 export class ModuleList extends React.PureComponent<Props> {
   static contextType = SandpackReactContext;
-  
+
   render(): JSX.Element {
     const {
       depth = 0,
@@ -32,13 +31,15 @@ export class ModuleList extends React.PureComponent<Props> {
     } = this.props;
 
     let fileListWithoutPrefix: string[] = [];
-    const { visibleFiles = [] } = this.context as SandpackContext ;
+    const { visibleFiles = [] } = this.context as SandpackContext;
     const hasVisibleFilesOption = visibleFiles.length > 0;
 
     // When visibleFiles or activeFile are set, the hidden and active flags on the files prop are ignored.
     // see: https://sandpack.codesandbox.io/docs/getting-started/custom-content#visiblefiles-and-activefile
-    const filterByHiddenProperty = enableAutoHiddenFile && !hasVisibleFilesOption;
-    const filterByVisibleFilesOption = enableAutoHiddenFile && !!hasVisibleFilesOption;
+    const filterByHiddenProperty =
+      enableAutoHiddenFile && !hasVisibleFilesOption;
+    const filterByVisibleFilesOption =
+      enableAutoHiddenFile && !!hasVisibleFilesOption;
 
     fileListWithoutPrefix = Object.keys(files)
       .filter((filePath) => {

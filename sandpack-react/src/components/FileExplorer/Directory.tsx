@@ -1,7 +1,6 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-
 import { File } from "./File";
 import { ModuleList } from "./ModuleList";
 
@@ -29,7 +28,14 @@ export class Directory extends React.Component<Props, State> {
   };
 
   render(): React.ReactElement {
-    const { prefixedPath, files, selectFile, activeFile, depth, enableAutoHiddenFile } = this.props;
+    const {
+      prefixedPath,
+      files,
+      selectFile,
+      activeFile,
+      depth,
+      enableAutoHiddenFile,
+    } = this.props;
 
     return (
       <div key={prefixedPath}>
