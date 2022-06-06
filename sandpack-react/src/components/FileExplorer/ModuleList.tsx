@@ -24,12 +24,12 @@ export const ModuleList: React.FC<ModuleListProps> = ({
   selectFile,
   prefixedPath,
   files,
-  enableAutoHiddenFile,
+  autoHiddenFiles,
   visibleFiles,
 }) => {
   const { directories, modules } = fromPropsToModules({
     visibleFiles,
-    enableAutoHiddenFile,
+    autoHiddenFiles,
     prefixedPath,
     files,
   });
@@ -40,8 +40,8 @@ export const ModuleList: React.FC<ModuleListProps> = ({
         <Directory
           key={dir}
           activeFile={activeFile}
+          autoHiddenFiles={autoHiddenFiles}
           depth={depth}
-          enableAutoHiddenFile={enableAutoHiddenFile}
           files={files}
           prefixedPath={dir}
           selectFile={selectFile}

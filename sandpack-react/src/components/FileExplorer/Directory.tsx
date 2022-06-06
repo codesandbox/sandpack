@@ -23,7 +23,7 @@ export const Directory: React.FC<Props> = ({
   selectFile,
   activeFile,
   depth,
-  enableAutoHiddenFile,
+  autoHiddenFiles,
   visibleFiles,
 }) => {
   const [open, setOpen] = React.useState(true);
@@ -42,8 +42,8 @@ export const Directory: React.FC<Props> = ({
       {open && (
         <ModuleList
           activeFile={activeFile}
+          autoHiddenFiles={autoHiddenFiles}
           depth={depth + 1}
-          enableAutoHiddenFile={enableAutoHiddenFile}
           files={files}
           prefixedPath={prefixedPath}
           selectFile={selectFile}

@@ -19,7 +19,7 @@ export interface SandpackFileExplorerProp {
    * @description set with hidden property in files property
    * @default false
    */
-  enableAutoHiddenFile?: boolean;
+  autoHiddenFiles?: boolean;
 }
 
 /**
@@ -27,7 +27,7 @@ export interface SandpackFileExplorerProp {
  */
 export const SandpackFileExplorer = ({
   className,
-  enableAutoHiddenFile = false,
+  autoHiddenFiles = false,
   ...props
 }: SandpackFileExplorerProp &
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
@@ -37,7 +37,7 @@ export const SandpackFileExplorer = ({
     <div className={classNames(fileExplorerClassName, className)} {...props}>
       <ModuleList
         activeFile={sandpack.activeFile}
-        enableAutoHiddenFile={enableAutoHiddenFile}
+        autoHiddenFiles={autoHiddenFiles}
         files={sandpack.files}
         prefixedPath="/"
         selectFile={sandpack.openFile}

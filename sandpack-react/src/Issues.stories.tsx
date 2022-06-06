@@ -51,7 +51,7 @@ export const Issue482 = (): JSX.Element => {
         template={"vanilla"}
       >
         <SandpackLayout>
-          <SandpackFileExplorer enableAutoHiddenFile={hidden} />
+          <SandpackFileExplorer autoHiddenFiles={hidden} />
           <SandpackCodeEditor />
         </SandpackLayout>
       </SandpackProvider>

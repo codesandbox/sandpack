@@ -12,7 +12,7 @@ const defaultProps: ModuleListProps = {
     "/index.js": { code: "", hidden: true },
     "/App.js": { code: "", hidden: false },
   },
-  enableAutoHiddenFile: false,
+  autoHiddenFiles: false,
   visibleFiles: [],
   prefixedPath: "/",
   activeFile: "",
@@ -50,10 +50,10 @@ describe(fromPropsToModules, () => {
     ]);
   });
 
-  it("returns only the files from the visibleFiles prop (enableAutoHiddenFile)", () => {
+  it("returns only the files from the visibleFiles prop (autoHiddenFiles)", () => {
     const input: ModuleListProps = {
       ...defaultProps,
-      enableAutoHiddenFile: true,
+      autoHiddenFiles: true,
       visibleFiles: ["/index.js", "/src/component/index.js"],
     };
 
@@ -63,10 +63,10 @@ describe(fromPropsToModules, () => {
     });
   });
 
-  it("returns only the non-hidden files (enableAutoHiddenFile)", () => {
+  it("returns only the non-hidden files (autoHiddenFiles)", () => {
     const input: ModuleListProps = {
       ...defaultProps,
-      enableAutoHiddenFile: true,
+      autoHiddenFiles: true,
       visibleFiles: [],
     };
 

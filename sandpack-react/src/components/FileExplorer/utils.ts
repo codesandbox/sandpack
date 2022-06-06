@@ -1,14 +1,14 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 
 export const fromPropsToModules = ({
-  enableAutoHiddenFile,
+  autoHiddenFiles,
   visibleFiles,
   files,
   prefixedPath,
 }: {
   prefixedPath: string;
   files: SandpackBundlerFiles;
-  enableAutoHiddenFile?: boolean;
+  autoHiddenFiles?: boolean;
   visibleFiles: string[];
 }): { directories: string[]; modules: string[] } => {
   const hasVisibleFilesOption = visibleFiles.length > 0;
@@ -18,9 +18,8 @@ export const fromPropsToModules = ({
    * and active flags on the files prop are ignored.
    * @see: https://sandpack.codesandbox.io/docs/getting-started/custom-content#visiblefiles-and-activefile
    */
-  const filterByHiddenProperty = enableAutoHiddenFile && !hasVisibleFilesOption;
-  const filterByVisibleFilesOption =
-    enableAutoHiddenFile && !!hasVisibleFilesOption;
+  const filterByHiddenProperty = autoHiddenFiles && !hasVisibleFilesOption;
+  const filterByVisibleFilesOption = autoHiddenFiles && !!hasVisibleFilesOption;
 
   const fileListWithoutPrefix = Object.keys(files)
     .filter((filePath) => {
