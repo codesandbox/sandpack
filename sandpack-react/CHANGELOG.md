@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/codesandbox/sandpack/compare/v1.1.1...v1.1.2) (2022-06-06)
+
+
+### Bug Fixes
+
+* **theme:** set color-scheme css property in theme context ([#491](https://github.com/codesandbox/sandpack/issues/491)) ([35342a3](https://github.com/codesandbox/sandpack/commit/35342a36cf8a5d9d0bd48779070397575541e9a7))
+
+
+
+
+
 ## [1.1.1](https://github.com/codesandbox/sandpack/compare/v1.1.0...v1.1.1) (2022-06-01)
 
 
