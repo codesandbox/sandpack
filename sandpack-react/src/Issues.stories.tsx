@@ -16,8 +16,7 @@ export default {
 export const Issue482 = (): JSX.Element => {
   const [hidden, setHidden] = useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const toggleHidden = () => {
+  const toggleHidden = (): void => {
     setHidden((prevHidden) => !prevHidden);
   };
 
@@ -45,10 +44,10 @@ export const Issue482 = (): JSX.Element => {
             hidden: true,
           },
         }}
-        // options={{
-        //   visibleFiles: ['/index.js', '/hidden.js'],
-        //   activeFile: '/index.js',
-        // }}
+        options={{
+          visibleFiles: ["/index.js", "/hidden.js"],
+          activeFile: "/index.js",
+        }}
         template={"vanilla"}
       >
         <SandpackLayout>

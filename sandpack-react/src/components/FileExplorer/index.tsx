@@ -41,6 +41,7 @@ export const SandpackFileExplorer = ({
         files={sandpack.files}
         prefixedPath="/"
         selectFile={sandpack.openFile}
+        visibleFiles={sandpack.visibleFiles}
       />
     </div>
   );

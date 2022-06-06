@@ -83,8 +83,10 @@ export const DirectoryIconStory: React.FC = () => (
         depth={1}
         files={{ App: { code: "" } }}
         prefixedPath="/src"
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        selectFile={(): any => null}
+        selectFile={(): void => {
+          //
+        }}
+        visibleFiles={[]}
       />
     </SandpackLayout>
   </SandpackProvider>
