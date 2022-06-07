@@ -1,52 +1,55 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
+import type { SandpackOptions } from "../..";
+
 import { File } from "./File";
 import { ModuleList } from "./ModuleList";
 
-export interface Props {
+import type { SandpackFileExplorerProp } from ".";
+
+export interface Props extends SandpackFileExplorerProp {
   prefixedPath: string;
   files: SandpackBundlerFiles;
   selectFile: (path: string) => void;
-  activeFile: string;
+  activeFile: NonNullable<SandpackOptions["activeFile"]>;
   depth: number;
+  visibleFiles: NonNullable<SandpackOptions["visibleFiles"]>;
 }
 
-interface State {
-  open: boolean;
-}
+export const Directory: React.FC<Props> = ({
+  prefixedPath,
+  files,
+  selectFile,
+  activeFile,
+  depth,
+  autoHiddenFiles,
+  visibleFiles,
+}) => {
+  const [open, setOpen] = React.useState(true);
 
-export class Directory extends React.Component<Props, State> {
-  state = {
-    open: true,
-  };
+  const toggle = (): void => setOpen((prev) => !prev);
 
-  toggleOpen = (): void => {
-    this.setState((state) => ({ open: !state.open }));
-  };
+  return (
+    <div key={prefixedPath}>
+      <File
+        depth={depth}
+        isDirOpen={open}
+        onClick={toggle}
+        path={prefixedPath + "/"}
+      />
 
-  render(): React.ReactElement {
-    const { prefixedPath, files, selectFile, activeFile, depth } = this.props;
-
-    return (
-      <div key={prefixedPath}>
-        <File
-          depth={depth}
-          isDirOpen={this.state.open}
-          onClick={this.toggleOpen}
-          path={prefixedPath + "/"}
+      {open && (
+        <ModuleList
+          activeFile={activeFile}
+          autoHiddenFiles={autoHiddenFiles}
+          depth={depth + 1}
+          files={files}
+          prefixedPath={prefixedPath}
+          selectFile={selectFile}
+          visibleFiles={visibleFiles}
         />
-
-        {this.state.open && (
-          <ModuleList
-            activeFile={activeFile}
-            depth={depth + 1}
-            files={files}
-            prefixedPath={prefixedPath}
-            selectFile={selectFile}
-          />
-        )}
-      </div>
-    );
-  }
-}
+      )}
+    </div>
+  );
+};

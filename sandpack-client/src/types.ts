@@ -2,6 +2,8 @@ import type { ITemplate } from "codesandbox-import-util-types";
 
 export interface SandpackBundlerFile {
   code: string;
+  hidden?: boolean;
+  active?: boolean;
   readOnly?: boolean;
 }
 
