@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.3](https://github.com/codesandbox/sandpack/compare/v1.1.2...v1.1.3) (2022-06-07)
+
+
+### Bug Fixes
+
+* **file-explorer:** adds property not to show hidden files ([#488](https://github.com/codesandbox/sandpack/issues/488)) ([1048fe9](https://github.com/codesandbox/sandpack/commit/1048fe93b7f3be2d54cd9d35ac64271e1ea613fe))
+
+
+
+
+
 # [1.1.0](https://github.com/codesandbox/sandpack/compare/v1.0.4...v1.1.0) (2022-05-31)
 
 
