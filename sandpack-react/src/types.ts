@@ -473,33 +473,21 @@ export interface SandpackProviderProps<
   children?: React.ReactNode;
 }
 
-/**
- * @hidden
- */
 export type SandpackClientDispatch = (
   msg: SandpackMessage,
   clientId?: string
 ) => void;
 
-/**
- * @hidden
- */
 export type SandpackClientListen = (
   listener: ListenerFunction,
   clientId?: string
 ) => UnsubscribeFunction;
 
-/**
- * @hidden
- */
 export type SandpackContext = SandpackState & {
   dispatch: SandpackClientDispatch;
   listen: SandpackClientListen;
 };
 
-/**
- * @hidden
- */
 export interface SandpackState {
   bundlerState: BundlerState | undefined;
 
