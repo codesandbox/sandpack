@@ -14,8 +14,7 @@ export const fromPropsToModules = ({
   const hasVisibleFilesOption = visibleFiles.length > 0;
 
   /**
-   * When visibleFiles are set, the hidden
-   * and active flags on the files prop are ignored.
+   * When visibleFiles or activeFile are set, the hidden and active flags on the files prop are ignored.
    * @see: https://sandpack.codesandbox.io/docs/getting-started/custom-content#visiblefiles-and-activefile
    */
   const filterByHiddenProperty = autoHiddenFiles && !hasVisibleFilesOption;
