@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { Extension } from "@codemirror/state";
-import type { DecorationSet, EditorView, ViewUpdate } from "@codemirror/view";
+import type { DecorationSet, ViewUpdate } from "@codemirror/view";
 import { Decoration, ViewPlugin } from "@codemirror/view";
 
 import { getCodeMirrorPosition } from "../CodeEditor/utils";
@@ -19,49 +20,23 @@ const activeLineHighlighter = ViewPlugin.fromClass(
     }
 
     update(update: ViewUpdate): void {
-      let message = null;
-
       update.transactions.forEach((trans) => {
-        // Overlap the types, it seems the original
-        // doesn't match what it really is.
-        interface Annotations {
-          annotations: Array<{ type: string }>;
+        type TransType = "show-error" | "remove-errors";
+
+        // @ts-ignore
+        const errorValue = trans.annotation<TransType>("show-error");
+        if (errorValue !== undefined) {
+          const position =
+            getCodeMirrorPosition(update.view.state.doc, {
+              line: errorValue as unknown as number,
+            }) + 1;
+
+          this.decorations = Decoration.set([lineDeco.range(position)]);
+          // @ts-ignore
+        } else if (trans.annotation<TransType>("remove-errors")) {
+          this.decorations = Decoration.none;
         }
-
-        (trans as unknown as Annotations).annotations?.forEach((element) => {
-          if (element.type === "error") {
-            message = element;
-          }
-
-          if (element.type === "clean-error") {
-            message = element;
-          }
-        });
       });
-
-      if (message !== null) {
-        this.decorations = this.getDecoration(update.view, message);
-      }
-    }
-
-    getDecoration(
-      view: EditorView,
-      message: { type: "clean-error" } | { type: "error"; value: number } | null
-    ): DecorationSet {
-      if (message === null || message.type === "clean-error") {
-        return Decoration.none;
-      }
-
-      if (message.type === "error") {
-        const position =
-          getCodeMirrorPosition(view.state.doc, {
-            line: message.value,
-          }) + 1;
-
-        return Decoration.set([lineDeco.range(position)]);
-      }
-
-      return Decoration.none;
     }
   },
   {
