@@ -11,6 +11,7 @@ import { standardizeTheme } from "../styles";
 import { defaultLight } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
 import { classNames } from "../utils/classNames";
+import { isDarkColor } from "../utils/stringUtils";
 
 const wrapperClassName = css({
   all: "initial",
@@ -21,6 +22,13 @@ const wrapperClassName = css({
   textRendering: "optimizeLegibility",
   WebkitTapHighlightColor: "transparent",
   WebkitFontSmoothing: "subpixel-antialiased",
+
+  variants: {
+    variant: {
+      dark: { colorScheme: "dark" },
+      light: { colorScheme: "light" },
+    },
+  },
 
   "@media screen and (min-resolution: 2dppx)": {
     WebkitFontSmoothing: "antialiased",
@@ -57,13 +65,15 @@ const SandpackThemeProvider: React.FC<
     return createTheme(id, standardizeStitchesTheme(theme));
   }, [theme, id]);
 
+  const isDarkTheme = isDarkColor(theme.colors.surface1);
+
   return (
     <SandpackThemeContext.Provider value={{ theme, id }}>
       <div
         className={classNames(
           c("wrapper"),
           themeClassName.toString(),
-          wrapperClassName,
+          wrapperClassName({ variant: isDarkTheme ? "dark" : "light" }),
           className
         )}
         {...props}
