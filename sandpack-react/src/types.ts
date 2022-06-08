@@ -498,6 +498,13 @@ export interface SandpackState {
   visibleFiles: string[];
 
   /**
+   * List the file path listed in the file tab,
+   *
+   * Can only be changed through the properties of sandpackprovider (files/options)
+   */
+  visibleFilesFromProps: string[];
+
+  /**
    * Path to the file will be open in the code editor
    * when the component mounts
    */
@@ -618,6 +625,12 @@ export interface SandpackProviderState {
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;
   visibleFiles: Array<TemplateFiles<SandpackPredefinedTemplate> | string>;
+  /**
+   * Can only be changed through the properties of sandpackprovider (files/options)
+   */
+  visibleFilesFromProps: Array<
+    TemplateFiles<SandpackPredefinedTemplate> | string
+  >;
   activeFile: TemplateFiles<SandpackPredefinedTemplate> | string;
   startRoute?: string;
   initMode: SandpackInitMode;

@@ -15,7 +15,7 @@ export interface ModuleListProps extends SandpackFileExplorerProp {
   selectFile: (path: string) => void;
   activeFile: NonNullable<SandpackOptions["activeFile"]>;
   depth?: number;
-  visibleFiles: NonNullable<SandpackOptions["visibleFiles"]>;
+  visibleFiles?: NonNullable<SandpackOptions["visibleFiles"]>;
 }
 
 export const ModuleList: React.FC<ModuleListProps> = ({

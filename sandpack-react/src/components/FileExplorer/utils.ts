@@ -2,14 +2,14 @@ import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 
 export const fromPropsToModules = ({
   autoHiddenFiles,
-  visibleFiles,
+  visibleFiles = [],
   files,
   prefixedPath,
 }: {
   prefixedPath: string;
   files: SandpackBundlerFiles;
   autoHiddenFiles?: boolean;
-  visibleFiles: string[];
+  visibleFiles?: string[];
 }): { directories: string[]; modules: string[] } => {
   const hasVisibleFilesOption = visibleFiles.length > 0;
 

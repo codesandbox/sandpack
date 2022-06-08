@@ -14,7 +14,7 @@ export interface Props extends SandpackFileExplorerProp {
   selectFile: (path: string) => void;
   activeFile: NonNullable<SandpackOptions["activeFile"]>;
   depth: number;
-  visibleFiles: NonNullable<SandpackOptions["visibleFiles"]>;
+  visibleFiles?: NonNullable<SandpackOptions["visibleFiles"]>;
 }
 
 export const Directory: React.FC<Props> = ({

@@ -74,6 +74,7 @@ class SandpackProviderClass extends React.PureComponent<
       files,
       environment,
       visibleFiles,
+      visibleFilesFromProps: visibleFiles,
       activeFile,
       startRoute: this.props.options?.startRoute,
       bundlerState: undefined,
@@ -276,11 +277,21 @@ class SandpackProviderClass extends React.PureComponent<
      */
     if (
       prevProps.template !== this.props.template ||
+      !isEqual(
+        prevProps.options?.visibleFiles,
+        this.props.options?.visibleFiles
+      ) ||
       !isEqual(prevProps.customSetup, this.props.customSetup) ||
       !isEqual(prevProps.files, this.props.files)
     ) {
       /* eslint-disable react/no-did-update-set-state */
-      this.setState({ activeFile, visibleFiles, files, environment });
+      this.setState({
+        activeFile,
+        visibleFiles,
+        visibleFilesFromProps: visibleFiles,
+        files,
+        environment,
+      });
 
       if (this.state.sandpackStatus !== "running") {
         return;
@@ -603,6 +614,7 @@ class SandpackProviderClass extends React.PureComponent<
       files,
       activeFile,
       visibleFiles,
+      visibleFilesFromProps,
       startRoute,
       bundlerState,
       editorState,
@@ -616,6 +628,7 @@ class SandpackProviderClass extends React.PureComponent<
       files,
       environment,
       visibleFiles,
+      visibleFilesFromProps: visibleFilesFromProps,
       activeFile,
       startRoute,
       error,

@@ -13,7 +13,6 @@ const defaultProps: ModuleListProps = {
     "/App.js": { code: "", hidden: false },
   },
   autoHiddenFiles: false,
-  visibleFiles: [],
   prefixedPath: "/",
   activeFile: "",
   selectFile: () => {
@@ -67,7 +66,6 @@ describe(fromPropsToModules, () => {
     const input: ModuleListProps = {
       ...defaultProps,
       autoHiddenFiles: true,
-      visibleFiles: [],
     };
 
     expect(fromPropsToModules(input)).toEqual({
