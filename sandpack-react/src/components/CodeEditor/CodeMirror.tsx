@@ -12,8 +12,9 @@ import { lineNumbers } from "@codemirror/gutter";
 import { defaultHighlightStyle } from "@codemirror/highlight";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
+import type { Extension } from "@codemirror/state";
 import { EditorState, EditorSelection, StateEffect } from "@codemirror/state";
-import { Annotation, Extension } from "@codemirror/state";
+import { Annotation } from "@codemirror/state";
 import {
   highlightSpecialChars,
   highlightActiveLine,

@@ -1,12 +1,16 @@
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as themes from "@codesandbox/sandpack-themes";
+import { useState } from "react";
 
+import type { CodeEditorProps } from "./components/CodeEditor";
 import { SANDBOX_TEMPLATES } from "./templates";
+
 import {
   SandpackProvider,
   SandpackCodeEditor,
   SandpackPreview,
   SandpackLayout,
+  SandpackFileExplorer,
 } from "./";
 
 export default {
@@ -16,27 +20,59 @@ export default {
 export const Main = (): JSX.Element => {
   const [config, setConfig] = useState({
     Components: { Preview: true, Editor: true, FileExplorer: true },
-    Options: {},
+    Options: {
+      showTabs: true,
+      showLineNumbers: true,
+      showInlineErrors: true,
+      closableTabs: true,
+      wrapContent: true,
+      readOnly: false,
+      showReadOnly: true,
+      showNavigator: true,
+      showRefreshButton: true,
+    },
     Template: "react",
     Theme: "auto",
   });
 
-  const update = (key: any, value: any) => {
+  const update = (key: any, value: any): void => {
     setConfig((prev) => ({ ...prev, [key]: value }));
   };
 
-  console.log(config);
+  const toggle = (key: any, value: any): void => {
+    setConfig((prev) => {
+      return {
+        ...prev,
+        [key]: { ...prev[key], [value]: !prev[key][value] },
+      };
+    });
+  };
+
+  const codeEditorOptions: CodeEditorProps = {
+    showTabs: config.Options.showTabs,
+    showLineNumbers: config.Options.showLineNumbers,
+    showInlineErrors: config.Options.showInlineErrors,
+    wrapContent: config.Options.wrapContent,
+    closableTabs: config.Options.closableTabs,
+    readOnly: config.Options.readOnly,
+    showReadOnly: config.Options.showReadOnly,
+  };
 
   return (
-    <>
-      <div>
+    <div style={{ display: "flex" }}>
+      <div style={{ marginRight: "2em", minWidth: 200 }}>
         {Object.entries(config).map(([key, value]) => {
           if (typeof value === "string") {
             if (key === "Template") {
               return (
                 <div>
-                  <p>Themes</p>
-                  <select>
+                  <h3>Themes</h3>
+                  <select
+                    onChange={({ target }): void =>
+                      update("Template", target.value)
+                    }
+                    value={config.Template}
+                  >
                     {Object.keys(SANDBOX_TEMPLATES).map((tem) => (
                       <option value={tem}>{tem}</option>
                     ))}
@@ -48,9 +84,11 @@ export const Main = (): JSX.Element => {
             if (key === "Theme") {
               return (
                 <div>
-                  <p>Themes</p>
+                  <h3>Themes</h3>
                   <select
-                    onChange={({ target }) => update("Theme", target.value)}
+                    onChange={({ target }): void =>
+                      update("Theme", target.value)
+                    }
                     value={config.Theme}
                   >
                     <option value="auto">Auto</option>
@@ -69,13 +107,19 @@ export const Main = (): JSX.Element => {
 
           return (
             <>
-              <h2>{key}</h2>
-              {Object.entries(value).map((prop, propValue) => {
+              <h3>{key}</h3>
+              {Object.entries(value).map(([prop, propValue]) => {
                 return (
-                  <label>
-                    <input checked={!!propValue} type="checkbox" />
-                    {prop}
-                  </label>
+                  <p>
+                    <label>
+                      <input
+                        defaultChecked={!!propValue}
+                        onClick={(): void => toggle(key, prop)}
+                        type="checkbox"
+                      />
+                      {prop}
+                    </label>
+                  </p>
                 );
               })}
             </>
@@ -84,14 +128,22 @@ export const Main = (): JSX.Element => {
       </div>
 
       <SandpackProvider
-        theme={themes[config.Theme] || config.Theme}
         template={config.Template}
+        theme={themes[config.Theme] || config.Theme}
       >
         <SandpackLayout>
-          <SandpackCodeEditor />
-          <SandpackPreview />
+          {config.Components.FileExplorer && <SandpackFileExplorer />}
+          {config.Components.Editor && (
+            <SandpackCodeEditor {...codeEditorOptions} />
+          )}
+          {config.Components.Preview && (
+            <SandpackPreview
+              showNavigator={config.Options?.showNavigator}
+              showRefreshButton={config.Options?.showRefreshButton}
+            />
+          )}
         </SandpackLayout>
       </SandpackProvider>
-    </>
+    </div>
   );
 };
