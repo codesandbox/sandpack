@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useClasser } from "@code-hike/classer";
 import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
 import {
@@ -12,7 +13,7 @@ import { defaultHighlightStyle } from "@codemirror/highlight";
 import { history, historyKeymap } from "@codemirror/history";
 import { bracketMatching } from "@codemirror/matchbrackets";
 import { EditorState, EditorSelection, StateEffect } from "@codemirror/state";
-import type { Annotation, Extension } from "@codemirror/state";
+import { Annotation, Extension } from "@codemirror/state";
 import {
   highlightSpecialChars,
   highlightActiveLine,
@@ -389,36 +390,17 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           if (message.type === "success") {
             view?.dispatch({
-              // Pass message to clean up inline error
-              annotations: [
-                {
-                  type: "clean-error",
-                  value: null,
-                } as unknown as Annotation<unknown>,
-              ],
-
-              // Trigger a doc change to remove inline error
-              changes: {
-                from: 0,
-                to: view.state.doc.length,
-                insert: view.state.doc,
-              },
-              selection: view.state.selection,
+              // @ts-ignore
+              annotations: [new Annotation("remove-errors", true)],
             });
-          }
-
-          if (
+          } else if (
             message.type === "action" &&
             message.action === "show-error" &&
             message.line
           ) {
             view?.dispatch({
-              annotations: [
-                {
-                  type: "error",
-                  value: message.line,
-                } as unknown as Annotation<unknown>,
-              ],
+              // @ts-ignore
+              annotations: [new Annotation("show-error", message.line)],
             });
           }
         });
