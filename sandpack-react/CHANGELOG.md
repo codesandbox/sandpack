@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5](https://github.com/codesandbox/sandpack/compare/v1.1.4...v1.1.5) (2022-06-14)
+
+
+### Bug Fixes
+
+* **sandpack options:** recreate sandpack context on `options` change and persist visible file in file-explorer ([#498](https://github.com/codesandbox/sandpack/issues/498)) ([1064bd0](https://github.com/codesandbox/sandpack/commit/1064bd0761148abe3fcdd58fcd6ca5a6c17fe72f))
+
+
+
+
+
 ## [1.1.4](https://github.com/codesandbox/sandpack/compare/v1.1.3...v1.1.4) (2022-06-13)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
