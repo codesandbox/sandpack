@@ -14,6 +14,7 @@ import type {
   ListenerFunction,
   SandpackError,
   ReactDevToolsMode,
+  Template,
 } from "./types";
 import {
   createPackageJSON,
@@ -85,9 +86,8 @@ export interface SandboxInfo {
   /**
    * What template we use, if not defined we infer the template from the dependencies or files.
    *
-   * @type {string}
    */
-  template?: string;
+  template?: Template;
 
   /**
    * Only use unpkg for fetching the dependencies, no preprocessing. It's slower, but doesn't talk

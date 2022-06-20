@@ -246,3 +246,13 @@ export type SandpackMessage = BaseSandpackMessage &
         }>;
       }
   );
+
+export type Template =
+  | "angular-cli"
+  | "create-react-app"
+  | "create-react-app-typescript"
+  | "svelte"
+  | "parcel"
+  | "vue-cli"
+  | "static"
+  | "solid";
