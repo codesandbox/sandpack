@@ -277,7 +277,7 @@ class SandpackProviderClass extends React.PureComponent<
      */
     if (
       prevProps.template !== this.props.template ||
-      prevProps.options !== this.props.options ||
+      !isEqual(prevProps.options, this.props.options) ||
       !isEqual(prevProps.customSetup, this.props.customSetup) ||
       !isEqual(prevProps.files, this.props.files)
     ) {
