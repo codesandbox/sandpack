@@ -125,9 +125,11 @@ It has this structure:
   /**
    * The sandbox template to use, this is inferred from the files and package.json if not specified
   **/
-  template?: string
+  template?: Template
 }
 ```
+
+Check the list of template available [here](/api/client/#template).
 
 ### ClientOptions
 
