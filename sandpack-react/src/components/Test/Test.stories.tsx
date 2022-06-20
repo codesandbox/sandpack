@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import {
   SandpackProvider,
   SandpackPreview,
@@ -12,36 +13,42 @@ export default {
   title: "components/Testing",
 };
 
-const testingFile = `import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+const testingFile = `import { TestBed } from "@angular/core/testing";
+import { AppComponent } from "./app.component";
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting
+} from "@angular/platform-browser-dynamic/testing";
 
-describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
+describe("AppComponent", () => {
+  beforeEach(async () => {
+    TestBed.initTestEnvironment(
+      BrowserDynamicTestingModule,
+      platformBrowserDynamicTesting()
+    );
+    await TestBed.configureTestingModule({
+      declarations: [AppComponent]
     }).compileComponents();
-  }));
-  
-  it('should create the app', async(() => {
+  });
+
+  it("should create the app", () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
+    const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  }));
-  
-  it(\`should have as title 'Hello World'\`, async(() => {
+  });
+
+  it(\`should have as title 'Hello World'\`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Hello World');
-  }));
-  
-  it('should render title in a h1 tag', async(() => {
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual("Hello World");
+  });
+
+  it("should render title", () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to angular-unit-test!');
-  }));
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector("h1").textContent).toContain("Hello World");
+  });
 });`;
 
 const SandpackTests: React.FC = () => {
@@ -64,32 +71,31 @@ const SandpackTests: React.FC = () => {
           return;
         }
 
-        if (message.type === "total_test_start") {
+        if (message.event === "total_test_start") {
           setState({ state: "LOADING" });
 
           return;
         }
 
-        if (message.type === "test_start") {
+        if (message.event === "test_start" || message.event === "test_end") {
           setState((prev) => ({
             ...prev,
             results: prev.results.map((item) =>
-              console.log(item.testName, message.test.name) ||
               item.testName === message.test.name
-                ? { ...item, status: message.test.status }
+                ? { ...item, state: message.test.status }
                 : item
             ),
           }));
 
           return;
         }
-
-        console.log(message);
       }
     });
   }, []);
 
   const runAllTests = () => {
+    setState({ state: "IDLE" });
+
     Object.values(sandpack.clients).forEach((client) => {
       client.dispatch({
         type: "run-all-tests",
