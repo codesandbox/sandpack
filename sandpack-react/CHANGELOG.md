@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.6](https://github.com/codesandbox/sandpack/compare/v1.1.5...v1.1.6) (2022-06-20)
+
+
+### Bug Fixes
+
+* **client/react:** make Template more accessible and do a deep equal on react context ([#504](https://github.com/codesandbox/sandpack/issues/504)) ([31980f8](https://github.com/codesandbox/sandpack/commit/31980f86e40d4cd09e586eaa004df8073e02d6e0))
+
+
+
+
+
 ## [1.1.5](https://github.com/codesandbox/sandpack/compare/v1.1.4...v1.1.5) (2022-06-14)
 
 
