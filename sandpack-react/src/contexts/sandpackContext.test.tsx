@@ -1,43 +1,92 @@
 import React from "react";
 import { create } from "react-test-renderer";
 
+import { REACT_TEMPLATE } from "..";
+
 import { SandpackProvider } from "./sandpackContext";
 
 describe(SandpackProvider, () => {
-  it("updates a file", () => {
-    const root = create(<SandpackProvider template="react" />);
-    const instance = root.getInstance();
+  describe("updateFile", () => {
+    it("updates a file", () => {
+      const root = create(<SandpackProvider template="react" />);
+      const instance = root.getInstance();
 
-    expect(instance.state.files["/App.js"]).toEqual({
-      code: `export default function App() {
+      expect(instance.state.files["/App.js"]).toEqual({
+        code: `export default function App() {
   return <h1>Hello World</h1>
 }
 `,
+      });
+
+      instance.updateFile("/App.js", "Foo");
+
+      expect(instance.state.files["/App.js"]).toEqual({ code: `Foo` });
     });
 
-    instance.updateFile("/App.js", "Foo");
+    it("updates multiples files", () => {
+      const root = create(<SandpackProvider template="react" />);
+      const instance = root.getInstance();
 
-    expect(instance.state.files["/App.js"]).toEqual({ code: `Foo` });
+      instance.updateFile({ "/App.js": "Foo", "/index.js": "Baz" });
+
+      expect(instance.state.files["/App.js"]).toEqual({ code: `Foo` });
+      expect(instance.state.files["/index.js"]).toEqual({ code: `Baz` });
+    });
+
+    it("updates multiples files in a row", () => {
+      const root = create(<SandpackProvider template="react" />);
+      const instance = root.getInstance();
+
+      instance.updateFile("/App.js", "Foo");
+      instance.updateFile("/index.js", "Baz");
+
+      expect(instance.state.files["/App.js"]).toEqual({ code: `Foo` });
+      expect(instance.state.files["/index.js"]).toEqual({ code: `Baz` });
+    });
   });
 
-  it("updates multiples files", () => {
-    const root = create(<SandpackProvider template="react" />);
-    const instance = root.getInstance();
+  describe("editorState", () => {
+    it("should return the same initial state", () => {
+      const root = create(<SandpackProvider template="react" />);
+      const instance = root.getInstance();
 
-    instance.updateFile({ "/App.js": "Foo", "/index.js": "Baz" });
+      expect(instance.state.editorState).toBe("pristine");
+    });
 
-    expect(instance.state.files["/App.js"]).toEqual({ code: `Foo` });
-    expect(instance.state.files["/index.js"]).toEqual({ code: `Baz` });
-  });
+    it("should return a dirty value after updating a file", () => {
+      const root = create(<SandpackProvider template="react" />);
+      const instance = root.getInstance();
 
-  it("updates multiples files in a row", () => {
-    const root = create(<SandpackProvider template="react" />);
-    const instance = root.getInstance();
+      expect(instance.state.editorState).toBe("pristine");
 
-    instance.updateFile("/App.js", "Foo");
-    instance.updateFile("/index.js", "Baz");
+      instance.updateFile("/App.js", "Foo");
+      expect(instance.state.editorState).toBe("dirty");
+    });
 
-    expect(instance.state.files["/App.js"]).toEqual({ code: `Foo` });
-    expect(instance.state.files["/index.js"]).toEqual({ code: `Baz` });
+    it("should return a pristine value after reseting files", () => {
+      const root = create(<SandpackProvider template="react" />);
+      const instance = root.getInstance();
+
+      expect(instance.state.editorState).toBe("pristine");
+
+      instance.updateFile("/App.js", "Foo");
+      expect(instance.state.editorState).toBe("dirty");
+
+      instance.resetAllFiles();
+      expect(instance.state.editorState).toBe("pristine");
+    });
+
+    it("should return a pristine value after reverting a change", () => {
+      const root = create(<SandpackProvider template="react" />);
+      const instance = root.getInstance();
+      expect(instance.state.editorState).toBe("pristine");
+
+      instance.updateFile("/App.js", "Foo");
+      expect(instance.state.editorState).toBe("dirty");
+
+      instance.updateFile("/App.js", REACT_TEMPLATE["files"]["/App.js"].code);
+
+      expect(instance.state.editorState).toBe("pristine");
+    });
   });
 });
