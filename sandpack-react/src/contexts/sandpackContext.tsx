@@ -625,26 +625,30 @@ class SandpackProviderClass extends React.PureComponent<
       editorState,
       initMode,
       clients: this.clients,
-      closeFile: this.closeFile,
-      deleteFile: this.deleteFile,
+
       dispatch: this.dispatchMessage,
       errorScreenRegisteredRef: this.errorScreenRegistered,
       lazyAnchorRef: this.lazyAnchorRef,
       listen: this.addListener,
       loadingScreenRegisteredRef: this.loadingScreenRegistered,
-      openFile: this.openFile,
       openInCSBRegisteredRef: this.openInCSBRegistered,
       registerBundler: this.registerBundler,
-      resetAllFiles: this.resetAllFiles,
-      resetFile: this.resetFile,
       runSandpack: this.runSandpack,
-      setActiveFile: this.setActiveFile,
       unregisterBundler: this.unregisterBundler,
+      registerReactDevTools: this.registerReactDevTools,
+
+      /**
+       * File operations
+       */
+      openFile: this.openFile,
+      resetFile: this.resetFile,
+      resetAllFiles: this.resetAllFiles,
+      setActiveFile: this.setActiveFile,
       updateCurrentFile: this.updateCurrentFile,
       updateFile: this.updateFile,
       addFile: this.addFile,
+      closeFile: this.closeFile,
       deleteFile: this.deleteFile,
-      registerReactDevTools: this.registerReactDevTools,
     };
   };
 
