@@ -636,6 +636,5 @@ export interface SandpackProviderState {
   error: SandpackError | null;
   sandpackStatus: SandpackStatus;
   editorState: EditorState;
-  renderHiddenIframe: boolean;
   reactDevTools?: ReactDevToolsMode;
 }
