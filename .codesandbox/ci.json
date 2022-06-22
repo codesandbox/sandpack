@@ -1,10 +1,5 @@
 {
-  "packages": [
-    "sandpack-client",
-    "sandpack-react"
-  ],
-  "sandboxes": [
-    "1zevr"
-  ],
+  "packages": ["sandpack-client", "sandpack-react"],
+  "sandboxes": ["sowx8r"],
   "node": "14"
 }
