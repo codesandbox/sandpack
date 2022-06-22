@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/codesandbox/sandpack/compare/v1.1.8...v1.2.0) (2022-06-22)
+
+
+### Features
+
+* **sandpack-context:** add file method ([#512](https://github.com/codesandbox/sandpack/issues/512)) ([3b76995](https://github.com/codesandbox/sandpack/commit/3b76995b3284250b4d8f37a16e613b0854f48156))
+
+
+
+
+
 ## [1.1.8](https://github.com/codesandbox/sandpack/compare/v1.1.7...v1.1.8) (2022-06-22)
 
 **Note:** Version bump only for package sandpack
