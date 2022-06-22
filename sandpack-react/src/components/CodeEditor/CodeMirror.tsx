@@ -456,7 +456,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           </pre>
 
           {readOnly && showReadOnly && (
-            <span className={classNames(c("read-only"), readOnlyClassName)}>
+            <span
+              className={classNames(c("read-only"), readOnlyClassName)}
+              {...(process.env.TEST_ENV ? { "data-testId": "read-only" } : {})}
+            >
               Read-only
             </span>
           )}
