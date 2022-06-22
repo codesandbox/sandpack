@@ -7,6 +7,30 @@ import { SandpackProvider } from "./sandpackContext";
 
 describe(SandpackProvider, () => {
   describe("updateFile", () => {
+    it("adds a file", () => {
+      const root = create(<SandpackProvider template="react" />);
+      const instance = root.getInstance();
+
+      instance.addFile({ "new-file.js": "new-content" });
+
+      expect(instance.state.files["new-file.js"].code).toBe("new-content");
+    });
+
+    it("deletes a file", () => {
+      const root = create(<SandpackProvider template="react" />);
+      const instance = root.getInstance();
+
+      instance.deleteFile("/App.js");
+
+      expect(instance.state.files["/App.js"]).toBe(undefined);
+      expect(Object.keys(instance.state.files)).toEqual([
+        "/index.js",
+        "/styles.css",
+        "/public/index.html",
+        "/package.json",
+      ]);
+    });
+
     it("updates a file", () => {
       const root = create(<SandpackProvider template="react" />);
       const instance = root.getInstance();

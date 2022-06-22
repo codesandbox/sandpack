@@ -484,25 +484,17 @@ class SandpackProviderClass extends React.PureComponent<
 
   deleteFile = (path: string): void => {
     this.setState(({ visibleFiles, files }) => {
-      const newPaths = visibleFiles.filter((openPath) => openPath !== path);
-      const newFiles = Object.keys(files).reduce(
-        (acc: SandpackBundlerFiles, filePath) => {
-          if (filePath === path) {
-            return acc;
-          }
-          acc[filePath] = files[filePath];
-          return acc;
-        },
-        {}
-      );
+      const newFiles = { ...files };
+      delete newFiles[path];
 
       return {
-        visibleFiles: newPaths,
+        visibleFiles: visibleFiles.filter((openPath) => openPath !== path),
         files: newFiles,
       };
-    });
-    this.updateClients();
+    }, this.updateClients);
   };
+
+  addFile = this.updateFile;
 
   dispatchMessage = (message: SandpackMessage, clientId?: string): void => {
     if (this.state.sandpackStatus !== "running") {
@@ -650,6 +642,8 @@ class SandpackProviderClass extends React.PureComponent<
       unregisterBundler: this.unregisterBundler,
       updateCurrentFile: this.updateCurrentFile,
       updateFile: this.updateFile,
+      addFile: this.addFile,
+      deleteFile: this.deleteFile,
       registerReactDevTools: this.registerReactDevTools,
     };
   };
