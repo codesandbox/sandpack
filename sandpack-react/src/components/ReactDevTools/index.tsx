@@ -5,7 +5,7 @@ import { useSandpackTheme } from "../..";
 import { useSandpack } from "../../hooks/useSandpack";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
-import { isDarkColor } from "../../utils/stringUtils";
+import { generateRandomId, isDarkColor } from "../../utils/stringUtils";
 
 const devToolClassName = css({
   height: "$layout$height",
@@ -31,6 +31,7 @@ export const SandpackReactDevTools = ({
   const c = useClasser(THEME_PREFIX);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const reactDevtools = React.useRef<any>();
+  const generatedClientId = React.useRef<string>(generateRandomId());
 
   const [ReactDevTools, setDevTools] = React.useState<React.FunctionComponent<{
     browserTheme: DevToolsTheme;
@@ -42,22 +43,24 @@ export const SandpackReactDevTools = ({
     });
   }, []);
 
+  const resolvedClientId = clientId
+    ? clientId
+    : Object.keys(sandpack.clients)?.[0] ?? generatedClientId.current;
+
   React.useEffect(() => {
     const unsubscribe = listen((msg) => {
       if (msg.type === "activate-react-devtools") {
-        const client = clientId
-          ? sandpack.clients[clientId]
-          : Object.values(sandpack.clients)[0];
+        const client = sandpack.clients[resolvedClientId];
         const contentWindow = client?.iframe?.contentWindow;
 
         if (reactDevtools.current && contentWindow) {
           setDevTools(reactDevtools.current.initialize(contentWindow));
         }
       }
-    });
+    }, resolvedClientId);
 
     return unsubscribe;
-  }, [reactDevtools, clientId, listen, sandpack.clients]);
+  }, [reactDevtools, resolvedClientId, listen, sandpack.clients]);
 
   React.useEffect(() => {
     sandpack.registerReactDevTools("legacy");

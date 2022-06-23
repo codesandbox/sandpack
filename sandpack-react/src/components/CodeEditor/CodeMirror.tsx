@@ -34,7 +34,7 @@ import type {
 } from "../../types";
 import { shallowEqual } from "../../utils/array";
 import { classNames } from "../../utils/classNames";
-import { getFileName } from "../../utils/stringUtils";
+import { generateRandomId, getFileName } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
 import { highlightInlineError } from "./highlightInlineError";
@@ -133,6 +133,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
   ) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const wrapper = React.useRef<any | HTMLElement>(null);
+    const clientId = React.useRef<string>(generateRandomId());
     const combinedRef = useCombinedRefs(wrapper, ref);
 
     const cmView = React.useRef<EditorView>();
@@ -404,7 +405,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
               annotations: [new Annotation("show-error", message.line)],
             });
           }
-        });
+        }, clientId.current);
 
         return (): void => unsubscribe();
       },
