@@ -13,7 +13,7 @@ export class IFrameProtocol {
   private globalListenersCount = 0;
 
   // React to messages from the iframe owned by this instance
-  private channelListeners: Record<number, ListenerFunction> = {};
+  public channelListeners: Record<number, ListenerFunction> = {};
   private channelListenersCount = 0;
 
   // Random number to identify this instance of the client when messages are coming from multiple iframes
