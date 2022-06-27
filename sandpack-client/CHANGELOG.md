@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/codesandbox/sandpack/compare/v1.2.0...v1.2.1) (2022-06-27)
+
+
+### Bug Fixes
+
+* **global-listeners:** doesn't unsubscribe all listener unexpectedly  ([#516](https://github.com/codesandbox/sandpack/issues/516)) ([7e65f6e](https://github.com/codesandbox/sandpack/commit/7e65f6ef3df52dfcd30be4181257ad3dadbfac53))
+
+
+
+
+
 ## [1.1.6](https://github.com/codesandbox/sandpack/compare/v1.1.5...v1.1.6) (2022-06-20)
 
 
