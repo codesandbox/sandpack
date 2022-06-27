@@ -25,27 +25,25 @@ For a better hydration strategy, we highly recommend adding an `id="sandpack"` t
 
 ```js
 // examples/nextjs/pages/_document.tsx
-import { getSandpackCssText } from "@codesandbox/sandpack-react";
-import NextDocument, { Html, Head, Main, NextScript } from "next/document";
-import React from "react";
 
-export default class Document extends NextDocument {
-  render() {
-    return (
-      <Html lang="en">
-        <Head>
-          <style
-            dangerouslySetInnerHTML={{ __html: getSandpackCssText() }}
-            id="sandpack"
-          />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
+import { getSandpackCssText } from "@codesandbox/sandpack-react";
+import { Html, Head, Main, NextScript } from "next/document";
+
+export default function Document() {
+  return (
+    <Html>
+      <Head>
+        <style
+          dangerouslySetInnerHTML={{ __html: getSandpackCssText() }}
+          id="sandpack"
+        />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
 }
 ```
 
