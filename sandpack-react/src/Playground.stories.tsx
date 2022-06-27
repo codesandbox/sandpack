@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as themes from "@codesandbox/sandpack-themes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { CodeEditorProps } from "./components/CodeEditor";
 import { SANDBOX_TEMPLATES } from "./templates";
@@ -12,9 +12,22 @@ import {
   SandpackLayout,
   SandpackFileExplorer,
 } from "./";
+import { useSandpack } from "./hooks";
 
 export default {
   title: "Intro/Playground",
+};
+
+const Listerner = () => {
+  const { listen } = useSandpack();
+
+  useEffect(() => {
+    const foo = listen(console.log);
+
+    return () => foo();
+  }, [listen]);
+
+  return null;
 };
 
 export const Main = (): JSX.Element => {
@@ -142,6 +155,8 @@ export const Main = (): JSX.Element => {
               showRefreshButton={config.Options?.showRefreshButton}
             />
           )}
+
+          <Listerner />
         </SandpackLayout>
       </SandpackProvider>
     </div>

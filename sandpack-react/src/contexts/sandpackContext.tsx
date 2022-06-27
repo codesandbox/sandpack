@@ -1,7 +1,6 @@
 import { ClasserProvider } from "@code-hike/classer";
 import type {
   ListenerFunction,
-  SandpackBundlerFiles,
   SandpackMessage,
   UnsubscribeFunction,
   ReactDevToolsMode,
@@ -40,7 +39,7 @@ const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
  * @category Provider
  * @hidden
  */
-class SandpackProviderClass extends React.PureComponent<
+export class SandpackProviderClass extends React.PureComponent<
   SandpackProviderProps,
   SandpackProviderState
 > {
@@ -55,7 +54,7 @@ class SandpackProviderClass extends React.PureComponent<
 
   intersectionObserver?: IntersectionObserver;
   queuedListeners: Record<string, Record<string, ListenerFunction>>;
-  unsubscribeQueuedListeners: Record<
+  unsubscribeClientListeners: Record<
     string,
     Record<string, UnsubscribeFunction>
   >;
@@ -98,7 +97,7 @@ class SandpackProviderClass extends React.PureComponent<
     /**
      * Global list of unsubscribe function for the listeners
      */
-    this.unsubscribeQueuedListeners = {};
+    this.unsubscribeClientListeners = {};
     this.preregisteredIframes = {};
     this.clients = {};
 
@@ -369,6 +368,9 @@ class SandpackProviderClass extends React.PureComponent<
       }, BUNDLER_TIMEOUT);
     }
 
+    this.unsubscribeClientListeners[clientId] =
+      this.unsubscribeClientListeners[clientId] || {};
+
     /**
      * Register any potential listeners that subscribed before sandpack ran
      */
@@ -376,7 +378,7 @@ class SandpackProviderClass extends React.PureComponent<
       Object.keys(this.queuedListeners[clientId]).forEach((listenerId) => {
         const listener = this.queuedListeners[clientId][listenerId];
         const unsubscribe = client.listen(listener) as () => void;
-        this.unsubscribeQueuedListeners[clientId][listenerId] = unsubscribe;
+        this.unsubscribeClientListeners[clientId][listenerId] = unsubscribe;
       });
 
       // Clear the queued listeners after they were registered
@@ -389,7 +391,7 @@ class SandpackProviderClass extends React.PureComponent<
     const globalListeners = Object.entries(this.queuedListeners.global);
     globalListeners.forEach(([listenerId, listener]) => {
       const unsubscribe = client.listen(listener) as () => void;
-      this.unsubscribeQueuedListeners[clientId][listenerId] = unsubscribe;
+      this.unsubscribeClientListeners[clientId][listenerId] = unsubscribe;
 
       /**
        * Important: Do not clean the global queue
@@ -431,6 +433,16 @@ class SandpackProviderClass extends React.PureComponent<
     if (this.timeoutHook) {
       clearTimeout(this.timeoutHook);
     }
+
+    const unsubscribeQueuedClients = Object.values(
+      this.unsubscribeClientListeners
+    );
+
+    // Unsubscribing all listener registered
+    unsubscribeQueuedClients.forEach((listenerOfClient) => {
+      const listenerFunctions = Object.values(listenerOfClient);
+      listenerFunctions.forEach((unsubscribe) => unsubscribe());
+    });
 
     this.setState({ sandpackStatus: "idle" });
   };
@@ -523,26 +535,32 @@ class SandpackProviderClass extends React.PureComponent<
 
         return unsubscribeListener;
       } else {
-        // When listeners are added before the client is instantiated, they are stored with an unique id
-        // When the client is eventually instantiated, the listeners are registered on the spot
-        // Their unsubscribe functions are stored in unsubscribeQueuedListeners for future cleanup
+        /**
+         * When listeners are added before the client is instantiated, they are stored with an unique id
+         * When the client is eventually instantiated, the listeners are registered on the spot
+         * Their unsubscribe functions are stored in unsubscribeClientListeners for future cleanup
+         */
         const listenerId = generateRandomId();
         this.queuedListeners[clientId] = this.queuedListeners[clientId] || {};
-        this.unsubscribeQueuedListeners[clientId] =
-          this.unsubscribeQueuedListeners[clientId] || {};
+        this.unsubscribeClientListeners[clientId] =
+          this.unsubscribeClientListeners[clientId] || {};
 
         this.queuedListeners[clientId][listenerId] = listener;
 
         const unsubscribeListener = (): void => {
           if (this.queuedListeners[clientId][listenerId]) {
-            // unsubscribe was called before the client was instantiated
-            // common example - a component with autorun=false that unmounted
+            /**
+             * Unsubscribe was called before the client was instantiated
+             * common example - a component with autorun=false that unmounted
+             */
             delete this.queuedListeners[clientId][listenerId];
-          } else if (this.unsubscribeQueuedListeners[clientId][listenerId]) {
-            // unsubscribe was called for a listener that got added before the client was instantiated
-            // call the unsubscribe function and remove it from memory
-            this.unsubscribeQueuedListeners[clientId][listenerId]();
-            delete this.unsubscribeQueuedListeners[clientId][listenerId];
+          } else if (this.unsubscribeClientListeners[clientId][listenerId]) {
+            /**
+             * unsubscribe was called for a listener that got added before the client was instantiated
+             * call the unsubscribe function and remove it from memory
+             */
+            this.unsubscribeClientListeners[clientId][listenerId]();
+            delete this.unsubscribeClientListeners[clientId][listenerId];
           }
         };
 
@@ -560,16 +578,6 @@ class SandpackProviderClass extends React.PureComponent<
       );
 
       const unsubscribeListener = (): void => {
-        const unsubscribeQueuedClients = Object.values(
-          this.unsubscribeQueuedListeners
-        );
-
-        // Unsubscribing all listener registered
-        unsubscribeQueuedClients.forEach((listenerOfClient) => {
-          const listenerFunctions = Object.values(listenerOfClient);
-          listenerFunctions.forEach((unsubscribe) => unsubscribe());
-        });
-
         // Unsubscribing from the clients already created
         currentClientUnsubscribeListeners.forEach((unsubscribe) =>
           unsubscribe()
