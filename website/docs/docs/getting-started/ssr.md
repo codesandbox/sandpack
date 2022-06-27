@@ -24,6 +24,8 @@ For a better hydration strategy, we highly recommend adding an `id="sandpack"` t
 ### Next.js
 
 ```js
+// examples/nextjs/pages/_document.tsx
+
 import { getSandpackCssText } from "@codesandbox/sandpack-react";
 import { Html, Head, Main, NextScript } from "next/document";
 
