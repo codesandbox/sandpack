@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.8-experimental.7](https://github.com/codesandbox/sandpack/compare/v0.19.8-experimental.6...v0.19.8-experimental.7) (2022-06-27)
+
+
+### Bug Fixes
+
+* **global-listeners:** doesn't unsubscribe all listener unexpectedly ([91530fe](https://github.com/codesandbox/sandpack/commit/91530fe0d487da365bf2e3457229926a6698cb47))
+
+
+
+
+
 ## [0.19.8-experimental.6](https://github.com/codesandbox/sandpack/compare/v0.19.8-experimental.5...v0.19.8-experimental.6) (2022-06-07)
 
 
