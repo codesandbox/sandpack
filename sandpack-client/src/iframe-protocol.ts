@@ -102,7 +102,6 @@ export class IFrameProtocol {
     const listenerId = this.channelListenersCount;
     this.channelListeners[listenerId] = listener;
     this.channelListenersCount++;
-
     return (): void => {
       delete this.channelListeners[listenerId];
     };
