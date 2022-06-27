@@ -4,11 +4,10 @@
 import React from "react";
 import { create } from "react-test-renderer";
 
-import * as sandpackClient from "@codesandbox/sandpack-client";
+import { REACT_TEMPLATE } from "..";
 
-import { REACT_TEMPLATE, SandpackState, SandpackProviderState } from "..";
-
-import { SandpackProvider, SandpackProviderClass } from "./sandpackContext";
+import type { SandpackProviderClass } from "./sandpackContext";
+import { SandpackProvider } from "./sandpackContext";
 
 const createContext = (): SandpackProviderClass => {
   const root = create(<SandpackProvider template="react" />);
@@ -17,6 +16,18 @@ const createContext = (): SandpackProviderClass => {
   instance.runSandpack();
 
   return instance;
+};
+
+const getAmountOfListener = (
+  instance: SandpackProviderClass,
+  name = "client-id",
+  ignoreGlobalListener = false
+): number => {
+  return (
+    Object.keys(instance.clients[name].iframeProtocol.channelListeners).length -
+    1 - // less protocol listener
+    (ignoreGlobalListener ? 0 : 1) // less the global Sandpack-react listener
+  );
 };
 
 describe(SandpackProvider, () => {
@@ -166,11 +177,7 @@ describe(SandpackProvider, () => {
       expect(Object.keys(instance.queuedListeners.global).length).toBe(1);
 
       // Expect: one listener in the client
-      expect(
-        Object.keys(
-          instance.clients["client-id"].iframeProtocol.globalListeners
-        ).length
-      ).toBe(1);
+      expect(getAmountOfListener(instance)).toBe(1);
     });
 
     it("set a listener, but the client has already been created - no global listener", () => {
@@ -200,11 +207,7 @@ describe(SandpackProvider, () => {
       expect(Object.keys(instance.queuedListeners.global).length).toBe(0);
 
       // Expect: one listener in the client
-      expect(
-        Object.keys(
-          instance.clients["client-id"].iframeProtocol.channelListeners
-        ).length
-      ).toBe(1);
+      expect(getAmountOfListener(instance)).toBe(1);
     });
 
     it("set a listener, but the client has already been created - global listener", () => {
@@ -234,14 +237,10 @@ describe(SandpackProvider, () => {
       expect(Object.keys(instance.queuedListeners.global).length).toBe(1);
 
       // Expect: one listener in the client
-      expect(
-        Object.keys(
-          instance.clients["client-id"].iframeProtocol.channelListeners
-        ).length
-      ).toBe(1);
+      expect(getAmountOfListener(instance)).toBe(1);
     });
 
-    it("sets a new listener and then one more client has been created", () => {
+    it("sets a new listener, and then create one more client", () => {
       const instance = createContext();
 
       // Act: Add listener
@@ -260,29 +259,78 @@ describe(SandpackProvider, () => {
       expect(Object.keys(instance.queuedListeners.global).length).toBe(0);
 
       // Expect: one listener in the client
-      expect(
-        Object.keys(
-          instance.clients["client-id"].iframeProtocol.channelListeners
-        ).length
-      ).toBe(1);
+      expect(getAmountOfListener(instance)).toBe(1);
 
       // Act: Add one more listener
       const anotherMock = jest.fn();
       instance.addListener(anotherMock /* , no client-id */);
 
-      console.log(
-        instance.clients["client-id"].iframeProtocol.channelListenersCount
-      );
-
       // Expect: one global listener
       expect(Object.keys(instance.queuedListeners.global).length).toBe(1);
 
       // Expect: two listener in the client
-      expect(
-        Object.keys(
-          instance.clients["client-id"].iframeProtocol.channelListeners
-        ).length
-      ).toBe(2);
+      expect(getAmountOfListener(instance)).toBe(2);
+    });
+
+    it("unsubscribes only from the assigned client id", () => {
+      const instance = createContext();
+
+      instance.registerBundler(document.createElement("iframe"), "client-1");
+      instance.registerBundler(document.createElement("iframe"), "client-2");
+
+      // Initial state
+      expect(getAmountOfListener(instance, "client-1")).toBe(0);
+      expect(getAmountOfListener(instance, "client-2", true)).toBe(0);
+
+      // Add listeners
+      instance.addListener(jest.fn(), "client-1");
+      const unsubscribeClientTwo = instance.addListener(jest.fn(), "client-2");
+
+      expect(getAmountOfListener(instance, "client-1")).toBe(1);
+      expect(getAmountOfListener(instance, "client-2", true)).toBe(1);
+
+      unsubscribeClientTwo();
+
+      expect(getAmountOfListener(instance, "client-1")).toBe(1);
+      expect(getAmountOfListener(instance, "client-2", true)).toBe(0);
+    });
+
+    it("doesn't trigger global unsubscribe", () => {
+      const instance = createContext();
+
+      instance.registerBundler(document.createElement("iframe"), "client-1");
+      instance.registerBundler(document.createElement("iframe"), "client-2");
+
+      instance.addListener(jest.fn());
+      instance.addListener(jest.fn());
+      const unsubscribe = instance.addListener(jest.fn());
+
+      expect(getAmountOfListener(instance, "client-1")).toBe(3);
+      expect(getAmountOfListener(instance, "client-2", true)).toBe(3);
+
+      unsubscribe();
+
+      expect(getAmountOfListener(instance, "client-1")).toBe(2);
+      expect(getAmountOfListener(instance, "client-2", true)).toBe(2);
+    });
+
+    it("unsubscribe all the listeners from a specific client when it unmonts", () => {
+      const instance = createContext();
+
+      instance.registerBundler(document.createElement("iframe"), "client-1");
+      instance.registerBundler(document.createElement("iframe"), "client-2");
+
+      instance.addListener(jest.fn());
+      instance.addListener(jest.fn());
+      instance.addListener(jest.fn());
+
+      expect(getAmountOfListener(instance, "client-1")).toBe(3);
+      expect(getAmountOfListener(instance, "client-2", true)).toBe(3);
+
+      instance.unregisterBundler("client-2");
+
+      expect(getAmountOfListener(instance, "client-1")).toBe(3);
+      expect(instance.clients["client-2"]).toBe(undefined);
     });
   });
 });

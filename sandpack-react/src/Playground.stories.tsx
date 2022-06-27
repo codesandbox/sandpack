@@ -3,6 +3,7 @@ import * as themes from "@codesandbox/sandpack-themes";
 import { useEffect, useState } from "react";
 
 import type { CodeEditorProps } from "./components/CodeEditor";
+import { useSandpack } from "./hooks";
 import { SANDBOX_TEMPLATES } from "./templates";
 
 import {
@@ -12,7 +13,6 @@ import {
   SandpackLayout,
   SandpackFileExplorer,
 } from "./";
-import { useSandpack } from "./hooks";
 
 export default {
   title: "Intro/Playground",
