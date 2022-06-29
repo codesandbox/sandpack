@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/codesandbox/sandpack/compare/v1.2.1...v1.2.2) (2022-06-29)
+
+
+### Bug Fixes
+
+* **codeeditor:** test-id should not be included in the bundler ([#521](https://github.com/codesandbox/sandpack/issues/521)) ([bf9cc21](https://github.com/codesandbox/sandpack/commit/bf9cc21827b69374914f416e03f06832d444af24))
+
+
+
+
+
 ## [1.2.1](https://github.com/codesandbox/sandpack/compare/v1.2.0...v1.2.1) (2022-06-27)
 
 
