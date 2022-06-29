@@ -16,9 +16,8 @@ const options = {
     ...(package.devDependencies || {}),
     ...(package.peerDependencies || {}),
   }),
-  define: {
-    TEST_ENV: false,
-  },
+  define: { "process.env.TEST_ENV": "false" },
+  minify: true,
 };
 
 build({

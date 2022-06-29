@@ -20,6 +20,7 @@ const options = {
     ...(package.devDependencies || {}),
     ...(package.peerDependencies || {}),
   }),
+  minify: true,
 };
 
 build({
