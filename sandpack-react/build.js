@@ -16,6 +16,9 @@ const options = {
     ...(package.devDependencies || {}),
     ...(package.peerDependencies || {}),
   }),
+  define: {
+    TEST_ENV: false,
+  },
 };
 
 build({
