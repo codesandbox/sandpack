@@ -436,6 +436,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     };
 
     if (readOnly) {
+      const env = typeof process !== "undefined" ? process.env : {};
+
       return (
         <>
           <pre
@@ -458,7 +460,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           {readOnly && showReadOnly && (
             <span
               className={classNames(c("read-only"), readOnlyClassName)}
-              {...(process.env.TEST_ENV ? { "data-testId": "read-only" } : {})}
+              {...(env.TEST_ENV ? { "data-testId": "read-only" } : {})}
             >
               Read-only
             </span>
