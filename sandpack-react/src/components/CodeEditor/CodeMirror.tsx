@@ -4,8 +4,8 @@ import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
 import {
   defaultKeymap,
   indentLess,
+  indentMore,
   deleteGroupBackward,
-  insertTab,
 } from "@codemirror/commands";
 import { commentKeymap } from "@codemirror/comment";
 import { lineNumbers } from "@codemirror/gutter";
@@ -100,7 +100,7 @@ interface CodeMirrorProps {
    */
   id?: string;
   extensions?: Extension[];
-  extensionsKeymap?: Array<readonly KeyBinding[]>;
+  extensionsKeymap?: KeyBinding[];
 }
 
 export interface CodeMirrorRef {
@@ -197,7 +197,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         const customCommandsKeymap: KeyBinding[] = [
           {
             key: "Tab",
-            run: insertTab,
+            run: indentMore,
           },
           {
             key: "Shift-Tab",
