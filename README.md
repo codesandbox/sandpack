@@ -1,6 +1,6 @@
 <img style="width:100%" src="https://user-images.githubusercontent.com/4838076/163777661-a44ec0a9-ee7c-483a-bdbb-7898ba665f68.gif" alt="Component toolkit for live running code editing experiences" />
 
-# Sandpack
+# Sandpack is awesome!
 
 Sandpack is a component toolkit for creating your own live running code editing experience powered by CodeSandbox.
 
