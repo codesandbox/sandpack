@@ -197,10 +197,14 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         const customCommandsKeymap: KeyBinding[] = [
           {
             key: "Tab",
-            run: ({ state, dispatch }): boolean => {
-              indentMore({ state, dispatch });
+            run: (view): boolean => {
+              indentMore(view);
 
-              return false;
+              const customKey = extensionsKeymap.find(
+                ({ key }) => key === "Tab"
+              );
+
+              return customKey?.run(view) ?? true;
             },
           },
           {
@@ -208,7 +212,11 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             run: ({ state, dispatch }): boolean => {
               indentLess({ state, dispatch });
 
-              return false;
+              const customKey = extensionsKeymap.find(
+                ({ key }) => key === "Shift-Tab"
+              );
+
+              return customKey?.run(view) ?? true;
             },
           },
           {
