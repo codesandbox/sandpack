@@ -147,7 +147,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     const ariaId = useGeneratedId(id);
 
     const prevExtension = React.useRef<Extension[]>([]);
-    const prevExtensionKeymap = React.useRef<Array<readonly KeyBinding[]>>([]);
+    const prevExtensionKeymap = React.useRef<KeyBinding[]>([]);
 
     const { isIntersecting } = useIntersectionObserver(wrapper, {
       rootMargin: "600px 0px",
