@@ -4,8 +4,8 @@ import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
 import {
   defaultKeymap,
   indentLess,
+  indentMore,
   deleteGroupBackward,
-  insertTab,
 } from "@codemirror/commands";
 import { commentKeymap } from "@codemirror/comment";
 import { lineNumbers } from "@codemirror/gutter";
@@ -100,7 +100,7 @@ interface CodeMirrorProps {
    */
   id?: string;
   extensions?: Extension[];
-  extensionsKeymap?: Array<readonly KeyBinding[]>;
+  extensionsKeymap?: KeyBinding[];
 }
 
 export interface CodeMirrorRef {
@@ -147,7 +147,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     const ariaId = useGeneratedId(id);
 
     const prevExtension = React.useRef<Extension[]>([]);
-    const prevExtensionKeymap = React.useRef<Array<readonly KeyBinding[]>>([]);
+    const prevExtensionKeymap = React.useRef<KeyBinding[]>([]);
 
     const { isIntersecting } = useIntersectionObserver(wrapper, {
       rootMargin: "600px 0px",
@@ -197,11 +197,27 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         const customCommandsKeymap: KeyBinding[] = [
           {
             key: "Tab",
-            run: insertTab,
+            run: (view): boolean => {
+              indentMore(view);
+
+              const customKey = extensionsKeymap.find(
+                ({ key }) => key === "Tab"
+              );
+
+              return customKey?.run(view) ?? true;
+            },
           },
           {
             key: "Shift-Tab",
-            run: indentLess,
+            run: ({ state, dispatch }): boolean => {
+              indentLess({ state, dispatch });
+
+              const customKey = extensionsKeymap.find(
+                ({ key }) => key === "Shift-Tab"
+              );
+
+              return customKey?.run(view) ?? true;
+            },
           },
           {
             key: "Escape",
