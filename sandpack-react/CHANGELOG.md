@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/codesandbox/sandpack/compare/v1.2.3...v1.2.4) (2022-07-12)
+
+
+### Bug Fixes
+
+* **react:** set react 18 as peer dependencies ([#529](https://github.com/codesandbox/sandpack/issues/529)) ([5a7e61c](https://github.com/codesandbox/sandpack/commit/5a7e61c622c4628af0767feb16bfcf4b3ee3351e))
+
+
+
+
+
 ## [1.2.3](https://github.com/codesandbox/sandpack/compare/v1.2.2...v1.2.3) (2022-07-12)
 
 
