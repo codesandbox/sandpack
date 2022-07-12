@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/codesandbox/sandpack/compare/v1.2.2...v1.2.3) (2022-07-12)
+
+
+### Bug Fixes
+
+* **codemirror:** use correct method to indent the code on tab key press ([#527](https://github.com/codesandbox/sandpack/issues/527)) ([6bea86b](https://github.com/codesandbox/sandpack/commit/6bea86bcd74fe0694abf6435ca7ab3c0d093428f))
+
+
+
+
+
 ## [1.2.2](https://github.com/codesandbox/sandpack/compare/v1.2.1...v1.2.2) (2022-06-29)
 
 
