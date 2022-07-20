@@ -91,3 +91,10 @@ export const vue = `<template>
   name: 'basic-example'
 };
 </script>`;
+
+export const markdown = `## Title
+
+- List item
+- List item
+- List item
+- List item`;
