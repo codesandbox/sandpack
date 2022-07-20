@@ -7,7 +7,7 @@ export default {
   title: "components/ReactDevTools",
 };
 
-const ReactDevTool = (): JSX.Element => (
+export const ReactDevTool: React.FC = () => (
   <SandpackProvider
     files={{
       "/App.js": `
@@ -38,8 +38,6 @@ export default function App() {
     </SandpackThemeProvider>
   </SandpackProvider>
 );
-
-export { ReactDevTool };
 
 export const MultipleReactDevTool = (): JSX.Element => {
   return (

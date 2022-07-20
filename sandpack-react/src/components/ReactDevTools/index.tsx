@@ -48,18 +48,12 @@ export const SandpackReactDevTools = ({
 
     const unsubscribe = listen((msg) => {
       if (msg.type === "activate-react-devtools") {
-        /**
-         * Sandpack client
-         */
         const uid = msg.uid;
         const client = clientId
           ? sandpack.clients[clientId]
           : Object.values(sandpack.clients)[0];
         const contentWindow = client?.iframe?.contentWindow;
 
-        /**
-         * react-devtools-inline
-         */
         if (reactDevtools.current && contentWindow) {
           const wall = {
             listen(listener: (params: unknown) => void): void {
