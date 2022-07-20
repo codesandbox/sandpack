@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/codesandbox/sandpack/compare/v1.2.4...v1.3.0) (2022-07-20)
+
+
+### Features
+
+* **codeeditor:** support markdown and plain text  ([#535](https://github.com/codesandbox/sandpack/issues/535)) ([c159608](https://github.com/codesandbox/sandpack/commit/c1596084b99b3f00282b7a25abaea008ad0e88a6))
+
+
+
+
+
 ## [1.2.4](https://github.com/codesandbox/sandpack/compare/v1.2.3...v1.2.4) (2022-07-12)
 
 
