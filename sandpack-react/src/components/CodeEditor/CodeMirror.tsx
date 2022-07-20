@@ -74,7 +74,8 @@ interface CodeMirrorProps {
     | "scss"
     | "less"
     | "html"
-    | "vue";
+    | "vue"
+    | "markdown";
   onCodeUpdate?: (newCode: string) => void;
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
