@@ -3,32 +3,25 @@ import * as React from "react";
 
 import { useSandpackTheme } from "../..";
 import { useSandpack } from "../../hooks/useSandpack";
-import { css, THEME_PREFIX } from "../../styles";
-import { classNames } from "../../utils/classNames";
 import { isDarkColor } from "../../utils/stringUtils";
-
-const devToolClassName = css({
-  height: "$layout$height",
-  width: "100%",
-});
 
 type DevToolsTheme = "dark" | "light";
 
-/**
- * @category Components
- */
+type SandpackReactDevToolsProps = {
+  clientId?: string;
+  theme?: DevToolsTheme;
+  onLoadModule?: () => void;
+} & React.HtmlHTMLAttributes<unknown>;
+
 export const SandpackReactDevTools = ({
   clientId,
   theme,
-  className,
+  onLoadModule,
   ...props
-}: {
-  clientId?: string;
-  theme?: DevToolsTheme;
-} & React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
+}: SandpackReactDevToolsProps): JSX.Element | null => {
   const { listen, sandpack } = useSandpack();
   const { theme: sandpackTheme } = useSandpackTheme();
-  const c = useClasser(THEME_PREFIX);
+  const c = useClasser("sp");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const reactDevtools = React.useRef<any>();
 
@@ -43,24 +36,64 @@ export const SandpackReactDevTools = ({
   }, []);
 
   React.useEffect(() => {
+    let unsubscribeMessageListener: () => void | undefined;
+
     const unsubscribe = listen((msg) => {
       if (msg.type === "activate-react-devtools") {
+        /**
+         * Sandpack client
+         */
+        const uid = msg.uid;
         const client = clientId
           ? sandpack.clients[clientId]
           : Object.values(sandpack.clients)[0];
         const contentWindow = client?.iframe?.contentWindow;
 
+        /**
+         * react-devtools-inline
+         */
         if (reactDevtools.current && contentWindow) {
-          setDevTools(reactDevtools.current.initialize(contentWindow));
+          const wall = {
+            listen(listener: (params: unknown) => void): void {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const listenerCallback = (event: MessageEvent<any>): void => {
+                if (event.data.uid === uid) {
+                  listener(event.data);
+                }
+              };
+
+              window.addEventListener("message", listenerCallback);
+
+              unsubscribeMessageListener = (): void => {
+                window.removeEventListener("message", listenerCallback);
+              };
+            },
+            send(event: unknown, payload: unknown): void {
+              contentWindow.postMessage({ event, payload, uid }, "*");
+            },
+          };
+
+          const { createBridge, createStore, initialize } =
+            reactDevtools.current;
+
+          const bridge = createBridge(contentWindow, wall);
+          const store = createStore(bridge);
+          const DevTools = initialize(contentWindow, { bridge, store });
+
+          setDevTools(DevTools);
+          onLoadModule?.();
         }
       }
     });
 
-    return unsubscribe;
+    return (): void => {
+      unsubscribeMessageListener?.();
+      unsubscribe();
+    };
   }, [reactDevtools, clientId, listen, sandpack.clients]);
 
   React.useEffect(() => {
-    sandpack.registerReactDevTools("legacy");
+    sandpack.registerReactDevTools("latest");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -75,10 +108,7 @@ export const SandpackReactDevTools = ({
   };
 
   return (
-    <div
-      className={classNames(c("devtools"), devToolClassName, className)}
-      {...props}
-    >
+    <div className={c("devtools")} {...props}>
       <ReactDevTools browserTheme={getBrowserTheme()} />
     </div>
   );
