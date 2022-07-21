@@ -101,7 +101,7 @@ interface CodeMirrorProps {
    */
   id?: string;
   extensions?: Extension[];
-  extensionsKeymap?: KeyBinding[];
+  extensionsKeymap?: ReadonlyArray<readonly KeyBinding[]>;
 }
 
 export interface CodeMirrorRef {

@@ -48,7 +48,7 @@ export interface CodeEditorProps {
   /**
    * Property to register CodeMirror extension keymap.
    */
-  extensionsKeymap?: KeyBinding[];
+  extensionsKeymap?: ReadonlyArray<readonly KeyBinding[]>;
   /**
    * By default, Sandpack generates a random value to use as an id.
    * Use this to override this value if you need predictable values.
