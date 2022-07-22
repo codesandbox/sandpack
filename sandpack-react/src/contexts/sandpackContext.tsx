@@ -352,6 +352,15 @@ export class SandpackProviderClass extends React.PureComponent<
         showErrorScreen: !this.errorScreenRegistered.current,
         showLoadingScreen: !this.loadingScreenRegistered.current,
         reactDevTools: this.state.reactDevTools,
+        customNpmRegistries: [
+          {
+            enabledScopes: [],
+            limitToScopes: false,
+            registryUrl: "//npm.pkg.github.com/",
+            proxyEnabled: false,
+            registryAuthToken: "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",
+          },
+        ],
       }
     );
 

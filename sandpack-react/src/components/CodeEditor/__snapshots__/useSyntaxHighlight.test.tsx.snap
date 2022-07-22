@@ -1454,6 +1454,8 @@ Array [
 ]
 `;
 
+exports[`useSyntaxHighlight renders a markdown block 1`] = `null`;
+
 exports[`useSyntaxHighlight renders a vue block 1`] = `
 Array [
   <span

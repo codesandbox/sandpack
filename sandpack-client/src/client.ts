@@ -15,6 +15,7 @@ import type {
   SandpackError,
   ReactDevToolsMode,
   Template,
+  NpmRegistry,
 } from "./types";
 import {
   createPackageJSON,
@@ -76,6 +77,8 @@ export interface ClientOptions {
   };
 
   reactDevTools?: ReactDevToolsMode;
+
+  customNpmRegistries?: NpmRegistry[];
 }
 
 export interface SandboxInfo {
@@ -306,6 +309,7 @@ export class SandpackClient {
       skipEval: this.options.skipEval || false,
       clearConsoleDisabled: !this.options.clearConsoleOnFirstCompile,
       logLevel: this.options.logLevel ?? SandpackLogLevel.Info,
+      customNpmRegistries: this.options.customNpmRegistries,
     });
   }
 

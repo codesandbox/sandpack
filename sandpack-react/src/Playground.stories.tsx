@@ -130,6 +130,9 @@ export const Main = (): JSX.Element => {
       <SandpackProvider
         template={config.Template}
         theme={themes[config.Theme] || config.Theme}
+        options={{
+          bundlerURL: "https://syqvij-3000.preview.csb.app",
+        }}
       >
         <SandpackLayout>
           {config.Components.FileExplorer && <SandpackFileExplorer />}
