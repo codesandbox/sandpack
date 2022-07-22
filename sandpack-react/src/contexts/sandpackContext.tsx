@@ -358,7 +358,7 @@ export class SandpackProviderClass extends React.PureComponent<
             limitToScopes: false,
             registryUrl: "//npm.pkg.github.com/",
             proxyEnabled: false,
-            registryAuthToken: "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",
+            registryAuthToken: "",
           },
         ],
       }
