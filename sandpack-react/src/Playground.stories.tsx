@@ -66,7 +66,7 @@ export const Main = (): JSX.Element => {
             if (key === "Template") {
               return (
                 <div>
-                  <h3>Themes</h3>
+                  <h3>Template</h3>
                   <select
                     onChange={({ target }): void =>
                       update("Template", target.value)
