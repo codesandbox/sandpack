@@ -31,7 +31,7 @@ export const Main = (): JSX.Element => {
       showNavigator: true,
       showRefreshButton: true,
     },
-    Template: "react",
+    Template: "react" as const,
     Theme: "auto",
   });
 

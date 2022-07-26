@@ -161,6 +161,7 @@ export interface NpmRegistry {
   enabledScopes: string[];
   limitToScopes: boolean;
   registryUrl: string;
+  proxyEnabled: false;
   registryAuthToken?: string;
 }
 

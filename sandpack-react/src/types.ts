@@ -210,7 +210,7 @@ export interface SandpackSetup {
    * }
    * ```
    */
-  customNpmRegistries?: NpmRegistry[];
+  npmRegistries?: NpmRegistry[];
 }
 
 /**
