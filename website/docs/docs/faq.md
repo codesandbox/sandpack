@@ -9,9 +9,13 @@ title: FAQ
 
 Sandpack is an open ecosystem of components and utilities that allow you to compile and run modern frameworks in the browser. You can either use one of our predefined `components` for embedding the *CodeSandbox* experience into your projects, or you can build your own version of `sandpack`, on top of our standard components and utilities.
 
-#### How to load local or private dependencies?
+#### How to load private dependencies?
 
-Currently, Sandpack doesn’t have a way to consume private dependencies from any kind of registry service, because the bundler host is shared with all Sandpack consumers apps. However, you can pass local dependencies just like a regular file or using the external resource API:
+Read the following [guide](/guides/private-packages).
+
+#### How to load local dependencies? 
+
+Currently, Sandpack doesn’t have a way to consume local dependencies, because the bundler host is shared with all Sandpack consumers apps. However, you can pass local dependencies just like a regular file or using the external resource API:
 
 ```jsx
 <Sandpack
