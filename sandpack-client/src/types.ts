@@ -157,6 +157,13 @@ export interface ProtocolRequestMessage extends BaseProtocolMessage {
   params: any[];
 }
 
+export interface NpmRegistry {
+  enabledScopes: string[];
+  limitToScopes: boolean;
+  registryUrl: string;
+  registryAuthToken?: string;
+}
+
 export type SandpackMessage = BaseSandpackMessage &
   (
     | {
@@ -221,6 +228,7 @@ export type SandpackMessage = BaseSandpackMessage &
         clearConsoleDisabled?: boolean;
         reactDevTools?: ReactDevToolsMode;
         logLevel?: SandpackLogLevel;
+        customNpmRegistries?: NpmRegistry[];
       }
     | {
         type: "refresh";

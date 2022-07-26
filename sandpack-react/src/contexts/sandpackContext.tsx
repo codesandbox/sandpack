@@ -352,6 +352,7 @@ export class SandpackProviderClass extends React.PureComponent<
         showErrorScreen: !this.errorScreenRegistered.current,
         showLoadingScreen: !this.loadingScreenRegistered.current,
         reactDevTools: this.state.reactDevTools,
+        customNpmRegistries: this.props.customSetup?.customNpmRegistries,
       }
     );
 
