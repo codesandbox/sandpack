@@ -25,5 +25,40 @@ As Sandpack bundles everything in-browser, it needs to find a way to connect to 
 Suppose you don't already have a public registry. In that case, we recommend using [Verdaccio](https://verdaccio.org/), an open-source project that creates a private registry and can proxy other registries, such as GitHub and Npm. 
 You can find examples of how to use the [examples folder](https://github.com/codesandbox/sandpack/tree/main/examples) in the main repository.
 
+## Sandpack configuration
+
+Once the proxy is running and configured, you need to set some options in your Sandpack context:
+
+```jsx
+ <Sandpack
+    customSetup={{
+      dependencies: { "@codesandbox/test-package": "1.0.5" },
+      npmRegistries: [
+        {
+          enabledScopes: ["@codesandbox"],
+          limitToScopes: true,
+          registryUrl: "PROXY_URL", 
+        },
+      ],
+    }}
+    files={{
+      "/App.js": `import { Button } from "@codesandbox/test-package"
+
+export default function App() {
+  return (
+    <div>
+      <Button>I'm a private Package</Button>
+    </div>
+  )
+}
+`,
+    }}
+    template="react"
+  />
+```
+
 ## Security
 It's essential to keep the information and tokens of the npm registry private, so by using this method, it would be best if you kept in mind that it might expose all private packages in your account, so be careful where and how this proxy will be used. Plus, make sure only to use authentication tokens with read-only access.
+
+It's also possible to define only certain packages to be exposed. If custom scopes are `@scope/package-name` instead of `@scope/*`, it will only expose that one package. You can even do something like `@scope/design-system*` to expose all packages of the design system or something.
+
