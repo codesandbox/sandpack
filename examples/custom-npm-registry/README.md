@@ -4,7 +4,7 @@ This project works as a recipe to proxy NPM registries. The main goal is to cons
 
 This new private registry can be used on a Sandpack instance and run private packages public. 
 
-Disclaimer: it would be best if you kept in mind that it will expose all private packages in your account, so be careful where this proxy will be used and the scopes of the authentication token. That's why we initially set this project for read-only purposes, meaning no user would be able to publish changes using this proxy.
+Disclaimer: it's essential to keep the information and tokens of the npm registry private, so by using this method, it would be best if you kept in mind that it might expose all private packages in your account, so be careful where and how this proxy will be used. Plus, make sure only to use authentication tokens with read-only access.
 
 ## How it works
 This project relies on [Verdaccio](https://verdaccio.org/), an open-source project that creates a private registry and can proxy other registries, such as GitHub and Npm. 
@@ -20,5 +20,5 @@ This project relies on [Verdaccio](https://verdaccio.org/), an open-source proje
 
 | Name | Description |
 | - | - |
-| `VERDACCIO_PUBLIC_URL` | is intended to be used behind proxies, and replace the final URL|
+| `VERDACCIO_PUBLIC_URL` | is intended to be used behind proxies, and replace the final URL (optional) |
 | `GH_PKG_TOKEN` | GitHub personal token with `read:packages` permission |
