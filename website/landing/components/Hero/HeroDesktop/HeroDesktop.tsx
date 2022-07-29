@@ -318,6 +318,7 @@ export const HeroDesktop: React.FC = () => {
               width: "100%",
               transformOrigin: "top right",
               transform: "scale($scale)",
+              zIndex: 1
             }}
           >
             <Clipboard />
