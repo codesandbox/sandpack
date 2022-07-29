@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/codesandbox/sandpack/compare/v1.3.1...v1.3.2) (2022-07-29)
+
+
+### Bug Fixes
+
+* **client:** update bundler ([bb6d9c1](https://github.com/codesandbox/sandpack/commit/bb6d9c175568b26f51a11b84e44ceba7fcf3d74c))
+
+
+
+
+
 ## [1.3.1](https://github.com/codesandbox/sandpack/compare/v1.3.0...v1.3.1) (2022-07-25)
 
 **Note:** Version bump only for package sandpack
