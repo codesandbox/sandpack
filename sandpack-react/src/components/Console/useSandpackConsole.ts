@@ -12,7 +12,7 @@ export const useSandpackConsole = ({
 }: {
   clientId?: string;
   maxMessageCount?: number;
-}): SandpackConsoleData => {
+}): { logs: SandpackConsoleData; reset: () => void } => {
   const [logs, setLogs] = React.useState<SandpackConsoleData>([]);
   const { listen } = useSandpack();
 
@@ -31,5 +31,5 @@ export const useSandpackConsole = ({
     return unsubscribe;
   }, [listen, maxMessageCount, clientId]);
 
-  return logs;
+  return { logs, reset: (): void => setLogs([]) };
 };

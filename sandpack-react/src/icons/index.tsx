@@ -54,6 +54,19 @@ export const RefreshIcon = (): React.ReactElement => (
 /**
  * @hidden
  */
+export const CleanIcon = (): React.ReactElement => (
+  <SVG fill="none" stroke="currentColor">
+    <path
+      d="M12.0001 19.0001C15.8661 19.0001 19.0001 15.8661 19.0001 12.0001C19.0001 8.13407 15.8661 5.00006 12.0001 5.00006C8.13407 5.00006 5.00006 8.13407 5.00006 12.0001C5.00006 15.8661 8.13407 19.0001 12.0001 19.0001Z"
+      strokeLinecap="round"
+    />
+    <path d="M6.99994 6.99994L16.9999 16.9999" />
+  </SVG>
+);
+
+/**
+ * @hidden
+ */
 export const ExportIcon = (): React.ReactElement => (
   <svg
     fill="none"

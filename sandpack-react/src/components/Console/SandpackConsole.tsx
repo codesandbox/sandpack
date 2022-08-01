@@ -2,7 +2,14 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { SandpackStack } from "../../common";
-import { RefreshIcon } from "../../icons";
+import { CleanIcon } from "../../icons";
+import { css } from "../../styles";
+import {
+  buttonClassName,
+  iconStandaloneClassName,
+  actionButtonClassName,
+} from "../../styles/shared";
+import { classNames } from "../../utils/classNames";
 import { CodeEditor } from "../CodeEditor";
 
 import { useSandpackConsole } from "./useSandpackConsole";
@@ -24,7 +31,7 @@ export const SandpackConsole: React.FC<
   maxMessageCount,
   ...props
 }) => {
-  const logs = useSandpackConsole({ clientId, maxMessageCount });
+  const { logs, reset } = useSandpackConsole({ clientId, maxMessageCount });
 
   const wrapperRef = React.useRef<HTMLDivElement>(null);
 
@@ -60,6 +67,7 @@ export const SandpackConsole: React.FC<
                         code={children}
                         fileType="js"
                         initMode="user-visible"
+                        showReadOnly={false}
                         readOnly
                       />
                     </span>
@@ -73,12 +81,24 @@ export const SandpackConsole: React.FC<
 
       {showClearButton && (
         <button
-          className={c("console-clean")}
-          onClick={(): void => setLogs([])}
+          className={classNames(
+            c("button", "icon-standalone"),
+            buttonClassName,
+            iconStandaloneClassName,
+            actionButtonClassName,
+            cleanButtonClassName
+          )}
+          onClick={reset}
         >
-          <RefreshIcon />
+          <CleanIcon />
         </button>
       )}
     </SandpackStack>
   );
 };
+
+const cleanButtonClassName = css({
+  position: "absolute",
+  bottom: "$space$2",
+  right: "$space$2",
+});
