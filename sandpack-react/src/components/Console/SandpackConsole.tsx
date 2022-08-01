@@ -2,16 +2,12 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { SandpackStack } from "../../common";
-import { CleanIcon } from "../../icons";
 import { css } from "../../styles";
-import {
-  buttonClassName,
-  iconStandaloneClassName,
-  actionButtonClassName,
-} from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 import { CodeEditor } from "../CodeEditor";
 
+import { Button } from "./Button";
+import { Header } from "./Header";
 import { useSandpackConsole } from "./useSandpackConsole";
 import { getType } from "./utils";
 
@@ -27,7 +23,7 @@ export const SandpackConsole: React.FC<
 > = ({
   clientId,
   showClearButton = true,
-  showHeader,
+  showHeader = true,
   maxMessageCount,
   ...props
 }) => {
@@ -44,61 +40,64 @@ export const SandpackConsole: React.FC<
   }, [logs]);
 
   return (
-    <SandpackStack>
-      <div ref={wrapperRef} className={c("console-scroll")}>
+    <SandpackStack {...props}>
+      {showHeader && <Header />}
+      <div ref={wrapperRef} className={classNames(css({ overflow: "auto" }))}>
         {logs.map(({ data, id, method }) => {
+          const variant = getType(method);
+
           return (
-            <p
-              key={id}
-              className={c("console-item", `console-${getType(method)}`)}
-            >
-              <span />
-              <span className={c("console-message")}>
-                {data.map((msg, index) => {
-                  if (typeof msg === "string") {
-                    return <span key={`${msg}-${index}`}>{msg}</span>;
-                  }
-
-                  const children = JSON.stringify(msg);
-
+            <div key={id}>
+              {data.map((msg, index) => {
+                if (typeof msg === "string") {
                   return (
-                    <span key={`${msg}-${index}`} className={c("console-span")}>
-                      <CodeEditor
-                        code={children}
-                        fileType="js"
-                        initMode="user-visible"
-                        showReadOnly={false}
-                        readOnly
-                      />
-                    </span>
+                    <div
+                      key={`${msg}-${index}`}
+                      className={classNames(consoleItemClassName({ variant }))}
+                    >
+                      {msg}
+                    </div>
                   );
-                })}
-              </span>
-            </p>
+                }
+
+                return (
+                  <div
+                    key={`${msg}-${index}`}
+                    className={classNames(consoleItemClassName({ variant }))}
+                  >
+                    <CodeEditor
+                      code={JSON.stringify(msg)}
+                      fileType="js"
+                      initMode="user-visible"
+                      showReadOnly={false}
+                      readOnly
+                    />
+                  </div>
+                );
+              })}
+            </div>
           );
         })}
       </div>
 
-      {showClearButton && (
-        <button
-          className={classNames(
-            c("button", "icon-standalone"),
-            buttonClassName,
-            iconStandaloneClassName,
-            actionButtonClassName,
-            cleanButtonClassName
-          )}
-          onClick={reset}
-        >
-          <CleanIcon />
-        </button>
-      )}
+      {showClearButton && <Button onClick={reset} />}
     </SandpackStack>
   );
 };
 
-const cleanButtonClassName = css({
-  position: "absolute",
-  bottom: "$space$2",
-  right: "$space$2",
+const consoleItemClassName = css({
+  width: "100%",
+  variants: {
+    variant: {
+      error: {
+        color: "$colors$error",
+        background: "$colors$errorSurface",
+      },
+      warning: {
+        color: "$colors$warning",
+        background: "$colors$warningSurface",
+      },
+      info: {},
+    },
+  },
 });
