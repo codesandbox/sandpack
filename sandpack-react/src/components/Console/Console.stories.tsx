@@ -3,7 +3,7 @@ import React from "react";
 import { SandpackCodeEditor, SandpackPreview } from "..";
 import { SandpackProvider, SandpackLayout } from "../..";
 
-import { SandpackConsole } from "./";
+import { SandpackConsole } from "./SandpackConsole";
 
 export default {
   title: "components/Console",

@@ -14,7 +14,7 @@ export const getType = (
   return "error";
 };
 
-export type ConsoleData = Array<{
+export type SandpackConsoleData = Array<{
   data: Array<string | Record<string, string>>;
   id: string;
   method: SandpackMessageConsoleMethods;
