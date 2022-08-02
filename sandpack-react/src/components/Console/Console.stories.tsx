@@ -12,6 +12,7 @@ export default {
 export const ReactDevTool: React.FC = () => {
   const [showHeader, setShowHeader] = React.useState(true);
   const [showClearButton, setShowClearButton] = React.useState(true);
+  const [showSyntaxErrors, setShowSyntaxErrors] = React.useState(true);
 
   return (
     <SandpackProvider
@@ -60,10 +61,20 @@ export const ReactDevTool: React.FC = () => {
         Show clear button
       </label>
 
+      <label>
+        <input
+          checked={showSyntaxErrors}
+          onChange={({ target }): void => setShowSyntaxErrors(target.checked)}
+          type="checkbox"
+        />
+        Show syntax errors
+      </label>
+
       <SandpackLayout style={{ marginTop: 12 }}>
         <SandpackConsole
           showClearButton={showClearButton}
           showHeader={showHeader}
+          showSyntaxError={showSyntaxErrors}
         />
       </SandpackLayout>
     </SandpackProvider>

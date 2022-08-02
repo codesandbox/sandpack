@@ -15,6 +15,7 @@ interface SandpackConsoleProps {
   clientId?: string;
   showHeader?: boolean;
   showClearButton?: boolean;
+  showSyntaxError?: boolean;
   maxMessageCount?: number;
 }
 
@@ -24,10 +25,15 @@ export const SandpackConsole: React.FC<
   clientId,
   showClearButton = true,
   showHeader = true,
+  showSyntaxError = false,
   maxMessageCount,
   ...props
 }) => {
-  const { logs, reset } = useSandpackConsole({ clientId, maxMessageCount });
+  const { logs, reset } = useSandpackConsole({
+    clientId,
+    maxMessageCount,
+    showSyntaxError,
+  });
   const wrapperRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -54,7 +60,7 @@ export const SandpackConsole: React.FC<
                 if (typeof msg === "string") {
                   return (
                     <div
-                      key={`${msg}-${index}`}
+                      key={`${id}-${index}`}
                       className={classNames(consoleItemClassName({ variant }))}
                     >
                       {msg}
@@ -62,13 +68,29 @@ export const SandpackConsole: React.FC<
                   );
                 }
 
+                // TODO console.error(()=>{}, Array)
+                let children;
+                if (msg != null && typeof msg["@t"] === "string") {
+                  children = msg["@t"];
+                } else {
+                  try {
+                    children = JSON.stringify(msg, null, 2);
+                  } catch (error) {
+                    try {
+                      children = Object.prototype.toString.call(msg);
+                    } catch (err) {
+                      children = "[" + typeof msg + "]";
+                    }
+                  }
+                }
+
                 return (
                   <div
-                    key={`${msg}-${index}`}
+                    key={`${id}-${index}`}
                     className={classNames(consoleItemClassName({ variant }))}
                   >
                     <CodeEditor
-                      code={JSON.stringify(msg)}
+                      code={children}
                       fileType="js"
                       initMode="user-visible"
                       showReadOnly={false}

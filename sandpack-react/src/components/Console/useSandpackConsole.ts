@@ -6,12 +6,16 @@ import type { SandpackConsoleData } from "./utils";
 
 const MAX_MESSAGE_COUNT = 100;
 
+const SYNTAX_ERROR_PATTERN = ["SyntaxError: ", "Error in sandbox:"];
+
 export const useSandpackConsole = ({
   clientId,
   maxMessageCount = MAX_MESSAGE_COUNT,
+  showSyntaxError = false,
 }: {
   clientId?: string;
   maxMessageCount?: number;
+  showSyntaxError?: boolean;
 }): { logs: SandpackConsoleData; reset: () => void } => {
   const [logs, setLogs] = React.useState<SandpackConsoleData>([]);
   const { listen } = useSandpack();
@@ -19,9 +23,32 @@ export const useSandpackConsole = ({
   React.useEffect(() => {
     const unsubscribe = listen((message) => {
       if (message.type === "console" && message.codesandbox) {
+        const logsMessages = showSyntaxError
+          ? message.log
+          : message.log.filter((messageItem) => {
+              const messagesWithoutSyntaxErrors = messageItem.data.filter(
+                (dataItem) => {
+                  if (typeof dataItem !== "string") return true;
+
+                  const matches = SYNTAX_ERROR_PATTERN.filter((lookFor) =>
+                    dataItem.startsWith(lookFor)
+                  );
+
+                  return matches.length === 0;
+                }
+              );
+
+              return messagesWithoutSyntaxErrors.length > 0;
+            });
+
+        if (!logsMessages) return;
+
         setLogs((prev) => {
-          const messages = [...prev, ...message.log];
-          messages.slice(Math.max(0, messages.length - maxMessageCount));
+          const messages = [...prev, ...logsMessages];
+
+          while (messages.length > MAX_MESSAGE_COUNT) {
+            messages.shift();
+          }
 
           return messages;
         });
@@ -29,7 +56,7 @@ export const useSandpackConsole = ({
     }, clientId);
 
     return unsubscribe;
-  }, [listen, maxMessageCount, clientId]);
+  }, [listen, maxMessageCount, clientId, showSyntaxError]);
 
   return { logs, reset: (): void => setLogs([]) };
 };
