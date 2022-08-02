@@ -2,7 +2,7 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { SandpackStack } from "../../common";
-import { css } from "../../styles";
+import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 import { CodeEditor } from "../CodeEditor";
 
@@ -28,10 +28,7 @@ export const SandpackConsole: React.FC<
   ...props
 }) => {
   const { logs, reset } = useSandpackConsole({ clientId, maxMessageCount });
-
   const wrapperRef = React.useRef<HTMLDivElement>(null);
-
-  const c = useClasser("sp");
 
   React.useEffect(() => {
     if (wrapperRef.current) {
@@ -42,7 +39,12 @@ export const SandpackConsole: React.FC<
   return (
     <SandpackStack {...props}>
       {showHeader && <Header />}
-      <div ref={wrapperRef} className={classNames(css({ overflow: "auto" }))}>
+      <div
+        ref={wrapperRef}
+        className={classNames(
+          css({ overflow: "auto", scrollBehavior: "smooth" })
+        )}
+      >
         {logs.map(({ data, id, method }) => {
           const variant = getType(method);
 
@@ -87,15 +89,55 @@ export const SandpackConsole: React.FC<
 
 const consoleItemClassName = css({
   width: "100%",
+  padding: "$space$3 $space$2",
+  fontSize: ".85em",
+  position: "relative",
+
+  "&:after": {
+    content: "",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 1,
+    background: "$colors$surface3",
+  },
+
+  /**
+   * Editor reset
+   */
+  ".cm-editor": {
+    background: "none",
+  },
+
+  ".cm-content": {
+    padding: 0,
+  },
+
+  [`.${THEME_PREFIX}-pre-placeholder`]: {
+    margin: "0 !important",
+    fontSize: "1em",
+  },
+
   variants: {
     variant: {
       error: {
         color: "$colors$error",
         background: "$colors$errorSurface",
+
+        "&:after": {
+          background: "$colors$error",
+          opacity: 0.07,
+        },
       },
       warning: {
         color: "$colors$warning",
         background: "$colors$warningSurface",
+
+        "&:after": {
+          background: "$colors$warning",
+          opacity: 0.07,
+        },
       },
       info: {},
     },

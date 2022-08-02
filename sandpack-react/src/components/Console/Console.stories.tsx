@@ -9,10 +9,14 @@ export default {
   title: "components/Console",
 };
 
-export const ReactDevTool: React.FC = () => (
-  <SandpackProvider
-    files={{
-      "/App.js": `export default function App() {
+export const ReactDevTool: React.FC = () => {
+  const [showHeader, setShowHeader] = React.useState(true);
+  const [showClearButton, setShowClearButton] = React.useState(true);
+
+  return (
+    <SandpackProvider
+      files={{
+        "/App.js": `export default function App() {
   
     return (
       <>
@@ -30,16 +34,38 @@ export const ReactDevTool: React.FC = () => (
     );
   }
   `,
-    }}
-    template="react"
-  >
-    <SandpackLayout>
-      <SandpackCodeEditor />
-      <SandpackPreview />
-    </SandpackLayout>
+      }}
+      template="react"
+    >
+      <SandpackLayout>
+        <SandpackCodeEditor />
+        <SandpackPreview />
+      </SandpackLayout>
 
-    <SandpackLayout style={{ marginTop: 12 }}>
-      <SandpackConsole />
-    </SandpackLayout>
-  </SandpackProvider>
-);
+      <label>
+        <input
+          checked={showHeader}
+          onChange={({ target }): void => setShowHeader(target.checked)}
+          type="checkbox"
+        />
+        Show header
+      </label>
+
+      <label>
+        <input
+          checked={showClearButton}
+          onChange={({ target }): void => setShowClearButton(target.checked)}
+          type="checkbox"
+        />
+        Show clear button
+      </label>
+
+      <SandpackLayout style={{ marginTop: 12 }}>
+        <SandpackConsole
+          showClearButton={showClearButton}
+          showHeader={showHeader}
+        />
+      </SandpackLayout>
+    </SandpackProvider>
+  );
+};
