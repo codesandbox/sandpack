@@ -1,3 +1,4 @@
+import { Decode } from "console-feed";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
@@ -23,6 +24,14 @@ export const useSandpackConsole = ({
   React.useEffect(() => {
     const unsubscribe = listen((message) => {
       if (message.type === "console" && message.codesandbox) {
+        if (message.log.find(({ method }) => method === "clear")) {
+          return setLogs([
+            { id: "random", method: "clear", data: ["Console was cleared"] },
+          ]);
+        }
+
+        const { method } = Decode(message.log);
+
         const logsMessages = showSyntaxError
           ? message.log
           : message.log.filter((messageItem) => {

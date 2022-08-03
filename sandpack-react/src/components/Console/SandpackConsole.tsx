@@ -1,4 +1,3 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { SandpackStack } from "../../common";
@@ -55,7 +54,7 @@ export const SandpackConsole: React.FC<
           const variant = getType(method);
 
           return (
-            <div key={id}>
+            <React.Fragment key={id}>
               {data.map((msg, index) => {
                 if (typeof msg === "string") {
                   return (
@@ -68,13 +67,12 @@ export const SandpackConsole: React.FC<
                   );
                 }
 
-                // TODO console.error(()=>{}, Array)
                 let children;
                 if (msg != null && typeof msg["@t"] === "string") {
                   children = msg["@t"];
                 } else {
                   try {
-                    children = JSON.stringify(msg, null, 2);
+                    children = JSON.stringify(msg);
                   } catch (error) {
                     try {
                       children = Object.prototype.toString.call(msg);
@@ -99,7 +97,7 @@ export const SandpackConsole: React.FC<
                   </div>
                 );
               })}
-            </div>
+            </React.Fragment>
           );
         })}
       </div>
@@ -115,7 +113,7 @@ const consoleItemClassName = css({
   fontSize: ".85em",
   position: "relative",
 
-  "&:after": {
+  "&:not(:first-child):after": {
     content: "",
     position: "absolute",
     top: 0,
@@ -147,7 +145,7 @@ const consoleItemClassName = css({
         color: "$colors$error",
         background: "$colors$errorSurface",
 
-        "&:after": {
+        "&:not(:first-child):after": {
           background: "$colors$error",
           opacity: 0.07,
         },
@@ -156,10 +154,13 @@ const consoleItemClassName = css({
         color: "$colors$warning",
         background: "$colors$warningSurface",
 
-        "&:after": {
+        "&:not(:first-child):after": {
           background: "$colors$warning",
           opacity: 0.07,
         },
+      },
+      clear: {
+        fontStyle: "italic",
       },
       info: {},
     },

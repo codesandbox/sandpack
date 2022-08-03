@@ -21,6 +21,8 @@ export const ReactDevTool: React.FC = () => {
   
     return (
       <>
+        <button onClick={() => console.log(document.createElement("a"))}>Log node</button>
+        <button onClick={() => console.log(()=>{})}>Log function</button>
         <button onClick={() => console.log({ foo: [] })}>Log object</button>
         <button onClick={() => {
           console.log("foo", "baz")
@@ -31,6 +33,7 @@ export const ReactDevTool: React.FC = () => {
         <button onClick={() => console.error({ foo: [] })}>Log error</button>
         <button onClick={() => console.warn({ foo: [] })}>Log warning</button>
         <button onClick={() => console.info({ foo: [] })}>Log info</button>
+        <button onClick={() => console.clear()}>Console.clear</button>
       </>
     );
   }
