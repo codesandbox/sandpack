@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Console, Encode } from "console-feed";
 
 import { SandpackStack } from "../../common";
 import { css, THEME_PREFIX } from "../../styles";
@@ -50,7 +51,8 @@ export const SandpackConsole: React.FC<
           css({ overflow: "auto", scrollBehavior: "smooth" })
         )}
       >
-        {logs.map(({ data, id, method }) => {
+        <Console logs={logs} />
+        {/* {logs.map(({ data, id, method }) => {
           const variant = getType(method);
 
           return (
@@ -99,7 +101,7 @@ export const SandpackConsole: React.FC<
               })}
             </React.Fragment>
           );
-        })}
+        })}*/}
       </div>
 
       {showClearButton && <Button onClick={reset} />}

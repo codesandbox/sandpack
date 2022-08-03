@@ -1,4 +1,4 @@
-import { Decode } from "console-feed";
+import { Console, Decode, Encode } from "console-feed";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
@@ -8,6 +8,12 @@ import type { SandpackConsoleData } from "./utils";
 const MAX_MESSAGE_COUNT = 100;
 
 const SYNTAX_ERROR_PATTERN = ["SyntaxError: ", "Error in sandbox:"];
+
+const CLEAR_LOG = {
+  id: "random",
+  method: "clear" as const,
+  data: ["Console was cleared"],
+};
 
 export const useSandpackConsole = ({
   clientId,
@@ -25,12 +31,10 @@ export const useSandpackConsole = ({
     const unsubscribe = listen((message) => {
       if (message.type === "console" && message.codesandbox) {
         if (message.log.find(({ method }) => method === "clear")) {
-          return setLogs([
-            { id: "random", method: "clear", data: ["Console was cleared"] },
-          ]);
+          return setLogs([CLEAR_LOG]);
         }
 
-        const { method } = Decode(message.log);
+        // console.log(Encode(message.log));
 
         const logsMessages = showSyntaxError
           ? message.log
@@ -53,7 +57,7 @@ export const useSandpackConsole = ({
         if (!logsMessages) return;
 
         setLogs((prev) => {
-          const messages = [...prev, ...logsMessages];
+          const messages = [...prev, Decode(message.log)];
 
           while (messages.length > MAX_MESSAGE_COUNT) {
             messages.shift();
