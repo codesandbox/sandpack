@@ -3,7 +3,7 @@ sidebar_position: 2
 title: Private packages
 ---
 
-<big>The custom private npm registry allows Sandpack instances to retrieve npm packages from your npm registry. This option requires running a third service (Node.js server) and configuring your Sandpack provider to consume these dependencies from another registry, not the public ones.</big>
+<big>The custom private NPM registry allows Sandpack instances to retrieve private NPM packages from your own registry. This option requires running a third service (Node.js server) and configuring your Sandpack provider to consume these dependencies from another registry, not the public ones.</big>
 
 <br/>
 <br/>
