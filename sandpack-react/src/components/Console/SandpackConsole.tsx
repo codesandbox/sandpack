@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Console, Encode } from "console-feed";
 
 import { SandpackStack } from "../../common";
 import { css, THEME_PREFIX } from "../../styles";
@@ -7,6 +6,7 @@ import { classNames } from "../../utils/classNames";
 import { CodeEditor } from "../CodeEditor";
 
 import { Button } from "./Button";
+import { formatMessage } from "./formatMessage";
 import { Header } from "./Header";
 import { useSandpackConsole } from "./useSandpackConsole";
 import { getType } from "./utils";
@@ -51,8 +51,7 @@ export const SandpackConsole: React.FC<
           css({ overflow: "auto", scrollBehavior: "smooth" })
         )}
       >
-        <Console logs={logs} />
-        {/* {logs.map(({ data, id, method }) => {
+        {logs.map(({ data, id, method }) => {
           const variant = getType(method);
 
           return (
@@ -69,28 +68,13 @@ export const SandpackConsole: React.FC<
                   );
                 }
 
-                let children;
-                if (msg != null && typeof msg["@t"] === "string") {
-                  children = msg["@t"];
-                } else {
-                  try {
-                    children = JSON.stringify(msg);
-                  } catch (error) {
-                    try {
-                      children = Object.prototype.toString.call(msg);
-                    } catch (err) {
-                      children = "[" + typeof msg + "]";
-                    }
-                  }
-                }
-
                 return (
                   <div
                     key={`${id}-${index}`}
                     className={classNames(consoleItemClassName({ variant }))}
                   >
                     <CodeEditor
-                      code={children}
+                      code={formatMessage(msg)}
                       fileType="js"
                       initMode="user-visible"
                       showReadOnly={false}
@@ -101,7 +85,7 @@ export const SandpackConsole: React.FC<
               })}
             </React.Fragment>
           );
-        })}*/}
+        })}
       </div>
 
       {showClearButton && <Button onClick={reset} />}

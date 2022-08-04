@@ -52,7 +52,6 @@
     "@react-hook/intersection-observer": "^3.1.1",
     "@stitches/core": "^1.2.6",
     "codesandbox-import-util-types": "^2.2.3",
-    "console-feed": "^3.4.0",
     "lodash.isequal": "^4.5.0",
     "lz-string": "^1.4.4",
     "react-devtools-inline": "4.4.0",

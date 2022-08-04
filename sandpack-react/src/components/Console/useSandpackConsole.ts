@@ -1,4 +1,3 @@
-import { Console, Decode, Encode } from "console-feed";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
@@ -34,8 +33,6 @@ export const useSandpackConsole = ({
           return setLogs([CLEAR_LOG]);
         }
 
-        // console.log(Encode(message.log));
-
         const logsMessages = showSyntaxError
           ? message.log
           : message.log.filter((messageItem) => {
@@ -57,7 +54,7 @@ export const useSandpackConsole = ({
         if (!logsMessages) return;
 
         setLogs((prev) => {
-          const messages = [...prev, Decode(message.log)];
+          const messages = [...prev, ...logsMessages];
 
           while (messages.length > MAX_MESSAGE_COUNT) {
             messages.shift();

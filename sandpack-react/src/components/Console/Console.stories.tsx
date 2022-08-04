@@ -22,8 +22,9 @@ export const ReactDevTool: React.FC = () => {
     return (
       <>
         <button onClick={() => console.log(document.createElement("a"))}>Log node</button>
-        <button onClick={() => console.log(()=>{})}>Log function</button>
+        <button onClick={() => console.log(()=>{}, function foo(){})}>Log function</button>
         <button onClick={() => console.log({ foo: [] })}>Log object</button>
+        <button onClick={() => console.log(["foo", 123, [], ["foo2"], () => {}])}>Multiples types</button>
         <button onClick={() => {
           console.log("foo", "baz")
           console.error("foo", "baz")
