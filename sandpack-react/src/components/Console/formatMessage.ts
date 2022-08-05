@@ -11,8 +11,14 @@ import type { TransformsTypes } from "./transformers";
 const TRANSFORMED_TYPE_KEY = "@t";
 
 export type Message =
+  | null
   | string
   | number
+  | undefined
+  | Array<any>
+  | Record<any, any>
+  | Boolean
+  | Symbol
   | {
       "@t": TransformsTypes;
       data: {
@@ -20,28 +26,29 @@ export type Message =
         body: string;
         proto: TransformsTypes;
       };
-    }
-  | Array<any>
-  | Record<any, any>;
+    };
 
 const format = (message: Message): any => {
-  if (typeof message === "string" || typeof message === "number") {
+  if (
+    typeof message === "string" ||
+    typeof message === "number" ||
+    message === null
+  ) {
     return message;
   } else if (Array.isArray(message)) {
     return message.map(format);
-  } else if (message[TRANSFORMED_TYPE_KEY]) {
+  } else if (typeof message == "object" && TRANSFORMED_TYPE_KEY in message) {
     const type = message[TRANSFORMED_TYPE_KEY] as TransformsTypes;
     const transform = transformers[type];
 
     return transform(message.data);
   }
 
-  // TODO: object
-
   return message;
 };
 
 export const formatMessage = (message: Message): string | number => {
+  console.log(message);
   const output = format(message);
 
   if (Array.isArray(output)) {
@@ -57,13 +64,19 @@ export const formatMessage = (message: Message): string | number => {
       return `"${output}"`;
 
     case "number":
-      return output;
-
     case "function":
+    case "symbol":
       return output.toString();
+
+    case "undefined":
+      return "undefined";
 
     case "object":
     default:
+      if (output instanceof RegExp || output instanceof Error) {
+        return output.toString();
+      }
+
       return JSON.stringify(output);
   }
 };

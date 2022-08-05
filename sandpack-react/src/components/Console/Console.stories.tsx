@@ -21,6 +21,20 @@ export const ReactDevTool: React.FC = () => {
   
     return (
       <>
+        <p>Primitives</p>
+        <button onClick={() => console.log("Lorem ipsum")}>string</button>
+        <button onClick={() => console.log(123)}>number</button>
+        <button onClick={() => console.log(BigInt(123))}>bigint</button>
+        <button onClick={() => console.log(true)}>boolean</button>
+        <button onClick={() => console.log(undefined)}>undefined</button>
+        <button onClick={() => console.log(Symbol("foo"))}>symbol</button>
+        <button onClick={() => console.log(null)}>null</button>
+
+        <p>Others</p>
+        <button onClick={() => console.log(new Date())}>Date</button>
+        <button onClick={() => console.log(NaN)}>NaN</button>
+        <button onClick={() => console.log(new RegExp("//"))}>Regex</button>
+        <button onClick={() => console.log(new Error("Foo"))}>Error</button>
         <button onClick={() => console.log(document.createElement("a"))}>Log node</button>
         <button onClick={() => console.log(()=>{}, function foo(){})}>Log function</button>
         <button onClick={() => console.log({ foo: [] })}>Log object</button>
