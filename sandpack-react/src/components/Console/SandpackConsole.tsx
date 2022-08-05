@@ -6,9 +6,8 @@ import { classNames } from "../../utils/classNames";
 import { CodeEditor } from "../CodeEditor";
 
 import { Button } from "./Button";
-import { formatMessage } from "./formatMessage";
 import { Header } from "./Header";
-import { decoder } from "./test";
+import { formatMessage } from "./formatMessage";
 import { useSandpackConsole } from "./useSandpackConsole";
 import { getType } from "./utils";
 
@@ -75,7 +74,7 @@ export const SandpackConsole: React.FC<
                     className={classNames(consoleItemClassName({ variant }))}
                   >
                     <CodeEditor
-                      code={decoder(data)}
+                      code={formatMessage(msg)}
                       fileType="js"
                       initMode="user-visible"
                       showReadOnly={false}

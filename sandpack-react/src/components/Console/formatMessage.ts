@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/array-type */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
@@ -5,55 +6,64 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { transformers } from "./transformers";
+import type { TransformsTypes } from "./transformers";
 
-/* eslint-disable @typescript-eslint/array-type */
 const TRANSFORMED_TYPE_KEY = "@t";
 
 export type Message =
   | string
   | number
   | {
-      "@t": "Function" | "Number";
+      "@t": TransformsTypes;
       data: {
         name: string;
         body: string;
-        proto: "Function" | "Number";
+        proto: TransformsTypes;
       };
     }
   | Array<any>
   | Record<any, any>;
 
-const format = (message: Message): string | number | Array<Message> => {
+const format = (message: Message): any => {
   if (typeof message === "string" || typeof message === "number") {
     return message;
   } else if (Array.isArray(message)) {
     return message.map(format);
   } else if (message[TRANSFORMED_TYPE_KEY]) {
-    const type = message["@t"];
+    const type = message[TRANSFORMED_TYPE_KEY] as TransformsTypes;
     const transform = transformers[type];
 
-    return transform.fromSerializable(message);
+    return transform(message.data);
   }
 
-  return JSON.stringify(message);
+  // TODO: object
+
+  return message;
 };
 
-export const formatMessage = (message: Message): string => {
+export const formatMessage = (message: Message): string | number => {
   const output = format(message);
 
-  if (typeof output === "string") return output;
+  if (Array.isArray(output)) {
+    const mergeArray = output.reduce<string>((acc, curr, index) => {
+      return `${acc}${index ? ", " : ""}${formatMessage(curr)}`;
+    }, "");
 
-  // if (Array.isArray(output)) {
-  //   const mergeArray = output.reduce<string>((acc, curr) => {
-  //     return `${acc}, ${curr}`;
-  //   }, "");
+    return `[${mergeArray}]`;
+  }
 
-  //   return `[${mergeArray}]`;
-  // }
+  switch (typeof output) {
+    case "string":
+      return `"${output}"`;
 
-  try {
-    return Object.prototype.toString.call(output);
-  } catch (err) {
-    return "[" + typeof output + "]";
+    case "number":
+      return output;
+
+    case "function":
+      return output.toString();
+
+    case "object":
+    default:
+      return JSON.stringify(output);
   }
 };

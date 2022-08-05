@@ -2,9 +2,15 @@ import type { Message } from "./formatMessage";
 import { formatMessage } from "./formatMessage";
 
 const cases: Array<[Message, string]> = [
+  /**
+   * Primitives
+   */
   [{ data: {} }, '{"data":{}}'],
   [[], "[]"],
 
+  /**
+   * Function
+   */
   [
     {
       "@t": "Function",
@@ -28,6 +34,9 @@ const cases: Array<[Message, string]> = [
     "function myFunction() {}",
   ],
 
+  /**
+   * Mix
+   */
   [
     [
       123,
