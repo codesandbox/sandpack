@@ -59,7 +59,7 @@ export default function App() {
 ```
 
 ## Security
-It's essential to keep the information and tokens of the npm registry private, so by using this method, it would be best if you kept in mind that it might expose all private packages in your account, so be careful where and how this proxy will be used. Plus, make sure only to use authentication tokens with read-only access.
+It's essential to keep the information and tokens of the npm registry private! By using this method, it's best to keep in mind that it could expose all private packages in your account. Be careful where and how this proxy will be used. Make sure to use authentication tokens with **read-only access**.
 
 It's also possible to define only certain packages to be exposed. If custom scopes are `@scope/package-name` instead of `@scope/*`, it will only expose that one package. You can even do something like `@scope/design-system*` to expose all packages of the design system or something.
 
