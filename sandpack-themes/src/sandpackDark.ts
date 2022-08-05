@@ -10,8 +10,8 @@ export const sandpackDark: SandpackTheme = {
     disabled: "#4D4D4D",
     hover: "#C5C5C5",
     accent: "#90e86f",
-    error: "#b08df8",
-    errorSurface: "#dac1fb",
+    error: "#E1CFF8",
+    errorSurface: "#b08df8",
   },
   syntax: {
     plain: "#f0fdaf",

@@ -11,15 +11,15 @@
   ],
   "tasks": {
     "docs": {
-      "name": "Docs",
+      "name": "Website: docs",
       "command": "yarn dev:docs"
     },
     "landing": {
-      "name": "Landing page",
+      "name": "Website: landing page",
       "command": "yarn dev:landing"
     },
     "theme": {
-      "name": "Theme",
+      "name": "Website: theme",
       "command": "yarn dev:theme"
     },
     "storybook": {
@@ -34,6 +34,21 @@
     "build": {
       "name": "Build Workspace",
       "command": "yarn build"
+    },
+    "build:client": {
+      "name": "Build: client",
+      "command": "yarn workspace @codesandbox/sandpack-client build",
+      "runAtStart": true
+    },
+    "build:themes": {
+      "name": "Build: themes",
+      "command": "yarn workspace @codesandbox/sandpack-themes build",
+      "runAtStart": true
+    },
+    "build:react": {
+      "name": "Build: react",
+      "command": "yarn workspace @codesandbox/sandpack-react build",
+      "runAtStart": true
     },
     "format": {
       "name": "Format Workspace",

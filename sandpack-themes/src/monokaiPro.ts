@@ -5,16 +5,13 @@ export const monokaiPro: SandpackTheme = {
     surface1: "#2D2A2E",
     surface2: "#444344",
     surface3: "#484747",
-
     clickable: "#939293",
     base: "#C1C0C1",
     disabled: "#444344",
     hover: "#FCFCFA",
-
     accent: "#FFD866",
-
-    error: "#811e18",
-    errorSurface: "#ffcdca",
+    error: "#ffcdca",
+    errorSurface: "#c24038",
   },
   syntax: {
     plain: "rgb(252, 252, 250)",
