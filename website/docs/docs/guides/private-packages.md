@@ -19,7 +19,8 @@ title: Private packages
 ## Self-host the proxy
 
 We recommend hosting a service that allows you to proxy your private packages from a registry (GitHub/Npm/your own) to a new one, which would make the packages available through another URL. 
-As Sandpack bundles everything in-browser, it needs to find a way to connect to the registry that can provide the project dependencies. First, Sandpack will try to fetch all dependencies from public registries, for example, `react` or `redux`. Then you can let Sandpack know which dependencies (or dependencies under a scope) should be fetched from a different registry, your custom registry, for example.
+As Sandpack bundles everything in-browser, it needs to find a way to connect to the registry which provides the project dependencies. 
+First, Sandpack will try to fetch all dependencies from public registries, for example, `react` or `redux`. Then you can let Sandpack know which dependencies (or scoped dependencies) should be fetched from a different registry. For example, your custom registry.
 
 ### Our recommendation
 Suppose you don't already have a public registry. In that case, we recommend using [Verdaccio](https://verdaccio.org/), an open-source project that creates a private registry and can proxy other registries, such as GitHub and Npm. 
