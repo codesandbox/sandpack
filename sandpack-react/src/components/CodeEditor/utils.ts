@@ -4,7 +4,7 @@ import { html } from "@codemirror/lang-html";
 import { javascript } from "@codemirror/lang-javascript";
 import { markdown } from "@codemirror/lang-markdown";
 import type { LanguageSupport } from "@codemirror/language";
-import { StreamParser } from "@codemirror/stream-parser";
+import { StreamLanguage } from "@codemirror/stream-parser";
 import { shell } from "@codemirror/legacy-modes/mode/shell";
 import type { Extension } from "@codemirror/state";
 import type { Text } from "@codemirror/text";
@@ -211,7 +211,7 @@ export const getCodeMirrorLanguage = (
     html: html(),
     css: css(),
     markdown: markdown(),
-    shell: Language.
+    shell: StreamLanguage.define(shell),
   };
 
   return options[extension];
