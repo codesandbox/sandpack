@@ -1,6 +1,6 @@
 # Sandpack custom npm registry (proxy)
 
-This project works as a recipe to proxy NPM registries. The main goal is to consume private packages and expose them through a private registry without any authentication token (GitHub or Npm) or requiring any authentication process, 
+This project works as a recipe to proxy NPM registries. The main goal is to enable the consumption of private packages and expose them through a private registry without any authentication token (GitHub or Npm) or requiring an authentication process. 
 
 This new private registry can be used on a Sandpack instance and run private packages public. 
 
