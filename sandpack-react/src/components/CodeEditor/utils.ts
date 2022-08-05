@@ -3,10 +3,10 @@ import { css } from "@codemirror/lang-css";
 import { html } from "@codemirror/lang-html";
 import { javascript } from "@codemirror/lang-javascript";
 import { markdown } from "@codemirror/lang-markdown";
-import type { LanguageSupport } from "@codemirror/language";
-import { StreamLanguage } from "@codemirror/stream-parser";
+import { LanguageSupport } from "@codemirror/language";
 import { shell } from "@codemirror/legacy-modes/mode/shell";
 import type { Extension } from "@codemirror/state";
+import { StreamLanguage } from "@codemirror/stream-parser";
 import type { Text } from "@codemirror/text";
 import { EditorView } from "@codemirror/view";
 import * as React from "react";
@@ -211,7 +211,7 @@ export const getCodeMirrorLanguage = (
     html: html(),
     css: css(),
     markdown: markdown(),
-    shell: StreamLanguage.define(shell),
+    shell: new LanguageSupport(StreamLanguage.define(shell)),
   };
 
   return options[extension];
