@@ -23,7 +23,7 @@ As Sandpack bundles everything in-browser, it needs to find a way to connect to 
 First, Sandpack will try to fetch all dependencies from public registries, for example, `react` or `redux`. Then you can let Sandpack know which dependencies (or scoped dependencies) should be fetched from a different registry. For example, your custom registry.
 
 ### Our recommendation
-Suppose you don't already have a public registry. In that case, we recommend using [Verdaccio](https://verdaccio.org/), an open-source project that creates a private registry and can proxy other registries, such as GitHub and Npm. 
+Suppose you don't already have a public registry, we recommend using [Verdaccio](https://verdaccio.org/). An open-source project that creates a private registry and can proxy other registries, such as GitHub and Npm. 
 You can find examples of how to use the [examples folder](https://github.com/codesandbox/sandpack/tree/main/examples) in the main repository.
 
 ## Sandpack configuration
