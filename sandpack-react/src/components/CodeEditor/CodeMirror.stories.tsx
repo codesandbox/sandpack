@@ -1,7 +1,8 @@
 import * as React from "react";
 
-import * as mocks from "./languages-mocks";
 import { SandpackProvider } from "../../contexts/sandpackContext";
+
+import * as mocks from "./languages-mocks";
 
 import { CodeEditor } from "./index";
 
@@ -88,6 +89,18 @@ export const Markdown: React.FC = () => (
       code={mocks.markdown}
       fileType="markdown"
       id="markdown"
+      initMode="immediate"
+      showLineNumbers={false}
+    />
+  </SandpackProvider>
+);
+
+export const Shell: React.FC = () => (
+  <SandpackProvider>
+    <CodeEditor
+      code={mocks.sh}
+      fileType="sh"
+      id="sh"
       initMode="immediate"
       showLineNumbers={false}
     />

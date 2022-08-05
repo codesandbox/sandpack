@@ -98,3 +98,12 @@ export const markdown = `## Title
 - List item
 - List item
 - List item`;
+
+export const sh = `#!/bin/sh
+
+EXAMPLE="drawn joyed"
+
+# Prints the EXAMPLE variable
+function show-example() {
+  echo $EXAMPLE
+}`;
