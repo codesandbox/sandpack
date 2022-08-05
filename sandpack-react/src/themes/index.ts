@@ -54,10 +54,10 @@ export const defaultDark: SandpackTheme = {
     hover: "#C5C5C5",
     accent: "#E5E5E5",
 
-    error: "#EA3323",
-    errorSurface: "#FCF1F0",
-    warning: "#6A4516",
-    warningSurface: "#FEF2C0",
+    error: "#FFB4A6",
+    errorSurface: "#690000",
+    warning: "#E7C400",
+    warningSurface: "#3A3000",
   },
   syntax: {
     plain: "#FFFFFF",
