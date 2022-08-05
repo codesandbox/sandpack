@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.4](https://github.com/codesandbox/sandpack/compare/v1.3.3...v1.3.4) (2022-08-05)
+
+
+### Bug Fixes
+
+* **themes:** tweak error surface contrast ([#548](https://github.com/codesandbox/sandpack/issues/548)) ([d9120c9](https://github.com/codesandbox/sandpack/commit/d9120c9f42bc5ab75619332cb44197e5e8d43b13))
+
+
+
+
+
 # [1.0.0](https://github.com/codesandbox/sandpack/compare/v0.19.10...v1.0.0) (2022-05-25)
 
 
