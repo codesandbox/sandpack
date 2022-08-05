@@ -4,6 +4,8 @@ import { html } from "@codemirror/lang-html";
 import { javascript } from "@codemirror/lang-javascript";
 import { markdown } from "@codemirror/lang-markdown";
 import type { LanguageSupport } from "@codemirror/language";
+import { StreamParser } from "@codemirror/stream-parser";
+import { shell } from "@codemirror/legacy-modes/mode/shell";
 import type { Extension } from "@codemirror/state";
 import type { Text } from "@codemirror/text";
 import { EditorView } from "@codemirror/view";
@@ -157,7 +159,8 @@ type SandpackLanguageSupport =
   | "typescript"
   | "html"
   | "css"
-  | "markdown";
+  | "markdown"
+  | "shell";
 
 export const getLanguageFromFile = (
   filePath?: string,
@@ -189,6 +192,11 @@ export const getLanguageFromFile = (
       return "css";
     case "md":
       return "markdown";
+    case "sh":
+    case "shell":
+    case "bash":
+    case "zsh":
+      return "shell";
     default:
       return "markdown";
   }
@@ -203,6 +211,7 @@ export const getCodeMirrorLanguage = (
     html: html(),
     css: css(),
     markdown: markdown(),
+    shell: Language.
   };
 
   return options[extension];
