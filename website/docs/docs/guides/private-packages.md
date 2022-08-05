@@ -14,7 +14,7 @@ title: Private packages
 
 **You'll need:**
 - Host a Node.js server, which will run registry proxy;
-- GitHub/NPM authentication token with at least read access;
+- GitHub/NPM authentication token with read access;
 
 ## Self-host the proxy
 
