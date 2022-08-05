@@ -14,7 +14,7 @@ This project relies on [Verdaccio](https://verdaccio.org/), an open-source proje
 ## How to use
 
 1. Host this project somewhere, and make sure it has permission to create new folders and files - Verdaccio needs to create temp storage to perform some optimizations;
-2. Configure your project correctly, for example, if you want to proxy NPM, GitHub, or both. You can find instructions on `/index.js`;
+2. Configure your project correctly, for example, if you want to proxy NPM, GitHub, or both. You can find instructions in `/index.js`;
 3. Set the environments variables, considering the type of registry you want to use;
 
 
