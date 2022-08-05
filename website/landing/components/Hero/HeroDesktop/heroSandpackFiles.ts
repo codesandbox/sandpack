@@ -87,6 +87,7 @@ const common = `import { styled } from './stitches.config';
 
 const Stack = styled("div", {
   display: "flex",
+  lineHeight: 1,
   variants: {
     horizontal: {
       true: {
