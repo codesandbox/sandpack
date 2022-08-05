@@ -1469,24 +1469,12 @@
     "@lezer/common" "^0.15.5"
     "@lezer/lr" "^0.15.0"
 
-"@codemirror/language@^6.0.0":
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/@codemirror/language/-/language-6.2.1.tgz#cb10cd785a76e50ecd2fe2dc59ff66af8a41b87a"
-  integrity sha512-MC3svxuvIj0MRpFlGHxLS6vPyIdbTr2KKPEW46kCoCXw2ktb4NTkpkPBI/lSP/FoNXLCBJ0mrnUi1OoZxtpW1Q==
+"@codemirror/legacy-modes@^0.19.1":
+  version "0.19.1"
+  resolved "https://registry.yarnpkg.com/@codemirror/legacy-modes/-/legacy-modes-0.19.1.tgz#7dc3b5df1842060648f75764ab6919fcfce3ea1a"
+  integrity sha512-vYPLsD/ON+3SXhlGj9Qb3fpFNNU3Ya/AtDiv/g3OyqVzhh5vs5rAnOvk8xopGWRwppdhlNPD9VyXjiOmZUQtmQ==
   dependencies:
-    "@codemirror/state" "^6.0.0"
-    "@codemirror/view" "^6.0.0"
-    "@lezer/common" "^1.0.0"
-    "@lezer/highlight" "^1.0.0"
-    "@lezer/lr" "^1.0.0"
-    style-mod "^4.0.0"
-
-"@codemirror/legacy-modes@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@codemirror/legacy-modes/-/legacy-modes-6.1.0.tgz#f1c6d504069509c8d3d9220453132e559477400c"
-  integrity sha512-V/PgGpndkZeTn3Hdlg/gd8MLFdyvTCIX+iwJzjUw5iNziWiNsAY8X0jvf7m3gSfxnKkNzmid6l0g4rYSpiDaCw==
-  dependencies:
-    "@codemirror/language" "^6.0.0"
+    "@codemirror/stream-parser" "^0.19.0"
 
 "@codemirror/lint@^0.19.0":
   version "0.19.6"
@@ -1533,12 +1521,7 @@
   dependencies:
     "@codemirror/text" "^0.19.0"
 
-"@codemirror/state@^6.0.0":
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/@codemirror/state/-/state-6.1.1.tgz#4f512e5e34ea23a5e10b2c1fe43f6195e90417bb"
-  integrity sha512-2s+aXsxmAwnR3Rd+JDHPG/1lw0YsA9PEwl7Re88gHJHGfxyfEzKBmsN4rr53RyPIR4lzbbhJX0DCq0WlqlBIRw==
-
-"@codemirror/stream-parser@^0.19.9":
+"@codemirror/stream-parser@^0.19.0", "@codemirror/stream-parser@^0.19.9":
   version "0.19.9"
   resolved "https://registry.yarnpkg.com/@codemirror/stream-parser/-/stream-parser-0.19.9.tgz#34955ea91a8047cf72abebd5ce28f0d332aeca48"
   integrity sha512-WTmkEFSRCetpk8xIOvV2yyXdZs3DgYckM0IP7eFi4ewlxWnJO/H4BeJZLs4wQaydWsAqTQoDyIwNH1BCzK5LUQ==
@@ -1571,15 +1554,6 @@
     "@codemirror/rangeset" "^0.19.5"
     "@codemirror/state" "^0.19.3"
     "@codemirror/text" "^0.19.0"
-    style-mod "^4.0.0"
-    w3c-keyname "^2.2.4"
-
-"@codemirror/view@^6.0.0":
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/@codemirror/view/-/view-6.2.0.tgz#bae4c486a84174bd9656af9c9d2bd709d5b26c9f"
-  integrity sha512-3emW1symh+GoteFMBPsltjmF790U/trouLILATh3JodbF/z98HvcQh2g3+H6dfNIHx16uNonsAF4mNzVr1TJNA==
-  dependencies:
-    "@codemirror/state" "^6.0.0"
     style-mod "^4.0.0"
     w3c-keyname "^2.2.4"
 
@@ -4043,24 +4017,12 @@
   resolved "https://registry.yarnpkg.com/@lezer/common/-/common-0.15.12.tgz#2f21aec551dd5fd7d24eb069f90f54d5bc6ee5e9"
   integrity sha512-edfwCxNLnzq5pBA/yaIhwJ3U3Kz8VAUOTRg0hhxaizaI1N+qxV7EXDv/kLCkLeq2RzSFvxexlaj5Mzfn2kY0Ig==
 
-"@lezer/common@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@lezer/common/-/common-1.0.0.tgz#1c95ae53ec17706aa3cbcc88b52c23f22ed56096"
-  integrity sha512-ohydQe+Hb+w4oMDvXzs8uuJd2NoA3D8YDcLiuDsLqH+yflDTPEpgCsWI3/6rH5C3BAedtH1/R51dxENldQceEA==
-
 "@lezer/css@^0.15.2":
   version "0.15.2"
   resolved "https://registry.yarnpkg.com/@lezer/css/-/css-0.15.2.tgz#e96995da67df90bb4b191aaa8a486349cca5d8e7"
   integrity sha512-tnMOMZY0Zs6JQeVjqfmREYMV0GnmZR1NitndLWioZMD6mA7VQF/PPKPmJX1f+ZgVZQc5Am0df9mX3aiJnNJlKQ==
   dependencies:
     "@lezer/lr" "^0.15.0"
-
-"@lezer/highlight@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@lezer/highlight/-/highlight-1.0.0.tgz#1dc82300f5d39fbd67ae1194b5519b4c381878d3"
-  integrity sha512-nsCnNtim90UKsB5YxoX65v3GEIw3iCHw9RM2DtdgkiqAbKh9pCdvi8AWNwkYf10Lu6fxNhXPpkpHbW6mihhvJA==
-  dependencies:
-    "@lezer/common" "^1.0.0"
 
 "@lezer/html@^0.15.0":
   version "0.15.1"
@@ -4082,13 +4044,6 @@
   integrity sha512-bM6oE6VQZ6hIFxDNKk8bKPa14hqFrV07J/vHGOeiAbJReIaQXmkVb6xQu4MR+JBTLa5arGRyAAjJe1qaQt3Uvg==
   dependencies:
     "@lezer/common" "^0.15.0"
-
-"@lezer/lr@^1.0.0":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@lezer/lr/-/lr-1.2.1.tgz#481756627185629179a25d0eb2d690c39cd20541"
-  integrity sha512-RpHRs+Q+5tPsXtobSfSeRFRAnTRD0e4bApDvo74O+JiaWq9812x5S8WgftNX67owdaTQXCB5E8XZGALo4Wt77A==
-  dependencies:
-    "@lezer/common" "^1.0.0"
 
 "@lezer/markdown@^0.15.0":
   version "0.15.6"

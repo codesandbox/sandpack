@@ -45,7 +45,7 @@
     "@codemirror/lang-javascript": "^0.19.3",
     "@codemirror/lang-markdown": "^0.19.3",
     "@codemirror/language": "^0.19.7",
-    "@codemirror/legacy-modes": "^6.1.0",
+    "@codemirror/legacy-modes": "^0.19.1",
     "@codemirror/matchbrackets": "^0.19.3",
     "@codemirror/state": "^0.19.6",
     "@codemirror/stream-parser": "^0.19.9",
