@@ -38,17 +38,14 @@
     "build:client": {
       "name": "Build: client",
       "command": "yarn workspace @codesandbox/sandpack-client build",
-      "runAtStart": true
     },
     "build:themes": {
       "name": "Build: themes",
       "command": "yarn workspace @codesandbox/sandpack-themes build",
-      "runAtStart": true
     },
     "build:react": {
       "name": "Build: react",
       "command": "yarn workspace @codesandbox/sandpack-react build",
-      "runAtStart": true
     },
     "format": {
       "name": "Format Workspace",
