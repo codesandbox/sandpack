@@ -24,10 +24,8 @@ export const ReactDevTool: React.FC = () => {
         <p>Primitives</p>
         <button onClick={() => console.log("Lorem ipsum")}>string</button>
         <button onClick={() => console.log(123)}>number</button>
-        <button onClick={() => console.log(BigInt(123))}>bigint</button>
         <button onClick={() => console.log(true)}>boolean</button>
         <button onClick={() => console.log(undefined)}>undefined</button>
-        <button onClick={() => console.log(Symbol("foo"))}>symbol</button>
         <button onClick={() => console.log(null)}>null</button>
 
         <p>Others</p>
@@ -35,9 +33,16 @@ export const ReactDevTool: React.FC = () => {
         <button onClick={() => console.log(NaN)}>NaN</button>
         <button onClick={() => console.log(new RegExp("//"))}>Regex</button>
         <button onClick={() => console.log(new Error("Foo"))}>Error</button>
-        <button onClick={() => console.log(document.createElement("a"))}>Log node</button>
+
+        <button onClick={() => console.log(document.querySelector("button"))}>Log a node</button>
+        <button onClick={() => console.log(document.querySelectorAll("button"))}>Log nodes</button>
+
         <button onClick={() => console.log(()=>{}, function foo(){})}>Log function</button>
+
+        <button onClick={() => console.log(new Map().set("foo", []))}>Log map</button>
+
         <button onClick={() => console.log({ foo: [] })}>Log object</button>
+        <button onClick={() => console.log({foo: [], baz: () => {}})}>Log object II</button>
         <button onClick={() => console.log(["foo", 123, [], ["foo2"], () => {}])}>Multiples types</button>
         <button onClick={() => {
           console.log("foo", "baz")
@@ -60,6 +65,16 @@ export const ReactDevTool: React.FC = () => {
         <SandpackCodeEditor />
         <SandpackPreview />
       </SandpackLayout>
+
+      <SandpackLayout style={{ marginTop: 12 }}>
+        <SandpackConsole
+          showClearButton={showClearButton}
+          showHeader={showHeader}
+          showSyntaxError={showSyntaxErrors}
+        />
+      </SandpackLayout>
+
+      <br />
 
       <label>
         <input
@@ -87,14 +102,6 @@ export const ReactDevTool: React.FC = () => {
         />
         Show syntax errors
       </label>
-
-      <SandpackLayout style={{ marginTop: 12 }}>
-        <SandpackConsole
-          showClearButton={showClearButton}
-          showHeader={showHeader}
-          showSyntaxError={showSyntaxErrors}
-        />
-      </SandpackLayout>
     </SandpackProvider>
   );
 };

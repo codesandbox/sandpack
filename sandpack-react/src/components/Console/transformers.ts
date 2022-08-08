@@ -16,6 +16,7 @@ const SET_SUPPORTED = typeof Set === "function";
 
 export type TransformsTypes =
   | "Function"
+  | "HTMLElement"
   | "[[NaN]]"
   | "[[undefined]]"
   | "[[Date]]"
@@ -31,6 +32,29 @@ export type TransformsTypes =
 type Transforms = Record<TransformsTypes, (...params: any) => any>;
 
 export const transformers: Transforms = {
+  HTMLElement: (data: {
+    tagName: string;
+    attributes: Record<string, string>;
+    innerHTML: string;
+  }) => {
+    const sandbox = document.implementation.createHTMLDocument("sandbox");
+
+    try {
+      const element = sandbox.createElement(data.tagName);
+      element.innerHTML = data.innerHTML;
+
+      for (const attribute of Object.keys(data.attributes)) {
+        try {
+          element.setAttribute(attribute, data.attributes[attribute]);
+        } catch {
+          //
+        }
+      }
+      return element;
+    } catch (e) {
+      return data;
+    }
+  },
   Function: (data) => {
     const tempFun = () => {};
 

@@ -79,6 +79,7 @@ export const SandpackConsole: React.FC<
                       initMode="user-visible"
                       showReadOnly={false}
                       readOnly
+                      wrapContent
                     />
                   </div>
                 );

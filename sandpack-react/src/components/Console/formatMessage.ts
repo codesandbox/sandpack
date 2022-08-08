@@ -42,14 +42,34 @@ const format = (message: Message): any => {
     const transform = transformers[type];
 
     return transform(message.data);
+  } else if (typeof message === "object") {
+    return Object.entries(message).reduce<Message>(
+      (acc, [key, value]: [string, Message]) => {
+        acc[key] = format(value);
+
+        return acc;
+      },
+      {}
+    );
   }
 
   return message;
 };
 
 export const formatMessage = (message: Message): string | number => {
-  console.log(message);
-  const output = format(message);
+  let input = message;
+  if (typeof message === "object" && message?.constructor.name === "NodeList") {
+    input = [];
+
+    // TODO: support object with constructor name
+    Object.keys(message).forEach((item) => {
+      if (!isNaN(item)) {
+        input.push(message[item]);
+      }
+    });
+  }
+
+  const output = format(input);
 
   if (Array.isArray(output)) {
     const mergeArray = output.reduce<string>((acc, curr, index) => {
@@ -68,14 +88,44 @@ export const formatMessage = (message: Message): string | number => {
     case "symbol":
       return output.toString();
 
+    case "boolean":
+      return String(output);
+
     case "undefined":
       return "undefined";
 
     case "object":
     default:
-      if (output instanceof RegExp || output instanceof Error) {
+      if (
+        output instanceof RegExp ||
+        output instanceof Error ||
+        output instanceof Date
+      ) {
         return output.toString();
       }
+
+      if (output === null) {
+        return String(null);
+      }
+
+      if (output instanceof HTMLElement) {
+        return output.outerHTML;
+      }
+
+      // if (Object.entries(output).length === 0) {
+      //   return output;
+      // }
+
+      // const formattedObject = Object.entries(output).reduce<Message>(
+      //   (acc, [key, value]: [string, Message]) => {
+      //     acc[key] = formatMessage(value);
+
+      //     return acc;
+      //   },
+      //   {}
+      // );
+
+      // console.log(formattedObject);
 
       return JSON.stringify(output);
   }
