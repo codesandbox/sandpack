@@ -51,8 +51,7 @@ const files = {
   color: white;
   line-height: 17px;
 }`,
-  "/App.js": `import "@codesandbox/sandpack-react/dist/index.css"
-import { 
+  "/App.js": `import { 
   SandpackProvider, 
   SandpackThemeProvider, 
   SandpackCodeViewer 
