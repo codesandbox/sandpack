@@ -15,6 +15,11 @@
     "**/html-minifier-terser"
   ],
   "description": "",
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@codemirror/legacy-modes)/)"
+    ]
+  },
   "scripts": {
     "lint": "eslint '**/*.ts?(x)' --fix",
     "format:check": "prettier --check '**/*.{ts,tsx}'",
