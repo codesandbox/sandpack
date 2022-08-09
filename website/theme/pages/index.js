@@ -117,6 +117,7 @@ export default function Home() {
                 showLineNumbers: true,
                 showInlineErrors: true,
                 showNavigator: true,
+                showTabs: true,
               }}
               template="react"
               theme={theme}
