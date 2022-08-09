@@ -161,7 +161,11 @@ export interface NpmRegistry {
   enabledScopes: string[];
   limitToScopes: boolean;
   registryUrl: string;
-  proxyEnabled: false;
+  /**
+   * It must be `false` if you're providing a sef-host solution,
+   * otherwise, it'll try to proxy from CodeSandbox Proxy
+   */
+  proxyEnabled: boolean;
   registryAuthToken?: string;
 }
 
