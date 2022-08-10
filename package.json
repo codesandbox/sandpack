@@ -18,7 +18,7 @@
   "scripts": {
     "lint": "eslint '**/*.ts?(x)' --fix",
     "format:check": "prettier --check '**/*.{ts,tsx}'",
-    "format": "prettier --write '**/*.{ts,tsx}'",
+    "format": "prettier --write '**/*.{ts,tsx,js,jsx}'",
     "test": "TEST_ENV=true jest sandpack-react sandpack-client",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
