@@ -121,6 +121,9 @@ export default function Home() {
                 showLineNumbers: true,
                 showInlineErrors: true,
                 showNavigator: true,
+                showTabs: true,
+                closableTabs: true,
+                visibleFiles: ["/App.js", "/index.js", "/public/index.html", "/styles.css"]
               }}
               template="react"
               theme={theme}
@@ -137,26 +140,26 @@ export default function Home() {
               </ContainerPre>
             </SandpackProvider>
 
-<div style={{display: "flex", gap: "4em"}}>
-            <p>
-              <a
-                href="https://sandpack.codesandbox.io/docs/getting-started/themes#custom-theme"
-                rel="noreferrer"
-                target="_blank"
-              >
-                How to use a custom theme?
-              </a>
-            </p>
-            
-            <p>
-              <a
-                href="https://sandpack.codesandbox.io/docs/community#contribution-guide"
-                rel="noreferrer"
-                target="_blank"
-              >
-                Publish it to @codesandbox/sandpack-themes
-              </a>
-            </p>
+            <div style={{ display: "flex", gap: "2em" }}>
+              <p>
+                <a
+                  href="https://sandpack.codesandbox.io/docs/getting-started/themes#custom-theme"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  How to use a custom theme?
+                </a>
+              </p>
+
+              <p>
+                <a
+                  href="https://sandpack.codesandbox.io/docs/community#contribution-guide"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Publish it to @codesandbox/sandpack-themes
+                </a>
+              </p>
             </div>
           </ContainerSandpack>
         </ContainerCode>
