@@ -1,4 +1,8 @@
-import { Sandpack } from "@codesandbox/sandpack-react";
+import {
+  Sandpack,
+  SandpackProvider,
+  SandpackCodeViewer,
+} from "@codesandbox/sandpack-react";
 import * as themeGallery from "@codesandbox/sandpack-themes";
 import Container, {
   ContainerControls,
@@ -117,6 +121,9 @@ export default function Home() {
                 showLineNumbers: true,
                 showInlineErrors: true,
                 showNavigator: true,
+                showTabs: true,
+                closableTabs: true,
+                visibleFiles: ["/App.js", "/index.js", "/public/index.html", "/styles.css"]
               }}
               template="react"
               theme={theme}
@@ -126,7 +133,34 @@ export default function Home() {
           <Title>Export</Title>
 
           <ContainerSandpack>
-            <ContainerPre>{JSON.stringify(theme, null, 2)}</ContainerPre>
+            <SandpackProvider>
+              <ContainerPre>
+                {" "}
+                <SandpackCodeViewer code={JSON.stringify(theme, null, 2)} />
+              </ContainerPre>
+            </SandpackProvider>
+
+            <div style={{ display: "flex", gap: "2em" }}>
+              <p>
+                <a
+                  href="https://sandpack.codesandbox.io/docs/getting-started/themes#custom-theme"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  How to use a custom theme?
+                </a>
+              </p>
+
+              <p>
+                <a
+                  href="https://sandpack.codesandbox.io/docs/community#contribution-guide"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Publish it to @codesandbox/sandpack-themes
+                </a>
+              </p>
+            </div>
           </ContainerSandpack>
         </ContainerCode>
       </Container>
@@ -235,11 +269,11 @@ function Advanced({ theme, updateTheme }) {
       })}
 
       <Divider />
-      <Title>font</Title>
+      <Title>Font</Title>
 
       <InputContainer>
         <Input
-          label="body"
+          label="Body"
           onChange={(e) => {
             setTypeControls({ ...typeControls, body: e.target.value });
             updateTheme("font.body", e.target.value);
@@ -248,7 +282,7 @@ function Advanced({ theme, updateTheme }) {
           value={typeControls.body}
         />
         <Input
-          label="mono"
+          label="Mono"
           onChange={(e) => {
             setTypeControls({ ...typeControls, mono: e.target.value });
             updateTheme("font.mono", e.target.value);
@@ -258,7 +292,7 @@ function Advanced({ theme, updateTheme }) {
         />
         <Input
           grid="2"
-          label="size (px)"
+          label="Size (px)"
           onChange={(e) => {
             setTypeControls({ ...typeControls, size: e.target.value });
             updateTheme("font.size", `${e.target.value}px`);
@@ -268,13 +302,13 @@ function Advanced({ theme, updateTheme }) {
         />
         <Input
           grid="2"
-          label="lineHeight"
+          label="Line-height (px)"
           onChange={(e) => {
             setTypeControls({
               ...typeControls,
               lineHeight: e.target.value,
             });
-            updateTheme("font.lineHeight", e.target.value);
+            updateTheme("font.lineHeight", `${e.target.value}px`);
           }}
           type="number"
           value={typeControls.lineHeight}
