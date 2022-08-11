@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/codesandbox/sandpack/compare/v1.4.0...v1.5.0) (2022-08-11)
+
+
+### Features
+
+* **themes:** dracula 🧛 ([#551](https://github.com/codesandbox/sandpack/issues/551)) ([88cbc83](https://github.com/codesandbox/sandpack/commit/88cbc83797122a5241e6ee819255246064538f32))
+
+
+
+
+
 ## [1.3.4](https://github.com/codesandbox/sandpack/compare/v1.3.3...v1.3.4) (2022-08-05)
 
 
