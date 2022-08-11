@@ -10,8 +10,8 @@ export const nightOwl: SandpackTheme = {
     disabled: "#4D4D4D",
     hover: "#c5e4fd",
     accent: "#c5e4fd",
-    error: "#811e18",
-    errorSurface: "#ffcdca",
+    error: "#ffcdca",
+    errorSurface: "#811e18",
   },
   syntax: {
     plain: "#d6deeb",

@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.5](https://github.com/codesandbox/sandpack/compare/v1.3.4...v1.3.5) (2022-08-10)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [1.3.4](https://github.com/codesandbox/sandpack/compare/v1.3.3...v1.3.4) (2022-08-05)
+
+
+### Bug Fixes
+
+* **themes:** tweak error surface contrast ([#548](https://github.com/codesandbox/sandpack/issues/548)) ([d9120c9](https://github.com/codesandbox/sandpack/commit/d9120c9f42bc5ab75619332cb44197e5e8d43b13))
+* **website:** ui tweaks ([b07c378](https://github.com/codesandbox/sandpack/commit/b07c378d04f5441ecea8b9718ddb0d494c0aa60e))
+
+
+
+
+
+## [1.3.3](https://github.com/codesandbox/sandpack/compare/v1.3.2...v1.3.3) (2022-08-04)
+
+
+### Bug Fixes
+
+* **syntax highlight:** default json to javascript ([f6b29e5](https://github.com/codesandbox/sandpack/commit/f6b29e5c8cb9c1caabba97f62974b357be04330f))
+
+
+
+
+
+## [1.3.2](https://github.com/codesandbox/sandpack/compare/v1.3.1...v1.3.2) (2022-07-29)
+
+
+### Bug Fixes
+
+* **client:** update bundler ([bb6d9c1](https://github.com/codesandbox/sandpack/commit/bb6d9c175568b26f51a11b84e44ceba7fcf3d74c))
+
+
+
+
+
 ## [1.3.1](https://github.com/codesandbox/sandpack/compare/v1.3.0...v1.3.1) (2022-07-25)
 
 **Note:** Version bump only for package sandpack

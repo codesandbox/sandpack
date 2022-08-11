@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useClipboard } from "use-clipboard-copy";
 
 import styles from "./Container.module.scss";
 
@@ -59,25 +58,7 @@ export function ContainerColors({ children, isActive }) {
 //ContainerPre
 
 export function ContainerPre({ children }) {
-  const clipboard = useClipboard();
-
-  const selectAll = (e) => {
-    let pre = e.target;
-    if (pre) {
-      let range = new Range();
-      range.setStart(pre, 0);
-      range.setEnd(pre, 1);
-      document.getSelection().removeAllRanges();
-      document.getSelection().addRange(range);
-      clipboard.copy(children);
-    }
-  };
-
-  return (
-    <div className={styles.containerPre}>
-      <pre onClick={selectAll}>{children}</pre>
-    </div>
-  );
+  return <div className={styles.containerPre}>{children}</div>;
 }
 
 //ContainerSandpack

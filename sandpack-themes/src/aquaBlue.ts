@@ -13,8 +13,8 @@ export const aquaBlue: SandpackTheme = {
 
     accent: "#2e7692",
 
-    error: "#ffcdca",
-    errorSurface: "#811e18",
+    error: "#811e18",
+    errorSurface: "#ffcdca",
   },
 
   syntax: {
