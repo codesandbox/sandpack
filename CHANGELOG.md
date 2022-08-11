@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/codesandbox/sandpack/compare/v1.3.5...v1.4.0) (2022-08-11)
+
+
+### Features
+
+* **custom-setup:** introduce custom npm registries ([#542](https://github.com/codesandbox/sandpack/issues/542)) ([1fd8b99](https://github.com/codesandbox/sandpack/commit/1fd8b997e3e95bc76026e3de1a5c267859d92c82))
+
+
+
+
+
 ## [1.3.5](https://github.com/codesandbox/sandpack/compare/v1.3.4...v1.3.5) (2022-08-10)
 
 **Note:** Version bump only for package sandpack

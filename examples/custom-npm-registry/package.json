@@ -1,6 +1,6 @@
 {
   "name": "custom-npm-registry",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "description": "",
   "dependencies": {
     "@verdaccio/node-api": "^6.0.0-6-next.32",
@@ -8,7 +8,6 @@
   },
   "license": "Apache-2.0",
   "author": "CodeSandbox",
-  "devDependencies": {},
   "scripts": {
     "start": "node index.js"
   },
