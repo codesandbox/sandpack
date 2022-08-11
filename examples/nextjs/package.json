@@ -2,6 +2,8 @@
   "name": "nextjs",
   "private": true,
   "version": "0.0.1",
+  "license": "Apache-2.0",
+  "author": "CodeSandbox",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

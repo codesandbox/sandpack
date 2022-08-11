@@ -10,6 +10,7 @@ import type {
   SandpackMessage,
   UnsubscribeFunction,
   SandpackLogLevel,
+  NpmRegistry,
 } from "@codesandbox/sandpack-client";
 import type React from "react";
 
@@ -194,6 +195,22 @@ export interface SandpackSetup {
    * they are designed to mirror the default behavior of the framework
    */
   environment?: SandboxEnvironment;
+
+  /**
+   * The custom private npm registry setting makes it possible
+   * to retrieve npm packages from your own npm registry.
+   *
+   * Examples:
+   * ```js
+   * {
+   *   enabledScopes: ["@codesandbox"],
+   *   registryUrl: "//my-registry.domain.com",
+   *   limitToScopes: true, // if false all packages will be fetched from custom registry
+   *   registryAuthToken: "SECRET" // optinal value, if public
+   * }
+   * ```
+   */
+  npmRegistries?: NpmRegistry[];
 }
 
 /**

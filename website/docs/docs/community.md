@@ -107,9 +107,21 @@ Our goal is to keep our docs comprehensive and updated. If you would like to hel
 - Fix errors and possible typos in existing docs
 - Help us add more guides to our docs
 
-#### Plugins
+#### Themes
 
-Empowering developers to include live coding experiences over the web is our key goal. The make this happen, accessibility is essential. With plugins, anyone can provide an easy way to get started with Sandpack.
+We're open to supporting new Sandpack themes because our key goal is empowering developers to include a custom live coding experiences over the web. That's why we provide plenty of options under `@codesandbox/sandpack-themes,` and we want even more options. So, how contribute to new thems?
+
+1. Create a new file in [codesandbox/sandpack/sandpack-themes/src](https://github.com/codesandbox/sandpack/tree/main/sandpack-themes/src) folder with following file `[theme name].ts`
+2. The content of this file must be an export for an object that contains the theme:
+
+```js
+import type { SandpackTheme } from "./types";	 
+
+export const themeName: SandpackTheme = {
+   ...themeObject
+}
+```
+3. Include your new theme into the [`index.ts`](https://github.com/codesandbox/sandpack/blob/main/sandpack-themes/src/index.ts) file, that exposes all themes.
 
 #### Features
 

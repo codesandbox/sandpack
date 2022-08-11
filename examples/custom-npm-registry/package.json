@@ -1,0 +1,23 @@
+{
+  "name": "custom-npm-registry",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "@verdaccio/node-api": "^6.0.0-6-next.32",
+    "@verdaccio/ui-theme": "^3.4.1"
+  },
+  "license": "Apache-2.0",
+  "author": "CodeSandbox",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danilowoz/sandpack-proxy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/danilowoz/sandpack-proxy/issues"
+  },
+  "homepage": "https://github.com/danilowoz/sandpack-proxy#readme"
+}
