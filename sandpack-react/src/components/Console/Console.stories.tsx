@@ -39,8 +39,6 @@ export const ReactDevTool: React.FC = () => {
 
         <button onClick={() => console.log(()=>{}, function foo(){})}>Log function</button>
 
-        <button onClick={() => console.log(new Map().set("foo", []))}>Log map</button>
-
         <button onClick={() => console.log({ foo: [] })}>Log object</button>
         <button onClick={() => console.log({foo: [], baz: () => {}})}>Log object II</button>
         <button onClick={() => console.log(["foo", 123, [], ["foo2"], () => {}])}>Multiples types</button>
