@@ -60,19 +60,6 @@ export const SandpackConsole: React.FC<
             return (
               <React.Fragment key={id}>
                 {data.map((msg, index) => {
-                  if (typeof msg === "string") {
-                    return (
-                      <div
-                        key={`${id}-${index}`}
-                        className={classNames(
-                          consoleItemClassName({ variant })
-                        )}
-                      >
-                        {msg}
-                      </div>
-                    );
-                  }
-
                   return (
                     <div
                       key={`${id}-${index}`}

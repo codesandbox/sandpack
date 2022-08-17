@@ -15,6 +15,12 @@ const references = [
     "@t": "Function",
     data: { name: "", body: "", proto: "Function" },
   },
+  [{ "@r": 1 }],
+  "foo",
+  [123, { "@r": 3 }],
+  // self-pointing
+  [{ "@r": 6 }],
+  { foo: { "@r": 5 } },
 ];
 
 const cases: Array<[Message, string]> = [
@@ -30,6 +36,10 @@ const cases: Array<[Message, string]> = [
   [Symbol("foo"), "Symbol(foo)"],
   [null, "null"],
   [Infinity, "Infinity"],
+  [
+    { constructor: { name: "CustomThing" } },
+    'CustomThing { constructor: { name: "CustomThing" } }',
+  ],
 
   /**
    * Function
@@ -127,6 +137,12 @@ const cases: Array<[Message, string]> = [
    * Recursive references
    */
   [{ "@r": 1 }, "function () {}"],
+  [{ "@r": 2 }, "[function () {}]"],
+  [{ "@r": 4 }, '[123, "foo"]'],
+  [
+    { "@r": 5 },
+    "[{ foo: [{ foo: [{ foo: [{ foo: [{ foo: [Unable to print information] }] }] }] }] }]",
+  ],
 ];
 
 describe(fromConsoleToString, () => {
