@@ -15,11 +15,11 @@ export const getType = (
     return "clear";
   }
 
-  return "error";
+  return "info";
 };
 
 export type SandpackConsoleData = Array<{
-  data: Array<string | Record<string, string>>;
+  data: Array<string | Record<string, string>> | undefined;
   id: string;
   method: SandpackMessageConsoleMethods;
 }>;

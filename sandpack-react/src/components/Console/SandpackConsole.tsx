@@ -7,7 +7,7 @@ import { CodeEditor } from "../CodeEditor";
 
 import { Button } from "./Button";
 import { Header } from "./Header";
-import { formatMessage } from "./formatMessage";
+import { fromConsoleToString } from "./fromConsoleToString";
 import { useSandpackConsole } from "./useSandpackConsole";
 import { getType } from "./utils";
 
@@ -51,41 +51,49 @@ export const SandpackConsole: React.FC<
           css({ overflow: "auto", scrollBehavior: "smooth" })
         )}
       >
-        {logs.map(({ data, id, method }) => {
+        {logs.map(({ data, id, method }, _index, references) => {
+          if (!data) return null;
+
           const variant = getType(method);
 
-          return (
-            <React.Fragment key={id}>
-              {data.map((msg, index) => {
-                if (typeof msg === "string") {
+          if (Array.isArray(data)) {
+            return (
+              <React.Fragment key={id}>
+                {data.map((msg, index) => {
+                  if (typeof msg === "string") {
+                    return (
+                      <div
+                        key={`${id}-${index}`}
+                        className={classNames(
+                          consoleItemClassName({ variant })
+                        )}
+                      >
+                        {msg}
+                      </div>
+                    );
+                  }
+
                   return (
                     <div
                       key={`${id}-${index}`}
                       className={classNames(consoleItemClassName({ variant }))}
                     >
-                      {msg}
+                      <CodeEditor
+                        code={fromConsoleToString(msg, references)}
+                        fileType="js"
+                        initMode="user-visible"
+                        showReadOnly={false}
+                        readOnly
+                        wrapContent
+                      />
                     </div>
                   );
-                }
+                })}
+              </React.Fragment>
+            );
+          }
 
-                return (
-                  <div
-                    key={`${id}-${index}`}
-                    className={classNames(consoleItemClassName({ variant }))}
-                  >
-                    <CodeEditor
-                      code={formatMessage(msg)}
-                      fileType="js"
-                      initMode="user-visible"
-                      showReadOnly={false}
-                      readOnly
-                      wrapContent
-                    />
-                  </div>
-                );
-              })}
-            </React.Fragment>
-          );
+          return null;
         })}
       </div>
 

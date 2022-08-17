@@ -27,11 +27,25 @@ export type TransformsTypes =
   | "[[ArrayBuffer]]"
   | "[[TypedArray]]"
   | "[[Map]]"
-  | "[[Set]]";
+  | "[[Set]]"
+  | "Arithmetic";
 
 type Transforms = Record<TransformsTypes, (...params: any) => any>;
 
+enum Arithmetic {
+  infinity,
+  minusInfinity,
+  minusZero,
+}
+
 export const transformers: Transforms = {
+  Arithmetic: (data) => {
+    if (data === Arithmetic.infinity) return Infinity;
+    if (data === Arithmetic.minusInfinity) return -Infinity;
+    if (data === Arithmetic.minusZero) return -0;
+
+    return data;
+  },
   HTMLElement: (data: {
     tagName: string;
     attributes: Record<string, string>;

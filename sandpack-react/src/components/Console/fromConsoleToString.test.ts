@@ -1,11 +1,21 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import jsdom from "jsdom";
 
-import type { Message } from "./formatMessage";
-import { formatMessage } from "./formatMessage";
+import type { Message } from "./fromConsoleToString";
+import { fromConsoleToString } from "./fromConsoleToString";
 
 global.window = new jsdom.JSDOM().window;
 global.document = window.document;
 global.HTMLElement = window.HTMLElement;
+
+const references = [
+  null, // the first item is the log itself
+  {
+    "@t": "Function",
+    data: { name: "", body: "", proto: "Function" },
+  },
+];
 
 const cases: Array<[Message, string]> = [
   /**
@@ -14,11 +24,12 @@ const cases: Array<[Message, string]> = [
   ["Lorem ipsum", '"Lorem ipsum"'],
   [123, "123"],
   [true, "true"],
-  [{ data: {} }, '{"data":{}}'],
+  [{ data: {} }, "{ data: {} }"],
   [[], "[]"],
   [{ "@t": "[[undefined]]", data: "" }, "undefined"],
   [Symbol("foo"), "Symbol(foo)"],
   [null, "null"],
+  [Infinity, "Infinity"],
 
   /**
    * Function
@@ -79,7 +90,17 @@ const cases: Array<[Message, string]> = [
         data: { name: "baz", body: "", proto: "Function" },
       },
     },
-    '{"foo":"[Mon Aug 08 2022 17:14:53 GMT+0100 (Western European Summer Time)]","baz":function baz() {}}',
+    "{ foo: [Mon Aug 08 2022 17:14:53 GMT+0100 (Western European Summer Time)], baz: function baz() {} }",
+  ],
+  [
+    {
+      foo: { anotherFoo: [123, "string", []] },
+      baz: {
+        "@t": "Function",
+        data: { name: "baz", body: "", proto: "Function" },
+      },
+    },
+    '{ foo: { anotherFoo: [123, "string", []] }, baz: function baz() {} }',
   ],
   [
     [
@@ -97,15 +118,21 @@ const cases: Array<[Message, string]> = [
           data: { name: "anotherFunction", body: "", proto: "Function" },
         },
       ],
+      { "@t": "[[Date]]", data: 1659975293702 },
     ],
-    '[123, "foo", function myFunction() {}, [123, "anotherFoo", function anotherFunction() {}]]',
+    '[123, "foo", function myFunction() {}, [123, "anotherFoo", function anotherFunction() {}], Mon Aug 08 2022 17:14:53 GMT+0100 (Western European Summer Time)]',
   ],
+
+  /**
+   * Recursive references
+   */
+  [{ "@r": 1 }, "function () {}"],
 ];
 
-describe(formatMessage, () => {
+describe(fromConsoleToString, () => {
   it("should format message", () => {
     cases.forEach(([input, output]) => {
-      expect(formatMessage(input)).toStrictEqual(output);
+      expect(fromConsoleToString(input, references)).toStrictEqual(output);
     });
   });
 });
