@@ -43,7 +43,10 @@ export const SandpackConsole: React.FC<
   }, [logs]);
 
   return (
-    <SandpackStack {...props}>
+    <SandpackStack
+      className={css({ height: "$layout$height !important" }).toString()}
+      {...props}
+    >
       {showHeader && <Header />}
       <div
         ref={wrapperRef}

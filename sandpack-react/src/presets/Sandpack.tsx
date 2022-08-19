@@ -3,6 +3,7 @@ import * as React from "react";
 import { SandpackLayout } from "../common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
+import { SandpackConsole } from "../components/Console";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import type {
@@ -91,6 +92,8 @@ export const Sandpack: SandpackInternal = (props) => {
             minWidth: 700 * (previewPart / (previewPart + editorPart)),
           }}
         />
+
+        {props.options?.showConsole && <SandpackConsole />}
       </SandpackLayout>
     </SandpackProvider>
   );

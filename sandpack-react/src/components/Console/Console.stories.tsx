@@ -1,7 +1,7 @@
 import React from "react";
 
 import { SandpackCodeEditor, SandpackPreview } from "..";
-import { SandpackProvider, SandpackLayout } from "../..";
+import { SandpackProvider, SandpackLayout, Sandpack } from "../..";
 
 import { SandpackConsole } from "./SandpackConsole";
 
@@ -9,7 +9,7 @@ export default {
   title: "components/Console",
 };
 
-export const ReactDevTool: React.FC = () => {
+export const Main: React.FC = () => {
   const [showHeader, setShowHeader] = React.useState(true);
   const [showClearButton, setShowClearButton] = React.useState(true);
   const [showSyntaxErrors, setShowSyntaxErrors] = React.useState(true);
@@ -104,4 +104,8 @@ export const ReactDevTool: React.FC = () => {
       </label>
     </SandpackProvider>
   );
+};
+
+export const Preset: React.FC = () => {
+  return <Sandpack options={{ showConsole: true }} />;
 };
