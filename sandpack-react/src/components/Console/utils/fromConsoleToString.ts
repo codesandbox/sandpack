@@ -5,14 +5,15 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import {
+  TRANSFORMED_TYPE_KEY,
+  MAX_NEST_LEVEL,
+  MAX_KEYS,
+  MAX_LENGTH_STRING,
+  CIRCULAR_REF_KEY,
+} from "./constraints";
 import { transformers } from "./transformers";
 import type { TransformsTypes } from "./transformers";
-
-const TRANSFORMED_TYPE_KEY = "@t";
-const CIRCULAR_REF_KEY = "@r";
-const MAX_LENGTH_STRING = 10000;
-const MAX_NEST_LEVEL = 2;
-const MAX_KEYS = 20;
 
 export type Message =
   | null
@@ -87,8 +88,10 @@ const objectToString = (
       const breakLine = entries.length > 10 ? "\n  " : "";
       const formatted = fromConsoleToString(value, references, level);
 
-      if (index > MAX_KEYS) {
+      if (index === MAX_KEYS) {
         return acc + breakLine + "...";
+      } else if (index > MAX_KEYS) {
+        return acc;
       }
 
       return acc + `${comma}${breakLine}${key}: ` + formatted;

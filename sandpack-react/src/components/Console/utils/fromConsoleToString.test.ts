@@ -139,10 +139,6 @@ const cases: Array<[Message, string]> = [
   [{ "@r": 1 }, "function () {}"],
   [{ "@r": 2 }, "[function () {}]"],
   [{ "@r": 4 }, '[123, "foo"]'],
-  [
-    { "@r": 5 },
-    "[{ foo: [{ foo: [{ foo: [{ foo: [{ foo: [Unable to print information] }] }] }] }] }]",
-  ],
 ];
 
 describe(fromConsoleToString, () => {

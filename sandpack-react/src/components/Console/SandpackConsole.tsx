@@ -7,9 +7,9 @@ import { CodeEditor } from "../CodeEditor";
 
 import { Button } from "./Button";
 import { Header } from "./Header";
-import { fromConsoleToString } from "./fromConsoleToString";
 import { useSandpackConsole } from "./useSandpackConsole";
-import { getType } from "./utils";
+import { fromConsoleToString } from "./utils/fromConsoleToString";
+import { getType } from "./utils/getType";
 
 interface SandpackConsoleProps {
   clientId?: string;
@@ -51,22 +51,31 @@ export const SandpackConsole: React.FC<
           css({ overflow: "auto", scrollBehavior: "smooth" })
         )}
       >
-        {logs.map(({ data, id, method }, _index, references) => {
+        {logs.map(({ data, id, method }, logIndex, references) => {
           if (!data) return null;
-
-          const variant = getType(method);
 
           if (Array.isArray(data)) {
             return (
               <React.Fragment key={id}>
-                {data.map((msg, index) => {
+                {data.map((msg, msgIndex) => {
+                  const fixReferences = references.slice(
+                    logIndex,
+                    references.length
+                  );
+
                   return (
                     <div
-                      key={`${id}-${index}`}
-                      className={classNames(consoleItemClassName({ variant }))}
+                      key={`${id}-${msgIndex}`}
+                      className={classNames(
+                        consoleItemClassName({ variant: getType(method) })
+                      )}
                     >
                       <CodeEditor
-                        code={fromConsoleToString(msg, references)}
+                        code={
+                          method === "clear"
+                            ? (msg as string)
+                            : fromConsoleToString(msg, fixReferences)
+                        }
                         fileType="js"
                         initMode="user-visible"
                         showReadOnly={false}

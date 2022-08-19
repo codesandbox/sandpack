@@ -2,17 +2,12 @@ import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 
-import type { SandpackConsoleData } from "./utils";
-
-const MAX_MESSAGE_COUNT = 100;
-
-const SYNTAX_ERROR_PATTERN = ["SyntaxError: ", "Error in sandbox:"];
-
-const CLEAR_LOG = {
-  id: "random",
-  method: "clear" as const,
-  data: ["Console was cleared"],
-};
+import {
+  CLEAR_LOG,
+  MAX_MESSAGE_COUNT,
+  SYNTAX_ERROR_PATTERN,
+} from "./utils/constraints";
+import type { SandpackConsoleData } from "./utils/getType";
 
 export const useSandpackConsole = ({
   clientId,

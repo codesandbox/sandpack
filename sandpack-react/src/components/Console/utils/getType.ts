@@ -3,19 +3,21 @@ import type { SandpackMessageConsoleMethods } from "@codesandbox/sandpack-client
 export const getType = (
   message: SandpackMessageConsoleMethods
 ): "info" | "warning" | "error" | "clear" => {
-  if (message === "log" || message === "info") {
-    return "info";
-  }
+  switch (message) {
+    case "warn":
+      return "warning";
 
-  if (message === "warn") {
-    return "warning";
-  }
+    case "clear":
+      return "clear";
 
-  if (message === "clear") {
-    return "clear";
-  }
+    case "error":
+      return "error";
 
-  return "info";
+    case "log":
+    case "info":
+    default:
+      return "info";
+  }
 };
 
 export type SandpackConsoleData = Array<{
