@@ -206,7 +206,7 @@ export interface SandpackSetup {
    *   enabledScopes: ["@codesandbox"],
    *   registryUrl: "//my-registry.domain.com",
    *   limitToScopes: true, // if false all packages will be fetched from custom registry
-   *   registryAuthToken: "SECRET" // optinal value, if public
+   *   registryAuthToken: "SECRET" // optional value, if public
    * }
    * ```
    */
