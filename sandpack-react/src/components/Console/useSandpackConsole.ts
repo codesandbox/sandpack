@@ -49,7 +49,11 @@ export const useSandpackConsole = ({
         if (!logsMessages) return;
 
         setLogs((prev) => {
-          const messages = [...prev, ...logsMessages];
+          const messages = [...prev, ...logsMessages].filter(
+            (value, index, self) => {
+              return index === self.findIndex((s) => s.id === value.id);
+            }
+          );
 
           while (messages.length > MAX_MESSAGE_COUNT) {
             messages.shift();
