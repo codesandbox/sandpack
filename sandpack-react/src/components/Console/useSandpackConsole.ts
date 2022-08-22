@@ -9,17 +9,18 @@ import {
 } from "./utils/constraints";
 import type { SandpackConsoleData } from "./utils/getType";
 
-export const useSandpackConsole = ({
-  clientId,
-  maxMessageCount = MAX_MESSAGE_COUNT,
-  showSyntaxError = false,
-}: {
-  clientId?: string;
-  maxMessageCount?: number;
-  showSyntaxError?: boolean;
-}): { logs: SandpackConsoleData; reset: () => void } => {
+export const useSandpackConsole = (
+  props?: {
+    clientId?: string;
+    maxMessageCount?: number;
+    showSyntaxError?: boolean;
+  }
+): { logs: SandpackConsoleData; reset: () => void } => {
   const [logs, setLogs] = React.useState<SandpackConsoleData>([]);
   const { listen } = useSandpack();
+
+  const showSyntaxError = props?.showSyntaxError ?? false;
+  const maxMessageCount = props?.maxMessageCount ?? MAX_MESSAGE_COUNT;
 
   React.useEffect(() => {
     const unsubscribe = listen((message) => {
@@ -62,10 +63,10 @@ export const useSandpackConsole = ({
           return messages;
         });
       }
-    }, clientId);
+    }, props?.clientId);
 
     return unsubscribe;
-  }, [listen, maxMessageCount, clientId, showSyntaxError]);
+  }, [listen, maxMessageCount, props, showSyntaxError]);
 
   return { logs, reset: (): void => setLogs([]) };
 };
