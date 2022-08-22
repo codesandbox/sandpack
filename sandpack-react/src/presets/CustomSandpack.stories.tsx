@@ -429,7 +429,7 @@ export const CustomNpmRegistries: React.FC = () => (
         {
           enabledScopes: ["@codesandbox"],
           limitToScopes: true,
-          registryUrl: "https://7khir3-4000.preview.csb.app",
+          registryUrl: "https://xywctu-4000.preview.csb.app",
         },
       ],
     }}
