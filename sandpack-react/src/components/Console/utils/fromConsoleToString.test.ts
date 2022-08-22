@@ -100,7 +100,7 @@ const cases: Array<[Message, string]> = [
         data: { name: "baz", body: "", proto: "Function" },
       },
     },
-    "{ foo: [Mon Aug 08 2022 17:14:53 GMT+0100 (Western European Summer Time)], baz: function baz() {} }",
+    "{ foo: [Mon Aug 08 2022 16:14:53 GMT+0000 (Coordinated Universal Time)], baz: function baz() {} }",
   ],
   [
     {
@@ -130,7 +130,7 @@ const cases: Array<[Message, string]> = [
       ],
       { "@t": "[[Date]]", data: 1659975293702 },
     ],
-    '[123, "foo", function myFunction() {}, [123, "anotherFoo", function anotherFunction() {}], Mon Aug 08 2022 17:14:53 GMT+0100 (Western European Summer Time)]',
+    '[123, "foo", function myFunction() {}, [123, "anotherFoo", function anotherFunction() {}], Mon Aug 08 2022 16:14:53 GMT+0000 (Coordinated Universal Time)]',
   ],
 
   /**
