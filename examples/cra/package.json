@@ -2,6 +2,8 @@
   "name": "cra",
   "version": "0.1.0",
   "private": true,
+  "license": "Apache-2.0",
+  "author": "CodeSandbox",
   "dependencies": {
     "@codesandbox/sandpack-react": "*",
     "@codesandbox/sandpack-themes": "*",

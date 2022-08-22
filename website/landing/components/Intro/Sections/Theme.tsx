@@ -26,7 +26,7 @@ import {
 } from "./common";
 
 const AnimatePresenceTyped = AnimatePresence as any;
-const themeOptions: SandpackPredefinedTheme[] = ["dark", "light", "auto"];
+const themeOptions: SandpackPredefinedTheme[] = ["dark", "light"];
 
 export const ThemeExample: React.FC = () => {
   const { ref, inView } = useInView({ threshold: THRESHOLD_VIEW });

@@ -174,6 +174,7 @@ export const getLanguageFromFile = (
   switch (extension) {
     case "js":
     case "jsx":
+    case "json":
       return "javascript";
     case "ts":
     case "tsx":

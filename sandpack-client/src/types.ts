@@ -157,6 +157,18 @@ export interface ProtocolRequestMessage extends BaseProtocolMessage {
   params: any[];
 }
 
+export interface NpmRegistry {
+  enabledScopes: string[];
+  limitToScopes: boolean;
+  registryUrl: string;
+  /**
+   * It must be `false` if you're providing a sef-host solution,
+   * otherwise, it'll try to proxy from CodeSandbox Proxy
+   */
+  proxyEnabled: boolean;
+  registryAuthToken?: string;
+}
+
 export type SandpackMessage = BaseSandpackMessage &
   (
     | {
@@ -221,6 +233,7 @@ export type SandpackMessage = BaseSandpackMessage &
         clearConsoleDisabled?: boolean;
         reactDevTools?: ReactDevToolsMode;
         logLevel?: SandpackLogLevel;
+        customNpmRegistries?: NpmRegistry[];
       }
     | {
         type: "refresh";

@@ -5,14 +5,11 @@ export const githubLight: SandpackTheme = {
     surface1: "#ffffff",
     surface2: "#F3F3F3",
     surface3: "#f5f5f5",
-
     clickable: "#959da5",
     base: "#24292e",
     disabled: "#d1d4d8",
     hover: "#24292e",
-
     accent: "#24292e",
-
     error: "#811e18",
     errorSurface: "#ffcdca",
   },

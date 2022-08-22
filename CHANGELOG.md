@@ -3,6 +3,100 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.4](https://github.com/codesandbox/sandpack/compare/v1.5.3...v1.5.4) (2022-08-22)
+
+
+### Bug Fixes
+
+* **client:** do not set default credentials for custom npm requests ([4ce7be9](https://github.com/codesandbox/sandpack/commit/4ce7be95e771339ebcbdd4868c04d3c4e2cb2d77))
+
+
+
+
+
+## [1.5.3](https://github.com/codesandbox/sandpack/compare/v1.5.2...v1.5.3) (2022-08-22)
+
+
+### Bug Fixes
+
+* **client:** custom registry should include the credentials only for csb urls ([#555](https://github.com/codesandbox/sandpack/issues/555)) ([de1e424](https://github.com/codesandbox/sandpack/commit/de1e424092525f2e9fa013c35ec8c961a4f1ced7))
+
+
+
+
+
+## [1.5.2](https://github.com/codesandbox/sandpack/compare/v1.5.1...v1.5.2) (2022-08-22)
+
+
+### Bug Fixes
+
+* **custom registry:** cors issue and make the types more strict ([#554](https://github.com/codesandbox/sandpack/issues/554)) ([dca96ec](https://github.com/codesandbox/sandpack/commit/dca96ec69587f6bb59d84d524357890f98bf980c))
+
+
+
+
+
+## [1.5.1](https://github.com/codesandbox/sandpack/compare/v1.5.0...v1.5.1) (2022-08-19)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+# [1.5.0](https://github.com/codesandbox/sandpack/compare/v1.4.0...v1.5.0) (2022-08-11)
+
+
+### Features
+
+* **themes:** dracula 🧛 ([#551](https://github.com/codesandbox/sandpack/issues/551)) ([88cbc83](https://github.com/codesandbox/sandpack/commit/88cbc83797122a5241e6ee819255246064538f32))
+
+
+
+
+
+# [1.4.0](https://github.com/codesandbox/sandpack/compare/v1.3.5...v1.4.0) (2022-08-11)
+
+
+### Features
+
+* **custom-setup:** introduce custom npm registries ([#542](https://github.com/codesandbox/sandpack/issues/542)) ([1fd8b99](https://github.com/codesandbox/sandpack/commit/1fd8b997e3e95bc76026e3de1a5c267859d92c82))
+
+
+
+
+
+## [1.3.5](https://github.com/codesandbox/sandpack/compare/v1.3.4...v1.3.5) (2022-08-10)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [1.3.4](https://github.com/codesandbox/sandpack/compare/v1.3.3...v1.3.4) (2022-08-05)
+
+
+### Bug Fixes
+
+* **themes:** tweak error surface contrast ([#548](https://github.com/codesandbox/sandpack/issues/548)) ([d9120c9](https://github.com/codesandbox/sandpack/commit/d9120c9f42bc5ab75619332cb44197e5e8d43b13))
+* **website:** ui tweaks ([b07c378](https://github.com/codesandbox/sandpack/commit/b07c378d04f5441ecea8b9718ddb0d494c0aa60e))
+
+
+
+
+
+## [1.3.3](https://github.com/codesandbox/sandpack/compare/v1.3.2...v1.3.3) (2022-08-04)
+
+
+### Bug Fixes
+
+* **syntax highlight:** default json to javascript ([f6b29e5](https://github.com/codesandbox/sandpack/commit/f6b29e5c8cb9c1caabba97f62974b357be04330f))
+
+
+
+
+
 ## [1.3.2](https://github.com/codesandbox/sandpack/compare/v1.3.1...v1.3.2) (2022-07-29)
 
 
