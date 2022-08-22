@@ -4,7 +4,7 @@ import * as React from "react";
 import { SandpackLayout } from "../common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
-import { SandpackConsole, useSandpackConsole } from "../components/Console";
+import { SandpackConsole } from "../components/Console";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import { ConsoleIcon } from "../icons";
@@ -206,6 +206,5 @@ const consoleWrapper = css({
   left: "50%",
   zIndex: "$top",
   overflow: "hidden",
-  height: "calc($layout$height / 2)",
   transition: "height $transitions$default",
 });

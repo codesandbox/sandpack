@@ -25,14 +25,14 @@ export const buttonClassName = css({
   '&[data-active="true"]': { color: "$colors$accent" },
 
   svg: {
-    width: "$space$5",
-    height: "$space$5",
+    width: "$space$4",
+    height: "$space$4",
   },
 
   [`&.${iconStandaloneClassName}`]: {
     padding: "$space$1",
-    width: "$space$8",
-    height: "$space$8",
+    width: "$space$7",
+    height: "$space$7",
     display: "flex",
   },
 });
