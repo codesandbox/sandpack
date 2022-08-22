@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.4](https://github.com/codesandbox/sandpack/compare/v1.5.3...v1.5.4) (2022-08-22)
+
+
+### Bug Fixes
+
+* **client:** do not set default credentials for custom npm requests ([4ce7be9](https://github.com/codesandbox/sandpack/commit/4ce7be95e771339ebcbdd4868c04d3c4e2cb2d77))
+
+
+
+
+
 ## [1.5.3](https://github.com/codesandbox/sandpack/compare/v1.5.2...v1.5.3) (2022-08-22)
 
 
