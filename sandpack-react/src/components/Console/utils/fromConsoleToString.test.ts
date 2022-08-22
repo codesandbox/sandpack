@@ -60,7 +60,7 @@ const cases: Array<[Message, string]> = [
   ],
   [
     { "@t": "[[Date]]", data: 1659720915173 },
-    "Fri Aug 05 2022 18:35:15 GMT+0100 (Western European Summer Time)",
+    "Fri Aug 05 2022 17:35:15 GMT+0000 (Coordinated Universal Time)",
   ],
   [{ "@t": "[[NaN]]", data: "" }, "NaN"],
   [{ "@t": "[[RegExp]]", data: { src: "\\/\\/", flags: "" } }, "/\\/\\//"],
