@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.3](https://github.com/codesandbox/sandpack/compare/v1.5.2...v1.5.3) (2022-08-22)
+
+
+### Bug Fixes
+
+* **client:** custom registry should include the credentials only for csb urls ([#555](https://github.com/codesandbox/sandpack/issues/555)) ([de1e424](https://github.com/codesandbox/sandpack/commit/de1e424092525f2e9fa013c35ec8c961a4f1ced7))
+
+
+
+
+
 # [1.4.0](https://github.com/codesandbox/sandpack/compare/v1.3.5...v1.4.0) (2022-08-11)
 
 
