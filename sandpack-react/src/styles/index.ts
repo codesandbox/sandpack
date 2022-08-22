@@ -21,7 +21,7 @@ const defaultVariables = {
   }, {}),
   border: { radius: "4px" },
   layout: { height: "300px" },
-  transitions: { default: "100ms ease" },
+  transitions: { default: "150ms ease" },
   zIndices: {
     base: "1",
     overlay: "2",
