@@ -6,8 +6,6 @@ export default {
   title: "components/Icons",
 };
 
-// const stories = storiesOf("Components/Icons", module);
-
 export const all: React.FC = () => {
   return (
     <div style={{ color: "black" }}>
