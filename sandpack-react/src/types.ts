@@ -210,7 +210,7 @@ export interface SandpackSetup {
    * }
    * ```
    */
-  npmRegistries?: NpmRegistry[];
+  npmRegistries?: Array<Omit<NpmRegistry, "proxyEnabled">>;
 }
 
 /**

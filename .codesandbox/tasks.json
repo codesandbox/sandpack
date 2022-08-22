@@ -1,64 +1,83 @@
 {
+  // These tasks will run in order when initializing your CodeSandbox project.
   "setupTasks": [
     {
-      "name": "Installing Dependencies",
+      "name": "Install Dependencies",
       "command": "yarn install"
-    },
-    {
-      "name": "Building Workspace",
-      "command": "yarn build"
     }
   ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
-    "docs": {
-      "name": "Website: docs",
-      "command": "yarn dev:docs"
+    "lint": {
+      "name": "lint",
+      "command": "yarn lint",
+      "runAtStart": false
     },
-    "landing": {
-      "name": "Website: landing page",
-      "command": "yarn dev:landing"
-    },
-    "theme": {
-      "name": "Website: theme",
-      "command": "yarn dev:theme"
-    },
-    "storybook": {
-      "name": "Storybook",
-      "command": "yarn workspace @codesandbox/sandpack-react storybook",
-      "runAtStart": true
-    },
-    "setup": {
-      "name": "Install Dependencies",
-      "command": "yarn"
-    },
-    "build": {
-      "name": "Build Workspace",
-      "command": "yarn build"
-    },
-    "build:client": {
-      "name": "Build: client",
-      "command": "yarn workspace @codesandbox/sandpack-client build",
-    },
-    "build:themes": {
-      "name": "Build: themes",
-      "command": "yarn workspace @codesandbox/sandpack-themes build",
-    },
-    "build:react": {
-      "name": "Build: react",
-      "command": "yarn workspace @codesandbox/sandpack-react build",
+    "format:check": {
+      "name": "format:check",
+      "command": "yarn format:check",
+      "runAtStart": false
     },
     "format": {
-      "name": "Format Workspace",
-      "command": "yarn format"
+      "name": "format",
+      "command": "yarn format",
+      "runAtStart": false
     },
-    "watch:tests": {
-      "name": "Watch tests",
-      "command": "yarn test --watch",
+    "test": {
+      "name": "test",
+      "command": "yarn test",
+      "runAtStart": false
+    },
+    "cy:open": {
+      "name": "cy:open",
+      "command": "yarn cy:open",
+      "runAtStart": false
+    },
+    "cy:run": {
+      "name": "cy:run",
+      "command": "yarn cy:run",
+      "runAtStart": false
+    },
+    "build": {
+      "name": "build",
+      "command": "yarn build",
+      "runAtStart": false
+    },
+    "prepare": {
+      "name": "prepare",
+      "command": "yarn prepare",
+      "runAtStart": false
+    },
+    "clean": {
+      "name": "clean",
+      "command": "yarn clean",
+      "runAtStart": false
+    },
+    "dev:docs": {
+      "name": "dev:docs",
+      "command": "yarn dev:docs",
+      "runAtStart": false
+    },
+    "dev:react": {
+      "name": "dev:react",
+      "command": "yarn dev:react",
       "runAtStart": true
     },
-    "lint": {
-      "name": "Lint Workspace",
-      "command": "yarn lint"
+    "dev:landing": {
+      "name": "dev:landing",
+      "command": "yarn dev:landing",
+      "runAtStart": false
+    },
+    "dev:theme": {
+      "name": "dev:theme",
+      "command": "yarn dev:theme",
+      "runAtStart": false
+    },
+    "chromatic:react": {
+      "name": "chromatic:react",
+      "command": "yarn chromatic:react",
+      "runAtStart": false
     }
   }
 }
