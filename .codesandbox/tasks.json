@@ -4,6 +4,10 @@
     {
       "name": "Install Dependencies",
       "command": "yarn install"
+    },
+    {
+      "name": "Building Workspace",
+      "command": "yarn build"
     }
   ],
 
@@ -12,11 +16,6 @@
     "lint": {
       "name": "lint",
       "command": "yarn lint",
-      "runAtStart": false
-    },
-    "format:check": {
-      "name": "format:check",
-      "command": "yarn format:check",
       "runAtStart": false
     },
     "format": {
@@ -29,54 +28,41 @@
       "command": "yarn test",
       "runAtStart": false
     },
-    "cy:open": {
-      "name": "cy:open",
-      "command": "yarn cy:open",
-      "runAtStart": false
-    },
-    "cy:run": {
-      "name": "cy:run",
-      "command": "yarn cy:run",
-      "runAtStart": false
-    },
     "build": {
       "name": "build",
       "command": "yarn build",
       "runAtStart": false
     },
-    "prepare": {
-      "name": "prepare",
-      "command": "yarn prepare",
-      "runAtStart": false
+    "build:client": {
+      "name": "Build: client",
+      "command": "yarn workspace @codesandbox/sandpack-client build"
     },
-    "clean": {
-      "name": "clean",
-      "command": "yarn clean",
-      "runAtStart": false
+    "build:themes": {
+      "name": "Build: themes",
+      "command": "yarn workspace @codesandbox/sandpack-themes build"
     },
-    "dev:docs": {
-      "name": "dev:docs",
+    "build:react": {
+      "name": "Build: react",
+      "command": "yarn workspace @codesandbox/sandpack-react build"
+    },
+    "dev:website-docs": {
+      "name": "Website docs",
       "command": "yarn dev:docs",
       "runAtStart": false
     },
-    "dev:react": {
-      "name": "dev:react",
+    "dev:sandpack-react": {
+      "name": "Storybook",
       "command": "yarn dev:react",
       "runAtStart": true
     },
-    "dev:landing": {
-      "name": "dev:landing",
+    "dev:website-landing": {
+      "name": "Website landing",
       "command": "yarn dev:landing",
       "runAtStart": false
     },
-    "dev:theme": {
-      "name": "dev:theme",
+    "dev:website-theme": {
+      "name": "Website theme",
       "command": "yarn dev:theme",
-      "runAtStart": false
-    },
-    "chromatic:react": {
-      "name": "chromatic:react",
-      "command": "yarn chromatic:react",
       "runAtStart": false
     }
   }
