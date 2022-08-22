@@ -445,7 +445,6 @@ export default function App() {
 }
 `,
     }}
-    options={{ bundlerURL: "https://78yg0l-3000.preview.csb.app" }}
     template="react"
   />
 );
