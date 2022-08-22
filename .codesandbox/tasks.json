@@ -1,7 +1,8 @@
 {
+  // These tasks will run in order when initializing your CodeSandbox project.
   "setupTasks": [
     {
-      "name": "Installing Dependencies",
+      "name": "Install Dependencies",
       "command": "yarn install"
     },
     {
@@ -9,56 +10,60 @@
       "command": "yarn build"
     }
   ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
-    "docs": {
-      "name": "Website: docs",
-      "command": "yarn dev:docs"
+    "lint": {
+      "name": "Lint",
+      "command": "yarn lint",
+      "runAtStart": false
     },
-    "landing": {
-      "name": "Website: landing page",
-      "command": "yarn dev:landing"
+    "format": {
+      "name": "Format",
+      "command": "yarn format",
+      "runAtStart": false
     },
-    "theme": {
-      "name": "Website: theme",
-      "command": "yarn dev:theme"
-    },
-    "storybook": {
-      "name": "Storybook",
-      "command": "yarn workspace @codesandbox/sandpack-react storybook",
-      "runAtStart": true
-    },
-    "setup": {
-      "name": "Install Dependencies",
-      "command": "yarn"
+    "test": {
+      "name": "Test",
+      "command": "yarn test",
+      "runAtStart": false
     },
     "build": {
-      "name": "Build Workspace",
-      "command": "yarn build"
+      "name": "Build",
+      "command": "yarn build",
+      "runAtStart": false
     },
     "build:client": {
       "name": "Build: client",
-      "command": "yarn workspace @codesandbox/sandpack-client build",
+      "command": "yarn workspace @codesandbox/sandpack-client build"
     },
     "build:themes": {
       "name": "Build: themes",
-      "command": "yarn workspace @codesandbox/sandpack-themes build",
+      "command": "yarn workspace @codesandbox/sandpack-themes build"
     },
     "build:react": {
       "name": "Build: react",
-      "command": "yarn workspace @codesandbox/sandpack-react build",
+      "command": "yarn workspace @codesandbox/sandpack-react build"
     },
-    "format": {
-      "name": "Format Workspace",
-      "command": "yarn format"
+    "dev:website-docs": {
+      "name": "Website docs",
+      "command": "yarn dev:docs",
+      "runAtStart": false
     },
-    "watch:tests": {
-      "name": "Watch tests",
-      "command": "yarn test --watch",
+    "dev:sandpack-react": {
+      "name": "Storybook",
+      "command": "yarn dev:react",
       "runAtStart": true
     },
-    "lint": {
-      "name": "Lint Workspace",
-      "command": "yarn lint"
+    "dev:website-landing": {
+      "name": "Website landing",
+      "command": "yarn dev:landing",
+      "runAtStart": false
+    },
+    "dev:website-theme": {
+      "name": "Website theme",
+      "command": "yarn dev:theme",
+      "runAtStart": false
     }
   }
 }

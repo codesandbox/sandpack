@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import type { ViewportSize } from "../";
 import { stackClassName } from "../";
 import { tabButton } from "../";
 import {
@@ -297,62 +296,6 @@ export const MultiplePreviewsAndListeners: React.FC = () => {
   );
 };
 
-const Box: React.FC<{
-  label?: string;
-  width?: number | string;
-  height?: number | string;
-}> = ({ children, label, width = "auto", height = "auto" }) => (
-  <div
-    style={{
-      display: "flex",
-      alignItems: "center",
-      flexDirection: "column",
-      margin: 10,
-      overflow: "auto",
-      border: "1px solid gray",
-      width,
-      height,
-    }}
-  >
-    <span style={{ padding: 4 }}>{label}</span>
-    {children}
-  </div>
-);
-
-const VIEWPORTS = ["Pixel 2", "Moto G4", "iPhone X"];
-
-export const MultiplePreviewsRandomViewports: React.FC = () => {
-  const [count, setCount] = useState(0);
-
-  const previews = Array.from(Array(count).keys());
-
-  return (
-    <>
-      <button onClick={(): void => setCount(count + 1)}>Add</button>
-      <button onClick={(): void => setCount(count > 0 ? count - 1 : 0)}>
-        Remove
-      </button>
-      <SandpackProvider>
-        <SandpackThemeProvider>
-          <div style={{ display: "flex", alignItems: "flex-start" }}>
-            <Box height={400} label="code editor" width={400}>
-              <SandpackCodeEditor />
-            </Box>
-            {previews.map((pr, index) => {
-              const viewport = VIEWPORTS[index % 3];
-              return (
-                <Box key={pr} label={viewport}>
-                  <SandpackPreview viewportSize={viewport as ViewportSize} />
-                </Box>
-              );
-            })}
-          </div>
-        </SandpackThemeProvider>
-      </SandpackProvider>
-    </>
-  );
-};
-
 export const ClosableTabs: React.FC = () => (
   <Sandpack options={{ closableTabs: true }} template="react" />
 );
@@ -486,7 +429,7 @@ export const CustomNpmRegistries: React.FC = () => (
         {
           enabledScopes: ["@codesandbox"],
           limitToScopes: true,
-          registryUrl: "https://1gemwv-4000.preview.csb.app",
+          registryUrl: "https://7khir3-4000.preview.csb.app",
         },
       ],
     }}
