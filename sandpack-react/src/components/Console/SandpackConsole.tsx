@@ -9,7 +9,8 @@ import { Button } from "./Button";
 import { Header } from "./Header";
 import { useSandpackConsole } from "./useSandpackConsole";
 import { fromConsoleToString } from "./utils/fromConsoleToString";
-import { getType, SandpackConsoleData } from "./utils/getType";
+import type { SandpackConsoleData } from "./utils/getType";
+import { getType } from "./utils/getType";
 
 interface SandpackConsoleProps {
   clientId?: string;

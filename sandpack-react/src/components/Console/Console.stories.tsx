@@ -9,6 +9,7 @@ export default {
   title: "components/Console",
 };
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 const files = (full: boolean): any => ({
   "/App.js": `export default function App() {
   
