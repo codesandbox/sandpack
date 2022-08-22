@@ -9,7 +9,7 @@ import { Button } from "./Button";
 import { Header } from "./Header";
 import { useSandpackConsole } from "./useSandpackConsole";
 import { fromConsoleToString } from "./utils/fromConsoleToString";
-import { getType } from "./utils/getType";
+import { getType, SandpackConsoleData } from "./utils/getType";
 
 interface SandpackConsoleProps {
   clientId?: string;
@@ -17,6 +17,7 @@ interface SandpackConsoleProps {
   showClearButton?: boolean;
   showSyntaxError?: boolean;
   maxMessageCount?: number;
+  onLogsChange?: (logs: SandpackConsoleData) => void;
 }
 
 export const SandpackConsole: React.FC<
@@ -27,6 +28,7 @@ export const SandpackConsole: React.FC<
   showHeader = true,
   showSyntaxError = false,
   maxMessageCount,
+  onLogsChange,
   ...props
 }) => {
   const { logs, reset } = useSandpackConsole({
@@ -37,10 +39,12 @@ export const SandpackConsole: React.FC<
   const wrapperRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
+    onLogsChange?.(logs);
+
     if (wrapperRef.current) {
       wrapperRef.current.scrollTop = wrapperRef.current.scrollHeight;
     }
-  }, [logs]);
+  }, [onLogsChange, logs]);
 
   return (
     <SandpackStack

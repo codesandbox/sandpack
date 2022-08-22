@@ -67,6 +67,7 @@ export const Sandpack: SandpackInternal = (props) => {
   const [consoleVisibility, setConsoleVisibility] = React.useState(
     props.options?.showConsole ?? false
   );
+  const [counter, setCounter] = React.useState(0);
 
   /**
    * Parts are set as `flex` values, so they set the flex shrink/grow
@@ -109,7 +110,10 @@ export const Sandpack: SandpackInternal = (props) => {
                 : 0,
             }}
           >
-            <SandpackConsole showHeader={false} />
+            <SandpackConsole
+              onLogsChange={(logs): void => setCounter(logs.length)}
+              showHeader={false}
+            />
           </div>
         )}
 
@@ -117,6 +121,7 @@ export const Sandpack: SandpackInternal = (props) => {
           actionsChildren={
             props.options?.showConsoleButton ? (
               <ConsoleCounterButton
+                counter={counter}
                 onClick={(): void => setConsoleVisibility((prev) => !prev)}
               />
             ) : undefined
@@ -139,22 +144,22 @@ export const Sandpack: SandpackInternal = (props) => {
   );
 };
 
-const ConsoleCounterButton: React.FC<{ onClick: () => void }> = ({
-  onClick,
-}) => {
-  const { logs } = useSandpackConsole();
-
+const ConsoleCounterButton: React.FC<{
+  onClick: () => void;
+  counter: number;
+}> = ({ onClick, counter }) => {
   return (
     <button
       className={classNames(
         buttonClassName,
         iconStandaloneClassName,
-        actionButtonClassName
+        actionButtonClassName,
+        buttonCounter
       )}
       onClick={onClick}
     >
       <ConsoleIcon />
-      {logs.length}
+      {counter > 0 && <span>{counter}</span>}
     </button>
   );
 };
@@ -175,6 +180,24 @@ const getPreviewHeight = (
 
   return editorHeight;
 };
+
+const buttonCounter = css({
+  position: "relative",
+
+  span: {
+    background: "$colors$clickable",
+    color: "$colors$surface1",
+    minWidth: 12,
+    height: 12,
+    padding: "0 2px",
+    borderRadius: 12,
+    fontSize: 8,
+    lineHeight: "12px",
+    position: "absolute",
+    top: 0,
+    right: 0,
+  },
+});
 
 const consoleWrapper = css({
   position: "absolute !important",
