@@ -102,6 +102,7 @@ export interface SandpackOptions {
   showInlineErrors?: boolean;
   showRefreshButton?: boolean;
   showTabs?: boolean;
+  showConsoleButton?: boolean;
   showConsole?: boolean;
   closableTabs?: boolean;
   wrapContent?: boolean;
@@ -444,6 +445,7 @@ interface SandpackInternalProps<
     showInlineErrors?: boolean;
     showRefreshButton?: boolean;
     showTabs?: boolean;
+    showConsoleButton?: boolean;
     showConsole?: boolean;
     closableTabs?: boolean;
     wrapContent?: boolean;

@@ -9,7 +9,7 @@ export default {
   title: "components/Console",
 };
 
-const files = {
+const files = (full: boolean): any => ({
   "/App.js": `export default function App() {
   
     return (
@@ -20,8 +20,10 @@ const files = {
         <button onClick={() => console.log(true)}>boolean</button>
         <button onClick={() => console.log(undefined)}>undefined</button>
         <button onClick={() => console.log(null)}>null</button>
-
-        <p>Others</p>
+        
+        ${
+          full
+            ? `<p>Others</p>
         <button onClick={() => console.log(new Date())}>Date</button>
         <button onClick={() => console.log(NaN)}>NaN</button>
         <button onClick={() => console.log(new RegExp("//"))}>Regex</button>
@@ -46,12 +48,14 @@ const files = {
         <button onClick={() => console.error({ foo: [] })}>Log error</button>
         <button onClick={() => console.warn({ foo: [] })}>Log warning</button>
         <button onClick={() => console.info({ foo: [] })}>Log info</button>
-        <button onClick={() => console.clear()}>Console.clear</button>
+        <button onClick={() => console.clear()}>Console.clear</button>`
+            : ""
+        }
       </>
     );
   }
   `,
-};
+});
 
 export const Main: React.FC = () => {
   const [showHeader, setShowHeader] = React.useState(true);
@@ -59,7 +63,7 @@ export const Main: React.FC = () => {
   const [showSyntaxErrors, setShowSyntaxErrors] = React.useState(true);
 
   return (
-    <SandpackProvider files={files} template="react">
+    <SandpackProvider files={files(true)} template="react">
       <SandpackLayout>
         <SandpackCodeEditor />
         <SandpackPreview />
@@ -107,6 +111,32 @@ export const Main: React.FC = () => {
 
 export const Preset: React.FC = () => {
   return (
-    <Sandpack files={files} options={{ showConsole: true }} template="react" />
+    <>
+      <Sandpack template="react" />
+
+      <br />
+
+      <Sandpack
+        files={files(false)}
+        options={{ showConsoleButton: true, showConsole: true }}
+        template="react"
+      />
+
+      <br />
+
+      <Sandpack
+        files={files(false)}
+        options={{ showConsoleButton: false, showConsole: true }}
+        template="react"
+      />
+
+      <br />
+
+      <Sandpack
+        files={files(false)}
+        options={{ showConsoleButton: true, showConsole: false }}
+        template="react"
+      />
+    </>
   );
 };

@@ -64,7 +64,9 @@ export const Sandpack: SandpackInternal = (props) => {
     classes: props.options?.classes,
   };
 
-  const [consoleVisibility, setConsoleVisibility] = React.useState(false);
+  const [consoleVisibility, setConsoleVisibility] = React.useState(
+    props.options?.showConsole ?? false
+  );
 
   /**
    * Parts are set as `flex` values, so they set the flex shrink/grow
@@ -93,14 +95,14 @@ export const Sandpack: SandpackInternal = (props) => {
           }}
         />
 
-        {props.options?.showConsole && (
+        {(props.options?.showConsoleButton || consoleVisibility) && (
           <div
             className={consoleWrapper.toString()}
             style={{
               borderTop: consoleVisibility ? "inherit" : "none",
               height: consoleVisibility
                 ? getPreviewHeight(
-                    props.options?.showConsole,
+                    consoleVisibility,
                     props.options?.editorHeight,
                     3
                   )
@@ -113,15 +115,17 @@ export const Sandpack: SandpackInternal = (props) => {
 
         <SandpackPreview
           actionsChildren={
-            <ConsoleCounterButton
-              onClick={(): void => setConsoleVisibility((prev) => !prev)}
-            />
+            props.options?.showConsoleButton ? (
+              <ConsoleCounterButton
+                onClick={(): void => setConsoleVisibility((prev) => !prev)}
+              />
+            ) : undefined
           }
           showNavigator={props.options?.showNavigator}
           showRefreshButton={props.options?.showRefreshButton}
           style={{
             height: getPreviewHeight(
-              props.options?.showConsole,
+              consoleVisibility,
               props.options?.editorHeight,
               consoleVisibility ? 1.5 : 1
             ),
@@ -156,11 +160,11 @@ const ConsoleCounterButton: React.FC<{ onClick: () => void }> = ({
 };
 
 const getPreviewHeight = (
-  showConsole?: boolean,
+  showConsoleButton?: boolean,
   editorHeight?: CSSProperties["height"],
   ratio = 2
 ): string | number | undefined => {
-  if (showConsole) {
+  if (showConsoleButton) {
     const height =
       typeof editorHeight === "number" ? `${editorHeight}px` : editorHeight;
 
