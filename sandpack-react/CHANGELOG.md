@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/codesandbox/sandpack/compare/v1.5.1...v1.5.2) (2022-08-22)
+
+
+### Bug Fixes
+
+* **custom registry:** cors issue and make the types more strict ([#554](https://github.com/codesandbox/sandpack/issues/554)) ([dca96ec](https://github.com/codesandbox/sandpack/commit/dca96ec69587f6bb59d84d524357890f98bf980c))
+
+
+
+
+
 ## [1.5.1](https://github.com/codesandbox/sandpack/compare/v1.5.0...v1.5.1) (2022-08-19)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
