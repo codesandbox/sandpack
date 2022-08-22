@@ -9,13 +9,11 @@ import {
 } from "./utils/constraints";
 import type { SandpackConsoleData } from "./utils/getType";
 
-export const useSandpackConsole = (
-  props?: {
-    clientId?: string;
-    maxMessageCount?: number;
-    showSyntaxError?: boolean;
-  }
-): { logs: SandpackConsoleData; reset: () => void } => {
+export const useSandpackConsole = (props?: {
+  clientId?: string;
+  maxMessageCount?: number;
+  showSyntaxError?: boolean;
+}): { logs: SandpackConsoleData; reset: () => void } => {
   const [logs, setLogs] = React.useState<SandpackConsoleData>([]);
   const { listen } = useSandpack();
 
