@@ -14,22 +14,22 @@
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
     "lint": {
-      "name": "lint",
+      "name": "Lint",
       "command": "yarn lint",
       "runAtStart": false
     },
     "format": {
-      "name": "format",
+      "name": "Format",
       "command": "yarn format",
       "runAtStart": false
     },
     "test": {
-      "name": "test",
+      "name": "Test",
       "command": "yarn test",
       "runAtStart": false
     },
     "build": {
-      "name": "build",
+      "name": "Build",
       "command": "yarn build",
       "runAtStart": false
     },
