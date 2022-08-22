@@ -27,6 +27,7 @@ export const layoutClassName = css({
   background: "$colors$surface1",
   borderRadius: "$border$radius",
   overflow: "hidden",
+  position: "relative",
 
   "> *:not(:first-child)": {
     borderLeft: "1px solid $colors$surface2",

@@ -1,3 +1,4 @@
+import { CSSProperties } from "@stitches/core";
 import * as React from "react";
 
 import { SandpackLayout } from "../common/Layout";
@@ -6,6 +7,7 @@ import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackConsole } from "../components/Console";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackProvider } from "../contexts/sandpackContext";
+import { css, THEME_PREFIX } from "../styles";
 import type {
   SandpackInternal,
   SandpackInternalOptions,
@@ -62,7 +64,6 @@ export const Sandpack: SandpackInternal = (props) => {
    */
   const editorPart = props.options?.editorWidthPercentage || 50;
   const previewPart = 100 - editorPart;
-  const editorHeight = props.options?.editorHeight;
 
   return (
     <SandpackProvider
@@ -76,25 +77,70 @@ export const Sandpack: SandpackInternal = (props) => {
         <SandpackCodeEditor
           {...codeEditorOptions}
           style={{
-            height: editorHeight,
+            height: props.options?.editorHeight, // use the original editor height
             flexGrow: editorPart,
             flexShrink: editorPart,
             minWidth: 700 * (editorPart / (previewPart + editorPart)),
           }}
         />
+
+        {props.options?.showConsole && (
+          <div
+            className={consoleWrapper.toString()}
+            style={{
+              height: getPreviewHeight(
+                props.options?.showConsole,
+                props.options?.editorHeight,
+                3
+              ),
+            }}
+          >
+            <SandpackConsole showHeader={false} />
+          </div>
+        )}
+
         <SandpackPreview
           showNavigator={props.options?.showNavigator}
           showRefreshButton={props.options?.showRefreshButton}
           style={{
-            height: editorHeight,
+            height: getPreviewHeight(
+              props.options?.showConsole,
+              props.options?.editorHeight,
+              1.5
+            ),
             flexGrow: previewPart,
             flexShrink: previewPart,
             minWidth: 700 * (previewPart / (previewPart + editorPart)),
           }}
         />
-
-        {props.options?.showConsole && <SandpackConsole />}
       </SandpackLayout>
     </SandpackProvider>
   );
 };
+
+const getPreviewHeight = (
+  showConsole?: boolean,
+  editorHeight?: CSSProperties["height"],
+  ratio = 2
+): string | number | undefined => {
+  if (showConsole) {
+    const height =
+      typeof editorHeight === "number" ? `${editorHeight}px` : editorHeight;
+
+    return `calc(${
+      height ?? `var(--${THEME_PREFIX}-layout-height)`
+    } / ${ratio})`;
+  }
+
+  return editorHeight;
+};
+
+const consoleWrapper = css({
+  position: "absolute !important",
+  bottom: 0,
+  right: 0,
+  left: "50%",
+  zIndex: "$top",
+
+  height: "calc($layout$height / 2)",
+});

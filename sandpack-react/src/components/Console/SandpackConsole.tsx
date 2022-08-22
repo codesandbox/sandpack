@@ -44,7 +44,7 @@ export const SandpackConsole: React.FC<
 
   return (
     <SandpackStack
-      className={css({ height: "$layout$height !important" }).toString()}
+      className={css({ height: "100%", background: "$surface1" }).toString()}
       {...props}
     >
       {showHeader && <Header />}

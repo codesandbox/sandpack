@@ -9,15 +9,8 @@ export default {
   title: "components/Console",
 };
 
-export const Main: React.FC = () => {
-  const [showHeader, setShowHeader] = React.useState(true);
-  const [showClearButton, setShowClearButton] = React.useState(true);
-  const [showSyntaxErrors, setShowSyntaxErrors] = React.useState(true);
-
-  return (
-    <SandpackProvider
-      files={{
-        "/App.js": `export default function App() {
+const files = {
+  "/App.js": `export default function App() {
   
     return (
       <>
@@ -58,9 +51,15 @@ export const Main: React.FC = () => {
     );
   }
   `,
-      }}
-      template="react"
-    >
+};
+
+export const Main: React.FC = () => {
+  const [showHeader, setShowHeader] = React.useState(true);
+  const [showClearButton, setShowClearButton] = React.useState(true);
+  const [showSyntaxErrors, setShowSyntaxErrors] = React.useState(true);
+
+  return (
+    <SandpackProvider files={files} template="react">
       <SandpackLayout>
         <SandpackCodeEditor />
         <SandpackPreview />
@@ -107,5 +106,7 @@ export const Main: React.FC = () => {
 };
 
 export const Preset: React.FC = () => {
-  return <Sandpack options={{ showConsole: true }} />;
+  return (
+    <Sandpack files={files} options={{ showConsole: true }} template="react" />
+  );
 };
