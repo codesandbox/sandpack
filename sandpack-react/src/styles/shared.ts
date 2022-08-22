@@ -24,6 +24,11 @@ export const buttonClassName = css({
 
   '&[data-active="true"]': { color: "$colors$accent" },
 
+  svg: {
+    width: "$space$5",
+    height: "$space$5",
+  },
+
   [`&.${iconStandaloneClassName}`]: {
     padding: "$space$1",
     width: "$space$8",
@@ -41,8 +46,6 @@ export const actionButtonClassName = css({
     backgroundColor: "$colors$surface3",
     color: "$colors$hover",
   },
-
-  
 });
 
 export const iconClassName = css({ padding: 0 });

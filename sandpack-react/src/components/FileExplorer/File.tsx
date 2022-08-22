@@ -1,7 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { DirectoryIcon, FileIcon } from "../../icons";
+import { DirectoryIconOpen, DirectoryIconClosed, FileIcon } from "../../icons";
 import { THEME_PREFIX, css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
@@ -45,6 +45,12 @@ export const File: React.FC<Props> = ({
 
   const fileName = path.split("/").filter(Boolean).pop();
 
+  const getIcon = (): JSX.Element => {
+    if (selectFile) return <FileIcon />;
+
+    return isDirOpen ? <DirectoryIconOpen /> : <DirectoryIconClosed />;
+  };
+
   return (
     <button
       className={classNames(
@@ -57,7 +63,7 @@ export const File: React.FC<Props> = ({
       style={{ paddingLeft: 18 * depth + "px" }}
       type="button"
     >
-      {selectFile ? <FileIcon /> : <DirectoryIcon isOpen={isDirOpen} />}
+      {getIcon()}
       {fileName}
     </button>
   );
