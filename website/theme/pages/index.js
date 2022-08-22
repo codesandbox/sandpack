@@ -123,7 +123,12 @@ export default function Home() {
                 showNavigator: true,
                 showTabs: true,
                 closableTabs: true,
-                visibleFiles: ["/App.js", "/index.js", "/public/index.html", "/styles.css"]
+                visibleFiles: [
+                  "/App.js",
+                  "/index.js",
+                  "/public/index.html",
+                  "/styles.css",
+                ],
               }}
               template="react"
               theme={theme}
