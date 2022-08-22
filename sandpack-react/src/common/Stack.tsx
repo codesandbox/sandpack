@@ -12,7 +12,7 @@ export const stackClassName = css({
   flexDirection: "column",
   width: "100%",
   position: "relative",
-  transition: "all $transitions$default",
+  transition: "height $transitions$default",
 });
 
 /**

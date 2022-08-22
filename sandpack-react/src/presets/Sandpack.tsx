@@ -203,8 +203,12 @@ const consoleWrapper = css({
   position: "absolute !important",
   bottom: 0,
   right: 0,
-  left: "50%",
+  left: 0,
   zIndex: "$top",
   overflow: "hidden",
   transition: "height $transitions$default",
+
+  "@media screen and (min-width: 768px)": {
+    left: "50%",
+  },
 });

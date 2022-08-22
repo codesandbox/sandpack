@@ -40,7 +40,7 @@ export const buttonClassName = css({
 export const actionButtonClassName = css({
   backgroundColor: "$colors$surface2",
   borderRadius: "99999px",
-  transition: "all $transitions$default",
+  transition: "background $transitions$default, color $transitions$default",
 
   "&:hover": {
     backgroundColor: "$colors$surface3",
