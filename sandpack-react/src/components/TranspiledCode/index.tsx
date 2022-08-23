@@ -1,6 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
+import { stackClassName } from "../..";
 import { ErrorOverlay } from "../../common/ErrorOverlay";
 import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { useSandpack } from "../../hooks/useSandpack";
@@ -48,6 +49,7 @@ export const SandpackTranspiledCode = ({
     <div
       className={classNames(
         c("transpiled-code"),
+        stackClassName,
         transpiledCodeClassName,
         className
       )}
