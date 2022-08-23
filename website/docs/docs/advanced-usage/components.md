@@ -304,12 +304,22 @@ This is especially useful to get the cursor's current position, add custom decor
 For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a read-only version of `codemirror`, so users will not be able to edit the code.
 
 ```jsx
-<SandpackProvider template="react">
-  <SandpackLayout>
-    <SandpackCodeViewer />
-    <SandpackPreview />
-  </SandpackLayout>
-</SandpackProvider>
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  SandpackCodeViewer,
+  SandpackPreview
+} from "@codesandbox/sandpack-react";
+
+const CustomSandpack = () => (
+  <SandpackProvider template="react">
+    <SandpackLayout>
+      <SandpackCodeViewer />
+      <SandpackPreview />
+    </SandpackLayout>
+  </SandpackProvider>
+)
 ```
 
 <SandpackProvider template="react">
@@ -330,15 +340,24 @@ This API provides a way to draw or style a piece of code in the editor content. 
 
 ## Console
 
-There are three ways to consume logs:
- - Sandpack preset;
- - SandpackConsole component;
- - Sandpack console hook;
+`SandpackConsole` is a Sandpack devtool to print the console logs from a Sandpack client, which is designed to be a light version of a browser console, meaning that it's limited to the most common cases when coding. 
+
+Sandpack runs the console directly into the iframe. As a result, all console messages pass through the Sandpack protocol, where you can attach a listener to these messages in your own component or use the proper Sandpack React hook to consume them. 
+
+That said, there are three ways to print the logs:
+- [`<Sandpack options={{ showConsole: true }} />`](/api/react/interfaces/SandpackOptions#showconsole): show a panel right after the `SandpackPreview`;
+- [`<SandpackConsole />`](/api/react/#sandpackconsole): standalone component to render the logs;
+- [`useSandpackConsole`](/api/react/#usesandpackconsole): React hook to consume the console logs from a Sandpack client;
 
 ```jsx
 import { Sandpack } from "@codesandbox/sandpack-react";
 
-<Sandpack options={{ showConsole: true }}
+<Sandpack 
+  options={{ 
+    showConsole: true, 
+    showConsoleButton: true 
+  }}
+/>
 ```
 
 <Sandpack 
@@ -350,8 +369,18 @@ document.getElementById("app").innerHTML = \`
 `
   }} 
   template="vanilla"
-  options={{ showConsole: true }} 
+  options={{ showConsole: true, showConsoleButton: true }} 
 />
+
+**Limitation**
+
+Considering that `SandpackConsole` is meant to be a light version of browser console, there are a few limitations in its implementation in order to keep it modular and light:
+- It needs to have a Sandpack client running (iframe) to execute the logs;
+- It only supports four types of consoles: `info`, `warning`, `error`, and `clear`;
+- It doesn't render nested objects due to recursive issues;
+
+However, if you need to support more advanced cases, `useSandpackConsole` is compatible with [console-feed](https://www.npmjs.com/package/console-feed), which provides a closer browser-console experience and implements all limitations mentioned above.
+
 
 ## ReactDevTools
 
