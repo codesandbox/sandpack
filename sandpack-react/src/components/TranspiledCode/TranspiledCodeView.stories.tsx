@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { SandpackLayout } from "../../common/Layout";
-import { SandpackStack } from "../../common/Stack";
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackCodeEditor } from "../CodeEditor";
 
@@ -27,9 +26,7 @@ const str = \`<div>\${text}</div>\`
   >
     <SandpackLayout>
       <SandpackCodeEditor />
-      <SandpackStack>
-        <SandpackTranspiledCode />
-      </SandpackStack>
+      <SandpackTranspiledCode />
     </SandpackLayout>
   </SandpackProvider>
 );
