@@ -1,7 +1,7 @@
 import type { CSSProperties } from "@stitches/core";
 import * as React from "react";
-import { SandpackStack } from "..";
 
+import { SandpackStack } from "..";
 import { SandpackLayout } from "../common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
