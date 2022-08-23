@@ -96,27 +96,6 @@ export const Sandpack: SandpackInternal = (props) => {
           }}
         />
 
-        {(props.options?.showConsoleButton || consoleVisibility) && (
-          <div
-            className={consoleWrapper.toString()}
-            style={{
-              borderTop: consoleVisibility ? "inherit" : "none",
-              height: consoleVisibility
-                ? getPreviewHeight(
-                    consoleVisibility,
-                    props.options?.editorHeight,
-                    3
-                  )
-                : 0,
-            }}
-          >
-            <SandpackConsole
-              onLogsChange={(logs): void => setCounter(logs.length)}
-              showHeader={false}
-            />
-          </div>
-        )}
-
         <SandpackPreview
           actionsChildren={
             props.options?.showConsoleButton ? (
@@ -139,6 +118,27 @@ export const Sandpack: SandpackInternal = (props) => {
             minWidth: 700 * (previewPart / (previewPart + editorPart)),
           }}
         />
+
+        {(props.options?.showConsoleButton || consoleVisibility) && (
+          <div
+            className={consoleWrapper.toString()}
+            style={{
+              borderTop: consoleVisibility ? "inherit" : "none",
+              height: consoleVisibility
+                ? getPreviewHeight(
+                    consoleVisibility,
+                    props.options?.editorHeight,
+                    3
+                  )
+                : 0,
+            }}
+          >
+            <SandpackConsole
+              onLogsChange={(logs): void => setCounter(logs.length)}
+              showHeader={false}
+            />
+          </div>
+        )}
       </SandpackLayout>
     </SandpackProvider>
   );
@@ -200,15 +200,16 @@ const buttonCounter = css({
 });
 
 const consoleWrapper = css({
-  position: "absolute !important",
-  bottom: 0,
-  right: 0,
-  left: 0,
-  zIndex: "$top",
-  overflow: "hidden",
   transition: "height $transitions$default",
+  width: "100%",
+  overflow: "hidden",
 
   "@media screen and (min-width: 768px)": {
+    position: "absolute !important",
+    bottom: 0,
+    right: 0,
+    zIndex: "$top",
+
     left: "50%",
   },
 });
