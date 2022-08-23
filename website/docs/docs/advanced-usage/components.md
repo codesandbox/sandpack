@@ -328,6 +328,21 @@ This API provides a way to draw or style a piece of code in the editor content. 
 
 <SandpackDecorators />
 
+## Console
+
+There are three ways to consume logs:
+ - Sandpack preset;
+ - SandpackConsole component;
+ - Sandpack console hook;
+
+```jsx
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+<Sandpack options={{ showConsole: true }}
+```
+
+<Sandpack options={{ showConsole: true }} />
+
 ## ReactDevTools
 
 Sandpack also provides a component that adds React DevTools, allowing you to inspect the React component hierarchies in the iframe. This is useful for `props` debugging and understanding the component tree. Our `SandpackReactDevTools` component has the same functionality as the React DevTools browser extensions, but it only shows what is in your Sandpack instance.
