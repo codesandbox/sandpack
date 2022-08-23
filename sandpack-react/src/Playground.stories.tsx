@@ -11,6 +11,7 @@ import {
   SandpackPreview,
   SandpackLayout,
   SandpackFileExplorer,
+  SandpackConsole,
 } from "./";
 
 export default {
@@ -19,7 +20,12 @@ export default {
 
 export const Main = (): JSX.Element => {
   const [config, setConfig] = useState({
-    Components: { Preview: true, Editor: true, FileExplorer: true },
+    Components: {
+      Preview: true,
+      Editor: true,
+      FileExplorer: true,
+      Console: true,
+    },
     Options: {
       showTabs: true,
       showLineNumbers: true,
@@ -30,6 +36,7 @@ export const Main = (): JSX.Element => {
       showReadOnly: true,
       showNavigator: true,
       showRefreshButton: true,
+      consoleShowHeader: true,
     },
     Template: "react" as const,
     Theme: "auto",
@@ -141,6 +148,9 @@ export const Main = (): JSX.Element => {
               showNavigator={config.Options?.showNavigator}
               showRefreshButton={config.Options?.showRefreshButton}
             />
+          )}
+          {config.Components.Console && (
+            <SandpackConsole showHeader={config.Options.consoleShowHeader} />
           )}
         </SandpackLayout>
       </SandpackProvider>

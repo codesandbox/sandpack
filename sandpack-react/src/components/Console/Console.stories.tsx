@@ -60,7 +60,6 @@ const files = (full: boolean): any => ({
 
 export const Main: React.FC = () => {
   const [showHeader, setShowHeader] = React.useState(true);
-  const [showClearButton, setShowClearButton] = React.useState(true);
   const [showSyntaxErrors, setShowSyntaxErrors] = React.useState(true);
 
   return (
@@ -72,7 +71,6 @@ export const Main: React.FC = () => {
 
       <SandpackLayout style={{ marginTop: 12 }}>
         <SandpackConsole
-          showClearButton={showClearButton}
           showHeader={showHeader}
           showSyntaxError={showSyntaxErrors}
         />
@@ -87,15 +85,6 @@ export const Main: React.FC = () => {
           type="checkbox"
         />
         Show header
-      </label>
-
-      <label>
-        <input
-          checked={showClearButton}
-          onChange={({ target }): void => setShowClearButton(target.checked)}
-          type="checkbox"
-        />
-        Show clear button
       </label>
 
       <label>

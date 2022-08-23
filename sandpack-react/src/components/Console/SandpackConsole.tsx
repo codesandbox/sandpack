@@ -15,7 +15,6 @@ import { getType } from "./utils/getType";
 interface SandpackConsoleProps {
   clientId?: string;
   showHeader?: boolean;
-  showClearButton?: boolean;
   showSyntaxError?: boolean;
   maxMessageCount?: number;
   onLogsChange?: (logs: SandpackConsoleData) => void;
@@ -25,7 +24,6 @@ export const SandpackConsole: React.FC<
   React.HTMLAttributes<HTMLDivElement> & SandpackConsoleProps
 > = ({
   clientId,
-  showClearButton = true,
   showHeader = true,
   showSyntaxError = false,
   maxMessageCount,
@@ -101,7 +99,7 @@ export const SandpackConsole: React.FC<
         })}
       </div>
 
-      {showClearButton && <Button onClick={reset} />}
+      <Button onClick={reset} />
     </SandpackStack>
   );
 };
