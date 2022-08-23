@@ -23,7 +23,6 @@ export const layoutClassName = css({
   display: "flex",
   flexWrap: "wrap",
   alignItems: "stretch",
-  background: "$colors$surface1",
   borderRadius: "$border$radius",
   overflow: "hidden",
   position: "relative",
