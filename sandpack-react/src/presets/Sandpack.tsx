@@ -78,14 +78,16 @@ export const Sandpack: SandpackInternal = (props) => {
   const editorPart = props.options?.editorWidthPercentage || 50;
   const previewPart = 100 - editorPart;
 
-  const RightColumn = props.options?.showConsole
-    ? SandpackStack
-    : React.Fragment;
+  const RightColumn =
+    props.options?.showConsole || props.options?.showConsoleButton
+      ? SandpackStack
+      : React.Fragment;
 
   const rightColumnStyle = {
     flexGrow: previewPart,
     flexShrink: previewPart,
     minWidth: 700 * (previewPart / (previewPart + editorPart)),
+    gap: consoleVisibility ? 1 : 0,
   };
 
   const rightColumnItemHeight = getPreviewHeight(
@@ -125,8 +127,8 @@ export const Sandpack: SandpackInternal = (props) => {
             showNavigator={props.options?.showNavigator}
             showRefreshButton={props.options?.showRefreshButton}
             style={{
-              height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
               ...rightColumnStyle,
+              height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
             }}
           />
 
@@ -134,7 +136,6 @@ export const Sandpack: SandpackInternal = (props) => {
             <div
               className={consoleWrapper.toString()}
               style={{
-                borderTop: consoleVisibility ? "inherit" : "none",
                 height: consoleVisibility ? rightColumnItemHeight(3) : 0,
               }}
             >
