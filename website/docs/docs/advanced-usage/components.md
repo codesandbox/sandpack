@@ -341,7 +341,17 @@ import { Sandpack } from "@codesandbox/sandpack-react";
 <Sandpack options={{ showConsole: true }}
 ```
 
-<Sandpack options={{ showConsole: true }} />
+<Sandpack 
+  files={{ 
+    "/src/index.js": `console.log("Hello Sandpack")    \n
+document.getElementById("app").innerHTML = \`
+<h1>Check the logs 👇</h1>
+\`
+`
+  }} 
+  template="vanilla"
+  options={{ showConsole: true }} 
+/>
 
 ## ReactDevTools
 
@@ -360,15 +370,16 @@ Sandpack also provides a component that adds React DevTools, allowing you to ins
   SandpackLayout,
   SandpackPreview,
   SandpackReactDevTools,
+  SandpackStack
 } from "@codesandbox/sandpack-react";
 export default function CustomSandpack() {
   return (
     <SandpackProvider template="react">
       <SandpackLayout>
-        <div style={{ display: "flex", width: "100%" }}>
-          <SandpackPreview />
+        <SandpackPreview />
+        <SandpackStack>
           <SandpackReactDevTools />
-        </div>
+         </SandpackStack> 
       </SandpackLayout>
     </SandpackProvider>
   )
