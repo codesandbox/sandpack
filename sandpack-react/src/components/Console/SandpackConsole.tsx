@@ -20,10 +20,9 @@ interface SandpackConsoleProps {
   onLogsChange?: (logs: SandpackConsoleData) => void;
 }
 
-
 /**
  * @category Components
- * 
+ *
  * `SandpackConsole` is a Sandpack devtool to print the console logs
  * from a Sandpack client, which is designed to be a light version of
  * a browser console, meaning that it's limited to the most common cases when coding.
