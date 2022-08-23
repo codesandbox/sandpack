@@ -1,5 +1,6 @@
 import type { CSSProperties } from "@stitches/core";
 import * as React from "react";
+import { SandpackStack } from "..";
 
 import { SandpackLayout } from "../common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
@@ -77,6 +78,16 @@ export const Sandpack: SandpackInternal = (props) => {
   const editorPart = props.options?.editorWidthPercentage || 50;
   const previewPart = 100 - editorPart;
 
+  const RightColumn = props.options?.showConsole
+    ? SandpackStack
+    : React.Fragment;
+
+  const rightColumnStyle = {
+    flexGrow: previewPart,
+    flexShrink: previewPart,
+    minWidth: 700 * (previewPart / (previewPart + editorPart)),
+  };
+
   return (
     <SandpackProvider
       customSetup={props.customSetup}
@@ -96,49 +107,49 @@ export const Sandpack: SandpackInternal = (props) => {
           }}
         />
 
-        <SandpackPreview
-          actionsChildren={
-            props.options?.showConsoleButton ? (
-              <ConsoleCounterButton
-                counter={counter}
-                onClick={(): void => setConsoleVisibility((prev) => !prev)}
-              />
-            ) : undefined
-          }
-          showNavigator={props.options?.showNavigator}
-          showRefreshButton={props.options?.showRefreshButton}
-          style={{
-            height: getPreviewHeight(
-              consoleVisibility,
-              props.options?.editorHeight,
-              consoleVisibility ? 1.5 : 1
-            ),
-            flexGrow: previewPart,
-            flexShrink: previewPart,
-            minWidth: 700 * (previewPart / (previewPart + editorPart)),
-          }}
-        />
-
-        {(props.options?.showConsoleButton || consoleVisibility) && (
-          <div
-            className={consoleWrapper.toString()}
+        <RightColumn style={rightColumnStyle}>
+          <SandpackPreview
+            actionsChildren={
+              props.options?.showConsoleButton ? (
+                <ConsoleCounterButton
+                  counter={counter}
+                  onClick={(): void => setConsoleVisibility((prev) => !prev)}
+                />
+              ) : undefined
+            }
+            showNavigator={props.options?.showNavigator}
+            showRefreshButton={props.options?.showRefreshButton}
             style={{
-              borderTop: consoleVisibility ? "inherit" : "none",
-              height: consoleVisibility
-                ? getPreviewHeight(
-                    consoleVisibility,
-                    props.options?.editorHeight,
-                    3
-                  )
-                : 0,
+              height: getPreviewHeight(
+                consoleVisibility,
+                props.options?.editorHeight,
+                consoleVisibility ? 1.5 : 1
+              ),
+              ...rightColumnStyle,
             }}
-          >
-            <SandpackConsole
-              onLogsChange={(logs): void => setCounter(logs.length)}
-              showHeader={false}
-            />
-          </div>
-        )}
+          />
+
+          {(props.options?.showConsoleButton || consoleVisibility) && (
+            <div
+              className={consoleWrapper.toString()}
+              style={{
+                borderTop: consoleVisibility ? "inherit" : "none",
+                height: consoleVisibility
+                  ? getPreviewHeight(
+                      consoleVisibility,
+                      props.options?.editorHeight,
+                      3
+                    )
+                  : 0,
+              }}
+            >
+              <SandpackConsole
+                onLogsChange={(logs): void => setCounter(logs.length)}
+                showHeader={false}
+              />
+            </div>
+          )}
+        </RightColumn>
       </SandpackLayout>
     </SandpackProvider>
   );
@@ -203,13 +214,4 @@ const consoleWrapper = css({
   transition: "height $transitions$default",
   width: "100%",
   overflow: "hidden",
-
-  "@media screen and (min-width: 768px)": {
-    position: "absolute !important",
-    bottom: 0,
-    right: 0,
-    zIndex: "$top",
-
-    left: "50%",
-  },
 });

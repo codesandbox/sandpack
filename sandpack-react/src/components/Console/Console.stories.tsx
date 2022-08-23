@@ -101,7 +101,7 @@ export const Main: React.FC = () => {
 
 export const Preset: React.FC = () => {
   return (
-    <>
+    <div style={{ width: "auto" }}>
       <Sandpack template="react" />
 
       <br />
@@ -127,6 +127,6 @@ export const Preset: React.FC = () => {
         options={{ showConsoleButton: true, showConsole: false }}
         template="react"
       />
-    </>
+    </div>
   );
 };
