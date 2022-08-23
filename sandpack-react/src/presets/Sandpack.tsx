@@ -1,6 +1,7 @@
 import type { CSSProperties } from "@stitches/core";
 import * as React from "react";
 
+import { SandpackStack } from "..";
 import { SandpackLayout } from "../common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
@@ -77,6 +78,23 @@ export const Sandpack: SandpackInternal = (props) => {
   const editorPart = props.options?.editorWidthPercentage || 50;
   const previewPart = 100 - editorPart;
 
+  const RightColumn =
+    props.options?.showConsole || props.options?.showConsoleButton
+      ? SandpackStack
+      : React.Fragment;
+
+  const rightColumnStyle = {
+    flexGrow: previewPart,
+    flexShrink: previewPart,
+    minWidth: 700 * (previewPart / (previewPart + editorPart)),
+    gap: consoleVisibility ? 1 : 0,
+  };
+
+  const rightColumnItemHeight = getPreviewHeight(
+    consoleVisibility,
+    props.options?.editorHeight
+  );
+
   return (
     <SandpackProvider
       customSetup={props.customSetup}
@@ -96,49 +114,38 @@ export const Sandpack: SandpackInternal = (props) => {
           }}
         />
 
-        <SandpackPreview
-          actionsChildren={
-            props.options?.showConsoleButton ? (
-              <ConsoleCounterButton
-                counter={counter}
-                onClick={(): void => setConsoleVisibility((prev) => !prev)}
-              />
-            ) : undefined
-          }
-          showNavigator={props.options?.showNavigator}
-          showRefreshButton={props.options?.showRefreshButton}
-          style={{
-            height: getPreviewHeight(
-              consoleVisibility,
-              props.options?.editorHeight,
-              consoleVisibility ? 1.5 : 1
-            ),
-            flexGrow: previewPart,
-            flexShrink: previewPart,
-            minWidth: 700 * (previewPart / (previewPart + editorPart)),
-          }}
-        />
-
-        {(props.options?.showConsoleButton || consoleVisibility) && (
-          <div
-            className={consoleWrapper.toString()}
+        <RightColumn style={rightColumnStyle}>
+          <SandpackPreview
+            actionsChildren={
+              props.options?.showConsoleButton ? (
+                <ConsoleCounterButton
+                  counter={counter}
+                  onClick={(): void => setConsoleVisibility((prev) => !prev)}
+                />
+              ) : undefined
+            }
+            showNavigator={props.options?.showNavigator}
+            showRefreshButton={props.options?.showRefreshButton}
             style={{
-              borderTop: consoleVisibility ? "inherit" : "none",
-              height: consoleVisibility
-                ? getPreviewHeight(
-                    consoleVisibility,
-                    props.options?.editorHeight,
-                    3
-                  )
-                : 0,
+              ...rightColumnStyle,
+              height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
             }}
-          >
-            <SandpackConsole
-              onLogsChange={(logs): void => setCounter(logs.length)}
-              showHeader={false}
-            />
-          </div>
-        )}
+          />
+
+          {(props.options?.showConsoleButton || consoleVisibility) && (
+            <div
+              className={consoleWrapper.toString()}
+              style={{
+                height: consoleVisibility ? rightColumnItemHeight(3) : 0,
+              }}
+            >
+              <SandpackConsole
+                onLogsChange={(logs): void => setCounter(logs.length)}
+                showHeader={false}
+              />
+            </div>
+          )}
+        </RightColumn>
       </SandpackLayout>
     </SandpackProvider>
   );
@@ -164,22 +171,20 @@ const ConsoleCounterButton: React.FC<{
   );
 };
 
-const getPreviewHeight = (
-  showConsoleButton?: boolean,
-  editorHeight?: CSSProperties["height"],
-  ratio = 2
-): string | number | undefined => {
-  if (showConsoleButton) {
-    const height =
-      typeof editorHeight === "number" ? `${editorHeight}px` : editorHeight;
+const getPreviewHeight =
+  (showConsoleButton?: boolean, editorHeight?: CSSProperties["height"]) =>
+  (ratio = 2): string | number | undefined => {
+    if (showConsoleButton) {
+      const height =
+        typeof editorHeight === "number" ? `${editorHeight}px` : editorHeight;
 
-    return `calc(${
-      height ?? `var(--${THEME_PREFIX}-layout-height)`
-    } / ${ratio})`;
-  }
+      return `calc(${
+        height ?? `var(--${THEME_PREFIX}-layout-height)`
+      } / ${ratio})`;
+    }
 
-  return editorHeight;
-};
+    return editorHeight;
+  };
 
 const buttonCounter = css({
   position: "relative",
@@ -203,13 +208,4 @@ const consoleWrapper = css({
   transition: "height $transitions$default",
   width: "100%",
   overflow: "hidden",
-
-  "@media screen and (min-width: 768px)": {
-    position: "absolute !important",
-    bottom: 0,
-    right: 0,
-    zIndex: "$top",
-
-    left: "50%",
-  },
 });

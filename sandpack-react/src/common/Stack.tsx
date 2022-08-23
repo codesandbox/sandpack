@@ -13,6 +13,7 @@ export const stackClassName = css({
   width: "100%",
   position: "relative",
   transition: "height $transitions$default",
+  gap: 1, // border between components
 });
 
 /**
