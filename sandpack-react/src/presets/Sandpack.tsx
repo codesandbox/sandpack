@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { CSSProperties } from "@stitches/core";
 import * as React from "react";
 
@@ -114,6 +115,7 @@ export const Sandpack: SandpackInternal = (props) => {
           }}
         />
 
+        {/* @ts-ignore */}
         <RightColumn style={rightColumnStyle}>
           <SandpackPreview
             actionsChildren={
