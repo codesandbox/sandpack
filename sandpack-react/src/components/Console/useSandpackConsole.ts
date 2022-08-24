@@ -9,6 +9,11 @@ import {
 } from "./utils/constraints";
 import type { SandpackConsoleData } from "./utils/getType";
 
+/**
+ * It provides an interface to consume the logs from a sandpack client.
+ *
+ * @category Hooks
+ */
 export const useSandpackConsole = (props?: {
   clientId?: string;
   maxMessageCount?: number;

@@ -52,6 +52,7 @@ const RenderSandpack = (props) => {
               : { [file]: children }
             : undefined
         }
+        options={{ showConsoleButton: true }}
         template={template}
         theme={theme}
       />

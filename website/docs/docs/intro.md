@@ -36,10 +36,12 @@ deeper into our ecosystem.
 ### Live coding environment in minutes
 
 ```js sandpack
+console.log("Sandpack 📦")
+
 export default function App() {
   return (
     <div className="App">
-      <h1>Hello Sandpack ✨</h1>
+      <h1>Hello World ✨</h1>
       <p>Start editing to see some magic happen!</p>
     </div>
   );
