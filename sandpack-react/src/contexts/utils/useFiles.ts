@@ -1,19 +1,11 @@
-import type { EditorState } from "@codemirror/state";
-import type {
-  BundlerState,
-  ReactDevToolsMode,
-  SandpackBundlerFiles,
-  SandpackError,
-} from "@codesandbox/sandpack-client";
+import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import { useState } from "react";
 
 import type {
   SandboxEnvironment,
   SandpackFiles,
-  SandpackInitMode,
   SandpackPredefinedTemplate,
   SandpackProviderProps,
-  SandpackStatus,
   TemplateFiles,
 } from "../..";
 import {
@@ -26,16 +18,6 @@ interface SandpackProviderState {
   environment?: SandboxEnvironment;
   visibleFiles: Array<TemplateFiles<SandpackPredefinedTemplate> | string>;
   activeFile: TemplateFiles<SandpackPredefinedTemplate> | string;
-}
-
-interface SandpackConfigState {
-  sandpackStatus: SandpackStatus;
-  editorState: EditorState;
-  reactDevTools?: ReactDevToolsMode;
-  startRoute?: string;
-  initMode: SandpackInitMode;
-  bundlerState?: BundlerState;
-  error: SandpackError | null;
 }
 
 type UseFiles = (props: SandpackProviderProps) => [
@@ -86,7 +68,7 @@ export const useFiles: UseFiles = (props) => {
   };
 
   const operations = {
-    openFile: (path:string): void => {
+    openFile: (path: string): void => {
       setState(({ visibleFiles, ...rest }) => {
         const newPaths = visibleFiles.includes(path)
           ? visibleFiles
@@ -99,7 +81,7 @@ export const useFiles: UseFiles = (props) => {
         };
       });
     },
-    resetFile: (path:string): void => {
+    resetFile: (path: string): void => {
       setState((prevState) => ({
         ...prevState,
         files: {

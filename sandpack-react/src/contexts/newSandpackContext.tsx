@@ -9,6 +9,7 @@ import type {
   SandpackProviderProps,
 } from "../types";
 
+import { useClient } from "./utils/useClient";
 import { useFiles } from "./utils/useFiles";
 
 const Sandpack = React.createContext<SandpackContext | null>(null);
@@ -16,6 +17,7 @@ const Sandpack = React.createContext<SandpackContext | null>(null);
 export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
   const { children, options, style, className, theme } = props;
   const [state, operations] = useFiles(props);
+  const foo = useClient(props);
 
   return (
     <Sandpack.Provider value={{}}>
