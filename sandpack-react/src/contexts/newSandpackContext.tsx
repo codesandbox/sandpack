@@ -1,7 +1,7 @@
-import * as React from "react";
 import { ClasserProvider } from "@code-hike/classer";
-import { SandpackThemeProvider } from "../contexts/themeContext";
+import * as React from "react";
 
+import { SandpackThemeProvider } from "../contexts/themeContext";
 import type {
   SandpackContext,
   SandpackInternalProvider,
@@ -14,6 +14,9 @@ const Sandpack = React.createContext<SandpackContext | null>(null);
 export const SandpackProvider: React.FC<SandpackProviderProps> = ({
   children,
   options,
+  style,
+  className,
+  theme,
 }) => {
   return (
     <Sandpack.Provider value={{}}>
@@ -29,3 +32,10 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = ({
     </Sandpack.Provider>
   );
 };
+
+/**
+ * @category Provider
+ */
+const SandpackConsumer = Sandpack.Consumer;
+
+export { SandpackConsumer, Sandpack as SandpackReactContext };
