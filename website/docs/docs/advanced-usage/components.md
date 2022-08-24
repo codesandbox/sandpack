@@ -344,7 +344,6 @@ This API provides a way to draw or style a piece of code in the editor content. 
 
 Sandpack runs the console directly into the iframe. As a result, all console messages pass through the Sandpack protocol, where you can attach a listener to these messages in your own component or use the proper Sandpack React hook to consume them. 
  
-
 There are three ways to print the logs:
 - [`<Sandpack options={{ showConsole: true }} />`](/api/react/interfaces/SandpackOptions#showconsole): shows a panel right after the `SandpackPreview`;
 - [`<SandpackConsole />`](/api/react/#sandpackconsole): standalone component to render the logs;
