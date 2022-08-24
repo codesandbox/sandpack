@@ -38,13 +38,13 @@ interface SandpackConfigState {
   error: SandpackError | null;
 }
 
-type UseFiles = (props: SandpackProviderProps) => {
-  state: SandpackProviderState & {
+type UseFiles = (props: SandpackProviderProps) => [
+  SandpackProviderState & {
     visibleFilesFromProps: Array<
       TemplateFiles<SandpackPredefinedTemplate> | string
     >;
-  };
-  operations: {
+  },
+  {
     openFile: (path: string) => void;
     resetFile: (path: string) => void;
     resetAllFiles: () => void;
@@ -54,8 +54,8 @@ type UseFiles = (props: SandpackProviderProps) => {
     addFile: (pathOrFiles: string | SandpackFiles, code?: string) => void;
     closeFile: (path: string) => void;
     deleteFile: (path: string) => void;
-  };
-};
+  }
+];
 
 export const useFiles: UseFiles = (props) => {
   const originalStateFromProps = getSandpackStateFromProps(props);
@@ -85,75 +85,74 @@ export const useFiles: UseFiles = (props) => {
     setState((prev) => ({ ...prev, files }));
   };
 
-  return {
-    state: { ...state, visibleFilesFromProps: visibleFiles },
-    operations: {
-      openFile: (path): void => {
-        setState(({ visibleFiles, ...rest }) => {
-          const newPaths = visibleFiles.includes(path)
-            ? visibleFiles
-            : [...visibleFiles, path];
+  const operations = {
+    openFile: (path:string): void => {
+      setState(({ visibleFiles, ...rest }) => {
+        const newPaths = visibleFiles.includes(path)
+          ? visibleFiles
+          : [...visibleFiles, path];
 
-          return {
-            ...rest,
-            activeFile: path,
-            visibleFiles: newPaths,
-          };
-        });
-      },
-      resetFile: (path): void => {
-        setState((prevState) => ({
-          ...prevState,
-          files: {
-            ...prevState.files,
-            [path]: originalStateFromProps.files[path],
-          },
-        }));
-      },
-      resetAllFiles: (): void => {
-        setState((prev) => ({ ...prev, files: originalStateFromProps.files }));
-      },
-      setActiveFile: (activeFile: string): void => {
-        setState((prev) => ({ ...prev, activeFile }));
-      },
-      updateCurrentFile: (code: string): void => {
-        updateFile(state.activeFile, code);
-      },
-      updateFile,
-      addFile: updateFile,
-      closeFile: (path: string): void => {
-        if (state.visibleFiles.length === 1) {
-          return;
-        }
+        return {
+          ...rest,
+          activeFile: path,
+          visibleFiles: newPaths,
+        };
+      });
+    },
+    resetFile: (path:string): void => {
+      setState((prevState) => ({
+        ...prevState,
+        files: {
+          ...prevState.files,
+          [path]: originalStateFromProps.files[path],
+        },
+      }));
+    },
+    resetAllFiles: (): void => {
+      setState((prev) => ({ ...prev, files: originalStateFromProps.files }));
+    },
+    setActiveFile: (activeFile: string): void => {
+      setState((prev) => ({ ...prev, activeFile }));
+    },
+    updateCurrentFile: (code: string): void => {
+      updateFile(state.activeFile, code);
+    },
+    updateFile,
+    addFile: updateFile,
+    closeFile: (path: string): void => {
+      if (state.visibleFiles.length === 1) {
+        return;
+      }
 
-        setState(({ visibleFiles, activeFile, ...prev }) => {
-          const indexOfRemovedPath = visibleFiles.indexOf(path);
-          const newPaths = visibleFiles.filter((openPath) => openPath !== path);
+      setState(({ visibleFiles, activeFile, ...prev }) => {
+        const indexOfRemovedPath = visibleFiles.indexOf(path);
+        const newPaths = visibleFiles.filter((openPath) => openPath !== path);
 
-          return {
-            ...prev,
-            activeFile:
-              path === activeFile
-                ? indexOfRemovedPath === 0
-                  ? visibleFiles[1]
-                  : visibleFiles[indexOfRemovedPath - 1]
-                : activeFile,
-            visibleFiles: newPaths,
-          };
-        });
-      },
-      deleteFile: (path: string): void => {
-        setState(({ visibleFiles, files, ...rest }) => {
-          const newFiles = { ...files };
-          delete newFiles[path];
+        return {
+          ...prev,
+          activeFile:
+            path === activeFile
+              ? indexOfRemovedPath === 0
+                ? visibleFiles[1]
+                : visibleFiles[indexOfRemovedPath - 1]
+              : activeFile,
+          visibleFiles: newPaths,
+        };
+      });
+    },
+    deleteFile: (path: string): void => {
+      setState(({ visibleFiles, files, ...rest }) => {
+        const newFiles = { ...files };
+        delete newFiles[path];
 
-          return {
-            ...rest,
-            visibleFiles: visibleFiles.filter((openPath) => openPath !== path),
-            files: newFiles,
-          };
-        });
-      },
+        return {
+          ...rest,
+          visibleFiles: visibleFiles.filter((openPath) => openPath !== path),
+          files: newFiles,
+        };
+      });
     },
   };
+
+  return [{ ...state, visibleFilesFromProps: visibleFiles }, operations];
 };

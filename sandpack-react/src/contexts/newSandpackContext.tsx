@@ -8,16 +8,14 @@ import type {
   SandpackProviderState,
   SandpackProviderProps,
 } from "../types";
+import { useFiles } from "./utils/useFiles";
 
 const Sandpack = React.createContext<SandpackContext | null>(null);
 
-export const SandpackProvider: React.FC<SandpackProviderProps> = ({
-  children,
-  options,
-  style,
-  className,
-  theme,
-}) => {
+export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
+  const { children, options, style, className, theme } = props;
+  const { state, operations } = useFiles(props);
+
   return (
     <Sandpack.Provider value={{}}>
       <ClasserProvider classes={options?.classes}>
