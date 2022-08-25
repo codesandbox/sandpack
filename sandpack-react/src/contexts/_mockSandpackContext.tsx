@@ -4,9 +4,9 @@ import type {
   SandpackMessage,
   UnsubscribeFunction,
   ReactDevToolsMode,
-} from "@codesandbox/sandpack-client";
+
+  SandpackClient} from "@codesandbox/sandpack-client";
 import {
-  SandpackClient,
   extractErrorDetails,
 } from "@codesandbox/sandpack-client";
 import isEqual from "lodash.isequal";
@@ -252,84 +252,7 @@ export class SandpackProviderClass extends React.PureComponent<
     }
   }
 
-  createClient = (
-    iframe: HTMLIFrameElement,
-    clientId: string
-  ): SandpackClient => {
-    const client = new SandpackClient(
-      iframe,
-      {
-        files: this.state.files,
-        template: this.state.environment,
-      },
-      {
-        externalResources: this.props.options?.externalResources,
-        bundlerURL: this.props.options?.bundlerURL,
-        startRoute: this.props.options?.startRoute,
-        fileResolver: this.props.options?.fileResolver,
-        skipEval: this.props.options?.skipEval ?? false,
-        logLevel: this.props.options?.logLevel,
-        showOpenInCodeSandbox: !this.openInCSBRegistered.current,
-        showErrorScreen: !this.errorScreenRegistered.current,
-        showLoadingScreen: !this.loadingScreenRegistered.current,
-        reactDevTools: this.state.reactDevTools,
-        customNpmRegistries: this.props.customSetup?.npmRegistries?.map(
-          (config) =>
-            ({
-              ...config,
-              proxyEnabled: false, // force
-            } ?? [])
-        ),
-      }
-    );
-
-    /**
-     * Subscribe inside the context with the first client that gets instantiated.
-     * This subscription is for global states like error and timeout, so no need for a per client listen
-     * Also, set the timeout timer only when the first client is instantiated
-     */
-    if (typeof this.unsubscribe !== "function") {
-      this.unsubscribe = client.listen(this.handleMessage);
-
-      this.timeoutHook = setTimeout(() => {
-        this.setState({ sandpackStatus: "timeout" });
-      }, BUNDLER_TIMEOUT);
-    }
-
-    this.unsubscribeClientListeners[clientId] =
-      this.unsubscribeClientListeners[clientId] || {};
-
-    /**
-     * Register any potential listeners that subscribed before sandpack ran
-     */
-    if (this.queuedListeners[clientId]) {
-      Object.keys(this.queuedListeners[clientId]).forEach((listenerId) => {
-        const listener = this.queuedListeners[clientId][listenerId];
-        const unsubscribe = client.listen(listener) as () => void;
-        this.unsubscribeClientListeners[clientId][listenerId] = unsubscribe;
-      });
-
-      // Clear the queued listeners after they were registered
-      this.queuedListeners[clientId] = {};
-    }
-
-    /**
-     * Register global listeners
-     */
-    const globalListeners = Object.entries(this.queuedListeners.global);
-    globalListeners.forEach(([listenerId, listener]) => {
-      const unsubscribe = client.listen(listener) as () => void;
-      this.unsubscribeClientListeners[clientId][listenerId] = unsubscribe;
-
-      /**
-       * Important: Do not clean the global queue
-       * Instead of cleaning the queue, keep it there for the
-       * following clients that might be created
-       */
-    });
-
-    return client;
-  };
+  
 
 
   registerBundler = (iframe: HTMLIFrameElement, clientId: string): void => {
@@ -367,14 +290,7 @@ export class SandpackProviderClass extends React.PureComponent<
     this.setState({ sandpackStatus: "idle" });
   };
 
-  unregisterAllClients = (): void => {
-    Object.keys(this.clients).map(this.unregisterBundler);
-
-    if (typeof this.unsubscribe === "function") {
-      this.unsubscribe();
-      this.unsubscribe = undefined;
-    }
-  };
+  
 
   dispatchMessage = (message: SandpackMessage, clientId?: string): void => {
     if (this.state.sandpackStatus !== "running") {

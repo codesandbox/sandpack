@@ -14,7 +14,7 @@ import {
   getSandpackStateFromProps,
 } from "../../utils/sandpackUtils";
 
-interface SandpackProviderState {
+export interface FilesState {
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;
   visibleFiles: Array<TemplateFiles<SandpackPredefinedTemplate> | string>;
@@ -22,7 +22,7 @@ interface SandpackProviderState {
 }
 
 type UseFiles = (props: SandpackProviderProps) => [
-  SandpackProviderState & {
+  FilesState & {
     visibleFilesFromProps: Array<
       TemplateFiles<SandpackPredefinedTemplate> | string
     >;
@@ -44,7 +44,7 @@ export const useFiles: UseFiles = (props) => {
   const originalStateFromProps = getSandpackStateFromProps(props);
   const { visibleFiles, ...rest } = originalStateFromProps;
 
-  const [state, setState] = useState<SandpackProviderState>({
+  const [state, setState] = useState<FilesState>({
     ...rest,
     visibleFiles,
   });
