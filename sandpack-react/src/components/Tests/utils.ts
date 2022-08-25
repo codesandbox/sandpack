@@ -1,7 +1,7 @@
 import type { Describe } from "./Describes";
-import type { Test } from "./Message";
 import type { Spec } from "./Specs";
 import type { SuiteResults, TestResults } from "./Summary";
+import type { Test } from "./Tests";
 
 export const getFailingTests = (block: Describe | Spec): Test[] =>
   getTests(block).filter((t) => t.status === "fail");

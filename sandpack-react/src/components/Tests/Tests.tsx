@@ -1,9 +1,9 @@
+import type { TestError } from "@codesandbox/sandpack-client";
 import React from "react";
 
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
-import type { Test } from "./Message";
 import { colors } from "./config";
 
 const testContainerClassName = css({
@@ -38,6 +38,17 @@ const skipClassName = css({
   marginRight: "8px",
   color: colors.skip,
 });
+
+type TestStatus = "idle" | "running" | "pass" | "fail";
+
+export interface Test {
+  name: string;
+  blocks: string[];
+  status: TestStatus;
+  path: string;
+  errors: TestError[];
+  duration?: number | undefined;
+}
 
 export const Tests: React.FC<{ tests: Test[] }> = ({ tests }) => {
   return (

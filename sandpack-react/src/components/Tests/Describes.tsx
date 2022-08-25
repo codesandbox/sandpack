@@ -3,7 +3,7 @@ import * as React from "react";
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
-import type { Test } from "./Message";
+import type { Test } from "./Tests";
 import { Tests } from "./Tests";
 import { isEmpty } from "./utils";
 

@@ -1,3 +1,4 @@
+import type { TestError } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
 import { css } from "../../styles";
@@ -6,7 +7,6 @@ import { classNames } from "../../utils/classNames";
 import type { Describe } from "./Describes";
 import { Describes } from "./Describes";
 import { FormattedError } from "./FormattedError";
-import type { TestError } from "./Message";
 import { Tests } from "./Tests";
 import { colors } from "./config";
 import { getFailingTests, getSpecTestResults, isEmpty } from "./utils";

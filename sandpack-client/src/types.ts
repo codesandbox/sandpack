@@ -169,6 +169,114 @@ export interface NpmRegistry {
   registryAuthToken?: string;
 }
 
+type TestStatus = "running" | "pass" | "fail";
+
+export type TestError = Error & {
+  matcherResult?: boolean;
+  mappedErrors?: Array<{
+    fileName: string;
+    _originalFunctionName: string;
+    _originalColumnNumber: number;
+    _originalLineNumber: number;
+    _originalScriptCode: Array<{
+      lineNumber: number;
+      content: string;
+      highlight: boolean;
+    }> | null;
+  }>;
+};
+
+export interface Test {
+  name: string;
+  blocks: string[];
+  status: TestStatus;
+  path: string;
+  errors: TestError[];
+  duration?: number | undefined;
+}
+
+export type SandboxTestMessage =
+  | ClearJestErrors
+  | ({ type: "test" } & (
+      | InitializedTestsMessage
+      | TestCountMessage
+      | TotalTestStartMessage
+      | TotalTestEndMessage
+      | AddFileMessage
+      | RemoveFileMessage
+      | FileErrorMessage
+      | DescribeStartMessage
+      | DescribeEndMessage
+      | AddTestMessage
+      | TestStartMessage
+      | TestEndMessage
+    ));
+
+interface InitializedTestsMessage {
+  event: "initialize_tests";
+}
+
+interface ClearJestErrors {
+  type: "action";
+  action: "clear-errors";
+  source: "jest";
+  path: string;
+}
+
+interface TestCountMessage {
+  event: "test_count";
+  count: number;
+}
+
+interface TotalTestStartMessage {
+  event: "total_test_start";
+}
+
+interface TotalTestEndMessage {
+  event: "total_test_end";
+}
+
+interface AddFileMessage {
+  event: "add_file";
+  path: string;
+}
+
+interface RemoveFileMessage {
+  event: "remove_file";
+  path: string;
+}
+
+interface FileErrorMessage {
+  event: "file_error";
+  path: string;
+  error: TestError;
+}
+
+interface DescribeStartMessage {
+  event: "describe_start";
+  blockName: string;
+}
+
+interface DescribeEndMessage {
+  event: "describe_end";
+}
+
+interface AddTestMessage {
+  event: "add_test";
+  testName: string;
+  path: string;
+}
+
+interface TestStartMessage {
+  event: "test_start";
+  test: Test;
+}
+
+interface TestEndMessage {
+  event: "test_end";
+  test: Test;
+}
+
 export type SandpackMessage = BaseSandpackMessage &
   (
     | {
@@ -258,6 +366,7 @@ export type SandpackMessage = BaseSandpackMessage &
           data: string[];
         }>;
       }
+    | SandboxTestMessage
   );
 
 export type Template =

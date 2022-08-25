@@ -1,9 +1,9 @@
+import type { TestError } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
-import type { TestError } from "./Message";
 import { colors } from "./config";
 
 interface Props {

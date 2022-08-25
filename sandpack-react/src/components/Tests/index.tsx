@@ -1,18 +1,17 @@
-import type { SandpackMessage } from "@codesandbox/sandpack-client";
-import { SandpackStack } from "@codesandbox/sandpack-react";
 import immer from "immer";
 import set from "lodash/set";
 import * as React from "react";
 
+import { SandpackStack } from "../../common";
 import { Loading } from "../../common/Loading";
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
 import { Controls } from "./Controls";
-import type { SandboxTestMessage, Test } from "./Message";
 import type { Spec } from "./Specs";
 import { Specs } from "./Specs";
 import { Summary } from "./Summary";
+import type { Test } from "./Tests";
 import { colors } from "./config";
 import { useSandpackClient } from "./useSandpackClient";
 import {
@@ -54,226 +53,224 @@ export const SandpackTests: React.FC<{ verbose?: boolean }> = ({
     let currentDescribeBlocks: string[] = [];
     let currentSpec = "";
 
-    const unsubscribe = listen(
-      (data: SandpackMessage | SandboxTestMessage): void => {
-        // Note: short-circuit if message isn't for the currently active spec when `runMode` is `single`
-        if (
-          state.runMode === "single" &&
-          (("path" in data && data.path !== sandpack.activeFile) ||
-            ("test" in data &&
-              "path" in data.test &&
-              data.test.path !== sandpack.activeFile))
-        ) {
+    const unsubscribe = listen((data): void => {
+      // Note: short-circuit if message isn't for the currently active spec when `runMode` is `single`
+      if (
+        state.runMode === "single" &&
+        (("path" in data && data.path !== sandpack.activeFile) ||
+          ("test" in data &&
+            "path" in data.test &&
+            data.test.path !== sandpack.activeFile))
+      ) {
+        return;
+      }
+
+      if (
+        data.type === "action" &&
+        data.action === "clear-errors" &&
+        data.source === "jest"
+      ) {
+        currentSpec = data.path;
+        return;
+      }
+
+      if (data.type === "test") {
+        if (data.event === "initialize_tests") {
+          currentDescribeBlocks = [];
+          currentSpec = "";
+          return setState((oldState) => ({
+            ...INITIAL_STATE,
+            status: "idle",
+            runMode: oldState.runMode,
+          }));
+        }
+
+        if (data.event === "test_count") {
           return;
         }
 
-        if (
-          data.type === "action" &&
-          data.action === "clear-errors" &&
-          data.source === "jest"
-        ) {
-          currentSpec = data.path;
-          return;
+        if (data.event === "total_test_start") {
+          currentDescribeBlocks = [];
+          return setState((oldState) => ({ ...oldState, status: "running" }));
         }
 
-        if (data.type === "test") {
-          if (data.event === "initialize_tests") {
-            currentDescribeBlocks = [];
-            currentSpec = "";
-            return setState((oldState) => ({
-              ...INITIAL_STATE,
-              status: "idle",
-              runMode: oldState.runMode,
-            }));
-          }
+        if (data.event === "total_test_end") {
+          return setState((oldState) => ({
+            ...oldState,
+            status: "complete",
+            runMode: "all",
+          }));
+        }
 
-          if (data.event === "test_count") {
+        if (data.event === "add_file") {
+          return setState((oldState) =>
+            immer(oldState, (state) => {
+              state.specs[data.path] = {
+                describes: {},
+                tests: {},
+                name: data.path,
+              };
+            })
+          );
+        }
+
+        if (data.event === "remove_file") {
+          return setState((oldState) =>
+            immer(oldState, (state) => {
+              if (state.specs[data.path]) {
+                delete state.specs[data.path];
+              }
+            })
+          );
+        }
+
+        if (data.event === "file_error") {
+          return setState((oldState) =>
+            immer(oldState, (state) => {
+              if (state.specs[data.path]) {
+                state.specs[data.path].error = data.error;
+              }
+            })
+          );
+        }
+
+        if (data.event === "describe_start") {
+          currentDescribeBlocks.push(data.blockName);
+          const [describePath, currentDescribe] = splitTail(
+            currentDescribeBlocks
+          );
+          const spec = currentSpec;
+
+          if (currentDescribe === undefined) {
             return;
           }
 
-          if (data.event === "total_test_start") {
-            currentDescribeBlocks = [];
-            return setState((oldState) => ({ ...oldState, status: "running" }));
-          }
-
-          if (data.event === "total_test_end") {
-            return setState((oldState) => ({
-              ...oldState,
-              status: "complete",
-              runMode: "all",
-            }));
-          }
-
-          if (data.event === "add_file") {
-            return setState((oldState) =>
-              immer(oldState, (state) => {
-                state.specs[data.path] = {
-                  describes: {},
+          return setState((oldState) =>
+            immer(oldState, (state) => {
+              set(
+                state.specs[spec],
+                [
+                  "describes",
+                  ...flatMap(describePath, (name) => [name, "describes"]),
+                  currentDescribe,
+                ],
+                {
+                  name: data.blockName,
                   tests: {},
-                  name: data.path,
-                };
-              })
-            );
-          }
-
-          if (data.event === "remove_file") {
-            return setState((oldState) =>
-              immer(oldState, (state) => {
-                if (state.specs[data.path]) {
-                  delete state.specs[data.path];
+                  describes: {},
                 }
-              })
-            );
-          }
+              );
+            })
+          );
+        }
 
-          if (data.event === "file_error") {
-            return setState((oldState) =>
-              immer(oldState, (state) => {
-                if (state.specs[data.path]) {
-                  state.specs[data.path].error = data.error;
-                }
-              })
-            );
-          }
+        if (data.event === "describe_end") {
+          currentDescribeBlocks.pop();
+          return;
+        }
 
-          if (data.event === "describe_start") {
-            currentDescribeBlocks.push(data.blockName);
-            const [describePath, currentDescribe] = splitTail(
-              currentDescribeBlocks
-            );
-            const spec = currentSpec;
-
-            if (currentDescribe === undefined) {
-              return;
-            }
-
-            return setState((oldState) =>
-              immer(oldState, (state) => {
+        if (data.event === "add_test") {
+          const [describePath, currentDescribe] = splitTail(
+            currentDescribeBlocks
+          );
+          const test: Test = {
+            status: "idle",
+            errors: [],
+            name: data.testName,
+            blocks: [...currentDescribeBlocks],
+            path: data.path,
+          };
+          return setState((oldState) =>
+            immer(oldState, (state) => {
+              if (currentDescribe === undefined) {
+                state.specs[data.path].tests[data.testName] = test;
+              } else {
                 set(
-                  state.specs[spec],
+                  state.specs[data.path].describes,
                   [
-                    "describes",
                     ...flatMap(describePath, (name) => [name, "describes"]),
                     currentDescribe,
+                    "tests",
+                    data.testName,
                   ],
-                  {
-                    name: data.blockName,
-                    tests: {},
-                    describes: {},
-                  }
+                  test
                 );
-              })
-            );
-          }
+              }
+            })
+          );
+        }
 
-          if (data.event === "describe_end") {
-            currentDescribeBlocks.pop();
-            return;
-          }
+        if (data.event === "test_start") {
+          const { test } = data;
+          const [describePath, currentDescribe] = splitTail(test.blocks);
 
-          if (data.event === "add_test") {
-            const [describePath, currentDescribe] = splitTail(
-              currentDescribeBlocks
-            );
-            const test: Test = {
-              status: "idle",
-              errors: [],
-              name: data.testName,
-              blocks: [...currentDescribeBlocks],
-              path: data.path,
-            };
-            return setState((oldState) =>
-              immer(oldState, (state) => {
-                if (currentDescribe === undefined) {
-                  state.specs[data.path].tests[data.testName] = test;
-                } else {
-                  set(
-                    state.specs[data.path].describes,
-                    [
-                      ...flatMap(describePath, (name) => [name, "describes"]),
-                      currentDescribe,
-                      "tests",
-                      data.testName,
-                    ],
-                    test
-                  );
-                }
-              })
-            );
-          }
+          const startedTest: Test = {
+            status: "running",
+            name: test.name,
+            blocks: test.blocks,
+            path: test.path,
+            errors: [],
+          };
 
-          if (data.event === "test_start") {
-            const { test } = data;
-            const [describePath, currentDescribe] = splitTail(test.blocks);
+          return setState((oldState) =>
+            immer(oldState, (state) => {
+              if (currentDescribe === undefined) {
+                state.specs[test.path].tests[test.name] = startedTest;
+              } else {
+                set(
+                  state.specs[test.path].describes,
+                  [
+                    ...flatMap(describePath, (name: string) => [
+                      name,
+                      "describes",
+                    ]),
+                    currentDescribe,
+                    "tests",
+                    test.name,
+                  ],
+                  startedTest
+                );
+              }
+            })
+          );
+        }
 
-            const startedTest: Test = {
-              status: "running",
-              name: test.name,
-              blocks: test.blocks,
-              path: test.path,
-              errors: [],
-            };
+        if (data.event === "test_end") {
+          const { test } = data;
+          const [describePath, currentDescribe] = splitTail(test.blocks);
+          const endedTest = {
+            status: test.status,
+            errors: test.errors,
+            duration: test.duration,
+            name: test.name,
+            blocks: test.blocks,
+            path: test.path,
+          };
 
-            return setState((oldState) =>
-              immer(oldState, (state) => {
-                if (currentDescribe === undefined) {
-                  state.specs[test.path].tests[test.name] = startedTest;
-                } else {
-                  set(
-                    state.specs[test.path].describes,
-                    [
-                      ...flatMap(describePath, (name: string) => [
-                        name,
-                        "describes",
-                      ]),
-                      currentDescribe,
-                      "tests",
-                      test.name,
-                    ],
-                    startedTest
-                  );
-                }
-              })
-            );
-          }
-
-          if (data.event === "test_end") {
-            const { test } = data;
-            const [describePath, currentDescribe] = splitTail(test.blocks);
-            const endedTest = {
-              status: test.status,
-              errors: test.errors,
-              duration: test.duration,
-              name: test.name,
-              blocks: test.blocks,
-              path: test.path,
-            };
-
-            return setState((oldState) =>
-              immer(oldState, (state) => {
-                if (currentDescribe === undefined) {
-                  state.specs[test.path].tests[test.name] = endedTest;
-                } else {
-                  set(
-                    state.specs[test.path].describes,
-                    [
-                      ...flatMap(describePath, (name: string) => [
-                        name,
-                        "describes",
-                      ]),
-                      currentDescribe,
-                      "tests",
-                      test.name,
-                    ],
-                    endedTest
-                  );
-                }
-              })
-            );
-          }
+          return setState((oldState) =>
+            immer(oldState, (state) => {
+              if (currentDescribe === undefined) {
+                state.specs[test.path].tests[test.name] = endedTest;
+              } else {
+                set(
+                  state.specs[test.path].describes,
+                  [
+                    ...flatMap(describePath, (name: string) => [
+                      name,
+                      "describes",
+                    ]),
+                    currentDescribe,
+                    "tests",
+                    test.name,
+                  ],
+                  endedTest
+                );
+              }
+            })
+          );
         }
       }
-    );
+    });
 
     return unsubscribe;
   }, [state.runMode, sandpack.activeFile]);
