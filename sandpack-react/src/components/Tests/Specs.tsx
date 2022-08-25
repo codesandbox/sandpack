@@ -9,9 +9,9 @@ import { FormattedError } from "./FormattedError";
 import type { Test, TestError } from "./Message";
 import type { Outcome } from "./Summary";
 import { Tests } from "./Tests";
+import { colors } from "./config";
 
 import type { Status } from ".";
-import { colors } from "./config";
 
 export type Spec = { error?: TestError } & Describe;
 
@@ -21,101 +21,6 @@ interface Props {
   status: Status;
   openSpec: (name: string) => void;
 }
-
-export const Specs: React.FC<Props> = ({
-  specs,
-  openSpec,
-  status,
-  verbose,
-}) => {
-  return (
-    <>
-      {specs.map((spec) => (
-        <SpecC
-          key={spec.name}
-          openSpec={openSpec}
-          spec={spec}
-          status={status}
-          verbose={verbose}
-        />
-      ))}
-    </>
-  );
-};
-
-// TODO: Rename
-const SpecC: React.FC<Omit<Props, "specs"> & { spec: Spec }> = ({
-  spec,
-  verbose,
-  status,
-  openSpec,
-}) => {
-  if (spec.error) {
-    return (
-      <div className={classNames(specContainerClassName)}>
-        <SpecLabel className={classNames(failLabelClassName)}>Error</SpecLabel>
-        <FilePath onClick={(): void => openSpec(spec.name)} path={spec.name} />
-        <FormattedError error={spec.error} path={spec.name} />
-      </div>
-    );
-  }
-
-  // TODO: Use combinators
-  if (
-    Object.values(spec.describes).length === 0 &&
-    Object.values(spec.tests).length === 0
-  ) {
-    return null;
-  }
-
-  /* TODO: Don't recompute this here */
-  const stats = getStats(spec);
-  const tests = Object.values(spec.tests);
-  const describes = Object.values(spec.describes);
-
-  return (
-    <div className={classNames(specContainerClassName)}>
-      <div className={classNames(fileContainer)}>
-        {status === "complete" &&
-          (stats.fail > 0 ? (
-            <SpecLabel className={classNames(failLabelClassName)}>
-              Fail
-            </SpecLabel>
-          ) : (
-            <SpecLabel className={classNames(passLabelClassName)}>
-              Pass
-            </SpecLabel>
-          ))}
-
-        <FilePath onClick={(): void => openSpec(spec.name)} path={spec.name} />
-      </div>
-
-      {verbose && <Tests tests={tests} />}
-
-      {verbose && <Describes describes={describes} />}
-
-      {getFailingTests(spec).map((test) => {
-        return (
-          <div
-            key={`failing-${test.name}`}
-            className={classNames(failingTestContainer)}
-          >
-            <div className={classNames(failTestClassName)}>
-              ● {test.blocks.join(" › ")} › {test.name}
-            </div>
-            {test.errors.map((e) => (
-              <FormattedError
-                key={`failing-${test.name}-error`}
-                error={e}
-                path={test.path}
-              />
-            ))}
-          </div>
-        );
-      })}
-    </div>
-  );
-};
 
 const fileContainer = css({
   display: "flex",
@@ -151,17 +56,6 @@ const specLabelClassName = css({
   textTransform: "uppercase",
 });
 
-const SpecLabel: React.FC<{ className: string; children: React.ReactNode }> = ({
-  children,
-  className,
-}) => {
-  return (
-    <span className={classNames(specLabelClassName, className)}>
-      {children}
-    </span>
-  );
-};
-
 const filePathButtonClassName = css({
   appearance: "none",
   border: "0",
@@ -185,6 +79,100 @@ const fileNameClassName = css({
   textDecorationStyle: "dotted",
   fontWeight: "bold",
 });
+
+export const Specs: React.FC<Props> = ({
+  specs,
+  openSpec,
+  status,
+  verbose,
+}) => {
+  return (
+    <>
+      {specs.map((spec) => {
+        if (spec.error) {
+          return (
+            <div key={spec.name} className={classNames(specContainerClassName)}>
+              <SpecLabel className={classNames(failLabelClassName)}>
+                Error
+              </SpecLabel>
+              <FilePath
+                onClick={(): void => openSpec(spec.name)}
+                path={spec.name}
+              />
+              <FormattedError error={spec.error} path={spec.name} />
+            </div>
+          );
+        }
+
+        const tests = Object.values(spec.tests);
+        const describes = Object.values(spec.describes);
+
+        if (describes.length === 0 && tests.length === 0) {
+          return null;
+        }
+
+        const stats = getStats(spec);
+
+        return (
+          <div key={spec.name} className={classNames(specContainerClassName)}>
+            <div className={classNames(fileContainer)}>
+              {status === "complete" &&
+                (stats.fail > 0 ? (
+                  <SpecLabel className={classNames(failLabelClassName)}>
+                    Fail
+                  </SpecLabel>
+                ) : (
+                  <SpecLabel className={classNames(passLabelClassName)}>
+                    Pass
+                  </SpecLabel>
+                ))}
+
+              <FilePath
+                onClick={(): void => openSpec(spec.name)}
+                path={spec.name}
+              />
+            </div>
+
+            {verbose && <Tests tests={tests} />}
+
+            {verbose && <Describes describes={describes} />}
+
+            {getFailingTests(spec).map((test) => {
+              return (
+                <div
+                  key={`failing-${test.name}`}
+                  className={classNames(failingTestContainer)}
+                >
+                  <div className={classNames(failTestClassName)}>
+                    ● {test.blocks.join(" › ")} › {test.name}
+                  </div>
+                  {test.errors.map((e) => (
+                    <FormattedError
+                      key={`failing-${test.name}-error`}
+                      error={e}
+                      path={test.path}
+                    />
+                  ))}
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+const SpecLabel: React.FC<{ className: string; children: React.ReactNode }> = ({
+  children,
+  className,
+}) => {
+  return (
+    <span className={classNames(specLabelClassName, className)}>
+      {children}
+    </span>
+  );
+};
 
 const FilePath: React.FC<{ onClick: () => void; path: string }> = ({
   onClick,

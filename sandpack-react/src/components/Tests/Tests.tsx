@@ -40,36 +40,27 @@ const skipClassName = css({
 });
 
 export const Tests: React.FC<{ tests: Test[] }> = ({ tests }) => {
-  if (tests.length === 0) return null;
-
   return (
     <div className={classNames(testContainerClassName)}>
       {tests.map((test) => (
-        <TestC key={test.name} test={test} />
+        <div key={test.name} className={classNames(containerClassName)}>
+          {test.status === "pass" && (
+            <span className={classNames(passClassName)}>✓</span>
+          )}
+          {test.status === "fail" && (
+            <span className={classNames(failClassName)}>✕</span>
+          )}
+          {test.status === "idle" && (
+            <span className={classNames(skipClassName)}>○</span>
+          )}
+          <span className={classNames(testClassName)}>{test.name}</span>
+          {test.duration !== undefined && (
+            <span className={classNames(durationClassName)}>
+              ({test.duration} ms)
+            </span>
+          )}
+        </div>
       ))}
-    </div>
-  );
-};
-
-// TODO: Rename
-const TestC: React.FC<{ test: Test }> = ({ test }) => {
-  return (
-    <div className={classNames(containerClassName)}>
-      {test.status === "pass" && (
-        <span className={classNames(passClassName)}>✓</span>
-      )}
-      {test.status === "fail" && (
-        <span className={classNames(failClassName)}>✕</span>
-      )}
-      {test.status === "idle" && (
-        <span className={classNames(skipClassName)}>○</span>
-      )}
-      <span className={classNames(testClassName)}>{test.name}</span>
-      {test.duration !== undefined && (
-        <span className={classNames(durationClassName)}>
-          ({test.duration} ms)
-        </span>
-      )}
     </div>
   );
 };

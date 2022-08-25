@@ -24,35 +24,26 @@ const containerClassName = css({
 export const Describes: React.FC<{ describes: Describe[] }> = ({
   describes,
 }) => {
-  if (describes.length === 0) return null;
   return (
     <>
-      {describes.map((describe) => (
-        <DescribeC key={describe.name} describe={describe} />
-      ))}
+      {describes.map((describe) => {
+        const tests = Object.values(describe.tests);
+        const describes = Object.values(describe.describes);
+
+        if (describes.length === 0 && tests.length === 0) {
+          return null;
+        }
+
+        return (
+          <div key={describe.name} className={classNames(containerClassName)}>
+            <div className={classNames(nameClassName)}>{describe.name}</div>
+
+            <Tests tests={tests} />
+
+            <Describes describes={describes} />
+          </div>
+        );
+      })}
     </>
-  );
-};
-
-// TODO: Rename
-const DescribeC: React.FC<{ describe: Describe }> = ({ describe }) => {
-  if (
-    Object.values(describe.describes).length === 0 &&
-    Object.values(describe.tests).length === 0
-  ) {
-    return null;
-  }
-
-  const tests = Object.values(describe.tests);
-  const describes = Object.values(describe.describes);
-
-  return (
-    <div className={classNames(containerClassName)}>
-      <div className={classNames(nameClassName)}>{describe.name}</div>
-
-      <Tests tests={tests} />
-
-      <Describes describes={describes} />
-    </div>
   );
 };
