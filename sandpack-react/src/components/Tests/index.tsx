@@ -310,8 +310,6 @@ export const SandpackTests: React.FC<{ verbose?: boolean }> = ({
   const testResults = getAllTestResults(specs);
   const suiteResults = getAllSuiteResults(specs);
 
-  // TODO: jest-lite doesn't support jsx files but does tsx. PR needed
-  // https://github.com/codesandbox/codesandbox-client/blob/master/packages/app/src/sandbox/eval/tests/jest-lite.ts#L214
   const testFileRegex = /.*\.(test|spec)\.[tj]sx?$/;
   const isSpecOpen = sandpack.activeFile.match(testFileRegex) !== null;
 
