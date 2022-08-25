@@ -36,15 +36,21 @@ type UseClient = (
 ) => [
   SandpackConfigState,
   {
+    clients: Record<string, SandpackClient>;
     initializeSandpackIframe: () => void;
     runSandpack: () => void;
     unregisterBundler: (clientId: string) => void;
+    registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
     registerReactDevTools: (value: ReactDevToolsMode) => void;
     addListener: (
       listener: ListenerFunction,
       clientId?: string
     ) => UnsubscribeFunction;
     dispatchMessage: (message: SandpackMessage, clientId?: string) => void;
+    lazyAnchorRef: React.RefObject<HTMLDivElement>;
+    loadingScreenRegisteredRef: React.RefObject<boolean>;
+    openInCSBRegisteredRef: React.RefObject<boolean>;
+    errorScreenRegisteredRef: React.RefObject<boolean>;
   }
 ];
 
@@ -77,6 +83,9 @@ export const useClient: UseClient = (props, fileState) => {
     Record<string, Record<string, ListenerFunction>>
   >({});
   const debounceHook = useRef<number | undefined>();
+  const loadingScreenRegisteredRef = useRef<boolean>();
+  const openInCSBRegisteredRef = useRef<boolean>();
+  const errorScreenRegisteredRef = useRef<boolean>();
 
   /**
    * Callbacks
@@ -253,6 +262,17 @@ export const useClient: UseClient = (props, fileState) => {
     state.initMode,
     unregisterAllClients,
   ]);
+
+  const registerBundler = (
+    iframe: HTMLIFrameElement,
+    clientId: string
+  ): void => {
+    if (state.sandpackStatus === "running") {
+      clients.current[clientId] = createClient(iframe, clientId);
+    } else {
+      preregisteredIframes.current[clientId] = iframe;
+    }
+  };
 
   const unregisterBundler = (clientId: string): void => {
     const client = clients.current[clientId];
@@ -474,12 +494,17 @@ export const useClient: UseClient = (props, fileState) => {
   return [
     state,
     {
+      clients,
       initializeSandpackIframe,
       runSandpack,
+      registerBundler,
       unregisterBundler,
       registerReactDevTools,
       addListener,
       dispatchMessage,
+      loadingScreenRegisteredRef,
+      openInCSBRegisteredRef,
+      errorScreenRegisteredRef,
     },
   ];
 };

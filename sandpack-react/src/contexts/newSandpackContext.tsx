@@ -18,15 +18,22 @@ const Sandpack = React.createContext<SandpackContext | null>(null);
 export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
   const { children, options, style, className, theme } = props;
 
-  const [state, operations] = useFiles(props);
-  const [clientState, clientOperations] = useClient(props);
-  const appState = useAppState(props, state.files);
+  const [fileState, fileOperations] = useFiles(props);
+  const [clientState, clientOperations] = useClient(props, fileState);
+  const [appState] = useAppState(props, fileState.files);
 
   React.useEffect(() => {
     clientOperations.initializeSandpackIframe();
   }, [clientOperations]);
 
-  const sandpackContext: SandpackContext = {};
+  const sandpackContext: SandpackContext = {
+    ...fileState,
+    ...clientState,
+    ...appState,
+
+    ...fileOperations,
+    ...clientOperations,
+  };
 
   return (
     <Sandpack.Provider value={sandpackContext}>
