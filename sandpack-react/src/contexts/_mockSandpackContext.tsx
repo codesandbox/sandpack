@@ -4,11 +4,9 @@ import type {
   SandpackMessage,
   UnsubscribeFunction,
   ReactDevToolsMode,
-
-  SandpackClient} from "@codesandbox/sandpack-client";
-import {
-  extractErrorDetails,
+  SandpackClient,
 } from "@codesandbox/sandpack-client";
+import { extractErrorDetails } from "@codesandbox/sandpack-client";
 import isEqual from "lodash.isequal";
 import * as React from "react";
 
@@ -52,7 +50,6 @@ export class SandpackProviderClass extends React.PureComponent<
   openInCSBRegistered: React.MutableRefObject<boolean>;
   loadingScreenRegistered: React.MutableRefObject<boolean>;
 
-  
   queuedListeners: Record<string, Record<string, ListenerFunction>>;
   unsubscribeClientListeners: Record<
     string,
@@ -109,61 +106,6 @@ export class SandpackProviderClass extends React.PureComponent<
     this.loadingScreenRegistered =
       React.createRef<boolean>() as React.MutableRefObject<boolean>;
   }
-
-  handleMessage = (msg: SandpackMessage): void => {
-    if (this.timeoutHook) {
-      clearTimeout(this.timeoutHook);
-    }
-
-    if (msg.type === "state") {
-      this.setState({ bundlerState: msg.state });
-    } else if (msg.type === "done" && !msg.compilatonError) {
-      this.setState({ error: null });
-    } else if (msg.type === "action" && msg.action === "show-error") {
-      this.setState({ error: extractErrorDetails(msg) });
-    } else if (
-      msg.type === "action" &&
-      msg.action === "notification" &&
-      msg.notificationType === "error"
-    ) {
-      this.setState({
-        error: { message: msg.title },
-      });
-    }
-  };
-
-  registerReactDevTools = (value: ReactDevToolsMode): void => {
-    this.setState({ reactDevTools: value });
-  };
-
-  updateClients = (): void => {
-    const { files, sandpackStatus } = this.state;
-    const recompileMode = this.props.options?.recompileMode ?? "delayed";
-    const recompileDelay = this.props.options?.recompileDelay ?? 500;
-
-    if (sandpackStatus !== "running") {
-      return;
-    }
-
-    if (recompileMode === "immediate") {
-      Object.values(this.clients).forEach((client) => {
-        client.updatePreview({
-          files,
-        });
-      });
-    }
-
-    if (recompileMode === "delayed") {
-      window.clearTimeout(this.debounceHook);
-      this.debounceHook = window.setTimeout(() => {
-        Object.values(this.clients).forEach((client) => {
-          client.updatePreview({
-            files: this.state.files,
-          });
-        });
-      }, recompileDelay);
-    }
-  };
 
   initializeSandpackIframe(): void {
     const autorun = this.props.options?.autorun ?? true;
@@ -252,9 +194,6 @@ export class SandpackProviderClass extends React.PureComponent<
     }
   }
 
-  
-
-
   registerBundler = (iframe: HTMLIFrameElement, clientId: string): void => {
     if (this.state.sandpackStatus === "running") {
       this.clients[clientId] = this.createClient(iframe, clientId);
@@ -289,8 +228,6 @@ export class SandpackProviderClass extends React.PureComponent<
 
     this.setState({ sandpackStatus: "idle" });
   };
-
-  
 
   dispatchMessage = (message: SandpackMessage, clientId?: string): void => {
     if (this.state.sandpackStatus !== "running") {
