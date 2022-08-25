@@ -340,6 +340,7 @@ export const useClient: UseClient = (props, fileState) => {
       Object.values(clients.current).forEach((client) => {
         client.updatePreview({
           files: fileState.files,
+          template: fileState.environment,
         });
       });
     }
@@ -350,12 +351,14 @@ export const useClient: UseClient = (props, fileState) => {
         Object.values(clients.current).forEach((client) => {
           client.updatePreview({
             files: fileState.files,
+            template: fileState.environment,
           });
         });
       }, recompileDelay);
     }
   }, [
     fileState.files,
+    fileState.environment,
     props.options?.recompileDelay,
     props.options?.recompileMode,
     state.status,
@@ -453,7 +456,7 @@ export const useClient: UseClient = (props, fileState) => {
     function watchFileChanges() {
       updateClients();
     },
-    [updateClients]
+    [fileState.files, fileState.environment, updateClients]
   );
 
   useEffect(

@@ -1,5 +1,6 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import isEqual from "lodash.isequal";
 
 import type {
   SandboxEnvironment,
@@ -43,26 +44,20 @@ export const useFiles: UseFiles = (props) => {
   const originalStateFromProps = getSandpackStateFromProps(props);
   const { visibleFiles, ...rest } = originalStateFromProps;
 
+  const prevOriginalStateFromProps = useRef({});
+
   const [state, setState] = useState<FilesState>({
     ...rest,
     visibleFiles,
   });
 
   useEffect(() => {
-    setState(originalStateFromProps);
+    if (!isEqual(prevOriginalStateFromProps.current, originalStateFromProps)) {
+      setState(originalStateFromProps);
 
-    // TODO
-    //   if (this.state.sandpackStatus !== "running") {
-    //     return;
-    //   }
-
-    //   Object.values(this.clients).forEach((client) =>
-    //     client.updatePreview({
-    //       files,
-    //       template: environment,
-    //     })
-    //   );
-  }, []);
+      prevOriginalStateFromProps.current = originalStateFromProps;
+    }
+  }, [originalStateFromProps]);
 
   const updateFile = (
     pathOrFiles: string | SandpackFiles,
