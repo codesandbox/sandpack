@@ -1,13 +1,12 @@
-import type { EditorState } from "@codemirror/state";
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import isEqual from "lodash.isequal";
 import { useEffect, useState } from "react";
 
-import type { SandpackProviderProps,  } from "../..";
+import type { SandpackProviderProps } from "../..";
 import { getSandpackStateFromProps } from "../../utils/sandpackUtils";
 
 interface SandpackAppState {
-  editorState: EditorState;
+  editorState: "pristine" | "dirty";
 }
 
 type UseAppState = (
@@ -17,17 +16,17 @@ type UseAppState = (
 
 export const useAppState: UseAppState = (props, files) => {
   const [state, setState] = useState<SandpackAppState>({
-    editorState: "pristine" as unknown as EditorState,
+    editorState: "pristine",
   });
 
   useEffect(
     function watchEditorState() {
       const originalStateFromProps = getSandpackStateFromProps(props);
-      const editorState = (isEqual(originalStateFromProps.files, files)
+      const editorState = isEqual(originalStateFromProps.files, files)
         ? "pristine"
-        : "dirty") as unknown as EditorState;
+        : "dirty";
 
-      if (editorState !== (state.editorState as unknown as EditorState)) {
+      if (editorState !== state.editorState) {
         setState((prev) => ({ ...prev, editorState }));
       }
     },

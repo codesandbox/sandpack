@@ -25,9 +25,9 @@ interface SandpackConfigState {
   reactDevTools?: ReactDevToolsMode;
   startRoute?: string;
   initMode: SandpackInitMode;
-  bundlerState?: BundlerState;
+  bundlerState: BundlerState | undefined;
   error: SandpackError | null;
-  sandpackStatus: SandpackStatus;
+  status: SandpackStatus;
 }
 
 type UseClient = (
@@ -48,9 +48,9 @@ type UseClient = (
     ) => UnsubscribeFunction;
     dispatchMessage: (message: SandpackMessage, clientId?: string) => void;
     lazyAnchorRef: React.RefObject<HTMLDivElement>;
-    loadingScreenRegisteredRef: React.RefObject<boolean | undefined>;
-    openInCSBRegisteredRef: React.RefObject<boolean | undefined>;
-    errorScreenRegisteredRef: React.RefObject<boolean | undefined>;
+    loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
+    openInCSBRegisteredRef: React.MutableRefObject<boolean>;
+    errorScreenRegisteredRef: React.MutableRefObject<boolean>;
   }
 ];
 
@@ -63,7 +63,7 @@ export const useClient: UseClient = (props, fileState) => {
     error: null,
     initMode: initModeFromProps,
     reactDevTools: undefined,
-    sandpackStatus: props.options?.autorun ?? true ? "initial" : "idle",
+    status: props.options?.autorun ?? true ? "initial" : "idle",
   });
 
   /**
@@ -83,9 +83,9 @@ export const useClient: UseClient = (props, fileState) => {
     Record<string, Record<string, ListenerFunction>>
   >({});
   const debounceHook = useRef<number | undefined>();
-  const loadingScreenRegisteredRef = useRef<boolean>();
-  const openInCSBRegisteredRef = useRef<boolean>();
-  const errorScreenRegisteredRef = useRef<boolean>();
+  const loadingScreenRegisteredRef = useRef<boolean>(true);
+  const openInCSBRegisteredRef = useRef<boolean>(true);
+  const errorScreenRegisteredRef = useRef<boolean>(true);
 
   /**
    * Callbacks
@@ -128,7 +128,7 @@ export const useClient: UseClient = (props, fileState) => {
         unsubscribe.current = client.listen(handleMessage);
 
         timeoutHook.current = setTimeout(() => {
-          setState((prev) => ({ ...prev, sandpackStatus: "timeout" }));
+          setState((prev) => ({ ...prev, status: "timeout" }));
         }, BUNDLER_TIMEOUT);
       }
 
@@ -196,7 +196,7 @@ export const useClient: UseClient = (props, fileState) => {
       clients.current[clientId] = createClient(iframe, clientId);
     });
 
-    setState((prev) => ({ ...prev, sandpackStatus: "running" }));
+    setState((prev) => ({ ...prev, status: "running" }));
   }, [createClient]);
 
   const initializeSandpackIframe = useCallback((): void => {
@@ -267,7 +267,7 @@ export const useClient: UseClient = (props, fileState) => {
     iframe: HTMLIFrameElement,
     clientId: string
   ): void => {
-    if (state.sandpackStatus === "running") {
+    if (state.status === "running") {
       clients.current[clientId] = createClient(iframe, clientId);
     } else {
       preregisteredIframes.current[clientId] = iframe;
@@ -298,7 +298,7 @@ export const useClient: UseClient = (props, fileState) => {
       listenerFunctions.forEach((unsubscribe) => unsubscribe());
     });
 
-    setState((prev) => ({ ...prev, sandpackStatus: "idle" }));
+    setState((prev) => ({ ...prev, status: "idle" }));
   };
 
   const handleMessage = (msg: SandpackMessage): void => {
@@ -332,7 +332,7 @@ export const useClient: UseClient = (props, fileState) => {
     const recompileMode = props.options?.recompileMode ?? "delayed";
     const recompileDelay = props.options?.recompileDelay ?? 500;
 
-    if (state.sandpackStatus !== "running") {
+    if (state.status !== "running") {
       return;
     }
 
@@ -358,14 +358,14 @@ export const useClient: UseClient = (props, fileState) => {
     fileState.files,
     props.options?.recompileDelay,
     props.options?.recompileMode,
-    state.sandpackStatus,
+    state.status,
   ]);
 
   const dispatchMessage = (
     message: SandpackMessage,
     clientId?: string
   ): void => {
-    if (state.sandpackStatus !== "running") {
+    if (state.status !== "running") {
       console.warn(
         `[sandpack-react]: dispatch cannot be called while in idle mode`
       );
