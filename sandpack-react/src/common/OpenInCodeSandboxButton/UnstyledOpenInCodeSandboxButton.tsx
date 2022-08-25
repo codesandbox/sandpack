@@ -96,7 +96,13 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
         title="Open in CodeSandbox"
         {...props}
       >
-        <form ref={formRef} action={CSB_URL} method="POST" target="_blank">
+        <form
+          ref={formRef}
+          action={CSB_URL}
+          method="POST"
+          style={{ visibility: "hidden" }}
+          target="_blank"
+        >
           {Array.from(
             paramsValues as unknown as Array<[string, string]>,
             ([key, value]) => (
