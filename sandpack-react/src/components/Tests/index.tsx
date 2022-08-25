@@ -314,8 +314,8 @@ export const SandpackTests: React.FC<{ verbose?: boolean }> = ({
   const isSpecOpen = sandpack.activeFile.match(testFileRegex) !== null;
 
   return (
-    <SandpackStack style={{ height: "70vh" }}>
-      <iframe ref={iframe} style={{ display: "none" }} title={"TODO"} />
+    <SandpackStack>
+      <iframe ref={iframe} style={{ display: "none" }} title="Sandpack Tests" />
 
       <Controls
         isSpecOpen={isSpecOpen}
