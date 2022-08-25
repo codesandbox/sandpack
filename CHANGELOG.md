@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.5](https://github.com/codesandbox/sandpack/compare/v1.5.4...v1.5.5) (2022-08-25)
+
+
+### Bug Fixes
+
+* **UnstyledOpenInCodeSandboxButton:** set visibility to hidden ([#560](https://github.com/codesandbox/sandpack/issues/560)) ([653cf0e](https://github.com/codesandbox/sandpack/commit/653cf0e93a19a4a3214c058269b3c9a8b77faa46))
+
+
+
+
+
 ## [1.5.4](https://github.com/codesandbox/sandpack/compare/v1.5.3...v1.5.4) (2022-08-22)
 
 
