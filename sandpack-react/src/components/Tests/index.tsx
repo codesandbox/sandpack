@@ -9,18 +9,19 @@ import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
 import { Controls } from "./Controls";
-import type { Describe } from "./Describes";
 import type { SandboxTestMessage, Test } from "./Message";
 import type { Spec } from "./Specs";
 import { Specs } from "./Specs";
-import type { Outcome } from "./Summary";
 import { Summary } from "./Summary";
 import { colors } from "./config";
 import { useSandpackClient } from "./useSandpackClient";
-
-const flatMap = <A, B>(as: A[], f: (a: A) => B[]): B[] => {
-  return as.map(f).reduce((acc, next) => acc.concat(next), []);
-};
+import {
+  flatMap,
+  getDuration,
+  getAllTestResults,
+  getAllSuiteResults,
+  splitTail,
+} from "./utils";
 
 export type Status = "initialising" | "idle" | "running" | "complete";
 type RunMode = "all" | "single";
@@ -312,41 +313,9 @@ export const SandpackTests: React.FC<{ verbose?: boolean }> = ({
   };
 
   const specs = Object.values(state.specs);
-
-  const duration = flatMap(specs, getTests).reduce(
-    (acc, test) => acc + (test.duration || 0),
-    0
-  );
-
-  const allTests = specs.map(getStats).reduce(
-    (acc, stats) => {
-      return {
-        pass: acc.pass + stats.pass,
-        fail: acc.fail + stats.fail,
-        skip: acc.skip + stats.skip,
-        total: acc.total + stats.total,
-      };
-    },
-    { pass: 0, skip: 0, fail: 0, total: 0 }
-  );
-
-  const allSuites = specs
-    .filter(
-      (spec) =>
-        Object.values(spec.describes).length > 0 ||
-        Object.values(spec.tests).length > 0
-    )
-    .map(getStats)
-    .reduce(
-      (acc, stats) => {
-        return {
-          pass: acc.pass + (stats.fail === 0 ? 1 : 0),
-          fail: acc.fail + (stats.fail > 0 ? 1 : 0),
-          total: acc.total + 1,
-        };
-      },
-      { pass: 0, fail: 0, total: 0 }
-    );
+  const duration = getDuration(specs);
+  const testResults = getAllTestResults(specs);
+  const suiteResults = getAllSuiteResults(specs);
 
   // TODO: jest-lite doesn't support jsx files but does tsx. PR needed
   // https://github.com/codesandbox/codesandbox-client/blob/master/packages/app/src/sandbox/eval/tests/jest-lite.ts#L214
@@ -392,11 +361,11 @@ export const SandpackTests: React.FC<{ verbose?: boolean }> = ({
               verbose={state.verbose}
             />
 
-            {state.status === "complete" && allTests.total > 0 && (
+            {state.status === "complete" && testResults.total > 0 && (
               <Summary
                 duration={duration}
-                suites={allSuites}
-                tests={allTests}
+                suites={suiteResults}
+                tests={testResults}
               />
             )}
           </>
@@ -423,39 +392,3 @@ const fileErrorContainerClassName = css({
 const filePathClassName = css({
   color: colors.failMessage,
 });
-
-const splitTail = <A,>(as: A[]): [A[], A | undefined] => {
-  const lastIndex = as.length - 1;
-  const head = as.slice(0, lastIndex);
-  const tail = as[lastIndex];
-  return [head, tail];
-};
-
-const getTests = (block: Describe | Spec): Test[] => {
-  const tests = Object.values(block.tests);
-  return tests.concat(...Object.values(block.describes).map(getTests));
-};
-
-const getStats = (spec: Spec): Outcome => {
-  const allTests = getTests(spec);
-
-  const sum = (
-    tests: Test[]
-  ): { pass: number; fail: number; skip: number; total: number } =>
-    tests.reduce(
-      (acc, test) => {
-        return {
-          pass: test.status === "pass" ? acc.pass + 1 : acc.pass,
-          fail: test.status === "fail" ? acc.fail + 1 : acc.fail,
-          skip:
-            test.status === "idle" || test.status === "running"
-              ? acc.skip + 1
-              : acc.skip,
-          total: acc.total + 1,
-        };
-      },
-      { pass: 0, fail: 0, skip: 0, total: 0 }
-    );
-
-  return sum(allTests);
-};

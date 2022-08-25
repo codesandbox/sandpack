@@ -6,10 +6,10 @@ import { classNames } from "../../utils/classNames";
 import type { Describe } from "./Describes";
 import { Describes } from "./Describes";
 import { FormattedError } from "./FormattedError";
-import type { Test, TestError } from "./Message";
-import type { Outcome } from "./Summary";
+import type { TestError } from "./Message";
 import { Tests } from "./Tests";
 import { colors } from "./config";
+import { getFailingTests, getSpecTestResults, isEmpty } from "./utils";
 
 import type { Status } from ".";
 
@@ -104,14 +104,13 @@ export const Specs: React.FC<Props> = ({
           );
         }
 
-        const tests = Object.values(spec.tests);
-        const describes = Object.values(spec.describes);
-
-        if (describes.length === 0 && tests.length === 0) {
+        if (isEmpty(spec)) {
           return null;
         }
 
-        const stats = getStats(spec);
+        const tests = Object.values(spec.tests);
+        const describes = Object.values(spec.describes);
+        const stats = getSpecTestResults(spec);
 
         return (
           <div key={spec.name} className={classNames(specContainerClassName)}>
@@ -187,38 +186,4 @@ const FilePath: React.FC<{ onClick: () => void; path: string }> = ({
       <span className={classNames(fileNameClassName)}>{fileName}</span>
     </button>
   );
-};
-
-// TODO: Tidy these
-const getFailingTests = (block: Describe | Spec): Test[] => {
-  return getTests(block).filter((t) => t.status === "fail");
-};
-
-const getTests = (block: Describe | Spec): Test[] => {
-  const tests = Object.values(block.tests);
-  return tests.concat(...Object.values(block.describes).map(getTests));
-};
-
-const getStats = (spec: Spec): Outcome => {
-  const allTests = getTests(spec);
-
-  const sum = (
-    tests: Test[]
-  ): { pass: number; fail: number; skip: number; total: number } =>
-    tests.reduce(
-      (acc, test) => {
-        return {
-          pass: test.status === "pass" ? acc.pass + 1 : acc.pass,
-          fail: test.status === "fail" ? acc.fail + 1 : acc.fail,
-          skip:
-            test.status === "idle" || test.status === "running"
-              ? acc.skip + 1
-              : acc.skip,
-          total: acc.total + 1,
-        };
-      },
-      { pass: 0, fail: 0, skip: 0, total: 0 }
-    );
-
-  return sum(allTests);
 };

@@ -5,6 +5,7 @@ import { classNames } from "../../utils/classNames";
 
 import type { Test } from "./Message";
 import { Tests } from "./Tests";
+import { isEmpty } from "./utils";
 
 export interface Describe {
   name: string;
@@ -27,12 +28,12 @@ export const Describes: React.FC<{ describes: Describe[] }> = ({
   return (
     <>
       {describes.map((describe) => {
-        const tests = Object.values(describe.tests);
-        const describes = Object.values(describe.describes);
-
-        if (describes.length === 0 && tests.length === 0) {
+        if (isEmpty(describe)) {
           return null;
         }
+
+        const tests = Object.values(describe.tests);
+        const describes = Object.values(describe.describes);
 
         return (
           <div key={describe.name} className={classNames(containerClassName)}>

@@ -5,16 +5,22 @@ import { classNames } from "../../utils/classNames";
 
 import { colors } from "./config";
 
-export interface Outcome {
+export interface TestResults {
   pass: number;
   fail: number;
   skip: number;
   total: number;
 }
 
+export interface SuiteResults {
+  pass: number;
+  fail: number;
+  total: number;
+}
+
 interface Props {
-  suites: Omit<Outcome, "skip">;
-  tests: Outcome;
+  suites: SuiteResults;
+  tests: TestResults;
   duration: number;
 }
 
