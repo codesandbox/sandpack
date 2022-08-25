@@ -284,7 +284,7 @@ export const SandpackTests: React.FC<{ verbose?: boolean }> = ({
     }));
     const client = getClient();
     if (client) {
-      client.dispatch({ type: "run-all-tests" } as any);
+      client.dispatch({ type: "run-all-tests" });
     }
   };
 
@@ -297,11 +297,7 @@ export const SandpackTests: React.FC<{ verbose?: boolean }> = ({
     }));
     const client = getClient();
     if (client) {
-      // TODO: Add this message type to the api client types (PR required)
-      client.dispatch({
-        type: "run-tests",
-        path: sandpack.activeFile,
-      } as any);
+      client.dispatch({ type: "run-tests", path: sandpack.activeFile });
     }
   };
 

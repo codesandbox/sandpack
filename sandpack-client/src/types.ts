@@ -196,6 +196,8 @@ export interface Test {
 }
 
 export type SandboxTestMessage =
+  | RunAllTests
+  | RunTests
   | ClearJestErrors
   | ({ type: "test" } & (
       | InitializedTestsMessage
@@ -275,6 +277,15 @@ interface TestStartMessage {
 interface TestEndMessage {
   event: "test_end";
   test: Test;
+}
+
+interface RunAllTests {
+  type: "run-all-tests";
+}
+
+interface RunTests {
+  type: "run-tests";
+  path: string;
 }
 
 export type SandpackMessage = BaseSandpackMessage &
