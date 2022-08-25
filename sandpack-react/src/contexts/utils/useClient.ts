@@ -48,9 +48,9 @@ type UseClient = (
     ) => UnsubscribeFunction;
     dispatchMessage: (message: SandpackMessage, clientId?: string) => void;
     lazyAnchorRef: React.RefObject<HTMLDivElement>;
-    loadingScreenRegisteredRef: React.RefObject<boolean>;
-    openInCSBRegisteredRef: React.RefObject<boolean>;
-    errorScreenRegisteredRef: React.RefObject<boolean>;
+    loadingScreenRegisteredRef: React.RefObject<boolean | undefined>;
+    openInCSBRegisteredRef: React.RefObject<boolean | undefined>;
+    errorScreenRegisteredRef: React.RefObject<boolean | undefined>;
   }
 ];
 
@@ -494,7 +494,7 @@ export const useClient: UseClient = (props, fileState) => {
   return [
     state,
     {
-      clients,
+      clients: clients.current,
       initializeSandpackIframe,
       runSandpack,
       registerBundler,
@@ -505,6 +505,7 @@ export const useClient: UseClient = (props, fileState) => {
       loadingScreenRegisteredRef,
       openInCSBRegisteredRef,
       errorScreenRegisteredRef,
+      lazyAnchorRef,
     },
   ];
 };
