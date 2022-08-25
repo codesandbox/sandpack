@@ -52,7 +52,7 @@ export class SandpackProviderClass extends React.PureComponent<
   openInCSBRegistered: React.MutableRefObject<boolean>;
   loadingScreenRegistered: React.MutableRefObject<boolean>;
 
-  intersectionObserver?: IntersectionObserver;
+  
   queuedListeners: Record<string, Record<string, ListenerFunction>>;
   unsubscribeClientListeners: Record<
     string,

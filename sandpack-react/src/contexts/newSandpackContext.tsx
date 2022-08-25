@@ -19,8 +19,13 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
   const { children, options, style, className, theme } = props;
 
   const [state, operations] = useFiles(props);
-  const client = useClient(props);
+  const [clientState, clientOperations] = useClient(props);
   const appState = useAppState(props, state.files);
+  
+  
+  React.useEffect(() => {
+    clientOperations.initializeSandpackIframe();
+  }, [clientOperations])
 
   return (
     <Sandpack.Provider value={{}}>
