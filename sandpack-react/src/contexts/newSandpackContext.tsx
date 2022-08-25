@@ -20,7 +20,7 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
 
   const [state, operations] = useFiles(props);
   const client = useClient(props);
-  const appState = useAppState(props);
+  const appState = useAppState(props, state.files);
 
   return (
     <Sandpack.Provider value={{}}>

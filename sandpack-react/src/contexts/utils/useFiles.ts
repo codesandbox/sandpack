@@ -1,5 +1,6 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 
 import type {
   SandboxEnvironment,
@@ -47,6 +48,22 @@ export const useFiles: UseFiles = (props) => {
     ...rest,
     visibleFiles,
   });
+
+  useEffect(() => {
+    setState(originalStateFromProps);
+
+    // TODO
+    //   if (this.state.sandpackStatus !== "running") {
+    //     return;
+    //   }
+
+    //   Object.values(this.clients).forEach((client) =>
+    //     client.updatePreview({
+    //       files,
+    //       template: environment,
+    //     })
+    //   );
+  }, [originalStateFromProps]);
 
   const updateFile = (
     pathOrFiles: string | SandpackFiles,
