@@ -5,6 +5,7 @@ import { useState } from "react";
 import type { CodeEditorProps } from "./components/CodeEditor";
 import { SANDBOX_TEMPLATES } from "./templates";
 
+import { ExperimentalSandpackProvider } from "./contexts/newSandpackContext";
 import {
   SandpackProvider,
   SandpackCodeEditor,
@@ -127,7 +128,7 @@ export const Main = (): JSX.Element => {
         })}
       </div>
 
-      <SandpackProvider
+      <ExperimentalSandpackProvider
         template={config.Template}
         theme={themes[config.Theme] || config.Theme}
       >
@@ -143,7 +144,7 @@ export const Main = (): JSX.Element => {
             />
           )}
         </SandpackLayout>
-      </SandpackProvider>
+      </ExperimentalSandpackProvider>
     </div>
   );
 };

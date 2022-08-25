@@ -10,7 +10,9 @@ import { useFiles } from "./utils/useFiles";
 
 const Sandpack = React.createContext<SandpackContext | null>(null);
 
-export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
+export const ExperimentalSandpackProvider: React.FC<SandpackProviderProps> = (
+  props
+) => {
   const { children, options, style, className, theme } = props;
 
   const [fileState, fileOperations] = useFiles(props);
@@ -51,6 +53,6 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
 /**
  * @category Provider
  */
-const SandpackConsumer = Sandpack.Consumer;
+const ExperimentalSandpackConsumer = Sandpack.Consumer;
 
-export { SandpackConsumer, Sandpack as SandpackReactContext };
+export { ExperimentalSandpackConsumer, Sandpack as SandpackReactContext };
