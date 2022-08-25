@@ -55,4 +55,4 @@ export const ExperimentalSandpackProvider: React.FC<SandpackProviderProps> = (
  */
 const ExperimentalSandpackConsumer = Sandpack.Consumer;
 
-export { ExperimentalSandpackConsumer, Sandpack as SandpackReactContext };
+export { ExperimentalSandpackConsumer, Sandpack as ExperimentalSandpackReactContext };

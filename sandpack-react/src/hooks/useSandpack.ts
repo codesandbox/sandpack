@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { SandpackReactContext } from "../contexts/sandpackContext";
+import { ExperimentalSandpackReactContext } from "../contexts/newSandpackContext";
 import type {
   SandpackClientDispatch,
   SandpackClientListen,
@@ -20,7 +20,7 @@ export interface UseSandpack {
  * @category Hooks
  */
 export function useSandpack(): UseSandpack {
-  const sandpack = React.useContext(SandpackReactContext);
+  const sandpack = React.useContext(ExperimentalSandpackReactContext);
 
   if (sandpack === null) {
     throw new Error(
