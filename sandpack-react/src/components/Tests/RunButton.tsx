@@ -24,6 +24,7 @@ export const RunButton: React.FC<{
       )}
       disabled={disabled}
       onClick={onClick}
+      type="button"
     >
       <RunIcon />
       {children}
