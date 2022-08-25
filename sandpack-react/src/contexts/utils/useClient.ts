@@ -81,10 +81,10 @@ export const useClient: UseClient = (props, fileState) => {
   const unsubscribe = useRef<() => void | undefined>();
   const queuedListeners = useRef<
     Record<string, Record<string, ListenerFunction>>
-  >({});
+  >({ global: {} });
   const debounceHook = useRef<number | undefined>();
   const loadingScreenRegisteredRef = useRef<boolean>(true);
-  const openInCSBRegisteredRef = useRef<boolean>(true);
+  const openInCSBRegisteredRef = useRef<boolean>(false);
   const errorScreenRegisteredRef = useRef<boolean>(true);
 
   /**
@@ -105,9 +105,9 @@ export const useClient: UseClient = (props, fileState) => {
           fileResolver: props.options?.fileResolver,
           skipEval: props.options?.skipEval ?? false,
           logLevel: props.options?.logLevel,
-          showOpenInCodeSandbox: true,
-          showErrorScreen: true,
-          showLoadingScreen: true,
+          showOpenInCodeSandbox: openInCSBRegisteredRef.current,
+          showErrorScreen: errorScreenRegisteredRef.current,
+          showLoadingScreen: loadingScreenRegisteredRef.current,
           reactDevTools: state.reactDevTools,
           customNpmRegistries: props.customSetup?.npmRegistries?.map(
             (config) =>
@@ -453,7 +453,7 @@ export const useClient: UseClient = (props, fileState) => {
     function watchFileChanges() {
       updateClients();
     },
-    [fileState.files, updateClients]
+    [updateClients]
   );
 
   useEffect(
@@ -464,7 +464,7 @@ export const useClient: UseClient = (props, fileState) => {
         initializeSandpackIframe();
       }
     },
-    [initModeFromProps, state, initializeSandpackIframe]
+    [initModeFromProps, initializeSandpackIframe, state.initMode]
   );
 
   useEffect(() => {

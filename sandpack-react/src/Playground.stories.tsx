@@ -3,9 +3,9 @@ import * as themes from "@codesandbox/sandpack-themes";
 import { useState } from "react";
 
 import type { CodeEditorProps } from "./components/CodeEditor";
+import { ExperimentalSandpackProvider } from "./contexts/experimentalSandpackContext";
 import { SANDBOX_TEMPLATES } from "./templates";
 
-import { ExperimentalSandpackProvider } from "./contexts/newSandpackContext";
 import {
   SandpackProvider,
   SandpackCodeEditor,

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ExperimentalSandpackReactContext } from "../contexts/newSandpackContext";
+import { ExperimentalSandpackReactContext } from "../contexts/experimentalSandpackContext";
 import type {
   SandpackClientDispatch,
   SandpackClientListen,

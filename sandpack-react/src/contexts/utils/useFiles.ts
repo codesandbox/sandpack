@@ -1,7 +1,6 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import { useEffect, useState } from "react";
 
-
 import type {
   SandboxEnvironment,
   SandpackFiles,
@@ -63,7 +62,7 @@ export const useFiles: UseFiles = (props) => {
     //       template: environment,
     //     })
     //   );
-  }, [originalStateFromProps]);
+  }, []);
 
   const updateFile = (
     pathOrFiles: string | SandpackFiles,

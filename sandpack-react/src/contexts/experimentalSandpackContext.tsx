@@ -22,7 +22,7 @@ export const ExperimentalSandpackProvider: React.FC<SandpackProviderProps> = (
 
   React.useEffect(() => {
     clientOperations.initializeSandpackIframe();
-  }, [clientOperations]);
+  }, []);
 
   const sandpackContext: SandpackContext = {
     ...fileState,
@@ -55,4 +55,7 @@ export const ExperimentalSandpackProvider: React.FC<SandpackProviderProps> = (
  */
 const ExperimentalSandpackConsumer = Sandpack.Consumer;
 
-export { ExperimentalSandpackConsumer, Sandpack as ExperimentalSandpackReactContext };
+export {
+  ExperimentalSandpackConsumer,
+  Sandpack as ExperimentalSandpackReactContext,
+};
