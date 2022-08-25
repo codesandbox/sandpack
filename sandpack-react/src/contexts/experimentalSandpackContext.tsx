@@ -24,19 +24,20 @@ export const ExperimentalSandpackProvider: React.FC<SandpackProviderProps> = (
     clientOperations.initializeSandpackIframe();
   }, []);
 
-  const sandpackContext: SandpackContext = {
-    ...fileState,
-    ...clientState,
-    ...appState,
-
-    ...fileOperations,
-    ...clientOperations,
-    listen: addListener,
-    dispatch: dispatchMessage,
-  };
-
   return (
-    <Sandpack.Provider value={sandpackContext}>
+    <Sandpack.Provider
+      value={{
+        ...fileState,
+        ...clientState,
+        ...appState,
+
+        ...fileOperations,
+        ...clientOperations,
+
+        listen: addListener,
+        dispatch: dispatchMessage,
+      }}
+    >
       <ClasserProvider classes={options?.classes}>
         <SandpackThemeProvider
           className={className}
