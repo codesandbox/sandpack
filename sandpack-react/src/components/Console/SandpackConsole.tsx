@@ -23,9 +23,9 @@ interface SandpackConsoleProps {
 /**
  * @category Components
  *
- * `SandpackConsole` is a Sandpack devtool that allows printing 
- * the console logs from a Sandpack client. It is designed to be 
- * a light version of a browser console, which means that it's 
+ * `SandpackConsole` is a Sandpack devtool that allows printing
+ * the console logs from a Sandpack client. It is designed to be
+ * a light version of a browser console, which means that it's
  * limited to a set of common use cases you may encounter when coding.
  */
 export const SandpackConsole: React.FC<
