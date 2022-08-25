@@ -1,5 +1,8 @@
 import * as React from "react";
 
+import { css } from "../../styles";
+import { classNames } from "../../utils/classNames";
+
 interface Props {
   onChange: () => void;
   checked: boolean;
@@ -7,6 +10,17 @@ interface Props {
   disabled: boolean;
   children: React.ReactNode;
 }
+
+const labelClassName = css({
+  display: "flex",
+  alignItems: "center",
+  cursor: "pointer",
+});
+
+const childrenClassName = css({
+  marginLeft: "8px",
+  color: "$colors$hover",
+});
 
 export const Toggle: React.FC<Props> = ({
   disabled,
@@ -16,21 +30,17 @@ export const Toggle: React.FC<Props> = ({
   children,
 }) => {
   return (
-    <label
-      className="inline-flex relative items-center cursor-pointer"
-      htmlFor={id}
-    >
+    <label className={classNames(labelClassName)} htmlFor={id}>
       <input
         checked={checked}
-        className="sr-only peer"
         disabled={disabled}
         id={id}
         onChange={onChange}
         type="checkbox"
         value=""
       />
-      <div className="w-8 h-4 bg-gray-200 peer-focus:outline-none dark:peer-focus:ring-gray-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all dark:border-gray-600 peer-checked:bg-gray-600"></div>
-      <span className="ml-2 text-white">{children}</span>
+
+      <span className={classNames(childrenClassName)}>{children}</span>
     </label>
   );
 };
