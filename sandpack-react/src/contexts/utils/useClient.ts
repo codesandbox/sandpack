@@ -3,6 +3,7 @@ import type {
   ReactDevToolsMode,
   SandpackClient,
   SandpackError,
+  UnsubscribeFunction,
 } from "@codesandbox/sandpack-client";
 import { useEffect, useRef, useState } from "react";
 
@@ -21,9 +22,14 @@ interface SandpackConfigState {
   sandpackStatus: SandpackStatus;
 }
 
-type UseClient = (
-  props: SandpackProviderProps
-) => [SandpackConfigState, { initializeSandpackIframe: () => void }];
+type UseClient = (props: SandpackProviderProps) => [
+  SandpackConfigState,
+  {
+    initializeSandpackIframe: () => void;
+    runSandpack: () => void;
+    unregisterBundler: () => void;
+  }
+];
 
 export const useClient: UseClient = (props) => {
   const initModeFromProps = props.options?.initMode || "lazy";
@@ -42,6 +48,10 @@ export const useClient: UseClient = (props) => {
   const initializeSandpackIframeHook = useRef<NodeJS.Timer | null>(null);
   const preregisteredIframes = useRef<Record<string, HTMLIFrameElement>>({});
   const clients = useRef<Record<string, SandpackClient>>({});
+  const timeoutHook = useRef<NodeJS.Timer | null>(null);
+  const unsubscribeClientListeners = useRef<
+    Record<string, Record<string, UnsubscribeFunction>>
+  >({});
 
   useEffect(
     function watchInitMode() {
@@ -96,7 +106,7 @@ export const useClient: UseClient = (props) => {
             clearTimeout(initializeSandpackIframeHook.current);
           }
 
-          Object.keys(clients.current).map(this.unregisterBundler);
+          Object.keys(clients.current).map(unregisterBundler);
           this.unregisterAllClients();
         }
       }, observerOptions);
@@ -120,5 +130,32 @@ export const useClient: UseClient = (props) => {
     setState((prev) => ({ ...prev, sandpackStatus: "running" }));
   };
 
-  return [state, { initializeSandpackIframe }];
+  const unregisterBundler = (clientId: string): void => {
+    const client = clients.current[clientId];
+    if (client) {
+      client.cleanup();
+      client.iframe.contentWindow?.location.replace("about:blank");
+      delete clients.current[clientId];
+    } else {
+      delete preregisteredIframes.current[clientId];
+    }
+
+    if (timeoutHook.current) {
+      clearTimeout(timeoutHook.current);
+    }
+
+    const unsubscribeQueuedClients = Object.values(
+      unsubscribeClientListeners.current
+    );
+
+    // Unsubscribing all listener registered
+    unsubscribeQueuedClients.forEach((listenerOfClient) => {
+      const listenerFunctions = Object.values(listenerOfClient);
+      listenerFunctions.forEach((unsubscribe) => unsubscribe());
+    });
+
+    setState((prev) => ({ ...prev, sandpackStatus: "idle" }));
+  };
+
+  return [state, { initializeSandpackIframe, runSandpack, unregisterBundler }];
 };

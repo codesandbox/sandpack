@@ -331,14 +331,6 @@ export class SandpackProviderClass extends React.PureComponent<
     return client;
   };
 
-  runSandpack = (): void => {
-    Object.keys(this.preregisteredIframes).forEach((clientId) => {
-      const iframe = this.preregisteredIframes[clientId];
-      this.clients[clientId] = this.createClient(iframe, clientId);
-    });
-
-    this.setState({ sandpackStatus: "running" });
-  };
 
   registerBundler = (iframe: HTMLIFrameElement, clientId: string): void => {
     if (this.state.sandpackStatus === "running") {
