@@ -15,6 +15,7 @@ import type {
   SandpackProviderProps,
   SandpackStatus,
 } from "../..";
+import { generateRandomId } from "../../utils/stringUtils";
 
 import type { FilesState } from "./useFiles";
 
@@ -39,6 +40,11 @@ type UseClient = (
     runSandpack: () => void;
     unregisterBundler: (clientId: string) => void;
     registerReactDevTools: (value: ReactDevToolsMode) => void;
+    addListener: (
+      listener: ListenerFunction,
+      clientId?: string
+    ) => UnsubscribeFunction;
+    dispatchMessage: (message: SandpackMessage, clientId?: string) => void;
   }
 ];
 
@@ -335,9 +341,100 @@ export const useClient: UseClient = (props, fileState) => {
     state.sandpackStatus,
   ]);
 
-  useEffect(() => {
-    updateClients();
-  }, [fileState.files, updateClients]);
+  const dispatchMessage = (
+    message: SandpackMessage,
+    clientId?: string
+  ): void => {
+    if (state.sandpackStatus !== "running") {
+      console.warn(
+        `[sandpack-react]: dispatch cannot be called while in idle mode`
+      );
+      return;
+    }
+
+    if (clientId) {
+      clients.current[clientId].dispatch(message);
+    } else {
+      Object.values(clients.current).forEach((client) => {
+        client.dispatch(message);
+      });
+    }
+  };
+
+  const addListener = (
+    listener: ListenerFunction,
+    clientId?: string
+  ): UnsubscribeFunction => {
+    if (clientId) {
+      if (clients.current[clientId]) {
+        const unsubscribeListener = clients.current[clientId].listen(listener);
+
+        return unsubscribeListener;
+      } else {
+        /**
+         * When listeners are added before the client is instantiated, they are stored with an unique id
+         * When the client is eventually instantiated, the listeners are registered on the spot
+         * Their unsubscribe functions are stored in unsubscribeClientListeners for future cleanup
+         */
+        const listenerId = generateRandomId();
+        queuedListeners.current[clientId] =
+          queuedListeners.current[clientId] || {};
+        unsubscribeClientListeners.current[clientId] =
+          unsubscribeClientListeners.current[clientId] || {};
+
+        queuedListeners.current[clientId][listenerId] = listener;
+
+        const unsubscribeListener = (): void => {
+          if (queuedListeners.current[clientId][listenerId]) {
+            /**
+             * Unsubscribe was called before the client was instantiated
+             * common example - a component with autorun=false that unmounted
+             */
+            delete queuedListeners.current[clientId][listenerId];
+          } else if (unsubscribeClientListeners.current[clientId][listenerId]) {
+            /**
+             * unsubscribe was called for a listener that got added before the client was instantiated
+             * call the unsubscribe function and remove it from memory
+             */
+            unsubscribeClientListeners.current[clientId][listenerId]();
+            delete unsubscribeClientListeners.current[clientId][listenerId];
+          }
+        };
+
+        return unsubscribeListener;
+      }
+    } else {
+      // Push to the **global** queue
+      const listenerId = generateRandomId();
+      queuedListeners.current.global[listenerId] = listener;
+
+      // Add to the current clients
+      const clientsList = Object.values(clients.current);
+      const currentClientUnsubscribeListeners = clientsList.map((client) =>
+        client.listen(listener)
+      );
+
+      const unsubscribeListener = (): void => {
+        // Unsubscribing from the clients already created
+        currentClientUnsubscribeListeners.forEach((unsubscribe) =>
+          unsubscribe()
+        );
+      };
+
+      return unsubscribeListener;
+    }
+  };
+
+  /**
+   * Effects
+   */
+
+  useEffect(
+    function watchFileChanges() {
+      updateClients();
+    },
+    [fileState.files, updateClients]
+  );
 
   useEffect(
     function watchInitMode() {
@@ -350,6 +447,30 @@ export const useClient: UseClient = (props, fileState) => {
     [initModeFromProps, state, initializeSandpackIframe]
   );
 
+  useEffect(() => {
+    return function unmontClient(): void {
+      if (typeof unsubscribe.current === "function") {
+        unsubscribe.current();
+      }
+
+      if (timeoutHook.current) {
+        clearTimeout(timeoutHook.current);
+      }
+
+      if (debounceHook.current) {
+        clearTimeout(debounceHook.current);
+      }
+
+      if (initializeSandpackIframeHook.current) {
+        clearTimeout(initializeSandpackIframeHook.current);
+      }
+
+      if (intersectionObserver.current) {
+        intersectionObserver.current.disconnect();
+      }
+    };
+  }, []);
+
   return [
     state,
     {
@@ -357,6 +478,8 @@ export const useClient: UseClient = (props, fileState) => {
       runSandpack,
       unregisterBundler,
       registerReactDevTools,
+      addListener,
+      dispatchMessage,
     },
   ];
 };
