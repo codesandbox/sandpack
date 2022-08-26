@@ -1,4 +1,5 @@
 import * as React from "react";
+import { stackClassName } from "../..";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { css } from "../../styles";
@@ -34,7 +35,10 @@ export const SandpackFileExplorer = ({
   const { sandpack } = useSandpack();
 
   return (
-    <div className={classNames(fileExplorerClassName, className)} {...props}>
+    <div
+      className={classNames(stackClassName, fileExplorerClassName, className)}
+      {...props}
+    >
       <ModuleList
         activeFile={sandpack.activeFile}
         autoHiddenFiles={autoHiddenFiles}
