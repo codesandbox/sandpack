@@ -8,6 +8,7 @@ import { classNames } from "../../utils/classNames";
 import type { Describe } from "./Describes";
 import { Describes } from "./Describes";
 import { FormattedError } from "./FormattedError";
+import type { Status } from "./SandpackTests";
 import { Tests } from "./Tests";
 import {
   failBackgroundClassName,
@@ -15,8 +16,6 @@ import {
   passBackgroundClassName,
 } from "./style";
 import { getFailingTests, getSpecTestResults, isEmpty } from "./utils";
-
-import type { Status } from ".";
 
 export type Spec = { error?: TestError } & Describe;
 
