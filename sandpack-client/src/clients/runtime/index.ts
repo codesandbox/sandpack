@@ -1,10 +1,7 @@
 import { getTemplate } from "codesandbox-import-utils/lib/create-sandbox/templates";
 import isEqual from "lodash.isequal";
 
-import Protocol from "./file-resolver-protocol";
-import { IFrameProtocol } from "./iframe-protocol";
 import type {
-  Dependencies,
   SandpackBundlerFiles,
   BundlerState,
   Modules,
@@ -14,16 +11,19 @@ import type {
   ListenerFunction,
   SandpackError,
   ReactDevToolsMode,
-  Template,
   NpmRegistry,
-} from "./types";
+  SandboxInfo,
+} from "../../types";
+import { SandpackLogLevel } from "../../types";
 import {
   createPackageJSON,
   addPackageJSONIfNeeded,
   extractErrorDetails,
-} from "./utils";
+} from "../../utils";
+import type { SandpackClientBase } from "../base";
 
-import { SandpackLogLevel } from ".";
+import Protocol from "./file-resolver-protocol";
+import { IFrameProtocol } from "./iframe-protocol";
 
 export interface ClientOptions {
   /**
@@ -85,24 +85,6 @@ export interface ClientOptions {
   customNpmRegistries?: NpmRegistry[];
 }
 
-export interface SandboxInfo {
-  files: SandpackBundlerFiles;
-  dependencies?: Dependencies;
-  devDependencies?: Dependencies;
-  entry?: string;
-  /**
-   * What template we use, if not defined we infer the template from the dependencies or files.
-   *
-   */
-  template?: Template;
-
-  /**
-   * Only use unpkg for fetching the dependencies, no preprocessing. It's slower, but doesn't talk
-   * to AWS.
-   */
-  disableDependencyPreprocessing?: boolean;
-}
-
 const BUNDLER_URL =
   process.env.CODESANDBOX_ENV === "development"
     ? "http://localhost:3000/"
@@ -111,8 +93,8 @@ const BUNDLER_URL =
         "-"
       )}-sandpack.codesandbox.io/`;
 
-export class SandpackClient {
-  selector: string | undefined;
+export class SandpackClientRuntime implements SandpackClientBase {
+  selector: string | HTMLIFrameElement = "";
   element: Element;
   iframe: HTMLIFrameElement;
   iframeProtocol: IFrameProtocol;

@@ -11,7 +11,7 @@ import type {
   ProtocolRequestMessage,
   ProtocolResultMessage,
   ProtocolErrorMessage,
-} from "./types";
+} from "../../types";
 
 export default class Protocol {
   private _disposeMessageListener: UnsubscribeFunction;

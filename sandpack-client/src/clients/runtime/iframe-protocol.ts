@@ -2,7 +2,7 @@ import type {
   ListenerFunction,
   SandpackMessage,
   UnsubscribeFunction,
-} from "./types";
+} from "../../types";
 
 export class IFrameProtocol {
   private frameWindow: Window | null;

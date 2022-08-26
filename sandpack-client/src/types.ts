@@ -268,4 +268,25 @@ export type Template =
   | "parcel"
   | "vue-cli"
   | "static"
-  | "solid";
+  | "solid"
+  | "nextjs";
+
+export type Environments = "runtime" | "server-runtime" | "sever";
+
+export interface SandboxInfo {
+  files: SandpackBundlerFiles;
+  dependencies?: Dependencies;
+  devDependencies?: Dependencies;
+  entry?: string;
+  /**
+   * What template we use, if not defined we infer the template from the dependencies or files.
+   *
+   */
+  template?: Template;
+
+  /**
+   * Only use unpkg for fetching the dependencies, no preprocessing. It's slower, but doesn't talk
+   * to AWS.
+   */
+  disableDependencyPreprocessing?: boolean;
+}
