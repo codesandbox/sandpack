@@ -91,7 +91,7 @@ export const useClient: UseClient = (props, fileState) => {
    * Callbacks
    */
   const createClient = useCallback(
-    (iframe: HTMLIFrameElement, clientId: string): SandpackClient => {
+    (iframe: HTMLIFrameElement, clientId: string): typeof SandpackClient => {
       const client = new SandpackClient(
         iframe,
         {

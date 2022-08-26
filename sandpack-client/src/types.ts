@@ -271,8 +271,6 @@ export type Template =
   | "solid"
   | "nextjs";
 
-export type Environments = "runtime" | "server-runtime" | "sever";
-
 export interface SandboxInfo {
   files: SandpackBundlerFiles;
   dependencies?: Dependencies;

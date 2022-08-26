@@ -20,7 +20,7 @@ import {
   addPackageJSONIfNeeded,
   extractErrorDetails,
 } from "../../utils";
-import type { SandpackClientBase } from "../base";
+import { SandpackClientBase } from "../base";
 
 import Protocol from "./file-resolver-protocol";
 import { IFrameProtocol } from "./iframe-protocol";
@@ -93,20 +93,16 @@ const BUNDLER_URL =
         "-"
       )}-sandpack.codesandbox.io/`;
 
-export class SandpackClientRuntime implements SandpackClientBase {
-  selector: string | HTMLIFrameElement = "";
+export class SandpackClientRuntime extends SandpackClientBase {
   element: Element;
   iframe: HTMLIFrameElement;
   iframeProtocol: IFrameProtocol;
-  options: ClientOptions;
 
   fileResolverProtocol?: Protocol;
   bundlerURL: string;
   bundlerState?: BundlerState;
   errors: SandpackError[];
   status: ClientStatus;
-
-  sandboxInfo: SandboxInfo;
 
   unsubscribeGlobalListener: UnsubscribeFunction;
   unsubscribeChannelListener: UnsubscribeFunction;
@@ -116,8 +112,7 @@ export class SandpackClientRuntime implements SandpackClientBase {
     sandboxInfo: SandboxInfo,
     options: ClientOptions = {}
   ) {
-    this.options = options;
-    this.sandboxInfo = sandboxInfo;
+    super(selector, sandboxInfo, options);
     this.bundlerURL = options.bundlerURL || BUNDLER_URL;
 
     this.bundlerState = undefined;
