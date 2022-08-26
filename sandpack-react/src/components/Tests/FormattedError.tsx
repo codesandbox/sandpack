@@ -4,7 +4,11 @@ import * as React from "react";
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
-import { failTextClassName, passTextClassName } from "./style";
+import {
+  failTextClassName,
+  passTextClassName,
+  titleTextClassName,
+} from "./style";
 
 interface Props {
   error: TestError;
@@ -99,7 +103,7 @@ const formatDiffMessage = (error: TestError, path: string): string => {
         const content = escapeHtml(code.content)
           .replace(
             /(describe|test|it)(\()(&#039;|&quot;|`)(.*)(&#039;|&quot;|`)/m,
-            `<span>$1$2$3</span><span class="${failTextClassName}">$4</span><span>$5</span>`
+            `<span>$1$2$3</span><span class="${titleTextClassName}">$4</span><span>$5</span>`
           )
           .replace(
             /(expect\()(.*)(\)\..*)(to[\w\d]*)(\()(.*)(\))/m,
