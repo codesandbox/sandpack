@@ -8,7 +8,7 @@ import type {
 } from "@codesandbox/sandpack-client";
 import { extractErrorDetails } from "@codesandbox/sandpack-client";
 import { SandpackClient } from "@codesandbox/sandpack-client";
-import { SandpackClientBase } from "@codesandbox/sandpack-client/dist/types/clients/base";
+import type { SandpackClientBase } from "@codesandbox/sandpack-client/dist/types/clients/base";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import type {
@@ -52,6 +52,12 @@ type UseClient = (
     loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
     openInCSBRegisteredRef: React.MutableRefObject<boolean>;
     errorScreenRegisteredRef: React.MutableRefObject<boolean>;
+    unsubscribeClientListenersRef: React.MutableRefObject<
+      Record<string, Record<string, UnsubscribeFunction>>
+    >;
+    queuedListenersRef: React.MutableRefObject<
+      Record<string, Record<string, ListenerFunction>>
+    >;
   }
 ];
 
@@ -518,6 +524,8 @@ export const useClient: UseClient = (props, fileState) => {
       openInCSBRegisteredRef,
       errorScreenRegisteredRef,
       lazyAnchorRef,
+      unsubscribeClientListenersRef: unsubscribeClientListeners,
+      queuedListenersRef: queuedListeners,
     },
   ];
 };

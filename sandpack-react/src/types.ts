@@ -17,6 +17,7 @@ import type React from "react";
 import type { SANDBOX_TEMPLATES } from "./templates";
 
 import type { CodeEditorProps } from ".";
+import { SandpackClientBase } from "@codesandbox/sandpack-client/dist/types/clients/base";
 
 /**
  * ------------------------ Public documentation ------------------------
@@ -540,7 +541,7 @@ export interface SandpackState {
   environment?: SandboxEnvironment;
   status: SandpackStatus;
   initMode: SandpackInitMode;
-  clients: Record<string, SandpackClient>;
+  clients: Record<string, SandpackClientBase>;
 
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
@@ -571,6 +572,12 @@ export interface SandpackState {
   errorScreenRegisteredRef: React.MutableRefObject<boolean>;
   openInCSBRegisteredRef: React.MutableRefObject<boolean>;
   loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
+  unsubscribeClientListenersRef: React.MutableRefObject<
+    Record<string, Record<string, UnsubscribeFunction>>
+  >;
+  queuedListenersRef: React.MutableRefObject<
+    Record<string, Record<string, ListenerFunction>>
+  >;
 }
 
 /**

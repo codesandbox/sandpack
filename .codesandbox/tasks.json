@@ -28,6 +28,10 @@
       "command": "yarn test",
       "runAtStart": false
     },
+    "test:watch": {
+      "name": "Test watch",
+      "command": "yarn test --watch"
+    },
     "build": {
       "name": "Build",
       "command": "yarn build",
