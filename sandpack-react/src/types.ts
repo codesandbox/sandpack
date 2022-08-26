@@ -12,12 +12,12 @@ import type {
   SandpackLogLevel,
   NpmRegistry,
 } from "@codesandbox/sandpack-client";
+import type { SandpackClientBase } from "@codesandbox/sandpack-client/dist/types/clients/base";
 import type React from "react";
 
 import type { SANDBOX_TEMPLATES } from "./templates";
 
 import type { CodeEditorProps } from ".";
-import { SandpackClientBase } from "@codesandbox/sandpack-client/dist/types/clients/base";
 
 /**
  * ------------------------ Public documentation ------------------------

@@ -11,6 +11,7 @@ import type {
   SandboxInfo,
   SandpackLogLevel,
 } from "../types";
+import { IFrameProtocol } from "./runtime/iframe-protocol";
 
 export interface ClientOptions {
   /**
@@ -78,6 +79,7 @@ export class SandpackClientBase {
   selector: string | HTMLIFrameElement;
   element!: Element;
   iframe!: HTMLIFrameElement;
+  iframeProtocol!: IFrameProtocol;
 
   constructor(
     selector: string | HTMLIFrameElement,

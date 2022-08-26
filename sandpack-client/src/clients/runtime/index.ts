@@ -94,8 +94,6 @@ const BUNDLER_URL =
       )}-sandpack.codesandbox.io/`;
 
 export class SandpackClientRuntime extends SandpackClientBase {
-  iframeProtocol: IFrameProtocol;
-
   fileResolverProtocol?: Protocol;
   bundlerURL: string;
   bundlerState?: BundlerState;
