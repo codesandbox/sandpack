@@ -12,7 +12,6 @@ import type {
   SandpackLogLevel,
   NpmRegistry,
 } from "@codesandbox/sandpack-client";
-import type { SandpackClientBase } from "@codesandbox/sandpack-client/dist/types/clients/base";
 import type React from "react";
 
 import type { SANDBOX_TEMPLATES } from "./templates";
@@ -541,7 +540,7 @@ export interface SandpackState {
   environment?: SandboxEnvironment;
   status: SandpackStatus;
   initMode: SandpackInitMode;
-  clients: Record<string, SandpackClientBase>;
+  clients: Record<string, SandpackClient>;
 
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;

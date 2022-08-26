@@ -1,9 +1,9 @@
 /* eslint-disable no-console,@typescript-eslint/no-explicit-any,prefer-rest-params */
 import type { SandboxInfo } from "../..";
 import type { ClientOptions } from "../base";
-import { SandpackClientBase } from "../base";
+import { SandpackClient } from "../base";
 
-export class SandpackClientRuntimeServer extends SandpackClientBase {
+export class SandpackClientRuntimeServer extends SandpackClient {
   element: Element;
   iframe: HTMLIFrameElement;
 

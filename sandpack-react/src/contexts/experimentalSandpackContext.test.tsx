@@ -10,7 +10,7 @@ import { REACT_TEMPLATE, useSandpack } from "..";
 import { ExperimentalSandpackProvider } from "./experimentalSandpackContext";
 
 const createContext = (): UseSandpack => {
-  const wrapper: React.FC = ({ children }) => (
+  const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <ExperimentalSandpackProvider template="react">
       {children}
     </ExperimentalSandpackProvider>
@@ -141,6 +141,7 @@ describe(ExperimentalSandpackProvider, () => {
     it("should return a pristine value after reverting a change", () => {
       const instance = createContext();
       expect(instance.sandpack.editorState).toBe("pristine");
+
       act(() => {
         instance.sandpack.updateFile("/App.js", "Foo");
       });

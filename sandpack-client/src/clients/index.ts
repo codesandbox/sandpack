@@ -2,7 +2,7 @@
 import type { SandboxInfo } from "..";
 import type { Template } from "../types";
 
-import type { SandpackClientBase } from "./base";
+import type { SandpackClient as SandpackClientBase } from "./base";
 import type { ClientOptions } from "./base";
 import { SandpackClientRuntime } from "./runtime";
 import { SandpackClientRuntimeServer } from "./runtime-server";
@@ -33,4 +33,4 @@ const SandpackClientImp = (
 };
 
 export const SandpackClient =
-  SandpackClientImp as unknown as typeof SandpackClientBase;
+  SandpackClientImp as unknown as SandpackClientBase;

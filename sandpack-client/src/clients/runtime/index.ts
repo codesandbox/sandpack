@@ -20,7 +20,7 @@ import {
   addPackageJSONIfNeeded,
   extractErrorDetails,
 } from "../../utils";
-import { SandpackClientBase } from "../base";
+import { SandpackClient } from "../base";
 
 import Protocol from "./file-resolver-protocol";
 import { IFrameProtocol } from "./iframe-protocol";
@@ -93,7 +93,7 @@ const BUNDLER_URL =
         "-"
       )}-sandpack.codesandbox.io/`;
 
-export class SandpackClientRuntime extends SandpackClientBase {
+export class SandpackClientRuntime extends SandpackClient {
   fileResolverProtocol?: Protocol;
   bundlerURL: string;
   bundlerState?: BundlerState;

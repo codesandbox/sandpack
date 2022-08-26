@@ -11,7 +11,8 @@ import type {
   SandboxInfo,
   SandpackLogLevel,
 } from "../types";
-import { IFrameProtocol } from "./runtime/iframe-protocol";
+
+import type { IFrameProtocol } from "./runtime/iframe-protocol";
 
 export interface ClientOptions {
   /**
@@ -73,7 +74,7 @@ export interface ClientOptions {
   customNpmRegistries?: NpmRegistry[];
 }
 
-export class SandpackClientBase {
+export class SandpackClient {
   options: ClientOptions;
   sandboxInfo: SandboxInfo;
   selector: string | HTMLIFrameElement;
@@ -102,7 +103,10 @@ export class SandpackClientBase {
     throw Error("Method not implemented");
   }
 
-  updatePreview(): void {
+  updatePreview(
+    _sandboxInfo = this.sandboxInfo,
+    _isInitializationCompile?: boolean
+  ): void {
     throw Error("Method not implemented");
   }
 

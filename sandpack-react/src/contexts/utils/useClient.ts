@@ -8,7 +8,6 @@ import type {
 } from "@codesandbox/sandpack-client";
 import { extractErrorDetails } from "@codesandbox/sandpack-client";
 import { SandpackClient } from "@codesandbox/sandpack-client";
-import type { SandpackClientBase } from "@codesandbox/sandpack-client/dist/types/clients/base";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import type {
@@ -37,7 +36,7 @@ type UseClient = (
 ) => [
   SandpackConfigState,
   {
-    clients: Record<string, SandpackClientBase>;
+    clients: Record<string, typeof SandpackClient>;
     initializeSandpackIframe: () => void;
     runSandpack: () => void;
     unregisterBundler: (clientId: string) => void;
@@ -80,7 +79,7 @@ export const useClient: UseClient = (props, fileState) => {
   const lazyAnchorRef = useRef<HTMLDivElement>(null);
   const initializeSandpackIframeHook = useRef<NodeJS.Timer | null>(null);
   const preregisteredIframes = useRef<Record<string, HTMLIFrameElement>>({});
-  const clients = useRef<Record<string, SandpackClientBase>>({});
+  const clients = useRef<Record<string, typeof SandpackClient>>({});
   const timeoutHook = useRef<NodeJS.Timer | null>(null);
   const unsubscribeClientListeners = useRef<
     Record<string, Record<string, UnsubscribeFunction>>
@@ -99,7 +98,7 @@ export const useClient: UseClient = (props, fileState) => {
    * Callbacks
    */
   const createClient = useCallback(
-    (iframe: HTMLIFrameElement, clientId: string): SandpackClientBase => {
+    (iframe: HTMLIFrameElement, clientId: string): typeof SandpackClient => {
       const client = new SandpackClient(
         iframe,
         {
