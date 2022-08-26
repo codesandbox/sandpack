@@ -24,7 +24,6 @@ import {
   splitTail,
 } from "./utils";
 
-
 export type Status = "initialising" | "idle" | "running" | "complete";
 type RunMode = "all" | "single";
 
@@ -33,6 +32,7 @@ interface State {
   status: Status;
   runMode: RunMode;
   verbose: boolean;
+  watchMode: boolean;
 }
 
 const INITIAL_STATE: State = {
@@ -40,17 +40,22 @@ const INITIAL_STATE: State = {
   status: "initialising",
   runMode: "all",
   verbose: false,
+  watchMode: true,
 };
 
 export const SandpackTests: React.FC<
-  { verbose?: boolean } & React.HtmlHTMLAttributes<HTMLDivElement>
-> = ({ verbose = false, style, ...props }) => {
+  {
+    verbose?: boolean;
+    watchMode?: boolean;
+  } & React.HtmlHTMLAttributes<HTMLDivElement>
+> = ({ verbose = false, watchMode = true, style, ...props }) => {
   const theme = useSandpackTheme();
   const { getClient, iframe, listen, sandpack } = useSandpackClient();
 
   const [state, setState] = React.useState<State>({
     ...INITIAL_STATE,
     verbose,
+    watchMode,
   });
 
   React.useEffect(() => {
@@ -305,6 +310,40 @@ export const SandpackTests: React.FC<
     }
   };
 
+/**
+ * TODO: if watchMode is true, then we need to run all Tests
+ * when the component is mounted. Requirements:
+ * - the status bundler needs to be running or make sure that the bundler is ready
+ *    - listen the state.status or the "done" message from bundler
+ * - watch the "watchMode" property from props
+ */
+  React.useEffect(
+    function triggerWatchModeOnFirstRender() {
+      const unsunscribe = listen(({ type }) => {
+        if (type === "done" && watchMode) {
+          console.log("fooooooo");
+          runAllTests();
+        }
+      });
+
+      return unsunscribe;
+    },
+    [watchMode]
+  );
+
+  React.useEffect(
+    function watchMode() {
+      const unsunscribe = listen(({ type }) => {
+        if (type === "done" && state.watchMode) {
+          runAllTests();
+        }
+      });
+
+      return unsunscribe;
+    },
+    [sandpack.files[sandpack.activeFile].code, state.watchMode]
+  );
+
   const openSpec = (file: string): void => {
     sandpack.setActiveFile(file);
   };
@@ -334,8 +373,12 @@ export const SandpackTests: React.FC<
         setVerbose={(): void =>
           setState((s) => ({ ...s, verbose: !s.verbose }))
         }
+        setWatchMode={(): void => {
+          setState((s) => ({ ...s, watchMode: !s.watchMode }));
+        }}
         status={state.status}
         verbose={state.verbose}
+        watchMode={state.watchMode}
       />
 
       <div className={classNames(containerClassName)}>

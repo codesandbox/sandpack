@@ -33,6 +33,8 @@ interface Props {
   verbose: boolean;
   status: Status;
   isSpecOpen: boolean;
+  watchMode: boolean;
+  setWatchMode: () => void;
 }
 
 export const Controls: React.FC<Props> = ({
@@ -41,6 +43,8 @@ export const Controls: React.FC<Props> = ({
   status,
   setVerbose,
   verbose,
+  watchMode,
+  setWatchMode,
   isSpecOpen,
 }) => {
   return (
@@ -66,6 +70,18 @@ export const Controls: React.FC<Props> = ({
           value=""
         />
         Verbose
+      </label>
+
+      <label className={classNames(buttonClassName)} htmlFor="watchMode">
+        <input
+          checked={watchMode}
+          disabled={status === "initialising"}
+          id="watchMode"
+          onChange={setWatchMode}
+          type="checkbox"
+          value=""
+        />
+        Watch mode
       </label>
     </div>
   );
