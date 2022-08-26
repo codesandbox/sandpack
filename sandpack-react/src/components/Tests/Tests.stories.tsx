@@ -1,4 +1,5 @@
 import { dracula } from "@codesandbox/sandpack-themes";
+import { CSSProperties } from "@stitches/core";
 import * as React from "react";
 
 import { SandpackProvider, SandpackLayout, SandpackCodeEditor } from "../..";
@@ -102,12 +103,8 @@ export const Light: React.FC = () => {
       }}
       theme="light"
     >
-      <SandpackLayout>
-        <SandpackCodeEditor
-          showRunButton={false}
-          style={{ height: "70vh" }}
-          showLineNumbers
-        />
+      <SandpackLayout style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
+        <SandpackCodeEditor showRunButton={false} showLineNumbers />
         <SandpackTests />
       </SandpackLayout>
     </SandpackProvider>
@@ -127,12 +124,8 @@ export const Dark: React.FC = () => {
       }}
       theme="dark"
     >
-      <SandpackLayout>
-        <SandpackCodeEditor
-          showRunButton={false}
-          style={{ height: "70vh" }}
-          showLineNumbers
-        />
+      <SandpackLayout style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
+        <SandpackCodeEditor showRunButton={false} showLineNumbers />
         <SandpackTests />
       </SandpackLayout>
     </SandpackProvider>
@@ -152,12 +145,8 @@ export const FileError: React.FC = () => {
       }}
       theme={dracula}
     >
-      <SandpackLayout>
-        <SandpackCodeEditor
-          showRunButton={false}
-          style={{ height: "70vh" }}
-          showLineNumbers
-        />
+      <SandpackLayout style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
+        <SandpackCodeEditor showRunButton={false} showLineNumbers />
         <SandpackTests />
       </SandpackLayout>
     </SandpackProvider>
@@ -184,12 +173,8 @@ export const ExtendedExpect: React.FC = () => {
       }}
       theme={dracula}
     >
-      <SandpackLayout>
-        <SandpackCodeEditor
-          showRunButton={false}
-          style={{ height: "70vh" }}
-          showLineNumbers
-        />
+      <SandpackLayout style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
+        <SandpackCodeEditor showRunButton={false} showLineNumbers />
         <SandpackTests />
       </SandpackLayout>
     </SandpackProvider>
@@ -209,12 +194,8 @@ export const SlowTest: React.FC = () => {
       }}
       theme={dracula}
     >
-      <SandpackLayout>
-        <SandpackCodeEditor
-          showRunButton={false}
-          style={{ height: "70vh" }}
-          showLineNumbers
-        />
+      <SandpackLayout style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
+        <SandpackCodeEditor showRunButton={false} showLineNumbers />
         <SandpackTests />
       </SandpackLayout>
     </SandpackProvider>
@@ -231,12 +212,8 @@ export const NoTests: React.FC = () => {
       }}
       theme={dracula}
     >
-      <SandpackLayout>
-        <SandpackCodeEditor
-          showRunButton={false}
-          style={{ height: "70vh" }}
-          showLineNumbers
-        />
+      <SandpackLayout style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
+        <SandpackCodeEditor showRunButton={false} showLineNumbers />
         <SandpackTests />
       </SandpackLayout>
     </SandpackProvider>
