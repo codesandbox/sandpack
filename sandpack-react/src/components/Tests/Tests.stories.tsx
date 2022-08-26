@@ -91,7 +91,7 @@ const extendedTest = `describe('Jest-extended matchers are supported', () => {
 const add = "export const add = (a: number, b: number): number => a + b;";
 const sub = "export const sub = (a: number, b: number): number => a - b;";
 
-export const Light: React.FC = () => {
+export const Main: React.FC = () => {
   const [theme, setTheme] = React.useState("dark");
   return (
     <>
@@ -127,7 +127,7 @@ export const Light: React.FC = () => {
   );
 };
 
-export const Dark: React.FC = () => {
+export const VerboseMode: React.FC = () => {
   return (
     <SandpackProvider
       customSetup={{ entry: "add.ts" }}
@@ -136,13 +136,12 @@ export const Dark: React.FC = () => {
         "/add.ts": add,
         "/src/app/sub.ts": sub,
         "/src/app/sub.test.ts": subTests,
-        "/failing.test.ts": failingTests,
       }}
-      theme="dark"
+      theme={dracula}
     >
       <SandpackLayout style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
         <SandpackCodeEditor showRunButton={false} showLineNumbers />
-        <SandpackTests />
+        <SandpackTests verbose />
       </SandpackLayout>
     </SandpackProvider>
   );
@@ -204,6 +203,7 @@ export const SlowTest: React.FC = () => {
       files={{
         "/slow.test.ts": slowTest,
         "/add.test.ts": addTests,
+        "/slow2.test.ts": slowTest,
         "/add.ts": add,
         "/src/app/sub.ts": sub,
         "/src/app/sub.test.ts": subTests,
@@ -212,7 +212,7 @@ export const SlowTest: React.FC = () => {
     >
       <SandpackLayout style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
         <SandpackCodeEditor showRunButton={false} showLineNumbers />
-        <SandpackTests />
+        <SandpackTests verbose />
       </SandpackLayout>
     </SandpackProvider>
   );
