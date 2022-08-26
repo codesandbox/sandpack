@@ -314,17 +314,24 @@ export const SandpackTests: React.FC<
     }
   };
 
+  const testFileRegex = /.*\.(test|spec)\.[tj]sx?$/;
+  const isSpecOpen = sandpack.activeFile.match(testFileRegex) !== null;
+
   React.useEffect(
     function watchMode() {
       const unsunscribe = listen(({ type }) => {
         if (type === "done" && state.watchMode) {
-          runAllTests();
+          if (isSpecOpen) {
+            runSpec();
+          } else {
+            runAllTests();
+          }
         }
       });
 
       return unsunscribe;
     },
-    [sandpack.files[sandpack.activeFile].code, state.watchMode]
+    [sandpack.files[sandpack.activeFile].code, state.watchMode, isSpecOpen]
   );
 
   const openSpec = (file: string): void => {
@@ -335,9 +342,6 @@ export const SandpackTests: React.FC<
   const duration = getDuration(specs);
   const testResults = getAllTestResults(specs);
   const suiteResults = getAllSuiteResults(specs);
-
-  const testFileRegex = /.*\.(test|spec)\.[tj]sx?$/;
-  const isSpecOpen = sandpack.activeFile.match(testFileRegex) !== null;
 
   return (
     <SandpackStack
