@@ -2,13 +2,18 @@ import type { TestError } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
 import { css } from "../../styles";
+import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
 import type { Describe } from "./Describes";
 import { Describes } from "./Describes";
 import { FormattedError } from "./FormattedError";
 import { Tests } from "./Tests";
-import { colors } from "./config";
+import {
+  failBackgroundClassName,
+  failTextClassName,
+  passBackgroundClassName,
+} from "./style";
 import { getFailingTests, getSpecTestResults, isEmpty } from "./utils";
 
 import type { Status } from ".";
@@ -26,45 +31,32 @@ const fileContainer = css({
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
-  marginBottom: "8px",
+  marginBottom: "$space$2",
 });
 
-const specContainerClassName = css({
-  marginBottom: "8px",
-});
-
-const failingTestContainer = css({
-  marginBottom: "8px",
+const gapBottomClassName = css({
+  marginBottom: "$space$2",
 });
 
 const failTestClassName = css({
-  color: colors.failMessage,
   fontWeight: "bold",
 });
 
-const passLabelClassName = css({
-  background: colors.pass,
-});
-const failLabelClassName = css({
-  background: colors.fail,
+const labelClassName = css({
+  borderRadius: "calc($border$radius / 2)",
 });
 
 const specLabelClassName = css({
-  marginRight: "8px",
-  padding: "4px 8px",
-  fontFamily: "Consolas, Monaco, monospace",
+  padding: "$space$1 $space$2",
+  fontFamily: "$font$mono",
   textTransform: "uppercase",
+  marginRight: "$space$2",
 });
 
 const filePathButtonClassName = css({
-  appearance: "none",
-  border: "0",
-  padding: "0",
-  margin: "0",
-  outline: "none",
-  background: "none",
-  fontFamily: "Consolas, Monaco, monospace",
+  fontFamily: "$font$mono",
   cursor: "pointer",
+  display: "inline-block",
 });
 
 const filePathClassName = css({
@@ -91,8 +83,10 @@ export const Specs: React.FC<Props> = ({
       {specs.map((spec) => {
         if (spec.error) {
           return (
-            <div key={spec.name} className={classNames(specContainerClassName)}>
-              <SpecLabel className={classNames(failLabelClassName)}>
+            <div key={spec.name} className={classNames(gapBottomClassName)}>
+              <SpecLabel
+                className={classNames(labelClassName, failBackgroundClassName)}
+              >
                 Error
               </SpecLabel>
               <FilePath
@@ -113,15 +107,25 @@ export const Specs: React.FC<Props> = ({
         const stats = getSpecTestResults(spec);
 
         return (
-          <div key={spec.name} className={classNames(specContainerClassName)}>
+          <div key={spec.name} className={classNames(gapBottomClassName)}>
             <div className={classNames(fileContainer)}>
               {status === "complete" &&
                 (stats.fail > 0 ? (
-                  <SpecLabel className={classNames(failLabelClassName)}>
+                  <SpecLabel
+                    className={classNames(
+                      labelClassName,
+                      failBackgroundClassName
+                    )}
+                  >
                     Fail
                   </SpecLabel>
                 ) : (
-                  <SpecLabel className={classNames(passLabelClassName)}>
+                  <SpecLabel
+                    className={classNames(
+                      labelClassName,
+                      passBackgroundClassName
+                    )}
+                  >
                     Pass
                   </SpecLabel>
                 ))}
@@ -140,9 +144,11 @@ export const Specs: React.FC<Props> = ({
               return (
                 <div
                   key={`failing-${test.name}`}
-                  className={classNames(failingTestContainer)}
+                  className={classNames(gapBottomClassName)}
                 >
-                  <div className={classNames(failTestClassName)}>
+                  <div
+                    className={classNames(failTestClassName, failTextClassName)}
+                  >
                     ● {test.blocks.join(" › ")} › {test.name}
                   </div>
                   {test.errors.map((e) => (
@@ -181,7 +187,10 @@ const FilePath: React.FC<{ onClick: () => void; path: string }> = ({
   const basePath = parts.slice(0, parts.length - 1).join("/") + "/";
   const fileName = parts[parts.length - 1];
   return (
-    <button className={classNames(filePathButtonClassName)} onClick={onClick}>
+    <button
+      className={classNames(buttonClassName, filePathButtonClassName)}
+      onClick={onClick}
+    >
       <span className={classNames(filePathClassName)}>{basePath}</span>
       <span className={classNames(fileNameClassName)}>{fileName}</span>
     </button>

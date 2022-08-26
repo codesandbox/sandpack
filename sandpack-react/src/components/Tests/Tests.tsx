@@ -4,39 +4,32 @@ import React from "react";
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
-import { colors } from "./config";
+import {
+  failTextClassName,
+  passTextClassName,
+  skipTextClassName,
+} from "./style";
 
 const testContainerClassName = css({
-  marginLeft: "16px",
+  marginLeft: "$space$4",
 });
 
 const containerClassName = css({
-  marginBottom: "8px",
+  marginBottom: "$space$2",
   color: "$colors$clickable",
 });
 
 const testClassName = css({
-  marginBottom: "8px",
+  marginBottom: "$space$2",
   color: "$colors$hover",
 });
 
 const durationClassName = css({
-  marginLeft: "8px",
+  marginLeft: "$space$2",
 });
 
-const passClassName = css({
-  marginRight: "8px",
-  color: colors.pass,
-});
-
-const failClassName = css({
-  marginRight: "8px",
-  color: colors.fail,
-});
-
-const skipClassName = css({
-  marginRight: "8px",
-  color: colors.skip,
+const gapRightClassName = css({
+  marginRight: "$space$2",
 });
 
 type TestStatus = "idle" | "running" | "pass" | "fail";
@@ -56,13 +49,19 @@ export const Tests: React.FC<{ tests: Test[] }> = ({ tests }) => {
       {tests.map((test) => (
         <div key={test.name} className={classNames(containerClassName)}>
           {test.status === "pass" && (
-            <span className={classNames(passClassName)}>✓</span>
+            <span className={classNames(passTextClassName, gapRightClassName)}>
+              ✓
+            </span>
           )}
           {test.status === "fail" && (
-            <span className={classNames(failClassName)}>✕</span>
+            <span className={classNames(failTextClassName, gapRightClassName)}>
+              ✕
+            </span>
           )}
           {test.status === "idle" && (
-            <span className={classNames(skipClassName)}>○</span>
+            <span className={classNames(skipTextClassName, gapRightClassName)}>
+              ○
+            </span>
           )}
           <span className={classNames(testClassName)}>{test.name}</span>
           {test.duration !== undefined && (

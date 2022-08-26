@@ -12,7 +12,7 @@ import type { Spec } from "./Specs";
 import { Specs } from "./Specs";
 import { Summary } from "./Summary";
 import type { Test } from "./Tests";
-import { colors } from "./config";
+import { failTextClassName } from "./style";
 import { useSandpackClient } from "./useSandpackClient";
 import {
   flatMap,
@@ -338,7 +338,7 @@ export const SandpackTests: React.FC<{ verbose?: boolean }> = ({
             <p>No test files found.</p>
             <p>
               Test match:{" "}
-              <span className={classNames(filePathClassName)}>
+              <span className={classNames(failTextClassName)}>
                 {testFileRegex.toString()}
               </span>
             </p>
@@ -367,19 +367,15 @@ export const SandpackTests: React.FC<{ verbose?: boolean }> = ({
 };
 
 const containerClassName = css({
-  padding: "16px",
+  padding: "$space$4",
   height: "100%",
   overflow: "auto",
   display: "flex",
   flexDirection: "column",
   position: "relative",
-  fontFamily: "Consolas, Monaco, monospace",
+  fontFamily: "$font$mono",
 });
 
 const fileErrorContainerClassName = css({
   fontWeight: "bold",
-});
-
-const filePathClassName = css({
-  color: colors.failMessage,
 });

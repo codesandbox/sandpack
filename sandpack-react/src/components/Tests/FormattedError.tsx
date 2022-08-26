@@ -4,7 +4,10 @@ import * as React from "react";
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
-import { colors } from "./config";
+import {
+  failTextClassName,
+  passTextClassName,
+} from "./style";
 
 interface Props {
   error: TestError;
@@ -13,8 +16,8 @@ interface Props {
 
 const containerClassName = css({
   color: "$colors$hover",
-  fontSize: "14px",
-  padding: "8px",
+  fontSize: "$font$size",
+  padding: "$space$2",
   whiteSpace: "pre-wrap",
 });
 
@@ -23,7 +26,7 @@ export const FormattedError: React.FC<Props> = ({ error, path }) => {
     <div
       className={classNames(containerClassName)}
       dangerouslySetInnerHTML={{ __html: formatDiffMessage(error, path) }}
-    ></div>
+    />
   );
 };
 
@@ -40,21 +43,21 @@ const formatDiffMessage = (error: TestError, path: string): string => {
   let finalMessage = "";
   if (error.matcherResult) {
     finalMessage = `<span>${escapeHtml(error.message)
-      .replace(/(expected)/m, `<span style="color:${colors.pass}">$1</span>`)
-      .replace(/(received)/m, `<span style="color:${colors.fail}">$1</span>`)
+      .replace(/(expected)/m, `<span class="${passTextClassName}">$1</span>`)
+      .replace(/(received)/m, `<span class="${failTextClassName}">$1</span>`)
       .replace(/(Difference:)/m, `<span>$1</span>`)
       .replace(
         /(Expected:)(.*)/m,
-        `<span>$1</span><span style="color:${colors.pass}">$2</span>`
+        `<span>$1</span><span class="${passTextClassName}">$2</span>`
       )
       .replace(
         /(Received:)(.*)/m,
-        `<span>$1</span><span style="color:${colors.fail}">$2</span>`
+        `<span>$1</span><span class="${failTextClassName}">$2</span>`
       )
-      .replace(/^(-.*)/gm, `<span style="color:${colors.fail}">$1</span>`)
+      .replace(/^(-.*)/gm, `<span class="${failTextClassName}">$1</span>`)
       .replace(
         /^(\+.*)/gm,
-        `<span style="color:${colors.pass}">$1</span>`
+        `<span class="${passTextClassName}">$1</span>`
       )}</span>`;
   } else {
     finalMessage = escapeHtml(error.message);
@@ -99,17 +102,17 @@ const formatDiffMessage = (error: TestError, path: string): string => {
         const content = escapeHtml(code.content)
           .replace(
             /(describe|test|it)(\()(&#039;|&quot;|`)(.*)(&#039;|&quot;|`)/m,
-            `<span>$1$2$3</span><span style="color:${colors.title}">$4</span><span>$5</span>`
+            `<span>$1$2$3</span><span class="${failTextClassName}">$4</span><span>$5</span>`
           )
           .replace(
             /(expect\()(.*)(\)\..*)(to[\w\d]*)(\()(.*)(\))/m,
-            `<span>$1</span><span style="color:${colors.fail}">$2</span><span>$3</span><span style="text-decoration: underline; font-weight: 900">$4</span><span>$5</span><span style="color:${colors.pass}">$6</span><span>$7</span>`
+            `<span>$1</span><span class="${failTextClassName}">$2</span><span>$3</span><span style="text-decoration: underline; font-weight: 900">$4</span><span>$5</span><span class="${passTextClassName}">$6</span><span>$7</span>`
           );
 
         finalMessage +=
           `<div ${code.highlight ? `style="font-weight:200;"` : ``}>` +
           (code.highlight
-            ? `<span style="color:${colors.fail};">></span> `
+            ? `<span class="${failTextClassName}">></span> `
             : "") +
           newMargin.join("") +
           escapeHtml("" + code.lineNumber) +
@@ -121,7 +124,7 @@ const formatDiffMessage = (error: TestError, path: string): string => {
               margin.join("") +
               " | " +
               toBeMargin.join("") +
-              `<span style="color:${colors.fail}">^</span>` +
+              `<span class="${failTextClassName}">^</span>` +
               "</div>"
             : "");
       });

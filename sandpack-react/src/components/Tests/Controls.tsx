@@ -1,10 +1,10 @@
 import * as React from "react";
 
 import { css } from "../../styles";
+import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
 import { RunButton } from "./RunButton";
-import { Toggle } from "./Toggle";
 
 import type { Status } from "./";
 
@@ -15,18 +15,15 @@ const containerClassName = css({
   justifyContent: "space-between",
   borderBottom: "1px solid $colors$surface2",
   height: "40px",
-  padding: "16px 8px",
-  fontFamily: "Consolas, Monaco, monospace",
+  padding: "$space$4 $space$2",
+  fontFamily: "$font$mono",
 });
 
 const buttonContainerClassName = css({
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
-});
-
-const marginRight = css({
-  marginRight: "16px",
+  gap: "$space$2",
 });
 
 interface Props {
@@ -49,11 +46,9 @@ export const Controls: React.FC<Props> = ({
   return (
     <div className={classNames(containerClassName)}>
       <div className={classNames(buttonContainerClassName)}>
-        <div className={classNames(marginRight)}>
-          <RunButton disabled={status === "initialising"} onClick={runAllTests}>
-            Run all
-          </RunButton>
-        </div>
+        <RunButton disabled={status === "initialising"} onClick={runAllTests}>
+          Run all
+        </RunButton>
         {isSpecOpen && (
           <RunButton disabled={status === "initialising"} onClick={runSpec}>
             Run suite
@@ -61,14 +56,17 @@ export const Controls: React.FC<Props> = ({
         )}
       </div>
 
-      <Toggle
-        checked={verbose}
-        disabled={status === "initialising"}
-        id="verbose"
-        onChange={setVerbose}
-      >
+      <label className={classNames(buttonClassName)} htmlFor="verbose">
+        <input
+          checked={verbose}
+          disabled={status === "initialising"}
+          id="verbose"
+          onChange={setVerbose}
+          type="checkbox"
+          value=""
+        />
         Verbose
-      </Toggle>
+      </label>
     </div>
   );
 };

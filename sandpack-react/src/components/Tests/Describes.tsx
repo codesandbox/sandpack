@@ -14,12 +14,12 @@ export interface Describe {
 }
 
 const nameClassName = css({
-  marginBottom: "8px",
   color: "$colors$hover",
+  marginBottom: "$space$2",
 });
 
 const containerClassName = css({
-  marginLeft: "16px",
+  marginLeft: "$space$4",
 });
 
 export const Describes: React.FC<{ describes: Describe[] }> = ({

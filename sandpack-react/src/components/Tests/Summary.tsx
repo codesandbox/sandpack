@@ -3,7 +3,11 @@ import * as React from "react";
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
-import { colors } from "./config";
+import {
+  failTextClassName,
+  passTextClassName,
+  skipTextClassName,
+} from "./style";
 
 export interface TestResults {
   pass: number;
@@ -24,18 +28,10 @@ interface Props {
   duration: number;
 }
 
-const passTextClassName = css({
-  color: colors.pass,
+const gapBottomClassName = css({
+  marginBottom: "$space$2",
 });
-const failTextClassName = css({
-  color: colors.failMessage,
-});
-const skipTextClassName = css({
-  color: colors.skip,
-});
-const marginBottomClassName = css({
-  marginBottom: "8px",
-});
+
 const labelClassName = css({
   fontWeight: "bold",
   color: "$colors$hover",
@@ -57,7 +53,7 @@ export const Summary: React.FC<Props> = ({ suites, tests, duration }) => {
 
   return (
     <div className={classNames(containerClassName)}>
-      <div className={classNames(marginBottomClassName)}>
+      <div className={classNames(gapBottomClassName)}>
         <span className={classNames(labelClassName)}>{widestLabel}</span>
         {suites.fail > 0 && (
           <span className={classNames(failTextClassName)}>
@@ -71,7 +67,7 @@ export const Summary: React.FC<Props> = ({ suites, tests, duration }) => {
         )}
         <span>{suites.total} total</span>
       </div>
-      <div className={classNames(marginBottomClassName)}>
+      <div className={classNames(gapBottomClassName)}>
         <span className={classNames(labelClassName)}>
           {withMargin("Tests:")}
         </span>

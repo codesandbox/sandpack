@@ -1,5 +1,6 @@
 import { dracula } from "@codesandbox/sandpack-themes";
-import { CSSProperties } from "@stitches/core";
+import * as themes from "@codesandbox/sandpack-themes";
+import type { CSSProperties } from "@stitches/core";
 import * as React from "react";
 
 import { SandpackProvider, SandpackLayout, SandpackCodeEditor } from "../..";
@@ -91,23 +92,38 @@ const add = "export const add = (a: number, b: number): number => a + b;";
 const sub = "export const sub = (a: number, b: number): number => a - b;";
 
 export const Light: React.FC = () => {
+  const [theme, setTheme] = React.useState("dark");
   return (
-    <SandpackProvider
-      customSetup={{ entry: "add.ts" }}
-      files={{
-        "/add.test.ts": addTests,
-        "/add.ts": add,
-        "/src/app/sub.ts": sub,
-        "/src/app/sub.test.ts": subTests,
-        "/failing.test.ts": failingTests,
-      }}
-      theme="light"
-    >
-      <SandpackLayout style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
-        <SandpackCodeEditor showRunButton={false} showLineNumbers />
-        <SandpackTests />
-      </SandpackLayout>
-    </SandpackProvider>
+    <>
+      <SandpackProvider
+        customSetup={{ entry: "add.ts" }}
+        files={{
+          "/add.test.ts": addTests,
+          "/add.ts": add,
+          "/src/app/sub.ts": sub,
+          "/src/app/sub.test.ts": subTests,
+          "/failing.test.ts": failingTests,
+        }}
+        theme={themes[theme] ?? theme}
+      >
+        <SandpackLayout
+          style={{ "--sp-layout-height": "70vh" } as CSSProperties}
+        >
+          <SandpackCodeEditor showRunButton={false} showLineNumbers />
+          <SandpackTests />
+        </SandpackLayout>
+      </SandpackProvider>
+
+      <h3>Themes</h3>
+      <select onChange={({ target }): void => setTheme(target.value)}>
+        <option value="auto">Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        {Object.keys(themes).map((tem) => (
+          <option value={tem}>{tem}</option>
+        ))}
+      </select>
+    </>
   );
 };
 
