@@ -6,7 +6,7 @@ import { classNames } from "../../utils/classNames";
 
 import { RunButton } from "./RunButton";
 
-import type { Status } from "./";
+import type { Status } from "./SandpackTests";
 
 const containerClassName = css({
   display: "flex",

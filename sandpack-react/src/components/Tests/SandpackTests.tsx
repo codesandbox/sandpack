@@ -87,11 +87,15 @@ export const SandpackTests: React.FC<
         if (data.event === "initialize_tests") {
           currentDescribeBlocks = [];
           currentSpec = "";
-          return setState((oldState) => ({
-            ...INITIAL_STATE,
-            status: "idle",
-            runMode: oldState.runMode,
-          }));
+          if (state.watchMode) {
+            return runAllTests();
+          } else {
+            return setState((oldState) => ({
+              ...INITIAL_STATE,
+              status: "idle",
+              runMode: oldState.runMode,
+            }));
+          }
         }
 
         if (data.event === "test_count") {
@@ -282,7 +286,7 @@ export const SandpackTests: React.FC<
     });
 
     return unsubscribe;
-  }, [state.runMode, sandpack.activeFile]);
+  }, [state.runMode, state.watchMode, sandpack.activeFile]);
 
   const runAllTests = (): void => {
     setState((oldState) => ({
@@ -309,27 +313,6 @@ export const SandpackTests: React.FC<
       client.dispatch({ type: "run-tests", path: sandpack.activeFile });
     }
   };
-
-/**
- * TODO: if watchMode is true, then we need to run all Tests
- * when the component is mounted. Requirements:
- * - the status bundler needs to be running or make sure that the bundler is ready
- *    - listen the state.status or the "done" message from bundler
- * - watch the "watchMode" property from props
- */
-  React.useEffect(
-    function triggerWatchModeOnFirstRender() {
-      const unsunscribe = listen(({ type }) => {
-        if (type === "done" && watchMode) {
-          console.log("fooooooo");
-          runAllTests();
-        }
-      });
-
-      return unsunscribe;
-    },
-    [watchMode]
-  );
 
   React.useEffect(
     function watchMode() {
