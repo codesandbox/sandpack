@@ -11,7 +11,8 @@
     "noImplicitAny": true,
     "typeRoots": ["node_modules/@types"],
     "outDir": "dist/types",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "downlevelIteration": true
   },
   "include": ["./src"],
   "exclude": ["node_modules", "src/**/*.test.ts"]

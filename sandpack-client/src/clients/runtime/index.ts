@@ -94,8 +94,6 @@ const BUNDLER_URL =
       )}-sandpack.codesandbox.io/`;
 
 export class SandpackClientRuntime extends SandpackClientBase {
-  element: Element;
-  iframe: HTMLIFrameElement;
   iframeProtocol: IFrameProtocol;
 
   fileResolverProtocol?: Protocol;
@@ -153,7 +151,7 @@ export class SandpackClientRuntime extends SandpackClientBase {
 
     this.unsubscribeGlobalListener = this.iframeProtocol.globalListen(
       (mes: SandpackMessage) => {
-        if (mes.type !== "initialized" || !this.iframe.contentWindow) {
+        if (mes.type !== "initialized" || !this.iframe?.contentWindow) {
           return;
         }
 

@@ -1,7 +1,8 @@
+/* eslint-disable no-console,@typescript-eslint/no-explicit-any,prefer-rest-params */
 import type { SandboxInfo } from "..";
 import type { Template } from "../types";
 
-import { SandpackClientBase } from "./base";
+import type { SandpackClientBase } from "./base";
 import type { ClientOptions } from "./base";
 import { SandpackClientRuntime } from "./runtime";
 import { SandpackClientRuntimeServer } from "./runtime-server";
@@ -25,9 +26,8 @@ const SandpackClientImp = (
   sandboxInfo: SandboxInfo,
   options: ClientOptions = {}
 ): SandpackClientBase => {
-  const Client =
-    (sandboxInfo.template && templates.get(sandboxInfo.template)) ??
-    SandpackClientBase;
+  const template = sandboxInfo.template ?? "parcel";
+  const Client = templates.get(template)!;
 
   return new Client(selector, sandboxInfo, options);
 };

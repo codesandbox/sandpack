@@ -1,6 +1,10 @@
 import isEqual from "lodash.isequal";
 
-import type { ListenerFunction, SandpackMessage, UnsubscribeFunction } from "..";
+import type {
+  ListenerFunction,
+  SandpackMessage,
+  UnsubscribeFunction,
+} from "..";
 import type {
   NpmRegistry,
   ReactDevToolsMode,
@@ -72,6 +76,8 @@ export class SandpackClientBase {
   options: ClientOptions;
   sandboxInfo: SandboxInfo;
   selector: string | HTMLIFrameElement;
+  element!: Element;
+  iframe!: HTMLIFrameElement;
 
   constructor(
     selector: string | HTMLIFrameElement,
@@ -83,19 +89,19 @@ export class SandpackClientBase {
     this.selector = selector;
   }
 
+  updateOptions(options: ClientOptions): void {
+    if (!isEqual(this.options, options)) {
+      this.options = options;
+      this.updatePreview();
+    }
+  }
+
   cleanup(): void {
     throw Error("Method not implemented");
   }
 
   updatePreview(): void {
     throw Error("Method not implemented");
-  }
-
-  updateOptions(options: ClientOptions): void {
-    if (!isEqual(this.options, options)) {
-      this.options = options;
-      this.updatePreview();
-    }
   }
 
   dispatch(_message: SandpackMessage): void {

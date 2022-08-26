@@ -8,6 +8,7 @@ import type {
 } from "@codesandbox/sandpack-client";
 import { extractErrorDetails } from "@codesandbox/sandpack-client";
 import { SandpackClient } from "@codesandbox/sandpack-client";
+import { SandpackClientBase } from "@codesandbox/sandpack-client/dist/types/clients/base";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import type {
@@ -36,7 +37,7 @@ type UseClient = (
 ) => [
   SandpackConfigState,
   {
-    clients: Record<string, SandpackClient>;
+    clients: Record<string, SandpackClientBase>;
     initializeSandpackIframe: () => void;
     runSandpack: () => void;
     unregisterBundler: (clientId: string) => void;
@@ -73,7 +74,7 @@ export const useClient: UseClient = (props, fileState) => {
   const lazyAnchorRef = useRef<HTMLDivElement>(null);
   const initializeSandpackIframeHook = useRef<NodeJS.Timer | null>(null);
   const preregisteredIframes = useRef<Record<string, HTMLIFrameElement>>({});
-  const clients = useRef<Record<string, SandpackClient>>({});
+  const clients = useRef<Record<string, SandpackClientBase>>({});
   const timeoutHook = useRef<NodeJS.Timer | null>(null);
   const unsubscribeClientListeners = useRef<
     Record<string, Record<string, UnsubscribeFunction>>
@@ -86,12 +87,13 @@ export const useClient: UseClient = (props, fileState) => {
   const loadingScreenRegisteredRef = useRef<boolean>(true);
   const openInCSBRegisteredRef = useRef<boolean>(true);
   const errorScreenRegisteredRef = useRef<boolean>(true);
+  const currentEnvironement = useRef(fileState.environment);
 
   /**
    * Callbacks
    */
   const createClient = useCallback(
-    (iframe: HTMLIFrameElement, clientId: string): typeof SandpackClient => {
+    (iframe: HTMLIFrameElement, clientId: string): SandpackClientBase => {
       const client = new SandpackClient(
         iframe,
         {
@@ -334,6 +336,14 @@ export const useClient: UseClient = (props, fileState) => {
 
     if (state.status !== "running") {
       return;
+    }
+
+    if (currentEnvironement.current !== fileState.environment) {
+      currentEnvironement.current = fileState.environment;
+
+      Object.entries(clients.current).forEach(([key, client]) => {
+        createClient(client.iframe, key);
+      });
     }
 
     if (recompileMode === "immediate") {
