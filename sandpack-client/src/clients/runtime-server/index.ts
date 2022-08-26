@@ -3,7 +3,7 @@ import type { SandboxInfo } from "../..";
 import type { ClientOptions } from "../base";
 import { SandpackClient } from "../base";
 
-export class SandpackClientRuntimeServer extends SandpackClient {
+export class RuntimeServer extends SandpackClient {
   element: Element;
   iframe: HTMLIFrameElement;
 

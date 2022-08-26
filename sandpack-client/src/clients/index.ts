@@ -4,19 +4,19 @@ import type { Template } from "../types";
 
 import type { SandpackClient as SandpackClientBase } from "./base";
 import type { ClientOptions } from "./base";
-import { SandpackClientRuntime } from "./runtime";
-import { SandpackClientRuntimeServer } from "./runtime-server";
+import { Runtime } from "./runtime";
+import { RuntimeServer } from "./runtime-server";
 
 const templateEnvs: Array<[Template, typeof SandpackClientBase]> = [
-  ["angular-cli", SandpackClientRuntime],
-  ["create-react-app", SandpackClientRuntime],
-  ["create-react-app-typescript", SandpackClientRuntime],
-  ["parcel", SandpackClientRuntime],
-  ["solid", SandpackClientRuntime],
-  ["static", SandpackClientRuntime],
-  ["svelte", SandpackClientRuntime],
-  ["vue-cli", SandpackClientRuntime],
-  ["nextjs", SandpackClientRuntimeServer],
+  ["angular-cli", Runtime],
+  ["create-react-app", Runtime],
+  ["create-react-app-typescript", Runtime],
+  ["parcel", Runtime],
+  ["solid", Runtime],
+  ["static", Runtime],
+  ["svelte", Runtime],
+  ["vue-cli", Runtime],
+  ["nextjs", RuntimeServer],
 ];
 
 const templates = new Map(templateEnvs);

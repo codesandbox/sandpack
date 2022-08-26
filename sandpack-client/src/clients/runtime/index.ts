@@ -93,7 +93,7 @@ const BUNDLER_URL =
         "-"
       )}-sandpack.codesandbox.io/`;
 
-export class SandpackClientRuntime extends SandpackClient {
+export class Runtime extends SandpackClient {
   fileResolverProtocol?: Protocol;
   bundlerURL: string;
   bundlerState?: BundlerState;
