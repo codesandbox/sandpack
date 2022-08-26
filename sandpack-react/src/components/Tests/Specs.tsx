@@ -61,14 +61,10 @@ const filePathButtonClassName = css({
 
 const filePathClassName = css({
   color: "$colors$clickable",
-  textDecorationStyle: "dotted",
-  textDecorationLine: "underline",
 });
 
 const fileNameClassName = css({
   color: "$colors$hover",
-  textDecorationLine: "underline",
-  textDecorationStyle: "dotted",
   fontWeight: "bold",
 });
 

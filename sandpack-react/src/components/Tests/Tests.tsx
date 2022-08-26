@@ -43,7 +43,11 @@ export interface Test {
   duration?: number | undefined;
 }
 
-export const Tests: React.FC<{ tests: Test[] }> = ({ tests }) => {
+interface SandpackTests extends React.HtmlHTMLAttributes<HTMLDivElement> {
+  tests: Test[];
+}
+
+export const Tests: React.FC<SandpackTests> = ({ tests, style }) => {
   return (
     <div className={classNames(testContainerClassName)}>
       {tests.map((test) => (
