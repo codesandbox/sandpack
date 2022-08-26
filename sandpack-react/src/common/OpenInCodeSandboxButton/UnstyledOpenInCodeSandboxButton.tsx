@@ -81,7 +81,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
    * Register the usage of the codesandbox link
    */
   React.useEffect(function registerUsage() {
-    sandpack.openInCSBRegisteredRef.current = true;
+    sandpack.openInCSBRegisteredRef.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -115,7 +115,7 @@ export const SandpackPreview = React.forwardRef<
     const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
 
     // SandpackPreview immediately registers the custom screens/components so the bundler does not render any of them
-    openInCSBRegisteredRef.current = true;
+    openInCSBRegisteredRef.current = false;
     errorScreenRegisteredRef.current = true;
     loadingScreenRegisteredRef.current = true;
 

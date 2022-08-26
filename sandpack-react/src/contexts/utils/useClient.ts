@@ -84,7 +84,7 @@ export const useClient: UseClient = (props, fileState) => {
   >({ global: {} });
   const debounceHook = useRef<number | undefined>();
   const loadingScreenRegisteredRef = useRef<boolean>(true);
-  const openInCSBRegisteredRef = useRef<boolean>(false);
+  const openInCSBRegisteredRef = useRef<boolean>(true);
   const errorScreenRegisteredRef = useRef<boolean>(true);
 
   /**
@@ -451,7 +451,6 @@ export const useClient: UseClient = (props, fileState) => {
   /**
    * Effects
    */
-
   useEffect(
     function watchFileChanges() {
       updateClients();
