@@ -4,10 +4,7 @@ import * as React from "react";
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
-import {
-  failTextClassName,
-  passTextClassName,
-} from "./style";
+import { failTextClassName, passTextClassName } from "./style";
 
 interface Props {
   error: TestError;
