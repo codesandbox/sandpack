@@ -21,7 +21,7 @@ const templateEnvs: Array<[Template, typeof SandpackClientBase]> = [
 
 const templates = new Map(templateEnvs);
 
-const SandpackClientImp = (
+const sandpackClientFactory = (
   selector: string | HTMLIFrameElement,
   sandboxInfo: SandboxInfo,
   options: ClientOptions = {}
@@ -33,4 +33,4 @@ const SandpackClientImp = (
 };
 
 export const SandpackClient =
-  SandpackClientImp as unknown as SandpackClientBase;
+  sandpackClientFactory as unknown as SandpackClientBase;

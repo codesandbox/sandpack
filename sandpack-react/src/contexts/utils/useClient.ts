@@ -377,6 +377,7 @@ export const useClient: UseClient = (props, fileState) => {
     props.options?.recompileDelay,
     props.options?.recompileMode,
     state.status,
+    createClient,
   ]);
 
   const dispatchMessage = (
