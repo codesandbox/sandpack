@@ -42,7 +42,11 @@ export const getSpecTestResults = (spec: Spec): TestResults =>
 
 export const getAllSuiteResults = (specs: Spec[]): SuiteResults =>
   specs
-    .filter(isEmpty)
+    .filter(
+      (spec) =>
+        Object.values(spec.describes).length > 0 ||
+        Object.values(spec.tests).length > 0
+    )
     .map(getSpecTestResults)
     .reduce(
       (acc, stats) => {
