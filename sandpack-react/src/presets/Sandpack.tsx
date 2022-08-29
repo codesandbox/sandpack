@@ -1,6 +1,6 @@
 import * as React from "react";
-import { SANDBOX_TEMPLATES } from "..";
 
+import { SANDBOX_TEMPLATES } from "..";
 import { SandpackLayout } from "../common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";

@@ -180,3 +180,17 @@ you need for your specific use case.
 :::success Congrats!
 You can now build your own sandpack-aware components on top of the sandpack custom hooks. The final piece of the puzzle is to understand the `sandpack-client`, the framework agnostic library that we use to manage the access to the bundler.
 :::
+
+## useSandpackClient
+
+It registers a new sandpack client and returns its instance, listeners, and dispatch function. Using it when creating a custom component to interact directly with the client is recommended. For other cases, use `useSandpack` instead.
+
+## useSandpackTheme
+
+It exposes the `theme` object configured on `SandpackContext` and contains an `id` to ensure uniqueness for custom themes. This `theme` object is responsible for distributing all the style configurations for the component thee.
+
+## useTranspiledCode
+
+It returns the transpile module from the bundler, the same one evaluated inside it.
+
+

@@ -6,9 +6,10 @@ import type {
 } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-import { useSandpack } from "./";
 import type { SandpackState } from "../types";
 import { generateRandomId } from "../utils/stringUtils";
+
+import { useSandpack } from "./";
 
 interface UseSandpackClient {
   sandpack: SandpackState;
