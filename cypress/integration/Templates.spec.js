@@ -20,6 +20,8 @@ const getIframeBody = () => {
 
 describe("Templates", () => {
   Object.keys(SANDBOX_TEMPLATES).forEach((template) => {
+    if (template === "test-ts") return null; // tests there is no preview
+
     it(`Should run the ${template} template`, () => {
       accessPage(template);
 
