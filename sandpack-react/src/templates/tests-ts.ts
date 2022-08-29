@@ -20,7 +20,7 @@ export const TEST_TYPESCRIPT_TEMPLATE = {
       code: `export const add = (a: number, b: number): number => a + b;`,
     },
     "/add.test.ts": {
-      code: `import {add} from './add';
+      code: `import { add } from './add';
 
 describe('add', () => {
   test('Commutative Law of Addition', () => {
@@ -36,4 +36,5 @@ describe('add', () => {
   entry: "/add.ts",
   main: "/add.test.ts",
   environment: "parcel",
+  mode: "tests",
 };

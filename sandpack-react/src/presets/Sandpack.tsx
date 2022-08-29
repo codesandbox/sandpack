@@ -1,9 +1,11 @@
 import * as React from "react";
+import { SANDBOX_TEMPLATES } from "..";
 
 import { SandpackLayout } from "../common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackPreview } from "../components/Preview";
+import { SandpackTests } from "../components/Tests";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import type {
   SandpackInternal,
@@ -63,6 +65,10 @@ export const Sandpack: SandpackInternal = (props) => {
   const previewPart = 100 - editorPart;
   const editorHeight = props.options?.editorHeight;
 
+  /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+  const templateFiles = SANDBOX_TEMPLATES[props.template!] ?? {};
+  const mode = "mode" in templateFiles ? templateFiles.mode : "preview";
+
   return (
     <SandpackProvider
       customSetup={props.customSetup}
@@ -81,16 +87,28 @@ export const Sandpack: SandpackInternal = (props) => {
             minWidth: 700 * (editorPart / (previewPart + editorPart)),
           }}
         />
-        <SandpackPreview
-          showNavigator={props.options?.showNavigator}
-          showRefreshButton={props.options?.showRefreshButton}
-          style={{
-            height: editorHeight,
-            flexGrow: previewPart,
-            flexShrink: previewPart,
-            minWidth: 700 * (previewPart / (previewPart + editorPart)),
-          }}
-        />
+        {mode === "preview" && (
+          <SandpackPreview
+            showNavigator={props.options?.showNavigator}
+            showRefreshButton={props.options?.showRefreshButton}
+            style={{
+              height: editorHeight,
+              flexGrow: previewPart,
+              flexShrink: previewPart,
+              minWidth: 700 * (previewPart / (previewPart + editorPart)),
+            }}
+          />
+        )}
+        {mode === "tests" && (
+          <SandpackTests
+            style={{
+              height: editorHeight,
+              flexGrow: editorPart,
+              flexShrink: editorPart,
+              minWidth: 700 * (editorPart / (previewPart + editorPart)),
+            }}
+          />
+        )}
       </SandpackLayout>
     </SandpackProvider>
   );
