@@ -1,1 +1,1 @@
-export {SandpackTests} from "./SandpackTests"
+export { SandpackTests } from "./SandpackTests";

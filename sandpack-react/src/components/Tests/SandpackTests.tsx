@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { SandpackStack } from "../../common";
 import { Loading } from "../../common/Loading";
-import { useSandpackTheme } from "../../hooks";
+import { useSandpackTheme, useSandpackClient } from "../../hooks";
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 import { isDarkColor } from "../../utils/stringUtils";
@@ -15,7 +15,6 @@ import { Specs } from "./Specs";
 import { Summary } from "./Summary";
 import type { Test } from "./Tests";
 import { failTextClassName, setTestTheme } from "./style";
-import { useSandpackClient } from "./useSandpackClient";
 import {
   flatMap,
   getDuration,

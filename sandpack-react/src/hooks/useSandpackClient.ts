@@ -6,9 +6,9 @@ import type {
 } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-import { useSandpack } from "../../hooks";
-import type { SandpackState } from "../../types";
-import { generateRandomId } from "../../utils/stringUtils";
+import { useSandpack } from "./";
+import type { SandpackState } from "../types";
+import { generateRandomId } from "../utils/stringUtils";
 
 interface UseSandpackClient {
   sandpack: SandpackState;
@@ -16,8 +16,17 @@ interface UseSandpackClient {
   iframe: React.MutableRefObject<HTMLIFrameElement | null>;
   listen: (listener: ListenerFunction) => UnsubscribeFunction;
   dispatch: (message: SandpackMessage) => void;
+  clientId: string;
 }
 
+/**
+ * It registers a new sandpack client and returns its instance,
+ * listeners, and dispatch function. Using it when creating a custom
+ * component to interact directly with the client is recommended.
+ * For other cases, use `useSandpack` instead.
+ *
+ * @category Hooks
+ */
 export const useSandpackClient = (): UseSandpackClient => {
   const { sandpack, listen, dispatch } = useSandpack();
   const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
@@ -41,6 +50,7 @@ export const useSandpackClient = (): UseSandpackClient => {
   return {
     sandpack,
     getClient,
+    clientId: clientId.current,
     iframe: iframeRef,
     listen: (listener): UnsubscribeFunction =>
       listen(listener, clientId.current),

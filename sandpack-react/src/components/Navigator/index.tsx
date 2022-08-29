@@ -49,7 +49,7 @@ const inputClassName = css({
  * @category Components
  */
 export interface NavigatorProps {
-  clientId?: string;
+  clientId: string;
   onURLChange?: (newURL: string) => void;
 }
 
