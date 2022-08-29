@@ -11,7 +11,6 @@ import { standardizeTheme } from "../styles";
 import { defaultLight } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
 import { classNames } from "../utils/classNames";
-import { isDarkColor } from "../utils/stringUtils";
 
 const wrapperClassName = css({
   all: "initial",
@@ -44,9 +43,11 @@ const wrapperClassName = css({
 const SandpackThemeContext = React.createContext<{
   theme: SandpackTheme;
   id: string;
+  mode: "dark" | "light";
 }>({
   theme: defaultLight,
   id: "light",
+  mode: "light",
 });
 
 /**
@@ -58,22 +59,20 @@ const SandpackThemeProvider: React.FC<
     children?: React.ReactNode;
   }
 > = ({ theme: themeFromProps, children, className, ...props }) => {
-  const { theme, id } = standardizeTheme(themeFromProps);
+  const { theme, id, mode } = standardizeTheme(themeFromProps);
   const c = useClasser(THEME_PREFIX);
 
   const themeClassName = React.useMemo(() => {
     return createTheme(id, standardizeStitchesTheme(theme));
   }, [theme, id]);
 
-  const isDarkTheme = isDarkColor(theme.colors.surface1);
-
   return (
-    <SandpackThemeContext.Provider value={{ theme, id }}>
+    <SandpackThemeContext.Provider value={{ theme, id, mode }}>
       <div
         className={classNames(
           c("wrapper"),
           themeClassName.toString(),
-          wrapperClassName({ variant: isDarkTheme ? "dark" : "light" }),
+          wrapperClassName({ variant: mode }),
           className
         )}
         {...props}

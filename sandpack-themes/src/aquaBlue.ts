@@ -12,9 +12,6 @@ export const aquaBlue: SandpackTheme = {
     hover: "#1f2933",
 
     accent: "#2e7692",
-
-    error: "#811e18",
-    errorSurface: "#ffcdca",
   },
 
   syntax: {

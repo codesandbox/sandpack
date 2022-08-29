@@ -9,7 +9,8 @@ import type { SandpackTheme } from "../types";
 export const useSandpackTheme = (): {
   theme: SandpackTheme;
   themeId: string;
+  themeMode: "dark" | "light";
 } => {
-  const { theme, id } = React.useContext(SandpackThemeContext);
-  return { theme, themeId: id };
+  const { theme, id, mode } = React.useContext(SandpackThemeContext);
+  return { theme, themeId: id, themeMode: mode };
 };
