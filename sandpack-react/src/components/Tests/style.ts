@@ -4,6 +4,7 @@ export const setTestTheme = (isDark: boolean): Record<string, string> => ({
   "--test-pass": isDark ? "#18df16" : "#15c213",
   "--test-fail": isDark ? "#df162b" : "#c21325",
   "--test-skip": isDark ? "#eace2b" : "#c2a813",
+  "--test-run": isDark ? "#eace2b" : "#c2a813",
   "--test-title": isDark ? "#3fbabe" : "#256c6f",
 });
 
@@ -28,9 +29,11 @@ const background = css({
     status: {
       pass: { background: "var(--test-pass)", color: "$colors$surface1" },
       fail: { background: "var(--test-fail)", color: "$colors$surface1" },
+      run: { background: "var(--test-run)", color: "$colors$surface1" },
     },
   },
 });
 
+export const runBackgroundClassName = background({ status: "run" });
 export const passBackgroundClassName = background({ status: "pass" });
 export const failBackgroundClassName = background({ status: "fail" });

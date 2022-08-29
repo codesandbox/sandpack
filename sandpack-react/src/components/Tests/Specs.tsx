@@ -14,6 +14,7 @@ import {
   failBackgroundClassName,
   failTextClassName,
   passBackgroundClassName,
+  runBackgroundClassName,
 } from "./style";
 import { getFailingTests, getSpecTestResults, isEmpty } from "./utils";
 
@@ -108,8 +109,8 @@ export const Specs: React.FC<Props> = ({
         return (
           <div key={spec.name} className={classNames(gapBottomClassName)}>
             <div className={classNames(fileContainer)}>
-              {status === "complete" &&
-                (stats.fail > 0 ? (
+              {status === "complete" ? (
+                stats.fail > 0 ? (
                   <SpecLabel
                     className={classNames(
                       labelClassName,
@@ -127,7 +128,14 @@ export const Specs: React.FC<Props> = ({
                   >
                     Pass
                   </SpecLabel>
-                ))}
+                )
+              ) : (
+                <SpecLabel
+                  className={classNames(labelClassName, runBackgroundClassName)}
+                >
+                  Run
+                </SpecLabel>
+              )}
 
               <FilePath
                 onClick={(): void => openSpec(spec.name)}
