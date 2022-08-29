@@ -91,6 +91,7 @@ export const SandpackPreview = React.forwardRef<
       showSandpackErrorOverlay = true,
       actionsChildren = <></>,
       children,
+      className,
       ...props
     },
     ref
@@ -158,7 +159,10 @@ export const SandpackPreview = React.forwardRef<
     };
 
     return (
-      <SandpackStack {...props}>
+      <SandpackStack
+        className={classNames(`${THEME_PREFIX}-preview`, className)}
+        {...props}
+      >
         {showNavigator && (
           <Navigator clientId={clientId.current} onURLChange={handleNewURL} />
         )}

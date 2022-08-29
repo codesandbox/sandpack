@@ -36,6 +36,7 @@ export const SandpackConsole: React.FC<
   showSyntaxError = false,
   maxMessageCount,
   onLogsChange,
+  className,
   ...props
 }) => {
   const { logs, reset } = useSandpackConsole({
@@ -55,7 +56,11 @@ export const SandpackConsole: React.FC<
 
   return (
     <SandpackStack
-      className={css({ height: "100%", background: "$surface1" }).toString()}
+      className={classNames(
+        css({ height: "100%", background: "$surface1" }),
+        `${THEME_PREFIX}-console`,
+        className
+      )}
       {...props}
     >
       {showHeader && <Header />}

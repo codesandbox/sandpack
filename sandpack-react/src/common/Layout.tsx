@@ -48,6 +48,11 @@ export const layoutClassName = css({
       minWidth: "100% !important;",
     },
   },
+
+  [`> .${THEME_PREFIX}-file-explorer`]: {
+    flex: 0.2,
+    minWidth: 200,
+  },
 });
 
 /**

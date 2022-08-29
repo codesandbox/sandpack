@@ -2,7 +2,7 @@ import * as React from "react";
 import { stackClassName } from "../..";
 
 import { useSandpack } from "../../hooks/useSandpack";
-import { css } from "../../styles";
+import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
 import { ModuleList } from "./ModuleList";
@@ -36,7 +36,12 @@ export const SandpackFileExplorer = ({
 
   return (
     <div
-      className={classNames(stackClassName, fileExplorerClassName, className)}
+      className={classNames(
+        stackClassName,
+        fileExplorerClassName,
+        `${THEME_PREFIX}-file-explorer`,
+        className
+      )}
       {...props}
     >
       <ModuleList
