@@ -25,13 +25,15 @@ deeper into our ecosystem.
 
 <div class="intro-section">
   <IntroCard title="Install" description="Learn how to add Sandpack to your projects and start coding in minutes." href="/docs/getting-started/install" actionText="Access &#8594;" />
+  
+  <IntroCard title="Components" description="A full listing and description of all Sandpack capabilities, such as console, tests and preview components" href="/docs/advanced-usage/components" actionText="Access &#8594;" />
 
   <IntroCard title="Advanced Usage" description="An overview of some Sandpack capabilities and how to extend its API." href="/docs/advanced-usage/provider" actionText="Access &#8594;" />
 
-  <IntroCard title="API reference" description="A full listing and description of the public API exported by the libraries." href="/docs/api/react" actionText="Access &#8594;" />
-
   <IntroCard title="Sandpack Theme Builder" description="Design and customize your own theme, among other Sandpack presets." href="https://sandpack.codesandbox.io/theme" actionText="Try it now" external />
 </div>
+
+
 
 ### Live coding environment in minutes
 

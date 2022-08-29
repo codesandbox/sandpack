@@ -42,6 +42,9 @@ const INITIAL_STATE: State = {
   watchMode: true,
 };
 
+/**
+ * @category Components
+ */
 export const SandpackTests: React.FC<
   {
     verbose?: boolean;

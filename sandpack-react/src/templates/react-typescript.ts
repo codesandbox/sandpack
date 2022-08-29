@@ -1,5 +1,5 @@
 /**
- * @category Template
+ * @hidden
  */
 export const REACT_TYPESCRIPT_TEMPLATE = {
   files: {

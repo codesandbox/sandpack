@@ -1,5 +1,5 @@
 /**
- * @category Template
+ * @hidden
  */
 export const ANGULAR_TEMPLATE = {
   files: {

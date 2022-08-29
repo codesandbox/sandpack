@@ -1,5 +1,5 @@
 /**
- * @category Template
+ * @hidden
  */
 export const TEST_TYPESCRIPT_TEMPLATE = {
   files: {

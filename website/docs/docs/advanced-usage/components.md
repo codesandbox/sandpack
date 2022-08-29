@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-import { SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview, SandpackThemeProvider } from "@codesandbox/sandpack-react"
+import { SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview, SandpackThemeProvider, SandpackTests } from "@codesandbox/sandpack-react"
 import { Sandpack, SandpackLayout } from "../../src/CustomSandpack"
 import SandpackDecorators from "../../src/examples/Decorators"
 
@@ -185,7 +185,7 @@ Worth mentioning that the SandpackClient will not be instantly available. Sandpa
 This means that it's expected that `getClient` function returns `undefined` which is a valid state.
 :::
 
-## Code Editor
+## Code editor
 
 The `SandpackCodeEditor` component renders a wrapper over [`codemirror`](https://github.com/codemirror/codemirror.next), a lightweight code editor we use inside `sandpack`.
 
@@ -298,6 +298,53 @@ const App = () => {
 ```
 
 This is especially useful to get the cursor's current position, add custom decorators, set the selection in a specific position, etc.
+
+## Tests
+
+Sandpack uses [Jest](https://jestjs.io/) library to run the tests directly in the browser. That means you can write tests, but adding additional plugins is not possible in the Client Sandbox experience. 
+
+Setting `test-ts` as a template and creating tests files that end with .test.js, .spec.js, .test.ts(x) and .spec.js(x), we'll automatically detect these them and show the results in the Tests component.
+
+#### Usage
+
+There are two ways to run tests and check out the output:
+
+##### Sandpack preset component
+
+TypeScript template, which contains a test example. Plus, by using this template, the Tests component will be used instead of the standard Preview component;
+
+```jsx
+<Sandpack template="test-ts" />
+```
+
+<Sandpack template="test-ts" />
+
+##### SandpackTests component
+
+Standalone and configurable component to run tests, which you can combine with `test-ts` template as well. For more details about its usage and implementation, check out the [API reference](/api/react/#sandpacktests). 
+
+**Options**
+
+- `verbose`: 
+- `watchMode`: 
+
+```jsx
+<SandpackProvider template="test-ts">
+  <SandpackLayout>
+    <SandpackTests />
+    <SandpackCodeEditor />
+  </SandpackLayout>
+</SandpackProvider>
+```
+
+<SandpackProvider template="test-ts">
+  <SandpackLayout>
+    <SandpackTests />
+    <SandpackCodeEditor />
+  </SandpackLayout>
+</SandpackProvider>
+
+
 
 ## Code Viewer
 
