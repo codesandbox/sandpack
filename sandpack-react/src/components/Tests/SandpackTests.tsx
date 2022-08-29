@@ -1,5 +1,3 @@
-import immer from "immer";
-import set from "lodash/set";
 import * as React from "react";
 
 import { SandpackStack } from "../../common";
@@ -21,6 +19,7 @@ import {
   getAllTestResults,
   getAllSuiteResults,
   splitTail,
+  set,
 } from "./utils";
 
 export type Status = "initialising" | "idle" | "running" | "complete";
@@ -118,35 +117,34 @@ export const SandpackTests: React.FC<
         }
 
         if (data.event === "add_file") {
-          return setState((oldState) =>
-            immer(oldState, (state) => {
-              state.specs[data.path] = {
-                describes: {},
-                tests: {},
-                name: data.path,
-              };
+          return setState(
+            set(["specs", data.path], {
+              describes: {},
+              tests: {},
+              name: data.path,
             })
           );
         }
 
         if (data.event === "remove_file") {
-          return setState((oldState) =>
-            immer(oldState, (state) => {
-              if (state.specs[data.path]) {
-                delete state.specs[data.path];
-              }
-            })
-          );
+          return setState((oldState) => {
+            const specs = Object.entries(oldState.specs).reduce(
+              (acc, [key, value]) => {
+                if (key === data.path) {
+                  return acc;
+                } else {
+                  return { ...acc, [key]: value };
+                }
+              },
+              {}
+            );
+
+            return { ...oldState, specs };
+          });
         }
 
         if (data.event === "file_error") {
-          return setState((oldState) =>
-            immer(oldState, (state) => {
-              if (state.specs[data.path]) {
-                state.specs[data.path].error = data.error;
-              }
-            })
-          );
+          return setState(set(["specs", data.path, "error"], data.error));
         }
 
         if (data.event === "describe_start") {
@@ -160,22 +158,21 @@ export const SandpackTests: React.FC<
             return;
           }
 
-          return setState((oldState) =>
-            immer(oldState, (state) => {
-              set(
-                state.specs[spec],
-                [
-                  "describes",
-                  ...flatMap(describePath, (name) => [name, "describes"]),
-                  currentDescribe,
-                ],
-                {
-                  name: data.blockName,
-                  tests: {},
-                  describes: {},
-                }
-              );
-            })
+          return setState(
+            set(
+              [
+                "specs",
+                spec,
+                "describes",
+                ...flatMap(describePath, (name) => [name, "describes"]),
+                currentDescribe,
+              ],
+              {
+                name: data.blockName,
+                tests: {},
+                describes: {},
+              }
+            )
           );
         }
 
@@ -195,24 +192,26 @@ export const SandpackTests: React.FC<
             blocks: [...currentDescribeBlocks],
             path: data.path,
           };
-          return setState((oldState) =>
-            immer(oldState, (state) => {
-              if (currentDescribe === undefined) {
-                state.specs[data.path].tests[data.testName] = test;
-              } else {
-                set(
-                  state.specs[data.path].describes,
-                  [
-                    ...flatMap(describePath, (name) => [name, "describes"]),
-                    currentDescribe,
-                    "tests",
-                    data.testName,
-                  ],
-                  test
-                );
-              }
-            })
-          );
+          if (currentDescribe === undefined) {
+            return setState(
+              set(["specs", data.path, "tests", data.testName], test)
+            );
+          } else {
+            return setState(
+              set(
+                [
+                  "specs",
+                  data.path,
+                  "describes",
+                  ...flatMap(describePath, (name) => [name, "describes"]),
+                  currentDescribe,
+                  "tests",
+                  data.testName,
+                ],
+                test
+              )
+            );
+          }
         }
 
         if (data.event === "test_start") {
@@ -227,27 +226,26 @@ export const SandpackTests: React.FC<
             errors: [],
           };
 
-          return setState((oldState) =>
-            immer(oldState, (state) => {
-              if (currentDescribe === undefined) {
-                state.specs[test.path].tests[test.name] = startedTest;
-              } else {
-                set(
-                  state.specs[test.path].describes,
-                  [
-                    ...flatMap(describePath, (name: string) => [
-                      name,
-                      "describes",
-                    ]),
-                    currentDescribe,
-                    "tests",
-                    test.name,
-                  ],
-                  startedTest
-                );
-              }
-            })
-          );
+          if (currentDescribe === undefined) {
+            return setState(
+              set(["specs", test.path, "tests", test.name], startedTest)
+            );
+          } else {
+            return setState(
+              set(
+                [
+                  "specs",
+                  test.path,
+                  "describes",
+                  ...flatMap(describePath, (name) => [name, "describes"]),
+                  currentDescribe,
+                  "tests",
+                  test.name,
+                ],
+                startedTest
+              )
+            );
+          }
         }
 
         if (data.event === "test_end") {
@@ -262,27 +260,26 @@ export const SandpackTests: React.FC<
             path: test.path,
           };
 
-          return setState((oldState) =>
-            immer(oldState, (state) => {
-              if (currentDescribe === undefined) {
-                state.specs[test.path].tests[test.name] = endedTest;
-              } else {
-                set(
-                  state.specs[test.path].describes,
-                  [
-                    ...flatMap(describePath, (name: string) => [
-                      name,
-                      "describes",
-                    ]),
-                    currentDescribe,
-                    "tests",
-                    test.name,
-                  ],
-                  endedTest
-                );
-              }
-            })
-          );
+          if (currentDescribe === undefined) {
+            return setState(
+              set(["specs", test.path, "tests", test.name], endedTest)
+            );
+          } else {
+            return setState(
+              set(
+                [
+                  "specs",
+                  test.path,
+                  "describes",
+                  ...flatMap(describePath, (name) => [name, "describes"]),
+                  currentDescribe,
+                  "tests",
+                  test.name,
+                ],
+                endedTest
+              )
+            );
+          }
         }
       }
     });

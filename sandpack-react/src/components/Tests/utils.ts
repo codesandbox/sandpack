@@ -1,3 +1,5 @@
+import cleanSet from "clean-set";
+
 import type { Describe } from "./Describes";
 import type { Spec } from "./Specs";
 import type { SuiteResults, TestResults } from "./Summary";
@@ -75,3 +77,9 @@ export const splitTail = <A>(as: A[]): [A[], A | undefined] => {
 
 export const flatMap = <A, B>(as: A[], f: (a: A) => B[]): B[] =>
   as.map(f).reduce((acc, next) => acc.concat(next), []);
+
+export const set =
+  (path: string[], value: unknown) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  <A extends Record<string, any>>(object: A): A =>
+    cleanSet(object, path, value);
