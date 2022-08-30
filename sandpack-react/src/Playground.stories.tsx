@@ -41,7 +41,7 @@ export const Main = (): JSX.Element => {
       consoleShowHeader: true,
     },
     Template: "exhaustedFilesTests" as const,
-    Theme: "auto",
+    Theme: "light",
   });
 
   const update = (key: any, value: any): void => {

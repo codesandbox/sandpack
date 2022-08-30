@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { ConsoleIcon } from "../..";
 import { css } from "../../styles";
-import { buttonClassName } from "../../styles/shared";
+import { roundedButtonClassName, buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
 import type { Status } from "./SandpackTests";
@@ -25,7 +25,6 @@ const flexClassName = css({
 });
 
 interface Props {
-  id: string;
   setVerbose: () => void;
   setSuiteOnly: () => void;
   verbose: boolean;
@@ -36,7 +35,6 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({
-  id,
   status,
   suiteOnly,
   setSuiteOnly,
@@ -45,6 +43,12 @@ export const Header: React.FC<Props> = ({
   watchMode,
   setWatchMode,
 }) => {
+  const buttonsClassName = classNames(
+    buttonClassName,
+    roundedButtonClassName,
+    css({ padding: "$space$1 $space$3" })
+  );
+
   return (
     <div className={classNames(wrapperClassName, flexClassName)}>
       <div className={classNames(flexClassName)}>
@@ -69,48 +73,30 @@ export const Header: React.FC<Props> = ({
       </div>
 
       <div className={classNames(flexClassName)}>
-        <label
-          className={classNames(buttonClassName)}
-          htmlFor={`${id}-verbose`}
+        <button
+          className={buttonsClassName}
+          data-active={verbose}
+          disabled={status === "initialising"}
+          onClick={setVerbose}
         >
-          <input
-            checked={verbose}
-            disabled={status === "initialising"}
-            id={`${id}-verbose`}
-            onChange={setVerbose}
-            type="checkbox"
-            value=""
-          />
           Verbose
-        </label>
-        <label
-          className={classNames(buttonClassName)}
-          htmlFor={`${id}-suiteOnly`}
+        </button>
+        <button
+          className={buttonsClassName}
+          data-active={suiteOnly}
+          disabled={status === "initialising"}
+          onClick={setSuiteOnly}
         >
-          <input
-            checked={suiteOnly}
-            disabled={status === "initialising"}
-            id={`${id}-suiteOnly`}
-            onChange={setSuiteOnly}
-            type="checkbox"
-            value=""
-          />
           Suite only
-        </label>
-        <label
-          className={classNames(buttonClassName)}
-          htmlFor={`${id}-watchMode`}
+        </button>
+        <button
+          className={buttonsClassName}
+          data-active={watchMode}
+          disabled={status === "initialising"}
+          onClick={setWatchMode}
         >
-          <input
-            checked={watchMode}
-            disabled={status === "initialising"}
-            id={`${id}-watchMode`}
-            onChange={setWatchMode}
-            type="checkbox"
-            value=""
-          />
-          Watch mode
-        </label>
+          Watch
+        </button>
       </div>
     </div>
   );

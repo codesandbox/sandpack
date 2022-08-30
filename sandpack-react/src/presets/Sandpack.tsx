@@ -15,7 +15,7 @@ import { css, THEME_PREFIX } from "../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
-  actionButtonClassName,
+  roundedButtonClassName,
 } from "../styles/shared";
 import type {
   SandpackInternal,
@@ -170,7 +170,7 @@ const ConsoleCounterButton: React.FC<{
       className={classNames(
         buttonClassName,
         iconStandaloneClassName,
-        actionButtonClassName,
+        roundedButtonClassName,
         buttonCounter
       )}
       onClick={onClick}

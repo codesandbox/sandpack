@@ -6,7 +6,7 @@ import { THEME_PREFIX } from "../../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
-  actionButtonClassName,
+  roundedButtonClassName,
 } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
@@ -24,7 +24,7 @@ export const OpenInCodeSandboxButton = (): JSX.Element | null => {
         c("button", "icon-standalone"),
         buttonClassName,
         iconStandaloneClassName,
-        actionButtonClassName
+        roundedButtonClassName
       )}
     >
       <ExportIcon />

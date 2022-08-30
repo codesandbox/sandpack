@@ -380,7 +380,6 @@ export const SandpackTests: React.FC<
       <iframe ref={iframe} style={{ display: "none" }} title="Sandpack Tests" />
 
       <Header
-        id={clientId}
         setSuiteOnly={(): void =>
           setState((s) => ({ ...s, suiteOnly: !s.suiteOnly }))
         }

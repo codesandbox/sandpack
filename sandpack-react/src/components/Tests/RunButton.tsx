@@ -4,7 +4,7 @@ import * as React from "react";
 import { RunIcon } from "../../icons";
 import { THEME_PREFIX } from "../../styles";
 import {
-  actionButtonClassName,
+  roundedButtonClassName,
   buttonClassName,
   iconStandaloneClassName,
 } from "../../styles/shared";
@@ -21,7 +21,7 @@ export const RunButton: React.FC<{
         c("button", "icon-standalone"),
         buttonClassName,
         iconStandaloneClassName,
-        actionButtonClassName
+        roundedButtonClassName
       )}
       onClick={onClick}
       title="Run tests"

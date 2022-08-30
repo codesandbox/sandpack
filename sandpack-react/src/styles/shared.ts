@@ -15,7 +15,6 @@ export const buttonClassName = css({
   backgroundColor: "transparent",
   transition: "color $default, background $default",
   cursor: "pointer",
-
   color: "$colors$clickable",
 
   "&:disabled": { color: "$colors$disabled" },
@@ -37,14 +36,17 @@ export const buttonClassName = css({
   },
 });
 
-export const actionButtonClassName = css({
+export const roundedButtonClassName = css({
   backgroundColor: "$colors$surface2",
   borderRadius: "99999px",
-  transition: "background $transitions$default, color $transitions$default",
 
-  "&:hover": {
+  '&[data-active="true"]': {
+    color: "$colors$surface1",
+    background: "$colors$accent",
+  },
+
+  "&:hover:not(:disabled,[data-active='true'])": {
     backgroundColor: "$colors$surface3",
-    color: "$colors$hover",
   },
 });
 
