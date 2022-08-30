@@ -40,7 +40,7 @@ export const Main = (): JSX.Element => {
       showRefreshButton: true,
       consoleShowHeader: true,
     },
-    Template: "react" as const,
+    Template: "exhaustedFilesTests" as const,
     Theme: "auto",
   });
 
@@ -82,6 +82,9 @@ export const Main = (): JSX.Element => {
                     }
                     value={config.Template}
                   >
+                    <option value="exhaustedFilesTests">
+                      exhaustedFilesTests
+                    </option>
                     {Object.keys(SANDBOX_TEMPLATES).map((tem) => (
                       <option value={tem}>{tem}</option>
                     ))}
@@ -137,8 +140,21 @@ export const Main = (): JSX.Element => {
       </div>
 
       <SandpackProvider
-        template={config.Template}
+        template={
+          config.Template === "exhaustedFilesTests" ? null : config.Template
+        }
         theme={themes[config.Theme] || config.Theme}
+        files={
+          config.Template === "exhaustedFilesTests"
+            ? exhaustedFilesTests.files
+            : {}
+        }
+        customSetup={{
+          dependencies:
+            config.Template === "exhaustedFilesTests"
+              ? exhaustedFilesTests.dependencies
+              : {},
+        }}
       >
         <SandpackLayout>
           {config.Components.FileExplorer && <SandpackFileExplorer />}
@@ -159,4 +175,17 @@ export const Main = (): JSX.Element => {
       </SandpackProvider>
     </div>
   );
+};
+
+const exhaustedFilesTests = {
+  ...SANDBOX_TEMPLATES["react-ts"],
+  files: {
+    "/src/utils/add.ts": SANDBOX_TEMPLATES["test-ts"].files["/add.ts"],
+    "/src/utils/add.test.ts":
+      SANDBOX_TEMPLATES["test-ts"].files["/add.test.ts"],
+    "/src/index.tsx": SANDBOX_TEMPLATES["react-ts"].files["/index.tsx"],
+    "/src/App.tsx": `console.log("Hello world");\n\n${SANDBOX_TEMPLATES["react-ts"].files["/App.tsx"].code}`,
+    "/src/styles.css": SANDBOX_TEMPLATES["react-ts"].files["/styles.css"],
+    "/package.json": JSON.stringify({ main: "/src/index.tsx" }),
+  },
 };
