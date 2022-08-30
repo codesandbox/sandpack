@@ -7,7 +7,7 @@ import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 import { isDarkColor } from "../../utils/stringUtils";
 
-import { Controls } from "./Controls";
+import { Header } from "./Header";
 import type { Spec } from "./Specs";
 import { Specs } from "./Specs";
 import { Summary } from "./Summary";
@@ -330,7 +330,7 @@ export const SandpackTests: React.FC<
 
       return unsunscribe;
     },
-    [sandpack.files[sandpack.activeFile].code, state.watchMode, isSpecOpen]
+    [runSpec, runAllTests, state.watchMode, isSpecOpen]
   );
 
   const openSpec = (file: string): void => {
@@ -353,7 +353,7 @@ export const SandpackTests: React.FC<
     >
       <iframe ref={iframe} style={{ display: "none" }} title="Sandpack Tests" />
 
-      <Controls
+      <Header
         isSpecOpen={isSpecOpen}
         runAllTests={runAllTests}
         runSpec={runSpec}

@@ -11,6 +11,7 @@ export const Header: React.FC = () => {
         css({
           borderBottom: "1px solid $colors$surface2",
           padding: "$space$3 $space$2",
+          height: "$layout$headerHeight",
         })
       )}
     >

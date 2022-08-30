@@ -13,9 +13,9 @@ const containerClassName = css({
   alignItems: "center",
   justifyContent: "space-between",
   borderBottom: "1px solid $colors$surface2",
-  height: "40px",
-  padding: "$space$4 $space$2",
+  padding: "$space$3 $space$2",
   fontFamily: "$font$mono",
+  height: "$layout$headerHeight",
 });
 
 const buttonContainerClassName = css({
@@ -36,7 +36,7 @@ interface Props {
   setWatchMode: () => void;
 }
 
-export const Controls: React.FC<Props> = ({
+export const Header: React.FC<Props> = ({
   runAllTests,
   runSpec,
   status,

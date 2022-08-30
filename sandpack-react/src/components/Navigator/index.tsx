@@ -13,7 +13,7 @@ import { splitUrl } from "./utils";
 const navigatorClassName = css({
   display: "flex",
   alignItems: "center",
-  height: "40px",
+  height: "$layout$headerHeight",
   borderBottom: "1px solid $colors$surface2",
   padding: "$space$2 $space$4",
   background: "$colors$surface1",
