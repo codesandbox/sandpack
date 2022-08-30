@@ -1,24 +1,23 @@
 import * as React from "react";
 
+import { ConsoleIcon } from "../..";
 import { css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
-import { RunButton } from "./RunButton";
 import type { Status } from "./SandpackTests";
 
-const containerClassName = css({
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
+const wrapperClassName = css({
   justifyContent: "space-between",
   borderBottom: "1px solid $colors$surface2",
   padding: "$space$3 $space$2",
   fontFamily: "$font$mono",
-  height: "$layout$headerHeight",
+  maxHeight: "$layout$headerHeight",
+  overflowX: "auto",
+  whiteSpace: "nowrap",
 });
 
-const buttonContainerClassName = css({
+const flexClassName = css({
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
@@ -26,62 +25,82 @@ const buttonContainerClassName = css({
 });
 
 interface Props {
-  runAllTests: () => void;
-  runSpec: () => void;
   setVerbose: () => void;
+  setSuiteOnly: () => void;
   verbose: boolean;
+  suiteOnly: boolean;
   status: Status;
-  isSpecOpen: boolean;
   watchMode: boolean;
   setWatchMode: () => void;
 }
 
 export const Header: React.FC<Props> = ({
-  runAllTests,
-  runSpec,
   status,
+  suiteOnly,
+  setSuiteOnly,
   setVerbose,
   verbose,
   watchMode,
   setWatchMode,
-  isSpecOpen,
 }) => {
   return (
-    <div className={classNames(containerClassName)}>
-      <div className={classNames(buttonContainerClassName)}>
-        <RunButton disabled={status === "initialising"} onClick={runAllTests}>
-          Run all
-        </RunButton>
-        {isSpecOpen && (
-          <RunButton disabled={status === "initialising"} onClick={runSpec}>
-            Run suite
-          </RunButton>
-        )}
+    <div className={classNames(wrapperClassName, flexClassName)}>
+      <div className={classNames(flexClassName)}>
+        <p
+          className={classNames(
+            css({
+              lineHeight: 1,
+              margin: 0,
+              color: "$colors$base",
+              fontSize: "$font$size",
+
+              display: "flex",
+              alignItems: "center",
+
+              gap: "$space$2",
+            })
+          )}
+        >
+          <ConsoleIcon />
+          Tests
+        </p>
       </div>
 
-      <label className={classNames(buttonClassName)} htmlFor="verbose">
-        <input
-          checked={verbose}
-          disabled={status === "initialising"}
-          id="verbose"
-          onChange={setVerbose}
-          type="checkbox"
-          value=""
-        />
-        Verbose
-      </label>
-
-      <label className={classNames(buttonClassName)} htmlFor="watchMode">
-        <input
-          checked={watchMode}
-          disabled={status === "initialising"}
-          id="watchMode"
-          onChange={setWatchMode}
-          type="checkbox"
-          value=""
-        />
-        Watch mode
-      </label>
+      <div className={classNames(flexClassName)}>
+        <label className={classNames(buttonClassName)} htmlFor="verbose">
+          <input
+            checked={verbose}
+            disabled={status === "initialising"}
+            id="verbose"
+            onChange={setVerbose}
+            type="checkbox"
+            value=""
+          />
+          Verbose
+        </label>
+        <label className={classNames(buttonClassName)} htmlFor="suiteOnly">
+          <input
+            checked={suiteOnly}
+            disabled={status === "initialising"}
+            id="suiteOnly"
+            onChange={setSuiteOnly}
+            type="checkbox"
+            value=""
+          />
+          Suite only
+        </label>
+        <label className={classNames(buttonClassName)} htmlFor="watchMode">
+          <input
+            checked={watchMode}
+            disabled={status === "initialising"}
+            id="watchMode"
+            onChange={setWatchMode}
+            type="checkbox"
+            value=""
+          />
+          Watch mode
+        </label>
+      </div>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { classNames } from "../../utils/classNames";
 import { isDarkColor } from "../../utils/stringUtils";
 
 import { Header } from "./Header";
+import { RunButton } from "./RunButton";
 import type { Spec } from "./Specs";
 import { Specs } from "./Specs";
 import { Summary } from "./Summary";
@@ -22,6 +23,16 @@ import {
   set,
 } from "./utils";
 
+const previewActionsClassName = css({
+  display: "flex",
+  position: "absolute",
+  bottom: "$space$2",
+  right: "$space$2",
+  zIndex: "$overlay",
+
+  "> *": { marginLeft: "$space$2" },
+});
+
 export type Status = "initialising" | "idle" | "running" | "complete";
 type RunMode = "all" | "single";
 
@@ -31,6 +42,7 @@ interface State {
   runMode: RunMode;
   verbose: boolean;
   watchMode: boolean;
+  suiteOnly: boolean;
 }
 
 const INITIAL_STATE: State = {
@@ -39,6 +51,7 @@ const INITIAL_STATE: State = {
   runMode: "all",
   verbose: false,
   watchMode: true,
+  suiteOnly: false,
 };
 
 /**
@@ -354,9 +367,9 @@ export const SandpackTests: React.FC<
       <iframe ref={iframe} style={{ display: "none" }} title="Sandpack Tests" />
 
       <Header
-        isSpecOpen={isSpecOpen}
-        runAllTests={runAllTests}
-        runSpec={runSpec}
+        setSuiteOnly={(): void =>
+          setState((s) => ({ ...s, suiteOnly: !s.suiteOnly }))
+        }
         setVerbose={(): void =>
           setState((s) => ({ ...s, verbose: !s.verbose }))
         }
@@ -364,15 +377,20 @@ export const SandpackTests: React.FC<
           setState((s) => ({ ...s, watchMode: !s.watchMode }));
         }}
         status={state.status}
+        suiteOnly={state.suiteOnly}
         verbose={state.verbose}
         watchMode={state.watchMode}
       />
 
-      <div className={classNames(containerClassName)}>
-        {(state.status === "running" || state.status === "initialising") && (
-          <Loading showOpenInCodeSandbox={false} />
-        )}
+      {state.status === "running" || state.status === "initialising" ? (
+        <Loading showOpenInCodeSandbox={false} />
+      ) : (
+        <div className={previewActionsClassName.toString()}>
+          <RunButton onClick={state.suiteOnly ? runSpec : runAllTests} />
+        </div>
+      )}
 
+      <div className={classNames(containerClassName)}>
         {specs.length === 0 && state.status === "complete" ? (
           <div className={classNames(fileErrorContainerClassName)}>
             <p>No test files found.</p>

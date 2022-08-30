@@ -33,7 +33,7 @@ export const Main = (): JSX.Element => {
       showLineNumbers: true,
       showInlineErrors: true,
       closableTabs: true,
-      wrapContent: true,
+      wrapContent: false,
       readOnly: false,
       showReadOnly: true,
       showNavigator: true,
@@ -140,21 +140,21 @@ export const Main = (): JSX.Element => {
       </div>
 
       <SandpackProvider
-        template={
-          config.Template === "exhaustedFilesTests" ? null : config.Template
-        }
-        theme={themes[config.Theme] || config.Theme}
-        files={
-          config.Template === "exhaustedFilesTests"
-            ? exhaustedFilesTests.files
-            : {}
-        }
         customSetup={{
           dependencies:
             config.Template === "exhaustedFilesTests"
               ? exhaustedFilesTests.dependencies
               : {},
         }}
+        files={
+          config.Template === "exhaustedFilesTests"
+            ? exhaustedFilesTests.files
+            : {}
+        }
+        template={
+          config.Template === "exhaustedFilesTests" ? null : config.Template
+        }
+        theme={themes[config.Theme] || config.Theme}
       >
         <SandpackLayout>
           {config.Components.FileExplorer && <SandpackFileExplorer />}

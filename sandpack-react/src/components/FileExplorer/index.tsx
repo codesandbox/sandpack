@@ -1,6 +1,6 @@
 import * as React from "react";
-import { stackClassName } from "../..";
 
+import { stackClassName } from "../..";
 import { useSandpack } from "../../hooks/useSandpack";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";

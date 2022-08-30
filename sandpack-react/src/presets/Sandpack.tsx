@@ -124,6 +124,14 @@ export const Sandpack: SandpackInternal = (props) => {
         <RightColumn style={rightColumnStyle}>
           {mode === "preview" && (
             <SandpackPreview
+              actionsChildren={
+                props.options?.showConsoleButton ? (
+                  <ConsoleCounterButton
+                    counter={counter}
+                    onClick={(): void => setConsoleVisibility((prev) => !prev)}
+                  />
+                ) : undefined
+              }
               showNavigator={props.options?.showNavigator}
               showRefreshButton={props.options?.showRefreshButton}
               style={{
@@ -133,23 +141,6 @@ export const Sandpack: SandpackInternal = (props) => {
             />
           )}
           {mode === "tests" && <SandpackTests style={rightColumnStyle} />}
-
-          <SandpackPreview
-            actionsChildren={
-              props.options?.showConsoleButton ? (
-                <ConsoleCounterButton
-                  counter={counter}
-                  onClick={(): void => setConsoleVisibility((prev) => !prev)}
-                />
-              ) : undefined
-            }
-            showNavigator={props.options?.showNavigator}
-            showRefreshButton={props.options?.showRefreshButton}
-            style={{
-              ...rightColumnStyle,
-              height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
-            }}
-          />
 
           {(props.options?.showConsoleButton || consoleVisibility) && (
             <div
