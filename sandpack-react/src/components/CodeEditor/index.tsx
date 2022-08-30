@@ -104,7 +104,7 @@ export const SandpackCodeEditor = React.forwardRef<
     };
 
     return (
-      <SandpackStack style={style}>
+      <SandpackStack className={c("editor")} style={style}>
         {shouldShowTabs && <FileTabs closableTabs={closableTabs} />}
 
         <div className={classNames(c("code-editor"), editorClassName)}>

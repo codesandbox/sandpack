@@ -94,7 +94,7 @@ const sub = "export const sub = (a: number, b: number): number => a - b;";
 export const Main: React.FC = () => {
   const [theme, setTheme] = React.useState("dark");
   return (
-    <>
+    <div style={{ width: 800 }}>
       <SandpackProvider
         customSetup={{ entry: "add.ts" }}
         files={{
@@ -107,7 +107,7 @@ export const Main: React.FC = () => {
         theme={themes[theme] ?? theme}
       >
         <SandpackLayout
-          style={{ "--sp-layout-height": "70vh" } as CSSProperties}
+          style={{ "--sp-layout-height": "350px" } as CSSProperties}
         >
           <SandpackCodeEditor showRunButton={false} showLineNumbers />
           <SandpackTests />
@@ -123,7 +123,7 @@ export const Main: React.FC = () => {
           <option value={tem}>{tem}</option>
         ))}
       </select>
-    </>
+    </div>
   );
 };
 
