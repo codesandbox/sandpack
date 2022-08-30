@@ -32,6 +32,7 @@ interface Props {
   status: Status;
   watchMode: boolean;
   setWatchMode: () => void;
+  showSuitesOnly: boolean;
 }
 
 export const Header: React.FC<Props> = ({
@@ -42,6 +43,7 @@ export const Header: React.FC<Props> = ({
   verbose,
   watchMode,
   setWatchMode,
+  showSuitesOnly,
 }) => {
   const buttonsClassName = classNames(
     buttonClassName,
@@ -73,6 +75,16 @@ export const Header: React.FC<Props> = ({
       </div>
 
       <div className={classNames(flexClassName)}>
+        {showSuitesOnly && (
+          <button
+            className={buttonsClassName}
+            data-active={suiteOnly}
+            disabled={status === "initialising"}
+            onClick={setSuiteOnly}
+          >
+            Suite only
+          </button>
+        )}
         <button
           className={buttonsClassName}
           data-active={verbose}
@@ -80,14 +92,6 @@ export const Header: React.FC<Props> = ({
           onClick={setVerbose}
         >
           Verbose
-        </button>
-        <button
-          className={buttonsClassName}
-          data-active={suiteOnly}
-          disabled={status === "initialising"}
-          onClick={setSuiteOnly}
-        >
-          Suite only
         </button>
         <button
           className={buttonsClassName}

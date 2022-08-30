@@ -34,24 +34,23 @@ const previewActionsClassName = css({
 });
 
 export type Status = "initialising" | "idle" | "running" | "complete";
-type RunMode = "all" | "single";
 
 interface State {
   specs: Record<string, Spec>;
   status: Status;
-  runMode: RunMode;
   verbose: boolean;
   watchMode: boolean;
   suiteOnly: boolean;
+  specsCount: number;
 }
 
 const INITIAL_STATE: State = {
   specs: {},
   status: "initialising",
-  runMode: "all",
   verbose: false,
   watchMode: true,
   suiteOnly: false,
+  specsCount: 0,
 };
 
 /**
@@ -85,9 +84,9 @@ export const SandpackTests: React.FC<
     let currentSpec = "";
 
     const unsubscribe = listen((data): void => {
-      // Note: short-circuit if message isn't for the currently active spec when `runMode` is `single`
+      // Note: short-circuit if message isn't for the currently active spec when `suiteOnly` is true
       if (
-        state.runMode === "single" &&
+        state.suiteOnly &&
         (("path" in data && data.path !== sandpack.activeFile) ||
           ("test" in data &&
             "path" in data.test &&
@@ -113,15 +112,18 @@ export const SandpackTests: React.FC<
             return runAllTests();
           } else {
             return setState((oldState) => ({
-              ...INITIAL_STATE,
+              ...oldState,
               status: "idle",
-              runMode: oldState.runMode,
+              specs: {},
             }));
           }
         }
 
         if (data.event === "test_count") {
-          return;
+          return setState((oldState) => ({
+            ...oldState,
+            specsCount: data.count,
+          }));
         }
 
         if (data.event === "total_test_start") {
@@ -137,7 +139,6 @@ export const SandpackTests: React.FC<
             return {
               ...oldState,
               status: "complete",
-              runMode: "all",
             };
           });
         }
@@ -311,13 +312,12 @@ export const SandpackTests: React.FC<
     });
 
     return unsubscribe;
-  }, [state.runMode, state.watchMode, sandpack.activeFile]);
+  }, [state.suiteOnly, state.watchMode, sandpack.activeFile]);
 
   const runAllTests = (): void => {
     setState((oldState) => ({
       ...oldState,
       status: "running",
-      runMode: "all",
       specs: {},
     }));
     const client = getClient();
@@ -330,7 +330,6 @@ export const SandpackTests: React.FC<
     setState((oldState) => ({
       ...oldState,
       status: "running",
-      runMode: "single",
       specs: {},
     }));
     const client = getClient();
@@ -389,6 +388,7 @@ export const SandpackTests: React.FC<
         setWatchMode={(): void => {
           setState((s) => ({ ...s, watchMode: !s.watchMode }));
         }}
+        showSuitesOnly={state.specsCount > 1}
         status={state.status}
         suiteOnly={state.suiteOnly}
         verbose={state.verbose}

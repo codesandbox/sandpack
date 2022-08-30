@@ -147,6 +147,24 @@ export const VerboseMode: React.FC = () => {
   );
 };
 
+export const OneTestFile: React.FC = () => {
+  return (
+    <SandpackProvider
+      customSetup={{ entry: "sub.ts" }}
+      files={{
+        "/sub.ts": sub,
+        "/sub.test.ts": subTests,
+      }}
+      theme={dracula}
+    >
+      <SandpackLayout style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
+        <SandpackCodeEditor showRunButton={false} showLineNumbers />
+        <SandpackTests verbose />
+      </SandpackLayout>
+    </SandpackProvider>
+  );
+};
+
 export const FileError: React.FC = () => {
   return (
     <SandpackProvider
