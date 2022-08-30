@@ -72,7 +72,7 @@ export const SandpackTests: React.FC<
   ...props
 }) => {
   const theme = useSandpackTheme();
-  const { getClient, iframe, listen, sandpack, clientId } = useSandpackClient();
+  const { getClient, iframe, listen, sandpack } = useSandpackClient();
 
   const [state, setState] = React.useState<State>({
     ...INITIAL_STATE,

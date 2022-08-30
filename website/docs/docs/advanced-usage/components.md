@@ -341,7 +341,7 @@ Standalone and configurable component to run tests, which you can combine with `
 </SandpackProvider>
 ```
 
-<SandpackProvider template="test-ts">
+<SandpackProvider template="test-ts" theme={sandpackDark}>
   <SandpackLayout>
     <SandpackTests />
     <SandpackCodeEditor />
@@ -386,6 +386,7 @@ describe('jest-extended matchers are supported', () => {
 <SandpackProvider
   theme={sandpackDark}
   template="test-ts"
+  theme={sandpackDark}
   customSetup={{ dependencies: { "jest-extended": "^3.0.2" } }}
   options={{
     activeFile: "/extended.test.ts",
@@ -410,46 +411,6 @@ describe('jest-extended matchers are supported', () => {
 </SandpackProvider>
 
 
-
-## Code Viewer
-
-For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a read-only version of `codemirror`, so users will not be able to edit the code.
-
-```jsx
-import {
-  SandpackProvider,
-  SandpackLayout,
-  SandpackCodeEditor,
-  SandpackCodeViewer,
-  SandpackPreview
-} from "@codesandbox/sandpack-react";
-
-const CustomSandpack = () => (
-  <SandpackProvider template="react">
-    <SandpackLayout>
-      <SandpackCodeViewer />
-      <SandpackPreview />
-    </SandpackLayout>
-  </SandpackProvider>
-)
-```
-
-<SandpackProvider template="react">
-  <SandpackLayout>
-    <SandpackCodeViewer />
-    <SandpackPreview />
-  </SandpackLayout>
-</SandpackProvider>
-
-### CodeMirror decorations
-
-This API provides a way to draw or style a piece of code in the editor content. You can implement it in the following ways:
-
-- Entire line: add `className` or elements attributes to an entire line;
-- Range: add `className` or elements attributes to a piece of content, given a `line`, `startColumn` and `endColumn`;
-
-<SandpackDecorators />
-
 ## Console
 
 `SandpackConsole` is a Sandpack devtool that allows printing the console logs from a Sandpack client. It is designed to be a light version of a browser console, which means that it's limited to a set of common use cases you may encounter when coding.
@@ -457,7 +418,7 @@ This API provides a way to draw or style a piece of code in the editor content. 
 Sandpack runs the console directly into the iframe. As a result, all console messages pass through the Sandpack protocol, where you can attach a listener to these messages in your own component or use the proper Sandpack React hook to consume them. 
 
 
-#### Usage 
+### Usage 
 
 There are three ways to print the logs:
 - [`<Sandpack options={{ showConsole: true }} />`](/api/react/interfaces/SandpackOptions#showconsole): shows a panel right after the `SandpackPreview`;
@@ -487,7 +448,7 @@ document.getElementById("app").innerHTML = \`
   options={{ showConsole: true, showConsoleButton: true }} 
 />
 
-#### Limitation
+### Limitation
 
 Considering that `SandpackConsole` is meant to be a light version of a browser console, there are a few limitations in its implementation in order to keep it modular and light:
 - It needs to have a Sandpack client running (iframe) to execute the logs.
@@ -496,6 +457,44 @@ Considering that `SandpackConsole` is meant to be a light version of a browser c
 
 However, if you need to support more advanced cases, [`useSandpackConsole`](/api/react/#usesandpackconsole) hook is compatible with [console-feed](https://www.npmjs.com/package/console-feed), which provides a closer browser-console experience without any of the limitations mentioned above.
 
+## Code Viewer
+
+For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a read-only version of `codemirror`, so users will not be able to edit the code.
+
+```jsx
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  SandpackCodeViewer,
+  SandpackPreview
+} from "@codesandbox/sandpack-react";
+
+const CustomSandpack = () => (
+  <SandpackProvider template="react">
+    <SandpackLayout>
+      <SandpackCodeViewer />
+      <SandpackPreview />
+    </SandpackLayout>
+  </SandpackProvider>
+)
+```
+
+<SandpackProvider template="react" theme={sandpackDark}>
+  <SandpackLayout>
+    <SandpackCodeViewer />
+    <SandpackPreview />
+  </SandpackLayout>
+</SandpackProvider>
+
+### CodeMirror decorations
+
+This API provides a way to draw or style a piece of code in the editor content. You can implement it in the following ways:
+
+- Entire line: add `className` or elements attributes to an entire line;
+- Range: add `className` or elements attributes to a piece of content, given a `line`, `startColumn` and `endColumn`;
+
+<SandpackDecorators />
 
 ## ReactDevTools
 
@@ -586,7 +585,7 @@ const CustomSandpack = () => (
 );
 ```
 
-<SandpackProvider template="react">
+<SandpackProvider template="react" theme={sandpackDark}>
   <SandpackLayout>
     <SandpackCodeEditor />
     <SandpackTranspiledCode />
