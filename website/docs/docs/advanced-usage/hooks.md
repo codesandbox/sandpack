@@ -109,6 +109,8 @@ Plus, `useSandpack` exposes a bunch of methods that you can use to manage the cu
 | `updateFile`        | Update the content of a file in a given path or multiple files |
 | `updateCurrentFile` | Update the content of the current file                         |
 
+[Check the API reference for more details](/api/react/#usesandpack)
+
 ## useSandpackNavigation
 
 Some of the common functionalities of sandpack are also extracted into
@@ -129,6 +131,8 @@ const CustomRefreshButton = () => {
   );
 };
 ```
+
+[Check the API reference for more details](/api/react/#usesandpacknavigation)
 
 ## useActiveCode
 
@@ -177,20 +181,36 @@ It's not pretty, but with just a few lines of code, you can create a whole new
 component that uses the power of sandpack, but has all the UI and functionality
 you need for your specific use case.
 
-:::success Congrats!
-You can now build your own sandpack-aware components on top of the sandpack custom hooks. The final piece of the puzzle is to understand the `sandpack-client`, the framework agnostic library that we use to manage the access to the bundler.
-:::
+[Check the API reference for more details](/api/react/#useactivecode)
+
+## useSandpackConsole
+
+The [`SandpackConsole`](/advanced-usage/components#console) is implemented on top of this hook, which provides an interface to consume the logs from a specific sandpack client. Sandpack runs the console directly into the iframe. As a result, all console messages pass through the Sandpack protocol, where you can attach a listener to these messages in your own component or just use this hook. 
+
+```jsx
+const { logs, reset } = useSandpackConsole();
+```  
+
+[Check the API reference for more details](/api/react/#usesandpackconsole)
 
 ## useSandpackClient
 
 It registers a new sandpack client and returns its instance, listeners, and dispatch function. Using it when creating a custom component to interact directly with the client is recommended. For other cases, use `useSandpack` instead.
 
+[Check the API reference for more details](/api/react/#usesandpackclient)
+
 ## useSandpackTheme
 
 It exposes the `theme` object configured on `SandpackContext` and contains an `id` to ensure uniqueness for custom themes. This `theme` object is responsible for distributing all the style configurations for the component thee.
+
+[Check the API reference for more details](/api/react/#usesandpacktheme)
 
 ## useTranspiledCode
 
 It returns the transpile module from the bundler, the same one evaluated inside it.
 
+[Check the API reference for more details](/api/react/#usetranspiledcode)
 
+:::success Congrats!
+You can now build your own sandpack-aware components on top of the sandpack custom hooks. The final piece of the puzzle is to understand the `sandpack-client`, the framework agnostic library that we use to manage the access to the bundler.
+:::

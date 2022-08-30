@@ -10,8 +10,6 @@ export const githubLight: SandpackTheme = {
     disabled: "#d1d4d8",
     hover: "#24292e",
     accent: "#24292e",
-    error: "#811e18",
-    errorSurface: "#ffcdca",
   },
   syntax: {
     keyword: "#d73a49",

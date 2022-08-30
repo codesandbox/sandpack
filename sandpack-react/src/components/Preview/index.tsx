@@ -89,9 +89,8 @@ export const SandpackPreview = React.forwardRef<
       showOpenInCodeSandbox = true,
       showSandpackErrorOverlay = true,
       actionsChildren = <></>,
-      className,
       children,
-      style,
+      className,
       ...props
     },
     ref
@@ -146,10 +145,7 @@ export const SandpackPreview = React.forwardRef<
 
     return (
       <SandpackStack
-        className={className}
-        style={{
-          ...style,
-        }}
+        className={classNames(`${THEME_PREFIX}-preview`, className)}
         {...props}
       >
         {showNavigator && (

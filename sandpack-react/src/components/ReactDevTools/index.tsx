@@ -5,7 +5,6 @@ import { useSandpackTheme } from "../..";
 import { useSandpack } from "../../hooks/useSandpack";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
-import { isDarkColor } from "../../utils/stringUtils";
 
 const devToolClassName = css({
   height: "$layout$height",
@@ -27,7 +26,7 @@ export const SandpackReactDevTools = ({
   theme?: DevToolsTheme;
 } & React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const { listen, sandpack } = useSandpack();
-  const { theme: sandpackTheme } = useSandpackTheme();
+  const { themeMode } = useSandpackTheme();
   const c = useClasser(THEME_PREFIX);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const reactDevtools = React.useRef<any>();
@@ -66,20 +65,12 @@ export const SandpackReactDevTools = ({
 
   if (!ReactDevTools) return null;
 
-  const getBrowserTheme = (): DevToolsTheme => {
-    if (theme) return theme;
-
-    const isDarkTheme = isDarkColor(sandpackTheme.colors.surface1);
-
-    return isDarkTheme ? "dark" : "light";
-  };
-
   return (
     <div
       className={classNames(c("devtools"), devToolClassName, className)}
       {...props}
     >
-      <ReactDevTools browserTheme={getBrowserTheme()} />
+      <ReactDevTools browserTheme={theme ?? themeMode} />
     </div>
   );
 };

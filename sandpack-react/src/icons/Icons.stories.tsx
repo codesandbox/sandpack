@@ -1,14 +1,19 @@
-import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import * as icons from ".";
 
-const stories = storiesOf("Components/Icons", module);
+export default {
+  title: "components/Icons",
+};
 
-Object.keys(icons).forEach((iconName) =>
-  stories.add(iconName, () => {
-    const Component = icons[iconName];
+export const all: React.FC = () => {
+  return (
+    <div style={{ color: "black" }}>
+      {Object.keys(icons).map((iconName) => {
+        const Component = icons[iconName];
 
-    return <Component />;
-  })
-);
+        return <Component key={iconName} />;
+      })}
+    </div>
+  );
+};

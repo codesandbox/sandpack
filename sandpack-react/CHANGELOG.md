@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/codesandbox/sandpack/compare/v1.5.5...v1.6.0) (2022-08-30)
+
+
+### Features
+
+* **console:** Add SandpackConsole component ([#546](https://github.com/codesandbox/sandpack/issues/546)) ([9987ec5](https://github.com/codesandbox/sandpack/commit/9987ec5979778143b35f2d1697ea01ac75aff0d4))
+
+
+
+
+
 ## [1.5.5](https://github.com/codesandbox/sandpack/compare/v1.5.4...v1.5.5) (2022-08-25)
 
 

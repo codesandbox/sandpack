@@ -24,10 +24,15 @@ export const buttonClassName = css({
 
   '&[data-active="true"]': { color: "$colors$accent" },
 
+  svg: {
+    width: "$space$4",
+    height: "$space$4",
+  },
+
   [`&.${iconStandaloneClassName}`]: {
     padding: "$space$1",
-    width: "$space$8",
-    height: "$space$8",
+    width: "$space$7",
+    height: "$space$7",
     display: "flex",
   },
 });
@@ -35,7 +40,7 @@ export const buttonClassName = css({
 export const actionButtonClassName = css({
   backgroundColor: "$colors$surface2",
   borderRadius: "99999px",
-  transition: "all $transitions$default",
+  transition: "background $transitions$default, color $transitions$default",
 
   "&:hover": {
     backgroundColor: "$colors$surface3",

@@ -1,4 +1,5 @@
 import { css } from "../../styles";
+import { buttonClassName } from "../../styles/shared";
 
 import { styleTokens } from "./utils";
 
@@ -56,4 +57,8 @@ export const readOnlyClassName = css({
   backgroundColor: "$colors$surface2",
   borderRadius: "99999px",
   padding: "calc($space$1 / 2) $space$2",
+
+  [`& + .${buttonClassName}`]: {
+    right: "calc($space$11 * 2)",
+  },
 });
