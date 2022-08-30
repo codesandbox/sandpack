@@ -343,7 +343,10 @@ This API provides a way to draw or style a piece of code in the editor content. 
 `SandpackConsole` is a Sandpack devtool that allows printing the console logs from a Sandpack client. It is designed to be a light version of a browser console, which means that it's limited to a set of common use cases you may encounter when coding.
 
 Sandpack runs the console directly into the iframe. As a result, all console messages pass through the Sandpack protocol, where you can attach a listener to these messages in your own component or use the proper Sandpack React hook to consume them. 
- 
+
+
+#### Usage 
+
 There are three ways to print the logs:
 - [`<Sandpack options={{ showConsole: true }} />`](/api/react/interfaces/SandpackOptions#showconsole): shows a panel right after the `SandpackPreview`;
 - [`<SandpackConsole />`](/api/react/#sandpackconsole): standalone component to render the logs;
@@ -372,14 +375,14 @@ document.getElementById("app").innerHTML = \`
   options={{ showConsole: true, showConsoleButton: true }} 
 />
 
-**Limitation**
+#### Limitation
 
-Considering that `SandpackConsole` is meant to be a light version of browser console, there are a few limitations in its implementation in order to keep it modular and light:
+Considering that `SandpackConsole` is meant to be a light version of a browser console, there are a few limitations in its implementation in order to keep it modular and light:
 - It needs to have a Sandpack client running (iframe) to execute the logs.
 - It only supports four types of consoles: `info`, `warning`, `error`, and `clear`.
 - It doesn't render nested objects due to recursive issues.
 
-However, if you need to support more advanced cases, `useSandpackConsole` is compatible with [console-feed](https://www.npmjs.com/package/console-feed), which provides a closer browser-console experience without any of the limitations mentioned above.
+However, if you need to support more advanced cases, [`useSandpackConsole`](/api/react/#usesandpackconsole) hook is compatible with [console-feed](https://www.npmjs.com/package/console-feed), which provides a closer browser-console experience without any of the limitations mentioned above.
 
 
 ## ReactDevTools
