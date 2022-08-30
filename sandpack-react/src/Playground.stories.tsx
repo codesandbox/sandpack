@@ -12,6 +12,7 @@ import {
   SandpackLayout,
   SandpackFileExplorer,
   SandpackConsole,
+  SandpackTests,
 } from "./";
 
 export default {
@@ -25,6 +26,7 @@ export const Main = (): JSX.Element => {
       Editor: true,
       FileExplorer: true,
       Console: true,
+      Tests: true,
     },
     Options: {
       showTabs: true,
@@ -152,6 +154,7 @@ export const Main = (): JSX.Element => {
           {config.Components.Console && (
             <SandpackConsole showHeader={config.Options.consoleShowHeader} />
           )}
+          {config.Components.Tests && <SandpackTests />}
         </SandpackLayout>
       </SandpackProvider>
     </div>

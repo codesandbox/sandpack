@@ -418,4 +418,5 @@ const containerClassName = css({
 
 const fileErrorContainerClassName = css({
   fontWeight: "bold",
+  color: "$colors$base",
 });
