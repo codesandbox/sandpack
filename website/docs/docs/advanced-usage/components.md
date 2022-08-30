@@ -2,8 +2,10 @@
 sidebar_position: 2
 ---
 
-import { SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview, SandpackThemeProvider, SandpackTests } from "@codesandbox/sandpack-react"
+import { Sandpack as DefaultSandpack, SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview, SandpackThemeProvider, SandpackTests } from "@codesandbox/sandpack-react"
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { Sandpack, SandpackLayout } from "../../src/CustomSandpack"
+import { ExtendedSandpackTests } from "../../src/ExtendedSandpackTests"
 import SandpackDecorators from "../../src/examples/Decorators"
 
 # Components
@@ -301,32 +303,35 @@ This is especially useful to get the cursor's current position, add custom decor
 
 ## Tests
 
-Sandpack uses [Jest](https://jestjs.io/) library to run the tests directly in the browser. That means you can write tests, but adding additional plugins is not possible in the Client Sandbox experience. 
+The `SandpackTests` component renders a thin wrapper around [`Jest`](https://jestjs.io/) to run tests directly in the browser. This means you can run tests but additional configuration may not possible given the browser environment.
 
-Setting `test-ts` as a template and creating tests files that end with .test.js, .spec.js, .test.ts(x) and .spec.js(x), we'll automatically detect these them and show the results in the Tests component.
+:::info
+Any test files ending with `.test.js(x)`, `.spec.js(x)`, `.test.ts(x)` and `.spec.ts(x)` will automatically be run with Jest and the results shown in the `SandpackTests` component.
+:::
 
-#### Usage
+### Usage
 
 There are two ways to run tests and check out the output:
 
-##### Sandpack preset component
+#### Sandpack Preset
 
-TypeScript template, which contains a test example. Plus, by using this template, the Tests component will be used instead of the standard Preview component;
+Using `test-ts` template preset, which contains an example test.
 
 ```jsx
 <Sandpack template="test-ts" />
 ```
 
-<Sandpack template="test-ts" />
+<DefaultSandpack theme={sandpackDark} template="test-ts" />
 
-##### SandpackTests component
+#### SandpackTests component
 
-Standalone and configurable component to run tests, which you can combine with `test-ts` template as well. For more details about its usage and implementation, check out the [API reference](/api/react/#sandpacktests). 
+Standalone and configurable component to run tests, which you can combine with `test-ts` template or supply custom files. For more details about its usage and implementation, check out the [API reference](/api/react/#sandpacktests).
 
 **Options**
 
-- `verbose`: 
-- `watchMode`: 
+- `verbose`: Display individual test results with the test suite hierarchy.
+- `watchMode`: Watch files for changes and rerun all tests. Note if changing a test file then the current file will run on it's own.
+- `onComplete`: A callback that is invoked with the completed specs.
 
 ```jsx
 <SandpackProvider template="test-ts">
@@ -344,7 +349,47 @@ Standalone and configurable component to run tests, which you can combine with `
   </SandpackLayout>
 </SandpackProvider>
 
+### Extending expect
 
+:::note
+Although not all configuration is supported, extending expect with custom / third party matchers is still possible.
+:::
+
+```jsx
+const extendedTest = `
+import * as matchers from 'jest-extended';
+import { add } from './add';
+
+expect.extend(matchers);
+
+describe('jest-extended matchers are supported', () => {
+  test('adding two positive integers yields a positive integer', () => {
+    expect(add(1, 2)).toBePositive();
+  });
+});
+`;
+
+export const ExtendedSandpackTests: React.FC = () => {
+  return (
+    <SandpackProvider
+      customSetup={{
+        dependencies: { "jest-extended": "^3.0.2" },
+      }}
+      files={{
+        "/extended.test.ts": extendedTest,
+      }}
+      template="test-ts"
+    >
+      <SandpackLayout>
+        <SandpackCodeEditor />
+        <SandpackTests />
+      </SandpackLayout>
+    </SandpackProvider>
+  );
+};
+```
+
+<ExtendedSandpackTests />
 
 ## Code Viewer
 
