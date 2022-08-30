@@ -25,6 +25,7 @@ const flexClassName = css({
 });
 
 interface Props {
+  id: string;
   setVerbose: () => void;
   setSuiteOnly: () => void;
   verbose: boolean;
@@ -35,6 +36,7 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({
+  id,
   status,
   suiteOnly,
   setSuiteOnly,
@@ -67,33 +69,42 @@ export const Header: React.FC<Props> = ({
       </div>
 
       <div className={classNames(flexClassName)}>
-        <label className={classNames(buttonClassName)} htmlFor="verbose">
+        <label
+          className={classNames(buttonClassName)}
+          htmlFor={`${id}-verbose`}
+        >
           <input
             checked={verbose}
             disabled={status === "initialising"}
-            id="verbose"
+            id={`${id}-verbose`}
             onChange={setVerbose}
             type="checkbox"
             value=""
           />
           Verbose
         </label>
-        <label className={classNames(buttonClassName)} htmlFor="suiteOnly">
+        <label
+          className={classNames(buttonClassName)}
+          htmlFor={`${id}-suiteOnly`}
+        >
           <input
             checked={suiteOnly}
             disabled={status === "initialising"}
-            id="suiteOnly"
+            id={`${id}-suiteOnly`}
             onChange={setSuiteOnly}
             type="checkbox"
             value=""
           />
           Suite only
         </label>
-        <label className={classNames(buttonClassName)} htmlFor="watchMode">
+        <label
+          className={classNames(buttonClassName)}
+          htmlFor={`${id}-watchMode`}
+        >
           <input
             checked={watchMode}
             disabled={status === "initialising"}
-            id="watchMode"
+            id={`${id}-watchMode`}
             onChange={setWatchMode}
             type="checkbox"
             value=""
