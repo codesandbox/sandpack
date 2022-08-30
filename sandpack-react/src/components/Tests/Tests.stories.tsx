@@ -8,7 +8,7 @@ import { SandpackProvider, SandpackLayout, SandpackCodeEditor } from "../..";
 import { SandpackTests } from "./";
 
 export default {
-  title: "components/Testing",
+  title: "components/Tests",
 };
 
 const addTests = `import {add} from './add';

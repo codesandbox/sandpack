@@ -3,7 +3,7 @@ import * as React from "react";
 import { SandpackStack } from "../../common";
 import { Loading } from "../../common/Loading";
 import { useSandpackTheme, useSandpackClient } from "../../hooks";
-import { css } from "../../styles";
+import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 import { isDarkColor } from "../../utils/stringUtils";
 
@@ -49,7 +49,7 @@ export const SandpackTests: React.FC<
     verbose?: boolean;
     watchMode?: boolean;
   } & React.HtmlHTMLAttributes<HTMLDivElement>
-> = ({ verbose = false, watchMode = true, style, ...props }) => {
+> = ({ verbose = false, watchMode = true, style, className, ...props }) => {
   const theme = useSandpackTheme();
   const { getClient, iframe, listen, sandpack } = useSandpackClient();
 
@@ -344,6 +344,7 @@ export const SandpackTests: React.FC<
 
   return (
     <SandpackStack
+      className={classNames(`${THEME_PREFIX}-tests`, className)}
       style={{
         ...setTestTheme(isDarkColor(theme.theme.colors.surface1)),
         ...style,
