@@ -48,8 +48,16 @@ export const SandpackTests: React.FC<
   {
     verbose?: boolean;
     watchMode?: boolean;
+    onComplete?: (specs: Record<string, Spec>) => void;
   } & React.HtmlHTMLAttributes<HTMLDivElement>
-> = ({ verbose = false, watchMode = true, style, className, ...props }) => {
+> = ({
+  verbose = false,
+  watchMode = true,
+  style,
+  className,
+  onComplete,
+  ...props
+}) => {
   const theme = useSandpackTheme();
   const { getClient, iframe, listen, sandpack } = useSandpackClient();
 
@@ -109,11 +117,16 @@ export const SandpackTests: React.FC<
         }
 
         if (data.event === "total_test_end") {
-          return setState((oldState) => ({
-            ...oldState,
-            status: "complete",
-            runMode: "all",
-          }));
+          return setState((oldState) => {
+            if (onComplete !== undefined) {
+              onComplete(oldState.specs);
+            }
+            return {
+              ...oldState,
+              status: "complete",
+              runMode: "all",
+            };
+          });
         }
 
         if (data.event === "add_file") {

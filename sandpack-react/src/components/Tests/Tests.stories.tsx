@@ -235,3 +235,24 @@ export const NoTests: React.FC = () => {
     </SandpackProvider>
   );
 };
+
+export const OnCompleteHandler: React.FC = () => {
+  return (
+    <SandpackProvider
+      customSetup={{ entry: "add.ts" }}
+      files={{
+        "/add.test.ts": addTests,
+        "/add.ts": add,
+        "/src/app/sub.ts": sub,
+        "/src/app/sub.test.ts": subTests,
+        "/failing.test.ts": failingTests,
+      }}
+    >
+      <SandpackLayout style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
+        <SandpackCodeEditor showRunButton={false} showLineNumbers />
+        {/* eslint-disable-next-line no-console */}
+        <SandpackTests onComplete={(specs): void => console.log(specs)} />
+      </SandpackLayout>
+    </SandpackProvider>
+  );
+};
