@@ -5,7 +5,6 @@ sidebar_position: 2
 import { Sandpack as DefaultSandpack, SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview, SandpackThemeProvider, SandpackTests } from "@codesandbox/sandpack-react"
 import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { Sandpack, SandpackLayout } from "../../src/CustomSandpack"
-import { ExtendedSandpackTests } from "../../src/ExtendedSandpackTests"
 import SandpackDecorators from "../../src/examples/Decorators"
 
 # Components
@@ -352,8 +351,10 @@ Standalone and configurable component to run tests, which you can combine with `
 ### Extending expect
 
 :::note
-Although not all configuration is supported, extending expect with custom / third party matchers is still possible.
+Although not all configuration is supported, [extending expect](https://jestjs.io/docs/expect#expectextendmatchers) with custom / third party matchers is still possible.
 :::
+
+Add the matchers either as a dependency or as a file and then import the matchers into your tests and invoke `expect.extend` with your matchers.
 
 ```jsx
 const extendedTest = `
@@ -369,27 +370,46 @@ describe('jest-extended matchers are supported', () => {
 });
 `;
 
-export const ExtendedSandpackTests: React.FC = () => {
-  return (
-    <SandpackProvider
-      customSetup={{
-        dependencies: { "jest-extended": "^3.0.2" },
-      }}
-      files={{
-        "/extended.test.ts": extendedTest,
-      }}
-      template="test-ts"
-    >
-      <SandpackLayout>
-        <SandpackCodeEditor />
-        <SandpackTests />
-      </SandpackLayout>
-    </SandpackProvider>
-  );
-};
+<SandpackProvider
+  customSetup={{ dependencies: { "jest-extended": "^3.0.2" } }}
+  files={{ "/extended.test.ts": extendedTest }}
+  template="test-ts"
+>
+  <SandpackLayout>
+    <SandpackCodeEditor />
+    <SandpackTests />
+  </SandpackLayout>
+</SandpackProvider>;
 ```
 
-<ExtendedSandpackTests />
+<!-- prettier-ignore -->
+<SandpackProvider
+  theme={sandpackDark}
+  template="test-ts"
+  customSetup={{ dependencies: { "jest-extended": "^3.0.2" } }}
+  options={{
+    activeFile: "/extended.test.ts",
+    visibleFiles: ["/add.test.ts"]
+  }}
+  files={{
+    "/extended.test.ts": `import * as matchers from 'jest-extended';
+import { add } from './add';\n
+expect.extend(matchers);\n
+describe('jest-extended matchers are supported', () => {
+  test('adding two positive integers yields a positive integer', () => {
+    expect(add(1, 2)).toBePositive();
+  });
+});
+`,
+  }}
+>
+  <SandpackLayout>
+    <SandpackCodeEditor showTabs />
+    <SandpackTests verbose />
+  </SandpackLayout>
+</SandpackProvider>
+
+
 
 ## Code Viewer
 
