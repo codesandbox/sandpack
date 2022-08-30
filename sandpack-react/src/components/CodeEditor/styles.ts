@@ -59,6 +59,6 @@ export const readOnlyClassName = css({
   padding: "calc($space$1 / 2) $space$2",
 
   [`& + .${buttonClassName}`]: {
-    right: "calc($space$11 *2)",
+    right: "calc($space$11 * 2)",
   },
 });

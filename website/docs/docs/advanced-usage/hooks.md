@@ -109,6 +109,8 @@ Plus, `useSandpack` exposes a bunch of methods that you can use to manage the cu
 | `updateFile`        | Update the content of a file in a given path or multiple files |
 | `updateCurrentFile` | Update the content of the current file                         |
 
+[Check the API reference for more details](/api/react/#usesandpack)
+
 ## useSandpackNavigation
 
 Some of the common functionalities of sandpack are also extracted into
@@ -129,6 +131,8 @@ const CustomRefreshButton = () => {
   );
 };
 ```
+
+[Check the API reference for more details](/api/react/#usesandpacknavigation)
 
 ## useActiveCode
 
@@ -176,6 +180,18 @@ export const CustomSandpack = () => (
 It's not pretty, but with just a few lines of code, you can create a whole new
 component that uses the power of sandpack, but has all the UI and functionality
 you need for your specific use case.
+
+[Check the API reference for more details](/api/react/#useactivecode)
+
+## useSandpackConsole
+
+The [`SandpackConsole`](/advanced-usage/components#console) is implemented on top of this hook, which provides an interface to consume the logs from a specific sandpack client. Sandpack runs the console directly into the iframe. As a result, all console messages pass through the Sandpack protocol, where you can attach a listener to these messages in your own component or just use this hook. 
+
+```jsx
+const { logs, reset } = useSandpackConsole();
+```  
+
+[Check the API reference for more details](/api/react/#usesandpackconsole)
 
 :::success Congrats!
 You can now build your own sandpack-aware components on top of the sandpack custom hooks. The final piece of the puzzle is to understand the `sandpack-client`, the framework agnostic library that we use to manage the access to the bundler.
