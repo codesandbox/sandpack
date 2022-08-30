@@ -1,7 +1,8 @@
 import * as React from "react";
 
-import * as mocks from "./languages-mocks";
 import { SandpackProvider } from "../../contexts/sandpackContext";
+
+import * as mocks from "./languages-mocks";
 
 import { CodeEditor } from "./index";
 

@@ -1,10 +1,21 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import type { CSSProperties } from "@stitches/core";
 import * as React from "react";
 
+import { SandpackStack } from "..";
 import { SandpackLayout } from "../common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
+import { SandpackConsole } from "../components/Console";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackProvider } from "../contexts/sandpackContext";
+import { ConsoleIcon } from "../icons";
+import { css, THEME_PREFIX } from "../styles";
+import {
+  buttonClassName,
+  iconStandaloneClassName,
+  actionButtonClassName,
+} from "../styles/shared";
 import type {
   SandpackInternal,
   SandpackInternalOptions,
@@ -12,6 +23,7 @@ import type {
   SandpackFiles,
   SandpackPredefinedTemplate,
 } from "../types";
+import { classNames } from "../utils/classNames";
 
 /**
  * @hidden
@@ -54,6 +66,11 @@ export const Sandpack: SandpackInternal = (props) => {
     classes: props.options?.classes,
   };
 
+  const [consoleVisibility, setConsoleVisibility] = React.useState(
+    props.options?.showConsole ?? false
+  );
+  const [counter, setCounter] = React.useState(0);
+
   /**
    * Parts are set as `flex` values, so they set the flex shrink/grow
    * Cannot use width percentages as it doesn't work with
@@ -61,7 +78,23 @@ export const Sandpack: SandpackInternal = (props) => {
    */
   const editorPart = props.options?.editorWidthPercentage || 50;
   const previewPart = 100 - editorPart;
-  const editorHeight = props.options?.editorHeight;
+
+  const RightColumn =
+    props.options?.showConsole || props.options?.showConsoleButton
+      ? SandpackStack
+      : React.Fragment;
+
+  const rightColumnStyle = {
+    flexGrow: previewPart,
+    flexShrink: previewPart,
+    minWidth: 700 * (previewPart / (previewPart + editorPart)),
+    gap: consoleVisibility ? 1 : 0,
+  };
+
+  const rightColumnItemHeight = getPreviewHeight(
+    consoleVisibility,
+    props.options?.editorHeight
+  );
 
   return (
     <SandpackProvider
@@ -75,23 +108,106 @@ export const Sandpack: SandpackInternal = (props) => {
         <SandpackCodeEditor
           {...codeEditorOptions}
           style={{
-            height: editorHeight,
+            height: props.options?.editorHeight, // use the original editor height
             flexGrow: editorPart,
             flexShrink: editorPart,
             minWidth: 700 * (editorPart / (previewPart + editorPart)),
           }}
         />
-        <SandpackPreview
-          showNavigator={props.options?.showNavigator}
-          showRefreshButton={props.options?.showRefreshButton}
-          style={{
-            height: editorHeight,
-            flexGrow: previewPart,
-            flexShrink: previewPart,
-            minWidth: 700 * (previewPart / (previewPart + editorPart)),
-          }}
-        />
+
+        {/* @ts-ignore */}
+        <RightColumn style={rightColumnStyle}>
+          <SandpackPreview
+            actionsChildren={
+              props.options?.showConsoleButton ? (
+                <ConsoleCounterButton
+                  counter={counter}
+                  onClick={(): void => setConsoleVisibility((prev) => !prev)}
+                />
+              ) : undefined
+            }
+            showNavigator={props.options?.showNavigator}
+            showRefreshButton={props.options?.showRefreshButton}
+            style={{
+              ...rightColumnStyle,
+              height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
+            }}
+          />
+
+          {(props.options?.showConsoleButton || consoleVisibility) && (
+            <div
+              className={consoleWrapper.toString()}
+              style={{
+                height: consoleVisibility ? rightColumnItemHeight(3) : 0,
+              }}
+            >
+              <SandpackConsole
+                onLogsChange={(logs): void => setCounter(logs.length)}
+                showHeader={false}
+              />
+            </div>
+          )}
+        </RightColumn>
       </SandpackLayout>
     </SandpackProvider>
   );
 };
+
+const ConsoleCounterButton: React.FC<{
+  onClick: () => void;
+  counter: number;
+}> = ({ onClick, counter }) => {
+  return (
+    <button
+      className={classNames(
+        buttonClassName,
+        iconStandaloneClassName,
+        actionButtonClassName,
+        buttonCounter
+      )}
+      onClick={onClick}
+    >
+      <ConsoleIcon />
+      {counter > 0 && <span>{counter}</span>}
+    </button>
+  );
+};
+
+const getPreviewHeight =
+  (showConsoleButton?: boolean, editorHeight?: CSSProperties["height"]) =>
+  (ratio = 2): string | number | undefined => {
+    if (showConsoleButton) {
+      const height =
+        typeof editorHeight === "number" ? `${editorHeight}px` : editorHeight;
+
+      return `calc(${
+        height ?? `var(--${THEME_PREFIX}-layout-height)`
+      } / ${ratio})`;
+    }
+
+    return editorHeight;
+  };
+
+const buttonCounter = css({
+  position: "relative",
+
+  span: {
+    background: "$colors$clickable",
+    color: "$colors$surface1",
+    minWidth: 12,
+    height: 12,
+    padding: "0 2px",
+    borderRadius: 12,
+    fontSize: 8,
+    lineHeight: "12px",
+    position: "absolute",
+    top: 0,
+    right: 0,
+  },
+});
+
+const consoleWrapper = css({
+  transition: "height $transitions$default",
+  width: "100%",
+  overflow: "hidden",
+});

@@ -304,12 +304,22 @@ This is especially useful to get the cursor's current position, add custom decor
 For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a read-only version of `codemirror`, so users will not be able to edit the code.
 
 ```jsx
-<SandpackProvider template="react">
-  <SandpackLayout>
-    <SandpackCodeViewer />
-    <SandpackPreview />
-  </SandpackLayout>
-</SandpackProvider>
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  SandpackCodeViewer,
+  SandpackPreview
+} from "@codesandbox/sandpack-react";
+
+const CustomSandpack = () => (
+  <SandpackProvider template="react">
+    <SandpackLayout>
+      <SandpackCodeViewer />
+      <SandpackPreview />
+    </SandpackLayout>
+  </SandpackProvider>
+)
 ```
 
 <SandpackProvider template="react">
@@ -328,6 +338,53 @@ This API provides a way to draw or style a piece of code in the editor content. 
 
 <SandpackDecorators />
 
+## Console
+
+`SandpackConsole` is a Sandpack devtool that allows printing the console logs from a Sandpack client. It is designed to be a light version of a browser console, which means that it's limited to a set of common use cases you may encounter when coding.
+
+Sandpack runs the console directly into the iframe. As a result, all console messages pass through the Sandpack protocol, where you can attach a listener to these messages in your own component or use the proper Sandpack React hook to consume them. 
+
+
+#### Usage 
+
+There are three ways to print the logs:
+- [`<Sandpack options={{ showConsole: true }} />`](/api/react/interfaces/SandpackOptions#showconsole): shows a panel right after the `SandpackPreview`;
+- [`<SandpackConsole />`](/api/react/#sandpackconsole): standalone component to render the logs;
+- [`useSandpackConsole`](/api/react/#usesandpackconsole): React hook to consume the console logs from a Sandpack client;
+
+```jsx
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+<Sandpack 
+  options={{ 
+    showConsole: true, 
+    showConsoleButton: true 
+  }}
+/>
+```
+
+<Sandpack 
+  files={{ 
+    "/src/index.js": `console.log("Hello Sandpack")    \n
+document.getElementById("app").innerHTML = \`
+<h1>Check the logs 👇</h1>
+\`
+`
+  }} 
+  template="vanilla"
+  options={{ showConsole: true, showConsoleButton: true }} 
+/>
+
+#### Limitation
+
+Considering that `SandpackConsole` is meant to be a light version of a browser console, there are a few limitations in its implementation in order to keep it modular and light:
+- It needs to have a Sandpack client running (iframe) to execute the logs.
+- It only supports four types of consoles: `info`, `warning`, `error`, and `clear`.
+- It doesn't render nested objects due to recursive issues.
+
+However, if you need to support more advanced cases, [`useSandpackConsole`](/api/react/#usesandpackconsole) hook is compatible with [console-feed](https://www.npmjs.com/package/console-feed), which provides a closer browser-console experience without any of the limitations mentioned above.
+
+
 ## ReactDevTools
 
 Sandpack also provides a component that adds React DevTools, allowing you to inspect the React component hierarchies in the iframe. This is useful for `props` debugging and understanding the component tree. Our `SandpackReactDevTools` component has the same functionality as the React DevTools browser extensions, but it only shows what is in your Sandpack instance.
@@ -345,15 +402,16 @@ Sandpack also provides a component that adds React DevTools, allowing you to ins
   SandpackLayout,
   SandpackPreview,
   SandpackReactDevTools,
+  SandpackStack
 } from "@codesandbox/sandpack-react";
 export default function CustomSandpack() {
   return (
     <SandpackProvider template="react">
       <SandpackLayout>
-        <div style={{ display: "flex", width: "100%" }}>
-          <SandpackPreview />
+        <SandpackPreview />
+        <SandpackStack>
           <SandpackReactDevTools />
-        </div>
+         </SandpackStack> 
       </SandpackLayout>
     </SandpackProvider>
   )

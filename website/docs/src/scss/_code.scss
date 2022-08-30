@@ -5,7 +5,11 @@ pre {
 }
 
 .sp-code-editor {
-  border-radius: 6px;
+  border-radius: 0;
+}
+
+.sp-code-editor pre {    
+  border-radius: 0;
 }
 
 .sp-wrapper {

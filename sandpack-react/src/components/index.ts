@@ -6,3 +6,4 @@ export * from "./Navigator";
 export * from "./Preview";
 export * from "./TranspiledCode";
 export * from "./ReactDevTools";
+export * from "./Console";

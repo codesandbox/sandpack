@@ -297,7 +297,10 @@ export const MultiplePreviewsAndListeners: React.FC = () => {
 };
 
 export const ClosableTabs: React.FC = () => (
-  <Sandpack options={{ closableTabs: true }} template="react" />
+  <Sandpack
+    options={{ closableTabs: true, visibleFiles: ["/App.js", "/index.js"] }}
+    template="react"
+  />
 );
 
 const ResetButtonComp: React.FC = () => {

@@ -1,10 +1,11 @@
 import { createStitches } from "@stitches/core";
 
-import { defaultLight, SANDPACK_THEMES } from "../themes";
+import { defaultLight, defaultDark, SANDPACK_THEMES } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
+import { isDarkColor } from "../utils/stringUtils";
 
 /**
- * @category ThemeisDarkColor
+ * @category Theme
  */
 export const THEME_PREFIX = "sp";
 
@@ -69,33 +70,50 @@ export const standardizeStitchesTheme = (
  * @category Theme
  */
 export const standardizeTheme = (
-  inputTheme?: SandpackThemeProp
-): { id: string; theme: SandpackTheme } => {
-  const defaultLightTheme = defaultLight;
+  inputTheme: SandpackThemeProp = "light"
+): { id: string; theme: SandpackTheme; mode: "dark" | "light" } => {
   const defaultLightThemeKey = "default";
 
+  /**
+   * Set a local theme: dark or light
+   */
   if (typeof inputTheme === "string") {
     const predefinedTheme = SANDPACK_THEMES[inputTheme];
     if (!predefinedTheme) {
-      throw new Error(`Invalid theme '${inputTheme}' provided.`);
+      throw new Error(
+        `[sandpack-react]: invalid theme '${inputTheme}' provided.`
+      );
     }
 
     return {
       theme: predefinedTheme,
-      id: inputTheme ?? defaultLightThemeKey,
+      id: inputTheme,
+      mode: "light",
     };
   }
 
+  /**
+   * Fullfill the colors key, in case it's missing any key
+   */
+  const mode = isDarkColor(
+    inputTheme?.colors?.surface1 ?? defaultLight.colors.surface1
+  )
+    ? "dark"
+    : "light";
+
+  /**
+   * Figure out what's the properly default colors it should be
+   * error, warning and success colors have different values between dark and light
+   */
+  const baseTheme = mode === "dark" ? defaultDark : defaultLight;
+  const colorsByMode = { ...baseTheme.colors, ...(inputTheme?.colors ?? {}) };
+  const syntaxByMode = { ...baseTheme.syntax, ...(inputTheme?.syntax ?? {}) };
+  const fontByMode = { ...baseTheme.font, ...(inputTheme?.font ?? {}) };
+
   const theme = {
-    colors: {
-      ...defaultLightTheme.colors,
-      ...(inputTheme?.colors ?? {}),
-    },
-    syntax: { ...defaultLightTheme.syntax, ...(inputTheme?.syntax ?? {}) },
-    font: {
-      ...defaultLightTheme.font,
-      ...(inputTheme?.font ?? {}),
-    },
+    colors: colorsByMode,
+    syntax: syntaxByMode,
+    font: fontByMode,
   };
 
   const id = inputTheme
@@ -105,6 +123,7 @@ export const standardizeTheme = (
   return {
     theme,
     id: `sp-${id}`,
+    mode,
   };
 };
 

@@ -12,6 +12,9 @@ export const stackClassName = css({
   flexDirection: "column",
   width: "100%",
   position: "relative",
+  backgroundColor: "$colors$surface1",
+  transition: "height $transitions$default",
+  gap: 1, // border between components
 });
 
 /**

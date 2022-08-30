@@ -32,7 +32,7 @@ const inputClassName = css({
   flex: 1,
   marginLeft: "$space$4",
   width: "0",
-  transition: "all $transitions$default",
+  transition: "background $transitions$default",
 
   "&:hover": {
     backgroundColor: "$colors$surface3",
