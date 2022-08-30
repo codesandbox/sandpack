@@ -16,8 +16,8 @@ Object {
     "surface1": "red",
     "surface2": "red",
     "surface3": "red",
-    "warning": "#6A4516",
-    "warningSurface": "#FEF2C0",
+    "warning": "#E7C400",
+    "warningSurface": "#3A3000",
   },
   "font": Object {
     "body": "",
@@ -67,7 +67,8 @@ Object {
 
 exports[`standardizeTheme should return a custom theme 1`] = `
 Object {
-  "id": "sp-376277195",
+  "id": "sp-634349132",
+  "mode": "dark",
   "theme": Object {
     "colors": Object {
       "accent": "red",
@@ -80,8 +81,8 @@ Object {
       "surface1": "red",
       "surface2": "red",
       "surface3": "red",
-      "warning": "#6A4516",
-      "warningSurface": "#FEF2C0",
+      "warning": "#E7C400",
+      "warningSurface": "#3A3000",
     },
     "font": Object {
       "body": "",
@@ -107,6 +108,7 @@ Object {
 exports[`standardizeTheme should return a custom theme merged with the default 1`] = `
 Object {
   "id": "sp-1791144801",
+  "mode": "light",
   "theme": Object {
     "colors": Object {
       "accent": "blue",
@@ -149,6 +151,7 @@ Object {
 exports[`standardizeTheme should return the \`dark\` theme 1`] = `
 Object {
   "id": "dark",
+  "mode": "light",
   "theme": Object {
     "colors": Object {
       "accent": "#E5E5E5",
@@ -190,7 +193,8 @@ Object {
 
 exports[`standardizeTheme should return the default theme 1`] = `
 Object {
-  "id": "sp-default",
+  "id": "light",
+  "mode": "light",
   "theme": Object {
     "colors": Object {
       "accent": "#3973E0",
