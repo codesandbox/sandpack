@@ -90,12 +90,9 @@ export const Sandpack: SandpackInternal = (props) => {
     flexShrink: previewPart,
     minWidth: 700 * (previewPart / (previewPart + editorPart)),
     gap: consoleVisibility ? 1 : 0,
+    height: props.options?.editorHeight, // use the original editor height
+    flex: 1,
   };
-
-  const rightColumnItemHeight = getPreviewHeight(
-    consoleVisibility,
-    props.options?.editorHeight
-  );
 
   /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
   const templateFiles = SANDBOX_TEMPLATES[props.template!] ?? {};
@@ -134,19 +131,13 @@ export const Sandpack: SandpackInternal = (props) => {
               actionsChildren={actionsChildren}
               showNavigator={props.options?.showNavigator}
               showRefreshButton={props.options?.showRefreshButton}
-              style={{
-                ...rightColumnStyle,
-                height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
-              }}
+              style={rightColumnStyle}
             />
           )}
           {mode === "tests" && (
             <SandpackTests
               actionsChildren={actionsChildren}
-              style={{
-                ...rightColumnStyle,
-                height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
-              }}
+              style={rightColumnStyle}
             />
           )}
 
@@ -154,7 +145,7 @@ export const Sandpack: SandpackInternal = (props) => {
             <div
               className={consoleWrapper.toString()}
               style={{
-                height: consoleVisibility ? rightColumnItemHeight(3) : 0,
+                flex: consoleVisibility ? 0.5 : 0,
               }}
             >
               <SandpackConsole
@@ -189,22 +180,6 @@ const ConsoleCounterButton: React.FC<{
   );
 };
 
-const getPreviewHeight =
-  (
-    showConsoleButton?: boolean,
-    editorHeight: CSSProperties["height"] = `var(--${THEME_PREFIX}-layout-height)`
-  ) =>
-  (ratio = 2): string | number | undefined => {
-    if (showConsoleButton) {
-      const height =
-        typeof editorHeight === "number" ? `${editorHeight}px` : editorHeight;
-
-      return `calc(${height} / ${ratio})`;
-    }
-
-    return editorHeight;
-  };
-
 const buttonCounter = css({
   position: "relative",
 
@@ -224,7 +199,7 @@ const buttonCounter = css({
 });
 
 const consoleWrapper = css({
-  transition: "height $transitions$default",
+  transition: "flex $transitions$default",
   width: "100%",
   overflow: "hidden",
 });

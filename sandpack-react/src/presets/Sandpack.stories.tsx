@@ -277,8 +277,12 @@ export const ShowConsoleButton: React.FC = () => (
         console.log(function helloWord() {})
         `,
       }}
-      options={{ showConsoleButton: true, showConsole: true }}
-      template="test-ts"
+      options={{
+        showConsoleButton: true,
+        showConsole: true,
+        // editorHeight: 350,
+      }}
+      template="react"
     />
   </div>
 );
