@@ -13,9 +13,9 @@ import { splitUrl } from "./utils";
 const navigatorClassName = css({
   display: "flex",
   alignItems: "center",
-  height: "40px",
+  height: "$layout$headerHeight",
   borderBottom: "1px solid $colors$surface2",
-  padding: "$space$2 $space$4",
+  padding: "$space$3 $space$2",
   background: "$colors$surface1",
 });
 
@@ -49,7 +49,7 @@ const inputClassName = css({
  * @category Components
  */
 export interface NavigatorProps {
-  clientId?: string;
+  clientId: string;
   onURLChange?: (newURL: string) => void;
 }
 
@@ -124,6 +124,16 @@ export const Navigator = ({
     dispatch({ type: "urlforward" });
   };
 
+  const buttonsClassNames = classNames(
+    c("button", "icon"),
+    buttonClassName,
+    iconClassName,
+    css({
+      minWidth: "$space$6",
+      justifyContent: "center",
+    })
+  );
+
   return (
     <div
       className={classNames(c("navigator"), navigatorClassName, className)}
@@ -131,11 +141,7 @@ export const Navigator = ({
     >
       <button
         aria-label="Go back one page"
-        className={classNames(
-          c("button", "icon"),
-          buttonClassName,
-          iconClassName
-        )}
+        className={buttonsClassNames}
         disabled={!backEnabled}
         onClick={handleBack}
         type="button"
@@ -144,11 +150,7 @@ export const Navigator = ({
       </button>
       <button
         aria-label="Go forward one page"
-        className={classNames(
-          c("button", "icon"),
-          buttonClassName,
-          iconClassName
-        )}
+        className={buttonsClassNames}
         disabled={!forwardEnabled}
         onClick={handleForward}
         type="button"
@@ -157,11 +159,7 @@ export const Navigator = ({
       </button>
       <button
         aria-label="Refresh page"
-        className={classNames(
-          c("button", "icon"),
-          buttonClassName,
-          iconClassName
-        )}
+        className={buttonsClassNames}
         onClick={handleRefresh}
         type="button"
       >

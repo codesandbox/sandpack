@@ -7,7 +7,7 @@ import { THEME_PREFIX } from "../../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
-  actionButtonClassName,
+  roundedButtonClassName,
 } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
@@ -30,7 +30,7 @@ export const RefreshButton = ({
         c("button", "icon-standalone"),
         buttonClassName,
         iconStandaloneClassName,
-        actionButtonClassName
+        roundedButtonClassName
       )}
       onClick={refresh}
       title="Refresh Sandpack"

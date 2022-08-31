@@ -46,14 +46,18 @@
       "command": "yarn workspace @codesandbox/sandpack-react build"
     },
     "dev:website-docs": {
-      "name": "Website docs",
+      "name": "Documentation",
       "command": "yarn dev:docs",
       "runAtStart": false
     },
     "dev:sandpack-react": {
       "name": "Storybook",
       "command": "yarn dev:react",
-      "runAtStart": true
+      "runAtStart": true,
+      "preview": {
+        "port": 6006,
+        "pr-link": "direct"
+      }
     },
     "dev:website-landing": {
       "name": "Website landing",

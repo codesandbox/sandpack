@@ -2,7 +2,8 @@
 sidebar_position: 2
 ---
 
-import { SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview, SandpackThemeProvider } from "@codesandbox/sandpack-react"
+import { Sandpack as DefaultSandpack, SandpackProvider, SandpackCodeEditor, SandpackCodeViewer, SandpackTranspiledCode, SandpackPreview, SandpackThemeProvider, SandpackTests } from "@codesandbox/sandpack-react"
+import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { Sandpack, SandpackLayout } from "../../src/CustomSandpack"
 import SandpackDecorators from "../../src/examples/Decorators"
 
@@ -40,7 +41,7 @@ const CustomSandpack = () => (
 );
 ```
 
-<SandpackProvider template="react">
+<SandpackProvider template="react" theme={sandpackDark} >
   <SandpackLayout>
     <SandpackCodeEditor />
     <SandpackPreview />
@@ -61,7 +62,7 @@ You can easily swap the two components inside the `SandpackLayout` to get a diff
 </SandpackProvider>
 ```
 
-<SandpackProvider template="react">
+<SandpackProvider template="react" theme={sandpackDark} >
   <SandpackLayout>
     <SandpackPreview />
     <SandpackCodeEditor />
@@ -100,7 +101,7 @@ There's nothing stopping you from rendering multiple previews in the same `Provi
 </SandpackProvider>
 ```
 
-<SandpackProvider template="react">
+<SandpackProvider template="react" theme={sandpackDark} >
   <SandpackLayout>
     <SandpackPreview />
     <SandpackPreview />
@@ -131,7 +132,7 @@ The `<SandpackPreview />` component also allows you to add additional buttons to
 </SandpackProvider>
 ```
 
-<SandpackProvider template="react">
+<SandpackProvider template="react" theme={sandpackDark} >
   <SandpackLayout>
     <SandpackPreview
       actionsChildren={
@@ -185,7 +186,7 @@ Worth mentioning that the SandpackClient will not be instantly available. Sandpa
 This means that it's expected that `getClient` function returns `undefined` which is a valid state.
 :::
 
-## Code Editor
+## Code editor
 
 The `SandpackCodeEditor` component renders a wrapper over [`codemirror`](https://github.com/codemirror/codemirror.next), a lightweight code editor we use inside `sandpack`.
 
@@ -215,7 +216,7 @@ If you played with the `Sandpack` preset, you should be familiar already with th
 </SandpackProvider>
 ```
 
-<SandpackProvider template="react">
+<SandpackProvider template="react" theme={sandpackDark}>
   <SandpackLayout>
     <SandpackCodeEditor
       showTabs
@@ -299,44 +300,116 @@ const App = () => {
 
 This is especially useful to get the cursor's current position, add custom decorators, set the selection in a specific position, etc.
 
-## Code Viewer
+## Tests
 
-For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a read-only version of `codemirror`, so users will not be able to edit the code.
+The `SandpackTests` component renders a thin wrapper around [`Jest`](https://jestjs.io/) to run tests directly in the browser. This means you can run tests but additional configuration may not possible given the browser environment.
+
+:::info
+Any test files ending with `.test.js(x)`, `.spec.js(x)`, `.test.ts(x)` and `.spec.ts(x)` will automatically be run with Jest and the results shown in the `SandpackTests` component.
+:::
+
+### Usage
+
+There are two ways to run tests and check out the output:
+
+#### Sandpack Preset
+
+Using `test-ts` template preset, which contains an example test.
 
 ```jsx
-import {
-  SandpackProvider,
-  SandpackLayout,
-  SandpackCodeEditor,
-  SandpackCodeViewer,
-  SandpackPreview
-} from "@codesandbox/sandpack-react";
-
-const CustomSandpack = () => (
-  <SandpackProvider template="react">
-    <SandpackLayout>
-      <SandpackCodeViewer />
-      <SandpackPreview />
-    </SandpackLayout>
-  </SandpackProvider>
-)
+<Sandpack template="test-ts" />
 ```
 
-<SandpackProvider template="react">
+<DefaultSandpack theme={sandpackDark} template="test-ts" />
+
+#### SandpackTests component
+
+Standalone and configurable component to run tests, which you can combine with `test-ts` template or supply custom files. For more details about its usage and implementation, check out the [API reference](/api/react/#sandpacktests).
+
+**Options**
+
+- `verbose`: Display individual test results with the test suite hierarchy.
+- `watchMode`: Watch files for changes and rerun all tests. Note if changing a test file then the current file will run on it's own.
+- `onComplete`: A callback that is invoked with the completed specs.
+
+```jsx
+<SandpackProvider template="test-ts">
   <SandpackLayout>
-    <SandpackCodeViewer />
-    <SandpackPreview />
+    <SandpackTests />
+    <SandpackCodeEditor />
+  </SandpackLayout>
+</SandpackProvider>
+```
+
+<SandpackProvider template="test-ts" theme={sandpackDark}>
+  <SandpackLayout>
+    <SandpackTests />
+    <SandpackCodeEditor />
   </SandpackLayout>
 </SandpackProvider>
 
-### CodeMirror decorations
+### Extending expect
 
-This API provides a way to draw or style a piece of code in the editor content. You can implement it in the following ways:
+:::note
+Although not all configuration is supported, [extending expect](https://jestjs.io/docs/expect#expectextendmatchers) with custom / third party matchers is still possible.
+:::
 
-- Entire line: add `className` or elements attributes to an entire line;
-- Range: add `className` or elements attributes to a piece of content, given a `line`, `startColumn` and `endColumn`;
+Add the matchers either as a dependency or as a file and then import the matchers into your tests and invoke `expect.extend` with your matchers.
 
-<SandpackDecorators />
+```jsx
+const extendedTest = `
+import * as matchers from 'jest-extended';
+import { add } from './add';
+
+expect.extend(matchers);
+
+describe('jest-extended matchers are supported', () => {
+  test('adding two positive integers yields a positive integer', () => {
+    expect(add(1, 2)).toBePositive();
+  });
+});
+`;
+
+<SandpackProvider
+  customSetup={{ dependencies: { "jest-extended": "^3.0.2" } }}
+  files={{ "/extended.test.ts": extendedTest }}
+  template="test-ts"
+>
+  <SandpackLayout>
+    <SandpackCodeEditor />
+    <SandpackTests />
+  </SandpackLayout>
+</SandpackProvider>;
+```
+
+<!-- prettier-ignore -->
+<SandpackProvider
+  theme={sandpackDark}
+  template="test-ts"
+  theme={sandpackDark}
+  customSetup={{ dependencies: { "jest-extended": "^3.0.2" } }}
+  options={{
+    activeFile: "/extended.test.ts",
+    visibleFiles: ["/add.test.ts"]
+  }}
+  files={{
+    "/extended.test.ts": `import * as matchers from 'jest-extended';
+import { add } from './add';\n
+expect.extend(matchers);\n
+describe('jest-extended matchers are supported', () => {
+  test('adding two positive integers yields a positive integer', () => {
+    expect(add(1, 2)).toBePositive();
+  });
+});
+`,
+  }}
+>
+  <SandpackLayout>
+    <SandpackCodeEditor showTabs />
+    <SandpackTests verbose />
+  </SandpackLayout>
+</SandpackProvider>
+
 
 ## Console
 
@@ -345,7 +418,7 @@ This API provides a way to draw or style a piece of code in the editor content. 
 Sandpack runs the console directly into the iframe. As a result, all console messages pass through the Sandpack protocol, where you can attach a listener to these messages in your own component or use the proper Sandpack React hook to consume them. 
 
 
-#### Usage 
+### Usage 
 
 There are three ways to print the logs:
 - [`<Sandpack options={{ showConsole: true }} />`](/api/react/interfaces/SandpackOptions#showconsole): shows a panel right after the `SandpackPreview`;
@@ -375,7 +448,7 @@ document.getElementById("app").innerHTML = \`
   options={{ showConsole: true, showConsoleButton: true }} 
 />
 
-#### Limitation
+### Limitation
 
 Considering that `SandpackConsole` is meant to be a light version of a browser console, there are a few limitations in its implementation in order to keep it modular and light:
 - It needs to have a Sandpack client running (iframe) to execute the logs.
@@ -384,6 +457,44 @@ Considering that `SandpackConsole` is meant to be a light version of a browser c
 
 However, if you need to support more advanced cases, [`useSandpackConsole`](/api/react/#usesandpackconsole) hook is compatible with [console-feed](https://www.npmjs.com/package/console-feed), which provides a closer browser-console experience without any of the limitations mentioned above.
 
+## Code Viewer
+
+For situations when you strictly want to show some code and run it in the browser, you can use the `SandpackCodeViewer` component. It looks similar to the code editor, but it renders a read-only version of `codemirror`, so users will not be able to edit the code.
+
+```jsx
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  SandpackCodeViewer,
+  SandpackPreview
+} from "@codesandbox/sandpack-react";
+
+const CustomSandpack = () => (
+  <SandpackProvider template="react">
+    <SandpackLayout>
+      <SandpackCodeViewer />
+      <SandpackPreview />
+    </SandpackLayout>
+  </SandpackProvider>
+)
+```
+
+<SandpackProvider template="react" theme={sandpackDark}>
+  <SandpackLayout>
+    <SandpackCodeViewer />
+    <SandpackPreview />
+  </SandpackLayout>
+</SandpackProvider>
+
+### CodeMirror decorations
+
+This API provides a way to draw or style a piece of code in the editor content. You can implement it in the following ways:
+
+- Entire line: add `className` or elements attributes to an entire line;
+- Range: add `className` or elements attributes to a piece of content, given a `line`, `startColumn` and `endColumn`;
+
+<SandpackDecorators />
 
 ## ReactDevTools
 
@@ -474,7 +585,7 @@ const CustomSandpack = () => (
 );
 ```
 
-<SandpackProvider template="react">
+<SandpackProvider template="react" theme={sandpackDark}>
   <SandpackLayout>
     <SandpackCodeEditor />
     <SandpackTranspiledCode />

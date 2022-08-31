@@ -1,5 +1,5 @@
 /**
- * @category Template
+ * @hidden
  */
 export const VANILLA_TYPESCRIPT_TEMPLATE = {
   files: {

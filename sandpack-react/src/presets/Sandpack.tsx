@@ -2,19 +2,20 @@
 import type { CSSProperties } from "@stitches/core";
 import * as React from "react";
 
-import { SandpackStack } from "..";
+import { SANDBOX_TEMPLATES, SandpackStack } from "..";
 import { SandpackLayout } from "../common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackConsole } from "../components/Console";
 import { SandpackPreview } from "../components/Preview";
+import { SandpackTests } from "../components/Tests";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import { ConsoleIcon } from "../icons";
 import { css, THEME_PREFIX } from "../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
-  actionButtonClassName,
+  roundedButtonClassName,
 } from "../styles/shared";
 import type {
   SandpackInternal,
@@ -96,6 +97,17 @@ export const Sandpack: SandpackInternal = (props) => {
     props.options?.editorHeight
   );
 
+  /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+  const templateFiles = SANDBOX_TEMPLATES[props.template!] ?? {};
+  const mode = "mode" in templateFiles ? templateFiles.mode : "preview";
+
+  const actionsChildren = props.options?.showConsoleButton ? (
+    <ConsoleCounterButton
+      counter={counter}
+      onClick={(): void => setConsoleVisibility((prev) => !prev)}
+    />
+  ) : undefined;
+
   return (
     <SandpackProvider
       customSetup={props.customSetup}
@@ -117,22 +129,26 @@ export const Sandpack: SandpackInternal = (props) => {
 
         {/* @ts-ignore */}
         <RightColumn style={rightColumnStyle}>
-          <SandpackPreview
-            actionsChildren={
-              props.options?.showConsoleButton ? (
-                <ConsoleCounterButton
-                  counter={counter}
-                  onClick={(): void => setConsoleVisibility((prev) => !prev)}
-                />
-              ) : undefined
-            }
-            showNavigator={props.options?.showNavigator}
-            showRefreshButton={props.options?.showRefreshButton}
-            style={{
-              ...rightColumnStyle,
-              height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
-            }}
-          />
+          {mode === "preview" && (
+            <SandpackPreview
+              actionsChildren={actionsChildren}
+              showNavigator={props.options?.showNavigator}
+              showRefreshButton={props.options?.showRefreshButton}
+              style={{
+                ...rightColumnStyle,
+                height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
+              }}
+            />
+          )}
+          {mode === "tests" && (
+            <SandpackTests
+              actionsChildren={actionsChildren}
+              style={{
+                ...rightColumnStyle,
+                height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
+              }}
+            />
+          )}
 
           {(props.options?.showConsoleButton || consoleVisibility) && (
             <div
@@ -162,7 +178,7 @@ const ConsoleCounterButton: React.FC<{
       className={classNames(
         buttonClassName,
         iconStandaloneClassName,
-        actionButtonClassName,
+        roundedButtonClassName,
         buttonCounter
       )}
       onClick={onClick}
@@ -174,15 +190,16 @@ const ConsoleCounterButton: React.FC<{
 };
 
 const getPreviewHeight =
-  (showConsoleButton?: boolean, editorHeight?: CSSProperties["height"]) =>
+  (
+    showConsoleButton?: boolean,
+    editorHeight: CSSProperties["height"] = `var(--${THEME_PREFIX}-layout-height)`
+  ) =>
   (ratio = 2): string | number | undefined => {
     if (showConsoleButton) {
       const height =
         typeof editorHeight === "number" ? `${editorHeight}px` : editorHeight;
 
-      return `calc(${
-        height ?? `var(--${THEME_PREFIX}-layout-height)`
-      } / ${ratio})`;
+      return `calc(${height} / ${ratio})`;
     }
 
     return editorHeight;

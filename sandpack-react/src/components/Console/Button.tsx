@@ -6,7 +6,7 @@ import { css } from "../../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
-  actionButtonClassName,
+  roundedButtonClassName,
 } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
@@ -19,7 +19,7 @@ export const Button: React.FC<{ onClick: () => void }> = ({ onClick }) => {
         c("button", "icon-standalone"),
         buttonClassName,
         iconStandaloneClassName,
-        actionButtonClassName,
+        roundedButtonClassName,
         css({
           position: "absolute",
           bottom: "$space$2",

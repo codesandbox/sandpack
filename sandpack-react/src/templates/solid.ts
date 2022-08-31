@@ -1,5 +1,5 @@
 /**
- * @category Template
+ * @hidden
  */
 export const SOLID_TEMPLATE = {
   files: {

@@ -21,7 +21,7 @@ const defaultVariables = {
     return { ...acc, [index + 1]: `${(index + 1) * 4}px` };
   }, {}),
   border: { radius: "4px" },
-  layout: { height: "300px" },
+  layout: { height: "300px", headerHeight: "40px" },
   transitions: { default: "150ms ease" },
   zIndices: {
     base: "1",

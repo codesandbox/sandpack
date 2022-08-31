@@ -1,5 +1,5 @@
 /**
- * @category Template
+ * @hidden
  */
 export const VUE_TEMPLATE_3 = {
   files: {

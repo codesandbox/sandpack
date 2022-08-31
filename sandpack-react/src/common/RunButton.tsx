@@ -4,7 +4,7 @@ import * as React from "react";
 import { useSandpack } from "../hooks/useSandpack";
 import { RunIcon } from "../icons";
 import { css, THEME_PREFIX } from "../styles";
-import { actionButtonClassName, buttonClassName } from "../styles/shared";
+import { roundedButtonClassName, buttonClassName } from "../styles/shared";
 import { classNames } from "../utils/classNames";
 
 const runButtonClassName = css({
@@ -30,7 +30,7 @@ export const RunButton = ({
       className={classNames(
         c("button"),
         buttonClassName,
-        actionButtonClassName,
+        roundedButtonClassName,
         runButtonClassName,
         className
       )}

@@ -235,6 +235,7 @@ export type SandpackPredefinedTemplate =
   | "angular"
   | "react"
   | "react-ts"
+  | "test-ts"
   | "vanilla"
   | "vanilla-ts"
   | "vue"

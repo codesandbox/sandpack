@@ -1,5 +1,5 @@
 /**
- * @category Template
+ * @hidden
  */
 export const SVELTE_TEMPLATE = {
   environment: "svelte",

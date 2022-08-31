@@ -26,6 +26,7 @@ Object {
     "size": "14px",
   },
   "layout": Object {
+    "headerHeight": "40px",
     "height": "300px",
   },
   "space": Object {

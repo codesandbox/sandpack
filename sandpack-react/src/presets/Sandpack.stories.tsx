@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Sandpack } from "../";
+import { REACT_TEMPLATE } from "../templates";
 
 export default {
   title: "presets/Sandpack: options",
@@ -264,3 +265,20 @@ export const FileResolver = (): JSX.Element => {
     </>
   );
 };
+
+export const ShowConsoleButton: React.FC = () => (
+  <div style={{ width: 800 }}>
+    <Sandpack
+      files={{
+        "/index.js": `${REACT_TEMPLATE.files["/index.js"].code}; 
+        
+        console.error("Something went wrong");
+        
+        console.log(function helloWord() {})
+        `,
+      }}
+      options={{ showConsoleButton: true, showConsole: true }}
+      template="test-ts"
+    />
+  </div>
+);

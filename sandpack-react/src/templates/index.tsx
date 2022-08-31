@@ -3,6 +3,7 @@ import { REACT_TEMPLATE } from "./react";
 import { REACT_TYPESCRIPT_TEMPLATE } from "./react-typescript";
 import { SOLID_TEMPLATE } from "./solid";
 import { SVELTE_TEMPLATE } from "./svelte";
+import { TEST_TYPESCRIPT_TEMPLATE } from "./tests-ts";
 import { VANILLA_TEMPLATE } from "./vanilla";
 import { VANILLA_TYPESCRIPT_TEMPLATE } from "./vanilla-typescript";
 import { VUE_TEMPLATE } from "./vue";
@@ -12,6 +13,7 @@ export { REACT_TEMPLATE } from "./react";
 export { REACT_TYPESCRIPT_TEMPLATE } from "./react-typescript";
 export { SOLID_TEMPLATE } from "./solid";
 export { SVELTE_TEMPLATE } from "./svelte";
+export { TEST_TYPESCRIPT_TEMPLATE } from "./tests-ts";
 export { VANILLA_TEMPLATE } from "./vanilla";
 export { VANILLA_TYPESCRIPT_TEMPLATE } from "./vanilla-typescript";
 export { VUE_TEMPLATE } from "./vue";
@@ -30,4 +32,5 @@ export const SANDBOX_TEMPLATES = {
   angular: ANGULAR_TEMPLATE,
   svelte: SVELTE_TEMPLATE,
   solid: SOLID_TEMPLATE,
+  "test-ts": TEST_TYPESCRIPT_TEMPLATE,
 };

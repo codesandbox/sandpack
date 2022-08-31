@@ -9,10 +9,9 @@ import { ErrorOverlay } from "../../common/ErrorOverlay";
 import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { OpenInCodeSandboxButton } from "../../common/OpenInCodeSandboxButton";
 import { SandpackStack } from "../../common/Stack";
-import { useSandpack } from "../../hooks/useSandpack";
+import { useSandpackClient } from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
-import { generateRandomId } from "../../utils/stringUtils";
 import { Navigator } from "../Navigator";
 
 import { RefreshButton } from "./RefreshButton";
@@ -68,7 +67,7 @@ export interface SandpackPreviewRef {
   /**
    * Retrieve the current Sandpack client instance from preview
    */
-  getClient: () => SandpackClient | undefined;
+  getClient: () => SandpackClient | null;
   /**
    * Returns the client id, which will be used to
    * initialize a client in the main Sandpack context
@@ -96,22 +95,19 @@ export const SandpackPreview = React.forwardRef<
     },
     ref
   ) => {
-    const { sandpack, listen } = useSandpack();
+    const { sandpack, listen, iframe, getClient, clientId } =
+      useSandpackClient();
     const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
       number | null
     >(null);
     const {
       status,
-      registerBundler,
-      unregisterBundler,
       errorScreenRegisteredRef,
       openInCSBRegisteredRef,
       loadingScreenRegisteredRef,
     } = sandpack;
 
     const c = useClasser(THEME_PREFIX);
-    const clientId = React.useRef<string>(generateRandomId());
-    const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
 
     // SandpackPreview immediately registers the custom screens/components so the bundler does not render any of them
     openInCSBRegisteredRef.current = true;
@@ -119,42 +115,31 @@ export const SandpackPreview = React.forwardRef<
     loadingScreenRegisteredRef.current = true;
 
     React.useEffect(() => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const iframeElement = iframeRef.current!;
-      const clientIdValue = clientId.current;
-
-      registerBundler(iframeElement, clientIdValue);
-
       const unsubscribe = listen((message: SandpackMessage) => {
         if (message.type === "resize") {
           setComputedAutoHeight(message.height);
         }
-      }, clientIdValue);
+      });
 
-      return (): void => {
-        unsubscribe();
-        unregisterBundler(clientIdValue);
-      };
+      return unsubscribe;
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     React.useImperativeHandle(
       ref,
       () => ({
-        clientId: clientId.current,
-        getClient(): SandpackClient | undefined {
-          return sandpack.clients[clientId.current];
-        },
+        clientId: clientId,
+        getClient,
       }),
-      [sandpack]
+      [getClient, clientId]
     );
 
     const handleNewURL = (newUrl: string): void => {
-      if (!iframeRef.current) {
+      if (!iframe.current) {
         return;
       }
 
-      iframeRef.current.src = newUrl;
+      iframe.current.src = newUrl;
       // eslint-disable-next-line react-hooks/exhaustive-deps
     };
 
@@ -164,12 +149,12 @@ export const SandpackPreview = React.forwardRef<
         {...props}
       >
         {showNavigator && (
-          <Navigator clientId={clientId.current} onURLChange={handleNewURL} />
+          <Navigator clientId={clientId} onURLChange={handleNewURL} />
         )}
 
         <div className={classNames(c("preview-container"), previewClassName)}>
           <iframe
-            ref={iframeRef}
+            ref={iframe}
             className={classNames(c("preview-iframe"), previewIframe)}
             style={{
               // set height based on the content only in auto mode
@@ -189,14 +174,14 @@ export const SandpackPreview = React.forwardRef<
           >
             {actionsChildren}
             {!showNavigator && showRefreshButton && status === "running" && (
-              <RefreshButton clientId={clientId.current} />
+              <RefreshButton clientId={clientId} />
             )}
 
             {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
           </div>
 
           <LoadingOverlay
-            clientId={clientId.current}
+            clientId={clientId}
             showOpenInCodeSandbox={showOpenInCodeSandbox}
           />
 

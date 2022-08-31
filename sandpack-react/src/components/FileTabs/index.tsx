@@ -47,7 +47,7 @@ const closeButtonClassName = css({
  */
 export const tabButton = css({
   padding: "0 $space$2",
-  height: "40px",
+  height: "$layout$headerHeight",
   whiteSpace: "nowrap",
 
   "&:focus": { outline: "none" },

@@ -15,6 +15,10 @@ export const stackClassName = css({
   backgroundColor: "$colors$surface1",
   transition: "height $transitions$default",
   gap: 1, // border between components
+
+  [`&:has(.${THEME_PREFIX}-stack)`]: {
+    backgroundColor: "$colors$surface2",
+  },
 });
 
 /**

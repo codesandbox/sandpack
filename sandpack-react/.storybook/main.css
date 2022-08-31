@@ -10,3 +10,29 @@ p {
   margin: 0;
   margin-bottom: 0.3em;
 }
+
+.playground-grid {
+  display: grid;
+  grid-template-columns: 200px 400px 400px;
+  grid-template-rows: repeat(2, 250px);
+  gap: 1px;
+}
+
+.playground-grid .sp-file-explorer {
+  grid-area: 1 / 1 / 3 / 2;
+}
+
+.playground-grid .sp-editor {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.playground-grid .sp-previe {
+  grid-area: 1 / 3 / 2 / 4;
+}
+
+.playground-grid .sp-consol {
+  grid-area: 2 / 2 / 3 / 3;
+}
+.playground-grid .sp-tests {
+  grid-area: 2 / 3 / 3 / 4;
+}
