@@ -15,7 +15,7 @@ const navigatorClassName = css({
   alignItems: "center",
   height: "$layout$headerHeight",
   borderBottom: "1px solid $colors$surface2",
-  padding: "$space$2 $space$4",
+  padding: "$space$3 $space$2",
   background: "$colors$surface1",
 });
 

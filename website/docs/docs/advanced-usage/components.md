@@ -41,7 +41,7 @@ const CustomSandpack = () => (
 );
 ```
 
-<SandpackProvider template="react">
+<SandpackProvider template="react" theme={sandpackDark} >
   <SandpackLayout>
     <SandpackCodeEditor />
     <SandpackPreview />
@@ -62,7 +62,7 @@ You can easily swap the two components inside the `SandpackLayout` to get a diff
 </SandpackProvider>
 ```
 
-<SandpackProvider template="react">
+<SandpackProvider template="react" theme={sandpackDark} >
   <SandpackLayout>
     <SandpackPreview />
     <SandpackCodeEditor />
@@ -101,7 +101,7 @@ There's nothing stopping you from rendering multiple previews in the same `Provi
 </SandpackProvider>
 ```
 
-<SandpackProvider template="react">
+<SandpackProvider template="react" theme={sandpackDark} >
   <SandpackLayout>
     <SandpackPreview />
     <SandpackPreview />
@@ -132,7 +132,7 @@ The `<SandpackPreview />` component also allows you to add additional buttons to
 </SandpackProvider>
 ```
 
-<SandpackProvider template="react">
+<SandpackProvider template="react" theme={sandpackDark} >
   <SandpackLayout>
     <SandpackPreview
       actionsChildren={
@@ -216,7 +216,7 @@ If you played with the `Sandpack` preset, you should be familiar already with th
 </SandpackProvider>
 ```
 
-<SandpackProvider template="react">
+<SandpackProvider template="react" theme={sandpackDark}>
   <SandpackLayout>
     <SandpackCodeEditor
       showTabs

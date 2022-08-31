@@ -207,14 +207,27 @@ const gridClassName = css({
   },
 });
 
+const defaultTemplate = SANDBOX_TEMPLATES["react-ts"];
+
 const exhaustedFilesTests = {
-  ...SANDBOX_TEMPLATES["react-ts"],
+  ...defaultTemplate,
+  dependencies: {
+    ...defaultTemplate.dependencies,
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/jest-dom": "^5.16.5",
+  },
   files: {
-    "/src/utils/add.ts": SANDBOX_TEMPLATES["test-ts"].files["/add.ts"],
-    "/src/utils/add.test.ts":
-      SANDBOX_TEMPLATES["test-ts"].files["/add.test.ts"],
     "/src/index.tsx": SANDBOX_TEMPLATES["react-ts"].files["/index.tsx"],
     "/src/App.tsx": `console.log("Hello world");\n\n${SANDBOX_TEMPLATES["react-ts"].files["/App.tsx"].code}`,
+    "/src/App.test.tsx": `import '@testing-library/jest-dom';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders welcome message', () => {
+  render(<App />);
+  expect(screen.getByText('Hello World')).toBeInTheDocument();
+});`,
     "/src/styles.css": SANDBOX_TEMPLATES["react-ts"].files["/styles.css"],
     "/package.json": JSON.stringify({ main: "/src/index.tsx" }),
   },
