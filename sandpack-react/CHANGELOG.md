@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/codesandbox/sandpack/compare/v1.7.0...v1.7.1) (2022-08-31)
+
+
+### Bug Fixes
+
+* **console-wrapper:** refactor toggle animation and reset padding on the editor ([#565](https://github.com/codesandbox/sandpack/issues/565)) ([6e730c6](https://github.com/codesandbox/sandpack/commit/6e730c6bb462e225daea1dcea58c56c3fd17bcd3))
+
+
+
+
+
 # [1.7.0](https://github.com/codesandbox/sandpack/compare/v1.6.0...v1.7.0) (2022-08-31)
 
 
