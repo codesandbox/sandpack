@@ -101,6 +101,13 @@ export const Sandpack: SandpackInternal = (props) => {
   const templateFiles = SANDBOX_TEMPLATES[props.template!] ?? {};
   const mode = "mode" in templateFiles ? templateFiles.mode : "preview";
 
+  const actionsChildren = props.options?.showConsoleButton ? (
+    <ConsoleCounterButton
+      counter={counter}
+      onClick={(): void => setConsoleVisibility((prev) => !prev)}
+    />
+  ) : undefined;
+  console.log(rightColumnItemHeight(consoleVisibility ? 1.5 : 1));
   return (
     <SandpackProvider
       customSetup={props.customSetup}
@@ -124,14 +131,7 @@ export const Sandpack: SandpackInternal = (props) => {
         <RightColumn style={rightColumnStyle}>
           {mode === "preview" && (
             <SandpackPreview
-              actionsChildren={
-                props.options?.showConsoleButton ? (
-                  <ConsoleCounterButton
-                    counter={counter}
-                    onClick={(): void => setConsoleVisibility((prev) => !prev)}
-                  />
-                ) : undefined
-              }
+              actionsChildren={actionsChildren}
               showNavigator={props.options?.showNavigator}
               showRefreshButton={props.options?.showRefreshButton}
               style={{
@@ -140,7 +140,15 @@ export const Sandpack: SandpackInternal = (props) => {
               }}
             />
           )}
-          {mode === "tests" && <SandpackTests style={rightColumnStyle} />}
+          {mode === "tests" && (
+            <SandpackTests
+              actionsChildren={actionsChildren}
+              style={{
+                ...rightColumnStyle,
+                height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
+              }}
+            />
+          )}
 
           {(props.options?.showConsoleButton || consoleVisibility) && (
             <div
@@ -182,15 +190,16 @@ const ConsoleCounterButton: React.FC<{
 };
 
 const getPreviewHeight =
-  (showConsoleButton?: boolean, editorHeight?: CSSProperties["height"]) =>
+  (
+    showConsoleButton?: boolean,
+    editorHeight: CSSProperties["height"] = `var(--${THEME_PREFIX}-layout-height)`
+  ) =>
   (ratio = 2): string | number | undefined => {
     if (showConsoleButton) {
       const height =
         typeof editorHeight === "number" ? `${editorHeight}px` : editorHeight;
 
-      return `calc(${
-        height ?? `var(--${THEME_PREFIX}-layout-height)`
-      } / ${ratio})`;
+      return `calc(${height} / ${ratio})`;
     }
 
     return editorHeight;

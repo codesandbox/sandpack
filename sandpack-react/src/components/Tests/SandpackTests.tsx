@@ -5,7 +5,6 @@ import { Loading } from "../../common/Loading";
 import { useSandpackTheme, useSandpackClient } from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
-import { isDarkColor } from "../../utils/stringUtils";
 
 import { Header } from "./Header";
 import { RunButton } from "./RunButton";
@@ -61,6 +60,7 @@ export const SandpackTests: React.FC<
     verbose?: boolean;
     watchMode?: boolean;
     onComplete?: (specs: Record<string, Spec>) => void;
+    actionsChildren?: JSX.Element;
   } & React.HtmlHTMLAttributes<HTMLDivElement>
 > = ({
   verbose = false,
@@ -68,6 +68,7 @@ export const SandpackTests: React.FC<
   style,
   className,
   onComplete,
+  actionsChildren,
   ...props
 }) => {
   const theme = useSandpackTheme();
@@ -371,7 +372,7 @@ export const SandpackTests: React.FC<
     <SandpackStack
       className={classNames(`${THEME_PREFIX}-tests`, className)}
       style={{
-        ...setTestTheme(isDarkColor(theme.theme.colors.surface1)),
+        ...setTestTheme(theme.themeMode === "dark"),
         ...style,
       }}
       {...props}
@@ -399,6 +400,7 @@ export const SandpackTests: React.FC<
         <Loading showOpenInCodeSandbox={false} />
       ) : (
         <div className={previewActionsClassName.toString()}>
+          {actionsChildren}
           <RunButton onClick={state.suiteOnly ? runSpec : runAllTests} />
         </div>
       )}

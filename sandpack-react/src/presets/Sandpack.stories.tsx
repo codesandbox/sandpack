@@ -277,8 +277,8 @@ export const ShowConsoleButton: React.FC = () => (
         console.log(function helloWord() {})
         `,
       }}
-      options={{ showConsoleButton: true }}
-      template="react"
+      options={{ showConsoleButton: true, showConsole: true }}
+      template="test-ts"
     />
   </div>
 );

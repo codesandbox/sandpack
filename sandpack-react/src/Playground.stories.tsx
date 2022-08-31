@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as themes from "@codesandbox/sandpack-themes";
-import { css } from "@stitches/core";
 import { useState } from "react";
 
 import type { CodeEditorProps } from "./components/CodeEditor";
@@ -158,7 +157,7 @@ export const Main = (): JSX.Element => {
         theme={themes[config.Theme] || config.Theme}
       >
         <SandpackLayout>
-          <div className={gridClassName.toString()}>
+          <div className="playground-grid">
             {config.Components.FileExplorer && <SandpackFileExplorer />}
             {config.Components.Editor && (
               <SandpackCodeEditor {...codeEditorOptions} />
@@ -180,32 +179,6 @@ export const Main = (): JSX.Element => {
     </div>
   );
 };
-
-const gridClassName = css({
-  display: "grid",
-  gridTemplateColumns: "200px 400px 400px",
-  gridTemplateRows: "repeat(2, 250px)",
-  gap: 1,
-
-  ".sp-file-explorer": {
-    gridArea: "1 / 1 / 3 / 2",
-  },
-
-  ".sp-editor": {
-    gridArea: "1 / 2 / 2 / 3",
-  },
-
-  ".sp-preview": {
-    gridArea: "1 / 3 / 2 / 4",
-  },
-
-  ".sp-console": {
-    gridArea: "2 / 2 / 3 / 3",
-  },
-  ".sp-tests": {
-    gridArea: "2 / 3 / 3 / 4",
-  },
-});
 
 const defaultTemplate = SANDBOX_TEMPLATES["react-ts"];
 
