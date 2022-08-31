@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/codesandbox/sandpack/compare/v1.6.0...v1.7.0) (2022-08-31)
+
+
+### Features
+
+* **SandpackTests:** Add SandpackTests component ([#562](https://github.com/codesandbox/sandpack/issues/562)) ([1191f82](https://github.com/codesandbox/sandpack/commit/1191f82c643356a3ff5729edc81ef0b501f81edc))
+
+
+
+
+
 ## [1.5.4](https://github.com/codesandbox/sandpack/compare/v1.5.3...v1.5.4) (2022-08-22)
 
 
