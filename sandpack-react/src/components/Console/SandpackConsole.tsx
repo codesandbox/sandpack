@@ -136,6 +136,10 @@ const consoleItemClassName = css({
   /**
    * Editor reset
    */
+  ".sp-cm": {
+    padding: 0,
+  },
+
   ".cm-editor": {
     background: "none",
   },

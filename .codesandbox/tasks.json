@@ -53,11 +53,7 @@
     "dev:sandpack-react": {
       "name": "Storybook",
       "command": "yarn dev:react",
-      "runAtStart": true,
-      "preview": {
-        "port": 6006,
-        "pr-link": "direct"
-      }
+      "runAtStart": true
     },
     "dev:website-landing": {
       "name": "Website landing",
@@ -68,6 +64,10 @@
       "name": "Website theme",
       "command": "yarn dev:theme",
       "runAtStart": false
+    },
+    "yarn install": {
+      "name": "yarn install",
+      "command": "yarn install"
     }
   }
 }

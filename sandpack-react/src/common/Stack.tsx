@@ -13,7 +13,7 @@ export const stackClassName = css({
   width: "100%",
   position: "relative",
   backgroundColor: "$colors$surface1",
-  transition: "height $transitions$default",
+  transition: "flex $transitions$default",
   gap: 1, // border between components
 
   [`&:has(.${THEME_PREFIX}-stack)`]: {
