@@ -15,7 +15,7 @@ p {
   display: grid;
   grid-template-columns: 200px 400px 400px;
   grid-template-rows: repeat(2, 250px);
-  gap: 1;
+  gap: 1px;
 }
 
 .playground-grid .sp-file-explorer {

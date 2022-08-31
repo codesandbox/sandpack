@@ -107,7 +107,7 @@ export const Sandpack: SandpackInternal = (props) => {
       onClick={(): void => setConsoleVisibility((prev) => !prev)}
     />
   ) : undefined;
-  console.log(rightColumnItemHeight(consoleVisibility ? 1.5 : 1));
+
   return (
     <SandpackProvider
       customSetup={props.customSetup}
