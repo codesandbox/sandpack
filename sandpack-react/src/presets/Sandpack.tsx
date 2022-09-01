@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import type { CSSProperties } from "@stitches/core";
 import * as React from "react";
 
 import { SANDBOX_TEMPLATES, SandpackStack } from "..";
@@ -11,7 +10,7 @@ import { SandpackPreview } from "../components/Preview";
 import { SandpackTests } from "../components/Tests";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import { ConsoleIcon } from "../icons";
-import { css, THEME_PREFIX } from "../styles";
+import { css } from "../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
@@ -80,18 +79,17 @@ export const Sandpack: SandpackInternal = (props) => {
   const editorPart = props.options?.editorWidthPercentage || 50;
   const previewPart = 100 - editorPart;
 
-  const RightColumn =
-    props.options?.showConsole || props.options?.showConsoleButton
-      ? SandpackStack
-      : React.Fragment;
+  const hasRightColumn =
+    props.options?.showConsole || props.options?.showConsoleButton;
+  const RightColumn = hasRightColumn ? SandpackStack : React.Fragment;
 
   const rightColumnStyle = {
     flexGrow: previewPart,
     flexShrink: previewPart,
+    flexBasis: 0,
     minWidth: 700 * (previewPart / (previewPart + editorPart)),
     gap: consoleVisibility ? 1 : 0,
     height: props.options?.editorHeight, // use the original editor height
-    flex: 1,
   };
 
   /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
@@ -104,6 +102,10 @@ export const Sandpack: SandpackInternal = (props) => {
       onClick={(): void => setConsoleVisibility((prev) => !prev)}
     />
   ) : undefined;
+
+  React.useEffect(() => {
+    setConsoleVisibility(props.options?.showConsole ?? false);
+  }, [props.options?.showConsole]);
 
   return (
     <SandpackProvider
@@ -131,13 +133,19 @@ export const Sandpack: SandpackInternal = (props) => {
               actionsChildren={actionsChildren}
               showNavigator={props.options?.showNavigator}
               showRefreshButton={props.options?.showRefreshButton}
-              style={rightColumnStyle}
+              style={{
+                ...rightColumnStyle,
+                flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
+              }}
             />
           )}
           {mode === "tests" && (
             <SandpackTests
               actionsChildren={actionsChildren}
-              style={rightColumnStyle}
+              style={{
+                ...rightColumnStyle,
+                flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
+              }}
             />
           )}
 
