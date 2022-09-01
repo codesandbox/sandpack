@@ -1,10 +1,9 @@
-import {} from "@codesandbox/pitcher-client";
-
 /* eslint-disable no-console,@typescript-eslint/no-explicit-any,prefer-rest-params */
 import type { SandboxInfo } from "../..";
 import type { ClientOptions } from "../base";
 import { SandpackClient } from "../base";
 import { BranchInfoDTO } from "./types";
+import { WebsocketClient } from "./WebsocketClient";
 
 const getPitcherInstance = async (
   branchId = "e8ifyo"
@@ -15,7 +14,7 @@ const getPitcherInstance = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJDb2RlU2FuZGJveCIsImV4cCI6MTY2MjAyOTg4NCwiaWF0IjoxNjYyMDI5Mjg0LCJpc3MiOiJDb2RlU2FuZGJveCIsImp0aSI6IjlkMmYwZjQzLWQ0MDUtNDEyZi1hZWY1LTM4NTk3NDI3MWU5YSIsIm5iZiI6MTY2MjAyOTI4MywicGVybWlzc2lvbiI6InNvY2tldCIsInN1YiI6IlVzZXI6ZDNmYTU1NGYtZmNlNC00MjY2LTg2NGQtMTM1NDMzOTY4ZTEzIiwidHlwIjoiYWNjZXNzIn0.rPd3oSWig1Ku0DDQexf5pVF9OXC9XYIahXdbv-a0-q-EwSUPN5HGSrEfZWtZmKVn-LfIIft5bAW-bcxj0l0VnQ"`,
+        Authorization: `Bearer `,
       },
     }
   );
@@ -39,6 +38,31 @@ export class Server extends SandpackClient {
       this.iframe.contentWindow?.location.replace(
         managerResponse.previewURL.replace("$PORT", "3000")
       );
+
+      const websocketConnection = new WebsocketClient(
+        `${managerResponse.pitcherURL}/?token=${managerResponse.pitcherToken}&appId=codesandbox`
+      );
+
+      let lastActivity = Date.now();
+
+      websocketConnection.onOpen(() => {
+        lastActivity = Date.now();
+        // this.onConnectedEmitter.fire();
+      });
+
+      websocketConnection.onMessage(async (data) => {
+        lastActivity = Date.now();
+        if (typeof data !== "string") {
+          //   const msg = await websocketMessageIntoBuffer(data);
+          //   this.onMessageEmitter.fire(msg);
+        }
+      });
+
+      websocketConnection.onError((err) => {
+        // this.onErrorEmitter.fire(err);
+      });
+
+      websocketConnection.connect();
 
       Object.values(this.listener).forEach((callback) => {
         callback({ type: "done" });
