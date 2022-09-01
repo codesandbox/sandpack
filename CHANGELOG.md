@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/codesandbox/sandpack/compare/v1.7.1...v1.7.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* **sandpack preset:** fix columns size ([#566](https://github.com/codesandbox/sandpack/issues/566)) ([cad7273](https://github.com/codesandbox/sandpack/commit/cad72736e86cdff689e963fc0b535b262f99bae3))
+
+
+
+
+
 ## [1.7.1](https://github.com/codesandbox/sandpack/compare/v1.7.0...v1.7.1) (2022-08-31)
 
 
