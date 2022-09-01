@@ -1,9 +1,22 @@
+import {} from "@codesandbox/pitcher-client";
+
 /* eslint-disable no-console,@typescript-eslint/no-explicit-any,prefer-rest-params */
 import type { SandboxInfo } from "../..";
 import type { ClientOptions } from "../base";
 import { SandpackClient } from "../base";
 
-export class RuntimeServer extends SandpackClient {
+const getPitcherInstance = async (branchId = "fzm1q") => {
+  const data = await fetch(
+    `https://codesandbox.stream/api/beta/sandboxes/branches/${branchId}/instance`,
+    {
+      method: "POST",
+    }
+  );
+
+  console.log(data);
+};
+
+export class Server extends SandpackClient {
   element: Element;
   iframe: HTMLIFrameElement;
 
@@ -19,9 +32,7 @@ export class RuntimeServer extends SandpackClient {
       const element = document.querySelector(selector);
 
       if (!element) {
-        throw new Error(
-          `[sandpack-client]: the element '${selector}' was not found`
-        );
+        throw new Error(`[server]: the element '${selector}' was not found`);
       }
 
       this.element = element;
@@ -41,22 +52,26 @@ export class RuntimeServer extends SandpackClient {
     this.iframe.contentWindow?.location.replace(
       "https://en.wikipedia.org/wiki/Main_Page"
     );
+
+    getPitcherInstance();
   }
 
   updatePreview(): any {
-    console.log("[runtime-server]: updatePreview");
+    console.log("[server]: updatePreview");
   }
 
   cleanup(): void {
-    console.log("[runtime-server]: cleanup");
+    console.log("[server]: cleanup");
   }
 
   dispatch(): void {
-    console.log("[runtime-server]: dispatch");
+    console.log("[server]: dispatch");
+
+    return () => {};
   }
 
   listen(callback): any {
-    console.log("[runtime-server]: dispatch");
+    console.log("[server]: dispatch");
 
     const message = { type: "done" };
 
@@ -73,9 +88,7 @@ export class RuntimeServer extends SandpackClient {
 
     if (!this.element.parentNode) {
       // This should never happen
-      throw new Error(
-        `[sandpack-client]: the given iframe does not have a parent.`
-      );
+      throw new Error(`[server]: the given iframe does not have a parent.`);
     }
 
     this.element.parentNode.replaceChild(this.iframe, this.element);

@@ -28,6 +28,12 @@ build({
   format: "esm",
   outdir: "dist/esm",
   target: "es2019",
+  watch: {
+    onRebuild(error, result) {
+      if (error) console.error("watch build failed:", error);
+      else console.log("watch build succeeded:", result);
+    },
+  },
 }).catch((error) => {
   console.error(error);
   process.exit(1);

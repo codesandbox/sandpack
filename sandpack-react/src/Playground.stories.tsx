@@ -32,7 +32,7 @@ export const Main = (): JSX.Element => {
       showNavigator: true,
       showRefreshButton: true,
     },
-    Template: "react" as const,
+    Template: "nextjs" as const,
     Theme: "auto",
   });
 

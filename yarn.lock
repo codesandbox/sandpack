@@ -1538,6 +1538,40 @@
     style-mod "^4.0.0"
     w3c-keyname "^2.2.4"
 
+"@codesandbox/pitcher-client@latest":
+  version "0.133.0"
+  resolved "https://npm.pkg.github.com/download/@codesandbox/pitcher-client/0.133.0/479f5d27581b97a8eb13326ab96f2a0df12eec89#479f5d27581b97a8eb13326ab96f2a0df12eec89"
+  integrity sha512-56ZIaolUa/W7jV4Am/WDqkPD/oKzVfwaagW+D4B1ZWyaEhupzOEjzwtYXNjySXS0i5m1tJcwtXdo2riT5kSl0g==
+  dependencies:
+    "@codesandbox/pitcher-common" "^0.133.0"
+    "@codesandbox/pitcher-protocol" "^0.133.0"
+
+"@codesandbox/pitcher-common@^0.133.0":
+  version "0.133.0"
+  resolved "https://npm.pkg.github.com/download/@codesandbox/pitcher-common/0.133.0/ac440dda4f6fb9da829fff13e291f0b8bb726550#ac440dda4f6fb9da829fff13e291f0b8bb726550"
+  integrity sha512-LQ1M2csOP9u9/0VIxAR7qW39dA43MqFTVI4uSuccUvAxC6ESF/lSfHVids1UXDaGl+BLL4Ux8Jb2HEgZohYR2A==
+  dependencies:
+    "@emotion/hash" "^0.8.0"
+    cross-fetch "^3.1.4"
+    cuid "^2.1.8"
+    micromatch "^4.0.4"
+    oo-ascii-tree "^1.34.0"
+    p-queue "^6.6.2"
+    retry "^0.13.1"
+    strip-json-comments "^3.1.1"
+    tiny-invariant "^1.2.0"
+    ts-mixer "^6.0.0"
+    type-fest "^2.11.1"
+    vscode-diff "^2.0.1"
+
+"@codesandbox/pitcher-protocol@^0.133.0":
+  version "0.133.0"
+  resolved "https://npm.pkg.github.com/download/@codesandbox/pitcher-protocol/0.133.0/a517b5da7a2e6ef586c5b2502a88bd8953fe28de#a517b5da7a2e6ef586c5b2502a88bd8953fe28de"
+  integrity sha512-XAUkyqFa/ekKbkj9EQECHGOBXOzYZMiSmxvAvV6VJiKY1syEBbhpXK/8kmqJv9q7EPHE4uID1KwrRiq+/GupnQ==
+  dependencies:
+    "@codesandbox/pitcher-common" "^0.133.0"
+    "@msgpack/msgpack" "^2.7.1"
+
 "@colors/colors@1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
@@ -2236,7 +2270,7 @@
     "@emotion/utils" "0.11.3"
     babel-plugin-emotion "^10.0.27"
 
-"@emotion/hash@0.8.0":
+"@emotion/hash@0.8.0", "@emotion/hash@^0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.8.0.tgz#bbbff68978fefdbe68ccb533bc8cbe1d1afb5413"
   integrity sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow==
@@ -4107,6 +4141,11 @@
   dependencies:
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
+
+"@msgpack/msgpack@^2.7.1":
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@msgpack/msgpack/-/msgpack-2.7.2.tgz#f34b8aa0c49f0dd55eb7eba577081299cbf3f90b"
+  integrity sha512-rYEi46+gIzufyYUAoHDnRzkWGxajpD9vVXFQ3g1vbjrBm6P7MBmm+s/fqPa46sxa+8FOUdEuRQKaugo5a4JWpw==
 
 "@next/env@12.1.6":
   version "12.1.6"
@@ -10965,7 +11004,7 @@ cross-fetch@3.1.4:
   dependencies:
     node-fetch "2.6.1"
 
-cross-fetch@^3.1.5:
+cross-fetch@^3.1.4, cross-fetch@^3.1.5:
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.5.tgz#e1389f44d9e7ba767907f7af8454787952ab534f"
   integrity sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==
@@ -11435,6 +11474,11 @@ csurf@^1.9.0:
     cookie-signature "1.0.6"
     csrf "3.1.0"
     http-errors "~1.7.3"
+
+cuid@^2.1.8:
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/cuid/-/cuid-2.1.8.tgz#cbb88f954171e0d5747606c0139fb65c5101eac0"
+  integrity sha512-xiEMER6E7TlTPnDxrM4eRiC6TRgjNX9xzEZ5U/Se2YJKr7Mq4pJn/2XEHjl3STcSh96GmkHPcBXLES8M29wyyg==
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
@@ -20879,6 +20923,11 @@ onetime@^5.1.0, onetime@^5.1.2:
   dependencies:
     mimic-fn "^2.1.0"
 
+oo-ascii-tree@^1.34.0:
+  version "1.66.0"
+  resolved "https://registry.yarnpkg.com/oo-ascii-tree/-/oo-ascii-tree-1.66.0.tgz#4384daefa449b3e387f5f6de043cb1d79e53e40a"
+  integrity sha512-qWv4ygUPK2GfX/Pbm72IirXyzxz85bRRIrQQh0BG/kuHjHJk2H3yETL9ypnKP6q87+4179KFlzl740OQzPmosg==
+
 open@^7.0.2, open@^7.0.3, open@^7.3.0:
   version "7.4.2"
   resolved "https://registry.yarnpkg.com/open/-/open-7.4.2.tgz#b8147e26dcf3e426316c730089fd71edd29c2321"
@@ -26979,7 +27028,7 @@ timsort@^0.3.0:
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
-tiny-invariant@^1.0.2:
+tiny-invariant@^1.0.2, tiny-invariant@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.2.0.tgz#a1141f86b672a9148c72e978a19a73b9b94a15a9"
   integrity sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg==
@@ -27235,6 +27284,11 @@ ts-dedent@^2.0.0:
   resolved "https://registry.yarnpkg.com/ts-dedent/-/ts-dedent-2.2.0.tgz#39e4bd297cd036292ae2394eb3412be63f563bb5"
   integrity sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ==
 
+ts-mixer@^6.0.0:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/ts-mixer/-/ts-mixer-6.0.1.tgz#7c2627fb98047eb5f3c7f2fee39d1521d18fe87a"
+  integrity sha512-hvE+ZYXuINrx6Ei6D6hz+PTim0Uf++dYbK9FFifLNwQj+RwKquhQpn868yZsCtJYiclZF1u8l6WZxxKi+vv7Rg==
+
 ts-node@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-4.1.0.tgz#36d9529c7b90bb993306c408cd07f7743de20712"
@@ -27457,6 +27511,11 @@ type-fest@^0.8.0, type-fest@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
+
+type-fest@^2.11.1:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.19.0.tgz#88068015bb33036a598b952e55e9311a60fd3a9b"
+  integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
 
 type-fest@^2.5.0:
   version "2.12.2"
@@ -28249,6 +28308,11 @@ void-elements@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-3.1.0.tgz#614f7fbf8d801f0bb5f0661f5b2f5785750e4f09"
   integrity sha1-YU9/v42AHwu18GYfWy9XhXUOTwk=
+
+vscode-diff@^2.0.1:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/vscode-diff/-/vscode-diff-2.0.2.tgz#57ee766498f28835eccd9c4858f1fcfa13d256be"
+  integrity sha512-ic1x9f1hbSxCMci/gR04skY6X9DmRDnJuUkd9Y0dsvCQR5mWYBxB0MUMTl8vAYOpRWD1AAHzzsKOxqAvu9p8Uw==
 
 vscode-oniguruma@^1.6.1:
   version "1.6.2"

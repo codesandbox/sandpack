@@ -6,6 +6,7 @@ import type { SandpackClient as SandpackClientBase } from "./base";
 import type { ClientOptions } from "./base";
 import { Runtime } from "./runtime";
 import { RuntimeServer } from "./runtime-server";
+import { Server } from "./server";
 
 const templateEnvs: Array<[Template, typeof SandpackClientBase]> = [
   ["angular-cli", Runtime],
@@ -16,7 +17,7 @@ const templateEnvs: Array<[Template, typeof SandpackClientBase]> = [
   ["static", Runtime],
   ["svelte", Runtime],
   ["vue-cli", Runtime],
-  ["nextjs", RuntimeServer],
+  ["nextjs", Server],
 ];
 
 const templates = new Map(templateEnvs);
