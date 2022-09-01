@@ -19,7 +19,7 @@ const options = {
     ...(package.dependencies || {}),
     ...(package.devDependencies || {}),
     ...(package.peerDependencies || {}),
-  }).filter((dep) => dep !== "@codesandbox/pitcher-client"),
+  }),
   minify: true,
 };
 
