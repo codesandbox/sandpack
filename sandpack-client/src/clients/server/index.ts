@@ -2,8 +2,8 @@
 import type { SandboxInfo } from "../..";
 import type { ClientOptions } from "../base";
 import { SandpackClient } from "../base";
-import { BranchInfoDTO } from "./types";
-import { WebsocketClient } from "./WebsocketClient";
+
+import type { BranchInfoDTO } from "./types";
 
 const getPitcherInstance = async (
   branchId = "e8ifyo"
@@ -38,31 +38,6 @@ export class Server extends SandpackClient {
       this.iframe.contentWindow?.location.replace(
         managerResponse.previewURL.replace("$PORT", "3000")
       );
-
-      const websocketConnection = new WebsocketClient(
-        `${managerResponse.pitcherURL}/?token=${managerResponse.pitcherToken}&appId=codesandbox`
-      );
-
-      let lastActivity = Date.now();
-
-      websocketConnection.onOpen(() => {
-        lastActivity = Date.now();
-        // this.onConnectedEmitter.fire();
-      });
-
-      websocketConnection.onMessage(async (data) => {
-        lastActivity = Date.now();
-        if (typeof data !== "string") {
-          //   const msg = await websocketMessageIntoBuffer(data);
-          //   this.onMessageEmitter.fire(msg);
-        }
-      });
-
-      websocketConnection.onError((err) => {
-        // this.onErrorEmitter.fire(err);
-      });
-
-      websocketConnection.connect();
 
       Object.values(this.listener).forEach((callback) => {
         callback({ type: "done" });

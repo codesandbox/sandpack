@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "@types/lodash.isequal": "^4.5.2",
-    "@codesandbox/pitcher-client": "latest",
     "@types/node": "^9.3.0",
     "babel-loader": "^7.1.5",
     "core-js": "^3.7.0",
