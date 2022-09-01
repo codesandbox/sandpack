@@ -90,6 +90,42 @@ export class SandpackClient {
     this.options = options;
     this.sandboxInfo = sandboxInfo;
     this.selector = selector;
+
+    if (typeof selector === "string") {
+      this.selector = selector;
+      const element = document.querySelector(selector);
+
+      if (!element) {
+        throw new Error(`[server]: the element '${selector}' was not found`);
+      }
+
+      this.element = element;
+      this.iframe = document.createElement("iframe");
+      this.initializeElement();
+    } else {
+      this.element = selector;
+      this.iframe = selector;
+    }
+    if (!this.iframe.getAttribute("sandbox")) {
+      this.iframe.setAttribute(
+        "sandbox",
+        "allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      );
+    }
+  }
+
+  private initializeElement(): void {
+    this.iframe.style.border = "0";
+    this.iframe.style.width = this.options.width || "100%";
+    this.iframe.style.height = this.options.height || "100%";
+    this.iframe.style.overflow = "hidden";
+
+    if (!this.element.parentNode) {
+      // This should never happen
+      throw new Error(`[server]: the given iframe does not have a parent.`);
+    }
+
+    this.element.parentNode.replaceChild(this.iframe, this.element);
   }
 
   updateOptions(options: ClientOptions): void {

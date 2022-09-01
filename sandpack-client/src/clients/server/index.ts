@@ -4,21 +4,29 @@ import {} from "@codesandbox/pitcher-client";
 import type { SandboxInfo } from "../..";
 import type { ClientOptions } from "../base";
 import { SandpackClient } from "../base";
+import { BranchInfoDTO } from "./types";
 
-const getPitcherInstance = async (branchId = "fzm1q") => {
+const getPitcherInstance = async (
+  branchId = "e8ifyo"
+): Promise<BranchInfoDTO> => {
   const data = await fetch(
-    `https://codesandbox.stream/api/beta/sandboxes/branches/${branchId}/instance`,
+    `https://codesandbox.io/api/beta/sandboxes/branches/${branchId}/instance`,
     {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJDb2RlU2FuZGJveCIsImV4cCI6MTY2MjAyOTg4NCwiaWF0IjoxNjYyMDI5Mjg0LCJpc3MiOiJDb2RlU2FuZGJveCIsImp0aSI6IjlkMmYwZjQzLWQ0MDUtNDEyZi1hZWY1LTM4NTk3NDI3MWU5YSIsIm5iZiI6MTY2MjAyOTI4MywicGVybWlzc2lvbiI6InNvY2tldCIsInN1YiI6IlVzZXI6ZDNmYTU1NGYtZmNlNC00MjY2LTg2NGQtMTM1NDMzOTY4ZTEzIiwidHlwIjoiYWNjZXNzIn0.rPd3oSWig1Ku0DDQexf5pVF9OXC9XYIahXdbv-a0-q-EwSUPN5HGSrEfZWtZmKVn-LfIIft5bAW-bcxj0l0VnQ"`,
+      },
     }
   );
 
-  console.log(data);
+  const managerResponse = await data.json();
+
+  return managerResponse;
 };
 
 export class Server extends SandpackClient {
-  element: Element;
-  iframe: HTMLIFrameElement;
+  listener: Record<string, any> = {};
 
   constructor(
     selector: string | HTMLIFrameElement,
@@ -27,33 +35,15 @@ export class Server extends SandpackClient {
   ) {
     super(selector, sandboxInfo, options);
 
-    if (typeof selector === "string") {
-      this.selector = selector;
-      const element = document.querySelector(selector);
-
-      if (!element) {
-        throw new Error(`[server]: the element '${selector}' was not found`);
-      }
-
-      this.element = element;
-      this.iframe = document.createElement("iframe");
-      this.initializeElement();
-    } else {
-      this.element = selector;
-      this.iframe = selector;
-    }
-    if (!this.iframe.getAttribute("sandbox")) {
-      this.iframe.setAttribute(
-        "sandbox",
-        "allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+    getPitcherInstance().then((managerResponse) => {
+      this.iframe.contentWindow?.location.replace(
+        managerResponse.previewURL.replace("$PORT", "3000")
       );
-    }
 
-    this.iframe.contentWindow?.location.replace(
-      "https://en.wikipedia.org/wiki/Main_Page"
-    );
-
-    getPitcherInstance();
+      Object.values(this.listener).forEach((callback) => {
+        callback({ type: "done" });
+      });
+    });
   }
 
   updatePreview(): any {
@@ -66,31 +56,16 @@ export class Server extends SandpackClient {
 
   dispatch(): void {
     console.log("[server]: dispatch");
-
-    return () => {};
   }
 
-  listen(callback): any {
+  listen(callback: any): any {
     console.log("[server]: dispatch");
+    const id = Math.random().toString();
 
-    const message = { type: "done" };
+    this.listener[id] = callback;
 
-    callback(message);
-
-    return () => {};
-  }
-
-  private initializeElement(): void {
-    this.iframe.style.border = "0";
-    this.iframe.style.width = this.options.width || "100%";
-    this.iframe.style.height = this.options.height || "100%";
-    this.iframe.style.overflow = "hidden";
-
-    if (!this.element.parentNode) {
-      // This should never happen
-      throw new Error(`[server]: the given iframe does not have a parent.`);
-    }
-
-    this.element.parentNode.replaceChild(this.iframe, this.element);
+    return (): any => {
+      delete this.listener[id];
+    };
   }
 }
