@@ -83,3 +83,60 @@ export const set =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   <A extends Record<string, any>>(object: A): A =>
     cleanSet(object, path, value);
+
+export class ReactStringReplacer {
+  private _source: React.ReactNode[];
+
+  constructor(source: string) {
+    this._source = [source];
+  }
+
+  // Note: this algorithm assumes the regex is wrapped in a matching group so it can collect the odd indexes (matches)
+  public replace = (
+    regex: RegExp,
+    mapper: (match: string, index: number) => React.ReactNode
+  ): ReactStringReplacer => {
+    this._source = flatMap(this._source, (node) => {
+      if (typeof node === "string") {
+        return node
+          .split(regex)
+          .reduce<React.ReactNode[]>((acc, match, index) => {
+            if (index % 2 === 0) {
+              return acc.concat(match);
+            } else {
+              const element = mapper(match, index);
+              return acc.concat(element);
+            }
+          }, []);
+      } else {
+        return [node];
+      }
+    });
+
+    return this;
+  };
+
+  public match = (
+    regex: RegExp,
+    mapper: (matches: string[], index: number) => React.ReactNode
+  ): ReactStringReplacer => {
+    this._source = this._source.map((node, index) => {
+      if (typeof node === "string") {
+        const matches = node.split(regex);
+
+        // No matches so just return the node
+        if (matches.length < 2) {
+          return node;
+        } else {
+          return mapper(matches, index);
+        }
+      } else {
+        return [node];
+      }
+    });
+
+    return this;
+  };
+
+  public get = (): React.ReactNode => this._source;
+}
