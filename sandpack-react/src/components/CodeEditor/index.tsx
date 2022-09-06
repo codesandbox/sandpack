@@ -94,7 +94,7 @@ export const SandpackCodeEditor = React.forwardRef<
   ) => {
     const { sandpack } = useSandpack();
     const { code, updateCode, readOnly: readOnlyFile } = useActiveCode();
-    const { activeFile, status, editorState } = sandpack;
+    const { activeFile, initialCursor, status, editorState } = sandpack;
     const shouldShowTabs = showTabs ?? sandpack.visibleFiles.length > 1;
 
     const c = useClasser(THEME_PREFIX);
@@ -117,6 +117,7 @@ export const SandpackCodeEditor = React.forwardRef<
             extensionsKeymap={extensionsKeymap}
             filePath={activeFile}
             id={id}
+            initialCursor={initialCursor}
             initMode={initMode || sandpack.initMode}
             onCodeUpdate={handleCodeUpdate}
             readOnly={readOnly || readOnlyFile}

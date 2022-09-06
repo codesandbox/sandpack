@@ -31,6 +31,7 @@ import { THEME_PREFIX } from "../../styles";
 import type {
   EditorState as SandpackEditorState,
   SandpackInitMode,
+  Cursor,
 } from "../../types";
 import { shallowEqual } from "../../utils/array";
 import { classNames } from "../../utils/classNames";
@@ -64,6 +65,7 @@ export type Decorators = Array<{
 
 interface CodeMirrorProps {
   code: string;
+  initialCursor?: Cursor;
   filePath?: string;
   fileType?:
     | "js"
@@ -129,6 +131,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       id,
       extensions = [],
       extensionsKeymap = [],
+      initialCursor,
     },
     ref
   ) => {
@@ -284,9 +287,23 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           extensionList.push(highlightInlineError());
         }
 
+        let editorSelection: EditorSelection;
+
+        try {
+          const line = EditorState.create({ doc: code }).doc.line(
+            initialCursor?.line || 1
+          );
+          editorSelection = EditorSelection.single(
+            line.from + (initialCursor?.column || 0)
+          );
+        } catch (e) {
+          editorSelection = EditorSelection.single(0);
+        }
+
         const startState = EditorState.create({
           doc: code,
           extensions: extensionList,
+          selection: editorSelection,
         });
 
         const parentDiv = wrapper.current;
@@ -323,6 +340,11 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           view.contentDOM.classList.add("cm-readonly");
         }
 
+        if (initialCursor) {
+          view.focus();
+          view.scrollPosIntoView(editorSelection.ranges[0].from);
+        }
+
         cmView.current = view;
       }, 0);
 
@@ -340,6 +362,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       themeId,
       sortedDecorators,
       readOnly,
+      initialCursor,
     ]);
 
     React.useEffect(
