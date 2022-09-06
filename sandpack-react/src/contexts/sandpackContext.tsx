@@ -618,7 +618,7 @@ export class SandpackProviderClass extends React.PureComponent<
     const {
       files,
       activeFile,
-      initialCursor: initialSelection,
+      initialCursor,
       visibleFiles,
       visibleFilesFromProps,
       startRoute,
@@ -636,7 +636,7 @@ export class SandpackProviderClass extends React.PureComponent<
       visibleFiles,
       visibleFilesFromProps,
       activeFile,
-      initialCursor: initialSelection,
+      initialCursor,
       startRoute,
       error,
       bundlerState,

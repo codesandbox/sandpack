@@ -4,6 +4,7 @@ import { SandpackStack } from "../../common";
 import { Loading } from "../../common/Loading";
 import { useSandpackTheme, useSandpackClient } from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
+import type { Cursor } from "../../types";
 import { classNames } from "../../utils/classNames";
 
 import { Header } from "./Header";
@@ -359,8 +360,8 @@ export const SandpackTests: React.FC<
     [runSpec, runAllTests, state.watchMode, isSpecOpen]
   );
 
-  const openSpec = (file: string): void => {
-    sandpack.setActiveFile(file);
+  const openSpec = (file: string, cursor?: Cursor): void => {
+    sandpack.setActiveFile(file, cursor);
   };
 
   const specs = Object.values(state.specs);

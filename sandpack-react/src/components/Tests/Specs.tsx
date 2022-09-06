@@ -3,6 +3,7 @@ import * as React from "react";
 
 import { css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
+import type { Cursor } from "../../types";
 import { classNames } from "../../utils/classNames";
 
 import type { Describe } from "./Describes";
@@ -24,7 +25,7 @@ interface Props {
   specs: Spec[];
   verbose: boolean;
   status: Status;
-  openSpec: (name: string) => void;
+  openSpec: (name: string, cursor?: Cursor) => void;
 }
 
 const fileContainer = css({
@@ -93,7 +94,11 @@ export const Specs: React.FC<Props> = ({
                 onClick={(): void => openSpec(spec.name)}
                 path={spec.name}
               />
-              <FormattedError error={spec.error} path={spec.name} />
+              <FormattedError
+                error={spec.error}
+                openSpec={(cursor): void => openSpec(spec.name, cursor)}
+                path={spec.name}
+              />
             </div>
           );
         }
@@ -162,6 +167,7 @@ export const Specs: React.FC<Props> = ({
                     <FormattedError
                       key={`failing-${test.name}-error`}
                       error={e}
+                      openSpec={(cursor): void => openSpec(spec.name, cursor)}
                       path={test.path}
                     />
                   ))}

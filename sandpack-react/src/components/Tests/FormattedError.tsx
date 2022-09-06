@@ -3,6 +3,7 @@ import * as React from "react";
 
 import { css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
+import type { Cursor } from "../../types";
 import { classNames } from "../../utils/classNames";
 
 import {
@@ -15,6 +16,7 @@ import { ReactStringReplacer } from "./utils";
 interface Props {
   error: TestError;
   path: string;
+  openSpec: (cursor: Cursor) => void;
 }
 
 const containerClassName = css({
@@ -22,6 +24,13 @@ const containerClassName = css({
   fontSize: "$font$size",
   padding: "$space$2",
   whiteSpace: "pre-wrap",
+});
+
+const matcherButtonClassName = css({
+  fontFamily: "$font$mono",
+  cursor: "pointer",
+  display: "inline-block",
+  padding: "0",
 });
 
 const matcherClassName = css({
@@ -34,7 +43,7 @@ const matcherClassName = css({
 const makeMargin = (length: number): string =>
   Array.from({ length }, () => " ").join("");
 
-export const FormattedError: React.FC<Props> = ({ error, path }) => {
+export const FormattedError: React.FC<Props> = ({ error, path, openSpec }) => {
   if (!error.matcherResult) {
     return (
       <div
@@ -97,7 +106,17 @@ export const FormattedError: React.FC<Props> = ({ error, path }) => {
                 <span>{$1}</span>
                 <span className={failTextClassName}>{$2}</span>
                 <span>{$3}</span>
-                <span className={classNames(matcherClassName)}>{$4}</span>
+                <button
+                  className={classNames(
+                    buttonClassName,
+                    matcherButtonClassName
+                  )}
+                  onClick={(): void =>
+                    openSpec({ line: code.lineNumber, column: matcherColumn })
+                  }
+                >
+                  <span className={classNames(matcherClassName)}>{$4}</span>
+                </button>
                 <span>{$5}</span>
                 <span className={passTextClassName}>{$6}</span>
                 <span>{$7}</span>
