@@ -196,6 +196,7 @@ export const getLanguageFromFile = (
     case "shell":
     case "bash":
     case "zsh":
+    case "fish":
       return "shell";
     default:
       return "markdown";
