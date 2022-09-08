@@ -8,7 +8,7 @@ import { SandpackStack } from "../../common/Stack";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
 import { THEME_PREFIX } from "../../styles";
-import type { SandpackInitMode } from "../../types";
+import type { CustomLanguage, SandpackInitMode } from "../../types";
 import { classNames } from "../../utils/classNames";
 import { FileTabs } from "../FileTabs";
 
@@ -63,6 +63,12 @@ export interface CodeEditorProps {
    * appears when `readOnly` is `true`
    */
   showReadOnly?: boolean;
+  /**
+   * Provides a way to add custom language modes by supplying a language
+   * type, applicable file extensions, and a LanguageSupport instance
+   * for that syntax mode
+   */
+  additionalLanguages?: CustomLanguage[];
 }
 
 export { CodeMirror as CodeEditor };
@@ -89,6 +95,7 @@ export const SandpackCodeEditor = React.forwardRef<
       id,
       readOnly,
       showReadOnly,
+      additionalLanguages,
     },
     ref
   ) => {
@@ -111,6 +118,7 @@ export const SandpackCodeEditor = React.forwardRef<
           <CodeMirror
             key={activeFile}
             ref={ref}
+            additionalLanguages={additionalLanguages}
             code={code}
             editorState={editorState}
             extensions={extensions}

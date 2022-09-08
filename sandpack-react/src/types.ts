@@ -424,7 +424,6 @@ interface SandpackRootProps<
   template?: TemplateName;
   customSetup?: SandpackSetup;
   theme?: SandpackThemeProp;
-  additionalLanguages?: CustomLanguage[];
 }
 
 /**
@@ -553,7 +552,6 @@ export interface SandpackState {
   editorState: EditorState;
   error: SandpackError | null;
   files: SandpackBundlerFiles;
-  additionalLanguages: CustomLanguage[];
   environment?: SandboxEnvironment;
   status: SandpackStatus;
   initMode: SandpackInitMode;
@@ -637,6 +635,12 @@ export interface SandpackCodeOptions {
    * Property to register CodeMirror extension keymap.
    */
   extensionsKeymap?: CodeEditorProps["extensionsKeymap"];
+  /**
+   * Provides a way to add custom language modes by supplying a language
+   * type, applicable file extensions, and a LanguageSupport instance
+   * for that syntax mode
+   */
+  additionalLanguages?: CodeEditorProps["additionalLanguages"];
 }
 
 /**
@@ -672,5 +676,4 @@ export interface SandpackProviderState {
   sandpackStatus: SandpackStatus;
   editorState: EditorState;
   reactDevTools?: ReactDevToolsMode;
-  additionalLanguages: CustomLanguage[];
 }

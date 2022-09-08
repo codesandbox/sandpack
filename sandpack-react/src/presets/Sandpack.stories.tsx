@@ -1,5 +1,4 @@
 import { LanguageSupport } from "@codemirror/language";
-import { python } from "@codemirror/legacy-modes/mode/python";
 import { shell } from "@codemirror/legacy-modes/mode/shell";
 import { StreamLanguage } from "@codemirror/stream-parser";
 import React from "react";
@@ -293,28 +292,10 @@ export const ShowConsoleButton: React.FC = () => (
 
 export const CustomLanguages: React.FC = () => (
   <Sandpack
-    additionalLanguages={[
-      {
-        name: "python",
-        extensions: ["py"],
-        language: new LanguageSupport(StreamLanguage.define(python)),
-      },
-      {
-        name: "shell",
-        extensions: ["sh"],
-        language: new LanguageSupport(StreamLanguage.define(shell)),
-      },
-    ]}
     customSetup={{
-      entry: "/example.py",
+      entry: "/example.sh",
     }}
     files={{
-      "/example.py": `import os
-
-api_token = os.environ['API_TOKEN']
-
-# Prints the api_token variable
-print("API token:", api_token)`,
       "/example.sh": `#!/bin/sh
 
 EXAMPLE="drawn joyed"
@@ -323,6 +304,29 @@ EXAMPLE="drawn joyed"
 function show-example() {
   echo $EXAMPLE
 }`,
+      "/example.bat": `@echo off 
+
+Rem Prints the "example" variable
+
+set example=Hello World 
+
+echo %example%`,
+      "/example.ps1": `$example = "Hello world"
+
+# Prints the "example" variable
+
+Write-Output $example`,
+    }}
+    options={{
+      codeEditor: {
+        additionalLanguages: [
+          {
+            name: "shell",
+            extensions: ["sh", "bat", "ps1"],
+            language: new LanguageSupport(StreamLanguage.define(shell)),
+          },
+        ],
+      },
     }}
   />
 );

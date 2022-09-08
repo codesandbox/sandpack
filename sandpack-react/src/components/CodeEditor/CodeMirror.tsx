@@ -29,6 +29,7 @@ import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
 import { THEME_PREFIX } from "../../styles";
 import type {
+  CustomLanguage,
   EditorState as SandpackEditorState,
   SandpackInitMode,
 } from "../../types";
@@ -92,6 +93,12 @@ interface CodeMirrorProps {
   id?: string;
   extensions?: Extension[];
   extensionsKeymap?: KeyBinding[];
+  /**
+   * Provides a way to add custom language modes by supplying a language
+   * type, applicable file extensions, and a LanguageSupport instance
+   * for that syntax mode
+   */
+  additionalLanguages?: CustomLanguage[];
 }
 
 export interface CodeMirrorRef {
@@ -119,6 +126,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       id,
       extensions = [],
       extensionsKeymap = [],
+      additionalLanguages = [],
     },
     ref
   ) => {
@@ -134,10 +142,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     );
 
     const c = useClasser(THEME_PREFIX);
-    const {
-      listen,
-      sandpack: { additionalLanguages },
-    } = useSandpack();
+    const { listen } = useSandpack();
     const ariaId = useGeneratedId(id);
 
     const prevExtension = React.useRef<Extension[]>([]);

@@ -100,16 +100,15 @@ export const Markdown: React.FC = () => (
 );
 
 export const CustomLanguageShell: React.FC = () => (
-  <SandpackProvider
-    additionalLanguages={[
-      {
-        name: "shell",
-        extensions: ["sh"],
-        language: new LanguageSupport(StreamLanguage.define(shell)),
-      },
-    ]}
-  >
+  <SandpackProvider>
     <CodeEditor
+      additionalLanguages={[
+        {
+          name: "shell",
+          extensions: ["sh"],
+          language: new LanguageSupport(StreamLanguage.define(shell)),
+        },
+      ]}
       code={mocks.shell}
       filePath="example.sh"
       id="shell"
@@ -120,16 +119,15 @@ export const CustomLanguageShell: React.FC = () => (
 );
 
 export const CustomLanguagePython: React.FC = () => (
-  <SandpackProvider
-    additionalLanguages={[
-      {
-        name: "python",
-        extensions: ["py"],
-        language: new LanguageSupport(StreamLanguage.define(python)),
-      },
-    ]}
-  >
+  <SandpackProvider>
     <CodeEditor
+      additionalLanguages={[
+        {
+          name: "python",
+          extensions: ["py"],
+          language: new LanguageSupport(StreamLanguage.define(python)),
+        },
+      ]}
       code={mocks.python}
       fileType="python"
       id="python"

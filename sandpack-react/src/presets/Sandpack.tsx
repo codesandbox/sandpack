@@ -41,6 +41,7 @@ export const Sandpack: SandpackInternal = (props) => {
     readOnly: props.options?.readOnly,
     showReadOnly: props.options?.showReadOnly,
     id: props.options?.id,
+    additionalLanguages: props.options?.codeEditor?.additionalLanguages,
   };
 
   const providerOptions: SandpackInternalOptions<
@@ -109,7 +110,6 @@ export const Sandpack: SandpackInternal = (props) => {
 
   return (
     <SandpackProvider
-      additionalLanguages={props.additionalLanguages}
       customSetup={props.customSetup}
       files={props.files as TemplateFiles<SandpackPredefinedTemplate>}
       options={providerOptions}
