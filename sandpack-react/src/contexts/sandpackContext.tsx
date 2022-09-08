@@ -82,6 +82,7 @@ export class SandpackProviderClass extends React.PureComponent<
       editorState: "pristine",
       initMode: this.props.options?.initMode || "lazy",
       reactDevTools: undefined,
+      additionalLanguages: this.props.additionalLanguages || [],
     };
 
     /**
@@ -625,6 +626,7 @@ export class SandpackProviderClass extends React.PureComponent<
       sandpackStatus,
       environment,
       initMode,
+      additionalLanguages,
     } = this.state;
 
     return {
@@ -639,6 +641,7 @@ export class SandpackProviderClass extends React.PureComponent<
       status: sandpackStatus,
       editorState,
       initMode,
+      additionalLanguages,
       clients: this.clients,
 
       dispatch: this.dispatchMessage,

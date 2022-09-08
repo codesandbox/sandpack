@@ -16,8 +16,8 @@ const highlightTheme = getSyntaxHighlight(defaultLight);
 describe(useSyntaxHighlight, () => {
   Object.entries(mocks).forEach(([fileType, code]) => {
     it(`renders a ${fileType} block`, () => {
-      const languageExtension = getLanguageFromFile("", fileType);
-      const langSupport = getCodeMirrorLanguage(languageExtension);
+      const languageExtension = getLanguageFromFile("", fileType, []);
+      const langSupport = getCodeMirrorLanguage(languageExtension, []);
 
       const reactElements = useSyntaxHighlight({
         code,

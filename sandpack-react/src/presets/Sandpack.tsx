@@ -109,6 +109,7 @@ export const Sandpack: SandpackInternal = (props) => {
 
   return (
     <SandpackProvider
+      additionalLanguages={props.additionalLanguages}
       customSetup={props.customSetup}
       files={props.files as TemplateFiles<SandpackPredefinedTemplate>}
       options={providerOptions}

@@ -1,3 +1,7 @@
+import { LanguageSupport } from "@codemirror/language";
+import { python } from "@codemirror/legacy-modes/mode/python";
+import { shell } from "@codemirror/legacy-modes/mode/shell";
+import { StreamLanguage } from "@codemirror/stream-parser";
 import React from "react";
 
 import { Sandpack } from "../";
@@ -285,4 +289,40 @@ export const ShowConsoleButton: React.FC = () => (
       template="react"
     />
   </div>
+);
+
+export const CustomLanguages: React.FC = () => (
+  <Sandpack
+    additionalLanguages={[
+      {
+        name: "python",
+        extensions: ["py"],
+        language: new LanguageSupport(StreamLanguage.define(python)),
+      },
+      {
+        name: "shell",
+        extensions: ["sh"],
+        language: new LanguageSupport(StreamLanguage.define(shell)),
+      },
+    ]}
+    customSetup={{
+      entry: "/example.py",
+    }}
+    files={{
+      "/example.py": `import os
+
+api_token = os.environ['API_TOKEN']
+
+# Prints the api_token variable
+print("API token:", api_token)`,
+      "/example.sh": `#!/bin/sh
+
+EXAMPLE="drawn joyed"
+
+# Prints the EXAMPLE variable
+function show-example() {
+  echo $EXAMPLE
+}`,
+    }}
+  />
 );

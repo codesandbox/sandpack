@@ -1,3 +1,7 @@
+import { LanguageSupport } from "@codemirror/language";
+import { python } from "@codemirror/legacy-modes/mode/python";
+import { shell } from "@codemirror/legacy-modes/mode/shell";
+import { StreamLanguage } from "@codemirror/stream-parser";
 import * as React from "react";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
@@ -89,6 +93,46 @@ export const Markdown: React.FC = () => (
       code={mocks.markdown}
       fileType="markdown"
       id="markdown"
+      initMode="immediate"
+      showLineNumbers={false}
+    />
+  </SandpackProvider>
+);
+
+export const CustomLanguageShell: React.FC = () => (
+  <SandpackProvider
+    additionalLanguages={[
+      {
+        name: "shell",
+        extensions: ["sh"],
+        language: new LanguageSupport(StreamLanguage.define(shell)),
+      },
+    ]}
+  >
+    <CodeEditor
+      code={mocks.shell}
+      filePath="example.sh"
+      id="shell"
+      initMode="immediate"
+      showLineNumbers={false}
+    />
+  </SandpackProvider>
+);
+
+export const CustomLanguagePython: React.FC = () => (
+  <SandpackProvider
+    additionalLanguages={[
+      {
+        name: "python",
+        extensions: ["py"],
+        language: new LanguageSupport(StreamLanguage.define(python)),
+      },
+    ]}
+  >
+    <CodeEditor
+      code={mocks.python}
+      fileType="python"
+      id="python"
       initMode="immediate"
       showLineNumbers={false}
     />

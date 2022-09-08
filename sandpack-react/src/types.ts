@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { LanguageSupport } from "@codemirror/language";
 import type {
   BundlerState,
   ListenerFunction,
@@ -271,6 +272,15 @@ export interface SandpackFile {
 export type SandpackInitMode = "immediate" | "lazy" | "user-visible";
 
 /**
+ * @category Setup
+ */
+export interface CustomLanguage {
+  name: string;
+  extensions: string[];
+  language: LanguageSupport;
+}
+
+/**
  * @category Theme
  */
 export type SandpackPredefinedTheme = "light" | "dark" | "auto";
@@ -414,6 +424,7 @@ interface SandpackRootProps<
   template?: TemplateName;
   customSetup?: SandpackSetup;
   theme?: SandpackThemeProp;
+  additionalLanguages?: CustomLanguage[];
 }
 
 /**
@@ -542,6 +553,7 @@ export interface SandpackState {
   editorState: EditorState;
   error: SandpackError | null;
   files: SandpackBundlerFiles;
+  additionalLanguages: CustomLanguage[];
   environment?: SandboxEnvironment;
   status: SandpackStatus;
   initMode: SandpackInitMode;
@@ -660,4 +672,5 @@ export interface SandpackProviderState {
   sandpackStatus: SandpackStatus;
   editorState: EditorState;
   reactDevTools?: ReactDevToolsMode;
+  additionalLanguages: CustomLanguage[];
 }

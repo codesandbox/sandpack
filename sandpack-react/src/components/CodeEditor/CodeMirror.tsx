@@ -65,17 +65,7 @@ export type Decorators = Array<{
 interface CodeMirrorProps {
   code: string;
   filePath?: string;
-  fileType?:
-    | "js"
-    | "jsx"
-    | "ts"
-    | "tsx"
-    | "css"
-    | "scss"
-    | "less"
-    | "html"
-    | "vue"
-    | "markdown";
+  fileType?: string;
   onCodeUpdate?: (newCode: string) => void;
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
@@ -144,7 +134,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     );
 
     const c = useClasser(THEME_PREFIX);
-    const { listen } = useSandpack();
+    const {
+      listen,
+      sandpack: { additionalLanguages },
+    } = useSandpack();
     const ariaId = useGeneratedId(id);
 
     const prevExtension = React.useRef<Extension[]>([]);
@@ -167,8 +160,15 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       }
     }, [initMode, isIntersecting]);
 
-    const languageExtension = getLanguageFromFile(filePath, fileType);
-    const langSupport = getCodeMirrorLanguage(languageExtension);
+    const languageExtension = getLanguageFromFile(
+      filePath,
+      fileType,
+      additionalLanguages
+    );
+    const langSupport = getCodeMirrorLanguage(
+      languageExtension,
+      additionalLanguages
+    );
     const highlightTheme = getSyntaxHighlight(theme);
 
     const syntaxHighlightRender = useSyntaxHighlight({
