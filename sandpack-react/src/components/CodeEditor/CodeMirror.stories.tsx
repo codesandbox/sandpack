@@ -1,5 +1,5 @@
+import { python } from "@codemirror/lang-python";
 import { LanguageSupport } from "@codemirror/language";
-import { python } from "@codemirror/legacy-modes/mode/python";
 import { shell } from "@codemirror/legacy-modes/mode/shell";
 import { StreamLanguage } from "@codemirror/stream-parser";
 import * as React from "react";
@@ -125,7 +125,7 @@ export const CustomLanguagePython: React.FC = () => (
         {
           name: "python",
           extensions: ["py"],
-          language: new LanguageSupport(StreamLanguage.define(python)),
+          language: python(),
         },
       ]}
       code={mocks.python}
