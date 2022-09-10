@@ -1909,6 +1909,21 @@
     "@types/react-router-dom" "*"
     react-helmet-async "*"
 
+"@docusaurus/plugin-client-redirects@2.0.0-beta.20":
+  version "2.0.0-beta.20"
+  resolved "https://registry.yarnpkg.com/@docusaurus/plugin-client-redirects/-/plugin-client-redirects-2.0.0-beta.20.tgz#f4bbe5958bbcc7915968c23d99dcfcbfe82df8d2"
+  integrity sha512-YgIDFpr2EDpLwYUtq1t6VD7EOsD3YqA6biXkQmgts1gjFZ1pqVte6Q+tXVzwvL/xR7NdnekevygmS98/IPNePQ==
+  dependencies:
+    "@docusaurus/core" "2.0.0-beta.20"
+    "@docusaurus/logger" "2.0.0-beta.20"
+    "@docusaurus/utils" "2.0.0-beta.20"
+    "@docusaurus/utils-common" "2.0.0-beta.20"
+    "@docusaurus/utils-validation" "2.0.0-beta.20"
+    eta "^1.12.3"
+    fs-extra "^10.1.0"
+    lodash "^4.17.21"
+    tslib "^2.4.0"
+
 "@docusaurus/plugin-content-blog@2.0.0-beta.20":
   version "2.0.0-beta.20"
   resolved "https://registry.yarnpkg.com/@docusaurus/plugin-content-blog/-/plugin-content-blog-2.0.0-beta.20.tgz#7c0d413ac8df9a422a0b3ddd90b77ec491bbda15"
