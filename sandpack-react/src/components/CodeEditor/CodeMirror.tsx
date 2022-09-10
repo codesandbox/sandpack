@@ -63,10 +63,21 @@ export type Decorators = Array<{
   elementAttributes?: Record<string, string>;
 }>;
 
-interface CodeMirrorProps {
+interface CodeMirrorProps<ExtraFileType extends CustomLanguage[]> {
   code: string;
   filePath?: string;
-  fileType?: string;
+  fileType?:
+    | "js"
+    | "jsx"
+    | "ts"
+    | "tsx"
+    | "css"
+    | "scss"
+    | "less"
+    | "html"
+    | "vue"
+    | "markdown"
+    | ExtraFileType[number]["name"];
   onCodeUpdate?: (newCode: string) => void;
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
@@ -105,10 +116,18 @@ export interface CodeMirrorRef {
   getCodemirror: () => EditorView | undefined;
 }
 
+interface CodeMirrorElement {
+  <ExtraFileType extends CustomLanguage[]>(
+    props: CodeMirrorProps<ExtraFileType> & {
+      additionalLanguages?: ExtraFileType;
+    } & React.RefAttributes<CodeMirrorRef>
+  ): JSX.Element | null;
+}
+
 /**
  * @category Components
  */
-export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
+export const CodeMirror: CodeMirrorElement = React.forwardRef(
   (
     {
       code,
