@@ -16,6 +16,17 @@ module.exports = {
   themes: ["@codesandbox/sandpack-docusaurus"],
 
   plugins: [
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        redirects: [
+          {
+            to: "//docs/getting-started/ssr",
+            from: "/docs/getting-started/ssr",
+          },
+        ],
+      },
+    ],
     function pluginAmplitude() {
       return {
         name: "docusaurus-plugin-amplitude",
