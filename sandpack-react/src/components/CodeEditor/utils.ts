@@ -198,7 +198,7 @@ export const getLanguageFromFile = (
     case "scss":
       return "css";
     case "md":
-      return "markdown";
+    case "markdown":
     default:
       return "markdown";
   }

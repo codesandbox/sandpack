@@ -104,7 +104,7 @@ export const CustomLanguageShell: React.FC = () => (
     <CodeEditor
       additionalLanguages={[
         {
-          name: "shell" as const,
+          name: "shell",
           extensions: ["sh"],
           language: new LanguageSupport(StreamLanguage.define(shell)),
         },
@@ -123,13 +123,13 @@ export const CustomLanguagePython: React.FC = () => (
     <CodeEditor
       additionalLanguages={[
         {
-          name: "python" as const, // TODO: how to convert it to a union type instead of a string?
+          name: "python",
           extensions: ["py"],
           language: python(),
         },
       ]}
       code={mocks.python}
-      fileType="pytho"
+      fileType="python"
       id="python"
       initMode="immediate"
       showLineNumbers={false}
