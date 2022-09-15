@@ -41,6 +41,7 @@ export const Sandpack: SandpackInternal = (props) => {
     readOnly: props.options?.readOnly,
     showReadOnly: props.options?.showReadOnly,
     id: props.options?.id,
+    additionalLanguages: props.options?.codeEditor?.additionalLanguages,
   };
 
   const providerOptions: SandpackInternalOptions<

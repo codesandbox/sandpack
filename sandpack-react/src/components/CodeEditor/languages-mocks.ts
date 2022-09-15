@@ -98,3 +98,19 @@ export const markdown = `## Title
 - List item
 - List item
 - List item`;
+
+export const shell = `#!/bin/sh
+
+EXAMPLE="drawn joyed"
+
+# Prints the EXAMPLE variable
+function show-example() {
+  echo $EXAMPLE
+}`;
+
+export const python = `import os
+
+api_token = os.environ['API_TOKEN']
+
+# Prints the api_token variable
+print("API token:", api_token)`;

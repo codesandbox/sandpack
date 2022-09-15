@@ -1,3 +1,6 @@
+import { LanguageSupport } from "@codemirror/language";
+import { shell } from "@codemirror/legacy-modes/mode/shell";
+import { StreamLanguage } from "@codemirror/stream-parser";
 import React from "react";
 
 import { Sandpack } from "../";
@@ -285,4 +288,45 @@ export const ShowConsoleButton: React.FC = () => (
       template="react"
     />
   </div>
+);
+
+export const CustomLanguages: React.FC = () => (
+  <Sandpack
+    customSetup={{
+      entry: "/example.sh",
+    }}
+    files={{
+      "/example.sh": `#!/bin/sh
+
+EXAMPLE="drawn joyed"
+
+# Prints the EXAMPLE variable
+function show-example() {
+  echo $EXAMPLE
+}`,
+      "/example.bat": `@echo off 
+
+Rem Prints the "example" variable
+
+set example=Hello World 
+
+echo %example%`,
+      "/example.ps1": `$example = "Hello world"
+
+# Prints the "example" variable
+
+Write-Output $example`,
+    }}
+    options={{
+      codeEditor: {
+        additionalLanguages: [
+          {
+            name: "shell",
+            extensions: ["sh", "bat", "ps1"],
+            language: new LanguageSupport(StreamLanguage.define(shell)),
+          },
+        ],
+      },
+    }}
+  />
 );

@@ -19,7 +19,7 @@
     "lint": "eslint '**/*.ts?(x)' --fix",
     "format:check": "prettier --check '**/*.{ts,tsx}'",
     "format": "prettier --write '**/*.{ts,tsx,js,jsx}'",
-    "test": "TEST_ENV=true jest sandpack-react sandpack-client",
+    "test": "TEST_ENV=true jest sandpack-react sandpack-client --transformIgnorePatterns \"node_modules/(?!@codemirror)/\"",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "build": "yarn workspace @codesandbox/sandpack-client build && yarn workspace @codesandbox/sandpack-react build && yarn workspace @codesandbox/sandpack-themes build",
