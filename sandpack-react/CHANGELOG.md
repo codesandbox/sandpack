@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/codesandbox/sandpack/compare/v1.7.2...v1.8.0) (2022-09-15)
+
+
+### Features
+
+* **codeeditor:** support additional, user-supplied language modes ([#570](https://github.com/codesandbox/sandpack/issues/570)) ([a746ae3](https://github.com/codesandbox/sandpack/commit/a746ae3ae700bf3b64b8e14e5caee3cb57dd307d))
+
+
+
+
+
 ## [1.7.2](https://github.com/codesandbox/sandpack/compare/v1.7.1...v1.7.2) (2022-09-01)
 
 
