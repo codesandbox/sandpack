@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/codesandbox/sandpack/compare/v1.8.0...v1.8.1) (2022-09-26)
+
+
+### Bug Fixes
+
+* **file-explorer:** trim and avoid shrinks the icon on long file names ([#578](https://github.com/codesandbox/sandpack/issues/578)) ([bc12d03](https://github.com/codesandbox/sandpack/commit/bc12d0347743065a68f4af6ac65719e9c0dbf954))
+
+
+
+
+
 # [1.8.0](https://github.com/codesandbox/sandpack/compare/v1.7.2...v1.8.0) (2022-09-15)
 
 
