@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.3](https://github.com/codesandbox/sandpack/compare/v1.8.2...v1.8.3) (2022-09-27)
+
+
+### Bug Fixes
+
+* **codemirror:** avoid Escape keybinding conflict ([#581](https://github.com/codesandbox/sandpack/issues/581)) ([61e615c](https://github.com/codesandbox/sandpack/commit/61e615c38a6e0a42c4f436d475eba8af2c26aa01))
+
+
+
+
+
 ## [1.8.2](https://github.com/codesandbox/sandpack/compare/v1.8.1...v1.8.2) (2022-09-27)
 
 
