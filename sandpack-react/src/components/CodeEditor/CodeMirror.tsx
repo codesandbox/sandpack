@@ -225,8 +225,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             run: (): boolean => {
               if (readOnly) return true;
 
-              console.log(extensions);
-
               if (wrapper.current) {
                 wrapper.current.focus();
               }
