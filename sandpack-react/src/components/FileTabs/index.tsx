@@ -17,33 +17,31 @@ const tabsClassName = css({
   background: "$colors$surface1",
 });
 
-const tabsScrollableClassName: () => CssComponent = () =>
-  css({
-    padding: "0 $space$2",
-    overflow: "auto",
-    display: "flex",
-    flexWrap: "nowrap",
-    alignItems: "stretch",
-    minHeight: "40px",
-    marginBottom: "-1px",
-  });
+const tabsScrollableClassName = css({
+  padding: "0 $space$2",
+  overflow: "auto",
+  display: "flex",
+  flexWrap: "nowrap",
+  alignItems: "stretch",
+  minHeight: "40px",
+  marginBottom: "-1px",
+});
 
-const closeButtonClassName: () => CssComponent = () =>
-  css({
-    padding: "0 $space$1 0 $space$1",
-    borderRadius: "$border$radius",
-    marginLeft: "$space$1",
-    width: "$space$5",
-    visibility: "hidden",
+const closeButtonClassName = css({
+  padding: "0 $space$1 0 $space$1",
+  borderRadius: "$border$radius",
+  marginLeft: "$space$1",
+  width: "$space$5",
+  visibility: "hidden",
 
-    svg: {
-      width: "$space$3",
-      height: "$space$3",
-      display: "block",
-      position: "relative",
-      top: 1,
-    },
-  });
+  svg: {
+    width: "$space$3",
+    height: "$space$3",
+    display: "block",
+    position: "relative",
+    top: 1,
+  },
+});
 
 /**
  * @hidden
@@ -55,7 +53,7 @@ export const tabButton: () => CssComponent = () =>
     whiteSpace: "nowrap",
 
     "&:focus": { outline: "none" },
-    [`&:hover > .${closeButtonClassName()}`]: { visibility: "unset" },
+    [`&:hover > .${closeButtonClassName}`]: { visibility: "unset" },
   });
 
 /**
@@ -134,7 +132,7 @@ export const FileTabs = ({
         aria-label="Select active file"
         className={classNames(
           c("tabs-scrollable-container"),
-          tabsScrollableClassName()
+          tabsScrollableClassName
         )}
         role="tablist"
       >
