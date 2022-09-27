@@ -31,7 +31,7 @@ export const RunButton = ({
         c("button"),
         buttonClassName(),
         roundedButtonClassName,
-        runButtonClassName(),
+        runButtonClassName,
         className
       )}
       onClick={(event): void => {

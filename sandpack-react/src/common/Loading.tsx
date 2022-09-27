@@ -29,17 +29,19 @@ const wrapperClassName: () => CssComponent = () =>
     [`&:hover .${cubeClassName}`]: { display: "none" },
   });
 
+const cubeRotate = keyframes({
+  "0%": {
+    transform: "rotateX(-25.5deg) rotateY(45deg)",
+  },
+
+  "100%": {
+    transform: "rotateX(-25.5deg) rotateY(405deg)",
+  },
+});
+
 const sidesClassNames: () => CssComponent = () =>
   css({
-    animation: `${keyframes({
-      "0%": {
-        transform: "rotateX(-25.5deg) rotateY(45deg)",
-      },
-
-      "100%": {
-        transform: "rotateX(-25.5deg) rotateY(405deg)",
-      },
-    })} 1s linear infinite`,
+    animation: `${cubeRotate} 1s linear infinite`,
     animationFillMode: "forwards",
     transformStyle: "preserve-3d",
     transform: "rotateX(-25.5deg) rotateY(45deg)",
