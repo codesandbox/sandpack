@@ -13,6 +13,29 @@ export default {
   title: "Bug reports/Issues",
 };
 
+export const Issue561 = (): JSX.Element => {
+  return (
+    <Sandpack
+      files={{
+        "/App.js": `
+import React from 'react';
+
+function App() {
+  return (
+    <a href="https://wikipedia.org">
+      Go to Wikipedia
+    </a>  
+  )
+}
+
+export default App;
+        `,
+      }}
+      template="react"
+    />
+  );
+};
+
 export const Issue482 = (): JSX.Element => {
   const [hidden, setHidden] = useState(false);
 
