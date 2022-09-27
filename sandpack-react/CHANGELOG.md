@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/codesandbox/sandpack/compare/v1.8.1...v1.8.2) (2022-09-27)
+
+
+### Bug Fixes
+
+* **useGenerateId:** improve useId conditional ([#584](https://github.com/codesandbox/sandpack/issues/584)) ([91acb05](https://github.com/codesandbox/sandpack/commit/91acb05f0d353392287a83f7a1526bfbbddfc4bd))
+
+
+
+
+
+## [1.8.1](https://github.com/codesandbox/sandpack/compare/v1.8.0...v1.8.1) (2022-09-26)
+
+
+### Bug Fixes
+
+* **file-explorer:** trim and avoid shrinks the icon on long file names ([#578](https://github.com/codesandbox/sandpack/issues/578)) ([bc12d03](https://github.com/codesandbox/sandpack/commit/bc12d0347743065a68f4af6ac65719e9c0dbf954))
+
+
+
+
+
+# [1.8.0](https://github.com/codesandbox/sandpack/compare/v1.7.2...v1.8.0) (2022-09-15)
+
+
+### Features
+
+* **codeeditor:** support additional, user-supplied language modes ([#570](https://github.com/codesandbox/sandpack/issues/570)) ([a746ae3](https://github.com/codesandbox/sandpack/commit/a746ae3ae700bf3b64b8e14e5caee3cb57dd307d))
+
+
+
+
+
+## [1.7.2](https://github.com/codesandbox/sandpack/compare/v1.7.1...v1.7.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* **sandpack preset:** fix columns size ([#566](https://github.com/codesandbox/sandpack/issues/566)) ([cad7273](https://github.com/codesandbox/sandpack/commit/cad72736e86cdff689e963fc0b535b262f99bae3))
+
+
+
+
+
+## [1.7.1](https://github.com/codesandbox/sandpack/compare/v1.7.0...v1.7.1) (2022-08-31)
+
+
+### Bug Fixes
+
+* **console-wrapper:** refactor toggle animation and reset padding on the editor ([#565](https://github.com/codesandbox/sandpack/issues/565)) ([6e730c6](https://github.com/codesandbox/sandpack/commit/6e730c6bb462e225daea1dcea58c56c3fd17bcd3))
+
+
+
+
+
 # [1.7.0](https://github.com/codesandbox/sandpack/compare/v1.6.0...v1.7.0) (2022-08-31)
 
 

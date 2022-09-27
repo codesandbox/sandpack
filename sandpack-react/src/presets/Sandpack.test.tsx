@@ -32,7 +32,7 @@ describe("getSandpackCssText", () => {
         <div />
       </SandpackProvider>
     );
-
+    
     expect(getSandpackCssText().length).toBe(2007);
     expect(getSandpackCssText()).not.toContain(componentClassName);
   });

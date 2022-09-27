@@ -55,7 +55,6 @@ export const tabButton: () => CssComponent = () =>
     whiteSpace: "nowrap",
 
     "&:focus": { outline: "none" },
-    "&:focus-visible": { boxShadow: "inset 0 0 0 2px $colors$accent" },
     [`&:hover > .${closeButtonClassName()}`]: { visibility: "unset" },
   });
 

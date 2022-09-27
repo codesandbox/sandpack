@@ -40,6 +40,7 @@ export const Component: React.FC = () => (
         "/index.tsx": "",
         "/src/app.tsx": "",
         "/src/components/button.tsx": "",
+        "/src/components/really-loooooooong-naaameeee.tsx": "",
       }}
       theme="dark"
     >

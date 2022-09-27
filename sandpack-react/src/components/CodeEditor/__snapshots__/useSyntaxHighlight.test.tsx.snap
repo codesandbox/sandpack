@@ -1456,6 +1456,145 @@ Array [
 
 exports[`useSyntaxHighlight renders a markdown block 1`] = `null`;
 
+exports[`useSyntaxHighlight renders a python block 1`] = `
+Array [
+  <span
+    className="sp-syntax-keyword"
+  >
+    import
+  </span>,
+  " ",
+  <span
+    className="sp-syntax-plain"
+  >
+    os
+  </span>,
+  "
+
+",
+  <span
+    className="sp-syntax-plain"
+  >
+    api_token
+  </span>,
+  " = ",
+  <span
+    className="sp-syntax-plain"
+  >
+    os
+  </span>,
+  ".",
+  <span
+    className="sp-syntax-property"
+  >
+    environ
+  </span>,
+  <span
+    className="sp-syntax-punctuation"
+  >
+    [
+  </span>,
+  <span
+    className="sp-syntax-string"
+  >
+    'API_TOKEN'
+  </span>,
+  <span
+    className="sp-syntax-punctuation"
+  >
+    ]
+  </span>,
+  "
+
+",
+  <span
+    className="sp-syntax-comment"
+  >
+    # Prints the api_token variable
+  </span>,
+  "
+",
+  <span
+    className="sp-syntax-definition"
+  >
+    print
+  </span>,
+  <span
+    className="sp-syntax-punctuation"
+  >
+    (
+  </span>,
+  <span
+    className="sp-syntax-string"
+  >
+    "API token:"
+  </span>,
+  <span
+    className="sp-syntax-punctuation"
+  >
+    ,
+  </span>,
+  " ",
+  <span
+    className="sp-syntax-plain"
+  >
+    api_token
+  </span>,
+  <span
+    className="sp-syntax-punctuation"
+  >
+    )
+  </span>,
+]
+`;
+
+exports[`useSyntaxHighlight renders a shell block 1`] = `
+Array [
+  "#!/bin/sh
+
+",
+  <span
+    className="sp-syntax-plain"
+  >
+    EXAMPLE
+  </span>,
+  "=",
+  <span
+    className="sp-syntax-string"
+  >
+    "drawn joyed"
+  </span>,
+  "
+
+",
+  <span
+    className="sp-syntax-comment"
+  >
+    # Prints the EXAMPLE variable
+  </span>,
+  "
+",
+  <span
+    className="sp-syntax-keyword"
+  >
+    function
+  </span>,
+  " show-example() {
+  ",
+  <span
+    className="sp-syntax-plain"
+  >
+    echo
+  </span>,
+  " ",
+  <span
+    className="sp-syntax-plain"
+  >
+    $EXAMPLE
+  </span>,
+]
+`;
+
 exports[`useSyntaxHighlight renders a vue block 1`] = `
 Array [
   <span

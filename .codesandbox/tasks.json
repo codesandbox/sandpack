@@ -68,6 +68,10 @@
       "name": "Website theme",
       "command": "yarn dev:theme",
       "runAtStart": false
+    },
+    "yarn install": {
+      "name": "Install",
+      "command": "yarn install"
     }
   }
 }
