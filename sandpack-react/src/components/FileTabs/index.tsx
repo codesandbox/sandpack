@@ -1,4 +1,5 @@
 import { useClasser } from "@code-hike/classer";
+import type { CssComponent } from "@stitches/core/types/styled-component";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
@@ -16,44 +17,47 @@ const tabsClassName = css({
   background: "$colors$surface1",
 });
 
-const tabsScrollableClassName = css({
-  padding: "0 $space$2",
-  overflow: "auto",
-  display: "flex",
-  flexWrap: "nowrap",
-  alignItems: "stretch",
-  minHeight: "40px",
-  marginBottom: "-1px",
-});
+const tabsScrollableClassName: () => CssComponent = () =>
+  css({
+    padding: "0 $space$2",
+    overflow: "auto",
+    display: "flex",
+    flexWrap: "nowrap",
+    alignItems: "stretch",
+    minHeight: "40px",
+    marginBottom: "-1px",
+  });
 
-const closeButtonClassName = css({
-  padding: "0 $space$1 0 $space$1",
-  borderRadius: "$border$radius",
-  marginLeft: "$space$1",
-  width: "$space$5",
-  visibility: "hidden",
+const closeButtonClassName: () => CssComponent = () =>
+  css({
+    padding: "0 $space$1 0 $space$1",
+    borderRadius: "$border$radius",
+    marginLeft: "$space$1",
+    width: "$space$5",
+    visibility: "hidden",
 
-  svg: {
-    width: "$space$3",
-    height: "$space$3",
-    display: "block",
-    position: "relative",
-    top: 1,
-  },
-});
+    svg: {
+      width: "$space$3",
+      height: "$space$3",
+      display: "block",
+      position: "relative",
+      top: 1,
+    },
+  });
 
 /**
  * @hidden
  */
-export const tabButton = css({
-  padding: "0 $space$2",
-  height: "$layout$headerHeight",
-  whiteSpace: "nowrap",
+export const tabButton: () => CssComponent = () =>
+  css({
+    padding: "0 $space$2",
+    height: "$layout$headerHeight",
+    whiteSpace: "nowrap",
 
-  "&:focus": { outline: "none" },
-  "&:focus-visible": { boxShadow: "inset 0 0 0 2px $colors$accent" },
-  [`&:hover > .${closeButtonClassName}`]: { visibility: "unset" },
-});
+    "&:focus": { outline: "none" },
+    "&:focus-visible": { boxShadow: "inset 0 0 0 2px $colors$accent" },
+    [`&:hover > .${closeButtonClassName()}`]: { visibility: "unset" },
+  });
 
 /**
  * @category Components
@@ -131,7 +135,7 @@ export const FileTabs = ({
         aria-label="Select active file"
         className={classNames(
           c("tabs-scrollable-container"),
-          tabsScrollableClassName
+          tabsScrollableClassName()
         )}
         role="tablist"
       >
@@ -139,7 +143,11 @@ export const FileTabs = ({
           <button
             key={filePath}
             aria-selected={filePath === activeFile}
-            className={classNames(c("tab-button"), buttonClassName, tabButton)}
+            className={classNames(
+              c("tab-button"),
+              buttonClassName(),
+              tabButton()
+            )}
             data-active={filePath === activeFile}
             onClick={(): void => setActiveFile(filePath)}
             role="tab"

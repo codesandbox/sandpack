@@ -46,8 +46,8 @@ export const Header: React.FC<Props> = ({
   showSuitesOnly,
 }) => {
   const buttonsClassName = classNames(
-    buttonClassName,
-    roundedButtonClassName,
+    buttonClassName(),
+    roundedButtonClassName(),
     css({ padding: "$space$1 $space$3" })
   );
 

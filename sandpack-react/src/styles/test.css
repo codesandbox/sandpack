@@ -1,0 +1,86 @@
+--sxs{
+    --sxs:0 light
+}
+@media{
+    .light{
+        --sp-space-1:4px;
+        --sp-space-2:8px;
+        --sp-space-3:12px;
+        --sp-space-4:16px;
+        --sp-space-5:20px;
+        --sp-space-6:24px;
+        --sp-space-7:28px;
+        --sp-space-8:32px;
+        --sp-space-9:36px;
+        --sp-space-10:40px;
+        --sp-space-11:44px;
+        --sp-border-radius:4px;
+        --sp-layout-height:300px;
+        --sp-layout-headerHeight:40px;
+        --sp-transitions-default:150ms ease;
+        --sp-zIndices-base:1;
+        --sp-zIndices-overlay:2;
+        --sp-zIndices-top:3;
+        --sp-colors-surface1:#ffffff;
+        --sp-colors-surface2:#EFEFEF;
+        --sp-colors-surface3:#F3F3F3;
+        --sp-colors-disabled:#C5C5C5;
+        --sp-colors-base:#323232;
+        --sp-colors-clickable:#808080;
+        --sp-colors-hover:#4D4D4D;
+        --sp-colors-accent:#3973E0;
+        --sp-colors-error:#EA3323;
+        --sp-colors-errorSurface:#FCF1F0;
+        --sp-colors-warning:#6A4516;
+        --sp-colors-warningSurface:#FEF2C0;
+        --sp-font-body:-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";
+        --sp-font-mono:\"Fira Mono\", \"DejaVu Sans Mono\", Menlo, Consolas, \"Liberation Mono\", Monaco, \"Lucida Console\", monospace;
+        --sp-font-size:13px;
+        --sp-font-lineHeight:20px;
+        --sp-syntax-color-plain:#151515;
+        --sp-syntax-color-comment:#999;
+        --sp-syntax-fontStyle-comment:italic;
+        --sp-syntax-color-keyword:#7C5AE3;
+        --sp-syntax-color-tag:#0971F1;
+        --sp-syntax-color-punctuation:#3B3B3B;
+        --sp-syntax-color-definition:#85A600;
+        --sp-syntax-color-property:#3B3B3B;
+        --sp-syntax-color-static:#3B3B3B;
+        --sp-syntax-color-string:#2E6BD0
+    }
+}
+--sxs{
+    --sxs:2 sp-c-fVPbOs
+}
+@media{
+    .sp-c-fVPbOs{
+        all:initial;
+        font-size:var(--sp-font-size);
+        font-family:var(--sp-font-body);
+        display:block;
+        box-sizing:border-box;
+        text-rendering:optimizeLegibility;
+        -webkit-tap-highlight-color:transparent;
+        -webkit-font-smoothing:subpixel-antialiased
+    }
+    @media screen and (min-resolution: 2dppx){
+        .sp-c-fVPbOs{
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale
+        }
+    }
+    .sp-c-fVPbOs *{
+        box-sizing:border-box
+    }
+    .sp-c-fVPbOs .sp-wrapper:focus{
+        outline:0
+    }
+}
+--sxs{
+    --sxs:3 sp-c-fVPbOs-gMQIch-variant-light
+}
+@media{
+    .sp-c-fVPbOs-gMQIch-variant-light{
+        color-scheme:light
+    }
+}

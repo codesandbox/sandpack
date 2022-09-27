@@ -22,9 +22,9 @@ export const OpenInCodeSandboxButton = (): JSX.Element | null => {
     <UnstyledOpenInCodeSandboxButton
       className={classNames(
         c("button", "icon-standalone"),
-        buttonClassName,
-        iconStandaloneClassName,
-        roundedButtonClassName
+        buttonClassName(),
+        iconStandaloneClassName(),
+        roundedButtonClassName()
       )}
     >
       <ExportIcon />

@@ -459,13 +459,16 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             ref={combinedRef}
             className={classNames(
               c("cm", editorState, languageExtension),
-              cmClassName,
-              tokensClassName
+              cmClassName(),
+              tokensClassName()
             )}
             translate="no"
           >
             <code
-              className={classNames(c("pre-placeholder"), placeholderClassName)}
+              className={classNames(
+                c("pre-placeholder"),
+                placeholderClassName()
+              )}
               style={{ marginLeft: gutterLineOffset() }}
             >
               {syntaxHighlightRender}
@@ -474,7 +477,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           {readOnly && showReadOnly && (
             <span
-              className={classNames(c("read-only"), readOnlyClassName)}
+              className={classNames(c("read-only"), readOnlyClassName())}
               {...(process.env.TEST_ENV ? { "data-testId": "read-only" } : {})}
             >
               Read-only
@@ -495,8 +498,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         }
         className={classNames(
           c("cm", editorState, languageExtension),
-          cmClassName,
-          tokensClassName
+          cmClassName(),
+          tokensClassName()
         )}
         onKeyDown={handleContainerKeyDown}
         role="group"
@@ -505,7 +508,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         suppressHydrationWarning
       >
         <pre
-          className={classNames(c("pre-placeholder"), placeholderClassName)}
+          className={classNames(c("pre-placeholder"), placeholderClassName())}
           style={{ marginLeft: gutterLineOffset() }}
         >
           {syntaxHighlightRender}

@@ -64,7 +64,7 @@ export const SandpackCodeViewer = React.forwardRef<
       <SandpackStack {...props}>
         {shouldShowTabs ? <FileTabs /> : null}
 
-        <div className={classNames(c("code-editor"), editorClassName)}>
+        <div className={classNames(c("code-editor"), editorClassName())}>
           <CodeEditor
             ref={ref}
             code={propCode ?? code}

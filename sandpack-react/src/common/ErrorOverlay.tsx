@@ -31,7 +31,7 @@ export const ErrorOverlay: React.FC<
     <div
       className={classNames(
         c("overlay", "error"),
-        absoluteClassName,
+        absoluteClassName(),
         errorClassName,
         className
       )}

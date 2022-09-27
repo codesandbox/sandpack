@@ -58,7 +58,7 @@ export const LoadingOverlay = ({
       <div
         className={classNames(
           c("overlay", "error"),
-          absoluteClassName,
+          absoluteClassName(),
           errorClassName,
           className
         )}
@@ -95,7 +95,7 @@ export const LoadingOverlay = ({
     <div
       className={classNames(
         c("overlay", "loading"),
-        absoluteClassName,
+        absoluteClassName(),
         loadingClassName,
         className
       )}

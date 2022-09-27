@@ -29,9 +29,9 @@ export const RunButton = ({
     <button
       className={classNames(
         c("button"),
-        buttonClassName,
-        roundedButtonClassName,
-        runButtonClassName,
+        buttonClassName(),
+        roundedButtonClassName(),
+        runButtonClassName(),
         className
       )}
       onClick={(event): void => {

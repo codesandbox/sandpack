@@ -308,7 +308,7 @@ const ResetButtonComp: React.FC = () => {
 
   return (
     <button
-      className={tabButton.toString()}
+      className={tabButton().toString()}
       onClick={sandpack.resetAllFiles}
       style={{
         background: "none",
@@ -327,7 +327,7 @@ const ResetCurrentFileButton: React.FC = () => {
 
   return (
     <button
-      className={tabButton.toString()}
+      className={tabButton().toString()}
       onClick={(): void => sandpack.resetFile(sandpack.activeFile)}
       style={{
         background: "none",

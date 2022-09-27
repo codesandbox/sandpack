@@ -176,9 +176,9 @@ const ConsoleCounterButton: React.FC<{
   return (
     <button
       className={classNames(
-        buttonClassName,
-        iconStandaloneClassName,
-        roundedButtonClassName,
+        buttonClassName(),
+        iconStandaloneClassName(),
+        roundedButtonClassName(),
         buttonCounter
       )}
       onClick={onClick}

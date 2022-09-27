@@ -55,7 +55,7 @@ export const File: React.FC<Props> = ({
     <button
       className={classNames(
         c("button", "explorer"),
-        buttonClassName,
+        buttonClassName(),
         explorerClassName
       )}
       data-active={active}

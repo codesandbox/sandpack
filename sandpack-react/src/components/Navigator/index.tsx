@@ -126,8 +126,8 @@ export const Navigator = ({
 
   const buttonsClassNames = classNames(
     c("button", "icon"),
-    buttonClassName,
-    iconClassName,
+    buttonClassName(),
+    iconClassName(),
     css({
       minWidth: "$space$6",
       justifyContent: "center",

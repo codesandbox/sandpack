@@ -210,7 +210,7 @@ const FilePath: React.FC<{ onClick: () => void; path: string }> = ({
   const fileName = parts[parts.length - 1];
   return (
     <button
-      className={classNames(buttonClassName, filePathButtonClassName)}
+      className={classNames(buttonClassName(), filePathButtonClassName)}
       onClick={onClick}
     >
       <span className={classNames(filePathClassName)}>{basePath}</span>
