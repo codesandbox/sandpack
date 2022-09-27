@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.4](https://github.com/codesandbox/sandpack/compare/v1.8.3...v1.8.4) (2022-09-27)
+
+
+### Bug Fixes
+
+* **track fork:** standardized UTM parameter ([#585](https://github.com/codesandbox/sandpack/issues/585)) ([8b21ed6](https://github.com/codesandbox/sandpack/commit/8b21ed6c733de54a7866e9796421368f61bbc2a4))
+
+
+
+
+
 ## [1.8.3](https://github.com/codesandbox/sandpack/compare/v1.8.2...v1.8.3) (2022-09-27)
 
 
