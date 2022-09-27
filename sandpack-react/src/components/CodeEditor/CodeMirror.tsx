@@ -225,6 +225,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             run: (): boolean => {
               if (readOnly) return true;
 
+              console.log(extensions);
+
               if (wrapper.current) {
                 wrapper.current.focus();
               }
@@ -243,6 +245,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           history(),
           closeBrackets(),
 
+          ...extensions,
+
           keymap.of([
             ...closeBracketsKeymap,
             ...defaultKeymap,
@@ -257,7 +261,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           getEditorTheme(),
           highlightTheme,
-          ...extensions,
         ];
 
         if (readOnly) {
