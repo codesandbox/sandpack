@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { vim } from "@replit/codemirror-vim";
 import { useState } from "react";
 
 import {
@@ -12,19 +11,6 @@ import {
 
 export default {
   title: "Bug reports/Issues",
-};
-
-export const Issue576 = (): JSX.Element => {
-  return (
-    <Sandpack
-      options={{
-        codeEditor: {
-          extensions: [vim()],
-        },
-      }}
-      template="react"
-    />
-  );
 };
 
 export const Issue482 = (): JSX.Element => {
