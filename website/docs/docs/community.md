@@ -109,7 +109,7 @@ Our goal is to keep our docs comprehensive and updated. If you would like to hel
 
 #### Themes
 
-We're open to supporting new Sandpack themes because our key goal is empowering developers to include a custom live coding experiences over the web. That's why we provide plenty of options under `@codesandbox/sandpack-themes,` and we want even more options. So, how contribute to new thems?
+We're open to supporting new Sandpack themes because our key goal is empowering developers to include custom live coding experiences over the web, regardless of your website layout or level of design expertise. That's why we provide plenty of options under `@codesandbox/sandpack-themes`, and we want to offer even more options. So, how can you contribute to new themes?
 
 1. Create a new file in [codesandbox/sandpack/sandpack-themes/src](https://github.com/codesandbox/sandpack/tree/main/sandpack-themes/src) folder with following file `[theme name].ts`
 2. The content of this file must be an export for an object that contains the theme:
