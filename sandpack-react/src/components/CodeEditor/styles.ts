@@ -33,17 +33,6 @@ export const cmClassName = css({
   margin: "0",
   outline: "none",
   height: "100%",
-
-  "&:focus-visible": {
-    boxShadow: "inset 0 0 0 4px $colors$accent",
-    paddingLeft: "$space$1",
-    paddingRight: "$space$1",
-  },
-  "&:focus-visible .cm-line": { padding: "0 $space$2" },
-  "&:focus-visible .cm-gutter.cm-lineNumbers": {
-    paddingLeft: "0",
-    paddingRight: "$space$2",
-  },
 });
 
 export const readOnlyClassName = css({

@@ -70,7 +70,7 @@
       "runAtStart": false
     },
     "yarn install": {
-      "name": "yarn install",
+      "name": "Install",
       "command": "yarn install"
     }
   }

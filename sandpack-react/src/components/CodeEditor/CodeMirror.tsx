@@ -248,6 +248,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           history(),
           closeBrackets(),
 
+          ...extensions,
+
           keymap.of([
             ...closeBracketsKeymap,
             ...defaultKeymap,
@@ -262,7 +264,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           getEditorTheme(),
           highlightTheme,
-          ...extensions,
         ];
 
         if (readOnly) {
