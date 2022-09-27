@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/codesandbox/sandpack/compare/v1.8.1...v1.8.2) (2022-09-27)
+
+
+### Bug Fixes
+
+* **useGenerateId:** improve useId conditional ([#584](https://github.com/codesandbox/sandpack/issues/584)) ([91acb05](https://github.com/codesandbox/sandpack/commit/91acb05f0d353392287a83f7a1526bfbbddfc4bd))
+
+
+
+
+
 ## [1.8.1](https://github.com/codesandbox/sandpack/compare/v1.8.0...v1.8.1) (2022-09-26)
 
 
