@@ -1,12 +1,8 @@
 import { useClasser } from "@code-hike/classer";
+import { createStitches } from "@stitches/core";
 import * as React from "react";
 
-import {
-  createTheme,
-  cssExtractor,
-  THEME_PREFIX,
-  standardizeStitchesTheme,
-} from "../styles";
+import { THEME_PREFIX, standardizeStitchesTheme } from "../styles";
 import { standardizeTheme } from "../styles";
 import { defaultLight } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
@@ -65,8 +61,14 @@ const SandpackThemeProvider: React.FC<
   const { theme, id, mode } = standardizeTheme(themeFromProps);
   const c = useClasser(THEME_PREFIX);
 
+  const { createTheme, css: cssExtractor } = bare
+    ? {}
+    : createStitches({
+        prefix: THEME_PREFIX,
+      });
+
   const themeClassName = React.useMemo(() => {
-    return createTheme(id, standardizeStitchesTheme(theme));
+    return createTheme?.(id, standardizeStitchesTheme(theme));
   }, [theme, id]);
 
   const cssThingy = bare ? () => () => "" : cssExtractor;

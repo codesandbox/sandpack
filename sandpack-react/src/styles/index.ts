@@ -1,5 +1,3 @@
-import { createStitches } from "@stitches/core";
-
 import { defaultLight, defaultDark, SANDPACK_THEMES } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
 import { isDarkColor } from "../utils/stringUtils";
@@ -12,13 +10,6 @@ export const THEME_PREFIX = "sp";
 /**
  * @category Theme
  */
-export const {
-  createTheme,
-  css: cssExtractor,
-  getCssText,
-} = createStitches({
-  prefix: THEME_PREFIX,
-});
 
 const defaultVariables = {
   space: new Array(11).fill(" ").reduce((acc, _, index) => {
