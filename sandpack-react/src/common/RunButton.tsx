@@ -30,7 +30,7 @@ export const RunButton = ({
       className={classNames(
         c("button"),
         buttonClassName(),
-        roundedButtonClassName(),
+        roundedButtonClassName,
         runButtonClassName(),
         className
       )}

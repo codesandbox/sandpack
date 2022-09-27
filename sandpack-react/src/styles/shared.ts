@@ -39,22 +39,38 @@ export const buttonClassName: () => CssComponent = () =>
     },
   });
 
-export const roundedButtonClassName: () => CssComponent = () =>
-  css({
-    backgroundColor: "$colors$surface2",
-    borderRadius: "99999px",
+export const roundedButtonClassName = css({
+  backgroundColor: "$colors$surface2",
+  borderRadius: "99999px",
 
-    '&[data-active="true"]': {
-      color: "$colors$surface1",
-      background: "$colors$accent",
-    },
+  '&[data-active="true"]': {
+    color: "$colors$surface1",
+    background: "$colors$accent",
+  },
 
-    "&:hover:not(:disabled,[data-active='true'])": {
-      backgroundColor: "$colors$surface3",
-    },
-  });
+  "&:hover:not(:disabled,[data-active='true'])": {
+    backgroundColor: "$colors$surface3",
+  },
+});
 
-export const iconClassName: () => CssComponent = () => css({ padding: 0 });
+export const absoluteClassName = css({
+  position: "absolute",
+  bottom: "0",
+  left: "0",
+  right: "0",
+  top: "0",
+  margin: "0",
+  overflow: "auto",
+  height: "100%",
+  zIndex: "$top",
+});
+
+export const errorClassName = css({
+  padding: "$space$4",
+  whiteSpace: "pre-wrap",
+  fontFamily: "$font$mono",
+  backgroundColor: "$colors$errorSurface",
+});
 
 const fadeIn = keyframes({
   "0%": {
@@ -67,27 +83,6 @@ const fadeIn = keyframes({
     transform: "translateY(0)",
   },
 });
-
-export const absoluteClassName: () => CssComponent = () =>
-  css({
-    position: "absolute",
-    bottom: "0",
-    left: "0",
-    right: "0",
-    top: "0",
-    margin: "0",
-    overflow: "auto",
-    height: "100%",
-    zIndex: "$top",
-  });
-
-export const errorClassName: () => CssComponent = () =>
-  css({
-    padding: "$space$4",
-    whiteSpace: "pre-wrap",
-    fontFamily: "$font$mono",
-    backgroundColor: "$colors$errorSurface",
-  });
 
 export const errorMessageClassName: () => CssComponent = () =>
   css({

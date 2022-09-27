@@ -21,7 +21,7 @@ export const RunButton: React.FC<{
         c("button", "icon-standalone"),
         buttonClassName(),
         iconStandaloneClassName(),
-        roundedButtonClassName()
+        roundedButtonClassName
       )}
       onClick={onClick}
       title="Run tests"

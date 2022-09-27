@@ -30,7 +30,7 @@ export const RefreshButton = ({
         c("button", "icon-standalone"),
         buttonClassName(),
         iconStandaloneClassName(),
-        roundedButtonClassName()
+        roundedButtonClassName
       )}
       onClick={refresh}
       title="Refresh Sandpack"

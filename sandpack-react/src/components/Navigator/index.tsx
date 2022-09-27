@@ -5,7 +5,7 @@ import { useSandpack } from "../../hooks/useSandpack";
 import { BackwardIcon, ForwardIcon, RefreshIcon } from "../../icons";
 import { THEME_PREFIX } from "../../styles";
 import { css } from "../../styles";
-import { buttonClassName, iconClassName } from "../../styles/shared";
+import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
 import { splitUrl } from "./utils";
@@ -127,8 +127,8 @@ export const Navigator = ({
   const buttonsClassNames = classNames(
     c("button", "icon"),
     buttonClassName(),
-    iconClassName(),
     css({
+      padding: 0,
       minWidth: "$space$6",
       justifyContent: "center",
     })

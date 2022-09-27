@@ -19,7 +19,7 @@ export const Button: React.FC<{ onClick: () => void }> = ({ onClick }) => {
         c("button", "icon-standalone"),
         buttonClassName(),
         iconStandaloneClassName(),
-        roundedButtonClassName(),
+        roundedButtonClassName,
         css({
           position: "absolute",
           bottom: "$space$2",
