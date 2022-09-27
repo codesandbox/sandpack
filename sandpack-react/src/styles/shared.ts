@@ -24,6 +24,7 @@ export const buttonClassName = css({
   '&[data-active="true"]': { color: "$colors$accent" },
 
   svg: {
+    minWidth: "$space$4",
     width: "$space$4",
     height: "$space$4",
   },

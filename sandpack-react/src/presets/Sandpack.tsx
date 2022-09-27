@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import type { CSSProperties } from "@stitches/core";
 import * as React from "react";
 
 import { SANDBOX_TEMPLATES, SandpackStack } from "..";
@@ -11,7 +10,7 @@ import { SandpackPreview } from "../components/Preview";
 import { SandpackTests } from "../components/Tests";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import { ConsoleIcon } from "../icons";
-import { css, THEME_PREFIX } from "../styles";
+import { css } from "../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
@@ -42,6 +41,7 @@ export const Sandpack: SandpackInternal = (props) => {
     readOnly: props.options?.readOnly,
     showReadOnly: props.options?.showReadOnly,
     id: props.options?.id,
+    additionalLanguages: props.options?.codeEditor?.additionalLanguages,
   };
 
   const providerOptions: SandpackInternalOptions<
@@ -80,22 +80,18 @@ export const Sandpack: SandpackInternal = (props) => {
   const editorPart = props.options?.editorWidthPercentage || 50;
   const previewPart = 100 - editorPart;
 
-  const RightColumn =
-    props.options?.showConsole || props.options?.showConsoleButton
-      ? SandpackStack
-      : React.Fragment;
+  const hasRightColumn =
+    props.options?.showConsole || props.options?.showConsoleButton;
+  const RightColumn = hasRightColumn ? SandpackStack : React.Fragment;
 
   const rightColumnStyle = {
     flexGrow: previewPart,
     flexShrink: previewPart,
+    flexBasis: 0,
     minWidth: 700 * (previewPart / (previewPart + editorPart)),
     gap: consoleVisibility ? 1 : 0,
+    height: props.options?.editorHeight, // use the original editor height
   };
-
-  const rightColumnItemHeight = getPreviewHeight(
-    consoleVisibility,
-    props.options?.editorHeight
-  );
 
   /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
   const templateFiles = SANDBOX_TEMPLATES[props.template!] ?? {};
@@ -107,6 +103,10 @@ export const Sandpack: SandpackInternal = (props) => {
       onClick={(): void => setConsoleVisibility((prev) => !prev)}
     />
   ) : undefined;
+
+  React.useEffect(() => {
+    setConsoleVisibility(props.options?.showConsole ?? false);
+  }, [props.options?.showConsole]);
 
   return (
     <SandpackProvider
@@ -136,7 +136,7 @@ export const Sandpack: SandpackInternal = (props) => {
               showRefreshButton={props.options?.showRefreshButton}
               style={{
                 ...rightColumnStyle,
-                height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
+                flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
               }}
             />
           )}
@@ -145,7 +145,7 @@ export const Sandpack: SandpackInternal = (props) => {
               actionsChildren={actionsChildren}
               style={{
                 ...rightColumnStyle,
-                height: rightColumnItemHeight(consoleVisibility ? 1.5 : 1),
+                flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
               }}
             />
           )}
@@ -154,7 +154,7 @@ export const Sandpack: SandpackInternal = (props) => {
             <div
               className={consoleWrapper.toString()}
               style={{
-                height: consoleVisibility ? rightColumnItemHeight(3) : 0,
+                flex: consoleVisibility ? 0.5 : 0,
               }}
             >
               <SandpackConsole
@@ -189,22 +189,6 @@ const ConsoleCounterButton: React.FC<{
   );
 };
 
-const getPreviewHeight =
-  (
-    showConsoleButton?: boolean,
-    editorHeight: CSSProperties["height"] = `var(--${THEME_PREFIX}-layout-height)`
-  ) =>
-  (ratio = 2): string | number | undefined => {
-    if (showConsoleButton) {
-      const height =
-        typeof editorHeight === "number" ? `${editorHeight}px` : editorHeight;
-
-      return `calc(${height} / ${ratio})`;
-    }
-
-    return editorHeight;
-  };
-
 const buttonCounter = css({
   position: "relative",
 
@@ -224,7 +208,7 @@ const buttonCounter = css({
 });
 
 const consoleWrapper = css({
-  transition: "height $transitions$default",
+  transition: "flex $transitions$default",
   width: "100%",
   overflow: "hidden",
 });

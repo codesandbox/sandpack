@@ -3,6 +3,7 @@ import * as themes from "@codesandbox/sandpack-themes";
 import { useState } from "react";
 
 import type { CodeEditorProps } from "./components/CodeEditor";
+import { Sandpack } from "./presets";
 import { SANDBOX_TEMPLATES } from "./templates";
 
 import {
@@ -39,6 +40,8 @@ export const Main = (): JSX.Element => {
       showNavigator: true,
       showRefreshButton: true,
       consoleShowHeader: true,
+      showConsoleButton: true,
+      showConsole: true,
     },
     Template: "exhaustedFilesTests" as const,
     Theme: "light",
@@ -139,43 +142,70 @@ export const Main = (): JSX.Element => {
         })}
       </div>
 
-      <SandpackProvider
-        customSetup={{
-          dependencies:
+      <div>
+        <SandpackProvider
+          customSetup={{
+            dependencies:
+              config.Template === "exhaustedFilesTests"
+                ? exhaustedFilesTests.dependencies
+                : {},
+          }}
+          files={
             config.Template === "exhaustedFilesTests"
-              ? exhaustedFilesTests.dependencies
-              : {},
-        }}
-        files={
-          config.Template === "exhaustedFilesTests"
-            ? exhaustedFilesTests.files
-            : {}
-        }
-        template={
-          config.Template === "exhaustedFilesTests" ? null : config.Template
-        }
-        theme={themes[config.Theme] || config.Theme}
-      >
-        <SandpackLayout>
-          <div className="playground-grid">
-            {config.Components.FileExplorer && <SandpackFileExplorer />}
-            {config.Components.Editor && (
-              <SandpackCodeEditor {...codeEditorOptions} />
-            )}
-            {config.Components.Preview && (
-              <SandpackPreview
-                showNavigator={config.Options?.showNavigator}
-                showRefreshButton={config.Options?.showRefreshButton}
-              />
-            )}
+              ? exhaustedFilesTests.files
+              : {}
+          }
+          template={
+            config.Template === "exhaustedFilesTests" ? null : config.Template
+          }
+          theme={themes[config.Theme] || config.Theme}
+        >
+          <SandpackLayout>
+            <div className="playground-grid">
+              {config.Components.FileExplorer && <SandpackFileExplorer />}
+              {config.Components.Editor && (
+                <SandpackCodeEditor {...codeEditorOptions} />
+              )}
+              {config.Components.Preview && (
+                <SandpackPreview
+                  showNavigator={config.Options?.showNavigator}
+                  showRefreshButton={config.Options?.showRefreshButton}
+                />
+              )}
 
-            {config.Components.Console && (
-              <SandpackConsole showHeader={config.Options.consoleShowHeader} />
-            )}
-            {config.Components.Tests && <SandpackTests />}
-          </div>
-        </SandpackLayout>
-      </SandpackProvider>
+              {config.Components.Console && (
+                <SandpackConsole
+                  showHeader={config.Options.consoleShowHeader}
+                />
+              )}
+              {config.Components.Tests && <SandpackTests />}
+            </div>
+          </SandpackLayout>
+        </SandpackProvider>
+
+        <br />
+
+        <Sandpack
+          customSetup={{
+            dependencies:
+              config.Template === "exhaustedFilesTests"
+                ? exhaustedFilesTests.dependencies
+                : {},
+          }}
+          files={
+            config.Template === "exhaustedFilesTests"
+              ? exhaustedFilesTests.files
+              : {}
+          }
+          options={{
+            ...config.Options,
+          }}
+          template={
+            config.Template === "exhaustedFilesTests" ? null : config.Template
+          }
+          theme={themes[config.Theme] || config.Theme}
+        />
+      </div>
     </div>
   );
 };
