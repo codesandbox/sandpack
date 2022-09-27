@@ -1,20 +1,19 @@
-import { css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 
 import { styleTokens } from "./utils";
 
-export const placeholderClassName = css({
+export const placeholderClassName = {
   margin: "0",
   display: "block",
   fontFamily: "$font$mono",
   fontSize: "$font$size",
   color: "$syntax$color$plain",
   lineHeight: "$font$lineHeight",
-});
+};
 
-export const tokensClassName = css(styleTokens());
+export const tokensClassName = styleTokens();
 
-export const editorClassName = css({
+export const editorClassName = {
   flex: 1,
   position: "relative",
   overflow: "auto",
@@ -27,15 +26,15 @@ export const editorClassName = css({
   [`.${placeholderClassName}`]: {
     padding: "$space$4 0",
   },
-});
+};
 
-export const cmClassName = css({
+export const cmClassName = {
   margin: "0",
   outline: "none",
   height: "100%",
-});
+};
 
-export const readOnlyClassName = css({
+export const readOnlyClassName = {
   fontFamily: "$font$mono",
   fontSize: "0.8em",
   position: "absolute",
@@ -50,4 +49,4 @@ export const readOnlyClassName = css({
   [`& + .${buttonClassName}`]: {
     right: "calc($space$11 * 2)",
   },
-});
+};

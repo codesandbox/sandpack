@@ -455,6 +455,7 @@ export interface SandpackInternalOptions<
   fileResolver?: FileResolver;
   externalResources?: string[];
   classes?: Record<string, string>;
+  bare?: boolean;
 }
 
 /**

@@ -674,6 +674,7 @@ export class SandpackProviderClass extends React.PureComponent<
       <Sandpack.Provider value={this._getSandpackState()}>
         <ClasserProvider classes={this.props.options?.classes}>
           <SandpackThemeProvider
+            bare={this.props.options?.bare}
             className={className}
             style={style}
             theme={theme}

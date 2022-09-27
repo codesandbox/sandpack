@@ -12,7 +12,12 @@ export const THEME_PREFIX = "sp";
 /**
  * @category Theme
  */
-export const { createTheme, css, getCssText, keyframes } = createStitches({
+export const {
+  createTheme,
+  css: cssExtractor,
+  getCssText,
+  keyframes,
+} = createStitches({
   prefix: THEME_PREFIX,
 });
 

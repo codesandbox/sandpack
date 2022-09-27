@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as React from "react";
 
-import { SANDBOX_TEMPLATES, SandpackStack } from "..";
+import { SANDBOX_TEMPLATES, SandpackStack, useSandpackTheme } from "..";
 import { SandpackLayout } from "../common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
@@ -9,8 +9,8 @@ import { SandpackConsole } from "../components/Console";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackTests } from "../components/Tests";
 import { SandpackProvider } from "../contexts/sandpackContext";
+import { SandpackThemeConsumer } from "../contexts/themeContext";
 import { ConsoleIcon } from "../icons";
-import { css } from "../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
@@ -65,6 +65,7 @@ export const Sandpack: SandpackInternal = (props) => {
     externalResources: props.options?.externalResources,
     logLevel: props.options?.logLevel,
     classes: props.options?.classes,
+    bare: props.options?.bare,
   };
 
   const [consoleVisibility, setConsoleVisibility] = React.useState(
@@ -116,55 +117,59 @@ export const Sandpack: SandpackInternal = (props) => {
       template={props.template}
       theme={props.theme}
     >
-      <SandpackLayout>
-        <SandpackCodeEditor
-          {...codeEditorOptions}
-          style={{
-            height: props.options?.editorHeight, // use the original editor height
-            flexGrow: editorPart,
-            flexShrink: editorPart,
-            minWidth: 700 * (editorPart / (previewPart + editorPart)),
-          }}
-        />
-
-        {/* @ts-ignore */}
-        <RightColumn style={rightColumnStyle}>
-          {mode === "preview" && (
-            <SandpackPreview
-              actionsChildren={actionsChildren}
-              showNavigator={props.options?.showNavigator}
-              showRefreshButton={props.options?.showRefreshButton}
+      <SandpackThemeConsumer>
+        {({ css }) => (
+          <SandpackLayout>
+            <SandpackCodeEditor
+              {...codeEditorOptions}
               style={{
-                ...rightColumnStyle,
-                flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
+                height: props.options?.editorHeight, // use the original editor height
+                flexGrow: editorPart,
+                flexShrink: editorPart,
+                minWidth: 700 * (editorPart / (previewPart + editorPart)),
               }}
             />
-          )}
-          {mode === "tests" && (
-            <SandpackTests
-              actionsChildren={actionsChildren}
-              style={{
-                ...rightColumnStyle,
-                flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
-              }}
-            />
-          )}
 
-          {(props.options?.showConsoleButton || consoleVisibility) && (
-            <div
-              className={consoleWrapper.toString()}
-              style={{
-                flex: consoleVisibility ? 0.5 : 0,
-              }}
-            >
-              <SandpackConsole
-                onLogsChange={(logs): void => setCounter(logs.length)}
-                showHeader={false}
-              />
-            </div>
-          )}
-        </RightColumn>
-      </SandpackLayout>
+            {/* @ts-ignore */}
+            <RightColumn style={rightColumnStyle}>
+              {mode === "preview" && (
+                <SandpackPreview
+                  actionsChildren={actionsChildren}
+                  showNavigator={props.options?.showNavigator}
+                  showRefreshButton={props.options?.showRefreshButton}
+                  style={{
+                    ...rightColumnStyle,
+                    flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
+                  }}
+                />
+              )}
+              {mode === "tests" && (
+                <SandpackTests
+                  actionsChildren={actionsChildren}
+                  style={{
+                    ...rightColumnStyle,
+                    flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
+                  }}
+                />
+              )}
+
+              {(props.options?.showConsoleButton || consoleVisibility) && (
+                <div
+                  className={css(consoleWrapper).toString()}
+                  style={{
+                    flex: consoleVisibility ? 0.5 : 0,
+                  }}
+                >
+                  <SandpackConsole
+                    onLogsChange={(logs): void => setCounter(logs.length)}
+                    showHeader={false}
+                  />
+                </div>
+              )}
+            </RightColumn>
+          </SandpackLayout>
+        )}
+      </SandpackThemeConsumer>
     </SandpackProvider>
   );
 };
@@ -173,13 +178,14 @@ const ConsoleCounterButton: React.FC<{
   onClick: () => void;
   counter: number;
 }> = ({ onClick, counter }) => {
+  const { css } = useSandpackTheme();
   return (
     <button
       className={classNames(
-        buttonClassName,
-        iconStandaloneClassName,
-        roundedButtonClassName,
-        buttonCounter
+        css(buttonClassName),
+        css(iconStandaloneClassName),
+        css(roundedButtonClassName),
+        css(buttonCounter)
       )}
       onClick={onClick}
     >
@@ -189,7 +195,7 @@ const ConsoleCounterButton: React.FC<{
   );
 };
 
-const buttonCounter = css({
+const buttonCounter = {
   position: "relative",
 
   span: {
@@ -205,10 +211,10 @@ const buttonCounter = css({
     top: 0,
     right: 0,
   },
-});
+};
 
-const consoleWrapper = css({
+const consoleWrapper = {
   transition: "flex $transitions$default",
   width: "100%",
   overflow: "hidden",
-});
+};

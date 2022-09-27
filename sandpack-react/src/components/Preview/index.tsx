@@ -5,12 +5,13 @@ import type {
 } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
+import { useSandpackTheme } from "../../";
 import { ErrorOverlay } from "../../common/ErrorOverlay";
 import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { OpenInCodeSandboxButton } from "../../common/OpenInCodeSandboxButton";
 import { SandpackStack } from "../../common/Stack";
 import { useSandpackClient } from "../../hooks";
-import { css, THEME_PREFIX } from "../../styles";
+import { THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 import { Navigator } from "../Navigator";
 
@@ -31,16 +32,16 @@ export interface PreviewProps {
 
 export { RefreshButton };
 
-const previewClassName = css({
+const previewClassName = {
   flex: 1,
   display: "flex",
   flexDirection: "column",
   background: "white",
   overflow: "auto",
   position: "relative",
-});
+};
 
-const previewIframe = css({
+const previewIframe = {
   border: "0",
   outline: "0",
   width: "100%",
@@ -48,9 +49,9 @@ const previewIframe = css({
   minHeight: "160px",
   maxHeight: "2000px",
   flex: 1,
-});
+};
 
-const previewActionsClassName = css({
+const previewActionsClassName = {
   display: "flex",
   position: "absolute",
   bottom: "$space$2",
@@ -58,7 +59,7 @@ const previewActionsClassName = css({
   zIndex: "$overlay",
 
   "> *": { marginLeft: "$space$2" },
-});
+};
 
 /**
  * @category Components
@@ -97,6 +98,7 @@ export const SandpackPreview = React.forwardRef<
   ) => {
     const { sandpack, listen, iframe, getClient, clientId } =
       useSandpackClient();
+    const { css } = useSandpackTheme();
     const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
       number | null
     >(null);
@@ -152,10 +154,12 @@ export const SandpackPreview = React.forwardRef<
           <Navigator clientId={clientId} onURLChange={handleNewURL} />
         )}
 
-        <div className={classNames(c("preview-container"), previewClassName)}>
+        <div
+          className={classNames(c("preview-container"), css(previewClassName))}
+        >
           <iframe
             ref={iframe}
-            className={classNames(c("preview-iframe"), previewIframe)}
+            className={classNames(c("preview-iframe"), css(previewIframe))}
             style={{
               // set height based on the content only in auto mode
               // and when the computed height was returned by the bundler
@@ -169,7 +173,7 @@ export const SandpackPreview = React.forwardRef<
           <div
             className={classNames(
               c("preview-actions"),
-              previewActionsClassName
+              css(previewActionsClassName)
             )}
           >
             {actionsChildren}

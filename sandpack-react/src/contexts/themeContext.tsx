@@ -12,7 +12,7 @@ import { defaultLight } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
 import { classNames } from "../utils/classNames";
 
-const wrapperClassName = css({
+const wrapperClassName = {
   all: "initial",
   fontSize: "$font$size",
   fontFamily: "$font$body",
@@ -35,7 +35,7 @@ const wrapperClassName = css({
   },
   "*": { boxSizing: "border-box" },
   ".sp-wrapper:focus": { outline: "0" },
-});
+};
 
 /**
  * @hidden
@@ -44,10 +44,12 @@ const SandpackThemeContext = React.createContext<{
   theme: SandpackTheme;
   id: string;
   mode: "dark" | "light";
+  css: any;
 }>({
   theme: defaultLight,
   id: "light",
   mode: "light",
+  css: () => () => "",
 });
 
 /**
@@ -57,8 +59,9 @@ const SandpackThemeProvider: React.FC<
   React.HTMLAttributes<HTMLDivElement> & {
     theme?: SandpackThemeProp;
     children?: React.ReactNode;
+    bare?: boolean;
   }
-> = ({ theme: themeFromProps, children, className, ...props }) => {
+> = ({ theme: themeFromProps, children, className, bare, ...props }) => {
   const { theme, id, mode } = standardizeTheme(themeFromProps);
   const c = useClasser(THEME_PREFIX);
 
@@ -66,13 +69,15 @@ const SandpackThemeProvider: React.FC<
     return createTheme(id, standardizeStitchesTheme(theme));
   }, [theme, id]);
 
+  const cssThingy = bare ? () => () => "" : css;
+
   return (
-    <SandpackThemeContext.Provider value={{ theme, id, mode }}>
+    <SandpackThemeContext.Provider value={{ theme, id, mode, css: cssThingy }}>
       <div
         className={classNames(
           c("wrapper"),
-          themeClassName.toString(),
-          wrapperClassName({ variant: mode }),
+          bare ? "" : themeClassName.toString(),
+          css(wrapperClassName)({ variant: mode }),
           className
         )}
         {...props}

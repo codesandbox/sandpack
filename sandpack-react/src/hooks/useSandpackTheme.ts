@@ -10,7 +10,8 @@ export const useSandpackTheme = (): {
   theme: SandpackTheme;
   themeId: string;
   themeMode: "dark" | "light";
+  css: any
 } => {
-  const { theme, id, mode } = React.useContext(SandpackThemeContext);
-  return { theme, themeId: id, themeMode: mode };
+  const { theme, id, mode, css } = React.useContext(SandpackThemeContext);
+  return { theme, themeId: id, themeMode: mode, css };
 };

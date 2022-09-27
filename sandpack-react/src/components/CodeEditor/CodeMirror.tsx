@@ -141,6 +141,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       initMode === "immediate"
     );
 
+    const { css } = useSandpackTheme();
+
     const c = useClasser(THEME_PREFIX);
     const { listen } = useSandpack();
     const ariaId = useGeneratedId(id);
@@ -465,13 +467,16 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             ref={combinedRef}
             className={classNames(
               c("cm", editorState, languageExtension),
-              cmClassName,
-              tokensClassName
+              css(cmClassName),
+              css(tokensClassName)
             )}
             translate="no"
           >
             <code
-              className={classNames(c("pre-placeholder"), placeholderClassName)}
+              className={classNames(
+                c("pre-placeholder"),
+                css(placeholderClassName)
+              )}
               style={{ marginLeft: gutterLineOffset() }}
             >
               {syntaxHighlightRender}
@@ -480,7 +485,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           {readOnly && showReadOnly && (
             <span
-              className={classNames(c("read-only"), readOnlyClassName)}
+              className={classNames(c("read-only"), css(readOnlyClassName))}
               {...(process.env.TEST_ENV ? { "data-testId": "read-only" } : {})}
             >
               Read-only
@@ -501,8 +506,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         }
         className={classNames(
           c("cm", editorState, languageExtension),
-          cmClassName,
-          tokensClassName
+          css(cmClassName),
+          css(tokensClassName)
         )}
         onKeyDown={handleContainerKeyDown}
         role="group"
@@ -511,7 +516,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         suppressHydrationWarning
       >
         <pre
-          className={classNames(c("pre-placeholder"), placeholderClassName)}
+          className={classNames(
+            c("pre-placeholder"),
+            css(placeholderClassName)
+          )}
           style={{ marginLeft: gutterLineOffset() }}
         >
           {syntaxHighlightRender}
