@@ -1,11 +1,12 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
+import { useSandpackTheme } from "..";
 import {
   useLoadingOverlayState,
   FADE_ANIMATION_DURATION,
 } from "../hooks/useLoadingOverlayState";
-import { css, THEME_PREFIX } from "../styles";
+import { THEME_PREFIX } from "../styles";
 import {
   absoluteClassName,
   errorClassName,
@@ -30,9 +31,9 @@ export interface LoadingOverlayProps {
   showOpenInCodeSandbox: boolean;
 }
 
-const loadingClassName = css({
+const loadingClassName = {
   backgroundColor: "$colors$surface1",
-});
+};
 
 /**
  * @category Components
@@ -48,6 +49,7 @@ export const LoadingOverlay = ({
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const loadingOverlayState = useLoadingOverlayState(clientId, loading);
   const c = useClasser(THEME_PREFIX);
+  const { css } = useSandpackTheme();
 
   if (loadingOverlayState === "HIDDEN") {
     return null;
@@ -58,25 +60,33 @@ export const LoadingOverlay = ({
       <div
         className={classNames(
           c("overlay", "error"),
-          absoluteClassName,
-          errorClassName,
-          className
+          css(absoluteClassName),
+          css(errorClassName),
+          css(className)
         )}
         {...props}
       >
-        <div className={classNames(c("error-message"), errorMessageClassName)}>
+        <div
+          className={classNames(c("error-message"), css(errorMessageClassName))}
+        >
           Unable to establish connection with the sandpack bundler. Make sure
           you are online or try again later. If the problem persists, please
           report it via{" "}
           <a
-            className={classNames(c("error-message"), errorMessageClassName)}
+            className={classNames(
+              c("error-message"),
+              css(errorMessageClassName)
+            )}
             href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error"
           >
             email
           </a>{" "}
           or submit an issue on{" "}
           <a
-            className={classNames(c("error-message"), errorMessageClassName)}
+            className={classNames(
+              c("error-message"),
+              css(errorMessageClassName)
+            )}
             href="https://github.com/codesandbox/sandpack/issues"
             rel="noreferrer noopener"
             target="_blank"

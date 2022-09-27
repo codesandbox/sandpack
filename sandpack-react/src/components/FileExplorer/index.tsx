@@ -1,17 +1,17 @@
 import * as React from "react";
 
-import { stackClassName } from "../..";
+import { stackClassName, useSandpackTheme } from "../..";
 import { useSandpack } from "../../hooks/useSandpack";
-import { css, THEME_PREFIX } from "../../styles";
+import { THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
 import { ModuleList } from "./ModuleList";
 
-const fileExplorerClassName = css({
+const fileExplorerClassName = {
   padding: "$space$3",
   overflow: "auto",
   height: "100%",
-});
+};
 
 export interface SandpackFileExplorerProp {
   /**
@@ -33,12 +33,13 @@ export const SandpackFileExplorer = ({
 }: SandpackFileExplorerProp &
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const { sandpack } = useSandpack();
+  const { css } = useSandpackTheme();
 
   return (
     <div
       className={classNames(
-        stackClassName,
-        fileExplorerClassName,
+        css(stackClassName),
+        css(fileExplorerClassName),
         `${THEME_PREFIX}-file-explorer`,
         className
       )}

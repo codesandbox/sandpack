@@ -1,10 +1,11 @@
 import React from "react";
 
+import { useSandpackTheme } from "../..";
 import { ConsoleIcon } from "../../icons";
-import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
 export const Header: React.FC = () => {
+  const { css } = useSandpackTheme();
   return (
     <div
       className={classNames(

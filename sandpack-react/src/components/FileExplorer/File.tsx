@@ -1,12 +1,13 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
+import { useSandpackTheme } from "../..";
 import { DirectoryIconOpen, DirectoryIconClosed, FileIcon } from "../../icons";
-import { THEME_PREFIX, css } from "../../styles";
+import { THEME_PREFIX } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
-const explorerClassName = css({
+const explorerClassName = {
   borderRadius: "0",
   width: "100%",
   padding: 0,
@@ -21,7 +22,7 @@ const explorerClassName = css({
   svg: {
     marginRight: "$space$1",
   },
-});
+};
 
 export interface Props {
   path: string;
@@ -40,6 +41,7 @@ export const File: React.FC<Props> = ({
   depth,
   isDirOpen,
 }) => {
+  const { css } = useSandpackTheme();
   const c = useClasser(THEME_PREFIX);
   const onClickButton = (event: React.MouseEvent<HTMLButtonElement>): void => {
     if (selectFile) {
@@ -61,8 +63,8 @@ export const File: React.FC<Props> = ({
     <button
       className={classNames(
         c("button", "explorer"),
-        buttonClassName,
-        explorerClassName
+        css(buttonClassName),
+        css(explorerClassName)
       )}
       data-active={active}
       onClick={onClickButton}

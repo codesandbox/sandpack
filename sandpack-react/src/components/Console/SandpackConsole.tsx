@@ -1,7 +1,8 @@
 import * as React from "react";
 
+import { useSandpackTheme } from "../..";
 import { SandpackStack } from "../../common";
-import { css, THEME_PREFIX } from "../../styles";
+import { THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 import { CodeEditor } from "../CodeEditor";
 
@@ -39,6 +40,7 @@ export const SandpackConsole: React.FC<
   className,
   ...props
 }) => {
+  const { css } = useSandpackTheme();
   const { logs, reset } = useSandpackConsole({
     clientId,
     maxMessageCount,
@@ -86,7 +88,7 @@ export const SandpackConsole: React.FC<
                     <div
                       key={`${id}-${msgIndex}`}
                       className={classNames(
-                        consoleItemClassName({ variant: getType(method) })
+                        css(consoleItemClassName)({ variant: getType(method) })
                       )}
                     >
                       <CodeEditor
@@ -117,7 +119,7 @@ export const SandpackConsole: React.FC<
   );
 };
 
-const consoleItemClassName = css({
+const consoleItemClassName = {
   width: "100%",
   padding: "$space$3 $space$2",
   fontSize: ".85em",
@@ -179,4 +181,4 @@ const consoleItemClassName = css({
       info: {},
     },
   },
-});
+};

@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
 import {
@@ -28,19 +27,19 @@ interface Props {
   duration: number;
 }
 
-const gapBottomClassName = css({
+const gapBottomClassName = {
   marginBottom: "$space$2",
-});
+};
 
-const labelClassName = css({
+const labelClassName = {
   fontWeight: "bold",
   color: "$colors$hover",
   whiteSpace: "pre-wrap",
-});
-const containerClassName = css({
+};
+const containerClassName = {
   fontWeight: "bold",
   color: "$colors$clickable",
-});
+};
 
 export const Summary: React.FC<Props> = ({ suites, tests, duration }) => {
   const widestLabel = "Test suites: ";

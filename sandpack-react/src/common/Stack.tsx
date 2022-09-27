@@ -1,13 +1,14 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { css, THEME_PREFIX } from "../styles";
+import { useSandpackTheme } from "..";
+import { THEME_PREFIX } from "../styles";
 import { classNames } from "../utils/classNames";
 
 /**
  * @hidden
  */
-export const stackClassName = css({
+export const stackClassName = {
   display: "flex",
   flexDirection: "column",
   width: "100%",
@@ -19,7 +20,7 @@ export const stackClassName = css({
   [`&:has(.${THEME_PREFIX}-stack)`]: {
     backgroundColor: "$colors$surface2",
   },
-});
+};
 
 /**
  * @category Components
@@ -28,10 +29,11 @@ export const SandpackStack: React.FC<
   React.HTMLAttributes<HTMLDivElement> & { children?: React.ReactNode }
 > = ({ className, ...props }) => {
   const c = useClasser(THEME_PREFIX);
+  const { css } = useSandpackTheme();
 
   return (
     <div
-      className={classNames(c("stack"), stackClassName, className)}
+      className={classNames(c("stack"), css(stackClassName), className)}
       {...props}
     />
   );

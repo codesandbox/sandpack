@@ -1,13 +1,12 @@
 import * as React from "react";
 
 import { ConsoleIcon } from "../..";
-import { css } from "../../styles";
 import { roundedButtonClassName, buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
 import type { Status } from "./SandpackTests";
 
-const wrapperClassName = css({
+const wrapperClassName = {
   justifyContent: "space-between",
   borderBottom: "1px solid $colors$surface2",
   padding: "$space$3 $space$2",
@@ -15,14 +14,14 @@ const wrapperClassName = css({
   maxHeight: "$layout$headerHeight",
   overflowX: "auto",
   whiteSpace: "nowrap",
-});
+};
 
-const flexClassName = css({
+const flexClassName = {
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
   gap: "$space$2",
-});
+};
 
 interface Props {
   setVerbose: () => void;

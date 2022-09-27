@@ -1,17 +1,17 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { stackClassName } from "../..";
+import { stackClassName, useSandpackTheme } from "../..";
 import { ErrorOverlay } from "../../common/ErrorOverlay";
 import { LoadingOverlay } from "../../common/LoadingOverlay";
 import { useSandpack } from "../../hooks/useSandpack";
 import { useTranspiledCode } from "../../hooks/useTranspiledCode";
-import { css, THEME_PREFIX } from "../../styles";
+import { THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 import type { CodeViewerProps } from "../CodeViewer";
 import { SandpackCodeViewer } from "../CodeViewer";
 
-const transpiledCodeClassName = css({
+const transpiledCodeClassName = {
   display: "flex",
   flexDirection: "column",
   width: "100%",
@@ -19,7 +19,7 @@ const transpiledCodeClassName = css({
   overflow: "auto",
   minHeight: "160px",
   flex: 1,
-});
+};
 
 /**
  * @category Components
@@ -28,6 +28,7 @@ export const SandpackTranspiledCode = ({
   className,
   ...props
 }: CodeViewerProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
+  const { css } = useSandpackTheme();
   const { sandpack } = useSandpack();
   const transpiledCode = useTranspiledCode();
   const c = useClasser(THEME_PREFIX);
@@ -49,8 +50,8 @@ export const SandpackTranspiledCode = ({
     <div
       className={classNames(
         c("transpiled-code"),
-        stackClassName,
-        transpiledCodeClassName,
+        css(stackClassName),
+        css(transpiledCodeClassName),
         className
       )}
       {...props}

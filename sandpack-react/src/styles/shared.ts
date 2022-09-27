@@ -1,10 +1,8 @@
-import { css, keyframes } from ".";
-
-export const iconStandaloneClassName = css({
+export const iconStandaloneClassName = {
   svg: { margin: "auto" },
-});
+};
 
-export const buttonClassName = css({
+export const buttonClassName = {
   appearance: "none",
   border: "0",
   outline: "none",
@@ -35,9 +33,9 @@ export const buttonClassName = css({
     height: "$space$7",
     display: "flex",
   },
-});
+};
 
-export const roundedButtonClassName = css({
+export const roundedButtonClassName = {
   backgroundColor: "$colors$surface2",
   borderRadius: "99999px",
 
@@ -49,23 +47,23 @@ export const roundedButtonClassName = css({
   "&:hover:not(:disabled,[data-active='true'])": {
     backgroundColor: "$colors$surface3",
   },
-});
+};
 
-export const iconClassName = css({ padding: 0 });
+export const iconClassName = { padding: 0 };
 
-const fadeIn = keyframes({
-  "0%": {
-    opacity: 0,
-    transform: "translateY(4px)",
-  },
+// const fadeIn = keyframes({
+//   "0%": {
+//     opacity: 0,
+//     transform: "translateY(4px)",
+//   },
 
-  "100%": {
-    opacity: 1,
-    transform: "translateY(0)",
-  },
-});
+//   "100%": {
+//     opacity: 1,
+//     transform: "translateY(0)",
+//   },
+// });
 
-export const absoluteClassName = css({
+export const absoluteClassName = {
   position: "absolute",
   bottom: "0",
   left: "0",
@@ -75,16 +73,16 @@ export const absoluteClassName = css({
   overflow: "auto",
   height: "100%",
   zIndex: "$top",
-});
+};
 
-export const errorClassName = css({
+export const errorClassName = {
   padding: "$space$4",
   whiteSpace: "pre-wrap",
   fontFamily: "$font$mono",
   backgroundColor: "$colors$errorSurface",
-});
+};
 
-export const errorMessageClassName = css({
-  animation: `${fadeIn} 150ms ease`,
+export const errorMessageClassName = {
+  //   animation: `${fadeIn} 150ms ease`,
   color: "$colors$error",
-});
+};

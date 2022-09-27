@@ -3,13 +3,13 @@ import * as React from "react";
 
 import { useSandpackTheme } from "../..";
 import { useSandpack } from "../../hooks/useSandpack";
-import { css, THEME_PREFIX } from "../../styles";
+import { THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
-const devToolClassName = css({
+const devToolClassName = {
   height: "$layout$height",
   width: "100%",
-});
+};
 
 type DevToolsTheme = "dark" | "light";
 

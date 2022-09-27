@@ -3,7 +3,7 @@ import * as React from "react";
 import { SandpackStack } from "../../common";
 import { Loading } from "../../common/Loading";
 import { useSandpackTheme, useSandpackClient } from "../../hooks";
-import { css, THEME_PREFIX } from "../../styles";
+import { THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
 import { Header } from "./Header";
@@ -22,7 +22,7 @@ import {
   set,
 } from "./utils";
 
-const previewActionsClassName = css({
+const previewActionsClassName = {
   display: "flex",
   position: "absolute",
   bottom: "$space$2",
@@ -30,7 +30,7 @@ const previewActionsClassName = css({
   zIndex: "$overlay",
 
   "> *": { marginLeft: "$space$2" },
-});
+};
 
 export type Status = "initialising" | "idle" | "running" | "complete";
 
@@ -439,7 +439,7 @@ export const SandpackTests: React.FC<
   );
 };
 
-const containerClassName = css({
+const containerClassName = {
   padding: "$space$4",
   height: "100%",
   overflow: "auto",
@@ -447,9 +447,9 @@ const containerClassName = css({
   flexDirection: "column",
   position: "relative",
   fontFamily: "$font$mono",
-});
+};
 
-const fileErrorContainerClassName = css({
+const fileErrorContainerClassName = {
   fontWeight: "bold",
   color: "$colors$base",
-});
+};

@@ -1,25 +1,25 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
+import { useSandpackTheme } from "../..";
 import { useSandpack } from "../../hooks/useSandpack";
 import { BackwardIcon, ForwardIcon, RefreshIcon } from "../../icons";
 import { THEME_PREFIX } from "../../styles";
-import { css } from "../../styles";
 import { buttonClassName, iconClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
 import { splitUrl } from "./utils";
 
-const navigatorClassName = css({
+const navigatorClassName = {
   display: "flex",
   alignItems: "center",
   height: "$layout$headerHeight",
   borderBottom: "1px solid $colors$surface2",
   padding: "$space$3 $space$2",
   background: "$colors$surface1",
-});
+};
 
-const inputClassName = css({
+const inputClassName = {
   backgroundColor: "$colors$surface2",
   color: "$colors$clickable",
   padding: "$space$1 $space$3",
@@ -43,7 +43,7 @@ const inputClassName = css({
     border: "1px solid $colors$accent",
     color: "$colors$base",
   },
-});
+};
 
 /**
  * @category Components
@@ -72,6 +72,7 @@ export const Navigator = ({
   const [backEnabled, setBackEnabled] = React.useState(false);
   const [forwardEnabled, setForwardEnabled] = React.useState(false);
 
+  const { css } = useSandpackTheme();
   const c = useClasser(THEME_PREFIX);
 
   React.useEffect(() => {
@@ -136,7 +137,7 @@ export const Navigator = ({
 
   return (
     <div
-      className={classNames(c("navigator"), navigatorClassName, className)}
+      className={classNames(c("navigator"), css(navigatorClassName), className)}
       {...props}
     >
       <button

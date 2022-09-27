@@ -16,7 +16,6 @@ export const {
   createTheme,
   css: cssExtractor,
   getCssText,
-  keyframes,
 } = createStitches({
   prefix: THEME_PREFIX,
 });

@@ -1,9 +1,10 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
+import { useSandpackTheme } from "../..";
 import { useSandpack } from "../../hooks/useSandpack";
 import { CloseIcon } from "../../icons";
-import { css, THEME_PREFIX } from "../../styles";
+import { THEME_PREFIX } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 import {
@@ -11,12 +12,12 @@ import {
   getFileName,
 } from "../../utils/stringUtils";
 
-const tabsClassName = css({
+const tabsClassName = {
   borderBottom: "1px solid $colors$surface2",
   background: "$colors$surface1",
-});
+};
 
-const tabsScrollableClassName = css({
+const tabsScrollableClassName = {
   padding: "0 $space$2",
   overflow: "auto",
   display: "flex",
@@ -24,9 +25,9 @@ const tabsScrollableClassName = css({
   alignItems: "stretch",
   minHeight: "40px",
   marginBottom: "-1px",
-});
+};
 
-const closeButtonClassName = css({
+const closeButtonClassName = {
   padding: "0 $space$1 0 $space$1",
   borderRadius: "$border$radius",
   marginLeft: "$space$1",
@@ -40,19 +41,19 @@ const closeButtonClassName = css({
     position: "relative",
     top: 1,
   },
-});
+};
 
 /**
  * @hidden
  */
-export const tabButton = css({
+export const tabButton = {
   padding: "0 $space$2",
   height: "$layout$headerHeight",
   whiteSpace: "nowrap",
 
   "&:focus": { outline: "none" },
   [`&:hover > .${closeButtonClassName}`]: { visibility: "unset" },
-});
+};
 
 /**
  * @category Components
@@ -76,6 +77,7 @@ export const FileTabs = ({
   ...props
 }: FileTabsProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const { sandpack } = useSandpack();
+  const { css } = useSandpackTheme();
   const c = useClasser(THEME_PREFIX);
 
   const { activeFile, visibleFiles, setActiveFile } = sandpack;
@@ -122,7 +124,7 @@ export const FileTabs = ({
 
   return (
     <div
-      className={classNames(c("tabs"), tabsClassName, className)}
+      className={classNames(c("tabs"), css(tabsClassName), className)}
       translate="no"
       {...props}
     >
@@ -130,7 +132,7 @@ export const FileTabs = ({
         aria-label="Select active file"
         className={classNames(
           c("tabs-scrollable-container"),
-          tabsScrollableClassName
+          css(tabsScrollableClassName)
         )}
         role="tablist"
       >
@@ -138,7 +140,11 @@ export const FileTabs = ({
           <button
             key={filePath}
             aria-selected={filePath === activeFile}
-            className={classNames(c("tab-button"), buttonClassName, tabButton)}
+            className={classNames(
+              c("tab-button"),
+              css(buttonClassName),
+              css(tabButton)
+            )}
             data-active={filePath === activeFile}
             onClick={(): void => setActiveFile(filePath)}
             role="tab"
@@ -148,7 +154,10 @@ export const FileTabs = ({
             {getTriggerText(filePath)}
             {closableTabs && visibleFiles.length > 1 && (
               <span
-                className={classNames(c("close-button"), closeButtonClassName)}
+                className={classNames(
+                  c("close-button"),
+                  css(closeButtonClassName)
+                )}
                 onClick={handleCloseFile}
               >
                 <CloseIcon />

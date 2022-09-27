@@ -1,7 +1,6 @@
 import type { TestError } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-import { css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 
@@ -27,50 +26,50 @@ interface Props {
   openSpec: (name: string) => void;
 }
 
-const fileContainer = css({
+const fileContainer = {
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
   marginBottom: "$space$2",
-});
+};
 
-const gapBottomClassName = css({
+const gapBottomClassName = {
   marginBottom: "$space$2",
-});
+};
 
-const failTestClassName = css({
+const failTestClassName = {
   fontWeight: "bold",
-});
+};
 
-const labelClassName = css({
+const labelClassName = {
   borderRadius: "calc($border$radius / 2)",
-});
+};
 
-const specLabelClassName = css({
+const specLabelClassName = {
   padding: "$space$1 $space$2",
   fontFamily: "$font$mono",
   textTransform: "uppercase",
   marginRight: "$space$2",
-});
+};
 
-const filePathButtonClassName = css({
+const filePathButtonClassName = {
   fontFamily: "$font$mono",
   cursor: "pointer",
   display: "inline-block",
-});
+};
 
-const filePathClassName = css({
+const filePathClassName = {
   color: "$colors$clickable",
   textDecorationStyle: "dotted",
   textDecorationLine: "underline",
-});
+};
 
-const fileNameClassName = css({
+const fileNameClassName = {
   color: "$colors$hover",
   fontWeight: "bold",
   textDecorationStyle: "dotted",
   textDecorationLine: "underline",
-});
+};
 
 export const Specs: React.FC<Props> = ({
   specs,

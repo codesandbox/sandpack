@@ -1,8 +1,8 @@
 import { useClasser } from "@code-hike/classer";
 import React from "react";
 
+import { useSandpackTheme } from "../..";
 import { CleanIcon } from "../../icons";
-import { css } from "../../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
@@ -12,14 +12,15 @@ import { classNames } from "../../utils/classNames";
 
 export const Button: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   const c = useClasser("sp");
+  const { css } = useSandpackTheme();
 
   return (
     <button
       className={classNames(
         c("button", "icon-standalone"),
-        buttonClassName,
-        iconStandaloneClassName,
-        roundedButtonClassName,
+        css(buttonClassName),
+        css(iconStandaloneClassName),
+        css(roundedButtonClassName),
         css({
           position: "absolute",
           bottom: "$space$2",

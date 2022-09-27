@@ -3,7 +3,7 @@ import * as React from "react";
 
 import {
   createTheme,
-  css,
+  cssExtractor,
   THEME_PREFIX,
   standardizeStitchesTheme,
 } from "../styles";
@@ -69,7 +69,7 @@ const SandpackThemeProvider: React.FC<
     return createTheme(id, standardizeStitchesTheme(theme));
   }, [theme, id]);
 
-  const cssThingy = bare ? () => () => "" : css;
+  const cssThingy = bare ? () => () => "" : cssExtractor;
 
   return (
     <SandpackThemeContext.Provider value={{ theme, id, mode, css: cssThingy }}>
@@ -77,7 +77,7 @@ const SandpackThemeProvider: React.FC<
         className={classNames(
           c("wrapper"),
           bare ? "" : themeClassName.toString(),
-          css(wrapperClassName)({ variant: mode }),
+          cssThingy(wrapperClassName)({ variant: mode }),
           className
         )}
         {...props}

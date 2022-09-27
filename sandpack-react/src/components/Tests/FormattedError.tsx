@@ -1,7 +1,7 @@
 import type { TestError } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-import { css } from "../../styles";
+import { useSandpackTheme } from "../..";
 import { classNames } from "../../utils/classNames";
 
 import {
@@ -15,17 +15,18 @@ interface Props {
   path: string;
 }
 
-const containerClassName = css({
+const containerClassName = {
   color: "$colors$hover",
   fontSize: "$font$size",
   padding: "$space$2",
   whiteSpace: "pre-wrap",
-});
+};
 
 export const FormattedError: React.FC<Props> = ({ error, path }) => {
+  const { css } = useSandpackTheme();
   return (
     <div
-      className={classNames(containerClassName)}
+      className={classNames(css(containerClassName))}
       dangerouslySetInnerHTML={{ __html: formatDiffMessage(error, path) }}
     />
   );
