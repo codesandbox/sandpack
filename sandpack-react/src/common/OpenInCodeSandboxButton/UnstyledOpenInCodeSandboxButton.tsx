@@ -63,7 +63,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
           parameters: params,
           query: new URLSearchParams({
             file: sandpack.activeFile,
-            "from-sandpack": "true",
+            utm_medium: "sandpack",
           }).toString(),
         });
 
