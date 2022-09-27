@@ -3,12 +3,6 @@ import * as React from "react";
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
-import {
-  failTextClassName,
-  passTextClassName,
-  skipTextClassName,
-} from "./style";
-
 export interface TestResults {
   pass: number;
   fail: number;
@@ -56,12 +50,12 @@ export const Summary: React.FC<Props> = ({ suites, tests, duration }) => {
       <div className={classNames(gapBottomClassName)}>
         <span className={classNames(labelClassName)}>{widestLabel}</span>
         {suites.fail > 0 && (
-          <span className={classNames(failTextClassName)}>
+          <span className={classNames(css({ color: "var(--test-fail)" }))}>
             {suites.fail} failed,{" "}
           </span>
         )}
         {suites.pass > 0 && (
-          <span className={classNames(passTextClassName)}>
+          <span className={classNames(css({ color: "var(--test-pass)" }))}>
             {suites.pass} passed,{" "}
           </span>
         )}
@@ -72,17 +66,17 @@ export const Summary: React.FC<Props> = ({ suites, tests, duration }) => {
           {withMargin("Tests:")}
         </span>
         {tests.fail > 0 && (
-          <span className={classNames(failTextClassName)}>
+          <span className={classNames(css({ color: "var(--test-fail)" }))}>
             {tests.fail} failed,{" "}
           </span>
         )}
         {tests.skip > 0 && (
-          <span className={classNames(skipTextClassName)}>
+          <span className={classNames(css({ color: "var(--test-skip)" }))}>
             {tests.skip} skipped,{" "}
           </span>
         )}
         {tests.pass > 0 && (
-          <span className={classNames(passTextClassName)}>
+          <span className={classNames(css({ color: "var(--test-pass)" }))}>
             {tests.pass} passed,{" "}
           </span>
         )}

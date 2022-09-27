@@ -4,12 +4,6 @@ import React from "react";
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
-import {
-  failTextClassName,
-  passTextClassName,
-  skipTextClassName,
-} from "./style";
-
 const testContainerClassName = css({
   marginLeft: "$space$4",
 });
@@ -53,17 +47,32 @@ export const Tests: React.FC<SandpackTests> = ({ tests, style }) => {
       {tests.map((test) => (
         <div key={test.name} className={classNames(containerClassName)}>
           {test.status === "pass" && (
-            <span className={classNames(passTextClassName, gapRightClassName)}>
+            <span
+              className={classNames(
+                css({ color: "var(--test-pass)" }),
+                gapRightClassName
+              )}
+            >
               ✓
             </span>
           )}
           {test.status === "fail" && (
-            <span className={classNames(failTextClassName, gapRightClassName)}>
+            <span
+              className={classNames(
+                css({ color: "var(--test-fail)" }),
+                gapRightClassName
+              )}
+            >
               ✕
             </span>
           )}
           {test.status === "idle" && (
-            <span className={classNames(skipTextClassName, gapRightClassName)}>
+            <span
+              className={classNames(
+                css({ color: "var(--test-skip)" }),
+                gapRightClassName
+              )}
+            >
               ○
             </span>
           )}

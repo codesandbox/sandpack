@@ -12,7 +12,7 @@ import type { Spec } from "./Specs";
 import { Specs } from "./Specs";
 import { Summary } from "./Summary";
 import type { Test } from "./Tests";
-import { failTextClassName, setTestTheme } from "./style";
+import { setTestTheme } from "./style";
 import {
   flatMap,
   getDuration,
@@ -411,7 +411,7 @@ export const SandpackTests: React.FC<
             <p>No test files found.</p>
             <p>
               Test match:{" "}
-              <span className={classNames(failTextClassName)}>
+              <span className={classNames(css({ color: "var(--test-fail)" }))}>
                 {testFileRegex.toString()}
               </span>
             </p>

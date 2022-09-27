@@ -10,12 +10,6 @@ import { Describes } from "./Describes";
 import { FormattedError } from "./FormattedError";
 import type { Status } from "./SandpackTests";
 import { Tests } from "./Tests";
-import {
-  failBackgroundClassName,
-  failTextClassName,
-  passBackgroundClassName,
-  runBackgroundClassName,
-} from "./style";
 import { getFailingTests, getSpecTestResults, isEmpty } from "./utils";
 
 export type Spec = { error?: TestError } & Describe;
@@ -85,7 +79,13 @@ export const Specs: React.FC<Props> = ({
           return (
             <div key={spec.name} className={classNames(gapBottomClassName)}>
               <SpecLabel
-                className={classNames(labelClassName, failBackgroundClassName)}
+                className={classNames(
+                  labelClassName,
+                  css({
+                    background: "var(--test-fail)",
+                    color: "$colors$surface1",
+                  })
+                )}
               >
                 Error
               </SpecLabel>
@@ -114,7 +114,10 @@ export const Specs: React.FC<Props> = ({
                   <SpecLabel
                     className={classNames(
                       labelClassName,
-                      failBackgroundClassName
+                      css({
+                        background: "var(--test-fail)",
+                        color: "$colors$surface1",
+                      })
                     )}
                   >
                     Fail
@@ -123,7 +126,10 @@ export const Specs: React.FC<Props> = ({
                   <SpecLabel
                     className={classNames(
                       labelClassName,
-                      passBackgroundClassName
+                      css({
+                        background: "var(--test-pass)",
+                        color: "$colors$surface1",
+                      })
                     )}
                   >
                     Pass
@@ -131,7 +137,13 @@ export const Specs: React.FC<Props> = ({
                 )
               ) : (
                 <SpecLabel
-                  className={classNames(labelClassName, runBackgroundClassName)}
+                  className={classNames(
+                    labelClassName,
+                    css({
+                      background: "var(--test-run)",
+                      color: "$colors$surface1",
+                    })
+                  )}
                 >
                   Run
                 </SpecLabel>
@@ -154,7 +166,10 @@ export const Specs: React.FC<Props> = ({
                   className={classNames(gapBottomClassName)}
                 >
                   <div
-                    className={classNames(failTestClassName, failTextClassName)}
+                    className={classNames(
+                      failTestClassName,
+                      css({ color: "var(--test-fail)" })
+                    )}
                   >
                     ● {test.blocks.join(" › ")} › {test.name}
                   </div>
