@@ -5,17 +5,16 @@ import { buttonClassName } from "../../styles/shared";
 
 import { styleTokens } from "./utils";
 
-export const placeholderClassName: () => CssComponent = () =>
-  css({
-    margin: "0",
-    display: "block",
-    fontFamily: "$font$mono",
-    fontSize: "$font$size",
-    color: "$syntax$color$plain",
-    lineHeight: "$font$lineHeight",
-  });
+export const placeholderClassName = css({
+  margin: "0",
+  display: "block",
+  fontFamily: "$font$mono",
+  fontSize: "$font$size",
+  color: "$syntax$color$plain",
+  lineHeight: "$font$lineHeight",
+});
 
-export const tokensClassName: () => CssComponent = () => css(styleTokens());
+export const tokensClassName = css(styleTokens());
 
 export const editorClassName: () => CssComponent = () =>
   css({
@@ -28,17 +27,16 @@ export const editorClassName: () => CssComponent = () =>
       padding: "$space$4 0",
     },
 
-    [`.${placeholderClassName()}`]: {
+    [`.${placeholderClassName}`]: {
       padding: "$space$4 0",
     },
   });
 
-export const cmClassName: () => CssComponent = () =>
-  css({
-    margin: "0",
-    outline: "none",
-    height: "100%",
-  });
+export const cmClassName = css({
+  margin: "0",
+  outline: "none",
+  height: "100%",
+});
 
 export const readOnlyClassName: () => CssComponent = () =>
   css({
