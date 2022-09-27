@@ -8,7 +8,7 @@ export const useGeneratedId = (id?: string): string => {
   return typeof id === "string"
     ? id
     : // @ts-ignore
-    typeof React.useId === "function"
+    "useId" in React && typeof React.useId === "function"
     ? // @ts-ignore
       React.useId()
     : React.useRef<string>(generateRandomId()).current;
