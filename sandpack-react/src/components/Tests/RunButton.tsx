@@ -20,7 +20,7 @@ export const RunButton: React.FC<{
       className={classNames(
         c("button", "icon-standalone"),
         buttonClassName(),
-        iconStandaloneClassName(),
+        iconStandaloneClassName,
         roundedButtonClassName
       )}
       onClick={onClick}
