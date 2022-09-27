@@ -13,6 +13,22 @@ const cubeClassName = css({
   "*": { position: "absolute", width: "96px", height: "96px" },
 });
 
+const wrapperClassName: () => CssComponent = () =>
+  css({
+    position: "absolute",
+    right: "$space$2",
+    bottom: "$space$2",
+    zIndex: "$top",
+    width: "32px",
+    height: "32px",
+    borderRadius: "$border$radius",
+
+    [`.${cubeClassName}`]: { display: "block" },
+    [`.${buttonClassName()}`]: { display: "none" },
+    [`&:hover .${buttonClassName()}`]: { display: "block" },
+    [`&:hover .${cubeClassName}`]: { display: "none" },
+  });
+
 const sidesClassNames: () => CssComponent = () =>
   css({
     animation: `${keyframes({
@@ -71,24 +87,7 @@ export const Loading = ({
 
   return (
     <div
-      className={classNames(
-        c("cube-wrapper"),
-        css({
-          position: "absolute",
-          right: "$space$2",
-          bottom: "$space$2",
-          zIndex: "$top",
-          width: "32px",
-          height: "32px",
-          borderRadius: "$border$radius",
-
-          [`.${cubeClassName}`]: { display: "block" },
-          [`.${buttonClassName()}`]: { display: "none" },
-          [`&:hover .${buttonClassName()}`]: { display: "block" },
-          [`&:hover .${cubeClassName}`]: { display: "none" },
-        }),
-        className
-      )}
+      className={classNames(c("cube-wrapper"), wrapperClassName(), className)}
       title="Open in CodeSandbox"
       {...props}
     >
