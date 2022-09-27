@@ -10,7 +10,7 @@ import { EditorView } from "@codemirror/view";
 import * as React from "react";
 
 import { THEME_PREFIX } from "../../styles";
-import type { SandpackTheme } from "../../types";
+import type { CustomLanguage, SandpackTheme } from "../../types";
 
 export const getCodeMirrorPosition = (
   doc: Text,
@@ -160,15 +160,25 @@ type SandpackLanguageSupport =
   | "markdown";
 
 export const getLanguageFromFile = (
-  filePath?: string,
-  fileType?: string
-): SandpackLanguageSupport => {
+  filePath: string | undefined,
+  fileType: string | undefined,
+  additionalLanguages: CustomLanguage[]
+): string => {
   if (!filePath && !fileType) return "markdown";
 
   let extension = fileType;
   if (!extension && filePath) {
     const extensionDotIndex = filePath.lastIndexOf(".");
     extension = filePath.slice(extensionDotIndex + 1);
+  }
+
+  for (const additionalLanguage of additionalLanguages) {
+    if (
+      extension === additionalLanguage.name ||
+      additionalLanguage.extensions.includes(extension || "")
+    ) {
+      return additionalLanguage.name;
+    }
   }
 
   switch (extension) {
@@ -188,14 +198,15 @@ export const getLanguageFromFile = (
     case "scss":
       return "css";
     case "md":
-      return "markdown";
+    case "markdown":
     default:
       return "markdown";
   }
 };
 
 export const getCodeMirrorLanguage = (
-  extension: SandpackLanguageSupport
+  extension: string,
+  additionalLanguages: CustomLanguage[]
 ): LanguageSupport => {
   const options: Record<SandpackLanguageSupport, LanguageSupport> = {
     javascript: javascript({ jsx: true, typescript: false }),
@@ -205,7 +216,13 @@ export const getCodeMirrorLanguage = (
     markdown: markdown(),
   };
 
-  return options[extension];
+  for (const additionalLanguage of additionalLanguages) {
+    if (extension === additionalLanguage.name) {
+      return additionalLanguage.language;
+    }
+  }
+
+  return options[extension as keyof typeof options];
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

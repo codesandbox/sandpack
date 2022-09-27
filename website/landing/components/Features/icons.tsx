@@ -28,9 +28,9 @@ export const ICONS = {
   export: (
     <svg
       fill="none"
-      height="600"
+      height="100%"
       viewBox="0 0 600 600"
-      width="600"
+      width="100%"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

@@ -12,6 +12,12 @@ const explorerClassName = css({
   padding: 0,
   marginBottom: "$space$2",
 
+  span: {
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+  },
+
   svg: {
     marginRight: "$space$1",
   },
@@ -61,10 +67,11 @@ export const File: React.FC<Props> = ({
       data-active={active}
       onClick={onClickButton}
       style={{ paddingLeft: 18 * depth + "px" }}
+      title={fileName}
       type="button"
     >
       {getIcon()}
-      {fileName}
+      <span>{fileName}</span>
     </button>
   );
 };

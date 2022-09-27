@@ -29,6 +29,7 @@ import { useSandpack } from "../../hooks/useSandpack";
 import { useSandpackTheme } from "../../hooks/useSandpackTheme";
 import { THEME_PREFIX } from "../../styles";
 import type {
+  CustomLanguage,
   EditorState as SandpackEditorState,
   SandpackInitMode,
 } from "../../types";
@@ -65,17 +66,7 @@ export type Decorators = Array<{
 interface CodeMirrorProps {
   code: string;
   filePath?: string;
-  fileType?:
-    | "js"
-    | "jsx"
-    | "ts"
-    | "tsx"
-    | "css"
-    | "scss"
-    | "less"
-    | "html"
-    | "vue"
-    | "markdown";
+  fileType?: string;
   onCodeUpdate?: (newCode: string) => void;
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
@@ -102,6 +93,12 @@ interface CodeMirrorProps {
   id?: string;
   extensions?: Extension[];
   extensionsKeymap?: KeyBinding[];
+  /**
+   * Provides a way to add custom language modes by supplying a language
+   * type, applicable file extensions, and a LanguageSupport instance
+   * for that syntax mode
+   */
+  additionalLanguages?: CustomLanguage[];
 }
 
 export interface CodeMirrorRef {
@@ -129,6 +126,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       id,
       extensions = [],
       extensionsKeymap = [],
+      additionalLanguages = [],
     },
     ref
   ) => {
@@ -167,8 +165,15 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       }
     }, [initMode, isIntersecting]);
 
-    const languageExtension = getLanguageFromFile(filePath, fileType);
-    const langSupport = getCodeMirrorLanguage(languageExtension);
+    const languageExtension = getLanguageFromFile(
+      filePath,
+      fileType,
+      additionalLanguages
+    );
+    const langSupport = getCodeMirrorLanguage(
+      languageExtension,
+      additionalLanguages
+    );
     const highlightTheme = getSyntaxHighlight(theme);
 
     const syntaxHighlightRender = useSyntaxHighlight({

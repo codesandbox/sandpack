@@ -256,6 +256,72 @@ import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 />
 ```
 
+### Additional languages
+
+Sandpack provides built-in support for a variety of common languages:
+
+- JavaScript, JSX
+- TypeScript, TSX
+- CSS, SCSS, Less
+- HTML
+- Vue
+- Markdown
+
+When an appropriate language can't be detected Markdown is used.
+
+If you want to support additional languages you can extend the editor by supplying a [CodeMirror language](https://github.com/orgs/codemirror/repositories?q=language&type=source) and associating it with one or more file extensions.
+
+```jsx
+import { python } from "@codemirror/lang-python";
+
+<SandpackProvider>
+  <SandpackCodeEditor
+    additionalLanguages={[
+      {
+        name: "python",
+        extensions: ["py"],
+        language: python(),
+      },
+    ]}
+  />
+</SandpackProvider>
+
+<Sandpack
+  options={{
+    codeEditor: {
+      additionalLanguages: [
+        {
+          name: "python",
+          extensions: ["py"],
+          language: python(),
+        },
+      ]
+    },
+  }}
+  template="react"
+/>
+```
+
+When using a [stream language mode](https://www.npmjs.com/package/@codemirror/legacy-modes) you'll need to convert it into a `LanguageSupport` instance.
+
+```jsx
+import { LanguageSupport } from "@codemirror/language";
+import { StreamLanguage } from "@codemirror/stream-parser";
+import { shell } from "@codemirror/legacy-modes/mode/shell";
+
+<SandpackProvider>
+  <SandpackCodeEditor
+    additionalLanguages={[
+      {
+        name: "shell",
+        extensions: ["sh", "bat", "ps1"],
+        language: new LanguageSupport(StreamLanguage.define(shell)),
+      },
+    ]}
+  />
+</SandpackProvider>
+```
+
 ### Advanced usage
 
 If you want to interact directly with CodeMirror, use the component ref to access the `getCodemirror` function, which will return the CodeMirror instance. Check out how to use it:

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import type { LanguageSupport } from "@codemirror/language";
 import type {
   BundlerState,
   ListenerFunction,
@@ -269,6 +270,15 @@ export interface SandpackFile {
  * @category Setup
  */
 export type SandpackInitMode = "immediate" | "lazy" | "user-visible";
+
+/**
+ * @category Setup
+ */
+export interface CustomLanguage {
+  name: string;
+  extensions: string[];
+  language: LanguageSupport;
+}
 
 /**
  * @category Theme
@@ -625,6 +635,12 @@ export interface SandpackCodeOptions {
    * Property to register CodeMirror extension keymap.
    */
   extensionsKeymap?: CodeEditorProps["extensionsKeymap"];
+  /**
+   * Provides a way to add custom language modes by supplying a language
+   * type, applicable file extensions, and a LanguageSupport instance
+   * for that syntax mode
+   */
+  additionalLanguages?: CodeEditorProps["additionalLanguages"];
 }
 
 /**
