@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { createStitches } from "@stitches/core";
 
 import { defaultLight, defaultDark, SANDPACK_THEMES } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
 import { isDarkColor } from "../utils/stringUtils";
+
+import { createStitchesMock } from "./stitches-mock";
 
 /**
  * @category Theme
@@ -15,15 +16,7 @@ export const THEME_PREFIX = "sp";
  */
 export const { createTheme, css, getCssText, keyframes } = process.env
   .SANDPACK_BARE_COMPONENTS
-  ? /**
-     * Improve mock
-     */
-    {
-      createTheme: () => "",
-      css: () => () => "",
-      getCssText: () => "",
-      keyframes: () => () => "",
-    }
+  ? createStitchesMock
   : createStitches({
       prefix: THEME_PREFIX,
     });
