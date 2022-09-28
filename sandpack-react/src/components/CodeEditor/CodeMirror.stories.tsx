@@ -87,18 +87,6 @@ export const Vue: React.FC = () => (
   </SandpackProvider>
 );
 
-export const Markdown: React.FC = () => (
-  <SandpackProvider>
-    <CodeEditor
-      code={mocks.markdown}
-      fileType="markdown"
-      id="markdown"
-      initMode="immediate"
-      showLineNumbers={false}
-    />
-  </SandpackProvider>
-);
-
 export const CustomLanguageShell: React.FC = () => (
   <SandpackProvider>
     <CodeEditor

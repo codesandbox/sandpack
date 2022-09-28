@@ -265,9 +265,8 @@ Sandpack provides built-in support for a variety of common languages:
 - CSS, SCSS, Less
 - HTML
 - Vue
-- Markdown
 
-When an appropriate language can't be detected Markdown is used.
+When an appropriate language can't be detected JavaScript is used.
 
 If you want to support additional languages you can extend the editor by supplying a [CodeMirror language](https://github.com/orgs/codemirror/repositories?q=language&type=source) and associating it with one or more file extensions.
 
