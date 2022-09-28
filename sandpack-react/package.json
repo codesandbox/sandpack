@@ -43,7 +43,6 @@
     "@codemirror/lang-css": "^0.19.3",
     "@codemirror/lang-html": "^0.19.4",
     "@codemirror/lang-javascript": "^0.19.3",
-    "@codemirror/lang-markdown": "^0.19.3",
     "@codemirror/language": "^0.19.7",
     "@codemirror/matchbrackets": "^0.19.3",
     "@codemirror/state": "^0.19.6",
