@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.6](https://github.com/codesandbox/sandpack/compare/v1.8.5...v1.8.6) (2022-09-28)
+
+
+### Bug Fixes
+
+* **syntax languages:** remove markdown ([#591](https://github.com/codesandbox/sandpack/issues/591)) ([a56962a](https://github.com/codesandbox/sandpack/commit/a56962a8be52f86d31ba3c9360d1480afc8e3fe5))
+
+
+
+
+
 ## [1.8.5](https://github.com/codesandbox/sandpack/compare/v1.8.4...v1.8.5) (2022-09-28)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
