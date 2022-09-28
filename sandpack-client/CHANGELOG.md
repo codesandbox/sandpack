@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.5](https://github.com/codesandbox/sandpack/compare/v1.8.4...v1.8.5) (2022-09-28)
+
+
+### Bug Fixes
+
+* **client-navigation:** make sure iframe is using the right location on refreshing ([#587](https://github.com/codesandbox/sandpack/issues/587)) ([317d456](https://github.com/codesandbox/sandpack/commit/317d456d5b137e795bb6e7bfa86fb92803c5afd3))
+
+
+
+
+
 # [1.7.0](https://github.com/codesandbox/sandpack/compare/v1.6.0...v1.7.0) (2022-08-31)
 
 
