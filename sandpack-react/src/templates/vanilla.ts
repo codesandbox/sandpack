@@ -40,9 +40,13 @@ document.getElementById("app").innerHTML = \`
 
 </html>`,
     },
+    "/package.json": {
+      code: JSON.stringify({
+        dependencies: {},
+        main: "/src/index.js",
+      }),
+    },
   },
-  dependencies: {},
-  entry: "/src/index.js",
   main: "/src/index.js",
   environment: "parcel",
 };

@@ -368,7 +368,7 @@ describe(getSandpackStateFromProps, () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       expect(err.message).toEqual(
-        `[sandpack-client]: "entry" was not specified - provide either a package.json with the "main" field or na "entry" value`
+        `[sandpack-client]: "entry" was not specified - provide either a package.json with the "main" field or an "entry" value`
       );
     }
   });
