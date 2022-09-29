@@ -21,7 +21,7 @@ test.describe("Issue", () => {
       "false"
     );
 
-    // 4. make sure the editor is mount
+    // ✅ 4. make sure the editor is mount
     await expect(page.locator(".cm-editor")).toHaveCount(1);
     await expect(page.locator(".pre-placeholder")).toHaveCount(0);
   });

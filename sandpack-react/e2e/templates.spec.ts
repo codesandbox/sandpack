@@ -18,6 +18,7 @@ test.describe("Templates", () => {
         .locator("h1")
         .innerText();
 
+      // ✅ find the "hello world" message
       expect(headingIframe).toBe("Hello World");
     });
   });

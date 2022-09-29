@@ -15,7 +15,7 @@ test.describe("Sandpack", () => {
       .locator("h1")
       .innerText();
 
-    // Initial state
+    // ✅ Initial state
     expect(headingIframe).toBe("Hello World");
 
     await page.locator(".cm-content").click();
@@ -32,7 +32,7 @@ test.describe("Sandpack", () => {
     // Wait to the bundler applies changes
     await page.waitForTimeout(2000);
 
-    // Asset new content on iframe
+    // ✅ Asset new content on iframe
     const newHeadingIframe = await page
       .frameLocator("iframe")
       .locator("h1")
@@ -47,7 +47,7 @@ test.describe("Sandpack", () => {
 
     const mainFileContent = await page.innerText("div.cm-content");
 
-    // Initial file
+    // ✅ Initial file
     expect(mainFileContent).toBe(
       `export default function App() {
   return <h1>Hello World</h1>
@@ -63,7 +63,7 @@ test.describe("Sandpack", () => {
 
     const secondFileContent = await page.innerText("div.cm-content");
 
-    // Second file
+    // ✅ Second file
     expect(secondFileContent).toContain(
       `body {
   font-family: sans-serif;
