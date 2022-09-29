@@ -182,9 +182,6 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run storybook
-        run: yarn dev:react
-
       - name: Run Playwright tests
         run: cd sandpack-react && npx playwright test
 
