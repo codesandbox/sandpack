@@ -1,5 +1,5 @@
 {
   "packages": ["sandpack-client", "sandpack-react"],
-  "sandboxes": ["sowx8r", "p9l5gn"],
+  "sandboxes": ["sowx8r"],
   "node": "14"
 }

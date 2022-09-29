@@ -18,7 +18,7 @@ test.describe("Sandpack", () => {
     // ✅ Initial state
     expect(headingIframe).toBe("Hello World");
 
-    await page.locator(".cm-content").click();
+    await page.locator(".cm-content").focus();
 
     // Clean editor
     await page.keyboard.press("Meta+a");
@@ -30,7 +30,7 @@ test.describe("Sandpack", () => {
 }`);
 
     // Wait to the bundler applies changes
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2000);
 
     // ✅ Asset new content on iframe
     const newHeadingIframe = await page
