@@ -28,12 +28,10 @@ describe('add', () => {
   });
 });`,
     },
-    "/package.json": {
+    "package.json": {
       code: JSON.stringify({
         dependencies: {},
-        devDependencies: {
-          typescript: "^4.0.0",
-        },
+        devDependencies: { typescript: "^4.0.0" },
         main: "/add.ts",
       }),
     },
