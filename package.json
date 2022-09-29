@@ -19,7 +19,7 @@
     "lint": "eslint '**/*.ts?(x)' --fix",
     "format:check": "prettier --check '**/*.{ts,tsx}'",
     "format": "prettier --write '**/*.{ts,tsx,js,jsx}'",
-    "test": "TEST_ENV=true jest sandpack-react sandpack-client --transformIgnorePatterns \"node_modules/(?!@codemirror)/\"",
+    "test": "TEST_ENV=true jest sandpack-react sandpack-client --transformIgnorePatterns \"node_modules/(?!@codemirror)/\" --modulePathIgnorePatterns \"e2e\"",
     "build": "yarn workspace @codesandbox/sandpack-client build && yarn workspace @codesandbox/sandpack-react build && yarn workspace @codesandbox/sandpack-themes build",
     "prepare": "husky install",
     "clean": "yarn workspaces run clean",
