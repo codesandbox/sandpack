@@ -30,7 +30,7 @@ test.describe("Sandpack", () => {
 }`);
 
     // Wait to the bundler applies changes
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
 
     // ✅ Asset new content on iframe
     const newHeadingIframe = await page

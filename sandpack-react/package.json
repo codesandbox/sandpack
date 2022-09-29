@@ -22,7 +22,7 @@
     "build:publish": "yarn build",
     "build:types": "tsc -p tsconfig.json",
     "start": "tsc -p tsconfig.esm.json --watch",
-    "storybook": "start-storybook -p 6006 --no-dll",
+    "storybook": "start-storybook -p 6006 --no-dll --quiet",
     "typecheck": "tsc",
     "test:e2e": "yarn storybook && yarn playwright test"
   },
