@@ -1,6 +1,0 @@
-{
-  "baseUrl": "http://localhost:6006",
-  "snapshotFileName": "./cypress/snapshots.js",
-  "chromeWebSecurity": false,
-  "projectId": "n9y1sd"
-}

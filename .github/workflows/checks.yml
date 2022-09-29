@@ -179,12 +179,6 @@ jobs:
           name: sandpack-themes-${{ github.sha }}
           path: sandpack-themes/dist
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          start: yarn dev:react
-          config: video=false
-
   test:
     name: Unit tests
     runs-on: ubuntu-latest
