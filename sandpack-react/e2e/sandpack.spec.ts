@@ -1,13 +1,50 @@
 import { test, expect } from "@playwright/test";
 
-test.beforeEach(async ({ page }) => {
-  await page.goto(
-    "http://localhost:6006/iframe.html?id=bug-reports-issues--file-tab"
-  );
-});
+test.describe("Sandpack", () => {
+  test("Should be able to run a sandbox and edit the content", async ({
+    page,
+  }) => {
+    await page.goto(
+      `http://localhost:6006/iframe.html?id=presets-template--react`
+    );
 
-test.describe("Sandpack preset", () => {
+    test.setTimeout(30000 * 3); // triple default
+
+    const headingIframe = await page
+      .frameLocator("iframe")
+      .locator("h1")
+      .innerText();
+
+    // Initial state
+    expect(headingIframe).toBe("Hello World");
+
+    await page.locator(".cm-content").click();
+
+    // Clean editor
+    await page.keyboard.press("Meta+a");
+    await page.keyboard.press("Backspace");
+
+    // Insert new content
+    await page.keyboard.insertText(`export default function App() {
+  return <h1>Hello Sandpack</h1>
+}`);
+
+    // Wait to the bundler applies changes
+    await page.waitForTimeout(2000);
+
+    // Asset new content on iframe
+    const newHeadingIframe = await page
+      .frameLocator("iframe")
+      .locator("h1")
+      .innerText();
+    expect(newHeadingIframe).toBe("Hello Sandpack");
+  });
+
   test("Should be able to navigate between files", async ({ page }) => {
+    await page.goto(
+      "http://localhost:6006/iframe.html?id=bug-reports-issues--file-tab"
+    );
+
     const mainFileContent = await page.innerText("div.cm-content");
 
     // Initial file
