@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.7](https://github.com/codesandbox/sandpack/compare/v1.8.6...v1.8.7) (2022-09-30)
+
+
+### Bug Fixes
+
+* **files:** normalize paths ([#595](https://github.com/codesandbox/sandpack/issues/595)) ([71a2044](https://github.com/codesandbox/sandpack/commit/71a2044f61ae32f69822f8eefdaae246629ef400))
+
+
+
+
+
 ## [1.8.6](https://github.com/codesandbox/sandpack/compare/v1.8.5...v1.8.6) (2022-09-28)
 
 

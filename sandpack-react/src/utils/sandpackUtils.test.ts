@@ -2,7 +2,6 @@ import { REACT_TEMPLATE } from "../templates/react";
 
 import {
   getSandpackStateFromProps,
-  createSetupFromUserInput,
   resolveFile,
   convertedFilesToBundlerFiles,
 } from "./sandpackUtils";
@@ -21,21 +20,27 @@ describe(resolveFile, () => {
   });
 
   it("resolves the file path without leading slash", () => {
-    const data = resolveFile("file.ts", { "file.js": "" });
+    const data = resolveFile("file.ts", { "/file.js": "" });
 
-    expect(data).toBe("file.js");
+    expect(data).toBe("/file.js");
   });
 
   it("removes the leading slash and resolves the file path", () => {
-    const data = resolveFile("/file.js", { "file.js": "" });
+    const data = resolveFile("file.js", { "/file.js": "" });
 
-    expect(data).toBe("file.js");
+    expect(data).toBe("/file.js");
   });
 
   it("fixes (add/remove) the leading slash and fixes the extension", () => {
-    const data = resolveFile("/file.ts", { "file.js": "" });
+    const data = resolveFile("/file.ts", { "/file.js": "" });
 
-    expect(data).toBe("file.js");
+    expect(data).toBe("/file.js");
+  });
+
+  it("resolves a file regardless the file extension", () => {
+    const data = resolveFile("file.sh", { "/file.sh": "" });
+
+    expect(data).toBe("/file.sh");
   });
 });
 
@@ -51,7 +56,7 @@ describe(getSandpackStateFromProps, () => {
       },
     });
 
-    expect(setup.files["foo.ts"].code).toBe("foo");
+    expect(setup.files["/foo.ts"].code).toBe("foo");
   });
 
   test("files should override template files", () => {
@@ -59,6 +64,17 @@ describe(getSandpackStateFromProps, () => {
       template: "react",
       files: {
         "/App.js": "foo",
+      },
+    });
+
+    expect(setup.files["/App.js"].code).toBe("foo");
+  });
+
+  test("files should override template files regardless the leading slash", () => {
+    const setup = getSandpackStateFromProps({
+      template: "react",
+      files: {
+        "App.js": "foo",
       },
     });
 
@@ -91,7 +107,7 @@ describe(getSandpackStateFromProps, () => {
       files: { "foo.js": "" },
       customSetup: { entry: "foo.js" },
     });
-    expect(customSetup.activeFile).toBe("foo.js");
+    expect(customSetup.activeFile).toBe("/foo.js");
   });
 
   test("show activeFile even when it's hidden", () => {
@@ -117,7 +133,7 @@ describe(getSandpackStateFromProps, () => {
       },
     });
 
-    expect(setup.activeFile).toEqual("entry.js");
+    expect(setup.activeFile).toEqual("/entry.js");
   });
 
   /**
@@ -196,27 +212,27 @@ describe(getSandpackStateFromProps, () => {
   test("visibleFiles override the files configurations", () => {
     const setup = getSandpackStateFromProps({
       files: {
-        A: { hidden: true, code: "" },
-        B: { hidden: true, code: "" },
+        "A.js": { hidden: true, code: "" },
+        "B.js": { hidden: true, code: "" },
       },
       customSetup: { entry: "A" },
-      options: { visibleFiles: ["A", "B"] },
+      options: { visibleFiles: ["A.js", "B.js"] },
     });
 
-    expect(setup.visibleFiles).toEqual(["A", "B"]);
+    expect(setup.visibleFiles).toEqual(["/A.js", "/B.js"]);
   });
 
   test("activeFile override the files configurations", () => {
     const setup = getSandpackStateFromProps({
       files: {
-        A: { active: true, code: "" },
-        B: { code: "" },
+        "A.js": { active: true, code: "" },
+        "B.js": { code: "" },
       },
       customSetup: { entry: "A" },
       options: { activeFile: "B" },
     });
 
-    expect(setup.activeFile).toEqual("B");
+    expect(setup.activeFile).toEqual("/B.js");
   });
 
   /**
@@ -232,7 +248,7 @@ describe(getSandpackStateFromProps, () => {
     });
 
     const packageContent = JSON.parse(setup.files["/package.json"].code);
-    expect(packageContent.main).toBe("foo.ts");
+    expect(packageContent.main).toBe("/foo.ts");
   });
 
   test("it resolves the entry file, even when the extension is wrong", () => {
@@ -245,7 +261,7 @@ describe(getSandpackStateFromProps, () => {
     });
 
     const packageContent = JSON.parse(setup.files["/package.json"].code);
-    expect(packageContent.main).toBe("entry.js");
+    expect(packageContent.main).toBe("/entry.js");
   });
 
   test("it keeps the entry into package.json main", () => {
@@ -271,7 +287,7 @@ describe(getSandpackStateFromProps, () => {
     });
 
     const packageContent = JSON.parse(setup.files["/package.json"].code);
-    expect(packageContent.main).toEqual("entry.js");
+    expect(packageContent.main).toEqual("/entry.js");
   });
 
   /**
@@ -399,26 +415,6 @@ describe(getSandpackStateFromProps, () => {
         `[sandpack-react]: invalid template "WHATEVER" provided`
       );
     }
-  });
-});
-
-describe(createSetupFromUserInput, () => {
-  test("convert `files` to a key/value format", () => {
-    const setup = createSetupFromUserInput({ files: { "App.js": "" } });
-
-    expect(setup).toStrictEqual({ files: { "App.js": { code: "" } } });
-  });
-
-  test("supports custom properties", () => {
-    const setup = createSetupFromUserInput({
-      files: { "App.js": "" },
-      customSetup: { environment: "create-react-app" },
-    });
-
-    expect(setup).toStrictEqual({
-      environment: "create-react-app",
-      files: { "App.js": { code: "" } },
-    });
   });
 });
 
