@@ -72,6 +72,7 @@ export class SandpackProviderClass extends React.PureComponent<
         template: props.template,
         files: props.files,
         customSetup: props.customSetup,
+        options: props.options,
       });
 
     this.state = {
@@ -280,6 +281,7 @@ export class SandpackProviderClass extends React.PureComponent<
         template: this.props.template,
         files: this.props.files,
         customSetup: this.props.customSetup,
+        options: this.props.options,
       });
 
     /**
@@ -612,6 +614,7 @@ export class SandpackProviderClass extends React.PureComponent<
       template: this.props.template,
       files: this.props.files,
       customSetup: this.props.customSetup,
+      options: this.props.options,
     });
 
     this.setState(
@@ -627,6 +630,7 @@ export class SandpackProviderClass extends React.PureComponent<
       template: this.props.template,
       files: this.props.files,
       customSetup: this.props.customSetup,
+      options: this.props.options,
     });
 
     this.setState({ files }, this.updateClients);
