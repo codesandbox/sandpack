@@ -27,7 +27,7 @@ export interface SandpackContextInfo {
 export const getSandpackStateFromProps = (
   props: SandpackProviderProps
 ): SandpackContextInfo => {
-  const normalizedFilesPath = normalizePath(props.files ?? {});
+  const normalizedFilesPath = normalizePath(props.files);
 
   // Merge predefined template with custom setup
   const projectSetup = getSetup({
@@ -42,7 +42,7 @@ export const getSandpackStateFromProps = (
     ? resolveFile(props.options?.activeFile, normalizedFilesPath || {})
     : undefined;
 
-  if (visibleFiles.length === 0 && props?.files) {
+  if (visibleFiles.length === 0 && normalizedFilesPath) {
     // extract open and active files from the custom input files
     Object.keys(normalizedFilesPath).forEach((filePath) => {
       const file = normalizedFilesPath[filePath];
