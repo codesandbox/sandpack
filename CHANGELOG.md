@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.8](https://github.com/codesandbox/sandpack/compare/v1.8.7...v1.8.8) (2022-09-30)
+
+
+### Bug Fixes
+
+* **e2e:** migrate from cypress to playwright & fix sandpackStateFromProps ([#593](https://github.com/codesandbox/sandpack/issues/593)) ([c993827](https://github.com/codesandbox/sandpack/commit/c993827aeed87b4fea91b63b829a09ad5563c61e))
+
+
+
+
+
 ## [1.8.7](https://github.com/codesandbox/sandpack/compare/v1.8.6...v1.8.7) (2022-09-30)
 
 
