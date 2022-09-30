@@ -115,6 +115,10 @@ export const resolveFile = (
   files: Record<string, any>
 ): string | undefined => {
   const normalizedFilesPath = normalizePath(files);
+  const normalizedPath = normalizePath(path);
+
+  if (normalizedPath in normalizedFilesPath) return normalizedPath;
+
   if (!path) return undefined;
 
   let resolvedPath = undefined;
@@ -123,15 +127,7 @@ export const resolveFile = (
   const strategies = [".js", ".jsx", ".ts", ".tsx"];
 
   while (!resolvedPath && index < strategies.length) {
-    const fileName = normalizePath(path);
-
-    if (normalizedFilesPath[fileName]) {
-      resolvedPath = normalizedFilesPath;
-
-      return;
-    }
-
-    const removeExtension = fileName.split(".")[0];
+    const removeExtension = normalizedPath.split(".")[0];
     const attemptPath = `${removeExtension}${strategies[index]}`;
 
     if (normalizedFilesPath[attemptPath] !== undefined) {
