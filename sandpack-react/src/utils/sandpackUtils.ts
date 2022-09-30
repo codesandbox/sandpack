@@ -27,7 +27,7 @@ export interface SandpackContextInfo {
 export const getSandpackStateFromProps = (
   props: SandpackProviderProps
 ): SandpackContextInfo => {
-  const normalizedFilesPath = normalizePath(props.files);
+  const normalizedFilesPath = normalizePath(props.files ?? {});
 
   // Merge predefined template with custom setup
   const projectSetup = getSetup({
