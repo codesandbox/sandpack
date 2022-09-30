@@ -8,6 +8,7 @@ import type {
 import {
   SandpackClient,
   extractErrorDetails,
+  normalizePath,
 } from "@codesandbox/sandpack-client";
 import isEqual from "lodash.isequal";
 import * as React from "react";
@@ -150,13 +151,13 @@ export class SandpackProviderClass extends React.PureComponent<
 
       files = {
         ...files,
-        ...convertedFilesToBundlerFiles({ [pathOrFiles]: { code } }),
+        [pathOrFiles]: { code },
       };
     } else if (typeof pathOrFiles === "object") {
       files = { ...files, ...convertedFilesToBundlerFiles(pathOrFiles) };
     }
 
-    this.setState({ files }, this.updateClients);
+    this.setState({ files: normalizePath(files) }, this.updateClients);
   };
 
   updateClients = (): void => {

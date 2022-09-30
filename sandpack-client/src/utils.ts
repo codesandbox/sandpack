@@ -6,8 +6,6 @@ import type {
   ErrorStackFrame,
 } from "./types";
 
-import type { SandpackBundlerFile } from ".";
-
 const DEPENDENCY_ERROR_MESSAGE = `[sandpack-client]: "dependencies" was not specified - provide either a package.json or a "dependencies" value`;
 const ENTRY_ERROR_MESSAGE = `[sandpack-client]: "entry" was not specified - provide either a package.json with the "main" field or na "entry" value`;
 

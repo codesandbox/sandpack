@@ -38,7 +38,9 @@ export const getSandpackStateFromProps = (
 
   // visibleFiles and activeFile override the setup flags
   let visibleFiles = normalizePath(props.options?.visibleFiles ?? []);
-  let activeFile = normalizePath(props.options?.activeFile);
+  let activeFile = props.options?.activeFile
+    ? resolveFile(props.options?.activeFile, normalizedFilesPath || {})
+    : undefined;
 
   if (visibleFiles.length === 0 && props?.files) {
     const inputFiles = props.files;
@@ -102,7 +104,8 @@ export const getSandpackStateFromProps = (
 
   return {
     visibleFiles: existOpenPath,
-    activeFile,
+    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+    activeFile: activeFile!,
     files,
     environment: projectSetup.environment,
   };
@@ -121,7 +124,7 @@ export const resolveFile = (
   const strategies = [".js", ".jsx", ".ts", ".tsx"];
 
   while (!resolvedPath && index < strategies.length) {
-    const fileName = path.startsWith("/") ? path : `/${path}`;
+    const fileName = normalizePath(path);
     const removeExtension = fileName.split(".")[0];
     const attemptPath = `${removeExtension}${strategies[index]}`;
 
@@ -193,7 +196,7 @@ export const getSetup = ({
       ...baseTemplate.devDependencies,
       ...setup.devDependencies,
     },
-    entry: setup.entry || baseTemplate.entry,
+    entry: normalizePath(setup.entry || baseTemplate.entry),
     main: setup.main || baseTemplate.main,
     environment: setup.environment || baseTemplate.environment,
   } as SandboxTemplate;

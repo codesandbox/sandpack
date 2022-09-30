@@ -8,8 +8,6 @@ import {
   normalizePath,
 } from "./sandpackUtils";
 
-
-
 describe(resolveFile, () => {
   it("resolves the file path based on the extension", () => {
     const data = resolveFile("/file.js", { "/file.ts": "" });
@@ -199,27 +197,27 @@ describe(getSandpackStateFromProps, () => {
   test("visibleFiles override the files configurations", () => {
     const setup = getSandpackStateFromProps({
       files: {
-        A: { hidden: true, code: "" },
-        B: { hidden: true, code: "" },
+        "A.js": { hidden: true, code: "" },
+        "B.js": { hidden: true, code: "" },
       },
       customSetup: { entry: "A" },
-      options: { visibleFiles: ["A", "B"] },
+      options: { visibleFiles: ["A.js", "B.js"] },
     });
 
-    expect(setup.visibleFiles).toEqual(["A", "B"]);
+    expect(setup.visibleFiles).toEqual(["/A.js", "/B.js"]);
   });
 
   test("activeFile override the files configurations", () => {
     const setup = getSandpackStateFromProps({
       files: {
-        A: { active: true, code: "" },
-        B: { code: "" },
+        "A.js": { active: true, code: "" },
+        "B.js": { code: "" },
       },
       customSetup: { entry: "A" },
       options: { activeFile: "B" },
     });
 
-    expect(setup.activeFile).toEqual("B");
+    expect(setup.activeFile).toEqual("/B.js");
   });
 
   /**
