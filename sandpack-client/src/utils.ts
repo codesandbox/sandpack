@@ -34,13 +34,7 @@ export function addPackageJSONIfNeeded(
 ): SandpackBundlerFiles {
   const newFiles = { ...files };
 
-  const getPackageJsonFile = (): string | undefined => {
-    if (newFiles["/package.json"]) return "/package.json";
-    if (newFiles["package.json"]) return "package.json";
-
-    return undefined;
-  };
-  const packageJsonFile = getPackageJsonFile();
+  const packageJsonFile = newFiles["/package.json"];
 
   /**
    * Create a new package json
@@ -60,7 +54,7 @@ export function addPackageJSONIfNeeded(
    * Merge package json with custom setup
    */
   if (packageJsonFile) {
-    const packageJsonContent = JSON.parse(newFiles[packageJsonFile].code);
+    const packageJsonContent = JSON.parse(packageJsonFile.code);
 
     if (!dependencies && !packageJsonContent.dependencies) {
       throw new Error(DEPENDENCY_ERROR_MESSAGE);
@@ -84,7 +78,7 @@ export function addPackageJSONIfNeeded(
       packageJsonContent.main = entry;
     }
 
-    newFiles[packageJsonFile] = {
+    newFiles["/package.json"] = {
       code: JSON.stringify(packageJsonContent, null, 2),
     };
   }

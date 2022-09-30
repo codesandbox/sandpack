@@ -207,10 +207,13 @@ export const convertedFilesToBundlerFiles = (
   files: SandpackFiles
 ): SandpackBundlerFiles => {
   return Object.keys(files).reduce((acc: SandpackBundlerFiles, key) => {
+    // Normalize path
+    const fileName = key.startsWith("/") ? key : `/${key}`;
+
     if (typeof files[key] === "string") {
-      acc[key] = { code: files[key] as string };
+      acc[fileName] = { code: files[key] as string };
     } else {
-      acc[key] = files[key] as SandpackBundlerFile;
+      acc[fileName] = files[key] as SandpackBundlerFile;
     }
 
     return acc;

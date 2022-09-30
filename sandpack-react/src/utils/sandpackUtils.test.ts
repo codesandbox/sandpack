@@ -425,7 +425,7 @@ describe(createSetupFromUserInput, () => {
 describe(convertedFilesToBundlerFiles, () => {
   it("converts regular files to bundler files", () => {
     expect(convertedFilesToBundlerFiles({ name: "code" })).toEqual({
-      name: { code: "code" },
+      "/name": { code: "code" },
     });
   });
 
@@ -433,7 +433,13 @@ describe(convertedFilesToBundlerFiles, () => {
     expect(
       convertedFilesToBundlerFiles({ name: { code: "code", hidden: true } })
     ).toEqual({
-      name: { code: "code", hidden: true },
+      "/name": { code: "code", hidden: true },
+    });
+  });
+
+  it("normalizes path / forward slash", () => {
+    expect(convertedFilesToBundlerFiles({ "package.json": "code" })).toEqual({
+      "/package.json": { code: "code" },
     });
   });
 });
