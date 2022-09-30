@@ -39,7 +39,7 @@ describe(addPackageJSONIfNeeded, () => {
     );
 
     expect(JSON.parse(output["/package.json"].code).main).toEqual(
-      "old-entry.js"
+      "new-entry.js"
     );
   });
 
@@ -91,7 +91,7 @@ describe(addPackageJSONIfNeeded, () => {
       "new-entry.ts"
     );
 
-    expect(JSON.parse(output["package.json"].code)).toEqual({
+    expect(JSON.parse(output["/package.json"].code)).toEqual({
       main: "new-entry.ts",
       dependencies: { baz: "*", foo: "*" },
       devDependencies: { baz: "*", foo: "*" },

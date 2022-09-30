@@ -6,6 +6,8 @@ import type {
   ErrorStackFrame,
 } from "./types";
 
+import type { SandpackBundlerFile } from ".";
+
 const DEPENDENCY_ERROR_MESSAGE = `[sandpack-client]: "dependencies" was not specified - provide either a package.json or a "dependencies" value`;
 const ENTRY_ERROR_MESSAGE = `[sandpack-client]: "entry" was not specified - provide either a package.json with the "main" field or na "entry" value`;
 
@@ -32,15 +34,20 @@ export function addPackageJSONIfNeeded(
   devDependencies?: Dependencies,
   entry?: string
 ): SandpackBundlerFiles {
-  const newFiles = { ...files };
+  const normalizedFilesPath = Object.entries(
+    files
+  ).reduce<SandpackBundlerFiles>(
+    (acc, [key, content]: [string, SandpackBundlerFile]) => {
+      const fileName = key.startsWith("/") ? key : `/${key}`;
 
-  const getPackageJsonFile = (): string | undefined => {
-    if (newFiles["/package.json"]) return "/package.json";
-    if (newFiles["package.json"]) return "package.json";
+      acc[fileName] = content;
 
-    return undefined;
-  };
-  const packageJsonFile = getPackageJsonFile();
+      return acc;
+    },
+    {}
+  );
+
+  const packageJsonFile = normalizedFilesPath["/package.json"];
 
   /**
    * Create a new package json
@@ -49,18 +56,18 @@ export function addPackageJSONIfNeeded(
     if (!dependencies) throw new Error(DEPENDENCY_ERROR_MESSAGE);
     if (!entry) throw new Error(ENTRY_ERROR_MESSAGE);
 
-    newFiles["/package.json"] = {
+    normalizedFilesPath["/package.json"] = {
       code: createPackageJSON(dependencies, devDependencies, entry),
     };
 
-    return newFiles;
+    return normalizedFilesPath;
   }
 
   /**
    * Merge package json with custom setup
    */
   if (packageJsonFile) {
-    const packageJsonContent = JSON.parse(newFiles[packageJsonFile].code);
+    const packageJsonContent = JSON.parse(packageJsonFile.code);
 
     if (!dependencies && !packageJsonContent.dependencies) {
       throw new Error(DEPENDENCY_ERROR_MESSAGE);
@@ -80,16 +87,16 @@ export function addPackageJSONIfNeeded(
       };
     }
 
-    if (entry && !packageJsonContent.main) {
+    if (entry) {
       packageJsonContent.main = entry;
     }
 
-    newFiles[packageJsonFile] = {
+    normalizedFilesPath["/package.json"] = {
       code: JSON.stringify(packageJsonContent, null, 2),
     };
   }
 
-  return newFiles;
+  return normalizedFilesPath;
 }
 
 export function extractErrorDetails(msg: SandpackErrorMessage): SandpackError {

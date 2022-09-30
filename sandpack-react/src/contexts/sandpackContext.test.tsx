@@ -37,7 +37,7 @@ describe(SandpackProvider, () => {
 
       instance.addFile({ "new-file.js": "new-content" });
 
-      expect(instance.state.files["new-file.js"].code).toBe("new-content");
+      expect(instance.state.files["/new-file.js"].code).toBe("new-content");
     });
 
     it("deletes a file", () => {
