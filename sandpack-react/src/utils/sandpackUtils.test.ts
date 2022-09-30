@@ -2,7 +2,6 @@ import { REACT_TEMPLATE } from "../templates/react";
 
 import {
   getSandpackStateFromProps,
-  createSetupFromUserInput,
   resolveFile,
   convertedFilesToBundlerFiles,
 } from "./sandpackUtils";
@@ -416,26 +415,6 @@ describe(getSandpackStateFromProps, () => {
         `[sandpack-react]: invalid template "WHATEVER" provided`
       );
     }
-  });
-});
-
-describe(createSetupFromUserInput, () => {
-  test("convert `files` to a key/value format", () => {
-    const setup = createSetupFromUserInput({ files: { "App.js": "" } });
-
-    expect(setup).toStrictEqual({ files: { "App.js": { code: "" } } });
-  });
-
-  test("supports custom properties", () => {
-    const setup = createSetupFromUserInput({
-      files: { "App.js": "" },
-      customSetup: { environment: "create-react-app" },
-    });
-
-    expect(setup).toStrictEqual({
-      environment: "create-react-app",
-      files: { "App.js": { code: "" } },
-    });
   });
 });
 
