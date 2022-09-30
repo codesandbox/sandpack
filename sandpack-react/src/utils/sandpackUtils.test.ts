@@ -5,7 +5,6 @@ import {
   createSetupFromUserInput,
   resolveFile,
   convertedFilesToBundlerFiles,
-  normalizePath,
 } from "./sandpackUtils";
 
 describe(resolveFile, () => {
@@ -37,6 +36,12 @@ describe(resolveFile, () => {
     const data = resolveFile("/file.ts", { "/file.js": "" });
 
     expect(data).toBe("/file.js");
+  });
+
+  it("resolves a file regardless the file extension", () => {
+    const data = resolveFile("file.sh", { "/file.sh": "" });
+
+    expect(data).toBe("/file.sh");
   });
 });
 

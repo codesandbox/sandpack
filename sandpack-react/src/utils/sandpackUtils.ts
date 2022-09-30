@@ -114,6 +114,7 @@ export const resolveFile = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   files: Record<string, any>
 ): string | undefined => {
+  const normalizedFilesPath = normalizePath(files);
   if (!path) return undefined;
 
   let resolvedPath = undefined;
@@ -123,10 +124,17 @@ export const resolveFile = (
 
   while (!resolvedPath && index < strategies.length) {
     const fileName = normalizePath(path);
+
+    if (normalizedFilesPath[fileName]) {
+      resolvedPath = normalizedFilesPath;
+
+      return;
+    }
+
     const removeExtension = fileName.split(".")[0];
     const attemptPath = `${removeExtension}${strategies[index]}`;
 
-    if (files[attemptPath] !== undefined) {
+    if (normalizedFilesPath[attemptPath] !== undefined) {
       resolvedPath = attemptPath;
     }
 
