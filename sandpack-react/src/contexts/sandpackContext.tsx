@@ -8,6 +8,7 @@ import type {
 import {
   SandpackClient,
   extractErrorDetails,
+  normalizePath,
 } from "@codesandbox/sandpack-client";
 import isEqual from "lodash.isequal";
 import * as React from "react";
@@ -67,7 +68,11 @@ export class SandpackProviderClass extends React.PureComponent<
     super(props);
 
     const { activeFile, visibleFiles, files, environment } =
-      getSandpackStateFromProps(props);
+      getSandpackStateFromProps({
+        template: props.template,
+        files: props.files,
+        customSetup: props.customSetup,
+      });
 
     this.state = {
       files,
@@ -148,12 +153,15 @@ export class SandpackProviderClass extends React.PureComponent<
         return;
       }
 
-      files = { ...files, [pathOrFiles]: { code: code } };
+      files = {
+        ...files,
+        [pathOrFiles]: { code },
+      };
     } else if (typeof pathOrFiles === "object") {
       files = { ...files, ...convertedFilesToBundlerFiles(pathOrFiles) };
     }
 
-    this.setState({ files }, this.updateClients);
+    this.setState({ files: normalizePath(files) }, this.updateClients);
   };
 
   updateClients = (): void => {
@@ -268,7 +276,11 @@ export class SandpackProviderClass extends React.PureComponent<
      * Custom setup derived from props
      */
     const { activeFile, visibleFiles, files, environment } =
-      getSandpackStateFromProps(this.props);
+      getSandpackStateFromProps({
+        template: this.props.template,
+        files: this.props.files,
+        customSetup: this.props.customSetup,
+      });
 
     /**
      * What the changes on the customSetup props
@@ -596,7 +608,11 @@ export class SandpackProviderClass extends React.PureComponent<
   };
 
   resetFile = (path: string): void => {
-    const { files } = getSandpackStateFromProps(this.props);
+    const { files } = getSandpackStateFromProps({
+      template: this.props.template,
+      files: this.props.files,
+      customSetup: this.props.customSetup,
+    });
 
     this.setState(
       (prevState) => ({
@@ -607,7 +623,11 @@ export class SandpackProviderClass extends React.PureComponent<
   };
 
   resetAllFiles = (): void => {
-    const { files } = getSandpackStateFromProps(this.props);
+    const { files } = getSandpackStateFromProps({
+      template: this.props.template,
+      files: this.props.files,
+      customSetup: this.props.customSetup,
+    });
 
     this.setState({ files }, this.updateClients);
   };

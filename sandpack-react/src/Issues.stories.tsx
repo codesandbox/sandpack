@@ -78,7 +78,11 @@ export const Issue454 = (): JSX.Element => {
 export const FileTab = (): JSX.Element => {
   return (
     <Sandpack
-      options={{ visibleFiles: ["/App.js", "/styles.css"] }}
+      files={{ "foo.sh": "" }}
+      options={{
+        visibleFiles: ["/App.js", "/styles.css"],
+        activeFile: "foo.sh",
+      }}
       template="react"
     />
   );

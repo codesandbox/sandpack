@@ -221,7 +221,7 @@ const exhaustedFilesTests = {
   },
   files: {
     "/src/index.tsx": SANDBOX_TEMPLATES["react-ts"].files["/index.tsx"],
-    "/src/App.tsx": `console.log("Hello world");\n\n${SANDBOX_TEMPLATES["react-ts"].files["/App.tsx"].code}`,
+    "src/App.tsx": `console.log("Hello world");\n\n${SANDBOX_TEMPLATES["react-ts"].files["/App.tsx"].code}`,
     "/src/App.test.tsx": `import '@testing-library/jest-dom';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
