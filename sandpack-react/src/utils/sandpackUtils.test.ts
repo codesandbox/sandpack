@@ -66,6 +66,17 @@ describe(getSandpackStateFromProps, () => {
     expect(setup.files["/App.js"].code).toBe("foo");
   });
 
+  test("files should override template files regardless the leading slash", () => {
+    const setup = getSandpackStateFromProps({
+      template: "react",
+      files: {
+        "App.js": "foo",
+      },
+    });
+
+    expect(setup.files["/App.js"].code).toBe("foo");
+  });
+
   /**
    * activeFile
    */
@@ -92,7 +103,7 @@ describe(getSandpackStateFromProps, () => {
       files: { "foo.js": "" },
       customSetup: { entry: "foo.js" },
     });
-    expect(customSetup.activeFile).toBe("foo.js");
+    expect(customSetup.activeFile).toBe("/foo.js");
   });
 
   test("show activeFile even when it's hidden", () => {
@@ -118,7 +129,7 @@ describe(getSandpackStateFromProps, () => {
       },
     });
 
-    expect(setup.activeFile).toEqual("entry.js");
+    expect(setup.activeFile).toEqual("/entry.js");
   });
 
   /**

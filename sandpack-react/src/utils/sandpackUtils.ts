@@ -43,11 +43,9 @@ export const getSandpackStateFromProps = (
     : undefined;
 
   if (visibleFiles.length === 0 && props?.files) {
-    const inputFiles = props.files;
-
     // extract open and active files from the custom input files
-    Object.keys(inputFiles).forEach((filePath) => {
-      const file = inputFiles[filePath];
+    Object.keys(normalizedFilesPath).forEach((filePath) => {
+      const file = normalizedFilesPath[filePath];
       if (typeof file === "string") {
         visibleFiles.push(filePath);
         return;
