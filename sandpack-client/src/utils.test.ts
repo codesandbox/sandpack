@@ -1,4 +1,4 @@
-import { addPackageJSONIfNeeded } from "./utils";
+import { addPackageJSONIfNeeded, normalizePath } from "./utils";
 
 const files = {
   "/package.json": {
@@ -95,6 +95,29 @@ describe(addPackageJSONIfNeeded, () => {
       main: "new-entry.ts",
       dependencies: { baz: "*", foo: "*" },
       devDependencies: { baz: "*", foo: "*" },
+    });
+  });
+});
+
+describe(normalizePath, () => {
+  it("adds trailing slash to a string", () => {
+    expect(normalizePath("foo")).toBe("/foo");
+    expect(normalizePath("/foo")).toBe("/foo");
+  });
+
+  it("adds trailing slash to an array of string", () => {
+    expect(normalizePath(["foo", "/baz"])).toStrictEqual(["/foo", "/baz"]);
+    expect(normalizePath(["/foo", "/baz"])).toStrictEqual(["/foo", "/baz"]);
+  });
+
+  it("adds trailing slash to an object", () => {
+    expect(normalizePath({ foo: "", baz: "" })).toStrictEqual({
+      "/baz": "",
+      "/foo": "",
+    });
+    expect(normalizePath({ "/foo": "", "/baz": "" })).toStrictEqual({
+      "/baz": "",
+      "/foo": "",
     });
   });
 });

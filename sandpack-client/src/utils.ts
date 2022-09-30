@@ -34,18 +34,7 @@ export function addPackageJSONIfNeeded(
   devDependencies?: Dependencies,
   entry?: string
 ): SandpackBundlerFiles {
-  const normalizedFilesPath = Object.entries(
-    files
-  ).reduce<SandpackBundlerFiles>(
-    (acc, [key, content]: [string, SandpackBundlerFile]) => {
-      const fileName = key.startsWith("/") ? key : `/${key}`;
-
-      acc[fileName] = content;
-
-      return acc;
-    },
-    {}
-  );
+  const normalizedFilesPath = normalizePath(files);
 
   const packageJsonFile = normalizedFilesPath["/package.json"];
 
@@ -191,3 +180,29 @@ function formatErrorMessage(
   return `${filePath}: ${message}${location}
 ${errorInCode}`;
 }
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export const normalizePath = <R extends any>(path: R): R => {
+  if (typeof path === "string") {
+    return (path.startsWith("/") ? path : `/${path}`) as R;
+  }
+
+  if (Array.isArray(path)) {
+    return path.map((p) => (p.startsWith("/") ? p : `/${p}`)) as R;
+  }
+
+  if (typeof path === "object") {
+    return Object.entries(path as any).reduce<any>(
+      (acc, [key, content]: [string, string | any]) => {
+        const fileName = key.startsWith("/") ? key : `/${key}`;
+
+        acc[fileName] = content;
+
+        return acc;
+      },
+      {}
+    );
+  }
+
+  return undefined as R;
+};

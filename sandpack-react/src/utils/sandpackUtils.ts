@@ -2,9 +2,11 @@ import type {
   SandpackBundlerFile,
   SandpackBundlerFiles,
 } from "@codesandbox/sandpack-client";
-import { addPackageJSONIfNeeded } from "@codesandbox/sandpack-client";
+import {
+  addPackageJSONIfNeeded,
+  normalizePath,
+} from "@codesandbox/sandpack-client";
 
-import type { SandpackFile } from "..";
 import { SANDBOX_TEMPLATES } from "../templates";
 import type {
   SandboxTemplate,
@@ -21,31 +23,6 @@ export interface SandpackContextInfo {
   files: Record<string, SandpackBundlerFile>;
   environment: SandboxEnvironment;
 }
-
-export const normalizePath = <R>(path: R): R => {
-  if (typeof path === "string") {
-    return path.startsWith("/") ? path : `/${path}`;
-  }
-
-  if (Array.isArray(path)) {
-    return path.map((p) => (p.startsWith("/") ? p : `/${p}`));
-  }
-
-  if (typeof path === "object") {
-    return Object.entries(path).reduce<SandpackFiles>(
-      (acc, [key, content]: [string, string | SandpackFile]) => {
-        const fileName = key.startsWith("/") ? key : `/${key}`;
-
-        acc[fileName] = content;
-
-        return acc;
-      },
-      {}
-    );
-  }
-
-  return undefined;
-};
 
 export const getSandpackStateFromProps = (
   props: SandpackProviderProps
