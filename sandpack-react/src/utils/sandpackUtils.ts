@@ -22,21 +22,35 @@ export interface SandpackContextInfo {
   environment: SandboxEnvironment;
 }
 
+export const normalizePath = <R>(path: R): R => {
+  if (typeof path === "string") {
+    return path.startsWith("/") ? path : `/${path}`;
+  }
+
+  if (Array.isArray(path)) {
+    return path.map((p) => (p.startsWith("/") ? p : `/${p}`));
+  }
+
+  if (typeof path === "object") {
+    return Object.entries(path).reduce<SandpackFiles>(
+      (acc, [key, content]: [string, string | SandpackFile]) => {
+        const fileName = key.startsWith("/") ? key : `/${key}`;
+
+        acc[fileName] = content;
+
+        return acc;
+      },
+      {}
+    );
+  }
+
+  return undefined;
+};
+
 export const getSandpackStateFromProps = (
   props: SandpackProviderProps
 ): SandpackContextInfo => {
-  const normalizedFilesPath = props.files
-    ? Object.entries(props.files).reduce<SandpackFiles>(
-        (acc, [key, content]: [string, string | SandpackFile]) => {
-          const fileName = key.startsWith("/") ? key : `/${key}`;
-
-          acc[fileName] = content;
-
-          return acc;
-        },
-        {}
-      )
-    : undefined;
+  const normalizedFilesPath = normalizePath(props.files);
 
   // Merge predefined template with custom setup
   const projectSetup = getSetup({
@@ -46,8 +60,8 @@ export const getSandpackStateFromProps = (
   });
 
   // visibleFiles and activeFile override the setup flags
-  let visibleFiles = props.options?.visibleFiles ?? [];
-  let activeFile = props.options?.activeFile;
+  let visibleFiles = normalizePath(props.options?.visibleFiles ?? []);
+  let activeFile = normalizePath(props.options?.activeFile);
 
   if (visibleFiles.length === 0 && props?.files) {
     const inputFiles = props.files;
