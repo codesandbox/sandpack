@@ -148,7 +148,10 @@ export class SandpackProviderClass extends React.PureComponent<
         return;
       }
 
-      files = { ...files, [pathOrFiles]: { code: code } };
+      files = {
+        ...files,
+        ...convertedFilesToBundlerFiles({ [pathOrFiles]: { code } }),
+      };
     } else if (typeof pathOrFiles === "object") {
       files = { ...files, ...convertedFilesToBundlerFiles(pathOrFiles) };
     }

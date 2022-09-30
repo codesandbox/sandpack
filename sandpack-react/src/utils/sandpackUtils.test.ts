@@ -21,21 +21,21 @@ describe(resolveFile, () => {
   });
 
   it("resolves the file path without leading slash", () => {
-    const data = resolveFile("file.ts", { "file.js": "" });
+    const data = resolveFile("file.ts", { "/file.js": "" });
 
-    expect(data).toBe("file.js");
+    expect(data).toBe("/file.js");
   });
 
   it("removes the leading slash and resolves the file path", () => {
-    const data = resolveFile("/file.js", { "file.js": "" });
+    const data = resolveFile("file.js", { "/file.js": "" });
 
-    expect(data).toBe("file.js");
+    expect(data).toBe("/file.js");
   });
 
   it("fixes (add/remove) the leading slash and fixes the extension", () => {
-    const data = resolveFile("/file.ts", { "file.js": "" });
+    const data = resolveFile("/file.ts", { "/file.js": "" });
 
-    expect(data).toBe("file.js");
+    expect(data).toBe("/file.js");
   });
 });
 
@@ -51,7 +51,7 @@ describe(getSandpackStateFromProps, () => {
       },
     });
 
-    expect(setup.files["foo.ts"].code).toBe("foo");
+    expect(setup.files["/foo.ts"].code).toBe("foo");
   });
 
   test("files should override template files", () => {
@@ -232,7 +232,7 @@ describe(getSandpackStateFromProps, () => {
     });
 
     const packageContent = JSON.parse(setup.files["/package.json"].code);
-    expect(packageContent.main).toBe("foo.ts");
+    expect(packageContent.main).toBe("/foo.ts");
   });
 
   test("it resolves the entry file, even when the extension is wrong", () => {
@@ -245,7 +245,7 @@ describe(getSandpackStateFromProps, () => {
     });
 
     const packageContent = JSON.parse(setup.files["/package.json"].code);
-    expect(packageContent.main).toBe("entry.js");
+    expect(packageContent.main).toBe("/entry.js");
   });
 
   test("it keeps the entry into package.json main", () => {
@@ -271,7 +271,7 @@ describe(getSandpackStateFromProps, () => {
     });
 
     const packageContent = JSON.parse(setup.files["/package.json"].code);
-    expect(packageContent.main).toEqual("entry.js");
+    expect(packageContent.main).toEqual("/entry.js");
   });
 
   /**

@@ -4,6 +4,7 @@ import type {
 } from "@codesandbox/sandpack-client";
 import { addPackageJSONIfNeeded } from "@codesandbox/sandpack-client";
 
+import type { SandpackFile } from "..";
 import { SANDBOX_TEMPLATES } from "../templates";
 import type {
   SandboxTemplate,
@@ -24,11 +25,24 @@ export interface SandpackContextInfo {
 export const getSandpackStateFromProps = (
   props: SandpackProviderProps
 ): SandpackContextInfo => {
+  const normalizedFilesPath = props.files
+    ? Object.entries(props.files).reduce<SandpackFiles>(
+        (acc, [key, content]: [string, string | SandpackFile]) => {
+          const fileName = key.startsWith("/") ? key : `/${key}`;
+
+          acc[fileName] = content;
+
+          return acc;
+        },
+        {}
+      )
+    : undefined;
+
   // Merge predefined template with custom setup
   const projectSetup = getSetup({
     template: props.template,
     customSetup: props.customSetup,
-    files: props.files,
+    files: normalizedFilesPath,
   });
 
   // visibleFiles and activeFile override the setup flags
@@ -114,17 +128,10 @@ export const resolveFile = (
 
   let index = 0;
   const strategies = [".js", ".jsx", ".ts", ".tsx"];
-  const leadingSlash = Object.keys(files).every((file) => file.startsWith("/"));
 
   while (!resolvedPath && index < strategies.length) {
-    const slashPath = (): string => {
-      if (path.startsWith("/")) {
-        return leadingSlash ? path : path.replace(/^\/+/, "");
-      }
-
-      return leadingSlash ? `/${path}` : path;
-    };
-    const removeExtension = slashPath().split(".")[0];
+    const fileName = path.startsWith("/") ? path : `/${path}`;
+    const removeExtension = fileName.split(".")[0];
     const attemptPath = `${removeExtension}${strategies[index]}`;
 
     if (files[attemptPath] !== undefined) {
