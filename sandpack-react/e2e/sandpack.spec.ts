@@ -18,16 +18,10 @@ test.describe("Sandpack", () => {
     // ✅ Initial state
     expect(headingIframe).toBe("Hello World");
 
-    await page.locator(".cm-content").focus();
-
-    // Clean editor
-    await page.keyboard.press("Meta+a");
-    await page.keyboard.press("Backspace");
-
     // Insert new content
-    await page.keyboard.insertText(`export default function App() {
-  return <h1>Hello Sandpack</h1>
-}`);
+    await page.locator(".cm-content").fill(`export default function App() {
+      return <h1>Hello Sandpack</h1>
+    }`);
 
     // Wait to the bundler applies changes
     await page.waitForTimeout(2000);
