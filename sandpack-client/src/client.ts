@@ -166,11 +166,7 @@ export class SandpackClient {
       );
     }
 
-    const urlSource = options.startRoute
-      ? new URL(options.startRoute, this.bundlerURL).toString()
-      : this.bundlerURL;
-
-    this.iframe.contentWindow?.location.replace(urlSource);
+    this.setLocationURLIntoIFrame();
 
     this.iframeProtocol = new IFrameProtocol(this.iframe, this.bundlerURL);
 
@@ -228,6 +224,14 @@ export class SandpackClient {
         }
       }
     );
+  }
+
+  public setLocationURLIntoIFrame(): void {
+    const urlSource = this.options.startRoute
+      ? new URL(this.options.startRoute, this.bundlerURL).toString()
+      : this.bundlerURL;
+
+    this.iframe.contentWindow?.location.replace(urlSource);
   }
 
   cleanup(): void {
@@ -318,6 +322,16 @@ export class SandpackClient {
   }
 
   public dispatch(message: SandpackMessage): void {
+    /**
+     * Intercept "refresh" dispatch: this will make sure
+     * that the iframe is still in the location it's supposed to be.
+     * External links inside the iframe will change the location and
+     * prevent the user from navigating back.
+     */
+    if (message.type === "refresh") {
+      this.setLocationURLIntoIFrame();
+    }
+
     this.iframeProtocol.dispatch(message);
   }
 
