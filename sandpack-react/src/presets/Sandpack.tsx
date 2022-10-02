@@ -82,7 +82,6 @@ export const Sandpack: SandpackInternal = (props) => {
 
   const hasRightColumn =
     props.options?.showConsole || props.options?.showConsoleButton;
-  const RightColumn = hasRightColumn ? SandpackStack : React.Fragment;
 
   const rightColumnStyle = {
     flexGrow: previewPart,
@@ -92,6 +91,13 @@ export const Sandpack: SandpackInternal = (props) => {
     gap: consoleVisibility ? 1 : 0,
     height: props.options?.editorHeight, // use the original editor height
   };
+
+  const RightColumn: React.FC<{ children: React.ReactNode }> = ({ children }) =>
+    hasRightColumn ? (
+      <SandpackStack style={rightColumnStyle}>{children}</SandpackStack>
+    ) : (
+      <React.Fragment>{children}</React.Fragment>
+    );
 
   /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
   const templateFiles = SANDBOX_TEMPLATES[props.template!] ?? {};
@@ -128,7 +134,7 @@ export const Sandpack: SandpackInternal = (props) => {
         />
 
         {/* @ts-ignore */}
-        <RightColumn style={rightColumnStyle}>
+        <RightColumn>
           {mode === "preview" && (
             <SandpackPreview
               actionsChildren={actionsChildren}
