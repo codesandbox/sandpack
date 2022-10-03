@@ -31,6 +31,6 @@ export const danielAwesomePro: SandpackTheme = {
     body: '-apple-system, BlinkMacSystemFont, "Overpass", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
     size: "15px",
-    lineHeight: "21px",
+    lineHeight: "19px",
   },
 };
