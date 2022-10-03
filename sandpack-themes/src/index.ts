@@ -4,3 +4,4 @@ export { monokaiPro } from "./monokaiPro";
 export { nightOwl } from "./nightOwl";
 export { sandpackDark } from "./sandpackDark";
 export { dracula } from "./dracula";
+export { danielAwesomePro } from "./danielAwesomePro";
