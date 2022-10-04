@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/codesandbox/sandpack/compare/v1.11.1...v1.12.0) (2022-10-04)
+
+
+### Features
+
+* **theme:** freeCodeCamp Dark Theme ([#605](https://github.com/codesandbox/sandpack/issues/605)) ([24370e1](https://github.com/codesandbox/sandpack/commit/24370e1f1e7840f6757eac232d9929ce24b988f9))
+
+
+
+
+
 # [1.11.0](https://github.com/codesandbox/sandpack/compare/v1.10.1...v1.11.0) (2022-10-04)
 
 
