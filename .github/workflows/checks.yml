@@ -1,102 +1,14 @@
 name: CI
 on: [pull_request]
+env:
+  TURBO_TEAM: codesandbox
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
 jobs:
-  install:
-    name: Install & build
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Setup | Checkout
-        uses: actions/checkout@v1
-
-      - name: Setup | Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version-file: .nvmrc
-
-      - name: Setup | Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ hashFiles('yarn.lock') }}
-
-      - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Build
-        run: yarn run build
-
-      - name: Cache | react build
-        uses: actions/upload-artifact@v2
-        with:
-          path: sandpack-react/dist
-          name: sandpack-react-${{ github.sha }}
-
-      - name: Cache | client build
-        uses: actions/upload-artifact@v2
-        with:
-          path: sandpack-client/dist
-          name: sandpack-client-${{ github.sha }}
-
-      - name: Cache | theme build
-        uses: actions/upload-artifact@v2
-        with:
-          path: sandpack-themes/dist
-          name: sandpack-themes-${{ github.sha }}
-
-  sizebot:
-    name: Sizebot
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    needs: install
-    steps:
-      - name: Setup | Checkout
-        uses: actions/checkout@v1
-
-      - name: Setup | Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version-file: .nvmrc
-
-      - name: Setup | Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ hashFiles('yarn.lock') }}
-
-      - name: Setup | Restore react build
-        uses: actions/download-artifact@v2
-        with:
-          name: sandpack-react-${{ github.sha }}
-          path: sandpack-react/dist
-
-      - name: Setup | Restore client build
-        uses: actions/download-artifact@v2
-        with:
-          name: sandpack-client-${{ github.sha }}
-          path: sandpack-client/dist
-
-      - name: Setup | Restore themes build
-        uses: actions/download-artifact@v2
-        with:
-          name: sandpack-themes-${{ github.sha }}
-          path: sandpack-themes/dist
-
-      - name: Bot script
-        run: node scripts/sizebot/index.js
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   integration:
     name: Integration tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -105,32 +17,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
+          cache: "yarn"
 
-      - name: Setup | Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ hashFiles('yarn.lock') }}
+      - name: Setup | Install dependencies
+        run: yarn install --prefer-offline
 
-      - name: Setup | Restore react build
-        uses: actions/download-artifact@v2
-        with:
-          name: sandpack-react-${{ github.sha }}
-          path: sandpack-react/dist
-
-      - name: Setup | Restore client build
-        uses: actions/download-artifact@v2
-        with:
-          name: sandpack-client-${{ github.sha }}
-          path: sandpack-client/dist
-
-      - name: Setup | Restore theme build
-        uses: actions/download-artifact@v2
-        with:
-          name: sandpack-themes-${{ github.sha }}
-          path: sandpack-themes/dist
+      - name: Build
+        run: yarn build
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -145,11 +38,10 @@ jobs:
           path: sandpack-react/playwright-report/
           retention-days: 30
 
-  test:
-    name: Unit tests
+  sizebot:
+    name: Sizebot
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: install
     steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
@@ -158,29 +50,38 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
+          cache: "yarn"
 
-      - name: Setup | Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ hashFiles('yarn.lock') }}
+      - name: Setup | Install dependencies
+        run: yarn install --prefer-offline
 
-      - name: Setup | Restore react build
-        uses: actions/download-artifact@v2
-        with:
-          name: sandpack-react-${{ github.sha }}
-          path: sandpack-react/dist
+      - name: Build
+        run: yarn build
 
-      - name: Setup | Restore client build
-        uses: actions/download-artifact@v2
+      - name: Bot script
+        run: node scripts/sizebot/index.js
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
         with:
-          name: sandpack-client-${{ github.sha }}
-          path: sandpack-client/dist
+          node-version-file: .nvmrc
+          cache: "yarn"
+
+      - name: Setup | Install dependencies
+        run: yarn install --prefer-offline
 
       - name: Test | Jest
-        run: yarn run test
+        run: yarn test
 
   lint:
     name: Lint
@@ -194,20 +95,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-
-      - name: Setup | Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ hashFiles('yarn.lock') }}
+          cache: "yarn"
 
       - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --prefer-offline
 
       - name: Lint | Eslint
-        run: yarn run lint
+        run: yarn lint
 
   format:
     name: Format
@@ -221,17 +115,30 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-
-      - name: Setup | Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ hashFiles('yarn.lock') }}
+          cache: "yarn"
 
       - name: Setup | Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --prefer-offline
 
       - name: Format
-        run: yarn run format:check
+        run: yarn format:check
+
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-18.04
+    timeout-minutes: 10
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup | Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: .nvmrc
+          cache: "yarn"
+
+      - name: Setup | Install dependencies
+        run: yarn install --prefer-offline
+
+      - name: Typecheck
+        run: yarn typecheck

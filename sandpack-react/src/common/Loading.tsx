@@ -21,9 +21,9 @@ const wrapperClassName = css({
   height: "32px",
   borderRadius: "$border$radius",
 
-  [`.${cubeClassName}`]: { display: "block" },
+  [`.${cubeClassName}`]: { display: "flex" },
   [`.${buttonClassName}`]: { display: "none" },
-  [`&:hover .${buttonClassName}`]: { display: "block" },
+  [`&:hover .${buttonClassName}`]: { display: "flex" },
   [`&:hover .${cubeClassName}`]: { display: "none" },
 });
 

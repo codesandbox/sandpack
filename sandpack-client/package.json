@@ -16,11 +16,14 @@
   "scripts": {
     "clean": "rm -rf dist sandpack",
     "prebuild": "yarn run clean",
+    "test": "jest .",
     "build": "node build.js && yarn run build:types",
     "build:types": "tsc -p tsconfig.json",
-    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "lint": "eslint '**/*.ts?(x)' --fix",
     "build:publish": "yarn build && gulp",
-    "build:bundler": "gulp"
+    "build:bundler": "gulp",
+    "format": "prettier --write '**/*.{ts,tsx,js,jsx}'",
+    "format:check": "prettier --check '**/*.{ts,tsx}'"
   },
   "files": [
     "dist",
@@ -43,9 +46,6 @@
     "gulp": "^4.0.2",
     "regenerator-runtime": "^0.13.7",
     "ts-node": "^4.1.0",
-    "tslint": "^5.8.0",
-    "tslint-config-prettier": "^1.1.0",
-    "tslint-config-standard": "^7.0.0",
     "typescript": "4.0.3"
   }
 }
