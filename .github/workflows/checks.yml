@@ -1,5 +1,8 @@
 name: CI
 on: [pull_request]
+env:
+  TURBO_TEAM: codesandbox
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
 jobs:
   integration:
