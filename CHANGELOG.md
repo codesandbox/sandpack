@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.1](https://github.com/codesandbox/sandpack/compare/v1.10.0...v1.10.1) (2022-10-04)
+
+
+### Bug Fixes
+
+* **templates:** move dependencies to a package json ([#594](https://github.com/codesandbox/sandpack/issues/594)) ([441d5a5](https://github.com/codesandbox/sandpack/commit/441d5a5182f162d343e4ad56cb6321e3e839d984))
+
+
+
+
+
 # [1.10.0](https://github.com/codesandbox/sandpack/compare/v1.9.0...v1.10.0) (2022-10-04)
 
 
