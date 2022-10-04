@@ -384,7 +384,7 @@ describe(getSandpackStateFromProps, () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       expect(err.message).toEqual(
-        `[sandpack-client]: "entry" was not specified - provide either a package.json with the "main" field or an "entry" value`
+        `[sandpack-client]: "entry" was not specified - provide either a package.json with the "main" field or na "entry" value`
       );
     }
   });
@@ -421,7 +421,7 @@ describe(getSandpackStateFromProps, () => {
 describe(convertedFilesToBundlerFiles, () => {
   it("converts regular files to bundler files", () => {
     expect(convertedFilesToBundlerFiles({ name: "code" })).toEqual({
-      "/name": { code: "code" },
+      name: { code: "code" },
     });
   });
 
@@ -429,13 +429,7 @@ describe(convertedFilesToBundlerFiles, () => {
     expect(
       convertedFilesToBundlerFiles({ name: { code: "code", hidden: true } })
     ).toEqual({
-      "/name": { code: "code", hidden: true },
-    });
-  });
-
-  it("normalizes path / forward slash", () => {
-    expect(convertedFilesToBundlerFiles({ "package.json": "code" })).toEqual({
-      "/package.json": { code: "code" },
+      name: { code: "code", hidden: true },
     });
   });
 });

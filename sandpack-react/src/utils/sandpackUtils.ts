@@ -189,9 +189,7 @@ const combineTemplateFilesToSetup = ({
     } as SandboxTemplate;
   }
 
-  const baseTemplate = SANDBOX_TEMPLATES[
-    template
-  ] as unknown as SandboxTemplate;
+  const baseTemplate = SANDBOX_TEMPLATES[template] as SandboxTemplate;
   if (!baseTemplate) {
     throw new Error(
       `[sandpack-react]: invalid template "${template}" provided`
@@ -241,13 +239,10 @@ export const convertedFilesToBundlerFiles = (
   if (!files) return {};
 
   return Object.keys(files).reduce((acc: SandpackBundlerFiles, key) => {
-    // Normalize path
-    const fileName = key.startsWith("/") ? key : `/${key}`;
-
     if (typeof files[key] === "string") {
-      acc[fileName] = { code: files[key] as string };
+      acc[key] = { code: files[key] as string };
     } else {
-      acc[fileName] = files[key] as SandpackBundlerFile;
+      acc[key] = files[key] as SandpackBundlerFile;
     }
 
     return acc;

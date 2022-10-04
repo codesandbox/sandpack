@@ -33,6 +33,7 @@ export function addPackageJSONIfNeeded(
   entry?: string
 ): SandpackBundlerFiles {
   const normalizedFilesPath = normalizePath(files);
+
   const packageJsonFile = normalizedFilesPath["/package.json"];
 
   /**
@@ -76,7 +77,7 @@ export function addPackageJSONIfNeeded(
     if (entry) {
       packageJsonContent.main = entry;
     }
-    
+
     normalizedFilesPath["/package.json"] = {
       code: JSON.stringify(packageJsonContent, null, 2),
     };
