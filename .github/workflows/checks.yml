@@ -92,57 +92,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  chromatic-deployment:
-    name: Chromatic deployment
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    needs: install
-    steps:
-      - name: Setup | Checkout
-        uses: actions/checkout@v1
-
-      - name: Setup | Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version-file: .nvmrc
-
-      - name: Setup | Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-          key: modules-${{ hashFiles('yarn.lock') }}
-
-      - name: Setup | Restore react build
-        uses: actions/download-artifact@v2
-        with:
-          name: sandpack-react-${{ github.sha }}
-          path: sandpack-react/dist
-
-      - name: Setup | Restore client build
-        uses: actions/download-artifact@v2
-        with:
-          name: sandpack-client-${{ github.sha }}
-          path: sandpack-client/dist
-
-      - name: Setup | Restore theme build
-        uses: actions/download-artifact@v2
-        with:
-          name: sandpack-themes-${{ github.sha }}
-          path: sandpack-themes/dist
-
-      - name: Publish to Chromatic
-        uses: chromaui/action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          buildScriptName: "chromatic:react"
-
   integration:
     name: Integration tests
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     needs: install
     steps:
       - name: Setup | Checkout
@@ -179,11 +132,18 @@ jobs:
           name: sandpack-themes-${{ github.sha }}
           path: sandpack-themes/dist
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: cd sandpack-react && npx playwright test
+
+      - uses: actions/upload-artifact@v2
+        if: always()
         with:
-          start: yarn dev:react
-          config: video=false
+          name: playwright-report
+          path: sandpack-react/playwright-report/
+          retention-days: 30
 
   test:
     name: Unit tests

@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/codesandbox/sandpack/compare/v1.9.0...v1.10.0) (2022-10-04)
+
+
+### Features
+
+* **theme:** gruvbox light and dark ([#600](https://github.com/codesandbox/sandpack/issues/600)) ([3d93fc0](https://github.com/codesandbox/sandpack/commit/3d93fc048e948980884545bb23e61d67b9615ed6))
+
+
+
+
+
+# [1.9.0](https://github.com/codesandbox/sandpack/compare/v1.8.8...v1.9.0) (2022-10-04)
+
+
+### Features
+
+* **theme:** atom dark ⚛ ([#598](https://github.com/codesandbox/sandpack/issues/598)) ([f48dc93](https://github.com/codesandbox/sandpack/commit/f48dc93ff3e213e3c19aa63b10161378835ee74b))
+
+
+
+
+
+## [1.8.8](https://github.com/codesandbox/sandpack/compare/v1.8.7...v1.8.8) (2022-09-30)
+
+
+### Bug Fixes
+
+* **e2e:** migrate from cypress to playwright & fix sandpackStateFromProps ([#593](https://github.com/codesandbox/sandpack/issues/593)) ([c993827](https://github.com/codesandbox/sandpack/commit/c993827aeed87b4fea91b63b829a09ad5563c61e))
+
+
+
+
+
+## [1.8.7](https://github.com/codesandbox/sandpack/compare/v1.8.6...v1.8.7) (2022-09-30)
+
+
+### Bug Fixes
+
+* **files:** normalize paths ([#595](https://github.com/codesandbox/sandpack/issues/595)) ([71a2044](https://github.com/codesandbox/sandpack/commit/71a2044f61ae32f69822f8eefdaae246629ef400))
+
+
+
+
+
+## [1.8.6](https://github.com/codesandbox/sandpack/compare/v1.8.5...v1.8.6) (2022-09-28)
+
+
+### Bug Fixes
+
+* **syntax languages:** remove markdown ([#591](https://github.com/codesandbox/sandpack/issues/591)) ([a56962a](https://github.com/codesandbox/sandpack/commit/a56962a8be52f86d31ba3c9360d1480afc8e3fe5))
+
+
+
+
+
+## [1.8.5](https://github.com/codesandbox/sandpack/compare/v1.8.4...v1.8.5) (2022-09-28)
+
+
+### Bug Fixes
+
+* **client-navigation:** make sure iframe is using the right location on refreshing ([#587](https://github.com/codesandbox/sandpack/issues/587)) ([317d456](https://github.com/codesandbox/sandpack/commit/317d456d5b137e795bb6e7bfa86fb92803c5afd3))
+
+
+
+
+
+## [1.8.4](https://github.com/codesandbox/sandpack/compare/v1.8.3...v1.8.4) (2022-09-27)
+
+
+### Bug Fixes
+
+* **track fork:** standardized UTM parameter ([#585](https://github.com/codesandbox/sandpack/issues/585)) ([8b21ed6](https://github.com/codesandbox/sandpack/commit/8b21ed6c733de54a7866e9796421368f61bbc2a4))
+
+
+
+
+
+## [1.8.3](https://github.com/codesandbox/sandpack/compare/v1.8.2...v1.8.3) (2022-09-27)
+
+
+### Bug Fixes
+
+* **codemirror:** avoid Escape keybinding conflict ([#581](https://github.com/codesandbox/sandpack/issues/581)) ([61e615c](https://github.com/codesandbox/sandpack/commit/61e615c38a6e0a42c4f436d475eba8af2c26aa01))
+
+
+
+
+
 ## [1.8.2](https://github.com/codesandbox/sandpack/compare/v1.8.1...v1.8.2) (2022-09-27)
 
 

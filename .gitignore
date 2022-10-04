@@ -106,6 +106,3 @@ dist
 
 # Mac
 .DS_Store
-
-cypress/videos
-cypress/screenshots

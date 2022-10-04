@@ -19,17 +19,14 @@
     "lint": "eslint '**/*.ts?(x)' --fix",
     "format:check": "prettier --check '**/*.{ts,tsx}'",
     "format": "prettier --write '**/*.{ts,tsx,js,jsx}'",
-    "test": "TEST_ENV=true jest sandpack-react sandpack-client --transformIgnorePatterns \"node_modules/(?!@codemirror)/\"",
-    "cy:open": "cypress open",
-    "cy:run": "cypress run",
+    "test": "TEST_ENV=true jest sandpack-react sandpack-client --transformIgnorePatterns \"node_modules/(?!@codemirror)/\" --modulePathIgnorePatterns \"e2e\"",
     "build": "yarn workspace @codesandbox/sandpack-client build && yarn workspace @codesandbox/sandpack-react build && yarn workspace @codesandbox/sandpack-themes build",
     "prepare": "husky install",
     "clean": "yarn workspaces run clean",
     "dev:docs": "yarn workspace sandpack-docs start",
     "dev:react": "yarn workspace @codesandbox/sandpack-react storybook",
     "dev:landing": "yarn workspace sandpack-landing dev -p 3001",
-    "dev:theme": "yarn workspace sandpack-theme dev -p 3002",
-    "chromatic:react": "yarn workspace @codesandbox/sandpack-react build-storybook"
+    "dev:theme": "yarn workspace sandpack-theme dev -p 3002"
   },
   "repository": {
     "type": "git",
@@ -41,19 +38,16 @@
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
-    "@cypress/snapshot": "^2.1.7",
     "@octokit/rest": "^18.12.0",
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
     "babel-eslint": "^10.0.0",
     "babel-jest": "^27.4.5",
-    "cypress": "^9.1.1",
     "esbuild": "^0.12.21",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-react-app": "^6.0.0",
-    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-flowtype": "^5.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
@@ -67,7 +61,6 @@
     "lint-staged": "^10.5.4",
     "package-build-stats": "7.3.6",
     "prettier": "^2.2.1",
-    "react-test-renderer": "^18.1.0",
-    "cypress-real-events": "^1.7.0"
+    "react-test-renderer": "^18.1.0"
   }
 }

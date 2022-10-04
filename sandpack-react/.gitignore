@@ -3,3 +3,7 @@ storybook-static
 .rpt2_cache
 dist
 .env
+node_modules/
+/test-results/
+/playwright-report/
+/playwright/.cache/

@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/codesandbox/sandpack/compare/v1.9.0...v1.10.0) (2022-10-04)
+
+
+### Features
+
+* **theme:** gruvbox light and dark ([#600](https://github.com/codesandbox/sandpack/issues/600)) ([3d93fc0](https://github.com/codesandbox/sandpack/commit/3d93fc048e948980884545bb23e61d67b9615ed6))
+
+
+
+
+
+# [1.9.0](https://github.com/codesandbox/sandpack/compare/v1.8.8...v1.9.0) (2022-10-04)
+
+
+### Features
+
+* **theme:** atom dark ⚛ ([#598](https://github.com/codesandbox/sandpack/issues/598)) ([f48dc93](https://github.com/codesandbox/sandpack/commit/f48dc93ff3e213e3c19aa63b10161378835ee74b))
+
+
+
+
+
 # [1.6.0](https://github.com/codesandbox/sandpack/compare/v1.5.5...v1.6.0) (2022-08-30)
 
 
