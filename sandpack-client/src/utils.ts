@@ -189,7 +189,7 @@ export const normalizePath = <R extends any>(path: R): R => {
     return path.map((p) => (p.startsWith("/") ? p : `/${p}`)) as R;
   }
 
-  if (typeof path === "object") {
+  if (typeof path === "object" && path !== null) {
     return Object.entries(path as any).reduce<any>(
       (acc, [key, content]: [string, string | any]) => {
         const fileName = key.startsWith("/") ? key : `/${key}`;
