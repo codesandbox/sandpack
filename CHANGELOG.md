@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.1](https://github.com/codesandbox/sandpack/compare/v1.11.0...v1.11.1) (2022-10-04)
+
+
+### Bug Fixes
+
+* style prop no longer passed to React.Fragment ([#601](https://github.com/codesandbox/sandpack/issues/601)) ([05766bb](https://github.com/codesandbox/sandpack/commit/05766bb18e519e20fc3a9012ebd9412981173fba))
+
+
+
+
+
 # [1.11.0](https://github.com/codesandbox/sandpack/compare/v1.10.1...v1.11.0) (2022-10-04)
 
 
