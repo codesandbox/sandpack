@@ -5,4 +5,4 @@ export { githubLight } from "./githubLight";
 export { monokaiPro } from "./monokaiPro";
 export { nightOwl } from "./nightOwl";
 export { sandpackDark } from "./sandpackDark";
-export { danielAwesomePro } from "./danielAwesomePro";
+export { ecoLight } from "./ecoLight";
