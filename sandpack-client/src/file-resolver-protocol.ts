@@ -5,7 +5,7 @@
  * an abstraction over the actions that can be dispatched between the bundler and the iframe.
  */
 
-import { IFrameProtocol } from "./iframe-protocol";
+import type { IFrameProtocol } from "./iframe-protocol";
 import type {
   UnsubscribeFunction,
   ProtocolRequestMessage,

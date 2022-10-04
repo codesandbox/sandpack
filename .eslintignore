@@ -1,5 +1,5 @@
 dist/
 esm/
 sandpack/
-file-resolver-protocol.ts
+sandpack-client/src/file-resolver-protocol.ts
 examples/
