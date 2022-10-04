@@ -93,6 +93,11 @@ export const Sandpack: SandpackInternal = (props) => {
     height: props.options?.editorHeight, // use the original editor height
   };
 
+  const rightColumnProps = React.useMemo(
+    () => (hasRightColumn ? { style: rightColumnStyle } : {}),
+    [hasRightColumn]
+  );
+
   /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
   const templateFiles = SANDBOX_TEMPLATES[props.template!] ?? {};
   const mode = "mode" in templateFiles ? templateFiles.mode : "preview";
@@ -128,7 +133,7 @@ export const Sandpack: SandpackInternal = (props) => {
         />
 
         {/* @ts-ignore */}
-        <RightColumn style={rightColumnStyle}>
+        <RightColumn {...rightColumnProps}>
           {mode === "preview" && (
             <SandpackPreview
               actionsChildren={actionsChildren}
