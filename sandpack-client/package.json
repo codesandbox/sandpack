@@ -21,7 +21,9 @@
     "build:types": "tsc -p tsconfig.json",
     "lint": "eslint '**/*.ts?(x)' --fix",
     "build:publish": "yarn build && gulp",
-    "build:bundler": "gulp"
+    "build:bundler": "gulp",
+    "format": "prettier --write '**/*.{ts,tsx,js,jsx}'",
+    "format:check": "prettier --check '**/*.{ts,tsx}'"
   },
   "files": [
     "dist",
