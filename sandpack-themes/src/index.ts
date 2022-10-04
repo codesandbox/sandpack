@@ -6,3 +6,4 @@ export { monokaiPro } from "./monokaiPro";
 export { nightOwl } from "./nightOwl";
 export { sandpackDark } from "./sandpackDark";
 export { ecoLight } from "./ecoLight";
+export { freeCodeCampDark } from "./freeCodeCampDark";
