@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/codesandbox/sandpack/compare/v1.8.8...v1.9.0) (2022-10-04)
+
+
+### Features
+
+* **theme:** atom dark ⚛ ([#598](https://github.com/codesandbox/sandpack/issues/598)) ([f48dc93](https://github.com/codesandbox/sandpack/commit/f48dc93ff3e213e3c19aa63b10161378835ee74b))
+
+
+
+
+
 ## [1.8.8](https://github.com/codesandbox/sandpack/compare/v1.8.7...v1.8.8) (2022-09-30)
 
 
