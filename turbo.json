@@ -15,12 +15,12 @@
     },
     "typecheck": {
       "dependsOn": ["^build"],
-      "inputs": ["src/**", "package.json"],
+      "inputs": [],
       "outputs": []
     },
     "lint": {
-      "dependsOn": ["^build"],
-      "inputs": ["src/**", "package.json"],
+      "dependsOn": [],
+      "inputs": [],
       "outputs": []
     },
     "format": {
