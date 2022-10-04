@@ -7,7 +7,7 @@ import type {
 } from "./types";
 
 const DEPENDENCY_ERROR_MESSAGE = `[sandpack-client]: "dependencies" was not specified - provide either a package.json or a "dependencies" value`;
-const ENTRY_ERROR_MESSAGE = `[sandpack-client]: "entry" was not specified - provide either a package.json with the "main" field or na "entry" value`;
+const ENTRY_ERROR_MESSAGE = `[sandpack-client]: "entry" was not specified - provide either a package.json with the "main" field or an "entry" value`;
 
 export function createPackageJSON(
   dependencies: Dependencies = {},
@@ -189,7 +189,7 @@ export const normalizePath = <R extends any>(path: R): R => {
     return path.map((p) => (p.startsWith("/") ? p : `/${p}`)) as R;
   }
 
-  if (typeof path === "object") {
+  if (typeof path === "object" && path !== null) {
     return Object.entries(path as any).reduce<any>(
       (acc, [key, content]: [string, string | any]) => {
         const fileName = key.startsWith("/") ? key : `/${key}`;

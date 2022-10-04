@@ -62,13 +62,17 @@ createApp(App).mount('#app')
 </html>
 `,
     },
+    "/package.json": {
+      code: JSON.stringify({
+        dependencies: {
+          "core-js": "^3.6.5",
+          vue: "^3.0.0-0",
+          "@vue/cli-plugin-babel": "4.5.0",
+        },
+        main: "/src/main.js",
+      }),
+    },
   },
-  dependencies: {
-    "core-js": "^3.6.5",
-    vue: "^3.0.0-0",
-    "@vue/cli-plugin-babel": "4.5.0",
-  },
-  entry: "/src/main.js",
   main: "/src/App.vue",
   environment: "vue-cli",
 };

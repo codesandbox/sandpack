@@ -49,11 +49,15 @@ h1 {
 </body>
 </html>`,
     },
+    "/package.json": {
+      code: JSON.stringify({
+        dependencies: {
+          "solid-js": "1.3.15",
+        },
+        main: "/index.tsx",
+      }),
+    },
   },
-  dependencies: {
-    "solid-js": "1.3.15",
-  },
-  entry: "/index.tsx",
   main: "/App.tsx",
   environment: "solid",
 };

@@ -214,14 +214,10 @@ const defaultTemplate = SANDBOX_TEMPLATES["react-ts"];
 
 const exhaustedFilesTests = {
   ...defaultTemplate,
-  dependencies: {
-    ...defaultTemplate.dependencies,
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/jest-dom": "^5.16.5",
-  },
+
   files: {
-    "/src/index.tsx": SANDBOX_TEMPLATES["react-ts"].files["/index.tsx"],
-    "src/App.tsx": `console.log("Hello world");\n\n${SANDBOX_TEMPLATES["react-ts"].files["/App.tsx"].code}`,
+    "/src/index.tsx": defaultTemplate.files["/index.tsx"],
+    "/src/App.tsx": `console.log("Hello world");\n\n${defaultTemplate.files["/App.tsx"].code}`,
     "/src/App.test.tsx": `import '@testing-library/jest-dom';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
@@ -231,7 +227,21 @@ test('renders welcome message', () => {
   render(<App />);
   expect(screen.getByText('Hello World')).toBeInTheDocument();
 });`,
-    "/src/styles.css": SANDBOX_TEMPLATES["react-ts"].files["/styles.css"],
-    "/package.json": JSON.stringify({ main: "/src/index.tsx" }),
+    "/src/styles.css": defaultTemplate.files["/styles.css"],
+    "/package.json": JSON.stringify({
+      dependencies: {
+        react: "^18.0.0",
+        "react-dom": "^18.0.0",
+        "react-scripts": "^4.0.0",
+        "@testing-library/react": "^13.3.0",
+        "@testing-library/jest-dom": "^5.16.5",
+      },
+      devDependencies: {
+        "@types/react": "^18.0.0",
+        "@types/react-dom": "^18.0.0",
+        typescript: "^4.0.0",
+      },
+      main: "/add.ts",
+    }),
   },
 };

@@ -62,12 +62,16 @@ new Vue({
 </html>
 `,
     },
+    "/package.json": {
+      code: JSON.stringify({
+        dependencies: {
+          vue: "^2.6.11",
+          "@vue/cli-plugin-babel": "4.1.1",
+        },
+        main: "/src/main.js",
+      }),
+    },
   },
-  dependencies: {
-    vue: "^2.6.11",
-    "@vue/cli-plugin-babel": "4.1.1",
-  },
-  entry: "/src/main.js",
   main: "/src/App.vue",
   environment: "vue-cli",
 };

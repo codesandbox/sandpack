@@ -28,12 +28,14 @@ describe('add', () => {
   });
 });`,
     },
+    "package.json": {
+      code: JSON.stringify({
+        dependencies: {},
+        devDependencies: { typescript: "^4.0.0" },
+        main: "/add.ts",
+      }),
+    },
   },
-  dependencies: {},
-  devDependencies: {
-    typescript: "^4.0.0",
-  },
-  entry: "/add.ts",
   main: "/add.test.ts",
   environment: "parcel",
   mode: "tests",

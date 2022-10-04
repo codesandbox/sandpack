@@ -80,18 +80,22 @@ platformBrowserDynamic()
       import "zone.js/dist/zone";
 `,
     },
+    "/package.json": {
+      code: JSON.stringify({
+        dependencies: {
+          "@angular/core": "^11.2.0",
+          "@angular/platform-browser": "^11.2.0",
+          "@angular/platform-browser-dynamic": "^11.2.0",
+          "@angular/common": "^11.2.0",
+          "@angular/compiler": "^11.2.0",
+          "zone.js": "0.11.3",
+          "core-js": "3.8.3",
+          rxjs: "6.6.3",
+        },
+        main: "/src/main.ts",
+      }),
+    },
   },
-  dependencies: {
-    "@angular/core": "^11.2.0",
-    "@angular/platform-browser": "^11.2.0",
-    "@angular/platform-browser-dynamic": "^11.2.0",
-    "@angular/common": "^11.2.0",
-    "@angular/compiler": "^11.2.0",
-    "zone.js": "0.11.3",
-    "core-js": "3.8.3",
-    rxjs: "6.6.3",
-  },
-  entry: "/src/main.ts",
   main: "/src/app/app.component.ts",
   environment: "angular-cli",
 };

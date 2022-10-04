@@ -53,13 +53,17 @@ h1 {
   </body>
 </html>`,
     },
+    "/package.json": {
+      code: JSON.stringify({
+        dependencies: {
+          react: "^18.0.0",
+          "react-dom": "^18.0.0",
+          "react-scripts": "^4.0.0",
+        },
+        main: "/index.js",
+      }),
+    },
   },
-  dependencies: {
-    react: "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-scripts": "^4.0.0",
-  },
-  entry: "/index.js",
   main: "/App.js",
   environment: "create-react-app",
 };
