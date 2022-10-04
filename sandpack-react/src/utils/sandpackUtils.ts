@@ -173,7 +173,7 @@ const combineTemplateFilesToSetup = ({
   if (!template) {
     // If not input, default to vanilla
     if (!customSetup) {
-      return SANDBOX_TEMPLATES.vanilla as SandboxTemplate;
+      return SANDBOX_TEMPLATES.vanilla as unknown as SandboxTemplate;
     }
 
     if (!files || Object.keys(files).length === 0) {
@@ -189,7 +189,9 @@ const combineTemplateFilesToSetup = ({
     } as SandboxTemplate;
   }
 
-  const baseTemplate = SANDBOX_TEMPLATES[template] as SandboxTemplate;
+  const baseTemplate = SANDBOX_TEMPLATES[
+    template
+  ] as unknown as SandboxTemplate;
   if (!baseTemplate) {
     throw new Error(
       `[sandpack-react]: invalid template "${template}" provided`
