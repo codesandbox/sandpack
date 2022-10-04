@@ -32,9 +32,8 @@ export function addPackageJSONIfNeeded(
   devDependencies?: Dependencies,
   entry?: string
 ): SandpackBundlerFiles {
-  const newFiles = { ...files };
-
-  const packageJsonFile = newFiles["/package.json"];
+  const normalizedFilesPath = normalizePath(files);
+  const packageJsonFile = normalizedFilesPath["/package.json"];
 
   /**
    * Create a new package json
@@ -43,11 +42,11 @@ export function addPackageJSONIfNeeded(
     if (!dependencies) throw new Error(DEPENDENCY_ERROR_MESSAGE);
     if (!entry) throw new Error(ENTRY_ERROR_MESSAGE);
 
-    newFiles["/package.json"] = {
+    normalizedFilesPath["/package.json"] = {
       code: createPackageJSON(dependencies, devDependencies, entry),
     };
 
-    return newFiles;
+    return normalizedFilesPath;
   }
 
   /**
@@ -74,16 +73,16 @@ export function addPackageJSONIfNeeded(
       };
     }
 
-    if (entry && !packageJsonContent.main) {
+    if (entry) {
       packageJsonContent.main = entry;
     }
-
-    newFiles["/package.json"] = {
+    
+    normalizedFilesPath["/package.json"] = {
       code: JSON.stringify(packageJsonContent, null, 2),
     };
   }
 
-  return newFiles;
+  return normalizedFilesPath;
 }
 
 export function extractErrorDetails(msg: SandpackErrorMessage): SandpackError {
@@ -178,3 +177,29 @@ function formatErrorMessage(
   return `${filePath}: ${message}${location}
 ${errorInCode}`;
 }
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export const normalizePath = <R extends any>(path: R): R => {
+  if (typeof path === "string") {
+    return (path.startsWith("/") ? path : `/${path}`) as R;
+  }
+
+  if (Array.isArray(path)) {
+    return path.map((p) => (p.startsWith("/") ? p : `/${p}`)) as R;
+  }
+
+  if (typeof path === "object") {
+    return Object.entries(path as any).reduce<any>(
+      (acc, [key, content]: [string, string | any]) => {
+        const fileName = key.startsWith("/") ? key : `/${key}`;
+
+        acc[fileName] = content;
+
+        return acc;
+      },
+      {}
+    );
+  }
+
+  return undefined as R;
+};

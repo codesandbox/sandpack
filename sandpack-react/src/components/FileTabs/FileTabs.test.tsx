@@ -26,4 +26,29 @@ describe("FileTabs", () => {
 
     expect(buttonsTex).toEqual(["foo/App.js", "App.js", "baz/App.js"]);
   });
+
+  it("render the visible files", () => {
+    const component = create(
+      <SandpackProvider
+        files={{
+          "/foo/App.js": "",
+          "/App.js": "",
+          "/baz/App.js": "",
+        }}
+        options={{
+          visibleFiles: ["/baz/App.js", "/App.js"],
+        }}
+        template="react"
+      >
+        <SandpackCodeEditor />
+      </SandpackProvider>
+    ).root;
+
+    const buttons = component.findAll((el) =>
+      el.props.className?.includes("sp-tab-button")
+    );
+    const buttonsTex = buttons.map((item) => item.props.children[0]);
+
+    expect(buttonsTex).toEqual(["baz/App.js", "App.js"]);
+  });
 });
