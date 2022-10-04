@@ -120,4 +120,10 @@ describe(normalizePath, () => {
       "/foo": "",
     });
   });
+
+  it("doesn't tranform invalid values", () => {
+    expect(normalizePath(null)).toBe(undefined);
+    expect(normalizePath(undefined)).toBe(undefined);
+    expect(normalizePath(123)).toBe(undefined);
+  });
 });
