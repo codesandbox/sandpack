@@ -1,6 +1,7 @@
 import type { SandpackTheme } from "./types";
 
-export const danielAwesomePro: SandpackTheme = {
+// ecoLight is inspired by love for green and associative environmental colors
+export const ecoLight: SandpackTheme = {
   colors: {
     surface1: "#eae8e8",
     surface2: "#009977",
