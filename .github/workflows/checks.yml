@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Setup | Install dependencies
         run: yarn install --prefer-offline
@@ -50,7 +50,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Setup | Install dependencies
         run: yarn install --prefer-offline
@@ -75,7 +75,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Setup | Install dependencies
         run: yarn install --prefer-offline
@@ -86,7 +86,8 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
-    timeout-minutes: 1    steps:
+    timeout-minutes: 10
+    steps:
       - name: Setup | Checkout
         uses: actions/checkout@v1
 
@@ -94,7 +95,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Setup | Install dependencies
         run: yarn install --prefer-offline
@@ -111,10 +112,10 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Setup | Node.js
-        uses: actions/setup-node@v       
+        uses: actions/setup-node@v
         with:
           node-version-file: .nvmrc
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Setup | Install dependencies
         run: yarn install --prefer-offline
@@ -134,7 +135,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Setup | Install dependencies
         run: yarn install --prefer-offline
