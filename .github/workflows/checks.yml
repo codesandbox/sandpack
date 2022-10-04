@@ -7,13 +7,21 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Setup | Checkout
-        uses: actions/checkout@v1
-
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
+
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
+
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Build
         run: yarn build
@@ -36,13 +44,21 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Setup | Checkout
-        uses: actions/checkout@v1
-
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
+
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
+
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Test | Jest
         run: yarn run test
@@ -52,13 +68,21 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Setup | Checkout
-        uses: actions/checkout@v1
-
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
+
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
+
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Lint | Eslint
         run: yarn run lint
@@ -68,13 +92,21 @@ jobs:
     runs-on: ubuntu-18.04
     timeout-minutes: 10
     steps:
-      - name: Setup | Checkout
-        uses: actions/checkout@v1
-
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
+
+      - name: Setup | Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+          key: modules-${{ hashFiles('yarn.lock') }}
+
+      - name: Setup | Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Format
         run: yarn run format:check
