@@ -5,5 +5,4 @@ export { githubLight } from "./githubLight";
 export { monokaiPro } from "./monokaiPro";
 export { nightOwl } from "./nightOwl";
 export { sandpackDark } from "./sandpackDark";
-export { gruvboxLight } from "./gruvboxLight";
-export { gruvboxDark } from "./gruvboxDark";
+export { ecoLight } from "./ecoLight";
