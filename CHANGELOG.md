@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/codesandbox/sandpack/compare/v1.10.1...v1.11.0) (2022-10-04)
+
+
+### Features
+
+* **theme:** EcoLight theme ([#602](https://github.com/codesandbox/sandpack/issues/602)) ([c8ed057](https://github.com/codesandbox/sandpack/commit/c8ed057de5ba6b7d01290738ba18ee0c6602da22))
+
+
+
+
+
 ## [1.10.1](https://github.com/codesandbox/sandpack/compare/v1.10.0...v1.10.1) (2022-10-04)
 
 
