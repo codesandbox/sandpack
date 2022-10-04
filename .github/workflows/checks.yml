@@ -7,6 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v1
+
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
@@ -96,7 +99,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Test | Jest
-        run: yarn run test
+        run: yarn test
 
   lint:
     name: Lint
@@ -123,7 +126,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Lint | Eslint
-        run: yarn run lint
+        run: yarn lint
 
   format:
     name: Format
@@ -150,4 +153,4 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Format
-        run: yarn run format:check
+        run: yarn format:check

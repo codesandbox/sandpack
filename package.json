@@ -18,7 +18,7 @@
   "scripts": {
     "prepare": "husky install",
     "----": "----",
-    "test": "turbo run test",
+    "test": "turbo run test --filter=\"@codesandbox/**\"",
     "build": "turbo run build --filter=\"@codesandbox/**\"",
     "typecheck": "turbo run typecheck --filter=\"@codesandbox/**\"",
     "lint": "turbo run lint --filter=\"@codesandbox/**\"",
