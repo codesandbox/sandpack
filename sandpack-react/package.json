@@ -61,6 +61,7 @@
     "react-is": "^17.0.2"
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "8.0.1",
     "@babel/core": "^7.12.3",
     "@codemirror/lang-python": "^0.19.5",
     "@codemirror/legacy-modes": "^0.19.1",

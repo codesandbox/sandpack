@@ -173,7 +173,16 @@ const combineTemplateFilesToSetup = ({
   if (!template) {
     // If not input, default to vanilla
     if (!customSetup) {
-      return SANDBOX_TEMPLATES.vanilla as unknown as SandboxTemplate;
+      const defaultTemplate =
+        SANDBOX_TEMPLATES.vanilla as unknown as SandboxTemplate;
+
+      return {
+        ...defaultTemplate,
+        files: {
+          ...defaultTemplate.files,
+          ...convertedFilesToBundlerFiles(files),
+        },
+      } as unknown as SandboxTemplate;
     }
 
     if (!files || Object.keys(files).length === 0) {
