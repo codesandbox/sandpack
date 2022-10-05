@@ -6,7 +6,7 @@ export const cobalt2: SandpackTheme = {
     surface2: "#0d3a58",
     surface3: "#1f4662",
     clickable: "#aaaaaa",
-    base: "#d0021b",
+    base: "#ffffff",
     disabled: "#C5C5C5",
     hover: "#ffffff",
     accent: "#ffc600",
