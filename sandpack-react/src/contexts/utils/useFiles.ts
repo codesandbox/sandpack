@@ -1,7 +1,5 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
-
 import { normalizePath } from "@codesandbox/sandpack-client";
-
 import isEqual from "lodash.isequal";
 import { useRef, useState } from "react";
 
