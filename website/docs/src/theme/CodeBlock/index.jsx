@@ -2,29 +2,19 @@ import {
   Sandpack,
   SandpackCodeViewer,
   SandpackProvider,
-  SandpackThemeProvider,
 } from "@codesandbox/sandpack-react";
 import { sandpackDark } from "@codesandbox/sandpack-themes";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import CodeBlock from "@theme-init/CodeBlock";
 import React from "react";
 
 import "./style.css";
 
 const RenderSandpack = (props) => {
-  const { siteConfig } = useDocusaurusContext();
-  const sandpackPluginOptions = siteConfig.themeConfig.sandpack;
-
   const {
     children,
     template = "react",
     file = "/App.js",
     theme = sandpackDark || sandpackDark,
   } = props;
-
-  if (props.className === "language-diff") {
-    return <CodeBlock {...props} />;
-  }
 
   if (props.sandpack) {
     const occurrences = children

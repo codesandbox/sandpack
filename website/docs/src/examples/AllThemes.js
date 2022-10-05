@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as themes from "@codesandbox/sandpack-themes";
 import { Sandpack } from "@codesandbox/sandpack-react";
-import CodeBlock from "@codesandbox/sandpack-docusaurus/src/theme/CodeBlock";
+import CodeBlock from "../../src/theme/CodeBlock";
 
 export default () => {
   const [current, setCurrent] = useState("githubLight");

@@ -7,8 +7,7 @@
     "sandpack-react",
     "sandpack-themes",
     "website/*",
-    "examples/*",
-    "plugins/*"
+    "examples/*"
   ],
   "nohoist": [
     "website/docs/**",
