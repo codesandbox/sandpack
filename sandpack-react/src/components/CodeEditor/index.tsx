@@ -3,8 +3,8 @@ import type { Extension } from "@codemirror/state";
 import type { KeyBinding } from "@codemirror/view";
 import * as React from "react";
 
-import { RunButton } from "../../common/RunButton";
-import { SandpackStack } from "../../common/Stack";
+import { RunButton } from "../common/RunButton";
+import { SandpackStack } from "../common/Stack";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
 import { THEME_PREFIX } from "../../styles";

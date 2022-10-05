@@ -1,7 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import React from "react";
 
-import { CleanIcon } from "../../icons";
+import { CleanIcon } from "../icons";
 import { css } from "../../styles";
 import {
   buttonClassName,

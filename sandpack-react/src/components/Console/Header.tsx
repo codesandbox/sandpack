@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ConsoleIcon } from "../../icons";
+import { ConsoleIcon } from "../icons";
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
 

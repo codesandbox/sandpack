@@ -2,7 +2,7 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
-import { BackwardIcon, ForwardIcon, RefreshIcon } from "../../icons";
+import { BackwardIcon, ForwardIcon, RefreshIcon } from "../icons";
 import { THEME_PREFIX } from "../../styles";
 import { css } from "../../styles";
 import { buttonClassName, iconClassName } from "../../styles/shared";

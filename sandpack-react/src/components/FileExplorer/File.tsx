@@ -1,7 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { DirectoryIconOpen, DirectoryIconClosed, FileIcon } from "../../icons";
+import { DirectoryIconOpen, DirectoryIconClosed, FileIcon } from "../icons";
 import { THEME_PREFIX, css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { SandpackStack } from "../../common";
+import { SandpackStack } from "../common";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 import { CodeEditor } from "../CodeEditor";

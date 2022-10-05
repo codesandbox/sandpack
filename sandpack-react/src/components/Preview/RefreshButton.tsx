@@ -2,7 +2,7 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpackNavigation } from "../../hooks/useSandpackNavigation";
-import { RefreshIcon } from "../../icons";
+import { RefreshIcon } from "../icons";
 import { THEME_PREFIX } from "../../styles";
 import {
   buttonClassName,

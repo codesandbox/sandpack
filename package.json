@@ -65,5 +65,9 @@
     "package-build-stats": "7.3.6",
     "prettier": "^2.2.1",
     "react-test-renderer": "^18.1.0"
+  },
+  "lint-staged": {
+    "*": "prettier -u --write",
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
   }
 }

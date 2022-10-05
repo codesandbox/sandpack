@@ -14,7 +14,7 @@ import isEqual from "lodash.isequal";
 import * as React from "react";
 
 import type { SandpackFiles } from "..";
-import { SandpackThemeProvider } from "../contexts/themeContext";
+import { SandpackThemeProvider } from "../styles/themeContext";
 import type {
   SandpackContext,
   SandpackInternalProvider,

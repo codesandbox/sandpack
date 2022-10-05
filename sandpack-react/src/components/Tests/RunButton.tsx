@@ -1,7 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { RunIcon } from "../../icons";
+import { RunIcon } from "../icons";
 import { THEME_PREFIX } from "../../styles";
 import {
   roundedButtonClassName,

@@ -2,8 +2,8 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { stackClassName } from "../..";
-import { ErrorOverlay } from "../../common/ErrorOverlay";
-import { LoadingOverlay } from "../../common/LoadingOverlay";
+import { ErrorOverlay } from "../common/ErrorOverlay";
+import { LoadingOverlay } from "../common/LoadingOverlay";
 import { useSandpack } from "../../hooks/useSandpack";
 import { useTranspiledCode } from "../../hooks/useTranspiledCode";
 import { css, THEME_PREFIX } from "../../styles";
