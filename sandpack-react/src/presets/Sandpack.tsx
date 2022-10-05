@@ -2,14 +2,14 @@
 import * as React from "react";
 
 import { SANDBOX_TEMPLATES, SandpackStack } from "..";
-import { SandpackLayout } from "../components/common/Layout";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackConsole } from "../components/Console";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackTests } from "../components/Tests";
-import { SandpackProvider } from "../contexts/sandpackContext";
+import { SandpackLayout } from "../components/common/Layout";
 import { ConsoleIcon } from "../components/icons";
+import { SandpackProvider } from "../contexts/sandpackContext";
 import { css } from "../styles";
 import {
   buttonClassName,
