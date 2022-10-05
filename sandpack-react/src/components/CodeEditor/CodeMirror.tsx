@@ -117,7 +117,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       onCodeUpdate,
       showLineNumbers = false,
       showInlineErrors = false,
-      wrapContent = false,
+      wrapContent = true,
       editorState = "pristine",
       readOnly = false,
       showReadOnly = true,
