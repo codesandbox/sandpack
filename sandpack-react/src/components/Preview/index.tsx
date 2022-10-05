@@ -100,17 +100,11 @@ export const SandpackPreview = React.forwardRef<
     const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
       number | null
     >(null);
-    const {
-      status,
-      errorScreenRegisteredRef,
-      openInCSBRegisteredRef,
-      loadingScreenRegisteredRef,
-    } = sandpack;
+    const { status, errorScreenRegisteredRef, loadingScreenRegisteredRef } =
+      sandpack;
 
     const c = useClasser(THEME_PREFIX);
 
-    // SandpackPreview immediately registers the custom screens/components so the bundler does not render any of them
-    openInCSBRegisteredRef.current = true;
     errorScreenRegisteredRef.current = true;
     loadingScreenRegisteredRef.current = true;
 

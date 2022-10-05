@@ -55,6 +55,6 @@ export default app;
       }),
     },
   },
-  main: "/index.js",
+  main: "/App.svelte",
   environment: "svelte",
 };

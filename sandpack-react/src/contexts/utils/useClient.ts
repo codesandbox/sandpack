@@ -44,7 +44,6 @@ export interface UseClientOperations {
   dispatchMessage: (message: SandpackMessage, clientId?: string) => void;
   lazyAnchorRef: React.RefObject<HTMLDivElement>;
   loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
-  openInCSBRegisteredRef: React.MutableRefObject<boolean>;
   errorScreenRegisteredRef: React.MutableRefObject<boolean>;
   unsubscribeClientListenersRef: React.MutableRefObject<
     Record<string, Record<string, UnsubscribeFunction>>
@@ -89,7 +88,6 @@ export const useClient: UseClient = (props, fileState) => {
   >({ global: {} });
   const debounceHook = useRef<number | undefined>();
   const loadingScreenRegisteredRef = useRef<boolean>(true);
-  const openInCSBRegisteredRef = useRef<boolean>(true);
   const errorScreenRegisteredRef = useRef<boolean>(true);
   const currentEnvironment = useRef(fileState.environment);
 
@@ -111,7 +109,7 @@ export const useClient: UseClient = (props, fileState) => {
           fileResolver: props.options?.fileResolver,
           skipEval: props.options?.skipEval ?? false,
           logLevel: props.options?.logLevel,
-          showOpenInCodeSandbox: openInCSBRegisteredRef.current,
+          showOpenInCodeSandbox: false,
           showErrorScreen: errorScreenRegisteredRef.current,
           showLoadingScreen: loadingScreenRegisteredRef.current,
           reactDevTools: state.reactDevTools,
@@ -345,6 +343,9 @@ export const useClient: UseClient = (props, fileState) => {
       return;
     }
 
+    /**
+     * TODO: make sure this piece works with multiples types of bundlers
+     */
     if (currentEnvironment.current !== fileState.environment) {
       currentEnvironment.current = fileState.environment;
 
@@ -523,7 +524,6 @@ export const useClient: UseClient = (props, fileState) => {
       addListener,
       dispatchMessage,
       loadingScreenRegisteredRef,
-      openInCSBRegisteredRef,
       errorScreenRegisteredRef,
       lazyAnchorRef,
       unsubscribeClientListenersRef: unsubscribeClientListeners,

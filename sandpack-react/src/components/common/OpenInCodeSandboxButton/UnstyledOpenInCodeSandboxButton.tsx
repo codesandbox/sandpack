@@ -78,14 +78,6 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
   );
 
   /**
-   * Register the usage of the codesandbox link
-   */
-  React.useEffect(function registerUsage() {
-    sandpack.openInCSBRegisteredRef.current = true;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  /**
    * This is a safe limit to avoid too long requests (401),
    * as all parameters are attached in the URL
    */
