@@ -59,7 +59,7 @@ jobs:
         run: yarn build
 
       - name: Bot script
-        run: node scripts/sizebot/index.js
+        run: node .github/scripts/sizebot/index.js
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
