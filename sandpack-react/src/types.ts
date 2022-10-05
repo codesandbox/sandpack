@@ -584,7 +584,6 @@ export interface SandpackState {
    * we don't need the actual element reference
    */
   errorScreenRegisteredRef: React.MutableRefObject<boolean>;
-  openInCSBRegisteredRef: React.MutableRefObject<boolean>;
   loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
 }
 
