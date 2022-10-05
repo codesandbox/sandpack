@@ -314,7 +314,7 @@ describe(SandpackProvider, () => {
       expect(getAmountOfListener(instance, "client-2", true)).toBe(2);
     });
 
-    it("unsubscribe all the listeners from a specific client when it unmonts", () => {
+    it("unsubscribe all the listeners from a specific client when it unmounts", () => {
       const instance = createContext();
 
       instance.registerBundler(document.createElement("iframe"), "client-1");

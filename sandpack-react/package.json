@@ -90,5 +90,8 @@
   "peerDependencies": {
     "react": "^16.8.0 || ^17 || ^18",
     "react-dom": "^16.8.0 || ^17 || ^18"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   }
 }
