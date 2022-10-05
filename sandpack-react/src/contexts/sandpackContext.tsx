@@ -465,7 +465,11 @@ export class SandpackProviderClass extends React.PureComponent<
       listenerFunctions.forEach((unsubscribe) => unsubscribe());
     });
 
-    this.setState({ sandpackStatus: "idle" });
+    // Keep running if it still have clients
+    const sandpackStatus =
+      Object.keys(this.clients).length > 0 ? "running" : "idle";
+
+    this.setState({ sandpackStatus });
   };
 
   unregisterAllClients = (): void => {

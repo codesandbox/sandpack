@@ -295,7 +295,7 @@ export const useClient: UseClient = (props, fileState) => {
     }
 
     const unsubscribeQueuedClients = Object.values(
-      unsubscribeClientListeners.current
+      unsubscribeClientListeners.current[clientId]
     );
 
     // Unsubscribing all listener registered
@@ -304,7 +304,10 @@ export const useClient: UseClient = (props, fileState) => {
       listenerFunctions.forEach((unsubscribe) => unsubscribe());
     });
 
-    setState((prev) => ({ ...prev, status: "idle" }));
+    // Keep running if it still have clients
+    const status = Object.keys(clients.current).length > 0 ? "running" : "idle";
+
+    setState((prev) => ({ ...prev, status }));
   };
 
   const handleMessage = (msg: SandpackMessage): void => {
