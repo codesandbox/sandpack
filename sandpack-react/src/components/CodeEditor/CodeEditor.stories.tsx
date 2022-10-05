@@ -98,10 +98,12 @@ export const InlineError: React.FC = () => (
 );
 
 export const ClosableTabs: React.FC = () => (
-  <SandpackProvider template="react">
-    <SandpackThemeProvider theme="dark">
-      <SandpackCodeEditor closableTabs />
-    </SandpackThemeProvider>
+  <SandpackProvider
+    options={{ visibleFiles: ["/App.js", "/index.js", "/styles.css"] }}
+    template="react"
+    theme="dark"
+  >
+    <SandpackCodeEditor closableTabs />
   </SandpackProvider>
 );
 

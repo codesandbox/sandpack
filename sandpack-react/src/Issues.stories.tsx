@@ -45,6 +45,7 @@ root.render(
           },
         }),
       }}
+      template="react"
     />
   );
 };

@@ -64,10 +64,6 @@ export const useFiles: UseFiles = (props) => {
     let files = state.files;
 
     if (typeof pathOrFiles === "string" && code) {
-      if (code === state.files[pathOrFiles]?.code) {
-        return;
-      }
-
       files = {
         ...files,
         [pathOrFiles]: { code },
