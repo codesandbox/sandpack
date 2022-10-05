@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { SandpackStack } from "../../common";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 import { CodeEditor } from "../CodeEditor";
+import { SandpackStack } from "../common";
 
 import { Button } from "./Button";
 import { Header } from "./Header";

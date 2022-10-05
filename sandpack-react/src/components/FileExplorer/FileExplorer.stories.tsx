@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as React from "react";
 
-import { SandpackLayout } from "../../common/Layout";
 import { SandpackCodeEditor } from "../../components/CodeEditor";
 import { SandpackProvider } from "../../contexts/sandpackContext";
+import { SandpackLayout } from "../common/Layout";
 
 import { Directory } from "./Directory";
 import { File } from "./File";

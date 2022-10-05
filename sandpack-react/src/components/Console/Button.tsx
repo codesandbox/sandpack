@@ -1,7 +1,6 @@
 import { useClasser } from "@code-hike/classer";
 import React from "react";
 
-import { CleanIcon } from "../../icons";
 import { css } from "../../styles";
 import {
   buttonClassName,
@@ -9,6 +8,7 @@ import {
   roundedButtonClassName,
 } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
+import { CleanIcon } from "../icons";
 
 export const Button: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   const c = useClasser("sp");

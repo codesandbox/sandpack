@@ -10,15 +10,15 @@
  */
 
 // Components
-export * from "./icons";
+export * from "./components/icons";
 export * from "./components";
-export * from "./common";
+export * from "./components/common";
 export * from "./hooks";
 
 // Contexts
 export * from "@code-hike/classer";
 export { getCssText as getSandpackCssText } from "./styles";
-export * from "./contexts/themeContext";
+export * from "./styles/themeContext";
 export * from "./contexts/sandpackContext";
 
 // Presets

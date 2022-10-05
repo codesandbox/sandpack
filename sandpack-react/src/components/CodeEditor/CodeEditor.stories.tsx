@@ -6,7 +6,7 @@ import * as React from "react";
 
 import { Sandpack } from "../../";
 import { SandpackProvider } from "../../contexts/sandpackContext";
-import { SandpackThemeProvider } from "../../contexts/themeContext";
+import { SandpackThemeProvider } from "../../styles/themeContext";
 import { SandpackPreview } from "../Preview";
 
 import { useSandpackLint } from "./eslint";

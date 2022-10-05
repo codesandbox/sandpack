@@ -4,14 +4,14 @@ import * as React from "react";
 import {
   useLoadingOverlayState,
   FADE_ANIMATION_DURATION,
-} from "../hooks/useLoadingOverlayState";
-import { css, THEME_PREFIX } from "../styles";
+} from "../../hooks/useLoadingOverlayState";
+import { css, THEME_PREFIX } from "../../styles";
 import {
   absoluteClassName,
   errorClassName,
   errorMessageClassName,
-} from "../styles/shared";
-import { classNames } from "../utils/classNames";
+} from "../../styles/shared";
+import { classNames } from "../../utils/classNames";
 
 import { Loading } from "./Loading";
 

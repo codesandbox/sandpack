@@ -3,8 +3,8 @@ import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import LZString from "lz-string";
 import * as React from "react";
 
-import { useSandpack } from "../../hooks/useSandpack";
-import type { SandboxEnvironment } from "../../types";
+import { useSandpack } from "../../../hooks/useSandpack";
+import type { SandboxEnvironment } from "../../../types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getParameters = (parameters: Record<string, any>): string =>

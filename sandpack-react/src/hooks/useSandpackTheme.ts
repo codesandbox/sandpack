@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { SandpackThemeContext } from "../contexts/themeContext";
+import { SandpackThemeContext } from "../styles/themeContext";
 import type { SandpackTheme } from "../types";
 
 /**

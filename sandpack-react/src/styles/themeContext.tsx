@@ -1,16 +1,12 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import {
-  createTheme,
-  css,
-  THEME_PREFIX,
-  standardizeStitchesTheme,
-} from "../styles";
-import { standardizeTheme } from "../styles";
 import { defaultLight } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
 import { classNames } from "../utils/classNames";
+
+import { standardizeTheme } from ".";
+import { createTheme, css, THEME_PREFIX, standardizeStitchesTheme } from ".";
 
 const wrapperClassName = css({
   all: "initial",

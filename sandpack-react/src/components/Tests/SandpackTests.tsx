@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { SandpackStack } from "../../common";
-import { Loading } from "../../common/Loading";
 import { useSandpackTheme, useSandpackClient } from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
+import { SandpackStack } from "../common";
+import { Loading } from "../common/Loading";
 
 import { Header } from "./Header";
 import { RunButton } from "./RunButton";

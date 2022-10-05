@@ -2,7 +2,6 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
-import { CloseIcon } from "../../icons";
 import { css, THEME_PREFIX } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
@@ -10,6 +9,7 @@ import {
   calculateNearestUniquePath,
   getFileName,
 } from "../../utils/stringUtils";
+import { CloseIcon } from "../icons";
 
 const tabsClassName = css({
   borderBottom: "1px solid $colors$surface2",
