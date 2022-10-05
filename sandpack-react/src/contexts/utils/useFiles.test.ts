@@ -1,0 +1,94 @@
+import { renderHook, act } from "@testing-library/react-hooks";
+
+import { VANILLA_TEMPLATE } from "../../templates";
+import { getSandpackStateFromProps } from "../../utils/sandpackUtils";
+
+import { useFiles } from "./useFiles";
+
+describe(useFiles, () => {
+  it("should returns an initial state, which is the default template", () => {
+    const { result } = renderHook(() => useFiles({}));
+
+    const stateFromDefaultTemplate = getSandpackStateFromProps({
+      ...VANILLA_TEMPLATE,
+      files: {},
+    });
+
+    expect(result.current[0]).toEqual({
+      ...stateFromDefaultTemplate,
+      visibleFilesFromProps: stateFromDefaultTemplate.visibleFiles,
+    });
+  });
+
+  it("adds a new file", () => {
+    const { result } = renderHook(() => useFiles({}));
+
+    act(() => {
+      result.current[1].addFile("/App.js", "new-content");
+    });
+
+    expect(result.current[0].files["/App.js"].code).toBe("new-content");
+  });
+
+  it("deletes a file", () => {
+    const { result } = renderHook(() => useFiles({}));
+
+    const fileList = Object.keys(VANILLA_TEMPLATE.files);
+
+    // Original list
+    expect(Object.keys(result.current[0].files)).toEqual(fileList);
+
+    act(() => {
+      result.current[1].deleteFile("/src/index.js");
+    });
+
+    // New list without deleted file
+    expect(result.current[0].files["/src/index.js"]).toBe(undefined);
+    expect(Object.keys(result.current[0].files)).toEqual(
+      fileList.filter((file) => file !== "/src/index.js")
+    );
+  });
+
+  it("updates a file", () => {
+    const { result } = renderHook(() => useFiles({ template: "react" }));
+
+    expect(result.current[0].files["/App.js"]).toEqual({
+      code: `export default function App() {
+  return <h1>Hello World</h1>
+}
+`,
+    });
+
+    act(() => {
+      result.current[1].updateFile("/App.js", "Foo");
+    });
+
+    expect(result.current[0].files["/App.js"]).toEqual({ code: `Foo` });
+  });
+
+  it("updates multiples files", () => {
+    const { result } = renderHook(() => useFiles({ template: "react" }));
+
+    act(() => {
+      result.current[1].updateFile({ "/App.js": "Foo", "/index.js": "Baz" });
+    });
+
+    expect(result.current[0].files["/App.js"]).toEqual({ code: `Foo` });
+    expect(result.current[0].files["/index.js"]).toEqual({ code: `Baz` });
+  });
+
+  it("updates multiples files in a row", () => {
+    const { result } = renderHook(() => useFiles({ template: "react" }));
+
+    act(() => {
+      result.current[1].updateFile("/App.js", "Foo");
+    });
+
+    act(() => {
+      result.current[1].updateFile("/index.js", "Baz");
+    });
+
+    expect(result.current[0].files["/App.js"]).toEqual({ code: `Foo` });
+    expect(result.current[0].files["/index.js"]).toEqual({ code: `Baz` });
+  });
+});
