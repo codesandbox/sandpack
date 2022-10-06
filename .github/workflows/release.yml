@@ -54,14 +54,14 @@ jobs:
         with:
           # pulls all commits (needed for lerna / semantic release to correctly version)
           fetch-depth: "0"
-          
+
       - name: Setup | Authenticate with Registry
         run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Setup | Ensure registry access
-        run: npm whoami 
+        run: npm whoami
 
       - name: Setup | Node.js
         uses: actions/setup-node@v2
@@ -99,7 +99,7 @@ jobs:
 
       - name: Sizebot | Commit results
         run: |
-          git add scripts/sizebot/sizebot.json 
+          git add ./github/scripts/sizebot/sizebot.json 
           git commit -am 'chore: [skip ci] update sizebot' --no-verify
           git push origin main
         continue-on-error: true
