@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/codesandbox/sandpack/compare/v1.12.2...v1.13.0) (2022-10-06)
+
+
+### Features
+
+* **theme:** Cobalt2 Theme ([#608](https://github.com/codesandbox/sandpack/issues/608)) ([929fbf2](https://github.com/codesandbox/sandpack/commit/929fbf23899ac765d2c4342a1be8f2618e678f48))
+* **theme:** Level Up Theme ([#609](https://github.com/codesandbox/sandpack/issues/609)) ([374536b](https://github.com/codesandbox/sandpack/commit/374536bf231497c3f6f9f1f319358c2a5cb4428e))
+
+
+
+
+
 # [1.12.0](https://github.com/codesandbox/sandpack/compare/v1.11.1...v1.12.0) (2022-10-04)
 
 
