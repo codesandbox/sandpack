@@ -14,8 +14,8 @@ export const THEME_PREFIX = "sp";
 /**
  * @category Theme
  */
-export const { createTheme, css, getCssText, keyframes } = process.env
-  .SANDPACK_BARE_COMPONENTS
+export const { createTheme, css, getCssText, keyframes } = process?.env
+  ?.SANDPACK_BARE_COMPONENTS
   ? createStitchesMock
   : createStitches({
       prefix: THEME_PREFIX,
