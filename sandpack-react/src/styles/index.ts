@@ -11,11 +11,18 @@ import { createStitchesMock } from "./stitches-mock";
  */
 export const THEME_PREFIX = "sp";
 
+const getNodeProcess = () => {
+  if (typeof process !== "undefined") {
+    return process.env.SANDPACK_BARE_COMPONENTS;
+  }
+
+  return false;
+};
+
 /**
  * @category Theme
  */
-export const { createTheme, css, getCssText, keyframes } = process?.env
-  ?.SANDPACK_BARE_COMPONENTS
+export const { createTheme, css, getCssText, keyframes } = getNodeProcess()
   ? createStitchesMock
   : createStitches({
       prefix: THEME_PREFIX,
