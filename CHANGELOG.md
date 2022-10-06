@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.2](https://github.com/codesandbox/sandpack/compare/v1.14.1...v1.14.2) (2022-10-06)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
 ## [1.14.1](https://github.com/codesandbox/sandpack/compare/v1.14.0...v1.14.1) (2022-10-06)
 
 
