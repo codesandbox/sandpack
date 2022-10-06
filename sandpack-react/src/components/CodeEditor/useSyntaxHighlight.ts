@@ -40,5 +40,15 @@ export const useSyntaxHighlight = ({
     addElement(to, className);
   });
 
+  /**
+   * The language parse doesn't look consistent.
+   * The final syntax highlight used by CodeMirror
+   * includes an end empty line, and the parse here doesn't,
+   * so let's add it manually.
+   */
+  if (offSet < code.length) {
+    codeElementsRender.push("\n\n");
+  }
+
   return codeElementsRender;
 };
