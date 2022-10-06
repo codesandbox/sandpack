@@ -7,3 +7,4 @@ export { nightOwl } from "./nightOwl";
 export { sandpackDark } from "./sandpackDark";
 export { ecoLight } from "./ecoLight";
 export { freeCodeCampDark } from "./freeCodeCampDark";
+export { levelUp } from "./levelUp";
