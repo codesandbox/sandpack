@@ -1,12 +1,11 @@
-import { existsSync, readFileSync } from 'fs';
-import { basename, join } from 'path';
+import { existsSync, readFileSync } from "fs";
+import { basename, join } from "path";
 
+import { valueToEstree } from "estree-util-value-to-estree";
+import type { Node } from "unist-util-visit";
+import { visit } from "unist-util-visit";
 
-import { valueToEstree } from 'estree-util-value-to-estree';
-import type { Node} from 'unist-util-visit';
-import { visit } from 'unist-util-visit';
-
-import type { SandpackFiles } from '../types';
+import type { SandpackFiles } from "../types";
 
 export interface VFile {
   history: string[];
@@ -15,7 +14,7 @@ export interface VFile {
 
 export interface JsxNodeElement extends Node {
   name: string;
-  attributes: Array<{ name: string; type: string; value: any }>;
+  attributes: Array<{ name: string; type: string; value: unknown }>;
 }
 
 export interface CodeNodeElement extends JsxNodeElement {
@@ -31,16 +30,16 @@ export interface CodeNodeMeta {
   hidden?: boolean;
 }
 
-export const transformCode = (jsxNode: JsxNodeElement, file: VFile):void => {
+export const transformCode = (jsxNode: JsxNodeElement, file: VFile): void => {
   const files: SandpackFiles = {};
-  visit(jsxNode, 'code', (codeNode: CodeNodeElement) => {
+  visit(jsxNode, "code", (codeNode: CodeNodeElement) => {
     const meta = resolveCodeMeta(codeNode);
     let code = codeNode.value;
 
     if (meta.file) {
       const filePath = join(file.cwd, meta.file);
       if (existsSync(filePath)) {
-        code = readFileSync(filePath, 'utf8');
+        code = readFileSync(filePath, "utf8");
 
         meta.name ||= basename(filePath);
       }
@@ -48,26 +47,26 @@ export const transformCode = (jsxNode: JsxNodeElement, file: VFile):void => {
 
     if (meta.name) {
       files[meta.name] = {
-        code: code || '',
+        code: code || "",
         active: meta.active,
         hidden: meta.hidden,
       };
     }
   });
 
-  appendProp(jsxNode, 'files', files);
+  appendProp(jsxNode, "files", files);
 };
 
-const resolveCodeMeta = (codeNode: CodeNodeElement):CodeNodeMeta => {
+const resolveCodeMeta = (codeNode: CodeNodeElement): CodeNodeMeta => {
   /**
    * First attribute is treated as `lang` by visitor
    */
-  const joinedMeta = codeNode.lang + ' ' + (codeNode.meta || '');
+  const joinedMeta = codeNode.lang + " " + (codeNode.meta || "");
   return joinedMeta
-    .split(' ')
+    .split(" ")
     .filter((meta) => meta.length)
     .reduce((meta, expression) => {
-      const [key, value] = expression.split('=');
+      const [key, value] = expression.split("=");
 
       // TODO improve filename checking
       if (!value && /[\w]+\.[\w]+/.test(key)) {
@@ -81,23 +80,27 @@ const resolveCodeMeta = (codeNode: CodeNodeElement):CodeNodeMeta => {
     }, {} as CodeNodeMeta);
 };
 
-const appendProp = (node: JsxNodeElement, propName: string, propValue: unknown):void => {
+const appendProp = (
+  node: JsxNodeElement,
+  propName: string,
+  propValue: unknown
+): void => {
   node.attributes.push({
-    type: 'mdxJsxAttribute',
+    type: "mdxJsxAttribute",
     name: propName,
     value: {
-      type: 'mdxJsxAttributeValueExpression',
+      type: "mdxJsxAttributeValueExpression",
       value: JSON.stringify(propValue),
       data: {
         estree: {
-          type: 'Program',
+          type: "Program",
           body: [
             {
-              type: 'ExpressionStatement',
+              type: "ExpressionStatement",
               expression: valueToEstree(propValue),
             },
           ],
-          sourceType: 'module',
+          sourceType: "module",
         },
       },
     },

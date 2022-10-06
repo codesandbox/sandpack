@@ -26,3 +26,6 @@ export * from "./presets/";
 export * from "./themes";
 export * from "./types";
 export * from "./templates";
+
+// Remark
+export * from './remark'
