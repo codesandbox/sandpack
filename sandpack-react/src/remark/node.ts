@@ -1,10 +1,12 @@
 import { existsSync, readFileSync } from 'fs';
 import { basename, join } from 'path';
 
-import type { SandpackFiles } from '@codesandbox/sandpack-react';
+
 import { valueToEstree } from 'estree-util-value-to-estree';
 import type { Node} from 'unist-util-visit';
 import { visit } from 'unist-util-visit';
+
+import type { SandpackFiles } from '../types';
 
 export interface VFile {
   history: string[];
