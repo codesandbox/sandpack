@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const { build } = require("esbuild");
 
-const package = require("../sandpack-themes/package.json");
+const package = require("./package.json");
 
 const options = {
   entryPoints: fs

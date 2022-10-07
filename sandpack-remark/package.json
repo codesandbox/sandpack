@@ -19,7 +19,8 @@
     "build": "node build.js && yarn run build:types",
     "build:types": "tsc -p tsconfig.json",
     "build:publish": "yarn build",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "test": "jest ."
   },
   "dependencies": {
     "estree-util-value-to-estree": "^2.0.0",
