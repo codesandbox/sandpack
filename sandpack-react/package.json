@@ -58,9 +58,7 @@
     "lodash.isequal": "^4.5.0",
     "lz-string": "^1.4.4",
     "react-devtools-inline": "4.4.0",
-    "react-is": "^17.0.2",
-    "estree-util-value-to-estree": "^2.0.0",
-    "unist-util-visit": "^4.1.1"
+    "react-is": "^17.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",

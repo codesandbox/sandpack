@@ -1,8 +1,9 @@
 import type { Transformer } from 'unified';
 import { visit } from 'unist-util-visit';
 
-import type { JsxNodeElement} from './node';
+
 import { transformCode } from './node';
+import type { JsxNodeElement } from './types';
 
 
 interface VFile {

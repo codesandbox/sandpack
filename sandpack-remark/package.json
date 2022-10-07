@@ -1,0 +1,37 @@
+{
+  "name": "@codesandbox/sandpack-remark",
+  "version": "1.13.0",
+  "description": "",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codesandbox/sandpack"
+  },
+  "license": "Apache-2.0",
+  "author": "CodeSandbox",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "clean": "rm -rf dist",
+    "prebuild": "yarn run clean",
+    "build": "node build.js && yarn run build:types",
+    "build:types": "tsc -p tsconfig.json",
+    "build:publish": "yarn build",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "estree-util-value-to-estree": "^2.0.0",
+    "unist-util-visit": "^4.1.1"
+  },
+  "devDependencies": {
+    "typescript": "4.0.3",
+    "unified": "^10.1.2"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ]
+}

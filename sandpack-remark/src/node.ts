@@ -2,36 +2,20 @@ import { existsSync, readFileSync } from "fs";
 import { basename, join } from "path";
 
 import { valueToEstree } from "estree-util-value-to-estree";
-import type { Node } from "unist-util-visit";
 import { visit } from "unist-util-visit";
 
-import type { SandpackFiles } from "../types";
-
-export interface VFile {
-  history: string[];
-  cwd: string;
-}
-
-export interface JsxNodeElement extends Node {
-  name: string;
-  attributes: Array<{ name: string; type: string; value: unknown }>;
-}
-
-export interface CodeNodeElement extends JsxNodeElement {
-  lang?: string;
-  meta?: string;
-  value?: string;
-}
-
-export interface CodeNodeMeta {
-  name?: string;
-  file?: string;
-  active?: boolean;
-  hidden?: boolean;
-}
+import type  {
+  CodeNodeElement,
+  CodeNodeMeta,
+  JsxNodeElement,
+  SandpackFiles,
+  VFile,
+} from "./types";
+import { isFilename } from "./utils";
 
 export const transformCode = (jsxNode: JsxNodeElement, file: VFile): void => {
   const files: SandpackFiles = {};
+
   visit(jsxNode, "code", (codeNode: CodeNodeElement) => {
     const meta = resolveCodeMeta(codeNode);
     let code = codeNode.value;
@@ -50,6 +34,7 @@ export const transformCode = (jsxNode: JsxNodeElement, file: VFile): void => {
         code: code || "",
         active: meta.active,
         hidden: meta.hidden,
+        readOnly: meta.readOnly,
       };
     }
   });
@@ -69,7 +54,7 @@ const resolveCodeMeta = (codeNode: CodeNodeElement): CodeNodeMeta => {
       const [key, value] = expression.split("=");
 
       // TODO improve filename checking
-      if (!value && /[\w]+\.[\w]+/.test(key)) {
+      if (!value && isFilename(key)) {
         meta.name = key;
       } else {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
