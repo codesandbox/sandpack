@@ -42,7 +42,7 @@ export const transformCode = (jsxNode: JsxNodeElement, file: VFile): void => {
   appendProp(jsxNode, "files", files);
 };
 
-const resolveCodeMeta = (codeNode: CodeNodeElement): CodeNodeMeta => {
+export const resolveCodeMeta = (codeNode: CodeNodeElement): CodeNodeMeta => {
   /**
    * First attribute is treated as `lang` by visitor
    */
