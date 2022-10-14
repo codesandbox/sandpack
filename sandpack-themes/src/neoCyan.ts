@@ -1,36 +1,36 @@
 import type { SandpackTheme } from "./types";
 
 export const neoCyan: SandpackTheme = {
-  colors: {
-    surface1: "#282727",
-    surface2: "#acf9e4",
-    surface3: "#4a4a4a",
-    clickable: "#54edcb",
-    base: "#963d3d",
-    disabled: "#9b9b9b",
-    hover: "#C5C5C5",
-    accent: "#0971F1",
-    error: "#ff0c00",
-    errorSurface: "#d8fcf4",
+    "colors": {
+    "surface1": "#2b3935",
+    "surface2": "#191324",
+    "surface3": "#524763",
+    "clickable": "#aaaaaa",
+    "base": "#ffffff",
+    "disabled": "#aaaaaa",
+    "hover": "#ffffff",
+    "accent": "#82d8d8",
+    "error": "#e54b4b",
+    "errorSurface": "#191324"
   },
-  syntax: {
-    plain: "#50e3c2",
-    comment: {
-      color: "#ffcd00",
-      fontStyle: "italic",
+  "syntax": {
+    "plain": "#ffffff",
+    "comment": {
+      "color": "#82d8d8",
+      "fontStyle": "italic"
     },
-    keyword: "#fc8492",
-    tag: "#7ed321",
-    punctuation: "#ffffff",
-    definition: "#68a8fa",
-    property: "#0971F1",
-    static: "#4a90e2",
-    string: "#d699f5",
+    "keyword": "#e54b4b",
+    "tag": "#ff26be",
+    "punctuation": "#9588aa",
+    "definition": "#82d8d8",
+    "property": "#82d8d8",
+    "static": "#82d8d8",
+    "string": "#a8fe39"
   },
-  font: {
-    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    size: "14px",
-    lineHeight: "22px",
-  },
+  "font": {
+    "body": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+    "mono": "\"MonoLisa\", \"Fira Mono\", \"DejaVu Sans Mono\", Menlo, Consolas, \"Liberation Mono\", Monaco, \"Lucida Console\", monospace",
+    "size": "12px",
+    "lineHeight": "18px"
+  }
 };
