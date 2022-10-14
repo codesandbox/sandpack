@@ -13,39 +13,13 @@ export default {
   title: "Bug reports/Issues",
 };
 
-export const PackageJsonDep = (): JSX.Element => {
+export const FlushServerVsClient = (): JSX.Element => {
   return (
-    <Sandpack
-      files={{
-        "/App.js": {
-          code: `export default function App() {
-  return <h1>Hello World</h1>
-}
-`,
-        },
-        "/index.js": {
-          code: `import React, { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-
-import App from "./App";
-
-const root = createRoot(document.getElementById("root"));
-root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);`,
-        },
-        "/package.json": JSON.stringify({
-          main: "/index.js",
-          dependencies: {
-            react: "^18.0.0",
-            "react-dom": "^18.0.0",
-            "react-scripts": "^4.0.0",
-          },
-        }),
-      }}
-    />
+    <SandpackProvider>
+      <div style={{ border: "1px solid black" }}>
+        <SandpackCodeEditor />
+      </div>
+    </SandpackProvider>
   );
 };
 

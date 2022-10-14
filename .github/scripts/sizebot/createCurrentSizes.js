@@ -52,7 +52,7 @@ const createCurrentSizes = async () => {
   }));
 
   await fs.writeFile(
-    "./scripts/sizebot/sizebot.json",
+    "./.github/scripts/sizebot/sizebot.json",
     JSON.stringify(currentSizes)
   );
 

@@ -4,17 +4,29 @@ import { defaultLight, defaultDark, SANDPACK_THEMES } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
 import { isDarkColor } from "../utils/stringUtils";
 
+import { createStitchesMock } from "./stitches-mock";
+
 /**
  * @category Theme
  */
 export const THEME_PREFIX = "sp";
 
+const getNodeProcess = (): false | string | undefined => {
+  if (typeof process !== "undefined") {
+    return process.env.SANDPACK_BARE_COMPONENTS;
+  }
+
+  return false;
+};
+
 /**
  * @category Theme
  */
-export const { createTheme, css, getCssText, keyframes } = createStitches({
-  prefix: THEME_PREFIX,
-});
+export const { createTheme, css, getCssText, keyframes } = getNodeProcess()
+  ? createStitchesMock
+  : createStitches({
+      prefix: THEME_PREFIX,
+    });
 
 const defaultVariables = {
   space: new Array(11).fill(" ").reduce((acc, _, index) => {

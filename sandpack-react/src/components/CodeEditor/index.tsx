@@ -3,14 +3,14 @@ import type { Extension } from "@codemirror/state";
 import type { KeyBinding } from "@codemirror/view";
 import * as React from "react";
 
-import { RunButton } from "../../common/RunButton";
-import { SandpackStack } from "../../common/Stack";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
 import { THEME_PREFIX } from "../../styles";
 import type { CustomLanguage, SandpackInitMode } from "../../types";
 import { classNames } from "../../utils/classNames";
 import { FileTabs } from "../FileTabs";
+import { RunButton } from "../common/RunButton";
+import { SandpackStack } from "../common/Stack";
 
 import { CodeMirror } from "./CodeMirror";
 import type { CodeMirrorRef } from "./CodeMirror";

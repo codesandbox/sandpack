@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { SandpackProvider } from "../contexts/sandpackContext";
+import { SandpackProvider } from "../../contexts/sandpackContext";
 
 import * as OpenOn from "./OpenInCodeSandboxButton";
 
@@ -16,7 +16,7 @@ export default {
   title: "components/Common",
 };
 
-const Provider: React.FC = ({ children }) => (
+const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <SandpackProvider>
     <SandpackLayout>{children}</SandpackLayout>
   </SandpackProvider>
@@ -53,7 +53,7 @@ export const SandpackLayoutStory: React.FC = () => (
 export const LoadingOverlayStory: React.FC = () => (
   <Provider>
     <div style={{ width: "100%", height: 200, position: "relative" }}>
-      <LoadingOverlay />
+      <LoadingOverlay showOpenInCodeSandbox />
     </div>
   </Provider>
 );

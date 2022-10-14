@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { SandpackLayout } from "../../common/Layout";
 import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackCodeViewer } from "../CodeViewer";
+import { SandpackLayout } from "../common/Layout";
 
 import { FileTabs } from "./index";
 

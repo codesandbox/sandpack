@@ -1,8 +1,8 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { css, THEME_PREFIX } from "../styles";
-import { classNames } from "../utils/classNames";
+import { css, THEME_PREFIX } from "../../styles";
+import { classNames } from "../../utils/classNames";
 
 /**
  * @hidden
