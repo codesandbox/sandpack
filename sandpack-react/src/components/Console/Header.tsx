@@ -1,8 +1,8 @@
 import React from "react";
 
-import { ConsoleIcon } from "../../icons";
 import { css } from "../../styles";
 import { classNames } from "../../utils/classNames";
+import { ConsoleIcon } from "../icons";
 
 export const Header: React.FC = () => {
   return (

@@ -1,7 +1,6 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { RunIcon } from "../../icons";
 import { THEME_PREFIX } from "../../styles";
 import {
   roundedButtonClassName,
@@ -9,6 +8,7 @@ import {
   iconStandaloneClassName,
 } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
+import { RunIcon } from "../icons";
 
 export const RunButton: React.FC<{
   onClick: () => void;

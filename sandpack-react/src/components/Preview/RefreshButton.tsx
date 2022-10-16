@@ -2,7 +2,6 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpackNavigation } from "../../hooks/useSandpackNavigation";
-import { RefreshIcon } from "../../icons";
 import { THEME_PREFIX } from "../../styles";
 import {
   buttonClassName,
@@ -10,6 +9,7 @@ import {
   roundedButtonClassName,
 } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
+import { RefreshIcon } from "../icons";
 
 interface RefreshButtonProps {
   clientId?: string;

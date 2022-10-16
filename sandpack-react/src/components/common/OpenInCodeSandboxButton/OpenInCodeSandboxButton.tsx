@@ -1,14 +1,14 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { ExportIcon } from "../../icons";
-import { THEME_PREFIX } from "../../styles";
+import { THEME_PREFIX } from "../../../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
   roundedButtonClassName,
-} from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+} from "../../../styles/shared";
+import { classNames } from "../../../utils/classNames";
+import { ExportIcon } from "../../icons";
 
 import { UnstyledOpenInCodeSandboxButton } from "./UnstyledOpenInCodeSandboxButton";
 

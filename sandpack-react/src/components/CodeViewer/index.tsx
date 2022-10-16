@@ -2,8 +2,6 @@ import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import type { SandpackInitMode } from "../..";
-import { RunButton } from "../../common/RunButton";
-import { SandpackStack } from "../../common/Stack";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
 import { THEME_PREFIX } from "../../styles";
@@ -13,6 +11,8 @@ import type { CodeEditorRef } from "../CodeEditor";
 import type { Decorators } from "../CodeEditor/CodeMirror";
 import { editorClassName } from "../CodeEditor/styles";
 import { FileTabs } from "../FileTabs";
+import { RunButton } from "../common/RunButton";
+import { SandpackStack } from "../common/Stack";
 
 /**
  * @category Components
