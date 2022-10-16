@@ -15,10 +15,7 @@ export const amethyst: SandpackTheme = {
   },
   syntax: {
     plain: "#ffffff",
-    comment: {
-      color: "#858591",
-      fontStyle: "italic",
-    },
+    comment: { color: "#858591", fontStyle: "italic" },
     keyword: "#a26cdd",
     tag: "#f07178",
     punctuation: "#99c9ff",
