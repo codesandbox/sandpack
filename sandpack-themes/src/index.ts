@@ -10,4 +10,4 @@ export { freeCodeCampDark } from "./freeCodeCampDark";
 export { neoCyan } from "./neoCyan";
 export { cobalt2 } from "./cobalt2";
 export { levelUp } from "./levelUp";
-
+export { cyberpunk } from "./cyberpunk";
