@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/codesandbox/sandpack/compare/v1.14.2...v1.15.0) (2022-10-17)
+
+
+### Features
+
+* added a new sandbox theme ([#616](https://github.com/codesandbox/sandpack/issues/616)) ([0cc7567](https://github.com/codesandbox/sandpack/commit/0cc75673090572da1a416d330a63ceb1070172c2))
+* added a new sandbox theme ([#617](https://github.com/codesandbox/sandpack/issues/617)) ([ca659f4](https://github.com/codesandbox/sandpack/commit/ca659f4a2fcf840c2a5052d530a94854d4172514))
+* **theme:** add cyberpunk theme ([#618](https://github.com/codesandbox/sandpack/issues/618)) ([6e16a71](https://github.com/codesandbox/sandpack/commit/6e16a71d9ad40a7e3257393199bd9d22fe35a7f1))
+
+
+
+
+
 ## [1.14.2](https://github.com/codesandbox/sandpack/compare/v1.14.1...v1.14.2) (2022-10-06)
 
 **Note:** Version bump only for package sandpack
