@@ -1,6 +1,8 @@
 name: Deploy Theme Builder
 on:
   push:
+    branches:
+      - main
     paths:
       - "sandpack-client/**"
       - "sandpack-react/**"

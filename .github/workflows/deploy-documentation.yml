@@ -1,6 +1,8 @@
 name: Deploy Documentation
 on:
   push:
+    branches:
+      - main
     paths:
       - "sandpack-client/**"
       - "sandpack-react/**"
