@@ -1,9 +1,11 @@
 export { aquaBlue } from "./aquaBlue";
 export { atomDark } from "./atomDark";
 export { dracula } from "./dracula";
+export { ecoLight } from "./ecoLight";
+export { freeCodeCampDark } from "./freeCodeCampDark";
 export { githubLight } from "./githubLight";
+export { gruvboxDark } from "./gruvboxDark";
+export { gruvboxLight } from "./gruvboxLight";
 export { monokaiPro } from "./monokaiPro";
 export { nightOwl } from "./nightOwl";
 export { sandpackDark } from "./sandpackDark";
-export { ecoLight } from "./ecoLight";
-export { freeCodeCampDark } from "./freeCodeCampDark";
