@@ -1,9 +1,9 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { css, THEME_PREFIX, keyframes } from "../styles";
-import { buttonClassName } from "../styles/shared";
-import { classNames } from "../utils/classNames";
+import { css, THEME_PREFIX, keyframes } from "../../styles";
+import { buttonClassName } from "../../styles/shared";
+import { classNames } from "../../utils/classNames";
 
 import { OpenInCodeSandboxButton } from "./OpenInCodeSandboxButton";
 

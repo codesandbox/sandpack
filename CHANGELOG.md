@@ -3,6 +3,69 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/codesandbox/sandpack/compare/v1.14.2...v1.15.0) (2022-10-17)
+
+
+### Features
+
+* added a new sandbox theme ([#616](https://github.com/codesandbox/sandpack/issues/616)) ([0cc7567](https://github.com/codesandbox/sandpack/commit/0cc75673090572da1a416d330a63ceb1070172c2))
+* added a new sandbox theme ([#617](https://github.com/codesandbox/sandpack/issues/617)) ([ca659f4](https://github.com/codesandbox/sandpack/commit/ca659f4a2fcf840c2a5052d530a94854d4172514))
+* **theme:** add cyberpunk theme ([#618](https://github.com/codesandbox/sandpack/issues/618)) ([6e16a71](https://github.com/codesandbox/sandpack/commit/6e16a71d9ad40a7e3257393199bd9d22fe35a7f1))
+
+
+
+
+
+## [1.14.2](https://github.com/codesandbox/sandpack/compare/v1.14.1...v1.14.2) (2022-10-06)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [1.14.1](https://github.com/codesandbox/sandpack/compare/v1.14.0...v1.14.1) (2022-10-06)
+
+
+### Bug Fixes
+
+* **bare components:** extend to browser api ([266d721](https://github.com/codesandbox/sandpack/commit/266d721fdc440dc87eb525da77a65bbe65d78286))
+
+
+
+
+
+# [1.14.0](https://github.com/codesandbox/sandpack/compare/v1.13.0...v1.14.0) (2022-10-06)
+
+
+### Features
+
+* **theme:** provide bare components ([#590](https://github.com/codesandbox/sandpack/issues/590)) ([158fd8c](https://github.com/codesandbox/sandpack/commit/158fd8c349677aebfb7d7fe01e7e23ab51089b9f))
+
+
+
+
+
+# [1.13.0](https://github.com/codesandbox/sandpack/compare/v1.12.2...v1.13.0) (2022-10-06)
+
+
+### Features
+
+* **theme:** Cobalt2 Theme ([#608](https://github.com/codesandbox/sandpack/issues/608)) ([929fbf2](https://github.com/codesandbox/sandpack/commit/929fbf23899ac765d2c4342a1be8f2618e678f48))
+* **theme:** Level Up Theme ([#609](https://github.com/codesandbox/sandpack/issues/609)) ([374536b](https://github.com/codesandbox/sandpack/commit/374536bf231497c3f6f9f1f319358c2a5cb4428e))
+
+
+
+
+
+## [1.12.2](https://github.com/codesandbox/sandpack/compare/v1.12.1...v1.12.2) (2022-10-05)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
 ## [1.12.1](https://github.com/codesandbox/sandpack/compare/v1.12.0...v1.12.1) (2022-10-04)
 
 **Note:** Version bump only for package sandpack

@@ -5,14 +5,14 @@ import type {
 } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-import { ErrorOverlay } from "../../common/ErrorOverlay";
-import { LoadingOverlay } from "../../common/LoadingOverlay";
-import { OpenInCodeSandboxButton } from "../../common/OpenInCodeSandboxButton";
-import { SandpackStack } from "../../common/Stack";
 import { useSandpackClient } from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 import { Navigator } from "../Navigator";
+import { ErrorOverlay } from "../common/ErrorOverlay";
+import { LoadingOverlay } from "../common/LoadingOverlay";
+import { OpenInCodeSandboxButton } from "../common/OpenInCodeSandboxButton";
+import { SandpackStack } from "../common/Stack";
 
 import { RefreshButton } from "./RefreshButton";
 

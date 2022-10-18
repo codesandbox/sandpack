@@ -37,6 +37,12 @@ While inspecting your Sandpack instance, notice that our components have classes
 This pattern is compatible with most modern styling systems, including Tailwind, styled-components and emotion.
 :::
 
+## Bare components and remove runtime styling
+
+Sandpack-React relies on [stitchesjs/stitches](https://github.com/stitchesjs/stitches) to style its component, which is almost zero-runtime CSS-in-JS framework. However, if you want to get rid of any runtime script or create your own style on top of Sandpack components, we provide a way to return bare components, which will eliminate all Sandpack CSS style.
+
+To do it, you need to pass `SANDPACK_BARE_COMPONENTS` environment variable as `true`, which will remove the Stitches dependency, its execution and return only the HTML of the components.
+
 ## Visual Options
 
 Some of the internal components of sandpack can be configured via the `options` prop.

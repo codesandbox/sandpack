@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { SandpackLayout } from "../../common/Layout";
 import { SandpackProvider } from "../../contexts/sandpackContext";
-import { SandpackThemeProvider } from "../../contexts/themeContext";
+import { SandpackThemeProvider } from "../../styles/themeContext";
 import { SandpackPreview } from "../Preview";
+import { SandpackLayout } from "../common/Layout";
 
 import { Navigator } from ".";
 

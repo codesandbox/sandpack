@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/codesandbox/sandpack/compare/v1.14.2...v1.15.0) (2022-10-17)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [1.14.2](https://github.com/codesandbox/sandpack/compare/v1.14.1...v1.14.2) (2022-10-06)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [1.14.1](https://github.com/codesandbox/sandpack/compare/v1.14.0...v1.14.1) (2022-10-06)
+
+
+### Bug Fixes
+
+* **bare components:** extend to browser api ([266d721](https://github.com/codesandbox/sandpack/commit/266d721fdc440dc87eb525da77a65bbe65d78286))
+
+
+
+
+
+# [1.14.0](https://github.com/codesandbox/sandpack/compare/v1.13.0...v1.14.0) (2022-10-06)
+
+
+### Features
+
+* **theme:** provide bare components ([#590](https://github.com/codesandbox/sandpack/issues/590)) ([158fd8c](https://github.com/codesandbox/sandpack/commit/158fd8c349677aebfb7d7fe01e7e23ab51089b9f))
+
+
+
+
+
+# [1.13.0](https://github.com/codesandbox/sandpack/compare/v1.12.2...v1.13.0) (2022-10-06)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [1.12.2](https://github.com/codesandbox/sandpack/compare/v1.12.1...v1.12.2) (2022-10-05)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
 ## [1.12.1](https://github.com/codesandbox/sandpack/compare/v1.12.0...v1.12.1) (2022-10-04)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react

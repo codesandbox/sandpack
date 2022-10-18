@@ -2,7 +2,7 @@ import type { Story } from "@storybook/react";
 import * as React from "react";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
-import { SandpackThemeProvider } from "../../contexts/themeContext";
+import { SandpackThemeProvider } from "../../styles/themeContext";
 
 import type { CodeViewerProps } from ".";
 import { SandpackCodeViewer } from ".";

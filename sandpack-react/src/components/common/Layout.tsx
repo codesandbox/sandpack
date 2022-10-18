@@ -1,10 +1,10 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { useCombinedRefs } from "../components/CodeEditor/utils";
-import { useSandpack } from "../hooks/useSandpack";
-import { css, THEME_PREFIX } from "../styles";
-import { classNames } from "../utils/classNames";
+import { useSandpack } from "../../hooks/useSandpack";
+import { css, THEME_PREFIX } from "../../styles";
+import { classNames } from "../../utils/classNames";
+import { useCombinedRefs } from "../CodeEditor/utils";
 
 import { stackClassName } from ".";
 
