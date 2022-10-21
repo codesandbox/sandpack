@@ -4,13 +4,13 @@ import type { SandpackTheme } from "./types";
 export const ecoLight: SandpackTheme = {
   colors: {
     surface1: "#eae8e8",
-    surface2: "#009977",
-    surface3: "#ffffff",
-    clickable: "#572222",
-    base: "#f7eaea",
+    surface2: "#00997761",
+    surface3: "#ffffff5e",
+    clickable: "#421010",
+    base: "#421010",
     disabled: "#C5C5C5",
     hover: "#4D4D4D",
-    accent: "#0a56b3",
+    accent: "#009977",
     error: "#ff453a",
     errorSurface: "#e8cac6",
   },
@@ -29,9 +29,9 @@ export const ecoLight: SandpackTheme = {
     string: "#f5a623",
   },
   font: {
-    body: '-apple-system, BlinkMacSystemFont, "Overpass", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    body: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     mono: '"Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace',
-    size: "15px",
-    lineHeight: "19px",
+    size: "13px",
+    lineHeight: "20px",
   },
 };
