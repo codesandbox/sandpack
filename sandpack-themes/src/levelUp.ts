@@ -3,7 +3,7 @@ import type { SandpackTheme } from "./types";
 export const levelUp: SandpackTheme = {
   colors: {
     surface1: "#191324",
-    surface2: "#191324",
+    surface2: "#261e33",
     surface3: "#524763",
     clickable: "#aaaaaa",
     base: "#ffffff",
