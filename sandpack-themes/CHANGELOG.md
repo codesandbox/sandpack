@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.2](https://github.com/codesandbox/sandpack/compare/v1.15.1...v1.15.2) (2022-10-21)
+
+
+### Bug Fixes
+
+* **themes:** ui tweaks ([#625](https://github.com/codesandbox/sandpack/issues/625)) ([d90f47e](https://github.com/codesandbox/sandpack/commit/d90f47e0814706971054a42a29a9ea591dd73821))
+
+
+
+
+
 ## [1.15.1](https://github.com/codesandbox/sandpack/compare/v1.15.0...v1.15.1) (2022-10-18)
 
 
