@@ -3,6 +3,7 @@
   "version": "1.15.1",
   "description": "",
   "keywords": [],
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/codesandbox/sandpack"
@@ -23,6 +24,7 @@
     "build": "node build.js && yarn run build:types",
     "build:publish": "yarn build",
     "build:types": "tsc -p tsconfig.json",
+    "build:ssr": " yarn esbuild ssr.tsx --target=node12 --outfile=out.js",
     "start": "tsc -p tsconfig.esm.json --watch",
     "storybook": "start-storybook -p 6006 --no-dll --quiet",
     "typecheck": "tsc",
