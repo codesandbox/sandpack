@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.5](https://github.com/codesandbox/sandpack/compare/v1.15.4...v1.15.5) (2022-10-27)
+
+
+### Bug Fixes
+
+* **CodeMirror:** make sure aria-label value persist ([#631](https://github.com/codesandbox/sandpack/issues/631)) ([80b558c](https://github.com/codesandbox/sandpack/commit/80b558ccf5d84cae7b63a4dc5944edf38bf6275d))
+
+
+
+
+
 ## [1.15.4](https://github.com/codesandbox/sandpack/compare/v1.15.3...v1.15.4) (2022-10-27)
 
 
