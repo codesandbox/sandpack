@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.3](https://github.com/codesandbox/sandpack/compare/v1.15.2...v1.15.3) (2022-10-27)
+
+
+### Bug Fixes
+
+* **CodeMirror:** a11y issues ([#629](https://github.com/codesandbox/sandpack/issues/629)) ([8288ac8](https://github.com/codesandbox/sandpack/commit/8288ac8ab613a207dfe7a1d7ddb5e279615b2387))
+
+
+
+
+
 ## [1.15.2](https://github.com/codesandbox/sandpack/compare/v1.15.1...v1.15.2) (2022-10-21)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
