@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.4](https://github.com/codesandbox/sandpack/compare/v1.15.3...v1.15.4) (2022-10-27)
+
+
+### Bug Fixes
+
+* **codeeditor:** a11y issues ([#630](https://github.com/codesandbox/sandpack/issues/630)) ([a173dbb](https://github.com/codesandbox/sandpack/commit/a173dbb1665ffe101d9fedb030e0a65b8635694b))
+
+
+
+
+
 ## [1.15.3](https://github.com/codesandbox/sandpack/compare/v1.15.2...v1.15.3) (2022-10-27)
 
 
