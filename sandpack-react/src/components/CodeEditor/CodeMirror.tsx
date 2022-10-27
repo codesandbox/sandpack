@@ -491,21 +491,21 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     }
 
     return (
-      /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-      /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
       <div
         ref={combinedRef}
+        aria-autocomplete="list"
         aria-describedby={`enter-instructions-${ariaId}`}
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
+        aria-multiline="true"
         className={classNames(
           c("cm", editorState, languageExtension),
           cmClassName,
           tokensClassName
         )}
         onKeyDown={handleContainerKeyDown}
-        role="group"
+        role="textbox"
         tabIndex={0}
         translate="no"
         suppressHydrationWarning
