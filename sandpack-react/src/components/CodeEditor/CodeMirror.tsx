@@ -494,7 +494,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       <div
         ref={combinedRef}
         aria-autocomplete="list"
-        aria-describedby={`enter-instructions-${ariaId}`}
         aria-label={
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
@@ -516,24 +515,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         >
           {syntaxHighlightRender}
         </pre>
-
-        <>
-          <p
-            id={`enter-instructions-${ariaId}`}
-            style={{ display: "none" }}
-            suppressHydrationWarning
-          >
-            To enter the code editing mode, press Enter. To exit the edit mode,
-            press Escape
-          </p>
-          <p
-            id={`exit-instructions-${ariaId}`}
-            style={{ display: "none" }}
-            suppressHydrationWarning
-          >
-            You are editing the code. To exit the edit mode, press Escape
-          </p>
-        </>
       </div>
     );
   }
