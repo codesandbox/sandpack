@@ -45,7 +45,6 @@ import {
   tokensClassName,
   readOnlyClassName,
 } from "./styles";
-import { useGeneratedId } from "./useGeneratedId";
 import { useSyntaxHighlight } from "./useSyntaxHighlight";
 import {
   getCodeMirrorLanguage,
@@ -143,7 +142,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
     const c = useClasser(THEME_PREFIX);
     const { listen } = useSandpack();
-    const ariaId = useGeneratedId(id);
 
     const prevExtension = React.useRef<Extension[]>([]);
     const prevExtensionKeymap = React.useRef<KeyBinding[]>([]);
@@ -319,14 +317,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
         view.contentDOM.setAttribute("data-gramm", "false");
 
-        if (!readOnly) {
-          view.contentDOM.setAttribute("tabIndex", "-1");
-          view.contentDOM.setAttribute(
-            "aria-describedby",
-            `exit-instructions-${ariaId}`
-          );
-        } else {
+        if (readOnly) {
           view.contentDOM.classList.add("cm-readonly");
+        } else {
+          view.contentDOM.setAttribute("tabIndex", "-1");
         }
 
         cmView.current = view;
