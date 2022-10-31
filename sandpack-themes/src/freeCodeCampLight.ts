@@ -3,7 +3,7 @@ import type { SandpackTheme } from "./types";
 export const freeCodeCampLight: SandpackTheme = {
   colors: {
     surface1: "#ffffff",
-    surface2: "#fefeff",
+    surface2: "#e7e7e7",
     surface3: "#ffffff",
     clickable: "#090909",
     base: "#000000",
