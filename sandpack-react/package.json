@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-react",
-  "version": "1.15.5",
+  "version": "1.16.0",
   "description": "",
   "keywords": [],
   "repository": {
@@ -65,7 +65,7 @@
     "@codemirror/lang-python": "^0.19.5",
     "@codemirror/legacy-modes": "^0.19.1",
     "@codemirror/stream-parser": "^0.19.9",
-    "@codesandbox/sandpack-themes": "^1.15.2",
+    "@codesandbox/sandpack-themes": "^1.16.0",
     "@playwright/test": "^1.26.1",
     "@storybook/addon-actions": "^6.1.9",
     "@storybook/addon-essentials": "^6.1.9",

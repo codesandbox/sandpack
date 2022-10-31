@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/codesandbox/sandpack/compare/v1.15.5...v1.16.0) (2022-10-31)
+
+
+### Features
+
+* added oceanBlue theme ([#636](https://github.com/codesandbox/sandpack/issues/636)) ([b508b84](https://github.com/codesandbox/sandpack/commit/b508b84c6231f066d869f1fc2e67367c6f735f88))
+
+
+
+
+
 ## [1.15.2](https://github.com/codesandbox/sandpack/compare/v1.15.1...v1.15.2) (2022-10-21)
 
 
