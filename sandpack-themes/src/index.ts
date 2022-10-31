@@ -14,4 +14,5 @@ export { monokaiPro } from "./monokaiPro";
 export { neoCyan } from "./neoCyan";
 export { nightOwl } from "./nightOwl";
 export { sandpackDark } from "./sandpackDark";
+export { freeCodeCampLight } from "./freeCodeCampLight";
 export { oceanBlue } from "./oceanBlue";
