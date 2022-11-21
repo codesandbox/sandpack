@@ -36,6 +36,7 @@ export default function Document() {
         <style
           dangerouslySetInnerHTML={{ __html: getSandpackCssText() }}
           id="sandpack"
+          key="sandpack-css"
         />
       </Head>
       <body>
@@ -58,6 +59,7 @@ export const onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
     <style
       id="sandpack"
+      key="sandpack-css"
       dangerouslySetInnerHTML={{
         __html: getSandpackCssText(),
       }}
