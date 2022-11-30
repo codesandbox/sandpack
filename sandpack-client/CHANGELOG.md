@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.1](https://github.com/codesandbox/sandpack/compare/v1.17.0...v1.17.1) (2022-11-30)
+
+
+### Bug Fixes
+
+* **vue template:** support script setup template ([#648](https://github.com/codesandbox/sandpack/issues/648)) ([1ffb205](https://github.com/codesandbox/sandpack/commit/1ffb2059221db1537faca770a5a4edb4c578f14e))
+
+
+
+
+
 ## [1.12.1](https://github.com/codesandbox/sandpack/compare/v1.12.0...v1.12.1) (2022-10-04)
 
 **Note:** Version bump only for package @codesandbox/sandpack-client
