@@ -4,31 +4,31 @@
 export const VUE_TEMPLATE_3 = {
   files: {
     "/src/App.vue": {
-      code: `<template>
-  <main id="app">
-    <h1>{{ helloWorld }}</h1>
-  </main>
+      code: `<script setup>
+import { ref } from "vue";
+
+const msg = ref("world");
+</script>
+
+<template>
+  <h1>Hello {{ msg }}</h1>
 </template>
                              
-<script>
-import { ref } from "vue";
-export default {
-   name: "App",
-   setup() {
-      const helloWorld = ref("Hello World");
-      return { helloWorld };
-   }
-};
-</script>
-                             
 <style>
-#app {
-font-family: Avenir, Helvetica, Arial, sans-serif;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-text-align: center;
-color: #2c3e50;
-margin-top: 60px;
+body {
+  font-family: sans-serif;
+  -webkit-font-smoothing: auto;
+  -moz-font-smoothing: auto;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: auto;
+  text-rendering: optimizeLegibility;
+  font-smooth: always;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+h1 {
+  font-size: 1.5rem;
 }
 </style>   
 `,
