@@ -7,7 +7,7 @@ export const VUE_TS_TEMPLATE_3 = {
       code: `<script setup lang="ts">
 import { ref } from 'vue';
 
-const msg = ref<string>('world');
+const msg = ref<string>('World');
 const count = ref<number>(1);
 const add = (): void => {
   count.value += 1;

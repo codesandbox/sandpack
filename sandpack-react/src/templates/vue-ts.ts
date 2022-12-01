@@ -29,7 +29,7 @@ export default Vue.extend({
     },
   },
   mounted() {
-    this.msg = "world";
+    this.msg = "World";
   },
 });
 </script>`,

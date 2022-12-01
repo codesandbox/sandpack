@@ -7,7 +7,7 @@ export const VUE_TEMPLATE_3 = {
       code: `<script setup>
 import { ref } from 'vue';
 
-const msg = ref('world');
+const msg = ref('World');
 const count = ref(1);
 const add = () => {
   count.value += 1;
