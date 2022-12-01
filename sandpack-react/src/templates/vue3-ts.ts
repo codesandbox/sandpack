@@ -1,15 +1,15 @@
 /**
  * @hidden
  */
-export const VUE_TEMPLATE_3 = {
+export const VUE_TS_TEMPLATE_3 = {
   files: {
     "/src/App.vue": {
-      code: `<script setup>
+      code: `<script setup lang="ts">
 import { ref } from 'vue';
 
-const msg = ref('world');
-const count = ref(1);
-const add = () => {
+const msg = ref<string>('world');
+const count = ref<number>(1);
+const add = (): void => {
   count.value += 1;
 };
 </script>
@@ -20,12 +20,18 @@ const add = () => {
   <p>count: {{ count }}</p>
 </template>`,
     },
-    "/src/main.js": {
+    "/src/main.ts": {
       code: `import { createApp } from 'vue'
 import App from './App.vue'
 createApp(App).mount('#app')
 `,
     },
+    "/src/shims-vue.d.ts": `/* eslint-disable */
+declare module "*.vue" {
+  import type { DefineComponent } from "vue";
+  const component: DefineComponent<{}, {}, any>;
+  export default component;
+}`,
     "/public/index.html": {
       code: `<!DOCTYPE html>
 <html lang="en">
@@ -50,10 +56,10 @@ createApp(App).mount('#app')
     },
     "/package.json": {
       code: JSON.stringify({
-        name: "vue3",
+        name: "vue3-ts",
         version: "0.1.0",
         private: true,
-        main: "/src/main.js",
+        main: "/src/main.ts",
         scripts: {
           serve: "vue-cli-service serve",
           build: "vue-cli-service build",
@@ -64,8 +70,42 @@ createApp(App).mount('#app')
         },
         devDependencies: {
           "@vue/cli-plugin-babel": "^5.0.8",
+          "@vue/cli-plugin-typescript": "^5.0.8",
           "@vue/cli-service": "^5.0.8",
+          typescript: "^4.9.3",
         },
+      }),
+    },
+    "/tsconfig.json": {
+      code: JSON.stringify({
+        compilerOptions: {
+          target: "esnext",
+          module: "esnext",
+          strict: true,
+          jsx: "preserve",
+          moduleResolution: "node",
+          experimentalDecorators: true,
+          skipLibCheck: true,
+          esModuleInterop: true,
+          allowSyntheticDefaultImports: true,
+          forceConsistentCasingInFileNames: true,
+          useDefineForClassFields: true,
+          sourceMap: false,
+          baseUrl: ".",
+          types: ["webpack-env"],
+          paths: {
+            "@/*": ["src/*"],
+          },
+          lib: ["esnext", "dom", "dom.iterable", "scripthost"],
+        },
+        include: [
+          "src/**/*.ts",
+          "src/**/*.tsx",
+          "src/**/*.vue",
+          "tests/**/*.ts",
+          "tests/**/*.tsx",
+        ],
+        exclude: ["node_modules"],
       }),
     },
   },
