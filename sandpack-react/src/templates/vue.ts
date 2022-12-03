@@ -7,8 +7,6 @@ export const VUE_TEMPLATE = {
       code: `<template>
   <div id="app">
     <h1>Hello {{ msg }}</h1>
-    <button @click="add">add</button>
-    <p>count: {{ count }}</p>
   </div>
 </template>
 
@@ -19,17 +17,8 @@ export default Vue.extend({
   name: "App",
   data() {
     return {
-      msg: "",
-      count: 1,
+      msg: "World",
     };
-  },
-  methods: {
-    add() {
-      this.count += 1;
-    },
-  },
-  mounted() {
-    this.msg = "World";
   },
 });
 </script>`,
