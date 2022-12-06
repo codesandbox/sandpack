@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.2](https://github.com/codesandbox/sandpack/compare/v1.17.1...v1.17.2) (2022-12-06)
+
+
+### Bug Fixes
+
+* **sandpack-context:** addFile with no code argument ([#652](https://github.com/codesandbox/sandpack/issues/652)) ([80d94c3](https://github.com/codesandbox/sandpack/commit/80d94c3d1f6c51b083b30f8b6e0ebe56b8d41663))
+
+
+
+
+
 ## [1.17.1](https://github.com/codesandbox/sandpack/compare/v1.17.0...v1.17.1) (2022-11-30)
 
 
