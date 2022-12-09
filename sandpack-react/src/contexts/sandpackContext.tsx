@@ -78,8 +78,8 @@ export class SandpackProviderClass extends React.PureComponent<
     this.state = {
       files,
       environment,
-      visibleFiles,
-      visibleFilesFromProps: visibleFiles,
+      visibleFiles: visibleFiles ?? [],
+      visibleFilesFromProps: visibleFiles ?? [],
       activeFile,
       startRoute: this.props.options?.startRoute,
       bundlerState: undefined,
@@ -498,7 +498,7 @@ export class SandpackProviderClass extends React.PureComponent<
   };
 
   closeFile = (path: string): void => {
-    if (this.state.visibleFiles.length === 1) {
+    if (this.state.visibleFiles?.length === 1) {
       return;
     }
 
