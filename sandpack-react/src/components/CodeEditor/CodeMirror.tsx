@@ -389,16 +389,22 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     React.useEffect(() => {
       if (cmView.current && code !== internalCode) {
         const view = cmView.current;
-
         const selection = view.state.selection.ranges.some(
-          ({ to, from }) => to > code.length || from > code.length
+          ({ to, from }) => to > code?.length || from > code?.length
         )
-          ? EditorSelection.cursor(code.length)
+          ? EditorSelection.cursor(code?.length)
           : view.state.selection;
 
-        const changes = { from: 0, to: view.state.doc.length, insert: code };
+        const changes = {
+          from: 0,
+          to: view.state.doc?.length,
+          insert: code ?? "",
+        };
 
-        view.dispatch({ changes, selection });
+        view.dispatch({
+          changes,
+          selection,
+        });
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [code]);
