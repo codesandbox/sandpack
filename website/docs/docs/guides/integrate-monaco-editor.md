@@ -78,7 +78,7 @@ function MonacoEditor() {
 ```
 
 :::info
-If you are unfamiliar with any of the code in this guide make sure to check the [**Advances Usage**](https://sandpack.codesandbox.io/docs/advanced-usage/provider) section for a better understanding.
+If you are unfamiliar with any of the code in this guide make sure to check the [**Advanced Usage**](https://sandpack.codesandbox.io/docs/advanced-usage/provider) section for a better understanding.
 :::
 
 Finally, using a `SandpackProvider` you can integrate the `MonacoEditor` component like the following example:
