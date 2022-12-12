@@ -13,7 +13,7 @@ In this next section, you can read about all the different options for customizi
 
 Theming controls the color palette and typography, but you can also append your own custom style to existing sandpack components.
 
-For this, sandpack uses a small package called [`classer`](https://github.com/code-hike/codehike/tree/next/packages/classer). To customize existing components, you need to map your own classes to the internal sandpack classes.
+For this, sandpack uses a small package called [`classer`](https://github.com/code-hike/codehike/blob/next/packages/mdx/src/classer/index.tsx). To customize existing components, you need to map your own classes to the internal sandpack classes.
 
 :::note
 While inspecting your Sandpack instance, notice that our components have classes prefixed with `sp-`.

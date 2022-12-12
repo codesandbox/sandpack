@@ -149,14 +149,17 @@ export class SandpackProviderClass extends React.PureComponent<
   updateFile = (pathOrFiles: string | SandpackFiles, code?: string): void => {
     let files = this.state.files;
 
-    if (typeof pathOrFiles === "string" && code) {
-      if (code === this.state.files[pathOrFiles]?.code) {
+    if (typeof pathOrFiles === "string") {
+      if (
+        this.state.files[pathOrFiles]?.code &&
+        code === this.state.files[pathOrFiles].code
+      ) {
         return;
       }
 
       files = {
         ...files,
-        [pathOrFiles]: { code },
+        [pathOrFiles]: { code: code ?? "" },
       };
     } else if (typeof pathOrFiles === "object") {
       files = { ...files, ...convertedFilesToBundlerFiles(pathOrFiles) };
