@@ -222,7 +222,7 @@ const combineTemplateFilesToSetup = ({
       ...baseTemplate.devDependencies,
       ...customSetup?.devDependencies,
     },
-    entry: normalizePath(customSetup?.entry || baseTemplate.entry),
+    entry: normalizePath(customSetup?.entry),
     main: baseTemplate.main,
     environment: customSetup?.environment || baseTemplate.environment,
   } as SandboxTemplate;
