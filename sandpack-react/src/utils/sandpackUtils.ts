@@ -76,7 +76,7 @@ export const getSandpackStateFromProps = (
   }
 
   // Make sure it resolves the entry file
-  if (!projectSetup.files[projectSetup.entry]) {
+  if (projectSetup.entry && !projectSetup.files[projectSetup.entry]) {
     /* eslint-disable */
     // @ts-ignore
     projectSetup.entry = resolveFile(projectSetup.entry, projectSetup.files);
@@ -222,7 +222,7 @@ const combineTemplateFilesToSetup = ({
       ...baseTemplate.devDependencies,
       ...customSetup?.devDependencies,
     },
-    entry: normalizePath(customSetup?.entry || baseTemplate.entry),
+    entry: normalizePath(customSetup?.entry),
     main: baseTemplate.main,
     environment: customSetup?.environment || baseTemplate.environment,
   } as SandboxTemplate;

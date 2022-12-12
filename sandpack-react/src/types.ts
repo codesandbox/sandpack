@@ -610,7 +610,7 @@ export interface SandboxTemplate {
   files: Record<string, SandpackFile>;
   dependencies: Record<string, string>;
   devDependencies?: Record<string, string>;
-  entry: string;
+  entry?: string;
   main: string;
   environment: SandboxEnvironment;
 }
