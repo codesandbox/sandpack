@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/codesandbox/sandpack/compare/v1.17.2...v1.18.0) (2022-12-12)
+
+
+### Bug Fixes
+
+* **sandpack-react:** make entry field optional, as bundler relies on package.json ([#660](https://github.com/codesandbox/sandpack/issues/660)) ([3d12b6e](https://github.com/codesandbox/sandpack/commit/3d12b6e862ed0e5a87c7fc88d25cc929f99c1f13))
+
+
+
+
+
 ## [1.17.1](https://github.com/codesandbox/sandpack/compare/v1.17.0...v1.17.1) (2022-11-30)
 
 

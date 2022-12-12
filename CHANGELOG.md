@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/codesandbox/sandpack/compare/v1.17.2...v1.18.0) (2022-12-12)
+
+
+### Bug Fixes
+
+* **sandpack-react:** make entry field optional, as bundler relies on package.json ([#660](https://github.com/codesandbox/sandpack/issues/660)) ([3d12b6e](https://github.com/codesandbox/sandpack/commit/3d12b6e862ed0e5a87c7fc88d25cc929f99c1f13))
+
+
+### Features
+
+* add vue-ts vue3-ts template ([#650](https://github.com/codesandbox/sandpack/issues/650)) ([035d1b9](https://github.com/codesandbox/sandpack/commit/035d1b9dc1962f0c2d2fb22a31f4ab6d3637fb88))
+
+
+
+
+
 ## [1.17.2](https://github.com/codesandbox/sandpack/compare/v1.17.1...v1.17.2) (2022-12-06)
 
 
