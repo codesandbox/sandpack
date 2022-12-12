@@ -48,7 +48,7 @@ export const getSandpackStateFromProps = (
     ? resolveFile(props.options?.activeFile, normalizedFilesPath || {})
     : undefined;
 
-  if (visibleFiles.length === 0 && normalizedFilesPath) {
+  if (visibleFiles?.length === 0 && normalizedFilesPath) {
     // extract open and active files from the custom input files
     Object.keys(normalizedFilesPath).forEach((filePath) => {
       const file = normalizedFilesPath[filePath];
@@ -70,7 +70,7 @@ export const getSandpackStateFromProps = (
     });
   }
 
-  if (visibleFiles.length === 0) {
+  if (visibleFiles?.length === 0) {
     // If no files are received, use the project setup / template
     visibleFiles = [projectSetup.main];
   }

@@ -58,7 +58,7 @@ export const SandpackCodeViewer = React.forwardRef<
     const { code } = useActiveCode();
     const c = useClasser(THEME_PREFIX);
 
-    const shouldShowTabs = showTabs ?? sandpack.visibleFiles.length > 1;
+    const shouldShowTabs = showTabs ?? sandpack.visibleFiles?.length > 1;
 
     return (
       <SandpackStack {...props}>

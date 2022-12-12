@@ -102,7 +102,7 @@ export const SandpackCodeEditor = React.forwardRef<
     const { sandpack } = useSandpack();
     const { code, updateCode, readOnly: readOnlyFile } = useActiveCode();
     const { activeFile, status, editorState } = sandpack;
-    const shouldShowTabs = showTabs ?? sandpack.visibleFiles.length > 1;
+    const shouldShowTabs = showTabs ?? sandpack.visibleFiles?.length > 1;
 
     const c = useClasser(THEME_PREFIX);
 

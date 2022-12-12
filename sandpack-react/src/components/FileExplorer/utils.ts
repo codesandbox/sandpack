@@ -11,7 +11,7 @@ export const fromPropsToModules = ({
   autoHiddenFiles?: boolean;
   visibleFiles: string[];
 }): { directories: string[]; modules: string[] } => {
-  const hasVisibleFilesOption = visibleFiles.length > 0;
+  const hasVisibleFilesOption = visibleFiles?.length > 0;
 
   /**
    * When visibleFiles or activeFile are set, the hidden and active flags on the files prop are ignored.

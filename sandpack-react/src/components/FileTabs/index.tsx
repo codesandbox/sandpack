@@ -146,7 +146,7 @@ export const FileTabs = ({
             type="button"
           >
             {getTriggerText(filePath)}
-            {closableTabs && visibleFiles.length > 1 && (
+            {closableTabs && visibleFiles?.length > 1 && (
               <span
                 className={classNames(c("close-button"), closeButtonClassName)}
                 onClick={handleCloseFile}
