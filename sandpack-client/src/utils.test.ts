@@ -100,6 +100,13 @@ describe(addPackageJSONIfNeeded, () => {
 });
 
 describe(normalizePath, () => {
+  it("returns null if it's not a path", () => {
+    expect(normalizePath(undefined)).toBe(null);
+    expect(normalizePath(null)).toBe(null);
+    expect(normalizePath({})).toBe(null);
+    expect(normalizePath(new Date())).toBe(null);
+  });
+
   it("adds trailing slash to a string", () => {
     expect(normalizePath("foo")).toBe("/foo");
     expect(normalizePath("/foo")).toBe("/foo");

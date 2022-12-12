@@ -202,5 +202,5 @@ export const normalizePath = <R extends any>(path: R): R => {
     );
   }
 
-  return undefined as R;
+  return null as R;
 };
