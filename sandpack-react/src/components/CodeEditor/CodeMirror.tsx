@@ -389,11 +389,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     React.useEffect(() => {
       if (cmView.current && code !== internalCode) {
         const view = cmView.current;
-        const selection = view.state.selection.ranges.some(
-          ({ to, from }) => to > code?.length || from > code?.length
-        )
-          ? EditorSelection.cursor(code?.length)
-          : view.state.selection;
+        const selection =
+          view.state.selection.ranges.some(
+            ({ to, from }) => to > code?.length || from > code?.length
+          ) && code !== undefined
+            ? EditorSelection.cursor(code?.length)
+            : view.state.selection;
 
         const changes = {
           from: 0,
