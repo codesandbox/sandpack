@@ -4,21 +4,15 @@
 export const VUE_TEMPLATE_3 = {
   files: {
     "/src/App.vue": {
-      code: `<script setup>
+      code: `<template>
+  <h1>Hello {{ msg }}</h1>
+</template>
+
+<script setup>
 import { ref } from 'vue';
 
 const msg = ref('World');
-const count = ref(1);
-const add = () => {
-  count.value += 1;
-};
-</script>
-
-<template>
-  <h1>Hello {{ msg }}</h1>
-  <button @click="add">add</button>
-  <p>count: {{ count }}</p>
-</template>`,
+</script>`,
     },
     "/src/main.js": {
       code: `import { createApp } from 'vue'

@@ -7,29 +7,18 @@ export const VUE_TS_TEMPLATE = {
       code: `<template>
   <div id="app">
     <h1>Hello {{ msg }}</h1>
-    <button @click="add">add</button>
-    <p>count: {{ count }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 
 export default Vue.extend({
   name: "App",
   data() {
     return {
-      msg: "",
-      count: 1,
+      msg: "World" as string,
     };
-  },
-  methods: {
-    add() {
-      this.count += 1;
-    },
-  },
-  mounted() {
-    this.msg = "World";
   },
 });
 </script>`,

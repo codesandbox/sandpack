@@ -4,21 +4,15 @@
 export const VUE_TS_TEMPLATE_3 = {
   files: {
     "/src/App.vue": {
-      code: `<script setup lang="ts">
+      code: `<template>
+  <h1>Hello {{ msg }}</h1>
+</template>
+
+<script setup lang="ts">
 import { ref } from 'vue';
 
 const msg = ref<string>('World');
-const count = ref<number>(1);
-const add = (): void => {
-  count.value += 1;
-};
-</script>
-
-<template>
-  <h1>Hello {{ msg }}</h1>
-  <button @click="add">add</button>
-  <p>count: {{ count }}</p>
-</template>`,
+</script>`,
     },
     "/src/main.ts": {
       code: `import { createApp } from 'vue'
