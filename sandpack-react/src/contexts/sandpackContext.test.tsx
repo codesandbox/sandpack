@@ -83,7 +83,7 @@ describe(SandpackProvider, () => {
       instance.runSandpack();
       instance.deleteFile("/App.js");
 
-      expect(instance.state.activeFile).toBe("/index.js");
+      expect(instance.state.activeFile).toBe("/package.json");
     });
 
     it("updates a file", () => {
