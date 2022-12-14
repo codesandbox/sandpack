@@ -23,6 +23,16 @@ export const FlushServerVsClient = (): JSX.Element => {
   );
 };
 
+export const Issue663 = (): JSX.Element => (
+  <Sandpack
+    options={{
+      showTabs: true,
+      activeFile: "/index.tsx",
+    }}
+    template="react-ts"
+  />
+);
+
 export const Issue482 = (): JSX.Element => {
   const [hidden, setHidden] = useState(false);
 
