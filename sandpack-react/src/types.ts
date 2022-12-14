@@ -241,6 +241,7 @@ export type SandpackPredefinedTemplate =
   | "vanilla-ts"
   | "vue"
   | "vue3"
+  | "vue3-ts"
   | "svelte"
   | "solid";
 

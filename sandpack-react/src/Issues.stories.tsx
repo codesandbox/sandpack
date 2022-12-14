@@ -85,6 +85,16 @@ export const Issue454 = (): JSX.Element => {
   );
 };
 
+export const Issue663 = (): JSX.Element => (
+  <Sandpack
+    options={{
+      showTabs: true,
+      activeFile: "/index.tsx",
+    }}
+    template="react-ts"
+  />
+);
+
 export const FileTab = (): JSX.Element => {
   return (
     <Sandpack
