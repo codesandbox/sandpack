@@ -110,7 +110,7 @@ export interface CodeMirrorRef {
 export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
   (
     {
-      code,
+      code = "",
       filePath,
       fileType,
       onCodeUpdate,
