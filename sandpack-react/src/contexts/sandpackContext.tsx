@@ -23,7 +23,6 @@ import type {
 } from "../types";
 import {
   convertedFilesToBundlerFiles,
-  getEntryFile,
   getSandpackStateFromProps,
 } from "../utils/sandpackUtils";
 import { generateRandomId } from "../utils/stringUtils";
@@ -523,17 +522,18 @@ export class SandpackProviderClass extends React.PureComponent<
     this.setState(({ visibleFiles, files, activeFile }) => {
       const newFiles = { ...files };
       delete newFiles[path];
-      
+
       const remainingVisibleFiles = visibleFiles.filter(
         (openPath) => openPath !== path
       );
       const deletedLastVisibleFile = remainingVisibleFiles.length === 0;
-      const entryFile: string = getEntryFile(files);
 
       if (deletedLastVisibleFile) {
+        const nextFile = Object.keys(files)[Object.keys(files).length - 1];
+
         return {
-          visibleFiles: [entryFile],
-          activeFile: entryFile,
+          visibleFiles: [nextFile],
+          activeFile: nextFile,
           files: newFiles,
         };
       }
