@@ -523,6 +523,7 @@ export class SandpackProviderClass extends React.PureComponent<
     this.setState(({ visibleFiles, files, activeFile }) => {
       const newFiles = { ...files };
       delete newFiles[path];
+      
       const remainingVisibleFiles = visibleFiles.filter(
         (openPath) => openPath !== path
       );
