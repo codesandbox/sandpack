@@ -136,10 +136,20 @@ describe(getSandpackStateFromProps, () => {
     expect(setup.activeFile).toEqual("/entry.js");
   });
 
+  test("custom activeFile", () => {
+    const setup = getSandpackStateFromProps({
+      template: "react",
+      options: {
+        activeFile: "/index.js",
+      },
+    });
+
+    expect(setup.activeFile).toBe("/index.js");
+  });
+
   /**
    * hidden file
    */
-
   test("exclude hidden files from custom files", () => {
     const setup = getSandpackStateFromProps({
       files: {
