@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.2](https://github.com/codesandbox/sandpack/compare/v1.18.1...v1.18.2) (2022-12-14)
+
+
+### Bug Fixes
+
+* **sandpack-react:** prevent crash upon deleting last visible file ([#661](https://github.com/codesandbox/sandpack/issues/661)) ([9818ab3](https://github.com/codesandbox/sandpack/commit/9818ab312cac59b1e2943d126ed7ca1fba421cc2))
+
+
+
+
+
 ## [1.18.1](https://github.com/codesandbox/sandpack/compare/v1.18.0...v1.18.1) (2022-12-14)
 
 
