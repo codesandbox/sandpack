@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.1](https://github.com/codesandbox/sandpack/compare/v1.18.0...v1.18.1) (2022-12-14)
+
+
+### Bug Fixes
+
+* **getSandpackStateFromProps:** get activeFile from files from props + template files ([#665](https://github.com/codesandbox/sandpack/issues/665)) ([0480f1b](https://github.com/codesandbox/sandpack/commit/0480f1b284b4f1b6b8db4f278acd83a5aa8ccee6))
+
+
+
+
+
 # [1.18.0](https://github.com/codesandbox/sandpack/compare/v1.17.2...v1.18.0) (2022-12-12)
 
 
