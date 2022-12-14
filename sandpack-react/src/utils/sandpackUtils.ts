@@ -39,7 +39,7 @@ export const getSandpackStateFromProps = (
   const projectSetup = combineTemplateFilesToSetup({
     template: props.template,
     customSetup: props.customSetup,
-    files: normalizePath(props.files),
+    files: normalizedFilesPath,
   });
 
   // visibleFiles and activeFile override the setup flags
