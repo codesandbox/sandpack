@@ -232,18 +232,7 @@ export type SandboxEnvironment =
 /**
  * @category Setup
  */
-export type SandpackPredefinedTemplate =
-  | "angular"
-  | "react"
-  | "react-ts"
-  | "test-ts"
-  | "vanilla"
-  | "vanilla-ts"
-  | "vue"
-  | "vue3"
-  | "vue3-ts"
-  | "svelte"
-  | "solid";
+export type SandpackPredefinedTemplate = keyof typeof SANDBOX_TEMPLATES;
 
 /**
  * @category Setup
