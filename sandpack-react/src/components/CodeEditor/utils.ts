@@ -2,11 +2,12 @@
 import { css } from "@codemirror/lang-css";
 import { html } from "@codemirror/lang-html";
 import { javascript } from "@codemirror/lang-javascript";
-import type {  LanguageSupport } from "@codemirror/language";
+import type { LanguageSupport } from "@codemirror/language";
 import { HighlightStyle } from "@codemirror/language";
 import type { Extension } from "@codemirror/state";
 import type { Text } from "@codemirror/text";
 import { EditorView } from "@codemirror/view";
+import { tags } from "@lezer/highlight";
 import * as React from "react";
 
 import { THEME_PREFIX } from "../../styles";
@@ -106,54 +107,51 @@ export const styleTokens = (): Record<string, string> => {
 };
 
 export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
-  {
+  HighlightStyle.define([
+    { tag: tags.link, textDecoration: "underline" },
+    { tag: tags.emphasis, fontStyle: "italic" },
+    { tag: tags.strong, fontWeight: "bold" },
 
-    return HighlightStyle.define([
-      { tag: tags.link, textDecoration: "underline" },
-      { tag: tags.emphasis, fontStyle: "italic" },
-      { tag: tags.strong, fontWeight: "bold" },
-
-      {
-        tag: tags.keyword,
-        class: classNameToken("keyword")
-      },
-      {
-        tag: [tags.atom, tags.number, tags.bool],
-        class: classNameToken("static")
-      },
-      {
-        tag: tags.tagName,
-        class: classNameToken("tag")
-      },
-      { tag: tags.variableName, class: classNameToken("plain") },
-      {
-        // Highlight function call
-        tag: tags.function(tags.variableName),
-        class: classNameToken("definition")
-      },
-      {
-        // Highlight function definition differently (eg: functional component def in React)
-        tag: tags.definition(tags.function(tags.variableName)),
-        class: classNameToken("definition")
-      },
-      {
-        tag: tags.propertyName,
-        class: classNameToken("property")
-      },
-      {
-        tag: [tags.literal, tags.inserted],
-        class: classNameToken(theme.syntax.string ? "string" : "static")
-      },
-      {
-        tag: tags.punctuation,
-        class: classNameToken("punctuation")
-      },
-      {
-        tag: [tags.comment, tags.quote],
-        class: classNameToken("comment")
-      },
-    ]);
-  };
+    {
+      tag: tags.keyword,
+      class: classNameToken("keyword"),
+    },
+    {
+      tag: [tags.atom, tags.number, tags.bool],
+      class: classNameToken("static"),
+    },
+    {
+      tag: tags.tagName,
+      class: classNameToken("tag"),
+    },
+    { tag: tags.variableName, class: classNameToken("plain") },
+    {
+      // Highlight function call
+      tag: tags.function(tags.variableName),
+      class: classNameToken("definition"),
+    },
+    {
+      // Highlight function definition differently (eg: functional component def in React)
+      tag: tags.definition(tags.function(tags.variableName)),
+      class: classNameToken("definition"),
+    },
+    {
+      tag: tags.propertyName,
+      class: classNameToken("property"),
+    },
+    {
+      tag: [tags.literal, tags.inserted],
+      class: classNameToken(theme.syntax.string ? "string" : "static"),
+    },
+    {
+      tag: tags.punctuation,
+      class: classNameToken("punctuation"),
+    },
+    {
+      tag: [tags.comment, tags.quote],
+      class: classNameToken("comment"),
+    },
+  ]);
 
 type SandpackLanguageSupport = "javascript" | "typescript" | "html" | "css";
 

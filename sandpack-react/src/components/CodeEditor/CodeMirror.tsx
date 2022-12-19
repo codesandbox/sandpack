@@ -13,6 +13,7 @@ import {
 // import { lineNumbers } from "@codemirror/gutter";
 // import { defaultHighlightStyle } from "@codemirror/highlight";
 // import { history, historyKeymap } from "@codemirror/history";
+import {syntaxHighlighting} from "@codemirror/language"
 import type { Extension } from "@codemirror/state";
 import { EditorState, EditorSelection, StateEffect } from "@codemirror/state";
 import { Annotation } from "@codemirror/state";
@@ -176,7 +177,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       languageExtension,
       additionalLanguages
     );
-    const highlightTheme = getSyntaxHighlight(theme);
+    const highlightTheme = syntaxHighlighting(getSyntaxHighlight(theme));
 
     // const syntaxHighlightRender = useSyntaxHighlight({
     //   langSupport,
