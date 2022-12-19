@@ -304,11 +304,11 @@ export const ShowConsoleButton: React.FC = () => (
 // function show-example() {
 //   echo $EXAMPLE
 // }`,
-//       "/example.bat": `@echo off 
+//       "/example.bat": `@echo off
 
 // Rem Prints the "example" variable
 
-// set example=Hello World 
+// set example=Hello World
 
 // echo %example%`,
 //       "/example.ps1": `$example = "Hello world"

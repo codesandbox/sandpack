@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useClasser } from "@code-hike/classer";
 // import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
+import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 import {
   defaultKeymap,
   indentLess,
@@ -13,7 +14,8 @@ import {
 // import { lineNumbers } from "@codemirror/gutter";
 // import { defaultHighlightStyle } from "@codemirror/highlight";
 // import { history, historyKeymap } from "@codemirror/history";
-import {syntaxHighlighting} from "@codemirror/language"
+import { syntaxHighlighting } from "@codemirror/language";
+import { bracketMatching, defaultHighlightStyle } from "@codemirror/language";
 import type { Extension } from "@codemirror/state";
 import { EditorState, EditorSelection, StateEffect } from "@codemirror/state";
 import { Annotation } from "@codemirror/state";
@@ -56,8 +58,6 @@ import {
   getSyntaxHighlight,
   useCombinedRefs,
 } from "./utils";
-import { bracketMatching, defaultHighlightStyle } from "@codemirror/language";
-import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 
 export type Decorators = Array<{
   className?: string;
@@ -177,13 +177,13 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       languageExtension,
       additionalLanguages
     );
-    const highlightTheme = syntaxHighlighting(getSyntaxHighlight(theme));
+    const highlightTheme = getSyntaxHighlight(theme);
 
-    // const syntaxHighlightRender = useSyntaxHighlight({
-    //   langSupport,
-    //   highlightTheme,
-    //   code,
-    // });
+    const syntaxHighlightRender = useSyntaxHighlight({
+      langSupport,
+      highlightTheme,
+      code,
+    });
 
     // decorators need to be sorted by `line`, otherwise it will throw error
     // see https://github.com/codesandbox/sandpack/issues/383
@@ -264,12 +264,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           // defaultHighlightStyle.fallback, TODO: consider removing
 
           getEditorTheme(),
-          highlightTheme, 
+          syntaxHighlighting(highlightTheme),
         ];
 
         if (readOnly) {
-          // extensionList.push(EditorState.readOnly.of(true));
-          // extensionList.push(EditorView.editable.of(false));
+          extensionList.push(EditorState.readOnly.of(true));
+          extensionList.push(EditorView.editable.of(false));
         } else {
           extensionList.push(bracketMatching());
           extensionList.push(highlightActiveLine());
@@ -476,7 +476,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
               className={classNames(c("pre-placeholder"), placeholderClassName)}
               style={{ marginLeft: gutterLineOffset() }}
             >
-              {/* {syntaxHighlightRender} */}
+              {syntaxHighlightRender}
             </code>
           </pre>
 
@@ -515,7 +515,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           className={classNames(c("pre-placeholder"), placeholderClassName)}
           style={{ marginLeft: gutterLineOffset() }}
         >
-          {/* {syntaxHighlightRender} */}
+          {syntaxHighlightRender}
         </pre>
       </div>
     );
