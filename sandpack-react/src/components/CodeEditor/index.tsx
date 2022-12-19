@@ -15,6 +15,7 @@ import { SandpackStack } from "../common/Stack";
 import { CodeMirror } from "./CodeMirror";
 import type { CodeMirrorRef } from "./CodeMirror";
 import { editorClassName } from "./styles";
+import { getLanguageFromFile } from "./utils";
 
 /**
  * @category Components
@@ -71,7 +72,7 @@ export interface CodeEditorProps {
   additionalLanguages?: CustomLanguage[];
 }
 
-export { CodeMirror as CodeEditor };
+export { CodeMirror as CodeEditor, getLanguageFromFile };
 
 /**
  * @category Components
