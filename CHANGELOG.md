@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.4](https://github.com/codesandbox/sandpack/compare/v1.18.3...v1.18.4) (2022-12-19)
+
+
+### Bug Fixes
+
+* **highlight inline error:** make sure it highlight the correct file ([#671](https://github.com/codesandbox/sandpack/issues/671)) ([baaf2c5](https://github.com/codesandbox/sandpack/commit/baaf2c5366e13584161659721df2b3b71cb396ec))
+
+
+
+
+
 ## [1.18.3](https://github.com/codesandbox/sandpack/compare/v1.18.2...v1.18.3) (2022-12-16)
 
 
