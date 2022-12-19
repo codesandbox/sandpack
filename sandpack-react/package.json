@@ -37,7 +37,6 @@
   ],
   "dependencies": {
     "@code-hike/classer": "^0.0.0-aa6efee",
-    "@codemirror/closebrackets": "^0.19.2",
     "@codemirror/commands": "^6.1.2",
     "@codemirror/lang-css": "^6.0.1",
     "@codemirror/lang-html": "^6.4.0",

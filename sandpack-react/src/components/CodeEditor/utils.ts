@@ -1,4 +1,4 @@
-import { HighlightStyle, tags } from "@codemirror/highlight";
+// import { HighlightStyle, tags } from "@codemirror/highlight";
 import { css } from "@codemirror/lang-css";
 import { html } from "@codemirror/lang-html";
 import { javascript } from "@codemirror/lang-javascript";
@@ -105,51 +105,54 @@ export const styleTokens = (): Record<string, string> => {
 };
 
 export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
-  HighlightStyle.define([
-    { tag: tags.link, textDecoration: "underline" },
-    { tag: tags.emphasis, fontStyle: "italic" },
-    { tag: tags.strong, fontWeight: "bold" },
+  {
+    return null
+    // return HighlightStyle.define([
+    //   { tag: tags.link, textDecoration: "underline" },
+    //   { tag: tags.emphasis, fontStyle: "italic" },
+    //   { tag: tags.strong, fontWeight: "bold" },
 
-    {
-      tag: tags.keyword,
-      class: classNameToken("keyword"),
-    },
-    {
-      tag: [tags.atom, tags.number, tags.bool],
-      class: classNameToken("static"),
-    },
-    {
-      tag: tags.tagName,
-      class: classNameToken("tag"),
-    },
-    { tag: tags.variableName, class: classNameToken("plain") },
-    {
-      // Highlight function call
-      tag: tags.function(tags.variableName),
-      class: classNameToken("definition"),
-    },
-    {
-      // Highlight function definition differently (eg: functional component def in React)
-      tag: tags.definition(tags.function(tags.variableName)),
-      class: classNameToken("definition"),
-    },
-    {
-      tag: tags.propertyName,
-      class: classNameToken("property"),
-    },
-    {
-      tag: [tags.literal, tags.inserted],
-      class: classNameToken(theme.syntax.string ? "string" : "static"),
-    },
-    {
-      tag: tags.punctuation,
-      class: classNameToken("punctuation"),
-    },
-    {
-      tag: [tags.comment, tags.quote],
-      class: classNameToken("comment"),
-    },
-  ]);
+    //   {
+    //     tag: tags.keyword,
+    //     class: classNameToken("keyword")
+    //   },
+    //   {
+    //     tag: [tags.atom, tags.number, tags.bool],
+    //     class: classNameToken("static")
+    //   },
+    //   {
+    //     tag: tags.tagName,
+    //     class: classNameToken("tag")
+    //   },
+    //   { tag: tags.variableName, class: classNameToken("plain") },
+    //   {
+    //     // Highlight function call
+    //     tag: tags.function(tags.variableName),
+    //     class: classNameToken("definition")
+    //   },
+    //   {
+    //     // Highlight function definition differently (eg: functional component def in React)
+    //     tag: tags.definition(tags.function(tags.variableName)),
+    //     class: classNameToken("definition")
+    //   },
+    //   {
+    //     tag: tags.propertyName,
+    //     class: classNameToken("property")
+    //   },
+    //   {
+    //     tag: [tags.literal, tags.inserted],
+    //     class: classNameToken(theme.syntax.string ? "string" : "static")
+    //   },
+    //   {
+    //     tag: tags.punctuation,
+    //     class: classNameToken("punctuation")
+    //   },
+    //   {
+    //     tag: [tags.comment, tags.quote],
+    //     class: classNameToken("comment")
+    //   },
+    // ]);
+  };
 
 type SandpackLanguageSupport = "javascript" | "typescript" | "html" | "css";
 

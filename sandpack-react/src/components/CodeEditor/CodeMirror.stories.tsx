@@ -1,7 +1,7 @@
 import { python } from "@codemirror/lang-python";
 import { LanguageSupport } from "@codemirror/language";
 import { shell } from "@codemirror/legacy-modes/mode/shell";
-import { StreamLanguage } from "@codemirror/stream-parser";
+// import { StreamLanguage } from "@codemirror/stream-parser";
 import * as React from "react";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
@@ -87,24 +87,24 @@ export const Vue: React.FC = () => (
   </SandpackProvider>
 );
 
-export const CustomLanguageShell: React.FC = () => (
-  <SandpackProvider>
-    <CodeEditor
-      additionalLanguages={[
-        {
-          name: "shell",
-          extensions: ["sh"],
-          language: new LanguageSupport(StreamLanguage.define(shell)),
-        },
-      ]}
-      code={mocks.shell}
-      filePath="example.sh"
-      id="shell"
-      initMode="immediate"
-      showLineNumbers={false}
-    />
-  </SandpackProvider>
-);
+// export const CustomLanguageShell: React.FC = () => (
+//   <SandpackProvider>
+//     <CodeEditor
+//       additionalLanguages={[
+//         {
+//           name: "shell",
+//           extensions: ["sh"],
+//           language: new LanguageSupport(StreamLanguage.define(shell)),
+//         },
+//       ]}
+//       code={mocks.shell}
+//       filePath="example.sh"
+//       id="shell"
+//       initMode="immediate"
+//       showLineNumbers={false}
+//     />
+//   </SandpackProvider>
+// );
 
 export const CustomLanguagePython: React.FC = () => (
   <SandpackProvider>
