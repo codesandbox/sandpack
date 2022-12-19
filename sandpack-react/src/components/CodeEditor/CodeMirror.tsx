@@ -174,11 +174,11 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     );
     const highlightTheme = getSyntaxHighlight(theme);
 
-    const syntaxHighlightRender = useSyntaxHighlight({
-      langSupport,
-      highlightTheme,
-      code,
-    });
+    // const syntaxHighlightRender = useSyntaxHighlight({
+    //   langSupport,
+    //   highlightTheme,
+    //   code,
+    // });
 
     // decorators need to be sorted by `line`, otherwise it will throw error
     // see https://github.com/codesandbox/sandpack/issues/383
@@ -243,7 +243,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
         const extensionList = [
           highlightSpecialChars(),
-          history(),
+          // history(),
           closeBrackets(),
 
           ...extensions,
@@ -251,14 +251,14 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           keymap.of([
             ...closeBracketsKeymap,
             ...defaultKeymap,
-            ...historyKeymap,
-            ...commentKeymap,
+            // ...historyKeymap,
+            // ...commentKeymap,
             ...customCommandsKeymap,
             ...extensionsKeymap,
           ] as KeyBinding[]),
           langSupport,
 
-          defaultHighlightStyle.fallback,
+          // defaultHighlightStyle.fallback,
 
           getEditorTheme(),
           highlightTheme,
@@ -281,7 +281,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         }
 
         if (showLineNumbers) {
-          extensionList.push(lineNumbers());
+          // extensionList.push(lineNumbers());
         }
 
         if (showInlineErrors) {
@@ -473,7 +473,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
               className={classNames(c("pre-placeholder"), placeholderClassName)}
               style={{ marginLeft: gutterLineOffset() }}
             >
-              {syntaxHighlightRender}
+              {/* {syntaxHighlightRender} */}
             </code>
           </pre>
 
