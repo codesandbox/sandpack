@@ -1,7 +1,6 @@
 import { python } from "@codemirror/lang-python";
-import { LanguageSupport } from "@codemirror/language";
+import { LanguageSupport, StreamLanguage } from "@codemirror/language";
 import { shell } from "@codemirror/legacy-modes/mode/shell";
-import { StreamLanguage } from "@codemirror/stream-parser";
 import React from "react";
 import { create } from "react-test-renderer";
 
