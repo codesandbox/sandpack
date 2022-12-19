@@ -6,6 +6,8 @@ import {
   indentLess,
   indentMore,
   deleteGroupBackward,
+  history,
+  historyKeymap,
 } from "@codemirror/commands";
 // import { commentKeymap } from "@codemirror/comment";
 // import { lineNumbers } from "@codemirror/gutter";
@@ -19,6 +21,7 @@ import {
   highlightActiveLine,
   keymap,
   EditorView,
+  lineNumbers,
 } from "@codemirror/view";
 import type { KeyBinding } from "@codemirror/view";
 import useIntersectionObserver from "@react-hook/intersection-observer";
@@ -243,17 +246,15 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
         const extensionList = [
           highlightSpecialChars(),
-          // history(),
+          history(),
           // closeBrackets(),
 
           ...extensions,
 
           keymap.of([
             // ...closeBracketsKeymap,
-            // ...defaultKeymap,
-            // ...historyKeymap,
-            // ...commentKeymap,
-            // ...customCommandsKeymap,
+            ...defaultKeymap,
+            ...historyKeymap,
             // ...extensionsKeymap,
           ] as KeyBinding[]),
           langSupport,
@@ -281,7 +282,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         }
 
         if (showLineNumbers) {
-          // extensionList.push(lineNumbers());
+          extensionList.push(lineNumbers());
         }
 
         if (showInlineErrors) {
