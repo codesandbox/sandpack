@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useClasser } from "@code-hike/classer";
-// import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
 import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 import {
   defaultKeymap,
@@ -10,12 +9,8 @@ import {
   history,
   historyKeymap,
 } from "@codemirror/commands";
-// import { commentKeymap } from "@codemirror/comment";
-// import { lineNumbers } from "@codemirror/gutter";
-// import { defaultHighlightStyle } from "@codemirror/highlight";
-// import { history, historyKeymap } from "@codemirror/history";
 import { syntaxHighlighting } from "@codemirror/language";
-import { bracketMatching, defaultHighlightStyle } from "@codemirror/language";
+import { bracketMatching } from "@codemirror/language";
 import type { Extension } from "@codemirror/state";
 import { EditorState, EditorSelection, StateEffect } from "@codemirror/state";
 import { Annotation } from "@codemirror/state";
@@ -203,48 +198,48 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
        * waiting for "postTask scheduler" API be ready
        */
       const timer = setTimeout(function delayCodeEditorInit() {
-        // const customCommandsKeymap: KeyBinding[] = [
-        //   {
-        //     key: "Tab",
-        //     run: (view): boolean => {
-        //       indentMore(view);
+        const customCommandsKeymap: KeyBinding[] = [
+          {
+            key: "Tab",
+            run: (view): boolean => {
+              indentMore(view);
 
-        //       const customKey = extensionsKeymap.find(
-        //         ({ key }) => key === "Tab"
-        //       );
+              const customKey = extensionsKeymap.find(
+                ({ key }) => key === "Tab"
+              );
 
-        //       return customKey?.run(view) ?? true;
-        //     },
-        //   },
-        //   {
-        //     key: "Shift-Tab",
-        //     run: ({ state, dispatch }): boolean => {
-        //       indentLess({ state, dispatch });
+              return customKey?.run?.(view) ?? true;
+            },
+          },
+          {
+            key: "Shift-Tab",
+            run: ({ state, dispatch }): boolean => {
+              indentLess({ state, dispatch });
 
-        //       const customKey = extensionsKeymap.find(
-        //         ({ key }) => key === "Shift-Tab"
-        //       );
+              const customKey = extensionsKeymap.find(
+                ({ key }) => key === "Shift-Tab"
+              );
 
-        //       return customKey?.run(view) ?? true;
-        //     },
-        //   },
-        //   {
-        //     key: "Escape",
-        //     run: (): boolean => {
-        //       if (readOnly) return true;
+              return customKey?.run?.(view) ?? true;
+            },
+          },
+          {
+            key: "Escape",
+            run: (): boolean => {
+              if (readOnly) return true;
 
-        //       if (wrapper.current) {
-        //         wrapper.current.focus();
-        //       }
+              if (wrapper.current) {
+                wrapper.current.focus();
+              }
 
-        //       return true;
-        //     },
-        //   },
-        //   {
-        //     key: "mod-Backspace",
-        //     run: deleteGroupBackward,
-        //   },
-        // ];
+              return true;
+            },
+          },
+          {
+            key: "mod-Backspace",
+            run: deleteGroupBackward,
+          },
+        ];
 
         const extensionList = [
           highlightSpecialChars(),
@@ -257,11 +252,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             ...closeBracketsKeymap,
             ...defaultKeymap,
             ...historyKeymap,
+            ...customCommandsKeymap,
             ...extensionsKeymap,
           ] as KeyBinding[]),
           langSupport,
-
-          // defaultHighlightStyle.fallback, TODO: consider removing
 
           getEditorTheme(),
           syntaxHighlighting(highlightTheme),
@@ -276,7 +270,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         }
 
         if (sortedDecorators) {
-          // extensionList.push(highlightDecorators(sortedDecorators));
+          extensionList.push(highlightDecorators(sortedDecorators));
         }
 
         if (wrapContent) {
@@ -288,7 +282,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         }
 
         if (showInlineErrors) {
-          // extensionList.push(highlightInlineError());
+          extensionList.push(highlightInlineError());
         }
 
         const startState = EditorState.create({
