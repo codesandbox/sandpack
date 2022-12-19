@@ -56,6 +56,7 @@ import {
   useCombinedRefs,
 } from "./utils";
 import { bracketMatching, defaultHighlightStyle } from "@codemirror/language";
+import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 
 export type Decorators = Array<{
   className?: string;
@@ -247,22 +248,22 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         const extensionList = [
           highlightSpecialChars(),
           history(),
-          // closeBrackets(),
+          closeBrackets(),
 
           ...extensions,
 
           keymap.of([
-            // ...closeBracketsKeymap,
+            ...closeBracketsKeymap,
             ...defaultKeymap,
             ...historyKeymap,
-            // ...extensionsKeymap,
+            ...extensionsKeymap,
           ] as KeyBinding[]),
           langSupport,
 
           // defaultHighlightStyle.fallback, TODO: consider removing
 
           getEditorTheme(),
-          // highlightTheme, TODO: re-implement
+          highlightTheme, 
         ];
 
         if (readOnly) {
