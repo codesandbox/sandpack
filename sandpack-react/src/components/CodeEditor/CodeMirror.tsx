@@ -418,6 +418,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           } else if (
             message.type === "action" &&
             message.action === "show-error" &&
+            message.path === filePath &&
             message.line
           ) {
             view?.dispatch({
