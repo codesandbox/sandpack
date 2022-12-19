@@ -11,7 +11,6 @@ import {
 // import { lineNumbers } from "@codemirror/gutter";
 // import { defaultHighlightStyle } from "@codemirror/highlight";
 // import { history, historyKeymap } from "@codemirror/history";
-import { bracketMatching } from "@codemirror/matchbrackets";
 import type { Extension } from "@codemirror/state";
 import { EditorState, EditorSelection, StateEffect } from "@codemirror/state";
 import { Annotation } from "@codemirror/state";
@@ -53,6 +52,7 @@ import {
   getSyntaxHighlight,
   useCombinedRefs,
 } from "./utils";
+import { bracketMatching, defaultHighlightStyle } from "@codemirror/language";
 
 export type Decorators = Array<{
   className?: string;
@@ -242,11 +242,11 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         // ];
 
         const extensionList = [
-          // highlightSpecialChars(),
+          highlightSpecialChars(),
           // history(),
           // closeBrackets(),
 
-          // ...extensions,
+          ...extensions,
 
           keymap.of([
             // ...closeBracketsKeymap,
@@ -256,20 +256,20 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             // ...customCommandsKeymap,
             // ...extensionsKeymap,
           ] as KeyBinding[]),
-          // langSupport,
+          langSupport,
 
-          // defaultHighlightStyle.fallback,
+          // defaultHighlightStyle.fallback, TODO: consider removing
 
-          // getEditorTheme(),
-          // highlightTheme,
+          getEditorTheme(),
+          // highlightTheme, TODO: re-implement
         ];
 
         if (readOnly) {
           // extensionList.push(EditorState.readOnly.of(true));
           // extensionList.push(EditorView.editable.of(false));
         } else {
-          // extensionList.push(bracketMatching());
-          // extensionList.push(highlightActiveLine());
+          extensionList.push(bracketMatching());
+          extensionList.push(highlightActiveLine());
         }
 
         if (sortedDecorators) {
@@ -277,7 +277,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         }
 
         if (wrapContent) {
-          // extensionList.push(EditorView.lineWrapping);
+          extensionList.push(EditorView.lineWrapping);
         }
 
         if (showLineNumbers) {
