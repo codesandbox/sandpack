@@ -43,7 +43,6 @@
     "@codemirror/lang-html": "^6.4.0",
     "@codemirror/lang-javascript": "^6.1.2",
     "@codemirror/language": "^6.3.2",
-    "@codemirror/matchbrackets": "^0.19.4",
     "@codemirror/state": "^6.2.0",
     "@codemirror/view": "^6.7.1",
     "@codesandbox/sandpack-client": "^1.18.0",
