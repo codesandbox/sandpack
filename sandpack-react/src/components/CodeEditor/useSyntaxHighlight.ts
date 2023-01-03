@@ -1,6 +1,6 @@
 import type { HighlightStyle, LanguageSupport } from "@codemirror/language";
-import { createElement } from "react";
 import { highlightTree } from "@lezer/highlight";
+import { createElement } from "react";
 
 export const useSyntaxHighlight = ({
   langSupport,
