@@ -6,11 +6,11 @@
     "sandpack-client",
     "sandpack-react",
     "sandpack-themes",
-    "website/*",
-    "examples/*"
+    "website/*"
   ],
   "nohoist": [
     "website/docs/**",
+    "examples/**",
     "**/html-minifier-terser"
   ],
   "description": "",

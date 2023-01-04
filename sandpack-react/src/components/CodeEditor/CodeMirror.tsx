@@ -285,11 +285,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           extensionList.push(highlightInlineError());
         }
 
-        const startState = EditorState.create({
-          doc: code,
-          extensions: extensionList,
-        });
-
         const parentDiv = wrapper.current;
         const existingPlaceholder = parentDiv.querySelector(
           ".sp-pre-placeholder"
@@ -299,7 +294,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         }
 
         const view = new EditorView({
-          state: startState,
+          doc: code,
+          extensions: extensionList,
           parent: parentDiv,
           dispatch: (tr): void => {
             view.update([tr]);

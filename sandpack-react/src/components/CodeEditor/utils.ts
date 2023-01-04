@@ -119,21 +119,26 @@ export const getSyntaxHighlight = (theme: SandpackTheme): HighlightStyle =>
       class: classNameToken("static"),
     },
     {
-      tag: tags.standard(tags.tagName),
-      class: classNameToken("tag"),
-    },
-    {
       tag: tags.variableName,
       class: classNameToken("plain"),
     },
     {
-      // Highlight function definition differently (eg: functional component def in React)
       tag: [
-        tags.function(tags.variableName),
-        tags.definition(tags.function(tags.variableName)),
+        // "Custom tags", meaning React component
         tags.tagName,
+
+        // Highlight function definition differently (eg: functional component def in React)
+        tags.definition(tags.function(tags.variableName)),
+
+        // Highlight function call
+        tags.function(tags.variableName),
       ],
       class: classNameToken("definition"),
+    },
+    {
+      // Standard tags, e.g <h1 />
+      tag: tags.standard(tags.tagName),
+      class: classNameToken("tag"),
     },
     {
       tag: tags.propertyName,
