@@ -33,7 +33,6 @@ export const layoutClassName = css({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: "0",
-    minWidth: "350px",
     height: "$layout$height",
 
     "@media print": {

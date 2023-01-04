@@ -77,8 +77,11 @@ export const Sandpack: SandpackInternal = (props) => {
    * Cannot use width percentages as it doesn't work with
    * the automatic layout break when the component is under 700px
    */
-  const editorPart = props.options?.editorWidthPercentage || 50;
+  const [editorPart, setEditorPart] = React.useState(
+    props.options?.editorWidthPercentage || 50
+  );
   const previewPart = 100 - editorPart;
+  const drag = React.useRef(false);
 
   const hasRightColumn =
     props.options?.showConsole || props.options?.showConsoleButton;
@@ -88,14 +91,14 @@ export const Sandpack: SandpackInternal = (props) => {
     flexGrow: previewPart,
     flexShrink: previewPart,
     flexBasis: 0,
-    minWidth: 700 * (previewPart / (previewPart + editorPart)),
+    // minWidth: 700 * (previewPart / (previewPart + editorPart)),
     gap: consoleVisibility ? 1 : 0,
     height: props.options?.editorHeight, // use the original editor height
   };
 
   const rightColumnProps = React.useMemo(
     () => (hasRightColumn ? { style: rightColumnStyle } : {}),
-    [hasRightColumn]
+    [hasRightColumn, previewPart]
   );
 
   /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
@@ -113,6 +116,30 @@ export const Sandpack: SandpackInternal = (props) => {
     setConsoleVisibility(props.options?.showConsole ?? false);
   }, [props.options?.showConsole]);
 
+  const onMove = (event) => {
+    if (!drag.current) return;
+
+    const pointerOffset = event.clientX;
+    const container = document
+      .querySelector(".sp-wrapper")
+      ?.getBoundingClientRect();
+    const offset = ((pointerOffset - container.left) / container.width) * 100;
+    const boundaries = Math.min(Math.max(offset, 30), 70);
+
+    setEditorPart(boundaries);
+  };
+
+  React.useEffect(() => {
+    document.body.addEventListener("mousemove", onMove);
+    document.body.addEventListener("mouseup", () => {
+      drag.current = false;
+    });
+
+    return () => {
+      document.body.removeEventListener("mousemove", onMove);
+    };
+  }, []);
+
   return (
     <SandpackProvider
       customSetup={props.customSetup}
@@ -129,6 +156,22 @@ export const Sandpack: SandpackInternal = (props) => {
             flexGrow: editorPart,
             flexShrink: editorPart,
             minWidth: 700 * (editorPart / (previewPart + editorPart)),
+          }}
+        />
+
+        <div
+          className="handler"
+          onMouseDown={() => (drag.current = true)}
+          onMouseUp={() => (drag.current = false)}
+          style={{
+            position: "absolute",
+            left: `calc(${editorPart}% - 10px)`,
+            top: 0,
+            bottom: 0,
+            width: 20,
+            // background: "red",
+            zIndex: 9999,
+            cursor: "ew-resize",
           }}
         />
 
