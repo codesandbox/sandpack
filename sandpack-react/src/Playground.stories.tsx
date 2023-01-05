@@ -32,6 +32,10 @@ export const Preset = (): JSX.Element => {
           }}
           template="react"
         />
+
+        <br />
+
+        <Sandpack template="react" />
       </div>
 
       <div style={{ width: 300, margin: "auto", padding: "4em 0" }}>

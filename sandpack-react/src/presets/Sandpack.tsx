@@ -81,12 +81,13 @@ export const Sandpack: SandpackInternal = (props) => {
     props.options?.editorWidthPercentage || 50
   );
   const previewPart = 100 - editorPart;
+
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   const dragEventTargetRef = React.useRef<any>(null);
 
   const hasRightColumn =
     props.options?.showConsole || props.options?.showConsoleButton;
   const RightColumn = hasRightColumn ? SandpackStack : React.Fragment;
-
   const rightColumnStyle = {
     flexGrow: previewPart,
     flexShrink: previewPart,
@@ -94,11 +95,6 @@ export const Sandpack: SandpackInternal = (props) => {
     gap: consoleVisibility ? 1 : 0,
     height: props.options?.editorHeight, // use the original editor height
   };
-
-  const rightColumnProps = React.useMemo(
-    () => (hasRightColumn ? { style: rightColumnStyle } : {}),
-    [hasRightColumn, previewPart]
-  );
 
   /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
   const templateFiles = SANDBOX_TEMPLATES[props.template!] ?? {};
@@ -185,25 +181,19 @@ export const Sandpack: SandpackInternal = (props) => {
         />
 
         {/* @ts-ignore */}
-        <RightColumn {...rightColumnProps}>
+        <RightColumn style={rightColumnStyle}>
           {mode === "preview" && (
             <SandpackPreview
               actionsChildren={actionsChildren}
               showNavigator={props.options?.showNavigator}
               showRefreshButton={props.options?.showRefreshButton}
-              style={{
-                ...(hasRightColumn ? {} : rightColumnStyle),
-                flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
-              }}
+              style={hasRightColumn ? { flex: 1 } : rightColumnStyle}
             />
           )}
           {mode === "tests" && (
             <SandpackTests
               actionsChildren={actionsChildren}
-              style={{
-                ...(hasRightColumn ? {} : rightColumnStyle),
-                flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
-              }}
+              style={hasRightColumn ? { flex: 1 } : rightColumnStyle}
             />
           )}
 
