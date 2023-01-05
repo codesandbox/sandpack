@@ -25,6 +25,14 @@ export const Preset = (): JSX.Element => {
     <>
       <div style={{ maxWidth: 820, margin: "auto", padding: "4em 0" }}>
         <Sandpack
+          files={{
+            "App.js": `
+export default function App() {
+  return <h1 onClick={() => console.log("Hello world")}>Hello World</h1>
+}
+
+          `,
+          }}
           options={{
             showLineNumbers: true,
             showConsole: true,

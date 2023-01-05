@@ -310,7 +310,6 @@ const buttonCounter = css({
 });
 
 const consoleWrapper = css({
-  // transition: "flex $transitions$default",
   width: "100%",
   overflow: "hidden",
 });
