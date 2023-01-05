@@ -91,7 +91,6 @@ export const Sandpack: SandpackInternal = (props) => {
     flexGrow: previewPart,
     flexShrink: previewPart,
     flexBasis: 0,
-    // minWidth: 700 * (previewPart / (previewPart + editorPart)),
     gap: consoleVisibility ? 1 : 0,
     height: props.options?.editorHeight, // use the original editor height
   };
@@ -116,7 +115,7 @@ export const Sandpack: SandpackInternal = (props) => {
     setConsoleVisibility(props.options?.showConsole ?? false);
   }, [props.options?.showConsole]);
 
-  const onMove = (event) => {
+  const onMove = (event: MouseEvent): void => {
     if (!drag.current) return;
 
     const pointerOffset = event.clientX;
@@ -135,7 +134,7 @@ export const Sandpack: SandpackInternal = (props) => {
       drag.current = false;
     });
 
-    return () => {
+    return (): void => {
       document.body.removeEventListener("mousemove", onMove);
     };
   }, []);
@@ -155,24 +154,18 @@ export const Sandpack: SandpackInternal = (props) => {
             height: props.options?.editorHeight, // use the original editor height
             flexGrow: editorPart,
             flexShrink: editorPart,
-            minWidth: 700 * (editorPart / (previewPart + editorPart)),
           }}
         />
 
         <div
-          className="handler"
-          onMouseDown={() => (drag.current = true)}
-          onMouseUp={() => (drag.current = false)}
-          style={{
-            position: "absolute",
-            left: `calc(${editorPart}% - 10px)`,
-            top: 0,
-            bottom: 0,
-            width: 20,
-            // background: "red",
-            zIndex: 9999,
-            cursor: "ew-resize",
+          className={classNames(handler)}
+          onMouseDown={(): void => {
+            drag.current = true;
           }}
+          onMouseUp={(): void => {
+            drag.current = false;
+          }}
+          style={{ left: `calc(${editorPart}% - 10px)` }}
         />
 
         {/* @ts-ignore */}
@@ -236,6 +229,16 @@ const ConsoleCounterButton: React.FC<{
     </button>
   );
 };
+
+const handler = css({
+  position: "absolute",
+  top: 0,
+  bottom: 0,
+  width: 20,
+  // background: "red",
+  zIndex: 9999,
+  cursor: "ew-resize",
+});
 
 const buttonCounter = css({
   position: "relative",
