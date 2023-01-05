@@ -81,7 +81,7 @@ export const Sandpack: SandpackInternal = (props) => {
     props.options?.editorWidthPercentage || 50
   );
   const previewPart = 100 - editorPart;
-  const drag = React.useRef(false);
+  const dragEventTargetRef = React.useRef<any>(null);
 
   const hasRightColumn =
     props.options?.showConsole || props.options?.showConsoleButton;
@@ -116,26 +116,43 @@ export const Sandpack: SandpackInternal = (props) => {
   }, [props.options?.showConsole]);
 
   const onMove = (event: MouseEvent): void => {
-    if (!drag.current) return;
+    if (!dragEventTargetRef.current) return;
 
-    const pointerOffset = event.clientX;
-    const container = document
-      .querySelector(".sp-wrapper")
-      ?.getBoundingClientRect();
-    const offset = ((pointerOffset - container.left) / container.width) * 100;
-    const boundaries = Math.min(Math.max(offset, 30), 70);
+    const container = dragEventTargetRef.current.parentElement;
+
+    if (!container) return;
+
+    const { left, width } = container.getBoundingClientRect();
+
+    const offset = ((event.clientX - left) / width) * 100;
+    const boundaries = Math.min(Math.max(offset, 25), 75);
 
     setEditorPart(boundaries);
+
+    container.querySelectorAll("iframe").forEach((frame: HTMLIFrameElement) => {
+      frame.style.pointerEvents = "none";
+    });
+  };
+
+  const stopDragging = (): void => {
+    const container = dragEventTargetRef.current?.parentElement;
+
+    if (!container) return;
+
+    container.querySelectorAll("iframe").forEach((frame: HTMLIFrameElement) => {
+      frame.style.pointerEvents = "";
+    });
+
+    dragEventTargetRef.current = null;
   };
 
   React.useEffect(() => {
     document.body.addEventListener("mousemove", onMove);
-    document.body.addEventListener("mouseup", () => {
-      drag.current = false;
-    });
+    document.body.addEventListener("mouseup", stopDragging);
 
     return (): void => {
       document.body.removeEventListener("mousemove", onMove);
+      document.body.removeEventListener("mouseup", stopDragging);
     };
   }, []);
 
@@ -154,18 +171,17 @@ export const Sandpack: SandpackInternal = (props) => {
             height: props.options?.editorHeight, // use the original editor height
             flexGrow: editorPart,
             flexShrink: editorPart,
+            flexBasis: 0,
+            overflow: "hidden",
           }}
         />
 
         <div
           className={classNames(handler)}
-          onMouseDown={(): void => {
-            drag.current = true;
+          onMouseDown={(event): void => {
+            dragEventTargetRef.current = event.target;
           }}
-          onMouseUp={(): void => {
-            drag.current = false;
-          }}
-          style={{ left: `calc(${editorPart}% - 10px)` }}
+          style={{ left: `${editorPart}%` }}
         />
 
         {/* @ts-ignore */}
@@ -176,7 +192,7 @@ export const Sandpack: SandpackInternal = (props) => {
               showNavigator={props.options?.showNavigator}
               showRefreshButton={props.options?.showRefreshButton}
               style={{
-                ...rightColumnStyle,
+                ...(hasRightColumn ? {} : rightColumnStyle),
                 flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
               }}
             />
@@ -185,7 +201,7 @@ export const Sandpack: SandpackInternal = (props) => {
             <SandpackTests
               actionsChildren={actionsChildren}
               style={{
-                ...rightColumnStyle,
+                ...(hasRightColumn ? {} : rightColumnStyle),
                 flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
               }}
             />
@@ -234,10 +250,13 @@ const handler = css({
   position: "absolute",
   top: 0,
   bottom: 0,
-  width: 20,
-  // background: "red",
-  zIndex: 9999,
+  width: 4,
+  zIndex: "$top",
   cursor: "ew-resize",
+
+  "@media screen and (max-width: 768px)": {
+    display: "none",
+  },
 });
 
 const buttonCounter = css({

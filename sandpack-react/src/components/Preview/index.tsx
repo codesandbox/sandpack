@@ -160,7 +160,6 @@ export const SandpackPreview = React.forwardRef<
               // set height based on the content only in auto mode
               // and when the computed height was returned by the bundler
               height: iframeComputedHeight ? iframeComputedHeight : undefined,
-              pointerEvents: "none",
             }}
             title="Sandpack Preview"
           />

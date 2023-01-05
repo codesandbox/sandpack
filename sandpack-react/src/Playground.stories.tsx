@@ -23,7 +23,7 @@ export default {
 export const Preset = (): JSX.Element => {
   return (
     <>
-      <div style={{ width: 820, margin: "auto", padding: "4em 0" }}>
+      <div style={{ maxWidth: 820, margin: "auto", padding: "4em 0" }}>
         <Sandpack
           options={{
             showLineNumbers: true,
