@@ -106,24 +106,23 @@ export const Sandpack: SandpackInternal = ({
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const dragEventTargetRef = React.useRef<any>(null);
 
-  const [editorWidth, setEditorWidth] = React.useState(
+  const [horizontalSize, setHorizontalSize] = React.useState(
     options.editorWidthPercentage
   );
-  const previewWidth = 100 - editorWidth;
-  const [topPanelPreviewHeight, setTopPanelPreviewHeight] = React.useState(70);
+  const [verticalSize, setVerticalSize] = React.useState(70);
 
   const RightColumn = hasRightColumn ? SandpackStack : React.Fragment;
   const rightColumnStyle = {
-    flexGrow: previewWidth,
-    flexShrink: previewWidth,
+    flexGrow: 100 - horizontalSize,
+    flexShrink: 100 - horizontalSize,
     flexBasis: 0,
     gap: consoleVisibility ? 1 : 0,
     height: options.editorHeight, // use the original editor height
   };
   const topRowStyle = hasRightColumn
     ? {
-        flexGrow: topPanelPreviewHeight,
-        flexShrink: topPanelPreviewHeight,
+        flexGrow: verticalSize,
+        flexShrink: verticalSize,
         flexBasis: 0,
         overflow: "hidden",
       }
@@ -132,36 +131,35 @@ export const Sandpack: SandpackInternal = ({
   const onDragMove = (event: MouseEvent): void => {
     if (!dragEventTargetRef.current) return;
 
-    const container = dragEventTargetRef.current.parentElement;
-    const direction = dragEventTargetRef.current.dataset.direction;
+    const container = dragEventTargetRef.current
+      .parentElement as HTMLDivElement;
+    const direction = dragEventTargetRef.current.dataset.direction as
+      | "horizontal"
+      | "vertical";
     const isHorizontal = direction === "horizontal";
 
-    if (!container) return;
-
     const { left, top, height, width } = container.getBoundingClientRect();
-
     const offset = isHorizontal
       ? ((event.clientX - left) / width) * 100
       : ((event.clientY - top) / height) * 100;
     const boundaries = Math.min(Math.max(offset, 25), 75);
 
     if (isHorizontal) {
-      setEditorWidth(boundaries);
+      setHorizontalSize(boundaries);
     } else {
-      setTopPanelPreviewHeight(boundaries);
+      setVerticalSize(boundaries);
     }
 
-    container.querySelectorAll("iframe").forEach((frame: HTMLIFrameElement) => {
+    container.querySelectorAll("iframe").forEach((frame) => {
       frame.style.pointerEvents = "none";
     });
   };
 
   const stopDragging = (): void => {
-    const container = dragEventTargetRef.current?.parentElement;
+    const container = dragEventTargetRef.current
+      ?.parentElement as HTMLDivElement;
 
-    if (!container) return;
-
-    container.querySelectorAll("iframe").forEach((frame: HTMLIFrameElement) => {
+    container.querySelectorAll("iframe").forEach((frame) => {
       frame.style.pointerEvents = "";
     });
 
@@ -196,8 +194,8 @@ export const Sandpack: SandpackInternal = ({
           {...codeEditorOptions}
           style={{
             height: options.editorHeight, // use the original editor height
-            flexGrow: editorWidth,
-            flexShrink: editorWidth,
+            flexGrow: horizontalSize,
+            flexShrink: horizontalSize,
             flexBasis: 0,
             overflow: "hidden",
           }}
@@ -209,7 +207,7 @@ export const Sandpack: SandpackInternal = ({
           onMouseDown={(event): void => {
             dragEventTargetRef.current = event.target;
           }}
-          style={{ left: `calc(${editorWidth}% - 5px)` }}
+          style={{ left: `calc(${horizontalSize}% - 5px)` }}
         />
 
         {/* @ts-ignore */}
@@ -241,16 +239,14 @@ export const Sandpack: SandpackInternal = ({
                 onMouseDown={(event): void => {
                   dragEventTargetRef.current = event.target;
                 }}
-                style={{ top: `calc(${topPanelPreviewHeight}% - 5px)` }}
+                style={{ top: `calc(${verticalSize}% - 5px)` }}
               />
 
               <div
                 className={consoleWrapper.toString()}
                 style={{
-                  flexGrow: consoleVisibility ? 100 - topPanelPreviewHeight : 0,
-                  flexShrink: consoleVisibility
-                    ? 100 - topPanelPreviewHeight
-                    : 0,
+                  flexGrow: consoleVisibility ? 100 - verticalSize : 0,
+                  flexShrink: consoleVisibility ? 100 - verticalSize : 0,
                   flexBasis: 0,
                 }}
               >
