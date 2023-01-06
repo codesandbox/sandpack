@@ -38,7 +38,7 @@ export const Sandpack: SandpackInternal = ({
 }) => {
   // fallback values
   options ??= {};
-  options.resizablePanel ??= true;
+  options.resizablePanels ??= true;
   options.editorWidthPercentage ??= 50;
   options.showConsole ??= false;
 

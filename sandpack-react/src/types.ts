@@ -108,7 +108,7 @@ export interface SandpackOptions {
   showConsole?: boolean;
   closableTabs?: boolean;
   wrapContent?: boolean;
-  resizablePanel?: boolean;
+  resizablePanels?: boolean;
 
   codeEditor?: SandpackCodeOptions;
 
@@ -478,7 +478,7 @@ interface SandpackInternalProps<
     showConsole?: boolean;
     closableTabs?: boolean;
     wrapContent?: boolean;
-    resizablePanel?: boolean;
+    resizablePanels?: boolean;
 
     codeEditor?: SandpackCodeOptions;
 
