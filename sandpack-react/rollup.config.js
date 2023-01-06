@@ -12,6 +12,7 @@ const configBase = {
       exports: "named",
       format: "cjs",
       inlineDynamicImports: true,
+      interop: "auto",
     },
     {
       file: pkg.module,
