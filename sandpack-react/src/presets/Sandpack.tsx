@@ -28,20 +28,33 @@ import { classNames } from "../utils/classNames";
 /**
  * @hidden
  */
-export const Sandpack: SandpackInternal = (props) => {
+export const Sandpack: SandpackInternal = ({
+  options,
+  template,
+  customSetup,
+  files,
+  theme,
+  ...props
+}) => {
+  // fallback values
+  options ??= {};
+  options.resizablePanel ??= true;
+  options.editorWidthPercentage ??= 50;
+  options.showConsole ??= false;
+
   const codeEditorOptions: CodeEditorProps = {
-    showTabs: props.options?.showTabs,
-    showLineNumbers: props.options?.showLineNumbers,
-    showInlineErrors: props.options?.showInlineErrors,
-    wrapContent: props.options?.wrapContent,
-    closableTabs: props.options?.closableTabs,
-    initMode: props.options?.initMode,
-    extensions: props.options?.codeEditor?.extensions,
-    extensionsKeymap: props.options?.codeEditor?.extensionsKeymap,
-    readOnly: props.options?.readOnly,
-    showReadOnly: props.options?.showReadOnly,
-    id: props.options?.id,
-    additionalLanguages: props.options?.codeEditor?.additionalLanguages,
+    showTabs: options.showTabs,
+    showLineNumbers: options.showLineNumbers,
+    showInlineErrors: options.showInlineErrors,
+    wrapContent: options.wrapContent,
+    closableTabs: options.closableTabs,
+    initMode: options.initMode,
+    extensions: options.codeEditor?.extensions,
+    extensionsKeymap: options.codeEditor?.extensionsKeymap,
+    readOnly: options.readOnly,
+    showReadOnly: options.showReadOnly,
+    id: options.id,
+    additionalLanguages: options.codeEditor?.additionalLanguages,
   };
 
   const providerOptions: SandpackInternalOptions<
@@ -51,37 +64,36 @@ export const Sandpack: SandpackInternal = (props) => {
     /**
      * TS-why: Type 'string | number | symbol' is not assignable to type 'string'
      */
-    activeFile: props.options?.activeFile as unknown as string,
-    visibleFiles: props.options?.visibleFiles as unknown as string[],
-    recompileMode: props.options?.recompileMode,
-    recompileDelay: props.options?.recompileDelay,
-    autorun: props.options?.autorun,
-    bundlerURL: props.options?.bundlerURL,
-    startRoute: props.options?.startRoute,
-    skipEval: props.options?.skipEval,
-    fileResolver: props.options?.fileResolver,
-    initMode: props.options?.initMode,
-    initModeObserverOptions: props.options?.initModeObserverOptions,
-    externalResources: props.options?.externalResources,
-    logLevel: props.options?.logLevel,
-    classes: props.options?.classes,
+    activeFile: options.activeFile as unknown as string,
+    visibleFiles: options.visibleFiles as unknown as string[],
+    recompileMode: options.recompileMode,
+    recompileDelay: options.recompileDelay,
+    autorun: options.autorun,
+    bundlerURL: options.bundlerURL,
+    startRoute: options.startRoute,
+    skipEval: options.skipEval,
+    fileResolver: options.fileResolver,
+    initMode: options.initMode,
+    initModeObserverOptions: options.initModeObserverOptions,
+    externalResources: options.externalResources,
+    logLevel: options.logLevel,
+    classes: options.classes,
   };
 
   /**
    * Console
    */
   const [consoleVisibility, setConsoleVisibility] = React.useState(
-    props.options?.showConsole ?? false
+    options.showConsole
   );
   const [counter, setCounter] = React.useState(0);
-  const hasRightColumn =
-    props.options?.showConsole || props.options?.showConsoleButton;
+  const hasRightColumn = options.showConsole || options.showConsoleButton;
 
   /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-  const templateFiles = SANDBOX_TEMPLATES[props.template!] ?? {};
+  const templateFiles = SANDBOX_TEMPLATES[template!] ?? {};
   const mode = "mode" in templateFiles ? templateFiles.mode : "preview";
 
-  const actionsChildren = props.options?.showConsoleButton ? (
+  const actionsChildren = options.showConsoleButton ? (
     <ConsoleCounterButton
       counter={counter}
       onClick={(): void => setConsoleVisibility((prev) => !prev)}
@@ -95,7 +107,7 @@ export const Sandpack: SandpackInternal = (props) => {
   const dragEventTargetRef = React.useRef<any>(null);
 
   const [editorWidth, setEditorWidth] = React.useState(
-    props.options?.editorWidthPercentage || 50
+    options.editorWidthPercentage
   );
   const previewWidth = 100 - editorWidth;
   const [topPanelPreviewHeight, setTopPanelPreviewHeight] = React.useState(70);
@@ -106,7 +118,7 @@ export const Sandpack: SandpackInternal = (props) => {
     flexShrink: previewWidth,
     flexBasis: 0,
     gap: consoleVisibility ? 1 : 0,
-    height: props.options?.editorHeight, // use the original editor height
+    height: options.editorHeight, // use the original editor height
   };
   const topRowStyle = hasRightColumn
     ? {
@@ -115,12 +127,12 @@ export const Sandpack: SandpackInternal = (props) => {
       }
     : rightColumnStyle;
   const bottomRowStyle = {
-    flex: consoleVisibility
-      ? `${100 - topPanelPreviewHeight} ${100 - topPanelPreviewHeight} 0`
-      : 0,
+    flexGrow: 100 - topPanelPreviewHeight,
+    flexShrink: 100 - topPanelPreviewHeight,
+    flexBasis: 0,
   };
 
-  const onMove = (event: MouseEvent): void => {
+  const onDragMove = (event: MouseEvent): void => {
     if (!dragEventTargetRef.current) return;
 
     const container = dragEventTargetRef.current.parentElement;
@@ -160,32 +172,33 @@ export const Sandpack: SandpackInternal = (props) => {
   };
 
   React.useEffect(() => {
-    document.body.addEventListener("mousemove", onMove);
+    document.body.addEventListener("mousemove", onDragMove);
     document.body.addEventListener("mouseup", stopDragging);
 
     return (): void => {
-      document.body.removeEventListener("mousemove", onMove);
+      document.body.removeEventListener("mousemove", onDragMove);
       document.body.removeEventListener("mouseup", stopDragging);
     };
   }, []);
 
   React.useEffect(() => {
-    setConsoleVisibility(props.options?.showConsole ?? false);
-  }, [props.options?.showConsole]);
+    setConsoleVisibility(options?.showConsole ?? false);
+  }, [options.showConsole]);
 
   return (
     <SandpackProvider
-      customSetup={props.customSetup}
-      files={props.files as TemplateFiles<SandpackPredefinedTemplate>}
+      customSetup={customSetup}
+      files={files as TemplateFiles<SandpackPredefinedTemplate>}
       options={providerOptions}
-      template={props.template}
-      theme={props.theme}
+      template={template}
+      theme={theme}
+      {...props}
     >
       <SandpackLayout>
         <SandpackCodeEditor
           {...codeEditorOptions}
           style={{
-            height: props.options?.editorHeight, // use the original editor height
+            height: options.editorHeight, // use the original editor height
             flexGrow: editorWidth,
             flexShrink: editorWidth,
             flexBasis: 0,
@@ -199,7 +212,7 @@ export const Sandpack: SandpackInternal = (props) => {
           onMouseDown={(event): void => {
             dragEventTargetRef.current = event.target;
           }}
-          style={{ left: `${editorWidth}%` }}
+          style={{ left: `calc(${editorWidth}% - 5px)` }}
         />
 
         {/* @ts-ignore */}
@@ -207,8 +220,8 @@ export const Sandpack: SandpackInternal = (props) => {
           {mode === "preview" && (
             <SandpackPreview
               actionsChildren={actionsChildren}
-              showNavigator={props.options?.showNavigator}
-              showRefreshButton={props.options?.showRefreshButton}
+              showNavigator={options.showNavigator}
+              showRefreshButton={options.showRefreshButton}
               style={topRowStyle}
             />
           )}
@@ -220,7 +233,7 @@ export const Sandpack: SandpackInternal = (props) => {
             />
           )}
 
-          {(props.options?.showConsoleButton || consoleVisibility) && (
+          {(options.showConsoleButton || consoleVisibility) && (
             <>
               <div
                 className={dragHandler({ direction: "vertical" })}
@@ -228,7 +241,7 @@ export const Sandpack: SandpackInternal = (props) => {
                 onMouseDown={(event): void => {
                   dragEventTargetRef.current = event.target;
                 }}
-                style={{ top: `${topPanelPreviewHeight}%` }}
+                style={{ top: `calc(${topPanelPreviewHeight}% - 5px)` }}
               />
 
               <div className={consoleWrapper.toString()} style={bottomRowStyle}>
@@ -274,13 +287,13 @@ const dragHandler = css({
       vertical: {
         right: 0,
         left: 0,
-        height: 4,
+        height: 10,
         cursor: "ns-resize",
       },
       horizontal: {
         top: 0,
         bottom: 0,
-        width: 4,
+        width: 10,
         cursor: "ew-resize",
       },
     },
