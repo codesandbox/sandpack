@@ -26,9 +26,10 @@ export const Preset = (): JSX.Element => {
       <div style={{ maxWidth: 820, margin: "auto", padding: "4em 0" }}>
         <Sandpack
           files={{
-            "App.js": `
-export default function App() {
-  return <h1 onClick={() => console.log("Hello world")}>Hello World</h1>
+            "App.js": `export default function App() {
+  return <h1 onClick={() => {
+    console.log("Hello world");
+  }}>Hello World</h1>
 }
 
           `,
@@ -43,19 +44,25 @@ export default function App() {
 
         <br />
 
-        <Sandpack template="react" />
-      </div>
+        <Sandpack
+          options={{
+            showLineNumbers: true,
+            showConsole: false,
+            showConsoleButton: false,
+          }}
+          template="vue"
+        />
 
-      {/* <div style={{ width: 300, margin: "auto", padding: "4em 0" }}> */}
-      <Sandpack
-        options={{
-          showLineNumbers: true,
-          showConsole: true,
-          showConsoleButton: true,
-        }}
-        template="react"
-      />
-      {/* </div> */}
+        <br />
+
+        <Sandpack
+          options={{
+            showLineNumbers: true,
+            showConsole: false,
+            showConsoleButton: true,
+          }}
+        />
+      </div>
     </>
   );
 };

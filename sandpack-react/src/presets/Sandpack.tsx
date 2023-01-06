@@ -202,7 +202,10 @@ export const Sandpack: SandpackInternal = ({
         />
 
         <div
-          className={dragHandler({ direction: "horizontal" })}
+          className={classNames(
+            dragHandler({ direction: "horizontal" }),
+            THEME_PREFIX + "-resize-handler"
+          )}
           data-direction="horizontal"
           onMouseDown={(event): void => {
             dragEventTargetRef.current = event.target;
@@ -233,17 +236,22 @@ export const Sandpack: SandpackInternal = ({
 
           {(options.showConsoleButton || consoleVisibility) && (
             <>
-              <div
-                className={dragHandler({ direction: "vertical" })}
-                data-direction="vertical"
-                onMouseDown={(event): void => {
-                  dragEventTargetRef.current = event.target;
-                }}
-                style={{ top: `calc(${verticalSize}% - 5px)` }}
-              />
+              {consoleVisibility && (
+                <div
+                  className={classNames(
+                    dragHandler({ direction: "vertical" }),
+                    THEME_PREFIX + "-resize-handler"
+                  )}
+                  data-direction="vertical"
+                  onMouseDown={(event): void => {
+                    dragEventTargetRef.current = event.target;
+                  }}
+                  style={{ top: `calc(${verticalSize}% - 5px)` }}
+                />
+              )}
 
               <div
-                className={consoleWrapper.toString()}
+                className={classNames(consoleWrapper)}
                 style={{
                   flexGrow: consoleVisibility ? 100 - verticalSize : 0,
                   flexShrink: consoleVisibility ? 100 - verticalSize : 0,
