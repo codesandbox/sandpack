@@ -137,12 +137,7 @@ experience by modifying the `recompileDelay` value or by setting the
 The `<Sandpack />` preset component has resizable columns and rows by default, allowing users to extend and shrink the component sizes. This makes it easier to play with the preview component and shows more code-editor content. However, this is an optional configuration, and you can easily disable it: 
 
 ```jsx
-<Sandpack
-  options={{
-    resizablePanels: false,
-  }}
-  template="react"
-/>
+<Sandpack options={{ resizablePanels: false }} />
 ```
 
 ---

@@ -167,6 +167,7 @@ export const Sandpack: SandpackInternal = ({
   };
 
   React.useEffect(() => {
+    if (!options?.resizablePanels) return;
     document.body.addEventListener("mousemove", onDragMove);
     document.body.addEventListener("mouseup", stopDragging);
 
@@ -174,7 +175,7 @@ export const Sandpack: SandpackInternal = ({
       document.body.removeEventListener("mousemove", onDragMove);
       document.body.removeEventListener("mouseup", stopDragging);
     };
-  }, []);
+  }, [options]);
 
   React.useEffect(() => {
     setConsoleVisibility(options?.showConsole ?? false);
@@ -201,17 +202,19 @@ export const Sandpack: SandpackInternal = ({
           }}
         />
 
-        <div
-          className={classNames(
-            dragHandler({ direction: "horizontal" }),
-            THEME_PREFIX + "-resize-handler"
-          )}
-          data-direction="horizontal"
-          onMouseDown={(event): void => {
-            dragEventTargetRef.current = event.target;
-          }}
-          style={{ left: `calc(${horizontalSize}% - 5px)` }}
-        />
+        {options.resizablePanels && (
+          <div
+            className={classNames(
+              dragHandler({ direction: "horizontal" }),
+              THEME_PREFIX + "-resize-handler"
+            )}
+            data-direction="horizontal"
+            onMouseDown={(event): void => {
+              dragEventTargetRef.current = event.target;
+            }}
+            style={{ left: `calc(${horizontalSize}% - 5px)` }}
+          />
+        )}
 
         {/* @ts-ignore */}
         <RightColumn
@@ -236,7 +239,7 @@ export const Sandpack: SandpackInternal = ({
 
           {(options.showConsoleButton || consoleVisibility) && (
             <>
-              {consoleVisibility && (
+              {options.resizablePanels && consoleVisibility && (
                 <div
                   className={classNames(
                     dragHandler({ direction: "vertical" }),

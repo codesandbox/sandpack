@@ -38,6 +38,7 @@ export const Preset = (): JSX.Element => {
             showLineNumbers: true,
             showConsole: true,
             showConsoleButton: true,
+            resizablePanels: false,
           }}
           template="react"
         />
