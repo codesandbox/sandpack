@@ -10,7 +10,7 @@ import { SandpackTests } from "../components/Tests";
 import { SandpackLayout } from "../components/common/Layout";
 import { ConsoleIcon } from "../components/icons";
 import { SandpackProvider } from "../contexts/sandpackContext";
-import { css } from "../styles";
+import { css, THEME_PREFIX } from "../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
@@ -122,15 +122,12 @@ export const Sandpack: SandpackInternal = ({
   };
   const topRowStyle = hasRightColumn
     ? {
+        flexGrow: topPanelPreviewHeight,
+        flexShrink: topPanelPreviewHeight,
+        flexBasis: 0,
         overflow: "hidden",
-        flex: `${topPanelPreviewHeight} ${topPanelPreviewHeight} 0`,
       }
     : rightColumnStyle;
-  const bottomRowStyle = {
-    flexGrow: 100 - topPanelPreviewHeight,
-    flexShrink: 100 - topPanelPreviewHeight,
-    flexBasis: 0,
-  };
 
   const onDragMove = (event: MouseEvent): void => {
     if (!dragEventTargetRef.current) return;
@@ -216,7 +213,10 @@ export const Sandpack: SandpackInternal = ({
         />
 
         {/* @ts-ignore */}
-        <RightColumn style={rightColumnStyle}>
+        <RightColumn
+          className={THEME_PREFIX + "-preset-column"}
+          style={rightColumnStyle}
+        >
           {mode === "preview" && (
             <SandpackPreview
               actionsChildren={actionsChildren}
@@ -244,7 +244,16 @@ export const Sandpack: SandpackInternal = ({
                 style={{ top: `calc(${topPanelPreviewHeight}% - 5px)` }}
               />
 
-              <div className={consoleWrapper.toString()} style={bottomRowStyle}>
+              <div
+                className={consoleWrapper.toString()}
+                style={{
+                  flexGrow: consoleVisibility ? 100 - topPanelPreviewHeight : 0,
+                  flexShrink: consoleVisibility
+                    ? 100 - topPanelPreviewHeight
+                    : 0,
+                  flexBasis: 0,
+                }}
+              >
                 <SandpackConsole
                   onLogsChange={(logs): void => setCounter(logs.length)}
                   showHeader={false}

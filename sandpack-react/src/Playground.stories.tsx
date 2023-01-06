@@ -46,16 +46,16 @@ export default function App() {
         <Sandpack template="react" />
       </div>
 
-      <div style={{ width: 300, margin: "auto", padding: "4em 0" }}>
-        <Sandpack
-          options={{
-            showLineNumbers: true,
-            showConsole: true,
-            showConsoleButton: true,
-          }}
-          template="react"
-        />
-      </div>
+      {/* <div style={{ width: 300, margin: "auto", padding: "4em 0" }}> */}
+      <Sandpack
+        options={{
+          showLineNumbers: true,
+          showConsole: true,
+          showConsoleButton: true,
+        }}
+        template="react"
+      />
+      {/* </div> */}
     </>
   );
 };

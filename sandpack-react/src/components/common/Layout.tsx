@@ -41,10 +41,13 @@ export const layoutClassName = css({
     },
 
     "@media screen and (max-width: 768px)": {
-      height: "auto",
+      [`&:not(.${THEME_PREFIX}-preview, .${THEME_PREFIX}-editor, .${THEME_PREFIX}-preset-column)`]:
+        {
+          height: "calc($layout$height / 2)",
+        },
 
       /* triggers the layout break at the 768px breakpoint, not when the component is less then 700px */
-      minWidth: "100% !important;",
+      minWidth: "100%",
     },
   },
 
