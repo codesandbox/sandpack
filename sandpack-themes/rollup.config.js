@@ -24,10 +24,7 @@ const configBase = {
     typescript({ tsconfig: "./tsconfig.json" }),
     commonjs({ requireReturnsDefault: "preferred" }),
   ],
-  external: [
-    ...Object.keys(pkg.dependencies),
-    ...Object.keys(pkg.devDependencies),
-  ],
+  external: [...Object.keys(pkg.devDependencies)],
 };
 
 module.exports = configBase;
