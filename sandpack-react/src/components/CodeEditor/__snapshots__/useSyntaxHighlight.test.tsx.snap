@@ -3,7 +3,7 @@
 exports[`useSyntaxHighlight renders a css block 1`] = `
 Array [
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     body
   </span>,
@@ -47,7 +47,7 @@ Array [
 
 ",
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     h1
   </span>,
@@ -114,7 +114,7 @@ Array [
 
 ",
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     p
   </span>,
@@ -196,7 +196,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     html
   </span>,
@@ -225,7 +225,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     head
   </span>,
@@ -242,7 +242,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     meta
   </span>,
@@ -271,7 +271,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     meta
   </span>,
@@ -312,7 +312,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     meta
   </span>,
@@ -353,7 +353,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     title
   </span>,
@@ -369,7 +369,7 @@ Array [
     &lt;/
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     title
   </span>,
@@ -386,7 +386,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     link
   </span>,
@@ -427,7 +427,7 @@ Array [
     &lt;/
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     head
   </span>,
@@ -444,7 +444,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     body
   </span>,
@@ -461,7 +461,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     script
   </span>,
@@ -488,7 +488,7 @@ Array [
     &lt;/
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     script
   </span>,
@@ -505,7 +505,7 @@ Array [
     &lt;/
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     body
   </span>,
@@ -522,7 +522,7 @@ Array [
     &lt;/
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     html
   </span>,
@@ -1220,7 +1220,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     Greeting
   </span>,
@@ -1250,7 +1250,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     Greeting
   </span>,
@@ -1280,7 +1280,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     Greeting
   </span>,
@@ -1384,7 +1384,7 @@ Array [
   </span>,
   " + 10",
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     px
   </span>,
@@ -1607,7 +1607,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     template
   </span>,
@@ -1624,7 +1624,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     div
   </span>,
@@ -1653,7 +1653,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     label
   </span>,
@@ -1693,7 +1693,7 @@ Array [
     &lt;/
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     label
   </span>,
@@ -1710,7 +1710,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     p
   </span>,
@@ -1739,7 +1739,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     input
   </span>,
@@ -1816,7 +1816,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     span
   </span>,
@@ -1856,7 +1856,7 @@ Array [
     &lt;/
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     span
   </span>,
@@ -1873,7 +1873,7 @@ Array [
     &lt;/
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     p
   </span>,
@@ -1890,7 +1890,7 @@ Array [
     &lt;/
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     div
   </span>,
@@ -1907,7 +1907,7 @@ Array [
     &lt;/
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     template
   </span>,
@@ -1925,7 +1925,7 @@ Array [
     &lt;
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     script
   </span>,
@@ -1991,7 +1991,7 @@ Array [
     &lt;/
   </span>,
   <span
-    className="sp-syntax-tag"
+    className="sp-syntax-definition"
   >
     script
   </span>,

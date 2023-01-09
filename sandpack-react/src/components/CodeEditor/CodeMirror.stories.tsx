@@ -1,7 +1,7 @@
 import { python } from "@codemirror/lang-python";
-import { LanguageSupport } from "@codemirror/language";
+import { LanguageSupport, StreamLanguage } from "@codemirror/language";
 import { shell } from "@codemirror/legacy-modes/mode/shell";
-import { StreamLanguage } from "@codemirror/stream-parser";
+import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
@@ -10,81 +10,20 @@ import * as mocks from "./languages-mocks";
 
 import { CodeEditor } from "./index";
 
-export default {
-  title: "components/CodeMirror",
-  component: CodeEditor,
-};
+const stories = storiesOf("components/CodeMirror", module);
 
-export const HTML: React.FC = () => (
-  <SandpackProvider>
-    <CodeEditor
-      code={mocks.html}
-      fileType="html"
-      id="html"
-      initMode="immediate"
-      showLineNumbers={false}
-    />
-  </SandpackProvider>
-);
-
-export const Javascript: React.FC = () => (
-  <SandpackProvider>
-    <CodeEditor
-      code={mocks.js}
-      fileType="js"
-      id="js"
-      initMode="immediate"
-      showLineNumbers={false}
-    />
-  </SandpackProvider>
-);
-
-export const JSX: React.FC = () => (
-  <SandpackProvider>
-    <CodeEditor
-      code={mocks.jsx}
-      fileType="jsx"
-      id="jsx"
-      initMode="immediate"
-      showLineNumbers={false}
-    />
-  </SandpackProvider>
-);
-
-export const CSS: React.FC = () => (
-  <SandpackProvider>
-    <CodeEditor
-      code={mocks.css}
-      fileType="css"
-      id="css"
-      initMode="immediate"
-      showLineNumbers={false}
-    />
-  </SandpackProvider>
-);
-
-export const Less: React.FC = () => (
-  <SandpackProvider>
-    <CodeEditor
-      code={mocks.less}
-      fileType="less"
-      id="less"
-      initMode="immediate"
-      showLineNumbers={false}
-    />
-  </SandpackProvider>
-);
-
-export const Vue: React.FC = () => (
-  <SandpackProvider>
-    <CodeEditor
-      code={mocks.vue}
-      fileType="vue"
-      id="vue"
-      initMode="immediate"
-      showLineNumbers={false}
-    />
-  </SandpackProvider>
+Object.entries(mocks).forEach(([languageName, mockFile]) =>
+  stories.add(languageName, () => (
+    <SandpackProvider>
+      <CodeEditor
+        code={mockFile}
+        fileType={languageName}
+        id={languageName}
+        initMode="immediate"
+        showLineNumbers={false}
+      />
+    </SandpackProvider>
+  ))
 );
 
 export const CustomLanguageShell: React.FC = () => (
