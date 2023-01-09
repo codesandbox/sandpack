@@ -8,8 +8,7 @@ import * as React from "react";
 
 import type { SandpackState } from "../types";
 import { generateRandomId } from "../utils/stringUtils";
-
-import { useSandpack } from "./";
+import { useSandpack } from "./useSandpack";
 
 interface UseSandpackClient {
   sandpack: SandpackState;

@@ -330,14 +330,17 @@ function Library({ setTheme }) {
     <>
       <Title>Themes</Title>
       <PickerContainer>
-        {Object.entries(themeGallery).map(([label, payload]) => (
-          <PickerTheme
-            key={JSON.stringify(payload)}
-            colors={[payload.colors.accent, payload.colors.surface1]}
-            label={label}
-            onClick={() => setTheme(payload)}
-          />
-        ))}
+        {Object.entries(themeGallery).map(([label, payload]) => {
+          if (!payload.colors) return null;
+          return (
+            <PickerTheme
+              key={JSON.stringify(payload)}
+              colors={[payload.colors.accent, payload.colors.surface1]}
+              label={label}
+              onClick={() => setTheme(payload)}
+            />
+          );
+        })}
       </PickerContainer>
     </>
   );

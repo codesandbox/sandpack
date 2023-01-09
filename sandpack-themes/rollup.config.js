@@ -1,6 +1,5 @@
 const typescript = require("@rollup/plugin-typescript");
 const pkg = require("./package.json");
-const commonjs = require("@rollup/plugin-commonjs");
 
 const configBase = {
   input: "src/index.ts",
@@ -20,10 +19,7 @@ const configBase = {
     },
   ],
 
-  plugins: [
-    typescript({ tsconfig: "./tsconfig.json" }),
-    commonjs({ requireReturnsDefault: "preferred" }),
-  ],
+  plugins: [typescript({ tsconfig: "./tsconfig.json" })],
   external: [...Object.keys(pkg.devDependencies)],
 };
 

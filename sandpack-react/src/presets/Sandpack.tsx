@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as React from "react";
 
-import { SANDBOX_TEMPLATES, SandpackStack } from "..";
 import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackConsole } from "../components/Console";
@@ -24,6 +23,8 @@ import type {
   SandpackPredefinedTemplate,
 } from "../types";
 import { classNames } from "../utils/classNames";
+import { SandpackStack } from "../components/common";
+import { SANDBOX_TEMPLATES } from "../templates";
 
 /**
  * @hidden
