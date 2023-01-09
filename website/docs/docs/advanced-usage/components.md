@@ -111,7 +111,6 @@ There's nothing stopping you from rendering multiple previews in the same `Provi
 </SandpackProvider>
 
 ### Additional buttons
-
 The `<SandpackPreview />` component also allows you to add additional buttons to the preview area.
 
 ```jsx
@@ -121,8 +120,8 @@ The `<SandpackPreview />` component also allows you to add additional buttons to
       actionsChildren={
         <button
           className="sp-button"
-          style={{ padding: "var(--sp-space-1) var(--sp-space-3)" }}
-          onClick={() => window.alert("Bug reported!")}
+          style={{ padding: 'var(--sp-space-1) var(--sp-space-3)' }}
+          onClick={() => window.alert('Bug reported!')}
         >
           Report bug
         </button>
@@ -151,7 +150,6 @@ The `<SandpackPreview />` component also allows you to add additional buttons to
 </SandpackProvider>
 
 ### Additional content
-
 For advanced use cases, children of `<SandpackPreview>` are rendered at the end of the preview container.
 
 ### Getting the client instance from SandpackPreview
@@ -184,7 +182,7 @@ const SandpackPreviewClient: React.FC = () => {
 ```
 
 :::note
-Worth mentioning that the SandpackClient will not be instantly available. Sandpack has its own rules to decide when it'is the "right" moment to initialize an instance from a preview component. (Sandpack will take into account properties such as autorun, initMode, and the current client stack priority)
+Worth mentioning that the SandpackClient will not be instantly available. Sandpack has its own rules to decide when it'is the "right" moment to initialize an instance from a preview component. (Sandpack will take into account properties such as autorun, initMode, and the current client stack priority) 
 This means that it's expected that `getClient` function returns `undefined` which is a valid state.
 :::
 
@@ -319,7 +317,7 @@ import { shell } from "@codemirror/legacy-modes/mode/shell";
       },
     ]}
   />
-</SandpackProvider>;
+</SandpackProvider>
 ```
 
 ### Advanced usage
@@ -335,9 +333,9 @@ const App = () => {
   useEffect(() => {
     // Getting CodeMirror instance
     const cmInstance = codemirrorInstance.current.getCodemirror();
-
-    if (!cmInstance) return;
-
+    
+    if(!cmInstance) return 
+    
     // Current position
     const currentPosition = cmInstance.state.selection.ranges[0].to;
 
@@ -347,10 +345,10 @@ const App = () => {
       changes: {
         from: 0,
         to: cmInstance.state.doc.length,
-        insert: code,
-      },
+        insert: code
+      }
     });
-
+    
     cmInstance.update([trans]);
   }, []);
 
@@ -469,25 +467,24 @@ describe('jest-extended matchers are supported', () => {
 });
 `,
   }}
-
->   <SandpackLayout>
-
+>
+  <SandpackLayout>
     <SandpackCodeEditor showTabs />
     <SandpackTests verbose />
-
   </SandpackLayout>
 </SandpackProvider>
+
 
 ## Console
 
 `SandpackConsole` is a Sandpack devtool that allows printing the console logs from a Sandpack client. It is designed to be a light version of a browser console, which means that it's limited to a set of common use cases you may encounter when coding.
 
-Sandpack runs the console directly into the iframe. As a result, all console messages pass through the Sandpack protocol, where you can attach a listener to these messages in your own component or use the proper Sandpack React hook to consume them.
+Sandpack runs the console directly into the iframe. As a result, all console messages pass through the Sandpack protocol, where you can attach a listener to these messages in your own component or use the proper Sandpack React hook to consume them. 
 
-### Usage
+
+### Usage 
 
 There are three ways to print the logs:
-
 - [`<Sandpack options={{ showConsole: true }} />`](/api/react/interfaces/SandpackOptions#showconsole): shows a panel right after the `SandpackPreview`;
 - [`<SandpackConsole />`](/api/react/#sandpackconsole): standalone component to render the logs;
 - [`useSandpackConsole`](/api/react/#usesandpackconsole): React hook to consume the console logs from a Sandpack client;
@@ -495,18 +492,18 @@ There are three ways to print the logs:
 ```jsx
 import { Sandpack } from "@codesandbox/sandpack-react";
 
-<Sandpack
-  options={{
-    showConsole: true,
-    showConsoleButton: true,
+<Sandpack 
+  options={{ 
+    showConsole: true, 
+    showConsoleButton: true 
   }}
-/>;
+/>
 ```
 
-<Sandpack
-files={{
-"/src/index.js": `console.log("Hello Sandpack") \n document.getElementById("app").innerHTML = \`
-
+<Sandpack 
+  files={{ 
+    "/src/index.js": `console.log("Hello Sandpack")    \n
+document.getElementById("app").innerHTML = \`
 <h1>Check the logs 👇</h1>
 \`
 `
@@ -518,7 +515,6 @@ files={{
 ### Limitation
 
 Considering that `SandpackConsole` is meant to be a light version of a browser console, there are a few limitations in its implementation in order to keep it modular and light:
-
 - It needs to have a Sandpack client running (iframe) to execute the logs.
 - It only supports four types of consoles: `info`, `warning`, `error`, and `clear`.
 - It doesn't render nested objects due to recursive issues.
@@ -535,7 +531,7 @@ import {
   SandpackLayout,
   SandpackCodeEditor,
   SandpackCodeViewer,
-  SandpackPreview,
+  SandpackPreview
 } from "@codesandbox/sandpack-react";
 
 const CustomSandpack = () => (
@@ -545,7 +541,7 @@ const CustomSandpack = () => (
       <SandpackPreview />
     </SandpackLayout>
   </SandpackProvider>
-);
+)
 ```
 
 <SandpackProvider template="react" theme={sandpackDark}>
