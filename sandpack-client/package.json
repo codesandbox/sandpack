@@ -17,7 +17,7 @@
     "clean": "rm -rf dist sandpack",
     "prebuild": "yarn run clean",
     "test": "jest .",
-    "build": "node build.js && yarn run build:types",
+    "build": "rollup -c && yarn run build:types",
     "build:types": "tsc -p tsconfig.json",
     "lint": "eslint '**/*.ts?(x)' --fix",
     "build:publish": "yarn build && gulp",

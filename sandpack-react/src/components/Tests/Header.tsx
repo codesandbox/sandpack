@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { ConsoleIcon } from "../..";
 import { css } from "../../styles";
 import { roundedButtonClassName, buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
+import { ConsoleIcon } from "../icons";
 
 import type { Status } from "./SandpackTests";
 

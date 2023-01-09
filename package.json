@@ -6,12 +6,12 @@
     "sandpack-client",
     "sandpack-react",
     "sandpack-themes",
-    "website/*",
-    "examples/*"
+    "website/*"
   ],
   "nohoist": [
     "website/docs/**",
-    "**/html-minifier-terser"
+    "**/html-minifier-terser",
+    "examples/**"
   ],
   "description": "",
   "scripts": {
@@ -36,16 +36,17 @@
   "author": "CodeSandbox",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@octokit/rest": "^18.12.0",
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
-    "@octokit/rest": "^18.12.0",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-typescript": "^10.0.1",
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
     "babel-eslint": "^10.0.0",
     "babel-jest": "^27.4.5",
-    "esbuild": "^0.12.21",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-react-app": "^6.0.0",
@@ -63,6 +64,8 @@
     "package-build-stats": "7.3.13",
     "prettier": "^2.2.1",
     "react-test-renderer": "^18.1.0",
+    "rollup": "^3.9.1",
+    "rollup-plugin-replace": "^2.2.0",
     "turbo": "^1.5.5"
   },
   "lint-staged": {
