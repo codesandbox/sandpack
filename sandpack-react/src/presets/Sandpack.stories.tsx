@@ -1,6 +1,5 @@
-import { LanguageSupport } from "@codemirror/language";
+import { LanguageSupport, StreamLanguage } from "@codemirror/language";
 import { shell } from "@codemirror/legacy-modes/mode/shell";
-import { StreamLanguage } from "@codemirror/stream-parser";
 import React from "react";
 
 import { Sandpack } from "../";

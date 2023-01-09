@@ -1,17 +1,16 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useClasser } from "@code-hike/classer";
-import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
+import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 import {
   defaultKeymap,
   indentLess,
   indentMore,
   deleteGroupBackward,
+  history,
+  historyKeymap,
 } from "@codemirror/commands";
-import { commentKeymap } from "@codemirror/comment";
-import { lineNumbers } from "@codemirror/gutter";
-import { defaultHighlightStyle } from "@codemirror/highlight";
-import { history, historyKeymap } from "@codemirror/history";
-import { bracketMatching } from "@codemirror/matchbrackets";
+import { syntaxHighlighting } from "@codemirror/language";
+import { bracketMatching } from "@codemirror/language";
 import type { Extension } from "@codemirror/state";
 import { EditorState, EditorSelection, StateEffect } from "@codemirror/state";
 import { Annotation } from "@codemirror/state";
@@ -20,6 +19,7 @@ import {
   highlightActiveLine,
   keymap,
   EditorView,
+  lineNumbers,
 } from "@codemirror/view";
 import type { KeyBinding } from "@codemirror/view";
 import useIntersectionObserver from "@react-hook/intersection-observer";
@@ -208,7 +208,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
                 ({ key }) => key === "Tab"
               );
 
-              return customKey?.run(view) ?? true;
+              return customKey?.run?.(view) ?? true;
             },
           },
           {
@@ -220,7 +220,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
                 ({ key }) => key === "Shift-Tab"
               );
 
-              return customKey?.run(view) ?? true;
+              return customKey?.run?.(view) ?? true;
             },
           },
           {
@@ -252,16 +252,13 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             ...closeBracketsKeymap,
             ...defaultKeymap,
             ...historyKeymap,
-            ...commentKeymap,
             ...customCommandsKeymap,
             ...extensionsKeymap,
           ] as KeyBinding[]),
           langSupport,
 
-          defaultHighlightStyle.fallback,
-
           getEditorTheme(),
-          highlightTheme,
+          syntaxHighlighting(highlightTheme),
         ];
 
         if (readOnly) {
@@ -288,11 +285,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           extensionList.push(highlightInlineError());
         }
 
-        const startState = EditorState.create({
-          doc: code,
-          extensions: extensionList,
-        });
-
         const parentDiv = wrapper.current;
         const existingPlaceholder = parentDiv.querySelector(
           ".sp-pre-placeholder"
@@ -302,7 +294,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         }
 
         const view = new EditorView({
-          state: startState,
+          doc: code,
+          extensions: extensionList,
           parent: parentDiv,
           dispatch: (tr): void => {
             view.update([tr]);
