@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/codesandbox/sandpack/compare/v1.18.4...v1.19.0) (2023-01-09)
+
+
+### Features
+
+* migrate esbuild to rollup ([#678](https://github.com/codesandbox/sandpack/issues/678)) ([671bb23](https://github.com/codesandbox/sandpack/commit/671bb235bad88aa8bbaeeb728225b3d5051ca4ea))
+
+
+
+
+
 # [1.18.0](https://github.com/codesandbox/sandpack/compare/v1.17.2...v1.18.0) (2022-12-12)
 
 
