@@ -36,6 +36,7 @@
   "author": "CodeSandbox",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@octokit/rest": "^18.12.0",
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
