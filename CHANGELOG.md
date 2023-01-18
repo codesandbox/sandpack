@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/codesandbox/sandpack/compare/v1.19.0...v1.20.0) (2023-01-18)
+
+
+### Features
+
+* **Sandpack-preset:** split panel ([#675](https://github.com/codesandbox/sandpack/issues/675)) ([158e2b0](https://github.com/codesandbox/sandpack/commit/158e2b08eeeaf910b1b55f6c38c8df0a49e0ec31))
+
+
+
+
+
 # [1.19.0](https://github.com/codesandbox/sandpack/compare/v1.18.4...v1.19.0) (2023-01-09)
 
 
