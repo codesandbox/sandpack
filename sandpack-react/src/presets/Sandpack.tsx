@@ -162,8 +162,11 @@ export const Sandpack: SandpackInternal = ({
   };
 
   const stopDragging = (): void => {
-    const container = dragEventTargetRef.current
-      ?.parentElement as HTMLDivElement;
+    const container = dragEventTargetRef.current?.parentElement as
+      | HTMLDivElement
+      | undefined;
+
+    if (!container) return;
 
     container.querySelectorAll(`.${THEME_PREFIX}-stack`).forEach((item) => {
       (item as HTMLDivElement).style.pointerEvents = "";
