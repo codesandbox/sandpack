@@ -156,7 +156,7 @@ export const Sandpack: SandpackInternal = ({
       setVerticalSize(boundaries);
     }
 
-    container?.querySelectorAll(`.${THEME_PREFIX}-stack`).forEach((item) => {
+    container.querySelectorAll(`.${THEME_PREFIX}-stack`).forEach((item) => {
       (item as HTMLDivElement).style.pointerEvents = "none";
     });
   };
