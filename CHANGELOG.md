@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.4](https://github.com/codesandbox/sandpack/compare/v1.20.3...v1.20.4) (2023-01-18)
+
+
+### Bug Fixes
+
+* **sandpack:** check if parent container exist ([#685](https://github.com/codesandbox/sandpack/issues/685)) ([88ff6e0](https://github.com/codesandbox/sandpack/commit/88ff6e044ee58b450713433398b058df903e3578))
+
+
+
+
+
 ## [1.20.3](https://github.com/codesandbox/sandpack/compare/v1.20.2...v1.20.3) (2023-01-18)
 
 
