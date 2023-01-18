@@ -45,7 +45,7 @@ export const getSandpackStateFromProps = (
   // visibleFiles and activeFile override the setup flags
   let visibleFiles = normalizePath(props.options?.visibleFiles ?? []);
   let activeFile = props.options?.activeFile
-    ? resolveFile(props.options?.activeFile, normalizedFilesPath || {})
+    ? resolveFile(props.options?.activeFile, projectSetup.files)
     : undefined;
 
   if (visibleFiles.length === 0 && normalizedFilesPath) {
@@ -76,7 +76,7 @@ export const getSandpackStateFromProps = (
   }
 
   // Make sure it resolves the entry file
-  if (!projectSetup.files[projectSetup.entry]) {
+  if (projectSetup.entry && !projectSetup.files[projectSetup.entry]) {
     /* eslint-disable */
     // @ts-ignore
     projectSetup.entry = resolveFile(projectSetup.entry, projectSetup.files);
@@ -222,7 +222,7 @@ const combineTemplateFilesToSetup = ({
       ...baseTemplate.devDependencies,
       ...customSetup?.devDependencies,
     },
-    entry: normalizePath(customSetup?.entry || baseTemplate.entry),
+    entry: normalizePath(customSetup?.entry),
     main: baseTemplate.main,
     environment: customSetup?.environment || baseTemplate.environment,
   } as SandboxTemplate;

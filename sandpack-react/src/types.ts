@@ -108,6 +108,7 @@ export interface SandpackOptions {
   showConsole?: boolean;
   closableTabs?: boolean;
   wrapContent?: boolean;
+  resizablePanels?: boolean;
 
   codeEditor?: SandpackCodeOptions;
 
@@ -232,17 +233,7 @@ export type SandboxEnvironment =
 /**
  * @category Setup
  */
-export type SandpackPredefinedTemplate =
-  | "angular"
-  | "react"
-  | "react-ts"
-  | "test-ts"
-  | "vanilla"
-  | "vanilla-ts"
-  | "vue"
-  | "vue3"
-  | "svelte"
-  | "solid";
+export type SandpackPredefinedTemplate = keyof typeof SANDBOX_TEMPLATES;
 
 /**
  * @category Setup
@@ -477,6 +468,7 @@ interface SandpackInternalProps<
     showConsole?: boolean;
     closableTabs?: boolean;
     wrapContent?: boolean;
+    resizablePanels?: boolean;
 
     codeEditor?: SandpackCodeOptions;
 
@@ -610,7 +602,7 @@ export interface SandboxTemplate {
   files: Record<string, SandpackFile>;
   dependencies: Record<string, string>;
   devDependencies?: Record<string, string>;
-  entry: string;
+  entry?: string;
   main: string;
   environment: SandboxEnvironment;
 }

@@ -122,8 +122,8 @@ describe(normalizePath, () => {
   });
 
   it("doesn't tranform invalid values", () => {
-    expect(normalizePath(null)).toBe(undefined);
-    expect(normalizePath(undefined)).toBe(undefined);
-    expect(normalizePath(123)).toBe(undefined);
+    expect(normalizePath(undefined)).toBe(null);
+    expect(normalizePath(null)).toBe(null);
+    expect(normalizePath(123)).toBe(null);
   });
 });

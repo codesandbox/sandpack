@@ -304,8 +304,7 @@ import { python } from "@codemirror/lang-python";
 When using a [stream language mode](https://www.npmjs.com/package/@codemirror/legacy-modes) you'll need to convert it into a `LanguageSupport` instance.
 
 ```jsx
-import { LanguageSupport } from "@codemirror/language";
-import { StreamLanguage } from "@codemirror/stream-parser";
+import { LanguageSupport, StreamLanguage } from "@codemirror/language";
 import { shell } from "@codemirror/legacy-modes/mode/shell";
 
 <SandpackProvider>

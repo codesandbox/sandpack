@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/codesandbox/sandpack/compare/v1.18.4...v1.19.0) (2023-01-09)
+
+
+### Features
+
+* migrate esbuild to rollup ([#678](https://github.com/codesandbox/sandpack/issues/678)) ([671bb23](https://github.com/codesandbox/sandpack/commit/671bb235bad88aa8bbaeeb728225b3d5051ca4ea))
+
+
+
+
+
+# [1.18.0](https://github.com/codesandbox/sandpack/compare/v1.17.2...v1.18.0) (2022-12-12)
+
+
+### Bug Fixes
+
+* **sandpack-react:** make entry field optional, as bundler relies on package.json ([#660](https://github.com/codesandbox/sandpack/issues/660)) ([3d12b6e](https://github.com/codesandbox/sandpack/commit/3d12b6e862ed0e5a87c7fc88d25cc929f99c1f13))
+
+
+
+
+
+## [1.17.1](https://github.com/codesandbox/sandpack/compare/v1.17.0...v1.17.1) (2022-11-30)
+
+
+### Bug Fixes
+
+* **vue template:** support script setup template ([#648](https://github.com/codesandbox/sandpack/issues/648)) ([1ffb205](https://github.com/codesandbox/sandpack/commit/1ffb2059221db1537faca770a5a4edb4c578f14e))
+
+
+
+
+
 ## [1.12.1](https://github.com/codesandbox/sandpack/compare/v1.12.0...v1.12.1) (2022-10-04)
 
 **Note:** Version bump only for package @codesandbox/sandpack-client

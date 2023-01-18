@@ -5,33 +5,27 @@ export const VUE_TEMPLATE = {
   files: {
     "/src/App.vue": {
       code: `<template>
-  <main id="app">
-    <h1>Hello World</h1>
-  </main>
+  <div id="app">
+    <h1>Hello {{ msg }}</h1>
+  </div>
 </template>
 
 <script>
-export default {
-  name: "App",
-};
-</script>
+import Vue from 'vue';
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
-`,
+export default Vue.extend({
+  name: "App",
+  data() {
+    return {
+      msg: "World",
+    };
+  },
+});
+</script>`,
     },
     "/src/main.js": {
       code: `import Vue from "vue";
 import App from "./App.vue";
-
 Vue.config.productionTip = false;
 
 new Vue({
@@ -64,11 +58,23 @@ new Vue({
     },
     "/package.json": {
       code: JSON.stringify({
-        dependencies: {
-          vue: "^2.6.11",
-          "@vue/cli-plugin-babel": "4.1.1",
-        },
+        name: "vue",
+        version: "0.1.0",
+        private: true,
         main: "/src/main.js",
+        scripts: {
+          serve: "vue-cli-service serve",
+          build: "vue-cli-service build",
+        },
+        dependencies: {
+          "core-js": "^3.26.1",
+          vue: "^2.7.14",
+        },
+        devDependencies: {
+          "@vue/cli-plugin-babel": "^5.0.8",
+          "@vue/cli-service": "^5.0.8",
+          "vue-template-compiler": "^2.7.14",
+        },
       }),
     },
   },

@@ -18,6 +18,10 @@ pre {
   }
 }
 
+.nestedSandpack .sp-resize-handler {
+  display: none;
+}
+
 .nestedSandpack > .sp-wrapper > .sp-layout {
   display: block;
 }

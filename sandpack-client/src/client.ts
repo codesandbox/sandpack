@@ -3,7 +3,7 @@ import isEqual from "lodash.isequal";
 
 import Protocol from "./file-resolver-protocol";
 import { IFrameProtocol } from "./iframe-protocol";
-import type {
+import {
   Dependencies,
   SandpackBundlerFiles,
   BundlerState,
@@ -16,14 +16,13 @@ import type {
   ReactDevToolsMode,
   Template,
   NpmRegistry,
+  SandpackLogLevel,
 } from "./types";
 import {
   createPackageJSON,
   addPackageJSONIfNeeded,
   extractErrorDetails,
 } from "./utils";
-
-import { SandpackLogLevel } from ".";
 
 export interface ClientOptions {
   /**

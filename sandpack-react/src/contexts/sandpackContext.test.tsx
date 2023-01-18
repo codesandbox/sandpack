@@ -54,6 +54,38 @@ describe(SandpackProvider, () => {
       ]);
     });
 
+    it("deletes the activeFile and set the following visibleFile as active", () => {
+      const root = create(
+        <SandpackProvider
+          template="react"
+          options={{ activeFile: "/App.js", visibleFiles: ["/styles.css"] }}
+        />
+      );
+
+      const instance = root.getInstance();
+
+      instance.runSandpack();
+      instance.deleteFile("/App.js");
+
+      expect(instance.state.activeFile).toBe("/styles.css");
+    });
+
+    it("deletes the activeFile and set the entry file if there no visibleFile left", () => {
+      const root = create(
+        <SandpackProvider
+          template="react"
+          options={{ activeFile: "/App.js", visibleFiles: [] }}
+        />
+      );
+
+      const instance = root.getInstance();
+
+      instance.runSandpack();
+      instance.deleteFile("/App.js");
+
+      expect(instance.state.activeFile).toBe("/package.json");
+    });
+
     it("updates a file", () => {
       const instance = createContext();
 
@@ -105,7 +137,7 @@ describe(SandpackProvider, () => {
       expect(instance.state.editorState).toBe("dirty");
     });
 
-    it("should return a pristine value after reseting files", () => {
+    it("should return a pristine value after reset files", () => {
       const instance = createContext();
 
       expect(instance.state.editorState).toBe("pristine");

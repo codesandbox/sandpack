@@ -149,14 +149,17 @@ export class SandpackProviderClass extends React.PureComponent<
   updateFile = (pathOrFiles: string | SandpackFiles, code?: string): void => {
     let files = this.state.files;
 
-    if (typeof pathOrFiles === "string" && code) {
-      if (code === this.state.files[pathOrFiles]?.code) {
+    if (typeof pathOrFiles === "string") {
+      if (
+        this.state.files[pathOrFiles]?.code &&
+        code === this.state.files[pathOrFiles].code
+      ) {
         return;
       }
 
       files = {
         ...files,
-        [pathOrFiles]: { code },
+        [pathOrFiles]: { code: code ?? "" },
       };
     } else if (typeof pathOrFiles === "object") {
       files = { ...files, ...convertedFilesToBundlerFiles(pathOrFiles) };
@@ -516,12 +519,31 @@ export class SandpackProviderClass extends React.PureComponent<
   };
 
   deleteFile = (path: string): void => {
-    this.setState(({ visibleFiles, files }) => {
+    this.setState(({ visibleFiles, files, activeFile }) => {
       const newFiles = { ...files };
       delete newFiles[path];
 
+      const remainingVisibleFiles = visibleFiles.filter(
+        (openPath) => openPath !== path
+      );
+      const deletedLastVisibleFile = remainingVisibleFiles.length === 0;
+
+      if (deletedLastVisibleFile) {
+        const nextFile = Object.keys(files)[Object.keys(files).length - 1];
+
+        return {
+          visibleFiles: [nextFile],
+          activeFile: nextFile,
+          files: newFiles,
+        };
+      }
+
       return {
-        visibleFiles: visibleFiles.filter((openPath) => openPath !== path),
+        visibleFiles: remainingVisibleFiles,
+        activeFile:
+          path === activeFile
+            ? remainingVisibleFiles[remainingVisibleFiles.length - 1]
+            : activeFile,
         files: newFiles,
       };
     }, this.updateClients);
