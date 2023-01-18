@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.3](https://github.com/codesandbox/sandpack/compare/v1.20.2...v1.20.3) (2023-01-18)
+
+
+### Bug Fixes
+
+* **resizable:** disable pointer to direct child ([#684](https://github.com/codesandbox/sandpack/issues/684)) ([26f20e6](https://github.com/codesandbox/sandpack/commit/26f20e638e45048e0e13733092ef77c188168b6e))
+
+
+
+
+
 ## [1.20.2](https://github.com/codesandbox/sandpack/compare/v1.20.1...v1.20.2) (2023-01-18)
 
 
