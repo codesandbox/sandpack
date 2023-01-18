@@ -6,6 +6,7 @@ import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackConsole } from "../components/Console";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackTests } from "../components/Tests";
+import { SandpackStack } from "../components/common";
 import { SandpackLayout } from "../components/common/Layout";
 import { ConsoleIcon } from "../components/icons";
 import { SandpackProvider } from "../contexts/sandpackContext";
@@ -15,6 +16,7 @@ import {
   iconStandaloneClassName,
   roundedButtonClassName,
 } from "../styles/shared";
+import { SANDBOX_TEMPLATES } from "../templates";
 import type {
   SandpackInternal,
   SandpackInternalOptions,
@@ -23,8 +25,6 @@ import type {
   SandpackPredefinedTemplate,
 } from "../types";
 import { classNames } from "../utils/classNames";
-import { SandpackStack } from "../components/common";
-import { SANDBOX_TEMPLATES } from "../templates";
 
 /**
  * @hidden
@@ -117,6 +117,7 @@ export const Sandpack: SandpackInternal = ({
     flexGrow: 100 - horizontalSize,
     flexShrink: 100 - horizontalSize,
     flexBasis: 0,
+    width: 100 - horizontalSize + "%",
     gap: consoleVisibility ? 1 : 0,
     height: options.editorHeight, // use the original editor height
   };
