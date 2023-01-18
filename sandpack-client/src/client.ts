@@ -163,6 +163,11 @@ export class SandpackClient {
         "sandbox",
         "allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
       );
+
+      this.iframe.setAttribute(
+        "allow",
+        "accelerometer; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi;"
+      );
     }
 
     this.setLocationURLIntoIFrame();
