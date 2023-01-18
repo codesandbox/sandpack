@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as themes from "@codesandbox/sandpack-themes";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import type { CodeEditorProps } from "./components/CodeEditor";
 import { Sandpack } from "./presets";
@@ -20,48 +20,37 @@ export default {
   title: "Intro/Playground",
 };
 
-export const Preset = (): JSX.Element => {
+export const Resizable = (): JSX.Element => {
   return (
     <>
       <div style={{ maxWidth: 820, margin: "auto", padding: "4em 0" }}>
         <Sandpack
           files={{
-            "App.js": `export default function App() {
-  return <h1 onClick={() => {
-    console.log("Hello world");
-  }}>Hello World</h1>
-}
-
-          `,
+            "/App.js": `export default function Example() {
+  return (
+    <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+      <div class="md:flex">
+        <div class="md:shrink-0">
+          <img class="h-48 w-full object-cover md:h-full md:w-48" src="https://images.unsplash.com/photo-1637734433731-621aca1c8cb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=404&q=80" alt="Modern building architecture" />
+        </div>
+        <div class="p-8">
+          <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Company retreats</div>
+          <a href="#" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Incredible accomodation for your team</a>
+          <p class="mt-2 text-slate-500">Looking to take your team away on a retreat to enjoy awesome food and take in some sunshine? We have a list of places to do just that.</p>
+        </div>
+      </div>
+    </div>
+  )
+}`,
           }}
           options={{
+            externalResources: ["https://cdn.tailwindcss.com"],
             showLineNumbers: true,
-            showConsole: true,
+            showConsole: false,
             showConsoleButton: true,
-            resizablePanels: false,
+            resizablePanels: true,
           }}
           template="react"
-        />
-
-        <br />
-
-        <Sandpack
-          options={{
-            showLineNumbers: true,
-            showConsole: false,
-            showConsoleButton: false,
-          }}
-          template="vue"
-        />
-
-        <br />
-
-        <Sandpack
-          options={{
-            showLineNumbers: true,
-            showConsole: false,
-            showConsoleButton: true,
-          }}
         />
       </div>
     </>
@@ -273,7 +262,7 @@ import App from './App';
 
 test('renders welcome message', () => {
   render(<App />);
-  expect(screen.getByText('Hello World')).toBeInTheDocument();
+  expect(screen.getByText('Hello world')).toBeInTheDocument();
 });`,
     "/src/styles.css": defaultTemplate.files["/styles.css"],
     "/package.json": JSON.stringify({
@@ -292,4 +281,17 @@ test('renders welcome message', () => {
       main: "/add.ts",
     }),
   },
+};
+
+export const Basic: React.FC = () => {
+  return (
+    <Sandpack
+      options={{
+        // showConsole: true,
+        showConsoleButton: false,
+        // editorHeight: 500,
+      }}
+      template="vite-react"
+    />
+  );
 };
