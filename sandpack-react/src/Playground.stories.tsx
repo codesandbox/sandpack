@@ -20,6 +20,54 @@ export default {
   title: "Intro/Playground",
 };
 
+export const Preset = (): JSX.Element => {
+  return (
+    <>
+      <div style={{ maxWidth: 820, margin: "auto", padding: "4em 0" }}>
+        <Sandpack
+          files={{
+            "App.js": `export default function App() {
+  return <h1 onClick={() => {
+    console.log("Hello world");
+  }}>Hello World</h1>
+}
+
+          `,
+          }}
+          options={{
+            showLineNumbers: true,
+            showConsole: true,
+            showConsoleButton: true,
+            resizablePanels: false,
+          }}
+          template="react"
+        />
+
+        <br />
+
+        <Sandpack
+          options={{
+            showLineNumbers: true,
+            showConsole: false,
+            showConsoleButton: false,
+          }}
+          template="vue"
+        />
+
+        <br />
+
+        <Sandpack
+          options={{
+            showLineNumbers: true,
+            showConsole: false,
+            showConsoleButton: true,
+          }}
+        />
+      </div>
+    </>
+  );
+};
+
 export const Main = (): JSX.Element => {
   const [config, setConfig] = useState({
     Components: {

@@ -9,7 +9,7 @@ import { SandpackTests } from "../components/Tests";
 import { SandpackLayout } from "../components/common/Layout";
 import { ConsoleIcon } from "../components/icons";
 import { SandpackProvider } from "../contexts/sandpackContext";
-import { css } from "../styles";
+import { css, THEME_PREFIX } from "../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
@@ -29,20 +29,33 @@ import { SANDBOX_TEMPLATES } from "../templates";
 /**
  * @hidden
  */
-export const Sandpack: SandpackInternal = (props) => {
+export const Sandpack: SandpackInternal = ({
+  options,
+  template,
+  customSetup,
+  files,
+  theme,
+  ...props
+}) => {
+  // fallback values
+  options ??= {};
+  options.resizablePanels ??= true;
+  options.editorWidthPercentage ??= 50;
+  options.showConsole ??= false;
+
   const codeEditorOptions: CodeEditorProps = {
-    showTabs: props.options?.showTabs,
-    showLineNumbers: props.options?.showLineNumbers,
-    showInlineErrors: props.options?.showInlineErrors,
-    wrapContent: props.options?.wrapContent,
-    closableTabs: props.options?.closableTabs,
-    initMode: props.options?.initMode,
-    extensions: props.options?.codeEditor?.extensions,
-    extensionsKeymap: props.options?.codeEditor?.extensionsKeymap,
-    readOnly: props.options?.readOnly,
-    showReadOnly: props.options?.showReadOnly,
-    id: props.options?.id,
-    additionalLanguages: props.options?.codeEditor?.additionalLanguages,
+    showTabs: options.showTabs,
+    showLineNumbers: options.showLineNumbers,
+    showInlineErrors: options.showInlineErrors,
+    wrapContent: options.wrapContent,
+    closableTabs: options.closableTabs,
+    initMode: options.initMode,
+    extensions: options.codeEditor?.extensions,
+    extensionsKeymap: options.codeEditor?.extensionsKeymap,
+    readOnly: options.readOnly,
+    showReadOnly: options.showReadOnly,
+    id: options.id,
+    additionalLanguages: options.codeEditor?.additionalLanguages,
   };
 
   const providerOptions: SandpackInternalOptions<
@@ -52,122 +65,209 @@ export const Sandpack: SandpackInternal = (props) => {
     /**
      * TS-why: Type 'string | number | symbol' is not assignable to type 'string'
      */
-    activeFile: props.options?.activeFile as unknown as string,
-    visibleFiles: props.options?.visibleFiles as unknown as string[],
-    recompileMode: props.options?.recompileMode,
-    recompileDelay: props.options?.recompileDelay,
-    autorun: props.options?.autorun,
-    bundlerURL: props.options?.bundlerURL,
-    startRoute: props.options?.startRoute,
-    skipEval: props.options?.skipEval,
-    fileResolver: props.options?.fileResolver,
-    initMode: props.options?.initMode,
-    initModeObserverOptions: props.options?.initModeObserverOptions,
-    externalResources: props.options?.externalResources,
-    logLevel: props.options?.logLevel,
-    classes: props.options?.classes,
+    activeFile: options.activeFile as unknown as string,
+    visibleFiles: options.visibleFiles as unknown as string[],
+    recompileMode: options.recompileMode,
+    recompileDelay: options.recompileDelay,
+    autorun: options.autorun,
+    bundlerURL: options.bundlerURL,
+    startRoute: options.startRoute,
+    skipEval: options.skipEval,
+    fileResolver: options.fileResolver,
+    initMode: options.initMode,
+    initModeObserverOptions: options.initModeObserverOptions,
+    externalResources: options.externalResources,
+    logLevel: options.logLevel,
+    classes: options.classes,
   };
-
-  const [consoleVisibility, setConsoleVisibility] = React.useState(
-    props.options?.showConsole ?? false
-  );
-  const [counter, setCounter] = React.useState(0);
 
   /**
-   * Parts are set as `flex` values, so they set the flex shrink/grow
-   * Cannot use width percentages as it doesn't work with
-   * the automatic layout break when the component is under 700px
+   * Console
    */
-  const editorPart = props.options?.editorWidthPercentage || 50;
-  const previewPart = 100 - editorPart;
-
-  const hasRightColumn =
-    props.options?.showConsole || props.options?.showConsoleButton;
-  const RightColumn = hasRightColumn ? SandpackStack : React.Fragment;
-
-  const rightColumnStyle = {
-    flexGrow: previewPart,
-    flexShrink: previewPart,
-    flexBasis: 0,
-    minWidth: 700 * (previewPart / (previewPart + editorPart)),
-    gap: consoleVisibility ? 1 : 0,
-    height: props.options?.editorHeight, // use the original editor height
-  };
-
-  const rightColumnProps = React.useMemo(
-    () => (hasRightColumn ? { style: rightColumnStyle } : {}),
-    [hasRightColumn]
+  const [consoleVisibility, setConsoleVisibility] = React.useState(
+    options.showConsole
   );
+  const [counter, setCounter] = React.useState(0);
+  const hasRightColumn = options.showConsole || options.showConsoleButton;
 
   /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-  const templateFiles = SANDBOX_TEMPLATES[props.template!] ?? {};
+  const templateFiles = SANDBOX_TEMPLATES[template!] ?? {};
   const mode = "mode" in templateFiles ? templateFiles.mode : "preview";
 
-  const actionsChildren = props.options?.showConsoleButton ? (
+  const actionsChildren = options.showConsoleButton ? (
     <ConsoleCounterButton
       counter={counter}
       onClick={(): void => setConsoleVisibility((prev) => !prev)}
     />
   ) : undefined;
 
+  /**
+   * Resizable
+   */
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const dragEventTargetRef = React.useRef<any>(null);
+
+  const [horizontalSize, setHorizontalSize] = React.useState(
+    options.editorWidthPercentage
+  );
+  const [verticalSize, setVerticalSize] = React.useState(70);
+
+  const RightColumn = hasRightColumn ? SandpackStack : React.Fragment;
+  const rightColumnStyle = {
+    flexGrow: 100 - horizontalSize,
+    flexShrink: 100 - horizontalSize,
+    flexBasis: 0,
+    gap: consoleVisibility ? 1 : 0,
+    height: options.editorHeight, // use the original editor height
+  };
+  const topRowStyle = hasRightColumn
+    ? {
+        flexGrow: verticalSize,
+        flexShrink: verticalSize,
+        flexBasis: 0,
+        overflow: "hidden",
+      }
+    : rightColumnStyle;
+
+  const onDragMove = (event: MouseEvent): void => {
+    if (!dragEventTargetRef.current) return;
+
+    const container = dragEventTargetRef.current
+      .parentElement as HTMLDivElement;
+    const direction = dragEventTargetRef.current.dataset.direction as
+      | "horizontal"
+      | "vertical";
+    const isHorizontal = direction === "horizontal";
+
+    const { left, top, height, width } = container.getBoundingClientRect();
+    const offset = isHorizontal
+      ? ((event.clientX - left) / width) * 100
+      : ((event.clientY - top) / height) * 100;
+    const boundaries = Math.min(Math.max(offset, 25), 75);
+
+    if (isHorizontal) {
+      setHorizontalSize(boundaries);
+    } else {
+      setVerticalSize(boundaries);
+    }
+
+    container.querySelectorAll("iframe").forEach((frame) => {
+      frame.style.pointerEvents = "none";
+    });
+  };
+
+  const stopDragging = (): void => {
+    const container = dragEventTargetRef.current
+      ?.parentElement as HTMLDivElement;
+
+    container.querySelectorAll("iframe").forEach((frame) => {
+      frame.style.pointerEvents = "";
+    });
+
+    dragEventTargetRef.current = null;
+  };
+
   React.useEffect(() => {
-    setConsoleVisibility(props.options?.showConsole ?? false);
-  }, [props.options?.showConsole]);
+    if (!options?.resizablePanels) return;
+    document.body.addEventListener("mousemove", onDragMove);
+    document.body.addEventListener("mouseup", stopDragging);
+
+    return (): void => {
+      document.body.removeEventListener("mousemove", onDragMove);
+      document.body.removeEventListener("mouseup", stopDragging);
+    };
+  }, [options]);
+
+  React.useEffect(() => {
+    setConsoleVisibility(options?.showConsole ?? false);
+  }, [options.showConsole]);
 
   return (
     <SandpackProvider
-      customSetup={props.customSetup}
-      files={props.files as TemplateFiles<SandpackPredefinedTemplate>}
+      customSetup={customSetup}
+      files={files as TemplateFiles<SandpackPredefinedTemplate>}
       options={providerOptions}
-      template={props.template}
-      theme={props.theme}
+      template={template}
+      theme={theme}
+      {...props}
     >
       <SandpackLayout>
         <SandpackCodeEditor
           {...codeEditorOptions}
           style={{
-            height: props.options?.editorHeight, // use the original editor height
-            flexGrow: editorPart,
-            flexShrink: editorPart,
-            minWidth: 700 * (editorPart / (previewPart + editorPart)),
+            height: options.editorHeight, // use the original editor height
+            flexGrow: horizontalSize,
+            flexShrink: horizontalSize,
+            flexBasis: 0,
+            overflow: "hidden",
           }}
         />
 
+        {options.resizablePanels && (
+          <div
+            className={classNames(
+              dragHandler({ direction: "horizontal" }),
+              THEME_PREFIX + "-resize-handler"
+            )}
+            data-direction="horizontal"
+            onMouseDown={(event): void => {
+              dragEventTargetRef.current = event.target;
+            }}
+            style={{ left: `calc(${horizontalSize}% - 5px)` }}
+          />
+        )}
+
         {/* @ts-ignore */}
-        <RightColumn {...rightColumnProps}>
+        <RightColumn
+          className={THEME_PREFIX + "-preset-column"}
+          style={rightColumnStyle}
+        >
           {mode === "preview" && (
             <SandpackPreview
               actionsChildren={actionsChildren}
-              showNavigator={props.options?.showNavigator}
-              showRefreshButton={props.options?.showRefreshButton}
-              style={{
-                ...rightColumnStyle,
-                flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
-              }}
-            />
-          )}
-          {mode === "tests" && (
-            <SandpackTests
-              actionsChildren={actionsChildren}
-              style={{
-                ...rightColumnStyle,
-                flex: hasRightColumn ? 1 : rightColumnStyle.flexGrow,
-              }}
+              showNavigator={options.showNavigator}
+              showRefreshButton={options.showRefreshButton}
+              style={topRowStyle}
             />
           )}
 
-          {(props.options?.showConsoleButton || consoleVisibility) && (
-            <div
-              className={consoleWrapper.toString()}
-              style={{
-                flex: consoleVisibility ? 0.5 : 0,
-              }}
-            >
-              <SandpackConsole
-                onLogsChange={(logs): void => setCounter(logs.length)}
-                showHeader={false}
-              />
-            </div>
+          {mode === "tests" && (
+            <SandpackTests
+              actionsChildren={actionsChildren}
+              style={topRowStyle}
+            />
+          )}
+
+          {(options.showConsoleButton || consoleVisibility) && (
+            <>
+              {options.resizablePanels && consoleVisibility && (
+                <div
+                  className={classNames(
+                    dragHandler({ direction: "vertical" }),
+                    THEME_PREFIX + "-resize-handler"
+                  )}
+                  data-direction="vertical"
+                  onMouseDown={(event): void => {
+                    dragEventTargetRef.current = event.target;
+                  }}
+                  style={{ top: `calc(${verticalSize}% - 5px)` }}
+                />
+              )}
+
+              <div
+                className={classNames(consoleWrapper)}
+                style={{
+                  flexGrow: consoleVisibility ? 100 - verticalSize : 0,
+                  flexShrink: consoleVisibility ? 100 - verticalSize : 0,
+                  flexBasis: 0,
+                }}
+              >
+                <SandpackConsole
+                  onLogsChange={(logs): void => setCounter(logs.length)}
+                  showHeader={false}
+                />
+              </div>
+            </>
           )}
         </RightColumn>
       </SandpackLayout>
@@ -195,6 +295,32 @@ const ConsoleCounterButton: React.FC<{
   );
 };
 
+const dragHandler = css({
+  position: "absolute",
+  zIndex: "$top",
+
+  variants: {
+    direction: {
+      vertical: {
+        right: 0,
+        left: 0,
+        height: 10,
+        cursor: "ns-resize",
+      },
+      horizontal: {
+        top: 0,
+        bottom: 0,
+        width: 10,
+        cursor: "ew-resize",
+      },
+    },
+  },
+
+  "@media screen and (max-width: 768px)": {
+    display: "none",
+  },
+});
+
 const buttonCounter = css({
   position: "relative",
 
@@ -214,7 +340,6 @@ const buttonCounter = css({
 });
 
 const consoleWrapper = css({
-  transition: "flex $transitions$default",
   width: "100%",
   overflow: "hidden",
 });
