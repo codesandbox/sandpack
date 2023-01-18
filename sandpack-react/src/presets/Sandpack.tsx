@@ -152,8 +152,8 @@ export const Sandpack: SandpackInternal = ({
       setVerticalSize(boundaries);
     }
 
-    container.querySelectorAll("iframe").forEach((frame) => {
-      frame.style.pointerEvents = "none";
+    container.querySelectorAll(`.${THEME_PREFIX}-stack`).forEach((item) => {
+      (item as HTMLDivElement).style.pointerEvents = "none";
     });
   };
 
@@ -161,8 +161,8 @@ export const Sandpack: SandpackInternal = ({
     const container = dragEventTargetRef.current
       ?.parentElement as HTMLDivElement;
 
-    container.querySelectorAll("iframe").forEach((frame) => {
-      frame.style.pointerEvents = "";
+    container.querySelectorAll(`.${THEME_PREFIX}-stack`).forEach((item) => {
+      (item as HTMLDivElement).style.pointerEvents = "";
     });
 
     dragEventTargetRef.current = null;
