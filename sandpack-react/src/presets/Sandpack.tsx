@@ -6,6 +6,7 @@ import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackConsole } from "../components/Console";
 import { SandpackPreview } from "../components/Preview";
 import { SandpackTests } from "../components/Tests";
+import { SandpackStack } from "../components/common";
 import { SandpackLayout } from "../components/common/Layout";
 import { ConsoleIcon } from "../components/icons";
 import { SandpackProvider } from "../contexts/sandpackContext";
@@ -15,6 +16,7 @@ import {
   iconStandaloneClassName,
   roundedButtonClassName,
 } from "../styles/shared";
+import { SANDBOX_TEMPLATES } from "../templates";
 import type {
   SandpackInternal,
   SandpackInternalOptions,
@@ -23,8 +25,6 @@ import type {
   SandpackPredefinedTemplate,
 } from "../types";
 import { classNames } from "../utils/classNames";
-import { SandpackStack } from "../components/common";
-import { SANDBOX_TEMPLATES } from "../templates";
 
 /**
  * @hidden
@@ -151,8 +151,8 @@ export const Sandpack: SandpackInternal = ({
       setVerticalSize(boundaries);
     }
 
-    container.querySelectorAll("iframe").forEach((frame) => {
-      frame.style.pointerEvents = "none";
+    container.querySelectorAll(`.${THEME_PREFIX}-stack`).forEach((item) => {
+      (item as HTMLDivElement).style.pointerEvents = "none";
     });
   };
 
@@ -160,8 +160,8 @@ export const Sandpack: SandpackInternal = ({
     const container = dragEventTargetRef.current
       ?.parentElement as HTMLDivElement;
 
-    container.querySelectorAll("iframe").forEach((frame) => {
-      frame.style.pointerEvents = "";
+    container.querySelectorAll(`.${THEME_PREFIX}-stack`).forEach((item) => {
+      (item as HTMLDivElement).style.pointerEvents = "";
     });
 
     dragEventTargetRef.current = null;
