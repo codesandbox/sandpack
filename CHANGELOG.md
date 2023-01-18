@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.2](https://github.com/codesandbox/sandpack/compare/v1.20.1...v1.20.2) (2023-01-18)
+
+
+### Bug Fixes
+
+* **resizable-panels:** iframe width ([#683](https://github.com/codesandbox/sandpack/issues/683)) ([159b4f1](https://github.com/codesandbox/sandpack/commit/159b4f129149e8cd051aa89f770c92060b56bcee))
+
+
+
+
+
 ## [1.20.1](https://github.com/codesandbox/sandpack/compare/v1.20.0...v1.20.1) (2023-01-18)
 
 
