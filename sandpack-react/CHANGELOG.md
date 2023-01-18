@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.1](https://github.com/codesandbox/sandpack/compare/v1.20.0...v1.20.1) (2023-01-18)
+
+
+### Bug Fixes
+
+* **client:** set iframe capabilities ([#682](https://github.com/codesandbox/sandpack/issues/682)) ([b3f4846](https://github.com/codesandbox/sandpack/commit/b3f484614b20163c6c512c7b741ca411dc4f15b6))
+
+
+
+
+
 # [1.20.0](https://github.com/codesandbox/sandpack/compare/v1.19.0...v1.20.0) (2023-01-18)
 
 
