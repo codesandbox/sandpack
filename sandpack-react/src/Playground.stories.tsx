@@ -291,7 +291,6 @@ export const Basic: React.FC = () => {
         showConsoleButton: false,
         // editorHeight: 500,
       }}
-      template="vite-react"
     />
   );
 };

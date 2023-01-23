@@ -183,6 +183,10 @@ export const Sandpack: SandpackInternal = ({
     setConsoleVisibility(options?.showConsole ?? false);
   }, [options.showConsole]);
 
+  const rightColumnProps = hasRightColumn
+    ? { className: THEME_PREFIX + "-preset-column", style: rightColumnStyle }
+    : {};
+
   return (
     <SandpackProvider
       customSetup={customSetup}
@@ -219,10 +223,7 @@ export const Sandpack: SandpackInternal = ({
         )}
 
         {/* @ts-ignore */}
-        <RightColumn
-          className={THEME_PREFIX + "-preset-column"}
-          style={rightColumnStyle}
-        >
+        <RightColumn {...rightColumnProps}>
           {mode === "preview" && (
             <SandpackPreview
               actionsChildren={actionsChildren}
