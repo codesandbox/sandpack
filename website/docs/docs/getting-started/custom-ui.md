@@ -140,6 +140,8 @@ The `<Sandpack />` preset component has resizable columns and rows by default, a
 <Sandpack options={{ resizablePanels: false }} />
 ```
 
+Other components (`SandpackProvider` for example) do not have this functionality and it must be implemented by the user.
+
 ---
 
 :::success Congrats!
