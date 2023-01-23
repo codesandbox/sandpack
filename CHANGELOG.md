@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.5](https://github.com/codesandbox/sandpack/compare/v1.20.4...v1.20.5) (2023-01-23)
+
+
+### Bug Fixes
+
+* **docs:** resizable panels documentation ([#690](https://github.com/codesandbox/sandpack/issues/690)) ([a480138](https://github.com/codesandbox/sandpack/commit/a48013867d6f64c0625a74bafa25093a6d0ddc64))
+* **sandpack preset:** don't pass invalid props to React.Fragment ([#691](https://github.com/codesandbox/sandpack/issues/691)) ([273dc73](https://github.com/codesandbox/sandpack/commit/273dc73a28685f0727dde6baecd6780a5d90d353))
+
+
+
+
+
 ## [1.20.4](https://github.com/codesandbox/sandpack/compare/v1.20.3...v1.20.4) (2023-01-18)
 
 
