@@ -3,7 +3,7 @@ import isEqual from "lodash.isequal";
 
 import Protocol from "./file-resolver-protocol";
 import { IFrameProtocol } from "./iframe-protocol";
-import {
+import type {
   Dependencies,
   SandpackBundlerFiles,
   BundlerState,
@@ -16,8 +16,8 @@ import {
   ReactDevToolsMode,
   Template,
   NpmRegistry,
-  SandpackLogLevel,
 } from "./types";
+import { SandpackLogLevel } from "./types";
 import {
   createPackageJSON,
   addPackageJSONIfNeeded,
@@ -236,6 +236,7 @@ export class SandpackClient {
       : this.bundlerURL;
 
     this.iframe.contentWindow?.location.replace(urlSource);
+    this.iframe.src = urlSource;
   }
 
   cleanup(): void {

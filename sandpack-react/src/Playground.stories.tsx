@@ -286,12 +286,10 @@ test('renders welcome message', () => {
 export const Basic: React.FC = () => {
   return (
     <Sandpack
-      options={{
-        // showConsole: true,
-        showConsoleButton: false,
-        // editorHeight: 500,
+      files={{
+        "/src/index.js": `navigator.mediaDevices.getUserMedia({ audio: true }) `,
       }}
-      template="vite-react"
+      template="vanilla"
     />
   );
 };
