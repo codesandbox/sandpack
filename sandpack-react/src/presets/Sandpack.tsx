@@ -133,8 +133,12 @@ export const Sandpack: SandpackInternal = ({
   const onDragMove = (event: MouseEvent): void => {
     if (!dragEventTargetRef.current) return;
 
-    const container = dragEventTargetRef.current
-      .parentElement as HTMLDivElement;
+    const container = dragEventTargetRef.current.parentElement as
+      | HTMLDivElement
+      | undefined;
+
+    if (!container) return;
+
     const direction = dragEventTargetRef.current.dataset.direction as
       | "horizontal"
       | "vertical";
@@ -158,8 +162,11 @@ export const Sandpack: SandpackInternal = ({
   };
 
   const stopDragging = (): void => {
-    const container = dragEventTargetRef.current
-      ?.parentElement as HTMLDivElement;
+    const container = dragEventTargetRef.current?.parentElement as
+      | HTMLDivElement
+      | undefined;
+
+    if (!container) return;
 
     container.querySelectorAll(`.${THEME_PREFIX}-stack`).forEach((item) => {
       (item as HTMLDivElement).style.pointerEvents = "";
@@ -182,6 +189,10 @@ export const Sandpack: SandpackInternal = ({
   React.useEffect(() => {
     setConsoleVisibility(options?.showConsole ?? false);
   }, [options.showConsole]);
+
+  const rightColumnProps = hasRightColumn
+    ? { className: THEME_PREFIX + "-preset-column", style: rightColumnStyle }
+    : {};
 
   return (
     <SandpackProvider
@@ -219,10 +230,7 @@ export const Sandpack: SandpackInternal = ({
         )}
 
         {/* @ts-ignore */}
-        <RightColumn
-          className={THEME_PREFIX + "-preset-column"}
-          style={rightColumnStyle}
-        >
+        <RightColumn {...rightColumnProps}>
           {mode === "preview" && (
             <SandpackPreview
               actionsChildren={actionsChildren}
