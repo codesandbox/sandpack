@@ -284,12 +284,5 @@ test('renders welcome message', () => {
 };
 
 export const Basic: React.FC = () => {
-  return (
-    <Sandpack
-      files={{
-        "/src/index.js": `navigator.mediaDevices.getUserMedia({ audio: true }) `,
-      }}
-      template="vanilla"
-    />
-  );
+  return <Sandpack />;
 };
