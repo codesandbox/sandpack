@@ -284,13 +284,5 @@ test('renders welcome message', () => {
 };
 
 export const Basic: React.FC = () => {
-  return (
-    <Sandpack
-      options={{
-        // showConsole: true,
-        showConsoleButton: false,
-        // editorHeight: 500,
-      }}
-    />
-  );
+  return <Sandpack />;
 };
