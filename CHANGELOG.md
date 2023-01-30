@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.7](https://github.com/codesandbox/sandpack/compare/v1.20.6...v1.20.7) (2023-01-30)
+
+
+### Bug Fixes
+
+* **bundler:** ignore unused files ([#695](https://github.com/codesandbox/sandpack/issues/695)) ([adb2e0d](https://github.com/codesandbox/sandpack/commit/adb2e0ded555b538673c37835742f06170a2de87))
+
+
+
+
+
 ## [1.20.6](https://github.com/codesandbox/sandpack/compare/v1.20.5...v1.20.6) (2023-01-27)
 
 
