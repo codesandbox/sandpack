@@ -35,10 +35,19 @@ function removeSourcemaps() {
 
 const dist = "./sandpack/";
 const paths = process.env.CI
-  ? ["../bundler/**/!(*.map)", "!../bundler/public/**"]
+  ? [
+      "../bundler/**/!(*.map)",
+      "!../bundler/public/**",
+      "!../bundler/static/js/prettier/**",
+      "!../bundler/static/fonts/**",
+      "!../bundler/static/img/**",
+    ]
   : [
       "../../codesandbox-client/www/**/!(*.map)",
       "!../../codesandbox-client/www/public/**",
+      "!../../codesandbox-client/www/static/js/prettier/**",
+      "!../../codesandbox-client/www/static/fonts/**",
+      "!../../codesandbox-client/www/static/img/**",
     ];
 
 const remove = () => del(dist);
