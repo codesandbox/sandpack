@@ -369,13 +369,7 @@ export class SandpackProviderClass extends React.PureComponent<
         showErrorScreen: !this.errorScreenRegistered.current,
         showLoadingScreen: !this.loadingScreenRegistered.current,
         reactDevTools: this.state.reactDevTools,
-        customNpmRegistries: this.props.customSetup?.npmRegistries?.map(
-          (config) =>
-            ({
-              ...config,
-              proxyEnabled: false, // force
-            } ?? [])
-        ),
+        customNpmRegistries: this.props.customSetup?.npmRegistries,
       }
     );
 
