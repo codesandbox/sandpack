@@ -22,6 +22,10 @@ pre {
   display: none;
 }
 
+.nestedSandpack > .sp-wrapper > .sp-layout .sp-stack {
+  width: inherit !important;
+}
+
 .nestedSandpack > .sp-wrapper > .sp-layout {
   display: block;
 }
