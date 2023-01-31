@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.8](https://github.com/codesandbox/sandpack/compare/v1.20.7...v1.20.8) (2023-01-31)
+
+
+### Bug Fixes
+
+* file explorer style in mobile ([#700](https://github.com/codesandbox/sandpack/issues/700)) ([62915c0](https://github.com/codesandbox/sandpack/commit/62915c09c5aa8003ed0df0f277ccb90987a37245))
+
+
+
+
+
 ## [1.20.7](https://github.com/codesandbox/sandpack/compare/v1.20.6...v1.20.7) (2023-01-30)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.8](https://github.com/codesandbox/sandpack/compare/v1.20.7...v1.20.8) (2023-01-31)
+
+
+### Bug Fixes
+
+* file explorer style in mobile ([#700](https://github.com/codesandbox/sandpack/issues/700)) ([62915c0](https://github.com/codesandbox/sandpack/commit/62915c09c5aa8003ed0df0f277ccb90987a37245))
+* website docs sandpack wrapper style ([#697](https://github.com/codesandbox/sandpack/issues/697)) ([7b63771](https://github.com/codesandbox/sandpack/commit/7b637710e95c142efce2777494a8eeab34ded73c))
+
+
+### Features
+
+* update docs sandpack deps ([#698](https://github.com/codesandbox/sandpack/issues/698)) ([e0d323b](https://github.com/codesandbox/sandpack/commit/e0d323b9197bd0b6da495e994eb8e3d369181856))
+
+
+
+
+
 ## [1.20.7](https://github.com/codesandbox/sandpack/compare/v1.20.6...v1.20.7) (2023-01-30)
 
 
