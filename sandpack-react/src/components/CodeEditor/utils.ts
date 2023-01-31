@@ -5,8 +5,8 @@ import type { LanguageSupport } from "@codemirror/language";
 import { HighlightStyle } from "@codemirror/language";
 import type { Extension, Text } from "@codemirror/state";
 import { EditorView } from "@codemirror/view";
-import * as React from "react";
 import { tags } from "@lezer/highlight";
+import * as React from "react";
 
 import { THEME_PREFIX } from "../../styles";
 import type { CustomLanguage, SandpackTheme } from "../../types";

@@ -57,8 +57,8 @@ describe(SandpackProvider, () => {
     it("deletes the activeFile and set the following visibleFile as active", () => {
       const root = create(
         <SandpackProvider
-          template="react"
           options={{ activeFile: "/App.js", visibleFiles: ["/styles.css"] }}
+          template="react"
         />
       );
 
@@ -73,8 +73,8 @@ describe(SandpackProvider, () => {
     it("deletes the activeFile and set the entry file if there no visibleFile left", () => {
       const root = create(
         <SandpackProvider
-          template="react"
           options={{ activeFile: "/App.js", visibleFiles: [] }}
+          template="react"
         />
       );
 

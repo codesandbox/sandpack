@@ -1,10 +1,12 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-import type { SandpackFileExplorerProp } from ".";
-import { SandpackOptions } from "../../types";
+import type { SandpackOptions } from "../../types";
+
 import { File } from "./File";
 import { ModuleList } from "./ModuleList";
+
+import type { SandpackFileExplorerProp } from ".";
 
 export interface Props extends SandpackFileExplorerProp {
   prefixedPath: string;
