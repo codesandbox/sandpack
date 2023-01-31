@@ -54,6 +54,11 @@ export const layoutClassName = css({
   [`> .${THEME_PREFIX}-file-explorer`]: {
     flex: 0.2,
     minWidth: 200,
+    "@media screen and (max-width: 768px)": {
+      "&": {
+        minWidth: "100% !important",
+      },
+    },
   },
 });
 
