@@ -6,7 +6,6 @@ export const iconStandaloneClassName = css({
 
 export const buttonClassName = css({
   appearance: "none",
-  border: "0",
   outline: "none",
   display: "flex",
   alignItems: "center",
@@ -16,6 +15,7 @@ export const buttonClassName = css({
   transition: "color $default, background $default",
   cursor: "pointer",
   color: "$colors$clickable",
+  border: 0,
 
   "&:disabled": { color: "$colors$disabled" },
 
@@ -31,15 +31,24 @@ export const buttonClassName = css({
 
   [`&.${iconStandaloneClassName}`]: {
     padding: "$space$1",
-    width: "$space$7",
     height: "$space$7",
     display: "flex",
+  },
+
+  // If there's a children besides the icon
+  [`&.${iconStandaloneClassName}&:not(:has(svg + span))`]: {
+    width: "$space$7",
+  },
+
+  [`&.${iconStandaloneClassName}&:has(svg + span)`]: {
+    paddingRight: "$space$3",
   },
 });
 
 export const roundedButtonClassName = css({
   backgroundColor: "$colors$surface2",
   borderRadius: "99999px",
+  border: "1px solid $colors$surface3",
 
   '&[data-active="true"]': {
     color: "$colors$surface1",
@@ -78,10 +87,28 @@ export const absoluteClassName = css({
 });
 
 export const errorClassName = css({
-  padding: "$space$4",
   whiteSpace: "pre-wrap",
   fontFamily: "$font$mono",
-  backgroundColor: "$colors$errorSurface",
+
+  padding: "$space$10",
+  backgroundColor: "$colors$surface1",
+  display: "flex",
+  gap: "$space$2",
+  flexDirection: "column",
+
+  [`.${buttonClassName}`]: {
+    width: "auto",
+    gap: "$space$2",
+    padding: "0 $space$3 0 $space$2",
+  },
+
+  variants: {
+    solidBg: {
+      true: {
+        backgroundColor: "$colors$errorSurface",
+      },
+    },
+  },
 });
 
 export const errorMessageClassName = css({

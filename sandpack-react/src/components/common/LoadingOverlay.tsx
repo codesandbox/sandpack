@@ -59,7 +59,7 @@ export const LoadingOverlay = ({
         className={classNames(
           c("overlay", "error"),
           absoluteClassName,
-          errorClassName,
+          errorClassName({ solidBg: true }),
           className
         )}
         {...props}

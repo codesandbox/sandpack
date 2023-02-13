@@ -6,10 +6,14 @@ import { useErrorMessage } from "../../hooks/useErrorMessage";
 import { THEME_PREFIX } from "../../styles";
 import {
   absoluteClassName,
+  buttonClassName,
   errorClassName,
   errorMessageClassName,
+  iconStandaloneClassName,
+  roundedButtonClassName,
 } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
+import { LogInIcon } from "../icons";
 
 /**
  * @category Components
@@ -30,7 +34,7 @@ export const ErrorOverlay: React.FC<
   }
 
   const onSignIn = () => {
-    dispatch({ type: "signin" });
+    dispatch({ type: "sign-in" });
   };
 
   if (errorMessage?.includes("NPM_REGISTRY_UNAUTHENTICATED_REQUEST")) {
@@ -42,16 +46,37 @@ export const ErrorOverlay: React.FC<
           errorClassName,
           className
         )}
-        translate="no"
         {...props}
       >
-        <div
-          className={classNames(c("error-message"), errorMessageClassName)}
-          style={{ padding: 50 }}
-        >
-          <h4>Sandpack Pro or error message</h4>
+        <p className={classNames(c("error-message"), errorMessageClassName)}>
+          <strong>Unable to fetch required dependency.</strong>
+        </p>
 
-          <button onClick={onSignIn}>Sign in</button>
+        <p className={classNames(c("error-message"), errorMessageClassName)}>
+          Authentication required. Please sign in to your account and try again.
+          If the issue persists, contact{" "}
+          <a
+            className={classNames(c("error-message"), errorMessageClassName)}
+            href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error"
+          >
+            support
+          </a>{" "}
+          for further assistance.
+        </p>
+
+        <div>
+          <button
+            className={classNames(
+              c("button"),
+              buttonClassName,
+              iconStandaloneClassName,
+              roundedButtonClassName
+            )}
+            onClick={onSignIn}
+          >
+            <LogInIcon />
+            <span>Sign in</span>
+          </button>
         </div>
       </div>
     );
@@ -62,7 +87,7 @@ export const ErrorOverlay: React.FC<
       className={classNames(
         c("overlay", "error"),
         absoluteClassName,
-        errorClassName,
+        errorClassName({ solidBg: true }),
         className
       )}
       translate="no"

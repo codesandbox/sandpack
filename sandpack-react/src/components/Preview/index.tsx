@@ -179,7 +179,7 @@ export const SandpackPreview = React.forwardRef<
 
             {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
 
-            <button onClick={() => dispatch({ type: "signout" })}>
+            <button onClick={() => dispatch({ type: "sign-out" })}>
               Sign out
             </button>
           </div>
