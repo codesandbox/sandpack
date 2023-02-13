@@ -378,6 +378,7 @@ export type SandpackMessage = BaseSandpackMessage &
         }>;
       }
     | SandboxTestMessage
+    | { type: "signin" }
   );
 
 export type Template =

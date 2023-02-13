@@ -1,5 +1,6 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
+import { useSandpack } from "../../hooks";
 
 import { useErrorMessage } from "../../hooks/useErrorMessage";
 import { THEME_PREFIX } from "../../styles";
@@ -21,10 +22,31 @@ export const ErrorOverlay: React.FC<
   ...props
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const errorMessage = useErrorMessage();
+  const { dispatch } = useSandpack();
   const c = useClasser(THEME_PREFIX);
 
   if (!errorMessage && !children) {
     return null;
+  }
+
+  const onSignIn = () => {
+    dispatch({ type: "signin" });
+  };
+
+  if (errorMessage?.includes("NPM_REGISTRY_UNAUTHENTICATED_REQUEST")) {
+    return (
+      <div
+        className={classNames(absoluteClassName, className)}
+        translate="no"
+        {...props}
+      >
+        <div style={{ padding: 50 }}>
+          <h1>Sandpack Pro or error message</h1>
+
+          <button onClick={onSignIn}>Sign in</button>
+        </div>
+      </div>
+    );
   }
 
   return (

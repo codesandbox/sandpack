@@ -13,9 +13,7 @@ export const Basic: React.FC = () => {
   return (
     <Sandpack
       customSetup={{
-        dependencies: {
-          "@codesandbox/test-package": "latest",
-        },
+        dependencies: { "@codesandbox/test-package": "latest" },
         npmRegistries: [
           {
             enabledScopes: ["@codesandbox"],
