@@ -95,7 +95,7 @@ export const SandpackPreview = React.forwardRef<
     },
     ref
   ) => {
-    const { sandpack, listen, iframe, getClient, clientId } =
+    const { sandpack, listen, iframe, getClient, clientId, dispatch } =
       useSandpackClient();
     const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
       number | null
@@ -178,6 +178,10 @@ export const SandpackPreview = React.forwardRef<
             )}
 
             {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
+
+            <button onClick={() => dispatch({ type: "signout" })}>
+              Sign out
+            </button>
           </div>
 
           <LoadingOverlay

@@ -19,7 +19,7 @@ export const Basic: React.FC = () => {
             enabledScopes: ["@codesandbox"],
             limitToScopes: true,
             proxyEnabled: true,
-            registryUrl: `${bundlerURL}/api/v1/sandboxes/${teamSandboxId}/npm_registry`,
+            registryUrl: `https://5t0o8w-3000.preview.csb.app/api/v1/sandboxes/${teamSandboxId}/npm_registry`,
           },
         ],
       }}

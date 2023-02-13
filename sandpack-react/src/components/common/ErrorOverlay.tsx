@@ -36,12 +36,20 @@ export const ErrorOverlay: React.FC<
   if (errorMessage?.includes("NPM_REGISTRY_UNAUTHENTICATED_REQUEST")) {
     return (
       <div
-        className={classNames(absoluteClassName, className)}
+        className={classNames(
+          c("overlay", "error"),
+          absoluteClassName,
+          errorClassName,
+          className
+        )}
         translate="no"
         {...props}
       >
-        <div style={{ padding: 50 }}>
-          <h1>Sandpack Pro or error message</h1>
+        <div
+          className={classNames(c("error-message"), errorMessageClassName)}
+          style={{ padding: 50 }}
+        >
+          <h4>Sandpack Pro or error message</h4>
 
           <button onClick={onSignIn}>Sign in</button>
         </div>
