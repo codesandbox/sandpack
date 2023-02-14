@@ -548,6 +548,7 @@ export interface SandpackState {
   status: SandpackStatus;
   initMode: SandpackInitMode;
   clients: Record<string, SandpackClient>;
+  authenticated: boolean;
 
   runSandpack: () => void;
   registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;

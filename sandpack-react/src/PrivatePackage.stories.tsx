@@ -6,9 +6,6 @@ export default {
   title: "Intro/PrivatePackage",
 };
 
-const bundlerURL = `http://localhost:3000`;
-const teamSandboxId = `lg1lqh`;
-
 export const Basic: React.FC = () => {
   return (
     <div style={{ width: 800, margin: "auto" }}>
@@ -18,12 +15,12 @@ export const Basic: React.FC = () => {
           npmRegistries: [
             {
               enabledScopes: ["@codesandbox"],
-              limitToScopes: true,
-              proxyEnabled: true,
-              registryUrl: `https://5t0o8w-3000.preview.csb.app/api/v1/sandboxes/${teamSandboxId}/npm_registry`,
+              codesandboxTeamId: `lg1lqh`,
             },
           ],
         }}
+        options={{ bundlerURL: `http://localhost:3000` }}
+        template="react"
         files={{
           "App.js": `import { Button } from "@codesandbox/test-package";
         
@@ -31,8 +28,6 @@ export default function App() {
   return <Button>Hello World</Button>
 }`,
         }}
-        options={{ bundlerURL }}
-        template="react"
       />
     </div>
   );

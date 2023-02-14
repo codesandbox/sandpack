@@ -13,7 +13,7 @@ import {
   roundedButtonClassName,
 } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
-import { LogInIcon } from "../icons";
+import { SignInIcon } from "../icons";
 
 /**
  * @category Components
@@ -74,7 +74,7 @@ export const ErrorOverlay: React.FC<
             )}
             onClick={onSignIn}
           >
-            <LogInIcon />
+            <SignInIcon />
             <span>Sign in</span>
           </button>
         </div>

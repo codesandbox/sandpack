@@ -157,17 +157,19 @@ export interface ProtocolRequestMessage extends BaseProtocolMessage {
   params: any[];
 }
 
-export interface NpmRegistry {
-  enabledScopes: string[];
-  limitToScopes: boolean;
-  registryUrl: string;
-  /**
-   * It must be `false` if you're providing a sef-host solution,
-   * otherwise, it'll try to proxy from CodeSandbox Proxy
-   */
-  proxyEnabled: boolean;
-  registryAuthToken?: string;
-}
+export type NpmRegistry =
+  | {
+      enabledScopes: string[];
+      limitToScopes: boolean;
+      registryUrl: string;
+      /**
+       * It must be `false` if you're providing a sef-host solution,
+       * otherwise, it'll try to proxy from CodeSandbox Proxy
+       */
+      proxyEnabled: boolean;
+      registryAuthToken?: string;
+    }
+  | { teamId: string; enabledScopes: string[] };
 
 type TestStatus = "running" | "pass" | "fail";
 

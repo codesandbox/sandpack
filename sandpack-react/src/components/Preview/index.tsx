@@ -15,6 +15,12 @@ import { OpenInCodeSandboxButton } from "../common/OpenInCodeSandboxButton";
 import { SandpackStack } from "../common/Stack";
 
 import { RefreshButton } from "./RefreshButton";
+import {
+  buttonClassName,
+  iconStandaloneClassName,
+  roundedButtonClassName,
+} from "../../styles/shared";
+import { SignOutIcon } from "../icons";
 
 /**
  * @category Components
@@ -179,9 +185,21 @@ export const SandpackPreview = React.forwardRef<
 
             {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
 
-            <button onClick={() => dispatch({ type: "sign-out" })}>
-              Sign out
-            </button>
+            {sandpack.authenticated && (
+              <button
+                onClick={() => dispatch({ type: "sign-out" })}
+                className={classNames(
+                  c("button", "icon-standalone"),
+                  buttonClassName,
+                  iconStandaloneClassName,
+                  roundedButtonClassName
+                )}
+                title="Sign out"
+                type="button"
+              >
+                <SignOutIcon />
+              </button>
+            )}
           </div>
 
           <LoadingOverlay

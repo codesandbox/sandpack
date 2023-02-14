@@ -692,6 +692,9 @@ export class SandpackProviderClass extends React.PureComponent<
       runSandpack: this.runSandpack,
       unregisterBundler: this.unregisterBundler,
       registerReactDevTools: this.registerReactDevTools,
+      authenticated: !!this.props.customSetup?.npmRegistries?.some(
+        (item) => "codesandboxTeamId" in item
+      ),
 
       /**
        * File operations
