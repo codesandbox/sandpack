@@ -64,7 +64,11 @@ export const LoadingOverlay = ({
         )}
         {...props}
       >
-        <div className={classNames(c("error-message"), errorMessageClassName)}>
+        <p className={classNames(c("error-message"), errorMessageClassName)}>
+          <strong>Timeout error</strong>
+        </p>
+
+        <p className={classNames(c("error-message"), errorMessageClassName)}>
           Unable to establish connection with the sandpack bundler. Make sure
           you are online or try again later. If the problem persists, please
           report it via{" "}
@@ -83,7 +87,7 @@ export const LoadingOverlay = ({
           >
             GitHub.
           </a>
-        </div>
+        </p>
       </div>
     );
   }
