@@ -88,7 +88,6 @@ export const absoluteClassName = css({
 
 export const errorClassName = css({
   whiteSpace: "pre-wrap",
-  fontFamily: "$font$mono",
 
   padding: "$space$10",
   backgroundColor: "$colors$surface1",
@@ -100,6 +99,7 @@ export const errorClassName = css({
     width: "auto",
     gap: "$space$2",
     padding: "0 $space$3 0 $space$2",
+    marginTop: "$space$1",
   },
 
   variants: {
@@ -114,4 +114,8 @@ export const errorClassName = css({
 export const errorMessageClassName = css({
   animation: `${fadeIn} 150ms ease`,
   color: "$colors$error",
+
+  variants: {
+    errorCode: { true: { fontFamily: "$font$mono" } },
+  },
 });

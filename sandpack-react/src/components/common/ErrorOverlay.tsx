@@ -53,8 +53,9 @@ export const ErrorOverlay: React.FC<
         </p>
 
         <p className={classNames(c("error-message"), errorMessageClassName)}>
-          Authentication required. Please sign in to your account and try again.
-          If the issue persists, contact{" "}
+          Authentication required. Please sign in to your account (make sure to
+          allow pop-ups to this page) and try again. If the issue persists,
+          contact{" "}
           <a
             className={classNames(c("error-message"), errorMessageClassName)}
             href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error"
@@ -93,9 +94,18 @@ export const ErrorOverlay: React.FC<
       translate="no"
       {...props}
     >
-      <div className={classNames(c("error-message"), errorMessageClassName)}>
+      <p className={classNames(c("error-message"), errorMessageClassName)}>
+        <strong>Something went wrong</strong>
+      </p>
+
+      <p
+        className={classNames(
+          c("error-message"),
+          errorMessageClassName({ errorCode: true })
+        )}
+      >
         {errorMessage || children}
-      </div>
+      </p>
     </div>
   );
 };
