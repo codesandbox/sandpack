@@ -116,7 +116,7 @@
       },
       {
         "title": "Nodebox",
-        "description": "Sandpack brings <a href='https://codesandbox.io/post/announcing-sandpack-2-and-nodebox' rel='noreferrer' target='_blank'><code>Nodebox</code></a>, its own Node.js runtime that allows you to run server-side code in any browser. Built-in support for Next.js, Remix, Vite, Astro and more.",
+        "description": "Sandpack brings <a href='https://codesandbox.io/blog/announcing-sandpack-2' rel='noreferrer' target='_blank'><code>Nodebox</code></a>, its own Node.js runtime that allows you to run server-side code in any browser. Built-in support for Next.js, Remix, Vite, Astro and more.",
         "illustrationKey": "providers"
       }
     ]
