@@ -38,7 +38,6 @@
     "types:check": "tsc --noEmit",
     "dev:layout": "tsup --watch",
     "dev:tailwind": "TAILWIND_MODE=watch yarn postcss css/styles.css -o dist/style.css --watch",
-    "prepublishOnly": "yarn build:all",
     "test": "vitest --run",
     "clean": "rimraf ./dist",
     "format": "prettier --ignore-path ../../.gitignore --write --list-different ."
