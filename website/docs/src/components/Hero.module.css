@@ -1,0 +1,23 @@
+.title {
+  font-size: 6rem;
+  line-height: 100%;
+}
+
+.subtitle {
+  margin-top: 1rem;
+  font-size: 1.9rem;
+  line-height: 130%;
+  margin-bottom: 3rem;
+  max-width: 45rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+}

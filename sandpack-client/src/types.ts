@@ -1,4 +1,83 @@
-import type { ITemplate } from "codesandbox-import-util-types";
+import type { SandpackNodeMessage } from "./clients/node/types";
+import type { SandpackRuntimeMessage } from "./clients/runtime/types";
+
+export interface ClientOptions {
+  /**
+   * Paths to external resources
+   */
+  externalResources?: string[];
+  /**
+   * Location of the bundler.
+   */
+  bundlerURL?: string;
+  /**
+   * Level of logging to do in the bundler
+   */
+  logLevel?: SandpackLogLevel;
+  /**
+   * Relative path that the iframe loads (eg: /about)
+   */
+  startRoute?: string;
+  /**
+   * Width of iframe.
+   */
+  width?: string;
+  /**
+   * Height of iframe.
+   */
+  height?: string;
+  /**
+   * If we should skip the third step: evaluation.
+   */
+  skipEval?: boolean;
+
+  /**
+   * Boolean flags to trigger certain UI elements in the bundler
+   */
+  showOpenInCodeSandbox?: boolean;
+  showErrorScreen?: boolean;
+  showLoadingScreen?: boolean;
+
+  /**
+   * The bundler will clear the console if you set this to true, everytime the iframe refreshes / starts the first compile
+   */
+  clearConsoleOnFirstCompile?: boolean;
+
+  /**
+   * You can pass a custom file resolver that is responsible for resolving files.
+   * We will use this to get all files from the file system.
+   */
+  fileResolver?: {
+    isFile: (path: string) => Promise<boolean>;
+    readFile: (path: string) => Promise<string>;
+  };
+
+  reactDevTools?: ReactDevToolsMode;
+
+  /**
+   * The custom private npm registry setting makes it possible
+   * to retrieve npm packages from your own npm registry.
+   */
+  customNpmRegistries?: NpmRegistry[];
+}
+
+export interface SandboxSetup {
+  files: SandpackBundlerFiles;
+  dependencies?: Dependencies;
+  devDependencies?: Dependencies;
+  entry?: string;
+  /**
+   * What template we use, if not defined we infer the template from the dependencies or files.
+   *
+   */
+  template?: Template;
+
+  /**
+   * Only use unpkg for fetching the dependencies, no preprocessing. It's slower, but doesn't talk
+   * to AWS.
+   */
+  disableDependencyPreprocessing?: boolean;
+}
 
 export interface SandpackBundlerFile {
   code: string;
@@ -87,6 +166,8 @@ export type ClientStatus =
   | "evaluating"
   | "running-tests"
   | "idle";
+
+export type SandpackMessage = SandpackRuntimeMessage | SandpackNodeMessage;
 
 export type ListenerFunction = (msg: SandpackMessage) => void;
 export type UnsubscribeFunction = () => void;
@@ -288,98 +369,6 @@ interface RunTests {
   path: string;
 }
 
-export type SandpackMessage = BaseSandpackMessage &
-  (
-    | {
-        type: "initialized";
-      }
-    | {
-        type: "start";
-        firstLoad?: boolean;
-      }
-    | {
-        type: "status";
-        status: ClientStatus;
-      }
-    | {
-        type: "state";
-        state: BundlerState;
-      }
-    | {
-        type: "success";
-      }
-    | ({
-        type: "action";
-        action: "show-error";
-      } & SandpackErrorMessage)
-    | {
-        type: "action";
-        action: "notification";
-        notificationType: "error";
-        title: string;
-      }
-    | {
-        type: "done";
-        compilatonError: boolean;
-      }
-    | {
-        type: "urlchange";
-        url: string;
-        back: boolean;
-        forward: boolean;
-      }
-    | {
-        type: "resize";
-        height: number;
-      }
-    | {
-        type: "transpiler-context";
-        data: Record<string, Record<string, unknown>>;
-      }
-    | {
-        type: "compile";
-        version: number;
-        isInitializationCompile?: boolean;
-        modules: Modules;
-        externalResources: string[];
-        hasFileResolver: boolean;
-        disableDependencyPreprocessing?: boolean;
-        template?: string | ITemplate;
-        showOpenInCodeSandbox: boolean;
-        showErrorScreen: boolean;
-        showLoadingScreen: boolean;
-        skipEval: boolean;
-        clearConsoleDisabled?: boolean;
-        reactDevTools?: ReactDevToolsMode;
-        logLevel?: SandpackLogLevel;
-        customNpmRegistries?: NpmRegistry[];
-      }
-    | {
-        type: "refresh";
-      }
-    | {
-        type: "urlback";
-      }
-    | {
-        type: "urlforward";
-      }
-    | {
-        type: "get-transpiler-context";
-      }
-    | {
-        type: "activate-react-devtools";
-      }
-    | {
-        type: "console";
-        log: Array<{
-          method: SandpackMessageConsoleMethods;
-          id: string;
-          data: string[];
-        }>;
-      }
-    | SandboxTestMessage
-  );
-
 export type Template =
   | "angular-cli"
   | "create-react-app"
@@ -388,4 +377,6 @@ export type Template =
   | "parcel"
   | "vue-cli"
   | "static"
-  | "solid";
+  | "solid"
+  | "nextjs"
+  | "node";

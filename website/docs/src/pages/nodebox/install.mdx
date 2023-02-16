@@ -1,0 +1,75 @@
+import { Callout, Tabs, Tab } from "nextra-theme-docs";
+import { CodeBlock } from "../../components/CodeBlock";
+
+# Install Nodebox
+
+<Tabs items={["npm", "yarn"]}>
+  <Tab>  
+```shell
+npm i @codesandbox/nodebox
+```
+  </Tab>
+
+  <Tab>
+```bash
+yarn i @codesandbox/nodebox
+```
+  </Tab>
+</Tabs>
+
+### Configure and connect
+
+To set up Nodebox, we have to provide a reference to an `<iframe>` element where the application's preview will be rendered.
+
+
+```js
+import { Nodebox } from '@codesandbox/nodebox';
+
+const emulator = new Nodebox({
+  iframe: document.getElementById('preview'),
+});
+
+await emulator.connect();
+```
+
+### Initialize file system
+
+Next, populate the emulator's file system with your project files.
+
+In this example, we will be running a simple HTTP server written in the `index.js` module.
+
+```js
+await emulator.fs.init({
+  'package.json': JSON.stringify({
+    name: 'my-app',
+  }),
+  'index.js': `
+import http from 'http'
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/plain'
+  })
+  res.write('Hello world')
+  res.end()
+})
+
+server.listen(3000, () => {
+  console.log('Server is ready!')
+})
+  `,
+});
+```
+
+> You can reference built-in Node.js modules, as well as external dependencies while writing your project files.
+
+### Run project
+
+To run our project we need to execute the `index.js` module. Let's create a new shell and execute it there:
+
+```js
+const shell = emulator.shell.create();
+await shell.runCommand('node', ['index.js']);
+```
+
+> You can use the same `shell` to control the process it's running (e.g. observe its `stdout`/`stderr`, terminate or restart it).

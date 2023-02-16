@@ -10,9 +10,10 @@ import type { Status } from "./SandpackTests";
 const wrapperClassName = css({
   justifyContent: "space-between",
   borderBottom: "1px solid $colors$surface2",
-  padding: "$space$3 $space$2",
+  padding: "0 $space$2",
   fontFamily: "$font$mono",
-  maxHeight: "$layout$headerHeight",
+  height: "$layout$headerHeight",
+  minHeight: "$layout$headerHeight",
   overflowX: "auto",
   whiteSpace: "nowrap",
 });
@@ -35,6 +36,12 @@ interface Props {
   showSuitesOnly: boolean;
 }
 
+const buttonsClassName = classNames(
+  buttonClassName,
+  roundedButtonClassName,
+  css({ padding: "$space$1 $space$3" })
+);
+
 export const Header: React.FC<Props> = ({
   status,
   suiteOnly,
@@ -45,12 +52,6 @@ export const Header: React.FC<Props> = ({
   setWatchMode,
   showSuitesOnly,
 }) => {
-  const buttonsClassName = classNames(
-    buttonClassName,
-    roundedButtonClassName,
-    css({ padding: "$space$1 $space$3" })
-  );
-
   return (
     <div className={classNames(wrapperClassName, flexClassName)}>
       <div className={classNames(flexClassName)}>
@@ -81,6 +82,7 @@ export const Header: React.FC<Props> = ({
             data-active={suiteOnly}
             disabled={status === "initialising"}
             onClick={setSuiteOnly}
+            type="button"
           >
             Suite only
           </button>
@@ -90,6 +92,7 @@ export const Header: React.FC<Props> = ({
           data-active={verbose}
           disabled={status === "initialising"}
           onClick={setVerbose}
+          type="button"
         >
           Verbose
         </button>
@@ -98,6 +101,7 @@ export const Header: React.FC<Props> = ({
           data-active={watchMode}
           disabled={status === "initialising"}
           onClick={setWatchMode}
+          type="button"
         >
           Watch
         </button>

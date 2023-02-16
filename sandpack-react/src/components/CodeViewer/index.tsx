@@ -14,9 +14,6 @@ import { FileTabs } from "../FileTabs";
 import { RunButton } from "../common/RunButton";
 import { SandpackStack } from "../common/Stack";
 
-/**
- * @category Components
- */
 export interface CodeViewerProps {
   showTabs?: boolean;
   showLineNumbers?: boolean;
@@ -35,9 +32,6 @@ export interface CodeViewerProps {
   initMode?: SandpackInitMode;
 }
 
-/**
- * @category Components
- */
 export const SandpackCodeViewer = React.forwardRef<
   CodeEditorRef,
   CodeViewerProps
@@ -61,7 +55,7 @@ export const SandpackCodeViewer = React.forwardRef<
     const shouldShowTabs = showTabs ?? sandpack.visibleFiles.length > 1;
 
     return (
-      <SandpackStack {...props}>
+      <SandpackStack className={c("editor-viewer")} {...props}>
         {shouldShowTabs ? <FileTabs /> : null}
 
         <div className={classNames(c("code-editor"), editorClassName)}>

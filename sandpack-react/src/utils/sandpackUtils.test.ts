@@ -1,4 +1,7 @@
-import { REACT_TEMPLATE } from "../templates/react";
+/**
+ * @jest-environment jsdom
+ */
+import { REACT_TEMPLATE } from "../templates/runtime/react";
 
 import {
   getSandpackStateFromProps,
@@ -101,7 +104,7 @@ describe(getSandpackStateFromProps, () => {
     expect(template.activeFile).toBe("/App.js");
 
     const noTemplate = getSandpackStateFromProps({});
-    expect(noTemplate.activeFile).toBe("/src/index.js");
+    expect(noTemplate.activeFile).toBe("/index.js");
 
     const customSetup = getSandpackStateFromProps({
       files: { "foo.js": "" },
@@ -201,13 +204,10 @@ describe(getSandpackStateFromProps, () => {
 
   test("it uses the visible path prop properly with a default template", () => {
     const setup = getSandpackStateFromProps({
-      options: { visibleFiles: ["/src/styles.css"] },
+      options: { visibleFiles: ["/styles.css"] },
     });
 
-    expect(setup.visibleFiles.sort()).toEqual([
-      "/src/index.js",
-      "/src/styles.css",
-    ]);
+    expect(setup.visibleFiles.sort()).toEqual(["/index.js", "/styles.css"]);
   });
 
   test("it uses the visible path prop properly with a template", () => {

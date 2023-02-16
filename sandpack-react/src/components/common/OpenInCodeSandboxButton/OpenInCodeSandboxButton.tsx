@@ -12,9 +12,6 @@ import { ExportIcon } from "../../icons";
 
 import { UnstyledOpenInCodeSandboxButton } from "./UnstyledOpenInCodeSandboxButton";
 
-/**
- * @category Components
- */
 export const OpenInCodeSandboxButton = (): JSX.Element | null => {
   const c = useClasser(THEME_PREFIX);
 

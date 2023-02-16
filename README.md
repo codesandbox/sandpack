@@ -38,16 +38,3 @@ import { githubLight } from "@codesandbox/sandpack-themes";
 ```
 
 [Read more](https://sandpack.codesandbox.io/docs/getting-started/themes)
-
-## Documentation
-
-You can find the Sandpack documentation on [https://sandpack.codesandbox.io/docs/](https://sandpack.codesandbox.io/docs).
-
-Start with the [Sandpack introduction](https://sandpack.codesandbox.io/docs) page for a quick overview and you can kick the tyres as well.
-
-The documentation is divided into following sections:
-
-- [Getting Started](https://sandpack.codesandbox.io/docs/getting-started/install)
-- [Advanced Guides](https://sandpack.codesandbox.io/docs/advanced-usage/provider)
-- [API reference](https://sandpack.codesandbox.io/docs/api/client)
-- [Migration guide from v0.x to v1.x](https://sandpack.codesandbox.io/docs/releases/v1)

@@ -15,27 +15,27 @@
   "tasks": {
     "lint": {
       "name": "Lint",
-      "command": "yarn lint",
-      "runAtStart": false
+      "command": "yarn lint"
     },
     "format": {
       "name": "Format",
-      "command": "yarn format",
-      "runAtStart": false
+      "command": "yarn format"
     },
     "test": {
       "name": "Test",
-      "command": "yarn test",
-      "runAtStart": false
+      "command": "yarn test"
     },
     "build": {
       "name": "Build",
       "command": "yarn build",
-      "runAtStart": false
+      "runAtStart": true
     },
     "build:client": {
       "name": "Build: client",
-      "command": "yarn workspace @codesandbox/sandpack-client build"
+      "command": "yarn workspace @codesandbox/sandpack-client build",
+      "restartOn": {
+        "branch": true
+      }
     },
     "build:themes": {
       "name": "Build: themes",
@@ -47,11 +47,10 @@
     },
     "dev:website-docs": {
       "name": "Documentation",
-      "command": "yarn dev:docs",
-      "runAtStart": false
+      "command": "yarn dev:docs"
     },
     "dev:sandpack-react": {
-      "name": "Storybook",
+      "name": "Dev: Sandpack react",
       "command": "yarn dev:react",
       "runAtStart": true,
       "preview": {
@@ -60,18 +59,19 @@
       }
     },
     "dev:website-landing": {
-      "name": "Website landing",
-      "command": "yarn dev:landing",
-      "runAtStart": false
+      "name": "Dev: Website landing",
+      "command": "yarn dev:landing"
     },
     "dev:website-theme": {
-      "name": "Website theme",
-      "command": "yarn dev:theme",
-      "runAtStart": false
+      "name": "Dev: Website theme",
+      "command": "yarn dev:theme"
     },
     "yarn install": {
       "name": "Install",
-      "command": "yarn install"
+      "command": "yarn install",
+      "restartOn": {
+        "files": ["yarn.lock", "**/package.json"]
+      }
     }
   }
 }

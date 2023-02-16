@@ -1,0 +1,57 @@
+import { Callout } from "nextra-theme-docs";
+
+# Hosting the Bundler
+
+<Callout>
+  You can also host the bundler by yourself, all necessary files are in the
+  `sandpack` folder.
+</Callout>
+
+If you want to host the bundler yourself, you will need to do a few things.
+
+- The bundler is part of the codesandbox-client codebase: https://github.com/codesandbox/codesandbox-client
+- Clone the codesandbox-client and install the dependencies in the root folder (`yarn install`).
+- `yarn build:deps` to build some of the packages lerna needs for internal links.
+- create your instance of sandpack with `yarn build:sandpack`.
+
+This creates a `www` folder in the root of `codesandbox-client`. That `www` folder is the
+sandpack folder sandpack-client connects to on `{version}-sandpack.codesandbox.io`.
+Once you have this hosted on your end you can pass `bundlerURL` when calling:
+
+```js
+new SandpackClient(iframe, sandboxInfo, {
+  bundlerURL: "https://your-hosted-version",
+});
+```
+
+or, if you use sandpack-react, you can bundlerURL in the `options` of the Sandpack preset.
+
+### Why
+
+There are few reasons for hosting the bundler like this, as opposed to having it exported as library code.
+
+#### Security
+
+The bundler evaluates and transpiles all files in an iframe under a different
+subdomain. This is important, because it prevents attackers from tampering with
+cookies of the host domain when evaluating code.
+
+#### Performance
+
+We heavily make use of Web Workers for transpilations. Almost all our
+transpilation happens in web workers, and there is no easy way yet to bundle
+this in a library.
+
+#### Bundle Size
+
+Another reason to host the bundler externally is because of code splitting: we
+split all our transpilers away and load them on-demand. If a user doesn't use
+`sass` we won't load the transpiler. This wouldn't be possible if we would give
+one big JS file as the library.
+
+#### Offline Support
+
+We use Service Workers to download all transpilers in the background, so the
+next time a user visits your website they don't have to download the bundler
+anymore and it can be used offline. This is possible because we host the service
+worker externally.

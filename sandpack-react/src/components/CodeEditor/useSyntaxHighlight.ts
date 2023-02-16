@@ -45,7 +45,7 @@ export const useSyntaxHighlight = ({
    * includes an end empty line, and the parse here doesn't,
    * so let's add it manually.
    */
-  if (offSet < code.length) {
+  if (offSet < code.length && code?.includes("\n")) {
     codeElementsRender.push("\n\n");
   }
 

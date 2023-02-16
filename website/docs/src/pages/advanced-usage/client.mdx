@@ -1,0 +1,309 @@
+import { Callout, Tabs, Tab } from "nextra-theme-docs";
+
+# Sandpack Client
+
+<br />
+<big>
+This library is an interface used to communicate with the CodeSandbox bundler.
+
+It allows you to run Sandpack in plain JavaScript, or create your own wrapper for Vue, Svelte, or any other library. 
+</big>
+
+## Install
+
+To use it, you have to install a different package:
+
+<Tabs items={["npm", "yarn", "pnpm"]}>
+  <Tab>  
+```shell
+npm i @codesandbox/sandpack-client
+```
+  </Tab>
+
+  <Tab>
+```bash
+yarn i @codesandbox/sandpack-client 
+```
+  </Tab>
+
+  <Tab>
+    ```bash
+pnpm i @codesandbox/sandpack-client 
+```
+  </Tab>
+</Tabs>
+
+
+## Usage
+
+`sandpack-client` implements two main methods to mount a bundler, and the choice between them will depend on which projects and environment you want to run. An environment might be a runtime JavaScript framework or a Node instance, which executes server scripts:
+- `SandpackRuntime`: mounts the bundler used on `codesandbox.io` and runs runtime JavaScript frameworks in-browser.
+- `SandpackNode`: mounts a [Nodebox](https://github.com/codesandbox/nodebox-runtime) instance, which is designed to execute Node.js frameworks and applications. Besides that, you can build your own Node.js runtime client by using Nodebox's standalone package, in order to do so, check the [documentation](https://github.com/codesandbox/nodebox-runtime/blob/main/packages/nodebox/api.md). 
+
+<Callout emoji="🎯">
+**`loadSandpackClient`**<br/>
+Alternatively, you can go for an async helper function that will adequately lazily load and mount a bundler, which is either `SandpackRuntime` or `SandpackNode`, given a set of files, environment, and dependencies.
+</Callout>
+
+### Quickstart
+
+We recommend going for the `loadSandpackClient` implementation, as this's the main entry point to mount a bundler, and it abstracts the most common cases.
+<br />
+
+```js
+import { loadSandpackClient } from "@codesandbox/sandpack-client";
+
+async function main() {
+  // Iframe selector or element itself
+  const iframe = document.getElementById("iframe");
+  
+  // Files, environment and dependencies
+  const content: SandboxSetup = {
+    files: { 
+      // We infer dependencies and the entry point from package.json 
+      "/package.json": { code: JSON.stringify({
+        main: "index.js",
+        dependencies: { uuid: "latest" },
+      })},
+      
+      // Main file
+      "/index.js": { code: `console.log(require('uuid'))` }
+    },
+    environment: "vanilla"
+  };
+  
+  // Optional options
+  const options: ClientOptions = {};
+  
+  // Properly load and mount the bundler
+  const client = async loadSandpackClient(
+    iframe, 
+    content, 
+    options
+  );
+  
+  /**
+   * When you make a change, you can just run `updateSandbox`. 
+   * We'll automatically discover which files have changed
+   * and hot reload them.
+   */
+  client.updateSandbox({
+    files: {
+      "/index.js": {
+        code: `console.log('New Text!')`,
+      },
+    },
+    entry: "/index.js",
+    dependencies: {
+      uuid: "latest",
+    },
+  });
+}
+```
+
+## API reference
+
+### Sandpack clients
+
+<br />
+
+```js
+SandpackRuntime(
+  iframe: HTMLElement | string,
+  content: SandboxSetup,
+  options?: ClientOptions
+): Client
+
+SandpackNode(
+  iframe: HTMLElement | string,
+  content: SandboxSetup,
+  options?: ClientOptions
+): Client
+```
+
+The `SandpackRuntime` and `SandpackNode` methods are used to mount a bundler inside the specified iframe element or selector. `SandpackRuntime` mounts the bundler used on codesandbox.io and runs runtime JavaScript frameworks in-browser, while `SandpackNode` mounts a Nodebox instance, which is designed to execute Node.js frameworks and applications.
+
+**Parameters**
+- `iframe`: The iframe element or selector in which to mount the bundler.
+- `content`: The files, environment, and dependencies to use for the sandbox.
+- `options`: (optional) An object containing additional options to use when loading the bundler.
+
+### `loadSandpackClient`
+<br />
+
+```js
+const client = async loadSandpackClient(
+  iframe: HTMLElement | string,
+  content: SandboxSetup,
+  options?: ClientOptions
+): Promise<Client>
+```
+
+Loads and mounts the sandpack bundler inside the specified iframe element or selector.
+
+**Parameters**
+
+- `iframe`: The iframe element or selector in which to mount the sandpack bundler.
+- `content`: The files, environment, and dependencies to use for the sandbox.
+- `options`: (optional) An object containing additional options to use when loading the sandpack bundler.
+
+**Returns**
+
+A promise that resolves to a Client object (`SandpackRuntime` or `SandpackNode`), which can be used to interact with the loaded sandpack bundler.
+
+<Callout>
+Both `SandpackRuntime` and `SandpackNode` have the same helper functions, which you can interact with. More details on each of these below.
+</Callout>
+
+### Client methods
+
+#### `updateSandbox`
+
+<br />
+
+```js
+client.updateSandbox(content: SandboxSetup): void
+```
+
+Sends new content like files and dependencies to the preview. It will automatically hot update the preview with the new files and options.
+
+**Parameters**
+
+- `content`: An object containing updates to the files, entry point, and/or dependencies for the sandbox, see [`SandboxSetup`](#sandboxsetup).
+
+
+#### `updateOptions`
+
+<br />
+
+```js
+client.updateOptions(options: ClientOptions): void
+```
+
+Updates the given options and then updates the preview.
+
+**Parameters**
+
+- `options`: An object containing updates the client options, see [`ClientOptions`](#clientoptions).
+
+
+#### `dispatch`
+
+<br />
+
+```js
+client.dispatch(data: any): void
+```
+
+The dispatch method is used to send an event to the sandpack bundler and all other listeners. The method accepts a single argument, which is the data to send with the event. When the event is dispatched, the internal id of the client will also be passed, so that only the bundler that performed the handshake with this client instance will respond to the event.
+
+**Parameters**
+- `data`: The data to send with the event.
+
+#### `listen`
+
+<br />
+
+```js
+client.listen(callback: (message: any) => void): void
+```
+
+The listen method is used to listen for events coming from the sandpack bundler that performed the handshake with this client instance. The method accepts a callback function that will be called whenever an event is received from the bundler. The callback function will be passed the message data for the event. The listen method uses the internal id of the client to filter out events coming from other bundlers.
+
+**Parameters**
+- `callback`: A function that will be called whenever an event is received from the bundler. The function will be passed the message data for the event.
+
+
+#### `getCodeSandboxURL`
+
+<br />
+
+```js
+client.getCodeSandboxURL(): {
+  sandboxId: string,
+  editorUrl: string,
+  embedUrl: string,
+}
+```
+
+The `getCodeSandboxURL` method creates a sandbox from the current files and returns an object containing the sandbox id, editor URL, and embed URL for the sandbox. The returned object has the following form:
+
+<br />
+
+```js
+{
+  sandboxId: sandbox_id,
+  editorUrl: `https://codesandbox.io/s/${sandbox_id}`,
+  embedUrl: `https://codesandbox.io/embed/${sandbox_id}`,
+}
+```
+
+- `sandboxId`: The id of the created sandbox.
+- `editorUrl`: The URL of the sandbox editor.
+- `embedUrl`: The URL that can be used to embed the sandbox in an iframe.
+
+### Interfaces
+
+#### `SandboxSetup`
+
+<br />
+
+```ts
+{
+  /**
+   * Files, keys are paths.
+  **/
+  files: {
+    [path: string]: {
+      code: string
+    }
+  },
+  /**
+   * Dependencies; supports npm and GitHub dependencies
+  **/
+  dependencies?: {
+    [dependencyName: string]: string
+  },
+  /**
+   * Default file to evaluate
+  **/
+  entry?: string,
+  /**
+   * The sandbox template to use; this is inferred from the files and package.json if not specified
+  **/
+  template?: Template
+}
+```
+
+#### `ClientOptions`
+
+<br />
+
+```ts
+{
+  /**
+   * Paths to external resources
+   */
+  externalResources?: string[];
+  /**
+   * Location of the bundler. Defaults to `${version}-sandpack.codesandbox.io`
+   */
+  bundlerURL?: string;
+  /**
+   * Width/Height of the iframe.
+   */
+  width?: string;
+  height?: string;
+  /**
+   * If the bundler should skip the third step, which is evaluation. 
+   * Useful if you only want to see transpiled results.
+   */
+  skipEval?: boolean;
+  /**
+   * Boolean flags to trigger certain UI elements in the bundler
+   */
+  showOpenInCodeSandbox?: boolean;
+  showErrorScreen?: boolean;
+  showLoadingScreen?: boolean;
+}
+```

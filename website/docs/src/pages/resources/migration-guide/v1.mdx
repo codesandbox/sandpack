@@ -1,0 +1,256 @@
+---
+title: v1.x
+---
+
+import { CodeBlock } from "../../../components/CodeBlock";
+import {
+  Sandpack,
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  SandpackPreview,
+  SandpackFileExplorer,
+} from "@codesandbox/sandpack-react";
+
+# Migration guide v1.x
+
+We're excited to announce a major release of Sandpack! It includes many feature requests and a ton of improvements to the developer experience. Here are a few highlights:
+
+- Improve SSR support.
+- Fresh design and new semantic UI tokens.
+- Introduce the `SandpackFileExplorer` component.
+- Improvements to the surface API.
+
+## New features
+
+### SSR support
+
+Sandpack uses [stitches/core](https://stitches.dev/) under the hood to generate and dedupe theme variation, ensuring a consistent and lightweight CSS output. To retrieve its style values, use the following guide to get the output in the SSR:
+
+```jsx
+import { getSandpackCssText } from "@codesandbox/sandpack-react";
+
+// SSR template
+<style
+  dangerouslySetInnerHTML={{ __html: getSandpackCssText() }}
+  id="sandpack"
+/>;
+```
+
+For further clarity, take a look at our [examples](https://github.com/codesandbox/sandpack/tree/main/examples).
+
+### SandpackFileExplorer
+
+We heard you, and now Sandpack has a new component to navigate through files:
+
+<SandpackProvider template="react">
+  <SandpackLayout>
+    <SandpackFileExplorer />
+    <SandpackCodeEditor closableTabs />
+    <SandpackPreview />
+  </SandpackLayout>
+</SandpackProvider>
+
+### Theme package
+
+To reduce the bundle size of the main package and make it possible for the community to contribute custom Sandpack themes with ease, we have detached the themes.
+
+So themes won't be available anymore through the `@codesandbox/sandpack-react` package but instead through `@codesandbox/sandpack-themes`.
+
+For example:
+
+<CodeBlock>
+{`import { Sandpack } from "@codesandbox/sandpack-react";
+import { githubLight, sandpackDark } from "@codesandbox/sandpack-themes";
+
+export default function App() {
+  return (
+    <Sandpack 
+      theme={githubLight}
+    />
+  );
+}`}
+</CodeBlock>
+
+Sandpack still offers a set of predefined options:
+
+```jsx
+<Sandpack
+  theme="auto" // prefer color scheme sensitive
+/>
+```
+
+<br />
+<br />
+
+But individual values can be passed to customize the style of your `Sandpack` instance:
+
+<CodeBlock>
+{`import { Sandpack } from "@codesandbox/sandpack-react";
+import { githubLight } from "@codesandbox/sandpack-themes";
+
+export default function App() {
+  return (
+    <Sandpack 
+      theme={{
+        ...githubLight,
+        colors: {
+          accent: "rebeccapurple",
+        },
+        syntax: {
+          tag: "#006400",
+          string: "rgb(255, 165, 0)",
+          plain: "tomato",
+        },
+      }}
+    />
+  );
+}
+`}
+</CodeBlock>
+
+### Fresh design
+
+We took this chance to rethink how Sandpack should fit on your website. Our amazing design team at CodeSandbox challenged themselves to come up with a solution that would fit in different layouts and contexts, but still be accessible and customizable.
+
+As a result, we created a new set of themes, icons, design tokens, and components from scratch.
+
+<Sandpack />
+
+### All props are type-safe
+
+From now on, `files` , `visibleFiles` and `activeFile` are type-safe:
+
+<video autoPlay muted playsInline>
+  <source src="/v1-ts.mp4" type="video/mp4" />
+</video>
+
+#### Additional highlights
+
+- New React template: supports v18.
+- Fix mismatch id from server to client on the `SandpackCodeEditor` component.
+- Getting ready to support a new feature to load sandboxes from [CodeSandbox](https://codesandbox.io) 👀.
+- Fix inconsistency between the dependencies prop and the `package.json` file.
+- `SandpackProvider` API: it fixes a few inconsistencies, which used to lead to very common mistakes. From now on, it's very similar to the `Sandpack` API, with some exceptions.
+- Improve error message descriptions.
+
+## Breaking changes
+
+- `SandpackRunner` has been deprecated because the same result can be achieved using the `SandpackPreview` component.
+- `customSetup.main` has been deprecated due to redundancy; use `options.activeFile` instead.
+- `customSetup.files` has been deprecated due to redundancy; use `files` instead.
+- `options.openPaths` has been deprecated; use `options.visibleFiles` instead.
+- Replaced the `customStyle` prop with `style`.
+- Deprecated `viewportSize` and `viewportOrientation` from the `SandpackPreview` component.
+- Deprecated `theme` on `SandpackLayout`; set the theme property on `SandpackProvider` instead.
+- `SandpackLayout` no longer renders `ClasserProvider` and `SandpackThemeProvider`, all context is rendered on `SandpackProvider`.
+
+### **Migration guide**
+
+**Surface API: Sandpack**
+
+```jsx
+// Before
+<Sandpack
+  customSetup={{ files: { "/src/App.vue": "" }, main: "/src/App.vue" }}
+  template="vue"
+/>
+```
+
+```jsx
+// Now
+<Sandpack
+  files={{ "/src/App.vue": "" }}
+  options={{ activeFile: "/src/App.vue" }}
+  template="vue"
+/>
+```
+
+**Surface API: SandpackProvider**
+
+```jsx
+// Before
+<SandpackProvider
+  activePath="/src/App.vue"
+  customSetup={{ files: { "/src/App.vue": "" }, dependencies: {} }}
+  template="vue"
+  openPaths={["/src/App.vue"]}
+/>
+```
+
+```jsx
+// Now
+<SandpackProvider
+  customSetup={{ dependencies: {} }}
+  files={{ "/src/App.vue": "" }}
+  options={{
+    activeFile: "/src/App.vue", // used to be activePath
+    visibleFiles: ["/src/App.vue"], // used to be openPaths
+  }}
+  template="vue"
+/>
+```
+
+**Surface API: common components**
+
+```jsx
+// Before
+<SandpackStack customStyle={customStyle} />
+```
+
+```jsx
+// Now
+<SandpackStack style={customStyle} />
+```
+
+**Theme prop**
+
+```jsx
+// Before
+<Sandpack theme="github-light" />
+```
+
+```jsx
+// Now
+import { githubLight } from "@codesandbox/sandpack-themes";
+
+<Sandpack theme={githubLight} />;
+```
+
+**Theme provider**
+
+```jsx
+// Before
+<SandpackProvider>
+  <SandpackLayout theme="github-light">...</SandpackLayout>
+</SandpackProvider>
+```
+
+```jsx
+// Now
+<SandpackProvider theme="github-light">
+  <SandpackLayout>...</SandpackLayout>
+</SandpackProvider>
+```
+
+**New theme tokens**
+
+We created a few new additional tokens and replaced some existing ones. So previous schemas might need some updates. See a list of schema changes below.
+
+How to read: [from key name] → [to key name]
+
+- palette → colors
+  - activeText → hover
+  - defaultText → clickable
+  - inactiveText → surface2
+  - inactiveText → disabled
+  - defaultBackground → surface1
+  - new → surface3
+  - accent → accent
+  - errorForeground → error
+  - errorBackground → errorSurface
+- typography → font
+  - bodyFont → body
+  - monoFont → mono
+  - fontSize → size
+  - lineHeight → lineHeight

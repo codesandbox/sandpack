@@ -18,7 +18,7 @@ export const Component: React.FC = () => (
     }}
     files={{
       "/index.js": {
-        code: `const text = 'Hello World!'
+        code: `const text = 'Hello world!'
 const str = \`<div>\${text}</div>\`
 `,
       },

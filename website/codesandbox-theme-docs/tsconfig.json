@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "ESNext",
+    "declaration": false,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "types": ["vitest/globals"],
+    "resolveJsonModule": true,
+    "baseUrl": "."
+  }
+}

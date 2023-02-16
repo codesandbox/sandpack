@@ -20,7 +20,7 @@ return (
   <div>
     <Button />
     <Button />
-    <h1>Hello World</h1>
+    <h1>Hello world</h1>
     <Button />
   </div>
 </Container>

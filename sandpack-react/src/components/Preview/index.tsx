@@ -5,31 +5,34 @@ import type {
 } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-import { useSandpackClient } from "../../hooks";
+import {
+  useSandpackClient,
+  useSandpackNavigation,
+  useSandpackShell,
+} from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 import { Navigator } from "../Navigator";
 import { ErrorOverlay } from "../common/ErrorOverlay";
 import { LoadingOverlay } from "../common/LoadingOverlay";
 import { OpenInCodeSandboxButton } from "../common/OpenInCodeSandboxButton";
+import { RoundedButton } from "../common/RoundedButton";
 import { SandpackStack } from "../common/Stack";
+import { RefreshIcon, RestartIcon } from "../icons";
 
-import { RefreshButton } from "./RefreshButton";
+import { PreviewProgress } from "./PreviewProgress";
 
-/**
- * @category Components
- */
 export interface PreviewProps {
   style?: React.CSSProperties;
   showNavigator?: boolean;
   showOpenInCodeSandbox?: boolean;
   showRefreshButton?: boolean;
+  showRestartButton?: boolean;
   showSandpackErrorOverlay?: boolean;
+  showOpenNewtab?: boolean;
   actionsChildren?: JSX.Element;
   children?: JSX.Element;
 }
-
-export { RefreshButton };
 
 const previewClassName = css({
   flex: 1,
@@ -38,6 +41,18 @@ const previewClassName = css({
   background: "white",
   overflow: "auto",
   position: "relative",
+
+  [`.${THEME_PREFIX}-bridge-frame`]: {
+    border: 0,
+    position: "absolute",
+    left: "$space$2",
+    bottom: "$space$2",
+    zIndex: "$top",
+    height: 12,
+    width: "30%",
+    mixBlendMode: "multiply",
+    pointerEvents: "none",
+  },
 });
 
 const previewIframe = css({
@@ -56,18 +71,14 @@ const previewActionsClassName = css({
   bottom: "$space$2",
   right: "$space$2",
   zIndex: "$overlay",
-
-  "> *": { marginLeft: "$space$2" },
+  gap: "$space$2",
 });
 
-/**
- * @category Components
- */
 export interface SandpackPreviewRef {
   /**
    * Retrieve the current Sandpack client instance from preview
    */
-  getClient: () => SandpackClient | null;
+  getClient: () => InstanceType<typeof SandpackClient> | null;
   /**
    * Returns the client id, which will be used to
    * initialize a client in the main Sandpack context
@@ -75,9 +86,6 @@ export interface SandpackPreviewRef {
   clientId: string;
 }
 
-/**
- * @category Components
- */
 export const SandpackPreview = React.forwardRef<
   SandpackPreviewRef,
   PreviewProps & React.HTMLAttributes<HTMLDivElement>
@@ -88,6 +96,8 @@ export const SandpackPreview = React.forwardRef<
       showRefreshButton = true,
       showOpenInCodeSandbox = true,
       showSandpackErrorOverlay = true,
+      showOpenNewtab = true,
+      showRestartButton = true,
       actionsChildren = <></>,
       children,
       className,
@@ -100,17 +110,13 @@ export const SandpackPreview = React.forwardRef<
     const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
       number | null
     >(null);
-    const {
-      status,
-      errorScreenRegisteredRef,
-      openInCSBRegisteredRef,
-      loadingScreenRegisteredRef,
-    } = sandpack;
+    const { status, errorScreenRegisteredRef, loadingScreenRegisteredRef } =
+      sandpack;
+    const { refresh } = useSandpackNavigation(clientId);
+    const { restart } = useSandpackShell(clientId);
 
     const c = useClasser(THEME_PREFIX);
 
-    // SandpackPreview immediately registers the custom screens/components so the bundler does not render any of them
-    openInCSBRegisteredRef.current = true;
     errorScreenRegisteredRef.current = true;
     loadingScreenRegisteredRef.current = true;
 
@@ -164,8 +170,6 @@ export const SandpackPreview = React.forwardRef<
             title="Sandpack Preview"
           />
 
-          {showSandpackErrorOverlay && <ErrorOverlay />}
-
           <div
             className={classNames(
               c("preview-actions"),
@@ -173,8 +177,17 @@ export const SandpackPreview = React.forwardRef<
             )}
           >
             {actionsChildren}
+
+            {showRestartButton && sandpack.environment === "node" && (
+              <RoundedButton onClick={restart}>
+                <RestartIcon />
+              </RoundedButton>
+            )}
+
             {!showNavigator && showRefreshButton && status === "running" && (
-              <RefreshButton clientId={clientId} />
+              <RoundedButton onClick={refresh}>
+                <RefreshIcon />
+              </RoundedButton>
             )}
 
             {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
@@ -184,6 +197,10 @@ export const SandpackPreview = React.forwardRef<
             clientId={clientId}
             showOpenInCodeSandbox={showOpenInCodeSandbox}
           />
+
+          <PreviewProgress clientId={clientId} />
+
+          {showSandpackErrorOverlay && <ErrorOverlay />}
 
           {children}
         </div>

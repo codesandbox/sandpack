@@ -12,12 +12,11 @@
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "no-console": ["error", { "allow": ["error", "warn"] }],
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-empty-function": "error",
-    // Enforce return types on exported functions or public methods
-    "@typescript-eslint/explicit-module-boundary-types": "error",
     // Enforce use of interfaces for object type definitions
     "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
     // Enforce use of Record<string, string> instead of {[key: string]: string};
@@ -81,14 +80,6 @@
       }
     ]
   },
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx"],
-      "rules": {
-        "@typescript-eslint/explicit-function-return-type": ["error"]
-      }
-    }
-  ],
   "settings": {
     "version": "detect"
   }

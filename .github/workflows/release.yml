@@ -93,16 +93,5 @@ jobs:
           yarn workspace @codesandbox/sandpack-react build:publish
           yarn workspace @codesandbox/sandpack-themes build:publish
 
-      - name: Sizebot | Generate
-        run: node scripts/sizebot/createCurrentSizes.js
-        continue-on-error: true
-
-      - name: Sizebot | Commit results
-        run: |
-          git add ./github/scripts/sizebot/sizebot.json 
-          git commit -am 'chore: [skip ci] update sizebot' --no-verify
-          git push origin main
-        continue-on-error: true
-
       - name: Release | Lerna Publish
         run: lerna publish from-package --yes

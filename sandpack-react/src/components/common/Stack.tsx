@@ -4,9 +4,6 @@ import * as React from "react";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
-/**
- * @hidden
- */
 export const stackClassName = css({
   display: "flex",
   flexDirection: "column",
@@ -20,9 +17,6 @@ export const stackClassName = css({
   },
 });
 
-/**
- * @category Components
- */
 export const SandpackStack: React.FC<
   React.HTMLAttributes<HTMLDivElement> & { children?: React.ReactNode }
 > = ({ className, ...props }) => {

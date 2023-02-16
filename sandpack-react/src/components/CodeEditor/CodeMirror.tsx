@@ -85,11 +85,6 @@ interface CodeMirrorProps {
    */
   decorators?: Decorators;
   initMode: SandpackInitMode;
-  /**
-   * By default, Sandpack generates a random value to use as an id.
-   * Use this to override this value if you need predictable values.
-   */
-  id?: string;
   extensions?: Extension[];
   extensionsKeymap?: KeyBinding[];
   /**
@@ -104,9 +99,6 @@ export interface CodeMirrorRef {
   getCodemirror: () => EditorView | undefined;
 }
 
-/**
- * @category Components
- */
 export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
   (
     {
@@ -122,7 +114,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       showReadOnly = true,
       decorators,
       initMode = "lazy",
-      id,
       extensions = [],
       extensionsKeymap = [],
       additionalLanguages = [],
@@ -193,140 +184,131 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     React.useEffect(() => {
       if (!wrapper.current || !shouldInitEditor) return;
 
-      /**
-       * TODO: replace this time out to something more efficient
-       * waiting for "postTask scheduler" API be ready
-       */
-      const timer = setTimeout(function delayCodeEditorInit() {
-        const customCommandsKeymap: KeyBinding[] = [
-          {
-            key: "Tab",
-            run: (view): boolean => {
-              indentMore(view);
+      const customCommandsKeymap: KeyBinding[] = [
+        {
+          key: "Tab",
+          run: (view): boolean => {
+            indentMore(view);
 
-              const customKey = extensionsKeymap.find(
-                ({ key }) => key === "Tab"
-              );
+            const customKey = extensionsKeymap.find(({ key }) => key === "Tab");
 
-              return customKey?.run?.(view) ?? true;
-            },
+            return customKey?.run?.(view) ?? true;
           },
-          {
-            key: "Shift-Tab",
-            run: ({ state, dispatch }): boolean => {
-              indentLess({ state, dispatch });
+        },
+        {
+          key: "Shift-Tab",
+          run: ({ state, dispatch }): boolean => {
+            indentLess({ state, dispatch });
 
-              const customKey = extensionsKeymap.find(
-                ({ key }) => key === "Shift-Tab"
-              );
+            const customKey = extensionsKeymap.find(
+              ({ key }) => key === "Shift-Tab"
+            );
 
-              return customKey?.run?.(view) ?? true;
-            },
+            return customKey?.run?.(view) ?? true;
           },
-          {
-            key: "Escape",
-            run: (): boolean => {
-              if (readOnly) return true;
+        },
+        {
+          key: "Escape",
+          run: (): boolean => {
+            if (readOnly) return true;
 
-              if (wrapper.current) {
-                wrapper.current.focus();
-              }
-
-              return true;
-            },
-          },
-          {
-            key: "mod-Backspace",
-            run: deleteGroupBackward,
-          },
-        ];
-
-        const extensionList = [
-          highlightSpecialChars(),
-          history(),
-          closeBrackets(),
-
-          ...extensions,
-
-          keymap.of([
-            ...closeBracketsKeymap,
-            ...defaultKeymap,
-            ...historyKeymap,
-            ...customCommandsKeymap,
-            ...extensionsKeymap,
-          ] as KeyBinding[]),
-          langSupport,
-
-          getEditorTheme(),
-          syntaxHighlighting(highlightTheme),
-        ];
-
-        if (readOnly) {
-          extensionList.push(EditorState.readOnly.of(true));
-          extensionList.push(EditorView.editable.of(false));
-        } else {
-          extensionList.push(bracketMatching());
-          extensionList.push(highlightActiveLine());
-        }
-
-        if (sortedDecorators) {
-          extensionList.push(highlightDecorators(sortedDecorators));
-        }
-
-        if (wrapContent) {
-          extensionList.push(EditorView.lineWrapping);
-        }
-
-        if (showLineNumbers) {
-          extensionList.push(lineNumbers());
-        }
-
-        if (showInlineErrors) {
-          extensionList.push(highlightInlineError());
-        }
-
-        const parentDiv = wrapper.current;
-        const existingPlaceholder = parentDiv.querySelector(
-          ".sp-pre-placeholder"
-        );
-        if (existingPlaceholder) {
-          parentDiv.removeChild(existingPlaceholder);
-        }
-
-        const view = new EditorView({
-          doc: code,
-          extensions: extensionList,
-          parent: parentDiv,
-          dispatch: (tr): void => {
-            view.update([tr]);
-
-            if (tr.docChanged) {
-              const newCode = tr.newDoc.sliceString(0, tr.newDoc.length);
-              setInternalCode(newCode);
-              onCodeUpdate?.(newCode);
+            if (wrapper.current) {
+              wrapper.current.focus();
             }
+
+            return true;
           },
-        });
+        },
+        {
+          key: "mod-Backspace",
+          run: deleteGroupBackward,
+        },
+      ];
 
-        view.contentDOM.setAttribute("data-gramm", "false");
-        view.contentDOM.setAttribute(
-          "aria-label",
-          filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
-        );
+      const extensionList = [
+        highlightSpecialChars(),
+        history(),
+        closeBrackets(),
 
-        if (readOnly) {
-          view.contentDOM.classList.add("cm-readonly");
-        } else {
-          view.contentDOM.setAttribute("tabIndex", "-1");
-        }
+        ...extensions,
 
-        cmView.current = view;
-      }, 0);
+        keymap.of([
+          ...closeBracketsKeymap,
+          ...defaultKeymap,
+          ...historyKeymap,
+          ...customCommandsKeymap,
+          ...extensionsKeymap,
+        ] as KeyBinding[]),
+        langSupport,
+
+        getEditorTheme(),
+        syntaxHighlighting(highlightTheme),
+      ];
+
+      if (readOnly) {
+        extensionList.push(EditorState.readOnly.of(true));
+        extensionList.push(EditorView.editable.of(false));
+      } else {
+        extensionList.push(bracketMatching());
+        extensionList.push(highlightActiveLine());
+      }
+
+      if (sortedDecorators) {
+        extensionList.push(highlightDecorators(sortedDecorators));
+      }
+
+      if (wrapContent) {
+        extensionList.push(EditorView.lineWrapping);
+      }
+
+      if (showLineNumbers) {
+        extensionList.push(lineNumbers());
+      }
+
+      if (showInlineErrors) {
+        extensionList.push(highlightInlineError());
+      }
+
+      const parentDiv = wrapper.current;
+      const existingPlaceholder = parentDiv.querySelector(
+        ".sp-pre-placeholder"
+      );
+      if (existingPlaceholder) {
+        parentDiv.removeChild(existingPlaceholder);
+      }
+
+      const view = new EditorView({
+        doc: code,
+        extensions: extensionList,
+        parent: parentDiv,
+        dispatch: (tr): void => {
+          view.update([tr]);
+
+          if (tr.docChanged) {
+            const newCode = tr.newDoc.sliceString(0, tr.newDoc.length);
+
+            setInternalCode(newCode);
+            onCodeUpdate?.(newCode);
+          }
+        },
+      });
+
+      view.contentDOM.setAttribute("data-gramm", "false");
+      view.contentDOM.setAttribute(
+        "aria-label",
+        filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
+      );
+
+      if (readOnly) {
+        view.contentDOM.classList.add("cm-readonly");
+      } else {
+        view.contentDOM.setAttribute("tabIndex", "-1");
+      }
+
+      cmView.current = view;
 
       return (): void => {
         cmView.current?.destroy();
-
-        clearTimeout(timer);
       };
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -380,7 +362,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
     // Update editor when code passed as prop from outside sandpack changes
     React.useEffect(() => {
-      if (cmView.current && code !== internalCode) {
+      if (cmView.current && typeof code === "string" && code !== internalCode) {
         const view = cmView.current;
 
         const selection = view.state.selection.ranges.some(

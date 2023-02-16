@@ -74,20 +74,20 @@
     ]
   },
   "features": {
-    "title": "A live coding</br>environment</br><span class=\"highlight\">in minutes.</span>",
+    "title": "A live coding</br>environment</br><span class=\"highlight\">in record time.</span>",
     "highlights": [
       {
-        "title": "Full editor experience",
-        "description": "Sandpack uses <a href='https://codemirror.net/' rel='noreferrer' target='_blank' class='external-link'>CodeMirror</a> under the hood, giving you all the basic capabilities of a code editor and syntax highlight. However, if you want to use your own editor framework, you can add that as a component too!",
+        "title": "Create interactive docs",
+        "description": "Easily create a live coding environment in your Docs. Sandpack runs <a href='https://codemirror.net/' rel='noreferrer' target='_blank' class='external-link'>CodeMirror</a> under the hood, giving you all the basic capabilities of a code editor and syntax highlight. But you can use your own editor too!",
         "iconKey": "editor"
       },
       {
-        "title": "Advanced preview",
-        "description": "Sandpack embeds the browser bundler that powers <a href='http://codesandbox.io' rel='noreferrer' target='_blank' class='external-link'>CodeSandbox</a> and takes advantage of features like npm dependency support, hot module reloading, error overlaying, and caching.",
+        "title": "Build low-code tools",
+        "description": "With built-in npm dependency support, hot module reloading, error overlaying, caching and Node.js support, Sandpack can preview configuration updates, test product outputs, inspect script integration, and more.",
         "iconKey": "preview"
       },
       {
-        "title": "Leverage CodeSandbox",
+        "title": "Keep coding with a click",
         "description": "With Sandpack, you're always one click away from opening your code snippet in CodeSandbox. This way, you can easily share bug reports or examples behind a unique URL.",
         "iconKey": "export"
       }
@@ -113,6 +113,11 @@
         "title": "Sandpack Client",
         "description": "The bundler is wrapped by a small package called <a href='https://sandpack.codesandbox.io/docs/advanced-usage/client' rel='noreferrer' target='_blank'><code>sandpack-client</code></a>, which is framework agnostic and allowing you to tap into the bundler protocol.",
         "illustrationKey": "client"
+      },
+      {
+        "title": "Nodebox",
+        "description": "Sandpack brings <a href='https://codesandbox.io/post/announcing-sandpack-2-and-nodebox' rel='noreferrer' target='_blank'><code>Nodebox</code></a>, its own Node.js runtime that allows you to run server-side code in any browser. Built-in support for Next.js, Remix, Vite, Astro and more.",
+        "illustrationKey": "providers"
       }
     ]
   },

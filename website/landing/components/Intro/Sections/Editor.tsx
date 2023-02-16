@@ -107,7 +107,7 @@ export const EditorExample: React.FC = () => {
           <CardDescription>
             Tweak the UI to your liking using the{" "}
             <a
-              href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#visual-options"
+              href="https://sandpack.codesandbox.io/docs/getting-started/layout"
               rel="noreferrer"
               target="_blank"
             >

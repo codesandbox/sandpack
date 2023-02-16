@@ -29,9 +29,9 @@ const AnimatedPresenceTyped = AnimatePresence as any;
 
 const frameworkOptions: SandpackPredefinedTemplate[] = [
   "react",
-  "react-ts",
+  "nextjs",
   "vue",
-  "vanilla",
+  "node",
   "angular",
 ];
 
@@ -99,7 +99,9 @@ export const TemplateExample: React.FC = () => {
               setMousePosition(getRelativeCoordinates(event, boxRef.current))
             }
           >
-            <CodeBlock>{`<Sandpack template="${template}">`}</CodeBlock>
+            <CodeBlock
+              key={template}
+            >{`<Sandpack template="${template}">`}</CodeBlock>
           </SnippetButton>
 
           <div style={{ height: 0, marginTop: "-24px" }}>

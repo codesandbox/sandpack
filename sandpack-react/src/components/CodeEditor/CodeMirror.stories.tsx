@@ -9,7 +9,6 @@ import { SandpackProvider } from "../../contexts/sandpackContext";
 import * as mocks from "./languages-mocks";
 
 import { CodeEditor } from "./index";
-
 const stories = storiesOf("components/CodeMirror", module);
 
 Object.entries(mocks).forEach(([languageName, mockFile]) =>
@@ -18,7 +17,6 @@ Object.entries(mocks).forEach(([languageName, mockFile]) =>
       <CodeEditor
         code={mockFile}
         fileType={languageName}
-        id={languageName}
         initMode="immediate"
         showLineNumbers={false}
       />
@@ -26,7 +24,7 @@ Object.entries(mocks).forEach(([languageName, mockFile]) =>
   ))
 );
 
-export const CustomLanguageShell: React.FC = () => (
+stories.add("CustomLanguageShell", () => (
   <SandpackProvider>
     <CodeEditor
       additionalLanguages={[
@@ -38,14 +36,13 @@ export const CustomLanguageShell: React.FC = () => (
       ]}
       code={mocks.shell}
       filePath="example.sh"
-      id="shell"
       initMode="immediate"
       showLineNumbers={false}
     />
   </SandpackProvider>
-);
+));
 
-export const CustomLanguagePython: React.FC = () => (
+stories.add("CustomLanguagePython", () => (
   <SandpackProvider>
     <CodeEditor
       additionalLanguages={[
@@ -57,14 +54,13 @@ export const CustomLanguagePython: React.FC = () => (
       ]}
       code={mocks.python}
       fileType="python"
-      id="python"
       initMode="immediate"
       showLineNumbers={false}
     />
   </SandpackProvider>
-);
+));
 
-export const ShowLineNumber: React.FC = () => (
+stories.add("ShowLineNumber", () => (
   <SandpackProvider>
     <CodeEditor
       code={`
@@ -77,26 +73,24 @@ export const ShowLineNumber: React.FC = () => (
 }  
 `}
       fileType="less"
-      id="less"
       initMode="immediate"
       showLineNumbers
     />
   </SandpackProvider>
-);
+));
 
-export const WrapContent: React.FC = () => (
+stories.add("WrapContent", () => (
   <SandpackProvider>
     <CodeEditor
       code={Array(20).fill("Lorem ipsum").join("")}
-      id="wrap"
       initMode="immediate"
       showLineNumbers
       wrapContent
     />
   </SandpackProvider>
-);
+));
 
-export const Decorators: React.FC = () => (
+stories.add("Decorators", () => (
   <SandpackProvider>
     <style>
       {`.highlight, .widget {
@@ -140,8 +134,7 @@ export default function List() {
         },
       ]}
       fileType="jsx"
-      id="decorators"
       initMode="immediate"
     />
   </SandpackProvider>
-);
+));

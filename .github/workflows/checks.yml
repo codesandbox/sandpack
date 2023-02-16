@@ -5,64 +5,6 @@ env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
 jobs:
-  integration:
-    name: Integration tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - name: Setup | Checkout
-        uses: actions/checkout@v1
-
-      - name: Setup | Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version-file: .nvmrc
-          cache: "yarn"
-
-      - name: Setup | Install dependencies
-        run: yarn install --prefer-offline
-
-      - name: Build
-        run: yarn build
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
-      - name: Run Playwright tests
-        run: cd sandpack-react && npx playwright test
-
-      - uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: playwright-report
-          path: sandpack-react/playwright-report/
-          retention-days: 30
-
-  sizebot:
-    name: Sizebot
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Setup | Checkout
-        uses: actions/checkout@v1
-
-      - name: Setup | Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version-file: .nvmrc
-          cache: "yarn"
-
-      - name: Setup | Install dependencies
-        run: yarn install --prefer-offline
-
-      - name: Build
-        run: yarn build
-
-      - name: Bot script
-        run: node .github/scripts/sizebot/index.js
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   test:
     name: Unit tests
     runs-on: ubuntu-latest

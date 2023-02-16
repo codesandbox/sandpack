@@ -1,0 +1,203 @@
+import { CodeBlock } from "../../components/CodeBlock";
+
+# Frequently Asked Questions
+
+## General questions
+
+#### What is Sandpack?
+
+Sandpack is an open ecosystem of components and utilities that allow you to compile and run modern JavaScript frameworks in the browser. You can either use one of our predefined `components` for embedding the *CodeSandbox* experience into your projects, or you can build your own version of `sandpack`, on top of our standard components and utilities.
+
+
+#### What license do Sandpack and Nodebox use? 
+
+Sandpack is licensed under the [Apache License 2.0.](https://github.com/codesandbox/sandpack/blob/main/LICENSE)
+
+The Apache License 2.0 is in the permissive category, meaning that you can do (nearly) anything you want with the code, with very few exceptions. You must include the following in the copy of the code, whether you have modified it or not: the original copyright notice, copy of the license, statement of significant changes that have been made (only if applicable), and copy of the notice file.
+
+**To sum up:**
+
+For **personal usage**, there are no limitations on how you can use Sandpack and you can freely use all of our templates, regardless of whether you are building a private or public project.
+
+For **commercial usage**, you can freely use all Sandpack templates except:
+
+- `nextjs`, any `vite` template, `astro`, `node`.
+- Any other sandbox that uses Nodebox as a runtime environment.
+
+The templates and sandboxes listed above are covered by the [Nodebox license](https://github.com/codesandbox/nodebox-runtime/blob/main/packages/nodebox/LICENSE) and a EULA that is shipped with the Nodebox runtime, which has some restrictions on commercial usage.
+
+## Nodebox
+  
+<details>
+  <summary>What Node.js version does Sandpack 2.0 run?</summary>
+
+  We are aiming for compatibility with the last version. Currently, this would be Node.js@18 (experimental features might be missing).
+</details>
+
+<details>
+  <summary>What is Nodebox?</summary>
+  Nodebox is a runtime for executing Node.js code in the browser. Sandpack 2.0 uses Nodebox to run server-side examples directly in the browser. For example, you can run a Vite template such as React and Vue directly on your website.
+  
+  For further details about Nodebox, check the [announcement post](https://codesandbox.io/post/announcing-sandpack-2) on the CodeSandbox blog.
+</details>
+
+<details>
+  <summary>How does Nodebox work?</summary>
+
+  Nodebox establishes a worker that contains an environment capable of running Node.js code. This is achieved by polyfilling some of the Node.js standard APIs, like `fs` and `net`, which guarantees Node.js compatibility but not complete feature parity.
+</details>
+
+<details>
+  <summary>Does Nodebox work offline?</summary>
+
+  Starting Nodebox requires a network connection to download all the node modules from the sandpack cdn `https://sandpack-cdn-v2.codesandbox.io` and load the preview domain for each port `https://id-port.nodebox.codesandbox.io`, once the previews have loaded Nodebox will work entirely offline.
+</details>
+
+<details>
+  <summary>What is the difference between Sandpack 2.0 and Nodebox?</summary>
+    
+  Nodebox is a runtime that runs Node.js in the browser, developed by the CodeSandbox team and introduced with Sandpack 2.0. While it is one of the core building blocks of Sandpack 2.0, Nodebox can be used standalone, as explained in the next topic.
+    
+  Still, it is expected that the development of Nodebox will be intertwined with that of Sandpack.
+</details>
+
+<details>
+  <summary>Can I run Nodebox without Sandpack?</summary>
+    
+  Yes, we made Nodebox available as a standalone package on npm. So you can find all details about installing and using it on the GitHub repository.
+</details>
+
+<details>
+  <summary>Is it possible to connect to a database in Nodebox?</summary>
+  
+  No. Nodebox is currently unable to connect to any external databases. However, serverless databases (Supabase, DynamoDB, Google Cloud Datastore, for example) can still be used normally since these options rely on standard REST APIs.
+
+  Still, we are currently exploring other alternatives for standard databases, like microVMs, which still need to be integrated into Sandpack.
+</details>
+
+<details>
+  <summary>What are the limitations of Nodebox?</summary>
+  
+  - Native node modules (Prisma, SWC, Sodium-native) will only work if they also release a WebAssembly version; we don't support napi modules because of browser limitations.
+  - Anything requiring native sockets; this will mainly be databases (Postgres, MongoDB, MySQL, ...).
+  - Large projects and monorepos are not optimally supported.
+</details>
+
+<details>
+  <summary>What frameworks does Nodebox support?</summary>
+    
+  At this moment, we support most of the frameworks based on Vite 4:
+      
+  - React
+  - Vue
+  - Preact
+  - Svelte
+      
+  And other frameworks, such as:
+      
+  - Next.js
+  - Astro
+  - Vuepress
+  - Express.js
+      
+  If you don't find your favorite framework, feel free to reach out to us through a GitHub issue, and then we can add it to the internal roadmap, among other frameworks.
+</details>
+
+<details>
+  <summary>I can’t see my favorite framework on the framework support list. How can I contribute?</summary>
+    
+  If you are still looking for your favorite framework, feel free to reach out to us through a GitHub issue, and then we can add it to the internal roadmap, among other frameworks.
+</details>
+
+<details>
+  <summary>What’s the browser compatibility?</summary>
+    
+  Nodebox aims for maximum browser compatibility. Although some issues might be expected on old browser versions, Nodebox runs without any problems on the latest version of WebKit (Safari, and any iOS browser), Blink (Microsoft Edge, Brave, and Chrome), and Gecko (Firefox) based browsers.
+
+  If you find any issues, please don't hesitate to contact us.
+</details>
+
+<details>
+  <summary>How to load private dependencies?</summary>
+  
+  This feature is currently under development. Although we can't make any promises about when we're going to launch this feature, this is a high priority for the team to make it available for everyone.
+</details>
+
+<details>
+  <summary>How does the Nodebox compare to WebContainers?</summary>
+    
+  While both Nodebox and WebContainers allow running Node.js on the browser, they have several fundamental differences:
+
+  - Nodebox runs on any browser because it was built from the ground up with cross-browser support in mind, avoiding modern features like `SharedArrayBuffer`.
+  - Nodebox does not have an install/setup step, making it faster to boot up. It installs `node_modules` in the background.
+  - Nodebox uses an internal dependency manager that is fine-tuned to deliver optimal initial load time by utilizing dependency caching via [Sandpack CDN](https://github.com/codesandbox/sandpack-cdn).
+  - Nodebox tends to use slightly more memory when multiple processes/workers are involved. Unfortunately, this is a trade-off for cross-browser support as the only way to optimize this is by using SharedArrayBuffers.
+  - Nodebox does not support synchronous cross-process communication as this would require Atomics and SharedArrayBuffers.
+  - Nodebox does not emulate Node.js's event loop, resulting in processes needing to be exited manually using `process.exit()` or by stopping the shell.
+  - Nodebox is not feature complete yet, some API's are still missing: `async_hooks`, `vm`, `worker_threads` and probably some more.
+</details>
+
+<details>
+  <summary>Is Nodebox open-source?</summary>
+  While unfortunately we are not open-sourcing Nodebox for a variety of reasons, some of which are outside of our control, we believe this technology may be the future of improved DX. So, we will continue to explore whether we can open-source it in the future.
+</details>
+
+<details>
+  <summary>I cannot run Nodebox on Brave or "The user denied permission to use Service Worker."</summary>
+
+  Brave has a few additional restrictions you need manually to disable to make the Service Worker available. 
+  - Go to `brave://settings/cookies`
+  - Click on "Add" to insert one more option under "Sites that can always use cookies"
+  - Add the URL of the page where you're trying to access the Sandpack or Nodebox playground. 
+</details>
+
+## Runtime sandboxes
+
+<details>
+  <summary>How to load private dependencies?</summary>
+
+Read the following [guide](/guides/private-packages).
+</details>
+
+<details>
+  <summary>How to load local dependencies?</summary>
+
+Currently, Sandpack doesn’t have a way to consume local dependencies, because the bundler host is shared with all Sandpack consumers' apps. However, you can pass local dependencies just like a regular file or using the external resource API:
+
+<CodeBlock stack>
+{`import { Sandpack } from "@codesandbox/sandpack-react";
+
+export default () => {
+  return (
+    <Sandpack
+      files={{
+        "/App.js": \`import { hello } from "fake-library";
+
+export default () => hello("World");
+\`,
+        "/node_modules/fake-library/package.json": JSON.stringify({
+  name: "fake-library",
+  main: "./index.js",
+}),
+        "/node_modules/fake-library/index.js": \`module.exports = {
+  hello: (name) => "Hello " + name
+}\`,
+      }}
+      template="react"
+    />
+  )
+}`}
+</CodeBlock>
+</details>
+
+<details>
+  <summary>How to highlight TypeScript errors in the editor?</summary>
+
+Currently, Sandpack doesn't officially support any kind of language server to provide a way to highlight errors in the `SandpackCodeEditor`. However, there is an [active discussion](https://github.com/codesandbox/sandpack/discussions/237) on how to make it work, with some examples and CodeMirror documentation references on how to implement it.
+</details>
+
+<details>
+  <summary>Why is the bundler hosted externally (iframe) and not a simple JavaScript module?</summary>
+
+There are a few reasons for hosting the bundler like this, as opposed to having it exported as library code. See further details in our [client documentation](/advanced-usage/client#why).
+</details>

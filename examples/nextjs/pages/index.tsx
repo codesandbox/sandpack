@@ -6,7 +6,7 @@ const Home: React.FC = () => {
     <div>
       <Sandpack />
       <Sandpack theme="dark" />
-      <Sandpack theme={githubLight} />
+      <Sandpack theme={githubLight} template="nextjs" />
       <Sandpack options={{ readOnly: true }} theme={sandpackDark} />
     </div>
   );

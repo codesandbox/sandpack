@@ -1,0 +1,14 @@
+{
+  "index": {
+    "title": "Install",
+    "label": "React"
+  },
+  "quickstart": {
+    "type": "page",
+    "title": "Quickstart",
+    "href": "/quickstart"
+  },
+  "usage": "Usage",
+  "layout": "Layout",
+  "themes": "Themes"
+}

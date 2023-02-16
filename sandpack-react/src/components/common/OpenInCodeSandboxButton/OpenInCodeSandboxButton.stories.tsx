@@ -1,8 +1,5 @@
-import {
-  SandpackProvider,
-  SandpackThemeProvider,
-  SandpackCodeEditor,
-} from "../../";
+import { SandpackCodeEditor } from "../../";
+import { SandpackProvider } from "../../..";
 
 import { OpenInCodeSandboxButton, UnstyledOpenInCodeSandboxButton } from ".";
 
@@ -13,20 +10,16 @@ export default {
 
 export const Main = (): JSX.Element => (
   <SandpackProvider>
-    <SandpackThemeProvider>
-      <SandpackCodeEditor />
-      <OpenInCodeSandboxButton />
-    </SandpackThemeProvider>
+    <SandpackCodeEditor />
+    <OpenInCodeSandboxButton />
   </SandpackProvider>
 );
 
 export const Unstyled = (): JSX.Element => (
   <SandpackProvider>
-    <SandpackThemeProvider>
-      <SandpackCodeEditor />
-      <UnstyledOpenInCodeSandboxButton>
-        Open in CodeSandbox
-      </UnstyledOpenInCodeSandboxButton>
-    </SandpackThemeProvider>
+    <SandpackCodeEditor />
+    <UnstyledOpenInCodeSandboxButton>
+      Open in CodeSandbox
+    </UnstyledOpenInCodeSandboxButton>
   </SandpackProvider>
 );

@@ -13,7 +13,7 @@ import { useSandpack } from "./useSandpack";
 
 interface UseSandpackClient {
   sandpack: SandpackState;
-  getClient: () => SandpackClient | null;
+  getClient: () => InstanceType<typeof SandpackClient> | null;
   iframe: React.MutableRefObject<HTMLIFrameElement | null>;
   listen: (listener: ListenerFunction) => UnsubscribeFunction;
   dispatch: (message: SandpackMessage) => void;
@@ -44,7 +44,7 @@ export const useSandpackClient = (): UseSandpackClient => {
     return (): void => sandpack.unregisterBundler(clientIdValue);
   }, []);
 
-  const getClient = (): SandpackClient | null => {
+  const getClient = (): InstanceType<typeof SandpackClient> | null => {
     return sandpack.clients[clientId.current] || null;
   };
 

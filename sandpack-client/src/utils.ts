@@ -1,3 +1,5 @@
+import { invariant } from "outvariant";
+
 import type {
   SandpackBundlerFiles,
   Dependencies,
@@ -6,8 +8,17 @@ import type {
   ErrorStackFrame,
 } from "./types";
 
-const DEPENDENCY_ERROR_MESSAGE = `[sandpack-client]: "dependencies" was not specified - provide either a package.json or a "dependencies" value`;
-const ENTRY_ERROR_MESSAGE = `[sandpack-client]: "entry" was not specified - provide either a package.json with the "main" field or an "entry" value`;
+export const createError = (message: string): string =>
+  `[sandpack-client]: ${message}`;
+
+export function nullthrows<T>(value?: T | null, err = "Value is nullish"): T {
+  invariant(value != null, createError(err));
+
+  return value;
+}
+
+const DEPENDENCY_ERROR_MESSAGE = `"dependencies" was not specified - provide either a package.json or a "dependencies" value`;
+const ENTRY_ERROR_MESSAGE = `"entry" was not specified - provide either a package.json with the "main" field or an "entry" value`;
 
 export function createPackageJSON(
   dependencies: Dependencies = {},
@@ -40,8 +51,8 @@ export function addPackageJSONIfNeeded(
    * Create a new package json
    */
   if (!packageJsonFile) {
-    if (!dependencies) throw new Error(DEPENDENCY_ERROR_MESSAGE);
-    if (!entry) throw new Error(ENTRY_ERROR_MESSAGE);
+    nullthrows(dependencies, DEPENDENCY_ERROR_MESSAGE);
+    nullthrows(entry, ENTRY_ERROR_MESSAGE);
 
     normalizedFilesPath["/package.json"] = {
       code: createPackageJSON(dependencies, devDependencies, entry),
@@ -56,9 +67,10 @@ export function addPackageJSONIfNeeded(
   if (packageJsonFile) {
     const packageJsonContent = JSON.parse(packageJsonFile.code);
 
-    if (!dependencies && !packageJsonContent.dependencies) {
-      throw new Error(DEPENDENCY_ERROR_MESSAGE);
-    }
+    nullthrows(
+      !(!dependencies && !packageJsonContent.dependencies),
+      ENTRY_ERROR_MESSAGE
+    );
 
     if (dependencies) {
       packageJsonContent.dependencies = {

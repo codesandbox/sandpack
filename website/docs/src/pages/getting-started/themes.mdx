@@ -1,0 +1,56 @@
+import { IntroSection, IntroCard } from "../../components/IntroCard";
+import Hero from "../../components/Hero";
+import { CodeBlock } from "../../components/CodeBlock";
+import Themes from "../../components/Themes";
+
+# Sandpack Themes
+
+<IntroSection>
+  <IntroCard 
+    icon="Theme"
+    title="All themes" 
+    description="See all themes available on @codesandbox/sandpack-themes and how you can use it" 
+    href="#all-themes" 
+  />
+
+  <IntroCard
+    icon="Magic" 
+    title="Sandpack Theme Builder"
+    description="Design and customize your own theme, among other Sandpack presets." 
+    href="https://sandpack.codesandbox.io/theme" 
+    external 
+  />
+</IntroSection>
+
+The overall style can be set through the `theme` prop. Sandpack offers a set of predefined options, but individual values can be passed to customize the style of your `Sandpack` instance. Besides the included themes, you can also consume a set of themes from `@codesandbox/sandpack-themes`, an open-source package that contains many other themes compatible with Sandpack.
+
+<Themes />
+
+## Custom Theme
+
+You can also pass a **partial** theme object that overrides properties in the
+**default** theme, which is `light`.
+
+<br />
+
+<CodeBlock stack>
+{`import { Sandpack } from "@codesandbox/sandpack-react";
+
+export default function App() {
+  return (
+    <Sandpack 
+      theme={{
+        colors: {
+          accent: "rebeccapurple",
+        },
+        syntax: {
+          tag: "#006400",
+          string: "rgb(255, 165, 0)",
+          plain: "tomato",
+        },
+      }}
+    />
+  );
+}
+`}
+</CodeBlock>

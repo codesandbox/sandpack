@@ -52,9 +52,6 @@ const INITIAL_STATE: State = {
   specsCount: 0,
 };
 
-/**
- * @category Components
- */
 export const SandpackTests: React.FC<
   {
     verbose?: boolean;
@@ -79,6 +76,35 @@ export const SandpackTests: React.FC<
     verbose,
     watchMode,
   });
+
+  const runAllTests = React.useCallback((): void => {
+    setState((oldState) => ({
+      ...oldState,
+      status: "running",
+      specs: {},
+    }));
+
+    const client = getClient();
+    if (client) {
+      client.dispatch({ type: "run-all-tests" });
+    }
+  }, [getClient]);
+
+  const runSpec = React.useCallback((): void => {
+    setState((oldState) => ({
+      ...oldState,
+      status: "running",
+      specs: {},
+    }));
+
+    const client = getClient();
+    if (client) {
+      client.dispatch({ type: "run-tests", path: sandpack.activeFile });
+    }
+  }, [getClient, sandpack.activeFile]);
+
+  const testFileRegex = /.*\.(test|spec)\.[tj]sx?$/;
+  const isSpecOpen = sandpack.activeFile.match(testFileRegex) !== null;
 
   React.useEffect(() => {
     let currentDescribeBlocks: string[] = [];
@@ -314,33 +340,6 @@ export const SandpackTests: React.FC<
 
     return unsubscribe;
   }, [state.suiteOnly, state.watchMode, sandpack.activeFile]);
-
-  const runAllTests = (): void => {
-    setState((oldState) => ({
-      ...oldState,
-      status: "running",
-      specs: {},
-    }));
-    const client = getClient();
-    if (client) {
-      client.dispatch({ type: "run-all-tests" });
-    }
-  };
-
-  const runSpec = (): void => {
-    setState((oldState) => ({
-      ...oldState,
-      status: "running",
-      specs: {},
-    }));
-    const client = getClient();
-    if (client) {
-      client.dispatch({ type: "run-tests", path: sandpack.activeFile });
-    }
-  };
-
-  const testFileRegex = /.*\.(test|spec)\.[tj]sx?$/;
-  const isSpecOpen = sandpack.activeFile.match(testFileRegex) !== null;
 
   React.useEffect(
     function watchMode() {

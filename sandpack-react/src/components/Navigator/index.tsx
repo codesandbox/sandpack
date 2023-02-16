@@ -45,17 +45,11 @@ const inputClassName = css({
   },
 });
 
-/**
- * @category Components
- */
 export interface NavigatorProps {
   clientId: string;
   onURLChange?: (newURL: string) => void;
 }
 
-/**
- * @category Components
- */
 export const Navigator = ({
   clientId,
   onURLChange,

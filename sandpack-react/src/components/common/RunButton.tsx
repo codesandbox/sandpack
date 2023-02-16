@@ -1,11 +1,10 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
-import { css, THEME_PREFIX } from "../../styles";
-import { roundedButtonClassName, buttonClassName } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { css } from "../../styles";
 import { RunIcon } from "../icons";
+
+import { RoundedButton } from "./RoundedButton";
 
 const runButtonClassName = css({
   position: "absolute",
@@ -14,35 +13,22 @@ const runButtonClassName = css({
   paddingRight: "$space$3",
 });
 
-/**
- * @category Components
- */
-export const RunButton = ({
-  className,
-  onClick,
-  ...props
-}: React.HTMLAttributes<HTMLButtonElement>): JSX.Element | null => {
-  const c = useClasser(THEME_PREFIX);
+export const RunButton: React.FC<
+  React.PropsWithChildren & React.ButtonHTMLAttributes<unknown>
+> = ({ className, onClick, ...props }) => {
   const { sandpack } = useSandpack();
 
   return (
-    <button
-      className={classNames(
-        c("button"),
-        buttonClassName,
-        roundedButtonClassName,
-        runButtonClassName,
-        className
-      )}
+    <RoundedButton
+      className={runButtonClassName.toString()}
       onClick={(event): void => {
         sandpack.runSandpack();
         onClick?.(event);
       }}
-      type="button"
       {...props}
     >
       <RunIcon />
-      Run
-    </button>
+      <span>Run</span>
+    </RoundedButton>
   );
 };

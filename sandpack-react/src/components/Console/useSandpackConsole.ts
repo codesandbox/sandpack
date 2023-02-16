@@ -24,17 +24,22 @@ export const useSandpackConsole = (props?: {
 
   const showSyntaxError = props?.showSyntaxError ?? false;
   const maxMessageCount = props?.maxMessageCount ?? MAX_MESSAGE_COUNT;
+  const clientId = props?.clientId;
 
   React.useEffect(() => {
     const unsubscribe = listen((message) => {
       if (message.type === "console" && message.codesandbox) {
-        if (message.log.find(({ method }) => method === "clear")) {
+        const payloadLog = Array.isArray(message.log)
+          ? message.log
+          : [message.log];
+
+        if (payloadLog.find(({ method }) => method === "clear")) {
           return setLogs([CLEAR_LOG]);
         }
 
         const logsMessages = showSyntaxError
-          ? message.log
-          : message.log.filter((messageItem) => {
+          ? payloadLog
+          : payloadLog.filter((messageItem) => {
               const messagesWithoutSyntaxErrors = messageItem.data.filter(
                 (dataItem) => {
                   if (typeof dataItem !== "string") return true;
@@ -66,10 +71,10 @@ export const useSandpackConsole = (props?: {
           return messages;
         });
       }
-    }, props?.clientId);
+    }, clientId);
 
     return unsubscribe;
-  }, [listen, maxMessageCount, props, showSyntaxError]);
+  }, [showSyntaxError, maxMessageCount, clientId]);
 
   return { logs, reset: (): void => setLogs([]) };
 };

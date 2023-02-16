@@ -9,42 +9,12 @@ import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackThemeProvider } from "../../styles/themeContext";
 import { SandpackPreview } from "../Preview";
 
-import { useSandpackLint } from "./eslint";
-
 import type { CodeEditorProps } from "./";
 import { SandpackCodeEditor } from "./";
 
 export default {
   title: "components/Code Editor",
   component: SandpackCodeEditor,
-};
-
-export const EslintIntegration: React.FC = () => {
-  const { lintErrors, lintExtensions } = useSandpackLint();
-
-  return (
-    <SandpackProvider
-      files={{
-        "/App.js": `export default function App() {
-  if(true) {
-    useState()
-  }
-  return <h1>Hello World</h1>
-}`,
-      }}
-      template="react"
-    >
-      <SandpackThemeProvider>
-        <SandpackCodeEditor
-          extensions={lintExtensions}
-          extensionsKeymap={[]}
-          id="extensions"
-        />
-
-        {JSON.stringify(lintErrors)}
-      </SandpackThemeProvider>
-    </SandpackProvider>
-  );
 };
 
 export const Component: Story<CodeEditorProps> = (args) => (
@@ -85,7 +55,7 @@ export const InlineError: React.FC = () => (
   <SandpackProvider
     files={{
       "/App.js": `export default function App() 
-  return <h1>Hello World</h1>
+  return <h1>Hello world</h1>
 }`,
     }}
     template="react"
@@ -98,10 +68,12 @@ export const InlineError: React.FC = () => (
 );
 
 export const ClosableTabs: React.FC = () => (
-  <SandpackProvider template="react">
-    <SandpackThemeProvider theme="dark">
-      <SandpackCodeEditor closableTabs />
-    </SandpackThemeProvider>
+  <SandpackProvider
+    options={{ visibleFiles: ["/App.js", "/index.js", "/styles.css"] }}
+    template="react"
+    theme="dark"
+  >
+    <SandpackCodeEditor closableTabs />
   </SandpackProvider>
 );
 

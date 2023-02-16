@@ -1,0 +1,65 @@
+---
+title: Introduction | Sandpack Docs
+name: Introduction
+authors: ["Admin"]
+---
+
+import { IntroSection, IntroCard } from "../components/IntroCard";
+import Hero from "../components/Hero";
+import { CodeBlock } from "../components/CodeBlock";
+
+<Hero
+  title="Live coding in the browser."
+  subtitle="Run any JavaScript and Node.js app in any browser."
+/>
+
+<CodeBlock options={{ showConsoleButton: true }}>
+{`console.log("Sandpack 📦")
+
+export default function App() {
+  return (
+    <div className="App">
+      <h1>Hello world ✨</h1>
+      <p>Start editing to see some magic happen!</p>
+    </div>
+  );
+}`}
+</CodeBlock>
+
+Sandpack is a component toolkit for creating live-running code editing experiences, powered by the online bundler used on [CodeSandbox](https://codesandbox.io/).
+
+It provides an open ecosystem of components and utilities that allow you to compile and run modern frameworks in the browser. You can either use one of our predefined `components` for embedding the _CodeSandbox_ experience into your projects, or you can build your own version of `sandpack`, on top of our standard components and utilities.
+
+As you walk through this guide, you will get deeper into our ecosystem.
+
+### Getting Started
+
+<IntroSection>
+  <IntroCard 
+    icon="Play"
+    title="Install" 
+    description="Learn how to add Sandpack to your projects and start coding in record time." 
+    href="/getting-started"  
+  />
+  
+  <IntroCard 
+    icon="Mosaic"
+    title="Components" 
+    description="Explore all Sandpack capabilities, such as console, tests and preview components." href="/advanced-usage/components"  
+  />
+
+  <IntroCard
+    icon="Code"
+    title="Advanced Usage"
+    description="Get an overview of some Sandpack capabilities and how to extend its API."
+    href="/advanced-usage/provider"
+  />
+
+  <IntroCard
+    icon="Theme" 
+    title="Sandpack Theme Builder" 
+    description="Design and customize your own theme and find other Sandpack presets." 
+    href="https://sandpack.codesandbox.io/theme"
+    external 
+  />
+</IntroSection>

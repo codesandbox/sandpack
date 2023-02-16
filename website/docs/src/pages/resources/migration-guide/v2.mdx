@@ -1,0 +1,85 @@
+---
+title: v2.x
+---
+
+# Migration guide v2.x
+
+<br />
+
+<big>
+Sandpack 2.0 introduces one of the most exciting features we've ever launched: Nodebox integration - a fast runtime Node.js environment inside of Sandpack:
+</big>
+
+- Run Vite-based templates, Next.js & more.
+- Lazily load bundler (runtime or Nodebox) as needed.
+
+Fortunately, `@codesandbox/sandpack-react` doesn't introduce any breaking changes for this release. However, in order to support a new kind of Sandpack bundler (Nodebox), `@codesandbox/sandpack-client` contains a few breaking changes, and we took this chance to rename some API methods.
+
+## `@codesandbox/sandpack-client`
+
+### Main entry point
+
+Sandpack Client used to export a single entry point to mound a new client. However, 2.0 introduced one more type of environment (Nodebox) and we wanted to provide an interface that could lazily load each environment as needed.
+
+To migrate to the latest version of sandpack-client, you will need to make the following changes:
+
+#### Importing the `loadSandpackClient` function
+
+Before, you would import the SandpackClient class like this:
+
+```js
+import { SandpackClient } from "@codesandbox/sandpack-client";
+```
+
+Now, you will need to import the `loadSandpackClient` function instead:
+
+```js
+import { loadSandpackClient } from "@codesandbox/sandpack-client";
+
+const main = async () => {
+  const client = await loadSandpackClient(myIframe, myFiles, myOptions);
+  
+  // The rest of your code can stay the same
+  client.updateSandbox();
+}
+```
+
+**Consuming clients independently**
+
+If you want to skip the lazy loading step and consume the clients independently, you can import the `SandpackRuntime` and `SandpackNode` classes directly:
+
+```js
+import { SandpackRuntime } from "@codesandbox/sandpack-client/clients/runtime";
+import { SandpackNode } from "@codesandbox/sandpack-client/clients/node";
+
+const runtimeClient = new SandpackRuntime(/* arguments */)
+const nodeClient = new SandpackNode(/* arguments */)
+```
+
+### Deprecated APIs
+
+**Template**
+
+The `vue` template has been deprecated in order to use the latest Vue version, which used to be on `vue3` template. In other words, the current `vue` template is now using Vue 3, and Vue 2 has been removed from the template list.
+
+
+### API renaming
+
+Two methods have been renamed in the latest version of sandpack-client:
+
+- `updateSandbox` is now called `updatePreview`
+- `cleanup` is now called `destroy`
+
+To migrate your code to the latest version, you will need to update any calls to these methods like this:
+
+```js
+// Before
+client.updateSandbox();
+client.cleanup();
+
+// Now
+client.updatePreview();
+client.destroy();
+```
+
+After making these changes, your code should be compatible with the latest version of `sandpack-client`.
