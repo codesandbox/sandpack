@@ -1,6 +1,6 @@
 {
   "name": "sandpack-docs",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "@codesandbox/sandpack-themes": "^2.0.1",
     "@radix-ui/react-tabs": "^1.0.1",
     "amplitude-js": "^8.13.0",
-    "codesandbox-theme-docs": "^2.0.1",
+    "codesandbox-theme-docs": "^2.0.2",
     "next": "^12.2.4",
     "nextra": "^2.0.1",
     "nextra-theme-docs": "^2.0.1",
