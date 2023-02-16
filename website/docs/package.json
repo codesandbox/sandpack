@@ -1,59 +1,25 @@
 {
   "name": "sandpack-docs",
-  "version": "0.0.1",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "docusaurus": "docusaurus",
-    "start": "docusaurus start -h 0.0.0.0",
-    "build:deps": "yarn workspace @codesandbox/sandpack-client build && yarn workspace @codesandbox/sandpack-react build && yarn workspace @codesandbox/sandpack-themes build",
-    "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "dev": "next",
+    "debug": "NODE_OPTIONS='--inspect' next",
+    "start": "next start",
+    "build": "next build",
+    "test-docs": "alex pages/**/"
   },
   "dependencies": {
+    "amplitude-js": "^8.13.0",
+    "next": "^12.2.4",
+    "nextra": "^2.0.1",
+    "nextra-theme-docs": "^2.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "@codesandbox/sandpack-react": "*",
     "@codesandbox/sandpack-themes": "*",
-    "@docusaurus/core": "2.0.0-beta.20",
-    "@docusaurus/plugin-sitemap": "^2.0.0-beta.20",
-    "@docusaurus/preset-classic": "2.0.0-beta.20",
-    "@mdx-js/react": "^1.6.21",
-    "@svgr/webpack": "^5.5.0",
-    "clsx": "^1.1.1",
-    "docusaurus-plugin-sass": "0.2.1",
-    "docusaurus-plugin-typedoc": "^0.16.3",
-    "file-loader": "^6.2.0",
-    "prism-react-renderer": "^1.2.1",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "sass": "1.30.0",
-    "typedoc": "^0.22.8",
-    "typedoc-plugin-markdown": "^3.11.3",
-    "url-loader": "^4.1.1"
-  },
-  "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.0.0-beta.20",
-    "@tsconfig/docusaurus": "^1.0.4",
-    "@types/react": "^17.0.14",
-    "@types/react-helmet": "^6.1.2",
-    "@types/react-router-dom": "^5.1.8",
-    "typedoc-plugin-no-inherit": "^1.3.1",
-    "typescript": "^4.3.5"
-  },
-  "browserslist": {
-    "production": [
-      ">0.5%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "codesandbox-theme-docs": "*",
+    "@radix-ui/react-tabs": "^1.0.1"
   }
 }

@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+import { act } from "@testing-library/react-hooks";
 import React from "react";
 import { create } from "react-test-renderer";
 
@@ -5,6 +9,8 @@ import { SandpackProvider } from "../../contexts/sandpackContext";
 import { SandpackCodeEditor } from "../CodeEditor";
 
 describe("FileTabs", () => {
+  jest.useFakeTimers();
+
   it("doesn't have duplicate filename", () => {
     const component = create(
       <SandpackProvider
@@ -18,6 +24,10 @@ describe("FileTabs", () => {
         <SandpackCodeEditor />
       </SandpackProvider>
     ).root;
+
+    act(() => {
+      jest.runAllTimers();
+    });
 
     const buttons = component.findAll((el) =>
       el.props.className?.includes("sp-tab-button")
@@ -43,6 +53,10 @@ describe("FileTabs", () => {
         <SandpackCodeEditor />
       </SandpackProvider>
     ).root;
+
+    act(() => {
+      jest.runAllTimers();
+    });
 
     const buttons = component.findAll((el) =>
       el.props.className?.includes("sp-tab-button")

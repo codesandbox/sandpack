@@ -1,0 +1,60 @@
+import { IntroSection, IntroCard } from "../../components/IntroCard";
+import { Callout, Tabs, Tab } from "nextra-theme-docs";
+import { CodeBlock } from "../../components/CodeBlock";
+
+# Install
+
+Install the Sandpack dependency on your project.
+
+<Tabs items={["npm", "yarn", "pnpm"]}>
+  <Tab>  
+```shell
+npm i @codesandbox/sandpack-react
+```
+  </Tab>
+
+  <Tab>
+```bash
+yarn i @codesandbox/sandpack-react 
+```
+  </Tab>
+
+  <Tab>
+    ```bash
+pnpm i @codesandbox/sandpack-react 
+```
+  </Tab>
+</Tabs>
+
+All the components and the bundler are packed inside the `Sandpack` component, which is a named export of the package. Besides that, the package contains multiple **components**, **utilities** and **typings**.
+
+## Quickstart
+
+This should give you a nice code editor with a preview that runs in the browser.
+
+<CodeBlock stack>
+{`import { Sandpack } from "@codesandbox/sandpack-react";
+
+export default function App() {
+  return <Sandpack />
+}
+`}
+</CodeBlock>
+
+## Next steps
+
+<IntroSection>
+  <IntroCard
+    icon="Code"
+    title="Templates & files"
+    description="Learn how to add files to your projects and start coding in record time."
+    href="/getting-started/usage"
+  />
+
+  <IntroCard
+    icon="Theme"
+    title="Themes"
+    description="Design and customize your own theme and find other Sandpack presets."
+    href="/getting-started/themes"
+  />
+</IntroSection>

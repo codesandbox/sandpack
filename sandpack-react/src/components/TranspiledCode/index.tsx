@@ -19,11 +19,12 @@ const transpiledCodeClassName = css({
   overflow: "auto",
   minHeight: "160px",
   flex: 1,
+
+  [`.${THEME_PREFIX}-stack`]: {
+    height: "100%",
+  },
 });
 
-/**
- * @category Components
- */
 export const SandpackTranspiledCode = ({
   className,
   ...props

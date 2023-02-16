@@ -1,28 +1,30 @@
 import * as React from "react";
 
+import { useSandpack, useSandpackClient, useSandpackShell } from "../..";
+import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
-import { CodeEditor } from "../CodeEditor";
 import { SandpackStack } from "../common";
+import { RoundedButton } from "../common/RoundedButton";
+import { CleanIcon, RestartIcon } from "../icons";
+import { PreviewProgress } from "../Preview/PreviewProgress";
 
-import { Button } from "./Button";
+import { ConsoleList } from "./ConsoleList";
 import { Header } from "./Header";
+import { StdoutList } from "./StdoutList";
 import { useSandpackConsole } from "./useSandpackConsole";
-import { fromConsoleToString } from "./utils/fromConsoleToString";
 import type { SandpackConsoleData } from "./utils/getType";
-import { getType } from "./utils/getType";
 
 interface SandpackConsoleProps {
   clientId?: string;
   showHeader?: boolean;
   showSyntaxError?: boolean;
+  showSetupProgress?: boolean;
   maxMessageCount?: number;
   onLogsChange?: (logs: SandpackConsoleData) => void;
 }
 
 /**
- * @category Components
- *
  * `SandpackConsole` is a Sandpack devtool that allows printing
  * the console logs from a Sandpack client. It is designed to be
  * a light version of a browser console, which means that it's
@@ -31,152 +33,119 @@ interface SandpackConsoleProps {
 export const SandpackConsole: React.FC<
   React.HTMLAttributes<HTMLDivElement> & SandpackConsoleProps
 > = ({
-  clientId,
   showHeader = true,
   showSyntaxError = false,
   maxMessageCount,
   onLogsChange,
   className,
+  showSetupProgress = false,
   ...props
 }) => {
-  const { logs, reset } = useSandpackConsole({
-    clientId,
+  const {
+    sandpack: { environment },
+  } = useSandpack();
+
+  const { restart } = useSandpackShell();
+
+  const [currentTab, setCurrentTab] = React.useState<"server" | "client">(
+    environment === "node" ? "server" : "client"
+  );
+
+  const { logs: consoleData, reset: resetConsole } = useSandpackConsole({
     maxMessageCount,
     showSyntaxError,
   });
+
+  const { logs: stdoutData, reset: resetStdout } = useSandpackShellStdout({
+    maxMessageCount,
+  });
+
   const wrapperRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    onLogsChange?.(logs);
+    onLogsChange?.(consoleData);
 
     if (wrapperRef.current) {
       wrapperRef.current.scrollTop = wrapperRef.current.scrollHeight;
     }
-  }, [onLogsChange, logs]);
+  }, [onLogsChange, consoleData, stdoutData, currentTab]);
+
+  const isServerTab = currentTab === "server";
+  const isNodeEnvironment = environment === "node";
 
   return (
     <SandpackStack
       className={classNames(
-        css({ height: "100%", background: "$surface1" }),
+        css({
+          height: "100%",
+          background: "$surface1",
+          iframe: { display: "none" },
+        }),
         `${THEME_PREFIX}-console`,
         className
       )}
       {...props}
     >
-      {showHeader && <Header />}
+      {showSetupProgress && (
+        <PreviewProgress dismissOnTimeout timeout={1_000} />
+      )}
+
+      {(showHeader || isNodeEnvironment) && (
+        <Header
+          currentTab={currentTab}
+          node={isNodeEnvironment}
+          setCurrentTab={setCurrentTab}
+        />
+      )}
+
       <div
         ref={wrapperRef}
         className={classNames(
           css({ overflow: "auto", scrollBehavior: "smooth" })
         )}
       >
-        {logs.map(({ data, id, method }, logIndex, references) => {
-          if (!data) return null;
-
-          if (Array.isArray(data)) {
-            return (
-              <React.Fragment key={id}>
-                {data.map((msg, msgIndex) => {
-                  const fixReferences = references.slice(
-                    logIndex,
-                    references.length
-                  );
-
-                  return (
-                    <div
-                      key={`${id}-${msgIndex}`}
-                      className={classNames(
-                        consoleItemClassName({ variant: getType(method) })
-                      )}
-                    >
-                      <CodeEditor
-                        code={
-                          method === "clear"
-                            ? (msg as string)
-                            : fromConsoleToString(msg, fixReferences)
-                        }
-                        fileType="js"
-                        initMode="user-visible"
-                        showReadOnly={false}
-                        readOnly
-                        wrapContent
-                      />
-                    </div>
-                  );
-                })}
-              </React.Fragment>
-            );
-          }
-
-          return null;
-        })}
+        {isServerTab ? (
+          <StdoutList data={stdoutData} />
+        ) : (
+          <ConsoleList data={consoleData} />
+        )}
       </div>
 
-      <Button onClick={reset} />
+      <div
+        className={classNames(
+          css({
+            position: "absolute",
+            bottom: "$space$2",
+            right: "$space$2",
+            display: "flex",
+            gap: "$space$2",
+          })
+        )}
+      >
+        {isServerTab && (
+          <RoundedButton
+            onClick={(): void => {
+              restart();
+              resetConsole();
+              resetStdout();
+            }}
+          >
+            <RestartIcon />
+          </RoundedButton>
+        )}
+
+        <RoundedButton
+          onClick={(): void => {
+            if (currentTab === "client") {
+              resetConsole();
+            } else {
+              resetStdout();
+            }
+          }}
+        >
+          <CleanIcon />
+        </RoundedButton>
+      </div>
     </SandpackStack>
   );
 };
-
-const consoleItemClassName = css({
-  width: "100%",
-  padding: "$space$3 $space$2",
-  fontSize: ".85em",
-  position: "relative",
-
-  "&:not(:first-child):after": {
-    content: "",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 1,
-    background: "$colors$surface3",
-  },
-
-  /**
-   * Editor reset
-   */
-  ".sp-cm": {
-    padding: 0,
-  },
-
-  ".cm-editor": {
-    background: "none",
-  },
-
-  ".cm-content": {
-    padding: 0,
-  },
-
-  [`.${THEME_PREFIX}-pre-placeholder`]: {
-    margin: "0 !important",
-    fontSize: "1em",
-  },
-
-  variants: {
-    variant: {
-      error: {
-        color: "$colors$error",
-        background: "$colors$errorSurface",
-
-        "&:not(:first-child):after": {
-          background: "$colors$error",
-          opacity: 0.07,
-        },
-      },
-      warning: {
-        color: "$colors$warning",
-        background: "$colors$warningSurface",
-
-        "&:not(:first-child):after": {
-          background: "$colors$warning",
-          opacity: 0.07,
-        },
-      },
-      clear: {
-        fontStyle: "italic",
-      },
-      info: {},
-    },
-  },
-});

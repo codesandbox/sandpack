@@ -152,7 +152,7 @@ Object {
 exports[`standardizeTheme should return the \`dark\` theme 1`] = `
 Object {
   "id": "dark",
-  "mode": "light",
+  "mode": "dark",
   "theme": Object {
     "colors": Object {
       "accent": "#E5E5E5",

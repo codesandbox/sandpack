@@ -75,7 +75,7 @@ export const ThemeExample: React.FC = () => {
           <CardDescription>
             Style Sandpack however you&apos;d like! Use a premade{" "}
             <a
-              href="https://sandpack.codesandbox.io/docs/getting-started/custom-ui#theming"
+              href="https://sandpack.codesandbox.io/docs/getting-started/themes"
               rel="noreferrer"
               target="_blank"
             >

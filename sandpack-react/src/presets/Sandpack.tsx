@@ -8,14 +8,10 @@ import { SandpackPreview } from "../components/Preview";
 import { SandpackTests } from "../components/Tests";
 import { SandpackStack } from "../components/common";
 import { SandpackLayout } from "../components/common/Layout";
+import { RoundedButton } from "../components/common/RoundedButton";
 import { ConsoleIcon } from "../components/icons";
 import { SandpackProvider } from "../contexts/sandpackContext";
 import { css, THEME_PREFIX } from "../styles";
-import {
-  buttonClassName,
-  iconStandaloneClassName,
-  roundedButtonClassName,
-} from "../styles/shared";
 import { SANDBOX_TEMPLATES } from "../templates";
 import type {
   SandpackInternal,
@@ -26,9 +22,6 @@ import type {
 } from "../types";
 import { classNames } from "../utils/classNames";
 
-/**
- * @hidden
- */
 export const Sandpack: SandpackInternal = ({
   options,
   template,
@@ -37,7 +30,6 @@ export const Sandpack: SandpackInternal = ({
   theme,
   ...props
 }) => {
-  // fallback values
   options ??= {};
   options.resizablePanels ??= true;
   options.editorWidthPercentage ??= 50;
@@ -54,7 +46,6 @@ export const Sandpack: SandpackInternal = ({
     extensionsKeymap: options.codeEditor?.extensionsKeymap,
     readOnly: options.readOnly,
     showReadOnly: options.showReadOnly,
-    id: options.id,
     additionalLanguages: options.codeEditor?.additionalLanguages,
   };
 
@@ -121,6 +112,7 @@ export const Sandpack: SandpackInternal = ({
     gap: consoleVisibility ? 1 : 0,
     height: options.editorHeight, // use the original editor height
   };
+
   const topRowStyle = hasRightColumn
     ? {
         flexGrow: verticalSize,
@@ -196,6 +188,7 @@ export const Sandpack: SandpackInternal = ({
 
   return (
     <SandpackProvider
+      key={template}
       customSetup={customSetup}
       files={files as TemplateFiles<SandpackPredefinedTemplate>}
       options={providerOptions}
@@ -239,7 +232,6 @@ export const Sandpack: SandpackInternal = ({
               style={topRowStyle}
             />
           )}
-
           {mode === "tests" && (
             <SandpackTests
               actionsChildren={actionsChildren}
@@ -284,26 +276,6 @@ export const Sandpack: SandpackInternal = ({
   );
 };
 
-const ConsoleCounterButton: React.FC<{
-  onClick: () => void;
-  counter: number;
-}> = ({ onClick, counter }) => {
-  return (
-    <button
-      className={classNames(
-        buttonClassName,
-        iconStandaloneClassName,
-        roundedButtonClassName,
-        buttonCounter
-      )}
-      onClick={onClick}
-    >
-      <ConsoleIcon />
-      {counter > 0 && <span>{counter}</span>}
-    </button>
-  );
-};
-
 const dragHandler = css({
   position: "absolute",
   zIndex: "$top",
@@ -330,10 +302,22 @@ const dragHandler = css({
   },
 });
 
+const ConsoleCounterButton: React.FC<{
+  onClick: () => void;
+  counter: number;
+}> = ({ onClick, counter }) => {
+  return (
+    <RoundedButton className={buttonCounter.toString()} onClick={onClick}>
+      <ConsoleIcon />
+      {counter > 0 && <strong>{counter}</strong>}
+    </RoundedButton>
+  );
+};
+
 const buttonCounter = css({
   position: "relative",
 
-  span: {
+  strong: {
     background: "$colors$clickable",
     color: "$colors$surface1",
     minWidth: 12,
@@ -345,6 +329,7 @@ const buttonCounter = css({
     position: "absolute",
     top: 0,
     right: 0,
+    fontWeight: "normal",
   },
 });
 

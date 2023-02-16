@@ -100,7 +100,7 @@ export const standardizeTheme = (
     return {
       theme: predefinedTheme,
       id: inputTheme,
-      mode: "light",
+      mode: isDarkColor(predefinedTheme.colors.surface1) ? "dark" : "light",
     };
   }
 

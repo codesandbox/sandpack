@@ -1,0 +1,65 @@
+import { Callout } from "nextra-theme-docs";
+import { CodeBlock } from "../../components/CodeBlock";
+
+# Overview
+
+If you [open a preset file](https://github.com/codesandbox/sandpack/blob/main/sandpack-react/src/presets/Sandpack.tsx) from the sandpack repository, you'll see it is made up
+of smaller sandpack **components** and has limited logic for passing props to
+those smaller components.
+
+If you need a custom version of sandpack, you can opt in to use these smaller
+components, which are also exported from the main package.
+
+Before talking about the actual components, let's dive into how sandpack manages its internal state.
+
+## Sandpack Provider
+
+The core of sandpack is managed by the `SandpackProvider`, central point of our
+architecture. The provider abstracts the functionality of `sandpack` and places
+the public state values and functions on a `context` object. The `React`
+components that are exported by the main package (eg: `SandpackCodeEditor`,
+`SandpackPreview`) use that `context` object to communicate with `sandpack`.
+
+<CodeBlock stack>
+{`import { 
+  SandpackProvider, 
+  SandpackLayout, 
+  SandpackPreview, 
+  SandpackCodeEditor 
+} from "@codesandbox/sandpack-react";
+
+const CustomSandpack = () => (
+  <SandpackProvider>
+    <SandpackLayout>
+      <SandpackCodeEditor />
+      <SandpackPreview />
+    </SandpackLayout>
+  </SandpackProvider>
+);
+
+export default () => <CustomSandpack />
+`}
+</CodeBlock>
+
+Running this snippet will render a preview with a vanilla template, because the sandpack logic is running behind
+the scenes and the template, if omitted, is `vanilla`.
+
+### Clients
+
+Under one Sandpack provider, you can have multiple `sandpack-clients`. For example, the most common case for multiple clients is when more than one `SandpackPreview` has been rendered.
+
+To access all the clients or to pass messages to the iframes under the same provider, use the `useSandpack` hook, which gives a way to interact with these clients:
+
+```js
+const ListenerIframeMessage = () => {
+  const { sandpack } = useSandpack();
+
+  const sender = () => {
+    Object.values(sandpack.clients).forEach((client) => {
+      client.iframe.contentWindow.postMessage("Hello world", "*");
+    });
+  };
+
+  return <button onClick={sender}>Send message</button>;
+};
+```

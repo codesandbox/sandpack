@@ -3,39 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.19.0](https://github.com/codesandbox/sandpack/compare/v1.18.4...v1.19.0) (2023-01-09)
-
-
-### Features
-
-* migrate esbuild to rollup ([#678](https://github.com/codesandbox/sandpack/issues/678)) ([671bb23](https://github.com/codesandbox/sandpack/commit/671bb235bad88aa8bbaeeb728225b3d5051ca4ea))
-
-
-
-
-
-# [1.17.0](https://github.com/codesandbox/sandpack/compare/v1.16.0...v1.17.0) (2022-10-31)
-
-
-### Features
-
-* added freeCodeCampLight theme ([#635](https://github.com/codesandbox/sandpack/issues/635)) ([5434bee](https://github.com/codesandbox/sandpack/commit/5434beea99d18eea4214c996540cace9062a67f0))
-
-
-
-
-
-# [1.16.0](https://github.com/codesandbox/sandpack/compare/v1.15.5...v1.16.0) (2022-10-31)
-
-
-### Features
-
-* added oceanBlue theme ([#636](https://github.com/codesandbox/sandpack/issues/636)) ([b508b84](https://github.com/codesandbox/sandpack/commit/b508b84c6231f066d869f1fc2e67367c6f735f88))
-
-
-
-
-
 ## [1.15.2](https://github.com/codesandbox/sandpack/compare/v1.15.1...v1.15.2) (2022-10-21)
 
 

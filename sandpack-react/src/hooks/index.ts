@@ -6,3 +6,4 @@ export * from "./useSandpackNavigation";
 export * from "./useSandpackTheme";
 export * from "./useTranspiledCode";
 export * from "./useSandpackClient";
+export * from "./useSandpackShell";

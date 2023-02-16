@@ -23,16 +23,43 @@ export interface SandpackFileExplorerProp {
   autoHiddenFiles?: boolean;
 }
 
-/**
- * @category Components
- */
 export const SandpackFileExplorer = ({
   className,
   autoHiddenFiles = false,
   ...props
 }: SandpackFileExplorerProp &
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
-  const { sandpack } = useSandpack();
+  const {
+    sandpack: {
+      status,
+      updateFile,
+      deleteFile,
+      activeFile,
+      files,
+      openFile,
+      visibleFilesFromProps,
+    },
+    listen,
+  } = useSandpack();
+
+  React.useEffect(
+    function watchFSFilesChanges() {
+      if (status !== "running") return;
+
+      const unsubscribe = listen((message) => {
+        if (message.type === "fs/change") {
+          updateFile(message.path, message.content, false);
+        }
+
+        if (message.type === "fs/remove") {
+          deleteFile(message.path, false);
+        }
+      });
+
+      return unsubscribe;
+    },
+    [status]
+  );
 
   return (
     <div
@@ -45,12 +72,12 @@ export const SandpackFileExplorer = ({
       {...props}
     >
       <ModuleList
-        activeFile={sandpack.activeFile}
+        activeFile={activeFile}
         autoHiddenFiles={autoHiddenFiles}
-        files={sandpack.files}
+        files={files}
         prefixedPath="/"
-        selectFile={sandpack.openFile}
-        visibleFiles={sandpack.visibleFilesFromProps}
+        selectFile={openFile}
+        visibleFiles={visibleFilesFromProps}
       />
     </div>
   );

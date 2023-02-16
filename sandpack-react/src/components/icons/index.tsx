@@ -11,9 +11,34 @@ const SVG: React.FC<React.SVGAttributes<unknown>> = (props) => (
   />
 );
 
-/**
- * @hidden
- */
+export const RestartIcon = (): React.ReactElement => (
+  <SVG fill="none" stroke="currentColor">
+    <title>Restart script</title>
+    <path
+      d="M8 2C4.68629 2 2 4.68629 2 8C2 10.0946 3.07333 11.9385 4.7 13.0118"
+      strokeLinecap="round"
+    />
+    <path
+      d="M14.0005 7.9998C14.0005 5.82095 12.8391 3.91335 11.1016 2.8623"
+      strokeLinecap="round"
+    />
+    <path
+      d="M14.0003 2.3335H11.167C10.8908 2.3335 10.667 2.55735 10.667 2.8335V5.66683"
+      strokeLinecap="round"
+    />
+    <path
+      d="M1.99967 13.6665L4.83301 13.6665C5.10915 13.6665 5.33301 13.4426 5.33301 13.1665L5.33301 10.3332"
+      strokeLinecap="round"
+    />
+    <path d="M10 10L12 12L10 14" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M14.667 14L12.667 14"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </SVG>
+);
+
 export const RunIcon = (): React.ReactElement => (
   <SVG>
     <title>Run sandbox</title>
@@ -21,9 +46,6 @@ export const RunIcon = (): React.ReactElement => (
   </SVG>
 );
 
-/**
- * @hidden
- */
 export const BackwardIcon = (): React.ReactElement => (
   <SVG>
     <title>Click to go back</title>
@@ -31,9 +53,6 @@ export const BackwardIcon = (): React.ReactElement => (
   </SVG>
 );
 
-/**
- * @hidden
- */
 export const ForwardIcon = (): React.ReactElement => (
   <SVG>
     <title>Click to go forward</title>
@@ -41,9 +60,6 @@ export const ForwardIcon = (): React.ReactElement => (
   </SVG>
 );
 
-/**
- * @hidden
- */
 export const RefreshIcon = (): React.ReactElement => (
   <SVG>
     <title>Refresh preview</title>
@@ -55,9 +71,6 @@ export const RefreshIcon = (): React.ReactElement => (
   </SVG>
 );
 
-/**
- * @hidden
- */
 export const CleanIcon = (): React.ReactElement => (
   <SVG fill="none" stroke="currentColor">
     <title>Clean</title>
@@ -66,9 +79,6 @@ export const CleanIcon = (): React.ReactElement => (
   </SVG>
 );
 
-/**
- * @hidden
- */
 export const ExportIcon = (): React.ReactElement => (
   <SVG fill="none" stroke="currentColor">
     <title>Open on CodeSandbox</title>
@@ -84,9 +94,6 @@ export const ExportIcon = (): React.ReactElement => (
   </SVG>
 );
 
-/**
- * @hidden
- */
 export const DirectoryIconOpen = (): React.ReactElement => (
   <SVG>
     <title>Directory</title>
@@ -115,9 +122,6 @@ export const DirectoryIconClosed = (): React.ReactElement => (
   </SVG>
 );
 
-/**
- * @hidden
- */
 export const FileIcon = (): React.ReactElement => (
   <SVG fill="currentColor">
     <title>File</title>
@@ -129,9 +133,6 @@ export const FileIcon = (): React.ReactElement => (
   </SVG>
 );
 
-/**
- * @hidden
- */
 export const CloseIcon = (): React.ReactElement => (
   <SVG stroke="currentColor">
     <title>Close file</title>
@@ -140,9 +141,6 @@ export const CloseIcon = (): React.ReactElement => (
   </SVG>
 );
 
-/**
- * @hidden
- */
 export const ConsoleIcon = (): React.ReactElement => (
   <SVG>
     <title>Open browser console</title>

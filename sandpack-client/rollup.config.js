@@ -1,8 +1,8 @@
-const typescript = require("@rollup/plugin-typescript");
-const pkg = require("./package.json");
 const commonjs = require("@rollup/plugin-commonjs");
-
+const typescript = require("@rollup/plugin-typescript");
 const replace = require("rollup-plugin-replace");
+
+const pkg = require("./package.json");
 
 const configBase = {
   input: "src/index.ts",

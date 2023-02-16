@@ -1,0 +1,34 @@
+{
+  "index": "Introduction",
+  "getting-started": "Getting Started",
+  "nodebox": "Nodebox",
+  "advanced-usage": "Advanced Usage",
+
+  "guides": { "title": "Guides", "collapsed": true },
+
+  "--": { "type": "separator" },
+  "quickstart": {
+    "type": "page",
+    "title": "Quickstart"
+  },
+  "resources": "Resources",
+
+  "github": {
+    "type": "page",
+    "title": "GitHub",
+    "href": "https://github.com/codesandbox/sandpack",
+    "newWindow": true
+  },
+  "twitter": {
+    "type": "page",
+    "title": "Twitter",
+    "href": "https://twitter.com/codesandbox",
+    "newWindow": true
+  },
+  "discord": {
+    "type": "page",
+    "title": "Discord",
+    "href": "https://discord.com/invite/5BpufEP7MH",
+    "newWindow": true
+  }
+}

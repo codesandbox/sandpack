@@ -1,0 +1,19 @@
+html[class~="dark"] {
+  --docs-accent-color: #8ffb89;
+  --docs-accent-color-opacity: #8ffb8960;
+  --docs-accent-color-link: #8ffb89;
+
+  --nextra-primary-hue: 117;
+  --nextra-primary-hue-saturation: 93%;
+  --nextra-primary-hue-lightness: 76%;
+}
+
+html[class~="light"] {
+  --docs-accent-color: #028922;
+  --docs-accent-color-opacity: #02892260;
+  --docs-accent-color-link: #028922;
+
+  --nextra-primary-hue: 134;
+  --nextra-primary-hue-saturation: 97%;
+  --nextra-primary-hue-lightness: 27%;
+}

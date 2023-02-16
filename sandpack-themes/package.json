@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-themes",
-  "version": "1.19.0",
+  "version": "1.15.2",
   "description": "",
   "keywords": [],
   "repository": {
@@ -16,7 +16,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "prebuild": "yarn run clean",
-    "build": "rollup -c && yarn run build:types",
+    "build": "rollup -c && yarn build:types",
     "build:types": "tsc -p tsconfig.json",
     "build:publish": "yarn build",
     "typecheck": "tsc"

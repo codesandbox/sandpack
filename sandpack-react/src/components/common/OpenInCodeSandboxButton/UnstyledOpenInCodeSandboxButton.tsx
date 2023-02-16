@@ -43,9 +43,6 @@ const getFileParameters = (
   });
 };
 
-/**
- * @category Components
- */
 export const UnstyledOpenInCodeSandboxButton: React.FC<
   React.HtmlHTMLAttributes<unknown>
 > = ({ children, ...props }) => {
@@ -78,14 +75,6 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
   );
 
   /**
-   * Register the usage of the codesandbox link
-   */
-  React.useEffect(function registerUsage() {
-    sandpack.openInCSBRegisteredRef.current = true;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  /**
    * This is a safe limit to avoid too long requests (401),
    * as all parameters are attached in the URL
    */
@@ -94,6 +83,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
       <button
         onClick={(): void => formRef.current?.submit()}
         title="Open in CodeSandbox"
+        type="button"
         {...props}
       >
         <form
@@ -103,6 +93,13 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
           style={{ visibility: "hidden" }}
           target="_blank"
         >
+          <input
+            name="environment"
+            type="hidden"
+            value={
+              sandpack.environment === "node" ? "server" : sandpack.environment
+            }
+          />
           {Array.from(
             paramsValues as unknown as Array<[string, string]>,
             ([key, value]) => (
@@ -117,7 +114,9 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
 
   return (
     <a
-      href={`${CSB_URL}?${paramsValues?.toString()}`}
+      href={`${CSB_URL}?${paramsValues?.toString()}&environment=${
+        sandpack.environment === "node" ? "server" : sandpack.environment
+      }`}
       rel="noreferrer noopener"
       target="_blank"
       title="Open in CodeSandbox"

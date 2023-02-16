@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  margin-top: 2em;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.scrollList {
+  overflow: scroll;
+  flex-wrap: nowrap;
+  padding: 2px;
+  margin-top: 1em;
+}
+
+.item {
+  border-radius: 99999px;
+  padding: 15px 20px 15px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-transform: capitalize;
+  gap: 10px;
+  line-height: 1;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.item span {
+  display: block;
+}
+
+.itemSelected {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(var(--tw-ring-offset-width))
+    var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+    var(--tw-shadow, 0 0 transparent);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: var(--docs-accent-color);
+  --tw-ring-offset-width: 1px;
+  --tw-ring-offset-color: var(--docs-accent-color);
+}
+
+.palette {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  border: 2px solid white;
+}
+
+.logo {
+  width: 16px;
+  height: 16px;
+  border-radius: 0 !important;
+  max-width: none;
+  display: none;
+}
+
+.logo:global(.any) {
+  display: block;
+}
+
+:global(html.light) .logo:global(.light) {
+  display: block;
+}
+
+:global(html.dark) .logo:global(.dark) {
+  display: block;
+}

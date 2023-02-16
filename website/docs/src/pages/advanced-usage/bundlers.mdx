@@ -1,0 +1,113 @@
+import { Callout } from "nextra-theme-docs";
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Experimental bundler (beta)
+
+<br/>
+<big>
+This [experimental Sandpack bundler](https://github.com/codesandbox/sandpack-bundler/) aims to eventually replace the current Sandpack with a more streamlined and faster version.
+
+Additionally, it allows us to implement even more improvements in the future, thanks to a fresh codebase that allowed us to remove many of the bottlenecks of the previous bundler.
+</big>
+
+**The new bundler:** 
+
+- Skips the transpiling step for dependencies by caching them in our custom-built CDN.
+- Fetches dependencies from our very own CDN, no longer third-party involved.
+- Uses fewer resources (avoids fetching unnecessary files) and is significantly faster.
+
+## How to use 
+
+You just need to set the new bundler URL in your Sandpack instance:
+
+<br />
+
+**Examples:**
+<br/>
+```jsx
+<SandpackProvider
+  template="react"
+  options={{ bundlerURL: "https://sandpack-bundler.pages.dev" }}
+>
+  {/* Children */}
+</SandpackProvider>
+```
+
+<br/>
+
+```jsx
+<Sandpack
+  template="react"
+  options={{ bundlerURL: "https://sandpack-bundler.pages.dev" }}
+/>
+```
+
+<br />
+
+**Preview**
+<Sandpack
+  template="react"
+  options={{ bundlerURL: "https://sandpack-bundler.pages.dev" }}
+/>
+
+<Callout>
+If you have any feedback, feature requests or if you're interested in collaborating on the development of the new bundler, feel free to reach out to one of the maintainers on this [discussion on GitHub](https://github.com/codesandbox/sandpack/discussions/416) or on the [main repository](https://github.com/codesandbox/sandpack-bundler/).
+</Callout>
+
+## Known issues & limitations
+
+- ✅ Support the React and Solid templates.
+- ✅ Watch console message.
+- ⏳ Other templates: Vue, Svelte, Vanilla, etc.
+- ⏳ No support for loading private dependencies.
+- ❌ No aliasing, git and file dependencies support in `package.json`.
+- ❌ It doesn't watch `package.json` changes.
+
+
+## Same benefits as the previous bundler
+
+**Security**
+
+The bundler evaluates and transpiles all files in an iFrame under a different subdomain. This is important because it prevents attackers from tampering with cookies of the host domain when evaluating code.
+
+**Scoped styles/JavaScript execution**
+
+There's no risk of any executed code affecting the main page, which avoids unexpected styles or unhandled errors.
+
+**Performance**
+
+We heavily make use of Web Workers for transpilations, and only for sandboxes that are in the viewport and the user is interacting with, meaning that we only use resources as needed.
+
+**Bundle Size**
+
+Another reason to host the bundler externally is code splitting: we split all our transpilers away and load them on-demand.
+
+**React DevTools**
+
+The Sandpack bundler supports running `react-devtools-inline` in isolated mode, as an external dependency. This means you can run more than one instance per page and lazily load it.
+
+**Others**
+
+- npm dependency support.
+- Hot module reloading.
+- Error overlaying.
+- Caching.
+
+## Benchmarks
+
+| | Legacy | Experimental |
+| - | - | - |
+| Memory usage (iframe thread) | ~20MB | ~ 5MB |
+| Memory usage (babel) [1] | 6.8 - 10.2MB | 6.6 - 6.6MB |
+| Network (compressed) [2] | 2.8MB | 863kb |
+| Time to load (first time) [3] | 9293ms | 4149ms |
+| Time to load (second time) [4] | 565ms | 566ms |
+| Time to load [5] | 854ms | 214ms |
+
+- [1] idle - peek
+- [2] Exclude local resource & external, except Sandpack & disabled cache
+- [3] Incognito window (fresh cache) & Fast 3G 
+- [4] Cache enabled & Fast 3G
+- [5] Incognito window (fresh cache) & no throttling
+
+

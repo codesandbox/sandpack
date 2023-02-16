@@ -22,6 +22,7 @@ export interface SandpackContextInfo {
   visibleFiles: string[];
   files: Record<string, SandpackBundlerFile>;
   environment: SandboxEnvironment;
+  shouldUpdatePreview: true;
 }
 
 /**
@@ -60,7 +61,8 @@ export const getSandpackStateFromProps = (
       if (!activeFile && file.active) {
         activeFile = filePath;
         if (file.hidden === true) {
-          visibleFiles.push(filePath); // active file needs to be available even if someone sets it as hidden by accident
+          // active file needs to be available even if someone sets it as hidden by accident
+          visibleFiles.push(filePath);
         }
       }
 
@@ -112,6 +114,7 @@ export const getSandpackStateFromProps = (
     activeFile: activeFile!,
     files,
     environment: projectSetup.environment,
+    shouldUpdatePreview: true,
   };
 };
 
@@ -173,7 +176,16 @@ const combineTemplateFilesToSetup = ({
   if (!template) {
     // If not input, default to vanilla
     if (!customSetup) {
-      return SANDBOX_TEMPLATES.vanilla as unknown as SandboxTemplate;
+      const defaultTemplate =
+        SANDBOX_TEMPLATES.vanilla as unknown as SandboxTemplate;
+
+      return {
+        ...defaultTemplate,
+        files: {
+          ...defaultTemplate.files,
+          ...convertedFilesToBundlerFiles(files),
+        },
+      } as unknown as SandboxTemplate;
     }
 
     if (!files || Object.keys(files).length === 0) {

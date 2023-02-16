@@ -189,6 +189,7 @@ export const getLanguageFromFile = (
     case "html":
     case "svelte":
     case "vue":
+    case "astro":
       return "html";
     case "css":
     case "less":

@@ -13,9 +13,6 @@ const devToolClassName = css({
 
 type DevToolsTheme = "dark" | "light";
 
-/**
- * @category Components
- */
 export const SandpackReactDevTools = ({
   clientId,
   theme,

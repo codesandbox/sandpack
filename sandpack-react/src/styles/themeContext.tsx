@@ -33,9 +33,6 @@ const wrapperClassName = css({
   ".sp-wrapper:focus": { outline: "0" },
 });
 
-/**
- * @hidden
- */
 const SandpackThemeContext = React.createContext<{
   theme: SandpackTheme;
   id: string;
@@ -79,9 +76,6 @@ const SandpackThemeProvider: React.FC<
   );
 };
 
-/**
- * @hidden
- */
 const SandpackThemeConsumer = SandpackThemeContext.Consumer;
 
 export { SandpackThemeProvider, SandpackThemeConsumer, SandpackThemeContext };

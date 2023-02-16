@@ -1,0 +1,18 @@
+.link {
+  font-size: 12px;
+  text-align: right;
+  font-weight: 500;
+  letter-spacing: -0.0125em;
+  opacity: 0.5;
+  transition: opacity 100ms ease-in-out;
+}
+
+.link:hover {
+  opacity: 1;
+}
+
+@media (max-width: 1280px) {
+  .link {
+    display: none;
+  }
+}

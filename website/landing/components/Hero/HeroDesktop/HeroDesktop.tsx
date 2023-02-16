@@ -391,10 +391,10 @@ export const HeroDesktop: React.FC = () => {
                 opacity: "$opacity",
               }}
             >
-              A component toolkit for creating
-              <br /> live-running code editing experiences,
+              Run any JavaScript and Node.js app
+              <br /> in any browser,
               <br />
-              using the power of CodeSandbox.
+              powered by CodeSandbox.
             </Text>
           </Box>
 

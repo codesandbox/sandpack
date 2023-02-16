@@ -22,8 +22,8 @@ const wrapperClassName = css({
   borderRadius: "$border$radius",
 
   [`.${cubeClassName}`]: { display: "flex" },
-  [`.${buttonClassName}`]: { display: "none" },
-  [`&:hover .${buttonClassName}`]: { display: "flex" },
+  [`.sp-button.${buttonClassName}`]: { display: "none" },
+  [`&:hover .sp-button.${buttonClassName}`]: { display: "flex" },
   [`&:hover .${cubeClassName}`]: { display: "none" },
 });
 

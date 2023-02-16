@@ -1,0 +1,8 @@
+.previewWrapper {
+  --sp-layout-height: 320px;
+  height: var(--sp-layout-height);
+}
+
+.previewWrapper :global(.sp-stack) {
+  height: 100%;
+}

@@ -27,6 +27,16 @@ export const editorClassName = css({
   [`.${placeholderClassName}`]: {
     padding: "$space$4 0",
   },
+
+  /**
+   * For iOS: prevent browser zoom when clicking on sandbox.
+   * Does NOT apply to code blocks.
+   */
+  "@media screen and (max-width: 768px)": {
+    "@supports (-webkit-overflow-scrolling: touch)": {
+      ".cm-content": { fontSize: "16px" },
+    },
+  },
 });
 
 export const cmClassName = css({

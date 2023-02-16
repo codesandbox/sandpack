@@ -1,4 +1,5 @@
 const typescript = require("@rollup/plugin-typescript");
+
 const pkg = require("./package.json");
 
 const configBase = {

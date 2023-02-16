@@ -105,7 +105,7 @@ export const CustomExample: React.FC = () => {
           <CardDescription>
             Use the{" "}
             <a
-              href="https://sandpack.codesandbox.io/docs/getting-started/custom-content#custom-setup"
+              href="https://sandpack.codesandbox.io/docs/getting-started/usage"
               rel="noreferrer"
               target="_blank"
             >

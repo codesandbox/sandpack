@@ -28,9 +28,6 @@ import type { CodeEditorProps } from ".";
  * general usage.
  */
 
-/**
- * @category Components
- */
 export interface SandpackProps {
   /**
    * It accepts an object, where each key is the relative
@@ -109,7 +106,6 @@ export interface SandpackOptions {
   closableTabs?: boolean;
   wrapContent?: boolean;
   resizablePanels?: boolean;
-
   codeEditor?: SandpackCodeOptions;
 
   /**
@@ -228,7 +224,8 @@ export type SandboxEnvironment =
   | "parcel"
   | "vue-cli"
   | "static"
-  | "solid";
+  | "solid"
+  | "node";
 
 /**
  * @category Setup
@@ -360,15 +357,9 @@ export type SandpackThemeProp =
  * For public purpose use SandpackProps instead.
  */
 
-/**
- * @hidden
- */
 export type TemplateFiles<Name extends SandpackPredefinedTemplate> =
   keyof typeof SANDBOX_TEMPLATES[Name]["files"];
 
-/**
- * @hidden
- */
 export interface SandpackInternal {
   <
     Files extends SandpackFiles | any,
@@ -381,9 +372,6 @@ export interface SandpackInternal {
   ): JSX.Element;
 }
 
-/**
- * @hidden
- */
 export interface SandpackInternalProvider {
   <
     Files extends SandpackFiles,
@@ -404,9 +392,6 @@ export interface SandpackInternalProvider {
   > | null;
 }
 
-/**
- * @hidden
- */
 interface SandpackRootProps<
   Files extends SandpackFiles | any,
   TemplateName extends SandpackPredefinedTemplate
@@ -417,9 +402,6 @@ interface SandpackRootProps<
   theme?: SandpackThemeProp;
 }
 
-/**
- * @hidden
- */
 export interface SandpackInternalOptions<
   Files extends SandpackFiles | any = any,
   TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
@@ -441,6 +423,7 @@ export interface SandpackInternalOptions<
   id?: string;
   logLevel?: SandpackLogLevel;
   bundlerURL?: string;
+  bundlerTimeOut?: number;
   startRoute?: string;
   skipEval?: boolean;
   fileResolver?: FileResolver;
@@ -448,9 +431,6 @@ export interface SandpackInternalOptions<
   classes?: Record<string, string>;
 }
 
-/**
- * @hidden
- */
 interface SandpackInternalProps<
   Files extends SandpackFiles | any,
   TemplateName extends SandpackPredefinedTemplate
@@ -469,7 +449,6 @@ interface SandpackInternalProps<
     closableTabs?: boolean;
     wrapContent?: boolean;
     resizablePanels?: boolean;
-
     codeEditor?: SandpackCodeOptions;
 
     /**
@@ -485,9 +464,6 @@ interface SandpackInternalProps<
   };
 }
 
-/**
- * @hidden
- */
 export interface SandpackProviderProps<
   Files extends SandpackFiles = SandpackFiles,
   TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
@@ -547,17 +523,28 @@ export interface SandpackState {
   environment?: SandboxEnvironment;
   status: SandpackStatus;
   initMode: SandpackInitMode;
-  clients: Record<string, SandpackClient>;
+  clients: Record<string, InstanceType<typeof SandpackClient>>;
 
-  runSandpack: () => void;
-  registerBundler: (iframe: HTMLIFrameElement, clientId: string) => void;
+  runSandpack: () => Promise<void>;
+  registerBundler: (
+    iframe: HTMLIFrameElement,
+    clientId: string
+  ) => Promise<void>;
   unregisterBundler: (clientId: string) => void;
-  updateFile: (pathOrFiles: string | SandpackFiles, code?: string) => void;
-  addFile: (pathOrFiles: string | SandpackFiles, code?: string) => void;
+  updateFile: (
+    pathOrFiles: string | SandpackFiles,
+    code?: string,
+    shouldUpdatePreview?: boolean
+  ) => void;
+  addFile: (
+    pathOrFiles: string | SandpackFiles,
+    code?: string,
+    shouldUpdatePreview?: boolean
+  ) => void;
   updateCurrentFile: (newCode: string) => void;
   openFile: (path: string) => void;
   closeFile: (path: string) => void;
-  deleteFile: (path: string) => void;
+  deleteFile: (path: string, shouldUpdatePreview?: boolean) => void;
   setActiveFile: (path: string) => void;
   resetFile: (path: string) => void;
   resetAllFiles: () => void;
@@ -576,13 +563,16 @@ export interface SandpackState {
    * we don't need the actual element reference
    */
   errorScreenRegisteredRef: React.MutableRefObject<boolean>;
-  openInCSBRegisteredRef: React.MutableRefObject<boolean>;
   loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
+
+  unsubscribeClientListenersRef: React.MutableRefObject<
+    Record<string, Record<string, UnsubscribeFunction>>
+  >;
+  queuedListenersRef: React.MutableRefObject<
+    Record<string, Record<string, ListenerFunction>>
+  >;
 }
 
-/**
- * @hidden
- */
 export type SandpackStatus =
   | "initial"
   | "idle"
@@ -590,14 +580,8 @@ export type SandpackStatus =
   | "timeout"
   | "done";
 
-/**
- * @hidden
- */
 export type EditorState = "pristine" | "dirty";
 
-/**
- * @hidden
- */
 export interface SandboxTemplate {
   files: Record<string, SandpackFile>;
   dependencies: Record<string, string>;
@@ -607,9 +591,6 @@ export interface SandboxTemplate {
   environment: SandboxEnvironment;
 }
 
-/**
- * @hidden
- */
 export type SandpackFiles = Record<string, string | SandpackFile>;
 
 /**
@@ -635,24 +616,15 @@ export interface SandpackCodeOptions {
   additionalLanguages?: CodeEditorProps["additionalLanguages"];
 }
 
-/**
- * @hidden
- */
 export type DeepPartial<Type> = {
   [Property in keyof Type]?: DeepPartial<Type[Property]>;
 };
 
-/**
- * @hidden
- */
 export interface FileResolver {
   isFile: (path: string) => Promise<boolean>;
   readFile: (path: string) => Promise<string>;
 }
 
-/**
- * @hidden
- */
 export interface SandpackProviderState {
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;

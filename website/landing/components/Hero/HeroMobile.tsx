@@ -75,9 +75,10 @@ export const HeroMobile: React.FC = () => {
               maxWidth: "320px",
             }}
           >
-            A component toolkit for creating
-            <br /> live-running code editing experiences,
-            <br /> using the power of CodeSandbox.
+            Run any JavaScript and Node.js app
+            <br /> in any browser,
+            <br />
+            powered by CodeSandbox.
           </Text>
         </Box>
       </Box>

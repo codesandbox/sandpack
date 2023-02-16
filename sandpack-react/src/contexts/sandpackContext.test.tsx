@@ -1,30 +1,38 @@
 /**
  * @jest-environment jsdom
  */
+import { renderHook, act } from "@testing-library/react-hooks";
 import React from "react";
-import { create } from "react-test-renderer";
 
-import { REACT_TEMPLATE } from "..";
+import type { UseSandpack } from "..";
+import { REACT_TEMPLATE, useSandpack } from "..";
 
-import type { SandpackProviderClass } from "./sandpackContext";
 import { SandpackProvider } from "./sandpackContext";
 
-const createContext = (): SandpackProviderClass => {
-  const root = create(<SandpackProvider template="react" />);
-  const instance = root.getInstance();
+jest.useFakeTimers();
 
-  instance.runSandpack();
+const createContext = async (): Promise<{ current: UseSandpack }> => {
+  const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <SandpackProvider template="react">{children}</SandpackProvider>
+  );
+  const { result } = renderHook(() => useSandpack(), { wrapper });
 
-  return instance;
+  await act(async () => {
+    result.current.sandpack.runSandpack();
+  });
+
+  return result;
 };
 
 const getAmountOfListener = (
-  instance: SandpackProviderClass,
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  instance: any,
   name = "client-id",
   ignoreGlobalListener = false
 ): number => {
   return (
-    Object.keys(instance.clients[name].iframeProtocol.channelListeners).length -
+    Object.keys(instance.sandpack.clients[name].iframeProtocol.channelListeners)
+      .length -
     1 - // less protocol listener
     (ignoreGlobalListener ? 0 : 1) // less the global Sandpack-react listener
   );
@@ -32,157 +40,221 @@ const getAmountOfListener = (
 
 describe(SandpackProvider, () => {
   describe("updateFile", () => {
-    it("adds a file", () => {
-      const instance = createContext();
+    it("adds a file", async () => {
+      const instance = await createContext();
 
-      instance.addFile({ "new-file.js": "new-content" });
+      act(() => {
+        instance.current.sandpack.addFile({ "new-file.js": "new-content" });
+      });
 
-      expect(instance.state.files["/new-file.js"].code).toBe("new-content");
+      expect(instance.current.sandpack.files["/new-file.js"].code).toBe(
+        "new-content"
+      );
     });
 
-    it("deletes a file", () => {
-      const instance = createContext();
+    it("deletes a file", async () => {
+      const instance = await createContext();
 
-      instance.deleteFile("/App.js");
+      act(() => {
+        instance.current.sandpack.deleteFile("/App.js");
+      });
 
-      expect(instance.state.files["/App.js"]).toBe(undefined);
-      expect(Object.keys(instance.state.files)).toEqual([
-        "/index.js",
+      expect(instance.current.sandpack.files["/App.js"]).toBe(undefined);
+      expect(Object.keys(instance.current.sandpack.files)).toEqual([
         "/styles.css",
+        "/index.js",
         "/public/index.html",
         "/package.json",
       ]);
     });
 
-    it("deletes the activeFile and set the following visibleFile as active", () => {
-      const root = create(
+    it("deletes the activeFile and set the following visibleFile as active", async () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
         <SandpackProvider
           options={{ activeFile: "/App.js", visibleFiles: ["/styles.css"] }}
           template="react"
-        />
+        >
+          {children}
+        </SandpackProvider>
       );
+      const { result } = renderHook(() => useSandpack(), { wrapper });
 
-      const instance = root.getInstance();
+      await act(async () => {
+        result.current.sandpack.runSandpack();
+        result.current.sandpack.deleteFile("/App.js");
+      });
 
-      instance.runSandpack();
-      instance.deleteFile("/App.js");
-
-      expect(instance.state.activeFile).toBe("/styles.css");
+      expect(result.current.sandpack.activeFile).toBe("/styles.css");
     });
 
-    it("deletes the activeFile and set the entry file if there no visibleFile left", () => {
-      const root = create(
+    it("deletes the activeFile and set the entry file if there no visibleFile left", async () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
         <SandpackProvider
           options={{ activeFile: "/App.js", visibleFiles: [] }}
           template="react"
-        />
+        >
+          {children}
+        </SandpackProvider>
       );
+      const { result } = renderHook(() => useSandpack(), { wrapper });
 
-      const instance = root.getInstance();
+      await act(async () => {
+        result.current.sandpack.runSandpack();
+        result.current.sandpack.deleteFile("/App.js");
+      });
 
-      instance.runSandpack();
-      instance.deleteFile("/App.js");
-
-      expect(instance.state.activeFile).toBe("/package.json");
+      expect(result.current.sandpack.activeFile).toBe("/package.json");
     });
 
-    it("updates a file", () => {
-      const instance = createContext();
+    it("updates a file", async () => {
+      const instance = await createContext();
 
-      expect(instance.state.files["/App.js"]).toEqual({
+      expect(instance.current.sandpack.files["/App.js"]).toEqual({
         code: `export default function App() {
-  return <h1>Hello World</h1>
+  return <h1>Hello world</h1>
 }
 `,
       });
+      act(() => {
+        instance.current.sandpack.updateFile("/App.js", "Foo");
+      });
 
-      instance.updateFile("/App.js", "Foo");
-
-      expect(instance.state.files["/App.js"]).toEqual({ code: `Foo` });
+      expect(instance.current.sandpack.files["/App.js"]).toEqual({
+        code: `Foo`,
+      });
     });
 
-    it("updates multiples files", () => {
-      const instance = createContext();
+    it("updates multiples files", async () => {
+      const instance = await createContext();
 
-      instance.updateFile({ "/App.js": "Foo", "/index.js": "Baz" });
+      act(() => {
+        instance.current.sandpack.updateFile({
+          "/App.js": "Foo",
+          "/index.js": "Baz",
+        });
+      });
 
-      expect(instance.state.files["/App.js"]).toEqual({ code: `Foo` });
-      expect(instance.state.files["/index.js"]).toEqual({ code: `Baz` });
+      expect(instance.current.sandpack.files["/App.js"]).toEqual({
+        code: `Foo`,
+      });
+      expect(instance.current.sandpack.files["/index.js"]).toEqual({
+        code: `Baz`,
+      });
     });
 
-    it("updates multiples files in a row", () => {
-      const instance = createContext();
+    it("updates multiples files in a row", async () => {
+      const instance = await createContext();
 
-      instance.updateFile("/App.js", "Foo");
-      instance.updateFile("/index.js", "Baz");
+      act(() => {
+        instance.current.sandpack.updateFile("/App.js", "Foo");
+      });
+      act(() => {
+        instance.current.sandpack.updateFile("/index.js", "Baz");
+      });
 
-      expect(instance.state.files["/App.js"]).toEqual({ code: `Foo` });
-      expect(instance.state.files["/index.js"]).toEqual({ code: `Baz` });
+      expect(instance.current.sandpack.files["/App.js"]).toEqual({
+        code: `Foo`,
+      });
+      expect(instance.current.sandpack.files["/index.js"]).toEqual({
+        code: `Baz`,
+      });
     });
   });
 
   describe("editorState", () => {
-    it("should return the same initial state", () => {
-      const instance = createContext();
+    it("should return the same initial state", async () => {
+      const instance = await createContext();
 
-      expect(instance.state.editorState).toBe("pristine");
+      expect(instance.current.sandpack.editorState).toBe("pristine");
     });
 
-    it("should return a dirty value after updating a file", () => {
-      const instance = createContext();
+    it("should return a dirty value after updating a file", async () => {
+      const instance = await createContext();
 
-      expect(instance.state.editorState).toBe("pristine");
+      expect(instance.current.sandpack.editorState).toBe("pristine");
 
-      instance.updateFile("/App.js", "Foo");
-      expect(instance.state.editorState).toBe("dirty");
+      act(() => {
+        instance.current.sandpack.updateFile("/App.js", "Foo");
+      });
+      expect(instance.current.sandpack.editorState).toBe("dirty");
     });
 
-    it("should return a pristine value after reset files", () => {
-      const instance = createContext();
+    it("should return a pristine value after reset files", async () => {
+      const instance = await createContext();
 
-      expect(instance.state.editorState).toBe("pristine");
+      expect(instance.current.sandpack.editorState).toBe("pristine");
+      act(() => {
+        instance.current.sandpack.updateFile("/App.js", "Foo");
+      });
+      expect(instance.current.sandpack.editorState).toBe("dirty");
 
-      instance.updateFile("/App.js", "Foo");
-      expect(instance.state.editorState).toBe("dirty");
-
-      instance.resetAllFiles();
-      expect(instance.state.editorState).toBe("pristine");
+      act(() => {
+        instance.current.sandpack.resetAllFiles();
+      });
+      expect(instance.current.sandpack.editorState).toBe("pristine");
     });
 
-    it("should return a pristine value after reverting a change", () => {
-      const instance = createContext();
-      expect(instance.state.editorState).toBe("pristine");
+    it("should return a pristine value after reverting a change", async () => {
+      const instance = await createContext();
+      expect(instance.current.sandpack.editorState).toBe("pristine");
 
-      instance.updateFile("/App.js", "Foo");
-      expect(instance.state.editorState).toBe("dirty");
+      act(() => {
+        instance.current.sandpack.updateFile("/App.js", "Foo");
+      });
+      expect(instance.current.sandpack.editorState).toBe("dirty");
 
-      instance.updateFile("/App.js", REACT_TEMPLATE["files"]["/App.js"].code);
+      act(() => {
+        instance.current.sandpack.updateFile(
+          "/App.js",
+          REACT_TEMPLATE["files"]["/App.js"].code
+        );
+      });
 
-      expect(instance.state.editorState).toBe("pristine");
+      expect(instance.current.sandpack.editorState).toBe("pristine");
     });
   });
 
   describe("listeners", () => {
-    it("sets a listener, but the client hasn't been created yet - no global listener", () => {
-      const instance = createContext();
+    it("sets a listener, but the client hasn't been created yet - no global listener", async () => {
+      const instance = await createContext();
 
       // Act: Add listener
       const mock = jest.fn();
-      instance.addListener(mock, "client-id");
+      act(() => {
+        instance.current.listen(mock, "client-id");
+      });
 
       // Act: Create client
-      instance.registerBundler(document.createElement("iframe"), "client-id");
+      await act(async () => {
+        await instance.current.sandpack.registerBundler(
+          document.createElement("iframe"),
+          "client-id"
+        );
+      });
 
       // Expect: one pending unsubscribe function
       expect(
-        Object.keys(instance.unsubscribeClientListeners["client-id"]).length
+        Object.keys(
+          instance.current.sandpack.unsubscribeClientListenersRef.current[
+            "client-id"
+          ]
+        ).length
       ).toBe(1);
 
       // Expect: no global listener
-      expect(Object.keys(instance.queuedListeners.global).length).toBe(0);
+      expect(
+        Object.keys(instance.current.sandpack.queuedListenersRef.current.global)
+          .length
+      ).toBe(0);
 
       // Expect: one client
-      expect(Object.keys(instance.clients)).toEqual(["client-id"]);
+      expect(Object.keys(instance.current.sandpack.clients)).toEqual([
+        "client-id",
+      ]);
 
       /**
        * TODO: figure out how to mock SandpackClient and invoke the listener func
@@ -190,179 +262,286 @@ describe(SandpackProvider, () => {
       // expect(mock).toHaveBeenCalled();
     });
 
-    it("sets a listener, but the client hasn't been created yet - global listener", () => {
-      const instance = createContext();
+    it("sets a listener, but the client hasn't been created yet - global listener", async () => {
+      const instance = await createContext();
 
       // Act: Add listener
       const mock = jest.fn();
-      instance.addListener(mock /* , no client-id */);
+      act(() => {
+        instance.current.listen(mock /* , no client-id */);
+      });
 
       // Act: Create client
-      instance.registerBundler(document.createElement("iframe"), "client-id");
+      await act(async () => {
+        await instance.current.sandpack.registerBundler(
+          document.createElement("iframe"),
+          "client-id"
+        );
+      });
 
       // Expect: one pending unsubscribe function
       expect(
-        Object.keys(instance.unsubscribeClientListeners["client-id"]).length
+        Object.keys(
+          instance.current.sandpack.unsubscribeClientListenersRef.current[
+            "client-id"
+          ]
+        ).length
       ).toBe(1);
 
       // Expect: no global listener
-      expect(Object.keys(instance.queuedListeners.global).length).toBe(1);
+      expect(
+        Object.keys(instance.current.sandpack.queuedListenersRef.current.global)
+          .length
+      ).toBe(1);
 
       // Expect: one listener in the client
-      expect(getAmountOfListener(instance)).toBe(1);
+      expect(getAmountOfListener(instance.current)).toBe(1);
     });
 
-    it("set a listener, but the client has already been created - no global listener", () => {
-      const instance = createContext();
+    it("set a listener, but the client has already been created - no global listener", async () => {
+      const instance = await createContext();
 
       // Act: Create client
-      instance.registerBundler(document.createElement("iframe"), "client-id");
+      await act(async () => {
+        await instance.current.sandpack.registerBundler(
+          document.createElement("iframe"),
+          "client-id"
+        );
+      });
 
       // Expect: no pending unsubscribe function
       expect(
-        Object.keys(instance.unsubscribeClientListeners["client-id"]).length
+        Object.keys(
+          instance.current.sandpack.unsubscribeClientListenersRef.current[
+            "client-id"
+          ]
+        ).length
       ).toBe(0);
 
       // Expect: no global listener
-      expect(Object.keys(instance.queuedListeners.global).length).toBe(0);
+      expect(
+        Object.keys(instance.current.sandpack.queuedListenersRef.current.global)
+          .length
+      ).toBe(0);
 
       // Act: Add listener
       const mock = jest.fn();
-      instance.addListener(mock, "client-id");
+      act(() => {
+        instance.current.listen(mock, "client-id");
+      });
 
       // Expect: no pending unsubscribe function
       expect(
-        Object.keys(instance.unsubscribeClientListeners["client-id"]).length
+        Object.keys(
+          instance.current.sandpack.unsubscribeClientListenersRef.current[
+            "client-id"
+          ]
+        ).length
       ).toBe(0);
 
       // Expect: no global listener
-      expect(Object.keys(instance.queuedListeners.global).length).toBe(0);
+      expect(
+        Object.keys(instance.current.sandpack.queuedListenersRef.current.global)
+          .length
+      ).toBe(0);
 
       // Expect: one listener in the client
-      expect(getAmountOfListener(instance)).toBe(1);
+      expect(getAmountOfListener(instance.current)).toBe(1);
     });
 
-    it("set a listener, but the client has already been created - global listener", () => {
-      const instance = createContext();
+    it("set a listener, but the client has already been created - global listener", async () => {
+      const instance = await createContext();
 
       // Act: Create client
-      instance.registerBundler(document.createElement("iframe"), "client-id");
+      await act(async () => {
+        await instance.current.sandpack.registerBundler(
+          document.createElement("iframe"),
+          "client-id"
+        );
+      });
 
       // Expect: no pending unsubscribe function
       expect(
-        Object.keys(instance.unsubscribeClientListeners["client-id"]).length
+        Object.keys(
+          instance.current.sandpack.unsubscribeClientListenersRef.current[
+            "client-id"
+          ]
+        ).length
       ).toBe(0);
 
       // Expect: no global listener
-      expect(Object.keys(instance.queuedListeners.global).length).toBe(0);
+      expect(
+        Object.keys(instance.current.sandpack.queuedListenersRef.current.global)
+          .length
+      ).toBe(0);
 
       // Act: Add listener
       const mock = jest.fn();
-      instance.addListener(mock /* , no client-id */);
+      act(() => {
+        instance.current.listen(mock /* , no client-id */);
+      });
 
       // Expect: no pending unsubscribe function, because it's a global
       expect(
-        Object.keys(instance.unsubscribeClientListeners["client-id"]).length
+        Object.keys(
+          instance.current.sandpack.unsubscribeClientListenersRef.current[
+            "client-id"
+          ]
+        ).length
       ).toBe(0);
 
       // Expect: one global listener
-      expect(Object.keys(instance.queuedListeners.global).length).toBe(1);
+      expect(
+        Object.keys(instance.current.sandpack.queuedListenersRef.current.global)
+          .length
+      ).toBe(1);
 
       // Expect: one listener in the client
-      expect(getAmountOfListener(instance)).toBe(1);
+      expect(getAmountOfListener(instance.current)).toBe(1);
     });
 
-    it("sets a new listener, and then create one more client", () => {
-      const instance = createContext();
+    it("sets a new listener, and then create one more client", async () => {
+      const instance = await createContext();
 
       // Act: Add listener
-      const mock = jest.fn();
-      instance.addListener(mock, "client-id");
+      act(() => {
+        const mock = jest.fn();
+        instance.current.listen(mock, "client-id");
+      });
 
-      // Act: Create client
-      instance.registerBundler(document.createElement("iframe"), "client-id");
+      // Act: Createasync  client
+      await act(async () => {
+        await instance.current.sandpack.registerBundler(
+          document.createElement("iframe"),
+          "client-id"
+        );
+      });
 
       // Expect: one pending unsubscribe function
       expect(
-        Object.keys(instance.unsubscribeClientListeners["client-id"]).length
+        Object.keys(
+          instance.current.sandpack.unsubscribeClientListenersRef.current[
+            "client-id"
+          ]
+        ).length
       ).toBe(1);
 
       // Expect: no global listener
-      expect(Object.keys(instance.queuedListeners.global).length).toBe(0);
+      expect(
+        Object.keys(instance.current.sandpack.queuedListenersRef.current.global)
+          .length
+      ).toBe(0);
 
       // Expect: one listener in the client
-      expect(getAmountOfListener(instance)).toBe(1);
+      expect(getAmountOfListener(instance.current)).toBe(1);
 
       // Act: Add one more listener
-      const anotherMock = jest.fn();
-      instance.addListener(anotherMock /* , no client-id */);
+      act(() => {
+        const anotherMock = jest.fn();
+        instance.current.listen(anotherMock /* , no client-id */);
+      });
 
       // Expect: one global listener
-      expect(Object.keys(instance.queuedListeners.global).length).toBe(1);
+      expect(
+        Object.keys(instance.current.sandpack.queuedListenersRef.current.global)
+          .length
+      ).toBe(1);
 
       // Expect: two listener in the client
-      expect(getAmountOfListener(instance)).toBe(2);
+      expect(getAmountOfListener(instance.current)).toBe(2);
     });
 
-    it("unsubscribes only from the assigned client id", () => {
-      const instance = createContext();
+    it("unsubscribes only from the assigned client id", async () => {
+      const instance = await createContext();
 
-      instance.registerBundler(document.createElement("iframe"), "client-1");
-      instance.registerBundler(document.createElement("iframe"), "client-2");
+      await act(async () => {
+        await instance.current.sandpack.registerBundler(
+          document.createElement("iframe"),
+          "client-1"
+        );
+        await instance.current.sandpack.registerBundler(
+          document.createElement("iframe"),
+          "client-2"
+        );
+      });
 
       // Initial state
-      expect(getAmountOfListener(instance, "client-1")).toBe(0);
-      expect(getAmountOfListener(instance, "client-2", true)).toBe(0);
+      expect(getAmountOfListener(instance.current, "client-1")).toBe(0);
+      expect(getAmountOfListener(instance.current, "client-2", true)).toBe(0);
 
       // Add listeners
-      instance.addListener(jest.fn(), "client-1");
-      const unsubscribeClientTwo = instance.addListener(jest.fn(), "client-2");
+      act(() => {
+        instance.current.listen(jest.fn(), "client-1");
+      });
+      const unsubscribeClientTwo = instance.current.listen(
+        jest.fn(),
+        "client-2"
+      );
 
-      expect(getAmountOfListener(instance, "client-1")).toBe(1);
-      expect(getAmountOfListener(instance, "client-2", true)).toBe(1);
+      expect(getAmountOfListener(instance.current, "client-1")).toBe(1);
+      expect(getAmountOfListener(instance.current, "client-2", true)).toBe(1);
 
       unsubscribeClientTwo();
 
-      expect(getAmountOfListener(instance, "client-1")).toBe(1);
-      expect(getAmountOfListener(instance, "client-2", true)).toBe(0);
+      expect(getAmountOfListener(instance.current, "client-1")).toBe(1);
+      expect(getAmountOfListener(instance.current, "client-2", true)).toBe(0);
     });
 
-    it("doesn't trigger global unsubscribe", () => {
-      const instance = createContext();
+    it("doesn't trigger global unsubscribe", async () => {
+      const instance = await createContext();
 
-      instance.registerBundler(document.createElement("iframe"), "client-1");
-      instance.registerBundler(document.createElement("iframe"), "client-2");
+      await act(async () => {
+        await instance.current.sandpack.registerBundler(
+          document.createElement("iframe"),
+          "client-1"
+        );
+        await instance.current.sandpack.registerBundler(
+          document.createElement("iframe"),
+          "client-2"
+        );
+      });
 
-      instance.addListener(jest.fn());
-      instance.addListener(jest.fn());
-      const unsubscribe = instance.addListener(jest.fn());
+      act(() => {
+        instance.current.listen(jest.fn());
+        instance.current.listen(jest.fn());
+      });
+      const unsubscribe = instance.current.listen(jest.fn());
 
-      expect(getAmountOfListener(instance, "client-1")).toBe(3);
-      expect(getAmountOfListener(instance, "client-2", true)).toBe(3);
+      expect(getAmountOfListener(instance.current, "client-1")).toBe(3);
+      expect(getAmountOfListener(instance.current, "client-2", true)).toBe(3);
 
       unsubscribe();
 
-      expect(getAmountOfListener(instance, "client-1")).toBe(2);
-      expect(getAmountOfListener(instance, "client-2", true)).toBe(2);
+      expect(getAmountOfListener(instance.current, "client-1")).toBe(2);
+      expect(getAmountOfListener(instance.current, "client-2", true)).toBe(2);
     });
 
-    it("unsubscribe all the listeners from a specific client when it unmonts", () => {
-      const instance = createContext();
+    it("unsubscribe all the listeners from a specific client when it unmonts", async () => {
+      const instance = await createContext();
+      await act(async () => {
+        await instance.current.sandpack.registerBundler(
+          document.createElement("iframe"),
+          "client-1"
+        );
+        await instance.current.sandpack.registerBundler(
+          document.createElement("iframe"),
+          "client-2"
+        );
 
-      instance.registerBundler(document.createElement("iframe"), "client-1");
-      instance.registerBundler(document.createElement("iframe"), "client-2");
+        instance.current.listen(jest.fn());
+        instance.current.listen(jest.fn());
+        instance.current.listen(jest.fn());
+      });
 
-      instance.addListener(jest.fn());
-      instance.addListener(jest.fn());
-      instance.addListener(jest.fn());
+      expect(getAmountOfListener(instance.current, "client-1")).toBe(3);
+      expect(getAmountOfListener(instance.current, "client-2", true)).toBe(3);
 
-      expect(getAmountOfListener(instance, "client-1")).toBe(3);
-      expect(getAmountOfListener(instance, "client-2", true)).toBe(3);
+      act(() => {
+        instance.current.sandpack.unregisterBundler("client-2");
+      });
 
-      instance.unregisterBundler("client-2");
-
-      expect(getAmountOfListener(instance, "client-1")).toBe(3);
-      expect(instance.clients["client-2"]).toBe(undefined);
+      expect(getAmountOfListener(instance.current, "client-1")).toBe(3);
+      expect(instance.current.sandpack.clients["client-2"]).toBe(undefined);
     });
   });
 });

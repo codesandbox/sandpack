@@ -1,0 +1,199 @@
+import { IntroSection, IntroCard } from "../../components/IntroCard";
+import { CodeBlock } from "../../components/CodeBlock";
+import { Callout } from "nextra-theme-docs";
+
+# Layout
+
+In this next section, you can read about all the different options for customizing the UI of the Sandpack components that render inside the `<Sandpack />` preset.
+
+## Styling
+
+Theming controls the color palette and typography, but you can also append your own custom style to existing Sandpack components.
+
+For this, sandpack uses a small package called [`classer`](https://github.com/code-hike/codehike/blob/next/packages/mdx/src/classer/index.tsx). To customize existing components, you need to map your own classes to the internal sandpack classes. So, while inspecting your Sandpack instance, notice that our components have classes prefixed with `sp-`.
+
+```jsx
+<Sandpack
+  theme={theme}
+  template="react"
+  options={{
+    classes: {
+      "sp-wrapper": "custom-wrapper",
+      "sp-layout": "custom-layout",
+      "sp-tab-button": "custom-tab",
+    },
+  }}
+/>
+```
+
+<Callout>
+This pattern is compatible with most modern styling systems, including Tailwind, styled-components and emotion.
+</Callout>
+
+### Bare components and remove runtime styling
+
+`@codesanbdox/sandpack-react` relies on [@stitches/core](https://github.com/stitchesjs/stitches) to style its component, which is almost zero-runtime CSS-in-JS framework. However, if you want to get rid of any runtime script or create your own style on top of Sandpack components, we provide a way to return bare components, which will eliminate all Sandpack CSS style.
+
+To do it, you need to pass `SANDPACK_BARE_COMPONENTS` environment variable as `true`, which will remove the Stitches dependency, its execution and return only the HTML of the components.
+
+## Themes
+
+The overall style can be set through the `theme` prop. Sandpack offers a set of predefined options, but individual values can be passed to customize the style of your `Sandpack` instance. Access the links below to see all themes and learn how to customize them.
+
+<IntroSection>
+  <IntroCard 
+    icon="Theme"
+    title="All themes" 
+    description="See all themes available on @codesandbox/sandpack-themes and how you can use it" 
+    href="#all-themes" 
+  />
+
+  <IntroCard
+    icon="Magic" 
+    title="Sandpack Theme Builder"
+    description="Design and customize your own theme, among other Sandpack presets." 
+    href="https://sandpack.codesandbox.io/theme" 
+    external 
+  />
+</IntroSection>
+
+## Options
+
+Some of the internal components of Sandpack can be configured via the `options` prop.
+
+### Navigator
+
+By default `<Sandpack />` will show a refresh button in the lower part of the preview. Using `showNavigator` you can toggle on a full browser navigator component with: `back`, `forward` and `refresh buttons` as well as an input for the URL.
+
+<CodeBlock stack>
+{`import { Sandpack } from "@codesandbox/sandpack-react";
+
+export default function App() {
+  return (
+    <Sandpack 
+      template="react"
+      options={{
+        showNavigator: true,
+      }}
+    />
+  );
+}
+`}
+</CodeBlock>
+
+### Tabs
+
+File tabs are shown if more than one file is open. But you can force tabs to always be shown/hidden with the `showTabs` prop. On top of that, the `closableTabs` prop allows you to add a small close button for each tab, which removes it from the list.
+
+<CodeBlock stack>
+{`import { Sandpack } from "@codesandbox/sandpack-react";
+
+export default function App() {
+  return (
+    <Sandpack 
+      template="react"
+      options={{
+        showTabs: true,
+        closableTabs: true,
+      }}
+    />
+  );
+}
+`}
+</CodeBlock>
+
+### Editor Settings
+
+There are a few different props for the code editor. `showLineNumbers` and `showInlineErrors` will toggle on/off some of the elements of the editor component. By default, line numbers are shown, but errors are not highlighted inline.
+
+One useful configuration is the height of the component. We recommend **fixed heights**, to avoid any layout shift while the bundler is running or as you type in the editor or switch the tab. By default, the height is set to `300px`, but you can adjust that with the `editorHeight` prop.
+
+Finally, you can specify the distribution between the width of the editor and that of the preview. The `<SandpackLayout />` component arranges the two in a flex layout, distributing the space between the editor and the preview according to this prop. A value of 60 for the `editorWidthPercentage` will mean the `Preview` gets 40% of the space.
+
+<CodeBlock stack>
+{`import { Sandpack } from "@codesandbox/sandpack-react";
+
+export default function App() {
+  return (
+    <Sandpack 
+      template="react"
+      options={{
+        showLineNumbers: false, // default - true
+        showInlineErrors: true, // default - false
+        wrapContent: true, // default - false
+        editorHeight: 280, // default - 300
+        editorWidthPercentage: 60, // default - 50
+      }}
+    />
+  );
+}
+`}
+</CodeBlock>
+
+### Autorun
+
+By default, the bundling process will start as soon as the component is getting closer to the viewport, or when the page loads, if the component is already in the viewport. But you can allow users to trigger the process manually.
+
+When a Sandpack instance is not set on `autorun`, which is the default setting, it will show a `Run` button that initializes the bundling process. This can be handy in situations in which you don't want multiple sandpack instances to run everytime the user loads the page.
+
+<CodeBlock stack>
+{`import { Sandpack } from "@codesandbox/sandpack-react";
+
+export default function App() {
+  return (
+    <Sandpack 
+      template="react"
+      options={{
+        autorun: false
+      }}
+    />
+  );
+}
+`}
+</CodeBlock>
+
+#### Init mode
+
+The `initMode` prop provides a way to control how some components are going to be initialized on the page. For example, `<SandpackCodeEditor />` and the `<SandpackPreview />` components are quite expensive and might overload memory usage, giving a certain control of when to initialize them.
+
+- `immediate`: loads right after the Sandpack instance is created;
+- `lazy`: loads when the Sandpack instance is close to the viewport and keeps it running (this's the default value);
+- `user-visible`: loads when the Sandpack instance is close to the viewport, but different from `lazy`, it destroys all instances when it's out of the viewport and mounts again when it's close to the viewport;
+
+```jsx
+<Sandpack
+  options={{
+    initMode: "user-visible",
+    initModeObserverOptions: { rootMargin: `1000px 0px` } // `IntersectionObserverInit` options
+  }}
+  template="react"
+/>
+```
+
+### Recompile Mode
+
+The `recompileMode` option also allows you configure what happens when the user starts typing in the code editor. The `immediate` mode will fire the change to the bundler as soon as it is received, while the `delayed` mode will debounce the bundler operation until the user starts typing. Optionally, you can set the delay for the debounce, which by default is `500ms`.
+
+By default, the mode is set to `delayed` to ensures the bundler doesn't run on each keystroke. You can customize this
+experience by modifying the `recompileDelay` value or by setting the
+`recompileMode` to `immediate`.
+
+```jsx
+<Sandpack
+  options={{
+    recompileMode: "delayed",
+    recompileDelay: 300,
+  }}
+  template="react"
+/>
+```
+
+### Resizable panels
+
+The `<Sandpack />` preset component has resizable columns and rows by default, allowing users to extend and shrink the component sizes. This makes it easier to play with the preview component and shows more code-editor content. However, this is an optional configuration, and you can easily disable it: 
+
+```jsx
+<Sandpack options={{ resizablePanels: false }} />
+```
+
+Other components (`SandpackProvider` for example) do not have this functionality and it must be implemented by the user.

@@ -8,7 +8,8 @@ import {
   SandpackProvider,
   SandpackThemeProvider,
   OpenInCodeSandboxButton,
-  RefreshButton,
+  RoundedButton,
+  RefreshIcon,
   SandpackLayout,
   SandpackCodeViewer,
   SandpackCodeEditor,
@@ -67,7 +68,9 @@ export const UsingVisualElements: React.FC = () => (
         }}
       >
         <OpenInCodeSandboxButton />
-        <RefreshButton />
+        <RoundedButton>
+          <RefreshIcon />
+        </RoundedButton>
       </div>
     </SandpackThemeProvider>
   </SandpackProvider>
@@ -376,7 +379,7 @@ export const ResetButton: React.FC = () => (
 );
 
 const ListenerIframeMessage = (): JSX.Element => {
-  const [message, setMessage] = useState("Hello World");
+  const [message, setMessage] = useState("Hello world");
   const { sandpack } = useSandpack();
 
   const sender = (): void => {

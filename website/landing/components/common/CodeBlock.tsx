@@ -27,13 +27,9 @@ export const CodeBlock: React.FC<{ children?: React.ReactNode }> = ({
         },
       }}
     >
-      <SandpackProvider
-        customSetup={{ entry: "index.ts" }}
-        files={{ "index.ts": (children as string)?.trim() }}
-        options={{ initMode: "immediate" }}
-      >
+      <SandpackProvider>
         <SandpackThemeProvider theme={sandpackDark}>
-          <SandpackCodeViewer />
+          <SandpackCodeViewer code={(children as string)?.trim()} />
         </SandpackThemeProvider>
       </SandpackProvider>
     </Box>

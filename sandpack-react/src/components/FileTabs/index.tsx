@@ -42,9 +42,6 @@ const closeButtonClassName = css({
   },
 });
 
-/**
- * @hidden
- */
 export const tabButton = css({
   padding: "0 $space$2",
   height: "$layout$headerHeight",
@@ -54,9 +51,6 @@ export const tabButton = css({
   [`&:hover > .${closeButtonClassName}`]: { visibility: "unset" },
 });
 
-/**
- * @category Components
- */
 export interface FileTabsProps {
   /**
    * This adds a close button next to each file with a unique trigger to close it.
@@ -66,8 +60,6 @@ export interface FileTabsProps {
 
 /**
  * FileTabs is a list of all open files, the active file, and its state.
- *
- * @category Components
  */
 
 export const FileTabs = ({

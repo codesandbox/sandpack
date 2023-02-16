@@ -1,0 +1,26 @@
+import Hero from "../../components/Hero";
+
+<Hero
+  title="Nodebox"
+  subtitle="Run Node in any browser."
+/>
+
+Nodebox is a runtime for executing Node.js code in the browser. Sandpack 2.0 uses Nodebox to run server-side examples directly in the browser. For example, you can run a Vite template such as React and Vue directly on your website.
+
+You can use Nodebox as an [NPM package](https://www.npmjs.com/package/@codesandbox/nodebox) or together with [Sandpack 2.0](/getting-started).
+
+## Server-side support
+
+Nodebox with out-of-the-box support for Next.js, Vite and Astro, but we’re growing to support just about any server-side framework you can imagine.
+
+However, bear in mind it can’t run napi or any other low-level C++/Rust package you can use in Node.js—only WebAssembly and JavaScript modules. Postgres, MongoDB and MySQL are also currently not supported because of the lack of raw socket support in browsers.
+
+
+## Difference with WebContainers
+
+Web Containers use modern browser technologies like `SharedArrayBuffer`, which makes it impossible to run in Safari and requires the user to set additional `Cross-Origin-Isolation` headers on the server to run any code.
+
+Nodebox however, is implemented without modern browser technologies, to make it run in any browser (like iOS and Safari) with minimal setup.
+
+For further details, check the [Nodebox FAQ](https://sandpack.codesandbox.io/docs/resources/faq#how-does-the-nodebox-compare-to-webcontainers).
+
