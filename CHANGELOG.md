@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.6](https://github.com/codesandbox/sandpack/compare/v2.0.5...v2.0.6) (2023-02-17)
+
+
+### Bug Fixes
+
+* **react-vite template:** use automatic runtime for jsx ([#720](https://github.com/codesandbox/sandpack/issues/720)) ([bbb41a6](https://github.com/codesandbox/sandpack/commit/bbb41a69ae7914bf905b6512dbde98584d39a0a9))
+
+
+
+
+
 ## [2.0.5](https://github.com/codesandbox/sandpack/compare/v2.0.4...v2.0.5) (2023-02-16)
 
 **Note:** Version bump only for package sandpack
