@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.8](https://github.com/codesandbox/sandpack/compare/v2.0.7...v2.0.8) (2023-02-20)
+
+
+### Bug Fixes
+
+* **sandpack-client:** fixing package exports ([#737](https://github.com/codesandbox/sandpack/issues/737)) ([e96672a](https://github.com/codesandbox/sandpack/commit/e96672a4abb8f09234126b95bdf0bb641fdbad91))
+
+
+
+
+
 ## [2.0.7](https://github.com/codesandbox/sandpack/compare/v2.0.6...v2.0.7) (2023-02-20)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
