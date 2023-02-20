@@ -1,5 +1,5 @@
 {
   "packages": ["sandpack-client", "sandpack-react"],
   "sandboxes": ["sowx8r"],
-  "node": "14.18.0"
+  "node": "16"
 }
