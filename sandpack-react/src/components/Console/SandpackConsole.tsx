@@ -31,125 +31,138 @@ interface SandpackConsoleProps {
  * a light version of a browser console, which means that it's
  * limited to a set of common use cases you may encounter when coding.
  */
-export const SandpackConsole: React.FC<
+export const SandpackConsole = React.forwardRef<
+  { reset: () => void },
   React.HTMLAttributes<HTMLDivElement> & SandpackConsoleProps
-> = ({
-  showHeader = true,
-  showSyntaxError = false,
-  maxMessageCount,
-  onLogsChange,
-  className,
-  showSetupProgress = false,
-  resetOnPreviewRestart = false,
-  ...props
-}) => {
-  const {
-    sandpack: { environment },
-  } = useSandpack();
+>(
+  (
+    {
+      showHeader = true,
+      showSyntaxError = false,
+      maxMessageCount,
+      onLogsChange,
+      className,
+      showSetupProgress = false,
+      resetOnPreviewRestart = false,
+      ...props
+    },
+    ref
+  ) => {
+    const {
+      sandpack: { environment },
+    } = useSandpack();
 
-  const { restart } = useSandpackShell();
+    const { restart } = useSandpackShell();
 
-  const [currentTab, setCurrentTab] = React.useState<"server" | "client">(
-    environment === "node" ? "server" : "client"
-  );
+    const [currentTab, setCurrentTab] = React.useState<"server" | "client">(
+      environment === "node" ? "server" : "client"
+    );
 
-  const { logs: consoleData, reset: resetConsole } = useSandpackConsole({
-    maxMessageCount,
-    showSyntaxError,
-    resetOnPreviewRestart,
-  });
+    const { logs: consoleData, reset: resetConsole } = useSandpackConsole({
+      maxMessageCount,
+      showSyntaxError,
+      resetOnPreviewRestart,
+    });
 
-  const { logs: stdoutData, reset: resetStdout } = useSandpackShellStdout({
-    maxMessageCount,
-    resetOnPreviewRestart,
-  });
+    const { logs: stdoutData, reset: resetStdout } = useSandpackShellStdout({
+      maxMessageCount,
+      resetOnPreviewRestart,
+    });
 
-  const wrapperRef = React.useRef<HTMLDivElement>(null);
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
-    onLogsChange?.(consoleData);
+    React.useEffect(() => {
+      onLogsChange?.(consoleData);
 
-    if (wrapperRef.current) {
-      wrapperRef.current.scrollTop = wrapperRef.current.scrollHeight;
-    }
-  }, [onLogsChange, consoleData, stdoutData, currentTab]);
+      if (wrapperRef.current) {
+        wrapperRef.current.scrollTop = wrapperRef.current.scrollHeight;
+      }
+    }, [onLogsChange, consoleData, stdoutData, currentTab]);
 
-  const isServerTab = currentTab === "server";
-  const isNodeEnvironment = environment === "node";
+    const isServerTab = currentTab === "server";
+    const isNodeEnvironment = environment === "node";
 
-  return (
-    <SandpackStack
-      className={classNames(
-        css({
-          height: "100%",
-          background: "$surface1",
-          iframe: { display: "none" },
-        }),
-        `${THEME_PREFIX}-console`,
-        className
-      )}
-      {...props}
-    >
-      {showSetupProgress && (
-        <PreviewProgress timeout={1_000} dismissOnTimeout />
-      )}
+    React.useImperativeHandle(ref, () => ({
+      reset() {
+        resetConsole();
+        resetStdout();
+      },
+    }));
 
-      {(showHeader || isNodeEnvironment) && (
-        <Header
-          currentTab={currentTab}
-          node={isNodeEnvironment}
-          setCurrentTab={setCurrentTab}
-        />
-      )}
-
-      <div
-        ref={wrapperRef}
-        className={classNames(
-          css({ overflow: "auto", scrollBehavior: "smooth" })
-        )}
-      >
-        {isServerTab ? (
-          <StdoutList data={stdoutData} />
-        ) : (
-          <ConsoleList data={consoleData} />
-        )}
-      </div>
-
-      <div
+    return (
+      <SandpackStack
         className={classNames(
           css({
-            position: "absolute",
-            bottom: "$space$2",
-            right: "$space$2",
-            display: "flex",
-            gap: "$space$2",
-          })
+            height: "100%",
+            background: "$surface1",
+            iframe: { display: "none" },
+          }),
+          `${THEME_PREFIX}-console`,
+          className
         )}
+        {...props}
       >
-        {isServerTab && (
-          <RoundedButton
-            onClick={(): void => {
-              restart();
-              resetConsole();
-              resetStdout();
-            }}
-          >
-            <RestartIcon />
-          </RoundedButton>
+        {showSetupProgress && (
+          <PreviewProgress timeout={1_000} dismissOnTimeout />
         )}
 
-        <RoundedButton
-          onClick={(): void => {
-            if (currentTab === "client") {
-              resetConsole();
-            } else {
-              resetStdout();
-            }
-          }}
+        {(showHeader || isNodeEnvironment) && (
+          <Header
+            currentTab={currentTab}
+            node={isNodeEnvironment}
+            setCurrentTab={setCurrentTab}
+          />
+        )}
+
+        <div
+          ref={wrapperRef}
+          className={classNames(
+            css({ overflow: "auto", scrollBehavior: "smooth" })
+          )}
         >
-          <CleanIcon />
-        </RoundedButton>
-      </div>
-    </SandpackStack>
-  );
-};
+          {isServerTab ? (
+            <StdoutList data={stdoutData} />
+          ) : (
+            <ConsoleList data={consoleData} />
+          )}
+        </div>
+
+        <div
+          className={classNames(
+            css({
+              position: "absolute",
+              bottom: "$space$2",
+              right: "$space$2",
+              display: "flex",
+              gap: "$space$2",
+            })
+          )}
+        >
+          {isServerTab && (
+            <RoundedButton
+              onClick={(): void => {
+                restart();
+                resetConsole();
+                resetStdout();
+              }}
+            >
+              <RestartIcon />
+            </RoundedButton>
+          )}
+
+          <RoundedButton
+            onClick={(): void => {
+              if (currentTab === "client") {
+                resetConsole();
+              } else {
+                resetStdout();
+              }
+            }}
+          >
+            <CleanIcon />
+          </RoundedButton>
+        </div>
+      </SandpackStack>
+    );
+  }
+);
