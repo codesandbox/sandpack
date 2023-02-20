@@ -536,14 +536,15 @@ export default () => (
 <details>
   <summary>`SandpackConsole` Options</summary>
 
-| Prop | Type  | Default |
-| :- | :- | :- |
-| `clientId` | `string` | `undefined` |
-| `showHeader` | `boolean` | `true` |
-| `showSyntaxError` | `boolean` | `false` | 
-| `maxMessageCount` | `number` | `800` |
-| `onLogsChange` | `(logs: SandpackConsoleData) => void` | |
-
+| Prop | Type  | Default | Description | 
+| :- | :- | :- | :- |
+| `clientId` | `string` | `undefined` | |
+| `showHeader` | `boolean` | `true` | |
+| `showSyntaxError` | `boolean` | `false` | |
+| `maxMessageCount` | `number` | `800` | |
+| `onLogsChange` | `(logs: SandpackConsoleData) => void` | | |
+| `resetOnPreviewRestart` | `boolean` | `false` | Reset the console list on every preview restart |
+| `ref` | `SandpackConsoleRef` | `SandpackConsoleRef` | Make possible to imperatively interact with the console component |
 
 </details>
 

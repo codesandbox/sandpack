@@ -6,9 +6,14 @@ import { useSandpack } from ".";
 
 const MAX_MESSAGE_COUNT = 400 * 2;
 
-export const useSandpackShellStdout = (props?: {
+export const useSandpackShellStdout = ({
+  clientId,
+  maxMessageCount = MAX_MESSAGE_COUNT,
+  resetOnPreviewRestart = false,
+}: {
   clientId?: string;
   maxMessageCount?: number;
+  resetOnPreviewRestart: boolean;
 }): {
   logs: Array<{ id: string; data: string }>;
   reset: () => void;
@@ -18,12 +23,11 @@ export const useSandpackShellStdout = (props?: {
   );
   const { listen } = useSandpack();
 
-  const maxMessageCount = props?.maxMessageCount ?? MAX_MESSAGE_COUNT;
-  const clientId = props?.clientId;
-
   React.useEffect(() => {
     const unsubscribe = listen((message) => {
-      if (
+      if (message.type === "start") {
+        setLogs([]);
+      } else if (
         message.type === "stdout" &&
         message.payload.data &&
         Boolean(message.payload.data.trim())
