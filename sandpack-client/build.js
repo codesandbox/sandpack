@@ -38,10 +38,7 @@ async function buildInjectScripts() {
 async function bundle() {
   const options = {
     entryPoints: [
-      ...fs
-        .readdirSync("./src")
-        .filter((src) => src.endsWith(".ts"))
-        .map((e) => `src/${e}`),
+      "src/index.ts",
       "src/clients/node/index.ts",
       "src/clients/runtime/index.ts",
     ],
