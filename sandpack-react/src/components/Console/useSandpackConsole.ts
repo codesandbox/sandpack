@@ -14,7 +14,12 @@ import type { SandpackConsoleData } from "./utils/getType";
  *
  * @category Hooks
  */
-export const useSandpackConsole = (props?: {
+export const useSandpackConsole = ({
+  clientId,
+  maxMessageCount = MAX_MESSAGE_COUNT,
+  showSyntaxError = false,
+  resetOnPreviewRestart = false,
+}: {
   clientId?: string;
   maxMessageCount?: number;
   showSyntaxError?: boolean;
@@ -23,13 +28,9 @@ export const useSandpackConsole = (props?: {
   const [logs, setLogs] = React.useState<SandpackConsoleData>([]);
   const { listen } = useSandpack();
 
-  const showSyntaxError = props?.showSyntaxError ?? false;
-  const maxMessageCount = props?.maxMessageCount ?? MAX_MESSAGE_COUNT;
-  const clientId = props?.clientId;
-
   React.useEffect(() => {
     const unsubscribe = listen((message) => {
-      if (message.type === "start") {
+      if (resetOnPreviewRestart && message.type === "start") {
         setLogs([]);
       } else if (message.type === "console" && message.codesandbox) {
         const payloadLog = Array.isArray(message.log)
