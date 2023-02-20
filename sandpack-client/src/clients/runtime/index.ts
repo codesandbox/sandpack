@@ -25,6 +25,7 @@ import { SandpackClient } from "../base";
 import Protocol from "./file-resolver-protocol";
 import { IFrameProtocol } from "./iframe-protocol";
 import type { SandpackRuntimeMessage } from "./types";
+import { getTemplate } from "./utils";
 
 const BUNDLER_URL =
   process.env.CODESANDBOX_ENV === "development"
