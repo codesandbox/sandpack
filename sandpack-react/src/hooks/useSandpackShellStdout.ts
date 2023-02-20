@@ -9,6 +9,7 @@ const MAX_MESSAGE_COUNT = 400 * 2;
 export const useSandpackShellStdout = (props?: {
   clientId?: string;
   maxMessageCount?: number;
+  resetOnPreviewRestart: boolean;
 }): {
   logs: Array<{ id: string; data: string }>;
   reset: () => void;
@@ -23,7 +24,9 @@ export const useSandpackShellStdout = (props?: {
 
   React.useEffect(() => {
     const unsubscribe = listen((message) => {
-      if (
+      if (message.type === "start") {
+        setLogs([]);
+      } else if (
         message.type === "stdout" &&
         message.payload.data &&
         Boolean(message.payload.data.trim())

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useSandpack, useSandpackClient, useSandpackShell } from "../..";
+import { useSandpack, useSandpackShell } from "../..";
 import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
@@ -22,6 +22,7 @@ interface SandpackConsoleProps {
   showSetupProgress?: boolean;
   maxMessageCount?: number;
   onLogsChange?: (logs: SandpackConsoleData) => void;
+  resetOnPreviewRestart?: boolean;
 }
 
 /**
@@ -39,6 +40,7 @@ export const SandpackConsole: React.FC<
   onLogsChange,
   className,
   showSetupProgress = false,
+  resetOnPreviewRestart = false,
   ...props
 }) => {
   const {
@@ -54,10 +56,12 @@ export const SandpackConsole: React.FC<
   const { logs: consoleData, reset: resetConsole } = useSandpackConsole({
     maxMessageCount,
     showSyntaxError,
+    resetOnPreviewRestart,
   });
 
   const { logs: stdoutData, reset: resetStdout } = useSandpackShellStdout({
     maxMessageCount,
+    resetOnPreviewRestart,
   });
 
   const wrapperRef = React.useRef<HTMLDivElement>(null);

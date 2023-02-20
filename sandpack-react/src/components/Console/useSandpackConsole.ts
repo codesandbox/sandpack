@@ -18,6 +18,7 @@ export const useSandpackConsole = (props?: {
   clientId?: string;
   maxMessageCount?: number;
   showSyntaxError?: boolean;
+  resetOnPreviewRestart: boolean;
 }): { logs: SandpackConsoleData; reset: () => void } => {
   const [logs, setLogs] = React.useState<SandpackConsoleData>([]);
   const { listen } = useSandpack();
@@ -28,7 +29,9 @@ export const useSandpackConsole = (props?: {
 
   React.useEffect(() => {
     const unsubscribe = listen((message) => {
-      if (message.type === "console" && message.codesandbox) {
+      if (message.type === "start") {
+        setLogs([]);
+      } else if (message.type === "console" && message.codesandbox) {
         const payloadLog = Array.isArray(message.log)
           ? message.log
           : [message.log];
