@@ -3,5 +3,6 @@
   "components": "Components",
   "hooks": "Hooks",
   "client": { "title": "Sandpack Client", "label": "JS" },
+  "nodebox": { "title": "Nodebox", "label": "JS" },
   "bundlers": "Experimental bundler (beta)"
 }
