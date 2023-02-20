@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.9](https://github.com/codesandbox/sandpack/compare/v2.0.8...v2.0.9) (2023-02-20)
+
+
+### Bug Fixes
+
+* **console:** improvements ([#743](https://github.com/codesandbox/sandpack/issues/743)) ([685fac3](https://github.com/codesandbox/sandpack/commit/685fac3717a5eb7173729b41bd9d37650e180d58))
+
+
+
+
+
 ## [2.0.8](https://github.com/codesandbox/sandpack/compare/v2.0.7...v2.0.8) (2023-02-20)
 
 
