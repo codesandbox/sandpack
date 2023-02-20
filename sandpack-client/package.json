@@ -14,8 +14,8 @@
   "module": "./dist/index.mjs",
   "exports": {
     "./clients/runtime": {
-      "import": "./dist/clients/node/index.mjs",
-      "require": "./dist/clients/node/index.js"
+      "import": "./dist/clients/runtime/index.mjs",
+      "require": "./dist/clients/runtime/index.js"
     },
     "./clients/node": {
       "import": "./dist/clients/node/index.mjs",
