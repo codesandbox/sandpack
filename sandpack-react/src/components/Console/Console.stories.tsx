@@ -3,7 +3,7 @@ import React from "react";
 import { SandpackCodeEditor, SandpackPreview } from "..";
 import { SandpackProvider, SandpackLayout, Sandpack } from "../..";
 
-import { SandpackConsole } from "./SandpackConsole";
+import { SandpackConsole, SandpackConsoleRef } from "./SandpackConsole";
 
 export default {
   title: "components/Console",
@@ -128,5 +128,22 @@ export const Preset: React.FC = () => {
         template="react"
       />
     </div>
+  );
+};
+
+export const ImperativeReset: React.FC = () => {
+  const consoleRef = React.useRef<SandpackConsoleRef>(null);
+
+  const resetLogs = () => {
+    consoleRef.current?.reset();
+  };
+
+  return (
+    <SandpackProvider>
+      <SandpackCodeEditor />
+      <SandpackPreview />
+      <button onClick={resetLogs}>Reset logs</button>
+      <SandpackConsole ref={consoleRef} />
+    </SandpackProvider>
   );
 };

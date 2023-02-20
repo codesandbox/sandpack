@@ -25,6 +25,10 @@ interface SandpackConsoleProps {
   resetOnPreviewRestart?: boolean;
 }
 
+export interface SandpackConsoleRef {
+  reset: () => void;
+}
+
 /**
  * `SandpackConsole` is a Sandpack devtool that allows printing
  * the console logs from a Sandpack client. It is designed to be
@@ -32,7 +36,7 @@ interface SandpackConsoleProps {
  * limited to a set of common use cases you may encounter when coding.
  */
 export const SandpackConsole = React.forwardRef<
-  { reset: () => void },
+  SandpackConsoleRef,
   React.HTMLAttributes<HTMLDivElement> & SandpackConsoleProps
 >(
   (
