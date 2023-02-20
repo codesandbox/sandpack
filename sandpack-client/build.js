@@ -68,6 +68,7 @@ async function bundle() {
   await build({
     ...options,
     format: "esm",
+    splitting: true,
     outExtension: { ".js": ".mjs" },
     target: "es2019",
   });
