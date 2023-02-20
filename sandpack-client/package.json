@@ -11,10 +11,14 @@
   "author": "CodeSandbox",
   "sideEffects": false,
   "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
+    "./clients/runtime": {
+      "import": "./dist/clients/node/index.mjs",
+      "require": "./dist/clients/node/index.js"
+    },
     "./clients/node": {
-      "import": "./dist/clients/node/index.js",
+      "import": "./dist/clients/node/index.mjs",
       "require": "./dist/clients/node/index.js"
     },
     ".": {
