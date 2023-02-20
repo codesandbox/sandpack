@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.7](https://github.com/codesandbox/sandpack/compare/v2.0.6...v2.0.7) (2023-02-20)
+
+
+### Bug Fixes
+
+* Invalid esm package exports ([#725](https://github.com/codesandbox/sandpack/issues/725)) ([44b05ec](https://github.com/codesandbox/sandpack/commit/44b05ecc5a2d322473f06e8eef8ad49afe3c2d20)), closes [#724](https://github.com/codesandbox/sandpack/issues/724)
+
+
+
+
+
 ## [2.0.6](https://github.com/codesandbox/sandpack/compare/v2.0.5...v2.0.6) (2023-02-17)
 
 
