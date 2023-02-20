@@ -42,7 +42,6 @@ async function bundle() {
       "src/clients/node/index.ts",
       "src/clients/runtime/index.ts",
     ],
-    splitting: true,
     outdir: "./dist",
     define: {
       global: "globalThis",
@@ -68,6 +67,7 @@ async function bundle() {
 
   await build({
     ...options,
+    splitting: true,
     format: "esm",
     outExtension: { ".js": ".mjs" },
     target: "es2019",
