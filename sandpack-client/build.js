@@ -30,6 +30,7 @@ async function buildInjectScripts() {
 
   fs.writeFile(`${dist}/consoleHook.txt`, text, (err) => {
     if (err) throw err;
+    // eslint-disable-next-line no-console
     console.log("The file has been saved!");
   });
 }
