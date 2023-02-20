@@ -1,4 +1,3 @@
-import { getTemplate } from "codesandbox-import-utils/lib/create-sandbox/templates";
 import isEqual from "lodash.isequal";
 
 import type { SandpackMessage } from "../..";
