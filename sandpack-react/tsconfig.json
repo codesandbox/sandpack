@@ -9,7 +9,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noImplicitAny": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "outDir": "dist/types",
     "skipLibCheck": true
   },
