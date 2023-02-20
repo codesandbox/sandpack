@@ -1,12 +1,13 @@
 const MAX_CLIENT_DEPENDENCY_COUNT = 50;
 
-type Dependencies = { [name: string]: string };
-type PackageJSON = {
+type Dependencies = Record<string, string>;
+interface PackageJSON {
   dependencies?: Dependencies;
   devDependencies?: Dependencies;
-};
+}
 export function getTemplate(
   pkg: PackageJSON | null,
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   modules: any
 ): string | undefined {
   if (!pkg) {

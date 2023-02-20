@@ -233,7 +233,7 @@ export class SandpackRuntime extends SandpackClient {
         this.sandboxSetup.disableDependencyPreprocessing,
       template:
         this.sandboxSetup.template ||
-        getTemplate(packageJSON, normalizedModules),
+        getTemplate({ pkg: packageJSON, modules: normalizedModules }),
       showOpenInCodeSandbox: this.options.showOpenInCodeSandbox ?? true,
       showErrorScreen: this.options.showErrorScreen ?? true,
       showLoadingScreen: this.options.showLoadingScreen ?? true,

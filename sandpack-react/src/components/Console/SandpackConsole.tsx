@@ -4,10 +4,10 @@ import { useSandpack, useSandpackClient, useSandpackShell } from "../..";
 import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
+import { PreviewProgress } from "../Preview/PreviewProgress";
 import { SandpackStack } from "../common";
 import { RoundedButton } from "../common/RoundedButton";
 import { CleanIcon, RestartIcon } from "../icons";
-import { PreviewProgress } from "../Preview/PreviewProgress";
 
 import { ConsoleList } from "./ConsoleList";
 import { Header } from "./Header";
@@ -87,7 +87,7 @@ export const SandpackConsole: React.FC<
       {...props}
     >
       {showSetupProgress && (
-        <PreviewProgress dismissOnTimeout timeout={1_000} />
+        <PreviewProgress timeout={1_000} dismissOnTimeout />
       )}
 
       {(showHeader || isNodeEnvironment) && (
