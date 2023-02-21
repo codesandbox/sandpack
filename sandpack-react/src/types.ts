@@ -211,6 +211,8 @@ export interface SandpackSetup {
    * ```
    */
   npmRegistries?: Array<NpmRegistry>;
+
+  codesandboxTeamId?: string;
 }
 
 /**

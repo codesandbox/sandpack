@@ -76,9 +76,7 @@ export const useClient: UseClient = (props, filesState) => {
     initMode: initModeFromProps,
     reactDevTools: undefined,
     status: props.options?.autorun ?? true ? "initial" : "idle",
-    authenticated: !!props.customSetup?.npmRegistries?.some(
-      (item) => "codesandboxTeamId" in item
-    ),
+    authenticated: !!props.customSetup?.codesandboxTeamId,
   });
 
   /**
@@ -138,6 +136,7 @@ export const useClient: UseClient = (props, filesState) => {
           showLoadingScreen: loadingScreenRegisteredRef.current,
           reactDevTools: state.reactDevTools,
           customNpmRegistries: props.customSetup?.npmRegistries,
+          teamId: props.customSetup?.codesandboxTeamId,
         }
       );
 

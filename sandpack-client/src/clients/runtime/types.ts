@@ -78,6 +78,7 @@ export type SandpackRuntimeMessage = BaseSandpackMessage &
         reactDevTools?: ReactDevToolsMode;
         logLevel?: SandpackLogLevel;
         customNpmRegistries?: NpmRegistry[];
+        teamId?: string;
       }
     | {
         type: "refresh";

@@ -59,6 +59,12 @@ export interface ClientOptions {
    * to retrieve npm packages from your own npm registry.
    */
   customNpmRegistries?: NpmRegistry[];
+
+  /**
+   * CodeSandbox team id: with this information, bundler can connect to CodeSandbox
+   * and unlock a few capabilities
+   */
+  teamId?: string;
 }
 
 export interface SandboxSetup {
@@ -238,19 +244,17 @@ export interface ProtocolRequestMessage extends BaseProtocolMessage {
   params: any[];
 }
 
-export type NpmRegistry =
-  | {
-      enabledScopes: string[];
-      limitToScopes: boolean;
-      registryUrl: string;
-      /**
-       * It must be `false` if you're providing a sef-host solution,
-       * otherwise, it'll try to proxy from CodeSandbox Proxy
-       */
-      proxyEnabled: boolean;
-      registryAuthToken?: string;
-    }
-  | { teamId: string; enabledScopes: string[] };
+export interface NpmRegistry {
+  enabledScopes: string[];
+  limitToScopes: boolean;
+  registryUrl: string;
+  /**
+   * It must be `false` if you're providing a sef-host solution,
+   * otherwise, it'll try to proxy from CodeSandbox Proxy
+   */
+  proxyEnabled: boolean;
+  registryAuthToken?: string;
+}
 
 type TestStatus = "running" | "pass" | "fail";
 

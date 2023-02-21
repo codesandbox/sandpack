@@ -58,6 +58,16 @@ export class SandpackRuntime extends SandpackClient {
 
     this.bundlerURL = options.bundlerURL || BUNDLER_URL;
 
+    /**
+     * TODO: make this more elegant
+     */
+    if (options.teamId) {
+      this.bundlerURL = this.bundlerURL.replace(
+        "https://",
+        "https://" + options.teamId + "."
+      );
+    }
+
     this.bundlerState = undefined;
     this.errors = [];
     this.status = "initializing";
@@ -241,6 +251,7 @@ export class SandpackRuntime extends SandpackClient {
       clearConsoleDisabled: !this.options.clearConsoleOnFirstCompile,
       logLevel: this.options.logLevel ?? SandpackLogLevel.Info,
       customNpmRegistries: this.options.customNpmRegistries,
+      teamId: this.options.teamId,
     });
   }
 
