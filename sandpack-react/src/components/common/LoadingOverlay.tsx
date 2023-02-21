@@ -11,6 +11,7 @@ import {
   absoluteClassName,
   buttonClassName,
   errorBundlerClassName,
+  errorClassName,
   errorMessageClassName,
   iconStandaloneClassName,
   roundedButtonClassName,
@@ -61,54 +62,53 @@ export const LoadingOverlay = ({
         className={classNames(
           c("overlay", "error"),
           absoluteClassName,
+          errorClassName({ solidBg: true }),
           errorBundlerClassName,
           className
         )}
         {...props}
       >
-        <div className={classNames(c("error-message"), errorMessageClassName)}>
-          <p className={classNames(css({ fontWeight: "bold" }))}>
-            Couldn't connect to server
-          </p>
+        <p className={classNames(c("error-message"), errorMessageClassName)}>
+          <strong>Couldn't connect to server</strong>
+        </p>
 
-          <p>
-            This means sandpack cannot connect to the runtime or your network is
-            having some issues. Please check the network tab in your browser and
-            try again. If the problem persists, report it via{" "}
-            <a href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error">
-              email
-            </a>{" "}
-            or submit an issue on{" "}
-            <a
-              href="https://github.com/codesandbox/sandpack/issues"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              GitHub.
-            </a>
-          </p>
+        <p>
+          This means sandpack cannot connect to the runtime or your network is
+          having some issues. Please check the network tab in your browser and
+          try again. If the problem persists, report it via{" "}
+          <a href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error">
+            email
+          </a>{" "}
+          or submit an issue on{" "}
+          <a
+            href="https://github.com/codesandbox/sandpack/issues"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            GitHub.
+          </a>
+        </p>
 
-          <pre>
-            ENV: {environment}
-            <br />
-            ERROR: TIME_OUT
-          </pre>
+        <pre>
+          ENV: {environment}
+          <br />
+          ERROR: TIME_OUT
+        </pre>
 
-          <div>
-            <button
-              className={classNames(
-                c("button", "icon-standalone"),
-                buttonClassName,
-                iconStandaloneClassName,
-                roundedButtonClassName
-              )}
-              onClick={runSandpack}
-              title="Restart script"
-              type="button"
-            >
-              <RestartIcon /> <span>Try again</span>
-            </button>
-          </div>
+        <div>
+          <button
+            className={classNames(
+              c("button", "icon-standalone"),
+              buttonClassName,
+              iconStandaloneClassName,
+              roundedButtonClassName
+            )}
+            onClick={runSandpack}
+            title="Restart script"
+            type="button"
+          >
+            <RestartIcon /> <span>Try again</span>
+          </button>
         </div>
       </div>
     );

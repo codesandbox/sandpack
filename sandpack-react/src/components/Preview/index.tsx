@@ -19,6 +19,12 @@ import { OpenInCodeSandboxButton } from "../common/OpenInCodeSandboxButton";
 import { RoundedButton } from "../common/RoundedButton";
 import { SandpackStack } from "../common/Stack";
 import { RefreshIcon, RestartIcon } from "../icons";
+import {
+  buttonClassName,
+  iconStandaloneClassName,
+  roundedButtonClassName,
+} from "../../styles/shared";
+import { SignOutIcon } from "../icons";
 
 import { PreviewProgress } from "./PreviewProgress";
 
@@ -105,7 +111,7 @@ export const SandpackPreview = React.forwardRef<
     },
     ref
   ) => {
-    const { sandpack, listen, iframe, getClient, clientId } =
+    const { sandpack, listen, iframe, getClient, clientId, dispatch } =
       useSandpackClient();
     const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
       number | null
@@ -191,6 +197,22 @@ export const SandpackPreview = React.forwardRef<
             )}
 
             {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
+
+            {sandpack.authenticated && (
+              <button
+                onClick={() => dispatch({ type: "sign-out" })}
+                className={classNames(
+                  c("button", "icon-standalone"),
+                  buttonClassName,
+                  iconStandaloneClassName,
+                  roundedButtonClassName
+                )}
+                title="Sign out"
+                type="button"
+              >
+                <SignOutIcon />
+              </button>
+            )}
           </div>
 
           <LoadingOverlay

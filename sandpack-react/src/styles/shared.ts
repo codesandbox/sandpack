@@ -85,10 +85,27 @@ export const absoluteClassName = css({
 });
 
 export const errorClassName = css({
-  padding: "$space$4",
   whiteSpace: "pre-wrap",
-  fontFamily: "$font$mono",
-  backgroundColor: "$colors$errorSurface",
+  padding: "$space$10",
+  backgroundColor: "$colors$surface1",
+  display: "flex",
+  gap: "$space$2",
+  flexDirection: "column",
+
+  [`.${buttonClassName}`]: {
+    width: "auto",
+    gap: "$space$2",
+    padding: "0 $space$3 0 $space$2",
+    marginTop: "$space$1",
+  },
+
+  variants: {
+    solidBg: {
+      true: {
+        backgroundColor: "$colors$errorSurface",
+      },
+    },
+  },
 });
 
 export const errorBundlerClassName = css({
@@ -109,6 +126,10 @@ export const errorMessageClassName = css({
   display: "flex",
   flexDirection: "column",
   gap: "$space$3",
+
+  variants: {
+    errorCode: { true: { fontFamily: "$font$mono" } },
+  },
 
   a: {
     color: "inherit",

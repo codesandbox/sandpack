@@ -210,7 +210,7 @@ export interface SandpackSetup {
    * }
    * ```
    */
-  npmRegistries?: Array<Omit<NpmRegistry, "proxyEnabled">>;
+  npmRegistries?: Array<NpmRegistry>;
 }
 
 /**
@@ -524,6 +524,7 @@ export interface SandpackState {
   status: SandpackStatus;
   initMode: SandpackInitMode;
   clients: Record<string, InstanceType<typeof SandpackClient>>;
+  authenticated: boolean;
 
   runSandpack: () => Promise<void>;
   registerBundler: (

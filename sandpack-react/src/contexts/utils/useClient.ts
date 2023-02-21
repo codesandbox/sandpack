@@ -32,6 +32,7 @@ interface SandpackConfigState {
   bundlerState: BundlerState | undefined;
   error: SandpackError | null;
   status: SandpackStatus;
+  authenticated: boolean;
 }
 
 export interface UseClientOperations {
@@ -75,6 +76,9 @@ export const useClient: UseClient = (props, filesState) => {
     initMode: initModeFromProps,
     reactDevTools: undefined,
     status: props.options?.autorun ?? true ? "initial" : "idle",
+    authenticated: !!props.customSetup?.npmRegistries?.some(
+      (item) => "codesandboxTeamId" in item
+    ),
   });
 
   /**
@@ -133,13 +137,7 @@ export const useClient: UseClient = (props, filesState) => {
           showErrorScreen: errorScreenRegisteredRef.current,
           showLoadingScreen: loadingScreenRegisteredRef.current,
           reactDevTools: state.reactDevTools,
-          customNpmRegistries: props.customSetup?.npmRegistries?.map(
-            (config) =>
-              ({
-                ...config,
-                proxyEnabled: false, // force
-              } ?? [])
-          ),
+          customNpmRegistries: props.customSetup?.npmRegistries,
         }
       );
 

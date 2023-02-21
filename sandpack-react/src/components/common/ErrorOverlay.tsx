@@ -1,6 +1,8 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
+import { useSandpack } from "../../hooks";
 
+import { SignInIcon } from "../icons";
 import { useSandpackShell } from "../..";
 import { useErrorMessage } from "../../hooks/useErrorMessage";
 import { css, THEME_PREFIX } from "../../styles";
@@ -45,12 +47,66 @@ export const ErrorOverlay: React.FC<
   const errorMessage = useErrorMessage();
   const { restart } = useSandpackShell();
   const c = useClasser(THEME_PREFIX);
+  const { dispatch } = useSandpack();
 
   if (!errorMessage && !children) {
     return null;
   }
 
   const isSandpackBundlerError = errorMessage?.startsWith("[sandpack-client]");
+  const privateDependencyError = errorMessage?.includes(
+    "NPM_REGISTRY_UNAUTHENTICATED_REQUEST"
+  );
+
+  const onSignIn = () => {
+    dispatch({ type: "sign-in" });
+  };
+
+  if (privateDependencyError) {
+    return (
+      <div
+        className={classNames(
+          c("overlay", "error"),
+          absoluteClassName,
+          errorClassName,
+          className
+        )}
+        {...props}
+      >
+        <p className={classNames(c("error-message"), errorMessageClassName)}>
+          <strong>Unable to fetch required dependency.</strong>
+        </p>
+
+        <p className={classNames(c("error-message"), errorMessageClassName)}>
+          Authentication required. Please sign in to your account (make sure to
+          allow pop-ups to this page) and try again. If the issue persists,
+          contact{" "}
+          <a
+            className={classNames(c("error-message"), errorMessageClassName)}
+            href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error"
+          >
+            support
+          </a>{" "}
+          for further assistance.
+        </p>
+
+        <div>
+          <button
+            className={classNames(
+              c("button"),
+              buttonClassName,
+              iconStandaloneClassName,
+              roundedButtonClassName
+            )}
+            onClick={onSignIn}
+          >
+            <SignInIcon />
+            <span>Sign in</span>
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (isSandpackBundlerError && errorMessage) {
     return (
@@ -94,15 +150,24 @@ export const ErrorOverlay: React.FC<
       className={classNames(
         c("overlay", "error"),
         absoluteClassName,
-        errorClassName,
+        errorClassName({ solidBg: true }),
         className
       )}
       translate="no"
       {...props}
     >
-      <div className={classNames(c("error-message"), errorMessageClassName)}>
+      <p className={classNames(c("error-message"), errorMessageClassName)}>
+        <strong>Something went wrong</strong>
+      </p>
+
+      <p
+        className={classNames(
+          c("error-message"),
+          errorMessageClassName({ errorCode: true })
+        )}
+      >
         {errorMessage || children}
-      </div>
+      </p>
     </div>
   );
 };
