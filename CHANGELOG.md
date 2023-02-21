@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.10](https://github.com/codesandbox/sandpack/compare/v2.0.9...v2.0.10) (2023-02-21)
+
+
+### Bug Fixes
+
+* **client:** enable code-splitting and dynamic imports in esbuild ([#741](https://github.com/codesandbox/sandpack/issues/741)) ([0bc9d80](https://github.com/codesandbox/sandpack/commit/0bc9d80f05d2c1bd35f2b74e1a4de96d9ddd4839))
+
+
+
+
+
 ## [2.0.9](https://github.com/codesandbox/sandpack/compare/v2.0.8...v2.0.9) (2023-02-20)
 
 
