@@ -225,7 +225,8 @@ export type SandboxEnvironment =
   | "vue-cli"
   | "static"
   | "solid"
-  | "node";
+  | "node"
+  | "vm";
 
 /**
  * @category Setup

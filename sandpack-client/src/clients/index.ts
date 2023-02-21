@@ -11,10 +11,16 @@ export async function loadSandpackClient(
   options: ClientOptions = {}
 ): Promise<SandpackClientBase> {
   const template = sandboxSetup.template ?? "parcel";
-  const Client =
-    template === "node"
-      ? await import("./node").then((m) => m.SandpackNode)
-      : await import("./runtime").then((m) => m.SandpackRuntime);
+
+  let Client;
+
+  if (template === "node") {
+    Client = await import("./node").then((m) => m.SandpackNode);
+  } else if (template === "vm") {
+    Client = await import("./node").then((m) => m.SandpackNode);
+  } else {
+    Client = await import("./runtime").then((m) => m.SandpackRuntime);
+  }
 
   return new Client(iframeSelector, sandboxSetup, options);
 }
