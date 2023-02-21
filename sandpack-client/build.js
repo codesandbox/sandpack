@@ -30,6 +30,7 @@ async function buildInjectScripts() {
 
   fs.writeFile(`${dist}/consoleHook.txt`, text, (err) => {
     if (err) throw err;
+    // eslint-disable-next-line no-console
     console.log("The file has been saved!");
   });
 }
@@ -37,10 +38,7 @@ async function buildInjectScripts() {
 async function bundle() {
   const options = {
     entryPoints: [
-      ...fs
-        .readdirSync("./src")
-        .filter((src) => src.endsWith(".ts"))
-        .map((e) => `src/${e}`),
+      "src/index.ts",
       "src/clients/node/index.ts",
       "src/clients/runtime/index.ts",
     ],
@@ -69,6 +67,7 @@ async function bundle() {
 
   await build({
     ...options,
+    splitting: true,
     format: "esm",
     outExtension: { ".js": ".mjs" },
     target: "es2019",
