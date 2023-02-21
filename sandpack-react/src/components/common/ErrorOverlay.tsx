@@ -77,18 +77,17 @@ export const ErrorOverlay: React.FC<
           <strong>Unable to fetch required dependency.</strong>
         </p>
 
-        <p className={classNames(c("error-message"), errorMessageClassName)}>
-          Authentication required. Please sign in to your account (make sure to
-          allow pop-ups to this page) and try again. If the issue persists,
-          contact{" "}
-          <a
-            className={classNames(c("error-message"), errorMessageClassName)}
-            href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error"
-          >
-            support
-          </a>{" "}
-          for further assistance.
-        </p>
+        <div className={classNames(c("error-message"), errorMessageClassName)}>
+          <p>
+            Authentication required. Please sign in to your account (make sure
+            to allow pop-ups to this page) and try again. If the issue persists,
+            contact{" "}
+            <a href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error">
+              support
+            </a>{" "}
+            for further assistance.
+          </p>
+        </div>
 
         <div>
           <button
@@ -120,8 +119,8 @@ export const ErrorOverlay: React.FC<
         {...props}
       >
         <div className={classNames(c("error-message"), errorMessageClassName)}>
-          <p className={classNames(css({ fontWeight: "bold" }))}>
-            Couldn't connect to server
+          <p>
+            <strong>Couldn't connect to server</strong>
           </p>
           <p>{mapBundlerErrors(errorMessage)}</p>
 

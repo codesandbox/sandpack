@@ -62,7 +62,7 @@ export const LoadingOverlay = ({
         className={classNames(
           c("overlay", "error"),
           absoluteClassName,
-          errorClassName({ solidBg: true }),
+          errorClassName,
           errorBundlerClassName,
           className
         )}
@@ -72,28 +72,35 @@ export const LoadingOverlay = ({
           <strong>Couldn't connect to server</strong>
         </p>
 
-        <p>
-          This means sandpack cannot connect to the runtime or your network is
-          having some issues. Please check the network tab in your browser and
-          try again. If the problem persists, report it via{" "}
-          <a href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error">
-            email
-          </a>{" "}
-          or submit an issue on{" "}
-          <a
-            href="https://github.com/codesandbox/sandpack/issues"
-            rel="noreferrer noopener"
-            target="_blank"
-          >
-            GitHub.
-          </a>
-        </p>
+        <div className={classNames(c("error-message"), errorMessageClassName)}>
+          <p>
+            This means sandpack cannot connect to the runtime or your network is
+            having some issues. Please check the network tab in your browser and
+            try again. If the problem persists, report it via{" "}
+            <a href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error">
+              email
+            </a>{" "}
+            or submit an issue on{" "}
+            <a
+              href="https://github.com/codesandbox/sandpack/issues"
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              GitHub.
+            </a>
+          </p>
+        </div>
 
-        <pre>
+        <p
+          className={classNames(
+            c("error-message"),
+            errorMessageClassName({ errorCode: true })
+          )}
+        >
           ENV: {environment}
           <br />
           ERROR: TIME_OUT
-        </pre>
+        </p>
 
         <div>
           <button

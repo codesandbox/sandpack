@@ -329,8 +329,9 @@ export const useClient: UseClient = (props, filesState) => {
     if (timeoutHook.current) {
       clearTimeout(timeoutHook.current);
     }
-
-    if (msg.type === "state") {
+    if (msg.type === "start" && msg.firstLoad) {
+      setState((prev) => ({ ...prev, error: null, status: "running" }));
+    } else if (msg.type === "state") {
       setState((prev) => ({ ...prev, bundlerState: msg.state }));
     } else if (msg.type === "done" && !msg.compilatonError) {
       setState((prev) => ({ ...prev, error: null }));
