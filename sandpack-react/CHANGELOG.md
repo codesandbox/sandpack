@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.14](https://github.com/codesandbox/sandpack/compare/v2.0.13...v2.0.14) (2023-02-22)
+
+
+### Bug Fixes
+
+* **file-explorer:** introduce initialCollapsedFolders ([#756](https://github.com/codesandbox/sandpack/issues/756)) ([27b075e](https://github.com/codesandbox/sandpack/commit/27b075ebff60424889cb2f6210de84a22fe7fb4d))
+
+
+
+
+
 ## [2.0.13](https://github.com/codesandbox/sandpack/compare/v2.0.12...v2.0.13) (2023-02-22)
 
 
