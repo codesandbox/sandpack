@@ -6,6 +6,7 @@ import type {
   ShellProcess,
   FSWatchEvent,
 } from "@codesandbox/nodebox";
+import type { ShellCommandOptions } from "@codesandbox/nodebox/build/modules/shell";
 
 import type {
   ClientOptions,
@@ -37,7 +38,7 @@ export class SandpackNode extends SandpackClient {
   private emulatorIframe!: HTMLIFrameElement;
   private emulator!: Nodebox;
   private emulatorShellProcess: ShellProcess | undefined;
-  private emulatorCommand: [string, string[]] | undefined;
+  private emulatorCommand: [string, string[], ShellCommandOptions] | undefined;
   private iframePreviewUrl: string | undefined;
   private _modulesCache = new Map();
 
@@ -136,9 +137,10 @@ export class SandpackNode extends SandpackClient {
           type: "shell/progress",
           data: {
             ...data,
-            command: this.emulatorCommand
-              ?.map((e) => (Array.isArray(e) ? e.join(" ") : e))
-              .join(" "),
+            command: [
+              this.emulatorCommand?.[0],
+              this.emulatorCommand?.[1].join(" "),
+            ].join(" "),
           },
         });
 
