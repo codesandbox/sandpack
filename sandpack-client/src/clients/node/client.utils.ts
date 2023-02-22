@@ -1,3 +1,4 @@
+import type { ShellCommandOptions } from "@codesandbox/nodebox/build/modules/shell";
 import { invariant } from "outvariant";
 
 import type { SandpackBundlerFiles } from "../..";
@@ -38,7 +39,7 @@ export const fromBundlerFilesToFS = (
  */
 export const findStartScriptPackageJson = (
   packageJson: string
-): [string, string[]] => {
+): [string, string[], ShellCommandOptions] => {
   let scripts: Record<string, string> = {};
   const possibleKeys = ["dev", "start"];
 
@@ -58,9 +59,24 @@ export const findStartScriptPackageJson = (
   for (let index = 0; index < possibleKeys.length; index++) {
     if (possibleKeys[index] in scripts) {
       const script = possibleKeys[index];
-      const [command, ...args] = scripts[script].split(" ");
 
-      return [command, args];
+      const candidate = scripts[script];
+
+      const env = candidate
+        .match(/(\w+=\w+;)*\w+=\w+/g)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ?.reduce<any>((acc, curr) => {
+          const [key, value] = curr.split("=");
+          acc[key] = value;
+          return acc;
+        }, {});
+
+      const [command, ...args] = candidate
+        .replace(/(\w+=\w+;)*\w+=\w+/g, "")
+        .trim()
+        .split(" ");
+
+      return [command, args, { env }];
     }
   }
 
