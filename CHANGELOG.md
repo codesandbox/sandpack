@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.11](https://github.com/codesandbox/sandpack/compare/v2.0.10...v2.0.11) (2023-02-22)
+
+
+### Bug Fixes
+
+* **sandpack-client:** move console-feed to dev deps ([#747](https://github.com/codesandbox/sandpack/issues/747)) ([bdd1bb7](https://github.com/codesandbox/sandpack/commit/bdd1bb7925f2511aaea594593e3f7f3b7b9c3613))
+
+
+
+
+
 ## [2.0.10](https://github.com/codesandbox/sandpack/compare/v2.0.9...v2.0.10) (2023-02-21)
 
 
