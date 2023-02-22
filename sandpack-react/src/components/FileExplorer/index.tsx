@@ -22,11 +22,14 @@ export interface SandpackFileExplorerProp {
    * @default false
    */
   autoHiddenFiles?: boolean;
+
+  initialCollapsedFolder?: string[];
 }
 
 export const SandpackFileExplorer = ({
   className,
   autoHiddenFiles = false,
+  initialCollapsedFolder = [],
   ...props
 }: SandpackFileExplorerProp &
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
@@ -83,6 +86,7 @@ export const SandpackFileExplorer = ({
           activeFile={activeFile}
           autoHiddenFiles={autoHiddenFiles}
           files={orderedFiles}
+          initialCollapsedFolder={initialCollapsedFolder}
           prefixedPath="/"
           selectFile={openFile}
           visibleFiles={visibleFilesFromProps}
