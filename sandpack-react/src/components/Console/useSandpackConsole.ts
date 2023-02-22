@@ -44,8 +44,8 @@ export const useSandpackConsole = ({
         const logsMessages = showSyntaxError
           ? payloadLog
           : payloadLog.filter((messageItem) => {
-              const messagesWithoutSyntaxErrors = messageItem.data.filter(
-                (dataItem) => {
+              const messagesWithoutSyntaxErrors =
+                messageItem?.data?.filter?.((dataItem) => {
                   if (typeof dataItem !== "string") return true;
 
                   const matches = SYNTAX_ERROR_PATTERN.filter((lookFor) =>
@@ -53,8 +53,7 @@ export const useSandpackConsole = ({
                   );
 
                   return matches.length === 0;
-                }
-              );
+                }) ?? [];
 
               return messagesWithoutSyntaxErrors.length > 0;
             });
