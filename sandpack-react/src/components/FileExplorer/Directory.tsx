@@ -28,7 +28,7 @@ export const Directory: React.FC<Props> = ({
   initialCollapsedFolder,
 }) => {
   const [open, setOpen] = React.useState(
-    initialCollapsedFolder.includes(prefixedPath)
+    !initialCollapsedFolder?.includes(prefixedPath)
   );
 
   const toggle = (): void => setOpen((prev) => !prev);

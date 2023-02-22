@@ -65,7 +65,7 @@ export const InitialCollapsedFolder: React.FC = () => (
       }}
     >
       <SandpackLayout>
-        <SandpackFileExplorer />
+        <SandpackFileExplorer initialCollapsedFolder={["/src/components/"]} />
         <SandpackCodeEditor closableTabs />
       </SandpackLayout>
     </SandpackProvider>
@@ -83,7 +83,7 @@ export const InitialCollapsedFolder: React.FC = () => (
       theme="dark"
     >
       <SandpackLayout>
-        <SandpackFileExplorer initialCollapsedFolder={["src"]} />
+        <SandpackFileExplorer initialCollapsedFolder={["/src/components/"]} />
       </SandpackLayout>
     </SandpackProvider>
   </>
