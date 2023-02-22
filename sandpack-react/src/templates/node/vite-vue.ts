@@ -24,8 +24,8 @@ h1 {
       code: `import { createApp } from 'vue'
 import App from './App.vue'
 import "./styles.css"
-            
-createApp(App).mount('#app')            
+
+createApp(App).mount('#app')
 `,
     },
     "/index.html": {
@@ -62,12 +62,12 @@ export default defineConfig({
           preview: "vite preview",
         },
         dependencies: {
-          vue: "^3.2.45",
+          vue: "^3.2.47",
         },
         devDependencies: {
-          "@vitejs/plugin-vue": "^3.2.0",
-          vite: "4.0.0",
-          "esbuild-wasm": "0.15.12",
+          "@vitejs/plugin-vue": "^4.0.0",
+          vite: "^4.1.4",
+          "esbuild-wasm": "0.17.10",
         },
       }),
     },

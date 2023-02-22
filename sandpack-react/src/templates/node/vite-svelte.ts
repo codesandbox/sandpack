@@ -41,6 +41,16 @@ export default app`,
 </html>
 `,
     },
+    "svelte.config.js": {
+      code: `import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
+
+export default {
+  // Consult https://svelte.dev/docs#compile-time-svelte-preprocess
+  // for more information about preprocessors
+  preprocess: vitePreprocess(),
+}
+`,
+    },
     "/vite.config.js": {
       code: `import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
@@ -57,11 +67,13 @@ export default defineConfig({
         scripts: {
           dev: "vite",
         },
+        dependencies: {
+          svelte: "^3.55.1",
+        },
         devDependencies: {
           "@sveltejs/vite-plugin-svelte": "^2.0.2",
-          svelte: "^3.55.1",
-          vite: "^4.0.4",
-          "esbuild-wasm": "0.15.12",
+          vite: "^4.1.4",
+          "esbuild-wasm": "0.17.10",
         },
       }),
     },
