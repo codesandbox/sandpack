@@ -74,6 +74,12 @@ export interface SandpackProps {
    * of the sandbox, such as initialization mode, recompile mode, files resolver, etc.
    */
   options?: SandpackOptions;
+
+  /**
+   * CodeSandbox team id: with this information, bundler can connect to CodeSandbox
+   * and unlock a few capabilities, like private dependencies.
+   */
+  teamId?: string;
 }
 
 /**
@@ -210,9 +216,7 @@ export interface SandpackSetup {
    * }
    * ```
    */
-  npmRegistries?: Array<NpmRegistry>;
-
-  codesandboxTeamId?: string;
+  npmRegistries?: NpmRegistry[];
 }
 
 /**
@@ -402,6 +406,7 @@ interface SandpackRootProps<
   template?: TemplateName;
   customSetup?: SandpackSetup;
   theme?: SandpackThemeProp;
+  teamId?: string;
 }
 
 export interface SandpackInternalOptions<
