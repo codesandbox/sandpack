@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.15](https://github.com/codesandbox/sandpack/compare/v2.0.14...v2.0.15) (2023-02-22)
+
+
+### Bug Fixes
+
+* Send serialized console output to parent ([#757](https://github.com/codesandbox/sandpack/issues/757)) ([5865fc5](https://github.com/codesandbox/sandpack/commit/5865fc51ae18a877194bd6832df12d0de86b38e0))
+
+
+
+
+
 ## [2.0.13](https://github.com/codesandbox/sandpack/compare/v2.0.12...v2.0.13) (2023-02-22)
 
 
