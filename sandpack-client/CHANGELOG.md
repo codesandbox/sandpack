@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.13](https://github.com/codesandbox/sandpack/compare/v2.0.12...v2.0.13) (2023-02-22)
+
+
+### Bug Fixes
+
+* **nodebox:** support env vars on commands ([#755](https://github.com/codesandbox/sandpack/issues/755)) ([af8d5c1](https://github.com/codesandbox/sandpack/commit/af8d5c1cfa0d9ef525565ec62c77459d745dfbf2))
+
+
+
+
+
 ## [2.0.11](https://github.com/codesandbox/sandpack/compare/v2.0.10...v2.0.11) (2023-02-22)
 
 
