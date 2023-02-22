@@ -52,6 +52,43 @@ export const Component: React.FC = () => (
   </>
 );
 
+export const InitialCollapsedFolder: React.FC = () => (
+  <>
+    <SandpackProvider
+      customSetup={{
+        entry: "/index.tsx",
+      }}
+      files={{
+        "/index.tsx": "",
+        "/src/app.tsx": "",
+        "/src/components/button.tsx": "",
+      }}
+    >
+      <SandpackLayout>
+        <SandpackFileExplorer />
+        <SandpackCodeEditor closableTabs />
+      </SandpackLayout>
+    </SandpackProvider>
+
+    <SandpackProvider
+      customSetup={{
+        entry: "/index.tsx",
+      }}
+      files={{
+        "/index.tsx": "",
+        "/src/app.tsx": "",
+        "/src/components/button.tsx": "",
+        "/src/components/really-loooooooong-naaameeee.tsx": "",
+      }}
+      theme="dark"
+    >
+      <SandpackLayout>
+        <SandpackFileExplorer initialCollapsedFolder={["src"]} />
+      </SandpackLayout>
+    </SandpackProvider>
+  </>
+);
+
 export const LongFileTree: React.FC = () => (
   <SandpackProvider
     customSetup={{
