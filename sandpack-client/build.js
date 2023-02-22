@@ -61,6 +61,7 @@ async function bundle() {
 
   await build({
     ...options,
+    splitting: true,
     format: "cjs",
     target: "es6",
   });
