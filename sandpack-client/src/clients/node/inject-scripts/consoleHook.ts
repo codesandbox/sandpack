@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment,no-console,@typescript-eslint/explicit-function-return-type, no-restricted-globals */
+/* eslint-disable @typescript-eslint/no-explicit-any,@typescript-eslint/ban-ts-comment,no-console,@typescript-eslint/explicit-function-return-type, no-restricted-globals */
 import Hook from "console-feed/lib/Hook";
 import { Encode } from "console-feed/lib/Transform";
 
