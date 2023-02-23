@@ -28,8 +28,8 @@ const configs = [
   {
     input: {
       index: "src/index.ts",
-      "clients-node": "src/clients/node/index.ts",
-      "clients-runtime": "src/clients/runtime/index.ts",
+      "clients/node/index": "src/clients/node/index.ts",
+      "clients/runtime/index": "src/clients/runtime/index.ts",
     },
     output: [
       {

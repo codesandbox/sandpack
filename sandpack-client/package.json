@@ -16,13 +16,13 @@
   "exports": {
     "./clients/runtime": {
       "types": "./dist/clients/runtime/index.d.ts",
-      "import": "./dist/clients-runtime.mjs",
-      "require": "./dist/clients-runtime.js"
+      "import": "./dist/clients/runtime/index.mjs",
+      "require": "./dist/clients/runtime/index.js"
     },
     "./clients/node": {
       "types": "./dist/clients/node/index.d.ts",
-      "import": "./dist/clients-node.mjs",
-      "require": "./dist/clients-node.js"
+      "import": "./dist/clients/node/index.mjs",
+      "require": "./dist/clients/node/index.js"
     },
     ".": {
       "types": "./dist/index.d.ts",
