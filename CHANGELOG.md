@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.16](https://github.com/codesandbox/sandpack/compare/v2.0.15...v2.0.16) (2023-02-23)
+
+
+### Bug Fixes
+
+* **sandpack-react:** use automatic runtime for jsx ([#738](https://github.com/codesandbox/sandpack/issues/738)) ([818d1b0](https://github.com/codesandbox/sandpack/commit/818d1b03e61a89119560f26e17e5ae6e9c9a3878))
+
+
+
+
+
 ## [2.0.15](https://github.com/codesandbox/sandpack/compare/v2.0.14...v2.0.15) (2023-02-22)
 
 
