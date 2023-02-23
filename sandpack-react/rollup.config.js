@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const commonjs = require("@rollup/plugin-commonjs");
 const typescript = require("@rollup/plugin-typescript");
 const replace = require("rollup-plugin-replace");
@@ -28,6 +29,7 @@ const configBase = {
     commonjs({ requireReturnsDefault: "preferred" }),
   ],
   external: [
+    'react/jsx-runtime',
     ...Object.keys(pkg.dependencies),
     ...Object.keys(pkg.devDependencies),
     ...Object.keys(pkg.peerDependencies),
