@@ -1,3 +1,5 @@
+import { Buffer } from "buffer";
+
 import type { ShellCommandOptions } from "@codesandbox/nodebox/build/modules/shell";
 import { invariant } from "outvariant";
 
