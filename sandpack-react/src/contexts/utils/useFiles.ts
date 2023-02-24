@@ -58,18 +58,13 @@ export const useFiles: UseFiles = (props) => {
 
   const [state, setState] = useState<FilesState>(originalStateFromProps);
 
-  // const filesHaveChanged = !isEqual(
-  //   prevOriginalStateFromProps.current,
-  //   originalStateFromProps
-  // );
+  const filesHaveChanged = !isEqual(originalStateFromProps, state);
 
-  // if (filesHaveChanged) {
-  //   setState(originalStateFromProps);
+  if (filesHaveChanged) {
+    setState(originalStateFromProps);
 
-  //   console.log("useFiles > filesHaveChanged", state.files["/App.js"].code);
-
-  //   prevOriginalStateFromProps.current = originalStateFromProps;
-  // }
+    console.log("useFiles > filesHaveChanged", state.files["/App.js"].code);
+  }
 
   //  useEffect(() => {
   //   const filesHaveChanged = !isEqual(
