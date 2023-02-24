@@ -288,7 +288,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
             const newCode = tr.newDoc.sliceString(0, tr.newDoc.length);
 
             setInternalCode(newCode);
-            console.log("onCodeUpdate", newCode);
+
             onCodeUpdate?.(newCode);
           }
         },

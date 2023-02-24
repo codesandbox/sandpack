@@ -14,7 +14,7 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
   const { children, options, style, className, theme } = props;
 
   const [fileState, fileOperations] = useFiles(props);
-  console.log("SandpackProvider", fileState.files["/App.js"].code);
+
   const [clientState, { dispatchMessage, addListener, ...clientOperations }] =
     useClient(props, fileState);
   const appState = useAppState(props, fileState.files);
