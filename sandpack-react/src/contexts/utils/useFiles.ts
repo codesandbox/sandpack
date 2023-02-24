@@ -1,7 +1,7 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import { normalizePath } from "@codesandbox/sandpack-client";
 import isEqual from "lodash.isequal";
-import { useRef, useState } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 
 import type {
   SandboxEnvironment,
@@ -52,51 +52,38 @@ export type UseFiles = (props: SandpackProviderProps) => [
   FilesOperations
 ];
 
-export const useFiles: UseFiles = (props) => {
-  const originalStateFromProps = getSandpackStateFromProps(props);
-  const prevOriginalStateFromProps = useRef(originalStateFromProps);
+export function useDeepCompareMemoize<T>(value: T) {
+  const ref = useRef<T>(value);
+  const signalRef = useRef<number>(0);
 
-  const [state, setState] = useState<FilesState>(
-    prevOriginalStateFromProps.current
-  );
-
-  console.log({
-    local: "before",
-    originalStateFromProps,
-    prevOriginalStateFromProps: prevOriginalStateFromProps.current,
-    state,
-  });
-
-  const filesHaveChanged = !isEqual(
-    prevOriginalStateFromProps.current,
-    originalStateFromProps
-  );
-  if (filesHaveChanged) {
-    prevOriginalStateFromProps.current = originalStateFromProps;
-
-    console.log({
-      local: "conditional",
-      originalStateFromProps,
-      prevOriginalStateFromProps: prevOriginalStateFromProps.current,
-      state,
-    });
-
-    setState(originalStateFromProps);
+  if (!isEqual(value, ref.current)) {
+    ref.current = value;
+    signalRef.current += 1;
   }
 
-  console.log({
-    local: "after",
-    originalStateFromProps,
-    prevOriginalStateFromProps: prevOriginalStateFromProps.current,
-    state,
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useMemo(() => ref.current, [signalRef.current]);
+}
+
+function useDeepCompareEffect(callback: any, dependencies: any) {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useEffect(callback, useDeepCompareMemoize(dependencies));
+}
+
+export const useFiles: UseFiles = (props) => {
+  const originalStateFromProps = getSandpackStateFromProps(props);
+
+  const [state, setState] = useState<FilesState>(originalStateFromProps);
+
+  useDeepCompareEffect(() => {
+    setState(getSandpackStateFromProps(props));
+  }, [props]);
 
   const updateFile = (
     pathOrFiles: string | SandpackFiles,
     code?: string,
     shouldUpdatePreview = true
   ): void => {
-    console.log("updateFile");
     setState((prev) => {
       let files = prev.files;
 
@@ -119,7 +106,6 @@ export const useFiles: UseFiles = (props) => {
 
   const operations = {
     openFile: (path: string): void => {
-      console.log("openFile");
       setState(({ visibleFiles, ...rest }) => {
         const newPaths = visibleFiles.includes(path)
           ? visibleFiles
@@ -133,7 +119,6 @@ export const useFiles: UseFiles = (props) => {
       });
     },
     resetFile: (path: string): void => {
-      console.log("resetFile");
       setState((prevState) => ({
         ...prevState,
         files: {
@@ -143,23 +128,22 @@ export const useFiles: UseFiles = (props) => {
       }));
     },
     resetAllFiles: (): void => {
-      console.log("resetAllFiles");
-      setState((prev) => ({ ...prev, files: originalStateFromProps.files }));
+      setState((prev) => ({
+        ...prev,
+        files: originalStateFromProps.files,
+      }));
     },
     setActiveFile: (activeFile: string): void => {
-      console.log("setActiveFile");
       if (state.files[activeFile]) {
         setState((prev) => ({ ...prev, activeFile }));
       }
     },
     updateCurrentFile: (code: string): void => {
-      console.log("updateCurrentFile");
       updateFile(state.activeFile, code);
     },
     updateFile,
     addFile: updateFile,
     closeFile: (path: string): void => {
-      console.log("closeFile");
       if (state.visibleFiles.length === 1) {
         return;
       }
@@ -181,7 +165,6 @@ export const useFiles: UseFiles = (props) => {
       });
     },
     deleteFile: (path: string, shouldUpdatePreview = true): void => {
-      console.log("deleteFile");
       setState(({ visibleFiles, files, activeFile, ...rest }) => {
         const newFiles = { ...files };
         delete newFiles[path];
@@ -217,7 +200,10 @@ export const useFiles: UseFiles = (props) => {
   };
 
   return [
-    { ...state, visibleFilesFromProps: originalStateFromProps.visibleFiles },
+    {
+      ...state,
+      visibleFilesFromProps: originalStateFromProps.visibleFiles,
+    },
     operations,
   ];
 };
