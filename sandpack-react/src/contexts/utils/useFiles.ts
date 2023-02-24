@@ -1,7 +1,7 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import { normalizePath } from "@codesandbox/sandpack-client";
 import isEqual from "lodash.isequal";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 
 import type {
   SandboxEnvironment,
@@ -54,7 +54,7 @@ export type UseFiles = (props: SandpackProviderProps) => [
 
 export const useFiles: UseFiles = (props) => {
   const originalStateFromProps = getSandpackStateFromProps(props);
-  const prevOriginalStateFromProps = useRef(originalStateFromProps);
+  const prevOriginalStateFromProps = useRef({ ...originalStateFromProps });
 
   const [state, setState] = useState<FilesState>(originalStateFromProps);
 
@@ -117,10 +117,7 @@ export const useFiles: UseFiles = (props) => {
       }));
     },
     resetAllFiles: (): void => {
-      setState((prev) => ({
-        ...prev,
-        files: originalStateFromProps.files,
-      }));
+      setState((prev) => ({ ...prev, files: originalStateFromProps.files }));
     },
     setActiveFile: (activeFile: string): void => {
       if (state.files[activeFile]) {
@@ -189,10 +186,7 @@ export const useFiles: UseFiles = (props) => {
   };
 
   return [
-    {
-      ...state,
-      visibleFilesFromProps: originalStateFromProps.visibleFiles,
-    },
+    { ...state, visibleFilesFromProps: originalStateFromProps.visibleFiles },
     operations,
   ];
 };
