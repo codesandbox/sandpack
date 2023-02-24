@@ -506,6 +506,8 @@ export const useClient: UseClient = (props, filesState) => {
     [filesState.files, filesState.environment, updateClients]
   );
 
+  console.log(filesState);
+
   useEffect(
     function watchInitMode() {
       if (initModeFromProps !== state.initMode) {
