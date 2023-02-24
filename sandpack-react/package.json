@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-react",
-  "version": "2.0.16",
+  "version": "2.0.17",
   "description": "",
   "keywords": [],
   "repository": {
@@ -35,7 +35,6 @@
     "README.md"
   ],
   "dependencies": {
-    "use-deep-compare-effect": "1.8.1",
     "@code-hike/classer": "^0.0.0-aa6efee",
     "@codemirror/autocomplete": "^6.4.0",
     "@codemirror/commands": "^6.1.3",
@@ -45,7 +44,7 @@
     "@codemirror/language": "^6.3.2",
     "@codemirror/state": "^6.2.0",
     "@codemirror/view": "^6.7.1",
-    "@codesandbox/sandpack-client": "^2.0.15",
+    "@codesandbox/sandpack-client": "^2.0.17",
     "@lezer/highlight": "^1.1.3",
     "@react-hook/intersection-observer": "^3.1.1",
     "@stitches/core": "^1.2.6",
@@ -55,7 +54,8 @@
     "dequal": "^2.0.2",
     "lz-string": "^1.4.4",
     "react-devtools-inline": "4.4.0",
-    "react-is": "^17.0.2"
+    "react-is": "^17.0.2",
+    "use-deep-compare-effect": "1.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
