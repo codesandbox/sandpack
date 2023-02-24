@@ -1,4 +1,4 @@
-import isEqual from "lodash.isequal";
+import { dequal as deepEqual } from "dequal";
 
 import type {
   ClientOptions,
@@ -35,7 +35,7 @@ export class SandpackClient {
    * Clients handles
    */
   public updateOptions(options: ClientOptions): void {
-    if (!isEqual(this.options, options)) {
+    if (!deepEqual(this.options, options)) {
       this.options = options;
       this.updateSandbox();
     }

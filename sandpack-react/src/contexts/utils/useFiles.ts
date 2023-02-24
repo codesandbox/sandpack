@@ -110,10 +110,7 @@ export const useFiles: UseFiles = (props) => {
       }));
     },
     resetAllFiles: (): void => {
-      setState((prev) => ({
-        ...prev,
-        files: originalStateFromProps.files,
-      }));
+      setState((prev) => ({ ...prev, files: originalStateFromProps.files }));
     },
     setActiveFile: (activeFile: string): void => {
       if (state.files[activeFile]) {
@@ -182,10 +179,7 @@ export const useFiles: UseFiles = (props) => {
   };
 
   return [
-    {
-      ...state,
-      visibleFilesFromProps: originalStateFromProps.visibleFiles,
-    },
+    { ...state, visibleFilesFromProps: originalStateFromProps.visibleFiles },
     operations,
   ];
 };
