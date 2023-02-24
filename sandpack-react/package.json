@@ -35,6 +35,7 @@
     "README.md"
   ],
   "dependencies": {
+    "use-deep-compare-effect": "1.8.1",
     "@code-hike/classer": "^0.0.0-aa6efee",
     "@codemirror/autocomplete": "^6.4.0",
     "@codemirror/commands": "^6.1.3",

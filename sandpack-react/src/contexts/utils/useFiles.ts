@@ -1,7 +1,7 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import { normalizePath } from "@codesandbox/sandpack-client";
-import isEqual from "lodash.isequal";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState } from "react";
+import useDeepCompareEffect from "use-deep-compare-effect";
 
 import type {
   SandboxEnvironment,
@@ -51,24 +51,6 @@ export type UseFiles = (props: SandpackProviderProps) => [
   },
   FilesOperations
 ];
-
-export function useDeepCompareMemoize<T>(value: T) {
-  const ref = useRef<T>(value);
-  const signalRef = useRef<number>(0);
-
-  if (!isEqual(value, ref.current)) {
-    ref.current = value;
-    signalRef.current += 1;
-  }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useMemo(() => ref.current, [signalRef.current]);
-}
-
-function useDeepCompareEffect(callback: any, dependencies: any) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useEffect(callback, useDeepCompareMemoize(dependencies));
-}
 
 export const useFiles: UseFiles = (props) => {
   const originalStateFromProps = getSandpackStateFromProps(props);
