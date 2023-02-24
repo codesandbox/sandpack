@@ -1,7 +1,7 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import { normalizePath } from "@codesandbox/sandpack-client";
 import isEqual from "lodash.isequal";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import type {
   SandboxEnvironment,
@@ -53,12 +53,18 @@ export type UseFiles = (props: SandpackProviderProps) => [
 ];
 
 export const useFiles: UseFiles = (props) => {
-  const originalStateFromProps = getSandpackStateFromProps(props);
-  const [state, setState] = useState<FilesState>(originalStateFromProps);
+  const originalStateFromProps = useRef(getSandpackStateFromProps(props));
+  const [state, setState] = useState<FilesState>(
+    getSandpackStateFromProps(props)
+  );
 
-  const filesHaveChanged = !isEqual(originalStateFromProps, state);
+  const filesHaveChanged = !isEqual(
+    originalStateFromProps.current,
+    getSandpackStateFromProps(props)
+  );
   if (filesHaveChanged) {
-    setState(originalStateFromProps);
+    setState(getSandpackStateFromProps(props));
+    originalStateFromProps.current = getSandpackStateFromProps(props);
   }
 
   const updateFile = (
@@ -105,12 +111,15 @@ export const useFiles: UseFiles = (props) => {
         ...prevState,
         files: {
           ...prevState.files,
-          [path]: originalStateFromProps.files[path],
+          [path]: originalStateFromProps.current.files[path],
         },
       }));
     },
     resetAllFiles: (): void => {
-      setState((prev) => ({ ...prev, files: originalStateFromProps.files }));
+      setState((prev) => ({
+        ...prev,
+        files: originalStateFromProps.current.files,
+      }));
     },
     setActiveFile: (activeFile: string): void => {
       if (state.files[activeFile]) {
@@ -179,7 +188,10 @@ export const useFiles: UseFiles = (props) => {
   };
 
   return [
-    { ...state, visibleFilesFromProps: originalStateFromProps.visibleFiles },
+    {
+      ...state,
+      visibleFilesFromProps: originalStateFromProps.current.visibleFiles,
+    },
     operations,
   ];
 };
