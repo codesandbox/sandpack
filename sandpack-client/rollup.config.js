@@ -25,6 +25,7 @@ const configs = [
     ],
     external: [],
   },
+
   {
     input: {
       index: "src/index.ts",
@@ -59,13 +60,11 @@ const configs = [
         },
       }),
     ],
-    external: [
-      ...Object.keys({
-        ...(pkg.dependencies || {}),
-        ...(pkg.devDependencies || {}),
-        ...(pkg.peerDependencies || {}),
-      }),
-    ],
+    external: Object.keys({
+      ...(pkg.dependencies || {}),
+      ...(pkg.devDependencies || {}),
+      ...(pkg.peerDependencies || {}),
+    }),
   },
 ];
 
