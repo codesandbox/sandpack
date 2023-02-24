@@ -69,6 +69,8 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
   options ??= {};
   customSetup ??= {};
 
+  console.log("useClient", filesState);
+
   const initModeFromProps = options?.initMode || "lazy";
 
   const [state, setState] = useState<SandpackConfigState>({
