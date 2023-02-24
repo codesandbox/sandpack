@@ -56,7 +56,16 @@ export const useFiles: UseFiles = (props) => {
   const originalStateFromProps = getSandpackStateFromProps(props);
   const prevOriginalStateFromProps = useRef(originalStateFromProps);
 
-  const [state, setState] = useState<FilesState>({ ...originalStateFromProps });
+  const [state, setState] = useState<FilesState>(
+    prevOriginalStateFromProps.current
+  );
+
+  console.log({
+    local: "before",
+    originalStateFromProps,
+    prevOriginalStateFromProps: prevOriginalStateFromProps.current,
+    state,
+  });
 
   const filesHaveChanged = !isEqual(
     prevOriginalStateFromProps.current,
@@ -65,8 +74,22 @@ export const useFiles: UseFiles = (props) => {
   if (filesHaveChanged) {
     prevOriginalStateFromProps.current = originalStateFromProps;
 
+    console.log({
+      local: "conditional",
+      originalStateFromProps,
+      prevOriginalStateFromProps: prevOriginalStateFromProps.current,
+      state,
+    });
+
     setState(originalStateFromProps);
   }
+
+  console.log({
+    local: "after",
+    originalStateFromProps,
+    prevOriginalStateFromProps: prevOriginalStateFromProps.current,
+    state,
+  });
 
   const updateFile = (
     pathOrFiles: string | SandpackFiles,
