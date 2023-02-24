@@ -54,21 +54,37 @@ export type UseFiles = (props: SandpackProviderProps) => [
 
 export const useFiles: UseFiles = (props) => {
   const originalStateFromProps = getSandpackStateFromProps(props);
-  const prevOriginalStateFromProps = useRef(originalStateFromProps);
+  // const prevOriginalStateFromProps = useRef(originalStateFromProps);
 
   const [state, setState] = useState<FilesState>(originalStateFromProps);
 
-  const filesHaveChanged = !isEqual(
-    prevOriginalStateFromProps.current,
-    originalStateFromProps
-  );
-  if (filesHaveChanged) {
-    setState(originalStateFromProps);
+  // const filesHaveChanged = !isEqual(
+  //   prevOriginalStateFromProps.current,
+  //   originalStateFromProps
+  // );
 
-    console.log("useFiles > filesHaveChanged", state.files["/App.js"].code);
+  // if (filesHaveChanged) {
+  //   setState(originalStateFromProps);
 
-    prevOriginalStateFromProps.current = originalStateFromProps;
-  }
+  //   console.log("useFiles > filesHaveChanged", state.files["/App.js"].code);
+
+  //   prevOriginalStateFromProps.current = originalStateFromProps;
+  // }
+
+  //  useEffect(() => {
+  //   const filesHaveChanged = !isEqual(
+  //     prevOriginalStateFromProps.current,
+  //     originalStateFromProps
+  //   );
+
+  //   if (filesHaveChanged) {
+  //     setState(originalStateFromProps);
+
+  //     console.log("useFiles > filesHaveChanged", state.files["/App.js"].code);
+
+  //     prevOriginalStateFromProps.current = originalStateFromProps;
+  //   }
+  // }, [originalStateFromProps, state.files]);
 
   const updateFile = (
     pathOrFiles: string | SandpackFiles,
