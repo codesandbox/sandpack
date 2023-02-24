@@ -69,7 +69,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
   options ??= {};
   customSetup ??= {};
 
-  console.log("useClient", filesState.files["/App.js"]);
+  console.log("useClient", filesState.files["/App.js"].code);
 
   const initModeFromProps = options?.initMode || "lazy";
 

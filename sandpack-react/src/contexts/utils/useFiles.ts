@@ -65,6 +65,8 @@ export const useFiles: UseFiles = (props) => {
   if (filesHaveChanged) {
     setState(originalStateFromProps);
 
+    console.log("useFiles > filesHaveChanged", state.files["/App.js"].code);
+
     prevOriginalStateFromProps.current = originalStateFromProps;
   }
 
@@ -184,6 +186,8 @@ export const useFiles: UseFiles = (props) => {
       });
     },
   };
+
+  console.log("useFiles > root", state.files["/App.js"].code);
 
   return [
     { ...state, visibleFilesFromProps: originalStateFromProps.visibleFiles },
