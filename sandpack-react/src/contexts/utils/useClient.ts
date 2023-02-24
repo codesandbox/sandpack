@@ -66,6 +66,9 @@ type UseClient = (
 ) => [SandpackConfigState, UseClientOperations];
 
 export const useClient: UseClient = (props, filesState) => {
+  props.options ??= {};
+  props.customSetup ??= {};
+
   const initModeFromProps = props.options?.initMode || "lazy";
 
   const [state, setState] = useState<SandpackConfigState>({
@@ -106,6 +109,9 @@ export const useClient: UseClient = (props, filesState) => {
       iframe: HTMLIFrameElement,
       clientId: string
     ): Promise<SandpackClientType> => {
+      props.options ??= {};
+      props.customSetup ??= {};
+
       const timeOut = props.options?.bundlerTimeOut ?? BUNDLER_TIMEOUT;
 
       if (timeoutHook.current) {
@@ -123,17 +129,17 @@ export const useClient: UseClient = (props, filesState) => {
           template: filesState.environment,
         },
         {
-          externalResources: props.options?.externalResources,
-          bundlerURL: props.options?.bundlerURL,
-          startRoute: props.options?.startRoute,
-          fileResolver: props.options?.fileResolver,
-          skipEval: props.options?.skipEval ?? false,
-          logLevel: props.options?.logLevel,
+          externalResources: props.options.externalResources,
+          bundlerURL: props.options.bundlerURL,
+          startRoute: props.options.startRoute,
+          fileResolver: props.options.fileResolver,
+          skipEval: props.options.skipEval ?? false,
+          logLevel: props.options.logLevel,
           showOpenInCodeSandbox: false,
           showErrorScreen: errorScreenRegisteredRef.current,
           showLoadingScreen: loadingScreenRegisteredRef.current,
           reactDevTools: state.reactDevTools,
-          customNpmRegistries: props.customSetup?.npmRegistries?.map(
+          customNpmRegistries: props.customSetup.npmRegistries?.map(
             (config) =>
               ({
                 ...config,
@@ -187,18 +193,7 @@ export const useClient: UseClient = (props, filesState) => {
 
       return client;
     },
-    [
-      filesState.environment,
-      filesState.files,
-      props.customSetup?.npmRegistries,
-      props.options?.bundlerURL,
-      props.options?.externalResources,
-      props.options?.fileResolver,
-      props.options?.logLevel,
-      props.options?.skipEval,
-      props.options?.startRoute,
-      state.reactDevTools,
-    ]
+    [filesState.environment, filesState.files, props, state.reactDevTools]
   );
 
   const unregisterAllClients = useCallback((): void => {
@@ -285,16 +280,16 @@ export const useClient: UseClient = (props, filesState) => {
     unregisterAllClients,
   ]);
 
-  const registerBundler = async (
-    iframe: HTMLIFrameElement,
-    clientId: string
-  ): Promise<void> => {
-    if (state.status === "running") {
-      clients.current[clientId] = await createClient(iframe, clientId);
-    } else {
-      preregisteredIframes.current[clientId] = iframe;
-    }
-  };
+  const registerBundler = useCallback(
+    async (iframe: HTMLIFrameElement, clientId: string): Promise<void> => {
+      if (state.status === "running") {
+        clients.current[clientId] = await createClient(iframe, clientId);
+      } else {
+        preregisteredIframes.current[clientId] = iframe;
+      }
+    },
+    [createClient, state.status]
+  );
 
   const unregisterBundler = (clientId: string): void => {
     const client = clients.current[clientId];
@@ -396,13 +391,11 @@ export const useClient: UseClient = (props, filesState) => {
       }, recompileDelay);
     }
   }, [
-    filesState.shouldUpdatePreview,
-    filesState.files,
-    filesState.environment,
+    filesState,
     recompileMode,
     recompileDelay,
     state.status,
-    createClient,
+    registerBundler,
   ]);
 
   const dispatchMessage = (
