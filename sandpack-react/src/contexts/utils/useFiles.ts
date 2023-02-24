@@ -1,7 +1,7 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import { normalizePath } from "@codesandbox/sandpack-client";
 import isEqual from "lodash.isequal";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import type {
   SandboxEnvironment,
@@ -52,19 +52,27 @@ export type UseFiles = (props: SandpackProviderProps) => [
   FilesOperations
 ];
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function usePrevious(value: any) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
+
 export const useFiles: UseFiles = (props) => {
-  const originalStateFromProps = useRef(getSandpackStateFromProps(props));
-  const [state, setState] = useState<FilesState>(
-    getSandpackStateFromProps(props)
-  );
+  const originalStateFromProps = getSandpackStateFromProps(props);
+  const prevOriginalStateFromProps = usePrevious(originalStateFromProps);
+
+  const [state, setState] = useState<FilesState>(originalStateFromProps);
 
   const filesHaveChanged = !isEqual(
-    originalStateFromProps.current,
-    getSandpackStateFromProps(props)
+    prevOriginalStateFromProps,
+    originalStateFromProps
   );
   if (filesHaveChanged) {
-    setState(getSandpackStateFromProps(props));
-    originalStateFromProps.current = getSandpackStateFromProps(props);
+    setState(originalStateFromProps);
   }
 
   const updateFile = (
@@ -111,14 +119,14 @@ export const useFiles: UseFiles = (props) => {
         ...prevState,
         files: {
           ...prevState.files,
-          [path]: originalStateFromProps.current.files[path],
+          [path]: originalStateFromProps.files[path],
         },
       }));
     },
     resetAllFiles: (): void => {
       setState((prev) => ({
         ...prev,
-        files: originalStateFromProps.current.files,
+        files: originalStateFromProps.files,
       }));
     },
     setActiveFile: (activeFile: string): void => {
@@ -190,7 +198,7 @@ export const useFiles: UseFiles = (props) => {
   return [
     {
       ...state,
-      visibleFilesFromProps: originalStateFromProps.current.visibleFiles,
+      visibleFilesFromProps: originalStateFromProps.visibleFiles,
     },
     operations,
   ];
