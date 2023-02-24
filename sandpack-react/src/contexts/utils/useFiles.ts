@@ -96,6 +96,7 @@ export const useFiles: UseFiles = (props) => {
     code?: string,
     shouldUpdatePreview = true
   ): void => {
+    console.log("updateFile");
     setState((prev) => {
       let files = prev.files;
 
