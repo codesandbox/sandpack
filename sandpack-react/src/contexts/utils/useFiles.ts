@@ -118,6 +118,7 @@ export const useFiles: UseFiles = (props) => {
 
   const operations = {
     openFile: (path: string): void => {
+      console.log("openFile");
       setState(({ visibleFiles, ...rest }) => {
         const newPaths = visibleFiles.includes(path)
           ? visibleFiles
@@ -131,6 +132,7 @@ export const useFiles: UseFiles = (props) => {
       });
     },
     resetFile: (path: string): void => {
+      console.log("resetFile");
       setState((prevState) => ({
         ...prevState,
         files: {
@@ -140,19 +142,23 @@ export const useFiles: UseFiles = (props) => {
       }));
     },
     resetAllFiles: (): void => {
+      console.log("resetAllFiles");
       setState((prev) => ({ ...prev, files: originalStateFromProps.files }));
     },
     setActiveFile: (activeFile: string): void => {
+      console.log("setActiveFile");
       if (state.files[activeFile]) {
         setState((prev) => ({ ...prev, activeFile }));
       }
     },
     updateCurrentFile: (code: string): void => {
+      console.log("updateCurrentFile");
       updateFile(state.activeFile, code);
     },
     updateFile,
     addFile: updateFile,
     closeFile: (path: string): void => {
+      console.log("closeFile");
       if (state.visibleFiles.length === 1) {
         return;
       }
@@ -174,6 +180,7 @@ export const useFiles: UseFiles = (props) => {
       });
     },
     deleteFile: (path: string, shouldUpdatePreview = true): void => {
+      console.log("deleteFile");
       setState(({ visibleFiles, files, activeFile, ...rest }) => {
         const newFiles = { ...files };
         delete newFiles[path];
