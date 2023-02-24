@@ -1,7 +1,7 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import { normalizePath } from "@codesandbox/sandpack-client";
-import { isEqual } from "lodash";
-import { useState, useEffect, useRef } from "react";
+import isEqual from "lodash.isequal";
+import { useState, useRef } from "react";
 
 import type {
   SandboxEnvironment,
