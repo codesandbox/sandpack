@@ -348,5 +348,5 @@ console.log("foo");`,
 };
 
 export const Basic: React.FC = () => {
-  return <Sandpack template="nextjs" theme={themes.sandpackDark} />;
+  return <Sandpack template="vite" theme={themes.sandpackDark} />;
 };

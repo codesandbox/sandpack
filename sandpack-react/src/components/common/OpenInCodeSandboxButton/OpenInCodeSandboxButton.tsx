@@ -1,7 +1,6 @@
 import { useClasser } from "@code-hike/classer";
-import * as React from "react";
 
-import { THEME_PREFIX } from "../../../styles";
+import { css, THEME_PREFIX } from "../../../styles";
 import {
   buttonClassName,
   iconStandaloneClassName,
@@ -25,6 +24,7 @@ export const OpenInCodeSandboxButton = (): JSX.Element | null => {
       )}
     >
       <ExportIcon />
+      <span>Open Sandbox</span>
     </UnstyledOpenInCodeSandboxButton>
   );
 };
