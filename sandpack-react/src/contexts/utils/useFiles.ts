@@ -54,12 +54,9 @@ export type UseFiles = (props: SandpackProviderProps) => [
 
 export const useFiles: UseFiles = (props) => {
   const originalStateFromProps = getSandpackStateFromProps(props);
-  // const prevOriginalStateFromProps = useRef(originalStateFromProps);
-
   const [state, setState] = useState<FilesState>(originalStateFromProps);
 
   const filesHaveChanged = !isEqual(originalStateFromProps, state);
-
   if (filesHaveChanged) {
     setState(originalStateFromProps);
   }
