@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { css } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 
 import type { Test } from "./Tests";
 import { Tests } from "./Tests";
@@ -25,6 +25,7 @@ const containerClassName = css({
 export const Describes: React.FC<{ describes: Describe[] }> = ({
   describes,
 }) => {
+  const classNames = useClassNames();
   return (
     <>
       {describes.map((describe) => {
@@ -36,8 +37,13 @@ export const Describes: React.FC<{ describes: Describe[] }> = ({
         const describes = Object.values(describe.describes);
 
         return (
-          <div key={describe.name} className={classNames(containerClassName)}>
-            <div className={classNames(nameClassName)}>{describe.name}</div>
+          <div
+            key={describe.name}
+            className={classNames("test-describe", [containerClassName])}
+          >
+            <div className={classNames("test-name", [nameClassName])}>
+              {describe.name}
+            </div>
 
             <Tests tests={tests} />
 
