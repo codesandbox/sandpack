@@ -5,7 +5,6 @@ export * from "./components/common";
 export * from "./hooks";
 
 // Contexts
-export * from "@code-hike/classer";
 export { getCssText as getSandpackCssText } from "./styles";
 export * from "./styles/themeContext";
 export * from "./contexts/sandpackContext";

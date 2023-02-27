@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 import { useClassNames } from "../../utils/classNames";
 import { DirectoryIconOpen, DirectoryIconClosed, FileIcon } from "../icons";

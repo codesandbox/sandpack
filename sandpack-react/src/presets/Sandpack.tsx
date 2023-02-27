@@ -20,7 +20,7 @@ import type {
   SandpackFiles,
   SandpackPredefinedTemplate,
 } from "../types";
-import { classNames } from "../utils/classNames";
+import { useClassNames } from "../utils/classNames";
 
 export const Sandpack: SandpackInternal = ({
   options,
@@ -186,6 +186,8 @@ export const Sandpack: SandpackInternal = ({
     ? { className: THEME_PREFIX + "-preset-column", style: rightColumnStyle }
     : {};
 
+  const classNames = useClassNames();
+
   return (
     <SandpackProvider
       key={template}
@@ -210,10 +212,9 @@ export const Sandpack: SandpackInternal = ({
 
         {options.resizablePanels && (
           <div
-            className={classNames(
+            className={classNames("resize-handler", [
               dragHandler({ direction: "horizontal" }),
-              THEME_PREFIX + "-resize-handler"
-            )}
+            ])}
             data-direction="horizontal"
             onMouseDown={(event): void => {
               dragEventTargetRef.current = event.target;
@@ -243,10 +244,9 @@ export const Sandpack: SandpackInternal = ({
             <>
               {options.resizablePanels && consoleVisibility && (
                 <div
-                  className={classNames(
+                  className={classNames("resize-handler", [
                     dragHandler({ direction: "vertical" }),
-                    THEME_PREFIX + "-resize-handler"
-                  )}
+                  ])}
                   data-direction="vertical"
                   onMouseDown={(event): void => {
                     dragEventTargetRef.current = event.target;
@@ -256,7 +256,7 @@ export const Sandpack: SandpackInternal = ({
               )}
 
               <div
-                className={classNames(consoleWrapper)}
+                className={classNames("console-wrapper", [consoleWrapper])}
                 style={{
                   flexGrow: consoleVisibility ? 100 - verticalSize : 0,
                   flexShrink: consoleVisibility ? 100 - verticalSize : 0,
