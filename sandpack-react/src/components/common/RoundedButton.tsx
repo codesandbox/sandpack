@@ -1,4 +1,3 @@
-import { useClasser } from "@code-hike/classer";
 import React from "react";
 
 import {
@@ -6,22 +5,22 @@ import {
   iconStandaloneClassName,
   roundedButtonClassName,
 } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 
 export const RoundedButton: React.FC<
   React.PropsWithChildren & React.ButtonHTMLAttributes<unknown>
 > = ({ onClick, className, children }) => {
-  const c = useClasser("sp");
+  const classNames = useClassNames();
 
   return (
     <button
-      className={classNames(
-        c("button", "icon-standalone"),
+      className={classNames("button", [
+        classNames("icon-standalone"),
         buttonClassName,
         iconStandaloneClassName,
         roundedButtonClassName,
-        className
-      )}
+        className,
+      ])}
       onClick={onClick}
       type="button"
     >

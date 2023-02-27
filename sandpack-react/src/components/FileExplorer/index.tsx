@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { css, THEME_PREFIX } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { stackClassName } from "../common";
 
 import { ModuleList } from "./ModuleList";
@@ -45,6 +45,7 @@ export const SandpackFileExplorer = ({
     },
     listen,
   } = useSandpack();
+  const classNames = useClassNames();
 
   React.useEffect(
     function watchFSFilesChanges() {
@@ -74,14 +75,14 @@ export const SandpackFileExplorer = ({
 
   return (
     <div
-      className={classNames(
-        stackClassName,
-        `${THEME_PREFIX}-file-explorer`,
-        className
-      )}
+      className={classNames("file-explorer", [stackClassName, className])}
       {...props}
     >
-      <div className={classNames(fileExplorerClassName)}>
+      <div
+        className={classNames("file-explorer-list", [
+          fileExplorerClassName,
+        ])}
+      >
         <ModuleList
           activeFile={activeFile}
           autoHiddenFiles={autoHiddenFiles}

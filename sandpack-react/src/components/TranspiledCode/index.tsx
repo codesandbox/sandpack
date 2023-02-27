@@ -1,10 +1,9 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { useTranspiledCode } from "../../hooks/useTranspiledCode";
 import { css, THEME_PREFIX } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import type { CodeViewerProps } from "../CodeViewer";
 import { SandpackCodeViewer } from "../CodeViewer";
 import { stackClassName } from "../common";
@@ -31,7 +30,7 @@ export const SandpackTranspiledCode = ({
 }: CodeViewerProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const { sandpack } = useSandpack();
   const transpiledCode = useTranspiledCode();
-  const c = useClasser(THEME_PREFIX);
+  const classNames = useClassNames();
 
   const hiddenIframeRef = React.useRef<HTMLIFrameElement | null>(null);
   React.useEffect(() => {
@@ -48,12 +47,11 @@ export const SandpackTranspiledCode = ({
 
   return (
     <div
-      className={classNames(
-        c("transpiled-code"),
+      className={classNames("transpiled-code", [
         stackClassName,
         transpiledCodeClassName,
-        className
-      )}
+        className,
+      ])}
       {...props}
     >
       <SandpackCodeViewer

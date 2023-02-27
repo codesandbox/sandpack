@@ -1,10 +1,9 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
-import { css, THEME_PREFIX } from "../../styles";
+import { css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import {
   calculateNearestUniquePath,
   getFileName,
@@ -68,7 +67,7 @@ export const FileTabs = ({
   ...props
 }: FileTabsProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const { sandpack } = useSandpack();
-  const c = useClasser(THEME_PREFIX);
+  const classNames = useClassNames();
 
   const { activeFile, visibleFiles, setActiveFile } = sandpack;
 
@@ -114,23 +113,22 @@ export const FileTabs = ({
 
   return (
     <div
-      className={classNames(c("tabs"), tabsClassName, className)}
+      className={classNames("tabs", [tabsClassName, className])}
       translate="no"
       {...props}
     >
       <div
         aria-label="Select active file"
-        className={classNames(
-          c("tabs-scrollable-container"),
-          tabsScrollableClassName
-        )}
+        className={classNames("tabs-scrollable-container", [
+          tabsScrollableClassName,
+        ])}
         role="tablist"
       >
         {visibleFiles.map((filePath) => (
           <button
             key={filePath}
             aria-selected={filePath === activeFile}
-            className={classNames(c("tab-button"), buttonClassName, tabButton)}
+            className={classNames("tab-button", [buttonClassName, tabButton])}
             data-active={filePath === activeFile}
             onClick={(): void => setActiveFile(filePath)}
             role="tab"
@@ -140,7 +138,7 @@ export const FileTabs = ({
             {getTriggerText(filePath)}
             {closableTabs && visibleFiles.length > 1 && (
               <span
-                className={classNames(c("close-button"), closeButtonClassName)}
+                className={classNames("close-button", [closeButtonClassName])}
                 onClick={handleCloseFile}
               >
                 <CloseIcon />

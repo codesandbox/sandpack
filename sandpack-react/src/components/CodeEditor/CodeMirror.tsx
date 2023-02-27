@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useClasser } from "@code-hike/classer";
 import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 import {
   defaultKeymap,
@@ -34,7 +33,7 @@ import type {
   SandpackInitMode,
 } from "../../types";
 import { shallowEqual } from "../../utils/array";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { getFileName } from "../../utils/stringUtils";
 
 import { highlightDecorators } from "./highlightDecorators";
@@ -131,7 +130,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       initMode === "immediate"
     );
 
-    const c = useClasser(THEME_PREFIX);
+    const classNames = useClassNames();
     const { listen } = useSandpack();
 
     const prevExtension = React.useRef<Extension[]>([]);
@@ -437,15 +436,16 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         <>
           <pre
             ref={combinedRef}
-            className={classNames(
-              c("cm", editorState, languageExtension),
+            className={classNames("cm", [
+              classNames(editorState),
+              classNames(languageExtension),
               cmClassName,
-              tokensClassName
-            )}
+              tokensClassName,
+            ])}
             translate="no"
           >
             <code
-              className={classNames(c("pre-placeholder"), placeholderClassName)}
+              className={classNames("pre-placeholder", [placeholderClassName])}
               style={{ marginLeft: gutterLineOffset() }}
             >
               {syntaxHighlightRender}
@@ -454,7 +454,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           {readOnly && showReadOnly && (
             <span
-              className={classNames(c("read-only"), readOnlyClassName)}
+              className={classNames("read-only", [readOnlyClassName])}
               {...(process.env.TEST_ENV ? { "data-testId": "read-only" } : {})}
             >
               Read-only
@@ -472,11 +472,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
         }
         aria-multiline="true"
-        className={classNames(
-          c("cm", editorState, languageExtension),
+        className={classNames("cm", [
+          classNames(editorState),
+          classNames(languageExtension),
           cmClassName,
-          tokensClassName
-        )}
+          tokensClassName,
+        ])}
         onKeyDown={handleContainerKeyDown}
         role="textbox"
         tabIndex={0}
@@ -484,7 +485,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         suppressHydrationWarning
       >
         <pre
-          className={classNames(c("pre-placeholder"), placeholderClassName)}
+          className={classNames("pre-placeholder", [placeholderClassName])}
           style={{ marginLeft: gutterLineOffset() }}
         >
           {syntaxHighlightRender}

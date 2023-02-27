@@ -1,4 +1,3 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpack } from "../..";
@@ -6,7 +5,7 @@ import {
   useLoadingOverlayState,
   FADE_ANIMATION_DURATION,
 } from "../../hooks/useLoadingOverlayState";
-import { css, THEME_PREFIX } from "../../styles";
+import { css } from "../../styles";
 import {
   absoluteClassName,
   buttonClassName,
@@ -15,7 +14,7 @@ import {
   iconStandaloneClassName,
   roundedButtonClassName,
 } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { RestartIcon } from "../icons";
 
 import { Loading } from "./Loading";
@@ -46,7 +45,7 @@ export const LoadingOverlay = ({
 }: LoadingOverlayProps &
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const loadingOverlayState = useLoadingOverlayState(clientId, loading);
-  const c = useClasser(THEME_PREFIX);
+  const classNames = useClassNames();
   const {
     sandpack: { runSandpack, environment },
   } = useSandpack();
@@ -58,16 +57,18 @@ export const LoadingOverlay = ({
   if (loadingOverlayState === "TIMEOUT") {
     return (
       <div
-        className={classNames(
-          c("overlay", "error"),
+        className={classNames("overlay", [
+          classNames("error"),
           absoluteClassName,
           errorBundlerClassName,
-          className
-        )}
+          className,
+        ])}
         {...props}
       >
-        <div className={classNames(c("error-message"), errorMessageClassName)}>
-          <p className={classNames(css({ fontWeight: "bold" }))}>
+        <div className={classNames("error-message", [errorMessageClassName])}>
+          <p
+            className={classNames("error-title", [css({ fontWeight: "bold" })])}
+          >
             Couldn't connect to server
           </p>
 
@@ -96,12 +97,12 @@ export const LoadingOverlay = ({
 
           <div>
             <button
-              className={classNames(
-                c("button", "icon-standalone"),
+              className={classNames("button", [
+                classNames("icon-standalone"),
                 buttonClassName,
                 iconStandaloneClassName,
-                roundedButtonClassName
-              )}
+                roundedButtonClassName,
+              ])}
               onClick={runSandpack}
               title="Restart script"
               type="button"
@@ -119,12 +120,12 @@ export const LoadingOverlay = ({
 
   return (
     <div
-      className={classNames(
-        c("overlay", "loading"),
+      className={classNames("overlay", [
+        classNames("loading"),
         absoluteClassName,
         loadingClassName,
-        className
-      )}
+        className,
+      ])}
       style={{
         ...style,
         opacity: stillLoading ? 1 : 0,
