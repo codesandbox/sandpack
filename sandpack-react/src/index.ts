@@ -3,6 +3,7 @@ export * from "./components/icons";
 export * from "./components";
 export * from "./components/common";
 export * from "./hooks";
+export { useClassNames } from "./utils/classNames";
 
 // Contexts
 export { getCssText as getSandpackCssText } from "./styles";
