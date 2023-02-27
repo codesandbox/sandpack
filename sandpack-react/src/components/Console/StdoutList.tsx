@@ -2,16 +2,20 @@ import Ansi from "ansi-to-react";
 import * as React from "react";
 
 import { css } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 
 export const StdoutList: React.FC<{
   data: Array<{ data: string; id: string }>;
 }> = ({ data }) => {
+  const classNames = useClassNames();
   return (
     <>
       {data.map(({ data, id }) => {
         return (
-          <div key={id} className={classNames(consoleItemClassName)}>
+          <div
+            key={id}
+            className={classNames("console-item", [consoleItemClassName])}
+          >
             <Ansi>{data}</Ansi>
           </div>
         );

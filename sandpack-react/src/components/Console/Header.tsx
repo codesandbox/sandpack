@@ -2,7 +2,7 @@ import React from "react";
 
 import { css } from "../../styles";
 import { buttonClassName, roundedButtonClassName } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { ConsoleIcon } from "../icons";
 
 const wrapperClassName = css({
@@ -23,21 +23,28 @@ const flexClassName = css({
   gap: "$space$2",
 });
 
-const buttonsClassName = classNames(
-  buttonClassName,
-  roundedButtonClassName,
-  css({ padding: "$space$1 $space$3" })
-);
-
 export const Header: React.FC<{
   currentTab: "server" | "client";
   setCurrentTab: (value: "server" | "client") => void;
   node: boolean;
 }> = ({ currentTab, setCurrentTab, node }) => {
+  const classNames = useClassNames();
+
+  const buttonsClassName = classNames("console-header-button", [
+    buttonClassName,
+    roundedButtonClassName,
+    css({ padding: "$space$1 $space$3" }),
+  ]);
+
   return (
-    <div className={classNames(wrapperClassName, flexClassName)}>
+    <div
+      className={classNames("console-header", [
+        wrapperClassName,
+        flexClassName,
+      ])}
+    >
       <p
-        className={classNames(
+        className={classNames("console-header-title", [
           css({
             lineHeight: 1,
             margin: 0,
@@ -48,15 +55,15 @@ export const Header: React.FC<{
             alignItems: "center",
 
             gap: "$space$2",
-          })
-        )}
+          }),
+        ])}
       >
         <ConsoleIcon />
         <span>Terminal</span>
       </p>
 
       {node && (
-        <div className={classNames(flexClassName)}>
+        <div className={classNames("console-header-actions", [flexClassName])}>
           <button
             className={buttonsClassName}
             data-active={currentTab === "server"}
