@@ -1,5 +1,5 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
-import isEqual from "lodash.isequal";
+import { dequal as deepEqual } from "dequal";
 import { useState } from "react";
 
 import type { SandpackProviderProps } from "../..";
@@ -20,7 +20,7 @@ export const useAppState: UseAppState = (props, files) => {
   });
 
   const originalStateFromProps = getSandpackStateFromProps(props);
-  const editorState = isEqual(originalStateFromProps.files, files)
+  const editorState = deepEqual(originalStateFromProps.files, files)
     ? "pristine"
     : "dirty";
 
