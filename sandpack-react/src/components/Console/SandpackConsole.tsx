@@ -3,7 +3,7 @@ import * as React from "react";
 import { useSandpack, useSandpackShell } from "../..";
 import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
 import { css, THEME_PREFIX } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { PreviewProgress } from "../Preview/PreviewProgress";
 import { SandpackStack } from "../common";
 import { RoundedButton } from "../common/RoundedButton";
@@ -93,17 +93,18 @@ export const SandpackConsole = React.forwardRef<
       },
     }));
 
+    const classNames = useClassNames();
+
     return (
       <SandpackStack
-        className={classNames(
+        className={classNames("console", [
           css({
             height: "100%",
             background: "$surface1",
             iframe: { display: "none" },
           }),
-          `${THEME_PREFIX}-console`,
-          className
-        )}
+          className,
+        ])}
         {...props}
       >
         {showSetupProgress && (
@@ -120,9 +121,9 @@ export const SandpackConsole = React.forwardRef<
 
         <div
           ref={wrapperRef}
-          className={classNames(
-            css({ overflow: "auto", scrollBehavior: "smooth" })
-          )}
+          className={classNames("console-list", [
+            css({ overflow: "auto", scrollBehavior: "smooth" }),
+          ])}
         >
           {isServerTab ? (
             <StdoutList data={stdoutData} />
@@ -132,15 +133,15 @@ export const SandpackConsole = React.forwardRef<
         </div>
 
         <div
-          className={classNames(
+          className={classNames("console-actions", [
             css({
               position: "absolute",
               bottom: "$space$2",
               right: "$space$2",
               display: "flex",
               gap: "$space$2",
-            })
-          )}
+            }),
+          ])}
         >
           {isServerTab && (
             <RoundedButton
