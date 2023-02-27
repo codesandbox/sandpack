@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { css } from "../../styles";
 import { roundedButtonClassName, buttonClassName } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { ConsoleIcon } from "../icons";
 
 import type { Status } from "./SandpackTests";
@@ -36,12 +36,6 @@ interface Props {
   showSuitesOnly: boolean;
 }
 
-const buttonsClassName = classNames(
-  buttonClassName,
-  roundedButtonClassName,
-  css({ padding: "$space$1 $space$3" })
-);
-
 export const Header: React.FC<Props> = ({
   status,
   suiteOnly,
@@ -52,11 +46,21 @@ export const Header: React.FC<Props> = ({
   setWatchMode,
   showSuitesOnly,
 }) => {
+  const classNames = useClassNames();
+
+  const buttonsClassName = classNames("test-header-button", [
+    buttonClassName,
+    roundedButtonClassName,
+    css({ padding: "$space$1 $space$3" }),
+  ]);
+
   return (
-    <div className={classNames(wrapperClassName, flexClassName)}>
-      <div className={classNames(flexClassName)}>
+    <div
+      className={classNames("test-header", [wrapperClassName, flexClassName])}
+    >
+      <div className={classNames("test-header-wrapper", [flexClassName])}>
         <p
-          className={classNames(
+          className={classNames("test-header-title", [
             css({
               lineHeight: 1,
               margin: 0,
@@ -67,15 +71,15 @@ export const Header: React.FC<Props> = ({
               alignItems: "center",
 
               gap: "$space$2",
-            })
-          )}
+            }),
+          ])}
         >
           <ConsoleIcon />
           Tests
         </p>
       </div>
 
-      <div className={classNames(flexClassName)}>
+      <div className={classNames("test-header-actions", [flexClassName])}>
         {showSuitesOnly && (
           <button
             className={buttonsClassName}

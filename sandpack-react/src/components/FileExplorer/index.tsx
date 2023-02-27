@@ -2,7 +2,7 @@ import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
-import { css, THEME_PREFIX } from "../../styles";
+import { css } from "../../styles";
 import { useClassNames } from "../../utils/classNames";
 import { stackClassName } from "../common";
 
@@ -79,9 +79,7 @@ export const SandpackFileExplorer = ({
       {...props}
     >
       <div
-        className={classNames("file-explorer-list", [
-          fileExplorerClassName,
-        ])}
+        className={classNames("file-explorer-list", [fileExplorerClassName])}
       >
         <ModuleList
           activeFile={activeFile}
