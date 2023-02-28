@@ -401,12 +401,7 @@ interface SandpackRootProps<
   theme?: SandpackThemeProp;
 }
 
-export interface SandpackTestGlobalOptions {
-  /**
-   * If `hideTestsAndSupressLogs` is true sandpack hides test files and suppresses their output from being logged to the console when a test fails.
-   */
-  hideTestsAndSupressLogs?: boolean;
-}
+ 
 
 export interface SandpackInternalOptions<
   Files extends SandpackFiles | any = any,
@@ -436,10 +431,9 @@ export interface SandpackInternalOptions<
   externalResources?: string[];
   classes?: Record<string, string>;
   /**
-   * Global options for sandpack tests
-   * - hideTestsAndSupressLogs - if true sandpack hides test files and suppresses their output from being logged to the console when a test fails.
+   * If `hideTestsAndSupressLogs` is true sandpack hides test files and suppresses their output from being logged to the console when a test fails.
    */
-  testOptions?: SandpackTestGlobalOptions;
+  hideTestsAndSupressLogs?: boolean;
 }
 
 interface SandpackInternalProps<
@@ -560,11 +554,10 @@ export interface SandpackState {
   resetFile: (path: string) => void;
   resetAllFiles: () => void;
   registerReactDevTools: (value: ReactDevToolsMode) => void;
-  /**
-   * Global options for sandpack tests
-   * - hideTestsAndSupressLogs - if true sandpack hides test files and suppresses their output from being logged to the console when a test fails.
+ /**
+   * If `hideTestsAndSupressLogs` is true sandpack hides test files and suppresses their output from being logged to the console when tests fails. This option will also disables verbose button.
    */
-  testOptions?: SandpackTestGlobalOptions;
+ hideTestsAndSupressLogs?: boolean;
   /**
    * Element refs
    * Different components inside the SandpackProvider might register certain elements of interest for sandpack

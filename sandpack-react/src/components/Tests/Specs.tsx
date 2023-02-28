@@ -80,7 +80,7 @@ export const Specs: React.FC<Props> = ({
   verbose,
 }) => {
   const { sandpack } = useSandpack();
-  const hideFailingTests = sandpack?.testOptions?.hideTestsAndSupressLogs;
+  const hideFailingTests = sandpack?.hideTestsAndSupressLogs;
   return (
     <>
       {specs.map((spec) => {

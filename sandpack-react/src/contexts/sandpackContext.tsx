@@ -33,7 +33,7 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
 
         listen: addListener,
         dispatch: dispatchMessage,
-        testOptions: options?.testOptions,
+        hideTestsAndSupressLogs: options?.hideTestsAndSupressLogs,
       }}
     >
       <ClasserProvider classes={options?.classes}>

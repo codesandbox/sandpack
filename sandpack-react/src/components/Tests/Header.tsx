@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { useSandpack } from "../../hooks";
 import { css } from "../../styles";
 import { buttonClassName, roundedButtonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
@@ -56,6 +57,7 @@ export const Header: React.FC<Props> = ({
   hideVerboseButton,
   hideWatchButton,
 }) => {
+  const {sandpack} = useSandpack()
   return (
     <div className={classNames(wrapperClassName, flexClassName)}>
       <div className={classNames(flexClassName)}>
@@ -91,11 +93,11 @@ export const Header: React.FC<Props> = ({
             Suite only
           </button>
         )}
-        {!hideVerboseButton && (
+        {!hideVerboseButton && ! (
           <button
             className={buttonsClassName}
             data-active={verbose}
-            disabled={status === "initialising"}
+            disabled={status === "initialising" ||sandpack.hideTestsAndSupressLogs}
             onClick={setVerbose}
             type="button"
           >
