@@ -89,10 +89,10 @@ Finally, using a `SandpackProvider` you can integrate the `MonacoEditor` compone
 ```jsx
 export default function MySandpack() {
   return (
-    <SandpackProvider template="react">
-      <SandpackLayout theme="dark">
+    <SandpackProvider template="react" theme="dark">
+      <SandpackLayout>
         <MonacoEditor /> // Your Monaco Editor Component
-        <SandpackPreview customStyle={{ height: "100vh" }} />
+        <SandpackPreview style={{ height: "100vh" }} />
       </SandpackLayout>
     </SandpackProvider>
   );

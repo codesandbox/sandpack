@@ -65,16 +65,19 @@ type UseClient = (
   filesState: FilesState
 ) => [SandpackConfigState, UseClientOperations];
 
-export const useClient: UseClient = (props, filesState) => {
-  const initModeFromProps = props.options?.initMode || "lazy";
+export const useClient: UseClient = ({ options, customSetup }, filesState) => {
+  options ??= {};
+  customSetup ??= {};
+
+  const initModeFromProps = options?.initMode || "lazy";
 
   const [state, setState] = useState<SandpackConfigState>({
-    startRoute: props.options?.startRoute,
+    startRoute: options?.startRoute,
     bundlerState: undefined,
     error: null,
     initMode: initModeFromProps,
     reactDevTools: undefined,
-    status: props.options?.autorun ?? true ? "initial" : "idle",
+    status: options?.autorun ?? true ? "initial" : "idle",
   });
 
   /**
@@ -106,7 +109,10 @@ export const useClient: UseClient = (props, filesState) => {
       iframe: HTMLIFrameElement,
       clientId: string
     ): Promise<SandpackClientType> => {
-      const timeOut = props.options?.bundlerTimeOut ?? BUNDLER_TIMEOUT;
+      options ??= {};
+      customSetup ??= {};
+
+      const timeOut = options?.bundlerTimeOut ?? BUNDLER_TIMEOUT;
 
       if (timeoutHook.current) {
         clearTimeout(timeoutHook.current);
@@ -123,17 +129,17 @@ export const useClient: UseClient = (props, filesState) => {
           template: filesState.environment,
         },
         {
-          externalResources: props.options?.externalResources,
-          bundlerURL: props.options?.bundlerURL,
-          startRoute: props.options?.startRoute,
-          fileResolver: props.options?.fileResolver,
-          skipEval: props.options?.skipEval ?? false,
-          logLevel: props.options?.logLevel,
+          externalResources: options.externalResources,
+          bundlerURL: options.bundlerURL,
+          startRoute: options.startRoute,
+          fileResolver: options.fileResolver,
+          skipEval: options.skipEval ?? false,
+          logLevel: options.logLevel,
           showOpenInCodeSandbox: false,
           showErrorScreen: errorScreenRegisteredRef.current,
           showLoadingScreen: loadingScreenRegisteredRef.current,
           reactDevTools: state.reactDevTools,
-          customNpmRegistries: props.customSetup?.npmRegistries?.map(
+          customNpmRegistries: customSetup.npmRegistries?.map(
             (config) =>
               ({
                 ...config,
@@ -187,18 +193,7 @@ export const useClient: UseClient = (props, filesState) => {
 
       return client;
     },
-    [
-      filesState.environment,
-      filesState.files,
-      props.customSetup?.npmRegistries,
-      props.options?.bundlerURL,
-      props.options?.externalResources,
-      props.options?.fileResolver,
-      props.options?.logLevel,
-      props.options?.skipEval,
-      props.options?.startRoute,
-      state.reactDevTools,
-    ]
+    [filesState.environment, filesState.files, state.reactDevTools]
   );
 
   const unregisterAllClients = useCallback((): void => {
@@ -222,13 +217,13 @@ export const useClient: UseClient = (props, filesState) => {
   }, [createClient]);
 
   const initializeSandpackIframe = useCallback((): void => {
-    const autorun = props.options?.autorun ?? true;
+    const autorun = options?.autorun ?? true;
 
     if (!autorun) {
       return;
     }
 
-    const observerOptions = props.options?.initModeObserverOptions ?? {
+    const observerOptions = options?.initModeObserverOptions ?? {
       rootMargin: `1000px 0px`,
     };
 
@@ -278,23 +273,23 @@ export const useClient: UseClient = (props, filesState) => {
       );
     }
   }, [
-    props.options?.autorun,
-    props.options?.initModeObserverOptions,
+    options?.autorun,
+    options?.initModeObserverOptions,
     runSandpack,
     state.initMode,
     unregisterAllClients,
   ]);
 
-  const registerBundler = async (
-    iframe: HTMLIFrameElement,
-    clientId: string
-  ): Promise<void> => {
-    if (state.status === "running") {
-      clients.current[clientId] = await createClient(iframe, clientId);
-    } else {
-      preregisteredIframes.current[clientId] = iframe;
-    }
-  };
+  const registerBundler = useCallback(
+    async (iframe: HTMLIFrameElement, clientId: string): Promise<void> => {
+      if (state.status === "running") {
+        clients.current[clientId] = await createClient(iframe, clientId);
+      } else {
+        preregisteredIframes.current[clientId] = iframe;
+      }
+    },
+    [createClient, state.status]
+  );
 
   const unregisterBundler = (clientId: string): void => {
     const client = clients.current[clientId];
@@ -354,56 +349,8 @@ export const useClient: UseClient = (props, filesState) => {
     setState((prev) => ({ ...prev, reactDevTools: value }));
   };
 
-  const recompileMode = props.options?.recompileMode ?? "delayed";
-  const recompileDelay = props.options?.recompileDelay ?? 500;
-  const updateClients = useCallback((): void => {
-    if (state.status !== "running" || !filesState.shouldUpdatePreview) {
-      return;
-    }
-
-    /**
-     * When the environment changes, Sandpack needs to make sure
-     * to create a new client and the proper bundler
-     */
-    if (prevEnvironment.current !== filesState.environment) {
-      prevEnvironment.current = filesState.environment;
-
-      Object.entries(clients.current).forEach(([key, client]) => {
-        registerBundler(client.iframe, key);
-      });
-    }
-
-    if (recompileMode === "immediate") {
-      Object.values(clients.current).forEach((client) => {
-        client.updateSandbox({
-          files: filesState.files,
-          template: filesState.environment,
-        });
-      });
-    }
-
-    if (recompileMode === "delayed") {
-      if (typeof window === "undefined") return;
-
-      window.clearTimeout(debounceHook.current);
-      debounceHook.current = window.setTimeout(() => {
-        Object.values(clients.current).forEach((client) => {
-          client.updateSandbox({
-            files: filesState.files,
-            template: filesState.environment,
-          });
-        });
-      }, recompileDelay);
-    }
-  }, [
-    filesState.shouldUpdatePreview,
-    filesState.files,
-    filesState.environment,
-    recompileMode,
-    recompileDelay,
-    state.status,
-    createClient,
-  ]);
+  const recompileMode = options?.recompileMode ?? "delayed";
+  const recompileDelay = options?.recompileDelay ?? 500;
 
   const dispatchMessage = (
     message: SandpackMessage,
@@ -499,11 +446,57 @@ export const useClient: UseClient = (props, filesState) => {
   /**
    * Effects
    */
+
   useEffect(
     function watchFileChanges() {
-      updateClients();
+      if (state.status !== "running" || !filesState.shouldUpdatePreview) {
+        return;
+      }
+
+      /**
+       * When the environment changes, Sandpack needs to make sure
+       * to create a new client and the proper bundler
+       */
+      if (prevEnvironment.current !== filesState.environment) {
+        prevEnvironment.current = filesState.environment;
+
+        Object.entries(clients.current).forEach(([key, client]) => {
+          registerBundler(client.iframe, key);
+        });
+      }
+
+      if (recompileMode === "immediate") {
+        Object.values(clients.current).forEach((client) => {
+          client.updateSandbox({
+            files: filesState.files,
+            template: filesState.environment,
+          });
+        });
+      }
+
+      if (recompileMode === "delayed") {
+        if (typeof window === "undefined") return;
+
+        window.clearTimeout(debounceHook.current);
+        debounceHook.current = window.setTimeout(() => {
+          Object.values(clients.current).forEach((client) => {
+            client.updateSandbox({
+              files: filesState.files,
+              template: filesState.environment,
+            });
+          });
+        }, recompileDelay);
+      }
     },
-    [filesState.files, filesState.environment, updateClients]
+    [
+      filesState.files,
+      filesState.environment,
+      filesState.shouldUpdatePreview,
+      recompileDelay,
+      recompileMode,
+      registerBundler,
+      state.status,
+    ]
   );
 
   useEffect(
