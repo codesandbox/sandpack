@@ -504,6 +504,36 @@ export default () => (
 `}
 </CodeBlock>
 
+### Hiding Tests
+
+You can hide the test files using the `visibleFiles` prop. Additionally, if you want to suppress test content and only show the test results, you can use the `hideTestsAndSuppressLogs` option.
+This option will hide the test files, suppress the console logs, and disable the verbose button.
+
+<CodeBlock stack>
+  {`
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  SandpackTests,
+} from "@codesandbox/sandpack-react";
+
+export default () => (
+  <SandpackProvider
+    template="test-ts"
+    options={{
+      visibleFiles: ["/add.ts"],
+    }}
+  >
+    <SandpackLayout>
+      <SandpackCodeEditor />
+      <SandpackTests hideTestsAndSupressLogs />
+    </SandpackLayout>
+  </SandpackProvider>
+);
+`}
+</CodeBlock>
+
 ## Console
 
 `SandpackConsole` is a Sandpack devtool that allows printing the console logs from a Sandpack client. It is designed to be a light version of a browser console, which means that it's limited to a set of common use cases you may encounter when coding.

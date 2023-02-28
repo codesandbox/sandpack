@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { css } from "../../styles";
-import { roundedButtonClassName, buttonClassName } from "../../styles/shared";
+import { buttonClassName, roundedButtonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 import { ConsoleIcon } from "../icons";
 
@@ -34,6 +34,9 @@ interface Props {
   watchMode: boolean;
   setWatchMode: () => void;
   showSuitesOnly: boolean;
+  showVerboseButton: boolean;
+  showWatchButton: boolean;
+  hideTestsAndSupressLogs: boolean;
 }
 
 const buttonsClassName = classNames(
@@ -51,6 +54,9 @@ export const Header: React.FC<Props> = ({
   watchMode,
   setWatchMode,
   showSuitesOnly,
+  showWatchButton,
+  showVerboseButton,
+  hideTestsAndSupressLogs,
 }) => {
   return (
     <div className={classNames(wrapperClassName, flexClassName)}>
@@ -87,24 +93,28 @@ export const Header: React.FC<Props> = ({
             Suite only
           </button>
         )}
-        <button
-          className={buttonsClassName}
-          data-active={verbose}
-          disabled={status === "initialising"}
-          onClick={setVerbose}
-          type="button"
-        >
-          Verbose
-        </button>
-        <button
-          className={buttonsClassName}
-          data-active={watchMode}
-          disabled={status === "initialising"}
-          onClick={setWatchMode}
-          type="button"
-        >
-          Watch
-        </button>
+        {showVerboseButton && (
+          <button
+            className={buttonsClassName}
+            data-active={verbose}
+            disabled={status === "initialising" || hideTestsAndSupressLogs}
+            onClick={setVerbose}
+            type="button"
+          >
+            Verbose
+          </button>
+        )}
+        {showWatchButton && (
+          <button
+            className={buttonsClassName}
+            data-active={watchMode}
+            disabled={status === "initialising"}
+            onClick={setWatchMode}
+            type="button"
+          >
+            Watch
+          </button>
+        )}
       </div>
     </div>
   );

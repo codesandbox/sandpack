@@ -107,7 +107,6 @@ export interface SandpackOptions {
   wrapContent?: boolean;
   resizablePanels?: boolean;
   codeEditor?: SandpackCodeOptions;
-
   /**
    * This disables editing of content by the user in all files.
    */
@@ -549,7 +548,6 @@ export interface SandpackState {
   resetFile: (path: string) => void;
   resetAllFiles: () => void;
   registerReactDevTools: (value: ReactDevToolsMode) => void;
-
   /**
    * Element refs
    * Different components inside the SandpackProvider might register certain elements of interest for sandpack
