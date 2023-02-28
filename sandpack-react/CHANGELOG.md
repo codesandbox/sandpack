@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.20](https://github.com/codesandbox/sandpack/compare/v2.0.19...v2.0.20) (2023-02-28)
+
+
+### Bug Fixes
+
+* **sandpack-client:** setup build with rollup ([#758](https://github.com/codesandbox/sandpack/issues/758)) ([f645119](https://github.com/codesandbox/sandpack/commit/f6451194a718a0679ce5fcb4d64d1f0d58f6c146))
+
+
+
+
+
 ## [2.0.19](https://github.com/codesandbox/sandpack/compare/v2.0.18...v2.0.19) (2023-02-28)
 
 
