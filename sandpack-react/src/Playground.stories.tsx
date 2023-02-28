@@ -29,3 +29,15 @@ export const Basic: React.FC = () => {
     </>
   );
 };
+export const RtlLayout: React.FC = () => {
+  return (
+    <>
+      <Sandpack
+        options={{
+          rtl: true,
+        }}
+        template="react"
+      />
+    </>
+  );
+};
