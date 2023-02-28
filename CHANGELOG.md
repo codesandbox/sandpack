@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.19](https://github.com/codesandbox/sandpack/compare/v2.0.18...v2.0.19) (2023-02-28)
+
+
+### Bug Fixes
+
+* **use-files:** watch prop keys changes ([#776](https://github.com/codesandbox/sandpack/issues/776)) ([987814f](https://github.com/codesandbox/sandpack/commit/987814f9ec0f7e455a645e69c1b51bda6aec7521))
+
+
+
+
+
 ## [2.0.18](https://github.com/codesandbox/sandpack/compare/v2.0.17...v2.0.18) (2023-02-28)
 
 
