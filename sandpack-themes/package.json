@@ -16,7 +16,8 @@
   "scripts": {
     "clean": "rm -rf dist",
     "prebuild": "yarn run clean",
-    "build": "rollup -c",
+    "build": "rollup -c && yarn build:types",
+    "build:types": "tsc -p tsconfig.json",
     "build:publish": "yarn build",
     "typecheck": "tsc"
   },
