@@ -9,6 +9,23 @@ export default {
 export const Basic: React.FC = () => {
   return (
     <div style={{ width: 800, margin: "auto" }}>
+      <pre>
+        {`<Sandpack
+  customSetup={{
+    dependencies: { "@codesandbox/test-package": "latest" },
+  }}
+  files={{
+    "App.js": \`import { Button } from "@codesandbox/test-package";
+
+export default function App() {
+return <Button>Hello World</Button>
+}\`,
+  }}
+  options={{ bundlerURL: \`http://localhost:3000\` }}
+  teamId="lg1lqh"
+  template="react"
+/>`}
+      </pre>
       <Sandpack
         customSetup={{
           dependencies: { "@codesandbox/test-package": "latest" },

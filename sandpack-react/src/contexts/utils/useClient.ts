@@ -136,7 +136,7 @@ export const useClient: UseClient = (props, filesState) => {
           showLoadingScreen: loadingScreenRegisteredRef.current,
           reactDevTools: state.reactDevTools,
           customNpmRegistries: props.customSetup?.npmRegistries,
-          teamId: props.customSetup,
+          teamId: props.teamId,
         }
       );
 
