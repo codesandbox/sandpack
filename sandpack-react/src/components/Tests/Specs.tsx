@@ -1,6 +1,7 @@
 import type { TestError } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
+import { useSandpack } from "../../hooks";
 import { css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
@@ -78,6 +79,8 @@ export const Specs: React.FC<Props> = ({
   status,
   verbose,
 }) => {
+  const { sandpack } = useSandpack();
+  const hideFailingTests = sandpack?.testOptions?.hideTestsAndSupressLogs;
   return (
     <>
       {specs.map((spec) => {
@@ -90,7 +93,9 @@ export const Specs: React.FC<Props> = ({
                 Error
               </SpecLabel>
               <FilePath
-                onClick={(): void => openSpec(spec.name)}
+                onClick={(): void =>
+                  openSpec(spec.name)
+                }
                 path={spec.name}
               />
               <FormattedError error={spec.error} path={spec.name} />
@@ -138,36 +143,44 @@ export const Specs: React.FC<Props> = ({
               )}
 
               <FilePath
-                onClick={(): void => openSpec(spec.name)}
+                onClick={(): void => {
+                  if(!hideFailingTests){
+                    openSpec(spec.name)
+                  }
+                }}
                 path={spec.name}
               />
             </div>
 
-            {verbose && <Tests tests={tests} />}
+            {verbose &&!hideFailingTests && <Tests tests={tests} />}
 
-            {verbose && <Describes describes={describes} />}
+            {verbose &&!hideFailingTests && <Describes describes={describes} />}
 
-            {getFailingTests(spec).map((test) => {
-              return (
-                <div
-                  key={`failing-${test.name}`}
-                  className={classNames(gapBottomClassName)}
-                >
+            {!hideFailingTests &&
+              getFailingTests(spec).map((test) => {
+                return (
                   <div
-                    className={classNames(failTestClassName, failTextClassName)}
+                    key={`failing-${test.name}`}
+                    className={classNames(gapBottomClassName)}
                   >
-                    ● {test.blocks.join(" › ")} › {test.name}
+                    <div
+                      className={classNames(
+                        failTestClassName,
+                        failTextClassName
+                      )}
+                    >
+                      ● {test.blocks.join(" › ")} › {test.name}
+                    </div>
+                    {test.errors.map((e) => (
+                      <FormattedError
+                        key={`failing-${test.name}-error`}
+                        error={e}
+                        path={test.path}
+                      />
+                    ))}
                   </div>
-                  {test.errors.map((e) => (
-                    <FormattedError
-                      key={`failing-${test.name}-error`}
-                      error={e}
-                      path={test.path}
-                    />
-                  ))}
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         );
       })}

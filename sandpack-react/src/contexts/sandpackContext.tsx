@@ -17,7 +17,6 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
   const [clientState, { dispatchMessage, addListener, ...clientOperations }] =
     useClient(props, fileState);
   const appState = useAppState(props, fileState.files);
-
   React.useEffect(() => {
     clientOperations.initializeSandpackIframe();
   }, []);
@@ -34,6 +33,7 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
 
         listen: addListener,
         dispatch: dispatchMessage,
+        testOptions: options?.testOptions,
       }}
     >
       <ClasserProvider classes={options?.classes}>

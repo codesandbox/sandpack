@@ -6,7 +6,7 @@ import { classNames } from "../../utils/classNames";
 import {
   failTextClassName,
   passTextClassName,
-  skipTextClassName,
+  skipTextClassName
 } from "./style";
 
 export interface TestResults {
@@ -44,7 +44,7 @@ const containerClassName = css({
 
 export const Summary: React.FC<Props> = ({ suites, tests, duration }) => {
   const widestLabel = "Test suites: ";
-
+ 
   const withMargin = (label: string): string => {
     const difference = widestLabel.length - label.length;
     const margin = Array.from({ length: difference }, () => " ").join("");

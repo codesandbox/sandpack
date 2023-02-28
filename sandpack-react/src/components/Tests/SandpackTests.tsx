@@ -58,6 +58,8 @@ export const SandpackTests: React.FC<
     watchMode?: boolean;
     onComplete?: (specs: Record<string, Spec>) => void;
     actionsChildren?: JSX.Element;
+    hideVerboseButton?:boolean
+    hideWatchButton?:boolean;
   } & React.HtmlHTMLAttributes<HTMLDivElement>
 > = ({
   verbose = false,
@@ -66,6 +68,8 @@ export const SandpackTests: React.FC<
   className,
   onComplete,
   actionsChildren,
+  hideVerboseButton,
+  hideWatchButton,
   ...props
 }) => {
   const theme = useSandpackTheme();
@@ -379,6 +383,8 @@ export const SandpackTests: React.FC<
       <iframe ref={iframe} style={{ display: "none" }} title="Sandpack Tests" />
 
       <Header
+        hideVerboseButton={hideVerboseButton}
+        hideWatchButton={hideWatchButton}
         setSuiteOnly={(): void =>
           setState((s) => ({ ...s, suiteOnly: !s.suiteOnly }))
         }

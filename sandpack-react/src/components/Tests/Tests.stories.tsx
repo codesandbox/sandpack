@@ -147,6 +147,31 @@ export const VerboseMode: React.FC = () => {
   );
 };
 
+export const HiddenTests: React.FC = () => {
+  return (
+    <SandpackProvider
+      customSetup={{ entry: "add.ts" }}
+      files={{
+        "/add.test.ts": addTests,
+        "/add.ts": add,
+        "/src/app/sub.ts": sub,
+        "/src/app/sub.test.ts": subTests,
+      }}
+      options={{
+        testOptions:{
+          hideTestsAndSupressLogs:true
+        }
+      }}
+      theme={dracula}
+    >
+      <SandpackLayout  style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
+        <SandpackCodeEditor showRunButton={false} showLineNumbers />
+        <SandpackTests />
+      </SandpackLayout>
+    </SandpackProvider>
+  );
+};
+
 export const OneTestFile: React.FC = () => {
   return (
     <SandpackProvider

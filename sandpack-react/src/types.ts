@@ -107,7 +107,6 @@ export interface SandpackOptions {
   wrapContent?: boolean;
   resizablePanels?: boolean;
   codeEditor?: SandpackCodeOptions;
-
   /**
    * This disables editing of content by the user in all files.
    */
@@ -402,6 +401,13 @@ interface SandpackRootProps<
   theme?: SandpackThemeProp;
 }
 
+export interface SandpackTestGlobalOptions {
+  /**
+   * If `hideTestsAndSupressLogs` is true sandpack hides test files and suppresses their output from being logged to the console when a test fails.
+   */
+  hideTestsAndSupressLogs?: boolean;
+}
+
 export interface SandpackInternalOptions<
   Files extends SandpackFiles | any = any,
   TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
@@ -429,6 +435,11 @@ export interface SandpackInternalOptions<
   fileResolver?: FileResolver;
   externalResources?: string[];
   classes?: Record<string, string>;
+  /**
+   * Global options for sandpack tests
+   * - hideTestsAndSupressLogs - if true sandpack hides test files and suppresses their output from being logged to the console when a test fails.
+   */
+  testOptions?: SandpackTestGlobalOptions;
 }
 
 interface SandpackInternalProps<
@@ -549,7 +560,11 @@ export interface SandpackState {
   resetFile: (path: string) => void;
   resetAllFiles: () => void;
   registerReactDevTools: (value: ReactDevToolsMode) => void;
-
+  /**
+   * Global options for sandpack tests
+   * - hideTestsAndSupressLogs - if true sandpack hides test files and suppresses their output from being logged to the console when a test fails.
+   */
+  testOptions?: SandpackTestGlobalOptions;
   /**
    * Element refs
    * Different components inside the SandpackProvider might register certain elements of interest for sandpack
