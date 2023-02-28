@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const commonjs = require("@rollup/plugin-commonjs");
+const replace = require("@rollup/plugin-replace");
 const typescript = require("@rollup/plugin-typescript");
-const replace = require("rollup-plugin-replace");
 
 const pkg = require("./package.json");
 
@@ -25,11 +25,14 @@ const configBase = {
 
   plugins: [
     typescript({ tsconfig: "./tsconfig.json" }),
-    replace({ "process.env.TEST_ENV": "false" }),
+    replace({
+      preventAssignment: true,
+      values: { "process.env.TEST_ENV": "false" },
+    }),
     commonjs({ requireReturnsDefault: "preferred" }),
   ],
   external: [
-    'react/jsx-runtime',
+    "react/jsx-runtime",
     ...Object.keys(pkg.dependencies),
     ...Object.keys(pkg.devDependencies),
     ...Object.keys(pkg.peerDependencies),

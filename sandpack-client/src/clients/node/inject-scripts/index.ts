@@ -5,7 +5,7 @@ import { INJECT_MESSAGE_TYPE } from "@codesandbox/nodebox";
 
 // get the bundled file, which contains all dependencies
 // @ts-ignore
-import consoleHook from "./dist/consoleHook.txt";
+import consoleHook from "./dist/consoleHook.js";
 import { setupHistoryListeners } from "./historyListener";
 
 const scripts = [

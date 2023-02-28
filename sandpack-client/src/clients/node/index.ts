@@ -1,5 +1,7 @@
 /* eslint-disable no-console,@typescript-eslint/no-explicit-any,prefer-rest-params,@typescript-eslint/explicit-module-boundary-types */
 
+import { Buffer } from "buffer";
+
 import { PREVIEW_LOADED_MESSAGE_TYPE, Nodebox } from "@codesandbox/nodebox";
 import type {
   FilesMap,
