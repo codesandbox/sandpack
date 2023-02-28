@@ -1,7 +1,6 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import { normalizePath } from "@codesandbox/sandpack-client";
-import { useState } from "react";
-import useDeepCompareEffect from "use-deep-compare-effect";
+import { useEffect, useState } from "react";
 
 import type {
   SandboxEnvironment,
@@ -57,9 +56,9 @@ export const useFiles: UseFiles = (props) => {
 
   const [state, setState] = useState<FilesState>(originalStateFromProps);
 
-  useDeepCompareEffect(() => {
+  useEffect(() => {
     setState(getSandpackStateFromProps(props));
-  }, [props]);
+  }, [props.files, props.customSetup, props.template]);
 
   const updateFile = (
     pathOrFiles: string | SandpackFiles,
