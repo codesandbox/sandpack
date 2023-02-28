@@ -46,10 +46,7 @@ const configs = [
     ],
 
     plugins: [
-      typescript({
-        tsconfig: "./tsconfig.json",
-        compilerOptions: { declaration: false },
-      }),
+      typescript({ tsconfig: "./tsconfig.json" }),
       string({ include: "**/dist/consoleHook.js" }),
       replace({
         preventAssignment: true,
