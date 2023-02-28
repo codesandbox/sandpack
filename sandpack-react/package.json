@@ -54,8 +54,7 @@
     "dequal": "^2.0.2",
     "lz-string": "^1.4.4",
     "react-devtools-inline": "4.4.0",
-    "react-is": "^17.0.2",
-    "use-deep-compare-effect": "1.8.1"
+    "react-is": "^17.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
