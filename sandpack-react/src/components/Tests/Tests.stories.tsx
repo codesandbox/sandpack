@@ -148,10 +148,10 @@ export const VerboseMode: React.FC = () => {
 };
 
 /**
- * This story is used to test the `hideTestsAndSupressLogs` option.
+ * This story is used to test the `hideTestsAndSupressLogs` prop.
  * Tests content should not be visible in the tests console.
  * It is useful when you want to hide the tests from the user.
- *  
+ *
  */
 export const HiddenTests: React.FC = () => {
   return (
@@ -164,14 +164,13 @@ export const HiddenTests: React.FC = () => {
         "/src/app/sub.test.ts": subTests,
       }}
       options={{
-        hideTestsAndSupressLogs:true,
         visibleFiles: ["/add.ts"],
       }}
       theme={dracula}
     >
-      <SandpackLayout  style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
+      <SandpackLayout style={{ "--sp-layout-height": "70vh" } as CSSProperties}>
         <SandpackCodeEditor showRunButton={false} showLineNumbers />
-        <SandpackTests verbose/>
+        <SandpackTests hideTestsAndSupressLogs />
       </SandpackLayout>
     </SandpackProvider>
   );

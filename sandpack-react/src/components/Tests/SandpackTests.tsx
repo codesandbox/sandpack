@@ -58,8 +58,14 @@ export const SandpackTests: React.FC<
     watchMode?: boolean;
     onComplete?: (specs: Record<string, Spec>) => void;
     actionsChildren?: JSX.Element;
-    hideVerboseButton?:boolean
-    hideWatchButton?:boolean;
+    showVerboseButton?: boolean;
+    showWatchButton?: boolean;
+    /**
+     * Hide the tests and supress logs
+     * If `true` the tests will be hidden and the logs will be supressed. This is useful when you want to run tests in the background and don't want to show the tests to the user.
+     * @default false
+     */
+    hideTestsAndSupressLogs?: boolean;
   } & React.HtmlHTMLAttributes<HTMLDivElement>
 > = ({
   verbose = false,
@@ -68,8 +74,9 @@ export const SandpackTests: React.FC<
   className,
   onComplete,
   actionsChildren,
-  hideVerboseButton,
-  hideWatchButton,
+  showVerboseButton,
+  showWatchButton,
+  hideTestsAndSupressLogs,
   ...props
 }) => {
   const theme = useSandpackTheme();
@@ -383,8 +390,7 @@ export const SandpackTests: React.FC<
       <iframe ref={iframe} style={{ display: "none" }} title="Sandpack Tests" />
 
       <Header
-        hideVerboseButton={hideVerboseButton}
-        hideWatchButton={hideWatchButton}
+        hideTestsAndSupressLogs={hideTestsAndSupressLogs}
         setSuiteOnly={(): void =>
           setState((s) => ({ ...s, suiteOnly: !s.suiteOnly }))
         }
@@ -395,6 +401,8 @@ export const SandpackTests: React.FC<
           setState((s) => ({ ...s, watchMode: !s.watchMode }));
         }}
         showSuitesOnly={state.specsCount > 1}
+        showVerboseButton={showVerboseButton}
+        showWatchButton={showWatchButton}
         status={state.status}
         suiteOnly={state.suiteOnly}
         verbose={state.verbose}
@@ -424,6 +432,7 @@ export const SandpackTests: React.FC<
         ) : (
           <>
             <Specs
+              hideTestsAndSupressLogs={hideTestsAndSupressLogs}
               openSpec={openSpec}
               specs={specs}
               status={state.status}

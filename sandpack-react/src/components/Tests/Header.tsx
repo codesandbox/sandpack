@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { useSandpack } from "../../hooks";
 import { css } from "../../styles";
 import { buttonClassName, roundedButtonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
@@ -35,8 +34,9 @@ interface Props {
   watchMode: boolean;
   setWatchMode: () => void;
   showSuitesOnly: boolean;
-  hideVerboseButton?: boolean;
-  hideWatchButton?: boolean;
+  showVerboseButton?: boolean;
+  showWatchButton?: boolean;
+  hideTestsAndSupressLogs?: boolean;
 }
 
 const buttonsClassName = classNames(
@@ -54,10 +54,10 @@ export const Header: React.FC<Props> = ({
   watchMode,
   setWatchMode,
   showSuitesOnly,
-  hideVerboseButton,
-  hideWatchButton,
+  showWatchButton,
+  showVerboseButton,
+  hideTestsAndSupressLogs,
 }) => {
-  const {sandpack} = useSandpack()
   return (
     <div className={classNames(wrapperClassName, flexClassName)}>
       <div className={classNames(flexClassName)}>
@@ -93,18 +93,18 @@ export const Header: React.FC<Props> = ({
             Suite only
           </button>
         )}
-        {!hideVerboseButton && ! (
+        {showVerboseButton && (
           <button
             className={buttonsClassName}
             data-active={verbose}
-            disabled={status === "initialising" ||sandpack.hideTestsAndSupressLogs}
+            disabled={status === "initialising" || hideTestsAndSupressLogs}
             onClick={setVerbose}
             type="button"
           >
             Verbose
           </button>
         )}
-        {!hideWatchButton && (
+        {showWatchButton && (
           <button
             className={buttonsClassName}
             data-active={watchMode}

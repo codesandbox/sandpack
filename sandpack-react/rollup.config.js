@@ -29,7 +29,7 @@ const configBase = {
     commonjs({ requireReturnsDefault: "preferred" }),
   ],
   external: [
-    'react/jsx-runtime',
+    "react/jsx-runtime",
     ...Object.keys(pkg.dependencies),
     ...Object.keys(pkg.devDependencies),
     ...Object.keys(pkg.peerDependencies),

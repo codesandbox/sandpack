@@ -1,7 +1,6 @@
 import type { TestError } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-import { useSandpack } from "../../hooks";
 import { css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
@@ -26,6 +25,7 @@ interface Props {
   verbose: boolean;
   status: Status;
   openSpec: (name: string) => void;
+  hideTestsAndSupressLogs?: boolean;
 }
 
 const fileContainer = css({
@@ -78,9 +78,8 @@ export const Specs: React.FC<Props> = ({
   openSpec,
   status,
   verbose,
+  hideTestsAndSupressLogs,
 }) => {
-  const { sandpack } = useSandpack();
-  const hideFailingTests = sandpack?.hideTestsAndSupressLogs;
   return (
     <>
       {specs.map((spec) => {
@@ -93,9 +92,7 @@ export const Specs: React.FC<Props> = ({
                 Error
               </SpecLabel>
               <FilePath
-                onClick={(): void =>
-                  openSpec(spec.name)
-                }
+                onClick={(): void => openSpec(spec.name)}
                 path={spec.name}
               />
               <FormattedError error={spec.error} path={spec.name} />
@@ -144,19 +141,21 @@ export const Specs: React.FC<Props> = ({
 
               <FilePath
                 onClick={(): void => {
-                  if(!hideFailingTests){
-                    openSpec(spec.name)
+                  if (!hideTestsAndSupressLogs) {
+                    openSpec(spec.name);
                   }
                 }}
                 path={spec.name}
               />
             </div>
 
-            {verbose &&!hideFailingTests && <Tests tests={tests} />}
+            {verbose && !hideTestsAndSupressLogs && <Tests tests={tests} />}
 
-            {verbose &&!hideFailingTests && <Describes describes={describes} />}
+            {verbose && !hideTestsAndSupressLogs && (
+              <Describes describes={describes} />
+            )}
 
-            {!hideFailingTests &&
+            {!hideTestsAndSupressLogs &&
               getFailingTests(spec).map((test) => {
                 return (
                   <div
