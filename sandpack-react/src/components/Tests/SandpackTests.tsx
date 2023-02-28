@@ -74,9 +74,9 @@ export const SandpackTests: React.FC<
   className,
   onComplete,
   actionsChildren,
-  showVerboseButton=true,
+  showVerboseButton = true,
   showWatchButton = true,
-  hideTestsAndSupressLogs=false,
+  hideTestsAndSupressLogs = false,
   ...props
 }) => {
   const theme = useSandpackTheme();
