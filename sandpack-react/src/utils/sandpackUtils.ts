@@ -53,7 +53,7 @@ export const getSandpackStateFromProps = (
     // extract open and active files from the custom input files
     Object.keys(normalizedFilesPath).forEach((filePath) => {
       const file = normalizedFilesPath[filePath];
-      if (typeof file === "string") {
+      if (typeof file === "string" || file instanceof Uint8Array) {
         visibleFiles.push(filePath);
         return;
       }

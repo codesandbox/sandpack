@@ -80,7 +80,7 @@ export interface SandboxSetup {
 }
 
 export interface SandpackBundlerFile {
-  code: string;
+  code: string | Uint8Array;
   hidden?: boolean;
   active?: boolean;
   readOnly?: boolean;

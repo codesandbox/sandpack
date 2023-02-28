@@ -236,7 +236,7 @@ export type SandpackPredefinedTemplate = keyof typeof SANDBOX_TEMPLATES;
  * @category Setup
  */
 export interface SandpackFile {
-  code: string;
+  code: string | Uint8Array;
   hidden?: boolean;
   active?: boolean;
   readOnly?: boolean;
@@ -591,7 +591,7 @@ export interface SandboxTemplate {
   environment: SandboxEnvironment;
 }
 
-export type SandpackFiles = Record<string, string | SandpackFile>;
+export type SandpackFiles = Record<string, string | Uint8Array | SandpackFile>;
 
 /**
  * Custom properties to be used in the SandpackCodeEditor component,
