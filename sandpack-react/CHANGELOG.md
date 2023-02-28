@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.18](https://github.com/codesandbox/sandpack/compare/v2.0.17...v2.0.18) (2023-02-28)
+
+
+### Bug Fixes
+
+* **sandpack-react:** open sandbox button ([#761](https://github.com/codesandbox/sandpack/issues/761)) ([430a0f5](https://github.com/codesandbox/sandpack/commit/430a0f5d13acc6da11e4108c8c4c82b35a0c7978))
+
+
+
+
+
 ## [2.0.17](https://github.com/codesandbox/sandpack/compare/v2.0.16...v2.0.17) (2023-02-24)
 
 
