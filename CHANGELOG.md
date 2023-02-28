@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.21](https://github.com/codesandbox/sandpack/compare/v2.0.20...v2.0.21) (2023-02-28)
+
+
+### Bug Fixes
+
+* **nodebox:** consider new files from Sandpack ([#778](https://github.com/codesandbox/sandpack/issues/778)) ([877222e](https://github.com/codesandbox/sandpack/commit/877222ef649ed741534709c834053eeefce70948))
+* **sandpack-tests:** introduce `hideTestsAndSupressLogs` prop ([#775](https://github.com/codesandbox/sandpack/issues/775)) ([373ab43](https://github.com/codesandbox/sandpack/commit/373ab4329692820d6cb6760c88a21b0222708cc9))
+
+
+
+
+
 ## [2.0.20](https://github.com/codesandbox/sandpack/compare/v2.0.19...v2.0.20) (2023-02-28)
 
 
