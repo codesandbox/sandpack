@@ -34,9 +34,9 @@ interface Props {
   watchMode: boolean;
   setWatchMode: () => void;
   showSuitesOnly: boolean;
-  showVerboseButton?: boolean;
-  showWatchButton?: boolean;
-  hideTestsAndSupressLogs?: boolean;
+  showVerboseButton: boolean;
+  showWatchButton: boolean;
+  hideTestsAndSupressLogs: boolean;
 }
 
 const buttonsClassName = classNames(
