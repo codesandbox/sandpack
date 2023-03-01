@@ -96,6 +96,11 @@ export interface SandpackOptions {
   editorHeight?: React.CSSProperties["height"];
   classes?: Record<string, string>;
 
+  /**
+   * right to left layout
+   * @default false
+   */
+  rtl?: boolean;
   showNavigator?: boolean;
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
@@ -438,6 +443,11 @@ interface SandpackInternalProps<
     editorWidthPercentage?: number;
     editorHeight?: React.CSSProperties["height"];
 
+    /**
+     * right to left layout
+     * @default false
+     */
+    rtl?: boolean;
     showNavigator?: boolean;
     showLineNumbers?: boolean;
     showInlineErrors?: boolean;

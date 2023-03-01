@@ -329,3 +329,16 @@ Write-Output $example`,
     }}
   />
 );
+
+export const RtlLayout: React.FC = () => {
+  return (
+    <>
+      <Sandpack
+        options={{
+          rtl: true,
+        }}
+        template="react"
+      />
+    </>
+  );
+};
