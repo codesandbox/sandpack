@@ -1298,10 +1298,10 @@
     style-mod "^4.0.0"
     w3c-keyname "^2.2.4"
 
-"@codesandbox/nodebox@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@codesandbox/nodebox/-/nodebox-0.1.0.tgz#b86a13a131c2f3413e3b8f4568fe0082dd7e748c"
-  integrity sha512-gcpoFoLY0M34l67rXJCA8ysdRBN9aj++ebXpfLn2KCl7H2XongKkvYi/uQiKGoQ8iH5EhKe8+x40y/NrCS9J9Q==
+"@codesandbox/nodebox@0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@codesandbox/nodebox/-/nodebox-0.1.3.tgz#d01c30be59c7e48eeded2d7afe609a3e4c5dd5e9"
+  integrity sha512-Tn3EG339C/PXtS2HK0GE/Gfbu7SEUxKs3EAAfII8OtcuJTMkUfasM+KJYDcimrotXMBqaA8/lrAplOL1SaI2eQ==
   dependencies:
     outvariant "^1.3.0"
     strict-event-emitter "^0.4.3"

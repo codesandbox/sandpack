@@ -271,6 +271,15 @@ export class SandpackNode extends SandpackClient {
 
         const event = message as FSWatchEvent;
 
+        const path =
+          "newPath" in event
+            ? event.newPath
+            : "path" in event
+            ? event.path
+            : "";
+        const { type } = await this.emulator.fs.stat(path);
+        if (type !== "file") return null;
+
         try {
           switch (event.type) {
             case "change":
@@ -370,7 +379,7 @@ export class SandpackNode extends SandpackClient {
           !this._modulesCache.get(key) ||
           Buffer.compare(value, this._modulesCache.get(key)) !== 0
         ) {
-          this.emulator.fs.writeFile(key, value);
+          this.emulator.fs.writeFile(key, value, { recursive: true });
         }
       });
 
