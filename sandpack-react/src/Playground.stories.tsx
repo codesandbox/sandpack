@@ -9,23 +9,9 @@ export default {
 };
 
 export const Basic: React.FC = () => {
-  const [text, setText] = React.useState("world");
   return (
     <>
-      <input
-        defaultValue={text}
-        onChange={({ target }) => setText(target.value)}
-      />
-      <Sandpack
-        files={{
-          "App.js": `export default function App() {
-  return <h1>Hello ${text}</h1>
-}
-`,
-        }}
-        template="react"
-        theme={themes.sandpackDark}
-      />
+      <Sandpack template="nextjs" theme={themes.sandpackDark} />
     </>
   );
 };

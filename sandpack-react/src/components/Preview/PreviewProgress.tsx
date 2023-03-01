@@ -44,13 +44,9 @@ const mapProgressMessage = (
   }
 };
 
-const TIMER = 5_000;
-
 export const PreviewProgress: React.FC<{
   clientId?: string;
-  dismissOnTimeout?: boolean;
-  timeout?: number;
-}> = ({ clientId, dismissOnTimeout = false, timeout = TIMER }) => {
+}> = ({ clientId }) => {
   const [isReady, setIsReady] = React.useState(false);
   const [totalDependencies, setTotalDependencies] = React.useState<number>();
   const [loadingMessage, setLoadingMessage] = React.useState<null | string>(
@@ -75,11 +71,6 @@ export const PreviewProgress: React.FC<{
             mapProgressMessage(message.data, totalDependencies)
           );
         }
-        clearTimeout(timer);
-
-        timer = setTimeout(() => {
-          setLoadingMessage(dismissOnTimeout ? null : "Still loading...");
-        }, timeout);
       }
 
       if (message.type === "done" && message.compilatonError === false) {
