@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.23](https://github.com/codesandbox/sandpack/compare/v2.0.22...v2.0.23) (2023-03-01)
+
+
+### Bug Fixes
+
+* **nodebox:** writeFile recursively ([#783](https://github.com/codesandbox/sandpack/issues/783)) ([9e61ef0](https://github.com/codesandbox/sandpack/commit/9e61ef0518677f2742d9b372a773af133ca4a2e5))
+
+
+
+
+
 ## [2.0.21](https://github.com/codesandbox/sandpack/compare/v2.0.20...v2.0.21) (2023-02-28)
 
 

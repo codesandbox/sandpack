@@ -1,6 +1,6 @@
 {
   "name": "codesandbox-theme-docs",
-  "version": "2.0.22",
+  "version": "2.0.23",
   "description": "A Nextra theme for documentation sites.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@codemirror/legacy-modes": "^6.3.1",
-    "@codesandbox/sandpack-react": "^2.0.22",
+    "@codesandbox/sandpack-react": "^2.0.23",
     "@codesandbox/sandpack-themes": "^2.0.21",
     "@headlessui/react": "^1.6.6",
     "@mdx-js/react": "^2.1.2",
