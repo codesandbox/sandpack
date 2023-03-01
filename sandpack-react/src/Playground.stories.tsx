@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as themes from "@codesandbox/sandpack-themes";
 import React from "react";
-import { SandpackProvider } from ".";
+
 import {
   SandpackCodeEditor,
   SandpackFileExplorer,
   SandpackPreview,
 } from "./components";
+
+import { SandpackProvider } from ".";
 
 export default {
   title: "Intro/Playground",
