@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.21](https://github.com/codesandbox/sandpack/compare/v2.0.20...v2.0.21) (2023-02-28)
+
+
+### Bug Fixes
+
+* **nodebox:** consider new files from Sandpack ([#778](https://github.com/codesandbox/sandpack/issues/778)) ([877222e](https://github.com/codesandbox/sandpack/commit/877222ef649ed741534709c834053eeefce70948))
+* **sandpack-tests:** introduce `hideTestsAndSupressLogs` prop ([#775](https://github.com/codesandbox/sandpack/issues/775)) ([373ab43](https://github.com/codesandbox/sandpack/commit/373ab4329692820d6cb6760c88a21b0222708cc9))
+
+
+
+
+
+## [2.0.20](https://github.com/codesandbox/sandpack/compare/v2.0.19...v2.0.20) (2023-02-28)
+
+
+### Bug Fixes
+
+* **sandpack-client:** setup build with rollup ([#758](https://github.com/codesandbox/sandpack/issues/758)) ([f645119](https://github.com/codesandbox/sandpack/commit/f6451194a718a0679ce5fcb4d64d1f0d58f6c146))
+
+
+
+
+
+## [2.0.19](https://github.com/codesandbox/sandpack/compare/v2.0.18...v2.0.19) (2023-02-28)
+
+
+### Bug Fixes
+
+* **use-files:** watch prop keys changes ([#776](https://github.com/codesandbox/sandpack/issues/776)) ([987814f](https://github.com/codesandbox/sandpack/commit/987814f9ec0f7e455a645e69c1b51bda6aec7521))
+
+
+
+
+
+## [2.0.18](https://github.com/codesandbox/sandpack/compare/v2.0.17...v2.0.18) (2023-02-28)
+
+
+### Bug Fixes
+
+* **sandpack-react:** open sandbox button ([#761](https://github.com/codesandbox/sandpack/issues/761)) ([430a0f5](https://github.com/codesandbox/sandpack/commit/430a0f5d13acc6da11e4108c8c4c82b35a0c7978))
+
+
+
+
+
 ## [2.0.17](https://github.com/codesandbox/sandpack/compare/v2.0.16...v2.0.17) (2023-02-24)
 
 

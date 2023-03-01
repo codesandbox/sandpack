@@ -25,6 +25,7 @@ interface Props {
   verbose: boolean;
   status: Status;
   openSpec: (name: string) => void;
+  hideTestsAndSupressLogs?: boolean;
 }
 
 const fileContainer = css({
@@ -77,6 +78,7 @@ export const Specs: React.FC<Props> = ({
   openSpec,
   status,
   verbose,
+  hideTestsAndSupressLogs,
 }) => {
   return (
     <>
@@ -138,36 +140,46 @@ export const Specs: React.FC<Props> = ({
               )}
 
               <FilePath
-                onClick={(): void => openSpec(spec.name)}
+                onClick={(): void => {
+                  if (!hideTestsAndSupressLogs) {
+                    openSpec(spec.name);
+                  }
+                }}
                 path={spec.name}
               />
             </div>
 
-            {verbose && <Tests tests={tests} />}
+            {verbose && !hideTestsAndSupressLogs && <Tests tests={tests} />}
 
-            {verbose && <Describes describes={describes} />}
+            {verbose && !hideTestsAndSupressLogs && (
+              <Describes describes={describes} />
+            )}
 
-            {getFailingTests(spec).map((test) => {
-              return (
-                <div
-                  key={`failing-${test.name}`}
-                  className={classNames(gapBottomClassName)}
-                >
+            {!hideTestsAndSupressLogs &&
+              getFailingTests(spec).map((test) => {
+                return (
                   <div
-                    className={classNames(failTestClassName, failTextClassName)}
+                    key={`failing-${test.name}`}
+                    className={classNames(gapBottomClassName)}
                   >
-                    ● {test.blocks.join(" › ")} › {test.name}
+                    <div
+                      className={classNames(
+                        failTestClassName,
+                        failTextClassName
+                      )}
+                    >
+                      ● {test.blocks.join(" › ")} › {test.name}
+                    </div>
+                    {test.errors.map((e) => (
+                      <FormattedError
+                        key={`failing-${test.name}-error`}
+                        error={e}
+                        path={test.path}
+                      />
+                    ))}
                   </div>
-                  {test.errors.map((e) => (
-                    <FormattedError
-                      key={`failing-${test.name}-error`}
-                      error={e}
-                      path={test.path}
-                    />
-                  ))}
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         );
       })}

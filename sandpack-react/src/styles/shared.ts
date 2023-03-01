@@ -16,6 +16,7 @@ export const buttonClassName = css({
   cursor: "pointer",
   color: "$colors$clickable",
   border: 0,
+  textDecoration: "none",
 
   "&:disabled": { color: "$colors$disabled" },
 
@@ -36,12 +37,14 @@ export const buttonClassName = css({
   },
 
   // If there's a children besides the icon
-  [`&.${iconStandaloneClassName}&:not(:has(svg + span))`]: {
+  [`&.${iconStandaloneClassName}&:not(:has(span))`]: {
     width: "$space$7",
   },
 
   [`&.${iconStandaloneClassName}&:has(svg + span)`]: {
     paddingRight: "$space$3",
+    paddingLeft: "$space$2",
+    gap: "$space$1",
   },
 });
 
