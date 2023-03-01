@@ -370,7 +370,7 @@ export class SandpackNode extends SandpackClient {
           !this._modulesCache.get(key) ||
           Buffer.compare(value, this._modulesCache.get(key)) !== 0
         ) {
-          this.emulator.fs.writeFile(key, value);
+          this.emulator.fs.writeFile(key, value, { recursive: true });
         }
       });
 
