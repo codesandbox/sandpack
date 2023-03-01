@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.22](https://github.com/codesandbox/sandpack/compare/v2.0.21...v2.0.22) (2023-03-01)
+
+
+### Bug Fixes
+
+* add rtl layout option ([#780](https://github.com/codesandbox/sandpack/issues/780)) ([80624f7](https://github.com/codesandbox/sandpack/commit/80624f7912cc0eda6b0fd61ecce29983cd1efdb6))
+* open icon style with loading status ([#782](https://github.com/codesandbox/sandpack/issues/782)) ([427aa8c](https://github.com/codesandbox/sandpack/commit/427aa8cf6708f3885129af6ce2a36c84b21bf905))
+
+
+
+
+
 ## [2.0.21](https://github.com/codesandbox/sandpack/compare/v2.0.20...v2.0.21) (2023-02-28)
 
 
