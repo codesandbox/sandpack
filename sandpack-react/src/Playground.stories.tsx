@@ -7,9 +7,9 @@ import {
   SandpackFileExplorer,
   SandpackPreview,
 } from "./components";
+import { useSandpack } from "./hooks";
 
 import { SandpackProvider } from ".";
-import { useSandpack } from "./hooks";
 
 export default {
   title: "Intro/Playground",
@@ -21,7 +21,7 @@ const AddFile = () => {
     <button
       onClick={() => {
         sandpack.addFile(
-          "/pages/foo/index.jsx",
+          "/pages/foo/index.js",
           `export default () => {
   return "foo"
 }`

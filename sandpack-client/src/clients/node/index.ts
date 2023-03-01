@@ -271,6 +271,15 @@ export class SandpackNode extends SandpackClient {
 
         const event = message as FSWatchEvent;
 
+        const path =
+          "newPath" in event
+            ? event.newPath
+            : "path" in event
+            ? event.path
+            : "";
+        const { type } = await this.emulator.fs.stat(path);
+        if (type !== "file") return null;
+
         try {
           switch (event.type) {
             case "change":
