@@ -345,7 +345,7 @@ const consoleWrapper = css({
   overflow: "hidden",
 });
 
-export const rtlLayoutClassName = css({
+const rtlLayoutClassName = css({
   flexDirection: "row-reverse",
 
   "@media screen and (max-width: 768px)": {
