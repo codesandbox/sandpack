@@ -23,11 +23,11 @@ Object.entries(allThemes).forEach(([themeName, value]) =>
           showNavigator: true,
           showTabs: true,
         }}
-        template="react"
+        template="nextjs"
         theme={value}
       />
 
-      <SandpackProvider template="react" theme={value}>
+      <SandpackProvider template="nextjs" theme={value}>
         <SandpackLayout>
           <SandpackFileExplorer />
           <SandpackCodeEditor showLineNumbers showTabs />

@@ -16,7 +16,7 @@ Object.keys(SANDPACK_THEMES).forEach((themeName) =>
         showNavigator: true,
         showTabs: true,
       }}
-      template="react"
+      template="nextjs"
       theme={themeName as keyof typeof SANDPACK_THEMES}
     />
   ))

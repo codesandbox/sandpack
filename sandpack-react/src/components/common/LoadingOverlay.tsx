@@ -59,7 +59,7 @@ export const LoadingOverlay = ({
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setShouldShowStdout(true);
-    }, 5_000);
+    }, 3_000);
 
     return () => {
       clearTimeout(timer);
@@ -159,8 +159,10 @@ export const LoadingOverlay = ({
 
 const stdoutPreview = css({
   position: "absolute",
-  inset: ".5",
+  left: 0,
+  right: 0,
   bottom: "$space$8",
   overflow: "auto",
   opacity: 0.5,
+  overflowX: "hidden",
 });
