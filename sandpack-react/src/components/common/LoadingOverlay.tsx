@@ -6,6 +6,7 @@ import {
   useLoadingOverlayState,
   FADE_ANIMATION_DURATION,
 } from "../../hooks/useLoadingOverlayState";
+import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
 import { css, THEME_PREFIX } from "../../styles";
 import {
   absoluteClassName,
@@ -16,6 +17,7 @@ import {
   roundedButtonClassName,
 } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
+import { StdoutList } from "../Console/StdoutList";
 import { RestartIcon } from "../icons";
 
 import { Loading } from "./Loading";
@@ -50,6 +52,19 @@ export const LoadingOverlay = ({
   const {
     sandpack: { runSandpack, environment },
   } = useSandpack();
+  const [shouldShowStdout, setShouldShowStdout] = React.useState(false);
+
+  const { logs: stdoutData } = useSandpackShellStdout({});
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setShouldShowStdout(true);
+    }, 5_000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   if (loadingOverlayState === "HIDDEN") {
     return null;
@@ -132,7 +147,20 @@ export const LoadingOverlay = ({
       }}
       {...props}
     >
+      {shouldShowStdout && (
+        <div className={stdoutPreview.toString()}>
+          <StdoutList data={stdoutData} />
+        </div>
+      )}
       <Loading showOpenInCodeSandbox={showOpenInCodeSandbox} />
     </div>
   );
 };
+
+const stdoutPreview = css({
+  position: "absolute",
+  inset: ".5",
+  bottom: "$space$8",
+  overflow: "auto",
+  opacity: 0.5,
+});

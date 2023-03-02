@@ -13,7 +13,7 @@ export const useSandpackShellStdout = ({
 }: {
   clientId?: string;
   maxMessageCount?: number;
-  resetOnPreviewRestart: boolean;
+  resetOnPreviewRestart?: boolean;
 }): {
   logs: Array<{ id: string; data: string }>;
   reset: () => void;
