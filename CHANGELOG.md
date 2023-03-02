@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.26](https://github.com/codesandbox/sandpack/compare/v2.0.25...v2.0.26) (2023-03-02)
+
+
+### Bug Fixes
+
+* **preview:** add stdout for long process ([#792](https://github.com/codesandbox/sandpack/issues/792)) ([4da4d99](https://github.com/codesandbox/sandpack/commit/4da4d997b54beb408d3ec2f15d027090d05879c7))
+
+
+
+
+
 ## [2.0.25](https://github.com/codesandbox/sandpack/compare/v2.0.24...v2.0.25) (2023-03-02)
 
 
