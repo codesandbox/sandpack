@@ -164,15 +164,11 @@ export class SandpackNode extends SandpackClient {
   }
 
   private async createPreviewURLFromId(id: string): Promise<void> {
-    try {
-      this.iframePreviewUrl = undefined;
+    this.iframePreviewUrl = undefined;
 
-      const { url } = await this.emulator.preview.getByShellId(id);
+    const { url } = await this.emulator.preview.getByShellId(id);
 
-      this.iframePreviewUrl = url;
-    } catch {
-      // no-op
-    }
+    this.iframePreviewUrl = url;
   }
 
   /**
