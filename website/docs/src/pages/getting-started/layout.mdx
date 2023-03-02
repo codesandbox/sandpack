@@ -197,3 +197,19 @@ The `<Sandpack />` preset component has resizable columns and rows by default, a
 ```
 
 Other components (`SandpackProvider` for example) do not have this functionality and it must be implemented by the user.
+
+### Right to left layout
+
+<CodeBlock stack>
+{`import { Sandpack } from "@codesandbox/sandpack-react";
+export default function App() {
+  return (
+    <Sandpack 
+      options={{
+        rtl: true, // default false
+      }}
+    />
+  );
+}
+`}
+</CodeBlock>

@@ -2,7 +2,14 @@
 import * as themes from "@codesandbox/sandpack-themes";
 import React from "react";
 
-import { Sandpack } from "./presets";
+import {
+  SandpackCodeEditor,
+  SandpackFileExplorer,
+  SandpackPreview,
+} from "./components";
+import { useSandpack } from "./hooks";
+
+import { SandpackProvider } from ".";
 
 export default {
   title: "Intro/Playground",

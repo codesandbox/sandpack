@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.23](https://github.com/codesandbox/sandpack/compare/v2.0.22...v2.0.23) (2023-03-01)
+
+
+### Bug Fixes
+
+* **nodebox:** writeFile recursively ([#783](https://github.com/codesandbox/sandpack/issues/783)) ([9e61ef0](https://github.com/codesandbox/sandpack/commit/9e61ef0518677f2742d9b372a773af133ca4a2e5))
+
+
+
+
+
+## [2.0.22](https://github.com/codesandbox/sandpack/compare/v2.0.21...v2.0.22) (2023-03-01)
+
+
+### Bug Fixes
+
+* add rtl layout option ([#780](https://github.com/codesandbox/sandpack/issues/780)) ([80624f7](https://github.com/codesandbox/sandpack/commit/80624f7912cc0eda6b0fd61ecce29983cd1efdb6))
+* open icon style with loading status ([#782](https://github.com/codesandbox/sandpack/issues/782)) ([427aa8c](https://github.com/codesandbox/sandpack/commit/427aa8cf6708f3885129af6ce2a36c84b21bf905))
+
+
+
+
+
+## [2.0.21](https://github.com/codesandbox/sandpack/compare/v2.0.20...v2.0.21) (2023-02-28)
+
+
+### Bug Fixes
+
+* **nodebox:** consider new files from Sandpack ([#778](https://github.com/codesandbox/sandpack/issues/778)) ([877222e](https://github.com/codesandbox/sandpack/commit/877222ef649ed741534709c834053eeefce70948))
+* **sandpack-tests:** introduce `hideTestsAndSupressLogs` prop ([#775](https://github.com/codesandbox/sandpack/issues/775)) ([373ab43](https://github.com/codesandbox/sandpack/commit/373ab4329692820d6cb6760c88a21b0222708cc9))
+
+
+
+
+
 ## [2.0.20](https://github.com/codesandbox/sandpack/compare/v2.0.19...v2.0.20) (2023-02-28)
 
 
