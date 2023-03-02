@@ -106,9 +106,7 @@ export const SandpackConsole = React.forwardRef<
         )}
         {...props}
       >
-        {showSetupProgress && (
-          <PreviewProgress timeout={1_000} dismissOnTimeout />
-        )}
+        {showSetupProgress && <PreviewProgress />}
 
         {(showHeader || isNodeEnvironment) && (
           <Header
