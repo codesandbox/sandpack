@@ -1,7 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { useSandpackShell } from "../..";
+import { useSandpack, useSandpackShell } from "../..";
 import { useErrorMessage } from "../../hooks/useErrorMessage";
 import { css, THEME_PREFIX } from "../../styles";
 import {
@@ -44,6 +44,9 @@ export const ErrorOverlay: React.FC<
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const errorMessage = useErrorMessage();
   const { restart } = useSandpackShell();
+  const {
+    sandpack: { runSandpack },
+  } = useSandpack();
   const c = useClasser(THEME_PREFIX);
 
   if (!errorMessage && !children) {
@@ -77,7 +80,10 @@ export const ErrorOverlay: React.FC<
                 iconStandaloneClassName,
                 roundedButtonClassName
               )}
-              onClick={restart}
+              onClick={() => {
+                restart();
+                runSandpack();
+              }}
               title="Restart script"
               type="button"
             >

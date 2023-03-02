@@ -213,7 +213,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
       })
     );
 
-    setState((prev) => ({ ...prev, status: "running" }));
+    setState((prev) => ({ ...prev, error: null, status: "running" }));
   }, [createClient]);
 
   const initializeSandpackIframe = useCallback((): void => {
