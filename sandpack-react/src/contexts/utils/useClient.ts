@@ -23,7 +23,7 @@ import { generateRandomId } from "../../utils/stringUtils";
 import type { FilesState } from "./useFiles";
 type SandpackClientType = InstanceType<typeof SandpackClient>;
 
-const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
+const BUNDLER_TIMEOUT = 40_000;
 
 interface SandpackConfigState {
   reactDevTools?: ReactDevToolsMode;
@@ -85,7 +85,6 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
    */
   const intersectionObserver = useRef<IntersectionObserver | null>(null);
   const lazyAnchorRef = useRef<HTMLDivElement>(null);
-  const initializeSandpackIframeHook = useRef<NodeJS.Timer | null>(null);
   const preregisteredIframes = useRef<Record<string, HTMLIFrameElement>>({});
   const clients = useRef<Record<string, SandpackClientType>>({});
   const timeoutHook = useRef<NodeJS.Timer | null>(null);
@@ -119,6 +118,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
       }
 
       timeoutHook.current = setTimeout(() => {
+        unregisterAllClients();
         setState((prev) => ({ ...prev, status: "timeout" }));
       }, timeOut);
 
@@ -235,10 +235,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
       // If any component registerd a lazy anchor ref component, use that for the intersection observer
       intersectionObserver.current = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
-          initializeSandpackIframeHook.current = setTimeout(() => {
-            runSandpack();
-          }, 50);
+          runSandpack();
 
           if (lazyAnchorRef.current) {
             intersectionObserver.current?.unobserve(lazyAnchorRef.current);
@@ -250,15 +247,8 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
     } else if (lazyAnchorRef.current && state.initMode === "user-visible") {
       intersectionObserver.current = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
-          initializeSandpackIframeHook.current = setTimeout(() => {
-            runSandpack();
-          }, 50);
+          runSandpack();
         } else {
-          if (initializeSandpackIframeHook.current) {
-            clearTimeout(initializeSandpackIframeHook.current);
-          }
-
           Object.keys(clients.current).map(unregisterBundler);
           unregisterAllClients();
         }
@@ -266,11 +256,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
 
       intersectionObserver.current.observe(lazyAnchorRef.current);
     } else {
-      // else run the sandpack on mount, with a slight delay to allow all subcomponents to mount/register components
-      initializeSandpackIframeHook.current = setTimeout(
-        () => runSandpack(),
-        50
-      );
+      runSandpack();
     }
   }, [
     options?.autorun,
@@ -323,13 +309,13 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
   };
 
   const handleMessage = (msg: SandpackMessage): void => {
-    if (timeoutHook.current) {
-      clearTimeout(timeoutHook.current);
-    }
-
     if (msg.type === "state") {
       setState((prev) => ({ ...prev, bundlerState: msg.state }));
     } else if (msg.type === "done" && !msg.compilatonError) {
+      if (timeoutHook.current) {
+        clearTimeout(timeoutHook.current);
+      }
+
       setState((prev) => ({ ...prev, error: null }));
     } else if (msg.type === "action" && msg.action === "show-error") {
       setState((prev) => ({ ...prev, error: extractErrorDetails(msg) }));
@@ -522,10 +508,6 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
 
       if (debounceHook.current) {
         clearTimeout(debounceHook.current);
-      }
-
-      if (initializeSandpackIframeHook.current) {
-        clearTimeout(initializeSandpackIframeHook.current);
       }
 
       if (intersectionObserver.current) {

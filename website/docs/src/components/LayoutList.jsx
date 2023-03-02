@@ -316,7 +316,7 @@ export const LAYOUTS = {
 
 export const LayoutList = ({ current, setCurrent }) => {
   return (
-    <SelectorList>
+    <SelectorList name="layout">
       {Object.keys(LAYOUTS).map((name) => (
         <SelectorListButton
           key={name}

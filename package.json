@@ -17,6 +17,7 @@
     "test": "turbo run test --filter=\"@codesandbox/**\"",
     "build": "turbo run build --filter=\"@codesandbox/**\" --filter=\"codesandbox-theme-docs\"",
     "build:client": "turbo run build --filter=\"@codesandbox/sandpack-client\"",
+    "build:react": "turbo run build --filter=\"@codesandbox/sandpack-react\"",
     "typecheck": "turbo run typecheck --filter=\"@codesandbox/**\"",
     "lint": "turbo run lint --filter=\"@codesandbox/**\"",
     "format": "turbo run format --filter=\"@codesandbox/**\"",

@@ -19,6 +19,7 @@ import {
 import { classNames } from "../../utils/classNames";
 import { StdoutList } from "../Console/StdoutList";
 import { RestartIcon } from "../icons";
+import { PreviewProgress } from "../Preview/PreviewProgress";
 
 import { Loading } from "./Loading";
 
@@ -133,27 +134,31 @@ export const LoadingOverlay = ({
     loadingOverlayState === "LOADING" || loadingOverlayState === "PRE_FADING";
 
   return (
-    <div
-      className={classNames(
-        c("overlay", "loading"),
-        absoluteClassName,
-        loadingClassName,
-        className
-      )}
-      style={{
-        ...style,
-        opacity: stillLoading ? 1 : 0,
-        transition: `opacity ${FADE_ANIMATION_DURATION}ms ease-out`,
-      }}
-      {...props}
-    >
-      {shouldShowStdout && (
-        <div className={stdoutPreview.toString()}>
-          <StdoutList data={stdoutData} />
-        </div>
-      )}
-      <Loading showOpenInCodeSandbox={showOpenInCodeSandbox} />
-    </div>
+    <>
+      <div
+        className={classNames(
+          c("overlay", "loading"),
+          absoluteClassName,
+          loadingClassName,
+          className
+        )}
+        style={{
+          ...style,
+          opacity: stillLoading ? 1 : 0,
+          transition: `opacity ${FADE_ANIMATION_DURATION}ms ease-out`,
+        }}
+        {...props}
+      >
+        {shouldShowStdout && (
+          <div className={stdoutPreview.toString()}>
+            <StdoutList data={stdoutData} />
+          </div>
+        )}
+        <Loading showOpenInCodeSandbox={showOpenInCodeSandbox} />
+      </div>
+
+      <PreviewProgress clientId={clientId} />
+    </>
   );
 };
 

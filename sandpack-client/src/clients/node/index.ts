@@ -435,6 +435,7 @@ export class SandpackNode extends SandpackClient {
   }
 
   public destroy(): void {
+    this.emulatorIframe.remove();
     this.emitter.cleanup();
   }
 }

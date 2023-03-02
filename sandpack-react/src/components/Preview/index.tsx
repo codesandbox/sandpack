@@ -20,8 +20,6 @@ import { RoundedButton } from "../common/RoundedButton";
 import { SandpackStack } from "../common/Stack";
 import { RefreshIcon, RestartIcon } from "../icons";
 
-import { PreviewProgress } from "./PreviewProgress";
-
 export interface PreviewProps {
   style?: React.CSSProperties;
   showNavigator?: boolean;
@@ -197,8 +195,6 @@ export const SandpackPreview = React.forwardRef<
             clientId={clientId}
             showOpenInCodeSandbox={showOpenInCodeSandbox}
           />
-
-          <PreviewProgress clientId={clientId} />
 
           {showSandpackErrorOverlay && <ErrorOverlay />}
 

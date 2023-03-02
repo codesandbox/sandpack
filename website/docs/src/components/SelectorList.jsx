@@ -10,18 +10,13 @@ export const SelectorListButton = ({ children, onClick, active }) => {
   } nx-bg-black/[.03] dark:nx-bg-gray-50/10`;
 
   return (
-    <button
-      key={children}
-      className={className}
-      data-select={active}
-      onClick={onClick}
-    >
+    <button className={className} data-select={active} onClick={onClick}>
       {children}
     </button>
   );
 };
 
-export const SelectorList = ({ list, children }) => {
+export const SelectorList = ({ list, children, name }) => {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -41,7 +36,7 @@ export const SelectorList = ({ list, children }) => {
   return (
     <div
       ref={ref}
-      className={`${styles.container} ${list ? styles.scrollList : ""}`}
+      className={`${styles.container} ${list ? styles.scrollList : ""} ${name}`}
     >
       {children}
     </div>
