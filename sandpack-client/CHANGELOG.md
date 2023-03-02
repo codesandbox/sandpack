@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.24](https://github.com/codesandbox/sandpack/compare/v2.0.23...v2.0.24) (2023-03-02)
+
+
+### Bug Fixes
+
+* increase preview timeout ([#789](https://github.com/codesandbox/sandpack/issues/789)) ([27fe67b](https://github.com/codesandbox/sandpack/commit/27fe67b986b81eee31f62c134fb08e47e002f7ee))
+
+
+
+
+
 ## [2.0.23](https://github.com/codesandbox/sandpack/compare/v2.0.22...v2.0.23) (2023-03-01)
 
 
