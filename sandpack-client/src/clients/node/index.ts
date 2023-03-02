@@ -353,7 +353,7 @@ export class SandpackNode extends SandpackClient {
 
       // 2. Exit shell
       await this.emulatorShellProcess.kill();
-      this.iframe?.contentWindow?.location.replace("about:blank");
+      this.iframe?.removeAttribute("attr");
 
       // 3. new Nodebox instance
       this.createNodebox();
@@ -431,6 +431,7 @@ export class SandpackNode extends SandpackClient {
   }
 
   public destroy(): void {
+    this.emulatorIframe.remove();
     this.emitter.cleanup();
   }
 }

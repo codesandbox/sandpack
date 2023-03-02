@@ -34,8 +34,7 @@ export async function loadPreviewIframe(
         return;
       }
 
-      iframe.contentWindow?.location.replace("about:blank");
-      iframe.contentWindow?.location.replace(url!);
+      iframe.setAttribute("src", url);
 
       timeout = setTimeout(() => {
         triesToSetUrl();

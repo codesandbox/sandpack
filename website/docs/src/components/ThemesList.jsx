@@ -4,16 +4,13 @@ import { SelectorList, SelectorListButton } from "./SelectorList";
 import styles from "./SelectorList.module.css";
 
 export const ThemesList = ({ current, setCurrent, list }) => {
-  return (
-    <SelectorList list={list}>
-      {["auto", "dark", "light", ...Object.keys(themes)].map((themeName) => {
-        if (
-          typeof themeName === "object" &&
-          !themes[themeName]?.colors?.surface1
-        ) {
-          return null;
-        }
+  const data = ["auto", "dark", "light", ...Object.keys(themes)].filter(
+    (e) => e !== "default"
+  );
 
+  return (
+    <SelectorList list={list} name="theme">
+      {data.map((themeName) => {
         return (
           <SelectorListButton
             key={themeName}
@@ -25,7 +22,7 @@ export const ThemesList = ({ current, setCurrent, list }) => {
               <span
                 className={styles.palette}
                 style={{
-                  background: `linear-gradient(-45deg, ${themes[themeName]?.colors?.surface1} 50%, ${themes[themeName]?.syntax?.definition} 50%)`,
+                  background: `linear-gradient(-45deg, ${themes[themeName].colors.surface1} 50%, ${themes[themeName].syntax.definition} 50%)`,
                 }}
               />
             ) : themeName === "auto" ? (
