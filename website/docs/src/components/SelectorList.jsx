@@ -16,7 +16,7 @@ export const SelectorListButton = ({ children, onClick, active }) => {
   );
 };
 
-export const SelectorList = ({ list, children, name }) => {
+export const SelectorList = ({ list, children }) => {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export const SelectorList = ({ list, children, name }) => {
   return (
     <div
       ref={ref}
-      className={`${styles.container} ${list ? styles.scrollList : ""} ${name}`}
+      className={`${styles.container} ${list ? styles.scrollList : ""}`}
     >
       {children}
     </div>

@@ -54,7 +54,7 @@ const Logo = ({ name }) => {
 
 export const TemplatesList = ({ current, setCurrent, list }) => {
   return (
-    <SelectorList name="template" list={list}>
+    <SelectorList list={list}>
       {Object.keys(SANDBOX_TEMPLATES).map((name) => {
         const templateName = name.startsWith("vite-")
           ? `${name.replace("vite-", "")} (Vite)`

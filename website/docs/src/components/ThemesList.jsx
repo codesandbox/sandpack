@@ -18,8 +18,7 @@ export const ThemesList = ({ current, setCurrent, list }) => {
             name={themeName}
             onClick={() => setCurrent(themeName)}
           >
-            {typeof themes[themeName] === "object" &&
-            themes[themeName].colors ? (
+            {typeof themes[themeName] === "object" ? (
               <span
                 className={styles.palette}
                 style={{
