@@ -6,6 +6,7 @@ import {
   useLoadingOverlayState,
   FADE_ANIMATION_DURATION,
 } from "../../hooks/useLoadingOverlayState";
+import { usePreviewProgress } from "../../hooks/usePreviewProgress";
 import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
 import { css, THEME_PREFIX } from "../../styles";
 import {
@@ -13,13 +14,13 @@ import {
   buttonClassName,
   errorBundlerClassName,
   errorMessageClassName,
+  fadeIn,
   iconStandaloneClassName,
   roundedButtonClassName,
 } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 import { StdoutList } from "../Console/StdoutList";
 import { RestartIcon } from "../icons";
-import { PreviewProgress } from "../Preview/PreviewProgress";
 
 import { Loading } from "./Loading";
 
@@ -48,24 +49,30 @@ export const LoadingOverlay = ({
   ...props
 }: LoadingOverlayProps &
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
-  const loadingOverlayState = useLoadingOverlayState(clientId, loading);
   const c = useClasser(THEME_PREFIX);
   const {
     sandpack: { runSandpack, environment },
   } = useSandpack();
   const [shouldShowStdout, setShouldShowStdout] = React.useState(false);
 
+  const loadingOverlayState = useLoadingOverlayState(clientId, loading);
+  const progressMessage = usePreviewProgress();
   const { logs: stdoutData } = useSandpackShellStdout({});
 
   React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setShouldShowStdout(true);
-    }, 3_000);
+    let timer: NodeJS.Timer;
+    if (progressMessage?.includes("Running")) {
+      timer = setTimeout(() => {
+        setShouldShowStdout(true);
+      }, 3_000);
+    }
 
     return () => {
-      clearTimeout(timer);
+      if (timer) {
+        clearTimeout(timer);
+      }
     };
-  }, []);
+  }, [progressMessage]);
 
   if (loadingOverlayState === "HIDDEN") {
     return null;
@@ -157,7 +164,11 @@ export const LoadingOverlay = ({
         <Loading showOpenInCodeSandbox={showOpenInCodeSandbox} />
       </div>
 
-      <PreviewProgress clientId={clientId} />
+      {progressMessage && (
+        <div className={wrapperClassName.toString()}>
+          <p>{progressMessage}</p>
+        </div>
+      )}
     </>
   );
 };
@@ -170,4 +181,22 @@ const stdoutPreview = css({
   overflow: "auto",
   opacity: 0.5,
   overflowX: "hidden",
+});
+
+const wrapperClassName = css({
+  position: "absolute",
+  left: "$space$5",
+  bottom: "$space$4",
+  zIndex: "$top",
+  color: "$colors$clickable",
+  animation: `${fadeIn} 150ms ease`,
+  fontFamily: "$font$mono",
+  fontSize: ".8em",
+  width: "75%",
+  p: {
+    whiteSpace: "nowrap",
+    margin: 0,
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+  },
 });

@@ -4,7 +4,6 @@ import { useSandpack, useSandpackShell } from "../..";
 import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
-import { PreviewProgress } from "../Preview/PreviewProgress";
 import { SandpackStack } from "../common";
 import { RoundedButton } from "../common/RoundedButton";
 import { CleanIcon, RestartIcon } from "../icons";
@@ -106,8 +105,6 @@ export const SandpackConsole = React.forwardRef<
         )}
         {...props}
       >
-        {showSetupProgress && <PreviewProgress />}
-
         {(showHeader || isNodeEnvironment) && (
           <Header
             currentTab={currentTab}
