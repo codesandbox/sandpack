@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.25](https://github.com/codesandbox/sandpack/compare/v2.0.24...v2.0.25) (2023-03-02)
+
+
+### Bug Fixes
+
+* make codesandbox theme private ([a01ff5c](https://github.com/codesandbox/sandpack/commit/a01ff5c9df034790c39aa377ae0d38290f2a7466))
+* throw error on timeout ([#791](https://github.com/codesandbox/sandpack/issues/791)) ([3c201aa](https://github.com/codesandbox/sandpack/commit/3c201aa1edc0bd16ad7045bd8c6303f7fdeba289))
+
+
+
+
+
 ## [2.0.24](https://github.com/codesandbox/sandpack/compare/v2.0.23...v2.0.24) (2023-03-02)
 
 
