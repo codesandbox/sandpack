@@ -63,6 +63,36 @@ const configs = [
       ...(pkg.peerDependencies || {}),
     }),
   },
+
+  {
+    input: "src/index.ts",
+    output: [
+      {
+        file: "dist/index.umd.js",
+        format: "umd",
+        name: "sandpack-client",
+        inlineDynamicImports: true,
+      },
+    ],
+    plugins: [
+      typescript({ tsconfig: "./tsconfig.json" }),
+      string({ include: "**/dist/consoleHook.js" }),
+      nodeResolve(),
+      replace({
+        preventAssignment: true,
+        values: {
+          global: "globalThis",
+          "process.env.CODESANDBOX_ENV": `"${process.env.CODESANDBOX_ENV}"`,
+          "process.env.PACKAGE_VERSION": `"${pkg.version}"`,
+        },
+      }),
+    ],
+    external: Object.keys({
+      ...(pkg.dependencies || {}),
+      ...(pkg.devDependencies || {}),
+      ...(pkg.peerDependencies || {}),
+    }),
+  },
 ];
 
 export default configs;
