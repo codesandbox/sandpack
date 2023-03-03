@@ -12,6 +12,8 @@ import { createStitchesMock } from "./stitches-mock";
 export const THEME_PREFIX = "sp";
 
 const getNodeProcess = (): false | string | undefined => {
+  if (typeof process === "undefined") return false;
+
   return (
     process.env.SANDPACK_BARE_COMPONENTS ||
     process.env.NEXT_PUBLIC_SANDPACK_BARE_COMPONENTS
