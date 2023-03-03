@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.27](https://github.com/codesandbox/sandpack/compare/v2.0.26...v2.0.27) (2023-03-03)
+
+
+### Bug Fixes
+
+* **getNodeProcess:** check if process is available ([#795](https://github.com/codesandbox/sandpack/issues/795)) ([ef272bc](https://github.com/codesandbox/sandpack/commit/ef272bca69abcef4dead63a8997f820364818931))
+
+
+
+
+
 ## [2.0.26](https://github.com/codesandbox/sandpack/compare/v2.0.25...v2.0.26) (2023-03-02)
 
 
