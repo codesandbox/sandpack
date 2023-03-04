@@ -20,7 +20,7 @@
     "prebuild": "yarn run clean",
     "test": "TEST_ENV=true jest . --transformIgnorePatterns \"node_modules/(?!@codemirror)/\" --modulePathIgnorePatterns \"e2e\"",
     "lint": "eslint '**/*.ts?(x)' --fix",
-    "build": "rollup -c && yarn build:types",
+    "build": "rollup -c && SANDPACK_BARE_COMPONENTS=true rollup -c && yarn build:types",
     "build:types": "tsc -p tsconfig.json",
     "build:publish": "yarn build",
     "start": "tsc -p tsconfig.esm.json --watch",
