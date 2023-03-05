@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.28](https://github.com/codesandbox/sandpack/compare/v2.0.27...v2.0.28) (2023-03-05)
+
+
+### Bug Fixes
+
+* Make generateRandomId actually generate a unique id ([#796](https://github.com/codesandbox/sandpack/issues/796)) ([3f76933](https://github.com/codesandbox/sandpack/commit/3f76933891b63aa24ef5729362ac008bbb7d0a0a))
+
+
+
+
+
 ## [2.0.27](https://github.com/codesandbox/sandpack/compare/v2.0.26...v2.0.27) (2023-03-03)
 
 

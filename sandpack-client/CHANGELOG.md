@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.28](https://github.com/codesandbox/sandpack/compare/v2.0.27...v2.0.28) (2023-03-05)
+
+
+### Bug Fixes
+
+* **remove outvariant:** remove it as it doesn't support esm ([#800](https://github.com/codesandbox/sandpack/issues/800)) ([3c1faef](https://github.com/codesandbox/sandpack/commit/3c1faefb5d2989c6ba75357ea743dbeb3cf71e5d))
+
+
+
+
+
 ## [2.0.26](https://github.com/codesandbox/sandpack/compare/v2.0.25...v2.0.26) (2023-03-02)
 
 

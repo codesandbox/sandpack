@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.28](https://github.com/codesandbox/sandpack/compare/v2.0.27...v2.0.28) (2023-03-05)
+
+
+### Bug Fixes
+
+* Make generateRandomId actually generate a unique id ([#796](https://github.com/codesandbox/sandpack/issues/796)) ([3f76933](https://github.com/codesandbox/sandpack/commit/3f76933891b63aa24ef5729362ac008bbb7d0a0a))
+* **remove outvariant:** remove it as it doesn't support esm ([#800](https://github.com/codesandbox/sandpack/issues/800)) ([3c1faef](https://github.com/codesandbox/sandpack/commit/3c1faefb5d2989c6ba75357ea743dbeb3cf71e5d))
+* upgrade node version to csb-client ([ad1d072](https://github.com/codesandbox/sandpack/commit/ad1d0723422ddf043ff10f28835e19c8c16567a2))
+
+
+
+
+
 ## [2.0.27](https://github.com/codesandbox/sandpack/compare/v2.0.26...v2.0.27) (2023-03-03)
 
 
