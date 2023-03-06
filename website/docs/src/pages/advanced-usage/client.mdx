@@ -76,7 +76,7 @@ async function main() {
   const options: ClientOptions = {};
   
   // Properly load and mount the bundler
-  const client = async loadSandpackClient(
+  const client = await loadSandpackClient(
     iframe, 
     content, 
     options
