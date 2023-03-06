@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/codesandbox/sandpack/compare/v2.0.29...v2.1.0) (2023-03-06)
+
+
+### Features
+
+* Improved loading and restarts ([#805](https://github.com/codesandbox/sandpack/issues/805)) ([1e1dffb](https://github.com/codesandbox/sandpack/commit/1e1dffb451f36b56084a87497e0da77ec6f16e29))
+
+
+
+
+
 ## [2.0.29](https://github.com/codesandbox/sandpack/compare/v2.0.28...v2.0.29) (2023-03-05)
 
 
