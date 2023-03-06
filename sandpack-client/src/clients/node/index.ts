@@ -47,6 +47,8 @@ export class SandpackNode extends SandpackClient {
   // Public
   public iframe!: HTMLIFrameElement;
 
+  private _initPromise: Promise<void> | null = null;
+
   constructor(
     selector: string | HTMLIFrameElement,
     sandboxInfo: SandboxSetup,
@@ -63,14 +65,21 @@ export class SandpackNode extends SandpackClient {
     this.manageIframes(selector);
 
     // Init emulator
-    this.createNodebox();
-  }
-
-  private createNodebox() {
     this.emulator = new Nodebox({
       iframe: this.emulatorIframe,
       runtimeUrl: this.options.bundlerURL,
     });
+  }
+
+  // Initialize nodebox, should only ever be called once
+  private async _init(files: FilesMap): Promise<void> {
+    await this.emulator.connect();
+
+    // 2. Setup
+    await this.emulator.fs.init(files);
+
+    // 2.1 Other dependencies
+    await this.globalListeners();
   }
 
   /**
@@ -80,13 +89,12 @@ export class SandpackNode extends SandpackClient {
     try {
       // 1. Init
       this.dispatch({ type: "start", firstLoad: true });
-      await this.emulator.connect();
+      if (!this._initPromise) {
+        this._initPromise = this._init(files);
+      }
+      await this._initPromise;
 
-      // 2. Setup
-      await this.emulator.fs.init(files);
-
-      // 2.1 Other dependencies
-      await this.globalListeners();
+      this.dispatch({ type: "connected" });
 
       // 3. Create, run task and assign preview
       const { id: shellId } = await this.createShellProcessFromTask(files);
@@ -355,10 +363,7 @@ export class SandpackNode extends SandpackClient {
       await this.emulatorShellProcess.kill();
       this.iframe?.removeAttribute("attr");
 
-      // 3. new Nodebox instance
-      this.createNodebox();
-
-      // 3.1 reassign helpers & run command again
+      // 3 Run command again
       await this.compile(Object.fromEntries(this._modulesCache));
     }
   }

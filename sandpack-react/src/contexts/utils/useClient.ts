@@ -311,7 +311,10 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
   const handleMessage = (msg: SandpackMessage): void => {
     if (msg.type === "state") {
       setState((prev) => ({ ...prev, bundlerState: msg.state }));
-    } else if (msg.type === "done" && !msg.compilatonError) {
+    } else if (
+      (msg.type === "done" && !msg.compilatonError) ||
+      msg.type === "connected"
+    ) {
       if (timeoutHook.current) {
         clearTimeout(timeoutHook.current);
       }

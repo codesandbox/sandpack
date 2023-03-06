@@ -13,7 +13,7 @@ export async function loadPreviewIframe(
     "Failed to await preview iframe: no content window found"
   );
 
-  const TIME_OUT = 3_000;
+  const TIME_OUT = 90_000;
   const MAX_MANY_TIRES = 20;
   let tries = 0;
   let timeout: ReturnType<typeof setTimeout>;
