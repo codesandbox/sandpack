@@ -13,8 +13,8 @@ export async function loadPreviewIframe(
     "Failed to await preview iframe: no content window found"
   );
 
-  const TIME_OUT = 2_000;
-  const MAX_MANY_TIRES = 10;
+  const TIME_OUT = 90_000;
+  const MAX_MANY_TIRES = 20;
   let tries = 0;
   let timeout: ReturnType<typeof setTimeout>;
 
@@ -34,8 +34,7 @@ export async function loadPreviewIframe(
         return;
       }
 
-      iframe.contentWindow?.location.replace("about:blank");
-      iframe.contentWindow?.location.replace(url!);
+      iframe.setAttribute("src", url);
 
       timeout = setTimeout(() => {
         triesToSetUrl();

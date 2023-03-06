@@ -102,6 +102,11 @@ export interface SandpackOptions {
   editorHeight?: React.CSSProperties["height"];
   classes?: Record<string, string>;
 
+  /**
+   * right to left layout
+   * @default false
+   */
+  rtl?: boolean;
   showNavigator?: boolean;
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
@@ -113,7 +118,6 @@ export interface SandpackOptions {
   wrapContent?: boolean;
   resizablePanels?: boolean;
   codeEditor?: SandpackCodeOptions;
-
   /**
    * This disables editing of content by the user in all files.
    */
@@ -446,6 +450,11 @@ interface SandpackInternalProps<
     editorWidthPercentage?: number;
     editorHeight?: React.CSSProperties["height"];
 
+    /**
+     * right to left layout
+     * @default false
+     */
+    rtl?: boolean;
     showNavigator?: boolean;
     showLineNumbers?: boolean;
     showInlineErrors?: boolean;
@@ -557,7 +566,6 @@ export interface SandpackState {
   resetFile: (path: string) => void;
   resetAllFiles: () => void;
   registerReactDevTools: (value: ReactDevToolsMode) => void;
-
   /**
    * Element refs
    * Different components inside the SandpackProvider might register certain elements of interest for sandpack

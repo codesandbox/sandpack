@@ -1,27 +1,7 @@
 import type { WorkerStatusUpdate } from "@codesandbox/nodebox";
 import * as React from "react";
 
-import { useSandpack } from "../..";
-import { css } from "../../styles";
-import { fadeIn } from "../../styles/shared";
-
-const wrapperClassName = css({
-  position: "absolute",
-  left: "$space$5",
-  bottom: "$space$4",
-  zIndex: "$top",
-  color: "$colors$clickable",
-  animation: `${fadeIn} 150ms ease`,
-  fontFamily: "$font$mono",
-  fontSize: ".8em",
-  width: "75%",
-  p: {
-    whiteSpace: "nowrap",
-    margin: 0,
-    textOverflow: "ellipsis",
-    overflow: "hidden",
-  },
-});
+import { useSandpack } from "..";
 
 const mapProgressMessage = (
   originalMessage: WorkerStatusUpdate & { command?: string },
@@ -44,18 +24,13 @@ const mapProgressMessage = (
   }
 };
 
-const TIMER = 5_000;
-
-export const PreviewProgress: React.FC<{
-  clientId?: string;
-  dismissOnTimeout?: boolean;
-  timeout?: number;
-}> = ({ clientId, dismissOnTimeout = false, timeout = TIMER }) => {
+export const usePreviewProgress = () => {
   const [isReady, setIsReady] = React.useState(false);
   const [totalDependencies, setTotalDependencies] = React.useState<number>();
   const [loadingMessage, setLoadingMessage] = React.useState<null | string>(
     null
   );
+
   const { listen } = useSandpack();
 
   React.useEffect(() => {
@@ -75,11 +50,6 @@ export const PreviewProgress: React.FC<{
             mapProgressMessage(message.data, totalDependencies)
           );
         }
-        clearTimeout(timer);
-
-        timer = setTimeout(() => {
-          setLoadingMessage(dismissOnTimeout ? null : "Still loading...");
-        }, timeout);
       }
 
       if (message.type === "done" && message.compilatonError === false) {
@@ -87,7 +57,7 @@ export const PreviewProgress: React.FC<{
         setIsReady(true);
         clearTimeout(timer);
       }
-    }, clientId);
+    });
 
     return (): void => {
       if (timer) {
@@ -95,13 +65,7 @@ export const PreviewProgress: React.FC<{
       }
       unsubscribe();
     };
-  }, [clientId, isReady, totalDependencies]);
+  }, [isReady, totalDependencies]);
 
-  if (!loadingMessage) return null;
-
-  return (
-    <div className={wrapperClassName.toString()}>
-      <p>{loadingMessage}</p>
-    </div>
-  );
+  return loadingMessage;
 };

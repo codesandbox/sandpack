@@ -66,6 +66,7 @@ export type SandpackNodeMessage = BaseSandpackMessage &
     | SandpackURLsMessages
     | SandpackBundlerMessages
     | SandpackShellMessages
+    | { type: "connected" }
     | {
         type: "stdout";
         payload: SandpackShellStdoutData;

@@ -1,11 +1,14 @@
 /* eslint-disable no-console,@typescript-eslint/no-explicit-any,prefer-rest-params,@typescript-eslint/explicit-module-boundary-types */
 
+import { Buffer } from "buffer";
+
 import { PREVIEW_LOADED_MESSAGE_TYPE, Nodebox } from "@codesandbox/nodebox";
 import type {
   FilesMap,
   ShellProcess,
   FSWatchEvent,
 } from "@codesandbox/nodebox";
+import type { ShellCommandOptions } from "@codesandbox/nodebox/build/modules/shell";
 
 import type {
   ClientOptions,
@@ -37,12 +40,14 @@ export class SandpackNode extends SandpackClient {
   private emulatorIframe!: HTMLIFrameElement;
   private emulator!: Nodebox;
   private emulatorShellProcess: ShellProcess | undefined;
-  private emulatorCommand: [string, string[]] | undefined;
+  private emulatorCommand: [string, string[], ShellCommandOptions] | undefined;
   private iframePreviewUrl: string | undefined;
   private _modulesCache = new Map();
 
   // Public
   public iframe!: HTMLIFrameElement;
+
+  private _initPromise: Promise<void> | null = null;
 
   constructor(
     selector: string | HTMLIFrameElement,
@@ -60,14 +65,21 @@ export class SandpackNode extends SandpackClient {
     this.manageIframes(selector);
 
     // Init emulator
-    this.createNodebox();
-  }
-
-  private createNodebox() {
     this.emulator = new Nodebox({
       iframe: this.emulatorIframe,
       runtimeUrl: this.options.bundlerURL,
     });
+  }
+
+  // Initialize nodebox, should only ever be called once
+  private async _init(files: FilesMap): Promise<void> {
+    await this.emulator.connect();
+
+    // 2. Setup
+    await this.emulator.fs.init(files);
+
+    // 2.1 Other dependencies
+    await this.globalListeners();
   }
 
   /**
@@ -77,13 +89,12 @@ export class SandpackNode extends SandpackClient {
     try {
       // 1. Init
       this.dispatch({ type: "start", firstLoad: true });
-      await this.emulator.connect();
+      if (!this._initPromise) {
+        this._initPromise = this._init(files);
+      }
+      await this._initPromise;
 
-      // 2. Setup
-      await this.emulator.fs.init(files);
-
-      // 2.1 Other dependencies
-      await this.globalListeners();
+      this.dispatch({ type: "connected" });
 
       // 3. Create, run task and assign preview
       const { id: shellId } = await this.createShellProcessFromTask(files);
@@ -136,9 +147,10 @@ export class SandpackNode extends SandpackClient {
           type: "shell/progress",
           data: {
             ...data,
-            command: this.emulatorCommand
-              ?.map((e) => (Array.isArray(e) ? e.join(" ") : e))
-              .join(" "),
+            command: [
+              this.emulatorCommand?.[0],
+              this.emulatorCommand?.[1].join(" "),
+            ].join(" "),
           },
         });
 
@@ -160,15 +172,11 @@ export class SandpackNode extends SandpackClient {
   }
 
   private async createPreviewURLFromId(id: string): Promise<void> {
-    try {
-      this.iframePreviewUrl = undefined;
+    this.iframePreviewUrl = undefined;
 
-      const { url } = await this.emulator.preview.getByShellId(id);
+    const { url } = await this.emulator.preview.getByShellId(id);
 
-      this.iframePreviewUrl = url;
-    } catch {
-      // no-op
-    }
+    this.iframePreviewUrl = url;
   }
 
   /**
@@ -267,6 +275,15 @@ export class SandpackNode extends SandpackClient {
 
         const event = message as FSWatchEvent;
 
+        const path =
+          "newPath" in event
+            ? event.newPath
+            : "path" in event
+            ? event.path
+            : "";
+        const { type } = await this.emulator.fs.stat(path);
+        if (type !== "file") return null;
+
         try {
           switch (event.type) {
             case "change":
@@ -344,12 +361,9 @@ export class SandpackNode extends SandpackClient {
 
       // 2. Exit shell
       await this.emulatorShellProcess.kill();
-      this.iframe?.contentWindow?.location.replace("about:blank");
+      this.iframe?.removeAttribute("attr");
 
-      // 3. new Nodebox instance
-      this.createNodebox();
-
-      // 3.1 reassign helpers & run command again
+      // 3 Run command again
       await this.compile(Object.fromEntries(this._modulesCache));
     }
   }
@@ -362,8 +376,11 @@ export class SandpackNode extends SandpackClient {
      */
     if (this.emulatorShellProcess?.state === "running") {
       Object.entries(modules).forEach(([key, value]) => {
-        if (Buffer.compare(value, this._modulesCache.get(key)) !== 0) {
-          this.emulator.fs.writeFile(key, value);
+        if (
+          !this._modulesCache.get(key) ||
+          Buffer.compare(value, this._modulesCache.get(key)) !== 0
+        ) {
+          this.emulator.fs.writeFile(key, value, { recursive: true });
         }
       });
 
@@ -419,6 +436,7 @@ export class SandpackNode extends SandpackClient {
   }
 
   public destroy(): void {
+    this.emulatorIframe.remove();
     this.emitter.cleanup();
   }
 }

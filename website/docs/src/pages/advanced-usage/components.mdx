@@ -168,7 +168,7 @@ const SandpackPreviewClient: React.FC = () => {
     }
   /**
    * NOTE: In order to make sure that the client will be available
-   * use the whole `sandpack` object as a dependencie.
+   * use the whole `sandpack` object as a dependency.
    */
   }, [sandpack]);
 
@@ -397,6 +397,7 @@ export default () => (
 | :---------------- | :--------------------------------------- | :--- | :------ |
 | `autoHiddenFiles` | Enable auto hidden file in file explorer |
 | `boolean`         | `false`                                  |
+| `initialCollapsedFolder`         | Initial state of folder (collapsed or not) | `string[]` e.g. `["/components/src/"]` | `undefined` |
 
 </details>
 
@@ -497,6 +498,36 @@ export default () => (
     <SandpackLayout>
       <SandpackCodeEditor />
       <SandpackTests />
+    </SandpackLayout>
+  </SandpackProvider>
+);
+`}
+</CodeBlock>
+
+### Hiding Tests
+
+You can hide the test files using the `visibleFiles` prop. Additionally, if you want to suppress test content and only show the test results, you can use the `hideTestsAndSuppressLogs` option.
+This option will hide the test files, suppress the console logs, and disable the verbose button.
+
+<CodeBlock stack>
+  {`
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  SandpackTests,
+} from "@codesandbox/sandpack-react";
+
+export default () => (
+  <SandpackProvider
+    template="test-ts"
+    options={{
+      visibleFiles: ["/add.ts"],
+    }}
+  >
+    <SandpackLayout>
+      <SandpackCodeEditor />
+      <SandpackTests hideTestsAndSupressLogs />
     </SandpackLayout>
   </SandpackProvider>
 );

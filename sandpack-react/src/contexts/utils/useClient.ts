@@ -23,7 +23,7 @@ import { generateRandomId } from "../../utils/stringUtils";
 import type { FilesState } from "./useFiles";
 type SandpackClientType = InstanceType<typeof SandpackClient>;
 
-const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
+const BUNDLER_TIMEOUT = 40_000;
 
 interface SandpackConfigState {
   reactDevTools?: ReactDevToolsMode;
@@ -66,17 +66,23 @@ type UseClient = (
   filesState: FilesState
 ) => [SandpackConfigState, UseClientOperations];
 
-export const useClient: UseClient = (props, filesState) => {
-  const initModeFromProps = props.options?.initMode || "lazy";
+export const useClient: UseClient = (
+  { options, customSetup, teamId },
+  filesState
+) => {
+  options ??= {};
+  customSetup ??= {};
+
+  const initModeFromProps = options?.initMode || "lazy";
 
   const [state, setState] = useState<SandpackConfigState>({
-    startRoute: props.options?.startRoute,
+    startRoute: options?.startRoute,
     bundlerState: undefined,
     error: null,
     initMode: initModeFromProps,
     reactDevTools: undefined,
-    status: props.options?.autorun ?? true ? "initial" : "idle",
-    authenticated: !!props.teamId,
+    authenticated: !!teamId,
+    status: options?.autorun ?? true ? "initial" : "idle",
   });
 
   /**
@@ -84,7 +90,6 @@ export const useClient: UseClient = (props, filesState) => {
    */
   const intersectionObserver = useRef<IntersectionObserver | null>(null);
   const lazyAnchorRef = useRef<HTMLDivElement>(null);
-  const initializeSandpackIframeHook = useRef<NodeJS.Timer | null>(null);
   const preregisteredIframes = useRef<Record<string, HTMLIFrameElement>>({});
   const clients = useRef<Record<string, SandpackClientType>>({});
   const timeoutHook = useRef<NodeJS.Timer | null>(null);
@@ -108,13 +113,17 @@ export const useClient: UseClient = (props, filesState) => {
       iframe: HTMLIFrameElement,
       clientId: string
     ): Promise<SandpackClientType> => {
-      const timeOut = props.options?.bundlerTimeOut ?? BUNDLER_TIMEOUT;
+      options ??= {};
+      customSetup ??= {};
+
+      const timeOut = options?.bundlerTimeOut ?? BUNDLER_TIMEOUT;
 
       if (timeoutHook.current) {
         clearTimeout(timeoutHook.current);
       }
 
       timeoutHook.current = setTimeout(() => {
+        unregisterAllClients();
         setState((prev) => ({ ...prev, status: "timeout" }));
       }, timeOut);
 
@@ -125,18 +134,18 @@ export const useClient: UseClient = (props, filesState) => {
           template: filesState.environment,
         },
         {
-          externalResources: props.options?.externalResources,
-          bundlerURL: props.options?.bundlerURL,
-          startRoute: props.options?.startRoute,
-          fileResolver: props.options?.fileResolver,
-          skipEval: props.options?.skipEval ?? false,
-          logLevel: props.options?.logLevel,
+          externalResources: options.externalResources,
+          bundlerURL: options.bundlerURL,
+          startRoute: options.startRoute,
+          fileResolver: options.fileResolver,
+          skipEval: options.skipEval ?? false,
+          logLevel: options.logLevel,
           showOpenInCodeSandbox: false,
           showErrorScreen: errorScreenRegisteredRef.current,
           showLoadingScreen: loadingScreenRegisteredRef.current,
           reactDevTools: state.reactDevTools,
-          customNpmRegistries: props.customSetup?.npmRegistries,
-          teamId: props.teamId,
+          customNpmRegistries: customSetup?.npmRegistries,
+          teamId: teamId,
         }
       );
 
@@ -184,18 +193,7 @@ export const useClient: UseClient = (props, filesState) => {
 
       return client;
     },
-    [
-      filesState.environment,
-      filesState.files,
-      props.customSetup?.npmRegistries,
-      props.options?.bundlerURL,
-      props.options?.externalResources,
-      props.options?.fileResolver,
-      props.options?.logLevel,
-      props.options?.skipEval,
-      props.options?.startRoute,
-      state.reactDevTools,
-    ]
+    [filesState.environment, filesState.files, state.reactDevTools]
   );
 
   const unregisterAllClients = useCallback((): void => {
@@ -215,17 +213,17 @@ export const useClient: UseClient = (props, filesState) => {
       })
     );
 
-    setState((prev) => ({ ...prev, status: "running" }));
+    setState((prev) => ({ ...prev, error: null, status: "running" }));
   }, [createClient]);
 
   const initializeSandpackIframe = useCallback((): void => {
-    const autorun = props.options?.autorun ?? true;
+    const autorun = options?.autorun ?? true;
 
     if (!autorun) {
       return;
     }
 
-    const observerOptions = props.options?.initModeObserverOptions ?? {
+    const observerOptions = options?.initModeObserverOptions ?? {
       rootMargin: `1000px 0px`,
     };
 
@@ -237,10 +235,7 @@ export const useClient: UseClient = (props, filesState) => {
       // If any component registerd a lazy anchor ref component, use that for the intersection observer
       intersectionObserver.current = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
-          initializeSandpackIframeHook.current = setTimeout(() => {
-            runSandpack();
-          }, 50);
+          runSandpack();
 
           if (lazyAnchorRef.current) {
             intersectionObserver.current?.unobserve(lazyAnchorRef.current);
@@ -252,15 +247,8 @@ export const useClient: UseClient = (props, filesState) => {
     } else if (lazyAnchorRef.current && state.initMode === "user-visible") {
       intersectionObserver.current = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
-          initializeSandpackIframeHook.current = setTimeout(() => {
-            runSandpack();
-          }, 50);
+          runSandpack();
         } else {
-          if (initializeSandpackIframeHook.current) {
-            clearTimeout(initializeSandpackIframeHook.current);
-          }
-
           Object.keys(clients.current).map(unregisterBundler);
           unregisterAllClients();
         }
@@ -268,30 +256,26 @@ export const useClient: UseClient = (props, filesState) => {
 
       intersectionObserver.current.observe(lazyAnchorRef.current);
     } else {
-      // else run the sandpack on mount, with a slight delay to allow all subcomponents to mount/register components
-      initializeSandpackIframeHook.current = setTimeout(
-        () => runSandpack(),
-        50
-      );
+      runSandpack();
     }
   }, [
-    props.options?.autorun,
-    props.options?.initModeObserverOptions,
+    options?.autorun,
+    options?.initModeObserverOptions,
     runSandpack,
     state.initMode,
     unregisterAllClients,
   ]);
 
-  const registerBundler = async (
-    iframe: HTMLIFrameElement,
-    clientId: string
-  ): Promise<void> => {
-    if (state.status === "running") {
-      clients.current[clientId] = await createClient(iframe, clientId);
-    } else {
-      preregisteredIframes.current[clientId] = iframe;
-    }
-  };
+  const registerBundler = useCallback(
+    async (iframe: HTMLIFrameElement, clientId: string): Promise<void> => {
+      if (state.status === "running") {
+        clients.current[clientId] = await createClient(iframe, clientId);
+      } else {
+        preregisteredIframes.current[clientId] = iframe;
+      }
+    },
+    [createClient, state.status]
+  );
 
   const unregisterBundler = (clientId: string): void => {
     const client = clients.current[clientId];
@@ -325,14 +309,16 @@ export const useClient: UseClient = (props, filesState) => {
   };
 
   const handleMessage = (msg: SandpackMessage): void => {
-    if (timeoutHook.current) {
-      clearTimeout(timeoutHook.current);
-    }
-    if (msg.type === "start" && msg.firstLoad) {
-      setState((prev) => ({ ...prev, error: null, status: "running" }));
-    } else if (msg.type === "state") {
+    if (msg.type === "state") {
       setState((prev) => ({ ...prev, bundlerState: msg.state }));
-    } else if (msg.type === "done" && !msg.compilatonError) {
+    } else if (
+      (msg.type === "done" && !msg.compilatonError) ||
+      msg.type === "connected"
+    ) {
+      if (timeoutHook.current) {
+        clearTimeout(timeoutHook.current);
+      }
+
       setState((prev) => ({ ...prev, error: null }));
     } else if (msg.type === "action" && msg.action === "show-error") {
       setState((prev) => ({ ...prev, error: extractErrorDetails(msg) }));
@@ -352,56 +338,8 @@ export const useClient: UseClient = (props, filesState) => {
     setState((prev) => ({ ...prev, reactDevTools: value }));
   };
 
-  const recompileMode = props.options?.recompileMode ?? "delayed";
-  const recompileDelay = props.options?.recompileDelay ?? 500;
-  const updateClients = useCallback((): void => {
-    if (state.status !== "running" || !filesState.shouldUpdatePreview) {
-      return;
-    }
-
-    /**
-     * When the environment changes, Sandpack needs to make sure
-     * to create a new client and the proper bundler
-     */
-    if (prevEnvironment.current !== filesState.environment) {
-      prevEnvironment.current = filesState.environment;
-
-      Object.entries(clients.current).forEach(([key, client]) => {
-        registerBundler(client.iframe, key);
-      });
-    }
-
-    if (recompileMode === "immediate") {
-      Object.values(clients.current).forEach((client) => {
-        client.updateSandbox({
-          files: filesState.files,
-          template: filesState.environment,
-        });
-      });
-    }
-
-    if (recompileMode === "delayed") {
-      if (typeof window === "undefined") return;
-
-      window.clearTimeout(debounceHook.current);
-      debounceHook.current = window.setTimeout(() => {
-        Object.values(clients.current).forEach((client) => {
-          client.updateSandbox({
-            files: filesState.files,
-            template: filesState.environment,
-          });
-        });
-      }, recompileDelay);
-    }
-  }, [
-    filesState.shouldUpdatePreview,
-    filesState.files,
-    filesState.environment,
-    recompileMode,
-    recompileDelay,
-    state.status,
-    createClient,
-  ]);
+  const recompileMode = options?.recompileMode ?? "delayed";
+  const recompileDelay = options?.recompileDelay ?? 500;
 
   const dispatchMessage = (
     message: SandpackMessage,
@@ -497,11 +435,57 @@ export const useClient: UseClient = (props, filesState) => {
   /**
    * Effects
    */
+
   useEffect(
     function watchFileChanges() {
-      updateClients();
+      if (state.status !== "running" || !filesState.shouldUpdatePreview) {
+        return;
+      }
+
+      /**
+       * When the environment changes, Sandpack needs to make sure
+       * to create a new client and the proper bundler
+       */
+      if (prevEnvironment.current !== filesState.environment) {
+        prevEnvironment.current = filesState.environment;
+
+        Object.entries(clients.current).forEach(([key, client]) => {
+          registerBundler(client.iframe, key);
+        });
+      }
+
+      if (recompileMode === "immediate") {
+        Object.values(clients.current).forEach((client) => {
+          client.updateSandbox({
+            files: filesState.files,
+            template: filesState.environment,
+          });
+        });
+      }
+
+      if (recompileMode === "delayed") {
+        if (typeof window === "undefined") return;
+
+        window.clearTimeout(debounceHook.current);
+        debounceHook.current = window.setTimeout(() => {
+          Object.values(clients.current).forEach((client) => {
+            client.updateSandbox({
+              files: filesState.files,
+              template: filesState.environment,
+            });
+          });
+        }, recompileDelay);
+      }
     },
-    [filesState.files, filesState.environment, updateClients]
+    [
+      filesState.files,
+      filesState.environment,
+      filesState.shouldUpdatePreview,
+      recompileDelay,
+      recompileMode,
+      registerBundler,
+      state.status,
+    ]
   );
 
   useEffect(
@@ -527,10 +511,6 @@ export const useClient: UseClient = (props, filesState) => {
 
       if (debounceHook.current) {
         clearTimeout(debounceHook.current);
-      }
-
-      if (initializeSandpackIframeHook.current) {
-        clearTimeout(initializeSandpackIframeHook.current);
       }
 
       if (intersectionObserver.current) {

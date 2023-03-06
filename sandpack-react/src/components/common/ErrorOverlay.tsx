@@ -1,11 +1,9 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
-import { useSandpack } from "../../hooks";
 
-import { SignInIcon } from "../icons";
-import { useSandpackShell } from "../..";
+import { useSandpack, useSandpackShell } from "../..";
 import { useErrorMessage } from "../../hooks/useErrorMessage";
-import { css, THEME_PREFIX } from "../../styles";
+import { THEME_PREFIX } from "../../styles";
 import {
   absoluteClassName,
   buttonClassName,
@@ -16,6 +14,7 @@ import {
   roundedButtonClassName,
 } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
+import { SignInIcon } from "../icons";
 import { RestartIcon } from "../icons";
 
 const mapBundlerErrors = (originalMessage: string): string => {
@@ -46,6 +45,9 @@ export const ErrorOverlay: React.FC<
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const errorMessage = useErrorMessage();
   const { restart } = useSandpackShell();
+  const {
+    sandpack: { runSandpack },
+  } = useSandpack();
   const c = useClasser(THEME_PREFIX);
   const { dispatch } = useSandpack();
 
@@ -132,7 +134,10 @@ export const ErrorOverlay: React.FC<
                 iconStandaloneClassName,
                 roundedButtonClassName
               )}
-              onClick={restart}
+              onClick={() => {
+                restart();
+                runSandpack();
+              }}
               title="Restart script"
               type="button"
             >

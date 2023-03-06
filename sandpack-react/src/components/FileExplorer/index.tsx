@@ -1,3 +1,4 @@
+import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
@@ -21,11 +22,14 @@ export interface SandpackFileExplorerProp {
    * @default false
    */
   autoHiddenFiles?: boolean;
+
+  initialCollapsedFolder?: string[];
 }
 
 export const SandpackFileExplorer = ({
   className,
   autoHiddenFiles = false,
+  initialCollapsedFolder = [],
   ...props
 }: SandpackFileExplorerProp &
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
@@ -61,24 +65,33 @@ export const SandpackFileExplorer = ({
     [status]
   );
 
+  const orderedFiles = Object.keys(files)
+    .sort()
+    .reduce<SandpackBundlerFiles>((obj, key) => {
+      obj[key] = files[key];
+      return obj;
+    }, {});
+
   return (
     <div
       className={classNames(
         stackClassName,
-        fileExplorerClassName,
         `${THEME_PREFIX}-file-explorer`,
         className
       )}
       {...props}
     >
-      <ModuleList
-        activeFile={activeFile}
-        autoHiddenFiles={autoHiddenFiles}
-        files={files}
-        prefixedPath="/"
-        selectFile={openFile}
-        visibleFiles={visibleFilesFromProps}
-      />
+      <div className={classNames(fileExplorerClassName)}>
+        <ModuleList
+          activeFile={activeFile}
+          autoHiddenFiles={autoHiddenFiles}
+          files={orderedFiles}
+          initialCollapsedFolder={initialCollapsedFolder}
+          prefixedPath="/"
+          selectFile={openFile}
+          visibleFiles={visibleFilesFromProps}
+        />
+      </div>
     </div>
   );
 };

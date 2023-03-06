@@ -1,39 +1,68 @@
-const commonjs = require("@rollup/plugin-commonjs");
-const typescript = require("@rollup/plugin-typescript");
-const replace = require("rollup-plugin-replace");
+import commonjs from "@rollup/plugin-commonjs";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import replace from "@rollup/plugin-replace";
+import terser from "@rollup/plugin-terser";
+import typescript from "@rollup/plugin-typescript";
+import { string } from "rollup-plugin-string";
 
-const pkg = require("./package.json");
+import pkg from "./package.json";
 
-const configBase = {
-  input: "src/index.ts",
-  output: [
-    {
-      file: pkg.main,
-      exports: "named",
-      format: "cjs",
-      inlineDynamicImports: true,
-      interop: "auto",
-    },
-    {
-      file: pkg.module,
-      exports: "named",
+const configs = [
+  {
+    input: "src/clients/node/inject-scripts/consoleHook.ts",
+    output: {
+      file: "src/clients/node/inject-scripts/dist/consoleHook.js",
       format: "es",
-      inlineDynamicImports: true,
     },
-  ],
+    plugins: [
+      typescript({
+        tsconfig: "./tsconfig.json",
+        compilerOptions: { declaration: false },
+      }),
+      commonjs(),
+      nodeResolve(),
+      terser({ compress: { passes: 2 } }),
+    ],
+    external: [],
+  },
 
-  plugins: [
-    typescript({ tsconfig: "./tsconfig.json" }),
-    replace({
-      "process.env.CODESANDBOX_ENV": `"${process.env.CODESANDBOX_ENV}"`,
-      "process.env.PACKAGE_VERSION": `"${pkg.version}"`,
+  {
+    input: {
+      index: "src/index.ts",
+      "clients/node/index": "src/clients/node/index.ts",
+      "clients/runtime/index": "src/clients/runtime/index.ts",
+    },
+    output: [
+      {
+        dir: "dist",
+        format: "cjs",
+      },
+      {
+        dir: "dist",
+        chunkFileNames: "[name]-[hash].mjs",
+        entryFileNames: "[name].mjs",
+        format: "es",
+      },
+    ],
+
+    plugins: [
+      typescript({ tsconfig: "./tsconfig.json" }),
+      string({ include: "**/dist/consoleHook.js" }),
+      replace({
+        preventAssignment: true,
+        values: {
+          global: "globalThis",
+          "process.env.CODESANDBOX_ENV": `"${process.env.CODESANDBOX_ENV}"`,
+          "process.env.PACKAGE_VERSION": `"${pkg.version}"`,
+        },
+      }),
+    ],
+    external: Object.keys({
+      ...(pkg.dependencies || {}),
+      ...(pkg.devDependencies || {}),
+      ...(pkg.peerDependencies || {}),
     }),
-    commonjs({ requireReturnsDefault: "preferred" }),
-  ],
-  external: [
-    ...Object.keys(pkg.dependencies),
-    ...Object.keys(pkg.devDependencies),
-  ],
-};
+  },
+];
 
-module.exports = configBase;
+export default configs;

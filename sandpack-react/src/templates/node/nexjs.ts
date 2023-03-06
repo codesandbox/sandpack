@@ -36,16 +36,13 @@ const nextConfig = {
 module.exports = nextConfig
 `,
     },
-    ".env.development": {
-      code: "NEXT_TELEMETRY_DISABLED=1",
-    },
     "/package.json": {
       code: JSON.stringify({
         name: "my-app",
         version: "0.1.0",
         private: true,
         scripts: {
-          dev: "next dev",
+          dev: "NEXT_TELEMETRY_DISABLED=1 next dev",
           build: "next build",
           start: "next start",
           lint: "next lint",

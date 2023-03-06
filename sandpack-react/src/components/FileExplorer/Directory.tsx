@@ -25,8 +25,11 @@ export const Directory: React.FC<Props> = ({
   depth,
   autoHiddenFiles,
   visibleFiles,
+  initialCollapsedFolder,
 }) => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(
+    !initialCollapsedFolder?.includes(prefixedPath)
+  );
 
   const toggle = (): void => setOpen((prev) => !prev);
 
@@ -45,6 +48,7 @@ export const Directory: React.FC<Props> = ({
           autoHiddenFiles={autoHiddenFiles}
           depth={depth + 1}
           files={files}
+          initialCollapsedFolder={initialCollapsedFolder}
           prefixedPath={prefixedPath}
           selectFile={selectFile}
           visibleFiles={visibleFiles}

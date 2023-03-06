@@ -1,7 +1,6 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import { normalizePath } from "@codesandbox/sandpack-client";
-import isEqual from "lodash.isequal";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import type {
   SandboxEnvironment,
@@ -54,19 +53,12 @@ export type UseFiles = (props: SandpackProviderProps) => [
 
 export const useFiles: UseFiles = (props) => {
   const originalStateFromProps = getSandpackStateFromProps(props);
-  const prevOriginalStateFromProps = useRef(originalStateFromProps);
 
   const [state, setState] = useState<FilesState>(originalStateFromProps);
 
-  const filesHaveChanged = !isEqual(
-    prevOriginalStateFromProps.current,
-    originalStateFromProps
-  );
-  if (filesHaveChanged) {
-    setState(originalStateFromProps);
-
-    prevOriginalStateFromProps.current = originalStateFromProps;
-  }
+  useEffect(() => {
+    setState(getSandpackStateFromProps(props));
+  }, [props.files, props.customSetup, props.template]);
 
   const updateFile = (
     pathOrFiles: string | SandpackFiles,

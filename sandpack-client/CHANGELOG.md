@@ -3,6 +3,160 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/codesandbox/sandpack/compare/v2.0.29...v2.1.0) (2023-03-06)
+
+
+### Features
+
+* Improved loading and restarts ([#805](https://github.com/codesandbox/sandpack/issues/805)) ([1e1dffb](https://github.com/codesandbox/sandpack/commit/1e1dffb451f36b56084a87497e0da77ec6f16e29))
+
+
+
+
+
+## [2.0.29](https://github.com/codesandbox/sandpack/compare/v2.0.28...v2.0.29) (2023-03-05)
+
+
+### Reverts
+
+* **remove outvariant:** remove it as it doesn't support esm ([#801](https://github.com/codesandbox/sandpack/issues/801)) ([dd47b0d](https://github.com/codesandbox/sandpack/commit/dd47b0d1e7811ab72d7ea48ee5c5256a79a69731))
+
+
+
+
+
+## [2.0.28](https://github.com/codesandbox/sandpack/compare/v2.0.27...v2.0.28) (2023-03-05)
+
+
+### Bug Fixes
+
+* **remove outvariant:** remove it as it doesn't support esm ([#800](https://github.com/codesandbox/sandpack/issues/800)) ([3c1faef](https://github.com/codesandbox/sandpack/commit/3c1faefb5d2989c6ba75357ea743dbeb3cf71e5d))
+
+
+
+
+
+## [2.0.26](https://github.com/codesandbox/sandpack/compare/v2.0.25...v2.0.26) (2023-03-02)
+
+
+### Bug Fixes
+
+* **preview:** add stdout for long process ([#792](https://github.com/codesandbox/sandpack/issues/792)) ([4da4d99](https://github.com/codesandbox/sandpack/commit/4da4d997b54beb408d3ec2f15d027090d05879c7))
+
+
+
+
+
+## [2.0.25](https://github.com/codesandbox/sandpack/compare/v2.0.24...v2.0.25) (2023-03-02)
+
+
+### Bug Fixes
+
+* throw error on timeout ([#791](https://github.com/codesandbox/sandpack/issues/791)) ([3c201aa](https://github.com/codesandbox/sandpack/commit/3c201aa1edc0bd16ad7045bd8c6303f7fdeba289))
+
+
+
+
+
+## [2.0.24](https://github.com/codesandbox/sandpack/compare/v2.0.23...v2.0.24) (2023-03-02)
+
+
+### Bug Fixes
+
+* increase preview timeout ([#789](https://github.com/codesandbox/sandpack/issues/789)) ([27fe67b](https://github.com/codesandbox/sandpack/commit/27fe67b986b81eee31f62c134fb08e47e002f7ee))
+
+
+
+
+
+## [2.0.23](https://github.com/codesandbox/sandpack/compare/v2.0.22...v2.0.23) (2023-03-01)
+
+
+### Bug Fixes
+
+* **nodebox:** writeFile recursively ([#783](https://github.com/codesandbox/sandpack/issues/783)) ([9e61ef0](https://github.com/codesandbox/sandpack/commit/9e61ef0518677f2742d9b372a773af133ca4a2e5))
+
+
+
+
+
+## [2.0.21](https://github.com/codesandbox/sandpack/compare/v2.0.20...v2.0.21) (2023-02-28)
+
+
+### Bug Fixes
+
+* **nodebox:** consider new files from Sandpack ([#778](https://github.com/codesandbox/sandpack/issues/778)) ([877222e](https://github.com/codesandbox/sandpack/commit/877222ef649ed741534709c834053eeefce70948))
+
+
+
+
+
+## [2.0.20](https://github.com/codesandbox/sandpack/compare/v2.0.19...v2.0.20) (2023-02-28)
+
+
+### Bug Fixes
+
+* **sandpack-client:** setup build with rollup ([#758](https://github.com/codesandbox/sandpack/issues/758)) ([f645119](https://github.com/codesandbox/sandpack/commit/f6451194a718a0679ce5fcb4d64d1f0d58f6c146))
+
+
+
+
+
+## [2.0.17](https://github.com/codesandbox/sandpack/compare/v2.0.16...v2.0.17) (2023-02-24)
+
+
+### Bug Fixes
+
+* **use-files:** make files reference more stable ([#760](https://github.com/codesandbox/sandpack/issues/760)) ([32ab419](https://github.com/codesandbox/sandpack/commit/32ab419bdd082353408ca2cfb7e2dba6d52caf08))
+
+
+
+
+
+## [2.0.15](https://github.com/codesandbox/sandpack/compare/v2.0.14...v2.0.15) (2023-02-22)
+
+
+### Bug Fixes
+
+* Send serialized console output to parent ([#757](https://github.com/codesandbox/sandpack/issues/757)) ([5865fc5](https://github.com/codesandbox/sandpack/commit/5865fc51ae18a877194bd6832df12d0de86b38e0))
+
+
+
+
+
+## [2.0.13](https://github.com/codesandbox/sandpack/compare/v2.0.12...v2.0.13) (2023-02-22)
+
+
+### Bug Fixes
+
+* **nodebox:** support env vars on commands ([#755](https://github.com/codesandbox/sandpack/issues/755)) ([af8d5c1](https://github.com/codesandbox/sandpack/commit/af8d5c1cfa0d9ef525565ec62c77459d745dfbf2))
+
+
+
+
+
+## [2.0.11](https://github.com/codesandbox/sandpack/compare/v2.0.10...v2.0.11) (2023-02-22)
+
+
+### Bug Fixes
+
+* **sandpack-client:** move console-feed to dev deps ([#747](https://github.com/codesandbox/sandpack/issues/747)) ([bdd1bb7](https://github.com/codesandbox/sandpack/commit/bdd1bb7925f2511aaea594593e3f7f3b7b9c3613))
+
+
+
+
+
+## [2.0.10](https://github.com/codesandbox/sandpack/compare/v2.0.9...v2.0.10) (2023-02-21)
+
+
+### Bug Fixes
+
+* **client:** enable code-splitting and dynamic imports in esbuild ([#741](https://github.com/codesandbox/sandpack/issues/741)) ([0bc9d80](https://github.com/codesandbox/sandpack/commit/0bc9d80f05d2c1bd35f2b74e1a4de96d9ddd4839))
+
+
+
+
+
 ## [2.0.8](https://github.com/codesandbox/sandpack/compare/v2.0.7...v2.0.8) (2023-02-20)
 
 
