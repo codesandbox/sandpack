@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/codesandbox/sandpack/compare/v2.1.0...v2.1.1) (2023-03-06)
+
+
+### Bug Fixes
+
+* **template vite:** clean cache on start script ([#806](https://github.com/codesandbox/sandpack/issues/806)) ([f7263ce](https://github.com/codesandbox/sandpack/commit/f7263ce1ca7b0e80674789efa5a17bd25a5601e1))
+
+
+
+
+
 # [2.1.0](https://github.com/codesandbox/sandpack/compare/v2.0.29...v2.1.0) (2023-03-06)
 
 
