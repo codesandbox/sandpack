@@ -5,47 +5,78 @@ const typescript = require("@rollup/plugin-typescript");
 
 const pkg = require("./package.json");
 
-const styleless = process.env.SANDPACK_BARE_COMPONENTS === "true";
+const basePlugins = [commonjs({ requireReturnsDefault: "preferred" })];
 
-const configBase = {
-  input: "src/index.ts",
-  output: [
-    {
-      file: styleless
-        ? pkg.main.replace("index.js", "index.styless.js")
-        : pkg.main,
-      exports: "named",
-      format: "cjs",
-      inlineDynamicImports: true,
-      interop: "auto",
-    },
-    {
-      file: styleless
-        ? pkg.module.replace("index.js", "index.styless.js")
-        : pkg.module,
-      exports: "named",
-      format: "es",
-      inlineDynamicImports: true,
-    },
-  ],
+const external = [
+  "react/jsx-runtime",
+  ...Object.keys(pkg.dependencies),
+  ...Object.keys(pkg.devDependencies),
+  ...Object.keys(pkg.peerDependencies),
+];
 
-  plugins: [
-    typescript({ tsconfig: "./tsconfig.json" }),
-    replace({
-      preventAssignment: true,
-      values: {
-        "process.env.TEST_ENV": "false",
-        "process.env.SANDPACK_BARE_COMPONENTS": `"${styleless}"`,
+const baseConfig = { input: "src/index.ts", external };
+
+const configBase = [
+  {
+    ...baseConfig,
+    plugins: basePlugins.concat(
+      replace({
+        preventAssignment: true,
+        values: {
+          "process.env.TEST_ENV": "false",
+          "process.env.SANDPACK_UNSTYLED_COMPONENTS": `"false"`,
+        },
+      }),
+      typescript({ tsconfig: "./tsconfig.json" })
+    ),
+    output: [
+      {
+        dir: "dist",
+        exports: "named",
+        format: "cjs",
+        inlineDynamicImports: true,
+        interop: "auto",
       },
-    }),
-    commonjs({ requireReturnsDefault: "preferred" }),
-  ],
-  external: [
-    "react/jsx-runtime",
-    ...Object.keys(pkg.dependencies),
-    ...Object.keys(pkg.devDependencies),
-    ...Object.keys(pkg.peerDependencies),
-  ],
-};
+      {
+        dir: "dist",
+        chunkFileNames: "[name]-[hash].mjs",
+        entryFileNames: "[name].mjs",
+        exports: "named",
+        format: "es",
+        inlineDynamicImports: true,
+      },
+    ],
+  },
+
+  {
+    ...baseConfig,
+    plugins: basePlugins.concat(
+      replace({
+        preventAssignment: true,
+        values: {
+          "process.env.TEST_ENV": "false",
+          "process.env.SANDPACK_UNSTYLED_COMPONENTS": `"true"`,
+        },
+      })
+    ),
+    output: [
+      {
+        dir: "dist/unstyled",
+        exports: "named",
+        format: "cjs",
+        inlineDynamicImports: true,
+        interop: "auto",
+      },
+      {
+        dir: "dist/unstyled",
+        chunkFileNames: "[name]-[hash].mjs",
+        entryFileNames: "[name].mjs",
+        exports: "named",
+        format: "es",
+        inlineDynamicImports: true,
+      },
+    ],
+  },
+];
 
 module.exports = configBase;

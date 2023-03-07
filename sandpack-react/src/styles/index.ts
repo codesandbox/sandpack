@@ -15,7 +15,7 @@ export const THEME_PREFIX = "sp";
  * @category Theme
  */
 // prettier-ignore
-export const { createTheme, css, getCssText, keyframes } = process.env.SANDPACK_BARE_COMPONENTS === 'true'
+export const { createTheme, css, getCssText, keyframes } = process.env.SANDPACK_UNSTYLED_COMPONENTS === 'true'
   ? createStitchesMock
   : createStitches({
       prefix: THEME_PREFIX,

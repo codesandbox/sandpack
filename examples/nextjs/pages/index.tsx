@@ -1,4 +1,4 @@
-import { Sandpack } from "@codesandbox/sandpack-react";
+import { Sandpack } from "@codesandbox/sandpack-react/unstyled";
 import { githubLight, sandpackDark } from "@codesandbox/sandpack-themes";
 
 const Home: React.FC = () => {

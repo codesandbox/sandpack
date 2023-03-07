@@ -9,9 +9,21 @@
   },
   "license": "Apache-2.0",
   "author": "CodeSandbox",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "./unstyled": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/unstyled/index.mjs",
+      "require": "./dist/unstyled/index.js"
+    },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "sideEffects": [
     "dist/index.css"
   ],
@@ -20,8 +32,7 @@
     "prebuild": "yarn run clean",
     "test": "TEST_ENV=true jest . --transformIgnorePatterns \"node_modules/(?!@codemirror)/\" --modulePathIgnorePatterns \"e2e\"",
     "lint": "eslint '**/*.ts?(x)' --fix",
-    "build": "rollup -c && SANDPACK_BARE_COMPONENTS=true rollup -c && yarn build:types",
-    "build:types": "tsc -p tsconfig.json",
+    "build": "rollup -c",
     "build:publish": "yarn build",
     "start": "tsc -p tsconfig.esm.json --watch",
     "dev": "start-storybook -p 6006 --quiet",
