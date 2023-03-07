@@ -58,13 +58,10 @@ export class SandpackRuntime extends SandpackClient {
 
     this.bundlerURL = options.bundlerURL || BUNDLER_URL;
 
-    /**
-     * TODO: make this more elegant
-     */
     if (options.teamId) {
       this.bundlerURL = this.bundlerURL.replace(
         "https://",
-        "https://" + options.teamId + "."
+        "https://" + options.teamId + "-"
       );
     }
 

@@ -232,7 +232,7 @@ export const useClient: UseClient = (
     }
 
     if (lazyAnchorRef.current && state.initMode === "lazy") {
-      // If any component registerd a lazy anchor ref component, use that for the intersection observer
+      // If any component registered a lazy anchor ref component, use that for the intersection observer
       intersectionObserver.current = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
           runSandpack();
@@ -500,7 +500,7 @@ export const useClient: UseClient = (
   );
 
   useEffect(() => {
-    return function unmontClient(): void {
+    return function unmountClient(): void {
       if (typeof unsubscribe.current === "function") {
         unsubscribe.current();
       }
