@@ -18,7 +18,7 @@
   "dependencies": {
     "@codesandbox/sandpack-react": "*",
     "@codesandbox/sandpack-themes": "*",
-    "gatsby": "^4.14.1",
+    "gatsby": "^5.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
