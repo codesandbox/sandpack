@@ -50,6 +50,10 @@ const configBase = [
 
   {
     ...baseConfig,
+    treeshake: {
+      preset: "smallest",
+      manualPureFunctions: ["createStitches"],
+    },
     plugins: basePlugins.concat(
       replace({
         preventAssignment: true,
@@ -57,6 +61,10 @@ const configBase = [
           "process.env.TEST_ENV": "false",
           "process.env.SANDPACK_UNSTYLED_COMPONENTS": `"true"`,
         },
+      }),
+      typescript({
+        tsconfig: "./tsconfig.json",
+        compilerOptions: { outDir: "dist/unstyled/" },
       })
     ),
     output: [
