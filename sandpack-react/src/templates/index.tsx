@@ -3,8 +3,11 @@ import { NEXTJS_TEMPLATE } from "./node/nexjs";
 import { NODE_TEMPLATE } from "./node/node";
 import { VITE_TEMPLATE } from "./node/vite";
 import { VITE_REACT_TEMPLATE } from "./node/vite-react";
+import { VITE_REACT_TS_TEMPLATE } from "./node/vite-react-ts";
 import { VITE_SVELTE_TEMPLATE } from "./node/vite-svelte";
+import { VITE_SVELTE_TS_TEMPLATE } from "./node/vite-svelte-ts";
 import { VITE_VUE_TEMPLATE } from "./node/vite-vue";
+import { VITE_VUE_TS_TEMPLATE } from "./node/vite-vue-ts";
 import { ANGULAR_TEMPLATE } from "./runtime/angular";
 import { REACT_TEMPLATE } from "./runtime/react";
 import { REACT_TYPESCRIPT_TEMPLATE } from "./runtime/react-typescript";
@@ -42,7 +45,10 @@ export const SANDBOX_TEMPLATES = {
   nextjs: NEXTJS_TEMPLATE,
   vite: VITE_TEMPLATE,
   "vite-react": VITE_REACT_TEMPLATE,
+  "vite-react-ts": VITE_REACT_TS_TEMPLATE,
   "vite-vue": VITE_VUE_TEMPLATE,
+  "vite-vue-ts": VITE_VUE_TS_TEMPLATE,
   "vite-svelte": VITE_SVELTE_TEMPLATE,
+  "vite-svelte-ts": VITE_SVELTE_TS_TEMPLATE,
   astro: ASTRO_TEMPLATE,
 };
