@@ -104,6 +104,6 @@ export type SandpackRuntimeMessage = BaseSandpackMessage &
         }>;
       }
     | SandboxTestMessage
-    | { type: "sign-in" }
+    | { type: "sign-in"; teamId: string }
     | { type: "sign-out" }
   );

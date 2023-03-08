@@ -38,7 +38,7 @@ export default function App() {
 }`,
         }}
         options={{ bundlerURL: `http://localhost:3000` }}
-        teamId="lg1lqh"
+        teamId="6756547b-12fb-465e-82c8-b38a981f1f67"
         template="react"
       />
     </div>

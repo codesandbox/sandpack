@@ -534,6 +534,7 @@ export interface SandpackState {
    * otherwise, it'll return `pristine`
    */
   editorState: EditorState;
+  teamId?: string;
   error: SandpackError | null;
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;

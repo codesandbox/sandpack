@@ -46,7 +46,7 @@ export const ErrorOverlay: React.FC<
   const errorMessage = useErrorMessage();
   const { restart } = useSandpackShell();
   const {
-    sandpack: { runSandpack },
+    sandpack: { runSandpack, teamId },
   } = useSandpack();
   const c = useClasser(THEME_PREFIX);
   const { dispatch } = useSandpack();
@@ -61,7 +61,7 @@ export const ErrorOverlay: React.FC<
   );
 
   const onSignIn = () => {
-    dispatch({ type: "sign-in" });
+    dispatch({ type: "sign-in", teamId });
   };
 
   if (privateDependencyError) {
