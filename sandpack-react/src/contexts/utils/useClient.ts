@@ -32,7 +32,6 @@ interface SandpackConfigState {
   bundlerState: BundlerState | undefined;
   error: SandpackError | null;
   status: SandpackStatus;
-  authenticated: boolean;
 }
 
 export interface UseClientOperations {
@@ -81,7 +80,6 @@ export const useClient: UseClient = (
     error: null,
     initMode: initModeFromProps,
     reactDevTools: undefined,
-    authenticated: !!teamId,
     status: options?.autorun ?? true ? "initial" : "idle",
   });
 

@@ -11,6 +11,11 @@ import {
   useSandpackShell,
 } from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
+import {
+  buttonClassName,
+  iconStandaloneClassName,
+  roundedButtonClassName,
+} from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 import { Navigator } from "../Navigator";
 import { ErrorOverlay } from "../common/ErrorOverlay";
@@ -19,11 +24,6 @@ import { OpenInCodeSandboxButton } from "../common/OpenInCodeSandboxButton";
 import { RoundedButton } from "../common/RoundedButton";
 import { SandpackStack } from "../common/Stack";
 import { RefreshIcon, RestartIcon } from "../icons";
-import {
-  buttonClassName,
-  iconStandaloneClassName,
-  roundedButtonClassName,
-} from "../../styles/shared";
 import { SignOutIcon } from "../icons";
 
 export interface PreviewProps {
@@ -196,15 +196,15 @@ export const SandpackPreview = React.forwardRef<
 
             {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
 
-            {sandpack.authenticated && (
+            {sandpack.teamId && (
               <button
-                onClick={() => dispatch({ type: "sign-out" })}
                 className={classNames(
                   c("button", "icon-standalone"),
                   buttonClassName,
                   iconStandaloneClassName,
                   roundedButtonClassName
                 )}
+                onClick={() => dispatch({ type: "sign-out" })}
                 title="Sign out"
                 type="button"
               >

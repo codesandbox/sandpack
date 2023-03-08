@@ -541,7 +541,6 @@ export interface SandpackState {
   status: SandpackStatus;
   initMode: SandpackInitMode;
   clients: Record<string, InstanceType<typeof SandpackClient>>;
-  authenticated: boolean;
 
   runSandpack: () => Promise<void>;
   registerBundler: (
