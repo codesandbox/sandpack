@@ -22,6 +22,7 @@ const config = {
       <meta content="summary_large_image" name="twitter:card" />
       <meta content="@codesandbox" name="twitter:site" />
       <meta content={OG_IMAGE_URL} name="twitter:image" />
+      <meta content={OG_IMAGE_URL} name="og:image" />
       <meta content="Sandpack | CodeSandbox" property="og:title" />
       <meta
         content="Sandpack is a component toolkit for creating your own live-running code editing experiences powered by CodeSandbox."
