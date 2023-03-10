@@ -3,7 +3,7 @@ import defaultConfigs from "codesandbox-theme-docs/shared.config.js";
 import BackLink from "./src/components/BackLink";
 import Logo from "./src/components/Logo";
 
-const OG_IMAGE_URL = "https://sandpackcodesandbox.io/docs/sandpack_og.jpg";
+const OG_IMAGE_URL = "https://sandpack.codesandbox.io/docs/sandpack_og.jpeg";
 
 const config = {
   ...defaultConfigs,
