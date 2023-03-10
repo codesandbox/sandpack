@@ -379,4 +379,5 @@ export type Template =
   | "static"
   | "solid"
   | "nextjs"
-  | "node";
+  | "node"
+  | "static";

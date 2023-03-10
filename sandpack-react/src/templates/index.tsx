@@ -18,6 +18,7 @@ import { VANILLA_TEMPLATE } from "./runtime/vanilla";
 import { VANILLA_TYPESCRIPT_TEMPLATE } from "./runtime/vanilla-typescript";
 import { VUE_TEMPLATE } from "./runtime/vue";
 import { VUE_TS_TEMPLATE } from "./runtime/vue-ts";
+import { STATIC_TEMPLATE } from "./static";
 export { ASTRO_TEMPLATE } from "./node/astro";
 export { ANGULAR_TEMPLATE } from "./runtime/angular";
 export { REACT_TEMPLATE } from "./runtime/react";
@@ -30,6 +31,7 @@ export { VANILLA_TYPESCRIPT_TEMPLATE } from "./runtime/vanilla-typescript";
 export { VUE_TEMPLATE } from "./runtime/vue";
 
 export const SANDBOX_TEMPLATES = {
+  static: STATIC_TEMPLATE,
   angular: ANGULAR_TEMPLATE,
   react: REACT_TEMPLATE,
   "react-ts": REACT_TYPESCRIPT_TEMPLATE,
