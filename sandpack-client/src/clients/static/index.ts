@@ -6,35 +6,49 @@ import type {
   UnsubscribeFunction,
 } from "../..";
 import { SandpackClient } from "../base";
+import { EventEmitter } from "../event-emitter";
 
 export class SandpackRuntime extends SandpackClient {
+  private emitter: EventEmitter;
+
   constructor(
     selector: string | HTMLIFrameElement,
     sandboxSetup: SandboxSetup,
     options: ClientOptions = {}
   ) {
     super(selector, sandboxSetup, options);
+
+    this.emitter = new EventEmitter();
   }
 
   public updateSandbox(
     _sandboxSetup = this.sandboxSetup,
     _isInitializationCompile?: boolean
   ): void {
-    throw Error("Method not implemented");
-  }
+    // Do stuff
 
-  public destroy(): void {
-    throw Error("Method not implemented");
+    this.dispatch({ type: "done", compilatonError: false });
   }
 
   /**
    * Bundler communication
    */
-  public dispatch(_message: SandpackMessage): void {
-    throw Error("Method not implemented");
+  public dispatch(message: SandpackMessage): void {
+    switch (message.type) {
+      //   case "CUSTOM_STUFF":
+      //     this.CUSTOM_STUFF();
+      //     break;
+
+      default:
+        this.emitter.dispatch(message);
+    }
   }
 
-  public listen(_listener: ListenerFunction): UnsubscribeFunction {
-    throw Error("Method not implemented");
+  public listen(listener: ListenerFunction): UnsubscribeFunction {
+    return this.emitter.listener(listener);
+  }
+
+  public destroy(): void {
+    this.emitter.cleanup();
   }
 }

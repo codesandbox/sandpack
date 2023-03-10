@@ -19,6 +19,7 @@ import type {
 import { nullthrows } from "../..";
 import { createError } from "../..";
 import { SandpackClient } from "../base";
+import { EventEmitter } from "../event-emitter";
 
 import {
   fromBundlerFilesToFS,
@@ -27,7 +28,6 @@ import {
   getMessageFromError,
   writeBuffer,
 } from "./client.utils";
-import { EventEmitter } from "./event-emitter";
 import { loadPreviewIframe, setPreviewIframeProperties } from "./iframe.utils";
 import { injectScriptToIframe } from "./inject-scripts";
 import type { SandpackNodeMessage } from "./types";
