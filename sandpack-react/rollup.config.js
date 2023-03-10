@@ -2,8 +2,10 @@
 const commonjs = require("@rollup/plugin-commonjs");
 const replace = require("@rollup/plugin-replace");
 const typescript = require("@rollup/plugin-typescript");
+const filesize = require("rollup-plugin-filesize");
 
 const pkg = require("./package.json");
+const removeCss = require("./scripts/rollup-remove-css-transformer");
 
 const basePlugins = [commonjs({ requireReturnsDefault: "preferred" })];
 
@@ -27,7 +29,8 @@ const configBase = [
           "process.env.SANDPACK_UNSTYLED_COMPONENTS": `"false"`,
         },
       }),
-      typescript({ tsconfig: "./tsconfig.json" })
+      typescript({ tsconfig: "./tsconfig.json" }),
+      filesize()
     ),
     output: [
       {
@@ -65,7 +68,9 @@ const configBase = [
       typescript({
         tsconfig: "./tsconfig.json",
         compilerOptions: { outDir: "dist/unstyled/" },
-      })
+      }),
+      removeCss(),
+      filesize()
     ),
     output: [
       {
