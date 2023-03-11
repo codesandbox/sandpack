@@ -1,8 +1,10 @@
 import * as React from "react";
 
-import { useSandpack, useSandpackShell } from "../..";
+import { useSandpack, useSandpackClient, useSandpackShell } from "../..";
+import { usePreviewProgress } from "../../hooks/usePreviewProgress";
 import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
 import { css, THEME_PREFIX } from "../../styles";
+import { fadeIn } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
 import { SandpackStack } from "../common";
 import { RoundedButton } from "../common/RoundedButton";
@@ -22,6 +24,7 @@ interface SandpackConsoleProps {
   maxMessageCount?: number;
   onLogsChange?: (logs: SandpackConsoleData) => void;
   resetOnPreviewRestart?: boolean;
+  standalone?: boolean;
 }
 
 export interface SandpackConsoleRef {
@@ -47,6 +50,7 @@ export const SandpackConsole = React.forwardRef<
       className,
       showSetupProgress = false,
       resetOnPreviewRestart = false,
+      standalone,
       ...props
     },
     ref
@@ -55,21 +59,28 @@ export const SandpackConsole = React.forwardRef<
       sandpack: { environment },
     } = useSandpack();
 
+    const { iframe, clientId: internalClientId } = useSandpackClient();
+    const progressMessage = usePreviewProgress(3_000);
+
     const { restart } = useSandpackShell();
 
     const [currentTab, setCurrentTab] = React.useState<"server" | "client">(
       environment === "node" ? "server" : "client"
     );
 
+    const clientId = standalone ? internalClientId : undefined;
+
     const { logs: consoleData, reset: resetConsole } = useSandpackConsole({
       maxMessageCount,
       showSyntaxError,
       resetOnPreviewRestart,
+      clientId,
     });
 
     const { logs: stdoutData, reset: resetStdout } = useSandpackShellStdout({
       maxMessageCount,
       resetOnPreviewRestart,
+      clientId,
     });
 
     const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -99,6 +110,19 @@ export const SandpackConsole = React.forwardRef<
             height: "100%",
             background: "$surface1",
             iframe: { display: "none" },
+
+            [`.${THEME_PREFIX}-bridge-frame`]: {
+              display: "block",
+              border: 0,
+              position: "absolute",
+              left: "$space$2",
+              bottom: "$space$2",
+              zIndex: "$top",
+              height: 12,
+              width: "30%",
+              mixBlendMode: "multiply",
+              pointerEvents: "none",
+            },
           }),
           `${THEME_PREFIX}-console`,
           className
@@ -161,7 +185,33 @@ export const SandpackConsole = React.forwardRef<
             <CleanIcon />
           </RoundedButton>
         </div>
+
+        {progressMessage && (
+          <div className={progressClassName.toString()}>
+            <p>{progressMessage}</p>
+          </div>
+        )}
+
+        <iframe ref={iframe} />
       </SandpackStack>
     );
   }
 );
+
+const progressClassName = css({
+  position: "absolute",
+  left: "$space$5",
+  bottom: "$space$4",
+  zIndex: "$top",
+  color: "$colors$clickable",
+  animation: `${fadeIn} 150ms ease`,
+  fontFamily: "$font$mono",
+  fontSize: ".8em",
+  width: "75%",
+  p: {
+    whiteSpace: "nowrap",
+    margin: 0,
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+  },
+});
