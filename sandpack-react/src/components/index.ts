@@ -7,3 +7,4 @@ export * from "./Preview";
 export * from "./TranspiledCode";
 export * from "./Tests";
 export * from "./Console";
+export * from "./ReactDevTools";

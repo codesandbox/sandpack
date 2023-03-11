@@ -1,30 +1,34 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const commonjs = require("@rollup/plugin-commonjs");
-const replace = require("@rollup/plugin-replace");
-const typescript = require("@rollup/plugin-typescript");
+import { relative } from "path";
 
-const pkg = require("./package.json");
+import commonjs from "@rollup/plugin-commonjs";
+import replace from "@rollup/plugin-replace";
+import typescript from "@rollup/plugin-typescript";
+
+import pkg from "./package.json";
 
 const configBase = {
   input: "src/index.ts",
   output: [
     {
-      file: pkg.main,
+      dir: "dist",
+      entryFileNames: relative("dist", pkg.main),
       exports: "named",
       format: "cjs",
-      inlineDynamicImports: true,
       interop: "auto",
     },
     {
-      file: pkg.module,
+      dir: "dist",
+      entryFileNames: relative("dist", pkg.module),
       exports: "named",
       format: "es",
-      inlineDynamicImports: true,
     },
   ],
 
   plugins: [
-    typescript({ tsconfig: "./tsconfig.json" }),
+    typescript({
+      tsconfig: "./tsconfig.json",
+    }),
     replace({
       preventAssignment: true,
       values: { "process.env.TEST_ENV": "false" },
@@ -33,10 +37,10 @@ const configBase = {
   ],
   external: [
     "react/jsx-runtime",
+    /react-devtools-inline/,
     ...Object.keys(pkg.dependencies),
-    ...Object.keys(pkg.devDependencies),
     ...Object.keys(pkg.peerDependencies),
   ],
 };
 
-module.exports = configBase;
+export default configBase;
