@@ -1,8 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { useSandpack, useSandpackShell } from "../..";
-import { useErrorMessage } from "../../hooks/useErrorMessage";
+import { useSandpack, useSandpackShell, useErrorMessage } from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
 import {
   absoluteClassName,

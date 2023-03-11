@@ -1,7 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { useSandpack } from "../..";
+import { useSandpack } from "../../hooks";
 import {
   useLoadingOverlayState,
   FADE_ANIMATION_DURATION,

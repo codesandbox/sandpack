@@ -1,8 +1,7 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { useSandpackTheme } from "../..";
-import { useSandpack } from "../../hooks/useSandpack";
+import { useSandpackTheme, useSandpack } from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
 
