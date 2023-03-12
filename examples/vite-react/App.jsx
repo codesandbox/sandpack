@@ -1,4 +1,4 @@
-import { Sandpack } from "@codesandbox/sandpack-react/unstyled";
+import { Sandpack } from "@codesandbox/sandpack-react";
 
 const App = () => {
   return (
