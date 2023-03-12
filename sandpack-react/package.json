@@ -24,9 +24,6 @@
       "require": "./dist/index.js"
     }
   },
-  "sideEffects": [
-    "dist/index.css"
-  ],
   "scripts": {
     "clean": "rm -rf dist",
     "prebuild": "yarn run clean",
