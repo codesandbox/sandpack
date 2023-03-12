@@ -24,7 +24,7 @@ const mapProgressMessage = (
   }
 };
 
-export const usePreviewProgress = () => {
+export const useSandpackPreviewProgress = () => {
   const [isReady, setIsReady] = React.useState(false);
   const [totalDependencies, setTotalDependencies] = React.useState<number>();
   const [loadingMessage, setLoadingMessage] = React.useState<null | string>(
