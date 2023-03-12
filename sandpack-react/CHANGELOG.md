@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/codesandbox/sandpack/compare/v2.1.2...v2.1.3) (2023-03-12)
+
+
+### Bug Fixes
+
+* **sandpack-react:** tweak imports to avoid circular deps ([#832](https://github.com/codesandbox/sandpack/issues/832)) ([b0faa50](https://github.com/codesandbox/sandpack/commit/b0faa50347912219d799eb7ec4aff5f50c4b2d75))
+
+
+
+
+
 ## [2.1.2](https://github.com/codesandbox/sandpack/compare/v2.1.1...v2.1.2) (2023-03-07)
 
 
