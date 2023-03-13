@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.4](https://github.com/codesandbox/sandpack/compare/v2.1.3...v2.1.4) (2023-03-13)
+
+
+### Bug Fixes
+
+* **sandpack-console:** standalone mode ([#835](https://github.com/codesandbox/sandpack/issues/835)) ([88d7d72](https://github.com/codesandbox/sandpack/commit/88d7d7220a2855ac4fc181d93333e3358f702281))
+
+
+
+
+
 ## [2.1.3](https://github.com/codesandbox/sandpack/compare/v2.1.2...v2.1.3) (2023-03-12)
 
 
