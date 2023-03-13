@@ -53,7 +53,7 @@ export const SandpackConsole = React.forwardRef<
       showSetupProgress = false,
       resetOnPreviewRestart = false,
       actionsChildren = <></>,
-      standalone,
+      standalone = false,
       ...props
     },
     ref
@@ -190,8 +190,12 @@ export const SandpackConsole = React.forwardRef<
           </RoundedButton>
         </div>
 
-        <DependenciesProgress />
-        <iframe ref={iframe} />
+        {standalone && (
+          <>
+            <DependenciesProgress />
+            <iframe ref={iframe} />
+          </>
+        )}
       </SandpackStack>
     );
   }
