@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.6](https://github.com/codesandbox/sandpack/compare/v2.1.5...v2.1.6) (2023-03-13)
+
+
+### Bug Fixes
+
+* **SandpackConsole:** make standalone defaults to false ([#837](https://github.com/codesandbox/sandpack/issues/837)) ([bb612c5](https://github.com/codesandbox/sandpack/commit/bb612c5324b16b9d7f308ea8cce741ace7b5d661))
+
+
+
+
+
 ## [2.1.5](https://github.com/codesandbox/sandpack/compare/v2.1.4...v2.1.5) (2023-03-13)
 
 
