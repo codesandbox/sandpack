@@ -2700,11 +2700,6 @@
   resolved "https://registry.yarnpkg.com/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-12.3.3.tgz#1b412e9e15550680e1fdba70daa8b6ddcc75a035"
   integrity sha512-Ku9mfGwmNtk44o4B/jEWUxBAT4tJ3S7QbBMLJdL1GmtRZ05LGL36OqWjLvBPr8dFiHOQQbYoAmYfQw7zeGypYA==
 
-"@noble/hashes@^1.1.5":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.2.0.tgz#a3150eeb09cc7ab207ebf6d7b9ad311a9bdbed12"
-  integrity sha512-FZfhjEDbT5GRswV3C6uvLPHMiVD6lQBmpoX5+eSiPaMTXte/IKqI5dykDxzZB/WBeK/CDuQRBWarPdi3FNY2zQ==
-
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -2906,13 +2901,6 @@
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@open-draft/deferred-promise/-/deferred-promise-2.1.0.tgz#4fb33ebdf5c05a0e47a26490ed9037ca36275a66"
   integrity sha512-Rzd5JrXZX8zErHzgcGyngh4fmEbSHqTETdGj9rXtejlqMIgXFlyKBA7Jn1Xp0Ls0M0Y22+xHcWiEzbmdWl0BOA==
-
-"@paralleldrive/cuid2@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@paralleldrive/cuid2/-/cuid2-2.2.0.tgz#105b31311994c18d816cb0d31f31ecaf425d32b4"
-  integrity sha512-CVQDpPIUHrUGGLdrMGz1NmqZvqmsB2j2rCIQEu1EvxWjlFh4fhvEGmgR409cY20/67/WlJsggenq0no3p3kYsw==
-  dependencies:
-    "@noble/hashes" "^1.1.5"
 
 "@pmmmwh/react-refresh-webpack-plugin@^0.5.3":
   version "0.5.6"
@@ -16211,13 +16199,12 @@ state-toggle@^1.0.0:
   resolved "https://registry.yarnpkg.com/state-toggle/-/state-toggle-1.0.3.tgz#e123b16a88e143139b09c6852221bc9815917dfe"
   integrity sha512-d/5Z4/2iiCnHw6Xzghyhb+GcmF89bxwgXG60wjIiZaxnymbyOmI8Hk4VqHXiVVp6u2ysaskFfXg3ekCj4WNftQ==
 
-static-browser-server@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/static-browser-server/-/static-browser-server-1.0.0.tgz#7176ec3959e4015413d3865973463400020d49fe"
-  integrity sha512-PHOj4mHewL2nAtaV2Cu0o8XyX9ZQih3go9IgtohzY+y+qtd2o+2qy56gzbLRFRF7mJQIhe+8cDnBMNvlele78Q==
+static-browser-server@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/static-browser-server/-/static-browser-server-1.0.1.tgz#f7a49a37dadaf839ed9b52f98ad3d18cd19055fd"
+  integrity sha512-GGEWI2EMRej5t4vbYgUFrpukdZtiuc0eWLVeSUhaZ6LVNrPSdGtJvsNGLuKTi/IFbxF/IgcSIsaJdwZKy8SuaQ==
   dependencies:
     "@open-draft/deferred-promise" "^2.1.0"
-    "@paralleldrive/cuid2" "^2.2.0"
     dotenv "^16.0.3"
     mime-db "^1.52.0"
     outvariant "^1.3.0"
