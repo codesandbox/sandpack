@@ -17,6 +17,10 @@ export class SandpackStatic extends SandpackClient {
   private previewController: PreviewController;
   private files: Map<string, string | Uint8Array> = new Map();
 
+  public iframe!: HTMLIFrameElement;
+  public selector!: string;
+  public element: Element;
+
   constructor(
     selector: string | HTMLIFrameElement,
     sandboxSetup: SandboxSetup,
@@ -26,7 +30,7 @@ export class SandpackStatic extends SandpackClient {
 
     this.emitter = new EventEmitter();
     this.previewController = new PreviewController({
-      baseUrl: "https://nh3fd7-3000.preview.csb.app/",
+      baseUrl: options.bundlerURL ?? "https://nh3fd7-3000.preview.csb.app/",
       getFileContent: (filepath) => {
         const content = this.files.get(filepath);
         if (!content) {
@@ -35,6 +39,28 @@ export class SandpackStatic extends SandpackClient {
         return content;
       },
     });
+
+    if (typeof selector === "string") {
+      this.selector = selector;
+      const element = document.querySelector(selector);
+
+      this.element = element!;
+      this.iframe = document.createElement("iframe");
+    } else {
+      this.element = selector;
+      this.iframe = selector;
+    }
+    if (!this.iframe.getAttribute("sandbox")) {
+      this.iframe.setAttribute(
+        "sandbox",
+        "allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+      );
+
+      this.iframe.setAttribute(
+        "allow",
+        "accelerometer; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi;"
+      );
+    }
   }
 
   public updateSandbox(
@@ -58,6 +84,8 @@ export class SandpackStatic extends SandpackClient {
     this.files = new Map(Object.entries(files));
 
     const previewUrl = await this.previewController.initPreview();
+    this.iframe.setAttribute("src", previewUrl);
+
     this.dispatch({ type: "done", compilatonError: false });
     this.dispatch({
       type: "urlchange",
