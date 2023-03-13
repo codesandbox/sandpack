@@ -4,14 +4,11 @@ import {
   useSandpack,
   useSandpackClient,
   useSandpackShell,
-  useSandpackPreviewProgress,
   useSandpackShellStdout,
 } from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
-import { fadeIn } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
-import { SandpackStack } from "../common";
-import { RoundedButton } from "../common/RoundedButton";
+import { SandpackStack, DependenciesProgress, RoundedButton } from "../common";
 import { CleanIcon, RestartIcon } from "../icons";
 
 import { ConsoleList } from "./ConsoleList";
@@ -29,6 +26,7 @@ interface SandpackConsoleProps {
   onLogsChange?: (logs: SandpackConsoleData) => void;
   resetOnPreviewRestart?: boolean;
   standalone?: boolean;
+  actionsChildren?: JSX.Element;
 }
 
 export interface SandpackConsoleRef {
@@ -54,6 +52,7 @@ export const SandpackConsole = React.forwardRef<
       className,
       showSetupProgress = false,
       resetOnPreviewRestart = false,
+      actionsChildren = <></>,
       standalone,
       ...props
     },
@@ -64,7 +63,6 @@ export const SandpackConsole = React.forwardRef<
     } = useSandpack();
 
     const { iframe, clientId: internalClientId } = useSandpackClient();
-    const progressMessage = useSandpackPreviewProgress(3_000);
 
     const { restart } = useSandpackShell();
 
@@ -165,6 +163,8 @@ export const SandpackConsole = React.forwardRef<
             })
           )}
         >
+          {actionsChildren}
+
           {isServerTab && (
             <RoundedButton
               onClick={(): void => {
@@ -190,32 +190,9 @@ export const SandpackConsole = React.forwardRef<
           </RoundedButton>
         </div>
 
-        {progressMessage && (
-          <div className={progressClassName.toString()}>
-            <p>{progressMessage}</p>
-          </div>
-        )}
-
+        <DependenciesProgress />
         <iframe ref={iframe} />
       </SandpackStack>
     );
   }
 );
-
-const progressClassName = css({
-  position: "absolute",
-  left: "$space$5",
-  bottom: "$space$4",
-  zIndex: "$top",
-  color: "$colors$clickable",
-  animation: `${fadeIn} 150ms ease`,
-  fontFamily: "$font$mono",
-  fontSize: ".8em",
-  width: "75%",
-  p: {
-    whiteSpace: "nowrap",
-    margin: 0,
-    textOverflow: "ellipsis",
-    overflow: "hidden",
-  },
-});
