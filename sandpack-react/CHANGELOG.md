@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.5](https://github.com/codesandbox/sandpack/compare/v2.1.4...v2.1.5) (2023-03-13)
+
+
+### Bug Fixes
+
+* **client:** make sure `unsubscribeQueuedClients` receives a valid obj ([#836](https://github.com/codesandbox/sandpack/issues/836)) ([3d42177](https://github.com/codesandbox/sandpack/commit/3d4217735a53452ea337fc11dc82dae0aa23703b))
+
+
+
+
+
 ## [2.1.4](https://github.com/codesandbox/sandpack/compare/v2.1.3...v2.1.4) (2023-03-13)
 
 
