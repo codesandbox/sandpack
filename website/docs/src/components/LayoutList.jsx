@@ -139,23 +139,18 @@ export const LAYOUTS = {
   },
 
   "Editor + Console": {
-    interface: (props) => `<SandpackProvider${props}
-    >
-      <SandpackLayout>
-        <SandpackCodeEditor />
-        <SandpackConsole />
-      </SandpackLayout>
-    </SandpackProvider>`,
+    interface: (props) => `<Sandpack${props} 
+      options={{ layout: "console" }}
+    >`,
     component: (props) => (
-      <SandpackProvider
-        options={{ ...(props.options ?? {}), initMode: "immediate" }}
+      <Sandpack
+        options={{
+          ...(props.options ?? {}),
+          initMode: "immediate",
+          layout: "console",
+        }}
         {...props}
-      >
-        <SandpackLayout>
-          <SandpackCodeEditor />
-          <SandpackConsole />
-        </SandpackLayout>
-      </SandpackProvider>
+      />
     ),
   },
 

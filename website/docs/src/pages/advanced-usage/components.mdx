@@ -570,15 +570,17 @@ export default () => (
 <details>
   <summary>`SandpackConsole` Options</summary>
 
-| Prop | Type  | Default | Description | 
+| Prop | Description | Type  | Default | 
 | :- | :- | :- | :- |
-| `clientId` | `string` | `undefined` | |
-| `showHeader` | `boolean` | `true` | |
-| `showSyntaxError` | `boolean` | `false` | |
-| `maxMessageCount` | `number` | `800` | |
-| `onLogsChange` | `(logs: SandpackConsoleData) => void` | | |
-| `resetOnPreviewRestart` | `boolean` | `false` | Reset the console list on every preview restart |
-| `ref` | `SandpackConsoleRef` | `SandpackConsoleRef` | Make possible to imperatively interact with the console component |
+| `clientId` | | `string` | `undefined` |
+| `showHeader` | | `boolean` | `true` |
+| `showSyntaxError` | | `boolean` | `false` |
+| `maxMessageCount` | | `number` | `800` |
+| `onLogsChange` | | `(logs: SandpackConsoleData) => void` | |
+| `resetOnPreviewRestart` | Reset the console list on every preview restart | `boolean` | `false` | 
+| `ref` | Make possible to imperatively interact with the console component | `SandpackConsoleRef` | `SandpackConsoleRef` | 
+| `standalone` | It runs its sandpack-client, meaning it doesn't depend on a `SandpackPreview` component. |`boolean` | `false` | 
+| `actionsChildren` | | JSX.Element | `null` |
 
 </details>
 
