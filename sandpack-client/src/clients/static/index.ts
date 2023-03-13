@@ -8,7 +8,7 @@ import type {
 import { SandpackClient } from "../base";
 import { EventEmitter } from "../event-emitter";
 
-export class SandpackRuntime extends SandpackClient {
+export class SandpackStatic extends SandpackClient {
   private emitter: EventEmitter;
 
   constructor(

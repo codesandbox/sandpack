@@ -19,7 +19,7 @@ export async function loadSandpackClient(
       Client = await import("./node").then((m) => m.SandpackNode);
       break;
     case "static":
-      Client = await import("./static").then((m) => m.SandpackRuntime);
+      Client = await import("./static").then((m) => m.SandpackStatic);
       break;
 
     default:
