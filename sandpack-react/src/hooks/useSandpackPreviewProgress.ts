@@ -24,7 +24,7 @@ const mapProgressMessage = (
   }
 };
 
-export const useSandpackPreviewProgress = () => {
+export const useSandpackPreviewProgress = (timeout?: number) => {
   const [isReady, setIsReady] = React.useState(false);
   const [totalDependencies, setTotalDependencies] = React.useState<number>();
   const [loadingMessage, setLoadingMessage] = React.useState<null | string>(
@@ -38,6 +38,12 @@ export const useSandpackPreviewProgress = () => {
     const unsubscribe = listen((message) => {
       if (message.type === "start" && message.firstLoad) {
         setIsReady(false);
+      }
+
+      if (timeout) {
+        timer = setTimeout(() => {
+          setLoadingMessage(null);
+        }, timeout);
       }
 
       if (message.type === "shell/progress" && !isReady) {
@@ -65,7 +71,7 @@ export const useSandpackPreviewProgress = () => {
       }
       unsubscribe();
     };
-  }, [isReady, totalDependencies]);
+  }, [isReady, totalDependencies, timeout]);
 
   return loadingMessage;
 };

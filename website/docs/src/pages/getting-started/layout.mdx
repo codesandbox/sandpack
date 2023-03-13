@@ -63,6 +63,30 @@ The overall style can be set through the `theme` prop. Sandpack offers a set of 
 
 Some of the internal components of Sandpack can be configured via the `options` prop.
 
+### Layout mode
+
+The Sandpack preset component offers three layout modes:
+
+- `preview`: (default option) which renders an iframe as a preview component;
+- `tests`: which renders a suit-test component;
+- `console`: which renders a terminal/console component instead of the preview.
+
+<CodeBlock stack>
+{`import { Sandpack } from "@codesandbox/sandpack-react";
+
+export default function App() {
+  return (
+    <Sandpack 
+      template="node"
+      options={{
+        layout: "console", // preview | tests | console
+      }}
+    />
+  );
+}
+`}
+</CodeBlock>
+
 ### Navigator
 
 By default `<Sandpack />` will show a refresh button in the lower part of the preview. Using `showNavigator` you can toggle on a full browser navigator component with: `back`, `forward` and `refresh buttons` as well as an input for the URL.

@@ -41,6 +41,19 @@ export default function App() {
   />
 );
 
+export const Layout: React.FC = () => (
+  <>
+    <p>Console</p>
+    <Sandpack options={{ layout: "console" }} template="node" />
+
+    <p>Tests</p>
+    <Sandpack options={{ layout: "tests" }} template="test-ts" />
+
+    <p>Preview</p>
+    <Sandpack options={{ layout: "preview" }} template="react" />
+  </>
+);
+
 export const CustomSetup: React.FC = () => (
   <Sandpack
     customSetup={{

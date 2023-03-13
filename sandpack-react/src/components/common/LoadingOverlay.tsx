@@ -165,7 +165,7 @@ export const LoadingOverlay = ({
       </div>
 
       {progressMessage && (
-        <div className={wrapperClassName.toString()}>
+        <div className={progressClassName.toString()}>
           <p>{progressMessage}</p>
         </div>
       )}
@@ -183,7 +183,7 @@ const stdoutPreview = css({
   overflowX: "hidden",
 });
 
-const wrapperClassName = css({
+const progressClassName = css({
   position: "absolute",
   left: "$space$5",
   bottom: "$space$4",

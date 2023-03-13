@@ -123,6 +123,8 @@ export interface SandpackOptions {
    */
   showReadOnly?: boolean;
 
+  layout?: "preview" | "tests" | "console";
+
   /**
    * This provides a way to control how some components are going to
    * be initialized on the page. The CodeEditor and the Preview components
@@ -470,6 +472,8 @@ interface SandpackInternalProps<
      * appears when `readOnly` is `true`
      */
     showReadOnly?: boolean;
+
+    layout?: "preview" | "tests" | "console";
   };
 }
 

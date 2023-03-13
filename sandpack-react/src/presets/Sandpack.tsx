@@ -84,7 +84,13 @@ export const Sandpack: SandpackInternal = ({
 
   /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
   const templateFiles = SANDBOX_TEMPLATES[template!] ?? {};
-  const mode = "mode" in templateFiles ? templateFiles.mode : "preview";
+  const mode = (
+    options?.layout
+      ? options?.layout
+      : "mode" in templateFiles
+      ? templateFiles.mode
+      : "preview"
+  ) as typeof options.layout;
 
   const actionsChildren = options.showConsoleButton ? (
     <ConsoleCounterButton
@@ -241,6 +247,13 @@ export const Sandpack: SandpackInternal = ({
           )}
           {mode === "tests" && (
             <SandpackTests
+              actionsChildren={actionsChildren}
+              style={topRowStyle}
+            />
+          )}
+
+          {mode === "console" && (
+            <SandpackConsole
               actionsChildren={actionsChildren}
               style={topRowStyle}
             />
