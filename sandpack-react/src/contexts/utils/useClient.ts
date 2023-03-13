@@ -307,7 +307,9 @@ export const useClient: UseClient = (
   };
 
   const handleMessage = (msg: SandpackMessage): void => {
-    if (msg.type === "state") {
+    if (msg.type === "start") {
+      setState((prev) => ({ ...prev, error: null }));
+    } else if (msg.type === "state") {
       setState((prev) => ({ ...prev, bundlerState: msg.state }));
     } else if (
       (msg.type === "done" && !msg.compilatonError) ||

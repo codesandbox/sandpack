@@ -194,8 +194,6 @@ export const SandpackPreview = React.forwardRef<
               </RoundedButton>
             )}
 
-            {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
-
             {sandpack.teamId && (
               <button
                 className={classNames(
@@ -211,6 +209,8 @@ export const SandpackPreview = React.forwardRef<
                 <SignOutIcon />
               </button>
             )}
+
+            {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
           </div>
 
           <LoadingOverlay

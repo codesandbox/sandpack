@@ -38,7 +38,8 @@ export default function App() {
 }`,
         }}
         options={{ bundlerURL: `http://localhost:3000` }}
-        teamId="6756547b-12fb-465e-82c8-b38a981f1f67"
+        // options={{ bundlerURL: `https://2-1-0-sandpack.codesandbox.stream/` }}
+        teamId="59dc0ba8-67d8-4eb3-8fbe-44e5b72a955e"
         template="react"
       />
     </div>
