@@ -1,8 +1,12 @@
 import * as React from "react";
 
-import { useSandpack, useSandpackClient, useSandpackShell } from "../..";
-import { usePreviewProgress } from "../../hooks/usePreviewProgress";
-import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
+import {
+  useSandpack,
+  useSandpackClient,
+  useSandpackShell,
+  useSandpackPreviewProgress,
+  useSandpackShellStdout,
+} from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
 import { fadeIn } from "../../styles/shared";
 import { classNames } from "../../utils/classNames";
@@ -60,7 +64,7 @@ export const SandpackConsole = React.forwardRef<
     } = useSandpack();
 
     const { iframe, clientId: internalClientId } = useSandpackClient();
-    const progressMessage = usePreviewProgress(3_000);
+    const progressMessage = useSandpackPreviewProgress(3_000);
 
     const { restart } = useSandpackShell();
 
