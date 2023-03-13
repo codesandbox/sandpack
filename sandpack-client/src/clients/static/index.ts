@@ -9,6 +9,7 @@ import type {
 } from "../..";
 import { SandpackClient } from "../base";
 import { EventEmitter } from "../event-emitter";
+import { fromBundlerFilesToFS } from "../node/client.utils";
 import type { SandpackNodeMessage } from "../node/types";
 
 export class SandpackStatic extends SandpackClient {
@@ -37,12 +38,20 @@ export class SandpackStatic extends SandpackClient {
   }
 
   public updateSandbox(
-    _sandboxSetup = this.sandboxSetup,
+    setup = this.sandboxSetup,
     _isInitializationCompile?: boolean
   ): void {
-    // Do stuff
+    const modules = fromBundlerFilesToFS(setup.files);
 
-    this.dispatch({ type: "done", compilatonError: false });
+    /**
+     * Pass init files to the bundler
+     */
+    this.dispatch({
+      codesandbox: true,
+      modules,
+      template: setup.template,
+      type: "compile",
+    });
   }
 
   private async compile(files: FilesMap): Promise<void> {
