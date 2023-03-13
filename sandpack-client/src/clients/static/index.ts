@@ -1,15 +1,20 @@
+import type { FilesMap } from "@codesandbox/nodebox";
+import { PreviewController } from "static-browser-server";
+
 import type {
   ClientOptions,
   ListenerFunction,
   SandboxSetup,
-  SandpackMessage,
   UnsubscribeFunction,
 } from "../..";
 import { SandpackClient } from "../base";
 import { EventEmitter } from "../event-emitter";
+import type { SandpackNodeMessage } from "../node/types";
 
 export class SandpackStatic extends SandpackClient {
   private emitter: EventEmitter;
+  private previewController: PreviewController;
+  private files: Map<string, string | Uint8Array> = new Map();
 
   constructor(
     selector: string | HTMLIFrameElement,
@@ -19,6 +24,16 @@ export class SandpackStatic extends SandpackClient {
     super(selector, sandboxSetup, options);
 
     this.emitter = new EventEmitter();
+    this.previewController = new PreviewController({
+      baseUrl: "https://nh3fd7-3000.preview.csb.app/",
+      getFileContent: (filepath) => {
+        const content = this.files.get(filepath);
+        if (!content) {
+          throw new Error("File not found");
+        }
+        return content;
+      },
+    });
   }
 
   public updateSandbox(
@@ -30,14 +45,27 @@ export class SandpackStatic extends SandpackClient {
     this.dispatch({ type: "done", compilatonError: false });
   }
 
+  private compile(files: FilesMap): void {
+    this.files = new Map(Object.entries(files));
+  }
+
   /**
    * Bundler communication
    */
-  public dispatch(message: SandpackMessage): void {
+  public dispatch(message: SandpackNodeMessage): void {
     switch (message.type) {
-      //   case "CUSTOM_STUFF":
-      //     this.CUSTOM_STUFF();
-      //     break;
+      case "compile":
+        this.compile(message.modules);
+        break;
+
+      // case "refresh":
+      //   await this.setLocationURLIntoIFrame();
+      //   break;
+
+      // case "urlback":
+      // case "urlforward":
+      //   this.iframe?.contentWindow?.postMessage(message, "*");
+      //   break;
 
       default:
         this.emitter.dispatch(message);
