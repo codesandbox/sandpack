@@ -16199,10 +16199,10 @@ state-toggle@^1.0.0:
   resolved "https://registry.yarnpkg.com/state-toggle/-/state-toggle-1.0.3.tgz#e123b16a88e143139b09c6852221bc9815917dfe"
   integrity sha512-d/5Z4/2iiCnHw6Xzghyhb+GcmF89bxwgXG60wjIiZaxnymbyOmI8Hk4VqHXiVVp6u2ysaskFfXg3ekCj4WNftQ==
 
-static-browser-server@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/static-browser-server/-/static-browser-server-1.0.1.tgz#f7a49a37dadaf839ed9b52f98ad3d18cd19055fd"
-  integrity sha512-GGEWI2EMRej5t4vbYgUFrpukdZtiuc0eWLVeSUhaZ6LVNrPSdGtJvsNGLuKTi/IFbxF/IgcSIsaJdwZKy8SuaQ==
+static-browser-server@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/static-browser-server/-/static-browser-server-1.0.2.tgz#e896197ddd6e3f5ba8a15bac0cd2c532b4d10e6e"
+  integrity sha512-Sp1+Wh9F6ne1H29giXYjpdfxEdXksV7PDoLpsD/iQySBb1OLeohZnQbpz6xDSZ/l/XyG5Dk9j7Ph2RDrpvX2fw==
   dependencies:
     "@open-draft/deferred-promise" "^2.1.0"
     dotenv "^16.0.3"
