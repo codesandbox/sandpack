@@ -293,7 +293,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
     }
 
     const unsubscribeQueuedClients = Object.values(
-      unsubscribeClientListeners.current[clientId]
+      unsubscribeClientListeners.current[clientId] ?? {}
     );
 
     // Unsubscribing all listener registered
