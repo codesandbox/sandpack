@@ -45,8 +45,17 @@ export class SandpackStatic extends SandpackClient {
     this.dispatch({ type: "done", compilatonError: false });
   }
 
-  private compile(files: FilesMap): void {
+  private async compile(files: FilesMap): Promise<void> {
     this.files = new Map(Object.entries(files));
+
+    const previewUrl = await this.previewController.initPreview();
+    this.dispatch({ type: "done", compilatonError: false });
+    this.dispatch({
+      type: "urlchange",
+      url: previewUrl,
+      back: false,
+      forward: false,
+    });
   }
 
   /**
