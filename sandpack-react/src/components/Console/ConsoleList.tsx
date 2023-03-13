@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { CodeEditor } from "..";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";
+import { CodeEditor } from "../CodeEditor";
 
 import { fromConsoleToString } from "./utils/fromConsoleToString";
 import type { SandpackConsoleData } from "./utils/getType";

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useSandpack, useSandpackShell } from "../..";
+import { useSandpack, useSandpackShell } from "../../hooks";
 import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
 import { css, THEME_PREFIX } from "../../styles";
 import { classNames } from "../../utils/classNames";

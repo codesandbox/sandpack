@@ -1,12 +1,12 @@
 import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { useSandpack } from "../..";
+import { useSandpack } from "../../hooks";
 import {
   useLoadingOverlayState,
   FADE_ANIMATION_DURATION,
 } from "../../hooks/useLoadingOverlayState";
-import { usePreviewProgress } from "../../hooks/usePreviewProgress";
+import { useSandpackPreviewProgress } from "../../hooks/useSandpackPreviewProgress";
 import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
 import { css, THEME_PREFIX } from "../../styles";
 import {
@@ -56,7 +56,7 @@ export const LoadingOverlay = ({
   const [shouldShowStdout, setShouldShowStdout] = React.useState(false);
 
   const loadingOverlayState = useLoadingOverlayState(clientId, loading);
-  const progressMessage = usePreviewProgress();
+  const progressMessage = useSandpackPreviewProgress();
   const { logs: stdoutData } = useSandpackShellStdout({});
 
   React.useEffect(() => {
