@@ -10,7 +10,7 @@
     "emitDecoratorMetadata": true,
     "noImplicitAny": true,
     "jsx": "react-jsx",
-    "outDir": "dist/types",
+    "outDir": "dist",
     "skipLibCheck": true
   },
   "include": ["src"],
