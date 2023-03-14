@@ -42,8 +42,8 @@ const configBase = [
       },
       {
         dir: "dist",
-        chunkFileNames: "[name]-[hash].mjs",
-        entryFileNames: "[name].mjs",
+        chunkFileNames: "[name]-[hash].esm.js",
+        entryFileNames: "[name].esm.js",
         exports: "named",
         format: "es",
         inlineDynamicImports: true,
@@ -82,8 +82,8 @@ const configBase = [
       },
       {
         dir: "dist/unstyled",
-        chunkFileNames: "[name]-[hash].mjs",
-        entryFileNames: "[name].mjs",
+        chunkFileNames: "[name]-[hash].esm.js",
+        entryFileNames: "[name].esm.js",
         exports: "named",
         format: "es",
         inlineDynamicImports: true,

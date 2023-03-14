@@ -15,12 +15,12 @@
   "exports": {
     "./unstyled": {
       "types": "./dist/unstyled/index.d.ts",
-      "import": "./dist/unstyled/index.mjs",
+      "import": "./dist/unstyled/index.esm.js",
       "require": "./dist/unstyled/index.js"
     },
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
+      "import": "./dist/index.esm.js",
       "require": "./dist/index.js"
     }
   },
