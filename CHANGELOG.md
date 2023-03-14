@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/codesandbox/sandpack/compare/v2.1.1...v2.1.2) (2023-03-07)
+
+
+### Bug Fixes
+
+* add vite-react-ts template ([#810](https://github.com/codesandbox/sandpack/issues/810)) ([924b704](https://github.com/codesandbox/sandpack/commit/924b704b5c2096d720bfbf28254af8e44ef86bf0))
+
+
+
+
+
 ## [2.1.1](https://github.com/codesandbox/sandpack/compare/v2.1.0...v2.1.1) (2023-03-06)
 
 
