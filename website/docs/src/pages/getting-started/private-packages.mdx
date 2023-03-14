@@ -61,7 +61,7 @@ It is important to us to ensure that the information and tokens of the npm regis
 
 ### Persisting the `auth` token
 
-The `auth` token is stored in our database in an encrypted form, using a key that's rolled and not available to the database itself. Even in the unlike event that our database would be compromised, your `auth` token would be encrypted and inaccessible.
+The `auth` token is stored in our database in an encrypted form, using a key that's rolled and not available to the database itself. Even in the unlikely event that our database gets compromised, your `auth` token would be encrypted and inaccessible.
 
 ### Single-Sandbox key
 
@@ -73,5 +73,5 @@ If they want to retrieve a package from the private npm registry, they will have
 
 Sandpack uses the HTTP Content-Security-Policy (CSP) frame-ancestors directive to validate parents' window that may embed the given sandpack iFrame.
 
-With this extra security layer, only websites you trust (and provide to us) can render and fetch private packages from your registry. This can avoid phishing websites and potential leakage of private data.
+With this extra security layer, only websites you trust (and provide to us) can render and fetch private packages from your registry. This can avoid phishing websites and the potential leakage of private data.
 
