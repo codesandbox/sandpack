@@ -10,5 +10,6 @@
   },
   "usage": "Usage",
   "layout": "Layout",
-  "themes": "Themes"
+  "themes": "Themes",
+  "private-packages": { "title": "Private packages", "label": "Pro" }
 }
