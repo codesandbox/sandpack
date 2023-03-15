@@ -61,7 +61,9 @@ export const ErrorOverlay: React.FC<
   );
 
   const onSignIn = () => {
-    dispatch({ type: "sign-in", teamId });
+    if (teamId) {
+      dispatch({ type: "sign-in", teamId });
+    }
   };
 
   if (privateDependencyError) {
