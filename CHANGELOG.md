@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.8](https://github.com/codesandbox/sandpack/compare/v2.1.7...v2.1.8) (2023-03-16)
+
+
+### Bug Fixes
+
+* reference error with sandpack-react/unstyled in typescript ([#842](https://github.com/codesandbox/sandpack/issues/842)) ([834d3c3](https://github.com/codesandbox/sandpack/commit/834d3c361284e0599bf72690f5ebc6ea38758287))
+
+
+
+
+
 ## [2.1.7](https://github.com/codesandbox/sandpack/compare/v2.1.6...v2.1.7) (2023-03-14)
 
 
