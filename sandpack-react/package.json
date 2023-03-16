@@ -10,11 +10,11 @@
   "license": "Apache-2.0",
   "author": "CodeSandbox",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "exports": {
     "./unstyled": {
-      "types": "./dist/unstyled/index.d.ts",
+      "types": "./dist/unstyled.d.ts",
       "import": "./dist/unstyled/index.esm.js",
       "require": "./dist/unstyled/index.js"
     },
@@ -22,6 +22,14 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
     }
   },
   "scripts": {
