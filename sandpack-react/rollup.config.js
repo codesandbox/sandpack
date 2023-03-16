@@ -5,6 +5,7 @@ const typescript = require("@rollup/plugin-typescript");
 const filesize = require("rollup-plugin-filesize");
 
 const pkg = require("./package.json");
+const generateUnstyledTypes = require("./scripts/rollup-generate-unstyled-types");
 const removeCss = require("./scripts/rollup-remove-css-transformer");
 
 const basePlugins = [commonjs({ requireReturnsDefault: "preferred" })];
@@ -70,6 +71,7 @@ const configBase = [
         compilerOptions: { outDir: "dist/unstyled/" },
       }),
       removeCss(),
+      generateUnstyledTypes(),
       filesize()
     ),
     output: [
