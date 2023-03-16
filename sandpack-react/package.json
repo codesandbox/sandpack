@@ -14,7 +14,7 @@
   "types": "dist/index.d.ts",
   "exports": {
     "./unstyled": {
-      "types": "./dist/unstyled.d.ts",
+      "types": "./dist/unstyled/index.d.ts",
       "import": "./dist/unstyled/index.esm.js",
       "require": "./dist/unstyled/index.js"
     },
