@@ -43,9 +43,9 @@ yarn add @codesandbox/nodebox
 
 ### Configure and connect
 
-To set up Nodebox, we have to provide a reference to an `<iframe>` element where the application's preview will be rendered.
+To set up Nodebox, first add an `<iframe>` to your browser element. This will provide a reference to where the application's preview will be rendered.
 
-
+In your Script element input the following: 
 ```js
 import { Nodebox } from '@codesandbox/nodebox';
 
@@ -56,26 +56,27 @@ const emulator = new Nodebox({
 await emulator.connect();
 ```
 
+This will Initialize a new Nodebox instance and link that instance to the preview element.
+
 ### Initialize file system
 
 Next, populate the emulator's file system with your project files.
 
-In this example, we will be running a simple HTTP server written in the `index.js` module.
+In this example, we will be running a simple HTTP server written in the `main.js` module.
 
 ```js
 await emulator.fs.init({
   'package.json': JSON.stringify({
     name: 'my-app',
   }),
-  'index.js': `
+  'main.js': `
 import http from 'http'
 
 const server = http.createServer((req, res) => {
   res.writeHead(200, {
     'Content-Type': 'text/plain'
   })
-  res.write('Hello world')
-  res.end()
+ res.end('Hello from Nodebox')
 })
 
 server.listen(3000, () => {
@@ -89,11 +90,19 @@ server.listen(3000, () => {
 
 ### Run project
 
-To run our project we need to execute the `index.js` module. Let's create a new shell and execute it there:
+To run our project we need to execute the `main.js` module. Let's create a new shell and execute it there:
 
 ```js
 const shell = emulator.shell.create();
-await shell.runCommand('node', ['index.js']);
+const serverCommand = await shell.runCommand("node", ["main.js"]);
+
+const { url } = await emulator.preview.getByShellId(serverCommand.id);
+
+// Preview Iframe to see output of code
+const previewIframe = document.getElementById("nodebox-preview-iframe");
+previewIframe.setAttribute("src", url);
 ```
 
 > You can use the same `shell` to control the process it's running (e.g. observe its `stdout`/`stderr`, terminate or restart it).
+
+Check out this [Nodebox example starter](https://codesandbox.io/p/sandbox/young-microservice-hgpbfd) and happy coding!
