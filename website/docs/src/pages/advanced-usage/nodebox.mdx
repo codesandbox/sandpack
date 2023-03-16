@@ -43,39 +43,40 @@ yarn add @codesandbox/nodebox
 
 ### Configure and connect
 
-To set up Nodebox, we have to provide a reference to an `<iframe>` element where the application's preview will be rendered.
+To set up Nodebox, first add an `<iframe>` to your html. Using the reference to this iframe nodebox can register itself and execute code inside the iframe without any security risks. To render previews you require a secondary `<iframe>`. In this example we have 2 iframes: `#nodebox-runtime-iframe` for running the node code and `#nodebox-runtime-preview` for rendering the output of the server.
 
-
+In your Script element input the following: 
 ```js
 import { Nodebox } from '@codesandbox/nodebox';
 
 const emulator = new Nodebox({
-  iframe: document.getElementById('preview'),
+  iframe: document.getElementById('nodebox-runtime-iframe'),
 });
 
 await emulator.connect();
 ```
 
+This will Initialize a new Nodebox instance and load the nodebox runtime in the `#nodebox-runtime-iframe` iframe, ready to execute your code.
+
 ### Initialize file system
 
 Next, populate the emulator's file system with your project files.
 
-In this example, we will be running a simple HTTP server written in the `index.js` module.
+In this example, we will be running a simple HTTP server written in the `main.js` module.
 
 ```js
 await emulator.fs.init({
   'package.json': JSON.stringify({
     name: 'my-app',
   }),
-  'index.js': `
+  'main.js': `
 import http from 'http'
 
 const server = http.createServer((req, res) => {
   res.writeHead(200, {
     'Content-Type': 'text/plain'
   })
-  res.write('Hello world')
-  res.end()
+ res.end('Hello from Nodebox')
 })
 
 server.listen(3000, () => {
@@ -89,11 +90,19 @@ server.listen(3000, () => {
 
 ### Run project
 
-To run our project we need to execute the `index.js` module. Let's create a new shell and execute it there:
+To run our project we need to execute the `main.js` module. Let's create a new shell and execute it there:
 
 ```js
 const shell = emulator.shell.create();
-await shell.runCommand('node', ['index.js']);
+const serverCommand = await shell.runCommand("node", ["main.js"]);
+
+const { url } = await emulator.preview.getByShellId(serverCommand.id);
+
+// Preview Iframe to see output of code
+const previewIframe = document.getElementById("nodebox-preview-iframe");
+previewIframe.setAttribute("src", url);
 ```
 
 > You can use the same `shell` to control the process it's running (e.g. observe its `stdout`/`stderr`, terminate or restart it).
+
+Check out this [Nodebox example starter](https://codesandbox.io/p/sandbox/young-microservice-hgpbfd) and happy coding!
