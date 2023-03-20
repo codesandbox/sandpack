@@ -116,7 +116,7 @@ export default defineConfig({
             vite: "^4.1.4",
             "vue-tsc": "^1.2.0",
             typescript: "^4.9.5",
-            "esbuild-wasm": "0.17.10",
+            "esbuild-wasm": "^0.17.12",
           },
         },
         null,
