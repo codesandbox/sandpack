@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.11](https://github.com/codesandbox/sandpack/compare/v2.1.10...v2.1.11) (2023-03-22)
+
+
+### Bug Fixes
+
+* **types:** incorrect typings for ErrorOverlay ([#855](https://github.com/codesandbox/sandpack/issues/855)) ([05f6625](https://github.com/codesandbox/sandpack/commit/05f66251b9cd36ac0d17b86dc3bcff0abb876f74))
+
+
+
+
+
 ## [2.1.10](https://github.com/codesandbox/sandpack/compare/v2.1.9...v2.1.10) (2023-03-20)
 
 **Note:** Version bump only for package sandpack
