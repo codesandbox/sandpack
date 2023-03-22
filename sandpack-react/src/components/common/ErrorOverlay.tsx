@@ -34,13 +34,11 @@ const mapBundlerErrors = (originalMessage: string): string => {
   return errorMessage;
 };
 
-export const ErrorOverlay: React.FC<
-  React.DOMAttributes<HTMLDivElement> & { children?: React.ReactNode }
-> = ({
-  children,
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
+export type ErrorOverlayProps = React.HTMLAttributes<HTMLDivElement> & {
+  children?: React.ReactNode;
+};
+export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
+  const { children, className, ...otherProps } = props;
   const errorMessage = useErrorMessage();
   const { restart } = useSandpackShell();
   const {
@@ -63,7 +61,7 @@ export const ErrorOverlay: React.FC<
           errorBundlerClassName,
           className
         )}
-        {...props}
+        {...otherProps}
       >
         <div className={classNames(c("error-message"), errorMessageClassName)}>
           <p className={classNames(css({ fontWeight: "bold" }))}>
@@ -103,7 +101,7 @@ export const ErrorOverlay: React.FC<
         className
       )}
       translate="no"
-      {...props}
+      {...otherProps}
     >
       <div className={classNames(c("error-message"), errorMessageClassName)}>
         {errorMessage || children}
