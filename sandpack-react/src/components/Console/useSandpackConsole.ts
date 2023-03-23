@@ -77,7 +77,7 @@ export const useSandpackConsole = ({
     }, clientId);
 
     return unsubscribe;
-  }, [showSyntaxError, maxMessageCount, clientId]);
+  }, [showSyntaxError, maxMessageCount, clientId, resetOnPreviewRestart]);
 
   return { logs, reset: (): void => setLogs([]) };
 };
