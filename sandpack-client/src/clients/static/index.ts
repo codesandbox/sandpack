@@ -48,7 +48,7 @@ export class SandpackStatic extends SandpackClient {
         const isHTMLFilePath =
           filepath.endsWith(".html") ||
           filepath.endsWith(".htm") ||
-          filepath === "/";
+          filepath.endsWith("/");
 
         if (isHTMLFilePath) {
           content = this.injectProtocolScript(content);
