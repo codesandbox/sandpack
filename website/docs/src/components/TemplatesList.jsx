@@ -4,6 +4,7 @@ import { SelectorList, SelectorListButton } from "./SelectorList";
 import styles from "./SelectorList.module.css";
 
 const logos = {
+  static: "/docs/logos/html.svg",
   react: "/docs/logos/react.svg",
   // "react-ts": "/docs/logos/react.svg",
   vue: "/docs/logos/vue.svg",

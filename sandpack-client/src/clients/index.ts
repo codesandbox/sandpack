@@ -11,10 +11,20 @@ export async function loadSandpackClient(
   options: ClientOptions = {}
 ): Promise<SandpackClientBase> {
   const template = sandboxSetup.template ?? "parcel";
-  const Client =
-    template === "node"
-      ? await import("./node").then((m) => m.SandpackNode)
-      : await import("./runtime").then((m) => m.SandpackRuntime);
+
+  let Client;
+
+  switch (template) {
+    case "node":
+      Client = await import("./node").then((m) => m.SandpackNode);
+      break;
+    case "static":
+      Client = await import("./static").then((m) => m.SandpackStatic);
+      break;
+
+    default:
+      Client = await import("./runtime").then((m) => m.SandpackRuntime);
+  }
 
   return new Client(iframeSelector, sandboxSetup, options);
 }

@@ -16,13 +16,15 @@ const stories = storiesOf("presets/Template", module);
 
 Object.keys(SANDBOX_TEMPLATES).forEach((template) =>
   stories.add(template, () => {
-    const isNode = SANDBOX_TEMPLATES[template].environment === "node";
+    const isNodeStatic =
+      SANDBOX_TEMPLATES[template].environment === "node" ||
+      SANDBOX_TEMPLATES[template].environment === "static";
 
     return (
       <SandpackProvider
         options={{
           bundlerTimeOut: 90000,
-          bundlerURL: isNode
+          bundlerURL: isNodeStatic
             ? undefined
             : "https://1-17-1-sandpack.codesandbox.io/",
         }}

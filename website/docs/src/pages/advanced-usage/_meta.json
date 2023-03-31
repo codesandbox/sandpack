@@ -4,5 +4,6 @@
   "hooks": "Hooks",
   "client": { "title": "Sandpack Client", "label": "JS" },
   "nodebox": { "title": "Nodebox", "label": "JS" },
+  "static": { "title": "Static", "label": "JS" },
   "bundlers": "Experimental bundler (beta)"
 }

@@ -1,0 +1,56 @@
+import Hero from "../../components/Hero";
+import { Callout, Tabs, Tab } from "nextra-theme-docs";
+
+<Hero
+  title="Static"
+  subtitle="Run a static web server in any browser."
+/>
+
+Our static template is powered by the NPM package [`static-browser-server`](https://www.npmjs.com/package/static-browser-server), which is documented here in case you'd like to use it outside of Sandpack.
+
+## Install static browser server
+
+<Tabs items={["npm", "yarn"]}>
+  <Tab>
+```shell
+npm i static-browser-server
+```
+  </Tab>
+
+  <Tab>
+```bash
+yarn add static-browser-server
+```
+  </Tab>
+</Tabs>
+
+### Setup the static server
+
+To setup a static browser server, setup a preview controller pointing to the static-browser-server preview [files](https://unpkg.com/browse/static-browser-server@latest/out/preview/) hosted on a wildcard domain. We're hosting the latest version at CodeSandbox on `https://preview.sandpack-static-server.codesandbox.io`, but feel free to self-host it. 
+
+<br/>
+```ts
+// Map of files
+const files = new Map<string, string>(["index.html", "Hello world!"]);
+
+// Setup a preview controller
+const controller = new PreviewController({
+  baseUrl: "https://preview.sandpack-static-server.codesandbox.io",
+  // Function to get the file content for the server this can also be async
+  getFileContent: (filepath) => {
+    const content = files.get(filepath);
+    if (!content) {
+        throw new Error("File not found");
+    }
+    return content;
+  },
+});
+
+// Initialize the preview
+// This will start up a relay frame and return a url which you can use to show the preview
+const previewUrl = await this.previewController.initPreview();
+
+// Create a preview frame and set the src url to the returned preview url
+const iframe = document.createElement("iframe");
+iframe.setAttribute("src", previewUrl);
+```
