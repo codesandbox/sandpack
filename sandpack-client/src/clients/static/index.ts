@@ -1,4 +1,5 @@
 import type { FilesMap } from "@codesandbox/nodebox";
+import type { FileContent } from "static-browser-server";
 import { PreviewController } from "static-browser-server";
 
 import type {
@@ -11,6 +12,10 @@ import { SandpackClient } from "../base";
 import { EventEmitter } from "../event-emitter";
 import { fromBundlerFilesToFS } from "../node/client.utils";
 import type { SandpackNodeMessage } from "../node/types";
+
+import { insertHtmlAfterRegex, readBuffer, writeBuffer } from "./utils";
+
+const INDEX_FILENAMES = ["index.html", "index.htm"];
 
 export class SandpackStatic extends SandpackClient {
   private emitter: EventEmitter;
@@ -33,11 +38,22 @@ export class SandpackStatic extends SandpackClient {
       baseUrl:
         options.bundlerURL ??
         "https://preview.sandpack-static-server.codesandbox.io",
+      // filepath is always normalized to start with / and not end with a slash
       getFileContent: (filepath) => {
-        const content = this.files.get(filepath);
+        let content = this.files.get(filepath);
+
         if (!content) {
-          throw new Error("File not found");
+          content = this.getIndexContent(filepath);
         }
+        const isHTMLFilePath =
+          filepath.endsWith(".html") ||
+          filepath.endsWith(".htm") ||
+          filepath === "/";
+
+        if (isHTMLFilePath) {
+          content = this.injectProtocolScript(content);
+        }
+
         return content;
       },
     });
@@ -62,6 +78,47 @@ export class SandpackStatic extends SandpackClient {
         "allow",
         "accelerometer; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi;"
       );
+    }
+  }
+
+  private injectProtocolScript(content: FileContent): FileContent {
+    const scriptToInsert = `<script>
+  window.addEventListener("message", (message) => {
+    if(message.data.type === "refresh") {
+      window.location.reload();
+    }
+  })
+</script>`;
+
+    // Make it a string
+    content = readBuffer(content);
+
+    // Inject script
+    content =
+      insertHtmlAfterRegex(/<head[^<>]*>/g, content, "\n" + scriptToInsert) ??
+      insertHtmlAfterRegex(
+        /<html[^<>]*>/g,
+        content,
+        "<head>\n" + scriptToInsert + "</head>\n"
+      ) ??
+      scriptToInsert + "\n" + content;
+
+    return writeBuffer(content);
+  }
+
+  private getIndexContent(filepath: string): string | Uint8Array {
+    const rootDir = filepath === "/" ? filepath : filepath + "/";
+    for (const indexFilename of INDEX_FILENAMES) {
+      const fullPath = rootDir + indexFilename;
+      const foundFile = this.files.get(fullPath);
+      if (foundFile) {
+        return foundFile;
+      }
+    }
+    if (rootDir === "/") {
+      return "<div>File not found</div>";
+    } else {
+      return this.getIndexContent("/");
     }
   }
 
@@ -106,11 +163,8 @@ export class SandpackStatic extends SandpackClient {
         this.compile(message.modules);
         break;
 
-      case "refresh":
-        this.iframe.contentDocument?.location.reload();
-        break;
-
       default:
+        this.iframe.contentWindow?.postMessage(message, "*");
         this.emitter.dispatch(message);
     }
   }
