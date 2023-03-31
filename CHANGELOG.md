@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/codesandbox/sandpack/compare/v2.1.11...v2.2.0) (2023-03-31)
+
+
+### Features
+
+* static template ([#830](https://github.com/codesandbox/sandpack/issues/830)) ([2b14ed2](https://github.com/codesandbox/sandpack/commit/2b14ed226c7fdfe49054c6efe732f7f9f560b23c))
+
+
+
+
+
 ## [2.1.11](https://github.com/codesandbox/sandpack/compare/v2.1.10...v2.1.11) (2023-03-22)
 
 
