@@ -30,7 +30,9 @@ export class SandpackStatic extends SandpackClient {
 
     this.emitter = new EventEmitter();
     this.previewController = new PreviewController({
-      baseUrl: options.bundlerURL ?? "https://nh3fd7-3000.preview.csb.app/",
+      baseUrl:
+        options.bundlerURL ??
+        "https://preview.sandpack-static-server.codesandbox.io",
       getFileContent: (filepath) => {
         const content = this.files.get(filepath);
         if (!content) {

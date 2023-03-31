@@ -26,15 +26,15 @@ yarn add static-browser-server
 
 ### Setup the static server
 
-To setup a static browser server, setup a preview controller pointing to the static-browser-server preview [files](https://unpkg.com/browse/static-browser-server@1.0.2/out/preview/) hosted on a wildcard domain. We're hosting the latest version at CodeSandbox on `https://<insert-domain-here>`, but feel free to self-host it. 
+To setup a static browser server, setup a preview controller pointing to the static-browser-server preview [files](https://unpkg.com/browse/static-browser-server@latest/out/preview/) hosted on a wildcard domain. We're hosting the latest version at CodeSandbox on `TODO`, but feel free to self-host it. 
 
-```js
+```ts
 // Map of files
 const files = new Map<string, string>(["index.html", "Hello world!"]);
 
 // Setup a preview controller
 const controller = new PreviewController({
-  baseUrl: options.bundlerURL ?? "https://nh3fd7-3000.preview.csb.app/",
+  baseUrl: "TODO",
   // Function to get the file content for the server this can also be async
   getFileContent: (filepath) => {
     const content = files.get(filepath);
