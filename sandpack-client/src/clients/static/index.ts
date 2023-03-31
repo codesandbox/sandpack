@@ -20,7 +20,6 @@ export class SandpackStatic extends SandpackClient {
   public iframe!: HTMLIFrameElement;
   public selector!: string;
   public element: Element;
-  private previewUrl: string | undefined;
 
   constructor(
     selector: string | HTMLIFrameElement,
@@ -86,13 +85,13 @@ export class SandpackStatic extends SandpackClient {
   private async compile(files: FilesMap): Promise<void> {
     this.files = new Map(Object.entries(files));
 
-    this.previewUrl = await this.previewController.initPreview();
-    this.iframe.setAttribute("src", this.previewUrl);
+    const previewUrl = await this.previewController.initPreview();
+    this.iframe.setAttribute("src", previewUrl);
 
     this.dispatch({ type: "done", compilatonError: false });
     this.dispatch({
       type: "urlchange",
-      url: this.previewUrl,
+      url: previewUrl,
       back: false,
       forward: false,
     });
