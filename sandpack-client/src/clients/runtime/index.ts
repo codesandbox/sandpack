@@ -31,9 +31,9 @@ const BUNDLER_URL =
   process.env.CODESANDBOX_ENV === "development"
     ? "http://localhost:3000/"
     : `https://${process.env.PACKAGE_VERSION?.replace(
-      /\./g,
-      "-"
-    )}-sandpack.codesandbox.io/`;
+        /\./g,
+        "-"
+      )}-sandpack.codesandbox.io/`;
 
 export class SandpackRuntime extends SandpackClient {
   fileResolverProtocol?: Protocol;
