@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/codesandbox/sandpack/compare/v2.2.0...v2.2.1) (2023-04-01)
+
+
+### Bug Fixes
+
+* **clients:** allow clipboard write ([#864](https://github.com/codesandbox/sandpack/issues/864)) ([7ec95e1](https://github.com/codesandbox/sandpack/commit/7ec95e1dfdbf1d943a6ef063f75dd14650bbba1a))
+
+
+
+
+
 # [2.2.0](https://github.com/codesandbox/sandpack/compare/v2.1.11...v2.2.0) (2023-03-31)
 
 
