@@ -38,7 +38,7 @@ export const useSandpackShellStdout = ({
             { data: message.payload.data!, id: generateRandomId() },
           ];
 
-          while (messages.length > MAX_MESSAGE_COUNT) {
+          while (messages.length > maxMessageCount) {
             messages.shift();
           }
 
