@@ -67,7 +67,7 @@ export const useSandpackConsole = ({
             }
           );
 
-          while (messages.length > MAX_MESSAGE_COUNT) {
+          while (messages.length > maxMessageCount) {
             messages.shift();
           }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { SandpackCodeEditor, SandpackPreview } from "..";
 import { SandpackProvider, SandpackLayout, Sandpack } from "../..";
@@ -182,3 +182,45 @@ console.log("foo");`,
     </SandpackLayout>
   </SandpackProvider>
 );
+
+export const MaxMessageCount = () => {
+  const [mode, setMode] = useState('client');
+  const [maxMessageCount, setMaxMessageCount] = useState(5);
+
+  return (
+    <>
+      <SandpackProvider
+        key={mode}
+        files={{
+          "/index.js": `new Array(10).fill('').forEach((_, i) => console.log(i));`,
+          "/package.json": JSON.stringify({
+            scripts: { start: "node index.js" },
+          }),
+        }}
+        options={{ visibleFiles: ["/index.js"], recompileDelay: 500 }}
+        template={mode === 'client' ? 'vanilla' : 'node'}
+      >
+        <SandpackLayout>
+          <SandpackCodeEditor />
+          <SandpackConsole standalone maxMessageCount={Number(maxMessageCount)} />
+        </SandpackLayout>
+        <div style={{
+          marginTop: 32,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 8,
+          justifyItems: 'left',
+          width: 'fit-content'
+        }}>
+          <button onClick={() => setMode(mode === 'client' ? 'server' : 'client')}>
+            Toggle mode: {mode}
+          </button>
+          <label style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            <span>Max Message Count</span>
+            <input type="number" value={maxMessageCount} onChange={e => setMaxMessageCount(+e.target.value)} />
+          </label>
+        </div>
+      </SandpackProvider>
+    </>
+  );
+}
