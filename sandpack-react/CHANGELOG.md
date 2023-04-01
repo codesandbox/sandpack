@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/codesandbox/sandpack/compare/v2.2.1...v2.2.2) (2023-04-01)
+
+
+### Bug Fixes
+
+* **SandpackConsole:** clear logs based on maxMessageCount option ([#866](https://github.com/codesandbox/sandpack/issues/866)) ([c8afd3e](https://github.com/codesandbox/sandpack/commit/c8afd3e35b7ee3021dc5c10ab1949e16f05cbaad))
+
+
+
+
+
 ## [2.2.1](https://github.com/codesandbox/sandpack/compare/v2.2.0...v2.2.1) (2023-04-01)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
