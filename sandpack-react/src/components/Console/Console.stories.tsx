@@ -184,7 +184,7 @@ console.log("foo");`,
 );
 
 export const MaxMessageCount = () => {
-  const [mode, setMode] = useState('client');
+  const [mode, setMode] = useState("client");
   const [maxMessageCount, setMaxMessageCount] = useState(5);
 
   return (
@@ -198,29 +198,40 @@ export const MaxMessageCount = () => {
           }),
         }}
         options={{ visibleFiles: ["/index.js"], recompileDelay: 500 }}
-        template={mode === 'client' ? 'vanilla' : 'node'}
+        template={mode === "client" ? "vanilla" : "node"}
       >
         <SandpackLayout>
           <SandpackCodeEditor />
-          <SandpackConsole standalone maxMessageCount={Number(maxMessageCount)} />
+          <SandpackConsole
+            standalone
+            maxMessageCount={Number(maxMessageCount)}
+          />
         </SandpackLayout>
-        <div style={{
-          marginTop: 32,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 8,
-          justifyItems: 'left',
-          width: 'fit-content'
-        }}>
-          <button onClick={() => setMode(mode === 'client' ? 'server' : 'client')}>
+        <div
+          style={{
+            marginTop: 32,
+            display: "flex",
+            flexDirection: "column",
+            gap: 8,
+            justifyItems: "left",
+            width: "fit-content",
+          }}
+        >
+          <button
+            onClick={() => setMode(mode === "client" ? "server" : "client")}
+          >
             Toggle mode: {mode}
           </button>
-          <label style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          <label style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             <span>Max Message Count</span>
-            <input type="number" value={maxMessageCount} onChange={e => setMaxMessageCount(+e.target.value)} />
+            <input
+              type="number"
+              value={maxMessageCount}
+              onChange={(e) => setMaxMessageCount(+e.target.value)}
+            />
           </label>
         </div>
       </SandpackProvider>
     </>
   );
-}
+};

@@ -131,7 +131,7 @@ export const SandpackConsole = React.forwardRef<
         )}
         {...props}
       >
-        {(showHeader || isNodeEnvironment) && (
+        {showHeader && isNodeEnvironment && (
           <Header
             currentTab={currentTab}
             node={isNodeEnvironment}
