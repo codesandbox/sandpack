@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.3](https://github.com/codesandbox/sandpack/compare/v2.2.2...v2.2.3) (2023-04-01)
+
+
+### Bug Fixes
+
+* **console:** add resetOnPreviewRestart to main useEffect hook ([#861](https://github.com/codesandbox/sandpack/issues/861)) ([abd8d39](https://github.com/codesandbox/sandpack/commit/abd8d394819725ee57cce720c397123525c10333))
+
+
+
+
+
 ## [2.2.2](https://github.com/codesandbox/sandpack/compare/v2.2.1...v2.2.2) (2023-04-01)
 
 
