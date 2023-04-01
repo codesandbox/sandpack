@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.4](https://github.com/codesandbox/sandpack/compare/v2.2.3...v2.2.4) (2023-04-01)
+
+
+### Bug Fixes
+
+* **SandpackConsole:** make showHeader flag works ([#867](https://github.com/codesandbox/sandpack/issues/867)) ([54fd641](https://github.com/codesandbox/sandpack/commit/54fd64181e5318c396815ecd58baa1e2316d75a8))
+
+
+
+
+
 ## [2.2.1](https://github.com/codesandbox/sandpack/compare/v2.2.0...v2.2.1) (2023-04-01)
 
 
