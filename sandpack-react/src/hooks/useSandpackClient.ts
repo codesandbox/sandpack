@@ -8,6 +8,7 @@ import * as React from "react";
 
 import type { SandpackState } from "../types";
 import { generateRandomId } from "../utils/stringUtils";
+import type { ClientPropsOverride } from "../contexts/utils/useClient";
 
 import { useSandpack } from "./useSandpack";
 
@@ -28,7 +29,9 @@ interface UseSandpackClient {
  *
  * @category Hooks
  */
-export const useSandpackClient = (): UseSandpackClient => {
+export const useSandpackClient = (
+  clientPropsOverride?: ClientPropsOverride
+): UseSandpackClient => {
   const { sandpack, listen, dispatch } = useSandpack();
   const iframeRef = React.useRef<HTMLIFrameElement | null>(null);
   const clientId = React.useRef<string>(generateRandomId());
@@ -38,7 +41,11 @@ export const useSandpackClient = (): UseSandpackClient => {
     const clientIdValue = clientId.current;
 
     if (iframeElement !== null) {
-      sandpack.registerBundler(iframeElement, clientIdValue);
+      sandpack.registerBundler(
+        iframeElement,
+        clientIdValue,
+        clientPropsOverride
+      );
     }
 
     return (): void => sandpack.unregisterBundler(clientIdValue);

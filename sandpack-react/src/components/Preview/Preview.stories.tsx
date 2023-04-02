@@ -84,6 +84,45 @@ export const WithNavigator: React.FC = () => (
   </SandpackProvider>
 );
 
+export const MultipleRoutePreviews: React.FC = () => {
+  const multiRoutePreviewCode = `
+    import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+    const router = createBrowserRouter([
+      { path: "/about", element: <div>About!</div> },
+      { path: "/careers", element: <div>Careers!</div> },
+    ]);
+
+    export default function MultiRoutePreviews() {
+      return <RouterProvider router={router} />;
+    }
+  `;
+
+  return (
+    <SandpackProvider
+      options={{ startRoute: "default" }}
+      files={{
+        "/App.js": multiRoutePreviewCode,
+        "package.json": JSON.stringify({
+          dependencies: {
+            react: "^18.0.0",
+            "react-dom": "^18.0.0",
+            "react-scripts": "^4.0.0",
+            "react-router-dom": "^6.10.0",
+          },
+          main: "/index.js",
+        }),
+      }}
+      template="react"
+    >
+      <SandpackLayout>
+        <SandpackPreview showNavigator startRoute="/about" />
+        <SandpackPreview showNavigator startRoute="/careers" />
+      </SandpackLayout>
+    </SandpackProvider>
+  );
+};
+
 export const AutoResize: React.FC = () => (
   <SandpackProvider
     files={{

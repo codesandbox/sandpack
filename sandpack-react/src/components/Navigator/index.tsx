@@ -48,19 +48,21 @@ const inputClassName = css({
 export interface NavigatorProps {
   clientId: string;
   onURLChange?: (newURL: string) => void;
+  startRoute?: string;
 }
 
 export const Navigator = ({
   clientId,
   onURLChange,
   className,
+  startRoute,
   ...props
 }: NavigatorProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const [baseUrl, setBaseUrl] = React.useState<string>("");
   const { sandpack, dispatch, listen } = useSandpack();
 
   const [relativeUrl, setRelativeUrl] = React.useState<string>(
-    sandpack.startRoute ?? "/"
+    startRoute ?? sandpack.startRoute ?? "/"
   );
 
   const [backEnabled, setBackEnabled] = React.useState(false);

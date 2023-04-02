@@ -19,6 +19,8 @@ import type { SANDBOX_TEMPLATES } from "./templates";
 
 import type { CodeEditorProps } from ".";
 
+import type { ClientPropsOverride } from "./contexts/utils/useClient";
+
 /**
  * ------------------------ Public documentation ------------------------
  *
@@ -541,7 +543,8 @@ export interface SandpackState {
   runSandpack: () => Promise<void>;
   registerBundler: (
     iframe: HTMLIFrameElement,
-    clientId: string
+    clientId: string,
+    clientPropsOverride?: ClientPropsOverride
   ) => Promise<void>;
   unregisterBundler: (clientId: string) => void;
   updateFile: (
