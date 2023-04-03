@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.6](https://github.com/codesandbox/sandpack/compare/v2.2.5...v2.2.6) (2023-04-03)
+
+
+### Bug Fixes
+
+* Don't add index logic to StaticSandbox ([#874](https://github.com/codesandbox/sandpack/issues/874)) ([146287b](https://github.com/codesandbox/sandpack/commit/146287b6fc09c6cf6335c1167f1425a3ec636614))
+
+
+
+
+
 ## [2.2.5](https://github.com/codesandbox/sandpack/compare/v2.2.4...v2.2.5) (2023-04-03)
 
 
