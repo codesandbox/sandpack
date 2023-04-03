@@ -133,7 +133,24 @@ export interface SandpackOptions {
    */
   initMode?: SandpackInitMode;
   initModeObserverOptions?: IntersectionObserverInit;
+  /**
+   * Determines whether or not the bundling process should start automatically
+   *  for a component in Sandpack. By default, when the component gets closer
+   *  to the viewport or when the page loads and the component is already in
+   *  the viewport, the bundling process will start automatically. However,
+   *  if this prop is set to false, the bundling process will only start when
+   *  triggered manually by the user.
+   */
   autorun?: boolean;
+  /**
+   * Determines whether or not the component should automatically reload when
+   *  changes are made to the code. When this prop is set to true, any changes
+   *  made to the code will trigger an automatic reload of the component,
+   * allowing the user to see the changes immediately. However, if this prop
+   *  is set to false, the component will need to be manually reloaded by the
+   *  user to see the changes.
+   */
+  autoReload?: boolean;
   recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;
 
@@ -424,6 +441,7 @@ export interface SandpackInternalOptions<
   initMode?: SandpackInitMode;
   initModeObserverOptions?: IntersectionObserverInit;
   autorun?: boolean;
+  autoReload?: boolean;
   recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;
   id?: string;
@@ -524,6 +542,8 @@ export interface SandpackState {
    */
   activeFile: string;
   startRoute?: string;
+
+  autoReload: boolean;
 
   /**
    * Returns the current state of the editor, meaning that any

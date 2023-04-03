@@ -164,11 +164,15 @@ export default function App() {
 `}
 </CodeBlock>
 
-### Autorun
+### Autorun & auto reload
 
-By default, the bundling process will start as soon as the component is getting closer to the viewport, or when the page loads, if the component is already in the viewport. But you can allow users to trigger the process manually.
+**`autorun`**
 
-When a Sandpack instance is not set on `autorun`, which is the default setting, it will show a `Run` button that initializes the bundling process. This can be handy in situations in which you don't want multiple sandpack instances to run everytime the user loads the page.
+Determines whether or not the bundling process should start automatically for a component in Sandpack. By default, when the component gets closer to the viewport or when the page loads and the component is already in the viewport, the bundling process will start automatically. However, if this prop is set to false, the bundling process will only start when triggered manually by the user.
+
+**`autoReload`**
+
+Determines whether or not the component should automatically reload when changes are made to the code. When this prop is set to true, any changes made to the code will trigger an automatic reload of the component, allowing the user to see the changes immediately. However, if this prop is set to false, the component will need to be manually reloaded by the user to see the changes.
 
 <CodeBlock stack>
 {`import { Sandpack } from "@codesandbox/sandpack-react";
@@ -178,7 +182,8 @@ export default function App() {
     <Sandpack 
       template="react"
       options={{
-        autorun: false
+        autorun: false,
+        autoReload: false
       }}
     />
   );
