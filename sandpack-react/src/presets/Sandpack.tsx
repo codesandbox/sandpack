@@ -245,6 +245,7 @@ export const Sandpack: SandpackInternal = ({
               style={topRowStyle}
             />
           )}
+          
           {mode === "tests" && (
             <SandpackTests
               actionsChildren={actionsChildren}
@@ -256,6 +257,7 @@ export const Sandpack: SandpackInternal = ({
             <SandpackConsole
               actionsChildren={actionsChildren}
               style={topRowStyle}
+              standalone
             />
           )}
 
