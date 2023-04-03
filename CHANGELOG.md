@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.9](https://github.com/codesandbox/sandpack/compare/v2.2.8...v2.2.9) (2023-04-03)
+
+
+### Bug Fixes
+
+* **static:** Don't crash at inserting runtime ([#878](https://github.com/codesandbox/sandpack/issues/878)) ([7da3346](https://github.com/codesandbox/sandpack/commit/7da3346aa0f79abc24c4ecf51fd7506bbf590dd7))
+
+
+
+
+
 ## [2.2.8](https://github.com/codesandbox/sandpack/compare/v2.2.7...v2.2.8) (2023-04-03)
 
 
