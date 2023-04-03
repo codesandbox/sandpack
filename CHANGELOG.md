@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.7](https://github.com/codesandbox/sandpack/compare/v2.2.6...v2.2.7) (2023-04-03)
+
+
+### Bug Fixes
+
+* **sandpack-content:** destroy current client in case it tries to run it again ([#875](https://github.com/codesandbox/sandpack/issues/875)) ([04298be](https://github.com/codesandbox/sandpack/commit/04298bef19e838d641dfb7e3a455dd190093cbb1))
+
+
+
+
+
 ## [2.2.6](https://github.com/codesandbox/sandpack/compare/v2.2.5...v2.2.6) (2023-04-03)
 
 
