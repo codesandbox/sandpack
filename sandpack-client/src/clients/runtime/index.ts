@@ -152,8 +152,16 @@ export class SandpackRuntime extends SandpackClient {
       ? new URL(this.options.startRoute, this.bundlerURL).toString()
       : this.bundlerURL;
 
-    this.iframe.contentWindow?.location.replace(urlSource);
-    this.iframe.src = urlSource;
+    const startRouteWithoutSlash = (
+      this.iframe.dataset.startRoute ?? "/"
+    ).replace(/^\/+/, "");
+    const previewUrlWithoutSlash = urlSource.replace(/\/+$/, "");
+
+    const urlWithStartRouter =
+      previewUrlWithoutSlash + "/" + startRouteWithoutSlash;
+
+    this.iframe.contentWindow?.location.replace(urlWithStartRouter);
+    this.iframe.src = urlWithStartRouter;
   }
 
   destroy(): void {

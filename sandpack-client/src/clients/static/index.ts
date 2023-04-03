@@ -45,6 +45,7 @@ export class SandpackStatic extends SandpackClient {
         if (!content) {
           content = this.getIndexContent(filepath);
         }
+
         const isHTMLFilePath =
           filepath.endsWith(".html") ||
           filepath.endsWith(".htm") ||
@@ -143,7 +144,16 @@ export class SandpackStatic extends SandpackClient {
     this.files = new Map(Object.entries(files));
 
     const previewUrl = await this.previewController.initPreview();
-    this.iframe.setAttribute("src", previewUrl);
+    
+      const startRouteWithoutSlash = (
+      this.iframe.dataset.startRoute ?? "/"
+    ).replace(/^\/+/, "");
+    const previewUrlWithoutSlash = previewUrl.replace(/\/+$/, "");
+
+    const urlWithStartRouter =
+      previewUrlWithoutSlash + "/" + startRouteWithoutSlash;
+
+    this.iframe.setAttribute("src", urlWithStartRouter);
 
     this.dispatch({ type: "done", compilatonError: false });
     this.dispatch({

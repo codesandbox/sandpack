@@ -219,7 +219,15 @@ export class SandpackNode extends SandpackClient {
 
   private async setLocationURLIntoIFrame(): Promise<void> {
     if (this.iframePreviewUrl) {
-      await loadPreviewIframe(this.iframe, this.iframePreviewUrl);
+      const startRouteWithoutSlash = (
+        this.iframe.dataset.startRoute ?? "/"
+      ).replace(/^\/+/, "");
+      const previewUrlWithoutSlash = this.iframePreviewUrl.replace(/\/+$/, "");
+
+      const urlWithStartRouter =
+        previewUrlWithoutSlash + "/" + startRouteWithoutSlash;
+
+      await loadPreviewIframe(this.iframe, urlWithStartRouter);
     }
   }
 

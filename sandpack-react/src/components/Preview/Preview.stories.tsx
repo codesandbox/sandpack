@@ -27,6 +27,45 @@ const code = `export default function Kitten() {
   );
 }`;
 
+export const MultipleRoutePreviews: React.FC = () => {
+  const multiRoutePreviewCode = `
+    import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+    const router = createBrowserRouter([
+      { path: "/", element: <div>Home!</div> },
+      { path: "/about", element: <div>About!</div> },
+      { path: "/careers", element: <div>Careers!</div> },
+    ]);
+    export default function MultiRoutePreviews() {
+      return <RouterProvider router={router} />;
+    }
+  `;
+
+  return (
+    <SandpackProvider
+      files={{
+        "/App.js": multiRoutePreviewCode,
+        "package.json": JSON.stringify({
+          dependencies: {
+            react: "^18.0.0",
+            "react-dom": "^18.0.0",
+            "react-scripts": "^4.0.0",
+            "react-router-dom": "^6.10.0",
+          },
+          main: "/index.js",
+        }),
+      }}
+      options={{ startRoute: "/" }}
+      template="react"
+    >
+      <SandpackLayout>
+        <SandpackPreview showNavigator />
+        <SandpackPreview startRoute="/about" showNavigator />
+        <SandpackPreview startRoute="/careers" showNavigator />
+      </SandpackLayout>
+    </SandpackProvider>
+  );
+};
+
 export const Component: React.FC = () => (
   <SandpackProvider
     files={{

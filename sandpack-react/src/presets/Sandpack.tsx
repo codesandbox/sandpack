@@ -245,7 +245,7 @@ export const Sandpack: SandpackInternal = ({
               style={topRowStyle}
             />
           )}
-          
+
           {mode === "tests" && (
             <SandpackTests
               actionsChildren={actionsChildren}
