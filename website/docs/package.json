@@ -8,6 +8,7 @@
     "dev": "next",
     "debug": "NODE_OPTIONS='--inspect' next",
     "start": "next start",
+    "build:deps": "yarn workspace @codesandbox/sandpack-client build && yarn workspace @codesandbox/sandpack-react build && yarn workspace @codesandbox/sandpack-themes build",
     "build": "next build",
     "test-docs": "alex pages/**/"
   },

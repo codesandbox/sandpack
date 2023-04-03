@@ -1,0 +1,54 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - cf-pages
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      deployments: write
+
+    strategy:
+      matrix:
+        include:
+          - projectName: 'sandpack-landing'
+            path: website/landing
+            NEXT_PUBLIC_AMPLITUDE_API_KEY: a205ed9b06a7baf5a594bdd30293aa80
+          - projectName: 'sandpack-docs'
+            path: website/docs
+            NEXT_PUBLIC_AMPLITUDE_API_KEY: a205ed9b06a7baf5a594bdd30293aa80
+          - projectName: 'sandpack-theme'
+            path: website/theme
+            NEXT_PUBLIC_AMPLITUDE_API_KEY: a205ed9b06a7baf5a594bdd30293aa80
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node env
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile --silent
+
+      - name: Run build
+        run: cd ${{ matrix.path }} && yarn build:deps && yarn build
+        env:
+          NEXT_PUBLIC_AMPLITUDE_API_KEY: ${{ matrix.NEXT_PUBLIC_AMPLITUDE_API_KEY }}
+
+      - name: Publish
+        uses: cloudflare/pages-action@v1.4.1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ matrix.projectName }}
+          directory: ./out
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
