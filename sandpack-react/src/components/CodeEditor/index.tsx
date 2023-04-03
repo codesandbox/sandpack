@@ -117,7 +117,9 @@ export const SandpackCodeEditor = React.forwardRef<
             wrapContent={wrapContent}
           />
 
-          {showRunButton && status === "idle" ? <RunButton /> : null}
+          {!sandpack.autoReload || (showRunButton && status === "idle") ? (
+            <RunButton />
+          ) : null}
         </div>
       </SandpackStack>
     );

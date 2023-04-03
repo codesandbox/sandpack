@@ -133,7 +133,14 @@ export interface SandpackOptions {
    */
   initMode?: SandpackInitMode;
   initModeObserverOptions?: IntersectionObserverInit;
+  /**
+   * TODO: docs
+   */
   autorun?: boolean;
+  /**
+   * TODO: docs
+   */
+  autoReload?: boolean;
   recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;
 
@@ -424,6 +431,7 @@ export interface SandpackInternalOptions<
   initMode?: SandpackInitMode;
   initModeObserverOptions?: IntersectionObserverInit;
   autorun?: boolean;
+  autoReload?: boolean;
   recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;
   id?: string;
@@ -524,6 +532,8 @@ export interface SandpackState {
    */
   activeFile: string;
   startRoute?: string;
+
+  autoReload: boolean;
 
   /**
    * Returns the current state of the editor, meaning that any
