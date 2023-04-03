@@ -208,7 +208,13 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
   const runSandpack = useCallback(async (): Promise<void> => {
     await Promise.all(
       Object.keys(preregisteredIframes.current).map(async (clientId) => {
+        // There's already a client if the same id, so we should destroy it
+        if (clients.current[clientId]) {
+          clients.current[clientId].destroy();
+        }
+
         const iframe = preregisteredIframes.current[clientId];
+
         clients.current[clientId] = await createClient(iframe, clientId);
       })
     );
