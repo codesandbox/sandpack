@@ -19,12 +19,15 @@ jobs:
           - projectName: 'sandpack-landing'
             path: website/landing
             NEXT_PUBLIC_AMPLITUDE_API_KEY: a205ed9b06a7baf5a594bdd30293aa80
+            buildCommand: cd website/landing && yarn build:deps && npx @cloudflare/next-on-pages --experimental-minify
           - projectName: 'sandpack-docs'
             path: website/docs
             NEXT_PUBLIC_AMPLITUDE_API_KEY: a205ed9b06a7baf5a594bdd30293aa80
+            buildCommand: yarn build && cd website/docs && npx @cloudflare/next-on-pages --experimental-minify
           - projectName: 'sandpack-theme'
             path: website/theme
             NEXT_PUBLIC_AMPLITUDE_API_KEY: a205ed9b06a7baf5a594bdd30293aa80
+            buildCommand: cd website/theme && yarn build:deps && npx @cloudflare/next-on-pages --experimental-minify
 
     steps:
       - name: Checkout
@@ -40,7 +43,7 @@ jobs:
         run: yarn --frozen-lockfile --silent
 
       - name: Run build
-        run: cd ${{ matrix.path }} && yarn build:deps && yarn build
+        run: ${{ matrix.buildCommand }}
         env:
           NEXT_PUBLIC_AMPLITUDE_API_KEY: ${{ matrix.NEXT_PUBLIC_AMPLITUDE_API_KEY }}
 
@@ -48,7 +51,7 @@ jobs:
         uses: cloudflare/pages-action@v1.4.1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          accountId: 0e922dabe6dbbcdecdb3a09dca5bbd55
           projectName: ${{ matrix.projectName }}
-          directory: ./out
+          directory: ${{ matrix.path }}/.vercel/output/static
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
