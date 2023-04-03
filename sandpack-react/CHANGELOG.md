@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.8](https://github.com/codesandbox/sandpack/compare/v2.2.7...v2.2.8) (2023-04-03)
+
+
+### Bug Fixes
+
+* **sandpack client:** introduce auto reload ([#877](https://github.com/codesandbox/sandpack/issues/877)) ([4a591fc](https://github.com/codesandbox/sandpack/commit/4a591fc00d80666fb5b301e87f4b0f565c3207f4))
+
+
+
+
+
 ## [2.2.7](https://github.com/codesandbox/sandpack/compare/v2.2.6...v2.2.7) (2023-04-03)
 
 
