@@ -2,10 +2,9 @@
 import * as themes from "@codesandbox/sandpack-themes";
 import React from "react";
 
-import { SandpackCodeEditor, SandpackPreview } from "./components";
-import { useSandpack } from "./hooks";
+import { SandpackCodeEditor, SandpackConsole } from "./components";
 
-import { Sandpack, SandpackProvider } from "./";
+import { Sandpack, SandpackLayout, SandpackProvider } from "./";
 
 export default {
   title: "Intro/Playground",
@@ -46,36 +45,3 @@ console.log("foo");`,
     template="node"
   />
 );
-
-export const RunExample = () => {
-  return (
-    <div className="App">
-      <SandpackProvider
-        options={{
-          autorun: false,
-        }}
-        template="vanilla-ts"
-      >
-        <SandpackCodeEditor />
-        <SandpackPreview />
-        <RunButton />
-      </SandpackProvider>
-    </div>
-  );
-};
-
-// Allows running sandpack programatically
-// However, the bug is that the values are stale:
-function RunButton() {
-  const { sandpack } = useSandpack();
-
-  return (
-    <button
-      onClick={() => {
-        sandpack.runSandpack();
-      }}
-    >
-      Run
-    </button>
-  );
-}
