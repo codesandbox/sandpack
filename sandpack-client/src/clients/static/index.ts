@@ -13,7 +13,7 @@ import { EventEmitter } from "../event-emitter";
 import { fromBundlerFilesToFS } from "../node/client.utils";
 import type { SandpackNodeMessage } from "../node/types";
 
-import { insertHtmlAfterRegex, readBuffer, writeBuffer } from "./utils";
+import { insertHtmlAfterRegex, readBuffer } from "./utils";
 
 export class SandpackStatic extends SandpackClient {
   private emitter: EventEmitter;
@@ -43,7 +43,11 @@ export class SandpackStatic extends SandpackClient {
           throw new Error("File not found");
         }
         if (filepath.endsWith(".html") || filepath.endsWith(".htm")) {
-          content = this.injectProtocolScript(content);
+          try {
+            content = this.injectProtocolScript(content);
+          } catch (err) {
+            console.error("Runtime injection failed", err);
+          }
         }
         return content;
       },
@@ -94,7 +98,7 @@ export class SandpackStatic extends SandpackClient {
       ) ??
       scriptToInsert + "\n" + content;
 
-    return writeBuffer(content);
+    return content;
   }
 
   public updateSandbox(
