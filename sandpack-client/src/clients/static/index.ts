@@ -45,6 +45,10 @@ export class SandpackStatic extends SandpackClient {
         if (filepath.endsWith(".html") || filepath.endsWith(".htm")) {
           try {
             content = this.injectProtocolScript(content);
+            content = this.injectHiddenHeadTags(
+              content,
+              options.hiddenHeadTags
+            );
           } catch (err) {
             console.error("Runtime injection failed", err);
           }
@@ -76,6 +80,26 @@ export class SandpackStatic extends SandpackClient {
     }
   }
 
+  private injectContentIntoHead(
+    content: FileContent,
+    contentToInsert: string
+  ): FileContent {
+    // Make it a string
+    content = readBuffer(content);
+
+    // Inject script
+    content =
+      insertHtmlAfterRegex(/<head[^<>]*>/g, content, "\n" + contentToInsert) ??
+      insertHtmlAfterRegex(
+        /<html[^<>]*>/g,
+        content,
+        "<head>\n" + contentToInsert + "</head>\n"
+      ) ??
+      contentToInsert + "\n" + content;
+
+    return content;
+  }
+
   private injectProtocolScript(content: FileContent): FileContent {
     const scriptToInsert = `<script>
   window.addEventListener("message", (message) => {
@@ -85,20 +109,25 @@ export class SandpackStatic extends SandpackClient {
   })
 </script>`;
 
-    // Make it a string
-    content = readBuffer(content);
+    return this.injectContentIntoHead(content, scriptToInsert);
+  }
 
-    // Inject script
-    content =
-      insertHtmlAfterRegex(/<head[^<>]*>/g, content, "\n" + scriptToInsert) ??
-      insertHtmlAfterRegex(
-        /<html[^<>]*>/g,
-        content,
-        "<head>\n" + scriptToInsert + "</head>\n"
-      ) ??
-      scriptToInsert + "\n" + content;
+  private injectHiddenHeadTags(
+    content: FileContent,
+    tags: ClientOptions["hiddenHeadTags"]
+  ): FileContent {
+    const linksToInsert =
+      tags?.links?.map(
+        (link) => `<link rel="${link.rel}" href="${link.href}">`
+      ) ?? [];
 
-    return content;
+    const scriptsToInsert =
+      tags?.scripts?.map((script) => `<script src="${script.src}"></script>`) ??
+      [];
+
+    const tagsToInsert = [...linksToInsert, ...scriptsToInsert].join("\n");
+
+    return this.injectContentIntoHead(content, tagsToInsert);
   }
 
   public updateSandbox(

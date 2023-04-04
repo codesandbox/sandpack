@@ -59,6 +59,14 @@ export interface ClientOptions {
    * to retrieve npm packages from your own npm registry.
    */
   customNpmRegistries?: NpmRegistry[];
+
+  /**
+   * Configuration for hidden `link` and `script` tags.
+   */
+  hiddenHeadTags?: {
+    links?: { rel: string; href: string }[];
+    scripts?: { src: string }[];
+  };
 }
 
 export interface SandboxSetup {

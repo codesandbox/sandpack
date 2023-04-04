@@ -453,6 +453,10 @@ export interface SandpackInternalOptions<
   fileResolver?: FileResolver;
   externalResources?: string[];
   classes?: Record<string, string>;
+  hiddenHeadTags?: {
+    links?: { rel: string; href: string }[];
+    scripts?: { src: string }[];
+  };
 }
 
 interface SandpackInternalProps<
