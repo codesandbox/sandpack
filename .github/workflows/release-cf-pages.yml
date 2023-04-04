@@ -20,10 +20,10 @@ jobs:
             path: website/landing
             NEXT_PUBLIC_AMPLITUDE_API_KEY: a205ed9b06a7baf5a594bdd30293aa80
             buildCommand: cd website/landing && yarn build:deps && npx @cloudflare/next-on-pages --experimental-minify
-          - projectName: 'sandpack-docs'
-            path: website/docs
-            NEXT_PUBLIC_AMPLITUDE_API_KEY: a205ed9b06a7baf5a594bdd30293aa80
-            buildCommand: yarn build && cd website/docs && npx @cloudflare/next-on-pages --experimental-minify
+          # - projectName: 'sandpack-docs'
+          #   path: website/docs
+          #   NEXT_PUBLIC_AMPLITUDE_API_KEY: a205ed9b06a7baf5a594bdd30293aa80
+          #   buildCommand: yarn build && cd website/docs && npx @cloudflare/next-on-pages --experimental-minify
           - projectName: 'sandpack-theme'
             path: website/theme
             NEXT_PUBLIC_AMPLITUDE_API_KEY: a205ed9b06a7baf5a594bdd30293aa80
