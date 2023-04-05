@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/codesandbox/sandpack/compare/v2.2.9...v2.3.0) (2023-04-05)
+
+
+### Features
+
+* **Preview:** add startRoute prop to override Provider default ([#868](https://github.com/codesandbox/sandpack/issues/868)) ([bc28871](https://github.com/codesandbox/sandpack/commit/bc288719afd057d8699cf10de13f905bf1dcded9))
+
+
+
+
+
 ## [2.2.9](https://github.com/codesandbox/sandpack/compare/v2.2.8...v2.2.9) (2023-04-03)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
