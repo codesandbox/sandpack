@@ -1,6 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment, @typescript-eslint/explicit-function-return-type, no-restricted-globals */
+/* eslint-disable @typescript-eslint/ban-ts-comment, @typescript-eslint/explicit-function-return-type, no-restricted-globals, @typescript-eslint/no-explicit-any  */
 
-export function setupHistoryListeners() {
+export function setupHistoryListeners({ scope }: { scope: any }) {
+  const channelId = scope?.channelId;
+
   // @ts-ignore
   const origHistoryProto = window.history.__proto__;
 
@@ -14,6 +16,7 @@ export function setupHistoryListeners() {
         url,
         back: historyPosition > 0,
         forward: historyPosition < historyList.length - 1,
+        channelId,
       },
       "*"
     );

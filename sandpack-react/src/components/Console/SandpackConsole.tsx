@@ -192,7 +192,7 @@ export const SandpackConsole = React.forwardRef<
 
         {standalone && (
           <>
-            <DependenciesProgress />
+            <DependenciesProgress clientId={clientId} />
             <iframe ref={iframe} />
           </>
         )}

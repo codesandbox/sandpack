@@ -55,22 +55,6 @@ export const Viewport: Story<PreviewProps> = (args) => (
   </SandpackProvider>
 );
 
-Viewport.argTypes = {
-  viewportSize: {
-    control: {
-      type: "select",
-      options: [
-        "iPhone X",
-        "iPad",
-        "Pixel 2",
-        "Moto G4",
-        "Surface Duo",
-        "auto",
-      ],
-    },
-  },
-};
-
 export const WithNavigator: React.FC = () => (
   <SandpackProvider
     files={{
@@ -85,39 +69,20 @@ export const WithNavigator: React.FC = () => (
 );
 
 export const MultipleRoutePreviews: React.FC = () => {
-  const multiRoutePreviewCode = `
-    import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-    const router = createBrowserRouter([
-      { path: "/about", element: <div>About!</div> },
-      { path: "/careers", element: <div>Careers!</div> },
-    ]);
-
-    export default function MultiRoutePreviews() {
-      return <RouterProvider router={router} />;
-    }
-  `;
-
   return (
     <SandpackProvider
-      options={{ startRoute: "default" }}
       files={{
-        "/App.js": multiRoutePreviewCode,
-        "package.json": JSON.stringify({
-          dependencies: {
-            react: "^18.0.0",
-            "react-dom": "^18.0.0",
-            "react-scripts": "^4.0.0",
-            "react-router-dom": "^6.10.0",
-          },
-          main: "/index.js",
-        }),
+        "/pages/index.js": `export default () => "Home"`,
+        "/pages/about.js": `export default () => "About"`,
+        "/pages/careers.js": `export default () => "Careers"`,
       }}
-      template="react"
+      options={{ startRoute: "/" }}
+      template="nextjs"
     >
       <SandpackLayout>
-        <SandpackPreview showNavigator startRoute="/about" />
-        <SandpackPreview showNavigator startRoute="/careers" />
+        <SandpackPreview showNavigator />
+        <SandpackPreview startRoute="/about" showNavigator />
+        <SandpackPreview startRoute="/careers" showNavigator />
       </SandpackLayout>
     </SandpackProvider>
   );

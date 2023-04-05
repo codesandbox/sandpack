@@ -27,6 +27,7 @@ import {
   findStartScriptPackageJson,
   getMessageFromError,
   writeBuffer,
+  generateRandomId,
 } from "./client.utils";
 import { loadPreviewIframe, setPreviewIframeProperties } from "./iframe.utils";
 import { injectScriptToIframe } from "./inject-scripts";
@@ -43,6 +44,7 @@ export class SandpackNode extends SandpackClient {
   private emulatorCommand: [string, string[], ShellCommandOptions] | undefined;
   private iframePreviewUrl: string | undefined;
   private _modulesCache = new Map();
+  private messageChannelId = generateRandomId();
 
   // Public
   public iframe!: HTMLIFrameElement;
@@ -176,7 +178,7 @@ export class SandpackNode extends SandpackClient {
 
     const { url } = await this.emulator.preview.getByShellId(id);
 
-    this.iframePreviewUrl = url;
+    this.iframePreviewUrl = url + this.options.startRoute;
   }
 
   /**
@@ -243,19 +245,22 @@ export class SandpackNode extends SandpackClient {
   private async globalListeners(): Promise<void> {
     window.addEventListener("message", (event) => {
       if (event.data.type === PREVIEW_LOADED_MESSAGE_TYPE) {
-        injectScriptToIframe(this.iframe);
+        injectScriptToIframe(this.iframe, this.messageChannelId);
       }
 
-      if (event.data.type === "urlchange") {
+      if (
+        event.data.type === "urlchange" &&
+        event.data.channelId === this.messageChannelId
+      ) {
         this.dispatch({
           type: "urlchange",
           url: event.data.url,
           back: event.data.back,
           forward: event.data.forward,
         });
+      } else if (event.data.channelId === this.messageChannelId) {
+        this.dispatch(event.data);
       }
-
-      this.dispatch(event.data);
     });
 
     await this.emulator.fs.watch(
