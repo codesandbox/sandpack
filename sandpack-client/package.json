@@ -44,7 +44,8 @@
     "build:publish": "yarn build && gulp",
     "build:bundler": "gulp",
     "format": "prettier --write '**/*.{ts,tsx,js,jsx}'",
-    "format:check": "prettier --check '**/*.{ts,tsx}'"
+    "format:check": "prettier --check '**/*.{ts,tsx}'",
+    "dev": "yarn build -- --watch"
   },
   "files": [
     "dist",
