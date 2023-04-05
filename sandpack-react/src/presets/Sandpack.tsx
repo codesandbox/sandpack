@@ -62,6 +62,7 @@ export const Sandpack: SandpackInternal = ({
     recompileMode: options.recompileMode,
     recompileDelay: options.recompileDelay,
     autorun: options.autorun,
+    autoReload: options.autoReload,
     bundlerURL: options.bundlerURL,
     startRoute: options.startRoute,
     skipEval: options.skipEval,
@@ -245,6 +246,7 @@ export const Sandpack: SandpackInternal = ({
               style={topRowStyle}
             />
           )}
+
           {mode === "tests" && (
             <SandpackTests
               actionsChildren={actionsChildren}
@@ -256,6 +258,7 @@ export const Sandpack: SandpackInternal = ({
             <SandpackConsole
               actionsChildren={actionsChildren}
               style={topRowStyle}
+              standalone
             />
           )}
 

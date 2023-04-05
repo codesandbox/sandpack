@@ -12,19 +12,18 @@ export const insertHtmlAfterRegex = (
   }
 };
 
-export const writeBuffer = (
-  content: string | Uint8Array,
-  encoding: BufferEncoding = "utf8"
-): Uint8Array => {
+export const writeBuffer = (content: string | Uint8Array): Uint8Array => {
   if (typeof content === "string") {
-    return Buffer.from(content, encoding);
+    return new TextEncoder().encode(content);
   } else {
     return content;
   }
 };
 
 export const readBuffer = (content: string | Uint8Array): string => {
-  if (typeof content === "string") return content;
-
-  return Buffer.from(content).toString("utf-8");
+  if (typeof content === "string") {
+    return content;
+  } else {
+    return new TextDecoder().decode(content);
+  }
 };

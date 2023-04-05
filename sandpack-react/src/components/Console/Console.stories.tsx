@@ -203,8 +203,8 @@ export const MaxMessageCount = () => {
         <SandpackLayout>
           <SandpackCodeEditor />
           <SandpackConsole
-            standalone
             maxMessageCount={Number(maxMessageCount)}
+            standalone
           />
         </SandpackLayout>
         <div
@@ -225,9 +225,9 @@ export const MaxMessageCount = () => {
           <label style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             <span>Max Message Count</span>
             <input
+              onChange={(e) => setMaxMessageCount(+e.target.value)}
               type="number"
               value={maxMessageCount}
-              onChange={(e) => setMaxMessageCount(+e.target.value)}
             />
           </label>
         </div>

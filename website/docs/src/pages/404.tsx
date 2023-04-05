@@ -1,4 +1,5 @@
 import { Sandpack } from "@codesandbox/sandpack-react";
+import Link from "next/link";
 
 const PageNotFound: React.FC = () => {
   return (
@@ -9,7 +10,10 @@ const PageNotFound: React.FC = () => {
         </h1>
 
         <div className="theme-doc-markdown markdown nx-mt-2 nx-mb-8">
-          <p>Oops! We can't find this page.</p>
+          <p>
+            Oops! We can't find this page. <Link href="/">Go back</Link> to
+            homepage to.
+          </p>
         </div>
 
         <Sandpack

@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.9](https://github.com/codesandbox/sandpack/compare/v2.2.8...v2.2.9) (2023-04-03)
+
+
+### Bug Fixes
+
+* **static:** Don't crash at inserting runtime ([#878](https://github.com/codesandbox/sandpack/issues/878)) ([7da3346](https://github.com/codesandbox/sandpack/commit/7da3346aa0f79abc24c4ecf51fd7506bbf590dd7))
+
+
+
+
+
+## [2.2.8](https://github.com/codesandbox/sandpack/compare/v2.2.7...v2.2.8) (2023-04-03)
+
+
+### Bug Fixes
+
+* **sandpack client:** introduce auto reload ([#877](https://github.com/codesandbox/sandpack/issues/877)) ([4a591fc](https://github.com/codesandbox/sandpack/commit/4a591fc00d80666fb5b301e87f4b0f565c3207f4))
+
+
+
+
+
+## [2.2.7](https://github.com/codesandbox/sandpack/compare/v2.2.6...v2.2.7) (2023-04-03)
+
+
+### Bug Fixes
+
+* **sandpack-content:** destroy current client in case it tries to run it again ([#875](https://github.com/codesandbox/sandpack/issues/875)) ([04298be](https://github.com/codesandbox/sandpack/commit/04298bef19e838d641dfb7e3a455dd190093cbb1))
+
+
+
+
+
+## [2.2.6](https://github.com/codesandbox/sandpack/compare/v2.2.5...v2.2.6) (2023-04-03)
+
+
+### Bug Fixes
+
+* Don't add index logic to StaticSandbox ([#874](https://github.com/codesandbox/sandpack/issues/874)) ([146287b](https://github.com/codesandbox/sandpack/commit/146287b6fc09c6cf6335c1167f1425a3ec636614))
+
+
+
+
+
+## [2.2.5](https://github.com/codesandbox/sandpack/compare/v2.2.4...v2.2.5) (2023-04-03)
+
+
+### Bug Fixes
+
+* **sandpack preset:** use standalone mode for console layout ([#872](https://github.com/codesandbox/sandpack/issues/872)) ([6b52a72](https://github.com/codesandbox/sandpack/commit/6b52a72274107fa3d15b864ad68026308110f72f))
+
+
+
+
+
 ## [2.2.4](https://github.com/codesandbox/sandpack/compare/v2.2.3...v2.2.4) (2023-04-01)
 
 

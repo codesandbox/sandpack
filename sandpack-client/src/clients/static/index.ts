@@ -13,9 +13,7 @@ import { EventEmitter } from "../event-emitter";
 import { fromBundlerFilesToFS } from "../node/client.utils";
 import type { SandpackNodeMessage } from "../node/types";
 
-import { insertHtmlAfterRegex, readBuffer, writeBuffer } from "./utils";
-
-const INDEX_FILENAMES = ["index.html", "index.htm"];
+import { insertHtmlAfterRegex, readBuffer } from "./utils";
 
 export class SandpackStatic extends SandpackClient {
   private emitter: EventEmitter;
@@ -41,19 +39,16 @@ export class SandpackStatic extends SandpackClient {
       // filepath is always normalized to start with / and not end with a slash
       getFileContent: (filepath) => {
         let content = this.files.get(filepath);
-
         if (!content) {
-          content = this.getIndexContent(filepath);
+          throw new Error("File not found");
         }
-        const isHTMLFilePath =
-          filepath.endsWith(".html") ||
-          filepath.endsWith(".htm") ||
-          filepath.endsWith("/");
-
-        if (isHTMLFilePath) {
-          content = this.injectProtocolScript(content);
+        if (filepath.endsWith(".html") || filepath.endsWith(".htm")) {
+          try {
+            content = this.injectProtocolScript(content);
+          } catch (err) {
+            console.error("Runtime injection failed", err);
+          }
         }
-
         return content;
       },
     });
@@ -103,23 +98,7 @@ export class SandpackStatic extends SandpackClient {
       ) ??
       scriptToInsert + "\n" + content;
 
-    return writeBuffer(content);
-  }
-
-  private getIndexContent(filepath: string): string | Uint8Array {
-    const rootDir = filepath === "/" ? filepath : filepath + "/";
-    for (const indexFilename of INDEX_FILENAMES) {
-      const fullPath = rootDir + indexFilename;
-      const foundFile = this.files.get(fullPath);
-      if (foundFile) {
-        return foundFile;
-      }
-    }
-    if (rootDir === "/") {
-      return "<div>File not found</div>";
-    } else {
-      return this.getIndexContent("/");
-    }
+    return content;
   }
 
   public updateSandbox(
