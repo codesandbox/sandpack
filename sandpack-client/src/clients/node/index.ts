@@ -178,7 +178,7 @@ export class SandpackNode extends SandpackClient {
 
     const { url } = await this.emulator.preview.getByShellId(id);
 
-    this.iframePreviewUrl = url + this.options.startRoute ?? "";
+    this.iframePreviewUrl = url + this.options.startRoute;
   }
 
   /**

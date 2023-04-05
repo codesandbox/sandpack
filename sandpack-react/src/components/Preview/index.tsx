@@ -105,7 +105,7 @@ export const SandpackPreview = React.forwardRef<
       actionsChildren = <></>,
       children,
       className,
-      startRoute,
+      startRoute = "/",
       ...props
     },
     ref
