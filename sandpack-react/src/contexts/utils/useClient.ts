@@ -146,7 +146,6 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
                 proxyEnabled: false, // force
               } ?? [])
           ),
-          hiddenHeadTags: options.hiddenHeadTags,
         }
       );
 

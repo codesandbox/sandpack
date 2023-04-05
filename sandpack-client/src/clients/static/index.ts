@@ -44,10 +44,11 @@ export class SandpackStatic extends SandpackClient {
         }
         if (filepath.endsWith(".html") || filepath.endsWith(".htm")) {
           try {
+            content = this.injectDocType(content);
             content = this.injectProtocolScript(content);
-            content = this.injectHiddenHeadTags(
+            content = this.injectExternalResources(
               content,
-              options.hiddenHeadTags
+              options.externalResources
             );
           } catch (err) {
             console.error("Runtime injection failed", err);
@@ -78,6 +79,19 @@ export class SandpackStatic extends SandpackClient {
         "accelerometer; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; clipboard-write;"
       );
     }
+  }
+
+  private injectDocType(content: FileContent): FileContent {
+    // Make it a string
+    let contentString = readBuffer(content);
+
+    // Add the DOCTYPE tag
+    const docTypeRegex = /<!DOCTYPE*>/gi;
+    if (!docTypeRegex.test(contentString)) {
+      contentString = `<!DOCTYPE html>\n${content}`;
+    }
+
+    return contentString;
   }
 
   private injectContentIntoHead(
@@ -112,20 +126,28 @@ export class SandpackStatic extends SandpackClient {
     return this.injectContentIntoHead(content, scriptToInsert);
   }
 
-  private injectHiddenHeadTags(
+  private injectExternalResources(
     content: FileContent,
-    tags: ClientOptions["hiddenHeadTags"]
+    externalResources: ClientOptions["externalResources"] = []
   ): FileContent {
-    const linksToInsert =
-      tags?.links?.map(
-        (link) => `<link rel="${link.rel}" href="${link.href}">`
-      ) ?? [];
+    const tagsToInsert = externalResources
+      .map((resource) => {
+        const match = resource.match(/\.([^.]*)$/);
+        const fileType = match?.[1];
 
-    const scriptsToInsert =
-      tags?.scripts?.map((script) => `<script src="${script.src}"></script>`) ??
-      [];
+        if (fileType === "css" || resource.includes("fonts.googleapis")) {
+          return `<link rel="stylesheet" href="${resource}">`;
+        }
 
-    const tagsToInsert = [...linksToInsert, ...scriptsToInsert].join("\n");
+        if (fileType === "js") {
+          return `<script src="${resource}"></script>`;
+        }
+
+        throw new Error(
+          `Unable to determine file type for external resource: ${resource}`
+        );
+      })
+      .join("\n");
 
     return this.injectContentIntoHead(content, tagsToInsert);
   }

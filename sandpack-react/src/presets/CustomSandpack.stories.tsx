@@ -483,8 +483,8 @@ body {
   <link rel="stylesheet" href="/styles.css" />
 </head>
 
-<body>
-  <button onClick="alertTest()">Alert</button>
+<body class="flex items-center justify-center">
+  <button class="p-4 bg-white rounded" onClick="alertTest()">Alert</button>
 </body>
 
 </html>
@@ -499,13 +499,12 @@ body {
           files={files}
           template="static"
           options={{
-            hiddenHeadTags: {
-              scripts: [{ src: "/hidden-test.js" }],
-              links: [
-                { rel: "stylesheet", href: "/hidden-test-1.css" },
-                { rel: "stylesheet", href: "/hidden-test-2.css" },
-              ],
-            },
+            externalResources: [
+              "https://unpkg.com/@tailwindcss/ui/dist/tailwind-ui.min.css",
+              "/hidden-test.js",
+              "/hidden-test-1.css",
+              "/hidden-test-2.css",
+            ],
           }}
         />
       </div>
@@ -514,14 +513,12 @@ body {
         <SandpackProvider
           files={files}
           options={{
-            hiddenHeadTags: {
-              scripts: [{ src: "/hidden-test.js" }],
-              links: [
-                { rel: "stylesheet", href: "/hidden-test-1.css" },
-                { rel: "stylesheet", href: "/hidden-test-2.css" },
-              ],
-            },
-            bundlerTimeOut: 90000,
+            externalResources: [
+              "https://unpkg.com/@tailwindcss/ui/dist/tailwind-ui.min.css",
+              "/hidden-test.js",
+              "/hidden-test-1.css",
+              "/hidden-test-2.css",
+            ],
           }}
           template="static"
         >
