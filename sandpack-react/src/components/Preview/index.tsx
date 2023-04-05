@@ -35,6 +35,7 @@ export interface PreviewProps {
   showOpenNewtab?: boolean;
   actionsChildren?: JSX.Element;
   children?: JSX.Element;
+  startRoute?: string;
 }
 
 const previewClassName = css({
@@ -104,12 +105,14 @@ export const SandpackPreview = React.forwardRef<
       actionsChildren = <></>,
       children,
       className,
+      startRoute = "/",
       ...props
     },
     ref
   ) => {
-    const { sandpack, listen, iframe, getClient, clientId } =
-      useSandpackClient();
+    const { sandpack, listen, iframe, getClient, clientId } = useSandpackClient(
+      { startRoute }
+    );
     const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
       number | null
     >(null);
@@ -158,7 +161,11 @@ export const SandpackPreview = React.forwardRef<
         {...props}
       >
         {showNavigator && (
-          <Navigator clientId={clientId} onURLChange={handleNewURL} />
+          <Navigator
+            clientId={clientId}
+            onURLChange={handleNewURL}
+            startRoute={startRoute}
+          />
         )}
 
         <div className={classNames(c("preview-container"), previewClassName)}>

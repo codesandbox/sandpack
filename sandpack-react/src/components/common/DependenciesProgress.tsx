@@ -2,8 +2,13 @@ import { useSandpackPreviewProgress } from "../..";
 import { css } from "../../styles";
 import { fadeIn } from "../../styles/shared";
 
-export const DependenciesProgress: React.FC = () => {
-  const progressMessage = useSandpackPreviewProgress(3_000);
+export const DependenciesProgress: React.FC<{ clientId?: string }> = ({
+  clientId,
+}) => {
+  const progressMessage = useSandpackPreviewProgress({
+    timeout: 3_000,
+    clientId,
+  });
 
   if (!progressMessage) {
     return null;

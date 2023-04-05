@@ -24,12 +24,22 @@ const mapProgressMessage = (
   }
 };
 
-export const useSandpackPreviewProgress = (timeout?: number) => {
+export const useSandpackPreviewProgress = (
+  props:
+    | {
+        timeout?: number;
+        clientId?: string;
+      }
+    | undefined
+) => {
   const [isReady, setIsReady] = React.useState(false);
   const [totalDependencies, setTotalDependencies] = React.useState<number>();
   const [loadingMessage, setLoadingMessage] = React.useState<null | string>(
     null
   );
+
+  const timeout = props?.timeout;
+  const clientId = props?.clientId;
 
   const { listen } = useSandpack();
 
@@ -63,7 +73,7 @@ export const useSandpackPreviewProgress = (timeout?: number) => {
         setIsReady(true);
         clearTimeout(timer);
       }
-    });
+    }, clientId);
 
     return (): void => {
       if (timer) {
@@ -71,7 +81,7 @@ export const useSandpackPreviewProgress = (timeout?: number) => {
       }
       unsubscribe();
     };
-  }, [isReady, totalDependencies, timeout]);
+  }, [clientId, isReady, totalDependencies, timeout]);
 
   return loadingMessage;
 };

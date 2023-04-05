@@ -56,8 +56,8 @@ export const LoadingOverlay = ({
   const [shouldShowStdout, setShouldShowStdout] = React.useState(false);
 
   const loadingOverlayState = useLoadingOverlayState(clientId, loading);
-  const progressMessage = useSandpackPreviewProgress();
-  const { logs: stdoutData } = useSandpackShellStdout({});
+  const progressMessage = useSandpackPreviewProgress({ clientId });
+  const { logs: stdoutData } = useSandpackShellStdout({ clientId });
 
   React.useEffect(() => {
     let timer: NodeJS.Timer;
