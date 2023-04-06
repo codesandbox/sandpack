@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.2](https://github.com/codesandbox/sandpack/compare/v2.3.1...v2.3.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* **useFiles:** Only sync props to state after mount ([#886](https://github.com/codesandbox/sandpack/issues/886)) ([c6390f2](https://github.com/codesandbox/sandpack/commit/c6390f26778339ab0ad058bab66d2fa86a8647a7))
+
+
+
+
+
 ## [2.3.1](https://github.com/codesandbox/sandpack/compare/v2.3.0...v2.3.1) (2023-04-06)
 
 **Note:** Version bump only for package sandpack
