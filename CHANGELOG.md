@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/codesandbox/sandpack/compare/v2.4.0...v2.4.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* **react build:** rename esm modules ([#888](https://github.com/codesandbox/sandpack/issues/888)) ([b0c4b82](https://github.com/codesandbox/sandpack/commit/b0c4b82be87b8ab95d080d3f3b3c6dc4bf791a24))
+
+
+
+
+
 # [2.4.0](https://github.com/codesandbox/sandpack/compare/v2.3.2...v2.4.0) (2023-04-06)
 
 
