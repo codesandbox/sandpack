@@ -1,7 +1,7 @@
-import Ansi from "ansi-to-react";
 import * as React from "react";
 
 import { css } from "../../styles";
+import Ansi from "../../utils/ansi-to-react";
 import { classNames } from "../../utils/classNames";
 
 export const StdoutList: React.FC<{

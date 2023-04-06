@@ -10,17 +10,17 @@
   "license": "Apache-2.0",
   "author": "CodeSandbox",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     "./unstyled": {
       "types": "./dist/unstyled.d.ts",
-      "import": "./dist/unstyled/index.esm.js",
+      "import": "./dist/unstyled/index.mjs",
       "require": "./dist/unstyled/index.js"
     },
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.esm.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     }
   },
@@ -64,10 +64,11 @@
     "@lezer/highlight": "^1.1.3",
     "@react-hook/intersection-observer": "^3.1.1",
     "@stitches/core": "^1.2.6",
-    "ansi-to-react": "6.1.6",
+    "anser": "^2.1.1",
     "clean-set": "^1.1.2",
     "codesandbox-import-util-types": "^2.2.3",
     "dequal": "^2.0.2",
+    "escape-carriage": "^1.3.1",
     "lz-string": "^1.4.4",
     "react-devtools-inline": "4.4.0",
     "react-is": "^17.0.2"

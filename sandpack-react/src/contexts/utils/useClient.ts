@@ -34,7 +34,7 @@ interface SandpackConfigState {
   status: SandpackStatus;
 }
 
-export type ClientPropsOverride = { startRoute?: string };
+export interface ClientPropsOverride { startRoute?: string }
 
 export interface UseClientOperations {
   clients: Record<string, SandpackClientType>;
