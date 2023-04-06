@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/codesandbox/sandpack/compare/v2.3.2...v2.4.0) (2023-04-06)
+
+
+### Features
+
+* **Static Template:** add hidden head tags option ([#884](https://github.com/codesandbox/sandpack/issues/884)) ([3cee76f](https://github.com/codesandbox/sandpack/commit/3cee76fdd937460e379ddffea52f462c34ed5d36))
+
+
+
+
+
 ## [2.3.1](https://github.com/codesandbox/sandpack/compare/v2.3.0...v2.3.1) (2023-04-06)
 
 **Note:** Version bump only for package @codesandbox/sandpack-client
