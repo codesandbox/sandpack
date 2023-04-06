@@ -15,11 +15,11 @@ import type {
 } from "@codesandbox/sandpack-client";
 import type React from "react";
 
+import type { ClientPropsOverride } from "./contexts/utils/useClient";
 import type { SANDBOX_TEMPLATES } from "./templates";
 
 import type { CodeEditorProps } from ".";
 
-import type { ClientPropsOverride } from "./contexts/utils/useClient";
 
 /**
  * ------------------------ Public documentation ------------------------

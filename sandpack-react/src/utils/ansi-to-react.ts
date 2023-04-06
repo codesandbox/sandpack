@@ -188,6 +188,7 @@ function fixBackspace(txt: string) {
   do {
     txt = tmp;
     // Cancel out anything-but-newline followed by backspace
+    // eslint-disable-next-line no-control-regex
     tmp = txt.replace(/[^\n]\x08/gm, "");
   } while (tmp.length < txt.length);
   return txt;

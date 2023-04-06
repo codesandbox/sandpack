@@ -6,9 +6,9 @@ import type {
 } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
+import type { ClientPropsOverride } from "../contexts/utils/useClient";
 import type { SandpackState } from "../types";
 import { generateRandomId } from "../utils/stringUtils";
-import type { ClientPropsOverride } from "../contexts/utils/useClient";
 
 import { useSandpack } from "./useSandpack";
 
