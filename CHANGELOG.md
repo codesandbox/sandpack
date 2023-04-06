@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.2](https://github.com/codesandbox/sandpack/compare/v2.4.1...v2.4.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* **code-viewer:** support additionalLanguages ([#889](https://github.com/codesandbox/sandpack/issues/889)) ([99cb481](https://github.com/codesandbox/sandpack/commit/99cb4811e263dbb581fd65229d672bb53509996e))
+
+
+
+
+
 ## [2.4.1](https://github.com/codesandbox/sandpack/compare/v2.4.0...v2.4.1) (2023-04-06)
 
 
