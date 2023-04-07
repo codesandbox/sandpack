@@ -1,11 +1,9 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import type { CustomLanguage, SandpackInitMode } from "../..";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
-import { THEME_PREFIX } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { CodeEditor } from "../CodeEditor";
 import type { CodeEditorRef } from "../CodeEditor";
 import type { Decorators } from "../CodeEditor/CodeMirror";
@@ -57,15 +55,15 @@ export const SandpackCodeViewer = React.forwardRef<
   ) => {
     const { sandpack } = useSandpack();
     const { code } = useActiveCode();
-    const c = useClasser(THEME_PREFIX);
+    const classNames = useClassNames();
 
     const shouldShowTabs = showTabs ?? sandpack.visibleFiles.length > 1;
 
     return (
-      <SandpackStack className={c("editor-viewer")} {...props}>
+      <SandpackStack className={classNames("editor-viewer")} {...props}>
         {shouldShowTabs ? <FileTabs /> : null}
 
-        <div className={classNames(c("code-editor"), editorClassName)}>
+        <div className={classNames("code-editor", [editorClassName])}>
           <CodeEditor
             ref={ref}
             additionalLanguages={additionalLanguages}

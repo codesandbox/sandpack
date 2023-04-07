@@ -7,7 +7,7 @@ import {
   useSandpackShellStdout,
 } from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { SandpackStack, DependenciesProgress, RoundedButton } from "../common";
 import { CleanIcon, RestartIcon } from "../icons";
 
@@ -105,9 +105,11 @@ export const SandpackConsole = React.forwardRef<
       },
     }));
 
+    const classNames = useClassNames();
+
     return (
       <SandpackStack
-        className={classNames(
+        className={classNames("console", [
           css({
             height: "100%",
             background: "$surface1",
@@ -126,9 +128,8 @@ export const SandpackConsole = React.forwardRef<
               pointerEvents: "none",
             },
           }),
-          `${THEME_PREFIX}-console`,
-          className
-        )}
+          className,
+        ])}
         {...props}
       >
         {showHeader && isNodeEnvironment && (
@@ -141,9 +142,9 @@ export const SandpackConsole = React.forwardRef<
 
         <div
           ref={wrapperRef}
-          className={classNames(
-            css({ overflow: "auto", scrollBehavior: "smooth" })
-          )}
+          className={classNames("console-list", [
+            css({ overflow: "auto", scrollBehavior: "smooth" }),
+          ])}
         >
           {isServerTab ? (
             <StdoutList data={stdoutData} />
@@ -153,15 +154,15 @@ export const SandpackConsole = React.forwardRef<
         </div>
 
         <div
-          className={classNames(
+          className={classNames("console-actions", [
             css({
               position: "absolute",
               bottom: "$space$2",
               right: "$space$2",
               display: "flex",
               gap: "$space$2",
-            })
-          )}
+            }),
+          ])}
         >
           {actionsChildren}
 

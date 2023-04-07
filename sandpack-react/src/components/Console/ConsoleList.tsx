@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { css, THEME_PREFIX } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { CodeEditor } from "../CodeEditor";
 
 import { fromConsoleToString } from "./utils/fromConsoleToString";
@@ -11,6 +11,8 @@ import { getType } from "./utils/getType";
 export const ConsoleList: React.FC<{ data: SandpackConsoleData }> = ({
   data,
 }) => {
+  const classNames = useClassNames();
+
   return (
     <>
       {data.map(({ data, id, method }, logIndex, references) => {
@@ -28,9 +30,9 @@ export const ConsoleList: React.FC<{ data: SandpackConsoleData }> = ({
                 return (
                   <div
                     key={`${id}-${msgIndex}`}
-                    className={classNames(
-                      consoleItemClassName({ variant: getType(method) })
-                    )}
+                    className={classNames("console-item", [
+                      consoleItemClassName({ variant: getType(method) }),
+                    ])}
                   >
                     <CodeEditor
                       code={

@@ -1,4 +1,4 @@
-import { useSandpackPreviewProgress } from "../..";
+import { useSandpackPreviewProgress } from "../../hooks/useSandpackPreviewProgress";
 import { css } from "../../styles";
 import { fadeIn } from "../../styles/shared";
 

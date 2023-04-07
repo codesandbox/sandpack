@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { generateRandomId } from "../utils/stringUtils";
 
-import { useSandpack } from ".";
+import { useSandpack } from "./useSandpack";
 
 const MAX_MESSAGE_COUNT = 400 * 2;
 

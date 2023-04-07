@@ -1,9 +1,8 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { THEME_PREFIX, css } from "../../styles";
+import { css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { DirectoryIconOpen, DirectoryIconClosed, FileIcon } from "../icons";
 
 const explorerClassName = css({
@@ -40,7 +39,7 @@ export const File: React.FC<Props> = ({
   depth,
   isDirOpen,
 }) => {
-  const c = useClasser(THEME_PREFIX);
+  const classNames = useClassNames();
   const onClickButton = (event: React.MouseEvent<HTMLButtonElement>): void => {
     if (selectFile) {
       selectFile(path);
@@ -59,11 +58,11 @@ export const File: React.FC<Props> = ({
 
   return (
     <button
-      className={classNames(
-        c("button", "explorer"),
+      className={classNames("button", [
+        classNames("explorer"),
         buttonClassName,
-        explorerClassName
-      )}
+        explorerClassName,
+      ])}
       data-active={active}
       onClick={onClickButton}
       style={{ paddingLeft: 18 * depth + "px" }}

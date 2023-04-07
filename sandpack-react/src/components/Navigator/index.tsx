@@ -1,11 +1,9 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
-import { THEME_PREFIX } from "../../styles";
 import { css } from "../../styles";
 import { buttonClassName, iconClassName } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { BackwardIcon, ForwardIcon, RefreshIcon } from "../icons";
 
 import { splitUrl } from "./utils";
@@ -68,7 +66,7 @@ export const Navigator = ({
   const [backEnabled, setBackEnabled] = React.useState(false);
   const [forwardEnabled, setForwardEnabled] = React.useState(false);
 
-  const c = useClasser(THEME_PREFIX);
+  const classNames = useClassNames();
 
   React.useEffect(() => {
     const unsub = listen((message) => {
@@ -120,19 +118,19 @@ export const Navigator = ({
     dispatch({ type: "urlforward" });
   };
 
-  const buttonsClassNames = classNames(
-    c("button", "icon"),
+  const buttonsClassNames = classNames("button", [
+    classNames("icon"),
     buttonClassName,
     iconClassName,
     css({
       minWidth: "$space$6",
       justifyContent: "center",
-    })
-  );
+    }),
+  ]);
 
   return (
     <div
-      className={classNames(c("navigator"), navigatorClassName, className)}
+      className={classNames("navigator", [navigatorClassName, className])}
       {...props}
     >
       <button
@@ -164,7 +162,7 @@ export const Navigator = ({
 
       <input
         aria-label="Current Sandpack URL"
-        className={classNames(c("input"), inputClassName)}
+        className={classNames("input", [inputClassName])}
         name="Current Sandpack URL"
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}

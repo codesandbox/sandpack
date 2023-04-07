@@ -1,8 +1,7 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpack, useSandpackShell, useErrorMessage } from "../../hooks";
-import { css, THEME_PREFIX } from "../../styles";
+import { css } from "../../styles";
 import {
   absoluteClassName,
   buttonClassName,
@@ -12,7 +11,7 @@ import {
   iconStandaloneClassName,
   roundedButtonClassName,
 } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { RestartIcon } from "../icons";
 
 const mapBundlerErrors = (originalMessage: string): string => {
@@ -41,10 +40,10 @@ export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
   const { children, className, ...otherProps } = props;
   const errorMessage = useErrorMessage();
   const { restart } = useSandpackShell();
+  const classNames = useClassNames();
   const {
     sandpack: { runSandpack },
   } = useSandpack();
-  const c = useClasser(THEME_PREFIX);
 
   if (!errorMessage && !children) {
     return null;
@@ -55,28 +54,30 @@ export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
   if (isSandpackBundlerError && errorMessage) {
     return (
       <div
-        className={classNames(
-          c("overlay", "error"),
+        className={classNames("overlay", [
+          classNames("error"),
           absoluteClassName,
           errorBundlerClassName,
-          className
-        )}
+          className,
+        ])}
         {...otherProps}
       >
-        <div className={classNames(c("error-message"), errorMessageClassName)}>
-          <p className={classNames(css({ fontWeight: "bold" }))}>
+        <div className={classNames("error-message", [errorMessageClassName])}>
+          <p
+            className={classNames("error-title", [css({ fontWeight: "bold" })])}
+          >
             Couldn't connect to server
           </p>
           <p>{mapBundlerErrors(errorMessage)}</p>
 
           <div>
             <button
-              className={classNames(
-                c("button", "icon-standalone"),
+              className={classNames("button", [
+                classNames("icon-standalone"),
                 buttonClassName,
                 iconStandaloneClassName,
-                roundedButtonClassName
-              )}
+                roundedButtonClassName,
+              ])}
               onClick={() => {
                 restart();
                 runSandpack();
@@ -94,16 +95,16 @@ export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
 
   return (
     <div
-      className={classNames(
-        c("overlay", "error"),
+      className={classNames("overlay", [
+        classNames("error"),
         absoluteClassName,
         errorClassName,
-        className
-      )}
+        className,
+      ])}
       translate="no"
       {...otherProps}
     >
-      <div className={classNames(c("error-message"), errorMessageClassName)}>
+      <div className={classNames("error-message", [errorMessageClassName])}>
         {errorMessage || children}
       </div>
     </div>

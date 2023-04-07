@@ -34,7 +34,9 @@ interface SandpackConfigState {
   status: SandpackStatus;
 }
 
-export interface ClientPropsOverride { startRoute?: string }
+export interface ClientPropsOverride {
+  startRoute?: string;
+}
 
 export interface UseClientOperations {
   clients: Record<string, SandpackClientType>;
@@ -221,10 +223,10 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
         if (clients.current[clientId]) {
           clients.current[clientId].destroy();
         }
-        
+
         const { iframe, clientPropsOverride = {} } =
           preregisteredIframes.current[clientId];
-          
+
         clients.current[clientId] = await createClient(
           iframe,
           clientId,

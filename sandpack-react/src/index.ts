@@ -3,9 +3,9 @@ export * from "./components/icons";
 export * from "./components";
 export * from "./components/common";
 export * from "./hooks";
+export { useClassNames } from "./utils/classNames";
 
 // Contexts
-export * from "@code-hike/classer";
 export { getCssText as getSandpackCssText } from "./styles";
 export * from "./styles/themeContext";
 export * from "./contexts/sandpackContext";

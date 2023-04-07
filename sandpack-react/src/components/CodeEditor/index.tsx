@@ -1,13 +1,11 @@
-import { useClasser } from "@code-hike/classer";
 import type { Extension } from "@codemirror/state";
 import type { KeyBinding } from "@codemirror/view";
-import * as React from "react";
+import { forwardRef } from "react";
 
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
-import { THEME_PREFIX } from "../../styles";
 import type { CustomLanguage, SandpackInitMode } from "../../types";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { FileTabs } from "../FileTabs";
 import { RunButton } from "../common/RunButton";
 import { SandpackStack } from "../common/Stack";
@@ -61,10 +59,7 @@ export interface CodeEditorProps {
 
 export { CodeMirror as CodeEditor };
 
-export const SandpackCodeEditor = React.forwardRef<
-  CodeMirrorRef,
-  CodeEditorProps
->(
+export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
   (
     {
       showTabs,
@@ -88,17 +83,17 @@ export const SandpackCodeEditor = React.forwardRef<
     const { activeFile, status, editorState } = sandpack;
     const shouldShowTabs = showTabs ?? sandpack.visibleFiles.length > 1;
 
-    const c = useClasser(THEME_PREFIX);
+    const classNames = useClassNames();
 
     const handleCodeUpdate = (newCode: string): void => {
       updateCode(newCode);
     };
 
     return (
-      <SandpackStack className={c("editor")} {...props}>
+      <SandpackStack className={classNames("editor")} {...props}>
         {shouldShowTabs && <FileTabs closableTabs={closableTabs} />}
 
-        <div className={classNames(c("code-editor"), editorClassName)}>
+        <div className={classNames("code-editor", [editorClassName])}>
           <CodeMirror
             key={activeFile}
             ref={ref}

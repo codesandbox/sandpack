@@ -2,16 +2,16 @@
 import * as themes from "@codesandbox/sandpack-themes";
 import React from "react";
 
-import { SandpackCodeEditor, SandpackConsole } from "./components";
-
-import { Sandpack, SandpackLayout, SandpackProvider } from "./";
-
-export default {
-  title: "Intro/Playground",
-};
+import { Sandpack } from "./";
 
 export const Basic: React.FC = () => {
-  return <Sandpack template="nextjs" theme={themes.sandpackDark} />;
+  return (
+    <Sandpack
+      options={{ classes: { "sp-layout": "fooo" } }}
+      template="nextjs"
+      theme={themes.sandpackDark}
+    />
+  );
 };
 
 export const EslintBasic = () => (

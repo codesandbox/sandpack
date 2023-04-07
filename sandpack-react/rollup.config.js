@@ -15,7 +15,7 @@ const external = [
   ...Object.keys(pkg.dependencies),
   ...Object.keys(pkg.devDependencies),
   ...Object.keys(pkg.peerDependencies),
-]
+];
 
 const baseConfig = { input: "src/index.ts", external };
 

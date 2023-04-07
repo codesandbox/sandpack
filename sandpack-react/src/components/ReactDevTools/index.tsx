@@ -1,9 +1,8 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpackTheme, useSandpack } from "../../hooks";
-import { css, THEME_PREFIX } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { css } from "../../styles";
+import { useClassNames } from "../../utils/classNames";
 
 const devToolClassName = css({
   height: "$layout$height",
@@ -23,7 +22,7 @@ export const SandpackReactDevTools = ({
 } & React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const { listen, sandpack } = useSandpack();
   const { themeMode } = useSandpackTheme();
-  const c = useClasser(THEME_PREFIX);
+  const classNames = useClassNames();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const reactDevtools = React.useRef<any>();
 
@@ -63,7 +62,7 @@ export const SandpackReactDevTools = ({
 
   return (
     <div
-      className={classNames(c("devtools"), devToolClassName, className)}
+      className={classNames("devtools", [devToolClassName, className])}
       {...props}
     >
       <ReactDevTools browserTheme={theme ?? themeMode} />

@@ -1,8 +1,7 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { css, THEME_PREFIX } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 
 export const stackClassName = css({
   display: "flex",
@@ -20,11 +19,11 @@ export const stackClassName = css({
 export const SandpackStack: React.FC<
   React.HTMLAttributes<HTMLDivElement> & { children?: React.ReactNode }
 > = ({ className, ...props }) => {
-  const c = useClasser(THEME_PREFIX);
+  const classNames = useClassNames();
 
   return (
     <div
-      className={classNames(c("stack"), stackClassName, className)}
+      className={classNames("stack", [stackClassName, className])}
       {...props}
     />
   );

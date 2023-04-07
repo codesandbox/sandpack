@@ -1,7 +1,7 @@
 import type { WorkerStatusUpdate } from "@codesandbox/nodebox";
 import * as React from "react";
 
-import { useSandpack } from ".";
+import { useSandpack } from "./useSandpack";
 
 const mapProgressMessage = (
   originalMessage: WorkerStatusUpdate & { command?: string },
