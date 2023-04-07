@@ -107,7 +107,6 @@ export class SandpackStatic extends SandpackClient {
     content = readBuffer(content);
 
     // Inject script
-
     content =
       insertHtmlAfterRegex(/<head[^<>]*>/g, content, "\n" + contentToInsert) ??
       contentToInsert + "\n" + content;
