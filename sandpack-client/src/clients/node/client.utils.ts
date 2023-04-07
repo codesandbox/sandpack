@@ -6,7 +6,7 @@ import { invariant } from "outvariant";
 import type { SandpackBundlerFiles } from "../..";
 import { createError } from "../..";
 
-import { tokenize } from "./taskManager";
+import { tokenize, TokenType } from "./taskManager";
 
 let counter = 0;
 
@@ -74,21 +74,31 @@ export const findStartScriptPackageJson = (
       const script = possibleKeys[index];
 
       const candidate = scripts[script];
-      console.log(tokenize(candidate));
 
-      const env = candidate
-        .match(/(\w+=\w+;)*\w+=\w+/g)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ?.reduce<any>((acc, curr) => {
-          const [key, value] = curr.split("=");
-          acc[key] = value;
-          return acc;
-        }, {});
+      let env = {};
+      let command = "";
+      const args: string[] = [];
 
-      const [command, ...args] = candidate
-        .replace(/(\w+=\w+;)*\w+=\w+/g, "")
-        .trim()
-        .split(" ");
+      tokenize(candidate).forEach((item) => {
+        const commandNotFoundYet = command === "";
+
+        if (item.type === TokenType.EnvVar) {
+          env = item.value;
+        }
+
+        if (item.type === TokenType.Command && commandNotFoundYet) {
+          command = item.value;
+        }
+
+        if (
+          item.type === TokenType.Argument ||
+          (!commandNotFoundYet && item.type === TokenType.Command)
+        ) {
+          args.push(item.value);
+        }
+
+        // TODO: support TokenType.AND, TokenType.OR, TokenType.PIPE
+      });
 
       return [command, args, { env }];
     }

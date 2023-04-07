@@ -26,7 +26,7 @@ function isEnvVar(char: string) {
   return isAlpha(char) && char === char.toUpperCase();
 }
 
-enum TokenType {
+export enum TokenType {
   OR = "OR",
   AND = "AND",
   PIPE = "PIPE",
@@ -37,7 +37,7 @@ enum TokenType {
 }
 
 type Token =
-  | { type: TokenType }
+  | { type: TokenType.OR | TokenType.AND | TokenType.PIPE }
   | {
       type: TokenType.Command | TokenType.Argument | TokenType.String;
       value: string;

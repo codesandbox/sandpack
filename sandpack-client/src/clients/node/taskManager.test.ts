@@ -9,7 +9,7 @@ describe(tokenize, () => {
       { type: "Argument", value: "-p" },
     ];
 
-    expect(input).toBe(output);
+    expect(input).toEqual(output);
   });
 
   it("parses multiples envs environment variables", () => {
@@ -20,7 +20,7 @@ describe(tokenize, () => {
       { type: "Argument", value: "-p" },
     ];
 
-    expect(input).toBe(output);
+    expect(input).toEqual(output);
   });
 
   it("parses command and argument", () => {
@@ -30,7 +30,7 @@ describe(tokenize, () => {
       { type: "Argument", value: "-p" },
     ];
 
-    expect(input).toBe(output);
+    expect(input).toEqual(output);
   });
 
   it("parses two commands", () => {
@@ -41,7 +41,7 @@ describe(tokenize, () => {
       { type: "Command", value: "node" },
     ];
 
-    expect(input).toBe(output);
+    expect(input).toEqual(output);
   });
 
   it("parses two commands", () => {
@@ -55,7 +55,7 @@ describe(tokenize, () => {
       { type: "Command", value: "index.js" },
     ];
 
-    expect(input).toBe(output);
+    expect(input).toEqual(output);
   });
 
   it("parses multiple arguments", () => {
@@ -67,7 +67,7 @@ describe(tokenize, () => {
       { type: "Argument", value: "--foo" },
     ];
 
-    expect(input).toBe(output);
+    expect(input).toEqual(output);
   });
 
   it("parses pipe and string commands", () => {
@@ -80,7 +80,7 @@ describe(tokenize, () => {
       { type: "Argument", value: "-w" },
     ];
 
-    expect(input).toBe(output);
+    expect(input).toEqual(output);
   });
 
   it("parses escaped characters", () => {
@@ -93,7 +93,7 @@ describe(tokenize, () => {
       { type: "Argument", value: "-w" },
     ];
 
-    expect(input).toBe(output);
+    expect(input).toEqual(output);
   });
 
   it("parses escaped characters", () => {
@@ -106,7 +106,7 @@ describe(tokenize, () => {
       { type: "Argument", value: "-w" },
     ];
 
-    expect(input).toBe(output);
+    expect(input).toEqual(output);
   });
 
   it("parses or", () => {
@@ -119,6 +119,6 @@ describe(tokenize, () => {
       { type: "Argument", value: "-w" },
     ];
 
-    expect(input).toBe(output);
+    expect(input).toEqual(output);
   });
 });
