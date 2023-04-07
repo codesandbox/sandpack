@@ -1,7 +1,5 @@
 /* eslint-disable no-console,@typescript-eslint/no-explicit-any,prefer-rest-params,@typescript-eslint/explicit-module-boundary-types */
 
-import { Buffer } from "buffer";
-
 import { PREVIEW_LOADED_MESSAGE_TYPE, Nodebox } from "@codesandbox/nodebox";
 import type {
   FilesMap,
@@ -383,7 +381,7 @@ export class SandpackNode extends SandpackClient {
       Object.entries(modules).forEach(([key, value]) => {
         if (
           !this._modulesCache.get(key) ||
-          Buffer.compare(value, this._modulesCache.get(key)) !== 0
+          readBuffer(value) !== readBuffer(this._modulesCache.get(key))
         ) {
           this.emulator.fs.writeFile(key, value, { recursive: true });
         }
