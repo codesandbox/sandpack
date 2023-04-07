@@ -85,11 +85,16 @@ export class SandpackStatic extends SandpackClient {
     // Make it a string
     let contentString = readBuffer(content);
 
+    // Check how long DOMParser takes
+    console.time('domparser');
+
     const domParser = new DOMParser();
     const doc = domParser.parseFromString(contentString, "text/html");
     doc.documentElement.setAttribute("lang", "en");
 
     const html = doc.documentElement.outerHTML;
+
+    console.timeEnd('domparser');
 
     return `<!DOCTYPE html>\n${html}`;
   }
