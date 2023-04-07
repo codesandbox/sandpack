@@ -1,8 +1,8 @@
 import * as React from "react";
 
+import { useSandpackTheme, useSandpack } from "../../hooks";
 import { css } from "../../styles";
 import { useClassNames } from "../../utils/classNames";
-import { useSandpackTheme, useSandpack } from "../../hooks";
 
 const devToolClassName = css({
   height: "$layout$height",

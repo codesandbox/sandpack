@@ -173,25 +173,20 @@ export const Specs: React.FC<Props> = ({
               <Describes describes={describes} />
             )}
 
-            {!hideTestsAndSupressLogs && getFailingTests(spec).map((test) => {
-              return (
-                <div
-                  key={`failing-${test.name}`}
-                  className={classNames("test-spec-error", [
-                    gapBottomClassName,
-                  ])}
-                >
+            {!hideTestsAndSupressLogs &&
+              getFailingTests(spec).map((test) => {
+                return (
                   <div
-                    className={classNames("test-spec-error-text", [
-                      failTestClassName,
-                      failTextClassName,
+                    key={`failing-${test.name}`}
+                    className={classNames("test-spec-error", [
+                      gapBottomClassName,
                     ])}
                   >
                     <div
-                      className={classNames(
+                      className={classNames("test-spec-error-text", [
                         failTestClassName,
-                        failTextClassName
-                      )}
+                        failTextClassName,
+                      ])}
                     >
                       ● {test.blocks.join(" › ")} › {test.name}
                     </div>

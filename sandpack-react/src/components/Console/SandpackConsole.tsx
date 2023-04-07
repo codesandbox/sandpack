@@ -8,8 +8,6 @@ import {
 } from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
 import { useClassNames } from "../../utils/classNames";
-import { PreviewProgress } from "../Preview/PreviewProgress";
-import { classNames } from "../../utils/classNames";
 import { SandpackStack, DependenciesProgress, RoundedButton } from "../common";
 import { CleanIcon, RestartIcon } from "../icons";
 

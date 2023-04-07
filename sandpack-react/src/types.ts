@@ -20,7 +20,6 @@ import type { SANDBOX_TEMPLATES } from "./templates";
 
 import type { CodeEditorProps } from ".";
 
-
 /**
  * ------------------------ Public documentation ------------------------
  *

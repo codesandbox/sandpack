@@ -2,9 +2,7 @@
 import * as themes from "@codesandbox/sandpack-themes";
 import React from "react";
 
-import { SandpackCodeEditor, SandpackConsole } from "./components";
-
-import { Sandpack, SandpackLayout, SandpackProvider } from "./";
+import { Sandpack } from "./";
 
 export const Basic: React.FC = () => {
   return (

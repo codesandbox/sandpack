@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { css } from "../../styles";
-import { useClassNames } from "../../utils/classNames";
 import Ansi from "../../utils/ansi-to-react";
+import { useClassNames } from "../../utils/classNames";
 
 export const StdoutList: React.FC<{
   data: Array<{ data: string; id: string }>;

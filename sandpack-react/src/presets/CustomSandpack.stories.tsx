@@ -497,7 +497,6 @@ body {
         <div>Sandpack Component</div>
         <Sandpack
           files={files}
-          template="static"
           options={{
             externalResources: [
               "https://unpkg.com/@tailwindcss/ui/dist/tailwind-ui.min.css",
@@ -506,6 +505,7 @@ body {
               "/hidden-test-2.css",
             ],
           }}
+          template="static"
         />
       </div>
       <div>

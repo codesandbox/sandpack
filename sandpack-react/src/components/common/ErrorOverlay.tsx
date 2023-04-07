@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { css } from "../../styles";
 import { useSandpack, useSandpackShell, useErrorMessage } from "../../hooks";
+import { css } from "../../styles";
 import {
   absoluteClassName,
   buttonClassName,
@@ -58,8 +58,8 @@ export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
           classNames("error"),
           absoluteClassName,
           errorBundlerClassName,
-          className
-        )}
+          className,
+        ])}
         {...otherProps}
       >
         <div className={classNames("error-message", [errorMessageClassName])}>

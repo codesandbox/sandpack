@@ -5,9 +5,9 @@ import {
   useLoadingOverlayState,
   FADE_ANIMATION_DURATION,
 } from "../../hooks/useLoadingOverlayState";
-import { css } from "../../styles";
 import { useSandpackPreviewProgress } from "../../hooks/useSandpackPreviewProgress";
 import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
+import { css } from "../../styles";
 import {
   absoluteClassName,
   buttonClassName,
@@ -146,10 +146,10 @@ export const LoadingOverlay = ({
     <>
       <div
         className={classNames("overlay", [
-        classNames("loading"),
-        absoluteClassName,
-        loadingClassName,
-        className,
+          classNames("loading"),
+          absoluteClassName,
+          loadingClassName,
+          className,
         ])}
         style={{
           ...style,
