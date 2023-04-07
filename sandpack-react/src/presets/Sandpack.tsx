@@ -207,7 +207,9 @@ export const Sandpack: SandpackInternal = ({
       {...props}
     >
       <SandpackLayout
-        className={rtlLayout ? classNames(rtlLayoutClassName) : ""}
+        className={
+          rtlLayout ? classNames("rtl-layout", [rtlLayoutClassName]) : ""
+        }
       >
         <SandpackCodeEditor
           {...codeEditorOptions}

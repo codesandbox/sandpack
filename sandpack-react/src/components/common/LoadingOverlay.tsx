@@ -48,7 +48,6 @@ export const LoadingOverlay = ({
   ...props
 }: LoadingOverlayProps &
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
-  const loadingOverlayState = useLoadingOverlayState(clientId, loading);
   const classNames = useClassNames();
   const {
     sandpack: { runSandpack, environment },
