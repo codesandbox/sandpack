@@ -43,7 +43,7 @@ root.render(
     "/package.json": {
       code: JSON.stringify({
         scripts: {
-          dev: "vite",
+          dev: "vite --force",
           build: "vite build",
           preview: "vite preview",
         },
@@ -54,7 +54,7 @@ root.render(
         devDependencies: {
           "@vitejs/plugin-react": "3.1.0",
           vite: "4.0.0",
-          "esbuild-wasm": "0.15.12",
+          "esbuild-wasm": "0.17.12",
         },
       }),
     },

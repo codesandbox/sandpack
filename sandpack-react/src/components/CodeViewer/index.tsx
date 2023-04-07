@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import type { SandpackInitMode } from "../..";
+import type { CustomLanguage, SandpackInitMode } from "../..";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
 import { useClassNames } from "../../utils/classNames";
@@ -28,6 +28,12 @@ export interface CodeViewerProps {
    * a certain control of when to initialize them.
    */
   initMode?: SandpackInitMode;
+  /**
+   * Provides a way to add custom language modes by supplying a language
+   * type, applicable file extensions, and a LanguageSupport instance
+   * for that syntax mode
+   */
+  additionalLanguages?: CustomLanguage[];
 }
 
 export const SandpackCodeViewer = React.forwardRef<
@@ -42,6 +48,7 @@ export const SandpackCodeViewer = React.forwardRef<
       code: propCode,
       initMode,
       wrapContent,
+      additionalLanguages,
       ...props
     },
     ref
@@ -59,6 +66,7 @@ export const SandpackCodeViewer = React.forwardRef<
         <div className={classNames("code-editor", [editorClassName])}>
           <CodeEditor
             ref={ref}
+            additionalLanguages={additionalLanguages}
             code={propCode ?? code}
             decorators={decorators}
             filePath={sandpack.activeFile}

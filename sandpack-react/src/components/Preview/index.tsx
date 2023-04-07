@@ -19,18 +19,22 @@ import { RoundedButton } from "../common/RoundedButton";
 import { SandpackStack } from "../common/Stack";
 import { RefreshIcon, RestartIcon } from "../icons";
 
-import { PreviewProgress } from "./PreviewProgress";
-
 export interface PreviewProps {
   style?: React.CSSProperties;
   showNavigator?: boolean;
   showOpenInCodeSandbox?: boolean;
   showRefreshButton?: boolean;
   showRestartButton?: boolean;
+
+  /**
+   * Whether to show the `<ErrorOverlay>` component on top of
+   * the preview, if a runtime error happens.
+   */
   showSandpackErrorOverlay?: boolean;
   showOpenNewtab?: boolean;
   actionsChildren?: JSX.Element;
   children?: JSX.Element;
+  startRoute?: string;
 }
 
 const previewClassName = css({
@@ -100,12 +104,14 @@ export const SandpackPreview = React.forwardRef<
       actionsChildren = <></>,
       children,
       className,
+      startRoute = "/",
       ...props
     },
     ref
   ) => {
-    const { sandpack, listen, iframe, getClient, clientId } =
-      useSandpackClient();
+    const { sandpack, listen, iframe, getClient, clientId } = useSandpackClient(
+      { startRoute }
+    );
     const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
       number | null
     >(null);
@@ -151,7 +157,11 @@ export const SandpackPreview = React.forwardRef<
     return (
       <SandpackStack className={classNames("preview", [className])} {...props}>
         {showNavigator && (
-          <Navigator clientId={clientId} onURLChange={handleNewURL} />
+          <Navigator
+            clientId={clientId}
+            onURLChange={handleNewURL}
+            startRoute={startRoute}
+          />
         )}
 
         <div className={classNames("preview-container", [previewClassName])}>
@@ -190,8 +200,6 @@ export const SandpackPreview = React.forwardRef<
             clientId={clientId}
             showOpenInCodeSandbox={showOpenInCodeSandbox}
           />
-
-          <PreviewProgress clientId={clientId} />
 
           {showSandpackErrorOverlay && <ErrorOverlay />}
 

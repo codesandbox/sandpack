@@ -23,7 +23,7 @@ import { generateRandomId } from "../../utils/stringUtils";
 import type { FilesState } from "./useFiles";
 type SandpackClientType = InstanceType<typeof SandpackClient>;
 
-const BUNDLER_TIMEOUT = 30000; // 30 seconds timeout for the bundler to respond.
+const BUNDLER_TIMEOUT = 40_000;
 
 interface SandpackConfigState {
   reactDevTools?: ReactDevToolsMode;
@@ -34,6 +34,8 @@ interface SandpackConfigState {
   status: SandpackStatus;
 }
 
+export interface ClientPropsOverride { startRoute?: string }
+
 export interface UseClientOperations {
   clients: Record<string, SandpackClientType>;
   initializeSandpackIframe: () => void;
@@ -41,7 +43,8 @@ export interface UseClientOperations {
   unregisterBundler: (clientId: string) => void;
   registerBundler: (
     iframe: HTMLIFrameElement,
-    clientId: string
+    clientId: string,
+    clientPropsOverride?: ClientPropsOverride
   ) => Promise<void>;
   registerReactDevTools: (value: ReactDevToolsMode) => void;
   addListener: (
@@ -85,8 +88,12 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
    */
   const intersectionObserver = useRef<IntersectionObserver | null>(null);
   const lazyAnchorRef = useRef<HTMLDivElement>(null);
-  const initializeSandpackIframeHook = useRef<NodeJS.Timer | null>(null);
-  const preregisteredIframes = useRef<Record<string, HTMLIFrameElement>>({});
+  const preregisteredIframes = useRef<
+    Record<
+      string,
+      { iframe: HTMLIFrameElement; clientPropsOverride?: ClientPropsOverride }
+    >
+  >({});
   const clients = useRef<Record<string, SandpackClientType>>({});
   const timeoutHook = useRef<NodeJS.Timer | null>(null);
   const unsubscribeClientListeners = useRef<
@@ -107,7 +114,8 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
   const createClient = useCallback(
     async (
       iframe: HTMLIFrameElement,
-      clientId: string
+      clientId: string,
+      clientPropsOverride?: ClientPropsOverride
     ): Promise<SandpackClientType> => {
       options ??= {};
       customSetup ??= {};
@@ -119,6 +127,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
       }
 
       timeoutHook.current = setTimeout(() => {
+        unregisterAllClients();
         setState((prev) => ({ ...prev, status: "timeout" }));
       }, timeOut);
 
@@ -131,7 +140,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
         {
           externalResources: options.externalResources,
           bundlerURL: options.bundlerURL,
-          startRoute: options.startRoute,
+          startRoute: clientPropsOverride?.startRoute ?? options.startRoute,
           fileResolver: options.fileResolver,
           skipEval: options.skipEval ?? false,
           logLevel: options.logLevel,
@@ -208,12 +217,23 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
   const runSandpack = useCallback(async (): Promise<void> => {
     await Promise.all(
       Object.keys(preregisteredIframes.current).map(async (clientId) => {
-        const iframe = preregisteredIframes.current[clientId];
-        clients.current[clientId] = await createClient(iframe, clientId);
+        // There's already a client if the same id, so we should destroy it
+        if (clients.current[clientId]) {
+          clients.current[clientId].destroy();
+        }
+        
+        const { iframe, clientPropsOverride = {} } =
+          preregisteredIframes.current[clientId];
+          
+        clients.current[clientId] = await createClient(
+          iframe,
+          clientId,
+          clientPropsOverride
+        );
       })
     );
 
-    setState((prev) => ({ ...prev, status: "running" }));
+    setState((prev) => ({ ...prev, error: null, status: "running" }));
   }, [createClient]);
 
   const initializeSandpackIframe = useCallback((): void => {
@@ -235,10 +255,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
       // If any component registerd a lazy anchor ref component, use that for the intersection observer
       intersectionObserver.current = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
-          initializeSandpackIframeHook.current = setTimeout(() => {
-            runSandpack();
-          }, 50);
+          runSandpack();
 
           if (lazyAnchorRef.current) {
             intersectionObserver.current?.unobserve(lazyAnchorRef.current);
@@ -250,15 +267,8 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
     } else if (lazyAnchorRef.current && state.initMode === "user-visible") {
       intersectionObserver.current = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          // Delay a cycle so all hooks register the refs for the sub-components (open in csb, loading, error overlay)
-          initializeSandpackIframeHook.current = setTimeout(() => {
-            runSandpack();
-          }, 50);
+          runSandpack();
         } else {
-          if (initializeSandpackIframeHook.current) {
-            clearTimeout(initializeSandpackIframeHook.current);
-          }
-
           Object.keys(clients.current).map(unregisterBundler);
           unregisterAllClients();
         }
@@ -266,11 +276,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
 
       intersectionObserver.current.observe(lazyAnchorRef.current);
     } else {
-      // else run the sandpack on mount, with a slight delay to allow all subcomponents to mount/register components
-      initializeSandpackIframeHook.current = setTimeout(
-        () => runSandpack(),
-        50
-      );
+      runSandpack();
     }
   }, [
     options?.autorun,
@@ -281,11 +287,22 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
   ]);
 
   const registerBundler = useCallback(
-    async (iframe: HTMLIFrameElement, clientId: string): Promise<void> => {
+    async (
+      iframe: HTMLIFrameElement,
+      clientId: string,
+      clientPropsOverride?: ClientPropsOverride
+    ): Promise<void> => {
       if (state.status === "running") {
-        clients.current[clientId] = await createClient(iframe, clientId);
+        clients.current[clientId] = await createClient(
+          iframe,
+          clientId,
+          clientPropsOverride
+        );
       } else {
-        preregisteredIframes.current[clientId] = iframe;
+        preregisteredIframes.current[clientId] = {
+          iframe,
+          clientPropsOverride,
+        };
       }
     },
     [createClient, state.status]
@@ -307,7 +324,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
     }
 
     const unsubscribeQueuedClients = Object.values(
-      unsubscribeClientListeners.current[clientId]
+      unsubscribeClientListeners.current[clientId] ?? {}
     );
 
     // Unsubscribing all listener registered
@@ -323,13 +340,16 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
   };
 
   const handleMessage = (msg: SandpackMessage): void => {
-    if (timeoutHook.current) {
-      clearTimeout(timeoutHook.current);
-    }
-
     if (msg.type === "state") {
       setState((prev) => ({ ...prev, bundlerState: msg.state }));
-    } else if (msg.type === "done" && !msg.compilatonError) {
+    } else if (
+      (msg.type === "done" && !msg.compilatonError) ||
+      msg.type === "connected"
+    ) {
+      if (timeoutHook.current) {
+        clearTimeout(timeoutHook.current);
+      }
+
       setState((prev) => ({ ...prev, error: null }));
     } else if (msg.type === "action" && msg.action === "show-error") {
       setState((prev) => ({ ...prev, error: extractErrorDetails(msg) }));
@@ -522,10 +542,6 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
 
       if (debounceHook.current) {
         clearTimeout(debounceHook.current);
-      }
-
-      if (initializeSandpackIframeHook.current) {
-        clearTimeout(initializeSandpackIframeHook.current);
       }
 
       if (intersectionObserver.current) {

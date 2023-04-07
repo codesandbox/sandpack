@@ -19,6 +19,7 @@ import {
   useSandpackNavigation,
   SandpackStack,
   UnstyledOpenInCodeSandboxButton,
+  SandpackFileExplorer,
 } from "../";
 import { useSandpack } from "../hooks/useSandpack";
 
@@ -454,3 +455,80 @@ export default function App() {
     template="react"
   />
 );
+
+export const HiddenHeadTags: React.FC = () => {
+  const files = {
+    "hidden-test.js": `
+function alertTest() {
+  alert('Hidden Script Test');
+}
+`,
+    "hidden-test-1.css": `
+body {
+  background-color: red;
+}
+`,
+    "hidden-test-2.css": `
+body {
+  background-color: blue;
+}
+`,
+    "index.html": `
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Parcel Sandbox</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body class="flex items-center justify-center">
+  <button class="p-4 bg-white rounded" onClick="alertTest()">Alert</button>
+</body>
+
+</html>
+`,
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+      <div>
+        <div>Sandpack Component</div>
+        <Sandpack
+          files={files}
+          template="static"
+          options={{
+            externalResources: [
+              "https://unpkg.com/@tailwindcss/ui/dist/tailwind-ui.min.css",
+              "/hidden-test.js",
+              "/hidden-test-1.css",
+              "/hidden-test-2.css",
+            ],
+          }}
+        />
+      </div>
+      <div>
+        <div>Sandpack Provider Component</div>
+        <SandpackProvider
+          files={files}
+          options={{
+            externalResources: [
+              "https://unpkg.com/@tailwindcss/ui/dist/tailwind-ui.min.css",
+              "/hidden-test.js",
+              "/hidden-test-1.css",
+              "/hidden-test-2.css",
+            ],
+          }}
+          template="static"
+        >
+          <SandpackLayout>
+            <SandpackFileExplorer />
+            <SandpackCodeEditor closableTabs showLineNumbers />
+            <SandpackPreview />
+          </SandpackLayout>
+        </SandpackProvider>
+      </div>
+    </div>
+  );
+};

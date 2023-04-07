@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { useSandpackShell } from "../..";
-import { useErrorMessage } from "../../hooks/useErrorMessage";
 import { css } from "../../styles";
+import { useSandpack, useSandpackShell, useErrorMessage } from "../../hooks";
 import {
   absoluteClassName,
   buttonClassName,
@@ -34,16 +33,17 @@ const mapBundlerErrors = (originalMessage: string): string => {
   return errorMessage;
 };
 
-export const ErrorOverlay: React.FC<
-  React.DOMAttributes<HTMLDivElement> & { children?: React.ReactNode }
-> = ({
-  children,
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
+export type ErrorOverlayProps = React.HTMLAttributes<HTMLDivElement> & {
+  children?: React.ReactNode;
+};
+export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
+  const { children, className, ...otherProps } = props;
   const errorMessage = useErrorMessage();
   const { restart } = useSandpackShell();
   const classNames = useClassNames();
+  const {
+    sandpack: { runSandpack },
+  } = useSandpack();
 
   if (!errorMessage && !children) {
     return null;
@@ -58,9 +58,9 @@ export const ErrorOverlay: React.FC<
           classNames("error"),
           absoluteClassName,
           errorBundlerClassName,
-          className,
-        ])}
-        {...props}
+          className
+        )}
+        {...otherProps}
       >
         <div className={classNames("error-message", [errorMessageClassName])}>
           <p
@@ -78,7 +78,10 @@ export const ErrorOverlay: React.FC<
                 iconStandaloneClassName,
                 roundedButtonClassName,
               ])}
-              onClick={restart}
+              onClick={() => {
+                restart();
+                runSandpack();
+              }}
               title="Restart script"
               type="button"
             >
@@ -99,7 +102,7 @@ export const ErrorOverlay: React.FC<
         className,
       ])}
       translate="no"
-      {...props}
+      {...otherProps}
     >
       <div className={classNames("error-message", [errorMessageClassName])}>
         {errorMessage || children}

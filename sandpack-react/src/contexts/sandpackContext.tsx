@@ -17,7 +17,6 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
   const [clientState, { dispatchMessage, addListener, ...clientOperations }] =
     useClient(props, fileState);
   const appState = useAppState(props, fileState.files);
-
   React.useEffect(() => {
     clientOperations.initializeSandpackIframe();
   }, []);
@@ -31,6 +30,8 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
 
         ...fileOperations,
         ...clientOperations,
+
+        autoReload: props.options?.autoReload ?? true,
 
         listen: addListener,
         dispatch: dispatchMessage,

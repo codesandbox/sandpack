@@ -3,6 +3,206 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.3](https://github.com/codesandbox/sandpack/compare/v2.4.2...v2.4.3) (2023-04-07)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
+# [2.4.0](https://github.com/codesandbox/sandpack/compare/v2.3.2...v2.4.0) (2023-04-06)
+
+
+### Features
+
+* **Static Template:** add hidden head tags option ([#884](https://github.com/codesandbox/sandpack/issues/884)) ([3cee76f](https://github.com/codesandbox/sandpack/commit/3cee76fdd937460e379ddffea52f462c34ed5d36))
+
+
+
+
+
+## [2.3.1](https://github.com/codesandbox/sandpack/compare/v2.3.0...v2.3.1) (2023-04-06)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
+# [2.3.0](https://github.com/codesandbox/sandpack/compare/v2.2.9...v2.3.0) (2023-04-05)
+
+
+### Features
+
+* **Preview:** add startRoute prop to override Provider default ([#868](https://github.com/codesandbox/sandpack/issues/868)) ([bc28871](https://github.com/codesandbox/sandpack/commit/bc288719afd057d8699cf10de13f905bf1dcded9))
+
+
+
+
+
+## [2.2.9](https://github.com/codesandbox/sandpack/compare/v2.2.8...v2.2.9) (2023-04-03)
+
+
+### Bug Fixes
+
+* **static:** Don't crash at inserting runtime ([#878](https://github.com/codesandbox/sandpack/issues/878)) ([7da3346](https://github.com/codesandbox/sandpack/commit/7da3346aa0f79abc24c4ecf51fd7506bbf590dd7))
+
+
+
+
+
+## [2.2.6](https://github.com/codesandbox/sandpack/compare/v2.2.5...v2.2.6) (2023-04-03)
+
+
+### Bug Fixes
+
+* Don't add index logic to StaticSandbox ([#874](https://github.com/codesandbox/sandpack/issues/874)) ([146287b](https://github.com/codesandbox/sandpack/commit/146287b6fc09c6cf6335c1167f1425a3ec636614))
+
+
+
+
+
+## [2.2.4](https://github.com/codesandbox/sandpack/compare/v2.2.3...v2.2.4) (2023-04-01)
+
+
+### Bug Fixes
+
+* **SandpackConsole:** make showHeader flag works ([#867](https://github.com/codesandbox/sandpack/issues/867)) ([54fd641](https://github.com/codesandbox/sandpack/commit/54fd64181e5318c396815ecd58baa1e2316d75a8))
+
+
+
+
+
+## [2.2.1](https://github.com/codesandbox/sandpack/compare/v2.2.0...v2.2.1) (2023-04-01)
+
+
+### Bug Fixes
+
+* **clients:** allow clipboard write ([#864](https://github.com/codesandbox/sandpack/issues/864)) ([7ec95e1](https://github.com/codesandbox/sandpack/commit/7ec95e1dfdbf1d943a6ef063f75dd14650bbba1a))
+
+
+
+
+
+# [2.2.0](https://github.com/codesandbox/sandpack/compare/v2.1.11...v2.2.0) (2023-03-31)
+
+
+### Features
+
+* static template ([#830](https://github.com/codesandbox/sandpack/issues/830)) ([2b14ed2](https://github.com/codesandbox/sandpack/commit/2b14ed226c7fdfe49054c6efe732f7f9f560b23c))
+
+
+
+
+
+## [2.1.9](https://github.com/codesandbox/sandpack/compare/v2.1.8...v2.1.9) (2023-03-17)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
+# [2.1.0](https://github.com/codesandbox/sandpack/compare/v2.0.29...v2.1.0) (2023-03-06)
+
+
+### Features
+
+* Improved loading and restarts ([#805](https://github.com/codesandbox/sandpack/issues/805)) ([1e1dffb](https://github.com/codesandbox/sandpack/commit/1e1dffb451f36b56084a87497e0da77ec6f16e29))
+
+
+
+
+
+## [2.0.29](https://github.com/codesandbox/sandpack/compare/v2.0.28...v2.0.29) (2023-03-05)
+
+
+### Reverts
+
+* **remove outvariant:** remove it as it doesn't support esm ([#801](https://github.com/codesandbox/sandpack/issues/801)) ([dd47b0d](https://github.com/codesandbox/sandpack/commit/dd47b0d1e7811ab72d7ea48ee5c5256a79a69731))
+
+
+
+
+
+## [2.0.28](https://github.com/codesandbox/sandpack/compare/v2.0.27...v2.0.28) (2023-03-05)
+
+
+### Bug Fixes
+
+* **remove outvariant:** remove it as it doesn't support esm ([#800](https://github.com/codesandbox/sandpack/issues/800)) ([3c1faef](https://github.com/codesandbox/sandpack/commit/3c1faefb5d2989c6ba75357ea743dbeb3cf71e5d))
+
+
+
+
+
+## [2.0.26](https://github.com/codesandbox/sandpack/compare/v2.0.25...v2.0.26) (2023-03-02)
+
+
+### Bug Fixes
+
+* **preview:** add stdout for long process ([#792](https://github.com/codesandbox/sandpack/issues/792)) ([4da4d99](https://github.com/codesandbox/sandpack/commit/4da4d997b54beb408d3ec2f15d027090d05879c7))
+
+
+
+
+
+## [2.0.25](https://github.com/codesandbox/sandpack/compare/v2.0.24...v2.0.25) (2023-03-02)
+
+
+### Bug Fixes
+
+* throw error on timeout ([#791](https://github.com/codesandbox/sandpack/issues/791)) ([3c201aa](https://github.com/codesandbox/sandpack/commit/3c201aa1edc0bd16ad7045bd8c6303f7fdeba289))
+
+
+
+
+
+## [2.0.24](https://github.com/codesandbox/sandpack/compare/v2.0.23...v2.0.24) (2023-03-02)
+
+
+### Bug Fixes
+
+* increase preview timeout ([#789](https://github.com/codesandbox/sandpack/issues/789)) ([27fe67b](https://github.com/codesandbox/sandpack/commit/27fe67b986b81eee31f62c134fb08e47e002f7ee))
+
+
+
+
+
+## [2.0.23](https://github.com/codesandbox/sandpack/compare/v2.0.22...v2.0.23) (2023-03-01)
+
+
+### Bug Fixes
+
+* **nodebox:** writeFile recursively ([#783](https://github.com/codesandbox/sandpack/issues/783)) ([9e61ef0](https://github.com/codesandbox/sandpack/commit/9e61ef0518677f2742d9b372a773af133ca4a2e5))
+
+
+
+
+
+## [2.0.21](https://github.com/codesandbox/sandpack/compare/v2.0.20...v2.0.21) (2023-02-28)
+
+
+### Bug Fixes
+
+* **nodebox:** consider new files from Sandpack ([#778](https://github.com/codesandbox/sandpack/issues/778)) ([877222e](https://github.com/codesandbox/sandpack/commit/877222ef649ed741534709c834053eeefce70948))
+
+
+
+
+
+## [2.0.20](https://github.com/codesandbox/sandpack/compare/v2.0.19...v2.0.20) (2023-02-28)
+
+
+### Bug Fixes
+
+* **sandpack-client:** setup build with rollup ([#758](https://github.com/codesandbox/sandpack/issues/758)) ([f645119](https://github.com/codesandbox/sandpack/commit/f6451194a718a0679ce5fcb4d64d1f0d58f6c146))
+
+
+
+
+
 ## [2.0.17](https://github.com/codesandbox/sandpack/compare/v2.0.16...v2.0.17) (2023-02-24)
 
 

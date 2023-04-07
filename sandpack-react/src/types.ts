@@ -15,9 +15,11 @@ import type {
 } from "@codesandbox/sandpack-client";
 import type React from "react";
 
+import type { ClientPropsOverride } from "./contexts/utils/useClient";
 import type { SANDBOX_TEMPLATES } from "./templates";
 
 import type { CodeEditorProps } from ".";
+
 
 /**
  * ------------------------ Public documentation ------------------------
@@ -96,6 +98,11 @@ export interface SandpackOptions {
   editorHeight?: React.CSSProperties["height"];
   classes?: Record<string, string>;
 
+  /**
+   * right to left layout
+   * @default false
+   */
+  rtl?: boolean;
   showNavigator?: boolean;
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
@@ -107,7 +114,6 @@ export interface SandpackOptions {
   wrapContent?: boolean;
   resizablePanels?: boolean;
   codeEditor?: SandpackCodeOptions;
-
   /**
    * This disables editing of content by the user in all files.
    */
@@ -119,6 +125,8 @@ export interface SandpackOptions {
    */
   showReadOnly?: boolean;
 
+  layout?: "preview" | "tests" | "console";
+
   /**
    * This provides a way to control how some components are going to
    * be initialized on the page. The CodeEditor and the Preview components
@@ -127,7 +135,24 @@ export interface SandpackOptions {
    */
   initMode?: SandpackInitMode;
   initModeObserverOptions?: IntersectionObserverInit;
+  /**
+   * Determines whether or not the bundling process should start automatically
+   *  for a component in Sandpack. By default, when the component gets closer
+   *  to the viewport or when the page loads and the component is already in
+   *  the viewport, the bundling process will start automatically. However,
+   *  if this prop is set to false, the bundling process will only start when
+   *  triggered manually by the user.
+   */
   autorun?: boolean;
+  /**
+   * Determines whether or not the component should automatically reload when
+   *  changes are made to the code. When this prop is set to true, any changes
+   *  made to the code will trigger an automatic reload of the component,
+   * allowing the user to see the changes immediately. However, if this prop
+   *  is set to false, the component will need to be manually reloaded by the
+   *  user to see the changes.
+   */
+  autoReload?: boolean;
   recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;
 
@@ -418,6 +443,7 @@ export interface SandpackInternalOptions<
   initMode?: SandpackInitMode;
   initModeObserverOptions?: IntersectionObserverInit;
   autorun?: boolean;
+  autoReload?: boolean;
   recompileMode?: "immediate" | "delayed";
   recompileDelay?: number;
   id?: string;
@@ -439,6 +465,11 @@ interface SandpackInternalProps<
     editorWidthPercentage?: number;
     editorHeight?: React.CSSProperties["height"];
 
+    /**
+     * right to left layout
+     * @default false
+     */
+    rtl?: boolean;
     showNavigator?: boolean;
     showLineNumbers?: boolean;
     showInlineErrors?: boolean;
@@ -461,6 +492,8 @@ interface SandpackInternalProps<
      * appears when `readOnly` is `true`
      */
     showReadOnly?: boolean;
+
+    layout?: "preview" | "tests" | "console";
   };
 }
 
@@ -512,6 +545,8 @@ export interface SandpackState {
   activeFile: string;
   startRoute?: string;
 
+  autoReload: boolean;
+
   /**
    * Returns the current state of the editor, meaning that any
    * changes from the original `files` must return a `dirty` value;
@@ -528,7 +563,8 @@ export interface SandpackState {
   runSandpack: () => Promise<void>;
   registerBundler: (
     iframe: HTMLIFrameElement,
-    clientId: string
+    clientId: string,
+    clientPropsOverride?: ClientPropsOverride
   ) => Promise<void>;
   unregisterBundler: (clientId: string) => void;
   updateFile: (
@@ -549,7 +585,6 @@ export interface SandpackState {
   resetFile: (path: string) => void;
   resetAllFiles: () => void;
   registerReactDevTools: (value: ReactDevToolsMode) => void;
-
   /**
    * Element refs
    * Different components inside the SandpackProvider might register certain elements of interest for sandpack

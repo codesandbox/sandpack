@@ -67,7 +67,7 @@ export const useSandpackConsole = ({
             }
           );
 
-          while (messages.length > MAX_MESSAGE_COUNT) {
+          while (messages.length > maxMessageCount) {
             messages.shift();
           }
 
@@ -77,7 +77,7 @@ export const useSandpackConsole = ({
     }, clientId);
 
     return unsubscribe;
-  }, [showSyntaxError, maxMessageCount, clientId]);
+  }, [showSyntaxError, maxMessageCount, clientId, resetOnPreviewRestart]);
 
   return { logs, reset: (): void => setLogs([]) };
 };

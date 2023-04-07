@@ -1,20 +1,24 @@
 import * as React from "react";
 
-import { useSandpack } from "../..";
+import { useSandpack } from "../../hooks";
 import {
   useLoadingOverlayState,
   FADE_ANIMATION_DURATION,
 } from "../../hooks/useLoadingOverlayState";
 import { css } from "../../styles";
+import { useSandpackPreviewProgress } from "../../hooks/useSandpackPreviewProgress";
+import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
 import {
   absoluteClassName,
   buttonClassName,
   errorBundlerClassName,
   errorMessageClassName,
+  fadeIn,
   iconStandaloneClassName,
   roundedButtonClassName,
 } from "../../styles/shared";
 import { useClassNames } from "../../utils/classNames";
+import { StdoutList } from "../Console/StdoutList";
 import { RestartIcon } from "../icons";
 
 import { Loading } from "./Loading";
@@ -49,6 +53,26 @@ export const LoadingOverlay = ({
   const {
     sandpack: { runSandpack, environment },
   } = useSandpack();
+  const [shouldShowStdout, setShouldShowStdout] = React.useState(false);
+
+  const loadingOverlayState = useLoadingOverlayState(clientId, loading);
+  const progressMessage = useSandpackPreviewProgress({ clientId });
+  const { logs: stdoutData } = useSandpackShellStdout({ clientId });
+
+  React.useEffect(() => {
+    let timer: NodeJS.Timer;
+    if (progressMessage?.includes("Running")) {
+      timer = setTimeout(() => {
+        setShouldShowStdout(true);
+      }, 3_000);
+    }
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [progressMessage]);
 
   if (loadingOverlayState === "HIDDEN") {
     return null;
@@ -119,21 +143,62 @@ export const LoadingOverlay = ({
     loadingOverlayState === "LOADING" || loadingOverlayState === "PRE_FADING";
 
   return (
-    <div
-      className={classNames("overlay", [
+    <>
+      <div
+        className={classNames("overlay", [
         classNames("loading"),
         absoluteClassName,
         loadingClassName,
         className,
-      ])}
-      style={{
-        ...style,
-        opacity: stillLoading ? 1 : 0,
-        transition: `opacity ${FADE_ANIMATION_DURATION}ms ease-out`,
-      }}
-      {...props}
-    >
-      <Loading showOpenInCodeSandbox={showOpenInCodeSandbox} />
-    </div>
+        ])}
+        style={{
+          ...style,
+          opacity: stillLoading ? 1 : 0,
+          transition: `opacity ${FADE_ANIMATION_DURATION}ms ease-out`,
+        }}
+        {...props}
+      >
+        {shouldShowStdout && (
+          <div className={stdoutPreview.toString()}>
+            <StdoutList data={stdoutData} />
+          </div>
+        )}
+        <Loading showOpenInCodeSandbox={showOpenInCodeSandbox} />
+      </div>
+
+      {progressMessage && (
+        <div className={progressClassName.toString()}>
+          <p>{progressMessage}</p>
+        </div>
+      )}
+    </>
   );
 };
+
+const stdoutPreview = css({
+  position: "absolute",
+  left: 0,
+  right: 0,
+  bottom: "$space$8",
+  overflow: "auto",
+  opacity: 0.5,
+  overflowX: "hidden",
+});
+
+const progressClassName = css({
+  position: "absolute",
+  left: "$space$5",
+  bottom: "$space$4",
+  zIndex: "$top",
+  color: "$colors$clickable",
+  animation: `${fadeIn} 150ms ease`,
+  fontFamily: "$font$mono",
+  fontSize: ".8em",
+  width: "75%",
+  p: {
+    whiteSpace: "nowrap",
+    margin: 0,
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+  },
+});

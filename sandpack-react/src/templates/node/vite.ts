@@ -31,13 +31,13 @@ document.getElementById("app").innerHTML = \`
     "/package.json": {
       code: JSON.stringify({
         scripts: {
-          dev: "vite",
+          dev: "vite --force",
           build: "vite build",
           preview: "vite preview",
         },
         devDependencies: {
           vite: "^4.0.0",
-          "esbuild-wasm": "0.15.12",
+          "esbuild-wasm": "^0.17.12",
         },
       }),
     },

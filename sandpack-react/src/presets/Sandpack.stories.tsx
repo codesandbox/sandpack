@@ -41,6 +41,19 @@ export default function App() {
   />
 );
 
+export const Layout: React.FC = () => (
+  <>
+    <p>Console</p>
+    <Sandpack options={{ layout: "console" }} template="node" />
+
+    <p>Tests</p>
+    <Sandpack options={{ layout: "tests" }} template="test-ts" />
+
+    <p>Preview</p>
+    <Sandpack options={{ layout: "preview" }} template="react" />
+  </>
+);
+
 export const CustomSetup: React.FC = () => (
   <Sandpack
     customSetup={{
@@ -132,7 +145,7 @@ export const ExternalResources: React.FC = () => (
   />
 );
 
-export const RunnableComponent = (): React.ReactElement => (
+export const AutoRun = (): React.ReactElement => (
   <Sandpack
     files={{
       "/App.js": `export default function Kitten() {
@@ -146,6 +159,23 @@ export const RunnableComponent = (): React.ReactElement => (
       showTabs: true,
       showLineNumbers: true,
       showNavigator: true,
+    }}
+    template="react"
+  />
+);
+
+export const AutoReload = (): React.ReactElement => (
+  <Sandpack
+    files={{
+      "/App.js": `export default function Kitten() {
+  return (
+    <img src="https://placekitten.com/200/250" alt="Kitten" />
+  );
+}`,
+    }}
+    options={{
+      autorun: true,
+      autoReload: false,
     }}
     template="react"
   />
@@ -329,3 +359,16 @@ Write-Output $example`,
     }}
   />
 );
+
+export const RtlLayout: React.FC = () => {
+  return (
+    <>
+      <Sandpack
+        options={{
+          rtl: true,
+        }}
+        template="react"
+      />
+    </>
+  );
+};

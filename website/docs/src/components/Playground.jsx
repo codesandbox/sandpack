@@ -73,7 +73,7 @@ const App = () => {
         applied to your project, such as colors, fonts, and layout. This allows
         you to easily customize the look and feel of your project, without
         having to manually edit the CSS and HTML.{" "}
-        <Link href="/docs/getting-started/themes" target="_blank" passHref>
+        <Link href="/getting-started/themes" target="_blank" passHref>
           <a className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under]">
             More about custom themes {"->"}
           </a>
@@ -99,7 +99,7 @@ const App = () => {
         basic HTML, CSS, and JavaScript files. This allows you to quickly set up
         a project with a basic structure and styling, without having to start
         from scratch.{" "}
-        <Link href="/docs/getting-started/usage" target="_blank" passHref>
+        <Link href="/getting-started/usage" target="_blank" passHref>
           <a className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under]">
             More about files and templates {"->"}
           </a>
@@ -124,7 +124,7 @@ const App = () => {
         positioning of text and images. This allows you to create a visually
         appealing and user-friendly design for your project, and can include
         elements such as grids and columns.{" "}
-        <Link href="/docs/advanced-usage/components" target="_blank" passHref>
+        <Link href="/advanced-usage/components" target="_blank" passHref>
           <a className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under]">
             More about layout and components {"->"}
           </a>

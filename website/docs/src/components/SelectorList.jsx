@@ -10,12 +10,7 @@ export const SelectorListButton = ({ children, onClick, active }) => {
   } nx-bg-black/[.03] dark:nx-bg-gray-50/10`;
 
   return (
-    <button
-      key={children}
-      className={className}
-      data-select={active}
-      onClick={onClick}
-    >
+    <button className={className} data-select={active} onClick={onClick}>
       {children}
     </button>
   );

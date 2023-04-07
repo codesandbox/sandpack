@@ -83,7 +83,7 @@ export class SandpackRuntime extends SandpackClient {
 
       this.iframe.setAttribute(
         "allow",
-        "accelerometer; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi;"
+        "accelerometer; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; clipboard-write;"
       );
     }
 

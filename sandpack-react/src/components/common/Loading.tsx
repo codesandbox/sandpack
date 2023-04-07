@@ -23,6 +23,7 @@ const wrapperClassName = css({
   [`.${cubeClassName}`]: { display: "flex" },
   [`.sp-button.${buttonClassName}`]: { display: "none" },
   [`&:hover .sp-button.${buttonClassName}`]: { display: "flex" },
+  [`&:hover .sp-button.${buttonClassName} > span`]: { display: "none" },
   [`&:hover .${cubeClassName}`]: { display: "none" },
 });
 

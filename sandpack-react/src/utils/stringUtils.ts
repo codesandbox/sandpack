@@ -109,5 +109,9 @@ export const isDarkColor = (color: string): boolean => {
   return yiq < 128;
 };
 
-export const generateRandomId = (): string =>
-  Math.floor(Math.random() * 10000).toString();
+// Minimal cuid-like id
+let lastCount = 0;
+export const generateRandomId = (): string => {
+  const random = +(Date.now().toString(10).substr(0, 4) + lastCount++);
+  return random.toString(16);
+};

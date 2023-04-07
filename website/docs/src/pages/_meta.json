@@ -11,6 +11,11 @@
     "type": "page",
     "title": "Quickstart"
   },
+  "faq-page": {
+    "type": "page",
+    "title": "FAQ",
+    "href": "https://sandpack.codesandbox.io/docs/resources/faq"
+  },
   "resources": "Resources",
 
   "github": {

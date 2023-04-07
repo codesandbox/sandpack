@@ -35,6 +35,7 @@ export const Sandpack: SandpackInternal = ({
   options.editorWidthPercentage ??= 50;
   options.showConsole ??= false;
 
+  const rtlLayout = options?.rtl ?? false;
   const codeEditorOptions: CodeEditorProps = {
     showTabs: options.showTabs,
     showLineNumbers: options.showLineNumbers,
@@ -61,6 +62,7 @@ export const Sandpack: SandpackInternal = ({
     recompileMode: options.recompileMode,
     recompileDelay: options.recompileDelay,
     autorun: options.autorun,
+    autoReload: options.autoReload,
     bundlerURL: options.bundlerURL,
     startRoute: options.startRoute,
     skipEval: options.skipEval,
@@ -83,7 +85,13 @@ export const Sandpack: SandpackInternal = ({
 
   /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
   const templateFiles = SANDBOX_TEMPLATES[template!] ?? {};
-  const mode = "mode" in templateFiles ? templateFiles.mode : "preview";
+  const mode = (
+    options?.layout
+      ? options?.layout
+      : "mode" in templateFiles
+      ? templateFiles.mode
+      : "preview"
+  ) as typeof options.layout;
 
   const actionsChildren = options.showConsoleButton ? (
     <ConsoleCounterButton
@@ -143,7 +151,7 @@ export const Sandpack: SandpackInternal = ({
     const boundaries = Math.min(Math.max(offset, 25), 75);
 
     if (isHorizontal) {
-      setHorizontalSize(boundaries);
+      setHorizontalSize(rtlLayout ? 100 - boundaries : boundaries);
     } else {
       setVerticalSize(boundaries);
     }
@@ -198,7 +206,9 @@ export const Sandpack: SandpackInternal = ({
       theme={theme}
       {...props}
     >
-      <SandpackLayout>
+      <SandpackLayout
+        className={rtlLayout ? classNames(rtlLayoutClassName) : ""}
+      >
         <SandpackCodeEditor
           {...codeEditorOptions}
           style={{
@@ -219,7 +229,11 @@ export const Sandpack: SandpackInternal = ({
             onMouseDown={(event): void => {
               dragEventTargetRef.current = event.target;
             }}
-            style={{ left: `calc(${horizontalSize}% - 5px)` }}
+            style={{
+              left: `calc(${
+                rtlLayout ? 100 - horizontalSize : horizontalSize
+              }% - 5px)`,
+            }}
           />
         )}
 
@@ -233,10 +247,19 @@ export const Sandpack: SandpackInternal = ({
               style={topRowStyle}
             />
           )}
+
           {mode === "tests" && (
             <SandpackTests
               actionsChildren={actionsChildren}
               style={topRowStyle}
+            />
+          )}
+
+          {mode === "console" && (
+            <SandpackConsole
+              actionsChildren={actionsChildren}
+              style={topRowStyle}
+              standalone
             />
           )}
 
@@ -336,4 +359,13 @@ const buttonCounter = css({
 const consoleWrapper = css({
   width: "100%",
   overflow: "hidden",
+});
+
+const rtlLayoutClassName = css({
+  flexDirection: "row-reverse",
+
+  "@media screen and (max-width: 768px)": {
+    flexFlow: "wrap-reverse !important",
+    flexDirection: "initial",
+  },
 });

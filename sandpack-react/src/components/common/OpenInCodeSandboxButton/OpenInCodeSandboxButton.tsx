@@ -21,6 +21,7 @@ export const OpenInCodeSandboxButton = (): JSX.Element | null => {
       ])}
     >
       <ExportIcon />
+      <span>Open Sandbox</span>
     </UnstyledOpenInCodeSandboxButton>
   );
 };
