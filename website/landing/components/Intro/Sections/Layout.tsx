@@ -4,7 +4,6 @@ import {
   SandpackThemeProvider,
   useActiveCode,
   SandpackProvider,
-  ClasserProvider,
   SandpackPreview,
   SandpackLayout,
   useSandpack,
@@ -107,21 +106,18 @@ export const LayoutExample: React.FC = () => {
               dependencies: { "@codesandbox/sandpack-react": "latest" },
             }}
             files={layoutFiles}
-            template="react"
-          >
-            <ClasserProvider
-              classes={{
+            options={{
+              classes: {
                 "sp-layout": "custom-layout",
                 "sp-stack": "custom-stack",
                 "sp-wrapper": "custom-wrapper",
-              }}
-            >
-              <SandpackThemeProvider>
-                <SandpackLayout>
-                  <SandpackPreview />
-                </SandpackLayout>
-              </SandpackThemeProvider>
-            </ClasserProvider>
+              },
+            }}
+            template="react"
+          >
+            <SandpackLayout>
+              <SandpackPreview />
+            </SandpackLayout>
           </SandpackProvider>
         </SandpackContainerMobile>
 
