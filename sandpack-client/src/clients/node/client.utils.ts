@@ -54,6 +54,7 @@ export const findStartScriptPackageJson = (
   packageJson: string
 ): [string, string[], ShellCommandOptions] => {
   let scripts: Record<string, string> = {};
+  // TODO: support postinstall
   const possibleKeys = ["dev", "start"];
 
   try {
