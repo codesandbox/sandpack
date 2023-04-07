@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.5](https://github.com/codesandbox/sandpack/compare/v2.4.4...v2.4.5) (2023-04-07)
+
+
+### Bug Fixes
+
+* **client:** remove buffer dependency ([#891](https://github.com/codesandbox/sandpack/issues/891)) ([307e52b](https://github.com/codesandbox/sandpack/commit/307e52b3fb59fcef4942c27a14dd51326ebbe649))
+
+
+
+
+
 ## [2.4.3](https://github.com/codesandbox/sandpack/compare/v2.4.2...v2.4.3) (2023-04-07)
 
 **Note:** Version bump only for package @codesandbox/sandpack-client
