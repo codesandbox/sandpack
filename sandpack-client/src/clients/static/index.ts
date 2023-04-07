@@ -44,7 +44,7 @@ export class SandpackStatic extends SandpackClient {
         }
         if (filepath.endsWith(".html") || filepath.endsWith(".htm")) {
           try {
-            content = this.injectDocType(content);
+            content = this.validateHtml(content);
             content = this.injectProtocolScript(content);
             content = this.injectExternalResources(
               content,
@@ -81,17 +81,17 @@ export class SandpackStatic extends SandpackClient {
     }
   }
 
-  private injectDocType(content: FileContent): FileContent {
+  private validateHtml(content: FileContent): FileContent {
     // Make it a string
     let contentString = readBuffer(content);
 
-    // Add the DOCTYPE tag
-    const docTypeRegex = /<!DOCTYPE*>/gi;
-    if (!docTypeRegex.test(contentString)) {
-      contentString = `<!DOCTYPE html>\n${content}`;
-    }
+    const domParser = new DOMParser();
+    const doc = domParser.parseFromString(contentString, "text/html");
+    doc.documentElement.setAttribute("lang", "en");
 
-    return contentString;
+    const html = doc.documentElement.outerHTML;
+
+    return `<!DOCTYPE html>\n${html}`;
   }
 
   private injectContentIntoHead(
@@ -102,13 +102,9 @@ export class SandpackStatic extends SandpackClient {
     content = readBuffer(content);
 
     // Inject script
+
     content =
       insertHtmlAfterRegex(/<head[^<>]*>/g, content, "\n" + contentToInsert) ??
-      insertHtmlAfterRegex(
-        /<html[^<>]*>/g,
-        content,
-        "<head>\n" + contentToInsert + "</head>\n"
-      ) ??
       contentToInsert + "\n" + content;
 
     return content;
