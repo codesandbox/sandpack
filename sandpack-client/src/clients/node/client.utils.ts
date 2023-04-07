@@ -107,7 +107,6 @@ export const findStartScriptPackageJson = (packageJson: string): Command[] => {
           const nodeboxCommand: Command = [command, args, { env }];
           listOfCommands.push(nodeboxCommand);
 
-          env = {};
           command = "";
           args = [];
         }
