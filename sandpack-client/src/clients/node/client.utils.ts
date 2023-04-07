@@ -6,6 +6,8 @@ import { invariant } from "outvariant";
 import type { SandpackBundlerFiles } from "../..";
 import { createError } from "../..";
 
+import { tokenize } from "./taskManager";
+
 let counter = 0;
 
 export function generateRandomId() {
@@ -72,6 +74,7 @@ export const findStartScriptPackageJson = (
       const script = possibleKeys[index];
 
       const candidate = scripts[script];
+      console.log(tokenize(candidate));
 
       const env = candidate
         .match(/(\w+=\w+;)*\w+=\w+/g)
