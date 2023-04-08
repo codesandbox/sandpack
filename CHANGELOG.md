@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.7](https://github.com/codesandbox/sandpack/compare/v2.4.6...v2.4.7) (2023-04-08)
+
+
+### Bug Fixes
+
+* **Static Template:** fix doctype injection ([#899](https://github.com/codesandbox/sandpack/issues/899)) ([9d4a1c7](https://github.com/codesandbox/sandpack/commit/9d4a1c70d2353946adc78fea0bd3b900322e7888))
+
+
+
+
+
 ## [2.4.6](https://github.com/codesandbox/sandpack/compare/v2.4.5...v2.4.6) (2023-04-08)
 
 
