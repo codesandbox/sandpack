@@ -17,6 +17,7 @@ export type CodeEditorRef = CodeMirrorRef;
 
 export interface CodeEditorProps {
   style?: React.CSSProperties;
+  className?: string;
   showTabs?: boolean;
   showLineNumbers?: boolean;
   showInlineErrors?: boolean;
@@ -74,6 +75,7 @@ export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
       readOnly,
       showReadOnly,
       additionalLanguages,
+      className,
       ...props
     },
     ref
@@ -90,7 +92,7 @@ export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
     };
 
     return (
-      <SandpackStack className={classNames("editor")} {...props}>
+      <SandpackStack className={classNames("editor", [className])} {...props}>
         {shouldShowTabs && <FileTabs closableTabs={closableTabs} />}
 
         <div className={classNames("code-editor", [editorClassName])}>
