@@ -86,9 +86,9 @@ export class SandpackStatic extends SandpackClient {
     let contentString = readBuffer(content);
 
     // Add the DOCTYPE tag
-    const docTypeRegex = /<!DOCTYPE*>/gi;
+    const docTypeRegex = /<!DOCTYPE.*>/gi;
     if (!docTypeRegex.test(contentString)) {
-      contentString = `<!DOCTYPE html>\n${content}`;
+      contentString = `<!DOCTYPE html>\n${contentString}`;
     }
 
     return contentString;
