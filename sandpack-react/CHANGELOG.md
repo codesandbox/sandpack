@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.8](https://github.com/codesandbox/sandpack/compare/v2.4.7...v2.4.8) (2023-04-09)
+
+
+### Bug Fixes
+
+* **react-template:** update react-scripts to ^5.0.0 ([#898](https://github.com/codesandbox/sandpack/issues/898)) ([49e365d](https://github.com/codesandbox/sandpack/commit/49e365d1a24b8e9b3c8a418fc48e0d1fbacb3bfa))
+
+
+
+
+
 ## [2.4.7](https://github.com/codesandbox/sandpack/compare/v2.4.6...v2.4.7) (2023-04-08)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
