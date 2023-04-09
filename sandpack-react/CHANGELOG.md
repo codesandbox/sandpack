@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.7](https://github.com/codesandbox/sandpack/compare/v2.4.6...v2.4.7) (2023-04-08)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+
+
+
+
+## [2.4.6](https://github.com/codesandbox/sandpack/compare/v2.4.5...v2.4.6) (2023-04-08)
+
+
+### Bug Fixes
+
+* **SandpackCodeEditor:** add className prop ([#896](https://github.com/codesandbox/sandpack/issues/896)) ([00cd7f4](https://github.com/codesandbox/sandpack/commit/00cd7f4ab724284cf84a1edd36720f1e7454f09b))
+
+
+
+
+
 ## [2.4.5](https://github.com/codesandbox/sandpack/compare/v2.4.4...v2.4.5) (2023-04-07)
 
 
