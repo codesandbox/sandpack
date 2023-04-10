@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.9](https://github.com/codesandbox/sandpack/compare/v2.4.8...v2.4.9) (2023-04-10)
+
+
+### Bug Fixes
+
+* **Static Template:** Ensure valid HTML formatting for static template ([#894](https://github.com/codesandbox/sandpack/issues/894)) ([af68579](https://github.com/codesandbox/sandpack/commit/af68579a8cd2177608110d6a5c87006c31d77cd6))
+
+
+
+
+
 ## [2.4.7](https://github.com/codesandbox/sandpack/compare/v2.4.6...v2.4.7) (2023-04-08)
 
 
