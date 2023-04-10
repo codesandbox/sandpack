@@ -68,7 +68,7 @@ export function tokenize(input: string): Token[] {
     return { type: TokenType.Command, value };
   }
 
-  function parseOperator(): Token {
+  function parseOperator(): { type: TokenType } {
     let value = "";
     while (isOperator(input[current]) && current < input.length) {
       value += input[current];

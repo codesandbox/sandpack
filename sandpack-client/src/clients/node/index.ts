@@ -7,8 +7,8 @@ import type {
   FilesMap,
   ShellProcess,
   FSWatchEvent,
+  ShellInfo,
 } from "@codesandbox/nodebox";
-import type { ShellCommandOptions } from "@codesandbox/nodebox/build/modules/shell";
 
 import type {
   ClientOptions,
@@ -41,7 +41,6 @@ export class SandpackNode extends SandpackClient {
   private emulatorIframe!: HTMLIFrameElement;
   private emulator!: Nodebox;
   private emulatorShellProcess: ShellProcess | undefined;
-  private emulatorCommand: [string, string[], ShellCommandOptions] | undefined;
   private iframePreviewUrl: string | undefined;
   private _modulesCache = new Map();
   private messageChannelId = generateRandomId();
@@ -127,18 +126,10 @@ export class SandpackNode extends SandpackClient {
   ): Promise<{ id: string }> {
     const packageJsonContent = readBuffer(files["/package.json"]);
 
-    this.emulatorCommand = findStartScriptPackageJson(packageJsonContent);
+    const emulatorCommand = findStartScriptPackageJson(packageJsonContent);
     this.emulatorShellProcess = this.emulator.shell.create();
 
-    // Shell listeners
-    await this.emulatorShellProcess.on("exit", (exitCode) => {
-      this.dispatch({
-        type: "action",
-        action: "notification",
-        notificationType: "error",
-        title: createError(`Error: process.exit(${exitCode}) called.`),
-      });
-    });
+    let globalIndexScript = 0;
 
     await this.emulatorShellProcess.on("progress", (data) => {
       if (
@@ -148,10 +139,10 @@ export class SandpackNode extends SandpackClient {
         this.dispatch({
           type: "shell/progress",
           data: {
-            ...data,
+            state: "command_running",
             command: [
-              this.emulatorCommand?.[0],
-              this.emulatorCommand?.[1].join(" "),
+              emulatorCommand?.[globalIndexScript][0],
+              emulatorCommand?.[globalIndexScript][1].join(" "),
             ].join(" "),
           },
         });
@@ -170,7 +161,46 @@ export class SandpackNode extends SandpackClient {
       this.dispatch({ type: "stdout", payload: { data, type: "err" } });
     });
 
-    return await this.emulatorShellProcess.runCommand(...this.emulatorCommand);
+    await this.emulatorShellProcess.on("exit", (exitCode) => {
+      if (globalIndexScript === emulatorCommand.length - 1) {
+        this.dispatch({
+          type: "action",
+          action: "notification",
+          notificationType: "error",
+          title: createError(`Error: process.exit(${exitCode}) called.`),
+        });
+      }
+    });
+
+    let shellId: ShellInfo;
+
+    for (
+      let indexScript = 0;
+      indexScript < emulatorCommand.length;
+      indexScript++
+    ) {
+      globalIndexScript = indexScript;
+
+      shellId = await this.emulatorShellProcess.runCommand(
+        ...emulatorCommand[indexScript]
+      );
+
+      await new Promise(async (resolve) => {
+        await this.emulatorShellProcess?.on("exit", async () => {
+          if (
+            this.emulatorShellProcess?.id &&
+            this.emulatorShellProcess?.state === "running"
+          ) {
+            console.log(this.emulatorShellProcess);
+            await this.emulatorShellProcess.kill();
+          }
+
+          resolve(undefined);
+        });
+      });
+    }
+
+    return shellId;
   }
 
   private async createPreviewURLFromId(id: string): Promise<void> {
@@ -360,7 +390,7 @@ export class SandpackNode extends SandpackClient {
    */
 
   public async restartShellProcess(): Promise<void> {
-    if (this.emulatorShellProcess && this.emulatorCommand) {
+    if (this.emulatorShellProcess) {
       // 1. Set the loading state and clean the URL
       this.dispatch({ type: "start", firstLoad: true });
 

@@ -47,12 +47,12 @@ export const fromBundlerFilesToFS = (
   );
 };
 
+type Command = [string, string[], ShellCommandOptions];
+
 /**
  * Figure out which script it must run to start a server
  */
-export const findStartScriptPackageJson = (
-  packageJson: string
-): [string, string[], ShellCommandOptions] => {
+export const findStartScriptPackageJson = (packageJson: string): Command[] => {
   let scripts: Record<string, string> = {};
   // TODO: support postinstall
   const possibleKeys = ["dev", "start"];
@@ -73,35 +73,48 @@ export const findStartScriptPackageJson = (
   for (let index = 0; index < possibleKeys.length; index++) {
     if (possibleKeys[index] in scripts) {
       const script = possibleKeys[index];
-
       const candidate = scripts[script];
+
+      const listOfCommands: Command[] = [];
+      const commandTokens = tokenize(candidate);
 
       let env = {};
       let command = "";
-      const args: string[] = [];
+      let args: string[] = [];
 
-      tokenize(candidate).forEach((item) => {
+      commandTokens.forEach((token, tokenIndex) => {
         const commandNotFoundYet = command === "";
 
-        if (item.type === TokenType.EnvVar) {
-          env = item.value;
+        if (token.type === TokenType.EnvVar) {
+          env = token.value;
         }
 
-        if (item.type === TokenType.Command && commandNotFoundYet) {
-          command = item.value;
+        if (token.type === TokenType.Command && commandNotFoundYet) {
+          command = token.value;
         }
 
         if (
-          item.type === TokenType.Argument ||
-          (!commandNotFoundYet && item.type === TokenType.Command)
+          token.type === TokenType.Argument ||
+          (!commandNotFoundYet && token.type === TokenType.Command)
         ) {
-          args.push(item.value);
+          args.push(token.value);
         }
 
-        // TODO: support TokenType.AND, TokenType.OR, TokenType.PIPE
+        if (
+          token.type === TokenType.AND ||
+          tokenIndex === commandTokens.length - 1
+        ) {
+          const nodeboxCommand: Command = [command, args, { env }];
+          listOfCommands.push(nodeboxCommand);
+
+          command = "";
+          args = [];
+        }
+
+        // TODO: support TokenType.OR, TokenType.PIPE
       });
 
-      return [command, args, { env }];
+      return listOfCommands;
     }
   }
 

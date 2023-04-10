@@ -84,11 +84,18 @@ root.render(
         2
       ),
     },
+    "/foo.js": {
+      code: `const fs = require('fs');
+fs.writeFile("fileeee.ts", "", console.error)
+
+process.exit()
+`,
+    },
     "/package.json": {
       code: JSON.stringify(
         {
           scripts: {
-            dev: "vite --force",
+            dev: "tsc -p tsconfig.json && node foo.js && vite --force",
             build: "tsc && vite build",
             preview: "vite preview",
           },
