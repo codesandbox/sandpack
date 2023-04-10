@@ -104,7 +104,7 @@ export function extractErrorDetails(msg: SandpackErrorMessage): SandpackError {
     return { title, path, message, line, column };
   }
 
-  const relevantStackFrame = getRelevantStackFrame(msg.payload.frames);
+  const relevantStackFrame = getRelevantStackFrame(msg.payload?.frames);
   if (!relevantStackFrame) {
     return { message: msg.message };
   }
