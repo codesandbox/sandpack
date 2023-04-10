@@ -13,7 +13,7 @@ import { EventEmitter } from "../event-emitter";
 import { fromBundlerFilesToFS } from "../node/client.utils";
 import type { SandpackNodeMessage } from "../node/types";
 
-import { insertHtmlAfterRegex, readBuffer } from "./utils";
+import { insertHtmlAfterRegex, readBuffer, validateHtml } from "./utils";
 
 export class SandpackStatic extends SandpackClient {
   private emitter: EventEmitter;
@@ -44,7 +44,7 @@ export class SandpackStatic extends SandpackClient {
         }
         if (filepath.endsWith(".html") || filepath.endsWith(".htm")) {
           try {
-            content = this.validateHtml(content);
+            content = validateHtml(content);
             content = this.injectProtocolScript(content);
             content = this.injectExternalResources(
               content,
@@ -79,24 +79,6 @@ export class SandpackStatic extends SandpackClient {
         "accelerometer; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; clipboard-write;"
       );
     }
-  }
-
-  private validateHtml(content: FileContent): FileContent {
-    // Make it a string
-    let contentString = readBuffer(content);
-
-    // Check how long DOMParser takes
-    console.time('domparser');
-
-    const domParser = new DOMParser();
-    const doc = domParser.parseFromString(contentString, "text/html");
-    doc.documentElement.setAttribute("lang", "en");
-
-    const html = doc.documentElement.outerHTML;
-
-    console.timeEnd('domparser');
-
-    return `<!DOCTYPE html>\n${html}`;
   }
 
   private injectContentIntoHead(
