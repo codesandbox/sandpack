@@ -13,7 +13,7 @@ import { EventEmitter } from "../event-emitter";
 import { fromBundlerFilesToFS } from "../node/client.utils";
 import type { SandpackNodeMessage } from "../node/types";
 
-import { insertHtmlAfterRegex, readBuffer } from "./utils";
+import { insertHtmlAfterRegex, readBuffer, validateHtml } from "./utils";
 
 export class SandpackStatic extends SandpackClient {
   private emitter: EventEmitter;
@@ -44,7 +44,7 @@ export class SandpackStatic extends SandpackClient {
         }
         if (filepath.endsWith(".html") || filepath.endsWith(".htm")) {
           try {
-            content = this.injectDocType(content);
+            content = validateHtml(content);
             content = this.injectProtocolScript(content);
             content = this.injectExternalResources(
               content,
@@ -81,19 +81,6 @@ export class SandpackStatic extends SandpackClient {
     }
   }
 
-  private injectDocType(content: FileContent): FileContent {
-    // Make it a string
-    let contentString = readBuffer(content);
-
-    // Add the DOCTYPE tag
-    const docTypeRegex = /<!DOCTYPE.*>/gi;
-    if (!docTypeRegex.test(contentString)) {
-      contentString = `<!DOCTYPE html>\n${contentString}`;
-    }
-
-    return contentString;
-  }
-
   private injectContentIntoHead(
     content: FileContent,
     contentToInsert: string
@@ -104,11 +91,6 @@ export class SandpackStatic extends SandpackClient {
     // Inject script
     content =
       insertHtmlAfterRegex(/<head[^<>]*>/g, content, "\n" + contentToInsert) ??
-      insertHtmlAfterRegex(
-        /<html[^<>]*>/g,
-        content,
-        "<head>\n" + contentToInsert + "</head>\n"
-      ) ??
       contentToInsert + "\n" + content;
 
     return content;
