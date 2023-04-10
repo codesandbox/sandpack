@@ -11,8 +11,8 @@ import {
   iconStandaloneClassName,
   roundedButtonClassName,
 } from "../../styles/shared";
-import { SignInIcon } from "../icons";
 import { useClassNames } from "../../utils/classNames";
+import { SignInIcon } from "../icons";
 import { RestartIcon } from "../icons";
 
 const mapBundlerErrors = (originalMessage: string): string => {
@@ -65,19 +65,19 @@ export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
   if (privateDependencyError) {
     return (
       <div
-        className={classNames(
-          c("overlay", "error"),
+        className={classNames("overlay", [
+          classNames("error"),
           absoluteClassName,
-          errorClassName,
-          className
-        )}
+          errorBundlerClassName,
+          className,
+        ])}
         {...props}
       >
-        <p className={classNames(c("error-message"), errorMessageClassName)}>
+        <p className={classNames("error-message", [errorMessageClassName])}>
           <strong>Unable to fetch required dependency.</strong>
         </p>
 
-        <div className={classNames(c("error-message"), errorMessageClassName)}>
+        <div className={classNames("error-message", [errorMessageClassName])}>
           <p>
             Authentication required. Please sign in to your account (make sure
             to allow pop-ups to this page) and try again. If the issue persists,
@@ -91,12 +91,11 @@ export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
 
         <div>
           <button
-            className={classNames(
-              c("button"),
+            className={classNames("button", [
               buttonClassName,
               iconStandaloneClassName,
-              roundedButtonClassName
-            )}
+              roundedButtonClassName,
+            ])}
             onClick={onSignIn}
           >
             <SignInIcon />
@@ -160,15 +159,14 @@ export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
       translate="no"
       {...otherProps}
     >
-      <p className={classNames(c("error-message"), errorMessageClassName)}>
+      <p className={classNames("error-message", [errorMessageClassName])}>
         <strong>Something went wrong</strong>
       </p>
 
       <p
-        className={classNames(
-          c("error-message"),
-          errorMessageClassName({ errorCode: true })
-        )}
+        className={classNames("error-message", [
+          errorMessageClassName({ errorCode: true }),
+        ])}
       >
         {errorMessage || children}
       </p>

@@ -115,9 +115,8 @@ export const SandpackPreview = React.forwardRef<
     },
     ref
   ) => {
-    const { sandpack, listen, iframe, getClient, clientId, dispatch } = useSandpackClient(
-      { startRoute }
-    );
+    const { sandpack, listen, iframe, getClient, clientId, dispatch } =
+      useSandpackClient({ startRoute });
     const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
       number | null
     >(null);
@@ -201,12 +200,12 @@ export const SandpackPreview = React.forwardRef<
 
             {sandpack.teamId && (
               <button
-                className={classNames(
-                  c("button", "icon-standalone"),
+                className={classNames("button", [
+                  classNames("icon-standalone"),
                   buttonClassName,
                   iconStandaloneClassName,
-                  roundedButtonClassName
-                )}
+                  roundedButtonClassName,
+                ])}
                 onClick={() => dispatch({ type: "sign-out" })}
                 title="Sign out"
                 type="button"
