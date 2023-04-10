@@ -1,3 +1,5 @@
+import type { FileContent } from "static-browser-server";
+
 export const insertHtmlAfterRegex = (
   regex: RegExp,
   content: string,
@@ -26,4 +28,20 @@ export const readBuffer = (content: string | Uint8Array): string => {
   } else {
     return new TextDecoder().decode(content);
   }
+};
+
+export const validateHtml = (content: FileContent): FileContent => {
+  // Make it a string
+  const contentString = readBuffer(content);
+
+  const domParser = new DOMParser();
+  const doc = domParser.parseFromString(contentString, "text/html");
+
+  if (!doc.documentElement.getAttribute("lang")) {
+    doc.documentElement.setAttribute("lang", "en");
+  }
+
+  const html = doc.documentElement.outerHTML;
+
+  return `<!DOCTYPE html>\n${html}`;
 };
