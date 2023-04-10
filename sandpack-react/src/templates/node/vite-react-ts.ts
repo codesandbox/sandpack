@@ -86,7 +86,10 @@ root.render(
     },
     "/foo.js": {
       code: `const fs = require('fs');
-fs.writeFile("fileeee.ts", "", console.error)`,
+fs.writeFile("fileeee.ts", "", console.error)
+
+process.exit()
+`,
     },
     "/package.json": {
       code: JSON.stringify(

@@ -129,16 +129,6 @@ export class SandpackNode extends SandpackClient {
     const emulatorCommand = findStartScriptPackageJson(packageJsonContent);
     this.emulatorShellProcess = this.emulator.shell.create();
 
-    // Shell listeners
-    await this.emulatorShellProcess.on("exit", (exitCode) => {
-      this.dispatch({
-        type: "action",
-        action: "notification",
-        notificationType: "error",
-        title: createError(`Error: process.exit(${exitCode}) called.`),
-      });
-    });
-
     let globalIndexScript = 0;
 
     await this.emulatorShellProcess.on("progress", (data) => {
@@ -171,6 +161,17 @@ export class SandpackNode extends SandpackClient {
       this.dispatch({ type: "stdout", payload: { data, type: "err" } });
     });
 
+    await this.emulatorShellProcess.on("exit", (exitCode) => {
+      if (globalIndexScript === emulatorCommand.length - 1) {
+        this.dispatch({
+          type: "action",
+          action: "notification",
+          notificationType: "error",
+          title: createError(`Error: process.exit(${exitCode}) called.`),
+        });
+      }
+    });
+
     let shellId: ShellInfo;
 
     for (
@@ -178,18 +179,24 @@ export class SandpackNode extends SandpackClient {
       indexScript < emulatorCommand.length;
       indexScript++
     ) {
-      if (this.emulatorShellProcess.id) {
-        await this.emulatorShellProcess.kill();
-      }
-
       globalIndexScript = indexScript;
 
       shellId = await this.emulatorShellProcess.runCommand(
         ...emulatorCommand[indexScript]
       );
 
-      await new Promise((resolve) => {
-        setTimeout(resolve, 1000);
+      await new Promise(async (resolve) => {
+        await this.emulatorShellProcess?.on("exit", async () => {
+          if (
+            this.emulatorShellProcess?.id &&
+            this.emulatorShellProcess?.state === "running"
+          ) {
+            console.log(this.emulatorShellProcess);
+            await this.emulatorShellProcess.kill();
+          }
+
+          resolve(undefined);
+        });
       });
     }
 
