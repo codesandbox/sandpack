@@ -1,7 +1,7 @@
 import type { WorkerStatusUpdate } from "@codesandbox/nodebox";
 import * as React from "react";
 
-import { useSandpack } from "..";
+import { useSandpack } from "./useSandpack";
 
 const mapProgressMessage = (
   originalMessage: WorkerStatusUpdate & { command?: string },
@@ -24,12 +24,22 @@ const mapProgressMessage = (
   }
 };
 
-export const usePreviewProgress = () => {
+export const useSandpackPreviewProgress = (
+  props:
+    | {
+        timeout?: number;
+        clientId?: string;
+      }
+    | undefined
+) => {
   const [isReady, setIsReady] = React.useState(false);
   const [totalDependencies, setTotalDependencies] = React.useState<number>();
   const [loadingMessage, setLoadingMessage] = React.useState<null | string>(
     null
   );
+
+  const timeout = props?.timeout;
+  const clientId = props?.clientId;
 
   const { listen } = useSandpack();
 
@@ -38,6 +48,12 @@ export const usePreviewProgress = () => {
     const unsubscribe = listen((message) => {
       if (message.type === "start" && message.firstLoad) {
         setIsReady(false);
+      }
+
+      if (timeout) {
+        timer = setTimeout(() => {
+          setLoadingMessage(null);
+        }, timeout);
       }
 
       if (message.type === "shell/progress" && !isReady) {
@@ -57,7 +73,7 @@ export const usePreviewProgress = () => {
         setIsReady(true);
         clearTimeout(timer);
       }
-    });
+    }, clientId);
 
     return (): void => {
       if (timer) {
@@ -65,7 +81,7 @@ export const usePreviewProgress = () => {
       }
       unsubscribe();
     };
-  }, [isReady, totalDependencies]);
+  }, [clientId, isReady, totalDependencies, timeout]);
 
   return loadingMessage;
 };

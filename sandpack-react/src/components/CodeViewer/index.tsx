@@ -1,11 +1,9 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import type { SandpackInitMode } from "../..";
+import type { CustomLanguage, SandpackInitMode } from "../..";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
-import { THEME_PREFIX } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { CodeEditor } from "../CodeEditor";
 import type { CodeEditorRef } from "../CodeEditor";
 import type { Decorators } from "../CodeEditor/CodeMirror";
@@ -30,6 +28,12 @@ export interface CodeViewerProps {
    * a certain control of when to initialize them.
    */
   initMode?: SandpackInitMode;
+  /**
+   * Provides a way to add custom language modes by supplying a language
+   * type, applicable file extensions, and a LanguageSupport instance
+   * for that syntax mode
+   */
+  additionalLanguages?: CustomLanguage[];
 }
 
 export const SandpackCodeViewer = React.forwardRef<
@@ -44,23 +48,25 @@ export const SandpackCodeViewer = React.forwardRef<
       code: propCode,
       initMode,
       wrapContent,
+      additionalLanguages,
       ...props
     },
     ref
   ) => {
     const { sandpack } = useSandpack();
     const { code } = useActiveCode();
-    const c = useClasser(THEME_PREFIX);
+    const classNames = useClassNames();
 
     const shouldShowTabs = showTabs ?? sandpack.visibleFiles.length > 1;
 
     return (
-      <SandpackStack className={c("editor-viewer")} {...props}>
+      <SandpackStack className={classNames("editor-viewer")} {...props}>
         {shouldShowTabs ? <FileTabs /> : null}
 
-        <div className={classNames(c("code-editor"), editorClassName)}>
+        <div className={classNames("code-editor", [editorClassName])}>
           <CodeEditor
             ref={ref}
+            additionalLanguages={additionalLanguages}
             code={propCode ?? code}
             decorators={decorators}
             filePath={sandpack.activeFile}

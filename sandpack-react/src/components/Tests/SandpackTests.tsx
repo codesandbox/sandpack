@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { useSandpackTheme, useSandpackClient } from "../../hooks";
-import { css, THEME_PREFIX } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { css } from "../../styles";
+import { useClassNames } from "../../utils/classNames";
 import { SandpackStack } from "../common";
 import { Loading } from "../common/Loading";
 
@@ -378,9 +378,11 @@ export const SandpackTests: React.FC<
   const testResults = getAllTestResults(specs);
   const suiteResults = getAllSuiteResults(specs);
 
+  const classNames = useClassNames();
+
   return (
     <SandpackStack
-      className={classNames(`${THEME_PREFIX}-tests`, className)}
+      className={classNames(`tests`, [className])}
       style={{
         ...setTestTheme(theme.themeMode === "dark"),
         ...style,
@@ -418,13 +420,13 @@ export const SandpackTests: React.FC<
         </div>
       )}
 
-      <div className={classNames(containerClassName)}>
+      <div className={containerClassName.toString()}>
         {specs.length === 0 && state.status === "complete" ? (
-          <div className={classNames(fileErrorContainerClassName)}>
+          <div className={fileErrorContainerClassName.toString()}>
             <p>No test files found.</p>
             <p>
               Test match:{" "}
-              <span className={classNames(failTextClassName)}>
+              <span className={failTextClassName.toString()}>
                 {testFileRegex.toString()}
               </span>
             </p>

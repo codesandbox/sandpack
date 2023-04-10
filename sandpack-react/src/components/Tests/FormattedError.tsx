@@ -2,7 +2,7 @@ import type { TestError } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
 import { css } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 
 import {
   failTextClassName,
@@ -23,9 +23,10 @@ const containerClassName = css({
 });
 
 export const FormattedError: React.FC<Props> = ({ error, path }) => {
+  const classNames = useClassNames();
   return (
     <div
-      className={classNames(containerClassName)}
+      className={classNames("test-error", [containerClassName])}
       dangerouslySetInnerHTML={{ __html: formatDiffMessage(error, path) }}
     />
   );

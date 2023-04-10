@@ -3,6 +3,335 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.8](https://github.com/codesandbox/sandpack/compare/v2.4.7...v2.4.8) (2023-04-09)
+
+
+### Bug Fixes
+
+* **react-template:** update react-scripts to ^5.0.0 ([#898](https://github.com/codesandbox/sandpack/issues/898)) ([49e365d](https://github.com/codesandbox/sandpack/commit/49e365d1a24b8e9b3c8a418fc48e0d1fbacb3bfa))
+
+
+
+
+
+## [2.4.7](https://github.com/codesandbox/sandpack/compare/v2.4.6...v2.4.7) (2023-04-08)
+
+
+### Bug Fixes
+
+* **Static Template:** fix doctype injection ([#899](https://github.com/codesandbox/sandpack/issues/899)) ([9d4a1c7](https://github.com/codesandbox/sandpack/commit/9d4a1c70d2353946adc78fea0bd3b900322e7888))
+
+
+
+
+
+## [2.4.6](https://github.com/codesandbox/sandpack/compare/v2.4.5...v2.4.6) (2023-04-08)
+
+
+### Bug Fixes
+
+* **SandpackCodeEditor:** add className prop ([#896](https://github.com/codesandbox/sandpack/issues/896)) ([00cd7f4](https://github.com/codesandbox/sandpack/commit/00cd7f4ab724284cf84a1edd36720f1e7454f09b))
+
+
+
+
+
+## [2.4.5](https://github.com/codesandbox/sandpack/compare/v2.4.4...v2.4.5) (2023-04-07)
+
+
+### Bug Fixes
+
+* **client:** remove buffer dependency ([#891](https://github.com/codesandbox/sandpack/issues/891)) ([307e52b](https://github.com/codesandbox/sandpack/commit/307e52b3fb59fcef4942c27a14dd51326ebbe649))
+
+
+
+
+
+## [2.4.4](https://github.com/codesandbox/sandpack/compare/v2.4.3...v2.4.4) (2023-04-07)
+
+
+### Bug Fixes
+
+* **classNames context:** general improvements ([#771](https://github.com/codesandbox/sandpack/issues/771)) ([93df1ec](https://github.com/codesandbox/sandpack/commit/93df1ec0cdd558d28248a9f7a7204697cd5f8863))
+
+
+
+
+
+## [2.4.3](https://github.com/codesandbox/sandpack/compare/v2.4.2...v2.4.3) (2023-04-07)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [2.4.2](https://github.com/codesandbox/sandpack/compare/v2.4.1...v2.4.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* **code-viewer:** support additionalLanguages ([#889](https://github.com/codesandbox/sandpack/issues/889)) ([99cb481](https://github.com/codesandbox/sandpack/commit/99cb4811e263dbb581fd65229d672bb53509996e))
+
+
+
+
+
+## [2.4.1](https://github.com/codesandbox/sandpack/compare/v2.4.0...v2.4.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* **react build:** rename esm modules ([#888](https://github.com/codesandbox/sandpack/issues/888)) ([b0c4b82](https://github.com/codesandbox/sandpack/commit/b0c4b82be87b8ab95d080d3f3b3c6dc4bf791a24))
+
+
+
+
+
+# [2.4.0](https://github.com/codesandbox/sandpack/compare/v2.3.2...v2.4.0) (2023-04-06)
+
+
+### Features
+
+* **Static Template:** add hidden head tags option ([#884](https://github.com/codesandbox/sandpack/issues/884)) ([3cee76f](https://github.com/codesandbox/sandpack/commit/3cee76fdd937460e379ddffea52f462c34ed5d36))
+
+
+
+
+
+## [2.3.2](https://github.com/codesandbox/sandpack/compare/v2.3.1...v2.3.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* **useFiles:** Only sync props to state after mount ([#886](https://github.com/codesandbox/sandpack/issues/886)) ([c6390f2](https://github.com/codesandbox/sandpack/commit/c6390f26778339ab0ad058bab66d2fa86a8647a7))
+
+
+
+
+
+## [2.3.1](https://github.com/codesandbox/sandpack/compare/v2.3.0...v2.3.1) (2023-04-06)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+# [2.3.0](https://github.com/codesandbox/sandpack/compare/v2.2.9...v2.3.0) (2023-04-05)
+
+
+### Features
+
+* **Preview:** add startRoute prop to override Provider default ([#868](https://github.com/codesandbox/sandpack/issues/868)) ([bc28871](https://github.com/codesandbox/sandpack/commit/bc288719afd057d8699cf10de13f905bf1dcded9))
+
+
+
+
+
+## [2.2.9](https://github.com/codesandbox/sandpack/compare/v2.2.8...v2.2.9) (2023-04-03)
+
+
+### Bug Fixes
+
+* **static:** Don't crash at inserting runtime ([#878](https://github.com/codesandbox/sandpack/issues/878)) ([7da3346](https://github.com/codesandbox/sandpack/commit/7da3346aa0f79abc24c4ecf51fd7506bbf590dd7))
+
+
+
+
+
+## [2.2.8](https://github.com/codesandbox/sandpack/compare/v2.2.7...v2.2.8) (2023-04-03)
+
+
+### Bug Fixes
+
+* **sandpack client:** introduce auto reload ([#877](https://github.com/codesandbox/sandpack/issues/877)) ([4a591fc](https://github.com/codesandbox/sandpack/commit/4a591fc00d80666fb5b301e87f4b0f565c3207f4))
+
+
+
+
+
+## [2.2.7](https://github.com/codesandbox/sandpack/compare/v2.2.6...v2.2.7) (2023-04-03)
+
+
+### Bug Fixes
+
+* **sandpack-content:** destroy current client in case it tries to run it again ([#875](https://github.com/codesandbox/sandpack/issues/875)) ([04298be](https://github.com/codesandbox/sandpack/commit/04298bef19e838d641dfb7e3a455dd190093cbb1))
+
+
+
+
+
+## [2.2.6](https://github.com/codesandbox/sandpack/compare/v2.2.5...v2.2.6) (2023-04-03)
+
+
+### Bug Fixes
+
+* Don't add index logic to StaticSandbox ([#874](https://github.com/codesandbox/sandpack/issues/874)) ([146287b](https://github.com/codesandbox/sandpack/commit/146287b6fc09c6cf6335c1167f1425a3ec636614))
+
+
+
+
+
+## [2.2.5](https://github.com/codesandbox/sandpack/compare/v2.2.4...v2.2.5) (2023-04-03)
+
+
+### Bug Fixes
+
+* **sandpack preset:** use standalone mode for console layout ([#872](https://github.com/codesandbox/sandpack/issues/872)) ([6b52a72](https://github.com/codesandbox/sandpack/commit/6b52a72274107fa3d15b864ad68026308110f72f))
+
+
+
+
+
+## [2.2.4](https://github.com/codesandbox/sandpack/compare/v2.2.3...v2.2.4) (2023-04-01)
+
+
+### Bug Fixes
+
+* **SandpackConsole:** make showHeader flag works ([#867](https://github.com/codesandbox/sandpack/issues/867)) ([54fd641](https://github.com/codesandbox/sandpack/commit/54fd64181e5318c396815ecd58baa1e2316d75a8))
+
+
+
+
+
+## [2.2.3](https://github.com/codesandbox/sandpack/compare/v2.2.2...v2.2.3) (2023-04-01)
+
+
+### Bug Fixes
+
+* **console:** add resetOnPreviewRestart to main useEffect hook ([#861](https://github.com/codesandbox/sandpack/issues/861)) ([abd8d39](https://github.com/codesandbox/sandpack/commit/abd8d394819725ee57cce720c397123525c10333))
+
+
+
+
+
+## [2.2.2](https://github.com/codesandbox/sandpack/compare/v2.2.1...v2.2.2) (2023-04-01)
+
+
+### Bug Fixes
+
+* **SandpackConsole:** clear logs based on maxMessageCount option ([#866](https://github.com/codesandbox/sandpack/issues/866)) ([c8afd3e](https://github.com/codesandbox/sandpack/commit/c8afd3e35b7ee3021dc5c10ab1949e16f05cbaad))
+
+
+
+
+
+## [2.2.1](https://github.com/codesandbox/sandpack/compare/v2.2.0...v2.2.1) (2023-04-01)
+
+
+### Bug Fixes
+
+* **clients:** allow clipboard write ([#864](https://github.com/codesandbox/sandpack/issues/864)) ([7ec95e1](https://github.com/codesandbox/sandpack/commit/7ec95e1dfdbf1d943a6ef063f75dd14650bbba1a))
+
+
+
+
+
+# [2.2.0](https://github.com/codesandbox/sandpack/compare/v2.1.11...v2.2.0) (2023-03-31)
+
+
+### Features
+
+* static template ([#830](https://github.com/codesandbox/sandpack/issues/830)) ([2b14ed2](https://github.com/codesandbox/sandpack/commit/2b14ed226c7fdfe49054c6efe732f7f9f560b23c))
+
+
+
+
+
+## [2.1.11](https://github.com/codesandbox/sandpack/compare/v2.1.10...v2.1.11) (2023-03-22)
+
+
+### Bug Fixes
+
+* **types:** incorrect typings for ErrorOverlay ([#855](https://github.com/codesandbox/sandpack/issues/855)) ([05f6625](https://github.com/codesandbox/sandpack/commit/05f66251b9cd36ac0d17b86dc3bcff0abb876f74))
+
+
+
+
+
+## [2.1.10](https://github.com/codesandbox/sandpack/compare/v2.1.9...v2.1.10) (2023-03-20)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [2.1.9](https://github.com/codesandbox/sandpack/compare/v2.1.8...v2.1.9) (2023-03-17)
+
+**Note:** Version bump only for package sandpack
+
+
+
+
+
+## [2.1.8](https://github.com/codesandbox/sandpack/compare/v2.1.7...v2.1.8) (2023-03-16)
+
+
+### Bug Fixes
+
+* reference error with sandpack-react/unstyled in typescript ([#842](https://github.com/codesandbox/sandpack/issues/842)) ([834d3c3](https://github.com/codesandbox/sandpack/commit/834d3c361284e0599bf72690f5ebc6ea38758287))
+
+
+
+
+
+## [2.1.7](https://github.com/codesandbox/sandpack/compare/v2.1.6...v2.1.7) (2023-03-14)
+
+
+### Bug Fixes
+
+* add new build for styleless ([#798](https://github.com/codesandbox/sandpack/issues/798)) ([d9e475d](https://github.com/codesandbox/sandpack/commit/d9e475d13eaaeb04ff1e5e51403a5694c1ada65c))
+
+
+
+
+
+## [2.1.6](https://github.com/codesandbox/sandpack/compare/v2.1.5...v2.1.6) (2023-03-13)
+
+
+### Bug Fixes
+
+* **SandpackConsole:** make standalone defaults to false ([#837](https://github.com/codesandbox/sandpack/issues/837)) ([bb612c5](https://github.com/codesandbox/sandpack/commit/bb612c5324b16b9d7f308ea8cce741ace7b5d661))
+
+
+
+
+
+## [2.1.5](https://github.com/codesandbox/sandpack/compare/v2.1.4...v2.1.5) (2023-03-13)
+
+
+### Bug Fixes
+
+* **client:** make sure `unsubscribeQueuedClients` receives a valid obj ([#836](https://github.com/codesandbox/sandpack/issues/836)) ([3d42177](https://github.com/codesandbox/sandpack/commit/3d4217735a53452ea337fc11dc82dae0aa23703b))
+
+
+
+
+
+## [2.1.4](https://github.com/codesandbox/sandpack/compare/v2.1.3...v2.1.4) (2023-03-13)
+
+
+### Bug Fixes
+
+* **sandpack-console:** standalone mode ([#835](https://github.com/codesandbox/sandpack/issues/835)) ([88d7d72](https://github.com/codesandbox/sandpack/commit/88d7d7220a2855ac4fc181d93333e3358f702281))
+
+
+
+
+
+## [2.1.3](https://github.com/codesandbox/sandpack/compare/v2.1.2...v2.1.3) (2023-03-12)
+
+
+### Bug Fixes
+
+* **sandpack-react:** tweak imports to avoid circular deps ([#832](https://github.com/codesandbox/sandpack/issues/832)) ([b0faa50](https://github.com/codesandbox/sandpack/commit/b0faa50347912219d799eb7ec4aff5f50c4b2d75))
+
+
+
+
+
 ## [2.1.2](https://github.com/codesandbox/sandpack/compare/v2.1.1...v2.1.2) (2023-03-07)
 
 

@@ -1,7 +1,5 @@
 /* eslint-disable no-console,@typescript-eslint/no-explicit-any,prefer-rest-params,@typescript-eslint/explicit-module-boundary-types */
 
-import { Buffer } from "buffer";
-
 import { PREVIEW_LOADED_MESSAGE_TYPE, Nodebox } from "@codesandbox/nodebox";
 import type {
   FilesMap,
@@ -19,6 +17,7 @@ import type {
 import { nullthrows } from "../..";
 import { createError } from "../..";
 import { SandpackClient } from "../base";
+import { EventEmitter } from "../event-emitter";
 
 import {
   fromBundlerFilesToFS,
@@ -26,8 +25,8 @@ import {
   findStartScriptPackageJson,
   getMessageFromError,
   writeBuffer,
+  generateRandomId,
 } from "./client.utils";
-import { EventEmitter } from "./event-emitter";
 import { loadPreviewIframe, setPreviewIframeProperties } from "./iframe.utils";
 import { injectScriptToIframe } from "./inject-scripts";
 import type { SandpackNodeMessage } from "./types";
@@ -43,6 +42,7 @@ export class SandpackNode extends SandpackClient {
   private emulatorCommand: [string, string[], ShellCommandOptions] | undefined;
   private iframePreviewUrl: string | undefined;
   private _modulesCache = new Map();
+  private messageChannelId = generateRandomId();
 
   // Public
   public iframe!: HTMLIFrameElement;
@@ -176,7 +176,7 @@ export class SandpackNode extends SandpackClient {
 
     const { url } = await this.emulator.preview.getByShellId(id);
 
-    this.iframePreviewUrl = url;
+    this.iframePreviewUrl = url + this.options.startRoute;
   }
 
   /**
@@ -243,19 +243,22 @@ export class SandpackNode extends SandpackClient {
   private async globalListeners(): Promise<void> {
     window.addEventListener("message", (event) => {
       if (event.data.type === PREVIEW_LOADED_MESSAGE_TYPE) {
-        injectScriptToIframe(this.iframe);
+        injectScriptToIframe(this.iframe, this.messageChannelId);
       }
 
-      if (event.data.type === "urlchange") {
+      if (
+        event.data.type === "urlchange" &&
+        event.data.channelId === this.messageChannelId
+      ) {
         this.dispatch({
           type: "urlchange",
           url: event.data.url,
           back: event.data.back,
           forward: event.data.forward,
         });
+      } else if (event.data.channelId === this.messageChannelId) {
+        this.dispatch(event.data);
       }
-
-      this.dispatch(event.data);
     });
 
     await this.emulator.fs.watch(
@@ -378,7 +381,7 @@ export class SandpackNode extends SandpackClient {
       Object.entries(modules).forEach(([key, value]) => {
         if (
           !this._modulesCache.get(key) ||
-          Buffer.compare(value, this._modulesCache.get(key)) !== 0
+          readBuffer(value) !== readBuffer(this._modulesCache.get(key))
         ) {
           this.emulator.fs.writeFile(key, value, { recursive: true });
         }

@@ -37,7 +37,7 @@ document.getElementById("app").innerHTML = \`
         },
         devDependencies: {
           vite: "^4.0.0",
-          "esbuild-wasm": "0.15.12",
+          "esbuild-wasm": "^0.17.12",
         },
       }),
     },

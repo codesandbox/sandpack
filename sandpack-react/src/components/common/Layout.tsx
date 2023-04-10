@@ -1,9 +1,8 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { useSandpack } from "../../hooks/useSandpack";
 import { css, THEME_PREFIX } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { useCombinedRefs } from "../CodeEditor/utils";
 
 import { stackClassName } from "./Stack";
@@ -61,13 +60,13 @@ export const SandpackLayout = React.forwardRef<
   SandpackLayoutProps
 >(({ children, className, ...props }, ref) => {
   const { sandpack } = useSandpack();
-  const c = useClasser(THEME_PREFIX);
+  const classNames = useClassNames();
   const combinedRef = useCombinedRefs(sandpack.lazyAnchorRef, ref);
 
   return (
     <div
       ref={combinedRef}
-      className={classNames(c("layout"), layoutClassName, className)}
+      className={classNames("layout", [layoutClassName, className])}
       {...props}
     >
       {children}

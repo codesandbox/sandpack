@@ -1,0 +1,93 @@
+# Local dependencies/packages
+
+This guide will show you how to consume local dependencies on Sandpack using an external library to bundle them. This can be useful when developing applications or libraries that are not yet ready for publication on npm or other registries.
+
+### Step 1: Bundle your local library with tsup
+
+The easiest way to bundle your TypeScript libraries is to use tsup.
+
+1. Install tsup as a development dependency:
+
+```
+$ npm install --save-dev tsup
+```
+
+2. Create a `tsup.config.js` file at the root of your library's directory with the following contents:
+
+```js
+import { defineConfig } from "tsup";
+
+export default defineConfig([
+  {
+    entry: ["./design-system/index.ts"], // your library path
+    treeshake: true,
+    minify: true,
+    verbose: true,
+    dts: true,
+    external: ["react", "react-dom"],
+    clean: true,
+    outDir: "./design-system/build-sandpack", // build output
+  },
+]);
+
+```
+
+3. Replace ./design-system/index.ts with the path to your library's entry point.
+
+4. Run tsup in your library's directory to generate the bundled file:
+```
+$ tsup
+```
+
+This command will create a build-sandpack directory inside your library's directory with the bundled output.
+
+### Step 2: Consume the local dependency on Sandpack
+Now that we have the bundled file, we need to consume it on Sandpack.
+
+1. Import the bundled file as a raw text file:
+
+```jsx
+import designSystemRaw from "../design-system/build-sandpack?raw";
+```
+
+Replace `../design-system/build-sandpack` with the path to your bundled file.
+
+2. Pass the `designSystemRaw` variable to Sandpack's files prop along with a fake `package.json` file and a fake index.js file:
+
+```jsx
+import designSystemRaw from "../design-system/build-sandpack?raw";
+
+<Sandpack
+  files={{
+    "/App.tsx": `import { Button, Tag } from "@internals/ds";
+
+export default function Sample() {
+  return (
+    <>
+      <Button type="primary">Button1</Button>
+      <Button type="secondary">Button2</Button>
+      <Tag>Tag</Tag>
+    </>
+  );
+}
+`,
+    "/node_modules/@internals/design-system/package.json": {
+      hidden: true,
+      code: JSON.stringify({
+        name: "@design-system",
+        main: "./index.js",
+      }),
+    },
+    "/node_modules/@internals/design-system/index.js": {
+      hidden: true,
+      code: designSystemRaw,
+    },
+  }}
+  template="react-vite"
+/>
+```
+
+Replace `/App.tsx` with the path to your application's main file.
+
+Here's an example of a Sandpack project that uses local dependencies and an external library to bundle them: https://github.com/codesandbox/sandpack-local-dependencies
+

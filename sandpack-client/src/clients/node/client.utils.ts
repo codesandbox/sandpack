@@ -1,26 +1,32 @@
-import { Buffer } from "buffer";
-
 import type { ShellCommandOptions } from "@codesandbox/nodebox/build/modules/shell";
 import { invariant } from "outvariant";
 
 import type { SandpackBundlerFiles } from "../..";
 import { createError } from "../..";
 
-export const writeBuffer = (
-  content: string | Uint8Array,
-  encoding: BufferEncoding = "utf8"
-): Uint8Array => {
+let counter = 0;
+
+export function generateRandomId() {
+  const now = Date.now();
+  const randomNumber = Math.round(Math.random() * 10000);
+  const count = (counter += 1);
+  return (+`${now}${randomNumber}${count}`).toString(16);
+}
+
+export const writeBuffer = (content: string | Uint8Array): Uint8Array => {
   if (typeof content === "string") {
-    return Buffer.from(content, encoding);
+    return new TextEncoder().encode(content);
   } else {
     return content;
   }
 };
 
 export const readBuffer = (content: string | Uint8Array): string => {
-  if (typeof content === "string") return content;
-
-  return Buffer.from(content).toString("utf-8");
+  if (typeof content === "string") {
+    return content;
+  } else {
+    return new TextDecoder().decode(content);
+  }
 };
 
 export const fromBundlerFilesToFS = (

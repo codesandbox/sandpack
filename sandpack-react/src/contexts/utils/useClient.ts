@@ -34,6 +34,10 @@ interface SandpackConfigState {
   status: SandpackStatus;
 }
 
+export interface ClientPropsOverride {
+  startRoute?: string;
+}
+
 export interface UseClientOperations {
   clients: Record<string, SandpackClientType>;
   initializeSandpackIframe: () => void;
@@ -41,7 +45,8 @@ export interface UseClientOperations {
   unregisterBundler: (clientId: string) => void;
   registerBundler: (
     iframe: HTMLIFrameElement,
-    clientId: string
+    clientId: string,
+    clientPropsOverride?: ClientPropsOverride
   ) => Promise<void>;
   registerReactDevTools: (value: ReactDevToolsMode) => void;
   addListener: (
@@ -88,7 +93,12 @@ export const useClient: UseClient = (
    */
   const intersectionObserver = useRef<IntersectionObserver | null>(null);
   const lazyAnchorRef = useRef<HTMLDivElement>(null);
-  const preregisteredIframes = useRef<Record<string, HTMLIFrameElement>>({});
+  const preregisteredIframes = useRef<
+    Record<
+      string,
+      { iframe: HTMLIFrameElement; clientPropsOverride?: ClientPropsOverride }
+    >
+  >({});
   const clients = useRef<Record<string, SandpackClientType>>({});
   const timeoutHook = useRef<NodeJS.Timer | null>(null);
   const unsubscribeClientListeners = useRef<
@@ -109,7 +119,8 @@ export const useClient: UseClient = (
   const createClient = useCallback(
     async (
       iframe: HTMLIFrameElement,
-      clientId: string
+      clientId: string,
+      clientPropsOverride?: ClientPropsOverride
     ): Promise<SandpackClientType> => {
       options ??= {};
       customSetup ??= {};
@@ -134,7 +145,7 @@ export const useClient: UseClient = (
         {
           externalResources: options.externalResources,
           bundlerURL: options.bundlerURL,
-          startRoute: options.startRoute,
+          startRoute: clientPropsOverride?.startRoute ?? options.startRoute,
           fileResolver: options.fileResolver,
           skipEval: options.skipEval ?? false,
           logLevel: options.logLevel,
@@ -206,8 +217,19 @@ export const useClient: UseClient = (
   const runSandpack = useCallback(async (): Promise<void> => {
     await Promise.all(
       Object.keys(preregisteredIframes.current).map(async (clientId) => {
-        const iframe = preregisteredIframes.current[clientId];
-        clients.current[clientId] = await createClient(iframe, clientId);
+        // There's already a client if the same id, so we should destroy it
+        if (clients.current[clientId]) {
+          clients.current[clientId].destroy();
+        }
+
+        const { iframe, clientPropsOverride = {} } =
+          preregisteredIframes.current[clientId];
+
+        clients.current[clientId] = await createClient(
+          iframe,
+          clientId,
+          clientPropsOverride
+        );
       })
     );
 
@@ -265,11 +287,22 @@ export const useClient: UseClient = (
   ]);
 
   const registerBundler = useCallback(
-    async (iframe: HTMLIFrameElement, clientId: string): Promise<void> => {
+    async (
+      iframe: HTMLIFrameElement,
+      clientId: string,
+      clientPropsOverride?: ClientPropsOverride
+    ): Promise<void> => {
       if (state.status === "running") {
-        clients.current[clientId] = await createClient(iframe, clientId);
+        clients.current[clientId] = await createClient(
+          iframe,
+          clientId,
+          clientPropsOverride
+        );
       } else {
-        preregisteredIframes.current[clientId] = iframe;
+        preregisteredIframes.current[clientId] = {
+          iframe,
+          clientPropsOverride,
+        };
       }
     },
     [createClient, state.status]
@@ -291,7 +324,7 @@ export const useClient: UseClient = (
     }
 
     const unsubscribeQueuedClients = Object.values(
-      unsubscribeClientListeners.current[clientId]
+      unsubscribeClientListeners.current[clientId] ?? {}
     );
 
     // Unsubscribing all listener registered

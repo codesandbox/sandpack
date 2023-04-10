@@ -36,9 +36,10 @@ pnpm i @codesandbox/sandpack-client
 
 ## Usage
 
-`sandpack-client` implements two main methods to mount a bundler, and the choice between them will depend on which projects and environment you want to run. An environment might be a runtime JavaScript framework or a Node instance, which executes server scripts:
+`sandpack-client` implements three main methods to mount a bundler, and the choice between them will depend on which projects and environment you want to run. An environment might be a runtime JavaScript framework, a Node instance (which executes server scripts) or a static browser server:
 - `SandpackRuntime`: mounts the bundler used on `codesandbox.io` and runs runtime JavaScript frameworks in-browser.
 - `SandpackNode`: mounts a [Nodebox](https://github.com/codesandbox/nodebox-runtime) instance, which is designed to execute Node.js frameworks and applications. Besides that, you can build your own Node.js runtime client by using Nodebox's standalone package, in order to do so, check the [documentation](https://github.com/codesandbox/nodebox-runtime/blob/main/packages/nodebox/api.md). 
+- `SandpackStatic`: mounts a simple service worker used for a static template, allowing users to develop vanilla sandboxes without extra any Sandpack sauce.
 
 <Callout emoji="🎯">
 **`loadSandpackClient`**<br/>
@@ -119,9 +120,15 @@ SandpackNode(
   content: SandboxSetup,
   options?: ClientOptions
 ): Client
+
+SandpackStatic(
+  iframe: HTMLElement | string,
+  content: SandboxSetup,
+  options?: ClientOptions
+): Client
 ```
 
-The `SandpackRuntime` and `SandpackNode` methods are used to mount a bundler inside the specified iframe element or selector. `SandpackRuntime` mounts the bundler used on codesandbox.io and runs runtime JavaScript frameworks in-browser, while `SandpackNode` mounts a Nodebox instance, which is designed to execute Node.js frameworks and applications.
+The `SandpackRuntime`, `SandpackNode` and `SandpackStatic` methods are used to mount a bundler inside the specified iframe element or selector. `SandpackRuntime` mounts the bundler used on codesandbox.io and runs runtime JavaScript frameworks in-browser, while `SandpackNode` mounts a Nodebox instance, which is designed to execute Node.js frameworks and applications.
 
 **Parameters**
 - `iframe`: The iframe element or selector in which to mount the bundler.

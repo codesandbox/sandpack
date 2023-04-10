@@ -3,6 +3,129 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.7](https://github.com/codesandbox/sandpack/compare/v2.4.6...v2.4.7) (2023-04-08)
+
+
+### Bug Fixes
+
+* **Static Template:** fix doctype injection ([#899](https://github.com/codesandbox/sandpack/issues/899)) ([9d4a1c7](https://github.com/codesandbox/sandpack/commit/9d4a1c70d2353946adc78fea0bd3b900322e7888))
+
+
+
+
+
+## [2.4.5](https://github.com/codesandbox/sandpack/compare/v2.4.4...v2.4.5) (2023-04-07)
+
+
+### Bug Fixes
+
+* **client:** remove buffer dependency ([#891](https://github.com/codesandbox/sandpack/issues/891)) ([307e52b](https://github.com/codesandbox/sandpack/commit/307e52b3fb59fcef4942c27a14dd51326ebbe649))
+
+
+
+
+
+## [2.4.3](https://github.com/codesandbox/sandpack/compare/v2.4.2...v2.4.3) (2023-04-07)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
+# [2.4.0](https://github.com/codesandbox/sandpack/compare/v2.3.2...v2.4.0) (2023-04-06)
+
+
+### Features
+
+* **Static Template:** add hidden head tags option ([#884](https://github.com/codesandbox/sandpack/issues/884)) ([3cee76f](https://github.com/codesandbox/sandpack/commit/3cee76fdd937460e379ddffea52f462c34ed5d36))
+
+
+
+
+
+## [2.3.1](https://github.com/codesandbox/sandpack/compare/v2.3.0...v2.3.1) (2023-04-06)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
+# [2.3.0](https://github.com/codesandbox/sandpack/compare/v2.2.9...v2.3.0) (2023-04-05)
+
+
+### Features
+
+* **Preview:** add startRoute prop to override Provider default ([#868](https://github.com/codesandbox/sandpack/issues/868)) ([bc28871](https://github.com/codesandbox/sandpack/commit/bc288719afd057d8699cf10de13f905bf1dcded9))
+
+
+
+
+
+## [2.2.9](https://github.com/codesandbox/sandpack/compare/v2.2.8...v2.2.9) (2023-04-03)
+
+
+### Bug Fixes
+
+* **static:** Don't crash at inserting runtime ([#878](https://github.com/codesandbox/sandpack/issues/878)) ([7da3346](https://github.com/codesandbox/sandpack/commit/7da3346aa0f79abc24c4ecf51fd7506bbf590dd7))
+
+
+
+
+
+## [2.2.6](https://github.com/codesandbox/sandpack/compare/v2.2.5...v2.2.6) (2023-04-03)
+
+
+### Bug Fixes
+
+* Don't add index logic to StaticSandbox ([#874](https://github.com/codesandbox/sandpack/issues/874)) ([146287b](https://github.com/codesandbox/sandpack/commit/146287b6fc09c6cf6335c1167f1425a3ec636614))
+
+
+
+
+
+## [2.2.4](https://github.com/codesandbox/sandpack/compare/v2.2.3...v2.2.4) (2023-04-01)
+
+
+### Bug Fixes
+
+* **SandpackConsole:** make showHeader flag works ([#867](https://github.com/codesandbox/sandpack/issues/867)) ([54fd641](https://github.com/codesandbox/sandpack/commit/54fd64181e5318c396815ecd58baa1e2316d75a8))
+
+
+
+
+
+## [2.2.1](https://github.com/codesandbox/sandpack/compare/v2.2.0...v2.2.1) (2023-04-01)
+
+
+### Bug Fixes
+
+* **clients:** allow clipboard write ([#864](https://github.com/codesandbox/sandpack/issues/864)) ([7ec95e1](https://github.com/codesandbox/sandpack/commit/7ec95e1dfdbf1d943a6ef063f75dd14650bbba1a))
+
+
+
+
+
+# [2.2.0](https://github.com/codesandbox/sandpack/compare/v2.1.11...v2.2.0) (2023-03-31)
+
+
+### Features
+
+* static template ([#830](https://github.com/codesandbox/sandpack/issues/830)) ([2b14ed2](https://github.com/codesandbox/sandpack/commit/2b14ed226c7fdfe49054c6efe732f7f9f560b23c))
+
+
+
+
+
+## [2.1.9](https://github.com/codesandbox/sandpack/compare/v2.1.8...v2.1.9) (2023-03-17)
+
+**Note:** Version bump only for package @codesandbox/sandpack-client
+
+
+
+
+
 # [2.1.0](https://github.com/codesandbox/sandpack/compare/v2.0.29...v2.1.0) (2023-03-06)
 
 

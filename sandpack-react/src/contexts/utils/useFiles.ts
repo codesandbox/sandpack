@@ -1,6 +1,6 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import { normalizePath } from "@codesandbox/sandpack-client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import type {
   SandboxEnvironment,
@@ -56,8 +56,13 @@ export const useFiles: UseFiles = (props) => {
 
   const [state, setState] = useState<FilesState>(originalStateFromProps);
 
+  const isMountedRef = useRef(false);
   useEffect(() => {
-    setState(getSandpackStateFromProps(props));
+    if (isMountedRef.current) {
+      setState(getSandpackStateFromProps(props));
+    } else {
+      isMountedRef.current = true;
+    }
   }, [props.files, props.customSetup, props.template]);
 
   const updateFile = (

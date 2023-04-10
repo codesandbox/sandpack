@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 
 import type { Describe } from "./Describes";
 import { Describes } from "./Describes";
@@ -80,14 +80,22 @@ export const Specs: React.FC<Props> = ({
   verbose,
   hideTestsAndSupressLogs,
 }) => {
+  const classNames = useClassNames();
+
   return (
     <>
       {specs.map((spec) => {
         if (spec.error) {
           return (
-            <div key={spec.name} className={classNames(gapBottomClassName)}>
+            <div
+              key={spec.name}
+              className={classNames("test-spec", [gapBottomClassName])}
+            >
               <SpecLabel
-                className={classNames(labelClassName, failBackgroundClassName)}
+                className={classNames("test-spec-error", [
+                  labelClassName,
+                  failBackgroundClassName,
+                ])}
               >
                 Error
               </SpecLabel>
@@ -109,31 +117,41 @@ export const Specs: React.FC<Props> = ({
         const stats = getSpecTestResults(spec);
 
         return (
-          <div key={spec.name} className={classNames(gapBottomClassName)}>
-            <div className={classNames(fileContainer)}>
+          <div
+            key={spec.name}
+            className={classNames("test-spec-name", [gapBottomClassName])}
+          >
+            <div
+              className={classNames("test-spec-name-container", [
+                fileContainer,
+              ])}
+            >
               {status === "complete" ? (
                 stats.fail > 0 ? (
                   <SpecLabel
-                    className={classNames(
+                    className={classNames("test-spec-complete", [
                       labelClassName,
-                      failBackgroundClassName
-                    )}
+                      failBackgroundClassName,
+                    ])}
                   >
                     Fail
                   </SpecLabel>
                 ) : (
                   <SpecLabel
-                    className={classNames(
+                    className={classNames("test-spec-pass", [
                       labelClassName,
-                      passBackgroundClassName
-                    )}
+                      passBackgroundClassName,
+                    ])}
                   >
                     Pass
                   </SpecLabel>
                 )
               ) : (
                 <SpecLabel
-                  className={classNames(labelClassName, runBackgroundClassName)}
+                  className={classNames("test-spec-run", [
+                    labelClassName,
+                    runBackgroundClassName,
+                  ])}
                 >
                   Run
                 </SpecLabel>
@@ -160,13 +178,15 @@ export const Specs: React.FC<Props> = ({
                 return (
                   <div
                     key={`failing-${test.name}`}
-                    className={classNames(gapBottomClassName)}
+                    className={classNames("test-spec-error", [
+                      gapBottomClassName,
+                    ])}
                   >
                     <div
-                      className={classNames(
+                      className={classNames("test-spec-error-text", [
                         failTestClassName,
-                        failTextClassName
-                      )}
+                        failTextClassName,
+                      ])}
                     >
                       ● {test.blocks.join(" › ")} › {test.name}
                     </div>
@@ -191,8 +211,12 @@ const SpecLabel: React.FC<{ className: string; children: React.ReactNode }> = ({
   children,
   className,
 }) => {
+  const classNames = useClassNames();
+
   return (
-    <span className={classNames(specLabelClassName, className)}>
+    <span
+      className={classNames("test-spec-label", [specLabelClassName, className])}
+    >
       {children}
     </span>
   );
@@ -205,14 +229,23 @@ const FilePath: React.FC<{ onClick: () => void; path: string }> = ({
   const parts = path.split("/");
   const basePath = parts.slice(0, parts.length - 1).join("/") + "/";
   const fileName = parts[parts.length - 1];
+  const classNames = useClassNames();
+
   return (
     <button
-      className={classNames(buttonClassName, filePathButtonClassName)}
+      className={classNames("test-filename", [
+        buttonClassName,
+        filePathButtonClassName,
+      ])}
       onClick={onClick}
       type="button"
     >
-      <span className={classNames(filePathClassName)}>{basePath}</span>
-      <span className={classNames(fileNameClassName)}>{fileName}</span>
+      <span className={classNames("test-filename-base", [filePathClassName])}>
+        {basePath}
+      </span>
+      <span className={classNames("test-filename-file", [fileNameClassName])}>
+        {fileName}
+      </span>
     </button>
   );
 };

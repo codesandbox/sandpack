@@ -1,9 +1,7 @@
 import {
-  ClasserProvider,
   SandpackLayout,
   SandpackPreview,
   SandpackProvider,
-  SandpackThemeProvider,
 } from "@codesandbox/sandpack-react";
 import { styled } from "@stitches/react";
 import { motion, useTransform, useViewportScroll } from "framer-motion";
@@ -114,22 +112,19 @@ export const Examples: React.FC = () => {
                     dependencies: { "@codesandbox/sandpack-react": "latest" },
                   }}
                   files={layoutFiles}
-                  options={{ initMode: "user-visible" }}
-                  template="react"
-                >
-                  <ClasserProvider
-                    classes={{
+                  options={{
+                    initMode: "user-visible",
+                    classes: {
                       "sp-layout": "custom-layout",
                       "sp-stack": "custom-stack",
                       "sp-wrapper": "custom-wrapper",
-                    }}
-                  >
-                    <SandpackThemeProvider>
-                      <SandpackLayout>
-                        <SandpackPreview />
-                      </SandpackLayout>
-                    </SandpackThemeProvider>
-                  </ClasserProvider>
+                    },
+                  }}
+                  template="react"
+                >
+                  <SandpackLayout>
+                    <SandpackPreview />
+                  </SandpackLayout>
                 </SandpackProvider>
               </motion.div>
             </SandpackContainer>

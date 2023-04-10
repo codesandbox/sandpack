@@ -1,9 +1,8 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { css, THEME_PREFIX, keyframes } from "../../styles";
+import { css, keyframes } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 
 import { OpenInCodeSandboxButton } from "./OpenInCodeSandboxButton";
 
@@ -83,17 +82,17 @@ export const Loading = ({
 }: React.HTMLAttributes<HTMLDivElement> & {
   showOpenInCodeSandbox: boolean;
 }): JSX.Element => {
-  const c = useClasser(THEME_PREFIX);
+  const classNames = useClassNames();
 
   return (
     <div
-      className={classNames(c("cube-wrapper"), wrapperClassName, className)}
+      className={classNames("cube-wrapper", [wrapperClassName, className])}
       title="Open in CodeSandbox"
       {...props}
     >
       {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
-      <div className={classNames(c("cube"), cubeClassName)}>
-        <div className={classNames(c("sides"), sidesClassNames)}>
+      <div className={classNames("cube", [cubeClassName])}>
+        <div className={classNames("sides", [sidesClassNames])}>
           <div className="top" />
           <div className="right" />
           <div className="bottom" />

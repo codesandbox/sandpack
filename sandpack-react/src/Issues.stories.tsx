@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
-
-import { SandpackPreview } from "./components";
+import React, { useState } from "react";
 
 import {
   Sandpack,

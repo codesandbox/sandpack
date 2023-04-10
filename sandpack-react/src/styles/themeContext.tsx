@@ -1,12 +1,11 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
 import { defaultLight } from "../themes";
 import type { SandpackTheme, SandpackThemeProp } from "../types";
-import { classNames } from "../utils/classNames";
+import { useClassNames } from "../utils/classNames";
 
 import { standardizeTheme } from ".";
-import { createTheme, css, THEME_PREFIX, standardizeStitchesTheme } from ".";
+import { createTheme, css, standardizeStitchesTheme } from ".";
 
 const wrapperClassName = css({
   all: "initial",
@@ -53,7 +52,7 @@ const SandpackThemeProvider: React.FC<
   }
 > = ({ theme: themeFromProps, children, className, ...props }) => {
   const { theme, id, mode } = standardizeTheme(themeFromProps);
-  const c = useClasser(THEME_PREFIX);
+  const classNames = useClassNames();
 
   const themeClassName = React.useMemo(() => {
     return createTheme(id, standardizeStitchesTheme(theme));
@@ -62,12 +61,11 @@ const SandpackThemeProvider: React.FC<
   return (
     <SandpackThemeContext.Provider value={{ theme, id, mode }}>
       <div
-        className={classNames(
-          c("wrapper"),
-          themeClassName.toString(),
+        className={classNames("wrapper", [
+          themeClassName,
           wrapperClassName({ variant: mode }),
-          className
-        )}
+          className,
+        ])}
         {...props}
       >
         {children}

@@ -55,22 +55,6 @@ export const Viewport: Story<PreviewProps> = (args) => (
   </SandpackProvider>
 );
 
-Viewport.argTypes = {
-  viewportSize: {
-    control: {
-      type: "select",
-      options: [
-        "iPhone X",
-        "iPad",
-        "Pixel 2",
-        "Moto G4",
-        "Surface Duo",
-        "auto",
-      ],
-    },
-  },
-};
-
 export const WithNavigator: React.FC = () => (
   <SandpackProvider
     files={{
@@ -83,6 +67,26 @@ export const WithNavigator: React.FC = () => (
     </SandpackLayout>
   </SandpackProvider>
 );
+
+export const MultipleRoutePreviews: React.FC = () => {
+  return (
+    <SandpackProvider
+      files={{
+        "/pages/index.js": `export default () => "Home"`,
+        "/pages/about.js": `export default () => "About"`,
+        "/pages/careers.js": `export default () => "Careers"`,
+      }}
+      options={{ startRoute: "/" }}
+      template="nextjs"
+    >
+      <SandpackLayout>
+        <SandpackPreview showNavigator />
+        <SandpackPreview startRoute="/about" showNavigator />
+        <SandpackPreview startRoute="/careers" showNavigator />
+      </SandpackLayout>
+    </SandpackProvider>
+  );
+};
 
 export const AutoResize: React.FC = () => (
   <SandpackProvider

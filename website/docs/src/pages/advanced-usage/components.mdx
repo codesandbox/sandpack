@@ -5,6 +5,9 @@ import SandpackDecorators from "../../components/Decorators";
 
 # Components
 
+<br/>
+<img src="/docs/components.jpg" />
+
 Several `Sandpack` prefixed components are available in the `sandpack-react` package. They can be used to build custom presets, as long as they render within the providers we talked about during the previous section.
 
 Let's try to rebuild the `Sandpack` preset, using the sandpack components available in the `sandpack-react` package.
@@ -103,14 +106,15 @@ export default () => (
   
   <summary>Options</summary>
   
-| Prop | Type | Default |
-| :- | :- | :- |
-| `showNavigator` | `boolean` | `false`|
-| `showOpenInCodeSandbox`| `boolean` | `true` |
-| `showRefreshButton`| `boolean` | `true` |
-| `showSandpackErrorOverlay`| `boolean` | `true` |
-| `showOpenNewtab` | `boolean` | `true` |
-| `actionsChildren` | JSX.Element | `null` | 
+| Prop | Description | Type | Default |
+| :- | :- | :- | :- |
+| `showNavigator` | | `boolean` | `false`|
+| `showOpenInCodeSandbox`| | `boolean` | `true` |
+| `showRefreshButton`| | `boolean` | `true` |
+| `showSandpackErrorOverlay`| Whether to show the `<ErrorOverlay>` component on top of the preview, if a runtime error happens. | `boolean` | `true` |
+| `showOpenNewtab` | | `boolean` | `true` |
+| `actionsChildren` | | JSX.Element | `null` |
+| `startRoute` | Overwrite the default starting route | `string` | `undefined` |
   
 </details>
 
@@ -567,15 +571,17 @@ export default () => (
 <details>
   <summary>`SandpackConsole` Options</summary>
 
-| Prop | Type  | Default | Description | 
+| Prop | Description | Type  | Default | 
 | :- | :- | :- | :- |
-| `clientId` | `string` | `undefined` | |
-| `showHeader` | `boolean` | `true` | |
-| `showSyntaxError` | `boolean` | `false` | |
-| `maxMessageCount` | `number` | `800` | |
-| `onLogsChange` | `(logs: SandpackConsoleData) => void` | | |
-| `resetOnPreviewRestart` | `boolean` | `false` | Reset the console list on every preview restart |
-| `ref` | `SandpackConsoleRef` | `SandpackConsoleRef` | Make possible to imperatively interact with the console component |
+| `clientId` | | `string` | `undefined` |
+| `showHeader` | | `boolean` | `true` |
+| `showSyntaxError` | | `boolean` | `false` |
+| `maxMessageCount` | | `number` | `800` |
+| `onLogsChange` | | `(logs: SandpackConsoleData) => void` | |
+| `resetOnPreviewRestart` | Reset the console list on every preview restart | `boolean` | `false` | 
+| `ref` | Make possible to imperatively interact with the console component | `SandpackConsoleRef` | `SandpackConsoleRef` | 
+| `standalone` | It runs its sandpack-client, meaning it doesn't depend on a `SandpackPreview` component. |`boolean` | `false` | 
+| `actionsChildren` | | JSX.Element | `null` |
 
 </details>
 

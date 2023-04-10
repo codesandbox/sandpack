@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/sandpack-client",
-  "version": "2.1.0",
+  "version": "2.4.7",
   "description": "",
   "keywords": [],
   "repository": {
@@ -24,6 +24,11 @@
       "import": "./dist/clients/node/index.mjs",
       "require": "./dist/clients/node/index.js"
     },
+    "./clients/static": {
+      "types": "./dist/clients/static/index.d.ts",
+      "import": "./dist/clients/static/index.mjs",
+      "require": "./dist/clients/static/index.js"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
@@ -39,7 +44,8 @@
     "build:publish": "yarn build && gulp",
     "build:bundler": "gulp",
     "format": "prettier --write '**/*.{ts,tsx,js,jsx}'",
-    "format:check": "prettier --check '**/*.{ts,tsx}'"
+    "format:check": "prettier --check '**/*.{ts,tsx}'",
+    "dev": "yarn build -- --watch"
   },
   "files": [
     "dist",
@@ -52,7 +58,8 @@
     "@codesandbox/nodebox": "0.1.4",
     "buffer": "^6.0.3",
     "dequal": "^2.0.2",
-    "outvariant": "1.3.0"
+    "outvariant": "1.3.0",
+    "static-browser-server": "1.0.3"
   },
   "devDependencies": {
     "@types/node": "^9.3.0",

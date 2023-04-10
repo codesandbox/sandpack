@@ -1,8 +1,8 @@
-import { ClasserProvider } from "@code-hike/classer";
 import * as React from "react";
 
 import { SandpackThemeProvider } from "../styles/themeContext";
 import type { SandpackContext, SandpackProviderProps } from "../types";
+import { ClassNamesProvider } from "../utils/classNames";
 
 import { useAppState } from "./utils/useAppState";
 import { useClient } from "./utils/useClient";
@@ -31,11 +31,13 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
         ...fileOperations,
         ...clientOperations,
 
+        autoReload: props.options?.autoReload ?? true,
+
         listen: addListener,
         dispatch: dispatchMessage,
       }}
     >
-      <ClasserProvider classes={options?.classes}>
+      <ClassNamesProvider classes={options?.classes}>
         <SandpackThemeProvider
           className={className}
           style={style}
@@ -43,7 +45,7 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
         >
           {children}
         </SandpackThemeProvider>
-      </ClasserProvider>
+      </ClassNamesProvider>
     </Sandpack.Provider>
   );
 };

@@ -1,6 +1,8 @@
-import type { ListenerFunction, UnsubscribeFunction } from "../../types";
-
-import type { SandpackNodeMessage } from "./types";
+import type {
+  ListenerFunction,
+  SandpackMessage,
+  UnsubscribeFunction,
+} from "..";
 
 export class EventEmitter {
   private listeners: Record<number, ListenerFunction> = {};
@@ -17,7 +19,7 @@ export class EventEmitter {
     this.listenersCount = 0;
   }
 
-  dispatch(message: SandpackNodeMessage): void {
+  dispatch(message: SandpackMessage): void {
     Object.values(this.listeners).forEach((listener) => listener(message));
   }
 

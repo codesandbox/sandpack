@@ -1,4 +1,3 @@
-import { useClasser } from "@code-hike/classer";
 import type {
   SandpackClient,
   SandpackMessage,
@@ -16,7 +15,7 @@ import {
   iconStandaloneClassName,
   roundedButtonClassName,
 } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { Navigator } from "../Navigator";
 import { ErrorOverlay } from "../common/ErrorOverlay";
 import { LoadingOverlay } from "../common/LoadingOverlay";
@@ -32,10 +31,16 @@ export interface PreviewProps {
   showOpenInCodeSandbox?: boolean;
   showRefreshButton?: boolean;
   showRestartButton?: boolean;
+
+  /**
+   * Whether to show the `<ErrorOverlay>` component on top of
+   * the preview, if a runtime error happens.
+   */
   showSandpackErrorOverlay?: boolean;
   showOpenNewtab?: boolean;
   actionsChildren?: JSX.Element;
   children?: JSX.Element;
+  startRoute?: string;
 }
 
 const previewClassName = css({
@@ -105,12 +110,14 @@ export const SandpackPreview = React.forwardRef<
       actionsChildren = <></>,
       children,
       className,
+      startRoute = "/",
       ...props
     },
     ref
   ) => {
-    const { sandpack, listen, iframe, getClient, clientId, dispatch } =
-      useSandpackClient();
+    const { sandpack, listen, iframe, getClient, clientId, dispatch } = useSandpackClient(
+      { startRoute }
+    );
     const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
       number | null
     >(null);
@@ -119,7 +126,7 @@ export const SandpackPreview = React.forwardRef<
     const { refresh } = useSandpackNavigation(clientId);
     const { restart } = useSandpackShell(clientId);
 
-    const c = useClasser(THEME_PREFIX);
+    const classNames = useClassNames();
 
     errorScreenRegisteredRef.current = true;
     loadingScreenRegisteredRef.current = true;
@@ -154,18 +161,19 @@ export const SandpackPreview = React.forwardRef<
     };
 
     return (
-      <SandpackStack
-        className={classNames(`${THEME_PREFIX}-preview`, className)}
-        {...props}
-      >
+      <SandpackStack className={classNames("preview", [className])} {...props}>
         {showNavigator && (
-          <Navigator clientId={clientId} onURLChange={handleNewURL} />
+          <Navigator
+            clientId={clientId}
+            onURLChange={handleNewURL}
+            startRoute={startRoute}
+          />
         )}
 
-        <div className={classNames(c("preview-container"), previewClassName)}>
+        <div className={classNames("preview-container", [previewClassName])}>
           <iframe
             ref={iframe}
-            className={classNames(c("preview-iframe"), previewIframe)}
+            className={classNames("preview-iframe", [previewIframe])}
             style={{
               // set height based on the content only in auto mode
               // and when the computed height was returned by the bundler
@@ -175,10 +183,7 @@ export const SandpackPreview = React.forwardRef<
           />
 
           <div
-            className={classNames(
-              c("preview-actions"),
-              previewActionsClassName
-            )}
+            className={classNames("preview-actions", [previewActionsClassName])}
           >
             {actionsChildren}
 

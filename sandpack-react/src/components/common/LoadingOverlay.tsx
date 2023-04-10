@@ -1,14 +1,13 @@
-import { useClasser } from "@code-hike/classer";
 import * as React from "react";
 
-import { useSandpack } from "../..";
+import { useSandpack } from "../../hooks";
 import {
   useLoadingOverlayState,
   FADE_ANIMATION_DURATION,
 } from "../../hooks/useLoadingOverlayState";
-import { usePreviewProgress } from "../../hooks/usePreviewProgress";
+import { useSandpackPreviewProgress } from "../../hooks/useSandpackPreviewProgress";
 import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
-import { css, THEME_PREFIX } from "../../styles";
+import { css } from "../../styles";
 import {
   absoluteClassName,
   buttonClassName,
@@ -19,7 +18,7 @@ import {
   iconStandaloneClassName,
   roundedButtonClassName,
 } from "../../styles/shared";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 import { StdoutList } from "../Console/StdoutList";
 import { RestartIcon } from "../icons";
 
@@ -50,15 +49,15 @@ export const LoadingOverlay = ({
   ...props
 }: LoadingOverlayProps &
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
-  const c = useClasser(THEME_PREFIX);
+  const classNames = useClassNames();
   const {
     sandpack: { runSandpack, environment },
   } = useSandpack();
   const [shouldShowStdout, setShouldShowStdout] = React.useState(false);
 
   const loadingOverlayState = useLoadingOverlayState(clientId, loading);
-  const progressMessage = usePreviewProgress();
-  const { logs: stdoutData } = useSandpackShellStdout({});
+  const progressMessage = useSandpackPreviewProgress({ clientId });
+  const { logs: stdoutData } = useSandpackShellStdout({ clientId });
 
   React.useEffect(() => {
     let timer: NodeJS.Timer;
@@ -82,18 +81,21 @@ export const LoadingOverlay = ({
   if (loadingOverlayState === "TIMEOUT") {
     return (
       <div
-        className={classNames(
-          c("overlay", "error"),
+        className={classNames("overlay", [
+          classNames("error"),
           absoluteClassName,
           errorClassName,
           errorBundlerClassName,
-          className
-        )}
+          className,
+        ])}
         {...props}
       >
-        <p className={classNames(c("error-message"), errorMessageClassName)}>
-          <strong>Couldn't connect to server</strong>
-        </p>
+        <div className={classNames("error-message", [errorMessageClassName])}>
+          <p
+            className={classNames("error-title", [css({ fontWeight: "bold" })])}
+          >
+            Couldn't connect to server
+          </p>
 
         <div className={classNames(c("error-message"), errorMessageClassName)}>
           <p>
@@ -127,12 +129,12 @@ export const LoadingOverlay = ({
 
         <div>
           <button
-            className={classNames(
-              c("button", "icon-standalone"),
+            className={classNames("button", [
+              classNames("icon-standalone"),
               buttonClassName,
               iconStandaloneClassName,
-              roundedButtonClassName
-            )}
+              roundedButtonClassName,
+            ])}
             onClick={runSandpack}
             title="Restart script"
             type="button"
@@ -150,12 +152,12 @@ export const LoadingOverlay = ({
   return (
     <>
       <div
-        className={classNames(
-          c("overlay", "loading"),
+        className={classNames("overlay", [
+          classNames("loading"),
           absoluteClassName,
           loadingClassName,
-          className
-        )}
+          className,
+        ])}
         style={{
           ...style,
           opacity: stillLoading ? 1 : 0,
@@ -172,7 +174,7 @@ export const LoadingOverlay = ({
       </div>
 
       {progressMessage && (
-        <div className={wrapperClassName.toString()}>
+        <div className={progressClassName.toString()}>
           <p>{progressMessage}</p>
         </div>
       )}
@@ -190,7 +192,7 @@ const stdoutPreview = css({
   overflowX: "hidden",
 });
 
-const wrapperClassName = css({
+const progressClassName = css({
   position: "absolute",
   left: "$space$5",
   bottom: "$space$4",

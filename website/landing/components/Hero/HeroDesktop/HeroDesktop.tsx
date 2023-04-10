@@ -1,22 +1,15 @@
 import type { CodeEditorRef } from "@codesandbox/sandpack-react";
 import {
-  ClasserProvider,
   SandpackCodeEditor,
   SandpackPreview,
-  SandpackThemeProvider,
   useSandpack,
 } from "@codesandbox/sandpack-react";
-import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { useTransform, useViewportScroll } from "framer-motion";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 import { AnimatedBox, Box, Clipboard, Resources, Text } from "../../common";
 
 import { SandpackTitle } from "./SandpackTitle";
-
-const CUSTOM_CLASSES_MAP = {
-  "sp-stack": "custom-stack__hero",
-};
 
 export const HeroDesktop: React.FC = () => {
   const { scrollY } = useViewportScroll();
@@ -268,26 +261,22 @@ export const HeroDesktop: React.FC = () => {
             },
           }}
         >
-          <SandpackThemeProvider theme={sandpackDark}>
-            <ClasserProvider classes={CUSTOM_CLASSES_MAP}>
-              <SandpackCodeEditor ref={editorRef} />
-              <Box
-                css={{
-                  opacity: "$sandpack-preview-opacity",
-                  position: "absolute",
-                  top: 0,
-                  transform: "translateX(100%)",
-                  transition: "opacity 300ms",
+          <SandpackCodeEditor ref={editorRef} />
+          <Box
+            css={{
+              opacity: "$sandpack-preview-opacity",
+              position: "absolute",
+              top: 0,
+              transform: "translateX(100%)",
+              transition: "opacity 300ms",
 
-                  ".custom-stack__hero": {
-                    border: "none !important",
-                  },
-                }}
-              >
-                <SandpackPreview />
-              </Box>
-            </ClasserProvider>
-          </SandpackThemeProvider>
+              ".custom-stack__hero": {
+                border: "none !important",
+              },
+            }}
+          >
+            <SandpackPreview />
+          </Box>
         </Box>
 
         <Box

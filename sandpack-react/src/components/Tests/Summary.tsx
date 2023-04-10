@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { css } from "../../styles";
-import { classNames } from "../../utils/classNames";
+import { useClassNames } from "../../utils/classNames";
 
 import {
   failTextClassName,
@@ -51,44 +51,64 @@ export const Summary: React.FC<Props> = ({ suites, tests, duration }) => {
     return label + margin;
   };
 
+  const classNames = useClassNames();
+
   return (
-    <div className={classNames(containerClassName)}>
-      <div className={classNames(gapBottomClassName)}>
-        <span className={classNames(labelClassName)}>{widestLabel}</span>
+    <div className={classNames("test-summary", [containerClassName])}>
+      <div className={classNames("test-summary", [gapBottomClassName])}>
+        <span
+          className={classNames("test-summary-suites-label", [labelClassName])}
+        >
+          {widestLabel}
+        </span>
         {suites.fail > 0 && (
-          <span className={classNames(failTextClassName)}>
+          <span
+            className={classNames("test-summary-suites-fail", [
+              failTextClassName,
+            ])}
+          >
             {suites.fail} failed,{" "}
           </span>
         )}
         {suites.pass > 0 && (
-          <span className={classNames(passTextClassName)}>
+          <span
+            className={classNames("test-summary-suites-pass", [
+              passTextClassName,
+            ])}
+          >
             {suites.pass} passed,{" "}
           </span>
         )}
         <span>{suites.total} total</span>
       </div>
-      <div className={classNames(gapBottomClassName)}>
-        <span className={classNames(labelClassName)}>
+      <div className={classNames("test-summary", [gapBottomClassName])}>
+        <span className={classNames("test-summary-label", [labelClassName])}>
           {withMargin("Tests:")}
         </span>
         {tests.fail > 0 && (
-          <span className={classNames(failTextClassName)}>
+          <span
+            className={classNames("test-summary-fail", [failTextClassName])}
+          >
             {tests.fail} failed,{" "}
           </span>
         )}
         {tests.skip > 0 && (
-          <span className={classNames(skipTextClassName)}>
+          <span
+            className={classNames("test-summary-skip", [skipTextClassName])}
+          >
             {tests.skip} skipped,{" "}
           </span>
         )}
         {tests.pass > 0 && (
-          <span className={classNames(passTextClassName)}>
+          <span
+            className={classNames("test-summary-pass", [passTextClassName])}
+          >
             {tests.pass} passed,{" "}
           </span>
         )}
         <span>{tests.total} total</span>
       </div>
-      <div className={classNames(labelClassName)}>
+      <div className={classNames("test-summary-curation", [labelClassName])}>
         {withMargin("Time:")}
         {duration / 1000}s
       </div>
