@@ -61,7 +61,7 @@ export class SandpackRuntime extends SandpackClient {
     if (options.teamId) {
       this.bundlerURL =
         this.bundlerURL.replace("https://", "https://" + options.teamId + "-") +
-        `?${Date.now()}`;
+        `?cache=${Date.now()}`;
     }
 
     this.bundlerState = undefined;
