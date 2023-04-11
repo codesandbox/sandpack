@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.10](https://github.com/codesandbox/sandpack/compare/v2.4.9...v2.4.10) (2023-04-11)
+
+
+### Bug Fixes
+
+* **sandpack-react:** disable LanguageTool extention for code editor ([#900](https://github.com/codesandbox/sandpack/issues/900)) ([6b92b32](https://github.com/codesandbox/sandpack/commit/6b92b32f67e72011935f6911b1fbd7df9edfb14b))
+
+
+
+
+
 ## [2.4.9](https://github.com/codesandbox/sandpack/compare/v2.4.8...v2.4.9) (2023-04-10)
 
 
