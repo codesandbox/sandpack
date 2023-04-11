@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/codesandbox/sandpack/compare/v2.4.11...v2.5.0) (2023-04-11)
+
+
+### Features
+
+* **task-manager:** parse commands ([#892](https://github.com/codesandbox/sandpack/issues/892)) ([7b5f25c](https://github.com/codesandbox/sandpack/commit/7b5f25c1355ab290f67b253e9de845825cc8ddb2))
+
+
+
+
+
 ## [2.4.11](https://github.com/codesandbox/sandpack/compare/v2.4.10...v2.4.11) (2023-04-11)
 
 
