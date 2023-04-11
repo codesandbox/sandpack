@@ -70,7 +70,10 @@ type UseClient = (
   filesState: FilesState
 ) => [SandpackConfigState, UseClientOperations];
 
-export const useClient: UseClient = ({ options, customSetup }, filesState) => {
+export const useClient: UseClient = (
+  { options, customSetup, teamId },
+  filesState
+) => {
   options ??= {};
   customSetup ??= {};
 
@@ -150,13 +153,8 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
           showErrorScreen: errorScreenRegisteredRef.current,
           showLoadingScreen: loadingScreenRegisteredRef.current,
           reactDevTools: state.reactDevTools,
-          customNpmRegistries: customSetup.npmRegistries?.map(
-            (config) =>
-              ({
-                ...config,
-                proxyEnabled: false, // force
-              } ?? [])
-          ),
+          customNpmRegistries: customSetup?.npmRegistries,
+          teamId: teamId,
         }
       );
 
@@ -254,7 +252,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
     }
 
     if (lazyAnchorRef.current && state.initMode === "lazy") {
-      // If any component registerd a lazy anchor ref component, use that for the intersection observer
+      // If any component registered a lazy anchor ref component, use that for the intersection observer
       intersectionObserver.current = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
           runSandpack();
@@ -342,7 +340,9 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
   };
 
   const handleMessage = (msg: SandpackMessage): void => {
-    if (msg.type === "state") {
+    if (msg.type === "start") {
+      setState((prev) => ({ ...prev, error: null }));
+    } else if (msg.type === "state") {
       setState((prev) => ({ ...prev, bundlerState: msg.state }));
     } else if (
       (msg.type === "done" && !msg.compilatonError) ||
@@ -533,7 +533,7 @@ export const useClient: UseClient = ({ options, customSetup }, filesState) => {
   );
 
   useEffect(() => {
-    return function unmontClient(): void {
+    return function unmountClient(): void {
       if (typeof unsubscribe.current === "function") {
         unsubscribe.current();
       }

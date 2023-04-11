@@ -59,6 +59,12 @@ export interface ClientOptions {
    * to retrieve npm packages from your own npm registry.
    */
   customNpmRegistries?: NpmRegistry[];
+
+  /**
+   * CodeSandbox team id: with this information, bundler can connect to CodeSandbox
+   * and unlock a few capabilities
+   */
+  teamId?: string;
 }
 
 export interface SandboxSetup {

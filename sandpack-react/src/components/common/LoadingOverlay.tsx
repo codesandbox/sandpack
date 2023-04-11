@@ -12,6 +12,7 @@ import {
   absoluteClassName,
   buttonClassName,
   errorBundlerClassName,
+  errorClassName,
   errorMessageClassName,
   fadeIn,
   iconStandaloneClassName,
@@ -39,15 +40,16 @@ const loadingClassName = css({
   backgroundColor: "$colors$surface1",
 });
 
-export const LoadingOverlay = ({
+export const LoadingOverlay: React.FC<
+  LoadingOverlayProps & React.HTMLAttributes<HTMLDivElement>
+> = ({
   clientId,
   loading,
   className,
   style,
   showOpenInCodeSandbox,
   ...props
-}: LoadingOverlayProps &
-  React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
+}): JSX.Element | null => {
   const classNames = useClassNames();
   const {
     sandpack: { runSandpack, environment },
@@ -83,6 +85,7 @@ export const LoadingOverlay = ({
         className={classNames("overlay", [
           classNames("error"),
           absoluteClassName,
+          errorClassName,
           errorBundlerClassName,
           className,
         ])}
@@ -95,28 +98,34 @@ export const LoadingOverlay = ({
             Couldn't connect to server
           </p>
 
-          <p>
-            This means sandpack cannot connect to the runtime or your network is
-            having some issues. Please check the network tab in your browser and
-            try again. If the problem persists, report it via{" "}
-            <a href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error">
-              email
-            </a>{" "}
-            or submit an issue on{" "}
-            <a
-              href="https://github.com/codesandbox/sandpack/issues"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              GitHub.
-            </a>
-          </p>
+          <div className={classNames("error-message", [errorMessageClassName])}>
+            <p>
+              This means sandpack cannot connect to the runtime or your network
+              is having some issues. Please check the network tab in your
+              browser and try again. If the problem persists, report it via{" "}
+              <a href="mailto:hello@codesandbox.io?subject=Sandpack Timeout Error">
+                email
+              </a>{" "}
+              or submit an issue on{" "}
+              <a
+                href="https://github.com/codesandbox/sandpack/issues"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                GitHub.
+              </a>
+            </p>
+          </div>
 
-          <pre>
+          <p
+            className={classNames("error-message", [
+              errorMessageClassName({ errorCode: true }),
+            ])}
+          >
             ENV: {environment}
             <br />
             ERROR: TIME_OUT
-          </pre>
+          </p>
 
           <div>
             <button

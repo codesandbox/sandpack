@@ -10,6 +10,11 @@ import {
   useSandpackShell,
 } from "../../hooks";
 import { css, THEME_PREFIX } from "../../styles";
+import {
+  buttonClassName,
+  iconStandaloneClassName,
+  roundedButtonClassName,
+} from "../../styles/shared";
 import { useClassNames } from "../../utils/classNames";
 import { Navigator } from "../Navigator";
 import { ErrorOverlay } from "../common/ErrorOverlay";
@@ -18,6 +23,7 @@ import { OpenInCodeSandboxButton } from "../common/OpenInCodeSandboxButton";
 import { RoundedButton } from "../common/RoundedButton";
 import { SandpackStack } from "../common/Stack";
 import { RefreshIcon, RestartIcon } from "../icons";
+import { SignOutIcon } from "../icons";
 
 export interface PreviewProps {
   style?: React.CSSProperties;
@@ -109,9 +115,8 @@ export const SandpackPreview = React.forwardRef<
     },
     ref
   ) => {
-    const { sandpack, listen, iframe, getClient, clientId } = useSandpackClient(
-      { startRoute }
-    );
+    const { sandpack, listen, iframe, getClient, clientId, dispatch } =
+      useSandpackClient({ startRoute });
     const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
       number | null
     >(null);
@@ -191,6 +196,22 @@ export const SandpackPreview = React.forwardRef<
               <RoundedButton onClick={refresh}>
                 <RefreshIcon />
               </RoundedButton>
+            )}
+
+            {sandpack.teamId && (
+              <button
+                className={classNames("button", [
+                  classNames("icon-standalone"),
+                  buttonClassName,
+                  iconStandaloneClassName,
+                  roundedButtonClassName,
+                ])}
+                onClick={() => dispatch({ type: "sign-out" })}
+                title="Sign out"
+                type="button"
+              >
+                <SignOutIcon />
+              </button>
             )}
 
             {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}

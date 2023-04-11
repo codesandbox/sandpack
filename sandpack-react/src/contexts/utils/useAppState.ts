@@ -7,6 +7,7 @@ import { getSandpackStateFromProps } from "../../utils/sandpackUtils";
 
 interface SandpackAppState {
   editorState: "pristine" | "dirty";
+  teamId?: string;
 }
 
 type UseAppState = (
@@ -17,6 +18,7 @@ type UseAppState = (
 export const useAppState: UseAppState = (props, files) => {
   const [state, setState] = useState<SandpackAppState>({
     editorState: "pristine",
+    teamId: props.teamId,
   });
 
   const originalStateFromProps = getSandpackStateFromProps(props);

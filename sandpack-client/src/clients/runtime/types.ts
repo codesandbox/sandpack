@@ -78,6 +78,7 @@ export type SandpackRuntimeMessage = BaseSandpackMessage &
         reactDevTools?: ReactDevToolsMode;
         logLevel?: SandpackLogLevel;
         customNpmRegistries?: NpmRegistry[];
+        teamId?: string;
       }
     | {
         type: "refresh";
@@ -103,4 +104,6 @@ export type SandpackRuntimeMessage = BaseSandpackMessage &
         }>;
       }
     | SandboxTestMessage
+    | { type: "sign-in"; teamId: string }
+    | { type: "sign-out" }
   );

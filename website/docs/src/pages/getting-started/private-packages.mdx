@@ -1,0 +1,74 @@
+# Private packages
+
+With Sandpack, you can securely consume private npm registries (GitHub packages, npm private registry, custom registries, etc.) within just a few steps. A CodeSandbox internal proxy provides the interface to communicate with a custom private npm registry and retrieve npm packages from any npm registry. 
+
+**This feature is available for all Team Pro accounts, and you can access the settings [here](https://codesandbox.io/dashboard/settings/npm-registry).**
+
+## Get started
+
+1. **Settings:** Configure your [npm settings](https://codesandbox.io/docs/learn/sandboxes/custom-npm-registry) on the CodeSandbox [Dashboard](https://codesandbox.io/dashboard/).
+
+2. **Trusted domains:** Set a list of trusted domains on the [Dashboard](https://codesandbox.io/dashboard/).
+
+<small>This will ensure that no one but you can use and render these sandboxes</small>
+
+<img src="/docs/private-package-dashboard.png" />
+
+3. **Sandpack:** Provide a team ID and your custom setup for your Sandpack sandboxes.
+
+<small>You can find your team ID on the dashboard URL at [codesandbox.io/dashboard](https://codesandbox.io/dashboard/)</small>
+
+<br />
+<br />
+
+```jsx
+<Sandpack
+  template="react"
+
+  // This is an identifier for your sandboxes and private npm registry
+  teamId="YOUR_TEAM_ID"
+
+  // Set the dependencies; for example, this is a private package from GitHub packages
+  customSetup={{
+    dependencies: { "@codesandbox/test-package": "latest" },
+  }}
+
+  // Consume dependencies as usual
+  files={{
+    "App.js": `import { Button } from "@codesandbox/test-package";
+
+export default function App() {
+  return <Button>Hello World</Button>
+}`,
+  }}
+/>
+
+```
+
+4. **Sign-in:** When Sandpack loads, you will be asked to sign in; after doing that, it's done.
+
+<img src="/docs/private-package-signin.png" />
+
+<img src="/docs/private-package-loaded.png" />
+
+
+## Security
+
+It is important to us to ensure that the information and tokens of the npm registry are kept private. As such, we have added some extra measures to prevent any type of leakage.
+
+### Persisting the `auth` token
+
+The `auth` token is stored in our database in an encrypted form, using a key that's rolled and not available to the database itself. Even in the unlikely event that our database gets compromised, your `auth` token would be encrypted and inaccessible.
+
+### Single-Sandbox key
+
+We never send the `auth` token to the browser. Instead, we give every editor of the sandbox a key that only gives them access to that specific sandbox.
+
+If they want to retrieve a package from the private npm registry, they will have to ask our API. The API will fetch the `auth` token, request the npm registry on behalf of the user and return the response to the user.
+
+### Trusted domain only
+
+Sandpack uses the HTTP Content-Security-Policy (CSP) frame-ancestors directive to validate parents' window that may embed the given sandpack iFrame.
+
+With this extra security layer, only websites you trust (and provide to us) can render and fetch private packages from your registry. This can avoid phishing websites and the potential leakage of private data.
+
