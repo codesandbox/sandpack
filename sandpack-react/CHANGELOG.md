@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/codesandbox/sandpack/compare/v2.5.0...v2.6.0) (2023-04-11)
+
+
+### Features
+
+* private dep v2 ([#746](https://github.com/codesandbox/sandpack/issues/746)) ([4fef453](https://github.com/codesandbox/sandpack/commit/4fef453b78444d41a4917629545decc091ff3cb6))
+
+
+
+
+
 # [2.5.0](https://github.com/codesandbox/sandpack/compare/v2.4.11...v2.5.0) (2023-04-11)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
