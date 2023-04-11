@@ -293,6 +293,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       });
 
       view.contentDOM.setAttribute("data-gramm", "false");
+      view.contentDOM.setAttribute("data-lt-active", "false");
       view.contentDOM.setAttribute(
         "aria-label",
         filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
