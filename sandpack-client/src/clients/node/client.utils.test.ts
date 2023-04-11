@@ -4,7 +4,7 @@ describe(findStartScriptPackageJson, () => {
   it("should parse a regular command", () => {
     expect(
       findStartScriptPackageJson(JSON.stringify({ scripts: { start: "node" } }))
-    ).toEqual(["node", [], { env: undefined }]);
+    ).toEqual(["node", [], { env: {} }]);
   });
 
   it("should parse a regular command with arguments", () => {
@@ -12,7 +12,7 @@ describe(findStartScriptPackageJson, () => {
       findStartScriptPackageJson(
         JSON.stringify({ scripts: { start: "node dev --foo" } })
       )
-    ).toEqual(["node", ["dev", "--foo"], { env: undefined }]);
+    ).toEqual(["node", ["dev", "--foo"], { env: {} }]);
   });
 
   it("should get dev script first", () => {
@@ -22,7 +22,7 @@ describe(findStartScriptPackageJson, () => {
           scripts: { start: "node start --foo", dev: "node dev --foo" },
         })
       )
-    ).toEqual(["node", ["dev", "--foo"], { env: undefined }]);
+    ).toEqual(["node", ["dev", "--foo"], { env: {} }]);
   });
 
   it("should parse env vars", () => {
