@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.11](https://github.com/codesandbox/sandpack/compare/v2.4.10...v2.4.11) (2023-04-11)
+
+
+### Bug Fixes
+
+* verbose mode runtime error ([#903](https://github.com/codesandbox/sandpack/issues/903)) ([017d3d3](https://github.com/codesandbox/sandpack/commit/017d3d3812f1ca16c2aa1fb125b46210b6838969))
+
+
+
+
+
 ## [2.4.10](https://github.com/codesandbox/sandpack/compare/v2.4.9...v2.4.10) (2023-04-11)
 
 
