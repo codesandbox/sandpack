@@ -6,16 +6,20 @@ With Sandpack, you can securely consume private npm registries (GitHub packages,
 
 ## Get started
 
-1. [Configure your npm settings](https://codesandbox.io/docs/learn/sandboxes/custom-npm-registry) on the CodeSandbox dashboard.
-2. Provide a team ID* and your custom setup for your Sandpack sandboxes.
-3. Set a list of trusted domains on the [Dashboard](https://codesandbox.io/dashboard/)**.
-4. When Sandpack loads, you will be asked to sign in; after doing that, it's done.
+1. **Settings:** Configure your [npm settings](https://codesandbox.io/docs/learn/sandboxes/custom-npm-registry) on the CodeSandbox [Dashboard](https://codesandbox.io/dashboard/).
 
-<small>* You can find your team ID on the dashboard URL at [codesandbox.io/dashboard](https://codesandbox.io/dashboard/)</small>
-<br/>
-<small>** This will ensure that no one but you can use and render these sandboxes</small>
+2. **Trusted domains:** Set a list of trusted domains on the [Dashboard](https://codesandbox.io/dashboard/).
 
-<br/><br/>
+<small>This will ensure that no one but you can use and render these sandboxes</small>
+
+<img src="/docs/private-package-dashboard.png" />
+
+3. **Sandpack:** Provide a team ID and your custom setup for your Sandpack sandboxes.
+
+<small>You can find your team ID on the dashboard URL at [codesandbox.io/dashboard](https://codesandbox.io/dashboard/)</small>
+
+<br />
+<br />
 
 ```jsx
 <Sandpack
@@ -41,19 +45,12 @@ export default function App() {
 
 ```
 
-### Examples (screenshots)
-
-**Sandpack sign-in**
+4. **Sign-in:** When Sandpack loads, you will be asked to sign in; after doing that, it's done.
 
 <img src="/docs/private-package-signin.png" />
 
-**Sandpack loaded**
-
 <img src="/docs/private-package-loaded.png" />
 
-**Sandpack sign-out**
-
-<img style={{width: "400px"}} src="/docs/private-package-signout.png" />
 
 ## Security
 
