@@ -47,6 +47,11 @@ module.exports = withNextra({
         destination: "/advanced-usage",
         permanent: true,
       },
+      {
+        source: "/guides/private-packages",
+        destination: "/getting-started/private-packages",
+        permanent: true,
+      },
     ];
   },
 });
