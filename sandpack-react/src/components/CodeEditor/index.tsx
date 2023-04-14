@@ -119,7 +119,7 @@ export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
             wrapContent={wrapContent}
           />
 
-          {!sandpack.autoReload || (showRunButton && status === "idle") ? (
+          {showRunButton && (!sandpack.autoReload || status === "idle") ? (
             <RunButton />
           ) : null}
         </div>
