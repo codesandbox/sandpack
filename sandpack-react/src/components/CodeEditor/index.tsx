@@ -87,8 +87,11 @@ export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
 
     const classNames = useClassNames();
 
-    const handleCodeUpdate = (newCode: string): void => {
-      updateCode(newCode);
+    const handleCodeUpdate = (
+      newCode: string,
+      shouldUpdatePreview = true
+    ): void => {
+      updateCode(newCode, shouldUpdatePreview);
     };
 
     return (
@@ -106,7 +109,9 @@ export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
             extensionsKeymap={extensionsKeymap}
             filePath={activeFile}
             initMode={initMode || sandpack.initMode}
-            onCodeUpdate={handleCodeUpdate}
+            onCodeUpdate={(newCode: string) =>
+              handleCodeUpdate(newCode, sandpack.autoReload ?? true)
+            }
             readOnly={readOnly || readOnlyFile}
             showInlineErrors={showInlineErrors}
             showLineNumbers={showLineNumbers}

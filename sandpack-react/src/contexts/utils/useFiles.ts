@@ -27,7 +27,7 @@ interface FilesOperations {
   resetFile: (path: string) => void;
   resetAllFiles: () => void;
   setActiveFile: (path: string) => void;
-  updateCurrentFile: (code: string) => void;
+  updateCurrentFile: (code: string, shouldUpdatePreview?: boolean) => void;
   updateFile: (
     pathOrFiles: string | SandpackFiles,
     code?: string,
@@ -121,8 +121,8 @@ export const useFiles: UseFiles = (props) => {
         setState((prev) => ({ ...prev, activeFile }));
       }
     },
-    updateCurrentFile: (code: string): void => {
-      updateFile(state.activeFile, code);
+    updateCurrentFile: (code: string, shouldUpdatePreview = true): void => {
+      updateFile(state.activeFile, code, shouldUpdatePreview);
     },
     updateFile,
     addFile: updateFile,

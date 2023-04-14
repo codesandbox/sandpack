@@ -584,7 +584,7 @@ export interface SandpackState {
     code?: string,
     shouldUpdatePreview?: boolean
   ) => void;
-  updateCurrentFile: (newCode: string) => void;
+  updateCurrentFile: (newCode: string, shouldUpdatePreview?: boolean) => void;
   openFile: (path: string) => void;
   closeFile: (path: string) => void;
   deleteFile: (path: string, shouldUpdatePreview?: boolean) => void;
