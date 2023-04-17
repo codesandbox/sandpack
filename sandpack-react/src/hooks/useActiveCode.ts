@@ -9,7 +9,7 @@ import { useSandpack } from "./useSandpack";
 export const useActiveCode = (): {
   code: string;
   readOnly: boolean;
-  updateCode: (newCode: string) => void;
+  updateCode: (newCode: string, shouldUpdatePreview?: boolean) => void;
 } => {
   const { sandpack } = useSandpack();
 
