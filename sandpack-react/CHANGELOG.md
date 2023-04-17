@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.1](https://github.com/codesandbox/sandpack/compare/v2.6.0...v2.6.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* **sandpack-react:** fix autoReload and honor showRunButton false ([#907](https://github.com/codesandbox/sandpack/issues/907)) ([63c89e3](https://github.com/codesandbox/sandpack/commit/63c89e3857fef05360375c1c2722097c5f56101d))
+
+
+
+
+
 # [2.6.0](https://github.com/codesandbox/sandpack/compare/v2.5.0...v2.6.0) (2023-04-11)
 
 
