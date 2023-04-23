@@ -12,6 +12,8 @@ import type {
   UnsubscribeFunction,
   SandpackLogLevel,
   NpmRegistry,
+  SandpackMessageType,
+  ListenerOptions,
 } from "@codesandbox/sandpack-client";
 import type React from "react";
 
@@ -517,9 +519,12 @@ export type SandpackClientDispatch = (
   clientId?: string
 ) => void;
 
-export type SandpackClientListen = (
-  listener: ListenerFunction,
-  clientId?: string
+export type SandpackClientListen = <
+  Type extends SandpackMessageType = SandpackMessageType
+>(
+  listener: ListenerFunction<Type>,
+  clientId?: string,
+  opts?: ListenerOptions<Type>
 ) => UnsubscribeFunction;
 
 export type SandpackContext = SandpackState & {

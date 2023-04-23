@@ -4,8 +4,11 @@ import { PreviewController } from "static-browser-server";
 
 import type {
   ClientOptions,
+  ListenerOptions,
   ListenerFunction,
   SandboxSetup,
+  SandpackMessageType,
+  SandpackMessageByType,
   UnsubscribeFunction,
 } from "../..";
 import { SandpackClient } from "../base";
@@ -23,6 +26,7 @@ export class SandpackStatic extends SandpackClient {
   private emitter: EventEmitter;
   private previewController: PreviewController;
   private files: Map<string, string | Uint8Array> = new Map();
+  private registeredMessageTypes: Map<SandpackMessageType, number> = new Map();
 
   public iframe!: HTMLIFrameElement;
   public selector!: string;
@@ -54,9 +58,12 @@ export class SandpackStatic extends SandpackClient {
               content,
               options.externalResources
             );
-            content = this.injectScriptIntoHead(content, {
-              script: consoleHook,
-            });
+
+            if (this.registeredMessageTypes.has("console")) {
+              content = this.injectScriptIntoHead(content, {
+                script: consoleHook,
+              });
+            }
           } catch (err) {
             console.error("Runtime injection failed", err);
           }
@@ -226,8 +233,37 @@ export class SandpackStatic extends SandpackClient {
     }
   }
 
-  public listen(listener: ListenerFunction): UnsubscribeFunction {
-    return this.emitter.listener(listener);
+  public listen<Type extends SandpackMessageType = SandpackMessageType>(
+    listener: ListenerFunction<Type>,
+    opts?: ListenerOptions<Type>
+  ): UnsubscribeFunction {
+    opts?.messageTypes?.forEach((type) => {
+      const count = this.registeredMessageTypes.get(type) ?? 0;
+      this.registeredMessageTypes.set(type, count + 1);
+    });
+
+    const unsubscribe = this.emitter.listener((message) => {
+      if (
+        !opts?.messageTypes ||
+        opts.messageTypes.includes(message.type as Type)
+      ) {
+        listener(message as SandpackMessageByType<Type>);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+
+      opts?.messageTypes?.forEach((type) => {
+        const count = this.registeredMessageTypes.get(type)!;
+
+        if (count === 1) {
+          this.registeredMessageTypes.delete(type);
+        } else {
+          this.registeredMessageTypes.set(type, count - 1);
+        }
+      });
+    };
   }
 
   public destroy(): void {

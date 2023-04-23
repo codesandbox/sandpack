@@ -6,6 +6,8 @@ import type {
   SandpackMessage,
   UnsubscribeFunction,
   SandpackClient,
+  SandpackMessageType,
+  ListenerOptions,
 } from "@codesandbox/sandpack-client";
 import {
   loadSandpackClient,
@@ -49,9 +51,10 @@ export interface UseClientOperations {
     clientPropsOverride?: ClientPropsOverride
   ) => Promise<void>;
   registerReactDevTools: (value: ReactDevToolsMode) => void;
-  addListener: (
+  addListener: <Type extends SandpackMessageType = SandpackMessageType>(
     listener: ListenerFunction,
-    clientId?: string
+    clientId?: string,
+    opts?: ListenerOptions<Type>
   ) => UnsubscribeFunction;
   dispatchMessage: (message: SandpackMessage, clientId?: string) => void;
   lazyAnchorRef: React.RefObject<HTMLDivElement>;
@@ -61,7 +64,10 @@ export interface UseClientOperations {
     Record<string, Record<string, UnsubscribeFunction>>
   >;
   queuedListenersRef: React.MutableRefObject<
-    Record<string, Record<string, ListenerFunction>>
+    Record<
+      string,
+      Record<string, { listener: ListenerFunction; opts?: ListenerOptions }>
+    >
   >;
 }
 
@@ -106,7 +112,10 @@ export const useClient: UseClient = (
   >({});
   const unsubscribe = useRef<() => void | undefined>();
   const queuedListeners = useRef<
-    Record<string, Record<string, ListenerFunction>>
+    Record<
+      string,
+      Record<string, { listener: ListenerFunction; opts?: ListenerOptions }>
+    >
   >({ global: {} });
   const debounceHook = useRef<number | undefined>();
   const loadingScreenRegisteredRef = useRef<boolean>(true);
@@ -185,8 +194,9 @@ export const useClient: UseClient = (
        */
       if (queuedListeners.current[clientId]) {
         Object.keys(queuedListeners.current[clientId]).forEach((listenerId) => {
-          const listener = queuedListeners.current[clientId][listenerId];
-          const unsubscribe = client.listen(listener) as () => void;
+          const { listener, opts } =
+            queuedListeners.current[clientId][listenerId];
+          const unsubscribe = client.listen(listener, opts) as () => void;
           unsubscribeClientListeners.current[clientId][listenerId] =
             unsubscribe;
         });
@@ -199,8 +209,8 @@ export const useClient: UseClient = (
        * Register global listeners
        */
       const globalListeners = Object.entries(queuedListeners.current.global);
-      globalListeners.forEach(([listenerId, listener]) => {
-        const unsubscribe = client.listen(listener) as () => void;
+      globalListeners.forEach(([listenerId, { listener, opts }]) => {
+        const unsubscribe = client.listen(listener, opts) as () => void;
         unsubscribeClientListeners.current[clientId][listenerId] = unsubscribe;
 
         /**
@@ -392,13 +402,17 @@ export const useClient: UseClient = (
     }
   };
 
-  const addListener = (
-    listener: ListenerFunction,
-    clientId?: string
+  const addListener = <Type extends SandpackMessageType = SandpackMessageType>(
+    listener: ListenerFunction<Type>,
+    clientId?: string,
+    opts?: ListenerOptions<Type>
   ): UnsubscribeFunction => {
     if (clientId) {
       if (clients.current[clientId]) {
-        const unsubscribeListener = clients.current[clientId].listen(listener);
+        const unsubscribeListener = clients.current[clientId].listen(
+          listener,
+          opts
+        );
 
         return unsubscribeListener;
       } else {
@@ -413,7 +427,10 @@ export const useClient: UseClient = (
         unsubscribeClientListeners.current[clientId] =
           unsubscribeClientListeners.current[clientId] || {};
 
-        queuedListeners.current[clientId][listenerId] = listener;
+        queuedListeners.current[clientId][listenerId] = {
+          listener: listener as any as ListenerFunction,
+          opts: opts as any as ListenerOptions,
+        };
 
         const unsubscribeListener = (): void => {
           if (queuedListeners.current[clientId][listenerId]) {
@@ -437,7 +454,10 @@ export const useClient: UseClient = (
     } else {
       // Push to the **global** queue
       const listenerId = generateRandomId();
-      queuedListeners.current.global[listenerId] = listener;
+      queuedListeners.current.global[listenerId] = {
+        listener: listener as any as ListenerFunction,
+        opts: opts as any as ListenerOptions,
+      };
 
       // Add to the current clients
       const clientsList = Object.values(clients.current);

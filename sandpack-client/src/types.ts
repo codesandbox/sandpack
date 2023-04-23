@@ -174,13 +174,27 @@ export type ClientStatus =
   | "idle";
 
 export type SandpackMessage = SandpackRuntimeMessage | SandpackNodeMessage;
+export type SandpackMessageType = SandpackMessage["type"];
+export type SandpackMessageByType<Type extends SandpackMessageType> = Extract<
+  SandpackMessage,
+  { type: Type }
+>;
 
-export type ListenerFunction = (msg: SandpackMessage) => void;
+export type ListenerFunction<
+  Type extends SandpackMessageType = SandpackMessageType
+> = (msg: SandpackMessageByType<Type>) => void;
 export type UnsubscribeFunction = () => void;
 
-export type Listen = (
-  listener: ListenerFunction,
-  clientId?: string
+export type ListenerOptions<
+  Type extends SandpackMessageType = SandpackMessageType
+> = {
+  messageTypes?: Array<Type>;
+};
+
+export type Listen = <Type extends SandpackMessageType = SandpackMessageType>(
+  listener: ListenerFunction<Type>,
+  clientId?: string,
+  opts?: ListenerOptions<Type>
 ) => UnsubscribeFunction;
 export type Dispatch = (msg: SandpackMessage, clientId?: string) => void;
 

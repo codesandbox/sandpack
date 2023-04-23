@@ -6,6 +6,8 @@ import type {
   ListenerFunction,
   SandpackMessage,
   UnsubscribeFunction,
+  SandpackMessageType,
+  ListenerOptions,
 } from "../types";
 
 export class SandpackClient {
@@ -59,7 +61,10 @@ export class SandpackClient {
     throw Error("Method not implemented");
   }
 
-  public listen(_listener: ListenerFunction): UnsubscribeFunction {
+  public listen<Type extends SandpackMessageType = SandpackMessageType>(
+    _listener: ListenerFunction<Type>,
+    _opts?: ListenerOptions<Type>
+  ): UnsubscribeFunction {
     throw Error("Method not implemented");
   }
 }
