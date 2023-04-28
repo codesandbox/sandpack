@@ -79,6 +79,8 @@ export class SandpackStatic extends SandpackClient {
         "accelerometer; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; clipboard-write;"
       );
     }
+
+    this.updateSandbox();
   }
 
   private injectContentIntoHead(
