@@ -173,7 +173,7 @@ export const useClient: UseClient = (
         }
       );
 
-      if (shouldSetTimeout) {
+      if (typeof unsubscribe.current !== "function") {
         unsubscribe.current = client.listen(handleMessage);
       }
 
