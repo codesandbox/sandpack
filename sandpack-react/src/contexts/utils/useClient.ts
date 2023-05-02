@@ -93,7 +93,7 @@ export const useClient: UseClient = (
    */
   const intersectionObserver = useRef<IntersectionObserver | null>(null);
   const lazyAnchorRef = useRef<HTMLDivElement>(null);
-  const preregisteredIframes = useRef<
+  const registeredIframes = useRef<
     Record<
       string,
       { iframe: HTMLIFrameElement; clientPropsOverride?: ClientPropsOverride }
@@ -121,7 +121,13 @@ export const useClient: UseClient = (
       iframe: HTMLIFrameElement,
       clientId: string,
       clientPropsOverride?: ClientPropsOverride
-    ): Promise<SandpackClientType> => {
+    ): Promise<void> => {
+      // Clean up any existing clients that
+      // have been created with the given id
+      if (clients.current[clientId]) {
+        clients.current[clientId].destroy();
+      }
+
       options ??= {};
       customSetup ??= {};
 
@@ -131,10 +137,19 @@ export const useClient: UseClient = (
         clearTimeout(timeoutHook.current);
       }
 
-      timeoutHook.current = setTimeout(() => {
-        unregisterAllClients();
-        setState((prev) => ({ ...prev, status: "timeout" }));
-      }, timeOut);
+      /**
+       * Subscribe inside the context with the first client that gets instantiated.
+       * This subscription is for global states like error and timeout, so no need for a per client listen
+       * Also, set the timeout timer only when the first client is instantiated
+       */
+      const shouldSetTimeout = typeof unsubscribe.current !== "function";
+
+      if (shouldSetTimeout) {
+        timeoutHook.current = setTimeout(() => {
+          unregisterAllClients();
+          setState((prev) => ({ ...prev, status: "timeout" }));
+        }, timeOut);
+      }
 
       const client = await loadSandpackClient(
         iframe,
@@ -158,11 +173,6 @@ export const useClient: UseClient = (
         }
       );
 
-      /**
-       * Subscribe inside the context with the first client that gets instantiated.
-       * This subscription is for global states like error and timeout, so no need for a per client listen
-       * Also, set the timeout timer only when the first client is instantiated
-       */
       if (typeof unsubscribe.current !== "function") {
         unsubscribe.current = client.listen(handleMessage);
       }
@@ -200,7 +210,7 @@ export const useClient: UseClient = (
          */
       });
 
-      return client;
+      clients.current[clientId] = client;
     },
     [filesState.environment, filesState.files, state.reactDevTools]
   );
@@ -216,21 +226,11 @@ export const useClient: UseClient = (
 
   const runSandpack = useCallback(async (): Promise<void> => {
     await Promise.all(
-      Object.keys(preregisteredIframes.current).map(async (clientId) => {
-        // There's already a client if the same id, so we should destroy it
-        if (clients.current[clientId]) {
-          clients.current[clientId].destroy();
+      Object.entries(registeredIframes.current).map(
+        async ([clientId, { iframe, clientPropsOverride = {} }]) => {
+          await createClient(iframe, clientId, clientPropsOverride);
         }
-
-        const { iframe, clientPropsOverride = {} } =
-          preregisteredIframes.current[clientId];
-
-        clients.current[clientId] = await createClient(
-          iframe,
-          clientId,
-          clientPropsOverride
-        );
-      })
+      )
     );
 
     setState((prev) => ({ ...prev, error: null, status: "running" }));
@@ -292,17 +292,15 @@ export const useClient: UseClient = (
       clientId: string,
       clientPropsOverride?: ClientPropsOverride
     ): Promise<void> => {
+      // Store the iframe info so it can be
+      // used later to manually run sandpack
+      registeredIframes.current[clientId] = {
+        iframe,
+        clientPropsOverride,
+      };
+
       if (state.status === "running") {
-        clients.current[clientId] = await createClient(
-          iframe,
-          clientId,
-          clientPropsOverride
-        );
-      } else {
-        preregisteredIframes.current[clientId] = {
-          iframe,
-          clientPropsOverride,
-        };
+        await createClient(iframe, clientId, clientPropsOverride);
       }
     },
     [createClient, state.status]
@@ -315,9 +313,9 @@ export const useClient: UseClient = (
       client.iframe.contentWindow?.location.replace("about:blank");
       client.iframe.removeAttribute("src");
       delete clients.current[clientId];
-    } else {
-      delete preregisteredIframes.current[clientId];
     }
+
+    delete registeredIframes.current[clientId];
 
     if (timeoutHook.current) {
       clearTimeout(timeoutHook.current);

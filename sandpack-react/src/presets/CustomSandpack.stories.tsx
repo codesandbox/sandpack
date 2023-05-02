@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 
 import { stackClassName } from "../";
 import { tabButton } from "../";
@@ -256,10 +256,11 @@ export const MultiplePreviews: React.FC = () => {
 
 const SandpackListener: React.FC = () => {
   const { listen } = useSandpack();
+  const id = useId();
 
   useEffect(() => {
     // eslint-disable-next-line no-console
-    const unsubscribe = listen((msg) => console.log(msg));
+    const unsubscribe = listen((msg) => console.log(id, msg));
 
     return unsubscribe;
   }, [listen]);
@@ -275,9 +276,12 @@ export const MultiplePreviewsAndListeners: React.FC = () => {
 
   return (
     <>
-      <SandpackProvider template="react">
-        {new Array(listenersCount).fill(" ").map((pr) => (
-          <SandpackListener key={pr} />
+      <SandpackProvider
+        options={{ autorun: true, autoReload: true }}
+        template="static"
+      >
+        {new Array(listenersCount).fill(" ").map((pr, index) => (
+          <SandpackListener key={index} />
         ))}
         <SandpackLayout>
           <SandpackCodeEditor />
