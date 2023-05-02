@@ -137,10 +137,15 @@ export const useClient: UseClient = (
         clearTimeout(timeoutHook.current);
       }
 
-      timeoutHook.current = setTimeout(() => {
-        unregisterAllClients();
-        setState((prev) => ({ ...prev, status: "timeout" }));
-      }, timeOut);
+      /**
+       * Only sets a timeout if no bundler is running
+       */
+      if (Object.keys(clients.current).length === 0) {
+        timeoutHook.current = setTimeout(() => {
+          unregisterAllClients();
+          setState((prev) => ({ ...prev, status: "timeout" }));
+        }, timeOut);
+      }
 
       const client = await loadSandpackClient(
         iframe,

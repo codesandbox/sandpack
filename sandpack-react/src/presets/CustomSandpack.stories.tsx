@@ -275,7 +275,10 @@ export const MultiplePreviewsAndListeners: React.FC = () => {
 
   return (
     <>
-      <SandpackProvider template="react">
+      <SandpackProvider
+        template="static"
+        options={{ autorun: false, autoReload: false }}
+      >
         {new Array(listenersCount).fill(" ").map((pr) => (
           <SandpackListener key={pr} />
         ))}
@@ -530,41 +533,5 @@ body {
         </SandpackProvider>
       </div>
     </div>
-  );
-};
-
-const RunSandpackButtonComponents = () => {
-  const { sandpack } = useSandpack();
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  return (
-    <div style={{ display: "flex", gap: 8, padding: 16 }}>
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <button
-          onClick={() => {
-            sandpack.registerBundler(iframeRef.current!, "custom");
-          }}
-        >
-          Register
-        </button>
-        <button onClick={sandpack.runSandpack}>Custom Run</button>
-      </div>
-      <iframe ref={iframeRef} />
-    </div>
-  );
-};
-
-export const RunSandpackButton = () => {
-  return (
-    <SandpackProvider
-      template="static"
-      options={{ autoReload: false, autorun: false }}
-    >
-      <SandpackLayout>
-        <SandpackCodeEditor showRunButton />
-        <SandpackPreview />
-      </SandpackLayout>
-      <RunSandpackButtonComponents />
-    </SandpackProvider>
   );
 };
