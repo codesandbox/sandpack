@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.2](https://github.com/codesandbox/sandpack/compare/v2.6.1...v2.6.2) (2023-05-02)
+
+
+### Bug Fixes
+
+* **useClient:** track all clients and update clients on runSandpack ([#923](https://github.com/codesandbox/sandpack/issues/923)) ([a7334ad](https://github.com/codesandbox/sandpack/commit/a7334adfb712abd2342c3fa949f72f201c7ba2c4))
+
+
+
+
+
 ## [2.6.1](https://github.com/codesandbox/sandpack/compare/v2.6.0...v2.6.1) (2023-04-17)
 
 
