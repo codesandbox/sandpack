@@ -80,6 +80,7 @@ export class SandpackStatic extends SandpackClient {
       );
     }
 
+    // Dispatch very first compile action
     this.updateSandbox();
   }
 
