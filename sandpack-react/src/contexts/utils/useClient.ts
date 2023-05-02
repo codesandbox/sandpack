@@ -138,9 +138,13 @@ export const useClient: UseClient = (
       }
 
       /**
-       * Only sets a timeout if no bundler is running
+       * Subscribe inside the context with the first client that gets instantiated.
+       * This subscription is for global states like error and timeout, so no need for a per client listen
+       * Also, set the timeout timer only when the first client is instantiated
        */
-      if (Object.keys(clients.current).length === 0) {
+      const shouldSetTimeout = typeof unsubscribe.current !== "function";
+
+      if (shouldSetTimeout) {
         timeoutHook.current = setTimeout(() => {
           unregisterAllClients();
           setState((prev) => ({ ...prev, status: "timeout" }));
@@ -169,12 +173,7 @@ export const useClient: UseClient = (
         }
       );
 
-      /**
-       * Subscribe inside the context with the first client that gets instantiated.
-       * This subscription is for global states like error and timeout, so no need for a per client listen
-       * Also, set the timeout timer only when the first client is instantiated
-       */
-      if (typeof unsubscribe.current !== "function") {
+      if (shouldSetTimeout) {
         unsubscribe.current = client.listen(handleMessage);
       }
 
