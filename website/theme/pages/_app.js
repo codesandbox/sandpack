@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import "../styles/globals.scss";
+import "../components/ColorPickerSwatch/index.css";
 import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
