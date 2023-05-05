@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.3](https://github.com/codesandbox/sandpack/compare/v2.6.2...v2.6.3) (2023-05-05)
+
+
+### Bug Fixes
+
+* **client:** work around solid refresh bugs ([b11b5c7](https://github.com/codesandbox/sandpack/commit/b11b5c79d1bfbbf0806e68a9ae74eeebb23c58f1))
+
+
+
+
+
 ## [2.6.2](https://github.com/codesandbox/sandpack/compare/v2.6.1...v2.6.2) (2023-05-02)
 
 
