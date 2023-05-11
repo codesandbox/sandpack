@@ -45,7 +45,7 @@ export interface SandpackProps {
    * }
    * ```
    */
-  files?: Record<string, string> | SandpackFile;
+  files?: SandpackFiles;
 
   /**
    * Set of presets to easily initialize sandboxes. Each template contains
@@ -625,7 +625,7 @@ export type SandpackStatus =
 export type EditorState = "pristine" | "dirty";
 
 export interface SandboxTemplate {
-  files: Record<string, SandpackFile>;
+  files: SandpackFiles;
   dependencies: Record<string, string>;
   devDependencies?: Record<string, string>;
   entry?: string;
