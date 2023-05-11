@@ -101,7 +101,7 @@ root.render(
             "@types/react-dom": "^18.0.11",
             "@vitejs/plugin-react": "^3.1.0",
             typescript: "^4.9.5",
-            vite: "^4.1.4",
+            vite: "4.1.4",
             "esbuild-wasm": "^0.17.12",
           },
         },
