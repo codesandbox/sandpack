@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.4](https://github.com/codesandbox/sandpack/compare/v2.6.3...v2.6.4) (2023-05-11)
+
+
+### Bug Fixes
+
+* **runtime-client:** disable loading state by default ([#935](https://github.com/codesandbox/sandpack/issues/935)) ([aee0e3d](https://github.com/codesandbox/sandpack/commit/aee0e3dd76548c43c7439ce353200685ab7f5288))
+* **types:** deduplicate files type ([#932](https://github.com/codesandbox/sandpack/issues/932)) ([c1b19ee](https://github.com/codesandbox/sandpack/commit/c1b19eec470f934cc5eb91ff331cf12efcb594ed))
+* **vite templates:** set specific version ([#934](https://github.com/codesandbox/sandpack/issues/934)) ([8ab934e](https://github.com/codesandbox/sandpack/commit/8ab934e2863df8c316eb40080fcbe8b15a743c6e))
+
+
+
+
+
 ## [2.6.3](https://github.com/codesandbox/sandpack/compare/v2.6.2...v2.6.3) (2023-05-05)
 
 
