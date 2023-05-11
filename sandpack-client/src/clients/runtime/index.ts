@@ -242,7 +242,7 @@ export class SandpackRuntime extends SandpackClient {
         getTemplate(packageJSON, normalizedModules),
       showOpenInCodeSandbox: this.options.showOpenInCodeSandbox ?? true,
       showErrorScreen: this.options.showErrorScreen ?? true,
-      showLoadingScreen: this.options.showLoadingScreen ?? true,
+      showLoadingScreen: this.options.showLoadingScreen ?? false,
       skipEval: this.options.skipEval || false,
       clearConsoleDisabled: !this.options.clearConsoleOnFirstCompile,
       logLevel: this.options.logLevel ?? SandpackLogLevel.Info,
