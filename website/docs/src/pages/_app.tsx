@@ -13,12 +13,5 @@ if (API_KEY && process.browser) {
 export default function Nextra({ Component, pageProps }): any {
   const getLayout = Component.getLayout || ((page): any => page);
 
-  useEffect(() => {
-    amplitude.getInstance().logEvent("pageview", {
-      path: window.location.href,
-      source: "sandpack-docs",
-    });
-  }, []);
-
   return getLayout(<Component {...pageProps} />);
 }
