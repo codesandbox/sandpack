@@ -12,6 +12,9 @@ if (API_KEY && process.browser) {
 
 export default function Nextra({ Component, pageProps }): any {
   const getLayout = Component.getLayout || ((page): any => page);
+  useEffect(() => {
+    amplitude.getInstance().logEvent("pageview");
+  }, []);
 
   return getLayout(<Component {...pageProps} />);
 }
