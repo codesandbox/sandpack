@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.5](https://github.com/codesandbox/sandpack/compare/v2.6.4...v2.6.5) (2023-05-19)
+
+
+### Bug Fixes
+
+* **package.json:** update @codesandbox/nodebox and outvariant versions ([#942](https://github.com/codesandbox/sandpack/issues/942)) ([e20d475](https://github.com/codesandbox/sandpack/commit/e20d475fdd5bd63c6597e4ba9367d7f9c49aa3ff))
+
+
+
+
+
 ## [2.6.4](https://github.com/codesandbox/sandpack/compare/v2.6.3...v2.6.4) (2023-05-11)
 
 
