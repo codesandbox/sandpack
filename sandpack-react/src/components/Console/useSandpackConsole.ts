@@ -26,7 +26,14 @@ export const useSandpackConsole = ({
   resetOnPreviewRestart: boolean;
 }): { logs: SandpackConsoleData; reset: () => void } => {
   const [logs, setLogs] = React.useState<SandpackConsoleData>([]);
-  const { listen } = useSandpack();
+  const { listen, dispatch } = useSandpack();
+
+  React.useEffect(() => {
+    dispatch({ type: "console/register" }, clientId);
+    return () => {
+      dispatch({ type: "console/unregister" }, clientId);
+    };
+  }, [dispatch, clientId]);
 
   React.useEffect(() => {
     const unsubscribe = listen((message) => {

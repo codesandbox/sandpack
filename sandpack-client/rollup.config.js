@@ -9,9 +9,9 @@ import pkg from "./package.json";
 
 const configs = [
   {
-    input: "src/clients/node/inject-scripts/consoleHook.ts",
+    input: "src/inject-scripts/consoleHook.ts",
     output: {
-      file: "src/clients/node/inject-scripts/dist/consoleHook.js",
+      file: "src/inject-scripts/dist/consoleHook.js",
       format: "es",
     },
     plugins: [

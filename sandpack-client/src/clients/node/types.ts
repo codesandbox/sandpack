@@ -6,7 +6,7 @@ import type {
   SandpackLogLevel,
 } from "../..";
 
-type SandpackStandartMessages =
+type SandpackStandardMessages =
   | {
       type: "start";
       firstLoad?: boolean;
@@ -60,9 +60,13 @@ type SandpackShellMessages =
   | { type: "shell/openPreview" }
   | { type: "shell/progress"; data: WorkerStatusUpdate & { command?: string } };
 
+type SandpackConsoleMessages =
+  | { type: "console/register" }
+  | { type: "console/unregister" };
+
 export type SandpackNodeMessage = BaseSandpackMessage &
   (
-    | SandpackStandartMessages
+    | SandpackStandardMessages
     | SandpackURLsMessages
     | SandpackBundlerMessages
     | SandpackShellMessages
@@ -72,6 +76,7 @@ export type SandpackNodeMessage = BaseSandpackMessage &
         payload: SandpackShellStdoutData;
       }
     | SandpackFSMessages
+    | SandpackConsoleMessages
   );
 
 export interface SandpackShellStdoutData {
