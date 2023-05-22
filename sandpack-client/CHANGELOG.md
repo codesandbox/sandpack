@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.6](https://github.com/codesandbox/sandpack/compare/v2.6.5...v2.6.6) (2023-05-22)
+
+
+### Bug Fixes
+
+* **compile:** create one TestRunner between sandbox compiles ([5ada4e3](https://github.com/codesandbox/sandpack/commit/5ada4e3e80509a0810e39baf8a638675991bb7dd))
+
+
+
+
+
 ## [2.6.5](https://github.com/codesandbox/sandpack/compare/v2.6.4...v2.6.5) (2023-05-19)
 
 
