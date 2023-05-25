@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import amplitude from "amplitude-js";
-import { useEffect } from "react";
 import "codesandbox-theme-docs/style.css";
 import "../styles.css";
 
@@ -12,13 +11,6 @@ if (API_KEY && process.browser) {
 
 export default function Nextra({ Component, pageProps }): any {
   const getLayout = Component.getLayout || ((page): any => page);
-
-  useEffect(() => {
-    amplitude.getInstance().logEvent("pageview", {
-      path: window.location.href,
-      source: "sandpack-docs",
-    });
-  }, []);
 
   return getLayout(<Component {...pageProps} />);
 }
