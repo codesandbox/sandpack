@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.7](https://github.com/codesandbox/sandpack/compare/v2.6.6...v2.6.7) (2023-05-26)
+
+
+### Bug Fixes
+
+* **client:** avoid concurrent compile step and init ([#946](https://github.com/codesandbox/sandpack/issues/946)) ([98a20e9](https://github.com/codesandbox/sandpack/commit/98a20e92ebb3aecb7ef23f18a5d3cb76f716b0a4))
+* **node:** remove --force option from all Sandpack Vite templates ([#947](https://github.com/codesandbox/sandpack/issues/947)) ([4d1b576](https://github.com/codesandbox/sandpack/commit/4d1b576adaa607e460b17a44f6d2b4c2349a2648))
+
+
+
+
+
 ## [2.6.6](https://github.com/codesandbox/sandpack/compare/v2.6.5...v2.6.6) (2023-05-22)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react

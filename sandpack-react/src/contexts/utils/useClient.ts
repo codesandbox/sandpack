@@ -55,8 +55,6 @@ export interface UseClientOperations {
   ) => UnsubscribeFunction;
   dispatchMessage: (message: SandpackMessage, clientId?: string) => void;
   lazyAnchorRef: React.RefObject<HTMLDivElement>;
-  loadingScreenRegisteredRef: React.MutableRefObject<boolean>;
-  errorScreenRegisteredRef: React.MutableRefObject<boolean>;
   unsubscribeClientListenersRef: React.MutableRefObject<
     Record<string, Record<string, UnsubscribeFunction>>
   >;
@@ -109,8 +107,6 @@ export const useClient: UseClient = (
     Record<string, Record<string, ListenerFunction>>
   >({ global: {} });
   const debounceHook = useRef<number | undefined>();
-  const loadingScreenRegisteredRef = useRef<boolean>(true);
-  const errorScreenRegisteredRef = useRef<boolean>(true);
   const prevEnvironment = useRef(filesState.environment);
 
   /**
@@ -165,8 +161,8 @@ export const useClient: UseClient = (
           skipEval: options.skipEval ?? false,
           logLevel: options.logLevel,
           showOpenInCodeSandbox: false,
-          showErrorScreen: errorScreenRegisteredRef.current,
-          showLoadingScreen: loadingScreenRegisteredRef.current,
+          showErrorScreen: true,
+          showLoadingScreen: false,
           reactDevTools: state.reactDevTools,
           customNpmRegistries: customSetup?.npmRegistries,
           teamId: teamId,
@@ -489,10 +485,15 @@ export const useClient: UseClient = (
 
       if (recompileMode === "immediate") {
         Object.values(clients.current).forEach((client) => {
-          client.updateSandbox({
-            files: filesState.files,
-            template: filesState.environment,
-          });
+          /**
+           * Avoid concurrency
+           */
+          if (client.status === "done") {
+            client.updateSandbox({
+              files: filesState.files,
+              template: filesState.environment,
+            });
+          }
         });
       }
 
@@ -502,10 +503,15 @@ export const useClient: UseClient = (
         window.clearTimeout(debounceHook.current);
         debounceHook.current = window.setTimeout(() => {
           Object.values(clients.current).forEach((client) => {
-            client.updateSandbox({
-              files: filesState.files,
-              template: filesState.environment,
-            });
+            /**
+             * Avoid concurrency
+             */
+            if (client.status === "done") {
+              client.updateSandbox({
+                files: filesState.files,
+                template: filesState.environment,
+              });
+            }
           });
         }, recompileDelay);
       }
@@ -567,8 +573,6 @@ export const useClient: UseClient = (
       registerReactDevTools,
       addListener,
       dispatchMessage,
-      loadingScreenRegisteredRef,
-      errorScreenRegisteredRef,
       lazyAnchorRef,
       unsubscribeClientListenersRef: unsubscribeClientListeners,
       queuedListenersRef: queuedListeners,
