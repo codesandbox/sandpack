@@ -59,7 +59,6 @@ export const useFiles: UseFiles = (props) => {
   const isMountedRef = useRef(false);
   useEffect(() => {
     if (isMountedRef.current) {
-      console.log("changed");
       setState(getSandpackStateFromProps(props));
     } else {
       isMountedRef.current = true;

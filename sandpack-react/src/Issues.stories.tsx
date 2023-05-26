@@ -1,9 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
-
-import { SandpackPreview } from "./components";
-import { useSandpack } from "./hooks";
-import { REACT_TEMPLATE } from "./templates";
+import React, { useState } from "react";
 
 import {
   Sandpack,
@@ -16,56 +12,6 @@ import {
 export default {
   title: "Bug reports/Issues",
 };
-
-const SandpackLog = () => {
-  const { listen } = useSandpack();
-
-  useEffect(() => {
-    const unsubs = listen(console.log);
-
-    return unsubs;
-  }, []);
-
-  return null;
-};
-
-export const Issue944 = (): JSX.Element => {
-  const [files, setFiles] = useState(REACT_TEMPLATE["files"]);
-
-  return (
-    <>
-      <button
-        onClick={() => {
-          setFiles(REACT_TEMPLATE["files"]);
-        }}
-      >
-        1
-      </button>
-      <button
-        onClick={() => {
-          setFiles({
-            ...REACT_TEMPLATE["files"],
-            "/App.js": `import Foo from "./Foo";
-export default function App() {
-  return <Foo />
-}`,
-            "Foo.js": `export default () => <button> Foo</button>`,
-          });
-        }}
-      >
-        2
-      </button>
-      <SandpackProvider options={{ autorun: false }} template="react">
-        <SandpackLayout>
-          <SandpackLog />
-          <SandpackCodeEditor />
-          <SandpackPreview />
-        </SandpackLayout>
-      </SandpackProvider>
-    </>
-  );
-};
-
 export const FlushServerVsClient = (): JSX.Element => {
   return (
     <SandpackProvider>
