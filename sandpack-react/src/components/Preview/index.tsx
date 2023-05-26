@@ -120,15 +120,11 @@ export const SandpackPreview = React.forwardRef<
     const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
       number | null
     >(null);
-    const { status, errorScreenRegisteredRef, loadingScreenRegisteredRef } =
-      sandpack;
+    const { status } = sandpack;
     const { refresh } = useSandpackNavigation(clientId);
     const { restart } = useSandpackShell(clientId);
 
     const classNames = useClassNames();
-
-    errorScreenRegisteredRef.current = true;
-    loadingScreenRegisteredRef.current = true;
 
     React.useEffect(() => {
       const unsubscribe = listen((message: SandpackMessage) => {

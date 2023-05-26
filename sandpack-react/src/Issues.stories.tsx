@@ -12,7 +12,6 @@ import {
 export default {
   title: "Bug reports/Issues",
 };
-
 export const FlushServerVsClient = (): JSX.Element => {
   return (
     <SandpackProvider>

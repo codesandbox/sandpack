@@ -6,7 +6,6 @@ import { createError } from "../..";
 import type {
   BundlerState,
   ClientOptions,
-  ClientStatus,
   ListenerFunction,
   Modules,
   SandboxSetup,
@@ -40,7 +39,6 @@ export class SandpackRuntime extends SandpackClient {
   bundlerURL: string;
   bundlerState?: BundlerState;
   errors: SandpackError[];
-  status: ClientStatus;
 
   selector!: string;
   element: Element;
@@ -142,6 +140,10 @@ export class SandpackRuntime extends SandpackClient {
             if (mes.action === "show-error") {
               this.errors = [...this.errors, extractErrorDetails(mes)];
             }
+            break;
+          }
+          case "done": {
+            this.status = "done";
             break;
           }
           case "state": {

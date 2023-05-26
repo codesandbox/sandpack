@@ -165,14 +165,6 @@ export interface BundlerState {
   transpiledModules: Record<string, TranspiledModule>;
 }
 
-export type ClientStatus =
-  | "initializing"
-  | "installing-dependencies"
-  | "transpiling"
-  | "evaluating"
-  | "running-tests"
-  | "idle";
-
 export type SandpackMessage = SandpackRuntimeMessage | SandpackNodeMessage;
 
 export type ListenerFunction = (msg: SandpackMessage) => void;
@@ -202,6 +194,15 @@ export interface SandpackErrorMessage {
     frames?: ErrorStackFrame[];
   };
 }
+
+export type ClientStatus =
+  | "initializing"
+  | "installing-dependencies"
+  | "transpiling"
+  | "evaluating"
+  | "running-tests"
+  | "idle"
+  | "done";
 
 export type SandpackMessageConsoleMethods =
   | "log"

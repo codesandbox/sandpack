@@ -1,5 +1,6 @@
 import { dequal as deepEqual } from "dequal";
 
+import type { ClientStatus } from "..";
 import type {
   ClientOptions,
   SandboxSetup,
@@ -20,6 +21,7 @@ export class SandpackClient {
    */
   iframe!: HTMLIFrameElement;
   iframeSelector: string | HTMLIFrameElement;
+  status: ClientStatus = "idle";
 
   constructor(
     iframeSelector: string | HTMLIFrameElement,
