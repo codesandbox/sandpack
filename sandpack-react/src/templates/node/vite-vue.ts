@@ -57,7 +57,7 @@ export default defineConfig({
     "/package.json": {
       code: JSON.stringify({
         scripts: {
-          dev: "vite --force",
+          dev: "vite",
           build: "vite build",
           preview: "vite preview",
         },

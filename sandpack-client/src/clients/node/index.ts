@@ -373,6 +373,11 @@ export class SandpackNode extends SandpackClient {
       await this.emulatorShellProcess.kill();
       this.iframe?.removeAttribute("attr");
 
+      this.emulator.fs.rm("/node_modules/.vite", {
+        recursive: true,
+        force: true,
+      });
+
       // 3 Run command again
       await this.compile(Object.fromEntries(this._modulesCache));
     }
