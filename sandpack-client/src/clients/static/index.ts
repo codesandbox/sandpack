@@ -31,6 +31,8 @@ export class SandpackStatic extends SandpackClient {
   ) {
     super(selector, sandboxSetup, options);
 
+    this.status = "initializing";
+
     this.emitter = new EventEmitter();
     this.previewController = new PreviewController({
       baseUrl:
@@ -160,6 +162,7 @@ export class SandpackStatic extends SandpackClient {
     const previewUrl = await this.previewController.initPreview();
     this.iframe.setAttribute("src", previewUrl);
 
+    this.status = "done";
     this.dispatch({ type: "done", compilatonError: false });
     this.dispatch({
       type: "urlchange",

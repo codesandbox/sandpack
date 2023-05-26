@@ -55,7 +55,7 @@ export default function App() {
       >
         2
       </button>
-      <SandpackProvider template="vite-react">
+      <SandpackProvider options={{ autorun: false }} template="react">
         <SandpackLayout>
           <SandpackLog />
           <SandpackCodeEditor />
