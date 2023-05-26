@@ -69,6 +69,9 @@ export class SandpackNode extends SandpackClient {
       iframe: this.emulatorIframe,
       runtimeUrl: this.options.bundlerURL,
     });
+
+    // Trigger initial compile
+    this.updateSandbox(sandboxInfo);
   }
 
   // Initialize nodebox, should only ever be called once
@@ -88,6 +91,7 @@ export class SandpackNode extends SandpackClient {
   private async compile(files: FilesMap): Promise<void> {
     try {
       // 1. Init
+      this.status = "initializing";
       this.dispatch({ type: "start", firstLoad: true });
       if (!this._initPromise) {
         this._initPromise = this._init(files);
@@ -153,6 +157,8 @@ export class SandpackNode extends SandpackClient {
             ].join(" "),
           },
         });
+
+        this.status = "installing-dependencies";
 
         return;
       }
@@ -228,6 +234,7 @@ export class SandpackNode extends SandpackClient {
    * consumer that the bundler is ready without any error
    */
   private dispatchDoneMessage(): void {
+    this.status = "done";
     this.dispatch({ type: "done", compilatonError: false });
 
     if (this.iframePreviewUrl) {
@@ -356,11 +363,11 @@ export class SandpackNode extends SandpackClient {
   /**
    * PUBLIC Methods
    */
-
   public async restartShellProcess(): Promise<void> {
     if (this.emulatorShellProcess && this.emulatorCommand) {
       // 1. Set the loading state and clean the URL
       this.dispatch({ type: "start", firstLoad: true });
+      this.status = "initializing";
 
       // 2. Exit shell
       await this.emulatorShellProcess.kill();
@@ -371,12 +378,13 @@ export class SandpackNode extends SandpackClient {
     }
   }
 
-  public updateSandbox(setup: SandboxSetup): any {
+  public updateSandbox(setup: SandboxSetup): void {
     const modules = fromBundlerFilesToFS(setup.files);
 
     /**
      * Update file changes
      */
+
     if (this.emulatorShellProcess?.state === "running") {
       Object.entries(modules).forEach(([key, value]) => {
         if (
@@ -400,7 +408,11 @@ export class SandpackNode extends SandpackClient {
       type: "compile",
     });
 
-    // Add modules to cache, this will ensure uniqueness changes
+    /**
+     * Add modules to cache, this will ensure uniqueness changes
+     *
+     * Keep it after the compile action, in order to update the cache at the right moment
+     */
     Object.entries(modules).forEach(([key, value]) => {
       this._modulesCache.set(key, writeBuffer(value));
     });

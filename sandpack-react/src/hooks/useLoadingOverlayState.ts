@@ -25,8 +25,6 @@ export const useLoadingOverlayState = (
    * Sandpack listener
    */
   React.useEffect(() => {
-    sandpack.loadingScreenRegisteredRef.current = true;
-
     const unsubscribe = listen((message) => {
       if (message.type === "start" && message.firstLoad === true) {
         setState("LOADING");

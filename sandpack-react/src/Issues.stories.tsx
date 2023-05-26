@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
+import { SandpackPreview } from "./components";
+import { useSandpack } from "./hooks";
 import { REACT_TEMPLATE } from "./templates";
 
 import {
@@ -13,6 +15,18 @@ import {
 
 export default {
   title: "Bug reports/Issues",
+};
+
+const SandpackLog = () => {
+  const { listen } = useSandpack();
+
+  useEffect(() => {
+    const unsubs = listen(console.log);
+
+    return unsubs;
+  }, []);
+
+  return null;
 };
 
 export const Issue944 = (): JSX.Element => {
@@ -41,7 +55,13 @@ export default function App() {
       >
         2
       </button>
-      <Sandpack files={files} template="react" />
+      <SandpackProvider template="vite-react">
+        <SandpackLayout>
+          <SandpackLog />
+          <SandpackCodeEditor />
+          <SandpackPreview />
+        </SandpackLayout>
+      </SandpackProvider>
     </>
   );
 };
