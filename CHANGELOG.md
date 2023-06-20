@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.9](https://github.com/codesandbox/sandpack/compare/v2.6.8...v2.6.9) (2023-06-20)
+
+
+### Bug Fixes
+
+* **lerna:** remove experimental flag for workspaces ([#956](https://github.com/codesandbox/sandpack/issues/956)) ([dec34f0](https://github.com/codesandbox/sandpack/commit/dec34f02bcbb92b0f3d62c305d58cd27a7db6b3b))
+
+
+
+
+
 ## [2.6.8](https://github.com/codesandbox/sandpack/compare/v2.6.7...v2.6.8) (2023-06-20)
 
 
