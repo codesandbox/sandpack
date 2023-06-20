@@ -4,7 +4,6 @@
     "sandpack-react"
   ],
   "npmClient": "yarn",
-  "useWorkspaces": true,
   "command": {
     "version": {
       "createRelease": "github",
