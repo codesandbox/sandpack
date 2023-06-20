@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.8](https://github.com/codesandbox/sandpack/compare/v2.6.7...v2.6.8) (2023-06-20)
+
+
+### Bug Fixes
+
+* **client:** hard reload on module removal ([d5dfdd1](https://github.com/codesandbox/sandpack/commit/d5dfdd126d1061d63e1f1b086f30cbe7077ca30b))
+
+
+
+
+
 ## [2.6.7](https://github.com/codesandbox/sandpack/compare/v2.6.6...v2.6.7) (2023-05-26)
 
 
