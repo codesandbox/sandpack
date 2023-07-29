@@ -34,7 +34,8 @@
       "name": "Build: client",
       "command": "yarn workspace @codesandbox/sandpack-client build",
       "restartOn": {
-        "branch": true
+        "branch": true,
+        "resume": false
       }
     },
     "build:themes": {
@@ -64,13 +65,21 @@
     },
     "dev:website-theme": {
       "name": "Dev: Website theme",
-      "command": "yarn dev:theme"
+      "command": "yarn dev:theme",
+      "preview": {
+        "port": 3002
+      }
     },
     "yarn install": {
       "name": "Install",
       "command": "yarn install",
       "restartOn": {
-        "files": ["yarn.lock", "**/package.json"]
+        "files": [
+          "yarn.lock",
+          "**/package.json"
+        ],
+        "branch": false,
+        "resume": false
       }
     }
   }
