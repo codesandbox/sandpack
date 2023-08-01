@@ -4,6 +4,7 @@ import { css } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 import { useClassNames } from "../../utils/classNames";
 import { DirectoryIconOpen, DirectoryIconClosed, FileIcon } from "../icons";
+import { DynamicFileIcon } from "../icons/FileIconComponents";
 
 const explorerClassName = css({
   borderRadius: "0",
@@ -50,8 +51,10 @@ export const File: React.FC<Props> = ({
 
   const fileName = path.split("/").filter(Boolean).pop();
 
-  const getIcon = (): JSX.Element => {
-    if (selectFile) return <FileIcon />;
+  const getIcon = (fileName: string): JSX.Element => {
+    if (selectFile) {
+      return <DynamicFileIcon fileName={fileName} />;
+    }
 
     return isDirOpen ? <DirectoryIconOpen /> : <DirectoryIconClosed />;
   };
@@ -69,7 +72,7 @@ export const File: React.FC<Props> = ({
       title={fileName}
       type="button"
     >
-      {getIcon()}
+      {getIcon(fileName as string)}
       <span>{fileName}</span>
     </button>
   );
