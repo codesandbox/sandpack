@@ -235,3 +235,31 @@ export const MaxMessageCount = () => {
     </>
   );
 };
+
+export const StaticTemplateConsole = () => {
+  const indexHtml = `
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script>function logMsg() { console.log('Hello Sandpack!'); }</script>
+</head>
+
+<body>
+  <h1>Hello Sandpack!</h1>
+  <button onclick="logMsg()">Log Message</button>
+</body>
+
+</html>
+`.trim();
+
+  return (
+    <SandpackProvider template="static" files={{ "/index.html": indexHtml }}>
+      <SandpackLayout>
+        <SandpackCodeEditor />
+        <SandpackPreview />
+        <SandpackConsole />
+      </SandpackLayout>
+    </SandpackProvider>
+  );
+};

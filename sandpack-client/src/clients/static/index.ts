@@ -15,10 +15,15 @@ import type { SandpackNodeMessage } from "../node/types";
 
 import { insertHtmlAfterRegex, readBuffer, validateHtml } from "./utils";
 
+// get the bundled file, which contains all dependencies
+// @ts-ignore
+import consoleHook from "../../inject-scripts/dist/consoleHook.js";
+
 export class SandpackStatic extends SandpackClient {
   private emitter: EventEmitter;
   private previewController: PreviewController;
   private files: Map<string, string | Uint8Array> = new Map();
+  private registeredConsoleCount = 0;
 
   public iframe!: HTMLIFrameElement;
   public selector!: string;
@@ -52,6 +57,12 @@ export class SandpackStatic extends SandpackClient {
               content,
               options.externalResources
             );
+
+            if (this.registeredConsoleCount > 0) {
+              content = this.injectScriptIntoHead(content, {
+                script: consoleHook,
+              });
+            }
           } catch (err) {
             console.error("Runtime injection failed", err);
           }
@@ -80,6 +91,11 @@ export class SandpackStatic extends SandpackClient {
         "allow",
         "accelerometer; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; clipboard-write;"
       );
+    }
+
+    this.eventListener = this.eventListener.bind(this);
+    if (typeof window !== "undefined") {
+      window.addEventListener("message", this.eventListener);
     }
 
     // Dispatch very first compile action
@@ -139,6 +155,21 @@ export class SandpackStatic extends SandpackClient {
     return this.injectContentIntoHead(content, tagsToInsert);
   }
 
+  private injectScriptIntoHead(
+    content: FileContent,
+    opts: { script: string; scope?: Record<string, any> }
+  ): FileContent {
+    const { script, scope = {} } = opts;
+    const scriptToInsert = `
+    <script>
+      const scope = ${JSON.stringify(scope)};
+      ${script}
+    </script>
+    `.trim();
+
+    return this.injectContentIntoHead(content, scriptToInsert);
+  }
+
   public updateSandbox(
     setup = this.sandboxSetup,
     _isInitializationCompile?: boolean
@@ -172,6 +203,21 @@ export class SandpackStatic extends SandpackClient {
     });
   }
 
+  // Handles message windows coming from iframes
+  private eventListener(evt: MessageEvent): void {
+    // skip events originating from different iframes
+    if (evt.source !== this.iframe.contentWindow) {
+      return;
+    }
+
+    const message = evt.data;
+    if (!message.codesandbox) {
+      return;
+    }
+
+    this.dispatch(message);
+  }
+
   /**
    * Bundler communication
    */
@@ -179,6 +225,14 @@ export class SandpackStatic extends SandpackClient {
     switch (message.type) {
       case "compile":
         this.compile(message.modules);
+        break;
+
+      case "console/register":
+        this.registeredConsoleCount += 1;
+        break;
+
+      case "console/unregister":
+        this.registeredConsoleCount -= 1;
         break;
 
       default:
@@ -193,5 +247,8 @@ export class SandpackStatic extends SandpackClient {
 
   public destroy(): void {
     this.emitter.cleanup();
+    if (typeof window !== "undefined") {
+      window.removeEventListener("message", this.eventListener);
+    }
   }
 }
