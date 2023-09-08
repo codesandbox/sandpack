@@ -13,8 +13,6 @@ import type {
   SandpackBundlerFiles,
   SandpackError,
   UnsubscribeFunction,
-  SandpackMessageType,
-  ListenerOptions,
 } from "../../types";
 import { SandpackLogLevel } from "../../types";
 import {
@@ -267,13 +265,8 @@ export class SandpackRuntime extends SandpackClient {
     this.iframeProtocol.dispatch(message);
   }
 
-  public listen<Type extends SandpackMessageType = SandpackMessageType>(
-    listener: ListenerFunction<Type>,
-    _opts?: ListenerOptions<Type>
-  ): UnsubscribeFunction {
-    return this.iframeProtocol.channelListen(
-      listener as any as ListenerFunction
-    );
+  public listen(listener: ListenerFunction): UnsubscribeFunction {
+    return this.iframeProtocol.channelListen(listener);
   }
 
   /**

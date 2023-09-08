@@ -13,8 +13,6 @@ import type {
   ListenerFunction,
   SandboxSetup,
   UnsubscribeFunction,
-  SandpackMessageType,
-  ListenerOptions,
 } from "../..";
 import { nullthrows } from "../..";
 import { createError } from "../..";
@@ -436,11 +434,8 @@ export class SandpackNode extends SandpackClient {
     }
   }
 
-  public listen<Type extends SandpackMessageType = SandpackMessageType>(
-    listener: ListenerFunction<Type>,
-    _opts?: ListenerOptions<Type>
-  ): UnsubscribeFunction {
-    return this.emitter.listener(listener as any as ListenerFunction);
+  public listen(listener: ListenerFunction): UnsubscribeFunction {
+    return this.emitter.listener(listener);
   }
 
   public destroy(): void {
