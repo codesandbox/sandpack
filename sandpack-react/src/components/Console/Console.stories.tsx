@@ -255,6 +255,7 @@ export const StaticTemplate: React.FC = () => {
 <body>
   <h1>Hello world</h1>
   <button onclick="console.log(document.querySelectorAll('button'))">Log</button>
+  <button onclick="console.log(document.querySelectorAll('button'))">Log</button>
 </body>
 
 </html>`,
