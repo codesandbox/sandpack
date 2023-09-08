@@ -269,3 +269,23 @@ export const StaticTemplate: React.FC = () => {
 export const NodeTemplate: React.FC = () => {
   return <Sandpack options={{ showConsole: true }} template="node" />;
 };
+
+export const ReactTemplate: React.FC = () => {
+  return (
+    <Sandpack
+      options={{ showConsole: true }}
+      files={{
+        "App.js": `import { useState } from "react"
+export default function App() {
+    const foo = useState("")
+    console.log(foo)
+    return (
+      <>
+      </>
+    )
+}`,
+      }}
+      template="react"
+    />
+  );
+};
