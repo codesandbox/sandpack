@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { FilesMap } from "@codesandbox/nodebox";
 import type { FileContent } from "static-browser-server";
 import { PreviewController } from "static-browser-server";
@@ -8,16 +9,15 @@ import type {
   SandboxSetup,
   UnsubscribeFunction,
 } from "../..";
-import { SandpackClient } from "../base";
-import { EventEmitter } from "../event-emitter";
-import { fromBundlerFilesToFS } from "../node/client.utils";
-import type { SandpackNodeMessage } from "../node/types";
-
-import { insertHtmlAfterRegex, readBuffer, validateHtml } from "./utils";
-
 // get the bundled file, which contains all dependencies
 // @ts-ignore
 import consoleHook from "../../inject-scripts/dist/consoleHook.js";
+import { SandpackClient } from "../base";
+import { EventEmitter } from "../event-emitter";
+import { fromBundlerFilesToFS, generateRandomId } from "../node/client.utils";
+import type { SandpackNodeMessage } from "../node/types";
+
+import { insertHtmlAfterRegex, readBuffer, validateHtml } from "./utils";
 
 export class SandpackStatic extends SandpackClient {
   private emitter: EventEmitter;
@@ -56,6 +56,7 @@ export class SandpackStatic extends SandpackClient {
             );
             content = this.injectScriptIntoHead(content, {
               script: consoleHook,
+              scope: { channelId: generateRandomId() },
             });
           } catch (err) {
             console.error("Runtime injection failed", err);
@@ -151,7 +152,11 @@ export class SandpackStatic extends SandpackClient {
 
   private injectScriptIntoHead(
     content: FileContent,
-    opts: { script: string; scope?: Record<string, any> }
+    opts: {
+      script: string;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      scope?: { channelId: string } & Record<string, any>;
+    }
   ): FileContent {
     const { script, scope = {} } = opts;
     const scriptToInsert = `

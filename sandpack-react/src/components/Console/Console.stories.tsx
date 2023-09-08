@@ -235,3 +235,36 @@ export const MaxMessageCount = () => {
     </>
   );
 };
+
+export const StaticTemplate: React.FC = () => {
+  return (
+    <Sandpack
+      files={{
+        "index.html": `<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Parcel Sandbox</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script>
+    console.log("fooo")
+  </script>
+</head>
+
+<body>
+  <h1>Hello world</h1>
+  <button onclick="console.log(document.querySelectorAll('button'))">Log</button>
+</body>
+
+</html>`,
+      }}
+      options={{ showConsole: true }}
+      template="static"
+    />
+  );
+};
+
+export const NodeTemplate: React.FC = () => {
+  return <Sandpack options={{ showConsole: true }} template="node" />;
+};
