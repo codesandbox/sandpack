@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/codesandbox/sandpack/compare/v2.6.9...v2.7.0) (2023-09-11)
+
+
+### Features
+
+* add console hook to static template ([#909](https://github.com/codesandbox/sandpack/issues/909)) ([1a473e3](https://github.com/codesandbox/sandpack/commit/1a473e3fa2a4d6581d8a1c4e30586588f5a9ee9b))
+
+
+
+
+
 ## [2.6.9](https://github.com/codesandbox/sandpack/compare/v2.6.8...v2.6.9) (2023-06-20)
 
 
