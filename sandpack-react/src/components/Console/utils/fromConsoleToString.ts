@@ -7,6 +7,7 @@
 
 import {
   TRANSFORMED_TYPE_KEY,
+  TRANSFORMED_TYPE_KEY_ALTERNATE,
   MAX_NEST_LEVEL,
   MAX_KEYS,
   MAX_LENGTH_STRING,
@@ -48,6 +49,25 @@ const formatSymbols = (message: Message): any => {
     const transform = transformers[type];
 
     return transform(message.data);
+  } else if (
+    typeof message == "object" &&
+    TRANSFORMED_TYPE_KEY_ALTERNATE in message
+  ) {
+    const type = message[TRANSFORMED_TYPE_KEY_ALTERNATE] as TransformsTypes;
+    const transform = transformers[type];
+
+    return transform(message.data);
+  } else if (
+    typeof message == "object" &&
+    message.constructor?.name === "NodeList"
+  ) {
+    const NodeList = {};
+    Object.entries(message).forEach(([key, value]) => {
+      // @ts-ignore
+      NodeList[key] = formatSymbols(value);
+    });
+
+    return NodeList;
   }
 
   return message;
@@ -161,6 +181,15 @@ export const fromConsoleToString = (
           const newMessage = references[output[CIRCULAR_REF_KEY]];
 
           return fromConsoleToString(newMessage, references, level + 1);
+        }
+
+        if (output.constructor?.name === "NodeList") {
+          const length = output.length;
+          const nodes = new Array(length).fill(null).map((_, index) => {
+            return fromConsoleToString(output[index], references);
+          });
+
+          return `NodeList(${output.length})[${nodes}]`;
         }
 
         return objectToString(output, references, level + 1);

@@ -40,6 +40,73 @@ const cases: Array<[Message, string]> = [
     { constructor: { name: "CustomThing" } },
     'CustomThing { constructor: { name: "CustomThing" } }',
   ],
+  [
+    {
+      "0": {
+        "#@t": "HTMLElement",
+        data: {
+          tagName: "button",
+          attributes: {},
+          innerHTML: "Test",
+        },
+      },
+      "1": {
+        "#@t": "HTMLElement",
+        data: {
+          tagName: "button",
+          attributes: {
+            onclick: "console.log(document.querySelectorAll('button'))",
+          },
+          innerHTML: "Log",
+        },
+      },
+      entries: {
+        "#@t": "Function",
+        data: {
+          name: "entries",
+          body: "",
+          proto: "Function",
+        },
+      },
+      keys: {
+        "#@t": "Function",
+        data: {
+          name: "keys",
+          body: "",
+          proto: "Function",
+        },
+      },
+      values: {
+        "#@t": "Function",
+        data: {
+          name: "values",
+          body: "",
+          proto: "Function",
+        },
+      },
+      forEach: {
+        "#@t": "Function",
+        data: {
+          name: "forEach",
+          body: "",
+          proto: "Function",
+        },
+      },
+      length: 2,
+      item: {
+        "#@t": "Function",
+        data: {
+          name: "item",
+          body: "",
+          proto: "Function",
+        },
+      },
+      constructor: {
+        name: "NodeList",
+      },
+    },
+    `NodeList(2)[<button>Test</button>,<button onclick="console.log(document.querySelectorAll('button'))">Log</button>]`,
+  ],
 
   /**
    * Function

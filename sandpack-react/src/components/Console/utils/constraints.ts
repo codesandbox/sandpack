@@ -7,6 +7,7 @@ export const CLEAR_LOG = {
 };
 
 export const TRANSFORMED_TYPE_KEY = "@t";
+export const TRANSFORMED_TYPE_KEY_ALTERNATE = "#@t";
 export const CIRCULAR_REF_KEY = "@r";
 
 export const MAX_LENGTH_STRING = 10000;

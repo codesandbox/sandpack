@@ -40,14 +40,14 @@ type Token =
   | { type: TokenType.OR | TokenType.AND | TokenType.PIPE }
   | {
       type: TokenType.Command | TokenType.Argument | TokenType.String;
-      value: string;
+      value?: string;
     }
   | {
       type: TokenType.EnvVar;
       value: Record<string, string>;
     };
 
-const operators = new Map<string, { type: TokenType }>([
+const operators = new Map<string, Token>([
   ["&&", { type: TokenType.AND }],
   ["||", { type: TokenType.OR }],
   ["|", { type: TokenType.PIPE }],

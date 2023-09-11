@@ -12,7 +12,6 @@ export const ConsoleList: React.FC<{ data: SandpackConsoleData }> = ({
   data,
 }) => {
   const classNames = useClassNames();
-
   return (
     <>
       {data.map(({ data, id, method }, logIndex, references) => {
