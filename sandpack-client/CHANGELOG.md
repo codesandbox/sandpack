@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.1](https://github.com/codesandbox/sandpack/compare/v2.7.0...v2.7.1) (2023-09-13)
+
+
+### Bug Fixes
+
+* **node:** fix issue with undefined startRoute in iframePreviewUrl ([#1002](https://github.com/codesandbox/sandpack/issues/1002)) ([c457a53](https://github.com/codesandbox/sandpack/commit/c457a5330d4c0eb9bf4bf35ab4af7c9171a5680e))
+
+
+
+
+
 # [2.7.0](https://github.com/codesandbox/sandpack/compare/v2.6.9...v2.7.0) (2023-09-11)
 
 
