@@ -20,6 +20,7 @@ const logos = {
   "nextjs-dark": "/docs/logos/next-dark.png",
   "vite-react": "/docs/logos/react.svg",
   "vite-vue": "/docs/logos/vue.svg",
+  "vite-preact": "/docs/logos/preact.svg",
   vite: "/docs/logos/vite.png",
   "vite-svelte": "/docs/logos/svelte.png",
   "astro-light": "/docs/logos/astro-light.svg",
