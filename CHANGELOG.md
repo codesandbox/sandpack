@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/codesandbox/sandpack/compare/v2.7.1...v2.8.0) (2023-09-26)
+
+
+### Features
+
+* add vite-preact and vite-preact-ts templates ([#1000](https://github.com/codesandbox/sandpack/issues/1000)) ([8789aa9](https://github.com/codesandbox/sandpack/commit/8789aa9b3c5ee4544e41e9ff1ae9e858bdcf85c9))
+
+
+
+
+
 ## [2.7.1](https://github.com/codesandbox/sandpack/compare/v2.7.0...v2.7.1) (2023-09-13)
 
 
