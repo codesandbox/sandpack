@@ -117,18 +117,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup | Ensure registry access
-        run: npm whoami
-
       - name: Setup | Node.js
         uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
-
-      - name: Setup | Configure git user
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
       - name: Install dependencies and cache
         uses: bahmutov/npm-install@v1
