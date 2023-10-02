@@ -15,11 +15,7 @@ npm i @codesandbox/sandpack-react
 
 {" "}
 
-<Tab>
-```bash 
-yarn add @codesandbox/sandpack-react 
-```
-</Tab>
+<Tab>```bash yarn add @codesandbox/sandpack-react ```</Tab>
 
   <Tab>
 ```bash
@@ -42,6 +38,50 @@ export default function App() {
 }
 `}
 </CodeBlock>
+
+## CDN
+
+To use Sandpack with CDN, simply include the Sandpack tag in your HTML file and specify the CDN imports inluding Sandpack and its dependencies.
+
+<br />
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.2.0",
+          "react-dom": "https://esm.sh/react-dom@18.2.0",
+          "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+          "@codesandbox/sandpack-react": "https://esm.sh/@codesandbox/sandpack-react@2.8.0"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import React from "react";
+      import { createRoot } from "react-dom/client";
+      import { Sandpack } from "@codesandbox/sandpack-react";
+
+      const root = createRoot(document.getElementById("root"));
+      const sandpackComponent = React.createElement(
+        Sandpack,
+        { template: "react" },
+        null
+      );
+      root.render(sandpackComponent);
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+```
 
 ## Next steps
 
