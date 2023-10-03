@@ -142,5 +142,5 @@ jobs:
           yarn workspace @codesandbox/sandpack-react build:publish
           yarn workspace @codesandbox/sandpack-themes build:publish
 
-      - name: Release | Lerna Publish
-        run: lerna publish from-package --yes
+      - name: Release | Publish
+        run: cd sandpack-client && npm publish && cd ../sandpack-react && npm publish && cd ../sandpack-themes && npm publish
