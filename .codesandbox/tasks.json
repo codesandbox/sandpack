@@ -34,7 +34,8 @@
       "name": "Build: client",
       "command": "yarn workspace @codesandbox/sandpack-client build",
       "restartOn": {
-        "branch": true
+        "branch": true,
+        "resume": false
       }
     },
     "build:themes": {
@@ -70,7 +71,12 @@
       "name": "Install",
       "command": "yarn install",
       "restartOn": {
-        "files": ["yarn.lock", "**/package.json"]
+        "files": [
+          "yarn.lock",
+          "**/package.json"
+        ],
+        "branch": false,
+        "resume": false
       }
     }
   }
