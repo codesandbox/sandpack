@@ -112,8 +112,8 @@ jobs:
           # pulls all commits (needed for lerna / semantic release to correctly version)
           fetch-depth: "0"
 
-      - name: Setup | Authenticate with Registry
-        run: echo @codesandbox:registry=https://npm.pkg.github.com\\n//npm.pkg.github.com/:_authToken=${GH_TOKEN} > .npmrc
+      - name: Setup GitHub npm registry
+        run: echo -e "@codesandbox:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${GH_TOKEN}" > .npmrc
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -143,4 +143,7 @@ jobs:
           yarn workspace @codesandbox/sandpack-themes build:publish
 
       - name: Release | Publish
-        run: cd sandpack-client && npm publish && cd ../sandpack-react && npm publish && cd ../sandpack-themes && npm publish
+        run: |
+          cd sandpack-client && npm publish --registry=https://npm.pkg.github.com && 
+          cd ../sandpack-react && npm publish --registry=https://npm.pkg.github.com && 
+          cd ../sandpack-themes && npm publish --registry=https://npm.pkg.github.com
