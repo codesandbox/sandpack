@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/codesandbox/sandpack/compare/v2.8.0...v2.9.0) (2023-10-06)
+
+
+### Features
+
+* add sandbox-id prop to compile ([#1015](https://github.com/codesandbox/sandpack/issues/1015)) ([600b984](https://github.com/codesandbox/sandpack/commit/600b984d4dccaefc36e87d41a56bbd4cb9bb434f))
+
+
+
+
+
 # [2.8.0](https://github.com/codesandbox/sandpack/compare/v2.7.1...v2.8.0) (2023-09-26)
 
 
