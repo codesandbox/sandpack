@@ -431,6 +431,7 @@ interface SandpackRootProps<
   customSetup?: SandpackSetup;
   theme?: SandpackThemeProp;
   teamId?: string;
+  sandboxId?: string;
 }
 
 export interface SandpackInternalOptions<

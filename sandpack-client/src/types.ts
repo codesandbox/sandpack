@@ -61,6 +61,11 @@ export interface ClientOptions {
   customNpmRegistries?: NpmRegistry[];
 
   /**
+   * CodeSandbox sandbox id: used internally by codesandbox
+   */
+  sandboxId?: string;
+
+  /**
    * CodeSandbox team id: with this information, bundler can connect to CodeSandbox
    * and unlock a few capabilities
    */

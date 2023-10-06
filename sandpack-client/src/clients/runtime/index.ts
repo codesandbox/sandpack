@@ -250,6 +250,7 @@ export class SandpackRuntime extends SandpackClient {
       logLevel: this.options.logLevel ?? SandpackLogLevel.Info,
       customNpmRegistries: this.options.customNpmRegistries,
       teamId: this.options.teamId,
+      sandboxId: this.options.sandboxId,
     });
   }
 
