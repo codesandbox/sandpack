@@ -69,7 +69,7 @@ type UseClient = (
 ) => [SandpackConfigState, UseClientOperations];
 
 export const useClient: UseClient = (
-  { options, customSetup, teamId },
+  { options, customSetup, teamId, sandboxId },
   filesState
 ) => {
   options ??= {};
@@ -165,7 +165,8 @@ export const useClient: UseClient = (
           showLoadingScreen: false,
           reactDevTools: state.reactDevTools,
           customNpmRegistries: customSetup?.npmRegistries,
-          teamId: teamId,
+          teamId,
+          sandboxId,
         }
       );
 

@@ -79,6 +79,7 @@ export type SandpackRuntimeMessage = BaseSandpackMessage &
         logLevel?: SandpackLogLevel;
         customNpmRegistries?: NpmRegistry[];
         teamId?: string;
+        sandboxId?: string;
       }
     | {
         type: "refresh";
