@@ -158,7 +158,7 @@ export default function Home() {
 
               <p>
                 <a
-                  href="https://sandpack.codesandbox.io/docs/community#contribution-guide"
+                  href="https://sandpack.codesandbox.io/docs/resources/community#contribution-guide"
                   rel="noreferrer"
                   target="_blank"
                 >
