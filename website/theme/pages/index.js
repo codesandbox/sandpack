@@ -201,17 +201,17 @@ function Basic({ simpleColors, mode, updateColor, updateMode }) {
         <PickerItem
           color={simpleColors.primary}
           label="Primary"
-          onChange={(color) => updateColor("primary", color.hex)}
+          onChange={(color) => updateColor("primary", color)}
         />
         <PickerItem
           color={simpleColors.secondary}
           label="Secondary"
-          onChange={(color) => updateColor("secondary", color.hex)}
+          onChange={(color) => updateColor("secondary", color)}
         />
         <PickerItem
           color={simpleColors.tertiary}
           label="Tertiary"
-          onChange={(color) => updateColor("tertiary", color.hex)}
+          onChange={(color) => updateColor("tertiary", color)}
         />
       </PickerContainer>
     </>
@@ -263,7 +263,7 @@ function Advanced({ theme, updateTheme }) {
                     key={c + i}
                     color={controls[area][c]}
                     label={c}
-                    onChange={(color) => updateTheme(`${area}.${c}`, color.hex)}
+                    onChange={(color) => updateTheme(`${area}.${c}`, color)}
                     advanced
                   />
                 );

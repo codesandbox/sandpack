@@ -16,7 +16,12 @@
     "next": "^12.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-color": "^2.19.3",
+    "@react-aria/color": "^3.0.0-beta.20",
+    "@react-aria/focus": "^3.12.0",
+    "@react-aria/i18n": "^3.7.1",
+    "react-aria-components": "^1.0.0-alpha.3",
+    "@react-aria/visually-hidden": "^3.8.0",
+    "@react-stately/color": "^3.3.1",
     "sass": "^1.43.4",
     "use-clipboard-copy": "^0.2.0",
     "values.js": "^2.0.0"
