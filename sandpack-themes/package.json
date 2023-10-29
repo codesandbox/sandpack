@@ -22,7 +22,7 @@
     "typecheck": "tsc"
   },
   "devDependencies": {
-    "typescript": "4.0.3"
+    "typescript": "^5.2.2"
   },
   "files": [
     "dist",
