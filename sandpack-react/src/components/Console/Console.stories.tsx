@@ -273,7 +273,6 @@ export const NodeTemplate: React.FC = () => {
 export const ReactTemplate: React.FC = () => {
   return (
     <Sandpack
-      options={{ showConsole: true }}
       files={{
         "App.js": `import { useState } from "react"
 export default function App() {
@@ -285,6 +284,7 @@ export default function App() {
     )
 }`,
       }}
+      options={{ showConsole: true }}
       template="react"
     />
   );

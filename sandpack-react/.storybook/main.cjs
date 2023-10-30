@@ -1,4 +1,5 @@
 const { dirname, join } = require("path");
+const { mergeConfig } = require("vite");
 
 module.exports = {
   stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
