@@ -15,6 +15,14 @@ module.exports = {
   features: {
     storyStoreV7: false, // 👈 Opt out of on-demand story loading
   },
+
+  async viteFinal(config, { configType }) {
+    return mergeConfig(config, {
+      define: {
+        "process.env.SANDPACK_UNSTYLED_COMPONENTS": "false",
+      },
+    });
+  },
 };
 
 function getAbsolutePath(value) {
