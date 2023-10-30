@@ -6,7 +6,7 @@ import { useServerInsertedHTML } from "next/navigation";
 /**
  * Ensures CSSinJS styles are loaded server side.
  */
-export const SandPackCSS = () => {
+export const SandpackCSS = () => {
   useServerInsertedHTML(() => {
     return (
       <style

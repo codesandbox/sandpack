@@ -50,10 +50,8 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
     }
 
     return (
-      <NextLink href={href} passHref>
-        <a ref={forwardedRef} {...props}>
-          {children}
-        </a>
+      <NextLink href={href} ref={forwardedRef} {...props}>
+        {children}
       </NextLink>
     );
   }
