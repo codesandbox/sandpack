@@ -48,11 +48,10 @@
     "@typescript-eslint/parser": "^6.9.0",
     "babel-eslint": "^10.0.0",
     "babel-jest": "^27.4.5",
-    "eslint": "^7.5.0",
+    "eslint": "8.38.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-react-app": "^6.0.0",
-    "eslint-plugin-flowtype": "^5.2.0",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.8",
@@ -69,5 +68,8 @@
   "lint-staged": {
     "*": "prettier -u --write",
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
+  },
+  "dependencies": {
+    "eslint-plugin-flowtype": "^8.0.3"
   }
 }
