@@ -13,12 +13,12 @@ jobs:
 
     steps:
       - name: Setup | Clone codesandbox-client
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: codesandbox/codesandbox-client
 
       - name: Setup | Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: "16.0.0"
 
@@ -34,7 +34,7 @@ jobs:
         run: yarn build:sandpack
 
       - name: Archive bundler artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: bundler
           path: www/**/*.*
@@ -50,7 +50,7 @@ jobs:
 
     steps:
       - name: Setup | Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           # pulls all commits (needed for lerna / semantic release to correctly version)
           fetch-depth: "0"
@@ -64,7 +64,7 @@ jobs:
         run: npm whoami
 
       - name: Setup | Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
 
@@ -79,7 +79,7 @@ jobs:
           useLockFile: true
 
       - name: Prepare | Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: bundler
           path: bundler
@@ -107,7 +107,7 @@ jobs:
 
     steps:
       - name: Setup | Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           # pulls all commits (needed for lerna / semantic release to correctly version)
           fetch-depth: "0"
@@ -118,7 +118,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup | Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
 
@@ -128,7 +128,7 @@ jobs:
           useLockFile: true
 
       - name: Prepare | Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: bundler
           path: bundler
