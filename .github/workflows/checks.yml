@@ -11,10 +11,10 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Setup | Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: Setup | Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: "yarn"
@@ -31,7 +31,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Setup | Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: Setup | Node.js
         uses: actions/setup-node@v2
@@ -47,14 +47,14 @@ jobs:
 
   format:
     name: Format
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Setup | Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: Setup | Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: "yarn"
@@ -67,14 +67,14 @@ jobs:
 
   typecheck:
     name: Typecheck
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Setup | Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: Setup | Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: "yarn"
