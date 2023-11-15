@@ -8,6 +8,7 @@ import { INJECT_MESSAGE_TYPE } from "@codesandbox/nodebox";
 import consoleHook from "../../../inject-scripts/dist/consoleHook.js";
 
 import { setupHistoryListeners } from "./historyListener";
+import { watchResize } from "./resize.js";
 
 const scripts = [
   { code: setupHistoryListeners.toString(), id: "historyListener" },
@@ -15,6 +16,7 @@ const scripts = [
     code: "function consoleHook({ scope }) {" + consoleHook + "\n};",
     id: "consoleHook",
   },
+  { code: watchResize.toString(), id: "watchResize" },
 ];
 
 export const injectScriptToIframe = (
