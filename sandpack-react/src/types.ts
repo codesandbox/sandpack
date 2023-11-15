@@ -388,7 +388,7 @@ export type SandpackThemeProp =
  */
 
 export type TemplateFiles<Name extends SandpackPredefinedTemplate> =
-  keyof (typeof SANDBOX_TEMPLATES)[Name]["files"];
+  keyof typeof SANDBOX_TEMPLATES[Name]["files"];
 
 export interface SandpackInternal {
   <
@@ -618,7 +618,7 @@ export type SandpackStatus =
 export type EditorState = "pristine" | "dirty";
 
 export interface SandboxTemplate {
-  files: SandpackFiles;
+  files: SandpackBundlerFiles;
   dependencies: Record<string, string>;
   devDependencies?: Record<string, string>;
   entry?: string;

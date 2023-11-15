@@ -44,7 +44,7 @@ export const getSandpackStateFromProps = (
   });
 
   // visibleFiles and activeFile override the setup flags
-  let visibleFiles = normalizePath(props.options?.visibleFiles ?? []);
+  let visibleFiles: string[] = normalizePath(props.options?.visibleFiles ?? []);
   let activeFile = props.options?.activeFile
     ? resolveFile(props.options?.activeFile, projectSetup.files)
     : undefined;
