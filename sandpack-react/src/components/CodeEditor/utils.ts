@@ -223,8 +223,7 @@ export const getCodeMirrorLanguage = (
   return options[extension as keyof typeof options];
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const useCombinedRefs = <T extends any>(
+export const useCombinedRefs = <T>(
   ...refs: Array<React.Ref<T>>
 ): React.Ref<T> =>
   React.useCallback(

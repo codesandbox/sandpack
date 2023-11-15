@@ -37,6 +37,8 @@ const HighlightPreview: React.FC<{ source: string; alt: string }> = ({
 
         img: {
           transition: "$default",
+          width: "100%",
+          height: "auto",
         },
       }}
     >

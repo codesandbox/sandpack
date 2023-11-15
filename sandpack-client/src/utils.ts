@@ -192,7 +192,7 @@ ${errorInCode}`;
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const normalizePath = <R extends any>(path: R): R => {
+export const normalizePath = <R>(path: R): R => {
   if (typeof path === "string") {
     return (path.startsWith("/") ? path : `/${path}`) as R;
   }

@@ -88,7 +88,7 @@ render(<App />, root);
             preview: "vite preview",
           },
           dependencies: {
-            "preact": "^10.16.0"
+            preact: "^10.16.0",
           },
           devDependencies: {
             "@preact/preset-vite": "^2.5.0",

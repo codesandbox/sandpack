@@ -4,8 +4,8 @@ import {
   SandpackLayout,
 } from "@codesandbox/sandpack-react";
 import * as themes from "@codesandbox/sandpack-themes";
-import { useTheme } from "next-themes";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 
 import { LayoutList, LAYOUTS } from "./LayoutList";
@@ -73,20 +73,24 @@ const App = () => {
         applied to your project, such as colors, fonts, and layout. This allows
         you to easily customize the look and feel of your project, without
         having to manually edit the CSS and HTML.{" "}
-        <Link href="/getting-started/themes" target="_blank" passHref>
-          <a className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under]">
-            More about custom themes {"->"}
-          </a>
+        <Link
+          className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under]"
+          href="/getting-started/themes"
+          target="_blank"
+        >
+          More about custom themes {"->"}
         </Link>
       </p>
 
       <ThemesList current={theme} setCurrent={setTheme} />
 
       <p className="nx-mt-6 nx-leading-7 first:nx-mt-0">
-        <Link href="#preview" target="_blank" passHref>
-          <a className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under] nx-mr-2">
-            See preview {"↓"}
-          </a>
+        <Link
+          className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under] nx-mr-2"
+          href="#preview"
+          target="_blank"
+        >
+          See preview {"↓"}
         </Link>
       </p>
 
@@ -99,19 +103,23 @@ const App = () => {
         basic HTML, CSS, and JavaScript files. This allows you to quickly set up
         a project with a basic structure and styling, without having to start
         from scratch.{" "}
-        <Link href="/getting-started/usage" target="_blank" passHref>
-          <a className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under]">
-            More about files and templates {"->"}
-          </a>
+        <Link
+          className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under]"
+          href="/getting-started/usage"
+          target="_blank"
+        >
+          More about files and templates {"->"}
         </Link>
       </p>
       <TemplatesList current={template} setCurrent={setTemplate} />
 
       <p className="nx-mt-6 nx-leading-7 first:nx-mt-0">
-        <Link href="#preview" target="_blank" passHref>
-          <a className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under] nx-mr-2">
-            See preview {"↓"}
-          </a>
+        <Link
+          className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under] nx-mr-2"
+          href="#preview"
+          target="_blank"
+        >
+          See preview {"↓"}
         </Link>
       </p>
 
@@ -124,19 +132,23 @@ const App = () => {
         positioning of text and images. This allows you to create a visually
         appealing and user-friendly design for your project, and can include
         elements such as grids and columns.{" "}
-        <Link href="/advanced-usage/components" target="_blank" passHref>
-          <a className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under]">
-            More about layout and components {"->"}
-          </a>
+        <Link
+          className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under]"
+          href="/advanced-usage/components"
+          target="_blank"
+        >
+          More about layout and components {"->"}
         </Link>
       </p>
       <LayoutList current={layout} setCurrent={setLayout} list />
 
       <p className="nx-mt-6 nx-leading-7 first:nx-mt-0">
-        <Link href="#preview" target="_blank" passHref>
-          <a className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under] nx-mr-2">
-            See preview {"↓"}
-          </a>
+        <Link
+          className="nx-text-primary-500 nx-underline nx-decoration-from-font [text-underline-position:under] nx-mr-2"
+          href="#preview"
+          target="_blank"
+        >
+          See preview {"↓"}
         </Link>
       </p>
 

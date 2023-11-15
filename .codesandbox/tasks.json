@@ -30,6 +30,10 @@
       "command": "yarn build",
       "runAtStart": true
     },
+    "ts": {
+      "name": "Typecheck",
+      "command": "yarn typecheck"
+    },
     "build:client": {
       "name": "Build: client",
       "command": "yarn workspace @codesandbox/sandpack-client build",
@@ -71,10 +75,7 @@
       "name": "Install",
       "command": "yarn install",
       "restartOn": {
-        "files": [
-          "yarn.lock",
-          "**/package.json"
-        ],
+        "files": ["yarn.lock", "**/package.json"],
         "branch": false,
         "resume": false
       }

@@ -1,4 +1,4 @@
-import { SandPackCSS } from "@/components/sandpack-styles";
+import { SandpackCSS } from "@/components/sandpack-styles";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <SandPackCSS />
+        <SandpackCSS />
       </head>
       <body>{children}</body>
     </html>

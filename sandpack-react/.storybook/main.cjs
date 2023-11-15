@@ -1,4 +1,5 @@
 const { dirname, join } = require("path");
+const { mergeConfig } = require("vite");
 
 module.exports = {
   stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
@@ -14,6 +15,14 @@ module.exports = {
 
   features: {
     storyStoreV7: false, // 👈 Opt out of on-demand story loading
+  },
+
+  async viteFinal(config, { configType }) {
+    return mergeConfig(config, {
+      define: {
+        "process.env.SANDPACK_UNSTYLED_COMPONENTS": "false",
+      },
+    });
   },
 };
 
