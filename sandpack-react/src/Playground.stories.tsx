@@ -4,14 +4,12 @@ import React from "react";
 
 import { Sandpack } from "./";
 
+export default {
+  title: "Intro/Playground",
+};
+
 export const Basic: React.FC = () => {
-  return (
-    <Sandpack
-      options={{ classes: { "sp-layout": "fooo" } }}
-      template="nextjs"
-      theme={themes.sandpackDark}
-    />
-  );
+  return <Sandpack template="vite" theme={themes.sandpackDark} />;
 };
 
 export const EslintBasic = () => (
