@@ -11,6 +11,7 @@ import type {
   SandpackErrorMessage,
   SandpackLogLevel,
   SandpackMessageConsoleMethods,
+  ExternalScriptResource
 } from "../..";
 
 export type SandpackRuntimeMessage = BaseSandpackMessage &
@@ -66,7 +67,7 @@ export type SandpackRuntimeMessage = BaseSandpackMessage &
         version: number;
         isInitializationCompile?: boolean;
         modules: Modules;
-        externalResources: string[];
+        externalResources?: Array<string | ExternalScriptResource>;
         hasFileResolver: boolean;
         disableDependencyPreprocessing?: boolean;
         template?: string | ITemplate;

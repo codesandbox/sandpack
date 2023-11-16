@@ -12,6 +12,7 @@ import type {
   UnsubscribeFunction,
   SandpackLogLevel,
   NpmRegistry,
+  ExternalScriptResource
 } from "@codesandbox/sandpack-client";
 import type React from "react";
 
@@ -171,7 +172,8 @@ export interface SandpackOptions {
   startRoute?: string;
   skipEval?: boolean;
   fileResolver?: FileResolver;
-  externalResources?: string[];
+  
+  externalResources?: Array<string | ExternalScriptResource>;
 }
 
 /**
@@ -460,7 +462,7 @@ export interface SandpackInternalOptions<
   startRoute?: string;
   skipEval?: boolean;
   fileResolver?: FileResolver;
-  externalResources?: string[];
+  externalResources?: Array<string | ExternalScriptResource>;
   classes?: Record<string, string>;
 }
 
