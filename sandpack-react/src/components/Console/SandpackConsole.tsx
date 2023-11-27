@@ -22,6 +22,8 @@ interface SandpackConsoleProps {
   showHeader?: boolean;
   showSyntaxError?: boolean;
   showSetupProgress?: boolean;
+  showRestartButton?: boolean;
+  showResetConsoleButton?: boolean;
   maxMessageCount?: number;
   onLogsChange?: (logs: SandpackConsoleData) => void;
   resetOnPreviewRestart?: boolean;
@@ -51,6 +53,8 @@ export const SandpackConsole = React.forwardRef<
       onLogsChange,
       className,
       showSetupProgress = false,
+      showResetConsoleButton = true,
+      showRestartButton = true,
       resetOnPreviewRestart = false,
       actionsChildren = <></>,
       standalone = false,
@@ -166,7 +170,7 @@ export const SandpackConsole = React.forwardRef<
         >
           {actionsChildren}
 
-          {isServerTab && (
+          {showRestartButton && isServerTab && (
             <RoundedButton
               onClick={(): void => {
                 restart();
@@ -178,17 +182,19 @@ export const SandpackConsole = React.forwardRef<
             </RoundedButton>
           )}
 
-          <RoundedButton
-            onClick={(): void => {
-              if (currentTab === "client") {
-                resetConsole();
-              } else {
-                resetStdout();
-              }
-            }}
-          >
-            <CleanIcon />
-          </RoundedButton>
+          {showResetConsoleButton && (
+            <RoundedButton
+              onClick={(): void => {
+                if (currentTab === "client") {
+                  resetConsole();
+                } else {
+                  resetStdout();
+                }
+              }}
+            >
+              <CleanIcon />
+            </RoundedButton>
+          )}
         </div>
 
         {standalone && (
