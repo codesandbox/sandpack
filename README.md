@@ -8,6 +8,11 @@ Sandpack is a component toolkit for creating your own live running code editing 
 
 [![Edit in CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/github/codesandbox/sandpack)
 
+
+```sh
+npm run build
+```
+
 ## Sandpack Client
 
 This is a small foundation package that sits on top of the bundler. It is
