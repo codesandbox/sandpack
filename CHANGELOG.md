@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/codesandbox/sandpack/compare/v2.10.0...v2.11.0) (2024-01-03)
+
+### Bug Fixes
+
+- Update git user configuration ([#1051](https://github.com/codesandbox/sandpack/issues/1051)) ([7144ed4](https://github.com/codesandbox/sandpack/commit/7144ed46370c6f0b6740c4fb2be0e2a0a3781c0b))
+- Update git user settings ([#1052](https://github.com/codesandbox/sandpack/issues/1052)) ([cc88156](https://github.com/codesandbox/sandpack/commit/cc8815624a9505747ee66a8aa2c0dc46eae8f4ee))
+
+### Features
+
+- Added showResetButton prop ([#1044](https://github.com/codesandbox/sandpack/issues/1044)) ([d7c2679](https://github.com/codesandbox/sandpack/commit/d7c2679fbc61dee6d486cb6d4ec33a77a8f30589))
+- improve system color scheme support and documentation ([#1050](https://github.com/codesandbox/sandpack/issues/1050)) ([23d513c](https://github.com/codesandbox/sandpack/commit/23d513cf9f81e240053768084178ce2e850711b3))
+
 # [2.10.0](https://github.com/codesandbox/sandpack/compare/v2.9.0...v2.10.0) (2023-11-15)
 
 ### Bug Fixes
