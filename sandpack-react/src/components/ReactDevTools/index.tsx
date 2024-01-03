@@ -9,7 +9,7 @@ const devToolClassName = css({
   width: "100%",
 });
 
-type DevToolsTheme = "dark" | "light";
+type DevToolsTheme = "dark" | "light" | "auto";
 
 export const SandpackReactDevTools = ({
   clientId,

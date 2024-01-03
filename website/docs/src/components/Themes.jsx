@@ -27,13 +27,22 @@ export default function Themes() {
   };
 
   const predefinedThemes = ["auto", "dark", "light"].includes(current);
-  const codeBlock = predefinedThemes
-    ? `// Predefined theme
-    
-<Sandpack theme="${current}" />`
-    : `import { ${current} } from "@codesandbox/sandpack-themes";
+  const codeBlock = (() => {
+    if (current === "auto") {
+      return `// System color scheme (light or dark)
+      
+<Sandpack theme="${current}" />`;
+    }
 
+    if (predefinedThemes)
+      return `// Predefined theme
+    
+<Sandpack theme="${current}" />`;
+
+    return `import { ${current} } from "@codesandbox/sandpack-themes";
+    
 <Sandpack theme={${current}} />;`;
+  })();
 
   return (
     <div>

@@ -35,7 +35,7 @@ const wrapperClassName = css({
 const SandpackThemeContext = React.createContext<{
   theme: SandpackTheme;
   id: string;
-  mode: "dark" | "light";
+  mode: "dark" | "light" | "auto";
 }>({
   theme: defaultLight,
   id: "light",
@@ -51,12 +51,33 @@ const SandpackThemeProvider: React.FC<
     children?: React.ReactNode;
   }
 > = ({ theme: themeFromProps, children, className, ...props }) => {
-  const { theme, id, mode } = standardizeTheme(themeFromProps);
+  const [prefferedTheme, setPreferredTheme] = React.useState<
+    SandpackThemeProp | undefined
+  >(themeFromProps);
+  const { theme, id, mode } = standardizeTheme(prefferedTheme);
   const classNames = useClassNames();
 
   const themeClassName = React.useMemo(() => {
     return createTheme(id, standardizeStitchesTheme(theme));
   }, [theme, id]);
+
+  React.useEffect(() => {
+    if (themeFromProps !== "auto") return;
+
+    const colorSchemeChange = ({ matches }: MediaQueryListEvent) => {
+      setPreferredTheme(matches ? "dark" : "light");
+    };
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", colorSchemeChange);
+
+    return () => {
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .removeEventListener("change", colorSchemeChange);
+    };
+  }, [themeFromProps]);
 
   return (
     <SandpackThemeContext.Provider value={{ theme, id, mode }}>
