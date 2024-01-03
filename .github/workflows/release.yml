@@ -56,6 +56,7 @@ jobs:
         with:
           # pulls all commits (needed for lerna / semantic release to correctly version)
           fetch-depth: "0"
+          token: ${{ secrets.CODESANDBOT_TOKEN }}
 
       - name: Setup | Authenticate with Registry
         run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
@@ -72,8 +73,8 @@ jobs:
 
       - name: Setup | Configure git user
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git config user.name 'codesandbot[bot]'
+          git config user.email 'codesandbot[bot]@users.noreply.github.com'
 
       - name: Install dependencies and cache
         uses: bahmutov/npm-install@v1
