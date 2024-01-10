@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.1](https://github.com/codesandbox/sandpack/compare/v2.11.0...v2.11.1) (2024-01-10)
+
+### Bug Fixes
+
+- add `allow-downloads` to iframes ([#1054](https://github.com/codesandbox/sandpack/issues/1054)) ([c038e13](https://github.com/codesandbox/sandpack/commit/c038e1322bbca94ea529f7a92089ad0f605d1ba5))
+
 # [2.10.0](https://github.com/codesandbox/sandpack/compare/v2.9.0...v2.10.0) (2023-11-15)
 
 ### Features
