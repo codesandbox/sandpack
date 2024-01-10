@@ -81,7 +81,7 @@ export class SandpackStatic extends SandpackClient {
     if (!this.iframe.getAttribute("sandbox")) {
       this.iframe.setAttribute(
         "sandbox",
-        "allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+        "allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts allow-downloads allow-pointer-lock"
       );
 
       this.iframe.setAttribute(
