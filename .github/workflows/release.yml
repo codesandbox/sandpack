@@ -99,12 +99,15 @@ jobs:
       - name: Release | Lerna Publish
         run: lerna publish from-package --yes
 
+
+      # Publish to GitHub packages too
+
       - name: "GitHub packages: Setup GitHub npm registry"
         run: echo -e "@codesandbox:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${GH_TOKEN}" > .npmrc
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Release | Publish
+      - name: "GitHub packages: Publish"
         run: |
           cd sandpack-client && npm publish --registry=https://npm.pkg.github.com && 
           cd ../sandpack-react && npm publish --registry=https://npm.pkg.github.com && 
