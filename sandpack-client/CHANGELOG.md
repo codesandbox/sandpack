@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.2](https://github.com/codesandbox/sandpack/compare/v2.11.1...v2.11.2) (2024-01-11)
+
+### Bug Fixes
+
+- bump codesandbox-client and test new publish script ([#1056](https://github.com/codesandbox/sandpack/issues/1056)) ([1736185](https://github.com/codesandbox/sandpack/commit/173618538584f11426c7b2156243bc1691303696))
+
 ## [2.11.1](https://github.com/codesandbox/sandpack/compare/v2.11.0...v2.11.1) (2024-01-10)
 
 ### Bug Fixes
