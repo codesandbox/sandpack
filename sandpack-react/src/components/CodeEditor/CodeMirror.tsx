@@ -131,7 +131,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     );
 
     const classNames = useClassNames();
-    const { listen } = useSandpack();
+    const {
+      listen,
+      sandpack: { autoReload },
+    } = useSandpack();
 
     const prevExtension = React.useRef<Extension[]>([]);
     const prevExtensionKeymap = React.useRef<KeyBinding[]>([]);
@@ -319,6 +322,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       themeId,
       sortedDecorators,
       readOnly,
+      autoReload,
     ]);
 
     React.useEffect(

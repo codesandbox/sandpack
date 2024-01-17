@@ -20,6 +20,9 @@ import {
   SandpackStack,
   UnstyledOpenInCodeSandboxButton,
   SandpackFileExplorer,
+  SandpackConsumer,
+  CodeEditor,
+  type SandpackContext,
 } from "../";
 import { useSandpack } from "../hooks/useSandpack";
 
@@ -38,6 +41,69 @@ export const UsingSandpackLayout: React.FC = () => (
     </SandpackLayout>
   </SandpackProvider>
 );
+
+export const UsingMultipleEditor: React.FC = (props) => {
+  const [isAutoReload, setAutoReload] = React.useState(true);
+
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "500px",
+      }}
+    >
+      <SandpackProvider
+        {...props}
+        options={{ initMode: "immediate", autoReload: isAutoReload }}
+        template="static"
+      >
+        <SandpackConsumer>
+          {(context: SandpackContext | null) => {
+            if (!context) return <></>;
+
+            const { files, updateFile, autoReload } = context;
+            const fileListValues = Object.values(files);
+            const fileListKeys = Object.keys(files);
+
+            return (
+              <SandpackLayout>
+                <SandpackStack style={{ padding: "10px 0" }}>
+                  <CodeEditor
+                    code={fileListValues[0].code}
+                    filePath={fileListKeys[0]}
+                    initMode="immediate"
+                    onCodeUpdate={(newCode) => {
+                      updateFile(fileListKeys[0], newCode, autoReload);
+                    }}
+                  />
+                </SandpackStack>
+
+                <SandpackStack style={{ padding: "10px 0" }}>
+                  <CodeEditor
+                    code={fileListValues[1].code}
+                    filePath={fileListKeys[1]}
+                    initMode="immediate"
+                    onCodeUpdate={(newCode) => {
+                      updateFile(fileListKeys[1], newCode, autoReload);
+                    }}
+                  />
+                </SandpackStack>
+
+                <SandpackPreview
+                  actionsChildren={
+                    <button onClick={() => setAutoReload((prev) => !prev)}>
+                      Toggle autoReload to {JSON.stringify(!autoReload)}
+                    </button>
+                  }
+                />
+              </SandpackLayout>
+            );
+          }}
+        </SandpackConsumer>
+      </SandpackProvider>
+    </div>
+  );
+};
 
 export const UsingVisualElements: React.FC = () => (
   <SandpackProvider options={{ activeFile: "/App.js" }} template="react">
