@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.3](https://github.com/codesandbox/sandpack/compare/v2.11.2...v2.11.3) (2024-01-17)
+
+### Bug Fixes
+
+- Update CodeMirror View when autoReload changed ([#1059](https://github.com/codesandbox/sandpack/issues/1059)) ([782c0c7](https://github.com/codesandbox/sandpack/commit/782c0c713af7e4c8181236c128b7df7ec6c6433a))
+
 ## [2.11.2](https://github.com/codesandbox/sandpack/compare/v2.11.1...v2.11.2) (2024-01-11)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
