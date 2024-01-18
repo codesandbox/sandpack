@@ -5,6 +5,7 @@ import { PreviewController } from "static-browser-server";
 
 import type {
   ClientOptions,
+  ExternalScriptResource,
   ListenerFunction,
   SandboxSetup,
   UnsubscribeFunction,
@@ -132,24 +133,35 @@ export class SandpackStatic extends SandpackClient {
   ): FileContent {
     const tagsToInsert = externalResources
       .map((resource) => {
-        const match = resource.match(/\.([^.]*)$/);
-        const fileType = match?.[1];
-
-        if (fileType === "css" || resource.includes("fonts.googleapis")) {
-          return `<link rel="stylesheet" href="${resource}">`;
+        if (this.isScriptResource(resource)) {
+          return `<script type="${resource.type}" src="${resource.src}"></script>`;
+        } else {
+          const match = resource.match(/\.([^.]*)$/);
+          const fileType = match?.[1];
+  
+          if (fileType === "css" || resource.includes("fonts.googleapis")) {
+            return `<link rel="stylesheet" href="${resource}">`;
+          }
+  
+          if (fileType === "js") {
+            return `<script src="${resource}"></script>`;
+          }
+  
+          throw new Error(
+            `Unable to determine file type for external resource: ${resource}`
+          );
         }
-
-        if (fileType === "js") {
-          return `<script src="${resource}"></script>`;
-        }
-
-        throw new Error(
-          `Unable to determine file type for external resource: ${resource}`
-        );
       })
       .join("\n");
 
     return this.injectContentIntoHead(content, tagsToInsert);
+  }
+
+  private isScriptResource(resource: unknown): resource is ExternalScriptResource {
+    return typeof resource === 'object' 
+      && resource !== null 
+      && 'type' in resource 
+      && 'src' in resource;
   }
 
   private injectScriptIntoHead(

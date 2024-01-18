@@ -291,7 +291,7 @@ The `getCodeSandboxURL` method creates a sandbox from the current files and retu
   /**
    * Paths to external resources
    */
-  externalResources?: string[];
+  externalResources?: Array<string | ExternalScriptResource>;
   /**
    * Location of the bundler. Defaults to `${version}-sandpack.codesandbox.io`
    */

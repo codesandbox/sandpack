@@ -5,7 +5,7 @@ export interface ClientOptions {
   /**
    * Paths to external resources
    */
-  externalResources?: string[];
+  externalResources?: Array<string | ExternalScriptResource>;
   /**
    * Location of the bundler.
    */
@@ -70,6 +70,11 @@ export interface ClientOptions {
    * and unlock a few capabilities
    */
   teamId?: string;
+}
+
+export interface ExternalScriptResource {
+  type: "module" | "importmap" | undefined;
+  src: string;
 }
 
 export interface SandboxSetup {
