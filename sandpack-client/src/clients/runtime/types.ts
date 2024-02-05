@@ -1,5 +1,3 @@
-import type { ITemplate } from "codesandbox-import-util-types";
-
 import type {
   BaseSandpackMessage,
   BundlerState,
@@ -11,6 +9,7 @@ import type {
   SandpackErrorMessage,
   SandpackLogLevel,
   SandpackMessageConsoleMethods,
+  SandpackTemplate,
 } from "../..";
 
 export type SandpackRuntimeMessage = BaseSandpackMessage &
@@ -69,7 +68,7 @@ export type SandpackRuntimeMessage = BaseSandpackMessage &
         externalResources: string[];
         hasFileResolver: boolean;
         disableDependencyPreprocessing?: boolean;
-        template?: string | ITemplate;
+        template?: string | SandpackTemplate;
         showOpenInCodeSandbox: boolean;
         showErrorScreen: boolean;
         showLoadingScreen: boolean;
