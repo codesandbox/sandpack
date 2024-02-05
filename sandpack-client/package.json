@@ -2,38 +2,20 @@
   "name": "@codesandbox/sandpack-client",
   "version": "2.12.0",
   "description": "",
-  "keywords": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/codesandbox/sandpack"
   },
   "license": "Apache-2.0",
   "author": "CodeSandbox",
-  "sideEffects": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
-    "./clients/runtime": {
-      "types": "./dist/clients/runtime/index.d.ts",
-      "import": "./dist/clients/runtime/index.mjs",
-      "require": "./dist/clients/runtime/index.js"
-    },
-    "./clients/node": {
-      "types": "./dist/clients/node/index.d.ts",
-      "import": "./dist/clients/node/index.mjs",
-      "require": "./dist/clients/node/index.js"
-    },
-    "./clients/static": {
-      "types": "./dist/clients/static/index.d.ts",
-      "import": "./dist/clients/static/index.mjs",
-      "require": "./dist/clients/static/index.js"
-    },
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    }
+    "./clients/runtime": { "types": "./dist/clients/runtime/index.d.ts", "import": "./dist/clients/runtime/index.mjs", "require": "./dist/clients/runtime/index.js" },
+    "./clients/node": { "types": "./dist/clients/node/index.d.ts", "import": "./dist/clients/node/index.mjs", "require": "./dist/clients/node/index.js" },
+    "./clients/static": { "types": "./dist/clients/static/index.d.ts", "import": "./dist/clients/static/index.mjs", "require": "./dist/clients/static/index.js" },
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.mjs", "require": "./dist/index.js" }
   },
   "scripts": {
     "clean": "rm -rf dist sandpack src/clients/node/inject-scripts/dist",
@@ -47,25 +29,7 @@
     "format:check": "prettier --check '**/*.{ts,tsx}'",
     "dev": "yarn build -- --watch"
   },
-  "files": [
-    "dist",
-    "esm",
-    "sandpack",
-    "package.json",
-    "README.md"
-  ],
-  "dependencies": {
-    "@codesandbox/nodebox": "0.1.8",
-    "buffer": "^6.0.3",
-    "dequal": "^2.0.2",
-    "outvariant": "1.4.0",
-    "static-browser-server": "1.0.3"
-  },
-  "devDependencies": {
-    "@types/node": "^9.3.0",
-    "console-feed": "3.3.0",
-    "del": "^6.0.0",
-    "gulp": "^4.0.2",
-    "typescript": "^5.2.2"
-  }
+  "files": ["dist", "esm", "sandpack", "package.json", "README.md"],
+  "dependencies": { "@codesandbox/nodebox": "0.1.8", "buffer": "^6.0.3", "dequal": "^2.0.2", "outvariant": "1.4.0", "static-browser-server": "1.0.3" },
+  "devDependencies": { "@types/node": "^9.3.0", "console-feed": "3.3.0", "del": "^6.0.0", "gulp": "^4.0.2", "typescript": "^5.2.2" }
 }
