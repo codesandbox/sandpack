@@ -81,7 +81,7 @@ export interface SandboxSetup {
    * What template we use, if not defined we infer the template from the dependencies or files.
    *
    */
-  template?: Template;
+  template?: SandpackTemplate;
 
   /**
    * Only use unpkg for fetching the dependencies, no preprocessing. It's slower, but doesn't talk
@@ -381,7 +381,7 @@ interface RunTests {
   path: string;
 }
 
-export type Template =
+export type SandpackTemplate =
   | "angular-cli"
   | "create-react-app"
   | "create-react-app-typescript"
