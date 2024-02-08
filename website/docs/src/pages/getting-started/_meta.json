@@ -11,5 +11,5 @@
   "usage": "Usage",
   "layout": "Layout",
   "themes": "Themes",
-  "private-packages": { "title": "Private packages", "label": "Pro" }
+  "private-packages": { "title": "Private packages", "label": "Enterprise" }
 }
