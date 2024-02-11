@@ -62,7 +62,10 @@ const SandpackThemeProvider: React.FC<
   }, [theme, id]);
 
   React.useEffect(() => {
-    if (themeFromProps !== "auto") return;
+    if (themeFromProps !== "auto") {
+      setPreferredTheme(themeFromProps);
+      return;
+    }
 
     const colorSchemeChange = ({ matches }: MediaQueryListEvent) => {
       setPreferredTheme(matches ? "dark" : "light");
