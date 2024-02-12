@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.1](https://github.com/codesandbox/sandpack/compare/v2.12.0...v2.12.1) (2024-02-12)
+
+### Bug Fixes
+
+- Theme state logic to account for non-prefers-color-scheme usage ([#1082](https://github.com/codesandbox/sandpack/issues/1082)) ([3fcd51d](https://github.com/codesandbox/sandpack/commit/3fcd51d1f1cae45030d1903a419fae3f7af0367d))
+
 # [2.12.0](https://github.com/codesandbox/sandpack/compare/v2.11.3...v2.12.0) (2024-02-05)
 
 ### Features
