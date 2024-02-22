@@ -251,6 +251,7 @@ export class SandpackRuntime extends SandpackClient {
       customNpmRegistries: this.options.customNpmRegistries,
       teamId: this.options.teamId,
       sandboxId: this.options.sandboxId,
+      ...this.options,
     });
   }
 
