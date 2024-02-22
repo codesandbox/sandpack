@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.13.0](https://github.com/codesandbox/sandpack/compare/v2.12.1...v2.13.0) (2024-02-22)
+
+### Features
+
+- Add spread operator for options in runtime client ([#1086](https://github.com/codesandbox/sandpack/issues/1086)) ([b7c7551](https://github.com/codesandbox/sandpack/commit/b7c7551472e42723a70db7cbf7af853810dfd9d3))
+
 # [2.12.0](https://github.com/codesandbox/sandpack/compare/v2.11.3...v2.12.0) (2024-02-05)
 
 ### Features
