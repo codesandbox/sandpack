@@ -349,6 +349,10 @@ export const useClient: UseClient = (
 
       setState((prev) => ({ ...prev, error: null }));
     } else if (msg.type === "action" && msg.action === "show-error") {
+      if (timeoutHook.current) {
+        clearTimeout(timeoutHook.current);
+      }
+
       setState((prev) => ({ ...prev, error: extractErrorDetails(msg) }));
     } else if (
       msg.type === "action" &&
