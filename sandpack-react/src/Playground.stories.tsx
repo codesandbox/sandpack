@@ -12,44 +12,34 @@ export const Basic: React.FC = () => {
   return <Sandpack template="vite" theme={themes.sandpackDark} />;
 };
 
-export const Playground = () => (
+export const EslintBasic = () => (
   <Sandpack
     files={{
-      "/App.js": `export default function Bio() {
-        return (
-          <div class="intro">
-            <h1>Welcome to my website!</h1>
-          </div>
-          <p class="summary">
-            You can find my thoughts here.
-            <br><br>
-            <b>And <i>pictures</b></i> of scientists!
-          </p>
-        );
-      }
-      `,
+      "/.eslintrc.js": `module.exports = {
+  rules: { 
+    "no-unused-vars": "error",
+    "no-console": "error",
+  },
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module'
+  },
+}`,
+      "/index.js": `const helloWorld = "";
+
+console.log("foo");`,
+
+      "/package.json": JSON.stringify({
+        devDependencies: {
+          eslint: "^8.0.1",
+        },
+        scripts: { start: "eslint index.js" },
+      }),
     }}
-    options={{ bundlerURL: "https://sandpack-bundler.codesandbox.io" }}
-    template="react"
+    options={{
+      visibleFiles: ["/index.js", "/.eslintrc.js"],
+      showConsole: true,
+    }}
+    template="node"
   />
 );
-
-/**
-
-export default function Bio() {
-  return (
-   <div>
-    <div class="intro">
-      <h1>Welcome to my website!</h1>
-    </div>
-    <p class="summary">
-      You can find my thoughts here.
-   
-      <b>And <i>pictures</i></b> of scientists!
-    </p>
-    </div>
-  );
-}
-      
-
- */
