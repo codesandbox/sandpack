@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.1](https://github.com/codesandbox/sandpack/compare/v2.13.0...v2.13.1) (2024-02-23)
+
+### Bug Fixes
+
+- **timeout:** clear it when there is a syntax error ([#1087](https://github.com/codesandbox/sandpack/issues/1087)) ([6777c24](https://github.com/codesandbox/sandpack/commit/6777c241f2d04b709e778543fe4afd9f79d3b514))
+
 # [2.13.0](https://github.com/codesandbox/sandpack/compare/v2.12.1...v2.13.0) (2024-02-22)
 
 ### Features
