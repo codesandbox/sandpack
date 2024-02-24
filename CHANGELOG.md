@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.2](https://github.com/codesandbox/sandpack/compare/v2.13.1...v2.13.2) (2024-02-24)
+
+### Bug Fixes
+
+- **compile opts:** don't overwrite default properties ([#1090](https://github.com/codesandbox/sandpack/issues/1090)) ([2877fcf](https://github.com/codesandbox/sandpack/commit/2877fcf46be7579a20d793b5ebb746e63622fb74))
+
 ## [2.13.1](https://github.com/codesandbox/sandpack/compare/v2.13.0...v2.13.1) (2024-02-23)
 
 ### Bug Fixes
