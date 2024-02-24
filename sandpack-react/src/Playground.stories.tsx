@@ -9,7 +9,7 @@ export default {
 };
 
 export const Basic: React.FC = () => {
-  return <Sandpack template="vite" theme={themes.sandpackDark} />;
+  return <Sandpack template="react" theme={themes.sandpackDark} />;
 };
 
 export const EslintBasic = () => (

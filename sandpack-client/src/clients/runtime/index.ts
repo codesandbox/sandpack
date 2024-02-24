@@ -229,6 +229,7 @@ export class SandpackRuntime extends SandpackClient {
     );
 
     this.dispatch({
+      ...this.options,
       type: "compile",
       codesandbox: true,
       version: 3,
@@ -251,7 +252,6 @@ export class SandpackRuntime extends SandpackClient {
       customNpmRegistries: this.options.customNpmRegistries,
       teamId: this.options.teamId,
       sandboxId: this.options.sandboxId,
-      ...this.options,
     });
   }
 
