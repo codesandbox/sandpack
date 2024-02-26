@@ -225,6 +225,7 @@ export const useClient: UseClient = (
     await Promise.all(
       Object.entries(registeredIframes.current).map(
         async ([clientId, { iframe, clientPropsOverride = {} }]) => {
+          // https://github.com/codesandbox/sandpack/commit/a7334adfb712abd2342c3fa949f72f201c7ba2c4
           await createClient(iframe, clientId, clientPropsOverride);
         }
       )
