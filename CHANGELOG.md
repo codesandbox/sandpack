@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.4](https://github.com/codesandbox/sandpack/compare/v2.13.3...v2.13.4) (2024-02-27)
+
+### Bug Fixes
+
+- update intersection callback ref every time prop change ([#1096](https://github.com/codesandbox/sandpack/issues/1096)) ([4fb3d7c](https://github.com/codesandbox/sandpack/commit/4fb3d7c5a8ba701f30fa0506eb27c246d4197de8))
+
 ## [2.13.3](https://github.com/codesandbox/sandpack/compare/v2.13.2...v2.13.3) (2024-02-27)
 
 ### Bug Fixes
