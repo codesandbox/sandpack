@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.3](https://github.com/codesandbox/sandpack/compare/v2.13.2...v2.13.3) (2024-02-27)
+
+### Bug Fixes
+
+- investigating scroll issue ([#1094](https://github.com/codesandbox/sandpack/issues/1094)) ([b994287](https://github.com/codesandbox/sandpack/commit/b994287a5ffc0b3a6bdcb7f857a46f34e97ed039))
+
 ## [2.13.2](https://github.com/codesandbox/sandpack/compare/v2.13.1...v2.13.2) (2024-02-24)
 
 ### Bug Fixes
