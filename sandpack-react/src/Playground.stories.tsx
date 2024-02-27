@@ -14,7 +14,7 @@ export const Basic: React.FC = () => {
       options={{
         initMode: "user-visible",
       }}
-      template="react"
+      template="static"
     />
   ));
 };
