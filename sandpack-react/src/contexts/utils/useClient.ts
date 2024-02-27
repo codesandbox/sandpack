@@ -310,9 +310,9 @@ export const useClient: UseClient = (
       client.iframe.contentWindow?.location.replace("about:blank");
       client.iframe.removeAttribute("src");
       delete clients.current[clientId];
+    } else {
+      delete registeredIframes.current[clientId];
     }
-
-    delete registeredIframes.current[clientId];
 
     if (timeoutHook.current) {
       clearTimeout(timeoutHook.current);
