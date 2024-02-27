@@ -9,15 +9,14 @@ export default {
 
 export const Basic: React.FC = () => {
   return (
-    <>
-      {new Array(10).fill(null).map((_, index) => (
-        <Sandpack
-          options={{
-            initMode: "user-visible",
-          }}
-          template="static"
-        />
-      ))}
-    </>
+    <div style={{ height: "400vh" }}>
+      <Sandpack
+        options={{
+          initMode: "user-visible",
+          bundlerURL: "https://786946de.sandpack-bundler-4bw.pages.dev",
+        }}
+        template="react"
+      />
+    </div>
   );
 };
