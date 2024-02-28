@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.5](https://github.com/codesandbox/sandpack/compare/v2.13.4...v2.13.5) (2024-02-28)
+
+### Bug Fixes
+
+- make sure to unregister all clients when "user-visible" option is out of viewport ([#1098](https://github.com/codesandbox/sandpack/issues/1098)) ([230960c](https://github.com/codesandbox/sandpack/commit/230960c1dafd74d7e5e578865cb0b27526152e07))
+
 ## [2.13.4](https://github.com/codesandbox/sandpack/compare/v2.13.3...v2.13.4) (2024-02-27)
 
 ### Bug Fixes
