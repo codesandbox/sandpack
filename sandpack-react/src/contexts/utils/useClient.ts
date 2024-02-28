@@ -244,6 +244,8 @@ export const useClient: UseClient = (
   ): void => {
     if (entries.some((entry) => entry.isIntersecting)) {
       runSandpack();
+    } else {
+      unregisterAllClients();
     }
   };
 
@@ -266,7 +268,15 @@ export const useClient: UseClient = (
       // If any component registered a lazy anchor ref component, use that for the intersection observer
       intersectionObserver.current = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          intersectionObserverCallback.current?.(entries);
+          // Trigger it once
+          if (
+            entries.some((entry) => entry.isIntersecting) &&
+            lazyAnchorRef.current
+          ) {
+            intersectionObserverCallback.current?.(entries);
+
+            intersectionObserver.current?.unobserve(lazyAnchorRef.current);
+          }
         }
       }, observerOptions);
 
