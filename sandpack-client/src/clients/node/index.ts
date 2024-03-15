@@ -202,6 +202,7 @@ export class SandpackNode extends SandpackClient {
       nullthrows(element, `The element '${selector}' was not found`);
 
       this.iframe = document.createElement("iframe");
+      element?.appendChild(this.iframe);
     } else {
       this.iframe = selector;
     }
