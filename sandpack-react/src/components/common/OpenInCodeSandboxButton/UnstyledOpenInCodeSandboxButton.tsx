@@ -5,6 +5,7 @@ import * as React from "react";
 
 import { useSandpack } from "../../../hooks/useSandpack";
 import type { SandboxEnvironment } from "../../../types";
+import { codeToString } from "../../../utils/stringUtils";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getParameters = (parameters: Record<string, any>): string =>
@@ -28,10 +29,11 @@ const getFileParameters = (
   >;
 
   const normalizedFiles = Object.keys(files).reduce((prev, next) => {
+    const code = files[next].code;
     const fileName = next.replace("/", "");
     const value = {
-      content: files[next].code,
-      isBinary: false,
+      content: codeToString(code),
+      isBinary: code instanceof Uint8Array,
     };
 
     return { ...prev, [fileName]: value };

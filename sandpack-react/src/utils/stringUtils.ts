@@ -53,6 +53,15 @@ export const calculateNearestUniquePath = (
   return resultPathParts.join("/");
 };
 
+export function codeToString(code: string | Uint8Array): string {
+  if (typeof code === "string") {
+    return code;
+  } else {
+    const decoder = new TextDecoder();
+    return decoder.decode(code);
+  }
+}
+
 export const hexToRGB = (
   hex: string
 ): { red: number; green: number; blue: number } => {

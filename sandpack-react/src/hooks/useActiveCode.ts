@@ -1,3 +1,5 @@
+import { codeToString } from "../utils/stringUtils";
+
 import { useSandpack } from "./useSandpack";
 
 /**
@@ -14,7 +16,7 @@ export const useActiveCode = (): {
   const { sandpack } = useSandpack();
 
   return {
-    code: sandpack.files[sandpack.activeFile]?.code,
+    code: codeToString(sandpack.files[sandpack.activeFile]?.code),
     readOnly: sandpack.files[sandpack.activeFile]?.readOnly ?? false,
     updateCode: sandpack.updateCurrentFile,
   };

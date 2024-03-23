@@ -1,4 +1,4 @@
-import { addPackageJSONIfNeeded, normalizePath } from "./utils";
+import { addPackageJSONIfNeeded, codeToString, normalizePath } from "./utils";
 
 const files = {
   "/package.json": {
@@ -15,7 +15,9 @@ describe(addPackageJSONIfNeeded, () => {
   test("it merges the package.json - dependencies", () => {
     const output = addPackageJSONIfNeeded(files, { foo: "*" });
 
-    expect(JSON.parse(output["/package.json"].code).dependencies).toEqual({
+    expect(
+      JSON.parse(codeToString(output["/package.json"].code)).dependencies
+    ).toEqual({
       baz: "*",
       foo: "*",
     });
@@ -24,7 +26,9 @@ describe(addPackageJSONIfNeeded, () => {
   test("it merges the package.json - dev-dependencies", () => {
     const output = addPackageJSONIfNeeded(files, undefined, { foo: "*" });
 
-    expect(JSON.parse(output["/package.json"].code).devDependencies).toEqual({
+    expect(
+      JSON.parse(codeToString(output["/package.json"].code)).devDependencies
+    ).toEqual({
       baz: "*",
       foo: "*",
     });
@@ -38,7 +42,7 @@ describe(addPackageJSONIfNeeded, () => {
       "new-entry.js"
     );
 
-    expect(JSON.parse(output["/package.json"].code).main).toEqual(
+    expect(JSON.parse(codeToString(output["/package.json"].code)).main).toEqual(
       "new-entry.js"
     );
   });
@@ -59,7 +63,7 @@ describe(addPackageJSONIfNeeded, () => {
       "new-entry.js"
     );
 
-    expect(JSON.parse(output["/package.json"].code).main).toEqual(
+    expect(JSON.parse(codeToString(output["/package.json"].code)).main).toEqual(
       "new-entry.js"
     );
   });
@@ -91,7 +95,7 @@ describe(addPackageJSONIfNeeded, () => {
       "new-entry.ts"
     );
 
-    expect(JSON.parse(output["/package.json"].code)).toEqual({
+    expect(JSON.parse(codeToString(output["/package.json"].code))).toEqual({
       main: "new-entry.ts",
       dependencies: { baz: "*", foo: "*" },
       devDependencies: { baz: "*", foo: "*" },
