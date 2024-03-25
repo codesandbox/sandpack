@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.6](https://github.com/codesandbox/sandpack/compare/v2.13.5...v2.13.6) (2024-03-25)
+
+### Bug Fixes
+
+- **pro:** use partitioned cookie for sandpack authentication ([#1110](https://github.com/codesandbox/sandpack/issues/1110)) ([2950186](https://github.com/codesandbox/sandpack/commit/29501863c2ebbcbf64fb9e7080feed1f2bc724b5))
+
 ## [2.13.2](https://github.com/codesandbox/sandpack/compare/v2.13.1...v2.13.2) (2024-02-24)
 
 ### Bug Fixes
