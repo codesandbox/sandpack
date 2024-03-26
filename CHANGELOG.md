@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.7](https://github.com/codesandbox/sandpack/compare/v2.13.6...v2.13.7) (2024-03-26)
+
+### Bug Fixes
+
+- Fixed sandpackNode initializing failure ([#1105](https://github.com/codesandbox/sandpack/issues/1105)) ([26685d9](https://github.com/codesandbox/sandpack/commit/26685d92973ab609bae03dadca4d7f21c1fd696c))
+
 ## [2.13.6](https://github.com/codesandbox/sandpack/compare/v2.13.5...v2.13.6) (2024-03-25)
 
 ### Bug Fixes
