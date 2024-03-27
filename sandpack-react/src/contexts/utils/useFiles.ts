@@ -76,7 +76,10 @@ export const useFiles: UseFiles = (props) => {
       if (typeof pathOrFiles === "string" && typeof code === "string") {
         files = {
           ...files,
-          [pathOrFiles]: { code },
+          [pathOrFiles]: {
+            ...files[pathOrFiles],
+            code
+          },
         };
       } else if (typeof pathOrFiles === "object") {
         files = { ...files, ...convertedFilesToBundlerFiles(pathOrFiles) };
