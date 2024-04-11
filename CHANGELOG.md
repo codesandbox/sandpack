@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.8](https://github.com/codesandbox/sandpack/compare/v2.13.7...v2.13.8) (2024-04-11)
+
+### Bug Fixes
+
+- force new release ([#1118](https://github.com/codesandbox/sandpack/issues/1118)) ([5b38b37](https://github.com/codesandbox/sandpack/commit/5b38b372de2d9ff26967fec1e22c772c755a0d33))
+
 ## [2.13.7](https://github.com/codesandbox/sandpack/compare/v2.13.6...v2.13.7) (2024-03-26)
 
 ### Bug Fixes
