@@ -320,10 +320,20 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       showLineNumbers,
       wrapContent,
       themeId,
-      sortedDecorators,
       readOnly,
       autoReload,
     ]);
+
+    React.useEffect(() => {
+      if (cmView.current && sortedDecorators) {
+        // Add new hightlight decorators
+        cmView.current.dispatch({
+          effects: StateEffect.appendConfig.of([
+            highlightDecorators(sortedDecorators),
+          ]),
+        });
+      }
+    }, [sortedDecorators]);
 
     React.useEffect(
       function applyExtensions() {
