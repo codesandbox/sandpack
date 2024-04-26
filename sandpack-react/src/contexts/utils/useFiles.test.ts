@@ -7,6 +7,7 @@ import { VANILLA_TEMPLATE } from "../../templates";
 import { getSandpackStateFromProps } from "../../utils/sandpackUtils";
 
 import { useFiles } from "./useFiles";
+import {SandpackBundlerFile} from "@codesandbox/sandpack-client/src";
 
 describe(useFiles, () => {
   it("should returns an initial state, which is the default template", () => {
@@ -125,4 +126,25 @@ describe(useFiles, () => {
     expect(result.current[0].files["/App.js"]).toEqual({ code: `Foo` });
     expect(result.current[0].files["/index.js"]).toEqual({ code: `Baz` });
   });
+  it("doesn't override the activeFile's metadata", () => {
+    const {result} = renderHook(() => useFiles({
+      template: "react",
+      files: {
+        "/App.js": {
+          code: "export default function App() { return <h1>Hello world</h1>}",
+          readOnly: true,
+          someOtherMetadata: "foo"
+        } as SandpackBundlerFile
+      }
+    }));
+
+    act(() => {
+      result.current[1].updateFile("/App.js", "console.log(10)");
+    });
+    expect(result.current[0].files["/App.js"]).toEqual({
+        code: "console.log(10)",
+        readOnly: true,
+        someOtherMetadata: "foo"
+    });
+  })
 });
