@@ -251,7 +251,7 @@ export class SandpackRuntime extends SandpackClient {
       hasFileResolver: Boolean(this.options.fileResolver),
       disableDependencyPreprocessing:
         this.sandboxSetup.disableDependencyPreprocessing,
-      enableServiceWorker: this.sandboxSetup.enableServiceWorker,
+      enableServiceWorker: this.options.enableServiceWorker,
       template:
         this.sandboxSetup.template ||
         getTemplate(packageJSON, normalizedModules),
