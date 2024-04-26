@@ -327,6 +327,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
+      shouldInitEditor,
       sortedDecorators,
       showLineNumbers,
       wrapContent,
