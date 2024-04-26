@@ -186,91 +186,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     React.useEffect(() => {
       if (!wrapper.current || !shouldInitEditor) return;
 
-      const customCommandsKeymap: KeyBinding[] = [
-        {
-          key: "Tab",
-          run: (view): boolean => {
-            indentMore(view);
-
-            const customKey = extensionsKeymap.find(({ key }) => key === "Tab");
-
-            return customKey?.run?.(view) ?? true;
-          },
-        },
-        {
-          key: "Shift-Tab",
-          run: ({ state, dispatch }): boolean => {
-            indentLess({ state, dispatch });
-
-            const customKey = extensionsKeymap.find(
-              ({ key }) => key === "Shift-Tab"
-            );
-
-            return customKey?.run?.(view) ?? true;
-          },
-        },
-        {
-          key: "Escape",
-          run: (): boolean => {
-            if (readOnly) return true;
-
-            if (wrapper.current) {
-              wrapper.current.focus();
-            }
-
-            return true;
-          },
-        },
-        {
-          key: "mod-Backspace",
-          run: deleteGroupBackward,
-        },
-      ];
-
-      const extensionList = [
-        highlightSpecialChars(),
-        history(),
-        closeBrackets(),
-
-        ...extensions,
-
-        keymap.of([
-          ...closeBracketsKeymap,
-          ...defaultKeymap,
-          ...historyKeymap,
-          ...customCommandsKeymap,
-          ...extensionsKeymap,
-        ] as KeyBinding[]),
-        langSupport,
-
-        getEditorTheme(),
-        syntaxHighlighting(highlightTheme),
-      ];
-
-      if (readOnly) {
-        extensionList.push(EditorState.readOnly.of(true));
-        extensionList.push(EditorView.editable.of(false));
-      } else {
-        extensionList.push(bracketMatching());
-        extensionList.push(highlightActiveLine());
-      }
-
-      if (sortedDecorators) {
-        extensionList.push(highlightDecorators(sortedDecorators));
-      }
-
-      if (wrapContent) {
-        extensionList.push(EditorView.lineWrapping);
-      }
-
-      if (showLineNumbers) {
-        extensionList.push(lineNumbers());
-      }
-
-      if (showInlineErrors) {
-        extensionList.push(highlightInlineError());
-      }
-
       const parentDiv = wrapper.current;
       const existingPlaceholder = parentDiv.querySelector(
         ".sp-pre-placeholder"
@@ -281,7 +196,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
       const view = new EditorView({
         doc: code,
-        extensions: extensionList,
+        extensions: [],
         parent: parentDiv,
         dispatch: (tr): void => {
           view.update([tr]);
@@ -313,14 +228,109 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       return (): void => {
         cmView.current?.destroy();
       };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [shouldInitEditor]);
 
+    React.useEffect(() => {
+      if (cmView.current) {
+        const customCommandsKeymap: KeyBinding[] = [
+          {
+            key: "Tab",
+            run: (view): boolean => {
+              indentMore(view);
+
+              const customKey = extensionsKeymap.find(
+                ({ key }) => key === "Tab"
+              );
+
+              return customKey?.run?.(view) ?? true;
+            },
+          },
+          {
+            key: "Shift-Tab",
+            run: (view): boolean => {
+              indentLess({ state: view.state, dispatch: view.dispatch });
+
+              const customKey = extensionsKeymap.find(
+                ({ key }) => key === "Shift-Tab"
+              );
+
+              return customKey?.run?.(view) ?? true;
+            },
+          },
+          {
+            key: "Escape",
+            run: (): boolean => {
+              if (readOnly) return true;
+
+              if (wrapper.current) {
+                wrapper.current.focus();
+              }
+
+              return true;
+            },
+          },
+          {
+            key: "mod-Backspace",
+            run: deleteGroupBackward,
+          },
+        ];
+
+        const extensionList = [
+          highlightSpecialChars(),
+          history(),
+          closeBrackets(),
+
+          ...extensions,
+
+          keymap.of([
+            ...closeBracketsKeymap,
+            ...defaultKeymap,
+            ...historyKeymap,
+            ...customCommandsKeymap,
+            ...extensionsKeymap,
+          ] as KeyBinding[]),
+          langSupport,
+
+          getEditorTheme(),
+          syntaxHighlighting(highlightTheme),
+        ];
+
+        if (readOnly) {
+          extensionList.push(EditorState.readOnly.of(true));
+          extensionList.push(EditorView.editable.of(false));
+        } else {
+          extensionList.push(bracketMatching());
+          extensionList.push(highlightActiveLine());
+        }
+
+        if (sortedDecorators) {
+          extensionList.push(highlightDecorators(sortedDecorators));
+        }
+
+        if (wrapContent) {
+          extensionList.push(EditorView.lineWrapping);
+        }
+
+        if (showLineNumbers) {
+          extensionList.push(lineNumbers());
+        }
+
+        if (showInlineErrors) {
+          extensionList.push(highlightInlineError());
+        }
+
+        // Add new hightlight decorators
+        cmView.current.dispatch({
+          effects: StateEffect.reconfigure.of(extensionList),
+        });
+      }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
-      shouldInitEditor,
+      sortedDecorators,
       showLineNumbers,
       wrapContent,
       themeId,
-      sortedDecorators,
       readOnly,
       autoReload,
     ]);

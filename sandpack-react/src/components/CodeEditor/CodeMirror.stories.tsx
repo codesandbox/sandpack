@@ -70,7 +70,7 @@ stories.add("ShowLineNumber", () => (
 #header {
   width: @width;
   height: @height;
-}  
+}
 `}
       fileType="less"
       initMode="immediate"
@@ -138,3 +138,54 @@ export default function List() {
     />
   </SandpackProvider>
 ));
+
+type Decorators = Array<{ className: string; line: number }>;
+
+stories.add("DecoratorsDynamic", () => {
+  const [decorators, setDecorators] = React.useState<Decorators>([]);
+  const [file, setFile] = React.useState(`const people = [{
+  id: 0,
+  name: 'Creola Katherine Johnson',
+  profession: 'mathematician',
+}, {
+  id: 1,
+  name: 'Mario José Molina-Pasquel Henríquez',
+  profession: 'chemist',
+}];
+
+export default function List() {
+  const [text, setText] = useState("")
+  const listItems = people.map(person =>
+    <li>{person}</li>
+  );
+  return <ul>{listItems}</ul>;
+}`);
+
+  React.useEffect(() => {
+    const lines = file.split("\n");
+
+    setDecorators([
+      {
+        className: "highlight",
+        line: Math.floor(Math.random() * lines.length),
+      },
+    ]);
+  }, [file]);
+
+  return (
+    <SandpackProvider>
+      <style>
+        {`.highlight, .widget {
+        background: red;
+      }`}
+      </style>
+      <CodeEditor
+        code={file}
+        decorators={decorators}
+        fileType="jsx"
+        initMode="immediate"
+        onCodeUpdate={(newCode) => setFile(newCode)}
+      />
+    </SandpackProvider>
+  );
+});
