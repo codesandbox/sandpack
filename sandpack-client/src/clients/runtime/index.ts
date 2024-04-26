@@ -65,7 +65,7 @@ export class SandpackRuntime extends SandpackClient {
     }
 
     const suffixes: string[] = [];
-    if (sandboxSetup.enableServiceWorker) {
+    if (options.enableServiceWorker) {
       suffixes.push(Math.random().toString(36).slice(2));
     }
     this.bundlerURL = this.bundlerURL.replace(

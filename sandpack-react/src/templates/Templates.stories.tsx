@@ -24,9 +24,10 @@ Object.keys(SANDBOX_TEMPLATES).forEach((template) =>
       <SandpackProvider
         options={{
           bundlerTimeOut: 90000,
+          enableServiceWorker: true,
           bundlerURL: isNodeStatic
             ? undefined
-            : "https://1-17-1-sandpack.codesandbox.io/",
+            : "https://1-17-1-{{suffix}}-sandpack.codesandbox.io/",
         }}
         template={template as SandpackPredefinedTemplate}
       >
