@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.9](https://github.com/codesandbox/sandpack/compare/v2.13.8...v2.13.9) (2024-04-26)
+
+### Bug Fixes
+
+- dynamically reconfigure codemirror instead of recreate on rerender ([#1125](https://github.com/codesandbox/sandpack/issues/1125)) ([a41d1a0](https://github.com/codesandbox/sandpack/commit/a41d1a07306918cffadfaaa81ac7cd97ce3d182d))
+
 ## [2.13.8](https://github.com/codesandbox/sandpack/compare/v2.13.7...v2.13.8) (2024-04-11)
 
 ### Bug Fixes
