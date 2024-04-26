@@ -26,13 +26,15 @@ import { IFrameProtocol } from "./iframe-protocol";
 import type { SandpackRuntimeMessage } from "./types";
 import { getTemplate } from "./utils";
 
+const SUFFIX_PLACEHOLDER = "-{{suffix}}";
+
 const BUNDLER_URL =
   process.env.CODESANDBOX_ENV === "development"
     ? "http://localhost:3000/"
     : `https://${process.env.PACKAGE_VERSION?.replace(
         /\./g,
         "-"
-      )}-sandpack.codesandbox.io/`;
+      )}${SUFFIX_PLACEHOLDER}-sandpack.codesandbox.io/`;
 
 export class SandpackRuntime extends SandpackClient {
   fileResolverProtocol?: Protocol;
@@ -61,6 +63,15 @@ export class SandpackRuntime extends SandpackClient {
         this.bundlerURL.replace("https://", "https://" + options.teamId + "-") +
         `?cache=${Date.now()}`;
     }
+
+    const suffixes: string[] = [];
+    if (sandboxSetup.enableServiceWorker) {
+      suffixes.push(Math.random().toString(36).slice(2));
+    }
+    this.bundlerURL = this.bundlerURL.replace(
+      SUFFIX_PLACEHOLDER,
+      suffixes.length ? `-${suffixes.join("-")}` : ""
+    );
 
     this.bundlerState = undefined;
     this.errors = [];
@@ -240,6 +251,7 @@ export class SandpackRuntime extends SandpackClient {
       hasFileResolver: Boolean(this.options.fileResolver),
       disableDependencyPreprocessing:
         this.sandboxSetup.disableDependencyPreprocessing,
+      enableServiceWorker: this.sandboxSetup.enableServiceWorker,
       template:
         this.sandboxSetup.template ||
         getTemplate(packageJSON, normalizedModules),

@@ -462,6 +462,7 @@ export interface SandpackInternalOptions<
   fileResolver?: FileResolver;
   externalResources?: string[];
   classes?: Record<string, string>;
+  enableServiceWorker?: boolean;
 }
 
 interface SandpackInternalProps<

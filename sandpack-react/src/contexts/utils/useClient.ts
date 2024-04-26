@@ -171,7 +171,7 @@ export const useClient: UseClient = (
           showLoadingScreen: false,
           reactDevTools: state.reactDevTools,
           customNpmRegistries: customSetup?.npmRegistries,
-          teamId,
+          enableServiceWorker: !!options?.enableServiceWorker,
           sandboxId,
         }
       );

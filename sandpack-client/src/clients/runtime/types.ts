@@ -68,6 +68,7 @@ export type SandpackRuntimeMessage = BaseSandpackMessage &
         externalResources: string[];
         hasFileResolver: boolean;
         disableDependencyPreprocessing?: boolean;
+        enableServiceWorker?: boolean;
         template?: string | SandpackTemplate;
         showOpenInCodeSandbox: boolean;
         showErrorScreen: boolean;
