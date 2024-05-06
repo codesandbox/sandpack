@@ -29,12 +29,13 @@ components that are exported by the main package (eg: `SandpackCodeEditor`,
 } from "@codesandbox/sandpack-react";
 
 const CustomSandpack = () => (
-  <SandpackProvider>
-    <SandpackLayout>
-      <SandpackCodeEditor />
-      <SandpackPreview />
-    </SandpackLayout>
-  </SandpackProvider>
+
+<SandpackProvider template="vanilla" theme="auto">
+  <SandpackLayout>
+    <SandpackCodeEditor />
+    <SandpackPreview />
+  </SandpackLayout>
+</SandpackProvider>
 );
 
 export default () => <CustomSandpack />
