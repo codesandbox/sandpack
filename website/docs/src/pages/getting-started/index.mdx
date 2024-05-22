@@ -7,21 +7,25 @@ import { CodeBlock } from "../../components/CodeBlock";
 Install the Sandpack dependency on your project.
 
 <Tabs items={["npm", "yarn", "pnpm"]}>
+
   <Tab>  
-```shell
+```bash
 npm i @codesandbox/sandpack-react
 ```
   </Tab>
 
-{" "}
-
-<Tab>```bash yarn add @codesandbox/sandpack-react ```</Tab>
+  <Tab>
+```bash
+yarn add @codesandbox/sandpack-react 
+```
+  </Tab>
 
   <Tab>
 ```bash
-pnpm i @codesandbox/sandpack-react 
+pnpm add @codesandbox/sandpack-react 
 ```
   </Tab>
+  
 </Tabs>
 
 All the components and the bundler are packed inside the `Sandpack` component, which is a named export of the package. Besides that, the package contains multiple **components**, **utilities** and **typings**.
