@@ -17,6 +17,15 @@ export function nullthrows<T>(value?: T | null, err = "Value is nullish"): T {
   return value;
 }
 
+export function codeToString(code: string | Uint8Array): string {
+  if (typeof code === "string") {
+    return code;
+  } else {
+    const decoder = new TextDecoder();
+    return decoder.decode(code);
+  }
+}
+
 const DEPENDENCY_ERROR_MESSAGE = `"dependencies" was not specified - provide either a package.json or a "dependencies" value`;
 const ENTRY_ERROR_MESSAGE = `"entry" was not specified - provide either a package.json with the "main" field or an "entry" value`;
 
@@ -65,7 +74,7 @@ export function addPackageJSONIfNeeded(
    * Merge package json with custom setup
    */
   if (packageJsonFile) {
-    const packageJsonContent = JSON.parse(packageJsonFile.code);
+    const packageJsonContent = JSON.parse(codeToString(packageJsonFile.code));
 
     nullthrows(
       !(!dependencies && !packageJsonContent.dependencies),

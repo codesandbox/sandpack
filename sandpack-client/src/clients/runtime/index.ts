@@ -18,6 +18,7 @@ import {
   extractErrorDetails,
   createPackageJSON,
   addPackageJSONIfNeeded,
+  codeToString,
 } from "../../utils";
 import { SandpackClient } from "../base";
 
@@ -207,7 +208,7 @@ export class SandpackRuntime extends SandpackClient {
       )
     );
     try {
-      packageJSON = JSON.parse(files["/package.json"].code);
+      packageJSON = JSON.parse(codeToString(files["/package.json"].code));
     } catch (e) {
       console.error(
         createError(
