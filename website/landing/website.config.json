@@ -127,7 +127,7 @@
       {
         "title": "React docs",
         "imageSource": "/assets/showcase/react-docs.jpg",
-        "url": "https://beta.reactjs.org/learn",
+        "url": "https://react.dev/learn",
         "description": "Want to try out a solution right on the same page alongside the guides or examples? With Sandpack you can embed a playground right into your documentation."
       },
       {
@@ -164,7 +164,7 @@
       },
       {
         "name": "React",
-        "socialUrl": "https://beta.reactjs.org/",
+        "socialUrl": "https://react.dev/",
         "logo": {
           "url": "/assets/logos/React.svg",
           "height": 50,
