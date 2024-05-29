@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/codesandbox/sandpack/compare/v2.13.10...v2.14.0) (2024-05-29)
+
+### Features
+
+- **export:** support private sandboxes in workspace ([#1136](https://github.com/codesandbox/sandpack/issues/1136)) ([1c7907e](https://github.com/codesandbox/sandpack/commit/1c7907e9219a7cf8bb5fd48e7f22048f900179da))
+
 ## [2.13.10](https://github.com/codesandbox/sandpack/compare/v2.13.9...v2.13.10) (2024-04-26)
 
 ### Bug Fixes
