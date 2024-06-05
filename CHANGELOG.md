@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.1](https://github.com/codesandbox/sandpack/compare/v2.14.0...v2.14.1) (2024-06-05)
+
+### Bug Fixes
+
+- **openCSB:** pass children to buttons ([#1144](https://github.com/codesandbox/sandpack/issues/1144)) ([62ba672](https://github.com/codesandbox/sandpack/commit/62ba6720fd0c8cef46f0cbe8bdad4083a29cdf9f))
+
 # [2.14.0](https://github.com/codesandbox/sandpack/compare/v2.13.10...v2.14.0) (2024-05-29)
 
 ### Bug Fixes
