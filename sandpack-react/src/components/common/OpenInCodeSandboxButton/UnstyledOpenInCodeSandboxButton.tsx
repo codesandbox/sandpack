@@ -45,7 +45,7 @@ const getFileParameters = (
 
 export const UnstyledOpenInCodeSandboxButton: React.FC<
   React.HtmlHTMLAttributes<unknown>
-> = ({ children, ...props }) => {
+> = (props) => {
   const { sandpack } = useSandpack();
 
   if (sandpack.exportOptions) {
