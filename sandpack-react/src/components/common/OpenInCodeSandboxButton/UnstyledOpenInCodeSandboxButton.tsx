@@ -63,10 +63,16 @@ export const ExportToWorkspaceButton: React.FC<
       throw new Error("Missing `apiToken` property");
     }
 
+    const normalizedFiles = Object.keys(state.files).reduce((prev, next) => {
+      const fileName = next.replace("/", "");
+      return { ...prev, [fileName]: state.files[next] };
+    }, {});
+
     const response = await fetch("https://api.codesandbox.io/sandbox", {
       method: "POST",
       body: JSON.stringify({
-        files: state.files,
+        template: state.environment,
+        files: normalizedFiles,
         privacy: state.exportOptions.privacy === "public" ? 0 : 2,
       }),
       headers: {
@@ -79,7 +85,7 @@ export const ExportToWorkspaceButton: React.FC<
     const data: { data: { alias: string } } = await response.json();
 
     window.open(
-      `https://codesandbox.io/p/sandbox/${data.data.alias}?file=/src/App.js&utm-source=storybook-addon`,
+      `https://codesandbox.io/p/sandbox/${data.data.alias}?file=/${state.activeFile}&utm-source=storybook-addon`,
       "_blank"
     );
   };
