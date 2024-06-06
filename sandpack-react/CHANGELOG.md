@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.2](https://github.com/codesandbox/sandpack/compare/v2.14.1...v2.14.2) (2024-06-06)
+
+### Bug Fixes
+
+- **export:** normalize files and pass template ([#1145](https://github.com/codesandbox/sandpack/issues/1145)) ([c3bc09d](https://github.com/codesandbox/sandpack/commit/c3bc09d11a0cf492c5211bf25d5916685aeae170))
+
 ## [2.14.1](https://github.com/codesandbox/sandpack/compare/v2.14.0...v2.14.1) (2024-06-05)
 
 ### Bug Fixes
