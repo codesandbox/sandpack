@@ -115,7 +115,8 @@ export type SandpackRuntimeMessage = BaseSandpackMessage &
           | {
               state: "downloaded_module";
               name: string;
-              totalPending: number;
+              total: number;
+              progress: number;
             }
           | {
               state: "starting";
