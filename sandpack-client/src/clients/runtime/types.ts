@@ -106,4 +106,19 @@ export type SandpackRuntimeMessage = BaseSandpackMessage &
     | SandboxTestMessage
     | { type: "sign-in"; teamId: string }
     | { type: "sign-out" }
+    | {
+        type: "dependencies";
+        data:
+          | {
+              state: "downloading_manifest";
+            }
+          | {
+              state: "downloaded_module";
+              name: string;
+              totalPending: number;
+            }
+          | {
+              state: "starting";
+            };
+      }
   );

@@ -56,7 +56,22 @@ export const useSandpackPreviewProgress = (
         }, timeout);
       }
 
-      if (message.type === "shell/progress" && !isReady) {
+      if (message.type === "dependencies") {
+        setLoadingMessage(() => {
+          switch (message.data.state) {
+            case "downloading_manifest":
+              return "[1/3] Downloading manifest";
+
+            case "downloaded_module":
+              return `[2/3] Downloaded ${message.data.name} (${message.data.progress}/${message.data.total})`;
+
+            case "starting":
+              return "[3/3] Starting";
+          }
+
+          return null;
+        });
+      } else if (message.type === "shell/progress" && !isReady) {
         if (!totalDependencies && message.data.state === "downloaded_module") {
           setTotalDependencies(message.data.totalPending);
         }
