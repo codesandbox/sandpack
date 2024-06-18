@@ -99,7 +99,6 @@ jobs:
       - name: Release | Lerna Publish
         run: lerna publish from-package --yes
 
-
       # Publish to GitHub packages too
 
       - name: "GitHub packages: Setup GitHub npm registry"
@@ -110,5 +109,4 @@ jobs:
       - name: "GitHub packages: Publish"
         run: |
           cd sandpack-client && npm publish --registry=https://npm.pkg.github.com && 
-          cd ../sandpack-react && npm publish --registry=https://npm.pkg.github.com && 
-          cd ../sandpack-themes && npm publish --registry=https://npm.pkg.github.com
+          cd ../sandpack-react && npm publish --registry=https://npm.pkg.github.com
