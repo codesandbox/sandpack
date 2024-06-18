@@ -24,11 +24,12 @@ Object.keys(SANDBOX_TEMPLATES).forEach((template) =>
       <SandpackProvider
         options={{
           bundlerTimeOut: 90000,
-          enableServiceWorker: true,
-          bundlerURL: isNodeStatic
-            ? undefined
-            : "https://1-17-1-{{suffix}}-sandpack.codesandbox.io/",
+          experimental_enableServiceWorker: true,
+          // bundlerURL: isNodeStatic
+          //   ? undefined
+          //   : "https://1-17-1-{{suffix}}-sandpack.codesandbox.io/",
         }}
+        // teamId="642af90c-4717-4730-bad3-e4c1e37ca5e2"
         template={template as SandpackPredefinedTemplate}
       >
         <SandpackLayout>

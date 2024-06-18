@@ -74,7 +74,7 @@ export interface ClientOptions {
   /**
    * Enable the service worker feature for sandpack-bundler
    */
-  enableServiceWorker?: boolean;
+  experimental_enableServiceWorker?: boolean;
 }
 
 export interface SandboxSetup {

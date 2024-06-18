@@ -65,8 +65,8 @@ export class SandpackRuntime extends SandpackClient {
     }
 
     const suffixes: string[] = [];
-    if (options.enableServiceWorker) {
-      suffixes.push(Math.random().toString(36).slice(2));
+    if (options.experimental_enableServiceWorker) {
+      suffixes.push(Math.random().toString(36).slice(4));
     }
     this.bundlerURL = this.bundlerURL.replace(
       SUFFIX_PLACEHOLDER,
@@ -251,7 +251,8 @@ export class SandpackRuntime extends SandpackClient {
       hasFileResolver: Boolean(this.options.fileResolver),
       disableDependencyPreprocessing:
         this.sandboxSetup.disableDependencyPreprocessing,
-      enableServiceWorker: this.options.enableServiceWorker,
+      experimental_enableServiceWorker:
+        this.options.experimental_enableServiceWorker,
       template:
         this.sandboxSetup.template ||
         getTemplate(packageJSON, normalizedModules),
