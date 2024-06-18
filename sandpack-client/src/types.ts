@@ -70,6 +70,11 @@ export interface ClientOptions {
    * and unlock a few capabilities
    */
   teamId?: string;
+
+  /**
+   * Enable the service worker feature for sandpack-bundler
+   */
+  experimental_enableServiceWorker?: boolean;
 }
 
 export interface SandboxSetup {
