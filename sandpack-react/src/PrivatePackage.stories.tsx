@@ -10,19 +10,17 @@ export const Basic: React.FC = () => {
   return (
     <div style={{ width: 800, margin: "auto" }}>
       <Sandpack
-        //         customSetup={{
-        //           dependencies: { "@codesandbox/test-package": "latest" },
-        //         }}
-        //         files={{
-        //           "App.js": `import { Button } from "@codesandbox/test-package";
+        customSetup={{
+          dependencies: { "@codesandbox/test-package": "latest" },
+        }}
+        files={{
+          "App.js": `import { Button } from "@codesandbox/test-package";
 
-        // export default function App() {
-        //   return <Button>Hello World</Button>
-        // }`,
-        //         }}
-        // options={{ bundlerURL: `http://localhost:3000` }}
-        options={{ bundlerURL: `https://2-1-0-sandpack.codesandbox.stream/` }}
-        teamId="6756547b-12fb-465e-82c8-b38a981f1f67"
+export default function App() {
+  return <Button>Hello World</Button>
+}`,
+        }}
+        teamId="642af90c-4717-4730-bad3-e4c1e37ca5e2"
         template="react"
       />
     </div>

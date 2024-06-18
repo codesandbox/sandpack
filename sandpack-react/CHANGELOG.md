@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.4](https://github.com/codesandbox/sandpack/compare/v2.14.3...v2.14.4) (2024-06-18)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+## [2.14.3](https://github.com/codesandbox/sandpack/compare/v2.14.2...v2.14.3) (2024-06-18)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
+## [2.14.2](https://github.com/codesandbox/sandpack/compare/v2.14.1...v2.14.2) (2024-06-06)
+
+### Bug Fixes
+
+- **export:** normalize files and pass template ([#1145](https://github.com/codesandbox/sandpack/issues/1145)) ([c3bc09d](https://github.com/codesandbox/sandpack/commit/c3bc09d11a0cf492c5211bf25d5916685aeae170))
+
+## [2.14.1](https://github.com/codesandbox/sandpack/compare/v2.14.0...v2.14.1) (2024-06-05)
+
+### Bug Fixes
+
+- **openCSB:** pass children to buttons ([#1144](https://github.com/codesandbox/sandpack/issues/1144)) ([62ba672](https://github.com/codesandbox/sandpack/commit/62ba6720fd0c8cef46f0cbe8bdad4083a29cdf9f))
+
+# [2.14.0](https://github.com/codesandbox/sandpack/compare/v2.13.10...v2.14.0) (2024-05-29)
+
+### Features
+
+- **export:** support private sandboxes in workspace ([#1136](https://github.com/codesandbox/sandpack/issues/1136)) ([1c7907e](https://github.com/codesandbox/sandpack/commit/1c7907e9219a7cf8bb5fd48e7f22048f900179da))
+
+## [2.13.10](https://github.com/codesandbox/sandpack/compare/v2.13.9...v2.13.10) (2024-04-26)
+
+### Bug Fixes
+
+- **codemirror:** make sure extensions & theme is applied when init ([#1126](https://github.com/codesandbox/sandpack/issues/1126)) ([9b4816e](https://github.com/codesandbox/sandpack/commit/9b4816e59902cc11c833e1ac1fd35aada5b93fa7))
+
 ## [2.13.9](https://github.com/codesandbox/sandpack/compare/v2.13.8...v2.13.9) (2024-04-26)
 
 ### Bug Fixes

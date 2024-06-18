@@ -241,6 +241,24 @@ export interface SandpackSetup {
    * ```
    */
   npmRegistries?: NpmRegistry[];
+
+  exportOptions?: SandpackExportOptions;
+}
+
+interface SandpackExportOptions {
+  /**
+   * Workspace API key from codesandbox.io/t/permissions.
+   * When set, the sandbox will be create inside the given workspace id.
+   */
+  apiToken: string;
+
+  /**
+   * The default visibility of the new sandboxes inside the workspace.
+   *
+   * @note Use `private` if there is a private registry or private NPM
+   * configured in your workspace.
+   */
+  privacy: "private" | "public";
 }
 
 /**
@@ -562,6 +580,7 @@ export interface SandpackState {
    */
   editorState: EditorState;
   teamId?: string;
+  exportOptions?: SandpackExportOptions;
   error: SandpackError | null;
   files: SandpackBundlerFiles;
   environment?: SandboxEnvironment;

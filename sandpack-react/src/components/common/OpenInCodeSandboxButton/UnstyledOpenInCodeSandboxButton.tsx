@@ -4,7 +4,7 @@ import LZString from "lz-string";
 import * as React from "react";
 
 import { useSandpack } from "../../../hooks/useSandpack";
-import type { SandboxEnvironment } from "../../../types";
+import type { SandboxEnvironment, SandpackState } from "../../../types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getParameters = (parameters: Record<string, any>): string =>
@@ -45,21 +45,78 @@ const getFileParameters = (
 
 export const UnstyledOpenInCodeSandboxButton: React.FC<
   React.HtmlHTMLAttributes<unknown>
-> = ({ children, ...props }) => {
+> = (props) => {
   const { sandpack } = useSandpack();
-  const formRef = React.useRef<HTMLFormElement>(null);
 
+  if (sandpack.exportOptions) {
+    return <ExportToWorkspaceButton state={sandpack} {...props} />;
+  }
+
+  return <RegularExportButton state={sandpack} {...props} />;
+};
+
+export const ExportToWorkspaceButton: React.FC<
+  React.HtmlHTMLAttributes<unknown> & { state: SandpackState }
+> = ({ children, state, ...props }) => {
+  const submit = async () => {
+    if (!state.exportOptions?.apiToken) {
+      throw new Error("Missing `apiToken` property");
+    }
+
+    const normalizedFiles = Object.keys(state.files).reduce((prev, next) => {
+      const fileName = next.replace("/", "");
+      return { ...prev, [fileName]: state.files[next] };
+    }, {});
+
+    const response = await fetch("https://api.codesandbox.io/sandbox", {
+      method: "POST",
+      body: JSON.stringify({
+        template: state.environment,
+        files: normalizedFiles,
+        privacy: state.exportOptions.privacy === "public" ? 0 : 2,
+      }),
+      headers: {
+        Authorization: `Bearer ${state.exportOptions.apiToken}`,
+        "Content-Type": "application/json",
+        "X-CSB-API-Version": "2023-07-01",
+      },
+    });
+
+    const data: { data: { alias: string } } = await response.json();
+
+    window.open(
+      `https://codesandbox.io/p/sandbox/${data.data.alias}?file=/${state.activeFile}&utm-source=storybook-addon`,
+      "_blank"
+    );
+  };
+
+  return (
+    <button
+      onClick={submit}
+      title="Export to workspace in CodeSandbox"
+      type="button"
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
+const RegularExportButton: React.FC<
+  React.HtmlHTMLAttributes<unknown> & { state: SandpackState }
+> = ({ children, state, ...props }) => {
+  const formRef = React.useRef<HTMLFormElement>(null);
   const [paramsValues, setParamsValues] = React.useState<URLSearchParams>();
 
   React.useEffect(
     function debounce() {
       const timer = setTimeout(() => {
-        const params = getFileParameters(sandpack.files, sandpack.environment);
+        const params = getFileParameters(state.files, state.environment);
 
         const searchParams = new URLSearchParams({
           parameters: params,
           query: new URLSearchParams({
-            file: sandpack.activeFile,
+            file: state.activeFile,
             utm_medium: "sandpack",
           }).toString(),
         });
@@ -71,7 +128,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
         clearTimeout(timer);
       };
     },
-    [sandpack.activeFile, sandpack.environment, sandpack.files]
+    [state.activeFile, state.environment, state.files]
   );
 
   /**
@@ -96,9 +153,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
           <input
             name="environment"
             type="hidden"
-            value={
-              sandpack.environment === "node" ? "server" : sandpack.environment
-            }
+            value={state.environment === "node" ? "server" : state.environment}
           />
           {Array.from(
             paramsValues as unknown as Array<[string, string]>,
@@ -115,7 +170,7 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
   return (
     <a
       href={`${CSB_URL}?${paramsValues?.toString()}&environment=${
-        sandpack.environment === "node" ? "server" : sandpack.environment
+        state.environment === "node" ? "server" : state.environment
       }`}
       rel="noreferrer noopener"
       target="_blank"

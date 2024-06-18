@@ -66,7 +66,7 @@ export default () => (
 `}
 </CodeBlock>
 
-`SandpackLayout` accepts a `theme` prop, so you can pass in your [custom theme object or a predefined theme](/themes).
+`SandpackProvider` accepts a `theme` prop, so you can pass in your [custom theme object or a predefined theme](/advanced-usage#sandpack-provider).
 
 ## Preview
 
@@ -575,19 +575,19 @@ export default () => (
 <details>
   <summary>`SandpackConsole` Options</summary>
 
-| Prop                    | Description                                                                              | Type                                  | Default              |
-| :---------------------- | :--------------------------------------------------------------------------------------- | :------------------------------------ | :------------------- |
-| `clientId`              |                                                                                          | `string`                              | `undefined`           |
-| `showHeader`            |                                                                                          | `boolean`                             | `true`               |
-| `showSyntaxError`       |                                                                                          | `boolean`                             | `false`              |
-| `showResetConsoleButton` |                                                                                         | `boolean`                             | `true`               |
-| `showRestartButton`     |                                                                                          | `boolean`                             | `true`               |
-| `maxMessageCount`       |                                                                                          | `number`                              | `800`                |
-| `onLogsChange`          |                                                                                          | `(logs: SandpackConsoleData) => void` |                      |
-| `resetOnPreviewRestart` | Reset the console list on every preview restart                                          | `boolean`                             | `false`              |
-| `ref`                   | Make possible to imperatively interact with the console component                        | `SandpackConsoleRef`                  | `SandpackConsoleRef` |
-| `standalone`            | It runs its sandpack-client, meaning it doesn't depend on a `SandpackPreview` component. | `boolean`                             | `false`              |
-| `actionsChildren`       |                                                                                          | JSX.Element                           | `null`               |
+| Prop                     | Description                                                                              | Type                                  | Default              |
+| :----------------------- | :--------------------------------------------------------------------------------------- | :------------------------------------ | :------------------- |
+| `clientId`               |                                                                                          | `string`                              | `undefined`          |
+| `showHeader`             |                                                                                          | `boolean`                             | `true`               |
+| `showSyntaxError`        |                                                                                          | `boolean`                             | `false`              |
+| `showResetConsoleButton` |                                                                                          | `boolean`                             | `true`               |
+| `showRestartButton`      |                                                                                          | `boolean`                             | `true`               |
+| `maxMessageCount`        |                                                                                          | `number`                              | `800`                |
+| `onLogsChange`           |                                                                                          | `(logs: SandpackConsoleData) => void` |                      |
+| `resetOnPreviewRestart`  | Reset the console list on every preview restart                                          | `boolean`                             | `false`              |
+| `ref`                    | Make possible to imperatively interact with the console component                        | `SandpackConsoleRef`                  | `SandpackConsoleRef` |
+| `standalone`             | It runs its sandpack-client, meaning it doesn't depend on a `SandpackPreview` component. | `boolean`                             | `false`              |
+| `actionsChildren`        |                                                                                          | JSX.Element                           | `null`               |
 
 </details>
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.4](https://github.com/codesandbox/sandpack/compare/v2.14.3...v2.14.4) (2024-06-18)
+
+### Bug Fixes
+
+- **client:** bump version ([#1151](https://github.com/codesandbox/sandpack/issues/1151)) ([a2e56c0](https://github.com/codesandbox/sandpack/commit/a2e56c0bcdacb242295fb545ab8d08231adfba21))
+
+## [2.14.3](https://github.com/codesandbox/sandpack/compare/v2.14.2...v2.14.3) (2024-06-18)
+
+### Bug Fixes
+
+- **preview:** allows clipboard api ([#1149](https://github.com/codesandbox/sandpack/issues/1149)) ([7350364](https://github.com/codesandbox/sandpack/commit/7350364b3dbf933ac04686be284222994335c001))
+
 ## [2.13.8](https://github.com/codesandbox/sandpack/compare/v2.13.7...v2.13.8) (2024-04-11)
 
 ### Bug Fixes

@@ -78,7 +78,7 @@ export const useFiles: UseFiles = (props) => {
           ...files,
           [pathOrFiles]: {
             ...files[pathOrFiles],
-            code
+            code,
           },
         };
       } else if (typeof pathOrFiles === "object") {

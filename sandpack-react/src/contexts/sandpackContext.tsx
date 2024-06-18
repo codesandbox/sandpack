@@ -32,6 +32,8 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
         ...clientOperations,
 
         autoReload: props.options?.autoReload ?? true,
+        teamId: props?.teamId,
+        exportOptions: props?.customSetup?.exportOptions,
 
         listen: addListener,
         dispatch: dispatchMessage,
