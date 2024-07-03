@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.5](https://github.com/codesandbox/sandpack/compare/v2.14.4...v2.14.5) (2024-07-03)
+
+### Bug Fixes
+
+- **bundler:** use latest bundler version ([#1155](https://github.com/codesandbox/sandpack/issues/1155)) ([260cb35](https://github.com/codesandbox/sandpack/commit/260cb35be7a669cf337533a0c1b970f04bc8571c))
+
 ## [2.14.4](https://github.com/codesandbox/sandpack/compare/v2.14.3...v2.14.4) (2024-06-18)
 
 ### Bug Fixes
