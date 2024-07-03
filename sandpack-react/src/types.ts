@@ -406,7 +406,7 @@ export type SandpackThemeProp =
  */
 
 export type TemplateFiles<Name extends SandpackPredefinedTemplate> =
-  keyof typeof SANDBOX_TEMPLATES[Name]["files"];
+  keyof (typeof SANDBOX_TEMPLATES)[Name]["files"];
 
 export interface SandpackInternal {
   <
@@ -480,6 +480,7 @@ export interface SandpackInternalOptions<
   fileResolver?: FileResolver;
   externalResources?: string[];
   classes?: Record<string, string>;
+  experimental_enableServiceWorker?: boolean;
 }
 
 interface SandpackInternalProps<
