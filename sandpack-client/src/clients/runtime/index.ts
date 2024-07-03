@@ -23,8 +23,15 @@ import { SandpackClient } from "../base";
 
 import Protocol from "./file-resolver-protocol";
 import { IFrameProtocol } from "./iframe-protocol";
-import type { SandpackRuntimeMessage } from "./types";
-import { getTemplate } from "./utils";
+import { EXTENSIONS_MAP } from "./mime";
+import type {
+  IPreviewRequestMessage,
+  IPreviewResponseMessage} from "./types";
+import {
+  CHANNEL_NAME,
+  type SandpackRuntimeMessage,
+} from "./types";
+import { getExtension, getTemplate } from "./utils";
 
 const SUFFIX_PLACEHOLDER = "-{{suffix}}";
 
@@ -164,6 +171,86 @@ export class SandpackRuntime extends SandpackClient {
         }
       }
     );
+
+    if (options.experimental_enableServiceWorker) {
+      this.serviceWorkerHandshake();
+    }
+  }
+
+  private serviceWorkerHandshake() {
+    const channel = new MessageChannel();
+
+    const iframeContentWindow = this.iframe.contentWindow;
+    if (!iframeContentWindow) {
+      throw new Error("Could not get iframe contentWindow");
+    }
+
+    const port = channel.port1;
+    port.onmessage = (evt: MessageEvent) => {
+      if (typeof evt.data === "object" && evt.data.$channel === CHANNEL_NAME) {
+        switch (evt.data.$type) {
+          case "preview/ready":
+            break;
+          case "preview/request":
+            const responseMessage = this.handleWorkerRequest(evt.data);
+
+            console.debug(`[client]:`, responseMessage);
+
+            port.postMessage(responseMessage);
+            break;
+        }
+      }
+    };
+
+    this.iframe.onload = () => {
+      const initMsg = {
+        $channel: CHANNEL_NAME,
+        $type: "preview/init",
+      };
+
+      iframeContentWindow.postMessage(initMsg, "*", [channel.port2]);
+    };
+  }
+
+  private handleWorkerRequest(
+    request: IPreviewRequestMessage
+  ): IPreviewResponseMessage {
+    try {
+      const filepath = new URL(request.url, this.bundlerURL).pathname;
+
+      const headers: Record<string, string> = {};
+
+      const files = this.getFiles();
+      const body = files[filepath].code;
+
+      if (!headers["Content-Type"]) {
+        const extension = getExtension(filepath);
+        const foundMimetype = EXTENSIONS_MAP.get(extension);
+        if (foundMimetype) {
+          headers["Content-Type"] = foundMimetype;
+        }
+      }
+
+      return {
+        $channel: CHANNEL_NAME,
+        $type: "preview/response",
+        id: request.id,
+        headers,
+        status: 200,
+        body,
+      };
+    } catch (err) {
+      return {
+        $channel: CHANNEL_NAME,
+        $type: "preview/response",
+        id: request.id,
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+        },
+        status: 404,
+        body: "File not found",
+      };
+    }
   }
 
   public setLocationURLIntoIFrame(): void {

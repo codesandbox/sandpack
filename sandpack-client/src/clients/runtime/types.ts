@@ -108,3 +108,21 @@ export type SandpackRuntimeMessage = BaseSandpackMessage &
     | { type: "sign-in"; teamId: string }
     | { type: "sign-out" }
   );
+export const CHANNEL_NAME = "$CSB_RELAY";
+
+export interface IPreviewRequestMessage {
+  $channel: typeof CHANNEL_NAME;
+  $type: "preview/request";
+  id: string;
+  method: string;
+  url: string;
+}
+
+export interface IPreviewResponseMessage {
+  $channel: typeof CHANNEL_NAME;
+  $type: "preview/response";
+  id: string;
+  status: number;
+  headers: Record<string, string>;
+  body: string | Uint8Array;
+}

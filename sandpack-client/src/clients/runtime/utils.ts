@@ -180,3 +180,13 @@ export function getTemplate(
 
   return undefined;
 }
+
+export function getExtension(filepath: string): string {
+  const parts = filepath.split(".");
+  if (parts.length <= 1) {
+    return "";
+  } else {
+    const ext = parts[parts.length - 1];
+    return ext;
+  }
+}

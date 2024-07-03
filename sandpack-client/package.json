@@ -58,6 +58,7 @@
     "@codesandbox/nodebox": "0.1.8",
     "buffer": "^6.0.3",
     "dequal": "^2.0.2",
+    "mime-db": "^1.52.0",
     "outvariant": "1.4.0",
     "static-browser-server": "1.0.3"
   },
