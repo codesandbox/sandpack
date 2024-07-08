@@ -1,13 +1,13 @@
 /**
  * @jest-environment jsdom
  */
+import type { SandpackBundlerFile } from "@codesandbox/sandpack-client/src";
 import { renderHook, act } from "@testing-library/react-hooks";
 
 import { VANILLA_TEMPLATE } from "../../templates";
 import { getSandpackStateFromProps } from "../../utils/sandpackUtils";
 
 import { useFiles } from "./useFiles";
-import { SandpackBundlerFile } from "@codesandbox/sandpack-client/src";
 
 describe(useFiles, () => {
   it("should returns an initial state, which is the default template", () => {

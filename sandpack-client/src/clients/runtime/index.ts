@@ -24,13 +24,8 @@ import { SandpackClient } from "../base";
 import Protocol from "./file-resolver-protocol";
 import { IFrameProtocol } from "./iframe-protocol";
 import { EXTENSIONS_MAP } from "./mime";
-import type {
-  IPreviewRequestMessage,
-  IPreviewResponseMessage} from "./types";
-import {
-  CHANNEL_NAME,
-  type SandpackRuntimeMessage,
-} from "./types";
+import type { IPreviewRequestMessage, IPreviewResponseMessage } from "./types";
+import { CHANNEL_NAME, type SandpackRuntimeMessage } from "./types";
 import { getExtension, getTemplate } from "./utils";
 
 const SUFFIX_PLACEHOLDER = "-{{suffix}}";
@@ -190,13 +185,11 @@ export class SandpackRuntime extends SandpackClient {
       if (typeof evt.data === "object" && evt.data.$channel === CHANNEL_NAME) {
         switch (evt.data.$type) {
           case "preview/ready":
+            // no op for now
             break;
           case "preview/request":
-            const responseMessage = this.handleWorkerRequest(evt.data);
+            this.handleWorkerRequest(evt.data, port);
 
-            console.debug(`[client]:`, responseMessage);
-
-            port.postMessage(responseMessage);
             break;
         }
       }
@@ -213,8 +206,9 @@ export class SandpackRuntime extends SandpackClient {
   }
 
   private handleWorkerRequest(
-    request: IPreviewRequestMessage
-  ): IPreviewResponseMessage {
+    request: IPreviewRequestMessage,
+    port: MessagePort
+  ) {
     try {
       const filepath = new URL(request.url, this.bundlerURL).pathname;
 
@@ -231,7 +225,7 @@ export class SandpackRuntime extends SandpackClient {
         }
       }
 
-      return {
+      const responseMessage: IPreviewResponseMessage = {
         $channel: CHANNEL_NAME,
         $type: "preview/response",
         id: request.id,
@@ -239,8 +233,10 @@ export class SandpackRuntime extends SandpackClient {
         status: 200,
         body,
       };
+
+      port.postMessage(responseMessage);
     } catch (err) {
-      return {
+      const responseMessage: IPreviewResponseMessage = {
         $channel: CHANNEL_NAME,
         $type: "preview/response",
         id: request.id,
@@ -250,6 +246,8 @@ export class SandpackRuntime extends SandpackClient {
         status: 404,
         body: "File not found",
       };
+
+      port.postMessage(responseMessage);
     }
   }
 

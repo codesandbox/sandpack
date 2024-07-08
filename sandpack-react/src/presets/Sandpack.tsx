@@ -72,6 +72,7 @@ export const Sandpack: SandpackInternal = ({
     externalResources: options.externalResources,
     logLevel: options.logLevel,
     classes: options.classes,
+    experimental_enableServiceWorker: options.experimental_enableServiceWorker,
   };
 
   /**

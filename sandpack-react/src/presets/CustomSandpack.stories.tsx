@@ -56,6 +56,7 @@ return <>
         experimental_enableServiceWorker: true,
         bundlerURL: "https://f6lh85-3000.csb.app",
       }}
+      template="react"
     />
   );
 };
