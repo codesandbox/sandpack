@@ -51,7 +51,7 @@
       "command": "yarn workspace @codesandbox/sandpack-react build"
     },
     "dev:website-docs": {
-      "name": "Documentation",
+      "name": "Dev: website docs",
       "command": "yarn dev:docs"
     },
     "dev:sandpack-react": {
