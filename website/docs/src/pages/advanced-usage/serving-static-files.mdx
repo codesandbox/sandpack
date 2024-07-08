@@ -1,0 +1,27 @@
+# Serving static files
+
+Sandpack is introducing beta support to serve static files inside each Sandpack instance, meaning that by enabling the following flag, it's possible to use files such as SVG, fonts, images, etc.
+
+By enabling this feature, Sandpack will register a new Service Worker in the iframe, intercepting requests and sending back the content from your  Sandpack instance. Before using it in production, you should carefully test your sandboxes and keep in mind that the current implementation might have limitations and unknown issues.
+
+**Limitation:** All static files served by the Sandpack should be placed inside the /public folder. If this doesn't work for you, please open a new issue in GitHub.
+
+<br />
+
+```jsx
+<SandpackProvider 
+  options={{
+    experimental_enableServiceWorker: true,
+  }}
+>
+  {...}
+</SandpackProvider>
+
+// or
+
+<Sandpack
+  options={{
+    experimental_enableServiceWorker: true,
+  }}
+/>
+```
