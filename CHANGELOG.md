@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.1](https://github.com/codesandbox/sandpack/compare/v2.16.0...v2.16.1) (2024-07-08)
+
+### Bug Fixes
+
+- **loading:** update bundler to consume the correct loading message ([#1157](https://github.com/codesandbox/sandpack/issues/1157)) ([7a70999](https://github.com/codesandbox/sandpack/commit/7a7099991e8831a5ca76b56cada5ec06b17aa339))
+
 # [2.16.0](https://github.com/codesandbox/sandpack/compare/v2.15.0...v2.16.0) (2024-07-08)
 
 ### Features
