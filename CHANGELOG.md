@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/codesandbox/sandpack/compare/v2.14.5...v2.15.0) (2024-07-08)
+
+### Features
+
+- **react:** enable use client directive ([#1156](https://github.com/codesandbox/sandpack/issues/1156)) ([3b4a6ec](https://github.com/codesandbox/sandpack/commit/3b4a6ecc1d9a80b91d64d00f72ca71482377e8db))
+
 ## [2.14.5](https://github.com/codesandbox/sandpack/compare/v2.14.4...v2.14.5) (2024-07-03)
 
 ### Bug Fixes
