@@ -1,5 +1,3 @@
-"use client";
-
 import { Sandpack } from "@codesandbox/sandpack-react";
 import { githubLight, sandpackDark } from "@codesandbox/sandpack-themes";
 /**
