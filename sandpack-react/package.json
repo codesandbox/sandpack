@@ -88,6 +88,7 @@
     "astring": "^1.8.4",
     "babel-loader": "^7.1.5",
     "rollup-plugin-filesize": "^10.0.0",
+    "rollup-plugin-preserve-directives": "^0.4.0",
     "storybook": "^7.5.1",
     "typescript": "^5.2.2"
   },
