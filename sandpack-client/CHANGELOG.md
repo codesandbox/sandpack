@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.17.0](https://github.com/codesandbox/sandpack/compare/v2.16.1...v2.17.0) (2024-07-09)
+
+### Features
+
+- **client:** enable SW in the bundler ([#1159](https://github.com/codesandbox/sandpack/issues/1159)) ([36e580b](https://github.com/codesandbox/sandpack/commit/36e580b5b76ee34bb722027b35302fa6c75e521e))
+
 ## [2.16.1](https://github.com/codesandbox/sandpack/compare/v2.16.0...v2.16.1) (2024-07-08)
 
 ### Bug Fixes
