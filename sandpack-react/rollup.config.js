@@ -3,7 +3,6 @@ const commonjs = require("@rollup/plugin-commonjs");
 const replace = require("@rollup/plugin-replace");
 const typescript = require("@rollup/plugin-typescript");
 const filesize = require("rollup-plugin-filesize");
-const { preserveDirectives } = require("rollup-plugin-preserve-directives");
 
 const pkg = require("./package.json");
 const generateUnstyledTypes = require("./scripts/rollup-generate-unstyled-types");
@@ -32,8 +31,7 @@ const configBase = [
         },
       }),
       typescript({ tsconfig: "./tsconfig.json" }),
-      filesize(),
-      preserveDirectives({ suppressPreserveModulesWarning: true })
+      filesize()
     ),
     output: [
       {
