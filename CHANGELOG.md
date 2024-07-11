@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.1](https://github.com/codesandbox/sandpack/compare/v2.17.0...v2.17.1) (2024-07-11)
+
+### Bug Fixes
+
+- **client:** update bundler ([#1160](https://github.com/codesandbox/sandpack/issues/1160)) ([a0c4209](https://github.com/codesandbox/sandpack/commit/a0c4209ce1172b2a9cdadd21dc3007d7f7cbfb1f))
+
 # [2.17.0](https://github.com/codesandbox/sandpack/compare/v2.16.1...v2.17.0) (2024-07-09)
 
 ### Features
