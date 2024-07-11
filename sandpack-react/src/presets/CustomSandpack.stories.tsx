@@ -45,16 +45,17 @@ export const ExperimentalServiceWorker: React.FC = () => {
 </svg>
   `,
         "/App.js": `export default function App() {
-return <>
-  <h1>Hello world</h1>
-  <img width="200" src="/public/logo.svg" />
-</>
+  return (
+    <>
+      <h1>Hello React</h1>
+      <img width="100" src="/public/logo.svg" />
+    </>
+  );
 }
-  `,
+        `,
       }}
       options={{
         experimental_enableServiceWorker: true,
-        bundlerURL: "https://f6lh85-3000.csb.app",
       }}
       template="react"
     />
