@@ -85,14 +85,14 @@ export const findStartScriptPackageJson = (
         }
 
         if (item.type === TokenType.Command && commandNotFoundYet) {
-          command = item.value;
+          command = item.value!;
         }
 
         if (
           item.type === TokenType.Argument ||
           (!commandNotFoundYet && item.type === TokenType.Command)
         ) {
-          args.push(item.value);
+          args.push(item.value!);
         }
 
         // TODO: support TokenType.AND, TokenType.OR, TokenType.PIPE

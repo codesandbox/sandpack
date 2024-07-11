@@ -1,0 +1,67 @@
+import { CodeBlock } from "../../components/CodeBlock";
+
+# Serving static files
+
+Sandpack is introducing beta support for serving static files inside each Sandpack instance. Files such as SVGs, fonts, images, etc., can now be used by enabling the flag specified below.
+
+By enabling this feature, Sandpack will register a new Service Worker in the iframe, intercepting requests and sending back the content from your Sandpack instance. Before using it in production, carefully test your Sandboxes and remember that the current implementation might have limitations and unknown issues.
+
+**Limitation:** All static files served by Sandpack should be placed inside the `/public` folder. If this doesn't work for you, please open a new issue on [GitHub](https://github.com/codesandbox/sandpack/issues).
+
+<br />
+
+```jsx
+<SandpackProvider
+  options={{
+    experimental_enableServiceWorker: true,
+  }}
+>
+  {...}
+</SandpackProvider>
+```
+
+<br />
+```jsx
+<Sandpack
+  options={{
+    experimental_enableServiceWorker: true,
+  }}
+/>
+```
+
+## Example
+
+<CodeBlock stack>
+{`import { Sandpack } from "@codesandbox/sandpack-react";
+
+export default () => (
+  <Sandpack
+    files={{
+      "/public/logo.svg": \`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348">
+<title>React Logo</title>
+<circle cx="0" cy="0" r="2.05" fill="#61dafb"/>
+<g stroke="#61dafb" stroke-width="1" fill="none">
+  <ellipse rx="11" ry="4.2"/>
+  <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+  <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+</g>
+</svg>
+\`,
+      "/App.js": \`export default function App() {
+  return (
+    <>
+      <h1>Hello React</h1>
+      <img width="100" src="/public/logo.svg" />
+    </>
+  );
+}
+      \`,
+    }}
+    options={{
+      experimental_enableServiceWorker: true,
+    }}
+    template="react"
+  />
+);
+`}
+</CodeBlock>

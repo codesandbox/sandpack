@@ -23,8 +23,12 @@ import { SandpackClient } from "../base";
 
 import Protocol from "./file-resolver-protocol";
 import { IFrameProtocol } from "./iframe-protocol";
-import type { SandpackRuntimeMessage } from "./types";
-import { getTemplate } from "./utils";
+import { EXTENSIONS_MAP } from "./mime";
+import type { IPreviewRequestMessage, IPreviewResponseMessage } from "./types";
+import { CHANNEL_NAME, type SandpackRuntimeMessage } from "./types";
+import { getExtension, getTemplate } from "./utils";
+
+const SUFFIX_PLACEHOLDER = "-{{suffix}}";
 
 const BUNDLER_URL =
   process.env.CODESANDBOX_ENV === "development"
@@ -32,7 +36,7 @@ const BUNDLER_URL =
     : `https://${process.env.PACKAGE_VERSION?.replace(
         /\./g,
         "-"
-      )}-sandpack.codesandbox.io/`;
+      )}${SUFFIX_PLACEHOLDER}-sandpack.codesandbox.io/`;
 
 export class SandpackRuntime extends SandpackClient {
   fileResolverProtocol?: Protocol;
@@ -61,6 +65,15 @@ export class SandpackRuntime extends SandpackClient {
         this.bundlerURL.replace("https://", "https://" + options.teamId + "-") +
         `?cache=${Date.now()}`;
     }
+
+    const suffixes: string[] = [];
+    if (options.experimental_enableServiceWorker) {
+      suffixes.push(Math.random().toString(36).slice(4));
+    }
+    this.bundlerURL = this.bundlerURL.replace(
+      SUFFIX_PLACEHOLDER,
+      suffixes.length ? `-${suffixes.join("-")}` : ""
+    );
 
     this.bundlerState = undefined;
     this.errors = [];
@@ -153,6 +166,89 @@ export class SandpackRuntime extends SandpackClient {
         }
       }
     );
+
+    if (options.experimental_enableServiceWorker) {
+      this.serviceWorkerHandshake();
+    }
+  }
+
+  private serviceWorkerHandshake() {
+    const channel = new MessageChannel();
+
+    const iframeContentWindow = this.iframe.contentWindow;
+    if (!iframeContentWindow) {
+      throw new Error("Could not get iframe contentWindow");
+    }
+
+    const port = channel.port1;
+    port.onmessage = (evt: MessageEvent) => {
+      if (typeof evt.data === "object" && evt.data.$channel === CHANNEL_NAME) {
+        switch (evt.data.$type) {
+          case "preview/ready":
+            // no op for now
+            break;
+          case "preview/request":
+            this.handleWorkerRequest(evt.data, port);
+
+            break;
+        }
+      }
+    };
+
+    this.iframe.onload = () => {
+      const initMsg = {
+        $channel: CHANNEL_NAME,
+        $type: "preview/init",
+      };
+
+      iframeContentWindow.postMessage(initMsg, "*", [channel.port2]);
+    };
+  }
+
+  private handleWorkerRequest(
+    request: IPreviewRequestMessage,
+    port: MessagePort
+  ) {
+    try {
+      const filepath = new URL(request.url, this.bundlerURL).pathname;
+
+      const headers: Record<string, string> = {};
+
+      const files = this.getFiles();
+      const body = files[filepath].code;
+
+      if (!headers["Content-Type"]) {
+        const extension = getExtension(filepath);
+        const foundMimetype = EXTENSIONS_MAP.get(extension);
+        if (foundMimetype) {
+          headers["Content-Type"] = foundMimetype;
+        }
+      }
+
+      const responseMessage: IPreviewResponseMessage = {
+        $channel: CHANNEL_NAME,
+        $type: "preview/response",
+        id: request.id,
+        headers,
+        status: 200,
+        body,
+      };
+
+      port.postMessage(responseMessage);
+    } catch (err) {
+      const responseMessage: IPreviewResponseMessage = {
+        $channel: CHANNEL_NAME,
+        $type: "preview/response",
+        id: request.id,
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+        },
+        status: 404,
+        body: "File not found",
+      };
+
+      port.postMessage(responseMessage);
+    }
   }
 
   public setLocationURLIntoIFrame(): void {
@@ -240,6 +336,8 @@ export class SandpackRuntime extends SandpackClient {
       hasFileResolver: Boolean(this.options.fileResolver),
       disableDependencyPreprocessing:
         this.sandboxSetup.disableDependencyPreprocessing,
+      experimental_enableServiceWorker:
+        this.options.experimental_enableServiceWorker,
       template:
         this.sandboxSetup.template ||
         getTemplate(packageJSON, normalizedModules),
