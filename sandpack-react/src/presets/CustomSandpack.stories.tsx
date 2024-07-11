@@ -55,6 +55,7 @@ export const ExperimentalServiceWorker: React.FC = () => {
         `,
       }}
       options={{
+        // bundlerURL: "https://7vv2xg-3000.csb.app",
         experimental_enableServiceWorker: true,
       }}
       template="react"
