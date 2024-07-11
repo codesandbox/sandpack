@@ -7,6 +7,7 @@ import {
   SandpackProvider,
   useSandpack,
 } from "@codesandbox/sandpack-react";
+import type { SandpackOptions } from "@codesandbox/sandpack-react";
 import { sandpackDark } from "@codesandbox/sandpack-themes";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -31,11 +32,11 @@ const ListenerResize: React.FC<{ onResize: (height: number) => void }> = ({
   return null;
 };
 
-export const CodeBlock: React.FC<{ children: string; stack: boolean }> = ({
-  children,
-  stack,
-  ...props
-}) => {
+export const CodeBlock: React.FC<{
+  children: string;
+  stack: boolean;
+  options?: SandpackOptions;
+}> = ({ children, stack, ...props }) => {
   const { theme } = useTheme();
   const [height, setHeight] = useState(150);
 
@@ -54,7 +55,7 @@ export const CodeBlock: React.FC<{ children: string; stack: boolean }> = ({
   const sandpackProps = {
     customSetup: {
       dependencies: {
-        "@codesandbox/sandpack-react": "^2.18.0",
+        "@codesandbox/sandpack-react": "2.18.0",
         "@codesandbox/sandpack-themes": "latest",
       },
     },
@@ -63,7 +64,7 @@ export const CodeBlock: React.FC<{ children: string; stack: boolean }> = ({
     },
     template: "react" as const,
     theme: getTheme(),
-    options: { showLineNumbers: true, initMode: "immediate" },
+    options: { showLineNumbers: true, initMode: "immediate", ...props.options },
     key: children,
     ...props,
   } as any;
