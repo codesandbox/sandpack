@@ -1,21 +1,5 @@
 ## What kind of change does this pull request introduce?
 
-<!-- Is it a Bug fix, feature, documentation update... -->
-
-## What is the current behavior?
-
-<!-- You can also link to an open issue here -->
-
-## What is the new behavior?
-
-<!-- if this is a feature change -->
-
-## What steps did you take to test this? This is required before we can merge, make sure to test the flow you've updated.
-
-1. Step A
-2. Step B
-3. Step C
-
 ## Checklist
 
 <!-- Have you done all of these things?  -->
@@ -26,7 +10,6 @@
 - [ ] Storybook (if applicable);
 - [ ] Tests;
 - [ ] Ready to be merged;
-
 
 <!-- feel free to add additional comments -->
 <!-- Thank you for contributing! -->
