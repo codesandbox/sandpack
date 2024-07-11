@@ -54,7 +54,7 @@ export const CodeBlock: React.FC<{ children: string; stack: boolean }> = ({
   const sandpackProps = {
     customSetup: {
       dependencies: {
-        "@codesandbox/sandpack-react": "latest",
+        "@codesandbox/sandpack-react": "^2.18.0",
         "@codesandbox/sandpack-themes": "latest",
       },
     },
