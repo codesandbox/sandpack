@@ -195,14 +195,18 @@ export class SandpackRuntime extends SandpackClient {
       }
     };
 
-    this.iframe.onload = () => {
+    const sendMessage = () => {
       const initMsg = {
         $channel: CHANNEL_NAME,
         $type: "preview/init",
       };
 
       iframeContentWindow.postMessage(initMsg, "*", [channel.port2]);
+
+      this.iframe.removeEventListener("load", sendMessage);
     };
+
+    this.iframe.addEventListener("load", sendMessage);
   }
 
   private handleWorkerRequest(
@@ -362,6 +366,10 @@ export class SandpackRuntime extends SandpackClient {
      */
     if (message.type === "refresh") {
       this.setLocationURLIntoIFrame();
+
+      if (this.options.experimental_enableServiceWorker) {
+        this.serviceWorkerHandshake();
+      }
     }
 
     this.iframeProtocol.dispatch(message);
