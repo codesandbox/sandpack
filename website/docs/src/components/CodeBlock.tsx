@@ -55,7 +55,7 @@ export const CodeBlock: React.FC<{
   const sandpackProps = {
     customSetup: {
       dependencies: {
-        "@codesandbox/sandpack-react": "2.18.0",
+        "@codesandbox/sandpack-react": "2.18.1",
         "@codesandbox/sandpack-themes": "latest",
       },
     },
