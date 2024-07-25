@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.18.1](https://github.com/codesandbox/sandpack/compare/v2.18.0...v2.18.1) (2024-07-25)
+
+### Bug Fixes
+
+- **docs:** update sandpack version ([#1162](https://github.com/codesandbox/sandpack/issues/1162)) ([55cb609](https://github.com/codesandbox/sandpack/commit/55cb6092b7436351f9adcc18ea0f966a1e416c28))
+- **sw:** assign new channel port on reload ([#1166](https://github.com/codesandbox/sandpack/issues/1166)) ([2d92bea](https://github.com/codesandbox/sandpack/commit/2d92bea4a9754373027455494050110d91bd13fc))
+
 # [2.18.0](https://github.com/codesandbox/sandpack/compare/v2.17.1...v2.18.0) (2024-07-11)
 
 ### Features
