@@ -13,17 +13,17 @@ const MAX_ID_LENGTH = 9;
 export const useAsyncSandpackId = (files: SandpackBundlerFiles) => {
   if (typeof useReactId === "function") {
     /* eslint-disable-next-line react-hooks/rules-of-hooks */
-    const id = useReactId();
+    const reactDomId = useReactId();
     return async () => {
       const allCode = Object.entries(files)
         .map((path, code) => path + "|" + code)
         .join("|||");
-      const sha = await generateShortId(allCode + id);
+      const sha = await generateShortId(allCode + reactDomId);
 
       return ensureLength(sha.replace(/:/g, "sp"), MAX_ID_LENGTH);
     };
   } else {
-    return generateRandomId();
+    return ensureLength(generateRandomId(), MAX_ID_LENGTH);
   }
 };
 
