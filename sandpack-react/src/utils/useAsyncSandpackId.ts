@@ -23,7 +23,7 @@ export const useAsyncSandpackId = (files: SandpackBundlerFiles) => {
       return ensureLength(sha.replace(/:/g, "sp"), MAX_ID_LENGTH);
     };
   } else {
-    return ensureLength(generateRandomId(), MAX_ID_LENGTH);
+    return () => ensureLength(generateRandomId(), MAX_ID_LENGTH);
   }
 };
 
