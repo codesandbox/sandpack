@@ -174,6 +174,8 @@ export const useClient: UseClient = (
           teamId,
           experimental_enableServiceWorker:
             !!options?.experimental_enableServiceWorker,
+          experimental_stableServiceWorkerId:
+            options?.experimental_stableServiceWorkerId,
           sandboxId,
         }
       );
