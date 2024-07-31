@@ -73,8 +73,8 @@ export const Sandpack: SandpackInternal = ({
     logLevel: options.logLevel,
     classes: options.classes,
     experimental_enableServiceWorker: options.experimental_enableServiceWorker,
-    experimental_stableServiceWorkerId:
-      options.experimental_stableServiceWorkerId,
+    experimental_enableStableServiceWorkerId:
+      options.experimental_enableStableServiceWorkerId,
   };
 
   /**

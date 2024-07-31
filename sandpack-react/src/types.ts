@@ -481,7 +481,7 @@ export interface SandpackInternalOptions<
   externalResources?: string[];
   classes?: Record<string, string>;
   experimental_enableServiceWorker?: boolean;
-  experimental_stableServiceWorkerId?: string;
+  experimental_enableStableServiceWorkerId?: boolean;
 }
 
 interface SandpackInternalProps<

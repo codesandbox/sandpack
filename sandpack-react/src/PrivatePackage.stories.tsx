@@ -34,8 +34,8 @@ export default function App() {
 }`,
         }}
         options={{
-          // bundlerURL: "https://t6jfwh-3000.csb.app/",
           experimental_enableServiceWorker: true,
+          experimental_enableStableServiceWorkerId: true,
         }}
         teamId="642af90c-4717-4730-bad3-e4c1e37ca5e2"
         template="react"
