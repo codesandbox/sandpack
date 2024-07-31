@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.18.2](https://github.com/codesandbox/sandpack/compare/v2.18.1...v2.18.2) (2024-07-31)
+
+### Bug Fixes
+
+- **client:** use stable sw id ([#1169](https://github.com/codesandbox/sandpack/issues/1169)) ([8c15b85](https://github.com/codesandbox/sandpack/commit/8c15b85018fae9d55bfad86922c736694e45848f))
+
 ## [2.18.1](https://github.com/codesandbox/sandpack/compare/v2.18.0...v2.18.1) (2024-07-25)
 
 ### Bug Fixes
