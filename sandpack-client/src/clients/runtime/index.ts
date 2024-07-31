@@ -58,22 +58,7 @@ export class SandpackRuntime extends SandpackClient {
   ) {
     super(selector, sandboxSetup, options);
 
-    this.bundlerURL = options.bundlerURL || BUNDLER_URL;
-
-    if (options.teamId) {
-      this.bundlerURL =
-        this.bundlerURL.replace("https://", "https://" + options.teamId + "-") +
-        `?cache=${Date.now()}`;
-    }
-
-    const suffixes: string[] = [];
-    if (options.experimental_enableServiceWorker) {
-      suffixes.push(Math.random().toString(36).slice(4));
-    }
-    this.bundlerURL = this.bundlerURL.replace(
-      SUFFIX_PLACEHOLDER,
-      suffixes.length ? `-${suffixes.join("-")}` : ""
-    );
+    this.bundlerURL = this.createBundlerURL();
 
     this.bundlerState = undefined;
     this.errors = [];
@@ -170,6 +155,37 @@ export class SandpackRuntime extends SandpackClient {
     if (options.experimental_enableServiceWorker) {
       this.serviceWorkerHandshake();
     }
+  }
+
+  private createBundlerURL() {
+    let bundlerURL = this.options.bundlerURL || BUNDLER_URL;
+
+    // if it's a custom, skip the rest
+    if (this.options.bundlerURL) {
+      return bundlerURL;
+    }
+
+    if (this.options.teamId) {
+      bundlerURL =
+        bundlerURL.replace("https://", "https://" + this.options.teamId + "-") +
+        `?cache=${Date.now()}`;
+    }
+
+    if (this.options.experimental_enableServiceWorker) {
+      const suffixes: string[] = [];
+      suffixes.push(Math.random().toString(36).slice(4));
+
+      bundlerURL = bundlerURL.replace(
+        SUFFIX_PLACEHOLDER,
+        `-${
+          this.options.experimental_stableServiceWorkerId ?? suffixes.join("-")
+        }`
+      );
+    } else {
+      bundlerURL = bundlerURL.replace(SUFFIX_PLACEHOLDER, "");
+    }
+
+    return bundlerURL;
   }
 
   private serviceWorkerHandshake() {

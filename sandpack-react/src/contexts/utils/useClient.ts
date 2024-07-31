@@ -19,8 +19,10 @@ import type {
   SandpackStatus,
 } from "../..";
 import { generateRandomId } from "../../utils/stringUtils";
+import { useAsyncSandpackId } from "../../utils/useAsyncSandpackId";
 
 import type { FilesState } from "./useFiles";
+
 type SandpackClientType = InstanceType<typeof SandpackClient>;
 
 const BUNDLER_TIMEOUT = 40_000;
@@ -115,6 +117,10 @@ export const useClient: UseClient = (
   const debounceHook = useRef<number | undefined>();
   const prevEnvironment = useRef(filesState.environment);
 
+  const experimental_stableServiceWorkerId = useAsyncSandpackId(
+    filesState.files
+  );
+
   /**
    * Callbacks
    */
@@ -174,6 +180,10 @@ export const useClient: UseClient = (
           teamId,
           experimental_enableServiceWorker:
             !!options?.experimental_enableServiceWorker,
+          experimental_stableServiceWorkerId:
+            options?.experimental_enableStableServiceWorkerId
+              ? await experimental_stableServiceWorkerId()
+              : undefined,
           sandboxId,
         }
       );
