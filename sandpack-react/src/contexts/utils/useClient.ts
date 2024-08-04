@@ -501,6 +501,8 @@ export const useClient: UseClient = (
         return;
       }
 
+      console.log(recompileMode, filesState);
+
       /**
        * When the environment changes, Sandpack needs to make sure
        * to create a new client and the proper bundler
