@@ -98,7 +98,12 @@ export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
       <SandpackStack className={classNames("editor", [className])} {...props}>
         {shouldShowTabs && <FileTabs closableTabs={closableTabs} />}
 
-        <div className={classNames("code-editor", [editorClassName])}>
+        <div
+          aria-labelledby={`${activeFile}-tab`}
+          className={classNames("code-editor", [editorClassName])}
+          id={`${activeFile}-tab-panel`}
+          role="tabpanel"
+        >
           <CodeMirror
             key={activeFile}
             ref={ref}

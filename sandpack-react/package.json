@@ -39,7 +39,7 @@
     "lint": "eslint '**/*.ts?(x)' --fix",
     "build": "rollup -c",
     "build:publish": "yarn build",
-    "start": "tsc -p tsconfig.esm.json --watch",
+    "start": "tsc -p tsconfig.json --watch",
     "dev": "storybook dev -p 6006 --quiet",
     "typecheck": "tsc",
     "format": "prettier --write '**/*.{ts,tsx,js,jsx}'",

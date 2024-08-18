@@ -25,12 +25,19 @@ const tabsScrollableClassName = css({
   marginBottom: "-1px",
 });
 
+const tabContainer = css({
+  display: "flex",
+  alignItems: "center",
+  outline: "none",
+});
+
 const closeButtonClassName = css({
   padding: "0 $space$1 0 $space$1",
   borderRadius: "$border$radius",
   marginLeft: "$space$1",
   width: "$space$5",
   visibility: "hidden",
+  cursor: "pointer",
 
   svg: {
     width: "$space$3",
@@ -46,8 +53,10 @@ export const tabButton = css({
   height: "$layout$headerHeight",
   whiteSpace: "nowrap",
 
-  "&:focus": { outline: "none" },
-  [`&:hover > .${closeButtonClassName}`]: { visibility: "unset" },
+  "&:focus": {
+    outline: "none",
+  },
+  [`&:hover ~ .${closeButtonClassName}`]: { visibility: "visible" },
 });
 
 export interface FileTabsProps {
@@ -70,6 +79,7 @@ export const FileTabs = ({
   const classNames = useClassNames();
 
   const { activeFile, visibleFiles, setActiveFile } = sandpack;
+  const [hoveredIndex, setIsHoveredIndex] = React.useState<null | number>(null);
 
   const handleCloseFile = (ev: React.MouseEvent<HTMLDivElement>): void => {
     ev.stopPropagation();
@@ -111,6 +121,69 @@ export const FileTabs = ({
     }
   };
 
+  const onKeyDown = ({
+    e,
+    index,
+  }: {
+    e: React.KeyboardEvent<HTMLElement>;
+    index: number;
+  }) => {
+    const target = e.currentTarget as HTMLElement;
+
+    switch (e.key) {
+      case "ArrowLeft":
+        {
+          const leftSibling = target.previousElementSibling as HTMLElement;
+
+          if (leftSibling) {
+            leftSibling.querySelector("button")?.focus();
+            setActiveFile(visibleFiles[index - 1]);
+          }
+        }
+        break;
+      case "ArrowRight":
+        {
+          const rightSibling = target.nextElementSibling as HTMLElement;
+
+          if (rightSibling) {
+            rightSibling.querySelector("button")?.focus();
+            setActiveFile(visibleFiles[index + 1]);
+          }
+        }
+        break;
+      case "Home": {
+        const parent = target.parentElement as HTMLElement;
+
+        const firstChild = parent.firstElementChild as HTMLElement;
+        firstChild.querySelector("button")?.focus();
+        setActiveFile(visibleFiles[0]);
+        break;
+      }
+      case "End": {
+        const parent = target.parentElement as HTMLElement;
+        const lastChild = parent.lastElementChild as HTMLElement;
+        lastChild.querySelector("button")?.focus();
+        setActiveFile(visibleFiles[-1]);
+        break;
+      }
+      default:
+        break;
+    }
+  };
+
+  const onTabFocus = (e: React.FocusEvent<HTMLElement>) => {
+    if (e.target.parentElement) {
+      e.target.parentElement.style.outline =
+        "-webkit-focus-ring-color auto 5px";
+    }
+  };
+
+  const onTabFocusOut = (e: React.FocusEvent<HTMLElement>) => {
+    if (e.target.parentElement) {
+      e.target.parentElement.style.outline = "none";
+    }
+  };
+
   return (
     <div
       className={classNames("tabs", [tabsClassName, className])}
@@ -124,27 +197,46 @@ export const FileTabs = ({
         ])}
         role="tablist"
       >
-        {visibleFiles.map((filePath) => (
-          <button
-            key={filePath}
-            aria-selected={filePath === activeFile}
-            className={classNames("tab-button", [buttonClassName, tabButton])}
-            data-active={filePath === activeFile}
-            onClick={(): void => setActiveFile(filePath)}
-            role="tab"
-            title={filePath}
-            type="button"
+        {visibleFiles.map((filePath, index) => (
+          <div
+            className={classNames("tab-container", [tabContainer])}
+            onKeyDown={(e) => onKeyDown({ e, index })}
+            onMouseEnter={() => setIsHoveredIndex(index)}
+            onMouseLeave={() => setIsHoveredIndex(null)}
           >
-            {getTriggerText(filePath)}
+            <button
+              key={filePath}
+              aria-controls={`${filePath}-tab-panel`}
+              aria-selected={filePath === activeFile}
+              className={classNames("tab-button", [buttonClassName, tabButton])}
+              data-active={filePath === activeFile}
+              id={`${filePath}-tab`}
+              onBlur={onTabFocusOut}
+              onClick={(): void => setActiveFile(filePath)}
+              onFocus={onTabFocus}
+              role="tab"
+              tabIndex={filePath === activeFile ? 0 : -1}
+              title={filePath}
+              type="button"
+            >
+              {getTriggerText(filePath)}
+            </button>
             {closableTabs && visibleFiles.length > 1 && (
               <span
                 className={classNames("close-button", [closeButtonClassName])}
                 onClick={handleCloseFile}
+                style={{
+                  visibility:
+                    filePath === activeFile || hoveredIndex === index
+                      ? "visible"
+                      : "hidden",
+                }}
+                tabIndex={filePath === activeFile ? 0 : -1}
               >
                 <CloseIcon />
               </span>
             )}
-          </button>
+          </div>
         ))}
       </div>
     </div>

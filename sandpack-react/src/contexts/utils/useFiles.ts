@@ -120,6 +120,7 @@ export const useFiles: UseFiles = (props) => {
       setState((prev) => ({ ...prev, files: originalStateFromProps.files }));
     },
     setActiveFile: (activeFile: string): void => {
+      console.log(activeFile);
       if (state.files[activeFile]) {
         setState((prev) => ({ ...prev, activeFile }));
       }
