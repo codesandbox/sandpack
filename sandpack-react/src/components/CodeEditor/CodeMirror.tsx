@@ -184,7 +184,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     );
 
     React.useEffect(() => {
-      if (!wrapper.current || !shouldInitEditor) return;
+      if (!wrapper.current || !shouldInitEditor || readOnly) return;
 
       const parentDiv = wrapper.current;
       const existingPlaceholder = parentDiv.querySelector(
@@ -198,16 +198,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         doc: code,
         extensions: [],
         parent: parentDiv,
-        dispatch: (tr): void => {
-          view.update([tr]);
-
-          if (tr.docChanged) {
-            const newCode = tr.newDoc.sliceString(0, tr.newDoc.length);
-
-            setInternalCode(newCode);
-            onCodeUpdate?.(newCode);
-          }
-        },
       });
 
       view.contentDOM.setAttribute("data-gramm", "false");
@@ -216,12 +206,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         "aria-label",
         filePath ? `Code Editor for ${getFileName(filePath)}` : `Code Editor`
       );
-
-      if (readOnly) {
-        view.contentDOM.classList.add("cm-readonly");
-      } else {
-        view.contentDOM.setAttribute("tabIndex", "-1");
-      }
+      view.contentDOM.setAttribute("tabIndex", "-1");
 
       cmView.current = view;
 
@@ -229,10 +214,10 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         cmView.current?.destroy();
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [shouldInitEditor]);
+    }, [shouldInitEditor, readOnly]);
 
     React.useEffect(() => {
-      if (cmView.current) {
+      if (cmView.current && !readOnly) {
         const customCommandsKeymap: KeyBinding[] = [
           {
             key: "Tab",
@@ -294,6 +279,15 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
 
           getEditorTheme(),
           syntaxHighlighting(highlightTheme),
+
+          EditorView.updateListener.of((update) => {
+            if (update.docChanged) {
+              const newCode = update.state.doc.toString();
+
+              setInternalCode(newCode);
+              onCodeUpdate?.(newCode);
+            }
+          }),
         ];
 
         if (readOnly) {

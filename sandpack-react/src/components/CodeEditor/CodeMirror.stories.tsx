@@ -8,7 +8,8 @@ import { SandpackProvider } from "../../contexts/sandpackContext";
 
 import * as mocks from "./languages-mocks";
 
-import { CodeEditor } from "./index";
+import { CodeEditor, SandpackCodeEditor } from "./index";
+import { useSandpack } from "../../hooks";
 const stories = storiesOf("components/CodeMirror", module);
 
 Object.entries(mocks).forEach(([languageName, mockFile]) =>
@@ -23,6 +24,37 @@ Object.entries(mocks).forEach(([languageName, mockFile]) =>
     </SandpackProvider>
   ))
 );
+
+stories.add("Ready only", () => {
+  return (
+    <>
+      <SandpackProvider
+        files={{
+          "/index.js": {
+            code: 'const title = "This is a simple code editor"',
+          },
+        }}
+      >
+        <ReadOnlyEditor />
+      </SandpackProvider>
+    </>
+  );
+});
+
+const ReadOnlyEditor = () => {
+  const [isReadOnly, setIsReadOnly] = React.useState(false);
+  const { sandpack } = useSandpack();
+
+  return (
+    <>
+      <button onClick={() => setIsReadOnly(!isReadOnly)} type="button">
+        Toggle read only ({isReadOnly ? "true" : "false"})
+      </button>
+      <SandpackCodeEditor readOnly={isReadOnly} />
+      <pre>{JSON.stringify(sandpack.files, null, 2)}</pre>
+    </>
+  );
+};
 
 stories.add("CustomLanguageShell", () => (
   <SandpackProvider>
