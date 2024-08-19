@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.18.3](https://github.com/codesandbox/sandpack/compare/v2.18.2...v2.18.3) (2024-08-19)
+
+### Bug Fixes
+
+- **code editor:** remount when readOnly change ([#1179](https://github.com/codesandbox/sandpack/issues/1179)) ([f30adcb](https://github.com/codesandbox/sandpack/commit/f30adcb17fda8b87f087dbb0dfba1f8e46cdc0db))
+
 ## [2.18.2](https://github.com/codesandbox/sandpack/compare/v2.18.1...v2.18.2) (2024-07-31)
 
 ### Bug Fixes
