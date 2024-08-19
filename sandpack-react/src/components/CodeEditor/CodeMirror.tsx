@@ -283,7 +283,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
           EditorView.updateListener.of((update) => {
             if (update.docChanged) {
               const newCode = update.state.doc.toString();
-              console.log("change");
+
               setInternalCode(newCode);
               onCodeUpdate?.(newCode);
             }
