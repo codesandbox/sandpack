@@ -110,7 +110,6 @@ Plus, `useSandpack` exposes a bunch of methods that you can use to manage the cu
 | `updateFile`        | Update the content of a file in a given path or multiple files |
 | `updateCurrentFile` | Update the content of the current file                         |
 
-
 ## `useSandpackNavigation`
 
 Some of the common functionalities of sandpack are also extracted into
@@ -131,7 +130,6 @@ const CustomRefreshButton = () => {
   );
 };
 ```
-
 
 ## `useActiveCode`
 
@@ -180,7 +178,6 @@ It's not pretty, but with just a few lines of code, you can create a whole new
 component that uses the power of sandpack, but has all the UI and functionality
 you need for your specific use case.
 
-
 ## `useSandpackConsole`
 
 The [`SandpackConsole`](/advanced-usage/components#console) is implemented on top of this hook, which provides an interface to consume the logs from a specific sandpack client. Sandpack runs the console directly into the iframe. As a result, all console messages pass through the Sandpack protocol, where you can attach a listener to these messages in your own component or just use this hook.
@@ -189,16 +186,34 @@ The [`SandpackConsole`](/advanced-usage/components#console) is implemented on to
 const { logs, reset } = useSandpackConsole();
 ```
 
-
 ## `useSandpackClient`
 
 It registers a new sandpack client and returns its instance, listeners, and dispatch function. Using it when creating a custom component to interact directly with the client is recommended. For other cases, use `useSandpack` instead.
 
+Example:
+
+```jsx
+const { iframe, listen } = useSandpackClient();
+
+React.useEffect(() => {
+  const unsubscribe = listen((message: SandpackMessage) => {
+    if (message.type === "resize") {
+      setComputedAutoHeight(message.height);
+    }
+  });
+
+  return unsubscribe;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
+<iframe ref={ifram} />;
+```
+
+For more details, you can check the [SandpackPreview implementation](https://github.com/codesandbox/sandpack/blob/061ad9d596bcca437dbb04a1ee8306afd5bfd925/sandpack-react/src/components/Preview/index.tsx#L119).
 
 ## `useSandpackTheme`
 
 It exposes the `theme` object configured on `SandpackContext` and contains an `id` to ensure uniqueness for custom themes. This `theme` object is responsible for distributing all the style configurations for the component thee.
-
 
 ## `useTranspiledCode`
 
