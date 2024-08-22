@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/codesandbox/sandpack/compare/v2.18.3...v2.19.0) (2024-08-22)
+
+### Features
+
+- **iframe allow:** introduce xr-spatial-tracking ([#1183](https://github.com/codesandbox/sandpack/issues/1183)) ([7245731](https://github.com/codesandbox/sandpack/commit/72457311c01c9d6ece540e177007e59b42a64153))
+
 ## [2.18.3](https://github.com/codesandbox/sandpack/compare/v2.18.2...v2.18.3) (2024-08-19)
 
 ### Bug Fixes
