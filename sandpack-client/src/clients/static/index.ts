@@ -86,7 +86,7 @@ export class SandpackStatic extends SandpackClient {
 
       this.iframe.setAttribute(
         "allow",
-        "accelerometer; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; clipboard-write;"
+        "accelerometer; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; clipboard-read; clipboard-write; xr-spatial-tracking;"
       );
     }
 
