@@ -29,6 +29,12 @@ const tabContainer = css({
   display: "flex",
   alignItems: "center",
   outline: "none",
+  position: "relative",
+  paddingRight: "20px",
+
+  "&:has(button:focus)": {
+    outline: "-webkit-focus-ring-color auto 5px",
+  },
 });
 
 const closeButtonClassName = css({
@@ -38,6 +44,9 @@ const closeButtonClassName = css({
   width: "$space$5",
   visibility: "hidden",
   cursor: "pointer",
+  position: "absolute",
+  color: "green",
+  right: "0px",
 
   svg: {
     width: "$space$3",
@@ -171,19 +180,6 @@ export const FileTabs = ({
     }
   };
 
-  const onTabFocus = (e: React.FocusEvent<HTMLElement>) => {
-    if (e.target.parentElement) {
-      e.target.parentElement.style.outline =
-        "-webkit-focus-ring-color auto 5px";
-    }
-  };
-
-  const onTabFocusOut = (e: React.FocusEvent<HTMLElement>) => {
-    if (e.target.parentElement) {
-      e.target.parentElement.style.outline = "none";
-    }
-  };
-
   return (
     <div
       className={classNames("tabs", [tabsClassName, className])}
@@ -211,9 +207,7 @@ export const FileTabs = ({
               className={classNames("tab-button", [buttonClassName, tabButton])}
               data-active={filePath === activeFile}
               id={`${filePath}-tab`}
-              onBlur={onTabFocusOut}
               onClick={(): void => setActiveFile(filePath)}
-              onFocus={onTabFocus}
               role="tab"
               tabIndex={filePath === activeFile ? 0 : -1}
               title={filePath}
