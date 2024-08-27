@@ -5,11 +5,12 @@ import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
 import { SandpackProvider } from "../../contexts/sandpackContext";
+import { useSandpack } from "../../hooks";
 
 import * as mocks from "./languages-mocks";
 
 import { CodeEditor, SandpackCodeEditor } from "./index";
-import { useSandpack } from "../../hooks";
+
 const stories = storiesOf("components/CodeMirror", module);
 
 Object.entries(mocks).forEach(([languageName, mockFile]) =>
@@ -147,6 +148,7 @@ export default function List() {
   );
   return <ul>{listItems}</ul>;
 }`}
+      readOnly
       decorators={[
         { className: "highlight", line: 1 },
         { className: "highlight", line: 9 },
