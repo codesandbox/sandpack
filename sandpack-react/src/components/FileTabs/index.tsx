@@ -45,7 +45,6 @@ const closeButtonClassName = css({
   visibility: "hidden",
   cursor: "pointer",
   position: "absolute",
-  color: "green",
   right: "0px",
 
   svg: {
