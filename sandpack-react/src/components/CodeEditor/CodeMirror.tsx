@@ -183,8 +183,12 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       [decorators]
     );
 
+    const useStaticReadOnly = readOnly && decorators?.length === 0;
+
     React.useEffect(() => {
-      if (!wrapper.current || !shouldInitEditor || readOnly) return;
+      if (!wrapper.current || !shouldInitEditor || useStaticReadOnly) {
+        return;
+      }
 
       const parentDiv = wrapper.current;
       const existingPlaceholder = parentDiv.querySelector(
@@ -214,10 +218,14 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
         cmView.current?.destroy();
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [shouldInitEditor, readOnly]);
+    }, [shouldInitEditor, readOnly, useStaticReadOnly]);
 
     React.useEffect(() => {
-      if (cmView.current && !readOnly) {
+      if (useStaticReadOnly) {
+        return;
+      }
+
+      if (cmView.current) {
         const customCommandsKeymap: KeyBinding[] = [
           {
             key: "Tab",
@@ -327,6 +335,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       wrapContent,
       themeId,
       readOnly,
+      useStaticReadOnly,
       autoReload,
     ]);
 
@@ -441,7 +450,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       return `var(--${THEME_PREFIX}-space-${offset})`;
     };
 
-    if (readOnly) {
+    if (useStaticReadOnly) {
       return (
         <>
           <pre
