@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.1](https://github.com/codesandbox/sandpack/compare/v2.19.0...v2.19.1) (2024-08-27)
+
+### Bug Fixes
+
+- **read only:** use codemirror instance with decorators ([#1186](https://github.com/codesandbox/sandpack/issues/1186)) ([623a346](https://github.com/codesandbox/sandpack/commit/623a34648ece5667768b4f0de75a581e9d348470))
+
 # [2.19.0](https://github.com/codesandbox/sandpack/compare/v2.18.3...v2.19.0) (2024-08-22)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
