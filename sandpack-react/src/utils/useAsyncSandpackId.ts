@@ -3,6 +3,15 @@ import { useId as useReactId } from "react";
 
 import { generateRandomId } from "./stringUtils";
 
+export const useSandpackId = () => {
+  if (typeof useReactId === "function") {
+    /* eslint-disable-next-line */
+    return useReactId();
+  } else {
+    return generateRandomId();
+  }
+};
+
 /**
  * This is a hard constraint to make URLs shorter.
  * For example, this id will be used to mount SW in the iframe
