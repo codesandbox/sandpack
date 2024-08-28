@@ -28,10 +28,6 @@ export const editorClassName = css({
     padding: "$space$4 0",
   },
 
-  "&:focus-within": {
-    outline: "-webkit-focus-ring-color auto 5px",
-  },
-
   /**
    * For iOS: prevent browser zoom when clicking on sandbox.
    * Does NOT apply to code blocks.

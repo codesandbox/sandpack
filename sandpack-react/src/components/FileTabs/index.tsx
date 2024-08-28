@@ -31,9 +31,10 @@ const tabContainer = css({
   outline: "none",
   position: "relative",
   paddingRight: "20px",
+  margin: "1px 0",
 
   "&:has(button:focus)": {
-    outline: "-webkit-focus-ring-color auto 5px",
+    outline: "$colors$accent auto 1px",
   },
 });
 

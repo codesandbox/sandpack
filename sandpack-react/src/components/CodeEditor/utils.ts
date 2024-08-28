@@ -37,7 +37,11 @@ export const getEditorTheme = (): Extension =>
       outline: "none",
     },
 
-    ".cm-activeLine": {
+    "& .cm-activeLine": {
+      backgroundColor: "transparent",
+    },
+
+    "&.cm-editor.cm-focused .cm-activeLine": {
       backgroundColor: `var(--${THEME_PREFIX}-colors-surface3)`,
       borderRadius: `var(--${THEME_PREFIX}-border-radius)`,
     },
