@@ -27,6 +27,9 @@ export const editorClassName = css({
   [`.${placeholderClassName}`]: {
     padding: "$space$4 0",
   },
+  "&:focus-within": {
+    outline: "$colors$accent auto 1px",
+  },
 
   /**
    * For iOS: prevent browser zoom when clicking on sandbox.

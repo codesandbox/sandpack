@@ -73,6 +73,11 @@ export interface FileTabsProps {
    * This adds a close button next to each file with a unique trigger to close it.
    */
   closableTabs?: boolean;
+  /**
+   * unique id appended with active files. This is
+   * used in aria-controls value along the combination of activeFile
+   */
+  activeFileUniqueId: string;
 }
 
 /**
@@ -202,11 +207,11 @@ export const FileTabs = ({
           >
             <button
               key={filePath}
-              aria-controls={`${filePath}-tab-panel`}
+              aria-controls={`${filePath}-${props.activeFileUniqueId}-tab-panel`}
               aria-selected={filePath === activeFile}
               className={classNames("tab-button", [buttonClassName, tabButton])}
               data-active={filePath === activeFile}
-              id={`${filePath}-tab`}
+              id={`${filePath}-${props.activeFileUniqueId}-tab`}
               onClick={(): void => setActiveFile(filePath)}
               role="tab"
               tabIndex={filePath === activeFile ? 0 : -1}
