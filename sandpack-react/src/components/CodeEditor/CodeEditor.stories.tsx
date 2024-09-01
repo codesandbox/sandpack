@@ -71,7 +71,7 @@ export const ClosableTabs: React.FC = () => (
   <SandpackProvider
     options={{ visibleFiles: ["/App.js", "/index.js", "/styles.css"] }}
     template="react"
-    theme="light"
+    theme="dark"
   >
     <SandpackCodeEditor closableTabs />
   </SandpackProvider>
