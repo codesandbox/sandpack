@@ -15,16 +15,6 @@ const logos = {
   svelte: "/docs/logos/svelte.svg",
   solid: "/docs/logos/solid.svg",
   // "test-ts": "/docs/logos/jest.svg",
-  node: "/docs/logos/node.svg",
-  "nextjs-light": "/docs/logos/next-light.png",
-  "nextjs-dark": "/docs/logos/next-dark.png",
-  "vite-react": "/docs/logos/react.svg",
-  "vite-vue": "/docs/logos/vue.svg",
-  "vite-preact": "/docs/logos/preact.svg",
-  vite: "/docs/logos/vite.png",
-  "vite-svelte": "/docs/logos/svelte.png",
-  "astro-light": "/docs/logos/astro-light.svg",
-  "astro-dark": "/docs/logos/astro-dark.svg",
 };
 
 const Logo = ({ name }) => {

@@ -14,12 +14,12 @@ import { ThemesList } from "./ThemesList";
 
 export const Playground = () => {
   const { theme: pageTheme } = useTheme();
-  const [template, setTemplate] = useState("nextjs");
+  const [template, setTemplate] = useState("react");
   const [theme, setTheme] = useState("light");
   const [layout, setLayout] = useState("Default");
 
   useEffect(() => {
-    setTemplate(window.localStorage["CSB_PLAYGROUND_TEMPLATE"] ?? "nextjs");
+    setTemplate(window.localStorage["CSB_PLAYGROUND_TEMPLATE"] ?? "react");
     setTheme(window.localStorage["CSB_PLAYGROUND_THEME"] ?? "light");
     setLayout(window.localStorage["CSB_PLAYGROUND_LAYOUT"] ?? "Default");
   }, []);
