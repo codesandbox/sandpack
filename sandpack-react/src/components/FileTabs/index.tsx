@@ -77,7 +77,7 @@ export interface FileTabsProps {
    * unique id appended with active files. This is
    * used in aria-controls value along the combination of activeFile
    */
-  activeFileUniqueId: string;
+  activeFileUniqueId?: string;
 }
 
 /**
@@ -200,20 +200,20 @@ export const FileTabs = ({
       >
         {visibleFiles.map((filePath, index) => (
           <div
+            aria-controls={`${filePath}-${props.activeFileUniqueId}-tab-panel`}
+            aria-selected={filePath === activeFile}
             className={classNames("tab-container", [tabContainer])}
             onKeyDown={(e) => onKeyDown({ e, index })}
             onMouseEnter={() => setIsHoveredIndex(index)}
             onMouseLeave={() => setIsHoveredIndex(null)}
+            role="tab"
           >
             <button
               key={filePath}
-              aria-controls={`${filePath}-${props.activeFileUniqueId}-tab-panel`}
-              aria-selected={filePath === activeFile}
               className={classNames("tab-button", [buttonClassName, tabButton])}
               data-active={filePath === activeFile}
               id={`${filePath}-${props.activeFileUniqueId}-tab`}
               onClick={(): void => setActiveFile(filePath)}
-              role="tab"
               tabIndex={filePath === activeFile ? 0 : -1}
               title={filePath}
               type="button"
