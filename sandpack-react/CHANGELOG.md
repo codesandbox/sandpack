@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.2](https://github.com/codesandbox/sandpack/compare/v2.19.1...v2.19.2) (2024-09-04)
+
+### Bug Fixes
+
+- accessibility issue in tabs ([#1184](https://github.com/codesandbox/sandpack/issues/1184)) ([98af978](https://github.com/codesandbox/sandpack/commit/98af978f40942ed6d3a3bb96151c9c9dcd00691a))
+
 ## [2.19.1](https://github.com/codesandbox/sandpack/compare/v2.19.0...v2.19.1) (2024-08-27)
 
 ### Bug Fixes
