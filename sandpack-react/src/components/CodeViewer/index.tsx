@@ -4,6 +4,7 @@ import type { CustomLanguage, SandpackInitMode } from "../..";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
 import { useClassNames } from "../../utils/classNames";
+import { useSandpackId } from "../../utils/useAsyncSandpackId";
 import { CodeEditor } from "../CodeEditor";
 import type { CodeEditorRef } from "../CodeEditor";
 import type { Decorators } from "../CodeEditor/CodeMirror";
@@ -59,11 +60,20 @@ export const SandpackCodeViewer = React.forwardRef<
 
     const shouldShowTabs = showTabs ?? sandpack.visibleFiles.length > 1;
 
+    const activeFileUniqueId = useSandpackId();
+
     return (
       <SandpackStack className={classNames("editor-viewer")} {...props}>
-        {shouldShowTabs ? <FileTabs /> : null}
+        {shouldShowTabs ? (
+          <FileTabs activeFileUniqueId={activeFileUniqueId} />
+        ) : null}
 
-        <div className={classNames("code-editor", [editorClassName])}>
+        <div
+          aria-labelledby={`${sandpack.activeFile}-${activeFileUniqueId}-tab`}
+          className={classNames("code-editor", [editorClassName])}
+          id={`${sandpack.activeFile}-${activeFileUniqueId}-tab-panel`}
+          role="tabpanel"
+        >
           <CodeEditor
             ref={ref}
             additionalLanguages={additionalLanguages}

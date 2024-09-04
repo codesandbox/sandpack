@@ -6,6 +6,7 @@ import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
 import type { CustomLanguage, SandpackInitMode } from "../../types";
 import { useClassNames } from "../../utils/classNames";
+import { useSandpackId } from "../../utils/useAsyncSandpackId";
 import { FileTabs } from "../FileTabs";
 import { RunButton } from "../common/RunButton";
 import { SandpackStack } from "../common/Stack";
@@ -94,11 +95,23 @@ export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
       updateCode(newCode, shouldUpdatePreview);
     };
 
+    const activeFileUniqueId = useSandpackId();
+
     return (
       <SandpackStack className={classNames("editor", [className])} {...props}>
-        {shouldShowTabs && <FileTabs closableTabs={closableTabs} />}
+        {shouldShowTabs && (
+          <FileTabs
+            activeFileUniqueId={activeFileUniqueId}
+            closableTabs={closableTabs}
+          />
+        )}
 
-        <div className={classNames("code-editor", [editorClassName])}>
+        <div
+          aria-labelledby={`${activeFile}-${activeFileUniqueId}-tab`}
+          className={classNames("code-editor", [editorClassName])}
+          id={`${activeFile}-${activeFileUniqueId}-tab-panel`}
+          role="tabpanel"
+        >
           <CodeMirror
             key={activeFile}
             ref={ref}
