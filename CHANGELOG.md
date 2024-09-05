@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.3](https://github.com/codesandbox/sandpack/compare/v2.19.2...v2.19.3) (2024-09-05)
+
+### Bug Fixes
+
+- **client:** remove non-letter chart from random id ([#1193](https://github.com/codesandbox/sandpack/issues/1193)) ([c7d4113](https://github.com/codesandbox/sandpack/commit/c7d4113ba4704fe4d1a5c25c3735bbadd77d980b))
+
 ## [2.19.2](https://github.com/codesandbox/sandpack/compare/v2.19.1...v2.19.2) (2024-09-04)
 
 ### Bug Fixes
