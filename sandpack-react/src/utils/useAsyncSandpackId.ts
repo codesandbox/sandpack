@@ -29,7 +29,10 @@ export const useAsyncSandpackId = (files: SandpackBundlerFiles) => {
         .join("|||");
       const sha = await generateShortId(allCode + reactDomId);
 
-      return ensureLength(sha.replace(/:/g, "sp"), MAX_ID_LENGTH);
+      return ensureLength(
+        sha.replace(/:/g, "sp").replace(/[^a-zA-Z]/g, ""),
+        MAX_ID_LENGTH
+      );
     };
   } else {
     return () => ensureLength(generateRandomId(), MAX_ID_LENGTH);
