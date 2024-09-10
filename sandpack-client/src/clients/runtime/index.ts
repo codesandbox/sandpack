@@ -259,8 +259,6 @@ export class SandpackRuntime extends SandpackClient {
           item.path.endsWith(filepath)
         ) as SandpackBundlerFile;
 
-        console.log(file);
-
         if (!file) {
           notFound();
           return;
