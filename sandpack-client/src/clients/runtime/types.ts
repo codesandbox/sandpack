@@ -94,6 +94,8 @@ export type SandpackRuntimeMessage = BaseSandpackMessage &
     | {
         type: "get-transpiler-context";
       }
+    | { type: "get-modules" }
+    | { type: "all-modules"; data: Array<{ path: string; code: string }> }
     | {
         type: "activate-react-devtools";
       }

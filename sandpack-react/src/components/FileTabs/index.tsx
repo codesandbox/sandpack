@@ -87,6 +87,7 @@ export interface FileTabsProps {
 export const FileTabs = ({
   closableTabs,
   className,
+  activeFileUniqueId,
   ...props
 }: FileTabsProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const { sandpack } = useSandpack();
@@ -200,19 +201,19 @@ export const FileTabs = ({
       >
         {visibleFiles.map((filePath, index) => (
           <div
-            aria-controls={`${filePath}-${props.activeFileUniqueId}-tab-panel`}
+            aria-controls={`${filePath}-${activeFileUniqueId}-tab-panel`}
             aria-selected={filePath === activeFile}
             className={classNames("tab-container", [tabContainer])}
             onKeyDown={(e) => onKeyDown({ e, index })}
             onMouseEnter={() => setIsHoveredIndex(index)}
             onMouseLeave={() => setIsHoveredIndex(null)}
             role="tab"
+            key={filePath}
           >
             <button
-              key={filePath}
               className={classNames("tab-button", [buttonClassName, tabButton])}
               data-active={filePath === activeFile}
-              id={`${filePath}-${props.activeFileUniqueId}-tab`}
+              id={`${filePath}-${activeFileUniqueId}-tab`}
               onClick={(): void => setActiveFile(filePath)}
               tabIndex={filePath === activeFile ? 0 : -1}
               title={filePath}

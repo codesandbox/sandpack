@@ -9,6 +9,7 @@ import type {
   ListenerFunction,
   Modules,
   SandboxSetup,
+  SandpackBundlerFile,
   SandpackBundlerFiles,
   SandpackError,
   UnsubscribeFunction,
@@ -225,17 +226,46 @@ export class SandpackRuntime extends SandpackClient {
     this.iframe.addEventListener("load", sendMessage);
   }
 
-  private handleWorkerRequest(
+  private async handleWorkerRequest(
     request: IPreviewRequestMessage,
     port: MessagePort
   ) {
+    const notFound = () => {
+      const responseMessage: IPreviewResponseMessage = {
+        $channel: CHANNEL_NAME,
+        $type: "preview/response",
+        id: request.id,
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+        },
+        status: 404,
+        body: "File not found",
+      };
+
+      port.postMessage(responseMessage);
+    };
     try {
       const filepath = new URL(request.url, this.bundlerURL).pathname;
 
       const headers: Record<string, string> = {};
 
       const files = this.getFiles();
-      const body = files[filepath].code;
+      let file = files[filepath];
+
+      if (!file) {
+        const modulesFromManager = await this.getTranspiledFiles();
+
+        file = modulesFromManager.find((item) =>
+          item.path.endsWith(filepath)
+        ) as SandpackBundlerFile;
+
+        if (!file) {
+          notFound();
+          return;
+        }
+      }
+
+      const body = file.code;
 
       if (!headers["Content-Type"]) {
         const extension = getExtension(filepath);
@@ -256,18 +286,8 @@ export class SandpackRuntime extends SandpackClient {
 
       port.postMessage(responseMessage);
     } catch (err) {
-      const responseMessage: IPreviewResponseMessage = {
-        $channel: CHANNEL_NAME,
-        $type: "preview/response",
-        id: request.id,
-        headers: {
-          "Content-Type": "text/html; charset=utf-8",
-        },
-        status: 404,
-        body: "File not found",
-      };
-
-      port.postMessage(responseMessage);
+      console.error(err);
+      notFound();
     }
   }
 
@@ -446,6 +466,22 @@ export class SandpackRuntime extends SandpackClient {
 
       this.dispatch({ type: "get-transpiler-context" });
     });
+
+  public getTranspiledFiles = (): Promise<
+    Array<{ path: string; code: string }>
+  > => {
+    return new Promise((resolve) => {
+      const unsubscribe = this.listen((message) => {
+        if (message.type === "all-modules") {
+          resolve(message.data);
+
+          unsubscribe();
+        }
+      });
+
+      this.dispatch({ type: "get-modules" });
+    });
+  };
 
   private getFiles(): SandpackBundlerFiles {
     const { sandboxSetup } = this;
