@@ -14,6 +14,8 @@ export const Basic: React.FC = () => {
         options={{
           showTabs: true,
           closableTabs: true,
+          experimental_enableServiceWorker: true,
+          experimental_enableStableServiceWorkerId: true,
         }}
         // customSetup={{
         //   dependencies: {

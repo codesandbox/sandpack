@@ -117,9 +117,7 @@ export const useClient: UseClient = (
   const debounceHook = useRef<number | undefined>();
   const prevEnvironment = useRef(filesState.environment);
 
-  const experimental_stableServiceWorkerId = useAsyncSandpackId(
-    filesState.files
-  );
+  const asyncSandpackId = useAsyncSandpackId(filesState.files);
 
   /**
    * Callbacks
@@ -159,6 +157,22 @@ export const useClient: UseClient = (
         }, timeOut);
       }
 
+      const getStableServiceWorkerId = async () => {
+        if (options?.experimental_enableStableServiceWorkerId) {
+          const key = `SANDPACK_INTERNAL:URL-CONSISTENT-ID`;
+          let fixedId = localStorage.getItem(key);
+
+          if (!fixedId) {
+            fixedId = await asyncSandpackId();
+            localStorage.setItem(key, fixedId);
+          }
+
+          return fixedId;
+        }
+
+        return await asyncSandpackId();
+      };
+
       const client = await loadSandpackClient(
         iframe,
         {
@@ -180,10 +194,7 @@ export const useClient: UseClient = (
           teamId,
           experimental_enableServiceWorker:
             !!options?.experimental_enableServiceWorker,
-          experimental_stableServiceWorkerId:
-            options?.experimental_enableStableServiceWorkerId
-              ? await experimental_stableServiceWorkerId()
-              : undefined,
+          experimental_stableServiceWorkerId: await getStableServiceWorkerId(),
           sandboxId,
         }
       );
