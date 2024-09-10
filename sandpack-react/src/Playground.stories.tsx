@@ -7,8 +7,6 @@ export default {
   title: "Intro/Playground",
 };
 
-localStorage.setItem("SANDPACK_INTERNAL:URL-CONSISTENT-ID", "123123123");
-
 export const Basic: React.FC = () => {
   return (
     <div style={{ height: "400vh" }}>

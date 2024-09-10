@@ -120,9 +120,7 @@ export const useClient: UseClient = (
   const debounceHook = useRef<number | undefined>();
   const prevEnvironment = useRef(filesState.environment);
 
-  const experimental_stableServiceWorkerId = useAsyncSandpackId(
-    filesState.files
-  );
+  const asyncSandpackId = useAsyncSandpackId(filesState.files);
 
   /**
    * Callbacks
@@ -163,23 +161,19 @@ export const useClient: UseClient = (
       }
 
       const getStableServiceWorkerId = async () => {
-        const key = `SANDPACK_INTERNAL:URL-CONSISTENT-ID`;
-        const fixedId = localStorage.getItem(key);
-        if (fixedId) {
-          if (fixedId.length !== MAX_SANDPACK_ID_LENGTH) {
-            throw new Error(
-              `${key} must be ${MAX_SANDPACK_ID_LENGTH} characters long`
-            );
+        if (options?.experimental_enableStableServiceWorkerId) {
+          const key = `SANDPACK_INTERNAL:URL-CONSISTENT-ID`;
+          let fixedId = localStorage.getItem(key);
+
+          if (!fixedId) {
+            fixedId = await asyncSandpackId();
+            localStorage.setItem(key, fixedId);
           }
 
           return fixedId;
         }
 
-        if (options?.experimental_enableStableServiceWorkerId) {
-          return await experimental_stableServiceWorkerId();
-        }
-
-        return undefined;
+        return await asyncSandpackId();
       };
 
       const client = await loadSandpackClient(
