@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.4](https://github.com/codesandbox/sandpack/compare/v2.19.3...v2.19.4) (2024-09-10)
+
+### Bug Fixes
+
+- **sw:** get transpiled files from bundler ([#1196](https://github.com/codesandbox/sandpack/issues/1196)) ([4563646](https://github.com/codesandbox/sandpack/commit/4563646a08d3b072dec14c0942af46f9755d2719))
+
 # [2.19.0](https://github.com/codesandbox/sandpack/compare/v2.18.3...v2.19.0) (2024-08-22)
 
 ### Features
