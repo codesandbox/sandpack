@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.5](https://github.com/codesandbox/sandpack/compare/v2.19.4...v2.19.5) (2024-09-10)
+
+### Bug Fixes
+
+- **sw:** support fixed id value ([#1197](https://github.com/codesandbox/sandpack/issues/1197)) ([1fb5a56](https://github.com/codesandbox/sandpack/commit/1fb5a56ec1359c09e2e6671a9885368c52f460af))
+
 ## [2.19.4](https://github.com/codesandbox/sandpack/compare/v2.19.3...v2.19.4) (2024-09-10)
 
 ### Bug Fixes
