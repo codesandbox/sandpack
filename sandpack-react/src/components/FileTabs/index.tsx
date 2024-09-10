@@ -96,18 +96,6 @@ export const FileTabs = ({
   const { activeFile, visibleFiles, setActiveFile } = sandpack;
   const [hoveredIndex, setIsHoveredIndex] = React.useState<null | number>(null);
 
-  const handleCloseFile = (ev: React.MouseEvent<HTMLDivElement>): void => {
-    ev.stopPropagation();
-    const tabElm = (ev.target as HTMLElement).closest(
-      "[data-active]"
-    ) as HTMLElement;
-    const pathToClose = tabElm?.getAttribute("title");
-    if (!pathToClose) {
-      return;
-    }
-    sandpack.closeFile(pathToClose);
-  };
-
   const getTriggerText = (currentPath: string): string => {
     const documentFileName = getFileName(currentPath);
 
@@ -224,7 +212,11 @@ export const FileTabs = ({
             {closableTabs && visibleFiles.length > 1 && (
               <span
                 className={classNames("close-button", [closeButtonClassName])}
-                onClick={handleCloseFile}
+                onClick={(ev) => {
+                  ev.stopPropagation();
+
+                  sandpack.closeFile(filePath);
+                }}
                 style={{
                   visibility:
                     filePath === activeFile || hoveredIndex === index
