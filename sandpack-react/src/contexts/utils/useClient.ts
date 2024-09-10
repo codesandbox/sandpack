@@ -19,10 +19,7 @@ import type {
   SandpackStatus,
 } from "../..";
 import { generateRandomId } from "../../utils/stringUtils";
-import {
-  MAX_SANDPACK_ID_LENGTH,
-  useAsyncSandpackId,
-} from "../../utils/useAsyncSandpackId";
+import { useAsyncSandpackId } from "../../utils/useAsyncSandpackId";
 
 import type { FilesState } from "./useFiles";
 
