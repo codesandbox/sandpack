@@ -17,7 +17,7 @@ export const useSandpackId = () => {
  * For example, this id will be used to mount SW in the iframe
  * so, to keep the URL valid, this must be an 9 character long string
  */
-const MAX_ID_LENGTH = 9;
+export const MAX_SANDPACK_ID_LENGTH = 9;
 
 export const useAsyncSandpackId = (files: SandpackBundlerFiles) => {
   if (typeof useReactId === "function") {
@@ -31,11 +31,11 @@ export const useAsyncSandpackId = (files: SandpackBundlerFiles) => {
 
       return ensureLength(
         sha.replace(/:/g, "sp").replace(/[^a-zA-Z]/g, ""),
-        MAX_ID_LENGTH
+        MAX_SANDPACK_ID_LENGTH
       );
     };
   } else {
-    return () => ensureLength(generateRandomId(), MAX_ID_LENGTH);
+    return () => ensureLength(generateRandomId(), MAX_SANDPACK_ID_LENGTH);
   }
 };
 

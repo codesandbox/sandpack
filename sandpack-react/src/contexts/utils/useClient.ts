@@ -19,7 +19,10 @@ import type {
   SandpackStatus,
 } from "../..";
 import { generateRandomId } from "../../utils/stringUtils";
-import { useAsyncSandpackId } from "../../utils/useAsyncSandpackId";
+import {
+  MAX_SANDPACK_ID_LENGTH,
+  useAsyncSandpackId,
+} from "../../utils/useAsyncSandpackId";
 
 import type { FilesState } from "./useFiles";
 
@@ -159,6 +162,26 @@ export const useClient: UseClient = (
         }, timeOut);
       }
 
+      const getStableServiceWorkerId = async () => {
+        const key = `SANDPACK_INTERNAL:URL-CONSISTENT-ID`;
+        const fixedId = localStorage.getItem(key);
+        if (fixedId) {
+          if (fixedId.length !== MAX_SANDPACK_ID_LENGTH) {
+            throw new Error(
+              `${key} must be ${MAX_SANDPACK_ID_LENGTH} characters long`
+            );
+          }
+
+          return fixedId;
+        }
+
+        if (options?.experimental_enableStableServiceWorkerId) {
+          return await experimental_stableServiceWorkerId();
+        }
+
+        return undefined;
+      };
+
       const client = await loadSandpackClient(
         iframe,
         {
@@ -180,10 +203,7 @@ export const useClient: UseClient = (
           teamId,
           experimental_enableServiceWorker:
             !!options?.experimental_enableServiceWorker,
-          experimental_stableServiceWorkerId:
-            options?.experimental_enableStableServiceWorkerId
-              ? await experimental_stableServiceWorkerId()
-              : undefined,
+          experimental_stableServiceWorkerId: await getStableServiceWorkerId(),
           sandboxId,
         }
       );
