@@ -18,7 +18,7 @@ export const Basic: React.FC = () => {
       <SandpackProvider>
         <SandpackLayout>
           <SandpackFileExplorer />
-          <SandpackCodeEditor showTabs closableTabs />
+          <SandpackCodeEditor closableTabs showTabs />
         </SandpackLayout>
       </SandpackProvider>
     </div>
