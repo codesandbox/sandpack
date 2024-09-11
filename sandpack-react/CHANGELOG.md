@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.6](https://github.com/codesandbox/sandpack/compare/v2.19.5...v2.19.6) (2024-09-11)
+
+### Bug Fixes
+
+- **file-tab:** close button ([#1198](https://github.com/codesandbox/sandpack/issues/1198)) ([58d1f54](https://github.com/codesandbox/sandpack/commit/58d1f54a1f18fb917b54510976f5ab87c4d16ae7))
+
 ## [2.19.5](https://github.com/codesandbox/sandpack/compare/v2.19.4...v2.19.5) (2024-09-10)
 
 ### Bug Fixes
