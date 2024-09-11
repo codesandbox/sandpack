@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.7](https://github.com/codesandbox/sandpack/compare/v2.19.6...v2.19.7) (2024-09-11)
+
+**Note:** Version bump only for package @codesandbox/sandpack-react
+
 ## [2.19.6](https://github.com/codesandbox/sandpack/compare/v2.19.5...v2.19.6) (2024-09-11)
 
 ### Bug Fixes

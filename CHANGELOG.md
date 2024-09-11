@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.7](https://github.com/codesandbox/sandpack/compare/v2.19.6...v2.19.7) (2024-09-11)
+
+### Bug Fixes
+
+- **client:** postcss transpile to angular template ([#1201](https://github.com/codesandbox/sandpack/issues/1201)) ([0b57de6](https://github.com/codesandbox/sandpack/commit/0b57de653d3bea38917c2665aae3942c87a212ff))
+
 ## [2.19.6](https://github.com/codesandbox/sandpack/compare/v2.19.5...v2.19.6) (2024-09-11)
 
 ### Bug Fixes
