@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.8](https://github.com/codesandbox/sandpack/compare/v2.19.7...v2.19.8) (2024-09-12)
+
+### Bug Fixes
+
+- **sandpack-id:** generate new bundler id based on client version ([#1202](https://github.com/codesandbox/sandpack/issues/1202)) ([dbb882e](https://github.com/codesandbox/sandpack/commit/dbb882eec6963a11c2eac7293c0891b501f9a9fe))
+
 ## [2.19.7](https://github.com/codesandbox/sandpack/compare/v2.19.6...v2.19.7) (2024-09-11)
 
 **Note:** Version bump only for package @codesandbox/sandpack-react
