@@ -19,6 +19,8 @@ export const useSandpackId = () => {
  */
 const MAX_ID_LENGTH = 9;
 
+const sandpackClientVersion = process.env.SANDPACK_CLIENT_VERSION;
+
 export const useAsyncSandpackId = (files: SandpackBundlerFiles) => {
   if (typeof useReactId === "function") {
     /* eslint-disable-next-line react-hooks/rules-of-hooks */
@@ -27,7 +29,9 @@ export const useAsyncSandpackId = (files: SandpackBundlerFiles) => {
       const allCode = Object.entries(files)
         .map((path, code) => path + "|" + code)
         .join("|||");
-      const sha = await generateShortId(allCode + reactDomId);
+      const sha = await generateShortId(
+        allCode + reactDomId + sandpackClientVersion
+      );
 
       return ensureLength(
         sha.replace(/:/g, "sp").replace(/[^a-zA-Z]/g, ""),

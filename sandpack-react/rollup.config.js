@@ -4,6 +4,8 @@ const replace = require("@rollup/plugin-replace");
 const typescript = require("@rollup/plugin-typescript");
 const filesize = require("rollup-plugin-filesize");
 
+const sandpackClientPkg = require("../sandpack-client/package.json");
+
 const pkg = require("./package.json");
 const generateUnstyledTypes = require("./scripts/rollup-generate-unstyled-types");
 const removeCss = require("./scripts/rollup-remove-css-transformer");
@@ -28,6 +30,7 @@ const configBase = [
         values: {
           "process.env.TEST_ENV": "false",
           "process.env.SANDPACK_UNSTYLED_COMPONENTS": `"false"`,
+          "process.env.SANDPACK_CLIENT_VERSION": `"${sandpackClientPkg.version}"`,
         },
       }),
       typescript({ tsconfig: "./tsconfig.json" }),
