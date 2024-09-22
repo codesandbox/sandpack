@@ -44,7 +44,7 @@ const escapeHtml = (unsafe: string): string => {
 const formatDiffMessage = (error: TestError, path: string): string => {
   let finalMessage = "";
   if (error.matcherResult) {
-    finalMessage = `<span>${escapeHtml(error.message)
+    finalMessage = `<span>${escapeHtml(error.message ?? "")
       .replace(/(expected)/m, `<span class="${passTextClassName}">$1</span>`)
       .replace(/(received)/m, `<span class="${failTextClassName}">$1</span>`)
       .replace(/(Difference:)/m, `<span>$1</span>`)
@@ -62,7 +62,7 @@ const formatDiffMessage = (error: TestError, path: string): string => {
         `<span class="${passTextClassName}">$1</span>`
       )}</span>`;
   } else {
-    finalMessage = escapeHtml(error.message);
+    finalMessage = escapeHtml(error.message ?? "");
   }
 
   if (
