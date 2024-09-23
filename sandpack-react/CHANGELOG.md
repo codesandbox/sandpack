@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.9](https://github.com/codesandbox/sandpack/compare/v2.19.8...v2.19.9) (2024-09-23)
+
+### Bug Fixes
+
+- handle string errors in SandpackTests component ([#1208](https://github.com/codesandbox/sandpack/issues/1208)) ([23c1b8d](https://github.com/codesandbox/sandpack/commit/23c1b8d9b3d3651c9eef76224c7c4f0c5b232085))
+
 ## [2.19.8](https://github.com/codesandbox/sandpack/compare/v2.19.7...v2.19.8) (2024-09-12)
 
 ### Bug Fixes
