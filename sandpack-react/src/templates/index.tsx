@@ -1,5 +1,6 @@
 import { ASTRO_TEMPLATE } from "./node/astro";
 import { NEXTJS_TEMPLATE } from "./node/nexjs";
+import { NEXTJS_14_TEMPLATE } from "./node/nextjs-14";
 import { NODE_TEMPLATE } from "./node/node";
 import { VITE_TEMPLATE } from "./node/vite";
 import { VITE_PREACT_TEMPLATE } from "./node/vite-preact";
@@ -47,6 +48,7 @@ export const SANDBOX_TEMPLATES = {
 
   node: NODE_TEMPLATE,
   nextjs: NEXTJS_TEMPLATE,
+  "nextjs-14": NEXTJS_14_TEMPLATE,
   vite: VITE_TEMPLATE,
   "vite-react": VITE_REACT_TEMPLATE,
   "vite-react-ts": VITE_REACT_TS_TEMPLATE,
