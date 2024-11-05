@@ -2072,6 +2072,13 @@
     outvariant "^1.4.0"
     strict-event-emitter "^0.4.3"
 
+"@codesandbox/sdk@latest":
+  version "0.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@codesandbox/sdk/-/sdk-0.0.0-alpha.1.tgz#33bb656e3127ab91ca887a06e1a3d62082403a57"
+  integrity sha512-pf4bWYd8u1pg/cHVez4JLfYC+ibpPYC4bPpGNOEFrs5nYCAIBnEQtnXEEiq96CdT9UaFOPgJiRVcTF9GD1RKvw==
+  dependencies:
+    "@hey-api/client-fetch" "^0.4.2"
+
 "@colors/colors@1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
@@ -2352,6 +2359,11 @@
   integrity sha512-D8n5yGCF3WIkPsjEYeM8knn9jQ70bigGGb5aUvN6y4BGxcT3OcOQOKcM3zRGllRCZCFxCZyQvYJF6ZE7bQUOyQ==
   dependencies:
     client-only "^0.0.1"
+
+"@hey-api/client-fetch@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@hey-api/client-fetch/-/client-fetch-0.4.2.tgz#02924579205dcfd4cb7c33db236007cb617ab30d"
+  integrity sha512-9BqcLTjsM3rWbads3afJkELS86vK7EqJvYgT429EVS9IO/kN75HEka3Ay/k142xCHSfXOuOShMdDam3nbG8wVA==
 
 "@humanwhocodes/config-array@^0.11.8":
   version "0.11.13"
