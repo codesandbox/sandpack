@@ -2072,10 +2072,10 @@
     outvariant "^1.4.0"
     strict-event-emitter "^0.4.3"
 
-"@codesandbox/sdk@latest":
-  version "0.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@codesandbox/sdk/-/sdk-0.0.0-alpha.1.tgz#33bb656e3127ab91ca887a06e1a3d62082403a57"
-  integrity sha512-pf4bWYd8u1pg/cHVez4JLfYC+ibpPYC4bPpGNOEFrs5nYCAIBnEQtnXEEiq96CdT9UaFOPgJiRVcTF9GD1RKvw==
+"@codesandbox/sdk@0.0.0-alpha.2":
+  version "0.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@codesandbox/sdk/-/sdk-0.0.0-alpha.2.tgz#f10641ff1504fe632167c845a4d2cd397a2d2537"
+  integrity sha512-U2BzgSyVV6z2JYyLH/21/83RqKEOaHqTGvfY7PHIjbDK/48YdzaQwgEL6i746c8xg077QeZBpHHYtKZMFVMQZw==
   dependencies:
     "@hey-api/client-fetch" "^0.4.2"
 

@@ -23,8 +23,9 @@ import {
 } from "./client.utils";
 import { loadPreviewIframe, setPreviewIframeProperties } from "./iframe.utils";
 import type { SandpackNodeMessage } from "./types";
+import { PortInfo } from "@codesandbox/sdk/dist/esm/ports";
 
-const token = "";
+const token = localStorage.getItem("sandpack-vm") || "";
 const sdk = new CodeSandbox(token);
 
 export class SandpackVM extends SandpackClient {
@@ -58,12 +59,29 @@ export class SandpackVM extends SandpackClient {
     this.updateSandbox(sandboxInfo);
   }
 
+  async ensureDirectoryExist(path: string): Promise<void> {
+    const directory = path.split("/").slice(0, -1).join("/");
+
+    if (directory === ".") {
+      return Promise.resolve();
+    }
+
+    await this.sandbox.fs.mkdir(directory, true);
+  }
+
   // Initialize sandbox, should only ever be called once
   private async _init(files: FilesMap): Promise<void> {
     this.sandbox = await sdk.createSandbox();
 
     for (const [key, value] of Object.entries(files)) {
-      this.sandbox.fs.writeTextFile(key, readBuffer(value));
+      const path = key.startsWith(".") ? key : `.${key}`;
+
+      await this.ensureDirectoryExist(path);
+
+      await this.sandbox.fs.writeFile(path, writeBuffer(value), {
+        create: true,
+        overwrite: true,
+      });
     }
 
     await this.globalListeners();
@@ -84,12 +102,7 @@ export class SandpackVM extends SandpackClient {
 
       this.dispatch({ type: "connected" });
 
-      // 3. Create, run task and assign preview
-      // const { id: shellId } = await this.createShellProcessFromTask(files);
-
-      // 4. Launch Preview
-      // await this.createPreviewURLFromId(shellId);
-      // await this.setLocationURLIntoIFrame();
+      await this.setLocationURLIntoIFrame();
 
       // 5. Returns to consumer
       this.dispatchDoneMessage();
@@ -103,12 +116,6 @@ export class SandpackVM extends SandpackClient {
 
       this.dispatch({ type: "done", compilatonError: true });
     }
-  }
-
-  private async createPreviewURLFromId(id: string): Promise<void> {
-    // this.iframePreviewUrl = undefined;
-    // const { url } = await this.emulator.preview.getByShellId(id);
-    // this.iframePreviewUrl = url + (this.options.startRoute ?? "");
   }
 
   /**
@@ -137,7 +144,27 @@ export class SandpackVM extends SandpackClient {
     setPreviewIframeProperties(this.iframe, this.options);
   }
 
+  private awaitForPorts(): Promise<PortInfo> {
+    return new Promise((resolve) => {
+      const initPorts = this.sandbox.ports.getOpenedPorts();
+
+      if (initPorts.length > 0) {
+        resolve(initPorts[0]);
+
+        return;
+      }
+
+      this.sandbox.ports.onDidPortOpen(() => {
+        resolve(this.sandbox.ports.getOpenedPorts()[0]);
+      });
+    });
+  }
+
   private async setLocationURLIntoIFrame(): Promise<void> {
+    const port = await this.awaitForPorts();
+
+    this.iframePreviewUrl = this.sandbox.ports.getPreviewUrl(port.port);
+
     if (this.iframePreviewUrl) {
       await loadPreviewIframe(this.iframe, this.iframePreviewUrl);
     }
@@ -180,19 +207,22 @@ export class SandpackVM extends SandpackClient {
     //     this.dispatch(event.data);
     //   }
     // });
-    // await this.emulator.fs.watch(
-    //   ["*"],
-    //   [
-    //     ".next",
-    //     "node_modules",
-    //     "build",
-    //     "dist",
-    //     "vendor",
-    //     ".config",
-    //     ".vuepress",
-    //   ],
+    // await this.sandbox.fs.watch(
+    //   "*",
+    //   {
+    //     excludes: [
+    //       ".next",
+    //       "node_modules",
+    //       "build",
+    //       "dist",
+    //       "vendor",
+    //       ".config",
+    //       ".vuepress",
+    //     ],
+    //   },
     //   async (message) => {
     //     if (!message) return;
+    //     debugger;
     //     const event = message as FSWatchEvent;
     //     const path =
     //       "newPath" in event
@@ -200,20 +230,17 @@ export class SandpackVM extends SandpackClient {
     //         : "path" in event
     //         ? event.path
     //         : "";
-    //     const { type } = await this.emulator.fs.stat(path);
+    //     const { type } = await this.sandbox.fs.stat(path);
     //     if (type !== "file") return null;
     //     try {
     //       switch (event.type) {
     //         case "change":
     //         case "create": {
-    //           const content = await this.emulator.fs.readFile(
-    //             event.path,
-    //             "utf8"
-    //           );
+    //           const content = await this.sandbox.fs.readFile(event.path);
     //           this.dispatch({
     //             type: "fs/change",
     //             path: event.path,
-    //             content: content,
+    //             content: readBuffer(content),
     //           });
     //           this._modulesCache.set(event.path, writeBuffer(content));
     //           break;
@@ -231,14 +258,11 @@ export class SandpackVM extends SandpackClient {
     //             path: event.oldPath,
     //           });
     //           this._modulesCache.delete(event.oldPath);
-    //           const newContent = await this.emulator.fs.readFile(
-    //             event.newPath,
-    //             "utf8"
-    //           );
+    //           const newContent = await this.sandbox.fs.readFile(event.newPath);
     //           this.dispatch({
     //             type: "fs/change",
     //             path: event.newPath,
-    //             content: newContent,
+    //             content: readBuffer(newContent),
     //           });
     //           this._modulesCache.set(event.newPath, writeBuffer(newContent));
     //           break;
@@ -296,7 +320,7 @@ export class SandpackVM extends SandpackClient {
     //     !this._modulesCache.get(key) ||
     //     readBuffer(value) !== readBuffer(this._modulesCache.get(key))
     //   ) {
-    //     this.sandbox.fs.writeFile(key, value);
+    // this.sandbox.fs.writeFile(key, value, { create: true, overwrite: true });
     //   }
     // });
 

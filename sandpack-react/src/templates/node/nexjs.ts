@@ -57,5 +57,5 @@ module.exports = nextConfig
     },
   },
   main: "/pages/index.js",
-  environment: "node",
+  environment: "vm",
 };
