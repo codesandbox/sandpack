@@ -407,6 +407,8 @@ export type SandpackThemeProp =
  */
 
 export type TemplateFiles<Name extends SandpackPredefinedTemplate> =
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   keyof (typeof SANDBOX_TEMPLATES)[Name]["files"];
 
 export interface SandpackInternal {

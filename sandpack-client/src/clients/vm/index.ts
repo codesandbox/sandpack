@@ -2,7 +2,7 @@
 
 import type { FilesMap } from "@codesandbox/nodebox";
 import type { Sandbox } from "@codesandbox/sdk";
-import { CodeSandbox } from "@codesandbox/sdk";
+import { connectToSandbox } from "@codesandbox/sdk/dist/cjs/browser";
 import type { PortInfo } from "@codesandbox/sdk/dist/esm/ports";
 
 import type {
@@ -25,8 +25,8 @@ import {
 import { loadPreviewIframe, setPreviewIframeProperties } from "./iframe.utils";
 import type { SandpackNodeMessage } from "./types";
 
-const token = localStorage.getItem("sandpack-vm") || "";
-const sdk = new CodeSandbox(token);
+// const token = localStorage.getItem("sandpack-vm") || "";
+// const sdk = new CodeSandbox(token);
 
 export class SandpackVM extends SandpackClient {
   private emitter: EventEmitter;
@@ -51,6 +51,8 @@ export class SandpackVM extends SandpackClient {
     });
 
     this.emitter = new EventEmitter();
+
+    debugger;
 
     // Assign iframes
     this.manageIframes(selector);

@@ -7,10 +7,7 @@ import { githubLight, sandpackDark } from "@codesandbox/sandpack-themes";
 export const SandpackExamples = () => {
   return (
     <>
-      <Sandpack />
-      <Sandpack theme="dark" />
-      <Sandpack theme={githubLight} template="nextjs" />
-      <Sandpack options={{ readOnly: true }} theme={sandpackDark} />
+      <Sandpack template="python" />
     </>
   );
 };
