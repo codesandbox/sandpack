@@ -83,6 +83,7 @@ export interface SandboxSetup {
   dependencies?: Dependencies;
   devDependencies?: Dependencies;
   entry?: string;
+  templateID?: string;
   /**
    * What template we use, if not defined we infer the template from the dependencies or files.
    *

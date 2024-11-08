@@ -3,6 +3,7 @@
 import type { FilesMap } from "@codesandbox/nodebox";
 import type { Sandbox } from "@codesandbox/sdk";
 import { CodeSandbox } from "@codesandbox/sdk";
+import type { PortInfo } from "@codesandbox/sdk/dist/esm/ports";
 
 import type {
   ClientOptions,
@@ -23,7 +24,6 @@ import {
 } from "./client.utils";
 import { loadPreviewIframe, setPreviewIframeProperties } from "./iframe.utils";
 import type { SandpackNodeMessage } from "./types";
-import { PortInfo } from "@codesandbox/sdk/dist/esm/ports";
 
 const token = localStorage.getItem("sandpack-vm") || "";
 const sdk = new CodeSandbox(token);
@@ -71,11 +71,13 @@ export class SandpackVM extends SandpackClient {
 
   // Initialize sandbox, should only ever be called once
   private async _init(files: FilesMap): Promise<void> {
-    this.sandbox = await sdk.createSandbox();
+    // TODO: move to server
+    this.sandbox = await sdk.sandbox.create({
+      template: this.sandboxSetup.templateID,
+    });
 
     for (const [key, value] of Object.entries(files)) {
       const path = key.startsWith(".") ? key : `.${key}`;
-
       await this.ensureDirectoryExist(path);
 
       await this.sandbox.fs.writeFile(path, writeBuffer(value), {
@@ -104,7 +106,6 @@ export class SandpackVM extends SandpackClient {
 
       await this.setLocationURLIntoIFrame();
 
-      // 5. Returns to consumer
       this.dispatchDoneMessage();
     } catch (err) {
       this.dispatch({
@@ -285,47 +286,30 @@ export class SandpackVM extends SandpackClient {
   /**
    * PUBLIC Methods
    */
-  public async restartShellProcess(): Promise<void> {
-    throw Error("Not implemented");
-    // if (this.emulatorShellProcess && this.emulatorCommand) {
-    //   // 1. Set the loading state and clean the URL
-    //   this.dispatch({ type: "start", firstLoad: true });
-    //   this.status = "initializing";
-
-    //   // 2. Exit shell
-    //   await this.emulatorShellProcess.kill();
-    //   this.iframe?.removeAttribute("attr");
-
-    //   this.emulator.fs.rm("/node_modules/.vite", {
-    //     recursive: true,
-    //     force: true,
-    //   });
-
-    //   // 3 Run command again
-    //   await this.compile(Object.fromEntries(this._modulesCache));
-    // }
-  }
-
   public updateSandbox(setup: SandboxSetup): void {
     const modules = fromBundlerFilesToFS(setup.files);
 
     /**
      * Update file changes
      */
+    if (this.status === "done") {
+      Object.entries(modules).forEach(async ([key, value]) => {
+        if (
+          !this._modulesCache.get(key) ||
+          readBuffer(value) !== readBuffer(this._modulesCache.get(key))
+        ) {
+          const path = key.startsWith(".") ? key : `.${key}`;
+          await this.ensureDirectoryExist(path);
 
-    // TODO: figure out if sandbox is running
-    // if (this.sandbox.?.state === "running") {
-    // Object.entries(modules).forEach(([key, value]) => {
-    //   if (
-    //     !this._modulesCache.get(key) ||
-    //     readBuffer(value) !== readBuffer(this._modulesCache.get(key))
-    //   ) {
-    // this.sandbox.fs.writeFile(key, value, { create: true, overwrite: true });
-    //   }
-    // });
+          this.sandbox.fs.writeFile(key, writeBuffer(value), {
+            create: true,
+            overwrite: true,
+          });
+        }
+      });
 
-    // return;
-    // }
+      return;
+    }
 
     /**
      * Pass init files to the bundler

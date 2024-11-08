@@ -178,6 +178,7 @@ export const useClient: UseClient = (
         {
           files: filesState.files,
           template: filesState.environment,
+          templateID: filesState.templateID,
         },
         {
           externalResources: options.externalResources,

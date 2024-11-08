@@ -52,7 +52,6 @@ export function addPackageJSONIfNeeded(
    */
   if (!packageJsonFile) {
     nullthrows(dependencies, DEPENDENCY_ERROR_MESSAGE);
-    nullthrows(entry, ENTRY_ERROR_MESSAGE);
 
     normalizedFilesPath["/package.json"] = {
       code: createPackageJSON(dependencies, devDependencies, entry),

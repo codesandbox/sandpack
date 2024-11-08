@@ -20,6 +20,7 @@ export interface FilesState {
   visibleFiles: Array<TemplateFiles<SandpackPredefinedTemplate> | string>;
   activeFile: TemplateFiles<SandpackPredefinedTemplate> | string;
   shouldUpdatePreview: boolean;
+  templateID?: string;
 }
 
 interface FilesOperations {
