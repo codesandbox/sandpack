@@ -1,9 +1,9 @@
 /* eslint-disable no-console,@typescript-eslint/no-explicit-any,prefer-rest-params,@typescript-eslint/explicit-module-boundary-types */
 
 import type { FilesMap } from "@codesandbox/nodebox";
-import type { Sandbox } from "@codesandbox/sdk";
-import { connectToSandbox } from "@codesandbox/sdk/dist/cjs/browser";
+import { connectToSandbox } from "@codesandbox/sdk/browser";
 import type { PortInfo } from "@codesandbox/sdk/dist/esm/ports";
+import type { SandboxWithoutClient } from "@codesandbox/sdk/dist/esm/sandbox";
 
 import type {
   ClientOptions,
@@ -25,12 +25,31 @@ import {
 import { loadPreviewIframe, setPreviewIframeProperties } from "./iframe.utils";
 import type { SandpackNodeMessage } from "./types";
 
-// const token = localStorage.getItem("sandpack-vm") || "";
-// const sdk = new CodeSandbox(token);
+let groupId = 1;
+const createLogGroup = (group: string) => {
+  let logId = 1;
+
+  console.group(`[${groupId++}]: ${group}`);
+
+  return {
+    groupEnd: () => console.groupEnd(),
+    log: (...args: any[]): void => {
+      console.info(`[${logId++}]:`, ...args);
+    },
+  };
+};
+
+const throwIfTimeout = (timeout: number) => {
+  return new Promise((_, reject) =>
+    setTimeout(() => {
+      reject(new Error(`Timeout of ${timeout}ms exceeded`));
+    }, timeout)
+  );
+};
 
 export class SandpackVM extends SandpackClient {
   private emitter: EventEmitter;
-  private sandbox!: Sandbox;
+  private sandbox!: SandboxWithoutClient;
   private iframePreviewUrl: string | undefined;
   private _modulesCache = new Map();
   private messageChannelId = generateRandomId();
@@ -45,6 +64,8 @@ export class SandpackVM extends SandpackClient {
     sandboxInfo: SandboxSetup,
     options: ClientOptions = {}
   ) {
+    const initLog = createLogGroup("Setup");
+
     super(selector, sandboxInfo, {
       ...options,
       bundlerURL: options.bundlerURL,
@@ -52,11 +73,12 @@ export class SandpackVM extends SandpackClient {
 
     this.emitter = new EventEmitter();
 
-    debugger;
-
     // Assign iframes
     this.manageIframes(selector);
+    initLog.log("Create iframe");
 
+    initLog.log("Trigger initial compile");
+    initLog.groupEnd();
     // Trigger initial compile
     this.updateSandbox(sandboxInfo);
   }
@@ -73,11 +95,29 @@ export class SandpackVM extends SandpackClient {
 
   // Initialize sandbox, should only ever be called once
   private async _init(files: FilesMap): Promise<void> {
-    // TODO: move to server
-    this.sandbox = await sdk.sandbox.create({
-      template: this.sandboxSetup.templateID,
-    });
+    const initLog = createLogGroup("Initializing sandbox...");
 
+    initLog.log("Fetching sandbox...");
+    const response = await fetch(
+      `/api/sandbox/${this.sandboxSetup.templateID}`
+    );
+
+    const sandpackData = await response.json();
+
+    initLog.log("Fetching sandbox success", sandpackData);
+
+    initLog.log("Connecting sandbox...");
+    this.sandbox = await Promise.race([
+      throwIfTimeout(5000),
+      connectToSandbox(sandpackData),
+    ]);
+    initLog.log("Connecting sandbox success", this.sandbox);
+    initLog.groupEnd();
+
+    console.group("Files");
+
+    const filesLog = createLogGroup("Files");
+    filesLog.log("Writing files...");
     for (const [key, value] of Object.entries(files)) {
       const path = key.startsWith(".") ? key : `.${key}`;
       await this.ensureDirectoryExist(path);
@@ -88,6 +128,9 @@ export class SandpackVM extends SandpackClient {
       });
     }
 
+    filesLog.log("Writing files success");
+    filesLog.groupEnd();
+
     await this.globalListeners();
   }
 
@@ -96,7 +139,6 @@ export class SandpackVM extends SandpackClient {
    */
   private async compile(files: FilesMap): Promise<void> {
     try {
-      // 1. Init
       this.status = "initializing";
       this.dispatch({ type: "start", firstLoad: true });
       if (!this._initPromise) {
@@ -164,13 +206,25 @@ export class SandpackVM extends SandpackClient {
   }
 
   private async setLocationURLIntoIFrame(): Promise<void> {
-    const port = await this.awaitForPorts();
+    const initLog = createLogGroup("Preview");
 
+    initLog.log("Waiting for port...");
+    const port = await this.awaitForPorts();
+    initLog.log("Pors found", port);
+
+    initLog.log("Getting preview url for port...");
     this.iframePreviewUrl = this.sandbox.ports.getPreviewUrl(port.port);
+    initLog.log("Got preview url", this.iframePreviewUrl);
 
     if (this.iframePreviewUrl) {
+      initLog.log("Loading preview iframe...");
       await loadPreviewIframe(this.iframe, this.iframePreviewUrl);
+      initLog.log("Preview iframe loaded");
+    } else {
+      initLog.log("No preview url found");
     }
+
+    initLog.groupEnd();
   }
 
   /**

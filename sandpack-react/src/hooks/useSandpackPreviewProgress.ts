@@ -46,6 +46,7 @@ export const useSandpackPreviewProgress = (
   React.useEffect(() => {
     let timer: NodeJS.Timer;
     const unsubscribe = listen((message) => {
+      console.log(message);
       if (message.type === "start" && message.firstLoad) {
         setIsReady(false);
       }

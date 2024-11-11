@@ -7,7 +7,7 @@ import { githubLight, sandpackDark } from "@codesandbox/sandpack-themes";
 export const SandpackExamples = () => {
   return (
     <>
-      <Sandpack template="python" />
+      <Sandpack template="vite-react-ts" />
     </>
   );
 };
