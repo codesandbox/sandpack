@@ -21,6 +21,7 @@ import {
   readBuffer,
   fromBundlerFilesToFS,
   writeBuffer,
+  scanDirectory,
 } from "./client.utils";
 import { loadPreviewIframe, setPreviewIframeProperties } from "./iframe.utils";
 import type { SandpackNodeMessage } from "./types";
@@ -84,13 +85,21 @@ export class SandpackVM extends SandpackClient {
   }
 
   async ensureDirectoryExist(path: string): Promise<void> {
+    if (path === ".") {
+      return Promise.resolve();
+    }
+
     const directory = path.split("/").slice(0, -1).join("/");
 
     if (directory === ".") {
       return Promise.resolve();
     }
 
-    await this.sandbox.fs.mkdir(directory, true);
+    try {
+      await this.sandbox.fs.mkdir(directory, true);
+    } catch {
+      // File already exists
+    }
   }
 
   // Initialize sandbox, should only ever be called once
@@ -98,9 +107,11 @@ export class SandpackVM extends SandpackClient {
     const initLog = createLogGroup("Initializing sandbox...");
 
     initLog.log("Fetching sandbox...");
-    const response = await fetch(
-      `/api/sandbox/${this.sandboxSetup.templateID}`
-    );
+    // const response = await fetch(
+    //   `/api/sandbox/${this.sandboxSetup.templateID}`
+    // );
+
+    const response = await fetch(`/api/sandbox/5c6t9h`);
 
     const sandpackData = await response.json();
 
@@ -108,13 +119,11 @@ export class SandpackVM extends SandpackClient {
 
     initLog.log("Connecting sandbox...");
     this.sandbox = await Promise.race([
-      throwIfTimeout(5000),
+      throwIfTimeout(10_000),
       connectToSandbox(sandpackData),
     ]);
     initLog.log("Connecting sandbox success", this.sandbox);
     initLog.groupEnd();
-
-    console.group("Files");
 
     const filesLog = createLogGroup("Files");
     filesLog.log("Writing files...");
@@ -127,8 +136,28 @@ export class SandpackVM extends SandpackClient {
         overwrite: true,
       });
     }
-
     filesLog.log("Writing files success");
+
+    filesLog.log("Scaning VM FS...");
+
+    const vmFiles = await scanDirectory(".", this.sandbox.fs);
+
+    vmFiles.forEach(({ path, content }) => {
+      const pathWithoutLeading = path.startsWith("./")
+        ? path.replace("./", "/")
+        : path;
+
+      this._modulesCache.set(pathWithoutLeading, content);
+
+      this.dispatch({
+        type: "fs/change",
+        path: pathWithoutLeading,
+        content: readBuffer(content),
+      });
+    });
+
+    filesLog.log("Scaning VM FS success", vmFiles);
+
     filesLog.groupEnd();
 
     await this.globalListeners();
@@ -189,18 +218,18 @@ export class SandpackVM extends SandpackClient {
     setPreviewIframeProperties(this.iframe, this.options);
   }
 
-  private awaitForPorts(): Promise<PortInfo> {
+  private awaitForPorts(): Promise<PortInfo[]> {
     return new Promise((resolve) => {
       const initPorts = this.sandbox.ports.getOpenedPorts();
 
       if (initPorts.length > 0) {
-        resolve(initPorts[0]);
+        resolve(initPorts);
 
         return;
       }
 
       this.sandbox.ports.onDidPortOpen(() => {
-        resolve(this.sandbox.ports.getOpenedPorts()[0]);
+        resolve(this.sandbox.ports.getOpenedPorts());
       });
     });
   }
@@ -209,11 +238,17 @@ export class SandpackVM extends SandpackClient {
     const initLog = createLogGroup("Preview");
 
     initLog.log("Waiting for port...");
-    const port = await this.awaitForPorts();
-    initLog.log("Pors found", port);
+    const ports = await this.awaitForPorts();
+    initLog.log("Ports found", ports);
+
+    const mainPort = ports.sort((a, b) => {
+      return a.port - b.port;
+    })[0];
+
+    initLog.log("Defined main port", mainPort);
 
     initLog.log("Getting preview url for port...");
-    this.iframePreviewUrl = this.sandbox.ports.getPreviewUrl(port.port);
+    this.iframePreviewUrl = this.sandbox.ports.getPreviewUrl(mainPort.port);
     initLog.log("Got preview url", this.iframePreviewUrl);
 
     if (this.iframePreviewUrl) {
@@ -342,27 +377,31 @@ export class SandpackVM extends SandpackClient {
   /**
    * PUBLIC Methods
    */
-  public updateSandbox(setup: SandboxSetup): void {
+  public async updateSandbox(setup: SandboxSetup) {
     const modules = fromBundlerFilesToFS(setup.files);
 
     /**
      * Update file changes
      */
     if (this.status === "done") {
-      Object.entries(modules).forEach(async ([key, value]) => {
+      for await (const [key, value] of Object.entries(modules)) {
         if (
           !this._modulesCache.get(key) ||
           readBuffer(value) !== readBuffer(this._modulesCache.get(key))
         ) {
-          const path = key.startsWith(".") ? key : `.${key}`;
-          await this.ensureDirectoryExist(path);
-
-          this.sandbox.fs.writeFile(key, writeBuffer(value), {
-            create: true,
-            overwrite: true,
-          });
+          const ensureLeadingPath = key.startsWith(".") ? key : "." + key;
+          await this.ensureDirectoryExist(ensureLeadingPath);
+          console.log(this._modulesCache, key);
+          try {
+            this.sandbox.fs.writeFile(ensureLeadingPath, writeBuffer(value), {
+              create: true,
+              overwrite: true,
+            });
+          } catch (error) {
+            console.error(error);
+          }
         }
-      });
+      }
 
       return;
     }
@@ -413,6 +452,6 @@ export class SandpackVM extends SandpackClient {
 
   public destroy(): void {
     this.emitter.cleanup();
-    this.sandbox.hibernate();
+    this.sandbox?.hibernate();
   }
 }
