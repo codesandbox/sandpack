@@ -256,6 +256,34 @@ export class SandpackVM extends SandpackClient {
   }
 
   private async globalListeners(): Promise<void> {
+    //   {
+    //     "type": "change",
+    //     "paths": [
+    //         "/project/sandbox/.git/FETCH_HEAD"
+    //     ]
+    // }
+
+    await this.sandbox.fs.watch(
+      "./",
+      {
+        recursive: true,
+        excludes: [
+          "**/node_modules/**",
+          "**/build/**",
+          "**/dist/**",
+          "**/vendor/**",
+          "**/.config/**",
+          "**/.vuepress/**",
+          "**/.git/**",
+          "**/.next/**",
+          "**/.nuxt/**",
+        ],
+      },
+      (message) => {
+        console.log(message);
+      }
+    );
+
     // await this.sandbox.fs.watch(
     //   "*",
     //   {
