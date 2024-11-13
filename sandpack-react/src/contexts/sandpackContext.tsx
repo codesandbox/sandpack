@@ -21,6 +21,25 @@ export const SandpackProvider: React.FC<SandpackProviderProps> = (props) => {
     clientOperations.initializeSandpackIframe();
   }, []);
 
+  React.useEffect(
+    function watchFSFilesChanges() {
+      if (clientState.status !== "running") return;
+
+      const unsubscribe = addListener((message) => {
+        if (message.type === "fs/change") {
+          fileOperations.updateFile(message.path, message.content, false);
+        }
+
+        if (message.type === "fs/remove") {
+          fileOperations.deleteFile(message.path, false);
+        }
+      });
+
+      return unsubscribe;
+    },
+    [clientState.status]
+  );
+
   return (
     <Sandpack.Provider
       value={{

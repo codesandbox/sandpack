@@ -58,7 +58,8 @@ export const SANDBOX_TEMPLATES = {
   // astro: ASTRO_TEMPLATE,
 
   nextjs: { environment: "vm", templateID: "1bvd7d" },
-  "vite-react-ts": { environment: "vm", templateID: "9qputt" },
+  "vite-react-ts": { environment: "vm", templateID: "9qputt" }, // TODO: orignal template is `9qputt`
   python: { environment: "vm", templateID: "in2qez" },
   rust: { environment: "vm", templateID: "rk69p3" },
+  node: { environment: "vm", templateID: "compassionate-thompson-node" },
 };

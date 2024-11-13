@@ -115,8 +115,7 @@ export const getSandpackStateFromProps = (
 
   return {
     visibleFiles: existOpenPath,
-    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-    activeFile: activeFile!,
+    activeFile: activeFile,
     files,
     environment: projectSetup.environment,
     shouldUpdatePreview: true,
@@ -282,3 +281,26 @@ export const convertedFilesToBundlerFiles = (
     return acc;
   }, {});
 };
+
+export const DEFAULT_FILES_TO_OPEN = [
+  "/src/App.js",
+  "/src/App.tsx",
+  "/src/index.js",
+  "/src/index.ts",
+  "/src/index.tsx",
+  "/app/page.tsx",
+  "/app/page.jsx",
+  "/index.js",
+  "/index.ts",
+  "/src/main.tsx",
+  "/src/main.jsx",
+  "/main.ts",
+  "/src/main.rs",
+  "/src/lib.rs",
+  "/index.html",
+  "/src/index.html",
+  "/src/index.vue",
+  "/src/App.vue",
+  "/src/main.astro",
+  "/package.json",
+];

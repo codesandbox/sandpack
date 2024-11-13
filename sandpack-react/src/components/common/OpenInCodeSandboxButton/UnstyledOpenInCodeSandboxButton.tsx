@@ -48,11 +48,47 @@ export const UnstyledOpenInCodeSandboxButton: React.FC<
 > = (props) => {
   const { sandpack } = useSandpack();
 
+  if (sandpack.environment === "vm") {
+    return <ExportVMButton {...props} />;
+  }
+
   if (sandpack.exportOptions) {
     return <ExportToWorkspaceButton state={sandpack} {...props} />;
   }
 
   return <RegularExportButton state={sandpack} {...props} />;
+};
+
+export const ExportVMButton: React.FC<React.HtmlHTMLAttributes<unknown>> = ({
+  children,
+  ...props
+}) => {
+  const sandpack = useSandpack();
+
+  React.useEffect(() => {
+    return sandpack.listen((message) => {
+      if (message.type === "vm/response_editor_url") {
+        window.open(message.data, "_blank");
+      }
+    });
+  });
+
+  const submit = () => {
+    sandpack.dispatch({
+      type: "vm/request_editor_url",
+    });
+  };
+
+  return (
+    <button
+      onClick={submit}
+      title="Export to workspace in CodeSandbox"
+      type="button"
+      {...props}
+    >
+      {children}
+    </button>
+  );
 };
 
 export const ExportToWorkspaceButton: React.FC<

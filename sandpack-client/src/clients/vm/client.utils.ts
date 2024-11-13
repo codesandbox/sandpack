@@ -53,34 +53,33 @@ export const getMessageFromError = (error: Error | string): string => {
   );
 };
 
-// Directories to ignore
-const IGNORED_DIRS = new Set([
-  "node_modules",
-  ".git",
-  "dist",
-  "build",
-  "coverage",
-  ".cache",
-  ".next",
-  ".nuxt",
-  ".output",
-  ".vscode",
-  ".idea",
-  ".devcontainer",
-  ".codesandbox",
-  "yarn.lock",
-  "pnpm-lock.yaml",
-]);
-
-const TYPES = {
-  FILE: 0,
-  FOLDER: 1,
-};
-
 export async function scanDirectory(
   dirPath: string,
   fs: SandboxWithoutClient["fs"]
 ) {
+  const IGNORED_DIRS = new Set([
+    "node_modules",
+    ".git",
+    "dist",
+    "build",
+    "coverage",
+    ".cache",
+    ".next",
+    ".nuxt",
+    ".output",
+    ".vscode",
+    ".idea",
+    ".devcontainer",
+    ".codesandbox",
+    "yarn.lock",
+    "pnpm-lock.yaml",
+  ]);
+
+  const TYPES = {
+    FILE: 0,
+    FOLDER: 1,
+  };
+
   const results: Array<{ path: string; content: Uint8Array }> = [];
 
   try {
@@ -89,12 +88,7 @@ export async function scanDirectory(
     for (const entry of entries) {
       const fullPath = dirPath + "/" + entry.name;
 
-      // Skip ignored directories
-      if (entry.type === TYPES.FOLDER && IGNORED_DIRS.has(entry.name)) {
-        continue;
-      }
-
-      if (entry.isSymlink) {
+      if (entry.isSymlink || IGNORED_DIRS.has(entry.name)) {
         continue;
       }
 
@@ -118,3 +112,28 @@ export async function scanDirectory(
     throw error;
   }
 }
+
+let groupId = 1;
+export const createLogGroup = (group: string) => {
+  let logId = 1;
+
+  // eslint-disable-next-line no-console
+  console.group(`[${groupId++}]: ${group}`);
+
+  return {
+    // eslint-disable-next-line no-console
+    groupEnd: () => console.groupEnd(),
+    log: (...args: unknown[]): void => {
+      // eslint-disable-next-line no-console
+      console.debug(`[${logId++}]:`, ...args);
+    },
+  };
+};
+
+export const throwIfTimeout = (timeout: number) => {
+  return new Promise((_, reject) =>
+    setTimeout(() => {
+      reject(new Error(`Timeout of ${timeout}ms exceeded`));
+    }, timeout)
+  );
+};

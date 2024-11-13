@@ -10,6 +10,7 @@ import type {
   TemplateFiles,
 } from "../..";
 import {
+  DEFAULT_FILES_TO_OPEN,
   convertedFilesToBundlerFiles,
   getSandpackStateFromProps,
 } from "../../utils/sandpackUtils";
@@ -65,6 +66,20 @@ export const useFiles: UseFiles = (props) => {
       isMountedRef.current = true;
     }
   }, [props.files, props.customSetup, props.template]);
+
+  useEffect(
+    function findActiveFileIfMissed() {
+      if (!state.activeFile) {
+        for (const file of DEFAULT_FILES_TO_OPEN) {
+          if (state.files[file]) {
+            setState((prev) => ({ ...prev, activeFile: file }));
+            break;
+          }
+        }
+      }
+    },
+    [state]
+  );
 
   const updateFile = (
     pathOrFiles: string | SandpackFiles,

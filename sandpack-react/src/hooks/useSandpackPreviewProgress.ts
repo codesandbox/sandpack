@@ -46,7 +46,6 @@ export const useSandpackPreviewProgress = (
   React.useEffect(() => {
     let timer: NodeJS.Timer;
     const unsubscribe = listen((message) => {
-      console.log(message);
       if (message.type === "start" && message.firstLoad) {
         setIsReady(false);
       }
@@ -82,6 +81,8 @@ export const useSandpackPreviewProgress = (
             mapProgressMessage(message.data, totalDependencies)
           );
         }
+      } else if (message.type === "vm/progress") {
+        setLoadingMessage(message.data);
       }
 
       if (message.type === "done" && message.compilatonError === false) {

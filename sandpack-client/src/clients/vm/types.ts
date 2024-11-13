@@ -55,7 +55,7 @@ type SandpackURLsMessages =
       type: "urlforward";
     };
 
-export type SandpackNodeMessage = BaseSandpackMessage &
+export type SandpackVMMessage = BaseSandpackMessage &
   (
     | SandpackStandartMessages
     | SandpackURLsMessages
@@ -65,6 +65,9 @@ export type SandpackNodeMessage = BaseSandpackMessage &
         type: "stdout";
         payload: SandpackShellStdoutData;
       }
+    | { type: "vm/progress"; data: string }
+    | { type: "vm/request_editor_url" }
+    | { type: "vm/response_editor_url"; data: string }
     | SandpackFSMessages
   );
 

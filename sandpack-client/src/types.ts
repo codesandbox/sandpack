@@ -1,5 +1,6 @@
 import type { SandpackNodeMessage } from "./clients/node/types";
 import type { SandpackRuntimeMessage } from "./clients/runtime/types";
+import { SandpackVMMessage } from "./clients/vm/types";
 
 export interface ClientOptions {
   /**
@@ -177,7 +178,10 @@ export interface BundlerState {
   transpiledModules: Record<string, TranspiledModule>;
 }
 
-export type SandpackMessage = SandpackRuntimeMessage | SandpackNodeMessage;
+export type SandpackMessage =
+  | SandpackRuntimeMessage
+  | SandpackNodeMessage
+  | SandpackVMMessage;
 
 export type ListenerFunction = (msg: SandpackMessage) => void;
 export type UnsubscribeFunction = () => void;

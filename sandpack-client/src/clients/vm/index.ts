@@ -17,47 +17,23 @@ import { EventEmitter } from "../event-emitter";
 
 import {
   getMessageFromError,
-  generateRandomId,
   readBuffer,
   fromBundlerFilesToFS,
   writeBuffer,
   scanDirectory,
+  createLogGroup,
+  throwIfTimeout,
 } from "./client.utils";
 import { loadPreviewIframe, setPreviewIframeProperties } from "./iframe.utils";
-import type { SandpackNodeMessage } from "./types";
-
-let groupId = 1;
-const createLogGroup = (group: string) => {
-  let logId = 1;
-
-  console.group(`[${groupId++}]: ${group}`);
-
-  return {
-    groupEnd: () => console.groupEnd(),
-    log: (...args: any[]): void => {
-      console.info(`[${logId++}]:`, ...args);
-    },
-  };
-};
-
-const throwIfTimeout = (timeout: number) => {
-  return new Promise((_, reject) =>
-    setTimeout(() => {
-      reject(new Error(`Timeout of ${timeout}ms exceeded`));
-    }, timeout)
-  );
-};
+import type { SandpackVMMessage } from "./types";
 
 export class SandpackVM extends SandpackClient {
   private emitter: EventEmitter;
   private sandbox!: SandboxWithoutClient;
-  private iframePreviewUrl: string | undefined;
-  private _modulesCache = new Map();
-  private messageChannelId = generateRandomId();
-
-  // Public
   public iframe!: HTMLIFrameElement;
 
+  private _modulesCache = new Map();
+  private _forkPromise: Promise<void> | null = null;
   private _initPromise: Promise<void> | null = null;
 
   constructor(
@@ -106,24 +82,30 @@ export class SandpackVM extends SandpackClient {
   private async _init(files: FilesMap): Promise<void> {
     const initLog = createLogGroup("Initializing sandbox...");
 
+    this.dispatch({
+      type: "vm/progress",
+      data: "[1/3] Fetching sandbox...",
+    });
+
     initLog.log("Fetching sandbox...");
-    // const response = await fetch(
-    //   `/api/sandbox/${this.sandboxSetup.templateID}`
-    // );
-
-    const response = await fetch(`/api/sandbox/5c6t9h`);
-
+    const response = await fetch(
+      `/api/sandbox/${this.sandboxSetup.templateID}`
+    );
     const sandpackData = await response.json();
-
     initLog.log("Fetching sandbox success", sandpackData);
 
     initLog.log("Connecting sandbox...");
     this.sandbox = await Promise.race([
-      throwIfTimeout(10_000),
+      throwIfTimeout(15_000),
       connectToSandbox(sandpackData),
     ]);
     initLog.log("Connecting sandbox success", this.sandbox);
     initLog.groupEnd();
+
+    this.dispatch({
+      type: "vm/progress",
+      data: "[2/3] Creating FS...",
+    });
 
     const filesLog = createLogGroup("Files");
     filesLog.log("Writing files...");
@@ -139,7 +121,6 @@ export class SandpackVM extends SandpackClient {
     filesLog.log("Writing files success");
 
     filesLog.log("Scaning VM FS...");
-
     const vmFiles = await scanDirectory(".", this.sandbox.fs);
 
     vmFiles.forEach(({ path, content }) => {
@@ -155,9 +136,7 @@ export class SandpackVM extends SandpackClient {
         content: readBuffer(content),
       });
     });
-
     filesLog.log("Scaning VM FS success", vmFiles);
-
     filesLog.groupEnd();
 
     await this.globalListeners();
@@ -237,6 +216,11 @@ export class SandpackVM extends SandpackClient {
   private async setLocationURLIntoIFrame(): Promise<void> {
     const initLog = createLogGroup("Preview");
 
+    this.dispatch({
+      type: "vm/progress",
+      data: "[3/3] Opening preview...",
+    });
+
     initLog.log("Waiting for port...");
     const ports = await this.awaitForPorts();
     initLog.log("Ports found", ports);
@@ -248,12 +232,12 @@ export class SandpackVM extends SandpackClient {
     initLog.log("Defined main port", mainPort);
 
     initLog.log("Getting preview url for port...");
-    this.iframePreviewUrl = this.sandbox.ports.getPreviewUrl(mainPort.port);
-    initLog.log("Got preview url", this.iframePreviewUrl);
+    const iframePreviewUrl = this.sandbox.ports.getPreviewUrl(mainPort.port);
+    initLog.log("Got preview url", iframePreviewUrl);
 
-    if (this.iframePreviewUrl) {
+    if (iframePreviewUrl) {
       initLog.log("Loading preview iframe...");
-      await loadPreviewIframe(this.iframe, this.iframePreviewUrl);
+      await loadPreviewIframe(this.iframe, iframePreviewUrl);
       initLog.log("Preview iframe loaded");
     } else {
       initLog.log("No preview url found");
@@ -269,36 +253,9 @@ export class SandpackVM extends SandpackClient {
   private dispatchDoneMessage(): void {
     this.status = "done";
     this.dispatch({ type: "done", compilatonError: false });
-
-    if (this.iframePreviewUrl) {
-      this.dispatch({
-        type: "urlchange",
-        url: this.iframePreviewUrl,
-        back: false,
-        forward: false,
-      });
-    }
   }
 
   private async globalListeners(): Promise<void> {
-    // window.addEventListener("message", (event) => {
-    //   if (event.data.type === PREVIEW_LOADED_MESSAGE_TYPE) {
-    //     injectScriptToIframe(this.iframe, this.messageChannelId);
-    //   }
-    //   if (
-    //     event.data.type === "urlchange" &&
-    //     event.data.channelId === this.messageChannelId
-    //   ) {
-    //     this.dispatch({
-    //       type: "urlchange",
-    //       url: event.data.url,
-    //       back: event.data.back,
-    //       forward: event.data.forward,
-    //     });
-    //   } else if (event.data.channelId === this.messageChannelId) {
-    //     this.dispatch(event.data);
-    //   }
-    // });
     // await this.sandbox.fs.watch(
     //   "*",
     //   {
@@ -374,6 +331,42 @@ export class SandpackVM extends SandpackClient {
     // );
   }
 
+  public async fork() {
+    this.dispatch({
+      type: "vm/progress",
+      data: "Forking sandbox...",
+    });
+
+    const timer = setTimeout(() => {
+      this.dispatch({
+        type: "vm/progress",
+        data: "Still forking...",
+      });
+    }, 3_000);
+
+    const response = await fetch(`/api/sandbox/${this.sandbox.id}`, {
+      method: "POST",
+    });
+    const sandpackData = await response.json();
+    this.sandbox = await Promise.race([
+      throwIfTimeout(10_000),
+      connectToSandbox(sandpackData),
+    ]);
+
+    clearTimeout(timer);
+
+    this.dispatch({
+      type: "vm/progress",
+      data: "Assigining new preview...",
+    });
+    this.setLocationURLIntoIFrame();
+
+    this.dispatch({
+      type: "done",
+      compilatonError: false,
+    });
+  }
+
   /**
    * PUBLIC Methods
    */
@@ -384,6 +377,15 @@ export class SandpackVM extends SandpackClient {
      * Update file changes
      */
     if (this.status === "done") {
+      // Stack pending requests
+      await this._forkPromise;
+
+      const needToFork = this.sandboxSetup.templateID === this.sandbox.id;
+      if (needToFork) {
+        this._forkPromise = this.fork();
+        await this._forkPromise;
+      }
+
       for await (const [key, value] of Object.entries(modules)) {
         if (
           !this._modulesCache.get(key) ||
@@ -426,7 +428,7 @@ export class SandpackVM extends SandpackClient {
     });
   }
 
-  public async dispatch(message: SandpackNodeMessage): Promise<void> {
+  public async dispatch(message: SandpackVMMessage): Promise<void> {
     switch (message.type) {
       case "compile":
         this.compile(message.modules);
@@ -441,6 +443,15 @@ export class SandpackVM extends SandpackClient {
         this.iframe?.contentWindow?.postMessage(message, "*");
         break;
 
+      case "vm/request_editor_url": {
+        this.dispatch({
+          type: "vm/response_editor_url",
+          data: `https://codesandbox.io/p/redirect-to-project-editor/${this.sandbox.id}`,
+        });
+
+        break;
+      }
+
       default:
         this.emitter.dispatch(message);
     }
@@ -452,6 +463,5 @@ export class SandpackVM extends SandpackClient {
 
   public destroy(): void {
     this.emitter.cleanup();
-    this.sandbox?.hibernate();
   }
 }

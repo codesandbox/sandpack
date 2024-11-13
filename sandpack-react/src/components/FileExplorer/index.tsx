@@ -34,37 +34,9 @@ export const SandpackFileExplorer = ({
 }: SandpackFileExplorerProp &
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
   const {
-    sandpack: {
-      status,
-      updateFile,
-      deleteFile,
-      activeFile,
-      files,
-      openFile,
-      visibleFilesFromProps,
-    },
-    listen,
+    sandpack: { activeFile, files, openFile, visibleFilesFromProps },
   } = useSandpack();
   const classNames = useClassNames();
-
-  React.useEffect(
-    function watchFSFilesChanges() {
-      if (status !== "running") return;
-
-      const unsubscribe = listen((message) => {
-        if (message.type === "fs/change") {
-          updateFile(message.path, message.content, false);
-        }
-
-        if (message.type === "fs/remove") {
-          deleteFile(message.path, false);
-        }
-      });
-
-      return unsubscribe;
-    },
-    [status]
-  );
 
   const orderedFiles = Object.keys(files)
     .sort()
