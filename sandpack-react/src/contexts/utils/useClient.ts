@@ -197,6 +197,7 @@ export const useClient: UseClient = (
             !!options?.experimental_enableServiceWorker,
           experimental_stableServiceWorkerId: await getStableServiceWorkerId(),
           sandboxId,
+          vmEnvironmentApiUrl: options.vmEnvironmentApiUrl,
         }
       );
 

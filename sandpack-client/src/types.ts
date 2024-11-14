@@ -1,6 +1,6 @@
 import type { SandpackNodeMessage } from "./clients/node/types";
 import type { SandpackRuntimeMessage } from "./clients/runtime/types";
-import { SandpackVMMessage } from "./clients/vm/types";
+import type { SandpackVMMessage } from "./clients/vm/types";
 
 export interface ClientOptions {
   /**
@@ -77,6 +77,11 @@ export interface ClientOptions {
    */
   experimental_enableServiceWorker?: boolean;
   experimental_stableServiceWorkerId?: string;
+
+  /**
+   * URL Api to connect to the server endpoint when using VM environment
+   */
+  vmEnvironmentApiUrl?: (id: string) => string;
 }
 
 export interface SandboxSetup {

@@ -34,7 +34,13 @@ export const SandpackExamples = () => {
         ))}
       </select>
 
-      <SandpackProvider key={state} template={state}>
+      <SandpackProvider
+        key={state}
+        template={state}
+        options={{
+          vmEnvironmentApiUrl: (id) => `/api/sandbox/${id}`,
+        }}
+      >
         <SandpackLayout style={{ "--sp-layout-height": "500px" }}>
           <SandpackFileExplorer />
           <SandpackCodeEditor closableTabs />

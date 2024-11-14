@@ -172,6 +172,8 @@ export interface SandpackOptions {
   skipEval?: boolean;
   fileResolver?: FileResolver;
   externalResources?: string[];
+
+  vmEnvironmentApiUrl?: (id: string) => string;
 }
 
 /**
@@ -485,6 +487,7 @@ export interface SandpackInternalOptions<
   classes?: Record<string, string>;
   experimental_enableServiceWorker?: boolean;
   experimental_enableStableServiceWorkerId?: boolean;
+  vmEnvironmentApiUrl?: (id: string) => string;
 }
 
 interface SandpackInternalProps<
@@ -524,6 +527,7 @@ interface SandpackInternalProps<
     showReadOnly?: boolean;
 
     layout?: "preview" | "tests" | "console";
+    vmEnvironmentApiUrl?: (id: string) => string;
   };
 }
 

@@ -88,8 +88,19 @@ export class SandpackVM extends SandpackClient {
     });
 
     initLog.log("Fetching sandbox...");
+
+    nullthrows(
+      this.options.vmEnvironmentApiUrl,
+      `No 'options.vmEnvironmentApiUrl' provided. This options is mandatory when using VM as environment`
+    );
+
+    nullthrows(
+      this.sandboxSetup.templateID,
+      `No templateID provided. This options is mandatory when using VM as environment`
+    );
+
     const response = await fetch(
-      `/api/sandbox/${this.sandboxSetup.templateID}`
+      this.options.vmEnvironmentApiUrl!(this.sandboxSetup.templateID!)
     );
     const sandpackData = await response.json();
     initLog.log("Fetching sandbox success", sandpackData);
@@ -160,6 +171,10 @@ export class SandpackVM extends SandpackClient {
 
       this.dispatchDoneMessage();
     } catch (err) {
+      if (this.emitter.listenersCount === 0) {
+        throw err;
+      }
+
       this.dispatch({
         type: "action",
         action: "notification",
@@ -256,34 +271,33 @@ export class SandpackVM extends SandpackClient {
   }
 
   private async globalListeners(): Promise<void> {
+    // TYPE:
     //   {
     //     "type": "change",
     //     "paths": [
     //         "/project/sandbox/.git/FETCH_HEAD"
     //     ]
     // }
-
-    await this.sandbox.fs.watch(
-      "./",
-      {
-        recursive: true,
-        excludes: [
-          "**/node_modules/**",
-          "**/build/**",
-          "**/dist/**",
-          "**/vendor/**",
-          "**/.config/**",
-          "**/.vuepress/**",
-          "**/.git/**",
-          "**/.next/**",
-          "**/.nuxt/**",
-        ],
-      },
-      (message) => {
-        console.log(message);
-      }
-    );
-
+    // await this.sandbox.fs.watch(
+    //   "./",
+    //   {
+    //     recursive: true,
+    //     excludes: [
+    //       "**/node_modules/**",
+    //       "**/build/**",
+    //       "**/dist/**",
+    //       "**/vendor/**",
+    //       "**/.config/**",
+    //       "**/.vuepress/**",
+    //       "**/.git/**",
+    //       "**/.next/**",
+    //       "**/.nuxt/**",
+    //     ],
+    //   },
+    //   (message) => {
+    //     console.log(message);
+    //   }
+    // );
     // await this.sandbox.fs.watch(
     //   "*",
     //   {
@@ -372,9 +386,10 @@ export class SandpackVM extends SandpackClient {
       });
     }, 3_000);
 
-    const response = await fetch(`/api/sandbox/${this.sandbox.id}`, {
-      method: "POST",
-    });
+    const response = await fetch(
+      this.options.vmEnvironmentApiUrl!(this.sandbox.id),
+      { method: "POST" }
+    );
     const sandpackData = await response.json();
     this.sandbox = await Promise.race([
       throwIfTimeout(10_000),

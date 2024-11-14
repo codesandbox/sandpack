@@ -6,7 +6,7 @@ import type {
 
 export class EventEmitter {
   private listeners: Record<number, ListenerFunction> = {};
-  private listenersCount = 0;
+  public listenersCount = 0;
 
   readonly channelId: number = Math.floor(Math.random() * 1000000);
 
