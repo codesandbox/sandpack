@@ -1,0 +1,47 @@
+# Overview
+
+import { Mermaid } from 'mdx-mermaid/Mermaid';
+
+1. Sandpack React
+
+- `<Sandpack />` component initializes
+- Manages React integration & UI state
+
+2. Sandpack Clinet
+
+- `loadSandpackClient()` selects appropriate client type (VM/Runtime/Static/Node)
+- Creates sandbox context from files, template, and dependencies
+
+3. Bundler
+
+- Processes sandbox setup
+- Handles code bundling
+- Returns updates to client
+
+<br />
+
+<Mermaid chart={`
+sequenceDiagram
+    autonumber
+    participant R as Sandpack-react
+    participant C as Sandpack-client
+    
+    Note left of R: <Sandpack />
+    Note right of C: loadSandpackClient(...)
+    Note right of C: Depending on the template/env<br/>loadSandpackClient will return a<br />vm, runtime, static or node client
+    Note right of C: sandpack-client/clients/index.ts
+    R->>+C: Get sandbox context
+    Note over R,C: Based on files, template, and deps, <br/> will be create a SandpackContextInfo.
+    Note right of R: getSandpackStateFromProps(...)
+
+    C->>-R: New client instance
+    Note left of R: new SandpackClient()
+
+    create participant B as Bundler
+    C->>+B: Dispatch sandbox setup
+    B->>+C: Messages with updates
+    Note left of R: Once it's done, show <br/>iframe with preview
+    C->>-R: Done
+
+    C->>+R: Dispatch sandbox setup
+`} />

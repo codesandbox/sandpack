@@ -1,0 +1,85 @@
+import { Mermaid } from 'mdx-mermaid/Mermaid';
+
+# Private dependencies: technical specification
+
+This document outlines the technical specification for enabling the use of private dependencies on CodeSandbox, specifically for Pro users. This feature leverages the existing infrastructure used for CodeSandbox's private package proxy to provide a secure and seamless experience for developers working with internal or private packages.
+
+### Use cases
+
+- **CodeSandbox proxy:** all secrets are stored on csb server, which will proxy internally and respond with package content. This is the safest way to deal with sensitive data once it doesn’t expose any secrets to the client;
+- **Companies with internal VPN**: given the nature of a VPN restriction, csb will respond with the registry token to the client, which then will fetch to the npm registry in the internal network.
+
+## Technical Specification
+
+1. Authentication Flow:
+- The Sandpack component initiates the authentication flow by redirecting the user to `codesandbox.io/auth/sandpack?team-id=<team-id>`.
+- The CodeSandbox authentication service verifies the team-id and provides a sandpack-secret token.
+- The sandpack-secret token is stored in a secure cookie with `SameSite=None` and `Secure=true` settings.
+
+2. Trusted Domains:
+- After the authentication flow, Sandpack requests the list of trusted domains for the specified team-id from the CodeSandbox API.
+- The API returns the list of trusted domains, which Sandpack uses to set the appropriate Content Security Policy (CSP) headers for the iframe.
+
+
+3. Package Fetch:
+- With the sandpack-secret token available, Sandpack makes requests to the CodeSandbox API to fetch the private package data.
+- The API authenticates the request using the sandpack-secret token and retrieves the package payload from the internal npm registry.
+- The API handles token renewal as necessary to ensure seamless access to the private package.
+
+<br />
+
+<Mermaid chart={`sequenceDiagram
+		participant U as mydomain.com
+    participant S as teamid.sandpack.codesandbox.io
+    participant C as codesandbox.io
+    participant A as API
+
+    Note over S: <Sandpack teamId="" />
+
+	  alt Pop-up authentication
+	    Note over U: 1st step
+	    S->>+C: Sign-in [team-id]
+	    C->>-A: GET /auth/sandpack [team-id]
+	    Note over A: website-url match team config?
+	    A->>+C: sandpack-token
+	    C->>-S: sandpack-token
+	    Note over S: Cookie SameSite=None Secure=true
+		end
+
+    Note over S: Refresh iframe to use the new cookie
+
+    alt Worker
+	    Note over U: 2nd step
+			U --> S: iframe src: teamid.sandpack.codesandbox.io
+			S ->>+A: GET /trusted-domains/:team-id
+			A ->>-S: List of trusted domains 
+			S ->> U: CSP: frame-ancestors
+		end
+
+    Note over U: At this point, this domain is a trusted one
+
+    alt Authenticated connection 
+		    Note over U: 3rd step: run sandbox
+        U->>+S: Run this sandbox
+        S->>+A: GET /[team-id]/npm_registry
+				A->>-S: Registry configuration
+        S->>+A: GET /[team-id]/npm_registry/[package]
+		    Note over A: Make sure it renews the token as need
+        A->>-S: Package payload
+    end`} />
+
+### Worker Technical Specification
+
+<br />
+
+<Mermaid chart={`
+sequenceDiagram
+		participant U as mydomain.com
+    participant S as teamid-2-0-0-sandpack.codesandbox.io
+    participant A as API
+
+		U --> S: iframe src: teamid.sandpack.codesandbox.io
+		S ->>+A: GET /trusted-domains/:team-id
+		A ->>-S: List of trusted domains 
+		S ->> U: CSP: frame-ancestors
+`} />
