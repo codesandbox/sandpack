@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.10](https://github.com/codesandbox/sandpack/compare/v2.19.9...v2.19.10) (2024-11-21)
+
+### Bug Fixes
+
+- replace eval with globalThis to comply with CSP policies ([#1232](https://github.com/codesandbox/sandpack/issues/1232)) ([515488d](https://github.com/codesandbox/sandpack/commit/515488da9dcbf4cf062527347b46adc7d7dba08f))
+
 ## [2.19.9](https://github.com/codesandbox/sandpack/compare/v2.19.8...v2.19.9) (2024-09-23)
 
 ### Bug Fixes
