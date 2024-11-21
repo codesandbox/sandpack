@@ -3,11 +3,17 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Const
-const GLOBAL = (function getGlobal() {
-  // NOTE: see http://www.ecma-international.org/ecma-262/6.0/index.html#sec-performeval step 10
-  const savedEval = eval;
+const GLOBAL = (function getGlobal(): any {
+  if (typeof globalThis !== "undefined") return globalThis; // modern standard
 
-  return savedEval("this");
+  if (typeof window !== "undefined") return window; // browser
+
+  if (typeof global !== "undefined") return global; // Node.js
+
+  // eslint-disable-next-line no-restricted-globals
+  if (typeof self !== "undefined") return self; // Web Worker
+
+  throw Error("Unable to locate global object");
 })();
 
 const ARRAY_BUFFER_SUPPORTED = typeof ArrayBuffer === "function";
