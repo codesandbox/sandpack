@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 
+import { REACT_TEMPLATE } from "./templates";
+
 import {
   Sandpack,
   SandpackCodeEditor,
@@ -12,6 +14,38 @@ import {
 export default {
   title: "Bug reports/Issues",
 };
+
+export const Issue944 = (): JSX.Element => {
+  const [files, setFiles] = useState(REACT_TEMPLATE["files"]);
+
+  return (
+    <>
+      <button
+        onClick={() => {
+          setFiles(REACT_TEMPLATE["files"]);
+        }}
+      >
+        1
+      </button>
+      <button
+        onClick={() => {
+          setFiles({
+            ...REACT_TEMPLATE["files"],
+            "/App.js": `import Foo from "./Foo";
+export default function App() {
+  return <Foo />
+}`,
+            "Foo.js": `export default () => <button> Foo</button>`,
+          });
+        }}
+      >
+        2
+      </button>
+      <Sandpack files={files} template="react" />
+    </>
+  );
+};
+
 export const FlushServerVsClient = (): JSX.Element => {
   return (
     <SandpackProvider>
