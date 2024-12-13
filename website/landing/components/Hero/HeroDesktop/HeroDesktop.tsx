@@ -22,7 +22,7 @@ export const HeroDesktop: React.FC = () => {
   const [scrollPosition, setScrollPosition] = useState(scrollY.get());
   const scrollHeight = useMemo(() => sectionHeight / 3, [sectionHeight]);
   const [animationComplete, setAnimationComplete] = useState(false);
-  const isMounted = useRef(false);
+  const isMountedRef = useRef(false);
 
   scrollY.onChange((updatedScroll) => setScrollPosition(updatedScroll));
 
@@ -102,9 +102,9 @@ export const HeroDesktop: React.FC = () => {
   }, [sectionRef]);
 
   useLayoutEffect(() => {
-    if (isMounted.current) return;
+    if (isMountedRef.current) return;
 
-    isMounted.current = !!sectionRef.current;
+    isMountedRef.current = !!sectionRef.current;
   }, [sectionRef]);
 
   useEffect(() => {
@@ -154,6 +154,8 @@ export const HeroDesktop: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animationComplete]);
 
+  const isMounted = isMountedRef.current;
+
   return (
     <AnimatedBox
       ref={sectionRef}
@@ -180,7 +182,7 @@ export const HeroDesktop: React.FC = () => {
           position: "sticky",
           top: 0,
           transform: "scale($container-scale)",
-          opacity: isMounted.current ? 1 : 0,
+          opacity: isMounted ? 1 : 0,
           transition: "opacity 300ms linear",
 
           display: "flex",
