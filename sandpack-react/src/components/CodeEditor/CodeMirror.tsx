@@ -183,7 +183,8 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       [decorators]
     );
 
-    const useStaticReadOnly = readOnly && decorators?.length === 0;
+    const useStaticReadOnly =
+      readOnly && (decorators?.length === 0 || decorators === undefined);
 
     React.useEffect(() => {
       if (!wrapper.current || !shouldInitEditor || useStaticReadOnly) {
