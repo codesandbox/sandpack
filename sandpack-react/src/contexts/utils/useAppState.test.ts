@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 
 import { VANILLA_TEMPLATE } from "../../templates";
 import { getSandpackStateFromProps } from "../../utils/sandpackUtils";

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import type { SandpackBundlerFile } from "@codesandbox/sandpack-client/src";
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act } from "@testing-library/react";
 
 import { VANILLA_TEMPLATE } from "../../templates";
 import { getSandpackStateFromProps } from "../../utils/sandpackUtils";
@@ -127,8 +127,8 @@ describe(useFiles, () => {
     expect(result.current[0].files["/index.js"]).toEqual({ code: `Baz` });
   });
   it("doesn't override the activeFile's metadata", () => {
-    const { result } = renderHook(() =>
-      useFiles({
+    const { result } = renderHook(useFiles, {
+      initialProps: {
         template: "react",
         files: {
           "/App.js": {
@@ -137,8 +137,8 @@ describe(useFiles, () => {
             someOtherMetadata: "foo",
           } as SandpackBundlerFile,
         },
-      })
-    );
+      },
+    });
 
     act(() => {
       result.current[1].updateFile("/App.js", "console.log(10)");

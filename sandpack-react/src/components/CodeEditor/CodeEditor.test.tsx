@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-import { act } from "@testing-library/react-hooks";
+import { act, render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import React from "react";
-import { create } from "react-test-renderer";
 
 import { SandpackProvider } from "../../";
 
@@ -13,7 +13,7 @@ describe("read-only", () => {
   jest.useFakeTimers();
 
   it("should render the read-only flag", () => {
-    const { root } = create(
+    render(
       <SandpackProvider>
         <SandpackCodeEditor readOnly />
       </SandpackProvider>
@@ -23,13 +23,12 @@ describe("read-only", () => {
       jest.runAllTimers();
     });
 
-    const readOnlyFlag = root.findByProps({ "data-testId": "read-only" });
-
-    expect(readOnlyFlag.props.children).toBe("Read-only");
+    const readOnlyFlag = screen.getByTestId("read-only");
+    expect(readOnlyFlag).toHaveTextContent("Read-only");
   });
 
   it("should not render the read-only flag, when showReadOnly is false", () => {
-    const { root } = create(
+    render(
       <SandpackProvider>
         <SandpackCodeEditor showReadOnly={false} readOnly />
       </SandpackProvider>
@@ -39,12 +38,6 @@ describe("read-only", () => {
       jest.runAllTimers();
     });
 
-    try {
-      root.findByProps({ "data-testId": "read-only" });
-    } catch (err) {
-      expect(err.message).toBe(
-        'No instances found with props: {"data-testId":"read-only"}'
-      );
-    }
+    expect(screen.queryByTestId("read-only")).not.toBeInTheDocument();
   });
 });
