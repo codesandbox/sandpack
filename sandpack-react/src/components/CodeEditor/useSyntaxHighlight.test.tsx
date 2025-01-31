@@ -1,8 +1,12 @@
+/**
+ * @jest-environment jsdom
+ */
 import { python } from "@codemirror/lang-python";
 import { LanguageSupport, StreamLanguage } from "@codemirror/language";
 import { shell } from "@codemirror/legacy-modes/mode/shell";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import React from "react";
-import { create } from "react-test-renderer";
 
 import { defaultLight } from "../../themes";
 
@@ -47,7 +51,8 @@ describe(useSyntaxHighlight, () => {
         langSupport,
       });
 
-      expect(create(<>{reactElements}</>).toJSON()).toMatchSnapshot();
+      const { container } = render(<>{reactElements}</>);
+      expect(container).toMatchSnapshot();
     });
   });
 });
