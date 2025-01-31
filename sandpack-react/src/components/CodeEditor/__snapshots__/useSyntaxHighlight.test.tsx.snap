@@ -1,2004 +1,2004 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`useSyntaxHighlight renders a css block 1`] = `
-Array [
+<div>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     body
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     background-color
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-static"
+    class="sp-syntax-static"
   >
     lightblue
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
-  "
+  </span>
+  
 
-",
+
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     h1
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     color
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-static"
+    class="sp-syntax-static"
   >
     white
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     text-align
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-static"
+    class="sp-syntax-static"
   >
     center
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
-  "
+  </span>
+  
 
-",
+
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     p
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     font-family
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-static"
+    class="sp-syntax-static"
   >
     verdana
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     font-size
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-static"
+    class="sp-syntax-static"
   >
     20
-  </span>,
+  </span>
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     px
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
-]
+  </span>
+</div>
 `;
 
 exports[`useSyntaxHighlight renders a html block 1`] = `
-Array [
-  "
-<!DOCTYPE html>
-",
+<div>
+  
+&lt;!DOCTYPE html&gt;
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     html
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     lang
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "en"
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     head
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     meta
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     charset
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "UTF-8"
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     meta
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     name
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "viewport"
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     content
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "width=device-width, initial-scale=1.0"
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     meta
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     http-equiv
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "X-UA-Compatible"
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     content
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "ie=edge"
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     title
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "HTML 5 Boilerplate",
+  </span>
+  HTML 5 Boilerplate
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     title
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     link
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     rel
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "stylesheet"
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     href
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "style.css"
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     head
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     body
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     script
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     src
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "index.js"
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     script
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     body
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     html
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
+  </span>
+  
 
-",
-]
+
+</div>
 `;
 
 exports[`useSyntaxHighlight renders a js block 1`] = `
-Array [
+<div>
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     function
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     foo
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     (
-  </span>,
+  </span>
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     params
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     )
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     return
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     params
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
-  "
+  </span>
+  
 
-",
+
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     const
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     baz
-  </span>,
-  " = ",
+  </span>
+   = 
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     (
-  </span>,
+  </span>
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     foo
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     )
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     =&gt;
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     return
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     foo
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
-  "
+  </span>
+  
 
-",
+
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     const
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     array
-  </span>,
-  " = ",
+  </span>
+   = 
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     [
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ]
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     const
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     object
-  </span>,
-  " = ",
+  </span>
+   = 
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     const
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     regex
-  </span>,
-  " = ",
+  </span>
+   = 
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     new
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     Regex
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     (
-  </span>,
+  </span>
   <span
-    className="sp-syntax-comment"
+    class="sp-syntax-comment"
   >
     //);
-  </span>,
-  "
+  </span>
+  
 
-",
+
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     const
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     expr
-  </span>,
-  " = ",
+  </span>
+   = 
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     'Papayas'
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     switch
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     (
-  </span>,
+  </span>
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     expr
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     )
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     case
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     'Oranges'
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     console
-  </span>,
-  ".",
+  </span>
+  .
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     log
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     (
-  </span>,
+  </span>
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     'Oranges are $0.59 a pound.'
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     )
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     break
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     case
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     'Mangoes'
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     case
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     'Papayas'
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     console
-  </span>,
-  ".",
+  </span>
+  .
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     log
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     (
-  </span>,
+  </span>
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     'Mangoes and papayas are $2.79 a pound.'
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     )
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-comment"
+    class="sp-syntax-comment"
   >
     // expected output: "Mangoes and papayas are $2.79 a pound."
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     break
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     default
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     console
-  </span>,
-  ".",
+  </span>
+  .
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     log
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     (
-  </span>,
+  </span>
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     \`Sorry, we are out of 
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     \${
-  </span>,
+  </span>
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     expr
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
+  </span>
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     .\`
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     )
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
-]
+  </span>
+</div>
 `;
 
 exports[`useSyntaxHighlight renders a jsx block 1`] = `
-Array [
+<div>
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     function
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     Greeting
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     (
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     name
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     )
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     return
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-tag"
+    class="sp-syntax-tag"
   >
     h1
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "Hello, ",
+  </span>
+  Hello, 
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
+  </span>
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     name
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
-  "!",
+  </span>
+  !
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-tag"
+    class="sp-syntax-tag"
   >
     h1
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
-  "
+  </span>
+  
 
-",
+
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     export
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     default
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     function
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     App
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     (
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     )
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     return
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     (
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-tag"
+    class="sp-syntax-tag"
   >
     div
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-      ",
+  </span>
+  
+      
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     Greeting
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     name
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "Divyesh"
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     /&gt;
-  </span>,
-  "
-      ",
+  </span>
+  
+      
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     Greeting
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     name
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "Sarah"
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     /&gt;
-  </span>,
-  "
-      ",
+  </span>
+  
+      
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     Greeting
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     name
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "Taylor"
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     /&gt;
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-tag"
+    class="sp-syntax-tag"
   >
     div
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     )
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
-]
+  </span>
+</div>
 `;
 
 exports[`useSyntaxHighlight renders a less block 1`] = `
-Array [
+<div>
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     @width
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  " 10",
+  </span>
+   10
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     px
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     @height
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     @width
-  </span>,
-  " + 10",
+  </span>
+   + 10
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     px
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
+  </span>
+  
 
-#header ",
+#header 
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     width
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  " @",
+  </span>
+   @
   <span
-    className="sp-syntax-static"
+    class="sp-syntax-static"
   >
     width
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     height
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  " @",
+  </span>
+   @
   <span
-    className="sp-syntax-static"
+    class="sp-syntax-static"
   >
     height
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
-]
+  </span>
+</div>
 `;
 
 exports[`useSyntaxHighlight renders a python block 1`] = `
-Array [
+<div>
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     import
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     os
-  </span>,
-  "
+  </span>
+  
 
-",
+
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     api_token
-  </span>,
-  " = ",
+  </span>
+   = 
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     os
-  </span>,
-  ".",
+  </span>
+  .
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     environ
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     [
-  </span>,
+  </span>
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     'API_TOKEN'
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ]
-  </span>,
-  "
+  </span>
+  
 
-",
+
   <span
-    className="sp-syntax-comment"
+    class="sp-syntax-comment"
   >
     # Prints the api_token variable
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     print
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     (
-  </span>,
+  </span>
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "API token:"
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ,
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     api_token
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     )
-  </span>,
-]
+  </span>
+</div>
 `;
 
 exports[`useSyntaxHighlight renders a shell block 1`] = `
-Array [
-  "#!/bin/sh
+<div>
+  #!/bin/sh
 
-",
+
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     EXAMPLE
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "drawn joyed"
-  </span>,
-  "
+  </span>
+  
 
-",
+
   <span
-    className="sp-syntax-comment"
+    class="sp-syntax-comment"
   >
     # Prints the EXAMPLE variable
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     function
-  </span>,
-  " show-example() {
-  ",
+  </span>
+   show-example() {
+  
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     echo
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-plain"
+    class="sp-syntax-plain"
   >
     $EXAMPLE
-  </span>,
-  "
+  </span>
+  
 
-",
-]
+
+</div>
 `;
 
 exports[`useSyntaxHighlight renders a vue block 1`] = `
-Array [
+<div>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     template
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     div
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     class
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "column is-12"
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     label
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     class
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "label"
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     for
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "email"
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "Email",
+  </span>
+  Email
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     label
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     p
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     :class
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "{ 'control': true }"
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-        ",
+  </span>
+  
+        
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     input
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     v-validate
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "'required|email'"
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     :class
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "{'input': true, 'is-danger': errors.has('email') }"
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     name
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "email"
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     type
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "text"
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     placeholder
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "Email"
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-        ",
+  </span>
+  
+        
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     span
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     v-show
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "errors.has('email')"
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     class
-  </span>,
-  "=",
+  </span>
+  =
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     "help is-danger"
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "{{ errors.first('email') }}",
+  </span>
+  {{ errors.first('email') }}
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     span
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-    ",
+  </span>
+  
+    
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     p
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     div
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     template
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
+  </span>
+  
 
-",
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     script
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     export
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-keyword"
+    class="sp-syntax-keyword"
   >
     default
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     {
-  </span>,
-  "
-  ",
+  </span>
+  
+  
   <span
-    className="sp-syntax-property"
+    class="sp-syntax-property"
   >
     name
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     :
-  </span>,
-  " ",
+  </span>
+   
   <span
-    className="sp-syntax-string"
+    class="sp-syntax-string"
   >
     'basic-example'
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     }
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     ;
-  </span>,
-  "
-",
+  </span>
+  
+
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &lt;/
-  </span>,
+  </span>
   <span
-    className="sp-syntax-definition"
+    class="sp-syntax-definition"
   >
     script
-  </span>,
+  </span>
   <span
-    className="sp-syntax-punctuation"
+    class="sp-syntax-punctuation"
   >
     &gt;
-  </span>,
-]
+  </span>
+</div>
 `;
