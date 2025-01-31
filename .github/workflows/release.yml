@@ -36,7 +36,7 @@ jobs:
         run: yarn build:sandpack
 
       - name: Archive bundler artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bundler
           path: www/**/*.*
@@ -82,7 +82,7 @@ jobs:
           useLockFile: true
 
       - name: Prepare | Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: bundler
           path: bundler
@@ -92,7 +92,7 @@ jobs:
 
       - name: Prepare | Build
         run: |
-          yarn workspace @codesandbox/sandpack-client build:publish 
+          yarn workspace @codesandbox/sandpack-client build:publish
           yarn workspace @codesandbox/sandpack-react build:publish
           yarn workspace @codesandbox/sandpack-themes build:publish
 
@@ -108,5 +108,5 @@ jobs:
 
       - name: "GitHub packages: Publish"
         run: |
-          cd sandpack-client && npm publish --registry=https://npm.pkg.github.com && 
+          cd sandpack-client && npm publish --registry=https://npm.pkg.github.com &&
           cd ../sandpack-react && npm publish --registry=https://npm.pkg.github.com
