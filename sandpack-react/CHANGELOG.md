@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.11](https://github.com/codesandbox/sandpack/compare/v2.19.10...v2.19.11) (2025-01-31)
+
+### Bug Fixes
+
+- raise react peer dependency to 19 ([#1245](https://github.com/codesandbox/sandpack/issues/1245)) ([125c515](https://github.com/codesandbox/sandpack/commit/125c515ce4d71a00e65568e4d4b3868a8d40f0d3)), closes [#1238](https://github.com/codesandbox/sandpack/issues/1238)
+
 ## [2.19.10](https://github.com/codesandbox/sandpack/compare/v2.19.9...v2.19.10) (2024-11-21)
 
 ### Bug Fixes
