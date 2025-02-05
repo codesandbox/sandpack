@@ -39,8 +39,8 @@ root.render(
     "/package.json": {
       code: JSON.stringify({
         dependencies: {
-          react: "^18.0.0",
-          "react-dom": "^18.0.0",
+          react: "^19.0.0",
+          "react-dom": "^19.0.0",
           "react-scripts": "^5.0.0",
         },
         main: "/index.js",
