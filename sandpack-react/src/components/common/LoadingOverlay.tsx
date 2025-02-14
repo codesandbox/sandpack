@@ -56,9 +56,11 @@ export const LoadingOverlay: React.FC<
   } = useSandpack();
   const [shouldShowStdout, setShouldShowStdout] = React.useState(false);
 
-  const loadingOverlayState = useLoadingOverlayState(clientId, loading);
   const progressMessage = useSandpackPreviewProgress({ clientId });
+  const loadingOverlayState = useLoadingOverlayState(clientId, loading);
   const { logs: stdoutData } = useSandpackShellStdout({ clientId });
+
+  const forking = progressMessage?.toLowerCase().includes("forking");
 
   React.useEffect(() => {
     let timer: NodeJS.Timer;
@@ -75,7 +77,7 @@ export const LoadingOverlay: React.FC<
     };
   }, [progressMessage]);
 
-  if (loadingOverlayState === "HIDDEN") {
+  if (loadingOverlayState === "HIDDEN" && !forking) {
     return null;
   }
 
@@ -161,7 +163,7 @@ export const LoadingOverlay: React.FC<
         ])}
         style={{
           ...style,
-          opacity: stillLoading ? 1 : 0,
+          opacity: stillLoading ? 1 : forking ? 0.7 : 0,
           transition: `opacity ${FADE_ANIMATION_DURATION}ms ease-out`,
         }}
         {...props}

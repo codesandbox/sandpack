@@ -81,6 +81,8 @@ export const useSandpackPreviewProgress = (
             mapProgressMessage(message.data, totalDependencies)
           );
         }
+      } else if (message.type === "vm/progress") {
+        setLoadingMessage(message.data);
       }
 
       if (message.type === "done" && message.compilatonError === false) {

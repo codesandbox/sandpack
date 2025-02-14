@@ -172,6 +172,8 @@ export interface SandpackOptions {
   skipEval?: boolean;
   fileResolver?: FileResolver;
   externalResources?: string[];
+
+  vmEnvironmentApiUrl?: (id: string) => string;
 }
 
 /**
@@ -273,7 +275,8 @@ export type SandboxEnvironment =
   | "vue-cli"
   | "static"
   | "solid"
-  | "node";
+  | "node"
+  | "vm";
 
 /**
  * @category Setup
@@ -406,7 +409,9 @@ export type SandpackThemeProp =
  */
 
 export type TemplateFiles<Name extends SandpackPredefinedTemplate> =
-  keyof typeof SANDBOX_TEMPLATES[Name]["files"];
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  keyof (typeof SANDBOX_TEMPLATES)[Name]["files"];
 
 export interface SandpackInternal {
   <
@@ -482,6 +487,7 @@ export interface SandpackInternalOptions<
   classes?: Record<string, string>;
   experimental_enableServiceWorker?: boolean;
   experimental_enableStableServiceWorkerId?: boolean;
+  vmEnvironmentApiUrl?: (id: string) => string;
 }
 
 interface SandpackInternalProps<
@@ -521,6 +527,7 @@ interface SandpackInternalProps<
     showReadOnly?: boolean;
 
     layout?: "preview" | "tests" | "console";
+    vmEnvironmentApiUrl?: (id: string) => string;
   };
 }
 
@@ -643,8 +650,9 @@ export interface SandboxTemplate {
   dependencies: Record<string, string>;
   devDependencies?: Record<string, string>;
   entry?: string;
-  main: string;
+  main?: string;
   environment: SandboxEnvironment;
+  templateID?: string;
 }
 
 export type SandpackFiles = Record<string, string | SandpackFile>;

@@ -178,6 +178,7 @@ export const useClient: UseClient = (
         {
           files: filesState.files,
           template: filesState.environment,
+          templateID: filesState.templateID,
         },
         {
           externalResources: options.externalResources,
@@ -196,6 +197,7 @@ export const useClient: UseClient = (
             !!options?.experimental_enableServiceWorker,
           experimental_stableServiceWorkerId: await getStableServiceWorkerId(),
           sandboxId,
+          vmEnvironmentApiUrl: options.vmEnvironmentApiUrl,
         }
       );
 

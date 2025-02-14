@@ -86,15 +86,19 @@ export const Sandpack: SandpackInternal = ({
   const [counter, setCounter] = React.useState(0);
   const hasRightColumn = options.showConsole || options.showConsoleButton;
 
-  /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-  const templateFiles = SANDBOX_TEMPLATES[template!] ?? {};
-  const mode = (
-    options?.layout
-      ? options?.layout
-      : "mode" in templateFiles
-      ? templateFiles.mode
-      : "preview"
-  ) as typeof options.layout;
+  function getMode() {
+    if (options?.layout) {
+      return options.layout;
+    }
+
+    const templateFiles = SANDBOX_TEMPLATES[template!];
+    if (typeof templateFiles === "object" && "mode" in templateFiles) {
+      return templateFiles.mode;
+    }
+
+    return "preview";
+  }
+  const mode = getMode();
 
   const actionsChildren = options.showConsoleButton ? (
     <ConsoleCounterButton

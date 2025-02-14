@@ -23,6 +23,7 @@ export interface SandpackContextInfo {
   files: Record<string, SandpackBundlerFile>;
   environment: SandboxEnvironment;
   shouldUpdatePreview: true;
+  templateID?: string;
 }
 
 /**
@@ -72,7 +73,7 @@ export const getSandpackStateFromProps = (
     });
   }
 
-  if (visibleFiles.length === 0) {
+  if (visibleFiles.length === 0 && projectSetup.main) {
     // If no files are received, use the project setup / template
     visibleFiles = [projectSetup.main];
   }
@@ -99,22 +100,26 @@ export const getSandpackStateFromProps = (
     visibleFiles.push(activeFile);
   }
 
-  const files = addPackageJSONIfNeeded(
-    projectSetup.files,
-    projectSetup.dependencies ?? {},
-    projectSetup.devDependencies ?? {},
-    projectSetup.entry
-  );
+  let files = projectSetup.files;
+
+  if (projectSetup.environment !== "vm") {
+    files = addPackageJSONIfNeeded(
+      projectSetup.files,
+      projectSetup.dependencies ?? {},
+      projectSetup.devDependencies ?? {},
+      projectSetup.entry
+    );
+  }
 
   const existOpenPath = visibleFiles.filter((path) => files[path]);
 
   return {
     visibleFiles: existOpenPath,
-    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-    activeFile: activeFile!,
+    activeFile: activeFile,
     files,
     environment: projectSetup.environment,
     shouldUpdatePreview: true,
+    templateID: projectSetup.templateID,
   };
 };
 
@@ -210,6 +215,20 @@ const combineTemplateFilesToSetup = ({
     );
   }
 
+  /**
+   * Sandbox template id for VM env
+   */
+  if (baseTemplate.templateID) {
+    return {
+      files: convertedFilesToBundlerFiles(files),
+      dependencies: customSetup?.dependencies ?? {},
+      devDependencies: customSetup?.devDependencies,
+      entry: normalizePath(customSetup?.entry),
+      environment: customSetup?.environment || baseTemplate.environment,
+      templateID: baseTemplate.templateID,
+    };
+  }
+
   // If no setup and not files, the template is used entirely
   if (!customSetup && !files) {
     return baseTemplate;
@@ -262,3 +281,26 @@ export const convertedFilesToBundlerFiles = (
     return acc;
   }, {});
 };
+
+export const DEFAULT_FILES_TO_OPEN = [
+  "/src/App.js",
+  "/src/App.tsx",
+  "/src/index.js",
+  "/src/index.ts",
+  "/src/index.tsx",
+  "/app/page.tsx",
+  "/app/page.jsx",
+  "/index.js",
+  "/index.ts",
+  "/src/main.tsx",
+  "/src/main.jsx",
+  "/main.ts",
+  "/src/main.rs",
+  "/src/lib.rs",
+  "/index.html",
+  "/src/index.html",
+  "/src/index.vue",
+  "/src/App.vue",
+  "/src/main.astro",
+  "/package.json",
+];

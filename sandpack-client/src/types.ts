@@ -1,5 +1,6 @@
 import type { SandpackNodeMessage } from "./clients/node/types";
 import type { SandpackRuntimeMessage } from "./clients/runtime/types";
+import type { SandpackVMMessage } from "./clients/vm/types";
 
 export interface ClientOptions {
   /**
@@ -76,6 +77,11 @@ export interface ClientOptions {
    */
   experimental_enableServiceWorker?: boolean;
   experimental_stableServiceWorkerId?: string;
+
+  /**
+   * URL Api to connect to the server endpoint when using VM environment
+   */
+  vmEnvironmentApiUrl?: (id: string) => string;
 }
 
 export interface SandboxSetup {
@@ -83,6 +89,7 @@ export interface SandboxSetup {
   dependencies?: Dependencies;
   devDependencies?: Dependencies;
   entry?: string;
+  templateID?: string;
   /**
    * What template we use, if not defined we infer the template from the dependencies or files.
    *
@@ -176,7 +183,10 @@ export interface BundlerState {
   transpiledModules: Record<string, TranspiledModule>;
 }
 
-export type SandpackMessage = SandpackRuntimeMessage | SandpackNodeMessage;
+export type SandpackMessage =
+  | SandpackRuntimeMessage
+  | SandpackNodeMessage
+  | SandpackVMMessage;
 
 export type ListenerFunction = (msg: SandpackMessage) => void;
 export type UnsubscribeFunction = () => void;
@@ -397,4 +407,5 @@ export type SandpackTemplate =
   | "static"
   | "solid"
   | "nextjs"
-  | "node";
+  | "node"
+  | "vm";

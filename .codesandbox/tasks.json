@@ -63,6 +63,10 @@
         "pr-link": "direct"
       }
     },
+    "dev:nextjs": {
+      "name": "Dev: Nextjs example",
+      "command": "yarn dev:nextjs"
+    },
     "dev:website-landing": {
       "name": "Dev: Website landing",
       "command": "yarn dev:landing"
