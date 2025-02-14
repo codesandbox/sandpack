@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.20.0](https://github.com/codesandbox/sandpack/compare/v2.19.11...v2.20.0) (2025-02-14)
+
+### Features
+
+- update to react 19 ([#1251](https://github.com/codesandbox/sandpack/issues/1251)) ([6449a73](https://github.com/codesandbox/sandpack/commit/6449a7376b4d8e47645e30cb2d9ad9c595892cfd))
+
 ## [2.19.11](https://github.com/codesandbox/sandpack/compare/v2.19.10...v2.19.11) (2025-01-31)
 
 ### Bug Fixes
