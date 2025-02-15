@@ -397,4 +397,5 @@ export type SandpackTemplate =
   | "static"
   | "solid"
   | "nextjs"
+  | "nextjs-14"
   | "node";
