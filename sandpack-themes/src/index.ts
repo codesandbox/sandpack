@@ -7,6 +7,7 @@ export { dracula } from "./dracula";
 export { ecoLight } from "./ecoLight";
 export { freeCodeCampDark } from "./freeCodeCampDark";
 export { githubLight } from "./githubLight";
+export { githubDark } from "./githubDark";
 export { gruvboxDark } from "./gruvboxDark";
 export { gruvboxLight } from "./gruvboxLight";
 export { levelUp } from "./levelUp";
