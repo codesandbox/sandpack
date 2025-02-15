@@ -32,10 +32,18 @@ render(() => <App />, document.getElementById("app"));`,
 </body>
 </html>`,
     },
+    "/.babelrc": {
+      code: `{
+  "presets": [
+    "babel-preset-solid"
+  ]
+}`
+    },
     "/package.json": {
       code: JSON.stringify({
         dependencies: {
           "solid-js": "1.3.15",
+          "babel-preset-solid": "1.6.16",
         },
         main: "/index.tsx",
       }),
