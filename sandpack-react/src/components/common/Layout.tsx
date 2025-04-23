@@ -59,13 +59,10 @@ export const SandpackLayout = React.forwardRef<
   HTMLDivElement,
   SandpackLayoutProps
 >(({ children, className, ...props }, ref) => {
-  const { sandpack } = useSandpack();
   const classNames = useClassNames();
-  const combinedRef = useCombinedRefs(sandpack.lazyAnchorRef, ref);
 
   return (
     <div
-      ref={combinedRef}
       className={classNames("layout", [layoutClassName, className])}
       {...props}
     >

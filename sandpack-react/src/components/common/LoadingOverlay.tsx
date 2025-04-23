@@ -1,12 +1,11 @@
+import type * as sandpackEnv from "@codesandbox/sandpack-environments";
 import * as React from "react";
 
-import { useSandpack } from "../../hooks";
+import { useEnvironment } from "../../contexts/SandpackEnvironmentContext";
 import {
   useLoadingOverlayState,
   FADE_ANIMATION_DURATION,
 } from "../../hooks/useLoadingOverlayState";
-import { useSandpackPreviewProgress } from "../../hooks/useSandpackPreviewProgress";
-import { useSandpackShellStdout } from "../../hooks/useSandpackShellStdout";
 import { css } from "../../styles";
 import {
   absoluteClassName,
@@ -19,21 +18,13 @@ import {
   roundedButtonClassName,
 } from "../../styles/shared";
 import { useClassNames } from "../../utils/classNames";
-import { StdoutList } from "../Console/StdoutList";
 import { RestartIcon } from "../icons";
 
 import { Loading } from "./Loading";
 
 export interface LoadingOverlayProps {
-  clientId?: string;
-
-  /**
-   * It enforces keeping the loading state visible,
-   * which is helpful for external loading states.
-   */
-  loading?: boolean;
-
   showOpenInCodeSandbox: boolean;
+  preview: sandpackEnv.SandpackPreview;
 }
 
 const loadingClassName = css({
@@ -43,25 +34,24 @@ const loadingClassName = css({
 export const LoadingOverlay: React.FC<
   LoadingOverlayProps & React.HTMLAttributes<HTMLDivElement>
 > = ({
-  clientId,
-  loading,
   className,
   style,
   showOpenInCodeSandbox,
+  preview,
   ...props
 }): JSX.Element | null => {
+  const env = useEnvironment();
   const classNames = useClassNames();
-  const {
-    sandpack: { runSandpack, environment },
-  } = useSandpack();
-  const [shouldShowStdout, setShouldShowStdout] = React.useState(false);
 
-  const progressMessage = useSandpackPreviewProgress({ clientId });
-  const loadingOverlayState = useLoadingOverlayState(clientId, loading);
-  const { logs: stdoutData } = useSandpackShellStdout({ clientId });
+  // const progressMessage = useSandpackPreviewProgress(preview);
+  const loadingOverlayState = useLoadingOverlayState(preview);
+  // TODO: NodeBox should rather put progress messages in the status of the preview
+  // const { logs: stdoutData } = useSandpackShellStdout({ clientId });
 
-  const forking = progressMessage?.toLowerCase().includes("forking");
+  // TODO: Forking is a status of the environment
+  // const forking = progressMessage?.toLowerCase().includes("forking");
 
+  /*
   React.useEffect(() => {
     let timer: NodeJS.Timer;
     if (progressMessage?.includes("Running")) {
@@ -76,12 +66,13 @@ export const LoadingOverlay: React.FC<
       }
     };
   }, [progressMessage]);
+    */
 
-  if (loadingOverlayState === "HIDDEN" && !forking) {
+  if (loadingOverlayState === "HIDDEN" /*&& !forking*/) {
     return null;
   }
 
-  if (loadingOverlayState === "TIMEOUT") {
+  if (preview.status.current === "ERROR") {
     return (
       <div
         className={classNames("overlay", [
@@ -124,8 +115,6 @@ export const LoadingOverlay: React.FC<
               errorMessageClassName({ errorCode: true }),
             ])}
           >
-            ENV: {environment}
-            <br />
             ERROR: TIME_OUT
           </p>
 
@@ -137,7 +126,7 @@ export const LoadingOverlay: React.FC<
                 iconStandaloneClassName,
                 roundedButtonClassName,
               ])}
-              onClick={runSandpack}
+              onClick={() => env.restart()}
               title="Restart script"
               type="button"
             >
@@ -163,28 +152,32 @@ export const LoadingOverlay: React.FC<
         ])}
         style={{
           ...style,
-          opacity: stillLoading ? 1 : forking ? 0.7 : 0,
+          // opacity: stillLoading ? 1 : forking ? 0.7 : 0,
+          opacity: stillLoading ? 1 : 0,
           transition: `opacity ${FADE_ANIMATION_DURATION}ms ease-out`,
         }}
         {...props}
       >
-        {shouldShowStdout && (
+        {/*
+        TODO: What is this specifically? Part of loading the preview?
+        shouldShowStdout && (
           <div className={stdoutPreview.toString()}>
             <StdoutList data={stdoutData} />
           </div>
-        )}
+        )*/}
         <Loading showOpenInCodeSandbox={showOpenInCodeSandbox} />
       </div>
 
-      {progressMessage && (
+      {preview.status.current === "LOADING" && (
         <div className={progressClassName.toString()}>
-          <p>{progressMessage}</p>
+          <p>{preview.status.progress[preview.status.progress.length - 1]}</p>
         </div>
       )}
     </>
   );
 };
 
+/*
 const stdoutPreview = css({
   position: "absolute",
   left: 0,
@@ -194,7 +187,7 @@ const stdoutPreview = css({
   opacity: 0.5,
   overflowX: "hidden",
 });
-
+*/
 const progressClassName = css({
   position: "absolute",
   left: "$space$5",

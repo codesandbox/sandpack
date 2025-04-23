@@ -1,11 +1,11 @@
-import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-import { useSandpack } from "../../hooks/useSandpack";
+import { useSandpackState } from "../../contexts/SandpackStateContext";
 import { css } from "../../styles";
 import { useClassNames } from "../../utils/classNames";
 import { stackClassName } from "../common";
 
+import type { ModuleListProps } from "./ModuleList";
 import { ModuleList } from "./ModuleList";
 
 const fileExplorerClassName = css({
@@ -14,17 +14,10 @@ const fileExplorerClassName = css({
   height: "100%",
 });
 
-export interface SandpackFileExplorerProp {
-  /**
-   * enable auto hidden file in file explorer
-   *
-   * @description set with hidden property in files property
-   * @default false
-   */
-  autoHiddenFiles?: boolean;
-
-  initialCollapsedFolder?: string[];
-}
+export type SandpackFileExplorerProp = Pick<
+  ModuleListProps,
+  "initialCollapsedFolder" | "autoHiddenFiles"
+>;
 
 export const SandpackFileExplorer = ({
   className,
@@ -33,17 +26,8 @@ export const SandpackFileExplorer = ({
   ...props
 }: SandpackFileExplorerProp &
   React.HTMLAttributes<HTMLDivElement>): JSX.Element | null => {
-  const {
-    sandpack: { activeFile, files, openFile, visibleFilesFromProps },
-  } = useSandpack();
+  const sandpackState = useSandpackState();
   const classNames = useClassNames();
-
-  const orderedFiles = Object.keys(files)
-    .sort()
-    .reduce<SandpackBundlerFiles>((obj, key) => {
-      obj[key] = files[key];
-      return obj;
-    }, {});
 
   return (
     <div
@@ -54,13 +38,14 @@ export const SandpackFileExplorer = ({
         className={classNames("file-explorer-list", [fileExplorerClassName])}
       >
         <ModuleList
-          activeFile={activeFile}
+          activeFile={sandpackState?.activeFile ?? ""}
           autoHiddenFiles={autoHiddenFiles}
-          files={orderedFiles}
           initialCollapsedFolder={initialCollapsedFolder}
-          prefixedPath="/"
-          selectFile={openFile}
-          visibleFiles={visibleFilesFromProps}
+          path="/"
+          selectFile={(filepath) => {
+            sandpackState.setActiveFile(filepath);
+          }}
+          visibleFiles={[]}
         />
       </div>
     </div>

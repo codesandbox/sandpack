@@ -1,4 +1,4 @@
-import type { SandboxWithoutClient } from "@codesandbox/sdk/dist/esm/sandbox";
+import type { SandboxSession } from "@codesandbox/sdk";
 
 import { createError } from "../..";
 import type { SandpackBundlerFiles } from "../../";
@@ -53,10 +53,7 @@ export const getMessageFromError = (error: Error | string): string => {
   );
 };
 
-export async function scanDirectory(
-  dirPath: string,
-  fs: SandboxWithoutClient["fs"]
-) {
+export async function scanDirectory(dirPath: string, fs: SandboxSession["fs"]) {
   const IGNORED_DIRS = new Set([
     "node_modules",
     ".git",
@@ -75,11 +72,6 @@ export async function scanDirectory(
     "pnpm-lock.yaml",
   ]);
 
-  const TYPES = {
-    FILE: 0,
-    FOLDER: 1,
-  };
-
   const results: Array<{ path: string; content: Uint8Array }> = [];
 
   try {
@@ -92,7 +84,7 @@ export async function scanDirectory(
         continue;
       }
 
-      if (entry.type === TYPES.FILE) {
+      if (entry.type === "file") {
         results.push({
           path: fullPath,
           content: await fs.readFile(fullPath),
@@ -100,7 +92,7 @@ export async function scanDirectory(
       }
 
       // Recursively scan subdirectories
-      if (entry.type === TYPES.FOLDER) {
+      if (entry.type === "directory") {
         const subDirResults = await scanDirectory(fullPath, fs);
         results.push(...subDirResults);
       }
@@ -131,7 +123,7 @@ export const createLogGroup = (group: string) => {
 };
 
 export const throwIfTimeout = (timeout: number) => {
-  return new Promise((_, reject) =>
+  return new Promise<never>((_, reject) =>
     setTimeout(() => {
       reject(new Error(`Timeout of ${timeout}ms exceeded`));
     }, timeout)

@@ -1,6 +1,4 @@
 import type { SandpackBundlerFiles } from "@codesandbox/sandpack-client";
-import { normalizePath } from "@codesandbox/sandpack-client";
-import { useEffect, useState, useRef } from "react";
 
 import type {
   SandboxEnvironment,
@@ -9,11 +7,6 @@ import type {
   SandpackProviderProps,
   TemplateFiles,
 } from "../..";
-import {
-  DEFAULT_FILES_TO_OPEN,
-  convertedFilesToBundlerFiles,
-  getSandpackStateFromProps,
-} from "../../utils/sandpackUtils";
 
 export interface FilesState {
   files: SandpackBundlerFiles;
@@ -44,7 +37,7 @@ interface FilesOperations {
   deleteFile: (path: string, shouldUpdatePreview?: boolean) => void;
 }
 
-export type UseFiles = (props: SandpackProviderProps) => [
+export type UseFiles = (props: SandpackProviderProps<any>) => [
   FilesState & {
     visibleFilesFromProps: Array<
       TemplateFiles<SandpackPredefinedTemplate> | string
@@ -53,6 +46,7 @@ export type UseFiles = (props: SandpackProviderProps) => [
   FilesOperations
 ];
 
+/*
 export const useFiles: UseFiles = (props) => {
   const originalStateFromProps = getSandpackStateFromProps(props);
 
@@ -206,3 +200,4 @@ export const useFiles: UseFiles = (props) => {
     operations,
   ];
 };
+*/

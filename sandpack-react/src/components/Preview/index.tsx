@@ -1,20 +1,7 @@
-import type {
-  SandpackClient,
-  SandpackMessage,
-} from "@codesandbox/sandpack-client";
 import * as React from "react";
 
-import {
-  useSandpackClient,
-  useSandpackNavigation,
-  useSandpackShell,
-} from "../../hooks";
+import { usePreview } from "../../hooks/usePreview";
 import { css, THEME_PREFIX } from "../../styles";
-import {
-  buttonClassName,
-  iconStandaloneClassName,
-  roundedButtonClassName,
-} from "../../styles/shared";
 import { useClassNames } from "../../utils/classNames";
 import { Navigator } from "../Navigator";
 import { ErrorOverlay } from "../common/ErrorOverlay";
@@ -22,8 +9,7 @@ import { LoadingOverlay } from "../common/LoadingOverlay";
 import { OpenInCodeSandboxButton } from "../common/OpenInCodeSandboxButton";
 import { RoundedButton } from "../common/RoundedButton";
 import { SandpackStack } from "../common/Stack";
-import { RefreshIcon, RestartIcon } from "../icons";
-import { SignOutIcon } from "../icons";
+import { RefreshIcon } from "../icons";
 
 export interface PreviewProps {
   style?: React.CSSProperties;
@@ -83,146 +69,120 @@ const previewActionsClassName = css({
   gap: "$space$2",
 });
 
-export interface SandpackPreviewRef {
-  /**
-   * Retrieve the current Sandpack client instance from preview
-   */
-  getClient: () => InstanceType<typeof SandpackClient> | null;
-  /**
-   * Returns the client id, which will be used to
-   * initialize a client in the main Sandpack context
-   */
-  clientId: string;
-}
+export const SandpackPreview = ({
+  showNavigator = false,
+  showRefreshButton = true,
+  showOpenInCodeSandbox = true,
+  showSandpackErrorOverlay = true,
+  showOpenNewtab = true,
+  showRestartButton = true,
+  actionsChildren = <></>,
+  children,
+  className,
+  startRoute = "/",
+  ...props
+}: PreviewProps & React.HTMLAttributes<HTMLDivElement>) => {
+  const preview = usePreview();
+  const iframeContainerRef = React.useRef<HTMLDivElement>(null);
 
-export const SandpackPreview = React.forwardRef<
-  SandpackPreviewRef,
-  PreviewProps & React.HTMLAttributes<HTMLDivElement>
->(
-  (
-    {
-      showNavigator = false,
-      showRefreshButton = true,
-      showOpenInCodeSandbox = true,
-      showSandpackErrorOverlay = true,
-      showOpenNewtab = true,
-      showRestartButton = true,
-      actionsChildren = <></>,
-      children,
-      className,
-      startRoute = "/",
-      ...props
-    },
-    ref
-  ) => {
-    const { sandpack, listen, iframe, getClient, clientId, dispatch } =
-      useSandpackClient({ startRoute });
-    const [iframeComputedHeight, setComputedAutoHeight] = React.useState<
-      number | null
-    >(null);
-    const { status } = sandpack;
-    const { refresh } = useSandpackNavigation(clientId);
-    const { restart } = useSandpackShell(clientId);
+  // TODO: Question why we need to compute this height. It comes from a subscription to "resize",
+  // which comes from an injected script in the iframe, but only on NodeBox?
+  const [iframeComputedHeight] = React.useState<number | null>(null);
+  const classNames = useClassNames();
 
-    const classNames = useClassNames();
+  React.useLayoutEffect(() => {
+    if (iframeContainerRef.current) {
+      preview.iframe.className = classNames("preview-iframe", [previewIframe]);
+      preview.iframe.title = "Sandpack Preview";
+      iframeContainerRef.current.prepend(preview.iframe);
+    }
+  }, []);
 
-    React.useEffect(() => {
-      const unsubscribe = listen((message: SandpackMessage) => {
-        if (message.type === "resize") {
-          setComputedAutoHeight(message.height);
-        }
-      });
+  React.useLayoutEffect(() => {
+    if (iframeComputedHeight) {
+      preview.iframe.style.height = iframeComputedHeight + "px";
+    }
+  }, [iframeComputedHeight, preview]);
 
-      return unsubscribe;
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  /*
+  const { sandpack, listen, iframe, getClient, clientId, dispatch } =
+    useSandpackClient({ startRoute });
+    */
 
-    React.useImperativeHandle(
-      ref,
-      () => ({
-        clientId: clientId,
-        getClient,
-      }),
-      [getClient, clientId]
-    );
+  // const { refresh } = useSandpackNavigation(clientId);
+  // const { restart } = useSandpackShell(clientId);
 
-    const handleNewURL = (newUrl: string): void => {
-      if (!iframe.current) {
-        return;
-      }
+  const handleNewURL = (newUrl: string): void => {
+    preview.iframe.src = newUrl;
+  };
 
-      iframe.current.src = newUrl;
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    };
+  return (
+    <SandpackStack className={classNames("preview", [className])} {...props}>
+      {showNavigator && (
+        <Navigator
+          onURLChange={handleNewURL}
+          preview={preview}
+          startRoute={startRoute}
+        />
+      )}
 
-    return (
-      <SandpackStack className={classNames("preview", [className])} {...props}>
-        {showNavigator && (
-          <Navigator
-            clientId={clientId}
-            onURLChange={handleNewURL}
-            startRoute={startRoute}
-          />
-        )}
+      <div
+        ref={iframeContainerRef}
+        className={classNames("preview-container", [previewClassName])}
+      >
+        <div
+          className={classNames("preview-actions", [previewActionsClassName])}
+        >
+          {actionsChildren}
 
-        <div className={classNames("preview-container", [previewClassName])}>
-          <iframe
-            ref={iframe}
-            className={classNames("preview-iframe", [previewIframe])}
-            style={{
-              // set height based on the content only in auto mode
-              // and when the computed height was returned by the bundler
-              height: iframeComputedHeight ? iframeComputedHeight : undefined,
-            }}
-            title="Sandpack Preview"
-          />
+          {/*
+          TODO: showRestartButton is never passed, why is this here?
+          showRestartButton && sandpack.environment === "node" && (
+            <RoundedButton onClick={restart}>
+              <RestartIcon />
+            </RoundedButton>
+          )*/}
 
-          <div
-            className={classNames("preview-actions", [previewActionsClassName])}
-          >
-            {actionsChildren}
-
-            {showRestartButton && sandpack.environment === "node" && (
-              <RoundedButton onClick={restart}>
-                <RestartIcon />
-              </RoundedButton>
-            )}
-
-            {!showNavigator && showRefreshButton && status === "running" && (
-              <RoundedButton onClick={refresh}>
+          {!showNavigator &&
+            showRefreshButton &&
+            preview.status.current === "READY" && (
+              <RoundedButton onClick={() => preview.refresh()}>
                 <RefreshIcon />
               </RoundedButton>
             )}
 
-            {sandpack.teamId && (
-              <button
-                className={classNames("button", [
-                  classNames("icon-standalone"),
-                  buttonClassName,
-                  iconStandaloneClassName,
-                  roundedButtonClassName,
-                ])}
-                onClick={() => dispatch({ type: "sign-out" })}
-                title="Sign out"
-                type="button"
-              >
-                <SignOutIcon />
-              </button>
-            )}
+          {/*
+          TODO: What is teamId used for? How can you sign out of Sandpack?
+          sandpack.teamId && (
+            <button
+              className={classNames("button", [
+                classNames("icon-standalone"),
+                buttonClassName,
+                iconStandaloneClassName,
+                roundedButtonClassName,
+              ])}
+              onClick={() => dispatch({ type: "sign-out" })}
+              title="Sign out"
+              type="button"
+            >
+              <SignOutIcon />
+            </button>
+          )*/}
 
-            {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
-          </div>
-
-          <LoadingOverlay
-            clientId={clientId}
-            showOpenInCodeSandbox={showOpenInCodeSandbox}
-          />
-
-          {showSandpackErrorOverlay && <ErrorOverlay />}
-
-          {children}
+          {/*showOpenInCodeSandbox && <OpenInCodeSandboxButton />*/}
         </div>
-      </SandpackStack>
-    );
-  }
-);
+
+        <LoadingOverlay
+          preview={preview}
+          showOpenInCodeSandbox={showOpenInCodeSandbox}
+        />
+
+        {/*showSandpackErrorOverlay && (
+          <ErrorOverlay description="No idea" title="Preview" />
+        )*/}
+
+        {children}
+      </div>
+    </SandpackStack>
+  );
+};

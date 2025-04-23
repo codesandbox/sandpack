@@ -4,7 +4,7 @@ export const insertHtmlAfterRegex = (
   regex: RegExp,
   content: string,
   insertable: string
-): string | void => {
+) => {
   const match = regex.exec(content);
   if (match && match.length >= 1) {
     const offset = match.index + match[0].length;

@@ -1,6 +1,6 @@
+import type * as sandpackEnv from "@codesandbox/sandpack-environments";
 import * as React from "react";
 
-import { useSandpack } from "../../hooks/useSandpack";
 import { css } from "../../styles";
 import { buttonClassName, iconClassName } from "../../styles/shared";
 import { useClassNames } from "../../utils/classNames";
@@ -44,23 +44,23 @@ const inputClassName = css({
 });
 
 export interface NavigatorProps {
-  clientId: string;
   onURLChange?: (newURL: string) => void;
   startRoute?: string;
+  preview: sandpackEnv.SandpackPreview;
 }
 
 export const Navigator = ({
-  clientId,
   onURLChange,
   className,
   startRoute,
+  preview,
   ...props
 }: NavigatorProps & React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const [baseUrl, setBaseUrl] = React.useState<string>("");
-  const { sandpack, dispatch, listen } = useSandpack();
 
   const [relativeUrl, setRelativeUrl] = React.useState<string>(
-    startRoute ?? sandpack.startRoute ?? "/"
+    // TODO: This should rather come from the new useOptions hook
+    startRoute ?? "/"
   );
 
   const [backEnabled, setBackEnabled] = React.useState(false);
@@ -68,23 +68,22 @@ export const Navigator = ({
 
   const classNames = useClassNames();
 
-  React.useEffect(() => {
-    const unsub = listen((message) => {
-      if (message.type === "urlchange") {
-        const { url, back, forward } = message;
+  React.useEffect(
+    () =>
+      preview.onMessage((message) => {
+        if (message.type === "urlchange") {
+          const { url, back, forward } = message;
 
-        const [newBaseUrl, newRelativeUrl] = splitUrl(url);
+          const [newBaseUrl, newRelativeUrl] = splitUrl(url);
 
-        setBaseUrl(newBaseUrl);
-        setRelativeUrl(newRelativeUrl);
-        setBackEnabled(back);
-        setForwardEnabled(forward);
-      }
-    }, clientId);
-
-    return (): void => unsub();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+          setBaseUrl(newBaseUrl);
+          setRelativeUrl(newRelativeUrl);
+          setBackEnabled(back);
+          setForwardEnabled(forward);
+        }
+      }),
+    [preview]
+  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const path = e.target.value.startsWith("/")
@@ -107,15 +106,15 @@ export const Navigator = ({
   };
 
   const handleRefresh = (): void => {
-    dispatch({ type: "refresh" });
+    preview.refresh();
   };
 
   const handleBack = (): void => {
-    dispatch({ type: "urlback" });
+    preview.back();
   };
 
   const handleForward = (): void => {
-    dispatch({ type: "urlforward" });
+    preview.forward();
   };
 
   const buttonsClassNames = classNames("button", [

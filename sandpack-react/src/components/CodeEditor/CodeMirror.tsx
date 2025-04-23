@@ -131,10 +131,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     );
 
     const classNames = useClassNames();
-    const {
-      listen,
-      sandpack: { autoReload },
-    } = useSandpack();
 
     const prevExtension = React.useRef<Extension[]>([]);
     const prevExtensionKeymap = React.useRef<KeyBinding[]>([]);
@@ -336,7 +332,6 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       themeId,
       readOnly,
       useStaticReadOnly,
-      autoReload,
     ]);
 
     React.useEffect(
@@ -396,13 +391,15 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [code]);
 
+    /*
+    TODO: Allow sending generic action messages?
     React.useEffect(
       function messageToInlineError() {
         if (!showInlineErrors) return;
 
         const unsubscribe = listen((message) => {
           const view = cmView.current;
-
+          
           if (message.type === "success") {
             view?.dispatch({
               // @ts-ignore
@@ -425,7 +422,7 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
       },
       [listen, showInlineErrors]
     );
-
+*/
     const handleContainerKeyDown = (evt: React.KeyboardEvent): void => {
       if (evt.key === "Enter" && cmView.current) {
         evt.preventDefault();

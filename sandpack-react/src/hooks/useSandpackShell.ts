@@ -1,4 +1,4 @@
-import { useSandpack } from "./useSandpack";
+// import { useSandpack } from "./useSandpack";
 
 /**
  * @category Hooks
@@ -9,10 +9,14 @@ export const useSandpackShell = (
   restart: () => void;
   openPreview: () => void;
 } => {
-  const { dispatch } = useSandpack();
+  // const { dispatch } = useSandpack();
 
   return {
-    restart: (): void => dispatch({ type: "shell/restart" }, clientId),
-    openPreview: (): void => dispatch({ type: "shell/openPreview" }, clientId),
+    restart: (): void => {
+      // TODO
+    },
+    openPreview: (): void => {
+      // TODO
+    },
   };
 };

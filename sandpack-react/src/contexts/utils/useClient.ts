@@ -1,30 +1,13 @@
 import type {
-  BundlerState,
   ListenerFunction,
   ReactDevToolsMode,
-  SandpackError,
   SandpackMessage,
   UnsubscribeFunction,
   SandpackClient,
 } from "@codesandbox/sandpack-client";
-import {
-  loadSandpackClient,
-  extractErrorDetails,
-} from "@codesandbox/sandpack-client";
-import { useCallback, useEffect, useRef, useState } from "react";
-
-import type {
-  SandpackInitMode,
-  SandpackProviderProps,
-  SandpackStatus,
-} from "../..";
-import { generateRandomId } from "../../utils/stringUtils";
-import { useAsyncSandpackId } from "../../utils/useAsyncSandpackId";
-
-import type { FilesState } from "./useFiles";
 
 type SandpackClientType = InstanceType<typeof SandpackClient>;
-
+/*
 const BUNDLER_TIMEOUT = 40_000;
 
 interface SandpackConfigState {
@@ -35,7 +18,7 @@ interface SandpackConfigState {
   error: SandpackError | null;
   status: SandpackStatus;
 }
-
+*/
 export interface ClientPropsOverride {
   startRoute?: string;
 }
@@ -64,12 +47,13 @@ export interface UseClientOperations {
     Record<string, Record<string, ListenerFunction>>
   >;
 }
-
+/*
 type UseClient = (
   props: SandpackProviderProps,
   filesState: FilesState
 ) => [SandpackConfigState, UseClientOperations];
-
+*/
+/*
 export const useClient: UseClient = (
   { options, customSetup, teamId, sandboxId },
   filesState
@@ -88,9 +72,7 @@ export const useClient: UseClient = (
     status: options?.autorun ?? true ? "initial" : "idle",
   });
 
-  /**
-   * Refs
-   */
+
   type InterserctionObserverCallback = (
     entries: IntersectionObserverEntry[]
   ) => void;
@@ -119,9 +101,7 @@ export const useClient: UseClient = (
 
   const asyncSandpackId = useAsyncSandpackId(filesState.files);
 
-  /**
-   * Callbacks
-   */
+
   const createClient = useCallback(
     async (
       iframe: HTMLIFrameElement,
@@ -143,11 +123,10 @@ export const useClient: UseClient = (
         clearTimeout(timeoutHook.current);
       }
 
-      /**
-       * Subscribe inside the context with the first client that gets instantiated.
-       * This subscription is for global states like error and timeout, so no need for a per client listen
-       * Also, set the timeout timer only when the first client is instantiated
-       */
+      // Subscribe inside the context with the first client that gets instantiated.
+       // This subscription is for global states like error and timeout, so no need for a per client listen
+      // Also, set the timeout timer only when the first client is instantiated
+       
       const shouldSetTimeout = typeof unsubscribe.current !== "function";
 
       if (shouldSetTimeout) {
@@ -208,9 +187,9 @@ export const useClient: UseClient = (
       unsubscribeClientListeners.current[clientId] =
         unsubscribeClientListeners.current[clientId] || {};
 
-      /**
-       * Register any potential listeners that subscribed before sandpack ran
-       */
+      
+       // Register any potential listeners that subscribed before sandpack ran
+       
       if (queuedListeners.current[clientId]) {
         Object.keys(queuedListeners.current[clientId]).forEach((listenerId) => {
           const listener = queuedListeners.current[clientId][listenerId];
@@ -223,19 +202,19 @@ export const useClient: UseClient = (
         queuedListeners.current[clientId] = {};
       }
 
-      /**
-       * Register global listeners
-       */
+ 
+       // Register global listeners
+
       const globalListeners = Object.entries(queuedListeners.current.global);
       globalListeners.forEach(([listenerId, listener]) => {
         const unsubscribe = client.listen(listener) as () => void;
         unsubscribeClientListeners.current[clientId][listenerId] = unsubscribe;
 
-        /**
-         * Important: Do not clean the global queue
-         * Instead of cleaning the queue, keep it there for the
-         * following clients that might be created
-         */
+        
+         // Important: Do not clean the global queue
+         // Instead of cleaning the queue, keep it there for the
+         // following clients that might be created
+         
       });
 
       clients.current[clientId] = client;
@@ -443,11 +422,10 @@ export const useClient: UseClient = (
 
         return unsubscribeListener;
       } else {
-        /**
-         * When listeners are added before the client is instantiated, they are stored with an unique id
-         * When the client is eventually instantiated, the listeners are registered on the spot
-         * Their unsubscribe functions are stored in unsubscribeClientListeners for future cleanup
-         */
+        
+         // When listeners are added before the client is instantiated, they are stored with an unique id
+         // When the client is eventually instantiated, the listeners are registered on the spot
+         // Their unsubscribe functions are stored in unsubscribeClientListeners for future cleanup
         const listenerId = generateRandomId();
         queuedListeners.current[clientId] =
           queuedListeners.current[clientId] || {};
@@ -458,16 +436,16 @@ export const useClient: UseClient = (
 
         const unsubscribeListener = (): void => {
           if (queuedListeners.current[clientId][listenerId]) {
-            /**
-             * Unsubscribe was called before the client was instantiated
-             * common example - a component with autorun=false that unmounted
-             */
+            
+             // Unsubscribe was called before the client was instantiated
+             // common example - a component with autorun=false that unmounted
+             
             delete queuedListeners.current[clientId][listenerId];
           } else if (unsubscribeClientListeners.current[clientId][listenerId]) {
-            /**
-             * unsubscribe was called for a listener that got added before the client was instantiated
-             * call the unsubscribe function and remove it from memory
-             */
+            
+             // unsubscribe was called for a listener that got added before the client was instantiated
+             // call the unsubscribe function and remove it from memory
+             
             unsubscribeClientListeners.current[clientId][listenerId]();
             delete unsubscribeClientListeners.current[clientId][listenerId];
           }
@@ -504,9 +482,7 @@ export const useClient: UseClient = (
     }
   };
 
-  /**
-   * Effects
-   */
+
 
   useEffect(
     function watchFileChanges() {
@@ -514,10 +490,10 @@ export const useClient: UseClient = (
         return;
       }
 
-      /**
-       * When the environment changes, Sandpack needs to make sure
-       * to create a new client and the proper bundler
-       */
+      
+       // When the environment changes, Sandpack needs to make sure
+       //  to create a new client and the proper bundler
+       
       if (prevEnvironment.current !== filesState.environment) {
         prevEnvironment.current = filesState.environment;
 
@@ -528,9 +504,9 @@ export const useClient: UseClient = (
 
       if (recompileMode === "immediate") {
         Object.values(clients.current).forEach((client) => {
-          /**
-           * Avoid concurrency
-           */
+          
+           // Avoid concurrency
+           
           if (client.status === "done") {
             client.updateSandbox({
               files: filesState.files,
@@ -546,9 +522,9 @@ export const useClient: UseClient = (
         window.clearTimeout(debounceHook.current);
         debounceHook.current = window.setTimeout(() => {
           Object.values(clients.current).forEach((client) => {
-            /**
-             * Avoid concurrency
-             */
+            
+             // Avoid concurrency
+             
             if (client.status === "done") {
               client.updateSandbox({
                 files: filesState.files,
@@ -622,3 +598,4 @@ export const useClient: UseClient = (
     },
   ];
 };
+*/

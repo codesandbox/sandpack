@@ -8,7 +8,7 @@ export { useClassNames } from "./utils/classNames";
 // Contexts
 export { getCssText as getSandpackCssText } from "./styles";
 export * from "./styles/themeContext";
-export * from "./contexts/sandpackContext";
+export * from "./components/SandpackProvider";
 
 // Presets
 export * from "./presets/";

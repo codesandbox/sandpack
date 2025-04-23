@@ -3,14 +3,13 @@ import { dequal as deepEqual } from "dequal";
 import { useState } from "react";
 
 import type { SandpackProviderProps } from "../..";
-import { getSandpackStateFromProps } from "../../utils/sandpackUtils";
 
 interface SandpackAppState {
   editorState: "pristine" | "dirty";
 }
 
 type UseAppState = (
-  props: SandpackProviderProps,
+  props: SandpackProviderProps<any>,
   files: SandpackBundlerFiles
 ) => SandpackAppState;
 
@@ -19,10 +18,7 @@ export const useAppState: UseAppState = (props, files) => {
     editorState: "pristine",
   });
 
-  const originalStateFromProps = getSandpackStateFromProps(props);
-  const editorState = deepEqual(originalStateFromProps.files, files)
-    ? "pristine"
-    : "dirty";
+  const editorState = deepEqual({}, files) ? "pristine" : "dirty";
 
   if (editorState !== state.editorState) {
     setState((prev) => ({ ...prev, editorState }));

@@ -1,5 +1,10 @@
 {
-  "packages": ["sandpack-client", "sandpack-react"],
+  "packages": [
+    "sandpack-client",
+    "sandpack-react",
+    "playgorund",
+    "sandpack-environments"
+  ],
   "npmClient": "yarn",
   "command": {
     "version": {

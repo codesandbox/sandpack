@@ -1,21 +1,7 @@
-import type {
-  SandpackBundlerFile,
-  SandpackBundlerFiles,
-} from "@codesandbox/sandpack-client";
-import {
-  addPackageJSONIfNeeded,
-  normalizePath,
-} from "@codesandbox/sandpack-client";
+import type { SandpackBundlerFile } from "@codesandbox/sandpack-client";
+import { normalizePath } from "@codesandbox/sandpack-client";
 
-import { SANDBOX_TEMPLATES } from "../templates";
-import type {
-  SandboxTemplate,
-  SandpackPredefinedTemplate,
-  SandpackProviderProps,
-  SandpackSetup,
-  SandpackFiles,
-  SandboxEnvironment,
-} from "../types";
+import type { SandpackFiles, SandboxEnvironment } from "../types";
 
 export interface SandpackContextInfo {
   activeFile: string;
@@ -32,6 +18,7 @@ export interface SandpackContextInfo {
  * the reliable way to ensure a consistent and predictable
  * sandpack-content throughout application
  */
+/*
 export const getSandpackStateFromProps = (
   props: SandpackProviderProps
 ): SandpackContextInfo => {
@@ -80,10 +67,8 @@ export const getSandpackStateFromProps = (
 
   // Make sure it resolves the entry file
   if (projectSetup.entry && !projectSetup.files[projectSetup.entry]) {
-    /* eslint-disable */
     // @ts-ignore
     projectSetup.entry = resolveFile(projectSetup.entry, projectSetup.files);
-    /* eslint-enable */
   }
 
   if (!activeFile && projectSetup.main) {
@@ -122,6 +107,7 @@ export const getSandpackStateFromProps = (
     templateID: projectSetup.templateID,
   };
 };
+*/
 
 /**
  * Given a file tree and a file, it uses a couple of rules
@@ -169,6 +155,7 @@ export const resolveFile = (
  * The setup can overwrite anything from the template
  * (eg: files, dependencies, environment, etc.)
  */
+/*
 const combineTemplateFilesToSetup = ({
   files,
   template,
@@ -215,9 +202,9 @@ const combineTemplateFilesToSetup = ({
     );
   }
 
-  /**
-   * Sandbox template id for VM env
-   */
+  
+   // Sandbox template id for VM env
+   
   if (baseTemplate.templateID) {
     return {
       files: convertedFilesToBundlerFiles(files),
@@ -236,15 +223,15 @@ const combineTemplateFilesToSetup = ({
 
   // Merge the setup on top of the template
   return {
-    /**
-     * The input setup might have files in the simple form Record<string, string>
-     * so we convert them to the sandbox template format
-     */
+    
+     // The input setup might have files in the simple form Record<string, string>
+     // so we convert them to the sandbox template format
+     
     files: convertedFilesToBundlerFiles({ ...baseTemplate.files, ...files }),
-    /**
-     * Merge template dependencies and user custom dependencies.
-     * As a rule, the custom dependencies must overwrite the template ones.
-     */
+    
+     // Merge template dependencies and user custom dependencies.
+     // As a rule, the custom dependencies must overwrite the template ones.
+     
     dependencies: {
       ...baseTemplate.dependencies,
       ...customSetup?.dependencies,
@@ -259,13 +246,13 @@ const combineTemplateFilesToSetup = ({
   } as SandboxTemplate;
 };
 
-/**
- * Transform an regular object, which contain files to
- * an object that sandpack-client can understand
- *
- * From: Record<string, string>
- * To: Record<string, { code: string }>
- */
+
+ // Transform an regular object, which contain files to
+ // an object that sandpack-client can understand
+ 
+ // From: Record<string, string>
+ // To: Record<string, { code: string }>
+ 
 export const convertedFilesToBundlerFiles = (
   files?: SandpackFiles
 ): SandpackBundlerFiles => {
@@ -304,3 +291,4 @@ export const DEFAULT_FILES_TO_OPEN = [
   "/src/main.astro",
   "/package.json",
 ];
+*/

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import type { FilesMap } from "@codesandbox/nodebox";
+
 import type { FileContent } from "static-browser-server";
 import { PreviewController } from "static-browser-server";
 
@@ -9,22 +8,23 @@ import type {
   SandboxSetup,
   UnsubscribeFunction,
 } from "../..";
-// get the bundled file, which contains all dependencies
-// @ts-ignore
+// @ts-expect-error // get the bundled file, which contains all dependencies
 import consoleHook from "../../inject-scripts/dist/consoleHook.js";
 import { SandpackClient } from "../base";
 import { EventEmitter } from "../event-emitter";
-import { fromBundlerFilesToFS, generateRandomId } from "../node/client.utils";
-import type { SandpackNodeMessage } from "../node/types";
+import { fromBundlerFilesToFS, generateRandomId } from "../vm/client.utils";
+import type { SandpackVMMessage } from "../vm/types";
 
 import { insertHtmlAfterRegex, readBuffer, validateHtml } from "./utils";
+
+export type FilesMap = Record<string, FileContent>;
 
 export class SandpackStatic extends SandpackClient {
   private emitter: EventEmitter;
   private previewController: PreviewController;
   private files: Map<string, string | Uint8Array> = new Map();
 
-  public iframe!: HTMLIFrameElement;
+
   public selector!: string;
   public element: Element;
 
@@ -222,7 +222,7 @@ export class SandpackStatic extends SandpackClient {
   /**
    * Bundler communication
    */
-  public dispatch(message: SandpackNodeMessage): void {
+  public dispatch(message: SandpackVMMessage): void {
     switch (message.type) {
       case "compile":
         this.compile(message.modules);

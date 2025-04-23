@@ -1,14 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-import type { InjectMessage } from "@codesandbox/nodebox";
-import { INJECT_MESSAGE_TYPE } from "@codesandbox/nodebox";
-
 // get the bundled file, which contains all dependencies
 // @ts-ignore
 import consoleHook from "../../../inject-scripts/dist/consoleHook.js";
 
 import { setupHistoryListeners } from "./historyListener";
 import { watchResize } from "./resize.js";
+
+const INJECT_MESSAGE_TYPE = "INJECT_AND_INVOKE";
+
+export interface Message {
+  type: string;
+}
+type BaseScope = Record<string, unknown>;
+export interface InjectMessage<Scope = BaseScope> {
+  uid: string;
+  type: typeof INJECT_MESSAGE_TYPE;
+  code: string;
+  scope: Scope;
+}
 
 const scripts = [
   { code: setupHistoryListeners.toString(), id: "historyListener" },

@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { useEnvironment } from "../../contexts/SandpackEnvironmentContext";
 import { useSandpack, useSandpackShell, useErrorMessage } from "../../hooks";
 import { css } from "../../styles";
 import {
@@ -34,34 +35,33 @@ const mapBundlerErrors = (originalMessage: string): string => {
   return errorMessage;
 };
 
-export type ErrorOverlayProps = React.HTMLAttributes<HTMLDivElement> & {
+export interface ErrorOverlayProps {
+  attributes?: React.HTMLAttributes<HTMLDivElement>;
+  title: string;
+  description: string;
   children?: React.ReactNode;
-};
+}
 export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
-  const { children, className, ...otherProps } = props;
-  const errorMessage = useErrorMessage();
-  const { restart } = useSandpackShell();
+  const { children, attributes, title, description } = props;
   const classNames = useClassNames();
-  const {
-    sandpack: { runSandpack, teamId },
-  } = useSandpack();
-  const { dispatch } = useSandpack();
 
-  if (!errorMessage && !children) {
-    return null;
-  }
-
+  /*
   const isSandpackBundlerError = errorMessage?.startsWith("[sandpack-client]");
   const privateDependencyError = errorMessage?.includes(
     "NPM_REGISTRY_UNAUTHENTICATED_REQUEST"
   );
+  */
 
   const onSignIn = () => {
+    // TODO: Figure out what teamId is for and how it works
+    /*
     if (teamId) {
       dispatch({ type: "sign-in", teamId });
     }
+      */
   };
 
+  /*
   if (privateDependencyError) {
     return (
       <div
@@ -69,9 +69,9 @@ export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
           classNames("error"),
           absoluteClassName,
           errorBundlerClassName,
-          className,
+          attributes?.className,
         ])}
-        {...props}
+        {...attributes}
       >
         <p className={classNames("error-message", [errorMessageClassName])}>
           <strong>Unable to fetch required dependency.</strong>
@@ -113,9 +113,9 @@ export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
           classNames("error"),
           absoluteClassName,
           errorBundlerClassName,
-          className,
+          attributes?.className,
         ])}
-        {...otherProps}
+        {...attributes}
       >
         <div className={classNames("error-message", [errorMessageClassName])}>
           <p
@@ -134,8 +134,7 @@ export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
                 roundedButtonClassName,
               ])}
               onClick={() => {
-                restart();
-                runSandpack();
+                env.restart();
               }}
               title="Restart script"
               type="button"
@@ -147,6 +146,7 @@ export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
       </div>
     );
   }
+    */
 
   return (
     <div
@@ -154,22 +154,22 @@ export const ErrorOverlay: React.FC<ErrorOverlayProps> = (props) => {
         classNames("error"),
         absoluteClassName,
         errorClassName({ solidBg: true }),
-        className,
+        attributes?.className,
       ])}
       translate="no"
-      {...otherProps}
+      {...attributes}
     >
-      <p className={classNames("error-message", [errorMessageClassName])}>
-        <strong>Something went wrong</strong>
+      <p className={classNames("error-title", [css({ fontWeight: "bold" })])}>
+        {title}
       </p>
-
       <p
         className={classNames("error-message", [
           errorMessageClassName({ errorCode: true }),
         ])}
       >
-        {errorMessage || children}
+        {description}
       </p>
+      {children}
     </div>
   );
 };

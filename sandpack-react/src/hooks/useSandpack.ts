@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { SandpackReactContext } from "../contexts/sandpackContext";
 import type {
   SandpackClientDispatch,
   SandpackClientListen,
+  SandpackContext,
   SandpackState,
 } from "../types";
 
@@ -20,7 +20,7 @@ export interface UseSandpack {
  * @category Hooks
  */
 export function useSandpack(): UseSandpack {
-  const sandpack = React.useContext(SandpackReactContext);
+  const sandpack = React.useContext(null as any) as unknown as SandpackContext;
 
   if (sandpack === null) {
     throw new Error(

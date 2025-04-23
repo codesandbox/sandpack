@@ -19,11 +19,6 @@
       "import": "./dist/clients/runtime/index.mjs",
       "require": "./dist/clients/runtime/index.js"
     },
-    "./clients/node": {
-      "types": "./dist/clients/node/index.d.ts",
-      "import": "./dist/clients/node/index.mjs",
-      "require": "./dist/clients/node/index.js"
-    },
     "./clients/static": {
       "types": "./dist/clients/static/index.d.ts",
       "import": "./dist/clients/static/index.mjs",
@@ -45,7 +40,8 @@
     "build:bundler": "gulp",
     "format": "prettier --write '**/*.{ts,tsx,js,jsx}'",
     "format:check": "prettier --check '**/*.{ts,tsx}'",
-    "dev": "yarn build -- --watch"
+    "dev": "yarn build -- --watch",
+    "typecheck": "tsc --noEmit --skipLibCheck"
   },
   "files": [
     "dist",
@@ -55,8 +51,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@codesandbox/nodebox": "0.1.8",
-    "@codesandbox/sdk": "0.0.0-alpha.8",
+    "@codesandbox/sdk": "^0.11.1",
     "buffer": "^6.0.3",
     "dequal": "^2.0.2",
     "mime-db": "^1.52.0",

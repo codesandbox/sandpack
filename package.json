@@ -3,15 +3,19 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
+    "playground",
     "sandpack-client",
     "sandpack-react",
     "sandpack-themes",
+    "sandpack-environments",
     "examples/nextjs-app-dir",
     "website/*"
   ],
   "nohoist": [
     "website/docs/**",
-    "**/html-minifier-terser"
+    "**/html-minifier-terser",
+    "**/static-browser-server",
+    "**/static-browser-server/**"
   ],
   "description": "",
   "scripts": {
@@ -40,11 +44,11 @@
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
-    "@rollup/plugin-commonjs": "^24.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-replace": "^5.0.2",
-    "@rollup/plugin-terser": "^0.4.0",
-    "@rollup/plugin-typescript": "^10.0.1",
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-replace": "^6.0.2",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.2",
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
@@ -63,7 +67,7 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "react-test-renderer": "^18.1.0",
-    "rollup": "^3.9.1",
+    "rollup": "^4.39.0",
     "rollup-plugin-string": "^3.0.0",
     "turbo": "^1.5.5"
   },

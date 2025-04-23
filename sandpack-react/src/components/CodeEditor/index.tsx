@@ -1,7 +1,9 @@
 import type { Extension } from "@codemirror/state";
 import type { KeyBinding } from "@codemirror/view";
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 
+import { useEnvironment } from "../../contexts/SandpackEnvironmentContext";
+import { useSandpackState } from "../../contexts/SandpackStateContext";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
 import type { CustomLanguage, SandpackInitMode } from "../../types";
@@ -81,60 +83,93 @@ export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
     },
     ref
   ) => {
-    const { sandpack } = useSandpack();
-    const { code, updateCode, readOnly: readOnlyFile } = useActiveCode();
-    const { activeFile, status, editorState } = sandpack;
-    const shouldShowTabs = showTabs ?? sandpack.visibleFiles.length > 1;
-
+    const env = useEnvironment();
+    const useCodeRef = useRef("");
+    const state = useSandpackState();
+    const [code, setCode] = useState("");
+    // const { code, updateCode, readOnly: readOnlyFile } = useActiveCode();
+    const shouldShowTabs = false; // showTabs ?? sandpack.visibleFiles.length > 1;
     const classNames = useClassNames();
 
-    const handleCodeUpdate = (
-      newCode: string,
-      shouldUpdatePreview = true
-    ): void => {
-      updateCode(newCode, shouldUpdatePreview);
+    useEffect(() => {
+      if (state?.activeFile) {
+        env.fs.readFile(state.activeFile).then((content) => {
+          const code =
+            typeof content === "string"
+              ? content
+              : new TextDecoder("utf-8").decode(content);
+
+          useCodeRef.current = code;
+
+          setCode(code);
+        });
+      }
+    }, [state?.activeFile]);
+
+    useEffect(() => {
+      const saveListener = (event: KeyboardEvent) => {
+        if (
+          state.activeFile &&
+          (event.metaKey || event.ctrlKey) &&
+          event.key.toLowerCase() === "s"
+        ) {
+          event.preventDefault();
+
+          env.fs.writeFile(state.activeFile, useCodeRef.current);
+        }
+      };
+
+      window.addEventListener("keydown", saveListener);
+
+      return () => {
+        window.removeEventListener("keydown", saveListener);
+      };
+    }, [state]);
+
+    const handleCodeUpdate = (newCode: string): void => {
+      useCodeRef.current = newCode;
+
+      if (env.type !== "vm" && state?.activeFile) {
+        env.fs.writeFile(state.activeFile, newCode);
+      }
     };
 
-    const activeFileUniqueId = useSandpackId();
+    if (!state.activeFile) {
+      return null;
+    }
 
     return (
       <SandpackStack className={classNames("editor", [className])} {...props}>
-        {shouldShowTabs && (
-          <FileTabs
-            activeFileUniqueId={activeFileUniqueId}
-            closableTabs={closableTabs}
-          />
-        )}
+        {shouldShowTabs && <FileTabs closableTabs={closableTabs} />}
 
         <div
-          aria-labelledby={`${activeFile}-${activeFileUniqueId}-tab`}
+          aria-labelledby={`${state.activeFile}-tab`}
           className={classNames("code-editor", [editorClassName])}
-          id={`${activeFile}-${activeFileUniqueId}-tab-panel`}
+          id={`${state.activeFile}-tab-panel`}
           role="tabpanel"
         >
           <CodeMirror
-            key={activeFile}
+            key={state.activeFile}
             ref={ref}
             additionalLanguages={additionalLanguages}
             code={code}
-            editorState={editorState}
+            editorState="pristine"
             extensions={extensions}
             extensionsKeymap={extensionsKeymap}
-            filePath={activeFile}
-            initMode={initMode || sandpack.initMode}
-            onCodeUpdate={(newCode: string) =>
-              handleCodeUpdate(newCode, sandpack.autoReload ?? true)
-            }
-            readOnly={readOnly || readOnlyFile}
+            filePath={state.activeFile}
+            // TODO: Rather pass component specific options from the top always
+            initMode={"immediate" /*initMode || sandpack.initMode*/}
+            onCodeUpdate={(newCode: string) => handleCodeUpdate(newCode)}
+            readOnly={false /*readOnly || readOnlyFile*/}
             showInlineErrors={showInlineErrors}
             showLineNumbers={showLineNumbers}
             showReadOnly={showReadOnly}
             wrapContent={wrapContent}
           />
 
-          {showRunButton && (!sandpack.autoReload || status === "idle") ? (
+          {/*showRunButton && (!sandpack.autoReload || status === "idle") ? (
             <RunButton />
-          ) : null}
+          ) : null*/}
         </div>
       </SandpackStack>
     );

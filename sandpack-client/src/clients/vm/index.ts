@@ -1,9 +1,7 @@
 /* eslint-disable no-console,@typescript-eslint/no-explicit-any,prefer-rest-params,@typescript-eslint/explicit-module-boundary-types */
-
-import type { FilesMap } from "@codesandbox/nodebox";
+import type { SandboxSession } from "@codesandbox/sdk";
+import type { PortInfo } from "@codesandbox/sdk";
 import { connectToSandbox } from "@codesandbox/sdk/browser";
-import type { PortInfo } from "@codesandbox/sdk/dist/esm/ports";
-import type { SandboxWithoutClient } from "@codesandbox/sdk/dist/esm/sandbox";
 
 import type {
   ClientOptions,
@@ -27,10 +25,12 @@ import {
 import { loadPreviewIframe, setPreviewIframeProperties } from "./iframe.utils";
 import type { SandpackVMMessage } from "./types";
 
+export type FileContent = Uint8Array | string;
+export type FilesMap = Record<string, FileContent>;
+
 export class SandpackVM extends SandpackClient {
   private emitter: EventEmitter;
-  private sandbox!: SandboxWithoutClient;
-  public iframe!: HTMLIFrameElement;
+  private sandbox!: SandboxSession;
 
   private _modulesCache = new Map();
   private _forkPromise: Promise<void> | null = null;

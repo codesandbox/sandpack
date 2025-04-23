@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import type { LanguageSupport } from "@codemirror/language";
 import type {
   BundlerState,
@@ -13,6 +12,8 @@ import type {
   SandpackLogLevel,
   NpmRegistry,
 } from "@codesandbox/sandpack-client";
+import type { SandpackEnvironmentOptions } from "@codesandbox/sandpack-environments";
+import type { SessionData } from "@codesandbox/sdk";
 import type React from "react";
 
 import type { ClientPropsOverride } from "./contexts/utils/useClient";
@@ -29,7 +30,7 @@ import type { CodeEditorProps } from ".";
  * general usage.
  */
 
-export interface SandpackProps {
+export interface OLDSandpackProps {
   /**
    * It accepts an object, where each key is the relative
    * path of that file in the sandbox folder structure. Files passed in
@@ -75,12 +76,6 @@ export interface SandpackProps {
    * of the sandbox, such as initialization mode, recompile mode, files resolver, etc.
    */
   options?: SandpackOptions;
-
-  /**
-   * CodeSandbox team id: with this information, bundler can connect to CodeSandbox
-   * and unlock a few capabilities, like private dependencies.
-   */
-  teamId?: string;
 }
 
 /**
@@ -411,7 +406,7 @@ export type SandpackThemeProp =
 export type TemplateFiles<Name extends SandpackPredefinedTemplate> =
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  keyof (typeof SANDBOX_TEMPLATES)[Name]["files"];
+  keyof typeof SANDBOX_TEMPLATES[Name]["files"];
 
 export interface SandpackInternal {
   <
@@ -434,7 +429,7 @@ export interface SandpackInternalProvider {
      * Infer files & template values
      */
     props: React.PropsWithChildren<
-      SandpackProviderProps<Files, TemplateName> & {
+      OLDSandpackProviderProps<Files, TemplateName> & {
         files?: Files;
         template?: TemplateName;
       }
@@ -478,16 +473,10 @@ export interface SandpackInternalOptions<
   recompileDelay?: number;
   id?: string;
   logLevel?: SandpackLogLevel;
-  bundlerURL?: string;
   bundlerTimeOut?: number;
   startRoute?: string;
   skipEval?: boolean;
-  fileResolver?: FileResolver;
-  externalResources?: string[];
   classes?: Record<string, string>;
-  experimental_enableServiceWorker?: boolean;
-  experimental_enableStableServiceWorkerId?: boolean;
-  vmEnvironmentApiUrl?: (id: string) => string;
 }
 
 interface SandpackInternalProps<
@@ -531,12 +520,85 @@ interface SandpackInternalProps<
   };
 }
 
-export interface SandpackProviderProps<
+export interface StaticSandbox {
+  environment: "static";
+  files: SandpackBundlerFiles;
+  externalResources?: string[];
+  entry: string;
+  sandboxId?: string;
+}
+
+export interface BundlerSandbox {
+  environment: "bundler";
+  template: "parcel" | "react";
+  files: SandpackBundlerFiles;
+  externalResources?: string[];
+  dependencies?: Record<string, string>;
+  devDependencies?: Record<string, string>;
+  entry: string;
+  sandboxId?: string;
+}
+
+export interface VMSandbox {
+  environment: "vm";
+  sandboxId: string;
+  session: SessionData;
+}
+
+export type Sandbox = BundlerSandbox | StaticSandbox | VMSandbox;
+
+export type SandboxChangeEvent =
+  | {
+      type: "update";
+      path: string;
+      content: string;
+    }
+  | {
+      type: "delete";
+      path: string;
+    };
+
+export type CustomSandbox = {
+  activeFile?: string;
+  files: SandpackBundlerFiles;
+  externalResources?: string[];
+  entry: string;
+} & (
+  | {
+      template: "static";
+    }
+  | {
+      template: "parcel" | "react";
+      dependencies?: Record<string, string>;
+      devDependencies?: Record<string, string>;
+    }
+);
+
+export interface SandpackProviderProps {
+  children?: React.ReactNode;
+  sandbox: CustomSandbox | (() => Promise<Sandbox>);
+  onChange?: (event: SandboxChangeEvent, sandbox: Sandbox) => void;
+  style?: React.CSSProperties;
+  className?: string;
+  environmentOptions?: {
+    [K in SandpackEnvironmentOptions["type"]]: SandpackEnvironmentOptions & {
+      type: K;
+    };
+  };
+  theme?: SandpackThemeProp;
+  classes?: Record<string, string>;
+  initMode?: SandpackInitMode;
+  initModeObserverOptions?: IntersectionObserverInit;
+}
+
+export interface OLDSandpackProviderProps<
   Files extends SandpackFiles = SandpackFiles,
   TemplateName extends SandpackPredefinedTemplate = SandpackPredefinedTemplate
-> extends SandpackRootProps<Files, TemplateName>,
-    React.HTMLAttributes<HTMLDivElement> {
+> extends SandpackRootProps<Files, TemplateName> {
+  style?: React.CSSProperties;
+  className?: string;
   options?: SandpackInternalOptions<Files, TemplateName>;
+  environmentOptions?: SandpackEnvironmentOptions;
   children?: React.ReactNode;
 }
 
@@ -644,16 +706,6 @@ export type SandpackStatus =
   | "done";
 
 export type EditorState = "pristine" | "dirty";
-
-export interface SandboxTemplate {
-  files: SandpackBundlerFiles;
-  dependencies: Record<string, string>;
-  devDependencies?: Record<string, string>;
-  entry?: string;
-  main?: string;
-  environment: SandboxEnvironment;
-  templateID?: string;
-}
 
 export type SandpackFiles = Record<string, string | SandpackFile>;
 

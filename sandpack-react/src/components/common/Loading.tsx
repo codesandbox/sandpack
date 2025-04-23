@@ -4,8 +4,6 @@ import { css, keyframes } from "../../styles";
 import { buttonClassName } from "../../styles/shared";
 import { useClassNames } from "../../utils/classNames";
 
-import { OpenInCodeSandboxButton } from "./OpenInCodeSandboxButton";
-
 const cubeClassName = css({
   transform: "translate(-4px, 9px) scale(0.13, 0.13)",
   "*": { position: "absolute", width: "96px", height: "96px" },
@@ -90,7 +88,7 @@ export const Loading = ({
       title="Open in CodeSandbox"
       {...props}
     >
-      {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
+      {/*showOpenInCodeSandbox && <OpenInCodeSandboxButton />*/}
       <div className={classNames("cube", [cubeClassName])}>
         <div className={classNames("sides", [sidesClassNames])}>
           <div className="top" />

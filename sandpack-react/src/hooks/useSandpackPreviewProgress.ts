@@ -1,50 +1,43 @@
-import type { WorkerStatusUpdate } from "@codesandbox/nodebox";
+import type * as sandpackEnv from "@codesandbox/sandpack-environments";
 import * as React from "react";
 
-import { useSandpack } from "./useSandpack";
-
-const mapProgressMessage = (
-  originalMessage: WorkerStatusUpdate & { command?: string },
-  firstTotalPending: number
-): string | null => {
-  switch (originalMessage.state) {
-    case "downloading_manifest":
-      return "[1/3] Downloading manifest";
-
-    case "downloaded_module":
-      return `[2/3] Downloaded ${originalMessage.name} (${
-        firstTotalPending - originalMessage.totalPending
-      }/${firstTotalPending})`;
-
-    case "starting_command":
-      return "[3/3] Starting command";
-
-    case "command_running":
-      return `[3/3] Running "${originalMessage.command?.trim()}"`;
-  }
-};
-
-export const useSandpackPreviewProgress = (
-  props:
-    | {
-        timeout?: number;
-        clientId?: string;
-      }
-    | undefined
-) => {
-  const [isReady, setIsReady] = React.useState(false);
-  const [totalDependencies, setTotalDependencies] = React.useState<number>();
+export const useSandpackPreviewProgress = ({
+  preview,
+}: {
+  preview: sandpackEnv.SandpackPreview;
+}) => {
+  const [isReady, setIsReady] = React.useState(
+    preview.status.current === "READY"
+  );
   const [loadingMessage, setLoadingMessage] = React.useState<null | string>(
     null
   );
 
-  const timeout = props?.timeout;
-  const clientId = props?.clientId;
-
-  const { listen } = useSandpack();
-
   React.useEffect(() => {
-    let timer: NodeJS.Timer;
+    if (isReady) {
+      return;
+    }
+
+    // TODO: Implement timeout in the environment
+    // let timer: NodeJS.Timer;
+
+    return preview.onStatusChange((status) => {
+      switch (status.current) {
+        case "ERROR": {
+          break;
+        }
+        case "LOADING": {
+          break;
+        }
+        case "READY": {
+          setLoadingMessage(null);
+          setIsReady(true);
+          break;
+        }
+      }
+    });
+    /*
+    TODO: Implement this stuff in the environment
     const unsubscribe = listen((message) => {
       if (message.type === "start" && message.firstLoad) {
         setIsReady(false);
@@ -68,19 +61,7 @@ export const useSandpackPreviewProgress = (
             case "starting":
               return "[3/3] Starting";
           }
-
-          return null;
         });
-      } else if (message.type === "shell/progress" && !isReady) {
-        if (!totalDependencies && message.data.state === "downloaded_module") {
-          setTotalDependencies(message.data.totalPending);
-        }
-
-        if (totalDependencies !== undefined) {
-          setLoadingMessage(
-            mapProgressMessage(message.data, totalDependencies)
-          );
-        }
       } else if (message.type === "vm/progress") {
         setLoadingMessage(message.data);
       }
@@ -98,7 +79,8 @@ export const useSandpackPreviewProgress = (
       }
       unsubscribe();
     };
-  }, [clientId, isReady, totalDependencies, timeout]);
+    */
+  }, [preview, isReady]);
 
   return loadingMessage;
 };

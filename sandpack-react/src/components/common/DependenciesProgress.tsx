@@ -5,10 +5,8 @@ import { fadeIn } from "../../styles/shared";
 export const DependenciesProgress: React.FC<{ clientId?: string }> = ({
   clientId,
 }) => {
-  const progressMessage = useSandpackPreviewProgress({
-    timeout: 3_000,
-    clientId,
-  });
+  // @ts-ignore
+  const progressMessage = useSandpackPreviewProgress();
 
   if (!progressMessage) {
     return null;

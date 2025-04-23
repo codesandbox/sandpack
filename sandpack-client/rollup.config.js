@@ -29,7 +29,7 @@ const configs = [
   {
     input: {
       index: "src/index.ts",
-      "clients/node/index": "src/clients/node/index.ts",
+      "clients/vm/index": "src/clients/vm/index.ts",
       "clients/runtime/index": "src/clients/runtime/index.ts",
     },
     output: [
@@ -46,7 +46,10 @@ const configs = [
     ],
 
     plugins: [
-      typescript({ tsconfig: "./tsconfig.json" }),
+      typescript({
+        tsconfig: "./tsconfig.json",
+        compilerOptions: { declaration: true, declarationDir: "dist" },
+      }),
       string({ include: "**/dist/consoleHook.js" }),
       replace({
         preventAssignment: true,
@@ -61,7 +64,7 @@ const configs = [
       ...(pkg.dependencies || {}),
       ...(pkg.devDependencies || {}),
       ...(pkg.peerDependencies || {}),
-    }),
+    }).concat("@codesandbox/sdk/browser"),
   },
 ];
 

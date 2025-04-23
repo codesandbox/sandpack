@@ -5,102 +5,101 @@ import type { CodeEditorProps } from "../components/CodeEditor";
 import { SandpackCodeEditor } from "../components/CodeEditor";
 import { SandpackConsole } from "../components/Console";
 import { SandpackPreview } from "../components/Preview";
+import { SandpackProvider } from "../components/SandpackProvider";
 import { SandpackTests } from "../components/Tests";
 import { SandpackStack } from "../components/common";
 import { SandpackLayout } from "../components/common/Layout";
 import { RoundedButton } from "../components/common/RoundedButton";
 import { ConsoleIcon } from "../components/icons";
-import { SandpackProvider } from "../contexts/sandpackContext";
 import { css, THEME_PREFIX } from "../styles";
-import { SANDBOX_TEMPLATES } from "../templates";
-import type {
-  SandpackInternal,
-  SandpackInternalOptions,
-  TemplateFiles,
-  SandpackFiles,
-  SandpackPredefinedTemplate,
-} from "../types";
+import type { SandpackProviderProps, SandpackCodeOptions } from "../types";
 import { useClassNames } from "../utils/classNames";
 
-export const Sandpack: SandpackInternal = ({
-  options,
-  template,
-  customSetup,
-  files,
-  theme,
+export type SandpackProps = SandpackProviderProps<any> & {
+  editorWidthPercentage?: number;
+  editorHeight?: React.CSSProperties["height"];
+
+  /**
+   * right to left layout
+   * @default false
+   */
+  rtl?: boolean;
+  showNavigator?: boolean;
+  showLineNumbers?: boolean;
+  showInlineErrors?: boolean;
+  showRefreshButton?: boolean;
+  showTabs?: boolean;
+  showConsoleButton?: boolean;
+  showConsole?: boolean;
+  closableTabs?: boolean;
+  wrapContent?: boolean;
+  resizablePanels?: boolean;
+  codeEditor?: SandpackCodeOptions;
+
+  /**
+   * This disables editing of content by the user in all files.
+   */
+  readOnly?: boolean;
+
+  /**
+   * Controls the visibility of Read-only label, which will only
+   * appears when `readOnly` is `true`
+   */
+  showReadOnly?: boolean;
+
+  layout?: "preview" | "tests" | "console";
+};
+
+export function Sandpack({
+  resizablePanels,
+  editorWidthPercentage,
+  showConsole,
   ...props
-}) => {
-  options ??= {};
-  options.resizablePanels ??= true;
-  options.editorWidthPercentage ??= 50;
-  options.showConsole ??= false;
+}: SandpackProps) {
+  resizablePanels ??= true;
+  editorWidthPercentage ??= 50;
+  showConsole ??= false;
 
-  const rtlLayout = options?.rtl ?? false;
+  const rtlLayout = props?.rtl ?? false;
   const codeEditorOptions: CodeEditorProps = {
-    showTabs: options.showTabs,
-    showLineNumbers: options.showLineNumbers,
-    showInlineErrors: options.showInlineErrors,
-    wrapContent: options.wrapContent,
-    closableTabs: options.closableTabs,
-    initMode: options.initMode,
-    extensions: options.codeEditor?.extensions,
-    extensionsKeymap: options.codeEditor?.extensionsKeymap,
-    readOnly: options.readOnly,
-    showReadOnly: options.showReadOnly,
-    additionalLanguages: options.codeEditor?.additionalLanguages,
-  };
-
-  const providerOptions: SandpackInternalOptions<
-    SandpackFiles,
-    SandpackPredefinedTemplate
-  > = {
-    /**
-     * TS-why: Type 'string | number | symbol' is not assignable to type 'string'
-     */
-    activeFile: options.activeFile as unknown as string,
-    visibleFiles: options.visibleFiles as unknown as string[],
-    recompileMode: options.recompileMode,
-    recompileDelay: options.recompileDelay,
-    autorun: options.autorun,
-    autoReload: options.autoReload,
-    bundlerURL: options.bundlerURL,
-    startRoute: options.startRoute,
-    skipEval: options.skipEval,
-    fileResolver: options.fileResolver,
-    initMode: options.initMode,
-    initModeObserverOptions: options.initModeObserverOptions,
-    externalResources: options.externalResources,
-    logLevel: options.logLevel,
-    classes: options.classes,
-    experimental_enableServiceWorker: options.experimental_enableServiceWorker,
-    experimental_enableStableServiceWorkerId:
-      options.experimental_enableStableServiceWorkerId,
+    showTabs: props.showTabs,
+    showLineNumbers: props.showLineNumbers,
+    showInlineErrors: props.showInlineErrors,
+    wrapContent: props.wrapContent,
+    closableTabs: props.closableTabs,
+    initMode: props.initMode,
+    extensions: props.codeEditor?.extensions,
+    extensionsKeymap: props.codeEditor?.extensionsKeymap,
+    readOnly: props.readOnly,
+    showReadOnly: props.showReadOnly,
+    additionalLanguages: props.codeEditor?.additionalLanguages,
   };
 
   /**
    * Console
    */
-  const [consoleVisibility, setConsoleVisibility] = React.useState(
-    options.showConsole
-  );
+  const [consoleVisibility, setConsoleVisibility] = React.useState(showConsole);
   const [counter, setCounter] = React.useState(0);
-  const hasRightColumn = options.showConsole || options.showConsoleButton;
+  const hasRightColumn = showConsole || props.showConsoleButton;
 
   function getMode() {
-    if (options?.layout) {
-      return options.layout;
+    if (props?.layout) {
+      return props.layout;
     }
 
-    const templateFiles = SANDBOX_TEMPLATES[template!];
+    // TODO: Do people actually use this?
+    /*
+    const templateFiles = SANDBOX_TEMPLATES[props.sandbox.template!];
     if (typeof templateFiles === "object" && "mode" in templateFiles) {
       return templateFiles.mode;
     }
+      */
 
     return "preview";
   }
   const mode = getMode();
 
-  const actionsChildren = options.showConsoleButton ? (
+  const actionsChildren = props.showConsoleButton ? (
     <ConsoleCounterButton
       counter={counter}
       onClick={(): void => setConsoleVisibility((prev) => !prev)}
@@ -114,7 +113,7 @@ export const Sandpack: SandpackInternal = ({
   const dragEventTargetRef = React.useRef<any>(null);
 
   const [horizontalSize, setHorizontalSize] = React.useState(
-    options.editorWidthPercentage
+    editorWidthPercentage
   );
   const [verticalSize, setVerticalSize] = React.useState(70);
 
@@ -125,7 +124,7 @@ export const Sandpack: SandpackInternal = ({
     flexBasis: 0,
     width: 100 - horizontalSize + "%",
     gap: consoleVisibility ? 1 : 0,
-    height: options.editorHeight, // use the original editor height
+    height: props.editorHeight, // use the original editor height
   };
 
   const topRowStyle = hasRightColumn
@@ -183,7 +182,7 @@ export const Sandpack: SandpackInternal = ({
   };
 
   React.useEffect(() => {
-    if (!options?.resizablePanels) return;
+    if (!resizablePanels) return;
     document.body.addEventListener("mousemove", onDragMove);
     document.body.addEventListener("mouseup", stopDragging);
 
@@ -191,11 +190,11 @@ export const Sandpack: SandpackInternal = ({
       document.body.removeEventListener("mousemove", onDragMove);
       document.body.removeEventListener("mouseup", stopDragging);
     };
-  }, [options]);
+  }, [resizablePanels]);
 
   React.useEffect(() => {
-    setConsoleVisibility(options?.showConsole ?? false);
-  }, [options.showConsole]);
+    setConsoleVisibility(showConsole ?? false);
+  }, [showConsole]);
 
   const rightColumnProps = hasRightColumn
     ? { className: THEME_PREFIX + "-preset-column", style: rightColumnStyle }
@@ -204,15 +203,7 @@ export const Sandpack: SandpackInternal = ({
   const classNames = useClassNames();
 
   return (
-    <SandpackProvider
-      key={template}
-      customSetup={customSetup}
-      files={files as TemplateFiles<SandpackPredefinedTemplate>}
-      options={providerOptions}
-      template={template}
-      theme={theme}
-      {...props}
-    >
+    <SandpackProvider {...props}>
       <SandpackLayout
         className={
           rtlLayout ? classNames("rtl-layout", [rtlLayoutClassName]) : ""
@@ -221,7 +212,7 @@ export const Sandpack: SandpackInternal = ({
         <SandpackCodeEditor
           {...codeEditorOptions}
           style={{
-            height: options.editorHeight, // use the original editor height
+            height: props.editorHeight, // use the original editor height
             flexGrow: horizontalSize,
             flexShrink: horizontalSize,
             flexBasis: 0,
@@ -229,7 +220,7 @@ export const Sandpack: SandpackInternal = ({
           }}
         />
 
-        {options.resizablePanels && (
+        {resizablePanels && (
           <div
             className={classNames("resize-handler", [
               dragHandler({ direction: "horizontal" }),
@@ -251,8 +242,8 @@ export const Sandpack: SandpackInternal = ({
           {mode === "preview" && (
             <SandpackPreview
               actionsChildren={actionsChildren}
-              showNavigator={options.showNavigator}
-              showRefreshButton={options.showRefreshButton}
+              showNavigator={props.showNavigator}
+              showRefreshButton={props.showRefreshButton}
               style={topRowStyle}
             />
           )}
@@ -272,9 +263,9 @@ export const Sandpack: SandpackInternal = ({
             />
           )}
 
-          {(options.showConsoleButton || consoleVisibility) && (
+          {(props.showConsoleButton || consoleVisibility) && (
             <>
-              {options.resizablePanels && consoleVisibility && (
+              {resizablePanels && consoleVisibility && (
                 <div
                   className={classNames("resize-handler", [
                     dragHandler({ direction: "vertical" }),
@@ -306,7 +297,7 @@ export const Sandpack: SandpackInternal = ({
       </SandpackLayout>
     </SandpackProvider>
   );
-};
+}
 
 const dragHandler = css({
   position: "absolute",
