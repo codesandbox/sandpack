@@ -24,9 +24,7 @@ import {
   type SandpackMessage,
 } from "./types";
 import {
-  addPackageJSONIfNeeded,
-  createError,
-  createPackageJSON,
+  ensureValidBundlerFiles,
   extractErrorDetails,
   getExtension,
   getTemplate,
@@ -271,16 +269,7 @@ export class SandpackBundlerPreview {
   private async getFiles(): Promise<SandpackBundlerFiles> {
     const files = await readAllFiles(this.fs, "/", {});
 
-    if (files["/package.json"] === undefined) {
-      return addPackageJSONIfNeeded(
-        files,
-        this.options.dependencies,
-        this.options.devDependencies,
-        this.options.entry
-      );
-    }
-
-    return files;
+    return ensureValidBundlerFiles(files, this.options.entry);
   }
 
   private async handleWorkerRequest(
@@ -381,6 +370,11 @@ export class SandpackBundlerPreview {
 
   async updateSandbox() {
     const files = await this.getFiles();
+    const packageJSON = JSON.parse(files["package.json"]?.code ?? "{}");
+
+    // TODO: The API currently finds the index file and loads it in the preview, but we
+    // need to manually fix this
+    // data.files["index.html"] = data.files["src/index.html"];
 
     const modules: Modules = Object.keys(files).reduce(
       (prev, next) => ({
@@ -392,23 +386,6 @@ export class SandpackBundlerPreview {
       }),
       {}
     );
-
-    let packageJSON = JSON.parse(
-      createPackageJSON(
-        this.options.dependencies,
-        this.options.devDependencies,
-        this.options.entry
-      )
-    );
-    try {
-      packageJSON = JSON.parse(files["/package.json"].code);
-    } catch (e) {
-      console.error(
-        createError(
-          "could not parse package.json file: " + (e as Error).message
-        )
-      );
-    }
 
     // TODO move this to a common format
     const normalizedModules = Object.keys(files).reduce(
@@ -437,7 +414,7 @@ export class SandpackBundlerPreview {
       experimental_enableServiceWorker:
         this.options.experimental_enableServiceWorker,
       template:
-        this.options.template || getTemplate(packageJSON, normalizedModules),
+        this.options.bundlerType || getTemplate(packageJSON, normalizedModules),
       showOpenInCodeSandbox: this.options.showOpenInCodeSandbox ?? true,
       showErrorScreen: this.options.showErrorScreen ?? true,
       showLoadingScreen: this.options.showLoadingScreen ?? false,

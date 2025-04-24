@@ -11,6 +11,7 @@ interface Directory {
 
 export class InMemoryFileSystem implements SandpackFileSystem {
   private files: Record<string, FileContent> = {};
+  private filesMetadata: Record<string, object> = {};
   private directories: Record<string, Directory> = {};
   private watchers: Record<string, Set<() => void>> = {};
   private globalWatchers: Set<() => void> = new Set();
@@ -82,11 +83,29 @@ export class InMemoryFileSystem implements SandpackFileSystem {
     this.notifyGlobalWatchers();
   }
 
+  writeFileMetadata(path: string, metadata: object): void {
+    const normalizedPath = normalizePath(path);
+
+    this.filesMetadata[normalizedPath] = metadata;
+  }
+
+  readFileMetadata(path: string): object {
+    const normalizedPath = normalizePath(path);
+
+    if (!this.filesMetadata[normalizedPath]) {
+      throw new Error(`ENOENT: no such file '${path}'`);
+    }
+
+    return this.filesMetadata[normalizedPath];
+  }
+
   async readFile(path: string) {
     const normalizedPath = normalizePath(path);
+
     if (!this.files[normalizedPath]) {
       throw new Error(`ENOENT: no such file '${path}'`);
     }
+
     return this.files[normalizedPath];
   }
 
@@ -242,6 +261,7 @@ export class InMemoryFileSystem implements SandpackFileSystem {
 
     // Delete file
     delete this.files[normalizedPath];
+    delete this.filesMetadata[normalizedPath];
 
     // Notify watchers
     if (this.watchers[normalizedPath]) {

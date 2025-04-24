@@ -2,7 +2,7 @@ import path from "path";
 
 import type {
   BundlerSandbox,
-  Sandbox,
+  SandboxFiles,
   StaticSandbox,
   VMSandbox,
 } from "@codesandbox/sandpack-react";
@@ -53,6 +53,7 @@ app.get("/api/sandboxes/:id", async (req, res) => {
       const sandbox: VMSandbox = {
         environment: "vm",
         session,
+        sandboxId,
       };
 
       res.status(200).json(sandbox);
@@ -70,18 +71,32 @@ app.get("/api/sandboxes/:id", async (req, res) => {
         : [moduleOrDirectory.title];
     };
 
-    const sandbox: BundlerSandbox | StaticSandbox = {
-      environment: data.template === "static" ? "static" : "bundler",
-      template: data.template,
-      main: data.entry,
-      files: data.modules.reduce((acc, module) => {
-        acc[getModulePath(module).join("/")] = {
-          code: module.code,
-        };
+    const entry = data.entry;
+    const files = data.modules.reduce((acc: SandboxFiles, module) => {
+      acc[getModulePath(module).join("/")] = {
+        code: module.code,
+        metadata: { shortid: module.shortid },
+      };
 
-        return acc;
-      }, {}),
-    };
+      return acc;
+    }, {});
+
+    const sandbox: BundlerSandbox | StaticSandbox =
+      data.template === "static"
+        ? {
+            environment: "static",
+
+            entry,
+            files,
+            sandboxId,
+          }
+        : {
+            environment: "bundler",
+            entry,
+            files,
+            bundler: data.template,
+            sandboxId,
+          };
 
     res.status(200).json(sandbox);
   } catch (error) {
@@ -90,19 +105,29 @@ app.get("/api/sandboxes/:id", async (req, res) => {
   }
 });
 
-// POST endpoint for creating and starting a sandbox
-app.post("/api/sandboxes/:id", async (req, res) => {
-  try {
-    const templateId = req.params.id;
+// POST endpoint for updating/creating a file in a sandbox
+app.post("/api/sandboxes/:id/fs", async (req, res) => {
+  const sandboxId = req.params.id;
+  const { shortid, content } = req.body;
 
-    const sandbox = await sdk.sandbox.create({ template: templateId });
-    const data = await sdk.sandbox.start(sandbox.id);
+  // Implementation details to be handled by you
+  // Example: update file at 'path' with 'content' in sandbox 'sandboxId'
 
-    res.status(200).json(data);
-  } catch (error) {
-    console.error("Error creating/starting sandbox:", error);
-    res.status(500).json({ error: "Failed to create or start sandbox" });
-  }
+  await fetch(
+    `https://codesandbox.io/api/v1/sandboxes/${sandboxId}/modules/${shortid}`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${globalApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ module: { code: content } }),
+    }
+  );
+
+  res
+    .status(200)
+    .json({ message: "File update endpoint hit", sandboxId, shortid, content });
 });
 
 // Start the server

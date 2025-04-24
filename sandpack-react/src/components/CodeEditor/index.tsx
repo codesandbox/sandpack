@@ -2,7 +2,7 @@ import type { Extension } from "@codemirror/state";
 import type { KeyBinding } from "@codemirror/view";
 import { forwardRef, useEffect, useRef, useState } from "react";
 
-import { useEnvironment } from "../../contexts/SandpackEnvironmentContext";
+import { useSandbox } from "../../contexts/SandpackSandboxContext";
 import { useSandpackState } from "../../contexts/SandpackStateContext";
 import { useActiveCode } from "../../hooks/useActiveCode";
 import { useSandpack } from "../../hooks/useSandpack";
@@ -83,7 +83,7 @@ export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
     },
     ref
   ) => {
-    const env = useEnvironment();
+    const { environment: env } = useSandbox();
     const useCodeRef = useRef("");
     const state = useSandpackState();
     const [code, setCode] = useState("");
@@ -107,7 +107,7 @@ export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
     }, [state?.activeFile]);
 
     useEffect(() => {
-      const saveListener = (event: KeyboardEvent) => {
+      const saveListener = async (event: KeyboardEvent) => {
         if (
           state.activeFile &&
           (event.metaKey || event.ctrlKey) &&
@@ -115,6 +115,14 @@ export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
         ) {
           event.preventDefault();
 
+          const content = useCodeRef.current;
+          const metadata = env.fs.readFileMetadata(state.activeFile);
+          await state.triggerChange({
+            type: "update",
+            path: state.activeFile,
+            content,
+            metadata,
+          });
           env.fs.writeFile(state.activeFile, useCodeRef.current);
         }
       };
@@ -126,12 +134,14 @@ export const SandpackCodeEditor = forwardRef<CodeMirrorRef, CodeEditorProps>(
       };
     }, [state]);
 
-    const handleCodeUpdate = (newCode: string): void => {
+    const handleCodeUpdate = async (newCode: string) => {
       useCodeRef.current = newCode;
 
-      if (env.type !== "vm" && state?.activeFile) {
-        env.fs.writeFile(state.activeFile, newCode);
+      if (env.type === "vm" || !state?.activeFile) {
+        return;
       }
+
+      env.fs.writeFile(state.activeFile, newCode);
     };
 
     if (!state.activeFile) {

@@ -8,16 +8,19 @@ import type {
 } from "../../types";
 import { debounce } from "../../utils";
 
-import { SandpackBundlerPreview } from "./BundlerPreview.js";
+import { SandpackBundlerPreview } from "./BundlerPreview";
 import type {
   FileResolver,
   NpmRegistry,
   ReactDevToolsMode,
   SandpackLogLevel,
-  SandpackTemplate,
+  BundlerType,
 } from "./types.js";
 
+export { BundlerType } from "./types";
+
 export interface SandpackBundlerEnvironmentOptions {
+  bundlerType: BundlerType;
   teamId?: string;
   experimental_enableServiceWorker?: boolean;
   experimental_stableServiceWorkerId?: string;
@@ -25,8 +28,6 @@ export interface SandpackBundlerEnvironmentOptions {
   externalResources?: string[];
   fileResolver?: FileResolver;
   startRoute?: string;
-  dependencies?: Record<string, string>;
-  devDependencies?: Record<string, string>;
   autorun?: boolean;
   autoReload?: boolean;
   recompileMode?: "immediate" | "delayed";
@@ -36,7 +37,6 @@ export interface SandpackBundlerEnvironmentOptions {
   entry?: string;
   reactDevTools?: ReactDevToolsMode;
   disableDependencyPreprocessing?: boolean;
-  template?: SandpackTemplate;
   showOpenInCodeSandbox?: boolean;
   showErrorScreen?: boolean;
   showLoadingScreen?: boolean;

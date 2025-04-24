@@ -22,6 +22,8 @@ export interface DirectoryEntry {
 export interface SandpackFileSystem {
   writeFile(path: string, content: FileContent): Promise<void>;
   readFile(path: string): Promise<FileContent>;
+  writeFileMetadata(path: string, metadata: object): void;
+  readFileMetadata(path: string): object;
   readDirectory(path: string): Promise<DirectoryEntry[]>;
   createDirectory(path: string): Promise<void>;
   deleteFile(path: string): Promise<void>;

@@ -107,7 +107,7 @@ export enum SandpackLogLevel {
 
 export type ReactDevToolsMode = "latest" | "legacy";
 
-export type SandpackTemplate =
+export type BundlerType =
   | "angular-cli"
   | "create-react-app"
   | "create-react-app-typescript"
@@ -344,7 +344,7 @@ export type SandpackMessage = BaseSandpackMessage &
         disableDependencyPreprocessing?: boolean;
         experimental_enableServiceWorker?: boolean;
         experimental_stableServiceWorkerId?: string;
-        template?: string | SandpackTemplate;
+        template?: string | BundlerType;
         showOpenInCodeSandbox: boolean;
         showErrorScreen: boolean;
         showLoadingScreen: boolean;

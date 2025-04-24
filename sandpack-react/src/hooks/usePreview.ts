@@ -1,11 +1,11 @@
 import type * as sandpackEnv from "@codesandbox/sandpack-environments";
 import React from "react";
 
-import { useEnvironment } from "../contexts/SandpackEnvironmentContext";
+import { useSandbox } from "../contexts/SandpackSandboxContext";
 
 export function usePreview() {
   const previewRef = React.useRef<sandpackEnv.SandpackPreview | null>(null);
-  const env = useEnvironment();
+  const { environment: env } = useSandbox();
 
   if (!previewRef.current) {
     previewRef.current = env.createPreview();

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { SandpackEnvironmentProvider } from "../../contexts/SandpackEnvironmentContext";
+import { SandpackSandboxProvider } from "../../contexts/SandpackSandboxContext";
 import { SandpackStateProvider } from "../../contexts/SandpackStateContext";
 import { SandpackThemeProvider } from "../../styles/themeContext";
 import type { SandpackProviderProps } from "../../types";
@@ -18,9 +18,14 @@ export function SandpackProvider(props: SandpackProviderProps) {
   } = props;
 
   return (
-    <SandpackEnvironmentProvider options={environmentOptions} sandbox={sandbox}>
+    <SandpackSandboxProvider options={environmentOptions} sandbox={sandbox}>
       <React.Suspense fallback="Loading...">
-        <SandpackStateProvider sandbox={sandbox}>
+        <SandpackStateProvider
+          onChange={props.onChange}
+          sandboxConfiguration={
+            typeof sandbox === "function" ? undefined : sandbox
+          }
+        >
           <ClassNamesProvider classes={classes}>
             <SandpackThemeProvider
               className={className}
@@ -32,6 +37,6 @@ export function SandpackProvider(props: SandpackProviderProps) {
           </ClassNamesProvider>
         </SandpackStateProvider>
       </React.Suspense>
-    </SandpackEnvironmentProvider>
+    </SandpackSandboxProvider>
   );
 }

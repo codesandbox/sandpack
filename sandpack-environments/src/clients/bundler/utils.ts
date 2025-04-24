@@ -22,79 +22,34 @@ export function nullthrows<T>(value?: T | null, err = "Value is nullish"): T {
 const DEPENDENCY_ERROR_MESSAGE = `"dependencies" was not specified - provide either a package.json or a "dependencies" value`;
 const ENTRY_ERROR_MESSAGE = `"entry" was not specified - provide either a package.json with the "main" field or an "entry" value`;
 
-export function createPackageJSON(
-  dependencies: Dependencies = {},
-  devDependencies: Dependencies = {},
-  entry = "/index.js"
-): string {
+export function createPackageJSON(entry = "/index.js"): string {
   return JSON.stringify(
     {
       name: "sandpack-project",
       main: entry,
-      dependencies,
-      devDependencies,
+      dependencies: {},
+      devDependencies: {},
     },
     null,
     2
   );
 }
 
-export function addPackageJSONIfNeeded(
+export function ensureValidBundlerFiles(
   files: SandpackBundlerFiles,
-  dependencies?: Dependencies,
-  devDependencies?: Dependencies,
   entry?: string
 ): SandpackBundlerFiles {
-  const normalizedFilesPath = normalizePath(files);
+  const normalizedFiles = normalizePaths(files);
 
-  const packageJsonFile = normalizedFilesPath["/package.json"];
+  const packageJsonFile = normalizedFiles["/package.json"];
 
-  /**
-   * Create a new package json
-   */
   if (!packageJsonFile) {
-    normalizedFilesPath["/package.json"] = {
-      code: createPackageJSON(dependencies, devDependencies, entry),
-    };
-
-    return normalizedFilesPath;
-  }
-
-  /**
-   * Merge package json with custom setup
-   */
-  if (packageJsonFile) {
-    const packageJsonContent = JSON.parse(packageJsonFile.code);
-
-    nullthrows(
-      !(!dependencies && !packageJsonContent.dependencies),
-      ENTRY_ERROR_MESSAGE
-    );
-
-    if (dependencies) {
-      packageJsonContent.dependencies = {
-        ...(packageJsonContent.dependencies ?? {}),
-        ...(dependencies ?? {}),
-      };
-    }
-
-    if (devDependencies) {
-      packageJsonContent.devDependencies = {
-        ...(packageJsonContent.devDependencies ?? {}),
-        ...(devDependencies ?? {}),
-      };
-    }
-
-    if (entry) {
-      packageJsonContent.main = entry;
-    }
-
-    normalizedFilesPath["/package.json"] = {
-      code: JSON.stringify(packageJsonContent, null, 2),
+    normalizedFiles["/package.json"] = {
+      code: createPackageJSON(entry),
     };
   }
 
-  return normalizedFilesPath;
+  return normalizedFiles;
 }
 
 export function extractErrorDetails(msg: SandpackErrorMessage): SandpackError {
@@ -191,7 +146,7 @@ ${errorInCode}`;
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const normalizePath = <R>(path: R): R => {
+export const normalizePaths = <R>(path: R): R => {
   if (typeof path === "string") {
     return (path.startsWith("/") ? path : `/${path}`) as R;
   }

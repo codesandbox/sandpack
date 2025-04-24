@@ -17,6 +17,14 @@ export class VMFileSystem implements SandpackFileSystem {
     });
   }
 
+  writeFileMetadata(path: string, metadata: object): void {
+    // Not needed in VMs
+  }
+
+  readFileMetadata(path: string) {
+    return {};
+  }
+
   async readFile(path: string): Promise<string> {
     const sandbox = await this.sandboxPromise;
     const file = await sandbox.fs.readFile(this.workspacePath + path);

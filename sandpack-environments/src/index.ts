@@ -8,6 +8,10 @@ export {
   SandpackEnvironmentOptions,
 } from "./types";
 
+export * from "./clients/bundler";
+export * from "./clients/static";
+export * from "./clients/vm";
+
 export async function loadEnvironment<T extends SandpackEnvironmentOptions>(
   options: T
 ): Promise<SandpackEnvironment> {

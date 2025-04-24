@@ -4,7 +4,6 @@ import type {
   BundlerState,
   ListenerFunction,
   ReactDevToolsMode,
-  SandpackBundlerFiles,
   SandpackClient,
   SandpackError,
   SandpackMessage,
@@ -12,7 +11,10 @@ import type {
   SandpackLogLevel,
   NpmRegistry,
 } from "@codesandbox/sandpack-client";
-import type { SandpackEnvironmentOptions } from "@codesandbox/sandpack-environments";
+import type {
+  BundlerType,
+  SandpackEnvironmentOptions,
+} from "@codesandbox/sandpack-environments";
 import type { SessionData } from "@codesandbox/sdk";
 import type React from "react";
 
@@ -406,7 +408,7 @@ export type SandpackThemeProp =
 export type TemplateFiles<Name extends SandpackPredefinedTemplate> =
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  keyof typeof SANDBOX_TEMPLATES[Name]["files"];
+  keyof (typeof SANDBOX_TEMPLATES)[Name]["files"];
 
 export interface SandpackInternal {
   <
@@ -520,9 +522,17 @@ interface SandpackInternalProps<
   };
 }
 
+export type SandboxFiles = Record<
+  string,
+  {
+    code: string;
+    metadata?: object;
+  }
+>;
+
 export interface StaticSandbox {
   environment: "static";
-  files: SandpackBundlerFiles;
+  files: SandboxFiles;
   externalResources?: string[];
   entry: string;
   sandboxId?: string;
@@ -530,54 +540,77 @@ export interface StaticSandbox {
 
 export interface BundlerSandbox {
   environment: "bundler";
-  template: "parcel" | "react";
-  files: SandpackBundlerFiles;
+  bundler: BundlerType;
+  files: SandboxFiles;
   externalResources?: string[];
-  dependencies?: Record<string, string>;
-  devDependencies?: Record<string, string>;
   entry: string;
   sandboxId?: string;
 }
 
 export interface VMSandbox {
   environment: "vm";
-  sandboxId: string;
   session: SessionData;
+  sandboxId?: string;
 }
 
-export type Sandbox = BundlerSandbox | StaticSandbox | VMSandbox;
+export type Sandbox = StaticSandbox | BundlerSandbox | VMSandbox;
 
 export type SandboxChangeEvent =
   | {
-      type: "update";
+      type: "add";
       path: string;
       content: string;
     }
   | {
+      type: "update";
+      path: string;
+      content: string;
+      metadata: object;
+    }
+  | {
       type: "delete";
       path: string;
+      metadata: object;
     };
 
-export type CustomSandbox = {
+export type OnChangeFunction = (
+  event: SandboxChangeEvent,
+  sandbox: Sandbox
+) => void;
+
+export interface StaticSandboxConfiguration {
+  environment: "static";
   activeFile?: string;
-  files: SandpackBundlerFiles;
+  files: SandboxFiles;
   externalResources?: string[];
   entry: string;
-} & (
-  | {
-      template: "static";
-    }
-  | {
-      template: "parcel" | "react";
-      dependencies?: Record<string, string>;
-      devDependencies?: Record<string, string>;
-    }
-);
+}
+
+export interface BundlerSandboxConfiguration {
+  environment: "bundler";
+  bundler: BundlerType;
+  activeFile?: string;
+  files: SandboxFiles;
+  externalResources?: string[];
+  entry: string;
+}
+
+// TODO: WIP
+export interface VMSandboxConfiguration {
+  environment: "vm";
+  activeFile?: string;
+  files: SandboxFiles;
+}
+
+export type SandboxConfiguration =
+  | StaticSandboxConfiguration
+  | BundlerSandboxConfiguration
+  | VMSandboxConfiguration;
 
 export interface SandpackProviderProps {
   children?: React.ReactNode;
-  sandbox: CustomSandbox | (() => Promise<Sandbox>);
-  onChange?: (event: SandboxChangeEvent, sandbox: Sandbox) => void;
+  sandbox: SandboxConfiguration | (() => Promise<Sandbox>);
+  onChange?: OnChangeFunction;
   style?: React.CSSProperties;
   className?: string;
   environmentOptions?: {
@@ -652,7 +685,7 @@ export interface SandpackState {
   teamId?: string;
   exportOptions?: SandpackExportOptions;
   error: SandpackError | null;
-  files: SandpackBundlerFiles;
+  files: SandboxFiles;
   environment?: SandboxEnvironment;
   status: SandpackStatus;
   initMode: SandpackInitMode;
@@ -742,7 +775,7 @@ export interface FileResolver {
 }
 
 export interface SandpackProviderState {
-  files: SandpackBundlerFiles;
+  files: SandboxFiles;
   environment?: SandboxEnvironment;
   visibleFiles: Array<TemplateFiles<SandpackPredefinedTemplate> | string>;
   visibleFilesFromProps: Array<

@@ -1,7 +1,7 @@
 import type * as sandpackEnv from "@codesandbox/sandpack-environments";
 import * as React from "react";
 
-import { useEnvironment } from "../../contexts/SandpackEnvironmentContext";
+import { useSandbox } from "../../contexts/SandpackSandboxContext";
 import {
   useLoadingOverlayState,
   FADE_ANIMATION_DURATION,
@@ -40,7 +40,7 @@ export const LoadingOverlay: React.FC<
   preview,
   ...props
 }): JSX.Element | null => {
-  const env = useEnvironment();
+  const { environment: env } = useSandbox();
   const classNames = useClassNames();
 
   // const progressMessage = useSandpackPreviewProgress(preview);

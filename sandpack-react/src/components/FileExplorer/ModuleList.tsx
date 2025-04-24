@@ -1,7 +1,7 @@
 import type { DirectoryEntry } from "@codesandbox/sandpack-environments";
 import * as React from "react";
 
-import { useEnvironment } from "../../contexts/SandpackEnvironmentContext";
+import { useSandbox } from "../../contexts/SandpackSandboxContext";
 import type { SandpackOptions } from "../../types";
 
 import { File } from "./File";
@@ -36,7 +36,7 @@ export const ModuleList: React.FC<ModuleListProps> = ({
   initialCollapsedFolder,
   path,
 }) => {
-  const env = useEnvironment();
+  const { environment: env } = useSandbox();
   const [entries, setEntries] = React.useState<DirectoryEntry[]>([]);
 
   React.useEffect(() => {

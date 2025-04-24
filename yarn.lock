@@ -2247,6 +2247,11 @@
   resolved "https://registry.yarnpkg.com/@codesandbox/sdk/-/sdk-0.11.1.tgz#026a9164093e8f3dbdab1ab5afaf4137e823b11f"
   integrity sha512-MKil+626cDuHOZTuHukAVgOyk3GIogDXLJPnPpCTQNwVq49UaEN6BlkEIuWmSOWE09X66lbXmuU96lJKUJ4aDA==
 
+"@codesandbox/sdk@workspace:*":
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/@codesandbox/sdk/-/sdk-0.11.2.tgz#2710e9156d6416779072bf37f734761767a08e1a"
+  integrity sha512-sn8+rdrdfRiQ/BeJxHLLXV+J1fiMtL0KGCgFzN8tg/VEHQVvVD31o1xL6j8pg9fm2FVPFWCnZbhMFaj6jOaqyQ==
+
 "@colors/colors@1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
@@ -4899,10 +4904,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-dom@^19.1.2":
-  version "19.1.2"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-19.1.2.tgz#bd1fe3b8c28a3a2e942f85314dcfb71f531a242f"
-  integrity sha512-XGJkWF41Qq305SKWEILa1O8vzhb3aOo3ogBlSmiqNko/WmRb6QIaweuZCXjKygVDXpzXb5wyxKTSOsmkuqj+Qw==
+"@types/react-dom@^18.3.1":
+  version "18.3.6"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.3.6.tgz#fa59a5e9a33499a792af6c1130f55921ef49d268"
+  integrity sha512-nf22//wEbKXusP6E9pfOCDwFdHAX4u172eaJI4YkDRQEZiorm6KfYnSC2SWLDMVWUOWPERmJnN0ujeAfTBLvrw==
 
 "@types/react@*", "@types/react@>=16", "@types/react@^18.0.15":
   version "18.0.25"
@@ -4920,13 +4925,6 @@
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@^19.1.0":
-  version "19.1.0"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.1.0.tgz#73c43ad9bc43496ca8184332b111e2aef63fc9da"
-  integrity sha512-UaicktuQI+9UKyA4njtDOGBD/67t8YEBt2xdfqu8+gP9hqPUPsiXlNPcpS2gVdjmis5GKPG3fCxbQLVgxsQZ8w==
-  dependencies:
     csstype "^3.0.2"
 
 "@types/resolve@1.20.2":
@@ -15133,7 +15131,7 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-dom@^19.0.0:
+react-dom@^19.1.0:
   version "19.1.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-19.1.0.tgz#133558deca37fa1d682708df8904b25186793623"
   integrity sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==
@@ -15246,7 +15244,7 @@ react@^18.2.0:
   dependencies:
     loose-envify "^1.1.0"
 
-react@^19.0.0:
+react@^19.1.0:
   version "19.1.0"
   resolved "https://registry.yarnpkg.com/react/-/react-19.1.0.tgz#926864b6c48da7627f004795d6cce50e90793b75"
   integrity sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==

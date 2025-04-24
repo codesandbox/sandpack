@@ -1,28 +1,35 @@
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext } from "react";
 import { useCallback, useMemo, useState } from "react";
 
-import type { SandpackProviderProps } from "../types";
+import type {
+  OnChangeFunction,
+  SandboxChangeEvent,
+  SandboxConfiguration,
+  SandpackProviderProps,
+} from "../types";
 
-import { useEnvironment } from "./SandpackEnvironmentContext";
+import { useSandbox } from "./SandpackSandboxContext";
 
 interface SandpackState {
   activeFile: string | null;
   setActiveFile(filepath: string): void;
+  triggerChange(event: SandboxChangeEvent): Promise<void>;
 }
 
 export const SandpackStateContext = createContext<SandpackState | null>(null);
 
 export function SandpackStateProvider({
   children,
-  sandbox,
+  sandboxConfiguration,
+  onChange,
 }: {
   children: React.ReactNode;
-  sandbox: SandpackProviderProps["sandbox"];
+  sandboxConfiguration?: SandboxConfiguration;
+  onChange?: OnChangeFunction;
 }) {
-  const env = useEnvironment();
+  const { environment, sandbox } = useSandbox();
   const [state, setState] = useState({
-    activeFile:
-      typeof sandbox === "function" ? null : sandbox.activeFile || null,
+    activeFile: sandboxConfiguration?.activeFile ?? null,
   });
 
   const setActiveFile = useCallback(
@@ -35,10 +42,18 @@ export function SandpackStateProvider({
     [state]
   );
 
+  const triggerChange = useCallback(
+    async (event: SandboxChangeEvent) => {
+      return onChange?.(event, sandbox);
+    },
+    [environment, state.activeFile]
+  );
+
   const value = useMemo(
     () => ({
       ...state,
       setActiveFile,
+      triggerChange,
     }),
     [state, setActiveFile]
   );
