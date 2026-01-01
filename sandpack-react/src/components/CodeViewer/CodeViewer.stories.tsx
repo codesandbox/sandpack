@@ -99,6 +99,7 @@ export default function List() {
         <SandpackCodeViewer
           decorators={[
             { className: "highlight", line: 1 },
+            { className: "highlight", line: 11, startColumn: 0, endColumn: 1 },
             { className: "highlight", line: 9 },
             {
               className: "widget",

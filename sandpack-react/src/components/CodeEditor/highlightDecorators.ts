@@ -38,7 +38,7 @@ export function highlightDecorators(positions: Decorators): Extension {
               column: item.startColumn,
             }) + 1;
 
-          if (item.startColumn && item.endColumn) {
+          if (item.startColumn !== undefined && item.endColumn !== undefined) {
             const positionLineEnd =
               getCodeMirrorPosition(view.state.doc, {
                 line: item.line,
