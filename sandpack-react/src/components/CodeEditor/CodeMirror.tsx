@@ -178,7 +178,11 @@ export const CodeMirror = React.forwardRef<CodeMirrorRef, CodeMirrorProps>(
     const sortedDecorators = React.useMemo(
       () =>
         decorators
-          ? decorators.sort((d1, d2) => d1.line - d2.line)
+          ? decorators.sort(
+              (d1, d2) =>
+                d1.line - d2.line ||
+                (d1.startColumn ?? 0) - (d2.startColumn ?? 0)
+            )
           : decorators,
       [decorators]
     );
