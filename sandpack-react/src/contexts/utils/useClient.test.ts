@@ -2,12 +2,72 @@
  * @jest-environment jsdom
  */
 
+import * as sandpackClient from "@codesandbox/sandpack-client";
 import { renderHook, act } from "@testing-library/react";
 
 import { getSandpackStateFromProps } from "../../utils/sandpackUtils";
 
 import { useClient } from "./useClient";
 import type { UseClientOperations } from "./useClient";
+
+const actualSandpackClient = jest.requireActual("@codesandbox/sandpack-client");
+
+jest.mock("@codesandbox/sandpack-client", () => {
+  const actual = jest.requireActual("@codesandbox/sandpack-client");
+
+  return {
+    ...actual,
+    loadSandpackClient: jest.fn((...args) =>
+      actual.loadSandpackClient(...args)
+    ),
+  };
+});
+
+const mockedLoadSandpackClient =
+  sandpackClient.loadSandpackClient as jest.MockedFunction<
+    typeof sandpackClient.loadSandpackClient
+  >;
+
+const createMockClient = (iframe: HTMLIFrameElement) => {
+  return createMockClientController(iframe).client;
+};
+
+const createMockClientController = (iframe: HTMLIFrameElement) => {
+  const listeners: sandpackClient.ListenerFunction[] = [];
+
+  return {
+    client: {
+      status: "initializing",
+      iframe,
+      listen: jest.fn((listener: sandpackClient.ListenerFunction) => {
+        listeners.push(listener);
+
+        return jest.fn(() => {
+          const listenerIndex = listeners.indexOf(listener);
+
+          if (listenerIndex >= 0) {
+            listeners.splice(listenerIndex, 1);
+          }
+        });
+      }),
+      dispatch: jest.fn(),
+      updateSandbox: jest.fn(),
+      destroy: jest.fn(),
+    } as unknown as InstanceType<typeof sandpackClient.SandpackClient>,
+    emit(message: sandpackClient.SandpackMessage) {
+      listeners.forEach((listener) => {
+        listener(message);
+      });
+    },
+  };
+};
+
+beforeEach(() => {
+  mockedLoadSandpackClient.mockReset();
+  mockedLoadSandpackClient.mockImplementation((...args) =>
+    actualSandpackClient.loadSandpackClient(...args)
+  );
+});
 
 const getAmountOfListener = (
   instance: UseClientOperations,
@@ -398,6 +458,132 @@ describe(useClient, () => {
       expect(result.current[0].status).toBe("running");
       expect(Object.keys(restartedOperations.clients)).toEqual(["client-2"]);
       expect(mockedLoadSandpackClient).toHaveBeenCalledTimes(2);
+    });
+
+    it("replays the latest file update after a client finishes initializing", async () => {
+      const iframe = document.createElement("iframe");
+      const clientController = createMockClientController(iframe);
+      const props = {
+        options: {
+          recompileMode: "immediate" as const,
+        },
+      };
+      let filesState = getSandpackStateFromProps(props);
+
+      mockedLoadSandpackClient.mockResolvedValue(clientController.client);
+
+      const { result, rerender } = renderHook(() =>
+        useClient(props, filesState)
+      );
+      const operations = result.current[1];
+
+      await act(async () => {
+        await operations.registerBundler(iframe, "client-1");
+        await operations.runSandpack();
+      });
+
+      const appPath =
+        Object.keys(filesState.files).find((path) => path.includes("App")) ??
+        Object.keys(filesState.files)[0];
+      const existingFile = filesState.files[appPath];
+      const nextFiles = {
+        ...filesState.files,
+        [appPath]:
+          typeof existingFile === "string"
+            ? { code: `${existingFile}\n// queued update` }
+            : {
+                ...existingFile,
+                code: `${existingFile.code}\n// queued update`,
+              },
+      };
+
+      filesState = {
+        ...filesState,
+        files: nextFiles,
+        shouldUpdatePreview: true,
+      };
+
+      await act(async () => {
+        rerender();
+      });
+
+      expect(clientController.client.updateSandbox).not.toHaveBeenCalled();
+
+      act(() => {
+        clientController.emit({
+          type: "done",
+          compilatonError: false,
+        } as sandpackClient.SandpackMessage);
+      });
+
+      expect(clientController.client.updateSandbox).toHaveBeenCalledTimes(1);
+      expect(clientController.client.updateSandbox).toHaveBeenCalledWith({
+        files: nextFiles,
+        template: filesState.environment,
+      });
+    });
+
+    it("keeps only the latest client when the same client id reloads before the first load resolves", async () => {
+      const initialIframe = document.createElement("iframe");
+      const staleIframe = document.createElement("iframe");
+      const freshIframe = document.createElement("iframe");
+      const initialController = createMockClientController(initialIframe);
+      const staleController = createMockClientController(staleIframe);
+      const freshController = createMockClientController(freshIframe);
+
+      let releaseStaleLoad!: () => void;
+      const staleLoadBlocked = new Promise<void>((resolve) => {
+        releaseStaleLoad = resolve;
+      });
+
+      mockedLoadSandpackClient.mockImplementation(async (iframeSelector) => {
+        const callCount = mockedLoadSandpackClient.mock.calls.length;
+
+        if (callCount === 1) {
+          return initialController.client;
+        }
+
+        if (callCount === 2) {
+          await staleLoadBlocked;
+          return staleController.client;
+        }
+
+        return freshController.client;
+      });
+
+      const { result } = renderHook(() =>
+        useClient({}, getSandpackStateFromProps({}))
+      );
+      let operations = result.current[1];
+
+      await act(async () => {
+        await operations.registerBundler(initialIframe, "client-1");
+        await operations.runSandpack();
+      });
+
+      operations = result.current[1];
+      let staleRegister!: Promise<void>;
+      await act(async () => {
+        staleRegister = operations.registerBundler(staleIframe, "client-1");
+        await Promise.resolve();
+      });
+
+      operations = result.current[1];
+      let freshRegister!: Promise<void>;
+      await act(async () => {
+        freshRegister = operations.registerBundler(freshIframe, "client-1");
+        await Promise.resolve();
+      });
+
+      releaseStaleLoad();
+
+      await act(async () => {
+        await Promise.all([staleRegister, freshRegister]);
+      });
+
+      expect(mockedLoadSandpackClient).toHaveBeenCalledTimes(3);
+      expect(operations.clients["client-1"]).toBe(freshController.client);
+      expect(operations.clients["client-1"].iframe).toBe(freshIframe);
     });
   });
 
