@@ -358,6 +358,47 @@ describe(useClient, () => {
       expect(getAmountOfListener(operations, "client-1")).toBe(3);
       expect(operations.clients["client-2"]).toBe(undefined);
     });
+
+    it("restarts sandpack when a new bundler registers after the last client unmounts", async () => {
+      mockedLoadSandpackClient.mockImplementation(async (iframeSelector) => {
+        return createMockClient(iframeSelector as HTMLIFrameElement);
+      });
+
+      const { result } = renderHook(() =>
+        useClient({}, getSandpackStateFromProps({}))
+      );
+      const operations = result.current[1];
+
+      await act(async () => {
+        await operations.registerBundler(
+          document.createElement("iframe"),
+          "client-1"
+        );
+        await operations.runSandpack();
+      });
+
+      expect(result.current[0].status).toBe("running");
+      expect(operations.clients["client-1"]).toBeDefined();
+
+      act(() => {
+        operations.unregisterBundler("client-1");
+      });
+
+      expect(result.current[0].status).toBe("idle");
+      expect(operations.clients["client-1"]).toBe(undefined);
+
+      const restartedOperations = result.current[1];
+      await act(async () => {
+        await restartedOperations.registerBundler(
+          document.createElement("iframe"),
+          "client-2"
+        );
+      });
+
+      expect(result.current[0].status).toBe("running");
+      expect(Object.keys(restartedOperations.clients)).toEqual(["client-2"]);
+      expect(mockedLoadSandpackClient).toHaveBeenCalledTimes(2);
+    });
   });
 
   describe("status", () => {

@@ -237,6 +237,7 @@ export const useClient: UseClient = (
       });
 
       clients.current[clientId] = client;
+      setState((prev) => ({ ...prev, status: "running" }));
     },
     [filesState.environment, filesState.files, state.reactDevTools]
   );
@@ -336,9 +337,14 @@ export const useClient: UseClient = (
 
       if (state.status === "running") {
         await createClient(iframe, clientId, clientPropsOverride);
+        return;
+      }
+
+      if ((options?.autorun ?? true) && state.status === "idle") {
+        await runSandpack();
       }
     },
-    [createClient, state.status]
+    [createClient, options?.autorun, runSandpack, state.status]
   );
 
   const unregisterBundler = (clientId: string): void => {
