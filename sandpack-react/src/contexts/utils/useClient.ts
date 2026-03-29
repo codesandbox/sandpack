@@ -36,6 +36,11 @@ interface SandpackConfigState {
   status: SandpackStatus;
 }
 
+interface PendingClientUpdate {
+  files: FilesState["files"];
+  template: FilesState["environment"];
+}
+
 export interface ClientPropsOverride {
   startRoute?: string;
 }
@@ -116,8 +121,120 @@ export const useClient: UseClient = (
   >({ global: {} });
   const debounceHook = useRef<number | undefined>();
   const prevEnvironment = useRef(filesState.environment);
+  const pendingClientUpdates = useRef<Record<string, PendingClientUpdate>>({});
+  const lastSentClientUpdates = useRef<Record<string, PendingClientUpdate>>({});
+  const unsubscribePendingClientUpdates = useRef<
+    Record<string, UnsubscribeFunction>
+  >({});
+  const clientLoadVersion = useRef<Record<string, number>>({});
 
   const asyncSandpackId = useAsyncSandpackId(filesState.files);
+
+  const clearPendingClientUpdateListener = useCallback(
+    (clientId: string): void => {
+      if (
+        typeof unsubscribePendingClientUpdates.current[clientId] !== "function"
+      ) {
+        return;
+      }
+
+      unsubscribePendingClientUpdates.current[clientId]();
+      delete unsubscribePendingClientUpdates.current[clientId];
+    },
+    []
+  );
+
+  const clearPendingClientUpdate = useCallback(
+    (clientId: string): void => {
+      clearPendingClientUpdateListener(clientId);
+      delete pendingClientUpdates.current[clientId];
+    },
+    [clearPendingClientUpdateListener]
+  );
+
+  const applyClientUpdate = useCallback(
+    (
+      clientId: string,
+      client: SandpackClientType,
+      update: PendingClientUpdate
+    ): void => {
+      clearPendingClientUpdate(clientId);
+      lastSentClientUpdates.current[clientId] = update;
+      client.updateSandbox(update);
+    },
+    [clearPendingClientUpdate]
+  );
+
+  const ensurePendingClientUpdateListener = useCallback(
+    (clientId: string, client: SandpackClientType): void => {
+      const pendingUpdate = pendingClientUpdates.current[clientId];
+      const lastSentUpdate = lastSentClientUpdates.current[clientId];
+
+      if (
+        pendingUpdate &&
+        lastSentUpdate &&
+        pendingUpdate.files === lastSentUpdate.files &&
+        pendingUpdate.template === lastSentUpdate.template
+      ) {
+        clearPendingClientUpdate(clientId);
+        return;
+      }
+
+      if (
+        typeof unsubscribePendingClientUpdates.current[clientId] === "function"
+      ) {
+        return;
+      }
+
+      unsubscribePendingClientUpdates.current[clientId] = client.listen(
+        (message: SandpackMessage) => {
+          if (message.type !== "done" || message.compilatonError) {
+            return;
+          }
+
+          const pendingUpdate = pendingClientUpdates.current[clientId];
+
+          if (!pendingUpdate) {
+            clearPendingClientUpdateListener(clientId);
+            return;
+          }
+
+          applyClientUpdate(clientId, client, pendingUpdate);
+        }
+      ) as UnsubscribeFunction;
+    },
+    [
+      applyClientUpdate,
+      clearPendingClientUpdate,
+      clearPendingClientUpdateListener,
+    ]
+  );
+
+  const queuePendingClientUpdate = useCallback(
+    (clientId: string, client: SandpackClientType): void => {
+      const nextUpdate = {
+        files: filesState.files,
+        template: filesState.environment,
+      };
+      const lastSentUpdate = lastSentClientUpdates.current[clientId];
+
+      if (
+        lastSentUpdate &&
+        lastSentUpdate.files === nextUpdate.files &&
+        lastSentUpdate.template === nextUpdate.template
+      ) {
+        return;
+      }
+
+      pendingClientUpdates.current[clientId] = nextUpdate;
+      ensurePendingClientUpdateListener(clientId, client);
+    },
+    [
+      ensurePendingClientUpdateListener,
+      filesState.environment,
+      filesState.files,
+    ]
+  );
 
   /**
    * Callbacks
@@ -128,9 +245,13 @@ export const useClient: UseClient = (
       clientId: string,
       clientPropsOverride?: ClientPropsOverride
     ): Promise<void> => {
+      const nextLoadVersion = (clientLoadVersion.current[clientId] ?? 0) + 1;
+      clientLoadVersion.current[clientId] = nextLoadVersion;
+
       // Clean up any existing clients that
       // have been created with the given id
       if (clients.current[clientId]) {
+        clearPendingClientUpdateListener(clientId);
         clients.current[clientId].destroy();
       }
 
@@ -199,6 +320,13 @@ export const useClient: UseClient = (
         }
       );
 
+      if (clientLoadVersion.current[clientId] !== nextLoadVersion) {
+        client.destroy();
+        client.iframe.contentWindow?.location.replace("about:blank");
+        client.iframe.removeAttribute("src");
+        return;
+      }
+
       if (typeof unsubscribe.current !== "function") {
         unsubscribe.current = client.listen(handleMessage);
       }
@@ -236,9 +364,24 @@ export const useClient: UseClient = (
          */
       });
 
+      lastSentClientUpdates.current[clientId] = {
+        files: filesState.files,
+        template: filesState.environment,
+      };
       clients.current[clientId] = client;
+      setState((prev) => ({ ...prev, status: "running" }));
+
+      if (pendingClientUpdates.current[clientId]) {
+        ensurePendingClientUpdateListener(clientId, client);
+      }
     },
-    [filesState.environment, filesState.files, state.reactDevTools]
+    [
+      clearPendingClientUpdateListener,
+      ensurePendingClientUpdateListener,
+      filesState.environment,
+      filesState.files,
+      state.reactDevTools,
+    ]
   );
 
   const unregisterAllClients = useCallback((): void => {
@@ -336,21 +479,30 @@ export const useClient: UseClient = (
 
       if (state.status === "running") {
         await createClient(iframe, clientId, clientPropsOverride);
+        return;
+      }
+
+      if ((options?.autorun ?? true) && state.status === "idle") {
+        await runSandpack();
       }
     },
-    [createClient, state.status]
+    [createClient, options?.autorun, runSandpack, state.status]
   );
 
   const unregisterBundler = (clientId: string): void => {
+    clientLoadVersion.current[clientId] =
+      (clientLoadVersion.current[clientId] ?? 0) + 1;
     const client = clients.current[clientId];
     if (client) {
       client.destroy();
       client.iframe.contentWindow?.location.replace("about:blank");
       client.iframe.removeAttribute("src");
       delete clients.current[clientId];
-    } else {
-      delete registeredIframes.current[clientId];
     }
+
+    delete registeredIframes.current[clientId];
+    clearPendingClientUpdate(clientId);
+    delete lastSentClientUpdates.current[clientId];
 
     if (timeoutHook.current) {
       clearTimeout(timeoutHook.current);
@@ -358,12 +510,11 @@ export const useClient: UseClient = (
 
     const unsubscribeQueuedClients = Object.values(
       unsubscribeClientListeners.current[clientId] ?? {}
-    );
+    ) as UnsubscribeFunction[];
 
     // Unsubscribing all listener registered
-    unsubscribeQueuedClients.forEach((listenerOfClient) => {
-      const listenerFunctions = Object.values(listenerOfClient);
-      listenerFunctions.forEach((unsubscribe) => unsubscribe());
+    unsubscribeQueuedClients.forEach((unsubscribe) => {
+      unsubscribe();
     });
 
     // Keep running if it still have clients
@@ -525,15 +676,18 @@ export const useClient: UseClient = (
       }
 
       if (recompileMode === "immediate") {
-        Object.values(clients.current).forEach((client) => {
+        Object.entries(clients.current).forEach(([clientId, client]) => {
+          const nextUpdate = {
+            files: filesState.files,
+            template: filesState.environment,
+          };
           /**
            * Avoid concurrency
            */
           if (client.status === "done") {
-            client.updateSandbox({
-              files: filesState.files,
-              template: filesState.environment,
-            });
+            applyClientUpdate(clientId, client, nextUpdate);
+          } else {
+            queuePendingClientUpdate(clientId, client);
           }
         });
       }
@@ -543,15 +697,18 @@ export const useClient: UseClient = (
 
         window.clearTimeout(debounceHook.current);
         debounceHook.current = window.setTimeout(() => {
-          Object.values(clients.current).forEach((client) => {
+          Object.entries(clients.current).forEach(([clientId, client]) => {
+            const nextUpdate = {
+              files: filesState.files,
+              template: filesState.environment,
+            };
             /**
              * Avoid concurrency
              */
             if (client.status === "done") {
-              client.updateSandbox({
-                files: filesState.files,
-                template: filesState.environment,
-              });
+              applyClientUpdate(clientId, client, nextUpdate);
+            } else {
+              queuePendingClientUpdate(clientId, client);
             }
           });
         }, recompileDelay);
@@ -568,6 +725,8 @@ export const useClient: UseClient = (
       recompileDelay,
       recompileMode,
       registerBundler,
+      applyClientUpdate,
+      queuePendingClientUpdate,
       state.status,
     ]
   );
