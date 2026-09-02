@@ -3,7 +3,7 @@
 export function setupHistoryListeners({
   scope,
 }: {
-  scope: { channelId: string };
+  scope: { channelId: string; parentOrigin: string };
 }) {
   // @ts-ignore
   const origHistoryProto = window.history.__proto__;
@@ -20,7 +20,7 @@ export function setupHistoryListeners({
         forward: historyPosition < historyList.length - 1,
         channelId: scope.channelId,
       },
-      "*"
+      scope.parentOrigin
     );
   };
 
@@ -71,11 +71,14 @@ export function setupHistoryListeners({
   interface NavigationMessage {
     type: "urlback" | "urlforward" | "refresh";
   }
-  function handleMessage({ data }: { data: NavigationMessage }) {
+  function handleMessage(event: MessageEvent) {
+    const { data, origin } = event;
+    if (origin !== scope.parentOrigin) return;
+
     if (data.type === "urlback") {
-      history.back();
+      window.history.back();
     } else if (data.type === "urlforward") {
-      history.forward();
+      window.history.forward();
     } else if (data.type === "refresh") {
       document.location.reload();
     }

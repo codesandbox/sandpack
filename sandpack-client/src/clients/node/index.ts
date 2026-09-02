@@ -251,7 +251,13 @@ export class SandpackNode extends SandpackClient {
   private async globalListeners(): Promise<void> {
     window.addEventListener("message", (event) => {
       if (event.data.type === PREVIEW_LOADED_MESSAGE_TYPE) {
-        injectScriptToIframe(this.iframe, this.messageChannelId);
+        if (
+          this.options.bundlerURL &&
+          event.origin !== new URL(this.options.bundlerURL).origin
+        ) {
+          return;
+        }
+        injectScriptToIframe(this.iframe, this.messageChannelId, window.location.origin);
       }
 
       if (
@@ -435,9 +441,11 @@ export class SandpackNode extends SandpackClient {
         break;
 
       case "urlback":
-      case "urlforward":
-        this.iframe?.contentWindow?.postMessage(message, "*");
+      case "urlforward": {
+        const targetOrigin = this.iframePreviewUrl ? new URL(this.iframePreviewUrl).origin : "*";
+        this.iframe?.contentWindow?.postMessage(message, targetOrigin);
         break;
+      }
 
       case "shell/restart":
         this.restartShellProcess();
