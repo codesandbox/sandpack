@@ -21,14 +21,15 @@ const scripts = [
 
 export const injectScriptToIframe = (
   iframe: HTMLIFrameElement,
-  channelId: string
+  channelId: string,
+  parentOrigin: string
 ): void => {
   scripts.forEach(({ code, id }) => {
     const message: InjectMessage = {
       uid: id,
       type: INJECT_MESSAGE_TYPE,
       code: `exports.activate = ${code}`,
-      scope: { channelId },
+      scope: { channelId, parentOrigin },
     };
 
     iframe.contentWindow?.postMessage(message, "*");
